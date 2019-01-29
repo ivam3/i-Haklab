@@ -22,6 +22,7 @@ i-haklab will ......
 Just execute from the command line $ i-Haklab --help to see the menu of use.
 
 :::::::::::::::::: i-Haklab help menu :::::::::::::::::::
+
 Syntax: i-Haklab [-arg-] [-option-]
 
 Arguments  |    Options     |    Description
@@ -55,10 +56,12 @@ Arguments  |    options     |    Description
 |                             LHOST=serveo.net apk=outlan.apk
 ╰─serveo───➤────────────────➤ Start a SSH client to request TCP port forwarding from the server and proxy
 |    ╰─────➤────domain──────➤ Start a SSH client to request port forwarding with especific dns
+
 **** If you want to suggest some command do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
 
 
 :::::::::::::: Tools or frameworks available in i-Haklab ::::::::::::::
+
 01: D-TECT
 02: DoS-A-Tool
 03: ExiF
@@ -105,10 +108,12 @@ Arguments  |    options     |    Description
 45: theharvester
 46: hydra
 47: tor
+
 **** If you want to suggest some tool, do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
 
 
 :::::::::::::: Games available in i-Haklab ::::::::::::::
+
 01: 2048
 02: angband
 03: brogue     
@@ -119,10 +124,12 @@ Arguments  |    options     |    Description
 08: moon-buggy
 09: snakegame
 10: solitaire
+
 **** If you want to suggest some game do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
 
 
 :::::::::::::: Books available in i-Haklab ::::::::::::::
+
 01: Aprende html
 02: Chema alonso coleccion
 03: Comandos basicos linux
@@ -144,10 +151,12 @@ Arguments  |    options     |    Description
 19: Programacion en php
 20: Programacion en ruby
 21: Python para todos
+
 **** If you want to suggest some book do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
 
 
 :::::::::::::: Tutorials available in i-Haklab ::::::::::::::
+
 01: TERMUX TIPS Cap.1
 02: TERMUX TIPS Cap.2
 03: TERMUX TIPS Cap.3
@@ -188,6 +197,7 @@ Arguments  |    options     |    Description
 38: CURSO DE PROGRAMACIÓN EN BASH 1ra Parte
 39: CURSO DE PROGRAMACIÓN EN BASH 2da Parte
 40: CURSO DE PROGRAMACIÓN EN BASH 3ra Parte
+
 **** If you want to suggest some tutorial do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
 
 
