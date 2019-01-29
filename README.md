@@ -204,13 +204,16 @@ Arguments  |    options     |    Description
 
 # INSTALLATION
 
-WITH SCRIPT Ivam3-Haklab :
+* Whit script Ivam3-Haklab
 
 - download the script Ivam3-Haklab in :
-	https://shrt.am/
-- move it to Home directory:
-	$ mv <downloading directory> $HOME
-- execute it by command : $ bash Ivam3-Haklab
+		https://shrt.am/
+- move it to Home directory
+		
+		: $ mv <downloading directory> $HOME
+- execute it by command 
+		
+		: $ bash Ivam3-Haklab
 
 		NUMBER 2 : Cloning
 - $ git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
