@@ -27,6 +27,7 @@ To see the main menu Just execute from the command line
 
 # i-Haklab help menu
 
+:
 Syntax: i-Haklab [-arg-] [-option-]
 
 Arguments  |    Options     |    Description
