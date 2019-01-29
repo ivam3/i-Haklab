@@ -8,8 +8,9 @@ To get help about how to use it join to irc chat in i-Haklab command
 
 To report some issues join to >> https://t.me/Ivam3_Bot
 
+# What is i-Haklab ?
 
-- i-Haklab Is a hacking laboratory that contains open source tools recommended by Ivam3. It use oh my fish insteractive shell, to get help about its use going to >> https://fishshell.com/docs/current/tutorial.html.
+- i-Haklab Is a hacking laboratory that contains open source tools recommended by Ivam3 with automation hacking commands. i-Haklab use oh my fish insteractive shell, to get help about its use going to >> https://fishshell.com/docs/current/tutorial.html.
 
 # Process during installation
 
@@ -21,6 +22,7 @@ i-haklab will ......
 - Coupled with it i-Haklab has an automation command for updating, installing and uninstalling tools and books, and executing hacking processes under a single command. under the command we will find the weechat argument, with which you can join the official IRC Ivam3byCinderella ((Internet Relay Chat (IRC) is an application layer protocol that facilitates communication in the form of text. The chat process works on a client/server networking model)).
 
 To see the main menu Just execute from the command line 
+
 		: $ i-Haklab --help
 
 # i-Haklab help menu
@@ -28,6 +30,7 @@ To see the main menu Just execute from the command line
 Syntax: i-Haklab [-arg-] [-option-]
 
 Arguments  |    Options     |    Description
+
 ╰─help─────➤────────────────➤ Show this help menu
 ╰─list─────➤────────────────➤ List all available tools/frameworks
 ╰─show─────➤──tools/books───➤ Show tools details and books availables
@@ -209,25 +212,40 @@ Arguments  |    options     |    Description
 Whit script Ivam3-Haklab
 
 - download the script Ivam3-Haklab in 
+
 		: https://shrt.am/
+
 - move it to Home directory
+
 		: $ mv <downloading directory> $HOME
+
 - execute it by command 
+
 		: $ bash Ivam3-Haklab
 
 Cloning it from Github
 
 - Clone it to home directory
+
 		: $ git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
+
 - Go to i-Haklab directory
+
 		: $ cd $HOME/i-Haklab
+
 - Give permissions needed
+
 		: $ chmod 711 -R *
+
 - Run the setup file
+
 		: $ bash setup
 
 
 
 
 *** HAVE A NICE HACKING DAY!!!!
+
+
+
 # 						@Ivam3
