@@ -96,7 +96,7 @@ if [ $CHECKROOT = "root" ]; then
         echo "#          i-Haklab by @Ivam3" >> ~/.suroot/.bashrc
         echo "alias server-php="sudo php -S LOCALHOST:80 -t $PREFIX/var/service/php/"" >> $PREFIX/var/alias
 else
-        sed -i "3a alias server-php="php -S LOCALHOST:4546 -t $PREFIX/var/service/php/"" $PREFIX/var/alias
+        sed -i "3a alias server-php=\"php -S LOCALHOST:4546 -t $PREFIX/var/service/php/\"" $PREFIX/var/alias
 fi
 if [ -d ~/storage ];then
 	rm -rf ~/storage
