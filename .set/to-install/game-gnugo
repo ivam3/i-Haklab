@@ -42,7 +42,7 @@ done
 if [ ! -d $iHAKLAB/games ]; then
         mkdir -p $iHAKLAB/games
 fi
-wget ......   -O $iHAKLAB/games/gnugo
+wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/games/gnugo -O $iHAKLAB/games/gnugo
 chmod +x $iHAKLAB/games/*
 
 #ENDING SCRIPT

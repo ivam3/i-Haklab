@@ -15,7 +15,7 @@ else
 fi
 
 while [ ! $(id -u) -ne 0 ]; do
-	printf "$R[W]:-> You need to be a common user$W\n"
+	printf "$R\n[W]:-> You need to be a common user$W\n"
 	exit
 done
 until [ -d $iHAKLAB ]; do
@@ -34,22 +34,16 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL QUICK GUIDES. . . .$i"
+        printf "$(clear) $C STARTING TO INSTALL CONVERTER"
         printf "\n\n"
         sleep 1
 done
 #INSTALLATION
-if [ -e $iHAKLAB/QickGuides/nmap ]; then 
-	rm $iHAKLAB/QickGuides/nmap
+if [ -e $PREFIX/bin/converter ]; then
+        rm $PREFIX/bin/converter
 fi
-if [ -e $iHAKLAB/QickGuides/aircrack ]; then
-	rm $iHAKLAB/QickGuides/aircrack
-fi
-if [ ! -d $iHAKLAB/QickGuides ]; then
-	mkdir -p $iHAKLAB/QickGuides
-fi
-wget .......... -O $iHAKLAB/QickGuides/nmap
-wget .......... -O $iHAKLAB/QickGuides/aircrack
+wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/converter -O $PREFIX/bin/converter
+chmod 777 $PREFIX/bin/converter
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"

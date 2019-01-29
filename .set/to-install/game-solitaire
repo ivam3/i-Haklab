@@ -42,7 +42,7 @@ done
 if [ ! -d $iHAKLAB/games ]; then
         mkdir -p $iHAKLAB/games
 fi
-wget ......   -O $iHAKLAB/games/solitaire
+wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/games/solitaire -O $iHAKLAB/games/solitaire
 chmod +x $iHAKLAB/games/*
 
 #ENDING SCRIPT

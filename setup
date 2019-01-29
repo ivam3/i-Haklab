@@ -13,8 +13,8 @@ done
 if [ -e $PREFIX/libexec/colors ]; then
         rm $PREFIX/libexec/colors
 fi
-wget ............ -O $PREFIX/libexec/colors
-wget ............ -O $PREFIX/var/alias
+wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/colors -O $PREFIX/libexec/colors
+wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/var/alias -O $PREFIX/var/alias
 source $PREFIX/libexec/colors
 CHECKROOT=$(bash $iHAKLAB/.set/to-install/check-root)
 USR=$(whoami)
@@ -69,7 +69,7 @@ for TOOL in $SRCH; do
         bash $iHAKLAB/.set/to-install/$TOOL
 	printf "\n\n"
 done
-wget ........ -O $PREFIX/bin/i-Haklab #Command i-Haklab
+wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/i-Haklab -O $PREFIX/bin/i-Haklab #Command i-Haklab
 curl -L http://get.oh-my.fish | fish
 echo "source $PREFIX/var/alias" >> $PREFIX/etc/fish/config.fish
 bash $iHAKLAB/.set/to-install/functions

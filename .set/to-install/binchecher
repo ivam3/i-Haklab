@@ -39,7 +39,7 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-wget ........... -O $PREFIX/bin/bincheker
+wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/binchecker -O $PREFIX/bin/bincheker
 chmod 777 $PREFIX/bin/bincheker
 
 

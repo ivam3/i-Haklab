@@ -14,8 +14,8 @@ else
         iHAKLAB=/data/data/com.termux/files/home/i-haklab
 fi
 
-while [ ! $(id -u) -ne 0 ]; do
-	printf "$R[W]:-> You need to be a common user$W\n"
+while [ $USER = "root" ]; do
+	printf "$R\n[W]:-> You need to be a common user$W\n"
 	exit
 done
 until [ -d $iHAKLAB ]; do
@@ -34,14 +34,22 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL LOCK COMMAND. . . .$i"
+        printf "$(clear) $C STARTING TO INSTALL BLACKBOX. . . .$i"
         printf "\n\n"
         sleep 1
 done
 #INSTALLATION
-wget .............   -O $PREFIX/bin/lock
-chmod 777 $PREFIX/bin/lock
+if [ -e $PREFIX/bin/blackbox ]; then
+        rm $PREFIX/bin/blackbox
+fi
+wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/blackbox -O $PREFIX/bin/blackbox
+chmod 777 $PREFIX/bin/blackbox
+pip2 install requests
+pip2 install pexpect
+pip2 install passlib
 
 #ENDING SCRIPT
-printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3by_Cinderella
+$W"
+sleep 3
 #                                               @Ivam3
