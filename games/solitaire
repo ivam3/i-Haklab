@@ -1,0 +1,8 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#This script will install and run a termux moon solitaire game
+#
+if [ ! -e $PREFIX/bin/tty-solitaire ]; then
+	apt install tty-solitaire -y
+fi
+tty-solitaire
+#		@Ivam3

@@ -1,0 +1,9 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#This script will install and run a termux angband game
+#
+if [ ! -e $PREFIX/bin/angband ]; then
+	apt update && apt upgrade
+	apt install angband -y
+fi
+angband
+#		@Ivam3

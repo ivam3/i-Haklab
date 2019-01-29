@@ -1,0 +1,8 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#This script will install and run a termux snake game
+#
+if [ ! -e $PREFIX/bin/snakegame ]; then
+	wget ......... -O $PREFIX/bin/snakegame
+fi
+snakegame
+#		@Ivam3

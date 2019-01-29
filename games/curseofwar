@@ -1,0 +1,8 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#This script will install and run a termux curse of war game
+#
+if [ ! -e $PREFIX/bin/curseofwar ]; then
+	apt install curseofwar -y
+fi
+curseofwar
+#		@Ivam3
