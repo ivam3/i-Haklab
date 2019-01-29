@@ -1,15 +1,16 @@
 # i-Haklab v.1.0 2019 by @Ivam3
 	DISCLAIMER
-#Please do not use in military or secret service organizations, or for illegal purposes.
-#Ivam3 is not responsible for the misuse that can be given to everything that this laboratory entails
-#
-#To get help about how to use it join to irc chat in i-Haklab command
-#To report some issues join to https://t.me/Ivam3byCinderella
-#
+Please do not use in military or secret service organizations, or for illegal purposes.
+Ivam3 is not responsible for the misuse that can be given to everything that this laboratory entails
+
+To get help about how to use it join to irc chat in i-Haklab command
+To report some issues join to https://t.me/Ivam3byCinderella
+
 
 i-Haklab Is a hacking laboratory that contains open source tools recommended by Ivam3. It use oh my fish insteractive shell, to get help about its use going to >> https://fishshell.com/docs/current/tutorial.html.
 
 :::::::::::::::::: Processes during installation :::::::::::::::::::
+
 i-haklab will ......
 
 - check if your android device has some root, if so, it will install the sudo command.
@@ -34,8 +35,8 @@ Arguments  |    Options     |    Description
 ╰─update───➤────────────────➤ Update i-Haklab
 ╰─upgrade──➤────────────────➤ upgrade i-Haklab by installing/upgrading tools
 ╰─version──➤────────────────➤ Show i-Haklab version installed
-           |       |        |
-   [--] Automatitation Arguments [--]
+|       |        |
+[--] Automatitation Arguments [--]
 Arguments  |    options     |    Description
 ╰─handler──➤──file.rc name──➤ Start handler on msfconsole with previous setting
 ╰───apk────➤──inlan/outlan──➤ Create a coded payload apk with msfvenom
@@ -54,7 +55,7 @@ Arguments  |    options     |    Description
 |                             LHOST=serveo.net apk=outlan.apk
 ╰─serveo───➤────────────────➤ Start a SSH client to request TCP port forwarding from the server and proxy
 |    ╰─────➤────domain──────➤ Start a SSH client to request port forwarding with especific dns
-**** ***** If you want to suggest some command do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
+**** If you want to suggest some command do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
 
 
 :::::::::::::: Tools or frameworks available in i-Haklab ::::::::::::::
@@ -104,7 +105,7 @@ Arguments  |    options     |    Description
 45: theharvester
 46: hydra
 47: tor
-**** ***** If you want to suggest some tool, do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
+**** If you want to suggest some tool, do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
 
 
 :::::::::::::: Games available in i-Haklab ::::::::::::::
@@ -118,7 +119,7 @@ Arguments  |    options     |    Description
 08: moon-buggy
 09: snakegame
 10: solitaire
-**** ***** If you want to suggest some game do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
+**** If you want to suggest some game do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
 
 
 :::::::::::::: Books available in i-Haklab ::::::::::::::
@@ -143,7 +144,7 @@ Arguments  |    options     |    Description
 19: Programacion en php
 20: Programacion en ruby
 21: Python para todos
-**** ***** If you want to suggest some book do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
+**** If you want to suggest some book do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
 
 
 :::::::::::::: Tutorials available in i-Haklab ::::::::::::::
@@ -187,7 +188,7 @@ Arguments  |    options     |    Description
 38: CURSO DE PROGRAMACIÓN EN BASH 1ra Parte
 39: CURSO DE PROGRAMACIÓN EN BASH 2da Parte
 40: CURSO DE PROGRAMACIÓN EN BASH 3ra Parte
-**** ***** If you want to suggest some tutorial do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
+**** If you want to suggest some tutorial do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
 
 
 
