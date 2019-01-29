@@ -183,7 +183,7 @@ elif [ $1 = upgrade ]; then
 	bash $iHAKLAB/.set/libexec/upgrade
 elif [ $1 = version ]; then
 	banner
-	cat $iHAKLAB/README.md | grep -o v.*.*.9
+	cat $iHAKLAB/README.md | grep -o v.*.*.9 | awk '{print $1}'
 elif [ $1 = apk ] && [ -z $2 ]; then
 	printf "$R[w]->$W apk argument need an option\n"
 elif [ $1 = apk ] && [ $2 ]; then
