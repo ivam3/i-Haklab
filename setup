@@ -9,8 +9,8 @@ function ctrl_c() {
 if [ -e $PREFIX/libexec/colors ]; then
         rm $PREFIX/libexec/colors
 fi
-curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/colors -O $PREFIX/libexec/colors
-curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/var/alias -O $PREFIX/var/alias
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/colors -o $PREFIX/libexec/colors
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/var/alias -o $PREFIX/var/alias
 source $PREFIX/libexec/colors
 while [ $USER = "root" ]; do
         printf "$R\n[W]:-> You need to be a common user to install i-Haklab$W\n"
@@ -108,7 +108,7 @@ for TOOL in $SRCH; do
         bash $iHAKLAB/.set/to-install/$TOOL
 	printf "\n\n"
 done
-curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/i-Haklab -O $PREFIX/bin/i-Haklab
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/i-Haklab -o $PREFIX/bin/i-Haklab
 curl -L http://get.oh-my.fish | fish
 echo "source $PREFIX/var/alias" >> $PREFIX/etc/fish/config.fish
 bash $iHAKLAB/.set/to-install/functions

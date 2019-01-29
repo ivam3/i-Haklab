@@ -42,7 +42,7 @@ done
 if [ -e $PREFIX/bin/converter ]; then
         rm $PREFIX/bin/converter
 fi
-curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/converter -O $PREFIX/bin/converter
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/converter -o $PREFIX/bin/converter
 chmod 777 $PREFIX/bin/converter
 
 #ENDING SCRIPT

@@ -44,8 +44,8 @@ fi
 if [ -e $PREFIX/bin/Ivam3 ]; then
         rm -rf $PREFIX/bin/Ivam3
 fi
-curl https://raw.githubusercontent.com/ivam3/DoS-A-Tool/master/DoS-A-Tool -O $PREFIX/bin/DoS-A-Tool
-curl https://raw.githubusercontent.com/ivam3/DoS-A-Tool/master/Ivam3 -O $PREFIX/bin/Ivam3
+curl https://raw.githubusercontent.com/ivam3/DoS-A-Tool/master/DoS-A-Tool -o $PREFIX/bin/DoS-A-Tool
+curl https://raw.githubusercontent.com/ivam3/DoS-A-Tool/master/Ivam3 -o $PREFIX/bin/Ivam3
 chmod +x $PREFIX/bin/*
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
