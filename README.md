@@ -4,24 +4,26 @@ Please do not use in military or secret service organizations, or for illegal pu
 Ivam3 is not responsible for the misuse that can be given to everything that this laboratory entails
 
 To get help about how to use it join to irc chat in i-Haklab command
-To report some issues join to https://t.me/Ivam3byCinderella
+		: $ i-Haklab weechat
+
+To report some issues join to >> https://t.me/Ivam3_Bot
 
 
-i-Haklab Is a hacking laboratory that contains open source tools recommended by Ivam3. It use oh my fish insteractive shell, to get help about its use going to >> https://fishshell.com/docs/current/tutorial.html.
+- i-Haklab Is a hacking laboratory that contains open source tools recommended by Ivam3. It use oh my fish insteractive shell, to get help about its use going to >> https://fishshell.com/docs/current/tutorial.html.
 
-:::::::::::::::::: Processes during installation :::::::::::::::::::
+# Process during installation
 
 i-haklab will ......
-
 - check if your android device has some root, if so, it will install the sudo command.
 - check if termux has permission to access the external memory, thus, in there it will create a directory called homeroot and there will install the tools and/or frameworks. otherwise they will be installed in the directory /data/data/com.termux/files/home. By the way, in case of Termux is installed in a second partition of your external memory those will be in /data/sdext2/data/com.termux/files/home.
 - Once the installation of the tools and/or frameworks is finished, i-Haklab will ask you to configure your password, security question and answer, which will be necessary to start session in i-Haklab.
 - i-Haklab has the "lock" command which will block the screen and it will only be unlocked with said password or answering the security question. It is worth mentioning that these access codes are encrypted for your security
 - Coupled with it i-Haklab has an automation command for updating, installing and uninstalling tools and books, and executing hacking processes under a single command. under the command we will find the weechat argument, with which you can join the official IRC Ivam3byCinderella ((Internet Relay Chat (IRC) is an application layer protocol that facilitates communication in the form of text. The chat process works on a client/server networking model)).
 
-Just execute from the command line $ i-Haklab --help to see the menu of use.
+To see the main menu Just execute from the command line 
+		: $ i-Haklab --help
 
-:::::::::::::::::: i-Haklab help menu :::::::::::::::::::
+# i-Haklab help menu
 
 Syntax: i-Haklab [-arg-] [-option-]
 
@@ -60,7 +62,7 @@ Arguments  |    options     |    Description
 **** If you want to suggest some command do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
 
 
-:::::::::::::: Tools or frameworks available in i-Haklab ::::::::::::::
+# Tools or frameworks available in i-Haklab
 
 01: D-TECT
 02: DoS-A-Tool
@@ -112,7 +114,7 @@ Arguments  |    options     |    Description
 **** If you want to suggest some tool, do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
 
 
-:::::::::::::: Games available in i-Haklab ::::::::::::::
+# Games available in i-Haklab
 
 01: 2048
 02: angband
@@ -128,7 +130,7 @@ Arguments  |    options     |    Description
 **** If you want to suggest some game do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
 
 
-:::::::::::::: Books available in i-Haklab ::::::::::::::
+# Books available in i-Haklab
 
 01: Aprende html
 02: Chema alonso coleccion
@@ -155,7 +157,7 @@ Arguments  |    options     |    Description
 **** If you want to suggest some book do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
 
 
-:::::::::::::: Tutorials available in i-Haklab ::::::::::::::
+# Tutorials available in i-Haklab
 
 01: TERMUX TIPS Cap.1
 02: TERMUX TIPS Cap.2
@@ -204,22 +206,28 @@ Arguments  |    options     |    Description
 
 # INSTALLATION
 
-* Whit script Ivam3-Haklab
+Whit script Ivam3-Haklab
 
-- download the script Ivam3-Haklab in :
-		https://shrt.am/
+- download the script Ivam3-Haklab in 
+		: https://shrt.am/
 - move it to Home directory
-		
 		: $ mv <downloading directory> $HOME
 - execute it by command 
-		
 		: $ bash Ivam3-Haklab
 
-		NUMBER 2 : Cloning
-- $ git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
-- $ cd $HOME/i-Haklab
-- $ chmod 711 -R *
-- $ bash setup
+Cloning it from Github
+
+- Clone it to home directory
+		: $ git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
+- Go to i-Haklab directory
+		: $ cd $HOME/i-Haklab
+- Give permissions needed
+		: $ chmod 711 -R *
+- Run the setup file
+		: $ bash setup
+
+
+
 
 *** HAVE A NICE HACKING DAY!!!!
 # 						@Ivam3
