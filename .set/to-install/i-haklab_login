@@ -214,7 +214,7 @@ if [ -e $PREFIX/var/log/login-termux ]; then
 	mv $PREFIX/var/log/login-termux $PREFIX/var/log/login-termux.O
 	rm $PREFIX/var/log/login-termux
 fi
-wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/login-files/i-haklab_login -O $PREFIX/var/log/login-termux
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/login-files/i-haklab_login -O $PREFIX/var/log/login-termux
 touch $PREFIX/libexec/termux/.Ivam3
 touch $PREFIX/libexec/termux/.Cinderella
 touch $PREFIX/libexec/termux/.Quiz
@@ -225,7 +225,7 @@ if [ -e $PREFIX/libexec/banner/login-banner ]; then
 	mv $PREFIX/libexec/banner/login-banner $PREFIX/libexec/banner/login-banner.O
 	rm $PREFIX/libexec/banner/login-banner
 fi
-wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/banner/i-Haklab -O $PREFIX/libexec/banner/login-banner
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/banner/i-Haklab -O $PREFIX/libexec/banner/login-banner
 if [ -e $PREFIX/libexec/banner/wall-banner ]; then
 	mv $PREFIX/libexec/banner/wall-banner $PREFIX/libexec/banner/wall-banner.O
 	rm $PREFIX/libexec/banner/wall-banner

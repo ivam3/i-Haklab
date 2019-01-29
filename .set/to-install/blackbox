@@ -42,7 +42,7 @@ done
 if [ -e $PREFIX/bin/blackbox ]; then
         rm $PREFIX/bin/blackbox
 fi
-wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/blackbox -O $PREFIX/bin/blackbox
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/blackbox -O $PREFIX/bin/blackbox
 chmod 777 $PREFIX/bin/blackbox
 pip2 install requests
 pip2 install pexpect

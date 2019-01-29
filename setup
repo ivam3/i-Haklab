@@ -6,6 +6,12 @@ function ctrl_c() {
 	echo
 	printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
 }
+if [ -e $PREFIX/libexec/colors ]; then
+        rm $PREFIX/libexec/colors
+fi
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/colors -O $PREFIX/libexec/colors
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/var/alias -O $PREFIX/var/alias
+source $PREFIX/libexec/colors
 while [ $USER = "root" ]; do
         printf "$R\n[W]:-> You need to be a common user to install i-Haklab$W\n"
         exit
@@ -51,12 +57,6 @@ echo $(clear)
         printf "$C         Press$G ENTER$C to continue"
         printf "$W\n"
         read enter
-if [ -e $PREFIX/libexec/colors ]; then
-        rm $PREFIX/libexec/colors
-fi
-wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/colors -O $PREFIX/libexec/colors
-wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/var/alias -O $PREFIX/var/alias
-source $PREFIX/libexec/colors
 CHECKROOT=$(bash $iHAKLAB/.set/to-install/check-root)
 USR=$(whoami)
 if [ $CHECKROOT = "root" ]; then
@@ -110,7 +110,7 @@ for TOOL in $SRCH; do
         bash $iHAKLAB/.set/to-install/$TOOL
 	printf "\n\n"
 done
-wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/i-Haklab -O $PREFIX/bin/i-Haklab #Command i-Haklab
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/i-Haklab -O $PREFIX/bin/i-Haklab
 curl -L http://get.oh-my.fish | fish
 echo "source $PREFIX/var/alias" >> $PREFIX/etc/fish/config.fish
 bash $iHAKLAB/.set/to-install/functions

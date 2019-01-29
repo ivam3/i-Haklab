@@ -2,7 +2,7 @@
 #This script will install and run a termux snake game
 #
 if [ ! -e $PREFIX/bin/snakegame ]; then
-	wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/snakegame -O $PREFIX/bin/snakegame
+	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/snakegame -O $PREFIX/bin/snakegame
 fi
 snakegame
 #		@Ivam3

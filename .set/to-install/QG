@@ -48,8 +48,8 @@ fi
 if [ ! -d $iHAKLAB/QickGuides ]; then
 	mkdir -p $iHAKLAB/QickGuides
 fi
-wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/QuickGuides/nmap.sh -O $iHAKLAB/QickGuides/nmap
-wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/QuickGuides/aircrack-ng.sh -O $iHAKLAB/QickGuides/aircrack
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/QuickGuides/nmap.sh -O $iHAKLAB/QickGuides/nmap
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/QuickGuides/aircrack-ng.sh -O $iHAKLAB/QickGuides/aircrack
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
