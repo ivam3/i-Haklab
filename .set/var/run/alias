@@ -1,0 +1,5 @@
+
+LOCALHOST="ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255"
+alias db="pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql"
+alias server="sudo php -S $LOCALHOST:80 -t /data/data/com.termux/files/usr/var/service/php/"
+alias startihaklab="bash /data/data/com.termux/files/usr/var/log/login-termux"

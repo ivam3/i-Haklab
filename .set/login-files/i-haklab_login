@@ -1,0 +1,226 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Coded by Ivam3 on Dec/2018
+#
+IFS=$'\n\t'
+trap ctrl_c 2
+source $PREFIX/libexec/colors
+Cinderella=$(base64 -d $PREFIX/libexec/termux/.Ivam3)
+Seque=$(base64 -d $PREFIX/libexec/termux/.Quiz)
+Secan=$(base64 -d $PREFIX/libexec/termux/.Cinderella)
+function ctrl_c() {
+	printf "$Y
+          [!]:->$R t.me/Ivam3byCinderella$Y <-:[!]$W"
+}
+function change_ak {
+	echo $(clear)
+	source $PREFIX/libexec/banner/login-banner
+	printf "$C"
+	until read -n 1 -p "                Forgot your access key ?
+
+            1) Get one new Access Key.
+            2) Change your Security question.
+            3) Change your Security answer.
+            0) Exit
+            >> " Chak && [ $Chak -lt 4 ]; do
+    	echo $(clear)
+	source $PREFIX/libexec/banner/login-banner
+	printf "$C"
+	done
+		sleep 1
+		echo
+		case_Chak
+        }
+
+function case_Chak {
+	case $Chak in
+		1)
+			echo $(clear)
+			source $PREFIX/libexec/banner/login-banner
+			printf "$C                  Confirm your access"
+			echo "
+			"
+			while read -s -p "            $Seque >> " Quiz && [ -z $Quiz ]; do
+				printf "$Y
+          [!]:->$R t.me/Ivam3byCinderella$Y <-:[!]$C \n"
+			done
+
+		if [ $Quiz = $Secan ]; then
+			printf "$C"
+			while read -s -p "
+            New access key >>  " Newak1 && [ -z $Newak1 ]; do
+				printf "$Y
+          [!]:->$R t.me/Ivam3byCinderella$Y <-:[!]$C"
+                        done
+                		printf "$C"
+                while read -s -p "
+            Type it once again to confirm >>  " Newak2 && [ -z $Newak2 ]; do
+			printf "$Y
+          [!]:->$R t.me/Ivam3byCinderella$Y <-:[!]$C"
+			done
+                        
+			if [ $Newak1 = $Newak2 ]; then
+                                Newak=$Newak1
+				echo
+                                set_ak
+                        else
+				printf "$R
+          O-ops!!  IT DOESN'T MATCH Try again$W \n"
+                                sleep 1
+				echo
+                                case_Chak
+                        fi
+		else
+			printf "$R\n                    Access denied$W \n"
+			sleep 1
+                        change_ak
+		fi
+                        ;;
+		2)
+			printf "$G"
+			echo
+			while read -s -p "            Confirm your Access Key >>  " Ivam3 && [ -z $Ivam3 ];do
+				printf "$Y
+          [!]:->$R t.me/Ivam3byCinderella$Y <-:[!]$G \n"
+				sleep 1
+			done
+			
+			if [ $Ivam3 = $Cinderella ]; then
+				printf "$G"
+				while read -p "
+            Write your New security question >>  " NewQ && [ -z $NewQ ]; do
+					printf "$Y
+          [!]:->$R t.me/Ivam3byCinderella$Y <-:[!]$G \n"
+				done
+				set_quiz
+
+			else
+				printf "$R\n                     Access denied$W \n"
+				sleep 1
+				echo $(clear)
+				change_ak
+				fi
+			;;
+		3)
+			printf "$G"
+			echo
+			while read -s -p "            Confirm your Access Key >>  " Ivam3 && [ -z $Ivam3 ];do
+				printf "$Y
+          [!]:->$R t.me/Ivam3byCinderella$Y <-:[!]$G \n"
+  			done
+                        if [ $Ivam3 = $Cinderella ]; then
+				printf "$G"
+                while read -s -p "
+            Write your New security Answer >>  " NewA && [ -z $NewA ]; do
+					printf "$Y
+          [!]:->$R t.me/Ivam3byCinderella$Y <-:[!]$G"
+                                done
+				set_answ
+                        else
+                                printf "$R\n                     Access denied \n"
+                                sleep 1
+                                echo $(clear)
+                                change_ak
+                                fi
+			;;
+		0)
+			echo $(clear)
+                        source $PREFIX/var/log/login-termux
+                        ;;
+        esac
+}
+
+function set_ak {
+	printf "$Newak" > $PREFIX/libexec/termux/.tmp-ak
+	chmod +w $PREFIX/libexec/termux/.Ivam3
+	base64 $PREFIX/libexec/termux/.tmp-ak > $PREFIX/libexec/termux/.Ivam3
+	chmod -w $PREFIX/libexec/termux/.Ivam3
+	rm $PREFIX/libexec/termux/.tmp-ak
+	check-Ak
+}
+
+function set_quiz {
+	printf "$NewQ" > $PREFIX/libexec/termux/.tmp-quiz
+	chmod +w $PREFIX/libexec/termux/.Quiz
+	base64 $PREFIX/libexec/termux/.tmp-quiz > $PREFIX/libexec/termux/.Quiz
+        chmod -w $PREFIX/libexec/termux/.Quiz
+	rm $PREFIX/libexec/termux/.tmp-quiz
+	printf "$Y            Your Security Question was changed$W"
+	sleep 3
+	echo $(clear)
+	source $PREFIX/var/log/login-termux
+}
+function set_answ {
+	printf "$NewA" > $PREFIX/libexec/termux/.tmp-answ
+	chmod +w $PREFIX/libexec/termux/.Cinderella
+	base64 $PREFIX/libexec/termux/.tmp-answ > $PREFIX/libexec/termux/.Cinderella
+	chmod -w $PREFIX/libexec/termux/.Cinderella
+	rm $PREFIX/libexec/termux/.tmp-answ
+	echo
+	printf "$G            Your Security Answer was changed$W"
+	sleep 3
+	echo $(clear)
+	source $PREFIX/var/log/login-termux
+}
+
+function check-Ak {
+	echo
+	if [ $Newak = $Cinderella ]; then
+		echo
+		printf "$G             Your Access Key was changed $W"
+		sleep 5
+		echo $(clear)
+		source $PREFIX/var/log/login-termux
+	else
+		printf "$R
+    O-ops!!   Something was wrong"
+   		echo $(clear)
+		source $PREFIX/var/log/login-termux
+	fi
+}
+
+# LOGIN
+for opt in 1 2 3; do
+        let try=opt++
+	echo $(clear)
+	source $PREFIX/libexec/banner/login-banner
+        printf "$B"
+        while read -n 4 -s -p "                    >> ACCESS KEY <<
+	    " Ivam3 && [ -z $Ivam3 ];do
+	printf "$R          Access denied$B \n"
+        done
+	
+	if [ $Ivam3 = $Cinderella ]; then
+		echo $(clear)
+                source $PREFIX/libexec/banner/wall-banner
+		break
+        else
+		printf "$R          Access denied$Y
+	               (try $try - 3) \n"
+		sleep 1
+		echo
+        fi
+done
+	if [ $try = 3 ]; then
+		printf "$Y                 O-ops!! Too many tries$W"
+		sleep 3
+		echo $(clear)
+		source $PREFIX/libexec/banner/login-banner
+		printf "$Y"
+		printf "        [!] Let's try with the security question$G"
+		echo "
+		"
+		while read -s -p "             $Seque " Quiz && [ -z $Quiz ]; do
+			echo ""
+			printf "$Y          [!]:->$R t.me/Ivam3byCinderella$Y <-:[!]$W \n"
+		done
+		if [ $Quiz = $Secan ]; then
+			printf "$W"
+			echo $(clear)
+			source $PREFIX/libexec/banner/wall-banner
+		else
+			printf "$R\n                     Access denied$W \n"
+			sleep 1
+			change_ak
+		fi
+	fi
+#				IbyC

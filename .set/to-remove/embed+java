@@ -1,0 +1,78 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Created on Dec/2018
+IFS=$'\n\t'
+trap ctrl_c 2
+source /data/data/com.termux/files/usr/libexec/colors
+apktool=$(find $PREFIX/bin -name "apktool")
+function ctrl_c() {
+                echo
+                printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
+}
+if [ -L ~/storage/external-1 ]; then
+	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-haklab
+else
+        iHAKLAB=/data/data/com.termux/files/home/i-haklab
+fi
+
+while [ ! $(id -u) -ne 0 ]; do
+	printf "$R\n[W]:-> You need to be a common user$W\n"
+	exit
+done
+until [ -d $iHAKLAB ]; do
+	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do you wanna install it?$W\n"
+	while read -p "       [yes/no]:-> " yesorno && [ -z $yesorno ]; do
+		continue
+	done
+if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
+	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
+        cd ~/i-Haklab;bash setup
+else 
+	printf "$G\n[!]-> Have a nice hacking day!!\n\n"
+	exit
+fi
+done
+
+echo $(clear)
+for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
+        printf "$(clear) $C STARTING TO UNINSTALL EMBED+JAVA. . . .$i"
+        printf "\n\n"
+        sleep 1
+done
+#UNINSTALLATION
+if [ -d $HOME/java ]; then
+                rm -rf $HOME/java
+        fi
+        if [ -L $PREFIX/bin/signapk ]; then
+                rm $PREFIX/bin/signapk
+        fi
+        if [ -L $PREFIX/bin/zzipalign ]; then
+                rm $PREFIX/bin/zzipalign
+        fi
+        if [ -L $PREFIX/bin/apktool ]; then
+                rm $PREFIX/bin/apktool
+        fi
+        if [ -L $PREFIX/bin/java ] || [ -e $PREFIX/bin/java ]; then
+                rm $PREFIX/bin/java
+        fi
+        if [ -L $PREFIX/bin/EMBED ] || [ -e $PREFIX/bin/EMBED ]; then
+                rm $PREFIX/bin/EMBED
+        fi
+pkg remove apksigner aapt -y
+TMP_DIR=$HOME/java
+rm -rf $TMP_DIR
+if [ -e $PREFIX/share/jdk8_aarch64.tar.gz ]; then
+        rm $PREFIX/share/jdk8_aarch64.tar.gz 
+fi
+if [ -e $PREFIX/share/jdk8_arm.tar.gz ]; then
+	rm $PREFIX/share/jdk8_arm.tar.gz
+fi
+rm -rf $PREFIX/share/glib
+rm -rf $PREFIX/share/jdk8
+rm -rf $PREFIX/share/bin
+rm -rf $HOME/java/
+rm -rf $PREFIX/var/spool/apktool.jar
+
+#ENDING SCRIPT
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot
+$W"
+#                                               @Ivam3

@@ -1,0 +1,12 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#This file verify if your device is rooted or not
+
+if [ -x /system/xbin/su ]; then
+        printf "root\n"
+elif [ -x /su/bin/su ]; then
+        printf "root\n"
+elif [ -x /sbin/su ]; then
+        printf "root\n"
+else
+        printf "no_root\n"
+fi

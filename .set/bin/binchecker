@@ -1,0 +1,23 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Coded by @Ivam3 on January 2019
+#Contact: https://t.me/Ivam3
+IFS=$'\n\t'
+source /data/data/com.termux/files/usr/libexec/colors
+
+printf "$G
+   ___  _____  __  _______           __
+  / _ )/  _/ |/ / / ___/ /  By_Ivam3/ /_____ ____
+ / _  |/ //    / / /__/ _ \/ -_) __/  '_/ -_) __/
+/____/___/_/|_/  \___/_//_/\__/\__/_/\_\\__/_/$W v.1.0
+
+$Y"
+printf "$Y[Set]$G Input BIN $W"
+while read -p ">> " BIN && [ -z $BIN ]; do
+	printf "\n$R[W] O-ops!! Please set a BIN$W\n"
+done
+printf "\n$Y[!]->$G Checking..\n\n"
+if [ $BIN ]
+then
+curl -H "Accept-Version: 3" "https://lookup.binlist.net/$BIN"
+sleep 1
+fi

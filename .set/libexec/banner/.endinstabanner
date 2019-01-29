@@ -1,0 +1,23 @@
+#!/data/data/com.termux/file/usr/bin/bash
+#
+printf "$B
+           . .IIIII             .II
+  IIIIIII. I  II  .    II..IIIIIIIIIIIIIIIIIIII
+ .  .IIIIII  II          III$C Ivam3$B IIIIIIIIII.
+    .IIIII.III I      IIIIIIIII$C by$B IIIIIIIII  I
+   .IIIIII$C  TERMUX  $B II  .IIII$C Cinderella$B III. III
+    IIIIIII$C  HACKING$B ' IIIII I IIIIIIIIIIII III I
+    .II$C    LABORATORY$B IIIIIIIIIIII  IIIIIIIIII
+       I.           .IIIIIIIIIIII   I   II  I
+         .IIII        IIIIIIIIIIII     .       I
+          IIIII.          IIIIII           . I.
+         IIIIIIIII         IIIII             ..I  II .
+          IIIIIII          IIII..             IIQII
+            IIII           III. I            IIIEIII
+            III             I                I  IPI
+             II       $C [-]$M Join me on$C [-]$B        D   .
+             I     $M t.me/Ivam3by_Cinderella$W
+             \n"
+printf "$C\n\n:::::::::: $TOOL installation finished ::::::::::$W\n\n\n"
+sleep 3
+#                                               @Ivam3

@@ -1,0 +1,47 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Created on Dec/2018
+IFS=$'\n\t'
+trap ctrl_c 2
+source /data/data/com.termux/files/usr/libexec/colors
+
+function ctrl_c() {
+                echo
+                printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
+}
+if [ -L ~/storage/external-1 ]; then
+        iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-haklab
+else
+        iHAKLAB=/data/data/com.termux/files/home/i-haklab
+fi
+
+while [ ! $(id -u) -ne 0 ]; do
+	printf "$R\n[W]:-> You have to be a normal user$W\n"
+        exit
+done
+until [ -d $iHAKLAB ]; do
+        printf "$R\n[W]:-> i-Haklab needed$W|$Y Do you wanna install it?$W\n"
+        while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
+                continue
+        done
+if [ $yesorno = "yes" ]; then
+	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
+        cd ~/i-Haklab;bash setup
+        exit
+else
+        exit
+fi
+done
+
+echo $(clear)
+for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
+        printf "$(clear) $C STARTING TO UNINSTALL D-TECT . . . .$i"
+        printf "\n\n"
+        sleep 1
+done
+if [ -d $iHAKLAB/../D-TECT-1 ]; then
+	rm -rf $iHAKLAB/../D-TECT-1
+fi
+python2 -m pip uninstall colorama beautifulsoup
+#ENDING SCRIPT
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
+#                                               @Ivam3

@@ -1,0 +1,59 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#
+#i-Haklab v.1.0 2019 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. Please do not use in military or secret service organizations, or for illegal purposes
+#
+#Created on Jan/2019
+#
+IFS=$'\n\t'
+trap ctrl_c 2
+source /data/data/com.termux/files/usr/libexec/colors
+function ctrl_c() {
+                echo
+                printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
+}
+if [ -L ~/storage/external-1 ]; then
+	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-haklab
+else
+        iHAKLAB=/data/data/com.termux/files/home/i-haklab
+fi
+while [ ! $(id -u) -ne 0 ]; do
+	printf "$R\n[W]:-> You need to be a common user$W\n"
+	exit
+done
+while ping -q -c 1 -W 1 8.8.8.8 > /dev/null; do
+        printf "$R[w]-> ERROR 404 | Please connect to some Network$W\n"
+	exit
+done
+until [ -d $iHAKLAB ]; do
+	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do you wanna install it?$W\n"
+	while read -p "       [yes/no]:-> " yesorno && [ -z $yesorno ]; do
+		continue
+	done
+if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
+	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
+        cd ~/i-Haklab;chmod 711 *;bash setup
+else 
+	printf "$G\n[!]-> Have a nice hacking day!!\n\n"
+	exit
+fi
+done
+function Install {
+	echo $(clear)
+	for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
+		printf "$(clear) $C UPGRADING i-HAKLAB. . . .$i"
+		printf "\n\n"
+		sleep 1
+	done
+}
+function Chao-chao {
+	printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
+}
+OLDver=$(cat $iHAKLAB/.set/libexec/banner/i-Haklab | grep -o v.*.*.9 | awk '{print $1}')
+NEWver=$(cat $iHAKLAB/README.md | grep -o v.*.*.9 | awk '{print $1}')
+
+if [ "$NEWver" = "$OLDver" ]; then
+        printf "$Y[!]->$W i-Haklab is already the newest version ($NEWver).\n"
+#else
+#        Install
+fi
+#                                               @Ivam3

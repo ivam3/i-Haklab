@@ -1,0 +1,208 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+#date: october 5 2018
+#update: December 15 2018
+
+
+#colors
+C='\033[1;36m'
+G='\033[1;32m'
+R='\033[1;31m'
+Y='\033[1;33m'
+B='\033[1;34m'
+P='\033[1;35m'
+RE='\033[0m'
+
+#version
+VERSION="v1.2"
+Ol
+
+#start code
+
+trap "ctrl_c" 2
+function ctrl_c {
+	if [ -e ~/tmp ]; then
+		rm tmp
+	fi
+	if [ -e ~/ruta ]; then
+		rm ruta
+	fi
+	banner
+	echo -e "$G Bye bye.."
+	sleep 1
+	exit 1
+}
+
+PWD=$(pwd)
+
+
+if [ -e $HOME/.milux/converter.mlx ] ; then
+
+function banner {
+        clear
+        echo -e "$C"
+        echo -e "
+                               _
+  ___ ___  _ ____   _____ _ __| |_ ___ _ __
+ / __/ _ \| '_ \ \ / / _ \ '__| __/ _ \ '__|
+| (_| (_) | | | \ V /  __/ |  | ||  __/ |		Codificado
+ \___\___/|_| |_|\_/ \___|_|   \__\___|_|  $RE By [M]iLu{×}_"
+        echo -e "$RE"
+
+}
+
+banner
+echo -e $G"		Bienvenido al conversor multimedia$C $VERSION
+
+     		 $RE ENTER$G Para continuar..$RE"
+read ENTER
+
+function convert {
+banner
+echo -e $Y"Ingresa la ruta donde se encuentra tu archivo.$C
+"
+while read -p " >>" RUTA && [ -z $RUTA ];do
+	echo -e $R"[*]$Y Debes ingresar una ruta valida$RE"
+done
+
+if [ "$(ls -A $RUTA)" ];then
+
+if [ -d "$RUTA" ];then
+	while [ -z $OPTION ];do
+	banner
+	echo -e $G"leyendo..$RE"
+	sleep 2
+	ls $RUTA > ruta;cat -n ruta
+	echo -e "$G 
+	Selecciona tu archivo a convertir$C
+	"
+	read -p " >>" OPTION 
+		if [ -z $OPTION ];then
+			banner
+                        echo -e $R"[X]$Y No escribiste nada$C"
+			sleep 2
+		fi
+
+	done
+	FILE=$(head -n $OPTION ruta | tail -n+$OPTION ruta )
+	echo "$FILE" > tmp | sed -i "2,1000d" tmp
+	NAMESONG=$(cat tmp)
+	F="${NAMESONG##*.}"
+	NAME=$(basename $RUTA/"$NAMESONG" .$F )
+	while [ -z $EXIT ];do
+		
+		if [ -d $RUTA/$NAMESONG ];then
+			banner
+			echo -e $R"[X]$Y Error! Seleccionaste un directorio$C"
+			sleep 2
+			bash $0
+		fi
+
+	banner
+	echo -e "$Y Ingresa el formato de salida,$RE Ejemplo:$C mp3, wma, wmv, avi etc.$RE
+	"
+
+	while read -p " >>" EXIT && [ -z $EXIT ] || [ "$EXIT" = "apk" ] || [ "$EXIT" = "doc" ] || [ "$EXIT" = "docx" ] || [ "$EXIT" = "xls" ] || [ "$EXIT" = "xlsx" ] || [ "$EXIT" = "pdf" ] || [ "$EXIT" = "py" ] || [ "$EXIT" = "sh" ] || [ "$EXIT" = "txt" ] ;do
+		echo -e $R"[X]$Y No escribiste nada o formato incopatible $RE"
+		sleep 1
+	done
+
+
+	while [ -z $SINO ];do
+	banner
+	echo -e $G"La informacion, es correcta? s/n
+                "
+	sleep 1
+        echo -e $P"Formato a convertir:$RE .$EXIT"
+        sleep 1
+        echo -e $P"Cancion:$RE $NAMESONG $C
+	"
+	while read -p " >>" SINO && [ -z $SINO ];do
+		echo -e $R"[X]$Y No escribiste nada$C"
+		sleep 1
+	done
+
+
+		if [ $SINO = "s" ] || [ $SINO = "S" ] || [ $SINO = "y" ] || [ $SINO = "Y" ];then
+		ffmpeg -i "$RUTA/$NAMESONG" "$RUTA/$NAME.$EXIT"
+		banner
+		echo -e $G"[*]$P Deseas conservar el archivo original? s/n$C"
+		while read -p ">> " CONSERVAR && [ -z $CONSERVAR ];do
+			echo -e $R"[X]$Y No escribiste nada$C"
+			sleep 1
+		done
+		
+	if [ $CONSERVAR = "s" ] || [ $CONSERVAR = "S" ] || [ $CONSERVAR = "y" ] || [ $CONSERVAR = "Y" ];then
+			rm -rf ruta tmp 
+		else
+			rm -rf ruta tmp $RUTA/"$NAMESONG"
+	fi
+
+		banner
+		echo -e $G"[*]$RE Listo se ha guardado como "$RUTA/$NAME.$EXIT""
+		sleep 2
+		echo -e $G"[*]$RE hasta luego!"
+		sleep 2
+		echo -e $G"[*]$RE ENTER Para continuar"
+		read ENTER
+		bash $0
+	else
+		bash $0
+	fi
+done
+		if [ -z $SINO ];then
+                        banner                                                                       echo -e $R"[X]$Y No escribiste nada$C"
+			sleep 2
+                fi
+
+	if [ -z $SINO ];then
+                        banner                                                                       echo -e $R"[X]$Y No escribiste nada$C"                                       sleep 2
+         fi
+	done
+else
+	banner
+	echo -e $R"[X]$Y Ruta invalida$C"
+	sleep 2
+	convert
+fi
+else
+	banner
+	echo -e $R"[X]$Y Ruta no existe!$C"
+	sleep 3
+	convert
+fi
+}
+convert
+
+
+
+if [ -z "$RUTA" ];then
+	echo -e $R"[*]$Y No ingresaste nada$C"
+	sleep 2
+fi
+
+
+else
+	#function update {
+		
+#}
+
+	clear
+	echo -e $C"Instalando herramientas basicas..$RE"
+	sleep 5
+	apt -y update && apt -y upgrade
+	pkg install -y ffmpeg whiptail
+	ln -s $PWD/$0 /data/data/com.termux/files/usr/bin/converter
+	mkdir ~/.milux
+	echo "Hola! No me elimines" > $HOME/.milux/converter.mlx
+	echo "$VERSION" > $HOME/.milux/version.mlx
+	
+	if (whiptail --title "Milux Converter v1.0" --yes-button "Acepto" --no-button "No acepto" --yesno "Gracias por utilizar mi script.\n al tocar Acepto  estas de acuerdo en el uso correcto y respetando\n el codigo asi como el banner y todo lo que conlleva este script se utiliza ffmpeg como motor principal \n sugerencia miluxmil@yahoo.com" 10 78) then
+	bash $0
+else
+	banner
+	echo -e $C"Seleccionaste No Acepto$RE"
+	sleep 2
+fi
+
+fi

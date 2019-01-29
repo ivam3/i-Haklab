@@ -1,0 +1,71 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Created on Dec/2018
+IFS=$'\n\t'
+trap ctrl_c 2
+source /data/data/com.termux/files/usr/libexec/colors
+arch=`dpkg --print-architecture`
+function ctrl_c() {
+                echo
+                printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
+}
+if [ -L ~/storage/external-1 ]; then
+	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-haklab
+else
+        iHAKLAB=/data/data/com.termux/files/home/i-haklab
+fi
+while [ ! $(id -u) -ne 0 ]; do
+	printf "$R\n[W]:-> You need to be a common user$W\n"
+	exit
+done
+until [ -d $iHAKLAB ]; do
+	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do you wanna install it?$W\n"
+	while read -p "       [yes/no]:-> " yesorno && [ -z $yesorno ]; do
+		continue
+	done
+if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
+	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
+        cd ~/i-Haklab;bash setup
+else 
+	printf "$G\n[!]-> Have a nice hacking day!!\n\n"
+	exit
+fi
+done
+
+echo $(clear)
+for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
+        printf "$(clear) $C STARTING TO INSTALL NGROK. . . .$i"
+        printf "\n\n"
+        sleep 1
+done
+#INSTALLATION
+function Install {
+        if [ $arch = "aarch64" -o $arch = "arm64" ]; then
+                unzip ~/i-Haklab/.set/to-install/ngrok-2.2.8-linux-arm64.zip -d $PREFIX/bin/
+        elif [ $arch = "armhf" -o $arch = "armv7l" ]; then
+                unzip ~/i-Haklab/.set/to-install/ngrok-2.2.8-linux-arm64.zip -d $PREFIX/bin/
+        elif [ $arch = "arm" ]; then
+                unzip ~/i-Haklab/.set/to-install/ngrok-stable-linux-arm.zip -d $PREFIX/bin/
+        else
+                printf "$R\n\n[W]:-> O-ops!!$W sorry unknown architecture\n\n"
+                sleep 3
+        fi
+        ENDING-SCRIPT
+        }
+function ENDING-SCRIPT {
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
+}
+if [ -e $PREFIX/bin/ngrok ]
+        printf "$Y\n\n[!]:-> Ngrok file already exists | Do you wanna re-install it ?"
+        while reap -p -n 2 "$G\n[y/Y|N/n]:->$W " yesorno [ -z $yesorno ]; do
+                printf "$R\n[W] O-ops!!$W\n"
+        done
+        if [ $yesorno = 'y' -o $yesorno = 'Y' ]; then
+                rm $PREFIX/bin/ngrok
+                Install
+        else
+                ENDING-SCRIPT
+        fi
+else
+        Install
+fi
+#                                               @Ivam3

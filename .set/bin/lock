@@ -1,0 +1,5 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# This files will lock the active session
+
+cacafire
+source /data/data/com.termux/files/usr/var/log/login-termux

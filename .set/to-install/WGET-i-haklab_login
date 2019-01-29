@@ -1,0 +1,249 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Coded by Ivam3 on 02 Agust 2018
+#
+IFS=$'\n\t'
+set -euo pipefail
+trap ctrl_c 2
+
+#Var
+PWD=$(pwd)
+
+if [ -L ~/storage/external-1 ]; then
+        iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-haklab
+else
+        iHAKLAB=/data/data/com.termux/files/home/i-haklab
+fi
+
+while [ ! $(id -u) -ne 0 ]; do
+        printf "$R[W]:-> You need to be a common user$W\n"
+        exit
+done
+until [ -d $iHAKLAB ]; do
+        printf "$R\n[W]:-> i-Haklab needed$W |$Y Do you wanna install it?$W\n"
+        while read -p "       [yes/no]:-> " yesorno && [ -z $yesorno ]; do
+                continue
+        done
+if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
+        git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
+        cd ~/i-Haklab;bash setup
+else
+        printf "$G\n[!]-> Have a nice hacking day!!\n\n"
+        exit
+fi
+done
+function ctrl_c() {
+	printf "$Y [!]$W Everything will be restored \n\n"
+	sleep 1
+		if [ -e $PREFIX/var/log/login-termux ]; then
+			rm $PREFIX/var/log/login-termux
+		fi
+		if [ -e $PREFIX/libexec/termux/.Ivam3 ]; then
+        		rm -r $PREFIX/libexec/termux/.Ivam3
+		fi
+		if [ -e $PREFIX/libexec/termux/.Cinderella ]; then
+			rm -r $PREFIX/libexec/termux/.Cinderella
+		fi
+		if [ -e $PREFIX/libexec/termux/.Quiz ]; then
+			rm -r $PREFIX/libexec/termux/.Quiz
+		fi
+		if [ -d $PREFIX/libexec/banner ]; then
+			rm -rf $PREFIX/libexec/banner
+		fi
+		if [ -e $PREFIX/etc/bashito ]; then
+			cat $PREFIX/etc/bashito > $PREFIX/etc/bash.bashrc
+                	rm $PREFIX/etc/bashito
+		fi
+		if [ -e $PREFIX/etc/motd2 ]; then
+			mv $PREFIX/etc/motd2 $PREFIX/etc/motd
+		fi
+		cacafire
+		echo $(exit)
+        }
+function banner {
+	bash $iHAKLAB/.repo/libexec/banner/logo
+}
+function Set_Ak {
+	banner
+printf "$C [IbyC]$M Let's setting your access keys$C [IbyC]$W\n\n"
+printf "\n$M [!]$W"
+	while read -p "Type your Access Key >> " Ak1 && [ -z $Ak1 ]; do
+		printf "$R O-ops!!$W \n"
+	done
+printf "$M [!]$W"
+	while read -p "Confirm your Access Key >> " Ak2 && [ -z $Ak2 ]; do
+		printf "$R O-ops!!$W \n"
+	done
+	Define_Ak
+	}
+#
+function Define_Ak {
+	if [ $Ak1 = $Ak2 ]; then
+		Ak=$Ak1
+		printf "$Ak" > $PREFIX/libexec/termux/tmp-Ak
+		chmod +w $PREFIX/libexec/termux/.Ivam3
+		base64 $PREFIX/libexec/termux/tmp-Ak > $PREFIX/libexec/termux/.Ivam3
+		chmod -w $PREFIX/libexec/termux/.Ivam3
+		rm $PREFIX/libexec/termux/tmp-Ak
+		Set_Q
+	else
+		printf "\n$R [W] Yours Access keys are diferents$W |$G please try again$W
+		\n"
+		sleep 2
+		Set_Ak
+	fi
+}
+#
+function Set_Q {
+        banner
+printf "$C [IbyC]$M Let's setting your security question$C [IbyC]$W\n\n"
+printf "\n$M [!]$W Type your security question \n"
+	while read -p " >> " Quiz1 && [ -z $Quiz1 ]; do
+		printf "$R O-ops!!$W \n"
+	done
+	printf "$Quiz1" > $PREFIX/libexec/termux/tmp-Quiz1
+	Quiz1=$(base64 $PREFIX/libexec/termux/tmp-Quiz1)
+	banner
+printf "$M [!]$W Confirm your security question \n"
+	while read -p " >> " Quiz2 && [ -z $Quiz2 ]; do
+		printf "$R O-ops!!$W \n"
+	done
+	printf "$Quiz2" > $PREFIX/libexec/termux/tmp-Quiz2
+        Quiz2=$(base64 $PREFIX/libexec/termux/tmp-Quiz2)
+	Define_Quiz
+        }
+#
+function Define_Quiz {
+        if [ $Quiz1 = $Quiz2 ]; then
+		Quiz=$Quiz1
+		chmod +w $PREFIX/libexec/termux/.Quiz
+                printf "$Quiz" > $PREFIX/libexec/termux/.Quiz
+                chmod -w $PREFIX/libexec/termux/.Quiz
+                rm $PREFIX/libexec/termux/tmp-Quiz1
+		rm $PREFIX/libexec/termux/tmp-Quiz2
+		Set_Answer
+        else
+		printf "\n$R [W] Your security questions are diferents$W |$G please try again$W
+                \n"
+                sleep 2
+                Set_Q
+        fi
+}
+#
+function Set_Answer {
+        banner
+printf "$C [IbyC]$M Let's setting your security answer$C [IbyC]$W\n\n"
+printf "\n$M [!]$W Type your security answer \n"
+	while read -p " >> " Anw1 && [ -z $Anw1 ]; do
+		printf "$R O-ops!!$W \n"
+	done
+	printf "$Anw1" > $PREFIX/libexec/termux/tmp-Anw1
+        Anw1=$(base64 $PREFIX/libexec/termux/tmp-Anw1)
+	banner
+printf "$M [!]$W Confirm your security answer \n"
+	while read -p " >> " Anw2 && [ -z $Anw2 ]; do
+		printf "$R O-ops!!$W \n"
+	done
+	printf "$Anw2" > $PREFIX/libexec/termux/tmp-Anw2
+        Anw2=$(base64 $PREFIX/libexec/termux/tmp-Anw2)
+	Define_Answer
+        }
+#
+function Define_Answer {
+        if [ $Anw1 = $Anw2 ]; then
+                Anw=$Anw1
+                chmod +w $PREFIX/libexec/termux/.Cinderella
+                printf "$Anw" > $PREFIX/libexec/termux/.Cinderella
+                chmod -w $PREFIX/libexec/termux/.Cinderella
+                rm $PREFIX/libexec/termux/tmp-Anw1
+		rm $PREFIX/libexec/termux/tmp-Anw2
+		Chao_chao
+        else
+		printf "\n$R [W] Your security answers are diferents$W |$G please try again$W
+                \n"
+                sleep 2
+                Set_Answer
+        fi
+}
+#			LET'S TO START
+#
+#Cleaning up
+	if [ -e $PREFIX/var/log/login-termux ]; then
+		rm $PREFIX/var/log/login-termux
+	fi
+	if [ -e $PREFIX/libexec/colors ]; then
+		rm $PREFIX/libexec/colors
+	fi
+	if [ -e $PREFIX/libexec/termux/.Ivam3 ]; then
+		rm -r $PREFIX/libexec/termux/.Ivam3
+	fi
+	if [ -e $PREFIX/libexec/termux/.Cinderella ]; then
+		rm -r $PREFIX/libexec/termux/.Cinderella
+	fi
+	if [ -e $PREFIX/libexec/termux/.Quiz ]; then
+		rm -r $PREFIX/libexec/termux/.Quiz
+	fi
+	if [ -d $PREFIX/libexec/banner ]; then
+		rm -rf $PREFIX/libexec/banner
+	fi
+	if [ -e $PREFIX/etc/bashito ]; then
+		cat $PREFIX/etc/bashito > $PREFIX/etc/bashito2
+		rm $PREFIX/etc/bashito
+	fi
+	if [ -e $PREFIX/etc/motd2 ]; then
+		mv $PREFIX/etc/motd2 $PREFIX/etc/motd
+	fi
+
+banner
+#Setting files
+cat $PREFIX/etc/bash.bashrc > $PREFIX/etc/bashito
+rm $PREFIX/etc/bash.bashrc
+if [ -e $PREFIX/etc/motd ]; then
+	mv $PREFIX/etc/motd $PREFIX/etc/motd2
+fi
+echo "command_not_found_handle() {" > $PREFIX/etc/bash.bashrc
+echo "        /data/data/com.termux/files/usr/libexec/termux/command-not-found "$1"" >> $PREFIX/etc/bash.bashrc
+echo "}" >> $PREFIX/etc/bash.bashrc
+echo " " >> $PREFIX/etc/bash.bashrc
+echo "source $PREFIX/var/log/login-termux" >> $PREFIX/etc/bash.bashrc
+echo " " >> $PREFIX/etc/bash.bashrc
+echo "PS1="\[\e[33m\][!] \[\e[31m\]Type\[\e[32m\] exit\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]"" >> $PREFIX/etc/bash.bashrc
+echo "#         @Ivam3" >> $PREFIX/etc/bash.bashrc
+#
+#Installing Scripts
+if [ -e $PREFIX/var/log/login-termux ]; then
+	mv $PREFIX/var/log/login-termux $PREFIX/var/log/login-termux.O
+	rm $PREFIX/var/log/login-termux
+fi
+wget .............   -O $PREFIX/var/log/login-termux #Falta wget del script de loggeo
+touch $PREFIX/libexec/termux/.Ivam3
+touch $PREFIX/libexec/termux/.Cinderella
+touch $PREFIX/libexec/termux/.Quiz
+if [ ! -d $PREFIX/libexec/banner ]; then
+	mkdir -p $PREFIX/libexec/banner
+fi
+if [ -e $PREFIX/libexec/banner/login-banner ]; then
+	mv $PREFIX/libexec/banner/login-banner $PREFIX/libexec/banner/login-banner.O
+	rm $PREFIX/libexec/banner/login-banner
+fi
+wget ............... -O $PREFIX/libexec/banner/login-banner #Falta wget del logo de i-haklab
+if [ -e $PREFIX/libexec/banner/wall-banner ]; then
+	mv $PREFIX/libexec/banner/wall-banner $PREFIX/libexec/banner/wall-banner.O
+	rm $PREFIX/libexec/banner/wall-banner
+fi
+echo "#!/data/data/com.termux/files/usr/bin/bash" > $PREFIX/libexec/banner/wall-banner
+echo "# You can modify this file to change the start banner in termux" >> $PREFIX/libexec/banner/wall-banner
+echo "#" >> $PREFIX/libexec/banner/wall-banner
+echo "source /data/data/com.termux/files/usr/libexec/colors" >> $PREFIX/libexec/banner/wall-banner
+echo "bash /data/data/com.termux/files/usr/libexec/banner/login-banner" >> $PREFIX/libexec/banner/wall-banner
+echo "fortune | lolcat" >> $PREFIX/libexec/banner/wall-banner
+echo "echo" >> $PREFIX/libexec/banner/wall-banner
+echo "fish" >> $PREFIX/libexec/banner/wall-banner
+echo "#		@Ivam3" >> $PREFIX/libexec/banner/wall-banner
+#
+#Bringing permissions
+chmod 711 $PREFIX/var/log/login-termux
+chmod 711 $PREFIX/libexec/colors
+chmod 711 -R $PREFIX/libexec/termux
+chmod 711 -R $PREFIX/libexec/banner
+Set_Ak
+#				IbyC

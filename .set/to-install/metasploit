@@ -1,0 +1,120 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Created on Dec/2018
+IFS=$'\n\t'
+trap ctrl_c 2
+source /data/data/com.termux/files/usr/libexec/colors
+version="4.17.32"
+
+function ctrl_c() {
+                echo
+                printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
+}
+if [ -L ~/storage/external-1 ]; then
+	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-haklab
+else
+        iHAKLAB=/data/data/com.termux/files/home/i-haklab
+fi
+
+while [ ! $(id -u) -ne 0 ]; do
+	printf "$R\n[W]:-> You need to be a common user$W\n"
+	exit
+done
+until [ -d $iHAKLAB ]; do
+	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do you wanna install it?$W\n"
+	while read -p "       [yes/no]:-> " yesorno && [ -z $yesorno ]; do
+		continue
+	done
+if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
+	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
+        cd ~/i-Haklab;bash setup
+else 
+	printf "$G\n[!]-> Have a nice hacking day!!\n\n"
+	exit
+fi
+done
+
+echo $(clear)
+for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
+        printf "$(clear) $C STARTING TO INSTALL METASPLOIT FRAMEWORK. . . .$i"
+        printf "\n\n"
+        sleep 1
+done
+#INSTALLATION
+function instamsf {
+	dpkg --configure -a
+	apt update -y && apt upgrade -y
+	apt autoremove
+	apt install -y util-linux
+	apt install -y autoconf util-linux bison clang coreutils axel curl findutils git apr apr-util libffi-dev libgmp-dev libpcap-dev postgresql-dev readline-dev libsqlite-dev openssl-dev libtool libxml2-dev libxslt-dev ncurses-dev pkg-config wget make ruby-dev libgrpc-dev termux-tools ncurses-utils ncurses unzip zip tar postgresql termux-elf-cleaner
+	if [ -d ~/metasploit-framework ]; then
+        	rm -rf ~/metasploit-framework
+	fi
+	find $HOME -name "*$version.tar.gz" -type f -delete
+	find $HOME -name "metasploit*" -type d -delete
+	cd $HOME
+	axel --alternate https://github.com/rapid7/metasploit-framework/archive/$version.tar.gz
+	tar -xf $HOME/metasploit-framework-$version.tar.gz
+	mv $HOME/metasploit-framework-$version $HOME/metasploit-framework
+	rm $HOME/metasploit-framework-$version.tar.gz
+	cd $HOME/metasploit-framework
+	sed '/rbnacl/d' -i Gemfile.lock
+	sed '/rbnacl/d' -i metasploit-framework.gemspec
+	gem update --system
+	gem install bundler
+	sed 's|nokogiri (1.*)|nokogiri (1.8.0)|g' -i Gemfile.lock
+	ln -sf $PREFIX/include/libxml2/libxml $PREFIX/include/
+	gem install nokogiri -v 1.8.0 -- --use-system-libraries
+	#sed 's|grpc (.*|grpc (1.4.1)|g' -i $HOME/metasploit-framework/Gemfile.lock
+	#gem unpack grpc -v 1.4.1
+	#cd grpc-1.4.1
+	#curl -LO https://raw.githubusercontent.com/grpc/grpc/v1.4.1/grpc.gemspec
+	#curl -L https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/extconf.patch
+	#patch -p1 < extconf.patch
+	#gem build grpc.gemspec
+	#gem install grpc-1.4.1.gem
+	#cd ..
+	#rm -r grpc-1.4.1
+	cd $HOME/metasploit-framework
+	bundle install -j5
+	$PREFIX/bin/find -type f -executable -exec termux-fix-shebang \{\} \;
+	rm ./modules/auxiliary/gather/http_pdf_authors.rb
+	if [ -e $PREFIX/bin/msfconsole ] || [ -L $PREFIX/bin/msfconsole ]; then
+	        rm $PREFIX/bin/msfconsole
+	fi
+	if [ -e $PREFIX/bin/msfvenom ] || [ -L $PREFIX/bin/msfvenom ]; then
+	        rm $PREFIX/bin/msfvenom
+	fi
+	ln -sf $HOME/metasploit-framework/msfconsole /data/data/com.termux/files/usr/bin/
+	ln -sf $HOME/metasploit-framework/msfvenom /data/data/com.termux/files/usr/bin/
+	termux-elf-cleaner /data/data/com.termux/files/usr/lib/ruby/gems/2.5.0/gems/pg-0.20.0/lib/pg_ext.so
+	#Intalling Ruby Gems Issues Resolve (RuGiR)
+	wget https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/RuGiR -O $HOME/metasploit-framework/RuGiR
+	chmod 777 $HOME/metasploit-framework/RuGiR
+	mv $HOME/metasploit-framework/database.yml $HOME/metasploit-framework/config
+	cd $HOME/metasploit-framework/config
+	mkdir -p $PREFIX/var/lib/postgresql
+	initdb $PREFIX/var/lib/postgresql
+	pg_ctl -D $PREFIX/var/lib/postgresql start
+	createuser msf
+	createdb msf_database
+	pg_ctl -D $PREFIX/var/lib/postgresql start
+}
+if [ -d ~/metasploit-framework ]; then
+	printf "$R[?]->$W Metasploit already exist$R |$W Do you want re-install it?\n"
+	while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
+		continue
+	done
+	if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
+		instamsf
+	else
+		printf "$G\n[!]-> Keeping Metasploit...\n\n"
+		sleep 1
+	fi
+else
+	instamsf
+fi
+
+#ENDING SCRIPT
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot
+$W"
+#                                               @Ivam3

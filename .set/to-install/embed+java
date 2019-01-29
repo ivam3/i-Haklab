@@ -1,0 +1,138 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Created on Dec/2018
+IFS=$'\n\t'
+trap ctrl_c 2
+source /data/data/com.termux/files/usr/libexec/colors
+
+function ctrl_c() {
+                echo
+                printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
+}
+if [ -L ~/storage/external-1 ]; then
+	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-haklab
+else
+        iHAKLAB=/data/data/com.termux/files/home/i-haklab
+fi
+
+while [ ! $(id -u) -ne 0 ]; do
+	printf "$R\n[W]:-> You need to be a common user$W\n"
+	exit
+done
+until [ -d $iHAKLAB ]; do
+	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do you wanna install it?$W\n"
+	while read -p "       [yes/no]:-> " yesorno && [ -z $yesorno ]; do
+		continue
+	done
+if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
+	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
+        cd ~/i-Haklab;bash setup
+else 
+	printf "$G\n[!]-> Have a nice hacking day!!\n\n"
+	exit
+fi
+done
+
+echo $(clear)
+for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
+        printf "$(clear) $C STARTING TO INSTALL EMBED+JAVA. . . .$i"
+        printf "\n\n"
+        sleep 1
+done
+#INSTALLATION
+if [ -d $HOME/java ]; then
+                rm -rf $HOME/java
+        fi
+        if [ -L $PREFIX/bin/signapk ]; then
+                rm $PREFIX/bin/signapk
+        fi
+        if [ -L $PREFIX/bin/zzipalign ]; then
+                rm $PREFIX/bin/zzipalign
+        fi
+        if [ -L $PREFIX/bin/apktool ]; then
+                rm $PREFIX/bin/apktool
+        fi
+        if [ -L $PREFIX/bin/java ] || [ -e $PREFIX/bin/java ]; then
+                rm $PREFIX/bin/java
+        fi
+        if [ -L $PREFIX/bin/EMBED ] || [ -e $PREFIX/bin/EMBED ]; then
+                rm $PREFIX/bin/EMBED
+        fi
+        if [ -e $PREFIX/bin/sudo ] || [ -d $HOME/.suroot ]; then
+                sudo chown -R $USR:$USR $HOME/.suroot
+        fi
+apt update && apt upgrade -y
+pkg install git wget tar apksigner aapt -y
+git clone https://github.com/ivam3/java.git
+TMP_DIR=$HOME/java
+mkdir -p $TMP_DIR/handler
+mkdir -p $TMP_DIR/unsign
+mkdir -p $TMP_DIR/finished
+wget https://raw.githubusercontent.com/ivam3/embed/master/EMBED -O $PREFIX/bin/EMBED
+chmod -R 711 $TMP_DIR
+chmod 777 $PREFIX/bin/EMBED
+arch=`dpkg --print-architecture`
+#
+# This Arch use Apktool from TMP_DIR
+#
+        if [ $arch = "aarch64" -o $arch = "arm64" ] ; then
+                echo $(wget https://github.com/ivam3/java/releases/download/v8/jdk8_aarch64.tar.gz)
+                sleep 1
+                mv jdk8_aarch64.tar.gz $PREFIX/share
+                cd $PREFIX/share
+                tar -xhf jdk8_aarch64.tar.gz
+                mv bin/* $PREFIX/bin/
+                rm -rf $PREFIX/share/bin
+                if [ ! -z $apktool ]; then
+                        rm $PREFIX/bin/apktool
+                fi
+                cp $HOME/java/.embed/apktool $PREFIX/bin/
+                cp $HOME/java/openjdk/apktool.jar $PREFIX/var/spool/
+                chmod 711 $PREFIX/share/jdk8/man/ja_JP.UTF-8/man1/*
+#
+# This Arch use Apktool from TMP_DIR
+#
+        elif [ $arch = "armhf" -o $arch = "armv7l" ]; then
+                echo $(wget https://github.com/ivam3/java/releases/download/v8/jdk8_aarch64.tar.gz)
+                mv jdk8_arm.tar.gz $PREFIX/share
+                cd $PREFIX/share
+                tar -xhf jdk8_arm.tar.gz
+                mv bin/* $PREFIX/bin
+                rm -rf $PREFIX/share/bin
+                if [ ! -z $apktool ]; then
+                        rm $PREFIX/bin/apktool
+                fi
+                cp $HOME/java/.embed/apktool $PREFIX/bin/
+                cp $HOME/java/openjdk/apktool.jar $PREFIX/var/spool/
+                chmod 711 $PREFIX/share/jdk8/man/ja_JP.UTF-8/man1/*
+#
+# This Arch use libld.so & apktool from TMP_DIR
+#
+        elif [ $arch = "arm" ]; then
+                echo $(wget https://github.com/ivam3/java/releases/download/v8-151/jdk8_arm.tar.gz)
+                mv jdk8_arm.tar.gz $PREFIX/share
+                cd $PREFIX/share
+                tar -xhf jdk8_arm.tar.gz
+                if [ ! -z $java ]; then
+                        rm $java
+                fi
+                if [ ! -z $apktool ]; then
+                        rm $apktool
+                fi
+                cp $HOME/java/.embed/apktool $PREFIX/bin/
+                cp $HOME/java/openjdk/apktool.jar $PREFIX/var/spool/
+                mv bin/* $PREFIX/bin
+                rm -rf $PREFIX/share/bin
+                chmod 711 $PREFIX/share/jdk8/man/ja_JP.UTF-8/man1/*
+                mv $PREFIX/share/jdk8/bin/java $PREFIX/share/jdk8/bin/java.O
+                cp $HOME/java/openjdk/bin/java $PREFIX/share/jdk8/bin/
+        else
+                printf "$R\n\n[W]:-> O-ops!!$W sorry unknown architecture\n\n"
+                sleep 3
+        fi
+mv $msf/lib/msf/core/payload/apk.rb $msf/lib/msf/core/payload/apk.rb.O
+cp $HOME/java/.embed/apk.rb $msf/lib/msf/core/payload/
+cp $TMP_DIR/.embed/signapk $PREFIX/bin
+
+#ENDING SCRIPT
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
+#                                               @Ivam3

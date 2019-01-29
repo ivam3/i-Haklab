@@ -1,0 +1,17 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Banner K-Boom
+source $PREFIX/libexec/colors
+clear
+printf "$W
+                        _-^--^=-_
+                   _.-^^          -~_
+                _--                  --_
+              (<                        >)
+               |                         |
+                \._                   _./
+                   '..--. . , ; .--..' $Y
+                         | |   |$R
+                      .-=$Y||  | |$R=-.
+                      '-=k-boom!!='$Y
+                         |;   :|$R
+                _____.,-#########~,._____$W"
