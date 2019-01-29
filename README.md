@@ -202,17 +202,15 @@ Arguments  |    options     |    Description
 
 
 
-****   _           _        _ _       _   _
-***   (_)_ __  ___| |_ __ _| | | __ _| |_(_) ___  _ __
-***  | | '_ \/ __| __/ _` | | |/ _` | __| |/ _ \| '_ \
-***  | | | | \__ \ || (_| | | | (_| | |_| | (_) | | | |
-***  |_|_| |_|___/\__\__,_|_|_|\__,_|\__|_|\___/|_| |_|
+# INSTALLATION
 
-- There is to ways :
-		NUMBER 1 : with installation script
-- download the script Ivam3-Haklab in >>
-- move it to Home directory and go there
-- execute it by command >> $ bash Ivam3-Haklab
+WITH SCRIPT Ivam3-Haklab :
+
+- download the script Ivam3-Haklab in :
+	https://shrt.am/
+- move it to Home directory:
+	$ mv <downloading directory> $HOME
+- execute it by command : $ bash Ivam3-Haklab
 
 		NUMBER 2 : Cloning
 - $ git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
