@@ -11,14 +11,14 @@ while [ $USER = "root" ]; do
 	printf "$R\n[W]:-> You need to be a common user to install i-Haklab$W\n"
 	exit
 done
-until [ -d ~/i-Haklab ]; do
+until [ -e /data/data/com.termux/files/home/i-Haklab/setup ]; do
 	printf "$R\n[W]:-> i-Haklab directory must to be in home directory$W\n"
 	exit
 done
 apt update && apt upgrade
 apt install -y fish root-repo util-linux coreutils vim python python2 ruby ruby-dev perl clang curl wget make openssl openssl-tool php zip unzip tar w3m neofetch dirmngr weechat irssi tor htop bison megatools findutils git apr apr-util libffi-dev libgmp-dev postgresql-dev readline-dev libsqlite-dev openssh openssl-dev libtool libxml2-dev libxslt-dev ncurses-dev pkg-config libgrpc-dev termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner libcaca fortune figlet man termux-api hydra megatools axel apksigner aircrack-ng ethtool macchanger -y
-if [ -d ~/storage ]; then
-	rm -rf ~/storage
+if [ -d /data/data/com.termux/files/home/home/storage ]; then
+	rm -rf /data/data/com.termux/files/home/home/storage
 fi
 if [ -e $PREFIX/libexec/colors ]; then
         rm $PREFIX/libexec/colors
@@ -68,7 +68,7 @@ echo $(clear)
         printf "$C         Press$G ENTER$C to continue"
         printf "$W\n"
         read enter
-CHECKROOT=$(bash ~/i-Haklab/.set/to-install/check-root)
+CHECKROOT=$(bash /data/data/com.termux/files/home/storage/i-Haklab/.set/to-install/check-root)
 USR=$(whoami)
 if [ $CHECKROOT = "root" ]; then
 	command -v sudo > /dev/null || bash $iHAKLAB/.set/to-install/instasudo
@@ -88,16 +88,16 @@ if [ $CHECKROOT = "root" ]; then
 else
         sed -i "3a alias server-php=\"php -S LOCALHOST:4546 -t $PREFIX/var/service/php/\"" $PREFIX/var/alias
 fi
-if [ -L ~/storage/external-1 ] && [ -z $PARTITION ]; then
-        until [ -d ~/storage/external-1/roothome ]; do
+if [ -L /data/data/com.termux/files/home/storage/external-1 ] && [ -z $PARTITION ]; then
+        until [ -d /data/data/com.termux/files/home/storage/external-1/roothome ]; do
                 printf "$R\n[W]-> O-ops!!$W roothome directory cannot be created\n"
-                mkdir -p ~/storage/external-1/roothome
+                mkdir -p /data/data/com.termux/files/home/storage/external-1/roothome
         done
-        until [ -O ~/storage/external-1/roothome ]; do
+        until [ -O /data/data/com.termux/files/home/storage/external-1/roothome ]; do
                 printf "$R\n[W]-> O-ops!!$W Your are not owner of roothome directory\n"
-                sudo chown $USR:$USR ~/storage/external-1/roothome
+                sudo chown $USR:$USR /data/data/com.termux/files/home/storage/external-1/roothome
         done
-        mv ~/i-Haklab ~/storage/external-1/roothome/
+        mv /data/data/com.termux/files/home/i-Haklab /data/data/com.termux/files/home/storage/external-1/roothome/
         iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 elif [ $PARTITION ] || [ -d /data/data/com.termux ]; then
         iHAKLAB=/data/data/com.termux/files/home/i-Haklab
