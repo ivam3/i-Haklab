@@ -16,7 +16,7 @@ until [ -e /data/data/com.termux/files/home/i-Haklab/setup ]; do
 	exit
 done
 apt update && apt upgrade
-apt install -y fish root-repo util-linux coreutils vim python python2 ruby ruby-dev perl clang curl wget make openssl openssl-tool php zip unzip tar w3m neofetch dirmngr weechat irssi tor htop bison megatools findutils git apr apr-util libffi-dev libgmp-dev postgresql-dev readline-dev libsqlite-dev openssh openssl-dev libtool libxml2-dev libxslt-dev ncurses-dev pkg-config libgrpc-dev termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner libcaca fortune figlet man termux-api hydra megatools axel apksigner aircrack-ng ethtool macchanger -y
+apt install -y fish root-repo util-linux coreutils vim python python2 ruby ruby-dev perl clang curl wget make openssl fish openssl-tool php zip unzip tar w3m neofetch dirmngr weechat irssi tor htop bison megatools findutils git apr apr-util libffi-dev libgmp-dev postgresql-dev readline-dev libsqlite-dev openssh openssl-dev libtool libxml2-dev libxslt-dev ncurses-dev pkg-config libgrpc-dev termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner libcaca fortune figlet man termux-api hydra megatools axel apksigner aircrack-ng ethtool macchanger -y
 if [ -d /data/data/com.termux/files/home/storage ]; then
 	rm -rf /data/data/com.termux/files/home/storage
 fi
@@ -112,6 +112,7 @@ for TOOL in $SRCH; do
 	printf "\n\n"
 done
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/i-Haklab -o $PREFIX/bin/i-Haklab
+chmod +x $PREFIX/bin/i-Haklab
 curl -L http://get.oh-my.fish | fish
 echo "source $PREFIX/var/alias" >> $PREFIX/etc/fish/config.fish
 bash $iHAKLAB/.set/to-install/functions
