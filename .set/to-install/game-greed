@@ -46,6 +46,5 @@ wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/games/greed -O $iHA
 chmod +x $iHAKLAB/games/*
 
 #ENDING SCRIPT
-printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot
-$W"
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot\n$W"
 #                                               @Ivam3

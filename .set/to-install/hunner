@@ -18,7 +18,7 @@ while [ ! $(id -u) -ne 0 ]; do
 	printf "$R\n[W]:-> You need to be a common user$W\n"
 	exit
 done
-until [ -d $iHAKLAB ]; do
+until [ ! -d $iHAKLAB ]; do
 	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do you wanna install it?$W\n"
 	while read -p "       [yes/no]:-> " yesorno && [ -z $yesorno ]; do
 		continue
@@ -47,5 +47,5 @@ chmod 777 $iHAKLAB/../Hunner/hunner.py
 pip install httplib2
 
 #ENDING SCRIPT
-printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3
