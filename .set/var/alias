@@ -2,5 +2,4 @@
 # you can add more as you can
 #
 alias postgresql="pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql"
-alias exit="exit;exit;exit;exit;exit"
 #			@Ivam3
