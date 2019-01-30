@@ -7,7 +7,7 @@ function ctrl_c() {
 	echo
 	printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
 }
-while [ $USER = "root" ]; do
+while [ "$USER" = "root" ]; do
 	printf "$R\n[W]:-> You need to be a common user to install i-Haklab$W\n"
 	exit
 done
@@ -17,8 +17,8 @@ until [ -e /data/data/com.termux/files/home/i-Haklab/setup ]; do
 done
 apt update && apt upgrade
 apt install -y fish root-repo util-linux coreutils vim python python2 ruby ruby-dev perl clang curl wget make openssl openssl-tool php zip unzip tar w3m neofetch dirmngr weechat irssi tor htop bison megatools findutils git apr apr-util libffi-dev libgmp-dev postgresql-dev readline-dev libsqlite-dev openssh openssl-dev libtool libxml2-dev libxslt-dev ncurses-dev pkg-config libgrpc-dev termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner libcaca fortune figlet man termux-api hydra megatools axel apksigner aircrack-ng ethtool macchanger -y
-if [ -d /data/data/com.termux/files/home/home/storage ]; then
-	rm -rf /data/data/com.termux/files/home/home/storage
+if [ -d /data/data/com.termux/files/home/storage ]; then
+	rm -rf /data/data/com.termux/files/home/storage
 fi
 if [ -e $PREFIX/libexec/colors ]; then
         rm $PREFIX/libexec/colors
@@ -68,7 +68,7 @@ echo $(clear)
         printf "$C         Press$G ENTER$C to continue"
         printf "$W\n"
         read enter
-CHECKROOT=$(bash /data/data/com.termux/files/home/storage/i-Haklab/.set/to-install/check-root)
+CHECKROOT=$(bash /data/data/com.termux/files/home/i-Haklab/.set/to-install/check-root)
 USR=$(whoami)
 if [ $CHECKROOT = "root" ]; then
 	command -v sudo > /dev/null || bash $iHAKLAB/.set/to-install/instasudo
