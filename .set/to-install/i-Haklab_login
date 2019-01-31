@@ -158,22 +158,24 @@ if [ -e $PREFIX/etc/motd2 ]; then
 	mv $PREFIX/etc/motd2 $PREFIX/etc/motd
 fi
 apt update && apt upgrade -y
+apt install ruby
+gem install lolcat
 cat $PREFIX/etc/bash.bashrc > $PREFIX/etc/bashito
 if [ -e $PREFIX/etc/motd ]; then
 	mv $PREFIX/etc/motd $PREFIX/etc/motd2
 fi
 echo "command_not_found_handle() {" > $PREFIX/etc/bash.bashrc
-echo "        /data/data/com.termux/files/usr/libexec/termux/command-not-found \"$1\"" >> $PREFIX/etc/bash.bashrc
+echo "        /data/data/com.termux/files/usr/libexec/termux/command-not-found \"\$1\"" >> $PREFIX/etc/bash.bashrc
 echo "}" >> $PREFIX/etc/bash.bashrc
 echo "source /data/data/com.termux/files/usr/var/log/login-termux" >> $PREFIX/etc/bash.bashrc
 echo "PS1=\"\[\e[33m\][!] \[\e[31m\]Type\[\e[32m\] exit\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\"" >> $PREFIX/etc/bash.bashrc
 echo "#				@Ivam3" >> $PREFIX/etc/bash.bashrc
-curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/login-files/i-haklab_login -o $PREFIX/var/log/login-termux
-curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/banner/i-Haklab -o $PREFIX/libexec/banner/login-banner
 touch $PREFIX/libexec/termux/.Quiz
 touch $PREFIX/libexec/termux/.Ivam3
 touch $PREFIX/libexec/termux/.Cinderella
 mkdir -p $PREFIX/libexec/banner
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/login-files/i-haklab_login -o $PREFIX/var/log/login-termux
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/banner/i-Haklab -o $PREFIX/libexec/banner/login-banner
 echo "#!/data/data/com.termux/files/usr/bin/bash" > $PREFIX/libexec/banner/wall-banner
 echo "# Banner for i-Haklab created by @Ivam3 on Jan/2019" >> $PREFIX/libexec/banner/wall-banner
 echo "IFS=$'\n\t'" >> $PREFIX/libexec/banner/wall-banner
