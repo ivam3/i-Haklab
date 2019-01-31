@@ -45,8 +45,8 @@ done
 if [ -d $iHAKLAB/../LaNMaSteR-recon-ng ]; then
         rm -rf $iHAKLAB/../LaNMaSteR-recon-ng
 fi
-cd $iHAKLAB/../;unzip $iHAKLAB/.set/to-install/LaNMaSteR-recon-ng.zip
-chmod 777 ~/LaNMaSteR-recon-ng/recon-ng
+unzip $iHAKLAB/.set/to-install/LaNMaSteR-recon-ng.zip -d $iHAKLAB/../
+chmod 777 $iHAKLAB/../LaNMaSteR-recon-ng/recon-ng
 python2 -m pip install dicttoxml
 python2 -m pip install dnspython
 python2 -m pip install jsonrpclib

@@ -42,12 +42,12 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-if [ -d ~/crunch-4tmux ]; then
-        rm -rf ~/crunch-4tmux
+if [ -d $iHAKLAB/../crunch-4tmux ]; then
+        rm -rf $iHAKLAB/../crunch-4tmux
 fi
 git clone https://github.com/ivam3/crunch-4tmux.git $iHAKLAB/../crunch
 mv $iHAKLAB/../crunch/crunch $PREFIX/bin/
-mv $iHAKLAB/../crunch//README.md $iHAKLAB/guides/crunch.txt
+mv $iHAKLAB/../crunch/README.md $iHAKLAB/QuickGuides/crunch.txt
 rm -rf $iHAKLAB/../crunch
 
 #ENDING SCRIPT

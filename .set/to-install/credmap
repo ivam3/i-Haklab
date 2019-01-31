@@ -43,7 +43,7 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
 done
 #INSTALLATION
 if [ -d $iHAKLAB/../credmap ]; then
-	rm -f $iHAKLAB/../credmap
+	rm -rf $iHAKLAB/../credmap
 fi
 git clone https://github.com/lightos/credmap.git $iHAKLAB/../credmap
 chmod 777 $iHAKLAB/../credmap/credmap.py

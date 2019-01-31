@@ -57,9 +57,9 @@ function Install {
 function ENDING-SCRIPT {
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 }
-if [ -e $PREFIX/bin/ngrok ]
+if [ -e $PREFIX/bin/ngrok ]; then
         printf "$Y\n\n[!]:-> Ngrok file already exists | Do you wanna re-install it ?"
-        while reap -p -n 2 "$G\n[y/Y|N/n]:->$W " yesorno [ -z $yesorno ]; do
+        while read -p -n 2 "$G\n[y/Y|N/n]:->$W " yesorno [ -z $yesorno ]; do
                 printf "$R\n[W] O-ops!!$W\n"
         done
         if [ $yesorno = 'y' -o $yesorno = 'Y' ]; then

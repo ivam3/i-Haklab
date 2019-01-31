@@ -43,29 +43,29 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
 done
 #INSTALLATION
 if [ -d $HOME/java ]; then
-                rm -rf $HOME/java
-        fi
-        if [ -L $PREFIX/bin/signapk ]; then
-                rm $PREFIX/bin/signapk
-        fi
-        if [ -L $PREFIX/bin/zzipalign ]; then
-                rm $PREFIX/bin/zzipalign
-        fi
-        if [ -L $PREFIX/bin/apktool ]; then
-                rm $PREFIX/bin/apktool
-        fi
-        if [ -L $PREFIX/bin/java ] || [ -e $PREFIX/bin/java ]; then
-                rm $PREFIX/bin/java
-        fi
-        if [ -L $PREFIX/bin/EMBED ] || [ -e $PREFIX/bin/EMBED ]; then
-                rm $PREFIX/bin/EMBED
-        fi
-        if [ -e $PREFIX/bin/sudo ] || [ -d $HOME/.suroot ]; then
-                sudo chown -R $USR:$USR $HOME/.suroot
-        fi
+	rm -rf $HOME/java
+fi
+if [ -L $PREFIX/bin/signapk ]; then
+	rm $PREFIX/bin/signapk
+fi
+if [ -L $PREFIX/bin/zzipalign ]; then
+        rm $PREFIX/bin/zzipalign
+fi
+if [ -L $PREFIX/bin/apktool ]; then
+        rm $PREFIX/bin/apktool
+fi
+if [ -L $PREFIX/bin/java ] || [ -e $PREFIX/bin/java ]; then
+	rm $PREFIX/bin/java
+fi
+if [ -L $PREFIX/bin/EMBED ] || [ -e $PREFIX/bin/EMBED ]; then
+        rm $PREFIX/bin/EMBED
+fi
+if [ -e $PREFIX/bin/sudo ] || [ -d $HOME/.suroot ]; then
+        sudo chown -R $USR:$USR $HOME/.suroot
+fi
 apt update && apt upgrade -y
 pkg install git wget tar apksigner aapt -y
-git clone https://github.com/ivam3/java.git
+git clone https://github.com/ivam3/java.git ~/java
 TMP_DIR=$HOME/java
 mkdir -p $TMP_DIR/handler
 mkdir -p $TMP_DIR/unsign
@@ -78,7 +78,8 @@ arch=`dpkg --print-architecture`
 # This Arch use Apktool from TMP_DIR
 #
         if [ $arch = "aarch64" -o $arch = "arm64" ] ; then
-                echo $(wget https://github.com/ivam3/java/releases/download/v8/jdk8_aarch64.tar.gz)
+                cd ~/
+		echo $(wget https://github.com/ivam3/java/releases/download/v8/jdk8_aarch64.tar.gz)
                 sleep 1
                 mv jdk8_aarch64.tar.gz $PREFIX/share
                 cd $PREFIX/share
@@ -88,14 +89,15 @@ arch=`dpkg --print-architecture`
                 if [ ! -z $apktool ]; then
                         rm $PREFIX/bin/apktool
                 fi
-                cp $HOME/java/.embed/apktool $PREFIX/bin/
-                cp $HOME/java/openjdk/apktool.jar $PREFIX/var/spool/
+                cp $TMP_DIR/.embed/apktool $PREFIX/bin/
+                cp $TMP_DIR/openjdk/apktool.jar $PREFIX/var/spool/
                 chmod 711 $PREFIX/share/jdk8/man/ja_JP.UTF-8/man1/*
 #
 # This Arch use Apktool from TMP_DIR
 #
         elif [ $arch = "armhf" -o $arch = "armv7l" ]; then
-                echo $(wget https://github.com/ivam3/java/releases/download/v8/jdk8_aarch64.tar.gz)
+                cd ~/
+		echo $(wget https://github.com/ivam3/java/releases/download/v8/jdk8_aarch64.tar.gz)
                 mv jdk8_arm.tar.gz $PREFIX/share
                 cd $PREFIX/share
                 tar -xhf jdk8_arm.tar.gz
@@ -121,19 +123,19 @@ arch=`dpkg --print-architecture`
                 if [ ! -z $apktool ]; then
                         rm $apktool
                 fi
-                cp $HOME/java/.embed/apktool $PREFIX/bin/
-                cp $HOME/java/openjdk/apktool.jar $PREFIX/var/spool/
+                cp $TMP_DIR/.embed/apktool $PREFIX/bin/
+                cp $TMP_DIR/openjdk/apktool.jar $PREFIX/var/spool/
                 mv bin/* $PREFIX/bin
                 rm -rf $PREFIX/share/bin
                 chmod 711 $PREFIX/share/jdk8/man/ja_JP.UTF-8/man1/*
                 mv $PREFIX/share/jdk8/bin/java $PREFIX/share/jdk8/bin/java.O
-                cp $HOME/java/openjdk/bin/java $PREFIX/share/jdk8/bin/
+                cp $TMP_DIR/openjdk/bin/java $PREFIX/share/jdk8/bin/
         else
                 printf "$R\n\n[W]:-> O-ops!!$W sorry unknown architecture\n\n"
                 sleep 3
         fi
 mv $msf/lib/msf/core/payload/apk.rb $msf/lib/msf/core/payload/apk.rb.O
-cp $HOME/java/.embed/apk.rb $msf/lib/msf/core/payload/
+cp $TMP_DIR/.embed/apk.rb $msf/lib/msf/core/payload/
 cp $TMP_DIR/.embed/signapk $PREFIX/bin
 
 #ENDING SCRIPT

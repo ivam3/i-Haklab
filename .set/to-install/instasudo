@@ -42,7 +42,7 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-if [ $CHECKROOT = "root" ]; then
+if [ "$CHECKROOT" = "root" ]; then
         #set colored=true to turn on colored error messages
         #set colored=false to turn off colored error messages
         colored=true

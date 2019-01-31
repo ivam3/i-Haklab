@@ -50,7 +50,7 @@ if [ -d $iHAKLAB/.set/to-install/.repo/sqliv ]; then
 else
 	printf "$R\n[W]:-> Sqliv repository has been archived by the owner.$W\n\n"
 fi
-chmod $iHAKLAB/../sqliv/sqliv.py
+chmod +x $iHAKLAB/../sqliv/sqliv.py
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"

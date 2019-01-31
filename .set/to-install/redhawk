@@ -46,7 +46,7 @@ if [ -d $iHAKLAB/../RED_HAWK ]; then
         rm -rf $iHAKLAB/../RED_HAWK
 fi
 git clone https://github.com/Tuhinshubhra/RED_HAWK.git $iHAKLAB/../RED_HAWK
-chmod $iHAKLAB/../RED_HAWK/rhawk.php
+chmod +x $iHAKLAB/../RED_HAWK/rhawk.php
 pkg install php -y
 
 #ENDING SCRIPT

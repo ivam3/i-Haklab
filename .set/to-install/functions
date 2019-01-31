@@ -50,6 +50,7 @@ function remove {
 }
 FNC=LOCALHOST
 remove
+mkdir -p ~/.config/fish/functions/
 wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/functions/LOCALHOST.fish -O $FNCDIR/LOCALHOST.fish
 
 #ENDING SCRIPT

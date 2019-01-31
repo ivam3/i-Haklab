@@ -1,5 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
-#Created on Dec/2018
+#Created on Jan/2019
 IFS=$'\n\t'
 trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
@@ -10,9 +10,9 @@ function ctrl_c() {
                 printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
 }
 if [ -L ~/storage/external-1 ]; then
-	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-haklab
+	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 else
-        iHAKLAB=/data/data/com.termux/files/home/i-haklab
+        iHAKLAB=/data/data/com.termux/files/home/i-Haklab
 fi
 
 while [ ! $(id -u) -ne 0 ]; do
@@ -115,6 +115,5 @@ else
 fi
 
 #ENDING SCRIPT
-printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot
-$W"
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3

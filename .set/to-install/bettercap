@@ -43,12 +43,12 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
 done
 #INSTALLATION
 RUROOT=$(bash $iHAKLAB/.set/to-install/check-root)
-if [ $RUROOT = "root" ]; then
+if [ "$RUROOT" = "root" ]; then
         apt update && apt upgrade
 	apt install ruby ruby-dev -y
 	gem install bettercap
 else
-        printf "$R\n[W]:-> You need to be root to get Aircrack-ng$W\n"
+        printf "$R\n[W]:-> You need to be root to get Bettercap$W\n"
         sleep 1
 fi
 

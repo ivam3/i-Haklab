@@ -23,7 +23,7 @@ while [ ! $(id -u) -ne 0 ]; do
 done
 until [ -d $iHAKLAB ]; do
 	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do you wanna install it?$W\n"
-	while read -p "       [yes/no]:-> " yesorno && [ -z $yesorno ]; do
+	while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
 		continue
 	done
 if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
@@ -42,17 +42,17 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-if [ -e $iHAKLAB/QickGuides/nmap ]; then 
-	rm $iHAKLAB/QickGuides/nmap
+if [ -e $iHAKLAB/QuickGuides/nmap ]; then 
+	rm $iHAKLAB/QuickGuides/nmap
 fi
-if [ -e $iHAKLAB/QickGuides/aircrack ]; then
-	rm $iHAKLAB/QickGuides/aircrack
+if [ -e $iHAKLAB/QuickGuides/aircrack ]; then
+	rm $iHAKLAB/QuickGuides/aircrack
 fi
-if [ ! -d $iHAKLAB/QickGuides ]; then
-	mkdir -p $iHAKLAB/QickGuides
+if [ ! -d $iHAKLAB/QuickGuides ]; then
+	mkdir -p $iHAKLAB/QuickGuides
 fi
-curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/QuickGuides/nmap.sh -O $iHAKLAB/QickGuides/nmap
-curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/QuickGuides/aircrack-ng.sh -O $iHAKLAB/QickGuides/aircrack
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/QuickGuides/nmap.sh -o $iHAKLAB/QuickGuides/nmap
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/QuickGuides/aircrack-ng.sh -o $iHAKLAB/QuickGuides/aircrack
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
