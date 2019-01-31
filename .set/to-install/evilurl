@@ -37,7 +37,7 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL . . . .$i"
+        printf "$(clear) $C STARTING TO INSTALL EVILURL. . . .$i"
         printf "\n\n"
         sleep 1
 done
