@@ -44,8 +44,8 @@ done
 #INSTALLATION
 apt update && apt upgrade
 apt install -y php
-git clone https://github.com/Juni0r007/spotichk.git $iHAKLAB/spotichk
-chmod +x $iHAKLAB/spotichk
+git clone https://github.com/Juni0r007/spotichk.git $iHAKLAB/../spotichk
+chmod +x $iHAKLAB/../spotichk
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"

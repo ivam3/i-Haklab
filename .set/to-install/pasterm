@@ -44,8 +44,8 @@ done
 #INSTALLATION
 apt update && apt upgrade
 apt install -y php
-git clone https://github.com/Juni0r007/PasTerm.git $iHAKLAB/PasTerm
-chmod +x $iHAKLAB/PasTerm
+git clone https://github.com/Juni0r007/PasTerm.git $iHAKLAB/../PasTerm
+chmod +x $iHAKLAB/../PasTerm
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
