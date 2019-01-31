@@ -30,7 +30,7 @@ while [ $USER = "root" ]; do
 done
 until [ -d $iHAKLAB ]; do
 	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do y ou wanna install it?$W\n"
-	while read -p "       [yes/no]:-> " yesorno && [ -z $yesorno ]; do
+	while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
 		continue
 	done
 if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
