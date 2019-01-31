@@ -19,9 +19,9 @@ function k-boom {
 	fi
 }
 if [ -L ~/storage/external-1 ]; then
-#	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
-#else
-        iHAKLAB=/data/data/com.termux/files/home/i-haklab
+	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+else
+        iHAKLAB=/data/data/com.termux/files/home/i-Haklab
 fi
 
 while [ $USER = "root" ]; do
@@ -46,7 +46,7 @@ TARGET=(0 1 2 3 29)
 SSH=$(netstat | grep -c "ssh")
 LOCALHOST=$(ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255)
 CHECKROOT=$(bash $iHAKLAB/.set/to-install/check-root)
-if [ $CHECKROOT = "root" ]; then
+if [ "$CHECKROOT" = "root" ]; then
 	LPORT=80
 else
 	LPORT=4546
