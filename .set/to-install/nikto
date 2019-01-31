@@ -8,26 +8,29 @@ function ctrl_c() {
                 echo
                 printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
 }
+if [ ! -d ~/storage ]; then
+        termux-setup-storage
+fi
 if [ -L ~/storage/external-1 ]; then
-	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-haklab
+	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 else
-        iHAKLAB=/data/data/com.termux/files/home/i-haklab
+        iHAKLAB=/data/data/com.termux/files/home/i-Haklab
 fi
 
 while [ ! $(id -u) -ne 0 ]; do
 	printf "$R\n[W]:-> You need to be a common user$W\n"
 	exit
 done
-until [ ! -d $iHAKLAB ]; do
+until [ -d $iHAKLAB ]; do
 	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do you wanna install it?$W\n"
-	while read -p "       [yes/no]:-> " yesorno && [ -z $yesorno ]; do
+	while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
 		continue
 	done
 if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
 	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
         cd ~/i-Haklab;bash setup
 else 
-	printf "$G\n[!]-> Have a nice hacking day!!\n\n"
+	printf "$G[!]-> Have a nice hacking day!!\n"
 	exit
 fi
 done
@@ -46,5 +49,5 @@ git clone https://github.com/sullo/nikto.git $iHAKLAB/../nikto
 chmod 777 $iHAKLAB/../nikto/program/nikto.pl
 
 #ENDING SCRIPT
-printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W\n"
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3

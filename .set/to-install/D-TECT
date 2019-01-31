@@ -8,16 +8,19 @@ function ctrl_c() {
                 echo
                 printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
 }
+if [ ! -d ~/storage ]; then
+	termux-setup-storage
+fi
 if [ -L ~/storage/external-1 ]; then
-        iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-haklab
+        iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 else
-        iHAKLAB=/data/data/com.termux/files/home/i-haklab
+        iHAKLAB=/data/data/com.termux/files/home/i-Haklab
 fi
 while [ ! $(id -u) -ne 0 ]; do
         printf "$R[W]:-> You have to be a normal user$W\n"
         exit
 done
-until [ ! -d $iHAKLAB ]; do
+until [ -d $iHAKLAB ]; do
         printf "$R[W]:-> i-Haklab needed$W|$Y Do you wanna install it?$W\n"
         while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
                 continue
@@ -27,7 +30,7 @@ if [ $yesorno = "yes" ]; then
         cd ~/i-Haklab;bash setup
         exit
 else
-	printf "$G\n[!]-> Have a nice hacking day!!\n"
+	printf "$G[!]-> Have a nice hacking day!!\n"
         exit
 fi
 done
@@ -45,5 +48,5 @@ git clone https://github.com/shawarkhanethicalhacker/D-TECT-1.git $iHAKLAB/../D-
 chmod 777 $iHAKLAB/../D-TECT-1/d-tect.py
 python2 -m pip install colorama beautifulsoup
 #ENDING SCRIPT
-printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot\n$W"
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot\n$W"
 #                                               @Ivam3

@@ -43,5 +43,5 @@ if [ -d $iHAKLAB/../D-TECT-1 ]; then
 fi
 python2 -m pip uninstall colorama beautifulsoup
 #ENDING SCRIPT
-printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n      To fix issues going to$B t.me/Ivam3_Bot$W"
 #                                               @Ivam3
