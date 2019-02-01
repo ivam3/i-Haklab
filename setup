@@ -131,7 +131,7 @@ if [ -e ~/ivam3-Haklab ]; then
 	rm ~/ivam3-Haklab
 fi
 
-printf "$Y[!]->$@ i-Haklab installed !!!$G\n[i]->$W Please restart Termux and then type$G :$W set fish_greeting\n"
+printf "$Y[!]->$G i-Haklab installed !!!$Y |$W Please restart Termux and enjoy it!!\n"
 
 
 #		@Ivam3
