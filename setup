@@ -119,6 +119,9 @@ curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/i-Haklab -
 chmod +x $PREFIX/bin/i-Haklab
 curl -L http://get.oh-my.fish | fish
 echo "source $PREFIX/var/alias" >> $PREFIX/etc/fish/config.fish
+sed "27d" ~/.config/fish/fish_variables > $PREFIX/tmp/fish_variables
+rm ~/.config/fish/fish_variables 
+mv $PREFIX/tmp/fish_variables ~/.config/fish/
 bash $iHAKLAB/.set/to-install/functions
 bash $iHAKLAB/.set/to-install/i-Haklab_login
 for del in bin functions login-files sqliv var ; do
