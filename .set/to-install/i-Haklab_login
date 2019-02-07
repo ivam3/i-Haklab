@@ -189,7 +189,7 @@ echo "#         	@Ivam3" >> $PREFIX/libexec/banner/wall-banner
 chmod 711 $PREFIX/var/log/login-termux
 chmod 711 -R $PREFIX/libexec/termux
 chmod 711 -R $PREFIX/libexec/banner
-printf "$G[?]-> Do you wanna set loggin access to i-Haklab ?\n$Y[!]-> You cat set it later executing$W $ i-Haklab install i-Haklab_login\n"
+printf "$G[?]-> Do you wanna set loggin access to i-Haklab ?\n$Y[!]-> You can set it later executing$W $ i-Haklab install i-Haklab_login\n"
 while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
 	continue
 done
