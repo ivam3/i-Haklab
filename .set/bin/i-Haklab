@@ -165,7 +165,7 @@ elif [ $1 = weechat ]; then
 	if [ ! -e $PREFIX/bin/weechat ]; then
 		apt install weechat -y
 	fi
-	printf "$Y\n   [!]->$W After start weechat type the next commands$Y <-[!]$Y\n/server add freenode chat.freenode.net/6697 -ssl -autoconnect\n                  /connect freenode\n                 /nick your-nickname\n              /join #Ivam3byCinderella$G\n\n                Press enter to start\n"
+	printf "$Y\n   [!]->$W After start weechat type the next commands$Y <-[!]$Y\n/server add freenode chat.freenode.net/6697 -ssl -autoconnect\n                   /connect freenode\n                  /nick your-nickname\n               /join #Ivam3byCinderella$G\n               $R[w]-> USE SOME VPN <-[w]$G\n\n                 Press enter to start$W\n"
 	read enter
 	weechat
 	k-boom
