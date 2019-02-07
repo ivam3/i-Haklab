@@ -41,7 +41,7 @@ else
 	exit
 fi
 done
-TOOL=$(ls $iHAKLAB/.set/to-install/ | grep -iv .zip | grep -iv instasudo | grep -iv check-root | grep -iv i-haklab_login | grep -iv functions | grep -n -iv lock)
+TOOL=$(ls $iHAKLAB/.set/to-install/ | grep -iv .zip | grep -iv instasudo | grep -iv check-root | grep -iv functions | grep -n -iv lock)
 TARGET=(0 1 2 3 29)
 SSH=$(netstat | grep -c "ssh")
 LOCALHOST=$(ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255)

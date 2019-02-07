@@ -138,21 +138,14 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         printf "\n\n"
         sleep 1
 done
+if [ -e $PREFIX/var/log/login-termux.O ]; then
+	mv $PREFIX/var/log/login-termux.O $PREFIX/var/log/login-termux.O2
+fi
 if [ -e $PREFIX/var/log/login-termux ]; then
-	rm $PREFIX/var/log/login-termux
-fi
-if [ -e $PREFIX/libexec/termux/.Ivam3 ]; then
-	rm -r $PREFIX/libexec/termux/.Ivam3
-fi
-if [ -e $PREFIX/libexec/termux/.Cinderella ]; then
-	rm -r $PREFIX/libexec/termux/.Cinderella
-fi
-if [ -e $PREFIX/libexec/termux/.Quiz ]; then
-	rm -r $PREFIX/libexec/termux/.Quiz
+	mv $PREFIX/var/log/login-termux $PREFIX/var/log/login-termux.O
 fi
 if [ -e $PREFIX/etc/bashito ]; then
-	cat $PREFIX/etc/bashito > $PREFIX/etc/bashito2
-	rm $PREFIX/etc/bashito
+	mv $PREFIX/etc/bashito $PREFIX/etc/bashito2
 fi
 if [ -e $PREFIX/etc/motd2 ]; then
 	mv $PREFIX/etc/motd2 $PREFIX/etc/motd
@@ -170,10 +163,18 @@ echo "}" >> $PREFIX/etc/bash.bashrc
 echo "source /data/data/com.termux/files/usr/var/log/login-termux" >> $PREFIX/etc/bash.bashrc
 echo "PS1=\"\[\e[33m\][!] \[\e[31m\]Type\[\e[32m\] exit\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\"" >> $PREFIX/etc/bash.bashrc
 echo "#				@Ivam3" >> $PREFIX/etc/bash.bashrc
-touch $PREFIX/libexec/termux/.Quiz
-touch $PREFIX/libexec/termux/.Ivam3
-touch $PREFIX/libexec/termux/.Cinderella
-mkdir -p $PREFIX/libexec/banner
+if [ ! -e $PREFIX/libexec/termux/.Quiz ]; then
+	touch $PREFIX/libexec/termux/.Quiz
+fi
+if [ ! -e $PREFIX/libexec/termux/.Ivam3 ]; then
+	touch $PREFIX/libexec/termux/.Ivam3
+fi
+if [ ! -e $PREFIX/libexec/termux/.Cinderella ]; then
+	touch $PREFIX/libexec/termux/.Cinderella
+fi
+if [ ! -d $PREFIX/libexec/banner ]; then
+	mkdir -p $PREFIX/libexec/banner
+fi
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/login-files/i-haklab_login -o $PREFIX/var/log/login-termux
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/banner/i-Haklab -o $PREFIX/libexec/banner/login-banner
 echo "#!/data/data/com.termux/files/usr/bin/bash" > $PREFIX/libexec/banner/wall-banner
@@ -188,7 +189,13 @@ echo "#         	@Ivam3" >> $PREFIX/libexec/banner/wall-banner
 chmod 711 $PREFIX/var/log/login-termux
 chmod 711 -R $PREFIX/libexec/termux
 chmod 711 -R $PREFIX/libexec/banner
-Set_Ak
+printf "$G[?]-> Do you wanna set loggin access to i-Haklab ?\n$Y[!]-> You cat set it later executing$W $ i-Haklab install i-Haklab_login\n"
+while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
+	continue
+done
+if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
+	Set_Ak
+fi
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
 #				IbyC
