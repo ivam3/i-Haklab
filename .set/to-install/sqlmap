@@ -45,9 +45,9 @@ done
 if [ -d $iHAKLAB/../sqlmap ]; then
         rm -rf $iHAKLAB/../sqlmap
 fi
-git clone https://github.com/sqlmapproject/sqlmap.git $iHAKLAB/../sqlmap
-chmod 777 $iHAKLAB/../sqlmap/sqlmap.py
-
+apt update && apt upgrade;apt install python2 python-dev
+python2 -m pip install --upgrade pip
+python2 -m pip install sqlmap
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3

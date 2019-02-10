@@ -43,6 +43,9 @@ done
 if [ -d $iHAKLAB/../sqlmap ]; then
         rm -rf $iHAKLAB/../sqlmap
 fi
+python2 -m pip uninstall sqlmap
+apt remove python2 python-dev
+apt autoremove
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot
