@@ -194,7 +194,7 @@ chmod 711 -R $PREFIX/libexec/banner
 #	continue
 #done
 #if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
-	Set_Ak
+#	Set_Ak
 #fi
 Ak=SXZhbTNieUNpbmRlcmVsbGEK
 chmod +w $PREFIX/libexec/termux/.Ivam3
