@@ -48,11 +48,14 @@ function remove {
 		rm ~/.config/fish/functions/$FNC.fish
 	fi
 }
-FNC=LOCALHOST
-remove
-mkdir -p ~/.config/fish/functions/
-wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/functions/LOCALHOST.fish -O $FNCDIR/LOCALHOST.fish
-
+if [ ! -d $HOME/.config/fish/functions/ ]; then
+	mkdir -p $HOME/.config/fish/functions
+fi
+FNClist=$(ls $iHAKLAB/.set/functions)
+for FNC in $FNClist; do
+	remove
+	wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/functions/$FNC -O $FNCDIR/$FNC
+done
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3
