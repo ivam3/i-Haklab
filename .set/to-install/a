@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+function install {
+	bundle install
+}
+
+
+
+command -v msfconsole > /dev/null || install
