@@ -52,13 +52,23 @@ OLDver=$(cat $iHAKLAB/.set/libexec/banner/i-Haklab | grep -o v.*.*.9 | awk '{pri
 NEWver=$(cat $iHAKLAB/README.md | grep -o v.*.*.9 | awk '{print $1}')
 cd $iHAKLAB;git pull
 if [ "$NEWver" = "$OLDver" ]; then
+#JtR
 	if [ ! -d $iHAKLAB/../JohnThrRipper ]; then
 		bash $iHAKLAB/.set/to-install/JohnTheRipper
 	fi
+#Dnsenum
 	if [ ! -e $PREFIX/bin/dnsenum ]; then
 		bash $iHAKLAB/.set/to-install/dnsenum
 	fi
+#Nikto function
 	if [ ! -e $HOME/.config/fish/functions/nikto.fish ]; then
+		bash $iHAKLAB/.set/to-install/functions
+	fi
+#Whatweb
+	if [ ! -d $iHAKLAB/../WhatWeb ]; then
+		bash $iHAKLAB/.set/to-install/whatweb
+	fi
+	if [ ! -e $HOME/.config/fish/functions/whatweb.fish ]; then
 		bash $iHAKLAB/.set/to-install/functions
 	fi
         printf "$Y[!]->$W i-Haklab is already the newest version ($NEWver).\n"
