@@ -51,8 +51,8 @@ fi
 apt update && apt upgrade
 apt install -y perl git
 git clone https://github.com/magnumripper/JohnTheRipper.git $iHAKLAB/../JohnTheRipper
-cd $iHAKLAB/../JohnTheRipper/src/
-sh configure && make
+#cd $iHAKLAB/../JohnTheRipper/src/
+#sh configure && make
 #curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/john -o $PREFIX/bin/john
 
 #ENDING SCRIPT
