@@ -1,3 +1,3 @@
 function whatweb
-	ruby $iHaklab/../WhatWeb/whatweb
+	ruby $iHAKLAB/../WhatWeb/whatweb
 end
