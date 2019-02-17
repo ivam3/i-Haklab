@@ -184,7 +184,7 @@ for opt in 1 2 3; do
 	echo $(clear)
 	source $PREFIX/libexec/banner/login-banner
         printf "$B"
-        while read -n 4 -s -p "                    >> ACCESS KEY <<
+        while read -s -p "                    >> ACCESS KEY <<
 	    " Ivam3 && [ -z $Ivam3 ];do
 	printf "$R          Access denied$B \n"
         done
