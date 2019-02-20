@@ -47,6 +47,8 @@ if [ -d $iHAKLAB/../nikto ]; then
 fi
 git clone https://github.com/sullo/nikto.git $iHAKLAB/../nikto
 chmod 777 $iHAKLAB/../nikto/program/nikto.pl
+echo "#!/bin/bash" > $PREFIX/bin/nikto
+echo "perl $iHAKLAB/../nikto/program/nikto.pl" >> $PREFIX/bin/nikto
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"

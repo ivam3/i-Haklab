@@ -34,12 +34,26 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL . . . .$i"
+        printf "$(clear) $C STARTING TO REMOVE WEBHACKSHL. . . .$i"
         printf "\n\n"
         sleep 1
 done
-#INSTALLATION
-
+#UNINSTALLATION
+apt update && apt upgrade -y
+apt install git curl python2 python2-dev python python-dev tor ruby nmap -y
+if [ -d $iHAKLAB/../webhackshl ]; then
+	rm -rf $iHAKLAB/../webhackshl
+fi
+python -m pip remove fierce
+if [ -d ~/.dnsenum ]; then
+	rm -rf ~/.dnsenum
+fi
+if [ -d ~/.nikto/program ]; then
+	rm -rf ~/.nikto
+fi
+if [ -d ~/.whatweb ]; then
+	rm -rf ~/.whatweb
+fi
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"

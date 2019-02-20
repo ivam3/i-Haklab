@@ -34,12 +34,38 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL . . . .$i"
+        printf "$(clear) $C STARTING TO INSTALL WEBHACKSHL. . . .$i"
         printf "\n\n"
         sleep 1
 done
 #INSTALLATION
-
+apt update && apt upgrade -y
+apt install git curl python2 python2-dev python python-dev tor ruby nmap -y
+git clone https://github.com/sechacklabs/webhackshl.git $iHAKLAB/../webhackshl
+python -m pip install fierce
+command -v dnsenum > /dev/null || bash $iHAKLAB/.set/to-install/dnsenum
+if [ ! -d ~/.dnsenum ]; then
+	mkdir -p ~/.dnsenum
+fi
+cp $PREFIX/bin/dnsenum ~/.dnsenum/dnsenum.pl
+command -v sqlmap || bash $iHAKLAB/.set/to-install/sqlmap
+if [ ! -d $iHAKLAB/../nikto ]; then
+	bash $iHAKLAB/.set/to-install/nikto
+fi
+if [ ! -d ~/.nikto/program ]; then
+	mkdir -p ~/.nikto/program
+fi
+cp $iHAKLAB/../nikto/program/nikto.pl ~/.nikto/program/
+if [ ! -d $iHAKLAB/../whatweb ]; then
+	bash $iHAKLAB/.set/to-install/whatweb
+fi
+if [ ! -d ~/.whatweb ]; then
+	mkdir -p ~/.whatweb
+fi
+cp $iHAKLAB/../whatweb/whatweb ~/.whatweb/
+if [ ! -d $iHAKLAB/../wpscan ]; then
+	bash $iHAKLAB/.set/to-install/wpscan
+fi
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
