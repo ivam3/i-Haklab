@@ -3,7 +3,9 @@
 IFS=$'\n\t'
 trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
-version="5.0.4"
+version="5.0.8"
+TMP_DIR=$PREFIX/opt/metasploit-framework
+APK=$TMP_DIR/lib/msf/core/payload/apk.rb
 function ctrl_c() {
                 echo
                 printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
@@ -39,66 +41,48 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-function instamsf {
-	dpkg --configure -a
-	apt update -y && apt upgrade -y
-	apt autoremove
-	apt install -y util-linux
-	apt install -y autoconf util-linux bison clang coreutils axel curl findutils git apr apr-util libffi-dev libgmp-dev libpcap-dev postgresql-dev readline-dev libsqlite-dev openssl-dev libtool libxml2-dev libxslt-dev ncurses-dev pkg-config wget make ruby-dev libgrpc-dev termux-tools ncurses-utils ncurses unzip zip tar postgresql termux-elf-cleaner
+Instamsf() {
 	if [ -d ~/metasploit-framework ]; then
-        	rm -rf ~/metasploit-framework
+		rm -rf ~/metasploit-framework
 	fi
-	find $HOME -name "*$version.tar.gz" -type f -delete
-	find $HOME -name "metasploit*" -type d -delete
-	cd $HOME
-	axel --alternate https://github.com/rapid7/metasploit-framework/archive/$version.tar.gz
-	tar -xf $HOME/metasploit-framework-$version.tar.gz
-	mv $HOME/metasploit-framework-$version $HOME/metasploit-framework
-	rm $HOME/metasploit-framework-$version.tar.gz
-	cd $HOME/metasploit-framework
-	sed '/rbnacl/d' -i Gemfile.lock
-	sed '/rbnacl/d' -i metasploit-framework.gemspec
-	gem update --system
-	gem install bundler
-	sed 's|nokogiri (1.*)|nokogiri (1.8.0)|g' -i Gemfile.lock
-	ln -sf $PREFIX/include/libxml2/libxml $PREFIX/include/
-	gem install nokogiri -v 1.8.0 -- --use-system-libraries
-	#sed 's|grpc (.*|grpc (1.4.1)|g' -i $HOME/metasploit-framework/Gemfile.lock
-	#gem unpack grpc -v 1.4.1
-	#cd grpc-1.4.1
-	#curl -LO https://raw.githubusercontent.com/grpc/grpc/v1.4.1/grpc.gemspec
-	#curl -L https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/extconf.patch
-	#patch -p1 < extconf.patch
-	#gem build grpc.gemspec
-	#gem install grpc-1.4.1.gem
-	#cd ..
-	#rm -r grpc-1.4.1
-	cd $HOME/metasploit-framework
-	bundle install -j5
-	$PREFIX/bin/find -type f -executable -exec termux-fix-shebang \{\} \;
-	rm ./modules/auxiliary/gather/http_pdf_authors.rb
-	if [ -e $PREFIX/bin/msfconsole ] || [ -L $PREFIX/bin/msfconsole ]; then
-	        rm $PREFIX/bin/msfconsole
+	if [ -d $TMP_DIR ]; then
+		rm -rf $TMP_DIR
 	fi
-	if [ -e $PREFIX/bin/msfvenom ] || [ -L $PREFIX/bin/msfvenom ]; then
-	        rm $PREFIX/bin/msfvenom
-	fi
-	ln -sf $HOME/metasploit-framework/msfconsole /data/data/com.termux/files/usr/bin/
-	ln -sf $HOME/metasploit-framework/msfvenom /data/data/com.termux/files/usr/bin/
-	termux-elf-cleaner /data/data/com.termux/files/usr/lib/ruby/gems/2.5.0/gems/pg-0.20.0/lib/pg_ext.so
-	#Intalling Ruby Gems Issues Resolve (RuGiR)
-	wget https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/RuGiR -O $HOME/metasploit-framework/RuGiR
-	chmod 777 $HOME/metasploit-framework/RuGiR
-	mv $HOME/metasploit-framework/database.yml $HOME/metasploit-framework/config
-	cd $HOME/metasploit-framework/config
-	mkdir -p $PREFIX/var/lib/postgresql
-	initdb $PREFIX/var/lib/postgresql
-	pg_ctl -D $PREFIX/var/lib/postgresql start
-	createuser msf
-	createdb msf_database
-	pg_ctl -D $PREFIX/var/lib/postgresql start
+dpkg --configure -a
+apt update --fix-missing -y && pkg upgrade -y
+apt install -y util-linux autoconf util-linux bison clang coreutils axel curl findutils git apr apr-util libffi-dev libgmp-dev libpcap-dev postgresql-dev readline-dev libsqlite-dev openssl-dev libtool libxml2-dev libxslt-dev ncurses-dev pkg-config wget make ruby-dev libgrpc-dev termux-tools ncurses-utils ncurses unzip zip tar postgresql termux-elf-cleaner -y
+pkg install unstable-repo -y
+pkg install --reinstall ruby -y
+pkg install metasploit -y
+ln -sf $PREFIX/include/libxml2/libxml $PREFIX/include/
+#GARBAGE
+if [ -d $TMP_DIR/installer.sh ]; then
+        rm -rf ~$TMP_DIR/installer.sh
+fi
+if [ -e $TEMP_DIR/msfupdate ]; then
+        rm $TMP_DIR/msfupdate
+fi
+#MSFUPDATE
+git clone https://github.com/ivam3/ivam3.github.io.git $PREFIX/tmp/Ivam3
+mv $PREFIX/tmp/Ivam3/master/mediafire/metasploit/msfupdate $PREFIX/bin/msfupdate
+chmod 777 $PREFIX/bin/msfupdate
+cp $PREFIX/bin/msfupdate $TMP_DIR/
+#RuGiR
+mv $PREFIX/tmp/Ivam3/master/mediafire/metasploit/RuGiR $TMP_DIR/RuGiR
+echo "#!/bin/bash" > $PREFIX/bin/RuGiR
+echo "#This file will help you to run RuGiR on the rigth way" >> $PREFIX/bin/RuGiR
+echo "#(Ru)by (G)ems (i)ssues (R)esolved was created by @Ivam3" >> $PREFIX/bin/RuGiR
+echo "cd $HOME/metasploit-framework" >> $PREFIX/bin/RuGiR
+echo "./RuGiR" >> $PREFIX/bin/RuGiR
+echo "#                 @IVAM3" >> $PREFIX/bin/RuGiR
+chmod 777 $TMP_DIR/RuGiR
+chmod 777 $PREFIX/bin/RuGiR
+rm -rf $PREFIX/tmp/Ivam3
+#FIX ARGUMENT -X
+mv $APK $APK.O
+wget https://raw.githubusercontent.com/ivam3/java/master/.embed/apk.rb -O $APK
 }
-if [ -d ~/metasploit-framework ]; then
+if [ -d ~/metasploit-framework ] || [ -d $TMP_DIR ]; then
 	printf "$R[?]->$W Metasploit already exist$R |$W Do you want re-install it?\n"
 	while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
 		continue
@@ -110,7 +94,7 @@ if [ -d ~/metasploit-framework ]; then
 		sleep 1
 	fi
 else
-	instamsf
+	Instamsf
 fi
 
 #ENDING SCRIPT

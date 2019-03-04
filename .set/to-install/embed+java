@@ -134,6 +134,10 @@ arch=`dpkg --print-architecture`
                 printf "$R\n\n[W]:-> O-ops!!$W sorry unknown architecture\n\n"
                 sleep 3
         fi
+	if [ -e $msf/lib/msf/core/payload/apk.rb.O ]; then
+		cat $msf/lib/msf/core/payload/apk.rb.O > $msf/lib/msf/core/payload/apk.rb
+		rm $msf/lib/msf/core/payload/apk.rb.O
+	fi
 mv $msf/lib/msf/core/payload/apk.rb $msf/lib/msf/core/payload/apk.rb.O
 cp $TMP_DIR/.embed/apk.rb $msf/lib/msf/core/payload/
 cp $TMP_DIR/.embed/signapk $PREFIX/bin
