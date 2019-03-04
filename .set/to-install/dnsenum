@@ -38,7 +38,7 @@ done
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
         printf "$(clear) $C STARTING TO INSTALL DNSENUM. . . .$i"
-        printf "\n\n"
+        printf "\n$W\n"
         sleep 1
 done
 #UNINSTALLATION
@@ -48,13 +48,21 @@ fi
 curl https://raw.githubusercontent.com/fwaeytens/dnsenum/master/dnsenum.pl -o /data/data/com.termux/files/usr/bin/dnsenum
 termux-fix-shebang /data/data/com.termux/files/usr/bin/dnsenum
 chmod +x /data/data/com.termux/files/usr/bin/dnsenum
-cpan -i WWW::Mechanize
-cpan -i Net::IP
-cpan -i Net::DNS
-cpan -i Net::Netmask
-cpan -i XML::Writer
-cpan -i String::Random
-
+printf "$R\n[W]-> DNSENUM repositories need an password to download\n      type it to download or press enter to continue\n$G"
+read -p "                 PASSWORD : " pl
+if [ "$pl" = "download" ]; then
+	cpan -i WWW::Mechanize
+	cpan -i Net::IP
+	cpan -i Net::DNS
+	cpan -i Net::Netmask
+	cpan -i XML::Writer
+	cpan -i String::Random
+elif [ -z "$pl" ]; then
+	printf "$Y[!]-> Join to t.me/Ivam3_Bot to get your password\n"
+	sleep 3
+else
 #ENDING SCRIPT
-printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
+	printf "$Y\n[!]-> ::::::::::::::: O-ops !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
+	sleep 3
+fi
 #                                               @Ivam3
