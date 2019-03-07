@@ -55,21 +55,31 @@ if [ "$NEWver" = "$OLDver" ]; then
 #JtR
 	if [ ! -d $iHAKLAB/../JohnThrRipper ]; then
 		bash $iHAKLAB/.set/to-install/JohnTheRipper
+		printf "$Y[!]->$W John The Ripper tool was added!!\n"
 	fi
 #Dnsenum
 	if [ ! -e $PREFIX/bin/dnsenum ]; then
 		bash $iHAKLAB/.set/to-install/dnsenum
+		printf "$Y[!]->$W Dnsenum tool was added!!\n"
 	fi
 #Nikto function
 	if [ ! -e $HOME/.config/fish/functions/nikto.fish ]; then
 		bash $iHAKLAB/.set/to-install/functions
+		printf "$Y[!]->$W command nikto was added!!\n"
 	fi
 #Whatweb
 	if [ ! -d $iHAKLAB/../WhatWeb ]; then
 		bash $iHAKLAB/.set/to-install/whatweb
+		printf "$Y[!]->$W Whatweb tool was added!!\n"
 	fi
 	if [ ! -e $HOME/.config/fish/functions/whatweb.fish ]; then
 		bash $iHAKLAB/.set/to-install/functions
+		printf "$Y[!]->$W command whatweb was added!!\n"
+	fi
+#Alias
+	if [ -z $(cat $PREFIX/etc/fish/config.fish | grep -oE "alias") ]; then
+		echo "source $PREFIX/var/alias" >> $PREFIX/etc/fish/config.fish
+		printf "$Y[!]->$W command server and postgresql was added!!\n"
 	fi
         printf "$Y[!]->$W i-Haklab is already the newest version ($NEWver).\n"
 #else
