@@ -42,45 +42,43 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
 done
 #INSTALLATION
 Instamsf() {
-	if [ -d ~/metasploit-framework ]; then
-		rm -rf ~/metasploit-framework
-	fi
-	if [ -d $TMP_DIR ]; then
-		rm -rf $TMP_DIR
-	fi
-dpkg --configure -a
-apt update --fix-missing -y && pkg upgrade -y
-apt install -y util-linux autoconf util-linux bison clang coreutils axel curl findutils git apr apr-util libffi-dev libgmp-dev libpcap-dev postgresql-dev readline-dev libsqlite-dev openssl-dev libtool libxml2-dev libxslt-dev ncurses-dev pkg-config wget make ruby-dev libgrpc-dev termux-tools ncurses-utils ncurses unzip zip tar postgresql termux-elf-cleaner -y
-pkg install unstable-repo -y
-pkg install --reinstall ruby -y
-pkg install metasploit -y
-ln -sf $PREFIX/include/libxml2/libxml $PREFIX/include/
+	apt update -y && pkg upgrade -y
+	apt install -y util-linux autoconf util-linux bison clang coreutils axel curl findutils git apr apr-util libffi-dev libgmp-dev libpcap-dev postgresql-dev readline-dev libsqlite-dev openssl-dev libtool libxml2-dev libxslt-dev ncurses-dev pkg-config wget make ruby-dev libgrpc-dev termux-tools ncurses-utils ncurses unzip postgresql termux-elf-cleaner -y
+	pkg install unstable-repo -y
+	pkg install --reinstall ruby -y
+	pkg install metasploit -y
 #GARBAGE
-if [ -d $TMP_DIR/installer.sh ]; then
-        rm -rf ~$TMP_DIR/installer.sh
-fi
-if [ -e $TEMP_DIR/msfupdate ]; then
-        rm $TMP_DIR/msfupdate
-fi
+	if [ -d ~/metasploit-framework ]; then
+        	rm -rf ~/metasploit-framework
+	fi
+	if [ -e $PREFIX/opt/metasploit-framework/msfupdate ]; then
+        	rm $PREFIX/opt/metasploit-framework/msfupdate
+	fi
 #MSFUPDATE
 git clone https://github.com/ivam3/ivam3.github.io.git $PREFIX/tmp/Ivam3
 mv $PREFIX/tmp/Ivam3/master/mediafire/metasploit/msfupdate $PREFIX/bin/msfupdate
 chmod 777 $PREFIX/bin/msfupdate
-cp $PREFIX/bin/msfupdate $TMP_DIR/
+cp $PREFIX/bin/msfupdate $PREFIX/opt/metasploit-framework
 #RuGiR
-mv $PREFIX/tmp/Ivam3/master/mediafire/metasploit/RuGiR $TMP_DIR/RuGiR
+mv $PREFIX/tmp/Ivam3/master/mediafire/metasploit/RuGiR $PREFIX/opt/metasploit-framework/RuGiR
 echo "#!/bin/bash" > $PREFIX/bin/RuGiR
 echo "#This file will help you to run RuGiR on the rigth way" >> $PREFIX/bin/RuGiR
 echo "#(Ru)by (G)ems (i)ssues (R)esolved was created by @Ivam3" >> $PREFIX/bin/RuGiR
-echo "cd $HOME/metasploit-framework" >> $PREFIX/bin/RuGiR
-echo "./RuGiR" >> $PREFIX/bin/RuGiR
+echo "cd $PREFIX/opt/metasploit-framework" >> $PREFIX/bin/RuGiR
+echo "unset LD_PRELOAD" >> $PREFIX/bin/RuGiR
+echo "$PREFIX/opt/metasploit-framework/RuGiR" >> $PREFIX/bin/RuGiR
 echo "#                 @IVAM3" >> $PREFIX/bin/RuGiR
-chmod 777 $TMP_DIR/RuGiR
+chmod 777 $PREFIX/opt/metasploit-framework/RuGiR
 chmod 777 $PREFIX/bin/RuGiR
 rm -rf $PREFIX/tmp/Ivam3
 #FIX ARGUMENT -X
-mv $APK $APK.O
-wget https://raw.githubusercontent.com/ivam3/java/master/.embed/apk.rb -O $APK
+mv $PREFIX/opt/metasploit-framework/lib/msf/core/payload/apk.rb $PREFIX/opt/metasploit-framework/lib/msf/core/payload/apk.rb.O
+wget https://raw.githubusercontent.com/ivam3/java/master/.embed/apk.rb -O $PREFIX/opt/metasploit-framework/lib/msf/core/payload/apk.rb
+printf "\n\n$C ::::::::: METASPLOIT INSTALLED :::::::::$W\n"
+printf " The data base can be active with command\n\t$G   > postgresql start <$W\n"
+printf "      Now you can run it with command$G\n\t$G   >    msfconsole    <\n"
+printf "\n$R :::::::::::::: ADVERSMENT ::::::::::::::$W\n"
+printf "    If you wanna get a new version run\n\t$G   >     msfupdate    <$W\n\n        If msfconsole didn't run\n         execute the file RuGiR\n       (Ruby Gem issues Resolved)\n    to try to fix it with an other steps\n\t$G   >       RuGiR      <$W\n\n"
 }
 if [ -d ~/metasploit-framework ] || [ -d $TMP_DIR ]; then
 	printf "$R[?]->$W Metasploit already exist$R |$W Do you want re-install it?\n"
