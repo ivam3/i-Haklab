@@ -24,7 +24,7 @@ else
         iHAKLAB=/data/data/com.termux/files/home/i-Haklab
 fi
 
-while [ $USER = "root" ]; do
+while [ "$USER" = "root" ]; do
 	printf "$R\n[W]:-> You need to be a common user$W\n"
 	exit
 done
