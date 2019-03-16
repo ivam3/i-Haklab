@@ -11,7 +11,7 @@ while [ "$USER" = "root" ]; do
 	printf "$R\n[W]:-> You need to be a common user to install i-Haklab$W\n"
 	exit
 done
-until [ -e /data/data/com.termux/files/home/i-Haklab/setup ]; do
+until [ -e /data/data/com.termux/files/home/i-Haklab/setup ] || [ -e /data/sdext2/data/com.termux/files/home/i-Haklab/setup ]; do
 	printf "$R\n[W]:-> i-Haklab directory must to be in home directory$W\n"
 	exit
 done
@@ -73,19 +73,19 @@ echo $(clear)
 CHECKROOT=$(bash /data/data/com.termux/files/home/i-Haklab/.set/to-install/check-root)
 USR=$(whoami)
 if [ $CHECKROOT = "root" ]; then
-	command -v sudo > /dev/null || bash $iHAKLAB/.set/to-install/instasudo
-        if [ -e ~/.suroot/.bashrc ]; then
-                if [ ! -O ~/.suroot/.bashrc ]; then
-                                sudo chown $USR:$USR ~/.suroot/.bashrc
+	command -v sudo > /dev/null || bash /data/data/com.termux/files/home/i-Haklab/.set/to-install/instasudo
+        if [ -e /data/data/com.termux/files/home/.suroot/.bashrc ]; then
+                if [ ! -O /data/data/com.termux/files/home/.suroot/.bashrc ]; then
+                                sudo chown $USR:$USR /data/data/com.termux/files/home/.suroot/.bashrc
                 fi
         fi
-        echo "PS1=\"\[\e[33m\][!] \[\e[31m\]Type\[\e[32m\] exit\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\"" > ~/.suroot/.bashrc
-        echo "export TERM=xterm-256color" >> ~/.suroot/.bashrc
-        echo "export LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib" >> ~/.suroot/.bashrc
-        echo "export PATH=/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:/system/xbin:/system/bin" >> ~/.suroot/.bashrc
-        echo "HOME=/data/data/com.termux/files/home/storage/external-1/roothome" >> ~/.suroot/.bashrc
-	echo "fish" >> ~/.suroot/.bashrc
-        echo "#          i-Haklab by @Ivam3" >> ~/.suroot/.bashrc
+        echo "PS1=\"\[\e[33m\][!] \[\e[31m\]Type\[\e[32m\] exit\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\"" > /data/data/com.termux/files/home/.suroot/.bashrc
+        echo "export TERM=xterm-256color" >> /data/data/com.termux/files/home/.suroot/.bashrc
+        echo "export LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib" >> /data/data/com.termux/files/home/.suroot/.bashrc
+        echo "export PATH=/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:/system/xbin:/system/bin" >> /data/data/com.termux/files/home/.suroot/.bashrc
+        echo "HOME=/data/data/com.termux/files/home/storage/external-1/roothome" >> /data/data/com.termux/files/home/.suroot/.bashrc
+	echo "fish" >> /data/data/com.termux/files/home/.suroot/.bashrc
+        echo "#          i-Haklab by @Ivam3" >> /data/data/com.termux/files/home/.suroot/.bashrc
         echo "alias server-php=\"sudo php -S LOCALHOST:80 -t $PREFIX/var/service/php/\"" >> $PREFIX/var/alias
 else
         sed -i "3a alias server-php=\"php -S LOCALHOST:4546 -t $PREFIX/var/service/php/\"" $PREFIX/var/alias
@@ -99,9 +99,9 @@ if [ -L /data/data/com.termux/files/home/storage/external-1 ] && [ -z $PARTITION
                 printf "$R\n[W]-> O-ops!!$W Your are not owner of roothome directory\n"
                 sudo chown $USR:$USR /data/data/com.termux/files/home/storage/external-1/roothome
         done
-        mv /data/data/com.termux/files/home/i-Haklab /data/data/com.termux/files/home/storage/external-1/roothome/
+        cp -r /data/data/com.termux/files/home/i-Haklab /data/data/com.termux/files/home/storage/external-1/roothome/
         iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
-elif [ $PARTITION ] || [ -d /data/data/com.termux ]; then
+elif [ ! -z $PARTITION ] || [ -d /data/data/com.termux ]; then
         iHAKLAB=/data/data/com.termux/files/home/i-Haklab
 else
         printf "$R\n[W]-> STORAGE ACCESS DENIED$W\n"
@@ -131,6 +131,9 @@ for del in bin functions login-files sqliv var ; do
 done
 if [ -e ~/ivam3-Haklab ]; then
 	rm ~/ivam3-Haklab
+fi
+if [ -d /data/data/com.termux/files/home/i-Haklab ] && [ -d /data/data/com.termux/files/home/storage/external-1/roothome/i-haklab ]; then
+	rm -rf /data/data/com.termux/files/home/i-Haklab
 fi
 
 printf "$Y[!]->$G i-Haklab installed !!!$Y |$W Please restart Termux and enjoy it!!\n"
