@@ -41,7 +41,7 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         printf "\n$W\n"
         sleep 1
 done
-#UNINSTALLATION
+#INSTALLATION
 if [ -d $PREFIX/bin/dnsenum ]; then
         rm -rf $PREFIX/bin/dnsenum
 fi
