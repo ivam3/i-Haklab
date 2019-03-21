@@ -136,7 +136,6 @@ if [ -d /data/data/com.termux/files/home/i-Haklab ] && [ -d /data/data/com.termu
 	rm -rf /data/data/com.termux/files/home/i-Haklab
 fi
 
-printf "$Y[!]->$G i-Haklab installed !!!$Y |$W Please restart Termux and enjoy it!!\n"
-
+printf "$Y\n\n[!]->$G i-Haklab installed !!!$Y |$W Please restart Termux and enjoy it!!\n\n"
 
 #		@Ivam3
