@@ -76,6 +76,10 @@ if [ "$NEWver" = "$OLDver" ]; then
 		bash $iHAKLAB/.set/to-install/functions
 		printf "$Y[!]->$W command whatweb was added!!\n"
 	fi
+#Lock
+	if [ ! -e $PREFIX/bin/lock ]; then
+		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/lock -o $PREFIX/bin/lock
+	fi
 #Alias
 	if [ -z $(cat $PREFIX/etc/fish/config.fish | grep -oE "alias") ]; then
 		echo "source $PREFIX/var/alias" >> $PREFIX/etc/fish/config.fish
