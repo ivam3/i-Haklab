@@ -41,7 +41,10 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-function Install {
+Advice() {
+	printf "$Y\n[!]-> NGROK tunnels are only available after you sign up.\n      Sign up at: https://ngrok.com/signup\n\n      If you have already signed up, make sure your authtoken is installed.\n      Your authtoken is available\n      on your dashboard: https://dashboard.ngrok.com\n$W"
+}
+Install() {
         if [ $arch = "aarch64" -o $arch = "arm64" ]; then
                 unzip ~/i-Haklab/.set/to-install/ngrok-2.2.8-linux-arm64.zip -d $PREFIX/bin/
         elif [ $arch = "armhf" -o $arch = "armv7l" ]; then
@@ -65,10 +68,12 @@ if [ -e $PREFIX/bin/ngrok ]; then
         if [ $yesorno = 'y' -o $yesorno = 'Y' ]; then
                 rm $PREFIX/bin/ngrok
                 Install
+		Advice
         else
                 ENDING-SCRIPT
         fi
 else
         Install
+	Advice
 fi
 #                                               @Ivam3
