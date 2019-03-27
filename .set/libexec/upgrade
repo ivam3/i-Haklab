@@ -81,7 +81,7 @@ if [ "$NEWver" = "$OLDver" ]; then
 		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/lock -o $PREFIX/bin/lock
 	fi
 #Alias
-	if [ -! $(cat $PREFIX/etc/fish/config.fish | grep -oE "alias") ]; then
+	if [ ! $(cat $PREFIX/etc/fish/config.fish | grep -oE "alias") ]; then
 		echo "source $PREFIX/var/alias" >> $PREFIX/etc/fish/config.fish
 		printf "$Y[!]->$W command server and postgresql was added!!\n"
 	fi
