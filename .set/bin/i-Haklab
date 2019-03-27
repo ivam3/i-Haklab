@@ -84,7 +84,9 @@ Arguments  |    options     |    Description
 |                     ╰─────➤ LPORT=48263 Payload=windows/meterpreter/reverse_tcp
 |                             LHOST=serveo.net file=outlan.exe
 ╰─serveo───➤────────────────➤ Start a SSH client to request TCP port forwarding from the server and proxy
-|    ╰─────➤────domain──────➤ Start a SSH client to request port forwarding with especific dns\n\n"
+|    ╰─────➤────domain──────➤ Start a SSH client to request port forwarding with especific dns
+╰─evilurl──➤────────────────➤ Run EvilUrl to generate an unicode domain for homonymous IDN attacks
+|________________________________________________________________________________________________________\n\n"
 elif [ $1 = list ]; then
 	banner
 	printf "$TOOL"
@@ -381,6 +383,9 @@ elif [ $1 = handler ] && [ $2 ]; then
 	else
 		printf "$R[w]->$W File $2 doesn't exist\n"
 	fi
+elif [ $1 = evilurl ]; then
+	WHEREAMI=$PWD
+	cd $iHAKLAB/../EvilURL;python evilurl.py;cd $WHEREAMI
 else
 	printf "$R[w]->$W Invalid argument $1 $R|$W Use help to main menu\n"
 fi
