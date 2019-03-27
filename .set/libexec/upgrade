@@ -86,6 +86,10 @@ if [ "$NEWver" = "$OLDver" ]; then
 		printf "$Y[!]->$W command server and postgresql was added!!\n"
 	fi
         printf "$Y[!]->$W i-Haklab is already the newest version ($NEWver).\n"
+#i-Haklab command
+	if [ -e $iHAKLAB/.set/bin/i-Haklab ]; then
+		cat $iHAKLAB/.set/bin/i-Haklab > $PREFIX/bin/i-Haklab
+	fi
 #else
 #        Install
 fi
