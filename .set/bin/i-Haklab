@@ -172,7 +172,7 @@ elif [ $1 = weechat ]; then
 elif [ $1 = update ]; then
 	banner
 	CHECK=$(cd $iHAKLAB;git pull | grep -oE Already)
-	if $CHECK; then 
+	if [ $CHECK ]; then 
 		printf "$G\n[i]->$W Already up to date$G <-[i]$W\n"
 	else
 		printf "$Y\n[i]->$W There is a new version, run i-Haklab upgrade$Y <-[i]$W\n"
