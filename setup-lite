@@ -127,9 +127,9 @@ sed -i "18a set iHAKLAB $iHAKLAB" $PREFIX/etc/fish/config.fish
 echo "source $PREFIX/var/alias" >> $PREFIX/etc/fish/config.fish
 bash $iHAKLAB/.set/to-install/functions
 bash $iHAKLAB/.set/to-install/i-Haklab_login
-for del in bin functions login-files sqliv var ; do
-	rm -rf $iHAKLAB/.set/$del
-done
+#for del in bin functions login-files sqliv var ; do
+#	rm -rf $iHAKLAB/.set/$del
+#done
 if [ -e ~/ivam3-Haklab ]; then
 	rm ~/ivam3-Haklab
 fi
