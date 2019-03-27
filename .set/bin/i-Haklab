@@ -265,7 +265,7 @@ elif [ $1 = paylink ] && [ $2 = pc ] && [ $3 ]; then
 				echo "set SRVHOST $LOCALHOST" >> ~/java/handler/paylink-pc-$3.rc
 				echo "set SRVPORT $LPORT" >> ~/java/handler/paylink-pc-$3.rc
 				echo "set LHOST $LOCALHOST" >> ~/java/handler/paylink-pc-$3.rc
-				echo "set LPORT $LPORT" >> ~/java/handler/paylink-pc-$3.rc
+				echo "set LPORT 48263" >> ~/java/handler/paylink-pc-$3.rc
 				echo "set URIPATH /" >> ~/java/handler/paylink-pc-$3.rc
 				echo "set target $3" >> ~/java/handler/paylink-pc-$3.rc
 				echo "run" >> ~/java/handler/paylink-pc-$3.rc
@@ -299,7 +299,7 @@ elif [ $1 = paylink ] && [ $2 = nexam ] && [ $3 ]; then
                                 echo "set SRVHOST $LOCALHOST" >> ~/java/handler/paylink-nexam-$3.rc
                                 echo "set SRVPORT $LPORT" >> ~/java/handler/paylink-nexam-$3.rc
                                 echo "set LHOST $LOCALHOST" >> ~/java/handler/paylink-nexam-$3.rc
-                                echo "set LPORT $LPORT" >> ~/java/handler/paylink-nexam-$3.rc
+                                echo "set LPORT 48263" >> ~/java/handler/paylink-nexam-$3.rc
                                 echo "set URIPATH /" >> ~/java/handler/paylink-nexam-$3.rc
                                 echo "set target $3" >> ~/java/handler/paylink-nexam-$3.rc
                                 echo "run" >> ~/java/handler/paylink-nexam-$3.rc
@@ -329,7 +329,7 @@ elif [ $1 = paylink ] && [ $2 = soa5 ]; then
                 echo "set SRVHOST $LOCALHOST" >> ~/java/handler/paylink-soa5.rc
                 echo "set SRVPORT $LPORT" >> ~/java/handler/paylink-soa5.rc
                 echo "set LHOST $LOCALHOST" >> ~/java/handler/paylink-soa5.rc
-                echo "set LPORT 4546" >> ~/java/handler/paylink-soa5.rc
+                echo "set LPORT 48263" >> ~/java/handler/paylink-soa5.rc
                 echo "set URIPATH /" >> ~/java/handler/paylink-soa5.rc
                 echo "run" >> ~/java/handler/paylink-soa5.rc
 		if [ $CHECKROOT = "root" ]; then
