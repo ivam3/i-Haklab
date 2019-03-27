@@ -53,7 +53,7 @@ NEWver=$(cat $iHAKLAB/README.md | grep -o v.*.*.9 | awk '{print $1}')
 cd $iHAKLAB;git pull
 if [ "$NEWver" = "$OLDver" ]; then
 #JtR
-	if [ ! -d $iHAKLAB/../JohnThrRipper ]; then
+	if [ ! -d $iHAKLAB/../JohnTheRipper ]; then
 		bash $iHAKLAB/.set/to-install/JohnTheRipper
 		printf "$Y[!]->$W John The Ripper tool was added!!\n"
 	fi
