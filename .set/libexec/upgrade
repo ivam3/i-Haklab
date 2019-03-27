@@ -14,7 +14,7 @@ function ctrl_c() {
 if [ -L ~/storage/external-1 ]; then
 	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-haklab
 else
-        iHAKLAB=/data/data/com.termux/files/home/i-haklab
+        iHAKLAB=/data/data/com.termux/files/home/i-Haklab
 fi
 while [ ! $(id -u) -ne 0 ]; do
 	printf "$R\n[W]:-> You need to be a common user$W\n"
