@@ -329,7 +329,7 @@ elif [ $1 = paylink ] && [ $2 = soa5 ]; then
                 echo "set SRVHOST $LOCALHOST" >> ~/java/handler/paylink-soa5.rc
                 echo "set SRVPORT $LPORT" >> ~/java/handler/paylink-soa5.rc
                 echo "set LHOST $LOCALHOST" >> ~/java/handler/paylink-soa5.rc
-                echo "set LPORT $LPORT" >> ~/java/handler/paylink-soa5.rc
+                echo "set LPORT 4546" >> ~/java/handler/paylink-soa5.rc
                 echo "set URIPATH /" >> ~/java/handler/paylink-soa5.rc
                 echo "run" >> ~/java/handler/paylink-soa5.rc
 		if [ $CHECKROOT = "root" ]; then
