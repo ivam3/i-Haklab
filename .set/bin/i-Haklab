@@ -96,7 +96,7 @@ elif [ $1 = show ] && [ $2 ]; then
 		banner
 		cat $iHAKLAB/.set/libexec/Readme/$2
 		echo
-	elif [ $2 = books ] && [ $3 = $BOOK ]; then
+	elif [ $2 = books ]; then #&& [ $3 = $BOOK ]; then
 		banner
 		cat $iHAKLAB/.set/libexec/Books/List | awk '{print $1,$2}'
 		echo
