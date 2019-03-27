@@ -86,7 +86,7 @@ if [ -d ~/metasploit-framework ] || [ -d $TMP_DIR ]; then
 		continue
 	done
 	if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
-		instamsf
+		Instamsf
 	else
 		printf "$G\n[!]-> Keeping Metasploit...\n\n"
 		sleep 1
