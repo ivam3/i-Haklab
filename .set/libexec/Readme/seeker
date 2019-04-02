@@ -1,16 +1,3 @@
-<p align="center"><img src="https://i.imgur.com/iLLX7A8.png"></p>
-<h4 align="center">
-Get Accurate Location using a Fake Website
-</h4>
-
-<p align="center">
-<img src="https://img.shields.io/badge/Python-3-brightgreen.svg?style=plastic">
-<img src="https://img.shields.io/badge/Python-2-brightgreen.svg?style=plastic">
-<img src="https://img.shields.io/badge/Docker-✔-blue.svg?style=plastic">
-<img src="https://img.shields.io/badge/Termux-✔-red.svg?style=plastic">
-<img src="https://img.shields.io/badge/NetHunter-✔-red.svg?style=plastic">
-</p>
-
 Concept behind Seeker is simple, just like we host phishing pages to get credentials why not host a fake page that requests your loction just like many popular location based websites.
 
 Seeker Hosts a fake website on **In Built PHP Server** and uses **Ngrok**, website asks for Location Permission and if the user allows it, we can get :
