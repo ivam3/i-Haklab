@@ -86,7 +86,7 @@ Arguments  |    options     |    Description
 ╰─bfmail───➤──email─passwd──➤ Start a brute force attack wiyh hydra tool at email(hotmail/gmail) account
 |   ╰──────➤─────gmail──────➤ example: i-Haklab bfgmail victim@gmail.com passwords.txt
 |   ╰──────➤──hotmail/live──➤ example: i-Haklab bfgmail victim@live.com passwords.txt
-╰──bfftp───➤─user─passwd─ip─➤ Start a brite force attack at ftp server
+╰──bfftp───➤─user─passwd─ip─➤ Start a brute force attack with hydra at ftp server
 |    ╰─────➤────────────────➤ example: i-Haklab bfftp users.txt passwords.txt 0.0.0.0
 ╰─serveo───➤────────────────➤ Start a SSH client to request TCP port forwarding from the server and proxy
 |    ╰─────➤────domain──────➤ Start a SSH client to request port forwarding with especific dns
