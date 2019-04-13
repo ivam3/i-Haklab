@@ -1,0 +1,18 @@
+USERS	PASSSWD
+
+admin	123456 
+Admin	123456
+root	pass
+admin	admin
+root	system
+admin	meinsm
+admin	12345
+root	root
+admin	4321
+admin	1111111
+admin	4321
+admin	admin
+admin	admin
+root	ikwd
+root	<blank>
+admin	<blank>
