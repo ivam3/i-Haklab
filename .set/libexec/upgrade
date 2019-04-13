@@ -52,30 +52,11 @@ OLDver=$(cat $iHAKLAB/.set/libexec/banner/i-Haklab | grep -o v.*.*.9 | awk '{pri
 NEWver=$(cat $iHAKLAB/README.md | grep -o v.*.*.9 | awk '{print $1}')
 cd $iHAKLAB;git pull
 if [ "$NEWver" = "$OLDver" ]; then
-#JtR
-	if [ ! -d $iHAKLAB/../JohnTheRipper ]; then
-		bash $iHAKLAB/.set/to-install/JohnTheRipper
-		printf "$Y[!]->$W John The Ripper tool was added!!\n"
-	fi
-#Dnsenum
-	if [ ! -e $PREFIX/bin/dnsenum ]; then
-		bash $iHAKLAB/.set/to-install/dnsenum
-		printf "$Y[!]->$W Dnsenum tool was added!!\n"
-	fi
-#Nikto function
-	if [ ! -e $HOME/.config/fish/functions/nikto.fish ]; then
-		bash $iHAKLAB/.set/to-install/functions
-		printf "$Y[!]->$W command nikto was added!!\n"
-	fi
-#Whatweb
-	if [ ! -d $iHAKLAB/../WhatWeb ]; then
-		bash $iHAKLAB/.set/to-install/whatweb
-		printf "$Y[!]->$W Whatweb tool was added!!\n"
-	fi
-	if [ ! -e $HOME/.config/fish/functions/whatweb.fish ]; then
-		bash $iHAKLAB/.set/to-install/functions
-		printf "$Y[!]->$W command whatweb was added!!\n"
-	fi
+#
+#	if [ ]; then
+#		bash $iHAKLAB/.set/to-install/
+#		printf "$Y[!]->$W John The Ripper tool was added!!\n"
+#	fi
 #Lock
 	if [ ! -e $PREFIX/bin/lock ]; then
 		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/lock -o $PREFIX/bin/lock
