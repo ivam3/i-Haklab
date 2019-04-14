@@ -68,8 +68,11 @@ if [ "$NEWver" = "$OLDver" ]; then
 	fi
         printf "$Y[!]->$W i-Haklab is already the newest version ($NEWver).\n"
 #i-Haklab command
-	if [ -e $iHAKLAB/.set/bin/i-Haklab ]; then
+	UP=$(cat $PREFIX/bin/i-Haklab | grep -oE "shodan")
+	if [ -z $UP ] && [ -e $iHAKLAB/.set/bin/i-Haklab ]; then
 		cat $iHAKLAB/.set/bin/i-Haklab > $PREFIX/bin/i-Haklab
+	else
+		printf "$R[w]-> ERROR :$W Join to https://t.me/Ivam3by_Cinderella"
 	fi
 #else
 #        Install
