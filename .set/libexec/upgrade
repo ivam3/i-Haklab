@@ -66,15 +66,15 @@ if [ "$NEWver" = "$OLDver" ]; then
 		echo "source $PREFIX/var/alias" >> $PREFIX/etc/fish/config.fish
 		printf "$Y[!]->$W command server and postgresql was added!!\n"
 	fi
-        printf "$Y[!]->$W i-Haklab is already the newest version ($NEWver).\n"
 #i-Haklab command
-	UP=$(cat $PREFIX/bin/i-Haklab | grep -oE "shodan")
-	if [ -z $UP ] && [ -e $iHAKLAB/.set/bin/i-Haklab ]; then
+	#UP=$(cat $PREFIX/bin/i-Haklab | grep -m 1 -oE "shodan")
+	if [ -e $iHAKLAB/.set/bin/i-Haklab ]; then
 		cat $iHAKLAB/.set/bin/i-Haklab > $PREFIX/bin/i-Haklab
 	else
 		printf "$R[w]-> ERROR :$W Join to https://t.me/Ivam3by_Cinderella"
 	fi
 #else
+	printf "$Y[!]->$W i-Haklab is already the newest version ($NEWver).\n"
 #        Install
 fi
-#                                               @Ivam3
+#			@Ivam3
