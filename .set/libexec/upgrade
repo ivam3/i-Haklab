@@ -61,6 +61,10 @@ if [ "$NEWver" = "$OLDver" ]; then
 	if [ ! -e $PREFIX/bin/lock ]; then
 		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/lock -o $PREFIX/bin/lock
 	fi
+#Function
+	if [ ! -e $HOME/.config/fish/functions/unset.fish ]; then
+		exec $iHAKLAB/.set/to-install/functions
+	fi
 #Alias
 	if [ ! $(cat $PREFIX/etc/fish/config.fish | grep -oE "alias") ]; then
 		echo "source $PREFIX/var/alias" >> $PREFIX/etc/fish/config.fish
