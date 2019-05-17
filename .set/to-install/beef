@@ -36,6 +36,7 @@ fi
 done
 
 echo $(clear)
+Archive() {
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
         printf "$(clear) $C STARTING TO INSTALL BEEF. . . .$i"
         printf "\n\n"
@@ -57,4 +58,5 @@ bundle install -j5
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
+}
 #                                               @Ivam3

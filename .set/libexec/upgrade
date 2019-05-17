@@ -72,6 +72,7 @@ if [ "$NEWver" = "$OLDver" ]; then
 		cat $iHAKLAB/.set/bin/i-Haklab > $PREFIX/bin/i-Haklab
 	else
 		printf "$R[w]-> ERROR :$W Join to https://t.me/Ivam3by_Cinderella"
+		exit
 	fi
 #else
 	printf "$Y[!]->$W i-Haklab is already the newest version ($NEWver).\n"

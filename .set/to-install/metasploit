@@ -42,16 +42,45 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
 done
 #INSTALLATION
 Instamsf() {
+	printf "$G\n[?]->$W There is two way to get metasploit$G\n[01]->$W Termux repositories$G\n[02]->$W Rapid7 repositories\n"
+	while read -p " >> " $MSF && [ -z $MSF ]; do
+		continue
+	done
+	if [ $MSF = '01' -o $MSF = '1' ]; then
+		Garbage
+		Termux
+		Ivam3
+		Ending
+	elif [ $MSF = '02' -o $MSF = '2' ]; then
+		Garbage
+		Rapid7
+		Ivam3
+		Ending
+	else
+		printf "$R\n[W]:-> Invalid Option$W\n"
+	fi
+}
+Garbage() {
 #DROPPING GARBAGE
 if [ -d $PREFIX/opt/metasploit-framework ]; then
         rm -rf $PREFIX/opt/metasploit-framework
+elif [ -d $HOME/metasploit-framework ]; then
+	rm -rf $HOME/metasploit-framework
 fi
-pkg autoremove metasploit -y
-pkg remove unstable-repo -y
+pkg uninstall metasploit -y
+pkg uninstall unstable-repo -y
 apt autoremove -y
+}
+Termux() {
+	apt update -y && pkg upgrade -y
+	apt install -y util-linux autoconf util-linux bison clang coreutils axel curl findutils git apr apr-util libffi-dev libgmp-dev libpcap-dev postgresql-dev readline-dev libsqlite-dev openssl-dev libtool libxml2-dev libxslt-dev ncurses-dev pkg-config wget make ruby ruby-dev libgrpc-dev termux-tools ncurses-utils ncurses unzip postgresql termux-elf-cleaner -y
+	pkg install unstable-repo -y
+	pkg install metasploit -y
+}
+Rapid7() {
 #INSTALLING DEPENDENCIES
 apt update
-apt install -y autoconf bison clang coreutils curl findutils git apr apr-util libffi-dev libgmp-dev libpcap-dev postgresql-dev readline-dev libsqlite-dev openssl-dev libtool libxml2-dev libxslt-dev ncurses-dev pkg-config wget make ruby-dev libgrpc-dev termux-tools ncurses-utils ncurses unzip zip tar postgresql termux-elf-cleaner
+apt install -y autoconf bison libpcap-dev clang coreutils curl findutils git apr apr-util libffi-dev libgmp-dev libpcap-dev postgresql-dev readline-dev libsqlite-dev openssl-dev libtool libxml2-dev libxslt-dev ncurses-dev pkg-config wget make ruby-dev libgrpc-dev termux-tools ncurses-utils ncurses unzip zip tar postgresql termux-elf-cleaner
 
 #DOWNLOAD METASPLOIT
 cd $PREFIX/opt
@@ -81,6 +110,23 @@ termux-elf-cleaner /data/data/com.termux/files/usr/lib/ruby/gems/2.6.0/gems/pg-0
 cd $PREFIX/opt/metasploit-framework/config
 curl -LO https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/mediafire/metasploit/database.yml
 
+#DATA BASE
+mkdir -p $PREFIX/var/lib/postgresql
+initdb $PREFIX/var/lib/postgresql
+pg_ctl -D $PREFIX/var/lib/postgresql start
+createuser msf
+createdb msf_database
+
+#FIXED COMMANDS
+rm $PREFIX/opt/$version.tar.gz
+cd ${PREFIX}/bin && curl -LO https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/mediafire/metasploit/msfconsole && chmod +x msfconsole
+ln -sf $(which msfconsole) $PREFIX/bin/msfvenom
+echo "#!/data/data/com.termux/files/usr/bin/bash" > $PREFIX/opt/metasploit-framework/installer.sh
+echo "echo \"[*] Metasploit Framework installation finished.\"" >> $PREFIX/opt/metasploit-framework/installer.sh
+echo "#                 @Ivam3" >> $PREFIX/opt/metasploit-framework/installer.sh
+}
+
+Ivam3() {
 #FIX ARGUMENT -X
 mv $PREFIX/opt/metasploit-framework/lib/msf/core/payload/apk.rb $PREFIX/opt/metasploit-framework/lib/msf/core/payload/apk.rb.O
 wget https://raw.githubusercontent.com/ivam3/java/master/.embed/apk.rb -O $PREFIX/opt/metasploit-framework/lib/msf/core/payload/apk.rb
@@ -98,21 +144,9 @@ echo "unset LD_PRELOAD" >> $PREFIX/bin/RuGiR
 echo "$PREFIX/opt/metasploit-framework/RuGiR" >> $PREFIX/bin/RuGiR
 echo "#                 @IVAM3" >> $PREFIX/bin/RuGiR
 chmod 777 $PREFIX/bin/RuGiR
+}
 
-#DATA BASE
-mkdir -p $PREFIX/var/lib/postgresql
-initdb $PREFIX/var/lib/postgresql
-pg_ctl -D $PREFIX/var/lib/postgresql start
-createuser msf
-createdb msf_database
-
-#FIXED COMMANDS
-rm $PREFIX/opt/$version.tar.gz
-cd ${PREFIX}/bin && curl -LO https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/mediafire/metasploit/msfconsole && chmod +x msfconsole
-ln -sf $(which msfconsole) $PREFIX/bin/msfvenom
-echo "#!/data/data/com.termux/files/usr/bin/bash" > $PREFIX/opt/metasploit-framework/installer.sh
-echo "echo \"[*] Metasploit Framework installation finished.\"" >> $PREFIX/opt/metasploit-framework/installer.sh
-echo "#                 @Ivam3" >> $PREFIX/opt/metasploit-framework/installer.sh
+Ending() {
 if ! cat ~/../usr/etc/bash.bashrc | grep -oE "postgresql" --silent; then
         sed -i "4a alias postgresql=\"pg_ctl -D $PREFIX/var/lib/postgresql\"" $PREFIX/etc/bash.bashrc
 fi
@@ -123,6 +157,7 @@ printf "      Now you can run it with command$G\n\t$G   >    msfconsole    <\n"
 printf "\n$R :::::::::::::: ADVERSMENT ::::::::::::::$W\n"
 printf "    If you wanna get a new version run\n\t$G   >     msfupdate    <$W\n\n        If msfconsole didn't run\n         execute the file RuGiR\n       (Ruby Gem issues Resolved)\n    to try to fix it with an other steps\n\t$G   >       RuGiR      <$W\n\n"
 }
+
 if [ -d ~/metasploit-framework ] || [ -d $TMP_DIR ]; then
 	printf "$R[?]->$W Metasploit already exist$R |$W Do you want re-install it?\n"
 	while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
