@@ -43,7 +43,7 @@ done
 #INSTALLATION
 Instamsf() {
 	printf "$G\n[?]->$W There is two way to get metasploit$G\n[01]->$W Termux repositories$G\n[02]->$W Rapid7 repositories\n"
-	while read -p " >> " $MSF && [ -z $MSF ]; do
+	while read -p " >> " MSF && [ -z $MSF ]; do
 		continue
 	done
 	if [ $MSF = '01' -o $MSF = '1' ]; then
