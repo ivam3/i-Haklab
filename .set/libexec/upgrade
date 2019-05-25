@@ -78,6 +78,10 @@ if [ "$NEWver" = "$OLDver" ]; then
 		printf "$R[w]-> ERROR :$W Join to https://t.me/Ivam3by_Cinderella"
 		exit
 	fi
+#searchsploit
+	if [ -d $iHAKLAB/../exploitdb ]; then
+		printf "$Y[!]-> Exploitdb tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install exploitdb\n"
+	fi
 #else
 	printf "$Y[!]->$W i-Haklab is already the newest version ($NEWver).\n"
 #        Install
