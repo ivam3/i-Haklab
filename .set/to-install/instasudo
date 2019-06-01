@@ -12,6 +12,13 @@ if [ ! -d ~/storage ]; then
         termux-setup-storage
 fi
 if [ -L ~/storage/external-1 ]; then
+	if [ -d ~/i-Haklab ]; then
+		mkdir -p /data/data/com.termux/files/home/storage/external-1/roothome/
+		mv /data/data/com.termux/files/home/i-Haklab /data/data/com.termux/files/home/storage/external-1/roothome/
+	else
+		printf "$R\n[W]:-> ERROR CODE :$E 48263\n"
+		exit
+	fi
 	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 else
         iHAKLAB=/data/data/com.termux/files/home/i-Haklab
