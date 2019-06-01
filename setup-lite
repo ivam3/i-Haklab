@@ -72,7 +72,6 @@ echo $(clear)
         read enter
 CHECKROOT=$(bash /data/data/com.termux/files/home/i-Haklab/.set/to-install/check-root)
 USR=$(whoami)
-ss() {
 	if [ $CHECKROOT = "root" ]; then
 	command -v sudo > /dev/null || bash /data/data/com.termux/files/home/i-Haklab/.set/to-install/instasudo
         if [ -e /data/data/com.termux/files/home/.suroot/.bashrc ]; then
@@ -107,8 +106,7 @@ elif [ ! -z $PARTITION ] || [ -d /data/data/com.termux ]; then
 else
         printf "$R\n[W]-> STORAGE ACCESS DENIED$W\n"
 fi
-}
-iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+
 SRCH=$(ls $iHAKLAB/.set/to-install/ | grep -iv .zip | grep -iv metasploit | grep -iv embed+java | grep -iv instasudo | grep -iv checkroot | grep -iv i-haklab_login | grep -iv login | grep -iv functions | grep -iv QG)
 
 for TOOL in DoS-A-Tool ExiF binchecker blackbox crunch php-server ssh-server sqlmap ; do
