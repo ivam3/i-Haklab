@@ -36,27 +36,63 @@ fi
 done
 
 echo $(clear)
-Archive() {
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
         printf "$(clear) $C STARTING TO INSTALL BEEF. . . .$i"
         printf "\n\n"
         sleep 1
 done
 #INSTALLATION
-apt install dirmngr
-cd $PREFIX/etc/apt/
-apt-key adv --keyserver pool.sks.keyservers.net --recv 45F2964132545795
-echo "deb https://termux-x11.ml x11 main" >> $PREFIX/etc/apt/sources.list
-echo "" >> $PREFIX/etc/apt/sources.list
-echo "deb [trusted=yes] https://hax4us.github.io/termux-tools extras main" >> $PREFIX/etc/apt/sources.list
-cd;apt update && apt upgrade
-apt install beef-xss
-cd $PREFIX/share/beef-xss
+
+fixbigdecimal() {
+        printf "$G\n[IbyC]-> FIXING BIG DECIMAL ISSUES$W\n"
+        apt install -yq patchelf
+        for i in aarch64-linux-android arm-linux-androideabi \
+                i686-linux-android x86_64-linux-android; do
+                        if [ -e "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal.so" ]; then
+                                if [ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal/util.so" | grep bigdecimal.so)" ]; then
+                                        exit 0
+                                fi
+                                patchelf --add-needed \
+                                        "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal.so" \
+                                        "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal/util.so"
+                        fi
+        done
+}
+printf "$G\n[IbyC]-> UPGRADING TERMUX$W\n"
+pkg update -y;pkg upgrade -y
+printf "$G\n[IbyC]-> INSTALLING ALL PACKAGES NEEDED$W\n"
+pkg install dirmngr ruby ruby-dev nodejs -y
+printf "$G\n[IbyC]-> DOWNLOADING BEEF PROJECT$W\n"
+git clone https://github.com/beefproject/beef.git $iHAKLAB/../beef >/dev/null 2>&1
+DIRBEEF=$(find ${HOME} -type d -name 'beef')
+while [ ! -z $DIRBEEF ]; do
+        printf "$Y\n[!]-> FIXING BEEF WORKING DIRECTORY$W\n"
+        mv $DIRBEEF $PREFIX/opt/
+done
+if [ -d $iHAKLAB/../beef ]; then
+        cd $iHAKLAB/../beef
+else
+        printf "$Y\n[!]-> NOT SUCH BEEF WORKING DIRECTORY$W\n"
+        exit
+fi
+printf "$R\n[w]-> DOWNLOADING BEEF PROJECT$W\n"
+sed 's|gem \'rubydns\', \'~> 1.*.*\'|gem \'rubydns\', \'~> 2.0.2\'|g' -i Gemfile
+sed 's|passwd: "beef"|passwd: "Ivam3byCinderella"|g' -i config.yaml
 gem update --system
 gem install bundler
-bundle install -j5
+bundle install
+fixbigdecimal
+printf "$G\n[IbyC]-> CREATING BEEF COMMAND$W\n"
+echo "#!/bin/bash" > $PREFIX/bin/beef
+echo "#This file will help you to run BEEF on the rigth way" >> $PREFIX/bin/beef
+echo "#Beef by Wade Alcorn was adapted by @Ivam3" >> $PREFIX/bin/beef
+echo "BACK=${PWD}" >> $PREFIX/bin/beef
+echo "cd $iHAKLAB/../beef" >> $PREFIX/bin/beef
+echo "ruby beef" >> $PREFIX/bin/beef
+echo "cd $BACK" >> $PREFIX/bin/beef
+echo "#                 @IVAM3" >> $PREFIX/bin/beef
+chmod 711 $PREFIX/bin/beef;cd
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
-}
 #                                               @Ivam3
