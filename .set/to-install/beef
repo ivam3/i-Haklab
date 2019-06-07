@@ -76,7 +76,11 @@ else
         exit
 fi
 printf "$R\n[w]-> DOWNLOADING BEEF PROJECT$W\n"
-sed 's|gem \'rubydns\', \'~> 1.*.*\'|gem \'rubydns\', \'~> 2.0.2\'|g' -i Gemfile
+#sed 's|gem \'rubydns\', \'~> 1.*.*\'|gem \'rubydns\', \'~> 2.0.2\'|g' -i Gemfile
+sed "70d" Gemfile > Gemfile2
+sed -i "69a gem 'rubydns', '~> 2.0.2'" Gemfile2
+cat Gemfile2 > Gemfile
+rm Gemfile2
 sed 's|passwd: "beef"|passwd: "Ivam3byCinderella"|g' -i config.yaml
 gem update --system
 gem install bundler
