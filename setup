@@ -16,7 +16,7 @@ until [ -e /data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 	exit
 done
 apt update && apt upgrade
-apt install -y fish root-repo util-linux coreutils vim python python2 ruby ruby-dev perl clang curl wget make openssl fish openssl-tool php zip unzip tar w3m neofetch dirmngr weechat irssi tor htop bison megatools findutils git apr apr-util libffi-dev libgmp-dev postgresql-dev readline-dev libsqlite-dev openssh openssl-dev libtool libxml2-dev libxslt-dev ncurses-dev pkg-config libgrpc-dev termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner libcaca cmatrix fortune figlet man termux-api hydra megatools axel apksigner macchanger -y
+apt install -y fish root-repo util-linux coreutils vim python python2 ruby ruby-dev perl clang curl wget make openssl fish openssl-tool php zip unzip tar w3m neofetch dirmngr weechat irssi tor htop bison megatools findutils git apr apr-util libffi-dev libgmp-dev postgresql-dev readline-dev libsqlite-dev openssh openssl-dev libtool libxml2-dev libxslt-dev ncurses-dev pkg-config libgrpc-dev termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner libcaca cmatrix fortune figlet man termux-api hydra megatools axel apksigner -y
 python -m pip install --upgrade pip
 python2 -m pip install --upgrade pip
 #if [ -d /data/data/com.termux/files/home/storage ]; then
@@ -105,6 +105,7 @@ elif [ ! -z $PARTITION ] || [ -d /data/data/com.termux ]; then
         iHAKLAB=/data/data/com.termux/files/home/i-Haklab
 else
         printf "$R\n[W]-> STORAGE ACCESS DENIED$W\n"
+	exit
 fi
 
 SRCH=$(ls $iHAKLAB/.set/to-install/ | grep -iv .zip | grep -iv metasploit | grep -iv embed+java | grep -iv instasudo | grep -iv checkroot | grep -iv i-haklab_login | grep -iv login | grep -iv functions | grep -iv QG)
@@ -119,6 +120,7 @@ bash $iHAKLAB/.set/to-install/embed+java
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/i-Haklab -o $PREFIX/bin/i-Haklab
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/lock -o $PREFIX/bin/lock
 chmod +x $PREFIX/bin/i-Haklab
+pkg install fish -y
 curl -L http://get.oh-my.fish | fish
 echo "source $PREFIX/var/alias" >> $PREFIX/etc/fish/config.fish
 sed "27d" ~/.config/fish/fish_variables > $PREFIX/tmp/fish_variables
