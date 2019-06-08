@@ -11,7 +11,7 @@ while [ "$USER" = "root" ]; do
 	printf "$R\n[W]:-> You need to be a common user to install i-Haklab$W\n"
 	exit
 done
-until [ -e /data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab/setup ] || [ -e /data/sdext2/data/com.termux/files/home/i-Haklab/setup ]; do
+until [ -e /data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab/setup ] || [ -e /data/data/com.termux/files/home/i-Haklab/setup ]; do
 	printf "$R\n[W]:-> i-Haklab directory must to be in home directory$W\n"
 	exit
 done
