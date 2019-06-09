@@ -63,12 +63,12 @@ pkg update -y;pkg upgrade -y
 printf "$G\n[IbyC]-> INSTALLING ALL PACKAGES NEEDED$W\n"
 pkg install dirmngr ruby ruby-dev nodejs -y
 printf "$G\n[IbyC]-> DOWNLOADING BEEF PROJECT$W\n"
-git clone https://github.com/beefproject/beef.git $iHAKLAB/../beef #>/dev/null 2>&1
-DIRBEEF=$(find ${HOME} -type d -name 'beef')
-if [ ! -z $DIRBEEF ]; then
-        printf "$Y\n[!]-> FIXING BEEF WORKING DIRECTORY$W\n"
-        mv $DIRBEEF $PREFIX/opt/
-fi
+git clone https://github.com/beefproject/beef.git $iHAKLAB/../beef >/dev/null 2>&1
+#DIRBEEF=$(find ${HOME} -type d -name 'beef')
+#if [ ! -z $DIRBEEF ]; then
+#        printf "$Y\n[!]-> FIXING BEEF WORKING DIRECTORY$W\n"
+#        mv $DIRBEEF $PREFIX/opt/
+#fi
 if [ -d $iHAKLAB/../beef ]; then
         cd $iHAKLAB/../beef
 else
