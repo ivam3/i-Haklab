@@ -75,7 +75,7 @@ else
         printf "$Y\n[!]-> NOT SUCH BEEF WORKING DIRECTORY$W\n"
         exit
 fi
-printf "$R\n[w]-> DOWNLOADING BEEF PROJECT$W\n"
+printf "$G\n[IbyC]-> DOWNLOADING BEEF PROJECT$W\n"
 #sed 's|gem \'rubydns\', \'~> 1.*.*\'|gem \'rubydns\', \'~> 2.0.2\'|g' -i Gemfile
 sed "70d" Gemfile > Gemfile2
 sed -i "69a gem 'rubydns', '~> 2.0.2'" Gemfile2
