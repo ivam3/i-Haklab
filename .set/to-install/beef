@@ -65,10 +65,10 @@ pkg install dirmngr ruby ruby-dev nodejs -y
 printf "$G\n[IbyC]-> DOWNLOADING BEEF PROJECT$W\n"
 git clone https://github.com/beefproject/beef.git $iHAKLAB/../beef #>/dev/null 2>&1
 DIRBEEF=$(find ${HOME} -type d -name 'beef')
-while [ ! -z $DIRBEEF ]; do
+if [ ! -z $DIRBEEF ]; then
         printf "$Y\n[!]-> FIXING BEEF WORKING DIRECTORY$W\n"
         mv $DIRBEEF $PREFIX/opt/
-done
+fi
 if [ -d $iHAKLAB/../beef ]; then
         cd $iHAKLAB/../beef
 else
