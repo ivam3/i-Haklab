@@ -31,7 +31,7 @@ until [ -d $iHAKLAB ]; do
 	done
 if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
 	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
-        cd ~/i-Haklab;chmod 711 *;bash setup
+        cd ~/i-Haklab;chmod 711 *;bash setup-lite
 else 
 	printf "$G\n[!]-> Have a nice hacking day!!\n\n"
 	exit
@@ -79,7 +79,7 @@ if [ "$NEWver" = "$OLDver" ]; then
 		exit
 	fi
 #searchsploit
-	if [ -d $iHAKLAB/../exploitdb ]; then
+	if [ ! -d $iHAKLAB/../exploitdb ]; then
 		printf "$Y[!]-> Exploitdb tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install exploitdb\n"
 	fi
 #else
