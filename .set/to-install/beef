@@ -28,7 +28,7 @@ until [ -d $iHAKLAB ]; do
 	done
 if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
 	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
-        cd ~/i-Haklab;bash setup
+        cd ~/i-Haklab;bash setup-lite
 else 
 	printf "$G[!]-> Have a nice hacking day!!\n"
 	exit
