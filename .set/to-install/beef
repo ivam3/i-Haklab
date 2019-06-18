@@ -63,14 +63,14 @@ pkg update -y;pkg upgrade -y
 printf "$G\n[IbyC]-> INSTALLING ALL PACKAGES NEEDED$W\n"
 pkg install dirmngr ruby ruby-dev nodejs -y
 printf "$G\n[IbyC]-> DOWNLOADING BEEF PROJECT$W\n"
-git clone https://github.com/beefproject/beef.git $iHAKLAB/../beef >/dev/null 2>&1
+git clone https://github.com/beefproject/beef.git $PREFIX/opt/beef >/dev/null 2>&1
 #DIRBEEF=$(find ${HOME} -type d -name 'beef')
 #if [ ! -z $DIRBEEF ]; then
 #        printf "$Y\n[!]-> FIXING BEEF WORKING DIRECTORY$W\n"
 #        mv $DIRBEEF $PREFIX/opt/
 #fi
-if [ -d $iHAKLAB/../beef ]; then
-        cd $iHAKLAB/../beef
+if [ -d $PREFIX/opt/beef ]; then
+        cd $PREFIX/opt/beef
 else
         printf "$Y\n[!]-> NOT SUCH BEEF WORKING DIRECTORY$W\n"
         exit
@@ -87,14 +87,7 @@ gem install bundler
 bundle install
 fixbigdecimal
 printf "$G\n[IbyC]-> CREATING BEEF COMMAND$W\n"
-echo "#!/bin/bash" > $PREFIX/bin/beef
-echo "#This file will help you to run BEEF on the rigth way" >> $PREFIX/bin/beef
-echo "#Beef by Wade Alcorn was adapted by @Ivam3" >> $PREFIX/bin/beef
-echo "BACK=${PWD}" >> $PREFIX/bin/beef
-echo "cd $iHAKLAB/../beef" >> $PREFIX/bin/beef
-echo "ruby beef" >> $PREFIX/bin/beef
-echo "cd $BACK" >> $PREFIX/bin/beef
-echo "#                 @IVAM3" >> $PREFIX/bin/beef
+curl -LO https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/beef -o $PREFIX/bin/beef
 chmod 711 $PREFIX/bin/beef;cd
 
 #ENDING SCRIPT
