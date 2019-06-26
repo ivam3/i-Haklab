@@ -34,7 +34,10 @@ else
 	exit
 fi
 done
-
+while [ ! -d $PREFIX/opt/metasploit-framework ]; do
+	printf "$R\n[W]:-> Metasploit needed$W |$Y Please install it?$W\n"
+	exit
+done
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
         printf "$(clear) $C STARTING TO INSTALL EMBED+JAVA. . . .$i"
@@ -42,6 +45,7 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
+msf="$PREFIX/opt/metasploit-framework"
 if [ -d $HOME/java ]; then
 	rm -rf $HOME/java
 fi
@@ -70,7 +74,7 @@ TMP_DIR=$HOME/java
 mkdir -p $TMP_DIR/handler
 mkdir -p $TMP_DIR/unsign
 mkdir -p $TMP_DIR/finished
-axel https://raw.githubusercontent.com/ivam3/embed/master/EMBED -O $PREFIX/bin/EMBED
+axel https://raw.githubusercontent.com/ivam3/embed/master/EMBED -o $PREFIX/bin/EMBED
 chmod -R 711 $TMP_DIR
 chmod 777 $PREFIX/bin/EMBED
 arch=`dpkg --print-architecture`
