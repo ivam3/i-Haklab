@@ -45,7 +45,7 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-msf="$PREFIX/opt/metasploit-framework"
+msf=$(find $PREFIX/opt/ -name "metasploit-framework" -type d)
 if [ -d $HOME/java ]; then
 	rm -rf $HOME/java
 fi
