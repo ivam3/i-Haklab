@@ -89,7 +89,7 @@ bundle install
 fixbigdecimal
 cp $PREFIX/opt/beef/README.md $iHAKLAB/.set/libexec/Readme/beef
 printf "$G\n[IbyC]-> CREATING BEEF COMMAND$W\n"
-curl -LO https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/beef -o $PREFIX/bin/beef
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/beef -o $PREFIX/bin/beef
 chmod 711 $PREFIX/bin/beef;cd
 
 #ENDING SCRIPT
