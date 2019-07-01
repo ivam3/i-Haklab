@@ -46,9 +46,9 @@ if [ -d $iHAKLAB/../nikto ]; then
         rm -rf $iHAKLAB/../nikto
 fi
 git clone https://github.com/sullo/nikto.git $iHAKLAB/../nikto
-chmod 777 $iHAKLAB/../nikto/program/nikto.pl
-echo "#!/bin/bash" > $PREFIX/bin/nikto
-echo "perl $iHAKLAB/../nikto/program/nikto.pl" >> $PREFIX/bin/nikto
+chmod +x -R $iHAKLAB/../nikto/*
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/nikto -o $PREFIX/bin/nikto
+chmod +x $PREFIX/bin/nikto
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"

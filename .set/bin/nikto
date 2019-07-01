@@ -1,0 +1,21 @@
+#!/data/data/com.termux/files/usr/bin/sh
+
+SCRIPT_NAME=$(basename "$0")
+if [ -d /data/data/com.termux/files/home/nikto/program ]; then
+	NIKTO_PATH="/data/data/com.termux/files/home/nikto/program"
+elif [ -d /data/data/com.termux/files/home/storage/external-1/roothome/nikto ]; then
+	NIKTO_PATH="/data/data/com.termux/files/home/storage/external-1/roothome/nikto/program"
+else
+	echo "[w]-> ERROR in Nikto path"
+	exit 1
+fi
+
+case "$SCRIPT_NAME" in
+	nikto|Nikto|nikto.pl|Nikto.pl)
+		exec perl "$NIKTO_PATH/$SCRIPT_NAME.pl" "$@"
+		;;
+	*)
+		echo "[!] Unknown Nikto command '$SCRIPT_NAME'."
+		exit 1
+		;;
+esac
