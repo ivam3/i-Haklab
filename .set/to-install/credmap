@@ -47,7 +47,7 @@ if [ -d $iHAKLAB/../credmap ]; then
 fi
 git clone https://github.com/lightos/credmap.git $iHAKLAB/../credmap
 chmod 777 $iHAKLAB/../credmap/credmap.py
-python2 -m pip install urllib2
+#python2 -m pip install urllib2
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_bot$W\n"
