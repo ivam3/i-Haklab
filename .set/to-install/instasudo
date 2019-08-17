@@ -49,6 +49,10 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
+if [ ! -d $HOME/.suroot ]; then
+	mkdir $HOME/.suroot
+	touch $HOME/.suroot/.bashrc
+fi
 if [ "$CHECKROOT" = "root" ]; then
         #set colored=true to turn on colored error messages
         #set colored=false to turn off colored error messages
