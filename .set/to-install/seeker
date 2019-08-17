@@ -55,7 +55,7 @@ if [ -e $PREFIX/bin/ngrok ]; then
         ln -s $PREFIX/bin/ngrok ~/seeker/Ngrok/
 else
         bash $iHAKLAB/.set/to-install/ngrok
-        ln -s $PREFIX/bin/ngrok $iHAKLAB/../seeker/Ngrok/
+        cp $PREFIX/bin/ngrok $iHAKLAB/../seeker/Ngrok/
 fi
 
 #ENDING SCRIPT

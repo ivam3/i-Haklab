@@ -50,7 +50,7 @@ if [ -e $PREFIX/bin/ngrok ]; then
         ln -s $PREFIX/bin/ngrok $iHAKLAB/../shellphish/
 else
         bash $iHAKLAB/.set/to-install/ngrok
-        ln -s $PREFIX/bin/ngrok $iHAKLAB/../shellphish/
+        cp $PREFIX/bin/ngrok $iHAKLAB/../shellphish/
 fi
 
 #ENDING SCRIPT

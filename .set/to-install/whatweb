@@ -52,7 +52,7 @@ function install {
 	gem install nokogiri -v 1.8.0 -- --use-system-libraries
 }
 apt update && apt upgrade -y
-apt install ruby ruby-dev git
+apt install ruby git
 git clone https://github.com/urbanadventurer/WhatWeb $iHAKLAB/../WhatWeb
 command -v msfconsole > /dev/null || install
 if [ ! -e $HOME/.config/fish/functions/whatweb.fish ]; then

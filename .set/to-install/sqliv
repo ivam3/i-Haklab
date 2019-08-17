@@ -51,7 +51,7 @@ else
 	printf "$R\n[W]:-> Sqliv repository has been archived by the owner.$W\n\n"
 fi
 chmod +x $iHAKLAB/../sqliv/sqliv.py
-
+python2 -m pip install terminaltables termcolor nyawc
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3

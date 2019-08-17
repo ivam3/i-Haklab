@@ -40,7 +40,7 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
 done
 #INSTALLATION
 apt update && apt upgrade -y
-apt install git curl python2 python2-dev python python-dev tor ruby nmap -y
+apt install git curl python2 python tor ruby nmap -y
 git clone https://github.com/sechacklabs/webhackshl.git $iHAKLAB/../webhackshl
 python -m pip install fierce
 command -v dnsenum > /dev/null || bash $iHAKLAB/.set/to-install/dnsenum

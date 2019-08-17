@@ -45,7 +45,7 @@ done
 if [ -d $iHAKLAB/../sqlmap ]; then
         rm -rf $iHAKLAB/../sqlmap
 fi
-apt update && apt upgrade;apt install python2 python-dev
+apt update && apt upgrade;apt install python2
 python2 -m pip install --upgrade pip
 python2 -m pip install sqlmap
 #ENDING SCRIPT
