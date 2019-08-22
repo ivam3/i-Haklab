@@ -1,0 +1,138 @@
+#!/data/data/com.termux/files/usr/bin/sh
+
+SCRIPT_NAME=$(basename "$1")
+BEEF_PATH="/data/data/com.termux/files/usr/opt/beef"
+BACK=$(pwd)
+
+if [ -d $HOME/i-Haklab ]; then
+	TMP_PATH="$HOME"
+elif [ -d $HOME/storage/external-1/roothome/i-Haklab ]; then
+	TMP_PATH="$HOME/storage/external-1/roothome"
+else
+	echo "$R[w]-> i-Haklab directory undefined <-[w]$W\n"
+	exit
+fi
+
+# Fix ruby bigdecimal extensions linking error.
+case "$(uname -m)" in
+	aarch64)
+		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/2.6.0/aarch64-linux-android/bigdecimal.so"
+		;;
+	arm*)
+		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/2.6.0/arm-linux-androideabi/bigdecimal.so"
+		;;
+	i686)
+		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/2.6.0/i686-linux-android/bigdecimal.so"
+		;;
+	x86_64)
+		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/2.6.0/x86_64-linux-android/bigdecimal.so"
+		;;
+	*)
+		;;
+esac
+
+case "$SCRIPT_NAME" in
+	beef|beef-xss)
+		if [ -d $BEEF_PATH ]; then
+			cd $BEEF_PATH
+			exec ruby "$BEEF_PATH/$SCRIPT_NAME" "$@"
+			cd $BACK
+		else
+			echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
+		fi
+		;;
+	wpscan)
+		if [ -d $TMP_DIR/$SCRIP_NAME ]; then
+			cd $TMP_PATH/wpscan/bin
+			exec ruby "$TMP_PATH/wpscan/bin/$SCRIPT_NAME" "$@"
+			cd $BACK
+		else
+			echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
+		fi
+		;;
+	androbugs)
+		if [ -d $TMP_DIR/$SCRIP_NAME ]; then
+			cd $TMP_PATH/$SCRIPT_NAME
+			exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
+			cd $BACK
+		else
+			echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
+		fi
+		;;
+	d-tect)
+		if [ -d $TMP_PATH/D-TECT-1 ]; then
+                        cd $TMP_PATH/D-TECT-1
+                        exec python2 "$TMP_PATH/D-TECT-1/$SCRIPT_NAME.py" "$@"
+                        cd $BACK
+                else
+                        echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
+                fi
+		;;
+	adminpanel)
+		if [ -d $TMP_PATH/admin_panel ]; then
+                        cd $TMP_PATH/admin_panel
+                        exec python2 "$TMP_PATH/admin_panel/admin_panel.py" "$@"
+                        cd $BACK
+                else
+                        echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
+                fi
+		;;
+	cc-genpro)
+		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        exec python2 "$TMP_PATH/$SCRIPT_NAME/cc-genpro1.2.py" "$@"
+                        cd $BACK
+                else
+                        echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
+                fi
+		;;
+	credmap)
+		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
+                        cd $BACK
+                else
+                        echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
+                fi
+		;;
+	evilurl)
+		if [ -d $TMP_PATH/$SCRIP_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
+                        cd $BACK
+                else
+                        echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
+                fi
+		;;
+	exploitdb)
+		if [ -d $TMP_PATH/$SCRIP_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        exec bash "$TMP_PATH/$SCRIPT_NAME/searchsploit" "$@"
+                        cd $BACK
+                else
+                        echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
+                fi
+		;;
+	fbbrute)
+		if [ -d $TMP_PATH/$SCRIP_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
+                        cd $BACK
+                else
+                        echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
+                fi
+		;;
+	fbi)
+		if [ -d $TMP_PATH/$SCRIP_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
+                        cd $BACK
+                else
+                        echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
+                fi
+		;;
+	*)
+		echo "[!] i-Haklab : Unknown command '$SCRIPT_NAME'."
+		exit 1
+		;;
+esac

@@ -8,9 +8,6 @@ function ctrl_c() {
                 echo
                 printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
 }
-if [ ! -d ~/storage ]; then
-        termux-setup-storage
-fi
 if [ -L ~/storage/external-1 ]; then
 	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 else
@@ -23,32 +20,35 @@ while [ ! $(id -u) -ne 0 ]; do
 done
 until [ -d $iHAKLAB ]; do
 	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do you wanna install it?$W\n"
-	while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
+	while read -p "       [yes/no]:-> " yesorno && [ -z $yesorno ]; do
 		continue
 	done
 if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
 	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
-        cd ~/i-Haklab;bash setup
+        cd ~/i-Haklab;bash setup-lite
 else 
-	printf "$G[!]-> Have a nice hacking day!!\n"
+	printf "$G\n[!]-> Have a nice hacking day!!\n\n"
 	exit
 fi
 done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL CONVERTER"
+        printf "$(clear) $C STARTING TO INSTALL PHONEINFOGA. . . .$i"
         printf "\n\n"
         sleep 1
 done
 #INSTALLATION
-if [ -e $PREFIX/bin/converter ]; then
-        rm $PREFIX/bin/converter
-fi
-curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/converter -o $PREFIX/bin/converter
-pkg install dialog
-chmod 777 $PREFIX/bin/converter
+pkg update && pkg upgrade
+pkg install git python
+git clone https://github.com/sundowndev/PhoneInfoga.git $iHAKLAB/../
+cd $iHAKLAB/../
+python -m pip install requirements.txt
+python -m pip install conrig google_api
+cp config.example.py config.py
+#falta gecko driver
+
 
 #ENDING SCRIPT
-printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
 #                                               @Ivam3
