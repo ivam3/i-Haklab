@@ -39,15 +39,18 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
+json=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest)
+url=$(echo "$json" | jq -r '.assets[].browser_download_url | select(contains("linux64"))')
 pkg update && pkg upgrade
 pkg install git python
 git clone https://github.com/sundowndev/PhoneInfoga.git $iHAKLAB/../
-cd $iHAKLAB/../
+cd $iHAKLAB/../PhoneInfoga
 python -m pip install requirements.txt
 python -m pip install conrig google_api
 cp config.example.py config.py
-#falta gecko driver
-
+curl -s -L "$url" | tar -xz
+chmod +x geckodriver
+mv geckodriver $PREFIX/bin
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
