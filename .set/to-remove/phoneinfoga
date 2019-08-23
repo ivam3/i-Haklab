@@ -39,14 +39,8 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-if [ -d $iHAKLAB/../PhoneInfoga ]; then
-	rm -rf $iHAKLAB/../PhoneInfoga
-else
-	printf "$R\n[W]:-> There is not PhoneInfoga installed$W\n"
-	exit
-fi
-#falta gecko driver
-
+rm -rf $iHAKLAB/../PhoneInfoga
+rm $PREFIX/bin/geckodriver
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
