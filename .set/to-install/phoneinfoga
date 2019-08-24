@@ -48,22 +48,8 @@ python -m pip install -r requirements.txt
 python -m pip install google_api
 python -m pip install config
 cp config.example.py config.py
-if [ $arch = "aarch64" -o $arch = "arm64" ] ; then
-	wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
-	tar -xhf geckodriver-v0.24.0-linux64.tar.gz
-elif [ $arch = "armhf" -o $arch = "armv7l" ]; then
-	wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
-	tar -xhf geckodriver-v0.24.0-linux64.tar.gz
-elif [ $arch = "arm" -o $arch = "i868" ]; then
-	wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux32.tar.gz
-	tar -xhf geckodriver-v0.24.0-linux64.tar.gz
-else
-	printf "\n\n$red [W] Unknown architecture\n\n$reset"
-	exit
-fi
-chmod +x geckodriver
-cp geckodriver $PREFIX/bin/
-export PATH=$PATH:$iHAKLAB/../PhoneInfoga/.
+pkg install unstable-repo -y
+pkg install geckodriver -y
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
