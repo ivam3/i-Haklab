@@ -118,7 +118,7 @@ bash $iHAKLAB/.set/to-install/metasploit
 bash $iHAKLAB/.set/to-install/embed+java
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/i-Haklab -o $PREFIX/bin/i-Haklab
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/lock -o $PREFIX/bin/lock
-chmod +x $PREFIX/bin/i-Haklab
+chmod +x $PREFIX/bin/*
 pkg install fish -y
 curl -L http://get.oh-my.fish | fish
 echo "alias postgresql=\"pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql\"" >> $PREFIX/etc/fish/config.fish
