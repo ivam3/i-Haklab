@@ -9,10 +9,13 @@ if [ -d $HOME/i-Haklab ]; then
 elif [ -d $HOME/storage/external-1/roothome/i-Haklab ]; then
 	TMP_PATH="$HOME/storage/external-1/roothome"
 else
-	echo "$R[w]-> i-Haklab directory undefined <-[w]$W\n"
+	echo "$R\n[w]-> i-Haklab directory undefined <-[w]$W\n"
 	exit
 fi
-
+STDERR() {
+	echo "$R\n[w] i-Haklab :$W $SCRIPT_NAME is not installed$W\n"
+	exit
+}
 # Fix ruby bigdecimal extensions linking error.
 case "$(uname -m)" in
 	aarch64)
@@ -38,25 +41,25 @@ case "$SCRIPT_NAME" in
 			exec ruby "$BEEF_PATH/$SCRIPT_NAME" "$@"
 			cd $BACK
 		else
-			echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
+			STDERR
 		fi
 		;;
 	wpscan)
-		if [ -d $TMP_DIR/$SCRIP_NAME ]; then
-			cd $TMP_PATH/wpscan/bin
-			exec ruby "$TMP_PATH/wpscan/bin/$SCRIPT_NAME" "$@"
+		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+			cd $TMP_PATH/$SCRIPT_NAME/bin
+			exec ruby "$TMP_PATH/$SCRIPT_NAME/bin/$SCRIPT_NAME" "$@"
 			cd $BACK
 		else
-			echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
+			STDERR
 		fi
 		;;
 	androbugs)
-		if [ -d $TMP_DIR/$SCRIP_NAME ]; then
+		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
 			cd $TMP_PATH/$SCRIPT_NAME
 			exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
 			cd $BACK
 		else
-			echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
+			STDERR
 		fi
 		;;
 	d-tect)
@@ -65,8 +68,8 @@ case "$SCRIPT_NAME" in
                         exec python2 "$TMP_PATH/D-TECT-1/$SCRIPT_NAME.py" "$@"
                         cd $BACK
                 else
-                        echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
-                fi
+                        STDERR
+		fi
 		;;
 	adminpanel)
 		if [ -d $TMP_PATH/admin_panel ]; then
@@ -74,7 +77,7 @@ case "$SCRIPT_NAME" in
                         exec python2 "$TMP_PATH/admin_panel/admin_panel.py" "$@"
                         cd $BACK
                 else
-                        echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
+                        STDERR
                 fi
 		;;
 	cc-genpro)
@@ -83,8 +86,8 @@ case "$SCRIPT_NAME" in
                         exec python2 "$TMP_PATH/$SCRIPT_NAME/cc-genpro1.2.py" "$@"
                         cd $BACK
                 else
-                        echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
-                fi
+                        STDERR
+		fi
 		;;
 	credmap)
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
@@ -92,47 +95,56 @@ case "$SCRIPT_NAME" in
                         exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
                         cd $BACK
                 else
-                        echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
-                fi
+			STDERR
+		fi
 		;;
 	evilurl)
-		if [ -d $TMP_PATH/$SCRIP_NAME ]; then
+		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/$SCRIPT_NAME
                         exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
                         cd $BACK
                 else
-                        echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
-                fi
+                        STDERR
+		fi
 		;;
 	exploitdb)
-		if [ -d $TMP_PATH/$SCRIP_NAME ]; then
+		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/$SCRIPT_NAME
                         exec bash "$TMP_PATH/$SCRIPT_NAME/searchsploit" "$@"
                         cd $BACK
                 else
-                        echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
-                fi
+                        STDERR
+		fi
 		;;
 	fbbrute)
-		if [ -d $TMP_PATH/$SCRIP_NAME ]; then
+		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/$SCRIPT_NAME
                         exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
                         cd $BACK
                 else
-                        echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
-                fi
+                        STDERR
+		fi
 		;;
 	fbi)
-		if [ -d $TMP_PATH/$SCRIP_NAME ]; then
+		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/$SCRIPT_NAME
                         exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
                         cd $BACK
                 else
-                        echo "$R[w]-> $SCRIPT_NAME is not istalled <-[w]$W\n"
-                fi
+                        STDERR
+		fi
 		;;
+	phoneinfoga)
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/PhoneInfoga
+                        exec python "$TMP_PATH/PhoneInfoga/$SCRIPT_NAME.py" "$@"
+                        cd $BACK
+                else
+			STDERR
+		fi
+                ;;
 	*)
-		echo "[!] i-Haklab : Unknown command '$SCRIPT_NAME'."
+		echo "$R\n[w] i-Haklab :$W Unknown argument '$SCRIPT_NAME'\n"
 		exit 1
 		;;
 esac

@@ -40,7 +40,8 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
 done
 #INSTALLATION
 rm -rf $iHAKLAB/../PhoneInfoga
-rm $PREFIX/bin/geckodriver
+pkg remove geckodriver
+apt autoremove
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
