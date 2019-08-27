@@ -14,7 +14,7 @@ ctrl_c() {
                 printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
 }
 if [ -L ~/storage/external-1 ]; then
-	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-haklab
+	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 else
         iHAKLAB=/data/data/com.termux/files/home/i-Haklab
 fi
