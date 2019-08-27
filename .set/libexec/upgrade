@@ -61,6 +61,10 @@ if [ "$NEWver" = "$OLDver" ]; then
 	if [ ! -e $PREFIX/bin/lock ]; then
 		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/lock -o $PREFIX/bin/lock
 	fi
+#run
+	if [ ! -e $PREFIX/bin/run ]; then
+		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/run -o $PREFIX/bin/run
+	fi
 #Function
 	if [ ! -e $HOME/.config/fish/functions/unset.fish ]; then
 		exec $iHAKLAB/.set/to-install/functions
