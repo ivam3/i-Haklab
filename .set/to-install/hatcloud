@@ -50,7 +50,7 @@ chmod 777 $iHAKLAB/../HatCloud/hatcloud.rb
 if [ -e $PREFIX/bin/hatcloud ]; then
         rm $PREFIX/bin/hatcloud
 fi
-cp $iHAKLAB/../HatCloud/hatcloud.rb $PREFIX/bin/hatcloud
+#cp $iHAKLAB/../HatCloud/hatcloud.rb $PREFIX/bin/hatcloud
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"

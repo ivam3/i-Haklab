@@ -42,11 +42,12 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-if [ -d $iHAKLAB/../LaNMaSteR-recon-ng ]; then
-        rm -rf $iHAKLAB/../LaNMaSteR-recon-ng
+if [ -d $iHAKLAB/../recon-ng ]; then
+        rm -rf $iHAKLAB/../recon-ng
 fi
-unzip $iHAKLAB/.set/to-install/LaNMaSteR-recon-ng.zip -d $iHAKLAB/../recon-ng
-chmod 777 $iHAKLAB/../recon-ng/recon-ng
+unzip $iHAKLAB/.set/to-install/LaNMaSteR-recon-ng.zip -d $iHAKLAB/
+mv $iHAKLAB/LaNMaSteR53-recon-ng-93bb9a4fb50b $iHAKLAB/recon-ng
+chmod 777 -R $iHAKLAB/../recon-ng
 python2 -m pip install dicttoxml
 python2 -m pip install dnspython
 python2 -m pip install jsonrpclib

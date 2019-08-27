@@ -12,8 +12,13 @@ else
 	echo "$R\n[w]-> i-Haklab directory undefined <-[w]$W\n"
 	exit
 fi
+CHECKROOT=$(bash $TMP_PATH/i-Haklab/.set/to-install/check-root)
 STDERR() {
 	echo "$R\n[w] i-Haklab :$W $SCRIPT_NAME is not installed$W\n"
+	exit
+}
+STDERROOT() {
+	echo "$R\n[w] i-Haklab :$W Your device is not rooted$W\n"
 	exit
 }
 # Fix ruby bigdecimal extensions linking error.
@@ -142,6 +147,219 @@ case "$SCRIPT_NAME" in
                 else
 			STDERR
 		fi
+                ;;
+	hatcloud)
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/HatCloud
+                        exec ruby "$TMP_PATH/HatCloud/$SCRIPT_NAME.rb" "$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	hunner)
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	ipgeolocation)
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/IPGeoLocation
+                        exec python "$TMP_PATH/IPGeoLocation/$SCRIPT_NAME.py" "$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	pasterm)
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/PasTerm
+                        exec php "$TMP_PATH/PasTerm/$SCRIPT_NAME.php" "$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	pybelt)
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/Pybelt
+                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	rhawk)
+                if [ -d $TMP_PATH/RED_HAWK ]; then
+                        cd $TMP_PATH/RED_HAWK
+                        exec php "$TMP_PATH/RED_HAWK//$SCRIPT_NAME.php" "$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	dog)
+                if [ -d $TMP_PATH/recondog ]; then
+                        cd $TMP_PATH/recondog
+                        exec python "$TMP_PATH/recondog/$SCRIPT_NAME" "$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	sigploit)
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	whatweb)
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        exec ruby "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME" "$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	binwalk)
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        #exec python "$TMP_PATH/$SCRIPT_NAME/setup.py" "$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	fuzzdb)
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        #exec ???? "$TMP_PATH/$SCRIPT_NAME/????" "$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	hakku)
+                if [ -d $TMP_PATH/hakkuframework ]; then
+                        cd $TMP_PATH/hakkuframework
+                        exec python "$TMP_PATH/hakkuframework/$SCRIPT_NAME" #"$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	nikto)
+		if [ $CHECKROOT = "root" ]; then
+			command -v sudo > /dev/null || bash $TMP_PATH/i-Haklab/.set/to-install/instasudo
+			if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+				cd $TMP_PATH/$SCRIPT_NAME
+				exec sudo perl "$TMP_PATH/$SCRIPT_NAME/program/$SCRIPT_NAME.pl" "$@"
+				cd $BACK
+			else
+				STDERR
+			fi
+		else
+			STDERROOT
+		fi
+		;;
+	recon-ng)
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME" "--no-check"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	rsf)
+                if [ -d $TMP_PATH/routersploit ]; then
+                        cd $TMP_PATH/routersploit
+                        exec python "$TMP_PATH/routersploit/$SCRIPT_NAME.py"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	saycheese)
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        exec bash "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.sh" "$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	seeker)
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+			ls
+                        exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" #"$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	shellphish)
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        exec bash "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.sh" #"$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	shellsploit)
+                if [ -d $TMP_PATH/$SCRIPT_NAME-framework ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME-framework
+                        exec python "$TMP_PATH/$SCRIPT_NAME-framework/$SCRIPT_NAME.py" #"$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	aio)
+                if [ -d $TMP_PATH/AIOChk ]; then
+                        cd $TMP_PATH/AIOChk
+                        exec php "$TMP_PATH/AIOChk/$SCRIPT_NAME.php" "$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	sqliv)
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	theharvester)
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	webhackshl)
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME" #"$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
                 ;;
 	*)
 		echo "$R\n[w] i-Haklab :$W Unknown argument '$SCRIPT_NAME'\n"
