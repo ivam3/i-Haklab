@@ -228,16 +228,7 @@ case "$SCRIPT_NAME" in
                 else
                         STDERR
                 fi
-                ;;
-	binwalk)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        #exec python "$TMP_PATH/$SCRIPT_NAME/setup.py" "$@"
-                        cd $BACK
-                else
-                        STDERR
-                fi
-                ;;
+		;;
 	fuzzdb)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/$SCRIPT_NAME
