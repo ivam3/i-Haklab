@@ -229,15 +229,6 @@ case "$SCRIPT_NAME" in
                         STDERR
                 fi
 		;;
-	fuzzdb)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        #exec ???? "$TMP_PATH/$SCRIPT_NAME/????" "$@"
-                        cd $BACK
-                else
-                        STDERR
-                fi
-                ;;
 	hakku)
                 if [ -d $TMP_PATH/hakkuframework ]; then
                         cd $TMP_PATH/hakkuframework
