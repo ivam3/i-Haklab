@@ -1,5 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/sh
-
+# Coded on Agust 2019 by Ivam3
+# This file bring a easy access to execute i-Haklab tools
+#
 SCRIPT_NAME=$(basename "$1")
 BEEF_PATH="/data/data/com.termux/files/usr/opt/beef"
 BACK=$(pwd)
@@ -21,6 +23,7 @@ STDERROOT() {
 	echo "$R\n[w] i-Haklab :$W Your device is not rooted$W\n"
 	exit
 }
+#
 # Fix ruby bigdecimal extensions linking error.
 case "$(uname -m)" in
 	aarch64)
@@ -260,7 +263,7 @@ case "$SCRIPT_NAME" in
                 else
                         STDERR
                 fi
-                ;;
+		;;
 	rsf)
                 if [ -d $TMP_PATH/routersploit ]; then
                         cd $TMP_PATH/routersploit
@@ -282,7 +285,6 @@ case "$SCRIPT_NAME" in
 	seeker)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/$SCRIPT_NAME
-			ls
                         exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" #"$@"
                         cd $BACK
                 else
