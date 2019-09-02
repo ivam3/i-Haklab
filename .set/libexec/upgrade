@@ -71,7 +71,9 @@ if [ "$NEWver" = "$OLDver" ]; then
 		chmod 711 $PREFIX/bin/run
 	fi
 #Functions
-	if [ ! -e $HOME/.config/fish/functions/unset.fish ]; then
+TARGET=$(ls $iHAKLAB/.set/to-install/functions)
+	for i in ${TARGET[*]}; do
+                if [ ! -e $i ]; then
 		exec $iHAKLAB/.set/to-install/functions
 	fi
 #Alias
