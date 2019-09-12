@@ -172,7 +172,7 @@ case "$SCRIPT_NAME" in
 	ipgeolocation)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/IPGeoLocation
-                        exec python "$TMP_PATH/IPGeoLocation/$SCRIPT_NAME.py" "$@"
+                        exec python "$TMP_PATH/IPGeoLocation/$SCRIPT_NAME.py" #"$@"
                         cd $BACK
                 else
                         STDERR
@@ -190,7 +190,7 @@ case "$SCRIPT_NAME" in
 	pybelt)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/Pybelt
-                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
+                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" #"$@"
                         cd $BACK
                 else
                         STDERR
@@ -199,7 +199,7 @@ case "$SCRIPT_NAME" in
 	rhawk)
                 if [ -d $TMP_PATH/RED_HAWK ]; then
                         cd $TMP_PATH/RED_HAWK
-                        exec php "$TMP_PATH/RED_HAWK//$SCRIPT_NAME.php" "$@"
+                        exec php "$TMP_PATH/RED_HAWK//$SCRIPT_NAME.php" #"$@"
                         cd $BACK
                 else
                         STDERR
