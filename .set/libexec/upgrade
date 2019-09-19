@@ -41,7 +41,6 @@ if [ -d $iHAKLAB ]; then
 #	rm -rf $iHAKLAB
 #	git clone https://github.com/ivam3/i-Haklab.git $iHAKLAB
 	chmod 711 -R $iHAKLAB
-#if [ "$NEWver" = "$OLDver" ]; then
 #Lock
 	if [ ! -e $PREFIX/bin/lock ]; then
 		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/lock -o $PREFIX/bin/lock
@@ -68,10 +67,6 @@ if [ -d $iHAKLAB ]; then
 #searchsploit
 	if [ ! -d $iHAKLAB/../exploitdb ]; then
 		printf "$Y[!]-> Exploitdb tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install exploitdb\n"
-	fi
-	if  [ -e $iHAKLAB/.set/libexec/upgrade ]; then
-		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/upgrade -o $PREFIX/libexec/upgrade-i-Haklab
-		printf "$Y\n[!]-> Argument upgrade fixed$W\n"
 	fi
 else
 	printf "$R\n[w]-> Not such i-Haklab directory$W\n$iHAKLAB\n$W"
