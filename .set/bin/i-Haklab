@@ -212,7 +212,7 @@ elif [ $1 = update ]; then
 elif [ $1 = upgrade ]; then
 	banner
 	cd $iHAKLAB;git pull > /dev/null
-	bash $iHAKLAB/.set/libexec/upgrade
+	bash $PREFIX/libexec/upgrade-i-Haklab
 elif [ $1 = version ]; then
 	banner
 	cat $iHAKLAB/README.md | grep -o v.*.*.9 | awk '{print $1}'
