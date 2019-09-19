@@ -5,7 +5,6 @@
 #Created on Jan/2019
 ####################
 
-
 IFS=$'\n\t'
 trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
@@ -13,7 +12,6 @@ ctrl_c() {
                 echo
                 printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
 }
-
 if [ -L ~/storage/external-1 ]; then
 	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 else
@@ -36,26 +34,12 @@ else
 	exit
 fi
 done
-
-Install() {
-	echo $(clear)
-	for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-		printf "$(clear) $C UPGRADING i-HAKLAB. . . .$i"
-		printf "\n\n"
-		sleep 1
-	done
-}
-Chao-chao() {
-	printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
-}
-
 OLDver=$(cat $iHAKLAB/.set/libexec/banner/i-Haklab | grep -o v.*.*.9 | awk '{print $1}')
 NEWver=$(cat $iHAKLAB/README.md | grep -o v.*.*.9 | awk '{print $1}')
 
-Install
 if [ -d $iHAKLAB ]; then
-	rm -rf $iHAKLAB
-	git clone https://github.com/ivam3/i-Haklab.git $iHAKLAB
+#	rm -rf $iHAKLAB
+#	git clone https://github.com/ivam3/i-Haklab.git $iHAKLAB
 	chmod 711 -R $iHAKLAB
 #if [ "$NEWver" = "$OLDver" ]; then
 #Lock
@@ -81,9 +65,6 @@ if [ -d $iHAKLAB ]; then
 		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/i-Haklab -o $PREFIX/bin/i-Haklab
 		printf "$Y\n[!]-> Command i-Haklab added$W\n"
 	fi
-#else
-#	printf "$R[w]-> ERROR :$W Join to https://t.me/Ivam3by_Cinderella"
-#	exit
 #searchsploit
 	if [ ! -d $iHAKLAB/../exploitdb ]; then
 		printf "$Y[!]-> Exploitdb tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install exploitdb\n"
@@ -92,7 +73,6 @@ if [ -d $iHAKLAB ]; then
 		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/upgrade -o $PREFIX/libexec/upgrade-i-Haklab
 		printf "$Y\n[!]-> Argument upgrade fixed$W\n"
 	fi
-#	printf "$Y\n\n[!]->$W i-Haklab is already the newest version ($NEWver).\n"
 else
 	printf "$R\n[w]-> Not such i-Haklab directory$W\n$iHAKLAB\n$W"
 	exit
