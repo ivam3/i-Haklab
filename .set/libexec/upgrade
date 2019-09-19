@@ -82,10 +82,8 @@ if [ -d $iHAKLAB ]; then
 	if [ ! -d $iHAKLAB/../exploitdb ]; then
 		printf "$Y[!]-> Exploitdb tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install exploitdb\n"
 	fi
-	if [ ! -e $PREFIX/libexec/upgrade-i-Haklab ]; then
-		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/upgrade -o $PREFIX/libexec/upgrade-i-Haklab
-	fi
-	printf "$Y[!]->$W i-Haklab is already the newest version ($NEWver).\n"
+	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/upgrade -o $PREFIX/libexec/upgrade-i-Haklab
+	printf "$Y\n\n[!]->$W i-Haklab is already the newest version ($NEWver).\n"
 else
 	printf "$R\n[w]-> Not such i-Haklab directory$W\n$iHAKLAB\n$W"
 	exit
