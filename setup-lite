@@ -118,6 +118,8 @@ bash $iHAKLAB/.set/to-install/metasploit
 bash $iHAKLAB/.set/to-install/embed+java
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/i-Haklab -o $PREFIX/bin/i-Haklab
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/lock -o $PREFIX/bin/lock
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/upgrade -o $PREFIX/libexec/upgrade-i-Haklab
+chmod +x $PREFIX/libexec/upgrade-i-Haklab
 chmod +x $PREFIX/bin/*
 pkg install fish -y
 curl -L http://get.oh-my.fish | fish

@@ -13,6 +13,7 @@ ctrl_c() {
                 echo
                 printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
 }
+
 if [ -L ~/storage/external-1 ]; then
 	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 else
@@ -35,6 +36,7 @@ else
 	exit
 fi
 done
+
 Install() {
 	echo $(clear)
 	for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
@@ -50,17 +52,12 @@ Chao-chao() {
 OLDver=$(cat $iHAKLAB/.set/libexec/banner/i-Haklab | grep -o v.*.*.9 | awk '{print $1}')
 NEWver=$(cat $iHAKLAB/README.md | grep -o v.*.*.9 | awk '{print $1}')
 
-rm -rf $iHAKLAB
-git clone https://github.com/ivam3/i-Haklab.git $iHAKLAB
-chmod 711 -R $iHAKLAB
-
-if [ "$NEWver" = "$OLDver" ]; then
-#
-#	if [ ]; then
-#		bash $iHAKLAB/.set/to-install/
-#		printf "$Y[!]->$W John The Ripper tool was added!!\n"
-#	fi
-
+Install
+if [ -d $iHAKLAB ]; then
+	rm -rf $iHAKLAB
+	git clone https://github.com/ivam3/i-Haklab.git $iHAKLAB
+	chmod 711 -R $iHAKLAB
+#if [ "$NEWver" = "$OLDver" ]; then
 #Lock
 	if [ ! -e $PREFIX/bin/lock ]; then
 		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/lock -o $PREFIX/bin/lock
@@ -71,30 +68,26 @@ if [ "$NEWver" = "$OLDver" ]; then
 		chmod 711 $PREFIX/bin/run
 	fi
 #Functions
-TARGET=$(ls $iHAKLAB/.set/to-install/functions)
+	TARGET=$(ls $iHAKLAB/.set/to-install/functions)
 	for i in ${TARGET[*]}; do
                 if [ ! -e $i ]; then
 		exec $iHAKLAB/.set/to-install/functions
-	fi
-#Alias
-#	if [ ! $(cat $PREFIX/etc/fish/config.fish | grep -oE alias) ]; then
-#		echo "source $PREFIX/var/alias" >> $PREFIX/etc/fish/config.fish
-#		printf "$Y[!]->$W command server and postgresql was added!!\n"
-#	fi
-#i-Haklab command
-	#UP=$(cat $PREFIX/bin/i-Haklab | grep -m 1 -oE "shodan")
-	if [ -e $iHAKLAB/.set/bin/i-Haklab ]; then
-		cat $iHAKLAB/.set/bin/i-Haklab > $PREFIX/bin/i-Haklab
-	else
-		printf "$R[w]-> ERROR :$W Join to https://t.me/Ivam3by_Cinderella"
-		exit
-	fi
+		fi
+	done
+	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/i-Haklab -o $PREFIX/bin/i-Haklab
+#else
+#	printf "$R[w]-> ERROR :$W Join to https://t.me/Ivam3by_Cinderella"
+#	exit
 #searchsploit
 	if [ ! -d $iHAKLAB/../exploitdb ]; then
 		printf "$Y[!]-> Exploitdb tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install exploitdb\n"
 	fi
-#else
+	if [ ! -e $PREFIX/libexec/upgrade-i-Haklab ]; then
+		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/upgrade -o $PREFIX/libexec/upgrade-i-Haklab
+	fi
 	printf "$Y[!]->$W i-Haklab is already the newest version ($NEWver).\n"
-#        Install
+else
+	printf "$R\n[w]-> Not such i-Haklab directory$W\n$iHAKLAB\n$W"
+	exit
 fi
 #			@Ivam3
