@@ -46,7 +46,7 @@ case "$SCRIPT_NAME" in
 	beef|beef-xss)
 		if [ -d $BEEF_PATH ]; then
 			cd $BEEF_PATH
-			exec ruby "$BEEF_PATH/$SCRIPT_NAME" "$@"
+			exec ruby "$BEEF_PATH/$SCRIPT_NAME" "$2" "$@"
 			cd $BACK
 		else
 			STDERR
@@ -64,7 +64,7 @@ case "$SCRIPT_NAME" in
 	androbugs)
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
 			cd $TMP_PATH/$SCRIPT_NAME
-			exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
+			exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$2" "$@"
 			cd $BACK
 		else
 			STDERR
@@ -127,7 +127,7 @@ case "$SCRIPT_NAME" in
 	fbbrute)
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/$SCRIPT_NAME
-                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
+                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py"
                         cd $BACK
                 else
                         STDERR
@@ -136,7 +136,7 @@ case "$SCRIPT_NAME" in
 	fbi)
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/$SCRIPT_NAME
-                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
+                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py"
                         cd $BACK
                 else
                         STDERR
@@ -145,7 +145,7 @@ case "$SCRIPT_NAME" in
 	phoneinfoga)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/PhoneInfoga
-                        exec python "$TMP_PATH/PhoneInfoga/$SCRIPT_NAME.py" "$@"
+                        exec python "$TMP_PATH/PhoneInfoga/$SCRIPT_NAME.py" "$2" "$@"
                         cd $BACK
                 else
 			STDERR
@@ -163,7 +163,7 @@ case "$SCRIPT_NAME" in
 	hunner)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/$SCRIPT_NAME
-                        exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
+                        exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py"
                         cd $BACK
                 else
                         STDERR
@@ -172,7 +172,7 @@ case "$SCRIPT_NAME" in
 	ipgeolocation)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/IPGeoLocation
-                        exec python "$TMP_PATH/IPGeoLocation/$SCRIPT_NAME.py" #"$@"
+                        exec python "$TMP_PATH/IPGeoLocation/$SCRIPT_NAME.py" "$2" "$@"
                         cd $BACK
                 else
                         STDERR
@@ -181,7 +181,7 @@ case "$SCRIPT_NAME" in
 	pasterm)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/PasTerm
-                        exec php "$TMP_PATH/PasTerm/$SCRIPT_NAME.php" "$@"
+                        exec php "$TMP_PATH/PasTerm/$SCRIPT_NAME.php"
                         cd $BACK
                 else
                         STDERR
@@ -208,7 +208,7 @@ case "$SCRIPT_NAME" in
 	dog)
                 if [ -d $TMP_PATH/recondog ]; then
                         cd $TMP_PATH/recondog
-                        exec python "$TMP_PATH/recondog/$SCRIPT_NAME" "$@"
+                        exec python "$TMP_PATH/recondog/$SCRIPT_NAME" "$2" "$@"
                         cd $BACK
                 else
                         STDERR
@@ -276,7 +276,7 @@ case "$SCRIPT_NAME" in
 	saycheese)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/$SCRIPT_NAME
-                        exec bash "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.sh" "$@"
+                        exec bash "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.sh"
                         cd $BACK
                 else
                         STDERR
@@ -312,7 +312,7 @@ case "$SCRIPT_NAME" in
 	aio)
                 if [ -d $TMP_PATH/AIOChk ]; then
                         cd $TMP_PATH/AIOChk
-                        exec php "$TMP_PATH/AIOChk/$SCRIPT_NAME.php" "$@"
+                        exec php "$TMP_PATH/AIOChk/$SCRIPT_NAME.php" #"$@"
                         cd $BACK
                 else
                         STDERR
@@ -321,7 +321,7 @@ case "$SCRIPT_NAME" in
 	sqliv)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/$SCRIPT_NAME
-                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
+                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$2" "$@"
                         cd $BACK
                 else
                         STDERR
@@ -330,7 +330,7 @@ case "$SCRIPT_NAME" in
 	theharvester)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/$SCRIPT_NAME
-                        exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
+                        exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$2" "$@"
                         cd $BACK
                 else
                         STDERR
