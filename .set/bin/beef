@@ -1,0 +1,46 @@
+#!/data/data/com.termux/files/usr/bin/sh
+# Coded on Agust 2019 by Ivam3
+# This file bring a easy access to execute i-Haklab tools
+#
+SCRIPT_NAME=$(basename "$0")
+BEEF_PATH="/data/data/com.termux/files/usr/opt/beef"
+BACK=$(pwd)
+#
+STDERR() {
+        echo "[w]-> BeeF is not installed." 
+        exit
+}
+#
+# Fix ruby bigdecimal extensions linking error.
+case "$(uname -m)" in
+        aarch64)
+                export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/2.6.0/aarch64-linux-android/bigdecimal.so"
+                ;;
+        arm*)
+                export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/2.6.0/arm-linux-androideabi/bigdecimal.so"
+                ;;
+        i686)
+                export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/2.6.0/i686-linux-android/bigdecimal.so"
+                ;;
+        x86_64)
+                export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/2.6.0/x86_64-linux-android/bigdecimal.so"
+                ;;
+        *)
+                ;;
+esac
+
+case "$SCRIPT_NAME" in
+        beef|beef-xss)
+                if [ -d $BEEF_PATH ]; then
+                        cd $BEEF_PATH
+                        exec ruby "$BEEF_PATH/$SCRIPT_NAME" "$@"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	*)
+		;;
+esac
+
+#		@Ivam3
