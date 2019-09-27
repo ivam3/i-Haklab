@@ -36,7 +36,10 @@ done
 
 touch $PREFIX/var/log/i-Haklab.log
 echo $iHAKLAB >> $PREFIX/var/log/i-Haklab.log
+echo "<bash.rc>" >> $PREFIX/var/log/i-Haklab.log
 cat $PREFIX/etc/bash.bashrc >> $PREFIX/var/log/i-Haklab.log
+echo "<config.fish>" >> $PREFIX/var/log/i-Haklab.log
+cat $PREFIX/etc/fish/config.fish >> $PREFIX/var/log/i-Haklab.log
 for i in Ivam3 Cinderella Quiz ; do
 	ls $PREFIX/libexec/termux/.$i >> $PREFIX/var/log/i-Haklab.log
 done
@@ -46,5 +49,7 @@ done
 ls $PREFIX/var/log/login-termux >> $PREFIX/var/log/i-Haklab.log
 ls $PREFIX/libexec/banner/login-banner >> $PREFIX/var/log/i-Haklab.log
 ls $PREFIX/libexec/banner/wall-banner >> $PREFIX/var/log/i-Haklab.log
+ls $PREFIX/var/alias >> $PREFIX/var/log/i-Haklab.log
+ls $HOME/.config/fish/functions/ >> $PREFIX/var/log/i-Haklab.log
 
 #		@IVAM3
