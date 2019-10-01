@@ -345,6 +345,15 @@ case "$SCRIPT_NAME" in
                         STDERR
                 fi
                 ;;
+	aquatone)
+		if [ -d $HOME/go/bin ]; then
+			cd $HOME/go/bin/
+			exec $HOME/go/bin/aquatone "$2" "$@"
+			cd $BACK
+		else
+			STDERR
+		fi
+		;;
 	*)
 		echo "$R\n[w] i-Haklab :$W Unknown argument '$SCRIPT_NAME'\n"
 		exit 1
