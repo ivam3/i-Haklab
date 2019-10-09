@@ -138,6 +138,7 @@ if [ -e ~/ivam3-Haklab ]; then
 fi
 if [ -d /data/data/com.termux/files/home/i-Haklab ] && [ -d /data/data/com.termux/files/home/storage/external-1/roothome/i-haklab ]; then
 	rm -rf /data/data/com.termux/files/home/i-Haklab
+fi
 bash $iHAKLAB/.set/libexec/review
 
 printf "$Y\n\n[!]->$G i-Haklab installed !!!$Y |$W Please restart Termux and enjoy it!!\n\n"
