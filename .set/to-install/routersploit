@@ -54,6 +54,7 @@ python3 -m pip install pycrypto
 python3 -m pip install cryptography
 printf "LDFLAGS="-L/system/lib/ -lm -lcompiler_rt""
 python3 -m pip install paramiko --global-option="build_ext" --global-option="--disable-jpeg"
+python3 -m pip install bcrypt --global-option="build_ext" --global-option="--disable-jpeg"
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"

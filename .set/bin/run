@@ -6,6 +6,9 @@ SCRIPT_NAME=$(basename "$1")
 BEEF_PATH="/data/data/com.termux/files/usr/opt/beef"
 BACK=$(pwd)
 
+if [ ! $(id -u) -ne 0 ]; then
+	HOME=$HOME/../
+fi
 if [ -d $HOME/i-Haklab ]; then
 	TMP_PATH="$HOME"
 elif [ -d $HOME/storage/external-1/roothome/i-Haklab ]; then
