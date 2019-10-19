@@ -8,6 +8,8 @@
 	189     ➤ TERMUX TIPS Cap.6
 	209	➤ TERMUX TIPS Cap.7
 	293	➤ TERMUX TIPS Cap.8
+	309     ➤ TERMUX TIPS Cap.9
+	342     ➤ TERMUX TIPS Cap.10
 	09 	➤ TERMUX: Aprendamos como ejecutar comandos
 	15 	➤ TERMUX: Combinación de comandos
 	17	➤ TERMUX: Instalando el comando Sudo
@@ -34,6 +36,8 @@
 	54	➤ NGROK : Instalacion
 	56	➤ PHISHING : WEEMAN (4ta parte) - Hacking Facebook outLAN
 	58	➤ PHISHING: Shellphish Framework - Hacking redes sociales
+	297	➤ SAYCHEESE : Hack webcam con un link (outlan)
+	349	➤ TERMUX VPN : Anonimisa tu ip en cada proceso hacking
 	62	➤ CRUNCH - Crear diccionearios para ataques de fuerza bruta
 	64	➤ FBBRUTE - Ataque de fuerza bruta a FACEBOOK
 	66	➤ FBI - Como sustraer información de un Facebook Hackeado
@@ -41,17 +45,19 @@
 	68	➤ ExiF - Extrayendo Meta Datos
 	134	➤ BETTERCAP - Instalación
 	161	➤ SQLMAP - Instalación
+	303	➤ BEEF - Instalación
+	312	➤ NIKTO - Instalación
 	98	➤ DNP Cap.1 Converter
 	118	➤ DNP Cap.2 FTP Crack
 	123	➤ DNP Cap.3 Droid Info
 	140	➤ DNP Cap.4 My web Site
 	148	➤ DNP Cap.5 Fastool
 	215	➤ DNP Cap.6 The black hack
+	268     ➤ TMUX-VIEWER - Conexion remota a Termux
 	231	➤ i-Haklab - Tips de uso 1ra parte
 	233	➤ i-Haklab - Tips de uso 2da parte
 	244	➤ i-Haklab - Tips de uso 3ra parte
-	264	➤ OFUSCODE - Oculta codigo bash script
-	268	➤ TMUX-VIEWER - Conexion remota a Termux
 	83	➤ CURSO DE PROGRAMACIÓN EN BASH 1ra Parte
 	85	➤ CURSO DE PROGRAMACIÓN EN BASH 2da Parte
 	87	➤ CURSO DE PROGRAMACIÓN EN BASH 3ra Parte
+	264     ➤ OFUSCODE - Oculta codigo bash script
