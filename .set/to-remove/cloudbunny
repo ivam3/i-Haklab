@@ -37,25 +37,20 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL ROUTERSPLOIT. . . .$i"
+        printf "$(clear) $C STARTING TO REMOVE CLOUDBUNNY. . . .$i"
         printf "\n\n"
         sleep 1
 done
-#INSTALLATION
-if [ -d $iHAKLAB/../routersploit ]; then
-        rm -rf $iHAKLAB/../routersploit
+#UNINSTALLATION
+if [ -d $iHAKLAB/../cloudbunny ]; then
+        rm -rf $iHAKLAB/../cloudbunny
+	for module in beautifulsoup4 configparser urlparse2 PrettyTable cfscrape argparse requests censys shodan ; do
+		python3 -m pip uninstall $module
+	done
+else
+	printf "$R[w]-> Not such directory cloudbunny $W\n"
+	exit
 fi
-git clone https://github.com/threat9/routersploit.git $iHAKLAB/../routersploit
-chmod 777 $iHAKLAB/../routersploit/rsf.py
-python3 -m pip install future
-python3 -m pip install requests
-python3 -m pip install pysnmp
-python3 -m pip install pycrypto
-python3 -m pip install cryptography
-printf "LDFLAGS="-L/system/lib/ -lm -lcompiler_rt""
-python3 -m pip install paramiko --global-option="build_ext" --global-option="--disable-jpeg"
-python3 -m pip install bcrypt --global-option="build_ext" --global-option="--disable-jpeg"
-python3 -m pip install pynacl --global-option="build_ext" --global-option="--disable-jpeg"
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
