@@ -19,6 +19,7 @@ apt update && apt upgrade
 apt install -y install -y fish root-repo util-linux coreutils vim python python2 ruby perl clang curl wget make openssl fish openssl-tool php zip unzip tar w3m neofetch dirmngr weechat irssi tor htop bison megatools findutils git apr apr-util openssh libtool pkg-config termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner libcaca cmatrix fortune figlet man termux-api hydra megatools axel fortune apksigner -y
 python -m pip install --upgrade pip
 python2 -m pip install --upgrade pip
+python -m pip install trufflehog
 #if [ -d /data/data/com.termux/files/home/storage ]; then
 #	rm -rf /data/data/com.termux/files/home/storage
 #fi
