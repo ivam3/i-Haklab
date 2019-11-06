@@ -65,9 +65,12 @@ if [ -d $iHAKLAB ]; then
 		printf "$Y\n[!]-> Command i-Haklab upgraded$W\n"
 	fi
 #searchsploit
-	if [ ! -d $iHAKLAB/../exploitdb ]; then
-		printf "$Y[!]-> Exploitdb tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install exploitdb\n"
-	fi
+	for tool in explloitdb cloudbunny kerbrute ; do
+		if [ ! -d $iHAKLAB/../exploitdb ]; then
+			printf "$Y[!]-> $tool tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install $tool\n"
+		fi
+		sleep 1
+	done
 else
 	printf "$R\n[w]-> Not such i-Haklab directory$W\n$iHAKLAB\n$W"
 	exit
