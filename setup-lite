@@ -110,7 +110,7 @@ fi
 
 SRCH=$(ls $iHAKLAB/.set/to-install/ | grep -iv .zip | grep -iv metasploit | grep -iv embed+java | grep -iv instasudo | grep -iv checkroot | grep -iv i-haklab_login | grep -iv login | grep -iv functions | grep -iv QG)
 
-for TOOL in DoS-A-Tool ExiF binchecker blackbox crunch php-server ssh-server sqlmap ; do
+for TOOL in DoS-A-Tool ExiF binchecker blackbox crunch php-server ssh-server sqlmap vpn youtube-dl evilurl ; do
         printf "$Y\n[!]->$G Installing $TOOL"
         bash $iHAKLAB/.set/to-install/$TOOL
 	printf "\n\n"
