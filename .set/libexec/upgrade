@@ -65,8 +65,8 @@ if [ -d $iHAKLAB ]; then
 		printf "$Y\n[!]-> Command i-Haklab upgraded$W\n"
 	fi
 #searchsploit
-	for tool in explloitdb cloudbunny kerbrute ; do
-		if [ ! -d $iHAKLAB/../exploitdb ]; then
+	for tool in explloitdb cloudbunny kerbrute GetNPUsers ; do
+		if [ ! -d $iHAKLAB/../$tool ]; then
 			printf "$Y[!]-> $tool tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install $tool\n"
 		fi
 		sleep 1

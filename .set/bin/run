@@ -357,6 +357,18 @@ case "$SCRIPT_NAME" in
 			STDERR
 		fi
 		;;
+	kerbrute)
+		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+			cd $TMP_PATH/$SCRIPT_NAME
+			exec python $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py "$2" "$@"
+			cd $BACK
+		else
+			STDERR
+		fi
+		;;
+	GetNPUsers)
+		exec python $PREFIX/bin/$SCRIPT_NAME "$2" "$@"
+		;;
 	*)
 		echo "$R\n[w] i-Haklab :$W Unknown argument '$SCRIPT_NAME'\n"
 		exit 1
