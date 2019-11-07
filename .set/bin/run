@@ -360,7 +360,7 @@ case "$SCRIPT_NAME" in
 	kerbrute)
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
 			cd $TMP_PATH/$SCRIPT_NAME
-			exec python $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py "$2" "$@"
+			exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py "$2" "$@"
 			cd $BACK
 		else
 			STDERR
