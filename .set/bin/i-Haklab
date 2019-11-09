@@ -148,10 +148,9 @@ elif [ $1 = show ] && [ $2 ]; then
 		if [ -d $iHAKLAB/QuickGuides ]; then
 			banner
 			ls $iHAKLAB/QuickGuides
-#			echo
-			printf "$G\n[?]-> Type QG name or press enter to exit"
-			while read -p ":─➤ " ANSW && [ -z $ANSW ]; do
-				printf "$R[w]->$W Unable to locate option $ANSW\n"
+			printf "$Y\n[?]->$W Type QG name or press$R enter$W to exit\n"
+			while read -p "[+]:─➤ " ANSW && [ -z $ANSW ]; do
+				exit
 			done
 			if [ -e $iHAKLAB/QuickGuides/$ANSW ]; then
 				exec bash $iHAKLAB/QuickGuides/$ANSW
