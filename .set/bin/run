@@ -121,7 +121,7 @@ case "$SCRIPT_NAME" in
 	exploitdb)
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/$SCRIPT_NAME
-                        exec bash "$TMP_PATH/$SCRIPT_NAME/searchsploit" "$@"
+                        exec bash "$TMP_PATH/$SCRIPT_NAME/searchsploit" "$2" "$@"
                         cd $BACK
                 else
                         STDERR
@@ -243,7 +243,7 @@ case "$SCRIPT_NAME" in
                 else
                         STDERR
                 fi
-                ;;
+		;;
 	nikto)
 		if [ $CHECKROOT = "root" ]; then
 			command -v sudo > /dev/null || bash $TMP_PATH/i-Haklab/.set/to-install/instasudo
@@ -330,6 +330,49 @@ case "$SCRIPT_NAME" in
                         STDERR
                 fi
                 ;;
+	binwalk)
+		if [ -e $PREFIX/bin/$SCRIPT_NAME ]; then
+			if [ $2 ]; then
+				exec python "$PREFIX/bin/$SCRIPT_NAME" "$2" "$@"
+			else
+				exec python "$PREFIX/bin/$SCRIPT_NAME" "-h"
+			fi
+
+		else
+			STDERR
+		fi
+		;;
+	bincheker)
+		if [ -e $PREFIX/bin/$SCRIPT_NAME ]; then
+			exec bash "$PREFIX/bin/$SCRIPT_NAME"
+		else
+			STDERR
+		fi
+		;;
+	blackbox)
+		if [ -e $PREFIX/bin/$SCRIPT_NAME ]; then
+			if [ $2 ]; then
+				exec python2 "$PREFIX/bin/$SCRIPT_NAME" "$2" "$@"
+			else
+				exec python2 "$PREFIX/bin/$SCRIPT_NAME" "-h"
+			fi
+
+		else
+			STDERR
+		fi
+		;;
+	dnsenum)
+		if [ $CHECKROOT = "root" ]; then
+			command -v sudo > /dev/null || bash $TMP_PATH/i-Haklab/.set/to-install/instasudo
+			if [ -e $PREFIX/bin/$SCRIPT_NAME ]; then
+				exec sudo perl "$PREFIX/bin/$SCRIPT_NAME" "$2" "$@"
+			else
+				STDERR
+			fi
+		else
+			STDERROOT
+		fi
+		;;
 	theharvester)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/$SCRIPT_NAME
