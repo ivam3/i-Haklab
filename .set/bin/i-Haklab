@@ -148,7 +148,16 @@ elif [ $1 = show ] && [ $2 ]; then
 		if [ -d $iHAKLAB/QuickGuides ]; then
 			banner
 			ls $iHAKLAB/QuickGuides
-			echo
+#			echo
+			printf "$G\n[?]-> Type QG name or press enter to exit"
+			while read -p ":─➤ " ANSW && [ -z $ANSW ]; do
+				printf "$R[w]->$W Unable to locate option $ANSW\n"
+			done
+			if [ -e $iHAKLAB/QuickGuides/$ANSW ]; then
+				exec bash $iHAKLAB/QuickGuides/$ANSW
+			else
+				printf "$R[w]->$W Unable to locate QG $ANSW\n"
+			fi
 		else
 			printf "$R[w]->$W Quick Guides was removed$R |$W please install it\n"
 		fi
