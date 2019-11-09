@@ -114,8 +114,7 @@ Arguments  |    options     |    Description
 |    ╰─────➤────────────────➤ example: i-Haklab bfftp users.txt passwords.txt 0.0.0.0
 ╰─serveo───➤────────────────➤ Start a SSH client to request TCP port forwarding from the server and proxy
 |    ╰─────➤────domain──────➤ Start a SSH client to request port forwarding with especific dns
-╰─evilurl──➤────────────────➤ Run EvilUrl to generate an unicode domain for homonymous IDN attacks
-|________________________________________________________________________________________________________\n\n"
+|__________________________________________________________________________________________\n\n"
 elif [ $1 = list ]; then
 	banner
 	printf "$TOOL"
@@ -567,9 +566,6 @@ elif [ $1 = bfftp ] && [ $2 ] && [ $3 ] && [ $4 ]; then
 		chk-hydra
                 hydra -L $2 -P $3 $4 ftp
         fi
-elif [ $1 = evilurl ]; then
-	WHEREAMI=$PWD
-	cd $iHAKLAB/../EvilURL;python evilurl.py;cd $WHEREAMI
 else
 	printf "$R[w]->$W Invalid argument $1 $R|$W Use help to main menu\n"
 fi
