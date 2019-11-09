@@ -165,12 +165,16 @@ case "$SCRIPT_NAME" in
                 ;;
 	cloudbunny)
 		if [ -d $TMP_PATH/CloudBunny ]; then
-			cd $TMP_PATH/CloudBunny
-			exec python2 "$TMP_PATH/CloudBunny/$SCRIPT_NAME.py" "$2" "$@"
-			cd $BACK
-		else
-			STDERR
-		fi
+			if [ $2 ]; then
+				cd $TMP_PATH/CloudBunny
+				exec python2 "$TMP_PATH/CloudBunny/$SCRIPT_NAME.py" "$2" "$@"
+				cd $BACK
+                        else
+                                exec python2 "$TMP_PATH/CloudBunny/$SCRIPT_NAME.py" "-h"
+                        fi
+                else
+                        STDERR
+                fi
 		;;
 	hunner)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
