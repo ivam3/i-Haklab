@@ -44,30 +44,30 @@ if [ -d $iHAKLAB ]; then
 #Lock
 	if [ ! -e $PREFIX/bin/lock ]; then
 		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/lock -o $PREFIX/bin/lock
-		printf "$Y\n[!]-> Command lock upgraded$W\n"
+		printf "$Y\n\n[!]-> Command lock upgraded$W\n"
 	fi
 #run
 	if [ -e $iHAKLAB/.set/bin/run ]; then
 		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/run -o $PREFIX/bin/run
 		chmod 711 $PREFIX/bin/run
-		printf "$Y\n[!]-> Command run upgraded$W\n"
+		printf "$Y\n\n[!]-> Command run upgraded$W\n"
 	fi
 #Functions
 	TARGET=$(ls $iHAKLAB/.set/to-install/functions)
 	for i in ${TARGET[*]}; do
                 if [ ! -e $i ]; then
 		exec $iHAKLAB/.set/to-install/functions
-		printf "$Y\n[!]-> Function $i added$W\n"
+		printf "$Y\n\n[!]-> Function $i added$W\n"
 		fi
 	done
 	if [ -e $iHAKLAB/.set/bin/i-Haklab ]; then
 		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/i-Haklab -o $PREFIX/bin/i-Haklab
-		printf "$Y\n[!]-> Command i-Haklab upgraded$W\n"
+		printf "$Y\n\n[!]-> Command i-Haklab upgraded$W\n"
 	fi
 #searchsploit
 	for tool in explloitdb cloudbunny aquatone kerbrute GetNPUsers ; do
 		if [ ! -d $iHAKLAB/../$tool ]; then
-			printf "$Y[!]-> $tool tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install $tool\n"
+			printf "$Y\n[!]-> $tool tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install $tool\n"
 		fi
 		sleep 1
 	done
