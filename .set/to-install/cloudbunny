@@ -47,9 +47,9 @@ if [ -d $iHAKLAB/../cloudbunny ]; then
 fi
 git clone https://github.com/Warflop/CloudBunny.git $iHAKLAB/../cloudbunny
 chmod 777 $iHAKLAB/../cloudbunny
-for module in beautifulsoup4 configparser urlparse2 PrettyTable cfscrape argparse requests censys shodan ; do
+for module in beautifulsoup4 certificates configparser urlparse2 PrettyTable cfscrape argparse requests censys shodan ; do
 	printf "LDFLAGS="-L/system/lib/ -lm -lcompiler_rt""
-	python3 -m pip install $module --global-option="build_ext" --global-option="--disable-jpeg"
+	python2 -m pip install $module --global-option="build_ext" --global-option="--disable-jpeg"
 done
 
 #ENDING SCRIPT
