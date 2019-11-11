@@ -46,6 +46,12 @@ fi
 if [ -e $PREFIX/bin/aquatone ]; then
 	rm $PREFIX/bin/aquatone
 fi
+if [ -d $iHAKLAB/../aquatone/ ]; then
+	rm $iHAKLAB/../aquatone/
+	gem uninstall aquatone
+else
+	printf "$R\n[w]-> i-Haklab :$W Aquatone is not installed\n"
+fi
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"

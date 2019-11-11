@@ -42,9 +42,15 @@ done
 apt update && apt upgrade -y
 apt install golang -y
 printf "$Y\n[!]-> i-Haklab : It could take a while . . .\n"
-go get github.com/michenriksen/aquatone
-chmod +x -R $HOME/go/
-ln -s /data/data/com.termux/files/home/go/bin/aquatone ln -s /data/data/com.termux/files/usr/bin/aquatone
+withGo() {
+	go get github.com/michenriksen/aquatone
+	chmod +x -R $HOME/go/
+	ln -s /data/data/com.termux/files/home/go/bin/aquatone ln -s /data/data/com.termux/files/usr/bin/aquatone
+}
+git clone https://github.com/michenriksen/aquatone.git $iHAKLAB/../aquatone
+chmod 711 -R $iHAKLAB/../aquatone/*
+pushd $iHAKLAB/../aquatone/
+gem install aquatone
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"

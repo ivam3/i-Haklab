@@ -118,6 +118,13 @@ case "$SCRIPT_NAME" in
                         STDERR
 		fi
 		;;
+	ExiF)
+		if [ -e $TMP_PATH/$SCRIPT_NAME ]; then
+			cd $TMP_PATH/$SCRIPT_NAME
+			exec bash $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME
+			cd $BACK
+		fi
+		;;
 	exploitdb)
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/$SCRIPT_NAME
@@ -325,7 +332,7 @@ case "$SCRIPT_NAME" in
                         STDERR
                 fi
                 ;;
-	aiochk)
+	aio)
                 if [ -d $TMP_PATH/AIOChk ]; then
                         cd $TMP_PATH/AIOChk
                         exec php "$TMP_PATH/AIOChk/$SCRIPT_NAME.php" #"$@"
