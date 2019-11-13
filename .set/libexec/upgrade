@@ -40,14 +40,14 @@ NEWver=$(cat $iHAKLAB/README.md | grep -o v.*.*.9 | awk '{print $1}')
 if [ -d $iHAKLAB ]; then
 	chmod 711 -R $iHAKLAB
 	for i in lock run i-Haklab ; do #Upgrading principal commands
-		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$i -o $PREFIX/bin/$i &
-		printf "$Y\n\n[!]-> Command $i upgraded$W\n"
+		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$i -o $PREFIX/bin/$i > /dev/null 2>&1
+		printf "$Y\n[!]-> Command $i upgraded$W\n"
 	done
 TARGET=$(ls $iHAKLAB/.set/to-install/functions)
 	for v in ${TARGET[*]}; do #Upgrading functions
                 if [ ! -e $v ]; then
-		exec $iHAKLAB/.set/to-install/functions
-		printf "$Y\n\n[!]-> Function $v added$W\n"
+		exec $iHAKLAB/.set/to-install/functions > /dev/null 2>&1
+		printf "$Y\n[!]-> Function $v added$W\n"
 		fi
 	done
 	for tool in exploitdb cloudbunny aquatone kerbrute GetNPUsers ; do #Upgrading tools
