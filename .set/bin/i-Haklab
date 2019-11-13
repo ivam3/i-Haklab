@@ -229,7 +229,7 @@ elif [ $1 = update ]; then
 elif [ $1 = upgrade ]; then
 	banner
 	cd $iHAKLAB;git pull > /dev/null
-	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/upgrade -o $PREFIX/tmp/upgrade
+	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/upgrade -o $PREFIX/tmp/upgrade > /dev/null 2>&1
 	chmod +x $PREFIX/tmp/upgrade
 	bash $PREFIX/tmp/upgrade
 	rm $PREFIX/tmp/upgrade

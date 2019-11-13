@@ -58,7 +58,7 @@ TARGET=$(ls $iHAKLAB/.set/to-install/functions)
 		fi
 		sleep 1
 	done
-	printf "$G\n[i]->$W Already up to date$G <-[i]$W\n"
+	printf "$G\n\t[i]->$W Already up to date$G <-[i]$W\n"
 else
 	printf "$R\n[w]-> Not such i-Haklab directory$W\n$iHAKLAB\n$W"
 	exit
