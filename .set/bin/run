@@ -172,8 +172,8 @@ case "$SCRIPT_NAME" in
                 ;;
 	cloudbunny)
 		if [ -d $TMP_PATH/CloudBunny ]; then
+			cd $TMP_PATH/CloudBunny
 			if [ $2 ]; then
-				cd $TMP_PATH/CloudBunny
 				exec python2 "$TMP_PATH/CloudBunny/$SCRIPT_NAME.py" "$2" "$@"
 				cd $BACK
                         else
@@ -230,9 +230,13 @@ case "$SCRIPT_NAME" in
                 ;;
 	dog)
                 if [ -d $TMP_PATH/recondog ]; then
-                        cd $TMP_PATH/recondog
-                        exec python "$TMP_PATH/recondog/$SCRIPT_NAME" "$2" "$@"
-                        cd $BACK
+			cd $TMP_PATH/recondog
+			if [ $2 ]; then
+				exec python "$TMP_PATH/recondog/$SCRIPT_NAME" "$2" "$@"
+			else
+				exec python "$TMP_PATH/recondog/$SCRIPT_NAME" "-h"
+			fi
+			cd $BACK
                 else
                         STDERR
                 fi

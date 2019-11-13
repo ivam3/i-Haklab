@@ -78,15 +78,18 @@ if [ -z $1 ] || [ $1 = help ]; then
 Arguments  |    Options     |    Description
 ╰─help─────➤────────────────➤ Show this help menu
 ╰─list─────➤────────────────➤ List all available tools/frameworks
-╰─show─────➤──tools/books───➤ Show tools details and books availables
+╰─show─────➤──tools/books───➤ Show details about specific tool and books availables to be downloaded
+    |		╰─────|─────➤ example : i-Haklab show bettercap
+    |		      ╰─────➤ example : i-Haklab show books
 |   ╰──────➤──tutorials/QG──➤ Show tutorials and Quick Guides availables
-╰─install──➤───tool/book────➤ Install tools or books
-╰─remove───➤─────tool───────➤ Remove tools
+╰─install──➤───tool─name────➤ Install tools or frameworks
+╰─remove───➤───tool─name────➤ Remove tools or frameworks
 ╰─weechat──➤────────────────➤ Connect with irc Ivam3byCinderella chat
 ╰─update───➤────────────────➤ Update i-Haklab
 ╰─upgrade──➤────────────────➤ upgrade i-Haklab by installing/upgrading tools
 ╰─version──➤────────────────➤ Show i-Haklab version installed
            |       |        |
+	   |       |        |
    [--] Automatitation Arguments [--]
 Arguments  |    options     |    Description
 ╰─handler──➤──file.rc name──➤ Start handler on msfconsole with previous setting
@@ -129,7 +132,20 @@ elif [ $1 = show ] && [ $2 ]; then
 	elif [ $2 = books ]; then #&& [ $3 = $BOOK ]; then
 		banner
 		cat $iHAKLAB/.set/libexec/Books/List | awk '{print $1,$2}'
-		echo
+		printf "$Y\n[?]->$W Type the book's number or press$R enter$W to exit\n"
+		while read -p "[+]:─➤ " ANSW && [ -z $ANSW ]; do
+			exit
+		done
+		if [ ! -z $ANSW ]; then
+			BOOK=$(cat -n $iHAKLAB/.set/libexec/Books/List | grep $ANSW | awk '{print $NF}')
+			if [ ! -z $BOOK ]; then
+				chk-mega
+				megadl https://mega.nz/$BOOK
+			else
+				printf "$R[w]->$W Unable to locate option $ANSW\n"
+				exit
+			fi
+		fi
 	elif [ $2 = tutorials ]; then
 		banner
 		cat $iHAKLAB/.set/libexec/Tutorials/List
@@ -168,16 +184,10 @@ elif [ $1 = install ] && [ -z $2 ]; then
 elif [ $1 = install ] && [ $2 ]; then
 	banner
 	TOOL=$(ls $iHAKLAB/.set/to-install/ | grep -iv .zip | grep $2)
-	if [ $2 = "books" ] && [ -z $3 ]; then
-		printf "$R[w]->$W Book option needs the book number\n"
-	elif [ $2 = "books" ] && [ ! -z $3 ]; then
-		BOOK=$(cat -n $iHAKLAB/.set/libexec/Books/List | grep $3 | awk '{print $NF}')
-		chk-mega
-		megadl https://mega.nz/$BOOK
-	elif [ "$TOOL" = $2 ]; then
+	if [ "$TOOL" = $2 ]; then
 		bash $iHAKLAB/.set/to-install/$TOOL
 	else
-		printf "$R[w]->$W Unable to locate tool or book $2\n"
+		printf "$R[w]->$W Unable to locate tool $2\n"
 		sleep 1
 		printf "$G[i]->$W Trying with apptitude repositories . . .\n"
 		sleep 1

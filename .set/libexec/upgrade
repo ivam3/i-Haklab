@@ -38,34 +38,19 @@ OLDver=$(cat $iHAKLAB/.set/libexec/banner/i-Haklab | grep -o v.*.*.9 | awk '{pri
 NEWver=$(cat $iHAKLAB/README.md | grep -o v.*.*.9 | awk '{print $1}')
 
 if [ -d $iHAKLAB ]; then
-#	rm -rf $iHAKLAB
-#	git clone https://github.com/ivam3/i-Haklab.git $iHAKLAB
 	chmod 711 -R $iHAKLAB
-#Lock
-	if [ ! -e $PREFIX/bin/lock ]; then
-		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/lock -o $PREFIX/bin/lock
-		printf "$Y\n\n[!]-> Command lock upgraded$W\n"
-	fi
-#run
-	if [ -e $iHAKLAB/.set/bin/run ]; then
-		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/run -o $PREFIX/bin/run
-		chmod 711 $PREFIX/bin/run
-		printf "$Y\n\n[!]-> Command run upgraded$W\n"
-	fi
-#Functions
-	TARGET=$(ls $iHAKLAB/.set/to-install/functions)
-	for i in ${TARGET[*]}; do
-                if [ ! -e $i ]; then
+	for i in lock run i-Haklab ; do #Upgrading principal commands
+		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$i -o $PREFIX/bin/$i &
+		printf "$Y\n\n[!]-> Command $i upgraded$W\n"
+	done
+TARGET=$(ls $iHAKLAB/.set/to-install/functions)
+	for v in ${TARGET[*]}; do #Upgrading functions
+                if [ ! -e $v ]; then
 		exec $iHAKLAB/.set/to-install/functions
-		printf "$Y\n\n[!]-> Function $i added$W\n"
+		printf "$Y\n\n[!]-> Function $v added$W\n"
 		fi
 	done
-	if [ -e $iHAKLAB/.set/bin/i-Haklab ]; then
-		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/i-Haklab -o $PREFIX/bin/i-Haklab
-		printf "$Y\n\n[!]-> Command i-Haklab upgraded$W\n"
-	fi
-#searchsploit
-	for tool in exploitdb cloudbunny aquatone kerbrute GetNPUsers ; do
+	for tool in exploitdb cloudbunny aquatone kerbrute GetNPUsers ; do #Upgrading tools
 		if [ ! -d $iHAKLAB/../$tool ]; then
 			printf "$Y\n[!]-> $tool tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install $tool\n"
 		fi
