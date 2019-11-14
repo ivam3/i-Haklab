@@ -58,6 +58,7 @@ command -v msfconsole > /dev/null || install
 if [ ! -e $HOME/.config/fish/functions/whatweb.fish ]; then
 	bash $iHAKLAB/.set/to-install/functions
 fi
+touch $PREFIX/etc/hosts
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3

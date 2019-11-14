@@ -123,6 +123,8 @@ case "$SCRIPT_NAME" in
 			cd $TMP_PATH/$SCRIPT_NAME
 			exec bash $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME
 			cd $BACK
+		else
+			STDERR
 		fi
 		;;
 	exploitdb)
@@ -195,7 +197,11 @@ case "$SCRIPT_NAME" in
 	ipgeolocation)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/IPGeoLocation
-                        exec python "$TMP_PATH/IPGeoLocation/$SCRIPT_NAME.py" "$2" "$@"
+			if [ ! -z $2 ]; then
+				exec python "$TMP_PATH/IPGeoLocation/$SCRIPT_NAME.py" "$2" "$@"
+			else
+				exec python "$TMP_PATH/IPGeoLocation/$SCRIPT_NAME.py" "-h"
+			fi
                         cd $BACK
                 else
                         STDERR
@@ -251,9 +257,13 @@ case "$SCRIPT_NAME" in
                 fi
                 ;;
 	whatweb)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        exec ruby "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME" "$@"
+                if [ -d $TMP_PATH/WhatWeb ]; then
+                        cd $TMP_PATH/WhatWeb
+			if [ ! -z $2 ];then
+				exec ruby "$TMP_PATH/WhatWeb/$SCRIPT_NAME" "$2" "$@" 
+			else
+				exec ruby "$TMP_PATH/WhatWeb/$SCRIPT_NAME" "-h"
+			fi
                         cd $BACK
                 else
                         STDERR
@@ -434,7 +444,11 @@ case "$SCRIPT_NAME" in
 		fi
 		;;
 	GetNPUsers)
-		exec python $PREFIX/bin/$SCRIPT_NAME "$2" "$@"
+		if [ -e $PREFIX/bin/$SCRIPT_NAME ]; then
+			exec python $PREFIX/bin/$SCRIPT_NAME "$2" "$@"
+		else
+			STDERR
+		fi
 		;;
 	*)
 		echo "$R\n[w] i-Haklab :$W Unknown argument '$SCRIPT_NAME'\n"
