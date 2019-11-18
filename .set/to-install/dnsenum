@@ -36,33 +36,28 @@ fi
 done
 
 echo $(clear)
-for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL DNSENUM. . . .$i"
-        printf "\n$W\n"
-        sleep 1
-done
+CHKROOT=$(bash $iHAKLAB/.set/to-install/check-root)
+if [ $CHKROOT = 'root' ]; then
+	for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
+		printf "$(clear) $C STARTING TO INSTALL DNSENUM. . . .$i"
+		printf "\n$W\n"
+		sleep 1
+	done
 #INSTALLATION
-if [ -d $PREFIX/bin/dnsenum ]; then
-        rm -rf $PREFIX/bin/dnsenum
-fi
-curl https://raw.githubusercontent.com/fwaeytens/dnsenum/master/dnsenum.pl -o /data/data/com.termux/files/usr/bin/dnsenum
-termux-fix-shebang /data/data/com.termux/files/usr/bin/dnsenum
-chmod +x /data/data/com.termux/files/usr/bin/dnsenum
-printf "$R\n[W]-> DNSENUM repositories need an password to download\n      type it to download or press enter to continue\n$G"
-read -p "                 PASSWORD : " pl
-if [ "$pl" = "download" ]; then
-	cpan -i WWW::Mechanize
-	cpan -i Net::IP
-	cpan -i Net::DNS
-	cpan -i Net::Netmask
-	cpan -i XML::Writer
-	cpan -i String::Random
-elif [ -z "$pl" ]; then
-	printf "$Y[!]-> Join to t.me/Ivam3_Bot to get your password\n"
-	sleep 3
+        command -v sudo > /dev/null || bash $TMP_PATH/i-Haklab/.set/to-install/instasudo
+        if [ -d $PREFIX/bin/dnsenum ]; then
+                sudo rm -rf $PREFIX/bin/dnsenum
+        fi
+        curl https://raw.githubusercontent.com/fwaeytens/dnsenum/master/dnsenum.pl -o /data/data/com.termux/files/usr/bin/dnsenum
+        termux-fix-shebang /data/data/com.termux/files/usr/bin/dnsenum
+        chmod +x /data/data/com.termux/files/usr/bin/dnsenum
+        for repo in WWW::Mechanize Net::IP Net::DNS Net::Netmask XML::Writer String::Random ; do
+		sudo cpan -i $repo
+        done
 else
-#ENDING SCRIPT
-	printf "$Y\n[!]-> ::::::::::::::: O-ops !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
-	sleep 3
+        printf "$R\n[W]:-> You need to be root to get Dnsenum tool$W\n"
+        sleep 1
 fi
+#ENDING SCRIPT
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3

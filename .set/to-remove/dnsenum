@@ -37,15 +37,21 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL DNSENUM. . . .$i"
+        printf "$(clear) $C STARTING TO REMOVE DNSENUM. . . .$i"
         printf "\n\n"
         sleep 1
 done
 #UNINSTALLATION
-if [ -d $PREFIX/bin/dnsenum ]; then
-        rm -rf $PREFIX/bin/dnsenum
+CHKROOT=$(bash $iHAKLAB/.set/to-install/check-root)
+if [ $CHKROOT = 'root' ]; then
+	command -v sudo > /dev/null || bash $TMP_PATH/i-Haklab/.set/to-install/instasudo
+	if [ -e $PREFIX/bin/dnsenum ]; then
+		sudo rm -rf $PREFIX/bin/dnsenum
+	else
+		printf "$R\n[w]-> DNSENUM is not installed"
+		exit
+	fi
 fi
-
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3
