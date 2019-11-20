@@ -5,9 +5,11 @@ trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
 
 function ctrl_c() {
-                echo
-                printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
-}
+                if [ -e $iHAKLAB/.set/libexec/banner/k-boom ]; then
+			bash $iHAKLAB/.set/libexec/banner/k-boom
+		fi
+		exit
+	}
 if [ ! -d ~/storage ]; then
         termux-setup-storage
 fi
