@@ -3,45 +3,46 @@
 IFS=$'\n\t'
 trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
-
 function ctrl_c() {
-                if [ -e $iHAKLAB/.set/libexec/banner/k-boom ]; then
-			bash $iHAKLAB/.set/libexec/banner/k-boom
-		fi
+                K-boom
 		exit
 	}
-if [ ! -d ~/storage ]; then
-        termux-setup-storage
-fi
-if [ -L ~/storage/external-1 ]; then
-	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
-else
-        iHAKLAB=/data/data/com.termux/files/home/i-Haklab
-fi
-
-until [ -d $iHAKLAB ]; do
-	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do you wanna install it?$W\n"
-	while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
-		continue
-	done
-if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
-	if [ ! $(id -u) -ne 0 ]; then
-		printf "$R\n[W]:-> You need to be a common user$W\n"
-		exit
-	else
-		git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
-		cd ~/i-Haklab;bash setup
-	fi
-else 
-	printf "$G[!]-> Have a nice hacking day!!\n"
-	exit
-fi
-done
 Banner() {
 	if [ -e $iHAKLAB/.set/libexec/banner/i-Haklab ]; then
 		bash $iHAKLAB/.set/libexec/banner/i-Haklab
 	fi
 }
+K-boom() {
+	if [ -e $iHAKLAB/.set/libexec/banner/k-boom ]; then
+		bash $iHAKLAB/.set/libexec/banner/k-boom
+	fi
+}
+if [ ! -d $HOME/storage ]; then
+        termux-setup-storage
+fi
+if [ -d /data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab ]; then
+	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+elif [ -d /data/data/com.termux/files/home/i-Haklab ]; then
+        iHAKLAB=/data/data/com.termux/files/home/i-Haklab
+else
+        printf "$R\n[W]:-> i-Haklab needed$W |$Y Do you wanna install it?$W\n"
+        while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
+                continue
+        done
+	if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
+		if [ ! $(id -u) -ne 0 ]; then
+			printf "$R\n[W]:-> You need to be a common user$W\n"
+			exit
+		else
+			git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
+			cd ~/i-Haklab;bash setup
+		fi
+	else
+		printf "$G[!]-> Have a nice hacking day!!\n"
+		exit
+	fi
+fi
+
 if [ ! -d $PREFIX/var/service/php ]; then
 	mkdir -p $PREFIX/var/service/php/
 fi
@@ -52,6 +53,7 @@ command -v php > /dev/null 2>&1 || pkg install php & > /dev/null 2>&1
 if [ ! $(id -u) -ne 0 ]; then
 	command -v sudo > /dev/null 2>&1 || bash $iHAKLAB/.set/to-install/instasudo > /dev/null 2>&1
 	sudo php -S $LOCALHOST:80 -t $DIR
+	K-boom
 else
 	php -S $LOCALHOST:4546 -t $DIR
 fi
