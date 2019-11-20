@@ -60,6 +60,7 @@ if [ -e $PREFIX/etc/fish/config.fish ]; then
 	echo "        /data/data/com.termux/files/usr/libexec/termux/command-not-found $argv[1]" >> $PREFIX/etc/fish/config.fish
 	echo "end" >> $PREFIX/etc/fish/config.fish
 	echo "set iHAKLAB /data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab" >> $PREFIX/etc/fish/config.fish
+	echo "set HOME /data/data/com.termux/files/home" >> $PREFIX/etc/fish/config.fish
 	echo "alias LOCALHOST=\"ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255\"" >> $PREFIX/etc/fish/config.fish
 	echo "alias postgresql=\"pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql\"" >> $PREFIX/etc/fish/config.fish
 	echo "" >> $PREFIX/etc/fish/config.fish
