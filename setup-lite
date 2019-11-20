@@ -83,12 +83,9 @@ USR=$(whoami)
         echo "export TERM=xterm-256color" >> /data/data/com.termux/files/home/.suroot/.bashrc
         echo "export LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib" >> /data/data/com.termux/files/home/.suroot/.bashrc
         echo "export PATH=/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:/system/xbin:/system/bin" >> /data/data/com.termux/files/home/.suroot/.bashrc
-        echo "HOME=/data/data/com.termux/files/home/storage/external-1/roothome" >> /data/data/com.termux/files/home/.suroot/.bashrc
+        echo "HOME=/data/data/com.termux/files/home" >> /data/data/com.termux/files/home/.suroot/.bashrc
 	echo "fish" >> /data/data/com.termux/files/home/.suroot/.bashrc
         echo "#          i-Haklab by @Ivam3" >> /data/data/com.termux/files/home/.suroot/.bashrc
-        echo "alias server-php=\"sudo php -S LOCALHOST:80 -t $PREFIX/var/service/php/\"" >> $PREFIX/etc/fish/config.fish
-else
-        echo "alias server-php=\"php -S LOCALHOST:4546 -t $PREFIX/var/service/php/\"" >> $PREFIX/etc/fish/config.fish
 fi
 if [ -L /data/data/com.termux/files/home/storage/external-1 ] && [ -z $PARTITION ]; then
         until [ -d /data/data/com.termux/files/home/storage/external-1/roothome ]; do

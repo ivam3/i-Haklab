@@ -62,7 +62,6 @@ if [ -e $PREFIX/etc/fish/config.fish ]; then
 	echo "set iHAKLAB /data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab" >> $PREFIX/etc/fish/config.fish
 	echo "alias LOCALHOST=\"ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255\"" >> $PREFIX/etc/fish/config.fish
 	echo "alias postgresql=\"pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql\"" >> $PREFIX/etc/fish/config.fish
-	echo "alias server-php=\"sudo php -S 192.168.1.71:80 -t /data/data/com.termux/files/usr/var/service/php/\"" >> $PREFIX/etc/fish/config.fish
 	echo "" >> $PREFIX/etc/fish/config.fish
 else
 	printf "$R\n[w]-> FATAL ERROR : interactive shell not installed$W\n"
@@ -71,7 +70,7 @@ if [ -d $iHAKLAB/../WhatWeb ]; then #Fix whatweb
 	wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/whatweb -O $PREFIX/bin/whatweb > /dev/null 2>&1
 fi
 
-for i in lock run i-Haklab ; do #Upgrading principal commands
+for i in lock run serverphp i-Haklab ; do #Upgrading principal commands
 	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$i -o $PREFIX/bin/$i > /dev/null 2>&1
 	printf "$Y\n[!]-> Command $i upgraded$W\n"
 	sleep 1

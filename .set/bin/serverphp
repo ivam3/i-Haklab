@@ -16,35 +16,41 @@ if [ -L ~/storage/external-1 ]; then
 else
         iHAKLAB=/data/data/com.termux/files/home/i-Haklab
 fi
-while [ ! $(id -u) -ne 0 ]; do
-	printf "$R\n[W]:-> You need to be a common user$W\n"
-	exit
-done
+
 until [ -d $iHAKLAB ]; do
 	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do you wanna install it?$W\n"
 	while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
 		continue
 	done
 if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
-	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
-        cd ~/i-Haklab;bash setup
+	if [ ! $(id -u) -ne 0 ]; then
+		printf "$R\n[W]:-> You need to be a common user$W\n"
+		exit
+	else
+		git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
+		cd ~/i-Haklab;bash setup
+	fi
 else 
 	printf "$G[!]-> Have a nice hacking day!!\n"
 	exit
 fi
 done
-
-echo $(clear)
-for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL PHP SERVER. . . .$i"
-        printf "\n\n"
-        sleep 1
-done
-#INSTALLATION
-apt update && apt upgrade
-apt install php
-mkdir -p $PREFIX/var/service/php/
-
-#ENDING SCRIPT
-printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
-#                                               @Ivam3
+Banner() {
+	if [ -e $iHAKLAB/.set/libexec/banner/i-Haklab ]; then
+		bash $iHAKLAB/.set/libexec/banner/i-Haklab
+	fi
+}
+if [ ! -d $PREFIX/var/service/php ]; then
+	mkdir -p $PREFIX/var/service/php/
+fi
+Banner
+DIR=$PREFIX/var/service/php/
+LOCALHOST=$(ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255)
+command -v php > /dev/null 2>&1 || pkg install php & > /dev/null 2>&1
+if [ ! $(id -u) -ne 0 ]; then
+	command -v sudo > /dev/null 2>&1 || bash $iHAKLAB/.set/to-install/instasudo > /dev/null 2>&1
+	sudo php -S $LOCALHOST:80 -t $DIR
+else
+	php -S $LOCALHOST:4546 -t $DIR
+fi
+#			@Ivam3
