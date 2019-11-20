@@ -37,30 +37,64 @@ done
 OLDver=$(cat $iHAKLAB/.set/libexec/banner/i-Haklab | grep -o v.*.*.9 | awk '{print $1}')
 NEWver=$(cat $iHAKLAB/README.md | grep -o v.*.*.9 | awk '{print $1}')
 
-if [ -d $iHAKLAB ]; then
-	chmod 711 -R $iHAKLAB
-	for i in lock run i-Haklab ; do #Upgrading principal commands
-		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$i -o $PREFIX/bin/$i > /dev/null 2>&1
-		printf "$Y\n[!]-> Command $i upgraded$W\n"
-		sleep 1
-	done
+#FIX SOME BUGS
+printf "$Y\n[!]-> Fixing some bugs$W\n"
+sleep 1
+if [ -e $PREFIX/etc/fish/config.fish ]; then
+	echo "# Put system-wide fish configuration entries here" > $PREFIX/etc/fish/config.fish
+	echo "# or in .fish files in conf.d/" >> $PREFIX/etc/fish/config.fish
+	echo "# Files in conf.d can be overridden by the user" >> $PREFIX/etc/fish/config.fish
+	echo "# by files with the same name in $XDG_CONFIG_HOME/fish/conf.d" >> $PREFIX/etc/fish/config.fish
+	echo "" >> $PREFIX/etc/fish/config.fish
+	echo "# This file is run by all fish instances." >> $PREFIX/etc/fish/config.fish
+	echo "# To include configuration only for login shells, use" >> $PREFIX/etc/fish/config.fish
+	echo "# if status --is-login" >> $PREFIX/etc/fish/config.fish
+	echo "#    ..." >> $PREFIX/etc/fish/config.fish
+	echo "# end" >> $PREFIX/etc/fish/config.fish
+	echo "# To include configuration only for interactive shells, use" >> $PREFIX/etc/fish/config.fish
+	echo "# if status --is-interactive" >> $PREFIX/etc/fish/config.fish
+	echo "#   ..." >> $PREFIX/etc/fish/config.fish
+	echo "# end" >> $PREFIX/etc/fish/config.fish
+	echo "" >> $PREFIX/etc/fish/config.fish
+	echo "function __fish_command_not_found_handler --on-event fish_command_not_found" >> $PREFIX/etc/fish/config.fish
+	echo "        /data/data/com.termux/files/usr/libexec/termux/command-not-found $argv[1]" >> $PREFIX/etc/fish/config.fish
+	echo "end" >> $PREFIX/etc/fish/config.fish
+	echo "set iHAKLAB /data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab" >> $PREFIX/etc/fish/config.fish
+	echo "alias LOCALHOST=\"ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255\"" >> $PREFIX/etc/fish/config.fish
+	echo "alias postgresql=\"pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql\"" >> $PREFIX/etc/fish/config.fish
+	echo "alias server-php=\"sudo php -S 192.168.1.71:80 -t /data/data/com.termux/files/usr/var/service/php/\"" >> $PREFIX/etc/fish/config.fish
+	echo "" >> $PREFIX/etc/fish/config.fish
+else
+	printf "$R\n[w]-> FATAL ERROR : interactive shell not installed$W\n"
+fi
+if [ -d $iHAKLAB/../WhatWeb ]; then #Fix whatweb
+	wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/whatweb -O $PREFIX/bin/whatweb > /dev/null 2>&1
+fi
+
+for i in lock run i-Haklab ; do #Upgrading principal commands
+	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$i -o $PREFIX/bin/$i > /dev/null 2>&1
+	printf "$Y\n[!]-> Command $i upgraded$W\n"
+	sleep 1
+done
+
 TARGET=$(ls $iHAKLAB/.set/to-install/functions)
-	for v in ${TARGET[*]}; do #Upgrading functions
-                if [ ! -e $v ]; then
+if [ -d $HOME/.config/fish/functions ]; then
+	rm $HOME/.config/fish/functions/* > /dev/null 2>&1
+fi
+for v in ${TARGET[*]}; do #Upgrading functions
+	if [ ! -e $v ]; then
 		exec $iHAKLAB/.set/to-install/functions > /dev/null 2>&1
 		printf "$Y\n[!]-> Function $v added$W\n"
 		sleep 1
-		fi
-	done
-	for tool in exploitdb cloudbunny aquatone kerbrute GetNPUsers ; do #Upgrading tools
-		if [ ! -d $iHAKLAB/../$tool ]; then
-			printf "$Y\n[!]-> $tool tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install $tool\n"
-		fi
-		sleep 1
-	done
-	printf "$G\n\t[i]->$W Already up to date$G <-[i]$W\n"
-else
-	printf "$R\n[w]-> Not such i-Haklab directory$W\n$iHAKLAB\n$W"
-	exit
-fi
+	fi
+done
+
+for tool in exploitdb cloudbunny aquatone kerbrute GetNPUsers ; do #Upgrading tools
+	if [ ! -d $iHAKLAB/../$tool ]; then
+		printf "$Y\n[!]-> $tool tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install $tool\n"
+	fi
+	sleep 1
+done
+printf "$G\n\t[i]->$W Already up to date$G <-[i]$W\n"
+
 #			@Ivam3

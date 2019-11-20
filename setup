@@ -28,7 +28,6 @@ if [ -e $PREFIX/libexec/colors ]; then
 fi
 #termux-setup-storage
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/colors -o $PREFIX/libexec/colors
-curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/var/alias -o $PREFIX/var/alias
 source $PREFIX/libexec/colors
 echo $(clear)
         printf "$C"
@@ -87,9 +86,9 @@ USR=$(whoami)
         echo "HOME=/data/data/com.termux/files/home/storage/external-1/roothome" >> /data/data/com.termux/files/home/.suroot/.bashrc
 	echo "fish" >> /data/data/com.termux/files/home/.suroot/.bashrc
         echo "#          i-Haklab by @Ivam3" >> /data/data/com.termux/files/home/.suroot/.bashrc
-        echo "alias server-php=\"sudo php -S LOCALHOST:80 -t $PREFIX/var/service/php/\"" >> $PREFIX/var/alias
+        echo "alias server-php=\"sudo php -S LOCALHOST:80 -t $PREFIX/var/service/php/\"" >> $PREFIX/etc/fish/config.fish
 else
-        sed -i "3a alias server-php=\"php -S LOCALHOST:4546 -t $PREFIX/var/service/php/\"" $PREFIX/var/alias
+        echo "alias server-php=\"php -S LOCALHOST:4546 -t $PREFIX/var/service/php/\"" >> $PREFIX/etc/fish/config.fish
 fi
 if [ -L /data/data/com.termux/files/home/storage/external-1 ] && [ -z $PARTITION ]; then
         until [ -d /data/data/com.termux/files/home/storage/external-1/roothome ]; do
@@ -124,16 +123,13 @@ chmod +x $PREFIX/bin/i-Haklab
 pkg install fish -y
 curl -L http://get.oh-my.fish | fish
 echo "alias postgresql=\"pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql\"" >> $PREFIX/etc/fish/config.fish
+echo "alias LOCALHOST=\"ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255\"" >> $PREFIX/etc/fish/config.fish
 sed "27d" ~/.config/fish/fish_variables > $PREFIX/tmp/fish_variables
 rm ~/.config/fish/fish_variables 
 mv $PREFIX/tmp/fish_variables ~/.config/fish/
 sed -i "18a set iHAKLAB $iHAKLAB" $PREFIX/etc/fish/config.fish
-echo "source $PREFIX/var/alias" >> $PREFIX/etc/fish/config.fish
 bash $iHAKLAB/.set/to-install/functions
 bash $iHAKLAB/.set/to-install/i-Haklab_login
-#for del in bin functions login-files sqliv var ; do
-#	rm -rf $iHAKLAB/.set/$del
-#done
 if [ -e ~/ivam3-Haklab ]; then
 	rm ~/ivam3-Haklab
 fi

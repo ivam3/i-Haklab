@@ -55,9 +55,8 @@ apt update && apt upgrade -y
 apt install ruby git
 git clone https://github.com/urbanadventurer/WhatWeb $iHAKLAB/../WhatWeb
 command -v msfconsole > /dev/null || install
-if [ ! -e $HOME/.config/fish/functions/whatweb.fish ]; then
-	bash $iHAKLAB/.set/to-install/functions
-fi
+wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/whatweb -O $PREFIX/bin/whatweb
+chmod 711 $PREFIX/bin/whatweb
 touch $PREFIX/etc/hosts
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"

@@ -322,7 +322,11 @@ case "$SCRIPT_NAME" in
 	seeker)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/$SCRIPT_NAME
-                        exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$2" "$@"
+			if [ $2 ]; then
+				exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$2" "$@"
+			else
+				exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "--help"
+			fi
                         cd $BACK
                 else
                         STDERR
@@ -371,7 +375,6 @@ case "$SCRIPT_NAME" in
 			else
 				exec python "$PREFIX/bin/$SCRIPT_NAME" "-h"
 			fi
-
 		else
 			STDERR
 		fi

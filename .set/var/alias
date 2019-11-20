@@ -1,5 +1,0 @@
-# This file export the variables for i-Haklab in termux.
-# you can add more as you can
-#
-alias postgresql="pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql"
-#			@Ivam3
