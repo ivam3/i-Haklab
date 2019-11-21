@@ -42,7 +42,10 @@ done
 apt install tor torsocks proxychains-ng
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/etc/tor/torrc -o $PREFIX/etc/tor/torrc
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/etc/proxychains.conf -o $PREFIX/etc/proxychains.conf
-
+for i in myip mypip swip ; do
+        curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$i -o $PREFIX/bin/$i > /dev/null 2>&1
+        chmod +x $PREFIX/bin/$i
+done
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"

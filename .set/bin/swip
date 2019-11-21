@@ -40,7 +40,7 @@ command -v w3m > /dev/null 2>&1 || pkg install w3m > /dev/null 2>&1
 command -v curl > /dev/null 2>&1 || pkg install curl > /dev/null 2>&1
 CHKTOR=$(curl --socks5-hostname localhost:9050 -s https://www.google.com > /dev/null; echo $?)
 if [[ "$CHKTOR" -gt 0 ]]; then
-	printf "$R[w]-> TOR connection is inactive$W\n"
+	printf "$R[w]-> TOR's connection is inactive$W\n"
 	exit
 else
 	killall -HUP tor
