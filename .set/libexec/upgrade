@@ -70,9 +70,10 @@ fi
 if [ -d $iHAKLAB/../WhatWeb ]; then #Fix whatweb
 	wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/whatweb -O $PREFIX/bin/whatweb > /dev/null 2>&1
 fi
-
-for i in lock run serverphp i-Haklab ; do #Upgrading principal commands
+BINDIR=$(ls $iHAKLAB/.set/bin) i #Upgrading executables
+for i in ${BINDIR[*]}; do
 	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$i -o $PREFIX/bin/$i > /dev/null 2>&1
+	chmod +x $PREFIX/bin/$i
 	printf "$Y\n[!]-> Command $i upgraded$W\n"
 	sleep 1
 done

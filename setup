@@ -114,9 +114,11 @@ for TOOL in $SRCH ; do
 done
 bash $iHAKLAB/.set/to-install/metasploit
 bash $iHAKLAB/.set/to-install/embed+java
-curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/i-Haklab -o $PREFIX/bin/i-Haklab
-curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/lock -o $PREFIX/bin/lock
-chmod +x $PREFIX/bin/i-Haklab
+TARGET=$(ls $iHAKLAB/.set/bin)
+for exe in ${TARGET[*]}; do
+	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$exe -o $PREFIX/bin/$exe
+	chmod +x $PREFIX/bin/$exe
+done
 pkg install fish -y
 curl -L http://get.oh-my.fish | fish
 echo "set HOME /data/data/com.termux/files/home" >> $PREFIX/etc/fish/config.fish

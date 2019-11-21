@@ -106,16 +106,18 @@ fi
 
 SRCH=$(ls $iHAKLAB/.set/to-install/ | grep -iv .zip | grep -iv metasploit | grep -iv embed+java | grep -iv instasudo | grep -iv checkroot | grep -iv i-haklab_login | grep -iv login | grep -iv functions | grep -iv QG)
 
-for TOOL in DoS-A-Tool ExiF binchecker blackbox crunch php-server ssh-server sqlmap vpn youtube-dl evilurl ; do
+for TOOL in DoS-A-Tool ExiF binchecker blackbox crunch sqlmap vpn youtube-dl evilurl ; do
         printf "$Y\n[!]->$G Installing $TOOL"
         bash $iHAKLAB/.set/to-install/$TOOL
 	printf "\n\n"
 done
 bash $iHAKLAB/.set/to-install/metasploit
 bash $iHAKLAB/.set/to-install/embed+java
-curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/i-Haklab -o $PREFIX/bin/i-Haklab
-curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/lock -o $PREFIX/bin/lock
-chmod +x $PREFIX/bin/*
+TARGET=$(ls $iHAKLAB/.set/bin)
+for exe in ${TARGET[*]}; do
+	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$exe -o $PREFIX/bin/$exe
+	chmod +x $PREFIX/bin/$exe
+done
 pkg install fish -y
 curl -L http://get.oh-my.fish | fish
 echo "set HOME /data/data/com.termux/files/home" >> $PREFIX/etc/fish/config.fish
