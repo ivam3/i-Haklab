@@ -50,10 +50,11 @@ if [ $CHKROOT = 'root' ]; then
         fi
         curl https://raw.githubusercontent.com/fwaeytens/dnsenum/master/dnsenum.pl -o /data/data/com.termux/files/usr/bin/dnsenum
         termux-fix-shebang /data/data/com.termux/files/usr/bin/dnsenum
-        chmod +x /data/data/com.termux/files/usr/bin/dnsenum
+        sudo chmod +x /data/data/com.termux/files/usr/bin/dnsenum
         for repo in WWW::Mechanize Net::IP Net::DNS Net::Netmask XML::Writer String::Random ; do
-		sudo cpan -i $repo
+		cpan -i $repo
         done
+	exec sudo dnsenum
 else
         printf "$R\n[W]:-> You need to be root to get Dnsenum tool$W\n"
         sleep 1
