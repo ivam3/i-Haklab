@@ -207,15 +207,6 @@ case "$SCRIPT_NAME" in
                         STDERR
                 fi
                 ;;
-	pasterm)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/PasTerm
-                        exec php "$TMP_PATH/PasTerm/$SCRIPT_NAME.php"
-                        cd $BACK
-                else
-                        STDERR
-                fi
-                ;;
 	pybelt)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/Pybelt
