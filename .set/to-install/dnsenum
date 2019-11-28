@@ -54,6 +54,10 @@ if [ $CHKROOT = 'root' ]; then
         for repo in WWW::Mechanize Net::IP Net::DNS Net::Netmask XML::Writer String::Random ; do
 		cpan -i $repo
         done
+	if [ ! -d $PREFIX/share/dnsenum/ ]; then
+		sudo mkdir -p $PREFIX/share/dnsenum
+	fi
+	curl https://raw.githubusercontent.com/fwaeytens/dnsenum/master/dns.txt -o $PREFIX/share/dnsenum/dns.txt
 	exec sudo dnsenum
 else
         printf "$R\n[W]:-> You need to be root to get Dnsenum tool$W\n"
