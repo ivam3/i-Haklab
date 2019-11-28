@@ -42,6 +42,7 @@ done
 apt update && apt upgrade -y
 apt install git curl python2 python tor ruby nmap -y
 git clone https://github.com/sechacklabs/webhackshl.git $iHAKLAB/../webhackshl
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/checker.py -o $iHAKLAB/../webhackshl/modules/checker.py
 python -m pip install fierce
 command -v dnsenum > /dev/null || bash $iHAKLAB/.set/to-install/dnsenum
 if [ ! -d ~/.dnsenum ]; then

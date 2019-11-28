@@ -175,8 +175,11 @@ case "$SCRIPT_NAME" in
 	cloudbunny)
 		if [ -d $TMP_PATH/CloudBunny ]; then
 			cd $TMP_PATH/CloudBunny
+			if [ -f $TMP_PATH/CloudBunny/api.conf.txt ]; then
+				mv $TMP_PATH/CloudBunny/api.conf.txt $TMP_PATH/CloudBunny/api.conf
+			fi
 			if [ $2 ]; then
-				exec python2 "$TMP_PATH/CloudBunny/$SCRIPT_NAME.py" "$2" "$@"
+				exec python2 "$TMP_PATH/CloudBunny/$SCRIPT_NAME.py" "$2" "$3" "$@"
 				cd $BACK
                         else
                                 exec python2 "$TMP_PATH/CloudBunny/$SCRIPT_NAME.py" "-h"
@@ -219,7 +222,7 @@ case "$SCRIPT_NAME" in
 	rhawk)
                 if [ -d $TMP_PATH/RED_HAWK ]; then
                         cd $TMP_PATH/RED_HAWK
-                        exec php "$TMP_PATH/RED_HAWK//$SCRIPT_NAME.php" #"$@"
+                        php "$TMP_PATH/RED_HAWK//$SCRIPT_NAME.php" #"$@"
                         cd $BACK
                 else
                         STDERR
