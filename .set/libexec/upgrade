@@ -94,7 +94,7 @@ for v in ${TARGET[*]}; do #Upgrading functions
 	fi
 done
 
-for tool in exploitdb cloudbunny aquatone kerbrute GetNPUsers ; do #Upgrading tools
+for tool in exploitdb cloudbunny aquatone kerbrute GetNPUsers a2sv ; do #Upgrading tools
 	if [ ! -d $iHAKLAB/../$tool ]; then
 		printf "$Y\n[!]-> $tool tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install $tool\n"
 	fi
