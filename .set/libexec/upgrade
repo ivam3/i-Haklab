@@ -73,6 +73,7 @@ fi
 
 #Adding bf wordlist
 command -v dnsenum > /dev/null 2>&1 || mkdir -p $PREFIX/share/dnsenum ; curl https://raw.githubusercontent.com/fwaeytens/dnsenum/master/dns.txt -o $PREFIX/share/dnsenum/dns.txt > /dev/null 2>&1
+command -v speedtest-cli > /dev/null 2>&1 || python -m pip install speedtest-cli /dev/null 2>&1
 
 BINDIR=$(ls $iHAKLAB/.set/bin) #Upgrading executables
 for i in ${BINDIR[*]}; do

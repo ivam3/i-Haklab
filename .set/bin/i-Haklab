@@ -86,7 +86,8 @@ Arguments  |    Options     |    Description
 ╰─remove───➤───tool─name────➤ Remove tools or frameworks
 ╰─weechat──➤────────────────➤ Connect with irc Ivam3byCinderella chat
 ╰─update───➤────────────────➤ Update i-Haklab
-╰─upgrade──➤────────────────➤ upgrade i-Haklab by installing/upgrading tools
+╰─upgrade──➤────────────────➤ Upgrade i-Haklab by installing/upgrading tools
+╰speedtest─➤────────────────➤ Run a speed test of your network
 ╰─version──➤────────────────➤ Show i-Haklab version installed
            |       |        |
 	   |       |        |
@@ -233,6 +234,11 @@ elif [ $1 = upgrade ]; then
 	chmod +x $PREFIX/tmp/upgrade
 	bash $PREFIX/tmp/upgrade
 	rm $PREFIX/tmp/upgrade
+elif [ $1 = speedtest ]; then
+	banner
+	printf "$Y[!]->$W Running speed test . . .$G\n"
+	speedtest-cli --simple
+	print "$W"
 elif [ $1 = version ]; then
 	banner
 	cat $iHAKLAB/README.md | grep -o v.*.*.9 | awk '{print $1}'

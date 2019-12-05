@@ -20,6 +20,7 @@ apt install -y fish root-repo util-linux coreutils vim python python2 ruby perl 
 python -m pip install --upgrade pip
 python2 -m pip install --upgrade pip
 python -m pip install trufflehog
+python -m pip install speedtest-cli
 #if [ -d /data/data/com.termux/files/home/storage ]; then
 #	rm -rf /data/data/com.termux/files/home/storage
 #fi
