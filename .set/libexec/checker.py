@@ -64,7 +64,7 @@ def checkarch():
 
 
 def checkali():
-    cCian("verificando si existen los repositorios de kali-rolling")
+    cCian("verificando si existen los repositorios de Termux")
     global kalic
     kalic=os.system("cat /data/data/com.termux/files/usr/etc/apt/sources.list | grep 'deb https://termux.net stable main'")
     if kalic == 0:
@@ -228,7 +228,7 @@ def check():
 
 def dtor():
     cVerde("Verificando que el servicio TOR esté activo...")
-    tor=os.system("netstat -ant | grep -oE 9050")
+    tor=os.system("netstat -ant | grep -oE 9050 > /dev/null")
     if tor == 0:
         cVerde("0K - TOR")
         pass
@@ -237,7 +237,7 @@ def dtor():
         resp = input("¿Deseas ininiciar el servicio ahora? y/n : ")
         if resp=="y":
             cAmarillo("Iniciando TOR...")
-            os.system("tor")
+            os.system("tor & > /dev/null")
             dtor()
         elif resp=="n":
             cRojo("Algunas opciones no funcionaran.")

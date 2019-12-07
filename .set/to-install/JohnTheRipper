@@ -51,6 +51,12 @@ fi
 apt update && apt upgrade
 apt install -y perl git
 git clone https://github.com/magnumripper/JohnTheRipper.git $iHAKLAB/../JohnTheRipper
+echo "#!/data/data/com.termux/files/usr/bin/bash" > $PREFIX/bin/john
+echo "" >> $PREFIX/bin/john
+echo 'printf "Command John will be available too soon"' >> $PREFIX/bin/john
+echo "" >> $PREFIX/bin/john
+echo "#\t\t @Ivam3" >> $PREFIX/bin/john
+chmod 711 $PREFIX/bin/john
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3
