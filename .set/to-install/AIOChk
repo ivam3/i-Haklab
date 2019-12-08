@@ -35,6 +35,10 @@ else
 fi
 done
 
+if [ -d $iHAKLAB/../AIOChk ]; then
+	printf "$R[w]->$W AIOChk exist, uninstall it if you wanna reinstall\n"
+	exit
+fi
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
         printf "$(clear) $C STARTING TO INSTALL SPOTICHK. . . .$i"

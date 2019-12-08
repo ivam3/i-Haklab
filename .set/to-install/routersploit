@@ -34,7 +34,10 @@ else
 	exit
 fi
 done
-
+if [ -d $iHAKLAB/../routersploit ]; then
+        printf "$R[w]->$W Routersploit exist, uninstall it if you wanna reinstall\n"
+        exit
+fi
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
         printf "$(clear) $C STARTING TO INSTALL ROUTERSPLOIT. . . .$i"
@@ -42,20 +45,35 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-if [ -d $iHAKLAB/../routersploit ]; then
-        rm -rf $iHAKLAB/../routersploit
-fi
+method1() {
+	printf "LDFLAGS=\"-L/system/lib/ -lm -lcompiler_rt\""
+	for module in paramiko bcrypt pynacl ; do
+		python3 -m pip install $module --global-option="build_ext" --global-option="--disable-jpeg"
+	done
+}
+method2() {
+	export SODIUM_INSTALL=system
+	for module in paramiko bcrypt pynacl ; do
+		python -m pip install --no-binary :all: $module
+	done
+}
 git clone https://github.com/threat9/routersploit.git $iHAKLAB/../routersploit
 chmod 777 $iHAKLAB/../routersploit/rsf.py
-python3 -m pip install future
-python3 -m pip install requests
-python3 -m pip install pysnmp
-python3 -m pip install pycrypto
-python3 -m pip install cryptography
-printf "LDFLAGS="-L/system/lib/ -lm -lcompiler_rt""
-python3 -m pip install paramiko --global-option="build_ext" --global-option="--disable-jpeg"
-python3 -m pip install bcrypt --global-option="build_ext" --global-option="--disable-jpeg"
-python3 -m pip install pynacl --global-option="build_ext" --global-option="--disable-jpeg"
+for module in future requests pysnmp pycrypto cryptography ; do
+	python3 -m pip install $module
+done
+printf "$Y[!]->$W There are 2 methods to install some python modules : choose one\n"
+while read -p "[1/2]:-> " ANSW && [ -z $ANSW ]; do
+	continue
+done
+if [ $ANSW = '1' ]; then
+	method1
+elif [ $ANSW = '2' ]; then
+	method2
+else
+	printf "$R[w]->$W method $ANSW doesn't exist\n"
+	exit
+fi
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
