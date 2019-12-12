@@ -89,7 +89,7 @@ if [ -d $HOME/.config/fish/functions ]; then
 else
 	mkdir -p $HOME/.config/fish/functions > /dev/null 2>&1
 fi
-exec $iHAKLAB/.set/to-install/functions > /dev/null 2>&1
+bash $iHAKLAB/.set/to-install/functions > /dev/null 2>&1
 for v in ${FNC[*]}; do
 	printf "$Y\n[!]-> Function $v added$W\n"
 	sleep 1

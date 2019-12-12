@@ -448,10 +448,10 @@ case "$SCRIPT_NAME" in
 		fi
 		;;
 	cryptovenom)
-		if [ -e $iHAKLAB/../$SCRIPT_NAME/$SCRIPT_NAME.py ]; then
-			exec python2 $iHAKLAB/../$SCRIPT_NAME/$SCRIPT_NAME.py
+		if [ -e $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py ]; then
+			exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py
 		else
-			ETDERR
+			STDERR
 		fi
 		;;
 	*)
