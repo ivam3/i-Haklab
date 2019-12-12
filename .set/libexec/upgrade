@@ -83,19 +83,27 @@ for i in ${BINDIR[*]}; do
 	sleep 1
 done
 
-TARGET=$(ls $iHAKLAB/.set/to-install/functions)
+FNC=$(ls $iHAKLAB/.set/functions) #Upgrading functions
 if [ -d $HOME/.config/fish/functions ]; then
 	rm $HOME/.config/fish/functions/* > /dev/null 2>&1
+else
+	mkdir -p $HOME/.config/fish/functions > /dev/null 2>&1
 fi
-for v in ${TARGET[*]}; do #Upgrading functions
-	if [ ! -e $v ]; then
-		exec $iHAKLAB/.set/to-install/functions > /dev/null 2>&1
-		printf "$Y\n[!]-> Function $v added$W\n"
+exec $iHAKLAB/.set/to-install/functions > /dev/null 2>&1
+for v in ${FNC[*]}; do
+	printf "$Y\n[!]-> Function $v added$W\n"
+	sleep 1
+done
+
+README=$(ls $iHAKLAB/.set/libexec/Readme)
+for a in ${README[*]}; do #Upgrading readme
+	if [ ! -e $iHAKLAB/.set/libexec/Readme/$a ]; then
+		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/Readme/$a -o $iHAKLAB/.set/libexec/Readme/$a > /dev/null 2>&1
+		printf "$Y\n[!]-> Information of Tool $a added$W\n"
 		sleep 1
 	fi
 done
-
-for tool in exploitdb cloudbunny aquatone kerbrute GetNPUsers a2sv ; do #Upgrading tools
+for tool in exploitdb cloudbunny aquatone kerbrute GetNPUsers a2sv cryptovenom ; do #Upgrading tools
 	if [ ! -d $iHAKLAB/../$tool ]; then
 		printf "$Y\n[!]-> $tool tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install $tool\n"
 	fi

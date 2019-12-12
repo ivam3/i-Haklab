@@ -447,6 +447,13 @@ case "$SCRIPT_NAME" in
 			STDERR
 		fi
 		;;
+	cryptovenom)
+		if [ -e $iHAKLAB/../$SCRIPT_NAME/$SCRIPT_NAME.py ]; then
+			exec python2 $iHAKLAB/../$SCRIPT_NAME/$SCRIPT_NAME.py
+		else
+			ETDERR
+		fi
+		;;
 	*)
 		echo "$R\n[w] i-Haklab :$W Unknown argument '$SCRIPT_NAME'\n"
 		exit 1
