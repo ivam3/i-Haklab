@@ -88,6 +88,7 @@ Arguments  |    Options     |    Description
 ╰─update───➤────────────────➤ Update i-Haklab
 ╰─upgrade──➤────────────────➤ Upgrade i-Haklab by installing/upgrading tools
 ╰speedtest─➤────────────────➤ Run a speed test of your network
+╰─restore──➤────────────────➤ Reinstall the main directory to fix some bugs
 ╰─version──➤────────────────➤ Show i-Haklab version installed
            |       |        |
 	   |       |        |
@@ -241,6 +242,22 @@ elif [ $1 = speedtest ]; then
 	printf "$Y[!]->$W Running speed test . . .$G\n"
 	speedtest-cli --simple
 	printf "$W"
+elif [ $1 = restore ]; then
+	if [ -d $iHAKLAB ]; then
+		banner
+		printf "$Y[!]->$W Restoring . .\n"
+		rm -rf $iHAKLAB > /dev/null 2>&1
+		while [ ! -d $iHAKLAB ]; do
+			git clone https://github.com/Ivam3/i-Haklab.git $iHAKLAB > /dev/null 2>&1
+		done
+		if [ -d $iHAKLAB ]; then
+			printf "$G[*]->$W DONE!!\n"
+		else
+			ctrl_c
+		fi
+	else
+		printf "$R[w]->$W The main directory not found.\n"
+	fi
 elif [ $1 = version ]; then
 	banner
 	cat $iHAKLAB/README.md | grep -o v.*.*.9 | awk '{print $1}'
