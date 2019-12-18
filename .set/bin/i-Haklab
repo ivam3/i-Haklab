@@ -74,7 +74,7 @@ else
 fi
 if [ -z $1 ] || [ $1 = help ]; then
 	banner
-	printf "$Y\n[i]->$W i-Haklab v.1.0 (c) 2019 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. Please do not use in military or secret service organizations, or for illegal purposes.\n\nSyntax: i-Haklab [-arg-] [-option-]\n
+	printf "$Y\n[i]->$W i-Haklab v.1.0 (c) 2019 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. If the law is violated with it's use, this would be the responsibility of the user who handled it.\n\nSyntax: i-Haklab [-arg-] [-option-]\n
 Arguments  |    Options     |    Description
 ╰─help─────➤────────────────➤ Show this help menu
 ╰─list─────➤────────────────➤ List all available tools/frameworks
