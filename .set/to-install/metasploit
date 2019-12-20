@@ -3,7 +3,7 @@
 IFS=$'\n\t'
 trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
-SOversion=$(termux-info | grep -oE '([5-9]{1}\.)([0-9]{1}\.)([0-9]{1})')
+SOversion=$(termux-info | grep -oE '([5-9]{1}\.)([0-9]{1}\.)([0-9]{1})' | awk -F "." '{print $1}')
 msfversion="5.0.56"
 TMP_DIR=$PREFIX/opt/metasploit-framework
 APK=$TMP_DIR/lib/msf/core/payload/apk.rb
