@@ -3,7 +3,8 @@
 IFS=$'\n\t'
 trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
-version="5.0.8"
+SOversion=$(termux-info | grep -oE '([5-9]{1}\.)([0-9]{1}\.)([0-9]{1})')
+msfversion="5.0.56"
 TMP_DIR=$PREFIX/opt/metasploit-framework
 APK=$TMP_DIR/lib/msf/core/payload/apk.rb
 function ctrl_c() {
@@ -72,21 +73,39 @@ pkg uninstall unstable-repo -y
 apt autoremove -y
 }
 Termux() {
+	command -v termux-info > /dev/null 2>&1 || pkg install termux-api termux-tools -y > /dev/null 2>&1
+	if [ $SOversion => '7' ]; then
+		Newest
+	else
+		Legacy
+	fi
+}
+Newest() {
 	apt update -y && pkg upgrade -y
-	apt install -y util-linux autoconf util-linux bison clang coreutils axel curl findutils git apr apr-util libffi-dev libgmp-dev libpcap-dev postgresql-dev readline-dev libsqlite-dev openssl-dev libtool libxml2-dev libxslt-dev ncurses-dev pkg-config wget make ruby ruby-dev libgrpc-dev termux-tools ncurses-utils ncurses unzip postgresql termux-elf-cleaner -y
+	apt install -y util-linux autoconf util-linux bison clang coreutils axel curl findutils git apr apr-util libtool pkg-config wget make ruby termux-tools ncurses-utils ncurses unzip postgresql termux-elf-cleaner -y
 	pkg install unstable-repo -y
 	pkg install metasploit -y
 }
+Legacy() {
+	pkg upgrade -y
+	pkg install ruby -y
+	gem install bundler:1.17.3
+	curl -LO https://github.com/termux/termux-packages/files/3960686/metasploit_5.0.56_android5_all.deb.gz
+	gunzip metasploit_5.0.56_android5_all.deb.gz
+	dpkg -i metasploit_5.0.56_android5_all.deb
+	apt -f install -y
+}
+
 Rapid7() {
 #INSTALLING DEPENDENCIES
 apt update
-apt install -y autoconf bison libpcap-dev clang coreutils curl findutils git apr apr-util libffi-dev libgmp-dev libpcap-dev postgresql-dev readline-dev libsqlite-dev openssl-dev libtool libxml2-dev libxslt-dev ncurses-dev pkg-config wget make ruby-dev libgrpc-dev termux-tools ncurses-utils ncurses unzip zip tar postgresql termux-elf-cleaner
+apt install -y autoconf bison clang coreutils curl findutils git apr apr-util libtool pkg-config wget make termux-tools ncurses-utils ncurses unzip zip tar postgresql termux-elf-cleaner
 
 #DOWNLOAD METASPLOIT
 cd $PREFIX/opt
-curl -LO https://github.com/rapid7/metasploit-framework/archive/$version.tar.gz
-tar -xf $PREFIX/opt/$version.tar.gz
-mv $PREFIX/opt/metasploit-framework-$version $PREFIX/opt/metasploit-framework
+curl -LO https://github.com/rapid7/metasploit-framework/archive/$msfversion.tar.gz
+tar -xf $PREFIX/opt/$msfversion.tar.gz
+mv $PREFIX/opt/metasploit-framework-$msfversion $PREFIX/opt/metasploit-framework
 cd $PREFIX/opt/metasploit-framework
 
 #INSTALLING RUBY GEMS
@@ -118,7 +137,7 @@ createuser msf
 createdb msf_database
 
 #FIXED COMMANDS
-rm $PREFIX/opt/$version.tar.gz
+rm $PREFIX/opt/$msfversion.tar.gz
 cd ${PREFIX}/bin && curl -LO https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/mediafire/metasploit/msfconsole && chmod +x msfconsole
 ln -sf $(which msfconsole) $PREFIX/bin/msfvenom
 echo "#!/data/data/com.termux/files/usr/bin/bash" > $PREFIX/opt/metasploit-framework/installer.sh
