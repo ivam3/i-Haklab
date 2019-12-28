@@ -84,7 +84,7 @@ for i in ${BINDIR[*]}; do
 done
 
 if [ -d $iHAKLAB/../saycheese ]; then
-	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/saycheese.sh -o $iHAKLAB/../saycheese/saycheese.sh
+	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/saycheese.sh -o $iHAKLAB/../saycheese/saycheese.sh > /dev/null 2>&1
 	printf "$Y\n[!]-> Saycheese modificated$W\n"
 	sleep 1
 fi
