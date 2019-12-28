@@ -40,8 +40,8 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
 done
 #INSTALLATION
 git clone https://github.com/thelinuxchoice/saycheese $iHAKLAB/../saycheese
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/saycheese.sh -o $iHAKLAB/../saycheese/saycheese.sh
 chmod +x $iHAKLAB/../saycheese/*
-
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
 #                                               @Ivam3

@@ -83,6 +83,12 @@ for i in ${BINDIR[*]}; do
 	sleep 1
 done
 
+if [ -d $iHAKLAB/../saycheese ]; then
+	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/saycheese.sh -o $iHAKLAB/../saycheese/saycheese.sh
+	printf "$Y\n[!]-> Saycheese modificated$W\n"
+	sleep 1
+fi
+
 FNC=$(ls $iHAKLAB/.set/functions) #Upgrading functions
 if [ -d $HOME/.config/fish/functions ]; then
 	rm $HOME/.config/fish/functions/* > /dev/null 2>&1

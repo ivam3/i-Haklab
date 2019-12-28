@@ -42,8 +42,8 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-apt update -y /dev/null 2>&1
-apt upgrade -y /dev/null 2>&1
+apt update -y > /dev/null 2>&1
+apt upgrade -y > /dev/null 2>&1
 for i in openssh tmate ; do
 	pkg install $i -y > /dev/null 2>&1
 done
