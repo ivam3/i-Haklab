@@ -45,6 +45,11 @@ case "$(uname -m)" in
 		;;
 esac
 
+if [ -z $SCRIPT_NAME ]; then
+	echo "$Y\n[!] Syntax :$W run [-name-of-tool-]\n"
+	exit
+fi
+
 case "$SCRIPT_NAME" in
 	beef|beef-xss)
 		if [ -d $BEEF_PATH ]; then
@@ -450,6 +455,15 @@ case "$SCRIPT_NAME" in
 	cryptovenom)
 		if [ -e $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py ]; then
 			exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py
+		else
+			STDERR
+		fi
+		;;
+	a2sv)
+		if [ -e $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py ]; then
+			cd $TMP_PATH/$SCRIPT_NAME
+			exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py "$2" "$@"
+			cd $BACK
 		else
 			STDERR
 		fi

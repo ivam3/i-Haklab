@@ -483,7 +483,10 @@ elif [ $1 = serveo ] && [ -z $2 ]; then
 	fi
 	banner
 	chk-ssh
-	ssh -R 48263:$LOCALHOST:$LPORT serveo.net
+	printf "$Y\n[!]-> serveo is inactive...$G running localhost.run$W\n"
+	sleep 3
+	ssh -R 80:$LOCALHOST:$LPORT localhost.run
+#	ssh -R 48263:$LOCALHOST:$LPORT serveo.net
 elif [ $1 = serveo ] && [ $2 ]; then
 	LINK=$2
 	if [ $SSH = "1" ]; then 
@@ -491,7 +494,8 @@ elif [ $1 = serveo ] && [ $2 ]; then
 	fi
 	banner
 	chk-ssh
-	ssh -R $LINK:80:$LOCALHOST:$LPORT serveo.net
+	printf "$Y\n[!]-> serveo is temporal inactive...$W\n"
+#	ssh -R $LINK:80:$LOCALHOST:$LPORT serveo.net
 elif [ $1 = handler ] && [ -z $2 ]; then
 	banner
 	printf "$R[w]->$W handler argument need an option$R |$W use one of those:\n"
