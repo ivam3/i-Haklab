@@ -117,8 +117,8 @@ Arguments  |    options     |    Description
 |   ╰──────➤──hotmail/live──➤ example: i-Haklab bfgmail victim@live.com passwords.txt
 ╰──bfftp───➤─user─passwd─ip─➤ Start a brute force attack with hydra at ftp server
 |    ╰─────➤────────────────➤ example: i-Haklab bfftp users.txt passwords.txt 0.0.0.0
-╰─serveo───➤────────────────➤ Start a SSH client to request TCP port forwarding from the server and proxy
-|    ╰─────➤────domain──────➤ Start a SSH client to request port forwarding with especific dns
+╰forwarding➤────────────────➤ Start a SSH client to request TCP port forwarding from server and proxy
+|    ╰─────➤─────domain─────➤ Start a SSH client to request port forwarding with especific dns | example: i-Haklab forwarding mydomain
 |__________________________________________________________________________________________\n\n"
 elif [ $1 = list ]; then
 	banner
@@ -477,7 +477,7 @@ clean() {
 		php -S $LOCALHOST:$LPORT -t $SERVERPATH > /dev/null
 	fi
 	clean
-elif [ $1 = serveo ] && [ -z $2 ]; then
+elif [ $1 = forwarding ] && [ -z $2 ]; then
 	if [ $SSH = "1" ]; then 
 		killall -2 ssh > /dev/null
 	fi
@@ -487,7 +487,7 @@ elif [ $1 = serveo ] && [ -z $2 ]; then
 	sleep 3
 	ssh -R 80:$LOCALHOST:$LPORT localhost.run
 #	ssh -R 48263:$LOCALHOST:$LPORT serveo.net
-elif [ $1 = serveo ] && [ $2 ]; then
+elif [ $1 = forwarding ] && [ $2 ]; then
 	LINK=$2
 	if [ $SSH = "1" ]; then 
 		killall -2 ssh > /dev/null 
