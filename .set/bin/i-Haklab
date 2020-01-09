@@ -88,7 +88,8 @@ Arguments  |    Options     |    Description
 ╰─update───➤────────────────➤ Update i-Haklab
 ╰─upgrade──➤────────────────➤ Upgrade i-Haklab by installing/upgrading tools
 ╰speedtest─➤────────────────➤ Run a speed test of your network
-╰─restore──➤────────────────➤ Reinstall the main directory to fix some bugs
+╰─restore──➤────────────────➤ Restore the main directory to fix some bugs
+╰reinstall─➤────────────────➤ Reinstall i-Haklab to factory configurations
 ╰─version──➤────────────────➤ Show i-Haklab version installed
            |       |        |
 	   |       |        |
@@ -257,6 +258,14 @@ elif [ $1 = restore ]; then
 		fi
 	else
 		printf "$R[w]->$W The main directory not found.\n"
+	fi
+elif [ $1 = reinstall ]; then
+	banner
+	if [ -e $iHAKLAB/.set/libexec/reinstall ]; then
+		bash $iHAKLAB/.set/libexec/reinstall
+	else
+		printf "$R\n[w]-> Fatal error\n$Y[!] please run$G i-Haklab restore$Y and try again$W\n"
+		exit
 	fi
 elif [ $1 = version ]; then
 	banner

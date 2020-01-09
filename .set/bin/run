@@ -46,7 +46,50 @@ case "$(uname -m)" in
 esac
 
 if [ -z $SCRIPT_NAME ]; then
-	echo "$Y\n[!] Syntax :$W run [-name-of-tool-]\n"
+	echo "$Y\n[!] Syntax :$W run [-name-of-tool/framework-]\n\n
+|─Tool/Framework─|──────────────────────Description────────────────────────────|
+╰─────aio────────➤  Accounts autopay generator
+╰────d-tect──────➤  Search web vulnerabilities
+╰─────a2sv───────➤  Find web SSL vulnerabilities
+╰──adminpanel────➤  Admin panel web searcher.
+╰───androbugs────➤  Search vulnerabilities in .apk files
+╰───aquatone─────➤  Search domain, subdomains, hosts scanner, headers HTTP, HTML body
+╰─────beef───────➤  Web penetration framework
+╰──binchecker────➤  Information gathering about credit/debit card
+╰────binwalk─────➤  Searching and given binary image for embedded files and executable code.
+╰────blackbox────➤  Tool for Bruteforcing attacks, Information Gathering, Dorking, Cracking and Exploit web vulnerabilities.
+╰────cc-genpro───➤  Bins and temporal e-mails generator.
+╰───cloudbunny───➤  Real IP server searcher under Shodan, Censys y Zoomeye.
+╰────credmap─────➤  A reuse credential maper in socials media.
+╰──cryptovenom───➤  Cryptosystems and cryptoanalysis methods all in one.
+╰────dnsenum─────➤  Enumerate DNS information of a domain and to discover non-contiguous ip blocks.
+╰────evilurl─────➤  Generate unicode evil domains for IDN Homograph Attack and detect them.
+╰───exploitdb────➤  Public exploits and corresponding vulnerable software, developed for use by penetration testers and vulnerability researchers
+╰────fbbrute─────➤  Brute force tool to substract facebook user credencials.
+╰──────fbi───────➤  Accurate facebook account information gathering
+╰──GetNPUserss───➤  Attempt to list and get TGTs for those users that have the property
+╰─────hakku──────➤  Penetration testing tools.
+╰────hatcloud────➤  Real IP CloudFlare server searcher.
+╰─────hunner─────➤  Penetracion tool with sql vulnerabilityScan xxs vulnerabilityDos sitesBrutforce FtpBrutforse SShBrutforse and emails.
+╰─ipgeolocation──➤  Ip accurately geolocatetor.
+╰────kerbrute────➤  Perform kerberos bruteforcing by using the Impacket library.
+╰─────nikto──────➤  Web server scanner which performs comprehensive tests against web servers for multiple items.
+╰──phoneinfoga───➤  Scan phone numbers to first gather standard information.
+╰────pybelt──────➤  Complete open source hackers tool.
+╰───recon-ng─────➤  Providing a powerful environment to conduct open source web-based reconnaissance.
+╰──────dog───────➤  Reconnaissance Swiss Army Knife.
+╰─────rhawk──────➤  Information Gathering and Vulnerability Scanning.
+╰──────rsf───────➤  Exploitation framework dedicated to embedded routers.
+╰───saycheese────➤  Grab target's webcam shots by link.
+╰─────seeker─────➤  Accurately Locate Smartphones using Social Engineering.
+╰──shellphish────➤  Script de automatizacion de servidor phishing para 18 redes sociales.
+╰──shellsploit───➤  Powerful phishing tool.
+╰─────sqliv──────➤  Massive SQL injection scanner.
+╰────sqlmap──────➤  Penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database server. 
+╰──theharvester──➤  Gather emails, subdomains, hosts, employee names, open ports and banners from different public sources like search engines, PGP key servers and SHODAN computer database.
+╰──webhackshl────➤  Vulnerability analysis and information collection of websites and servers.
+╰───whatweb──────➤  Identifie websites (DNS).
+╰────wpscan──────➤  Black box WordPress vulnerability scanner.\n"
 	exit
 fi
 
