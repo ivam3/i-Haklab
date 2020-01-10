@@ -105,7 +105,7 @@ if [ -e $PREFIX/opt/beef/GeoLite2-City_20200107.tar.gz ]; then
 		fi
 	fi
 else
-	printf "$R\n[w]-> Beef data base can be created$W\n"
+	printf "$R\n[w]-> Beef database can be created$W\n"
 	exit
 fi
 chmod 711 $PREFIX/bin/beef;cd
