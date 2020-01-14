@@ -102,7 +102,7 @@ if [ "$CHECKROOT" = "root" ]; then
         if [ -e $PREFIX/bin/applets/sudo ]; then
                 rm $PREFIX/bin/applets/sudo
         fi
-        wget https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/sudo -O $PREFIX/bin/applets/sudo
+        wget https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/mediafire/sudo -O $PREFIX/bin/applets/sudo
         chmod +x $PREFIX/bin/applets/sudo
         sudo echo "HOME=/data/data/com.termux/files/home/storage/external-1/roothome" >> ~/.suroot/.bashrc
 else
