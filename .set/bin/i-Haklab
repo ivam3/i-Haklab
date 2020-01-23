@@ -488,23 +488,37 @@ clean() {
 	clean
 elif [ $1 = forwarding ] && [ -z $2 ]; then
 	if [ $SSH = "1" ]; then 
-		killall -2 ssh > /dev/null
+		killall -2 ssh > /dev/null 2>&1
 	fi
+	printf "$Y\n[?]->$W Protocol to use :$W\n"
+	while read -p "[tcp/ssh]:─➤ " PTU && [ -z $PTU ]; do
+		continue
+	done
 	banner
 	chk-ssh
-	printf "$Y\n[!]-> serveo is inactive...$G running localhost.run$W\n"
-	sleep 3
-	ssh -R 80:$LOCALHOST:$LPORT localhost.run
-#	ssh -R 48263:$LOCALHOST:$LPORT serveo.net
+	if [ $PTU = ssh ] || [ $PTU = tcp ]; then
+		ssh -R 80:$LOCALHOST:$LPORT $PTU.localhost.run
+	else
+		printf "$R[w]-> ERROR :$W wrong connection\n"
+		exit
+	fi
 elif [ $1 = forwarding ] && [ $2 ]; then
 	LINK=$2
 	if [ $SSH = "1" ]; then 
-		killall -2 ssh > /dev/null 
+		killall -2 ssh > /dev/null 2>&1
 	fi
-	banner
-	chk-ssh
-	printf "$Y\n[!]-> serveo is temporal inactive...$W\n"
-#	ssh -R $LINK:80:$LOCALHOST:$LPORT serveo.net
+	printf "$Y\n[?]->$W Protocol to use :$W\n"
+        while read -p "[tcp/ssh]:─➤ " PTU && [ -z $PTU ]; do
+                continue
+        done
+        banner
+        chk-ssh
+        if [ $PTU = ssh ] || [ $PTU = tcp ]; then
+		ssh -R 80:$LOCALHOST:$LPORT $LINK@$PTU.localhost.run
+	else
+                printf "$R[w]-> ERROR :$W wrong connection\n"
+                exit
+        fi
 elif [ $1 = handler ] && [ -z $2 ]; then
 	banner
 	printf "$R[w]->$W handler argument need an option$R |$W use one of those:\n"
