@@ -79,7 +79,7 @@ USR=$(whoami)
                                 sudo chown $USR:$USR /data/data/com.termux/files/home/.suroot/.bashrc
                 fi
         fi
-        echo "PS1=\"\[\e[33m\][!] \[\e[31m\]Type\[\e[32m\] exit\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\"" > /data/data/com.termux/files/home/.suroot/.bashrc
+        echo "PS1=\"\[\e[33m\][!] \[\e[31m\]Press\[\e[32m\] Ctrl d\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\"" > /data/data/com.termux/files/home/.suroot/.bashrc
         echo "export TERM=xterm-256color" >> /data/data/com.termux/files/home/.suroot/.bashrc
         echo "export LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib" >> /data/data/com.termux/files/home/.suroot/.bashrc
         echo "export PATH=/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:/system/xbin:/system/bin" >> /data/data/com.termux/files/home/.suroot/.bashrc
