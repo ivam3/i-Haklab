@@ -4,6 +4,7 @@
 #
 SCRIPT_NAME=$(basename "$1")
 BEEF_PATH="/data/data/com.termux/files/usr/opt/beef"
+GO_PATH=$(cat $PREFIX/etc/fish/config.fish | grep GOPATH | awk '{print $3}')
 BACK=$(pwd)
 
 if [ ! $(id -u) -ne 0 ]; then
@@ -68,6 +69,7 @@ if [ -z $SCRIPT_NAME ]; then
 ╰────fbbrute─────➤  Brute force tool to substract facebook user credencials.
 ╰──────fbi───────➤  Accurate facebook account information gathering
 ╰──GetNPUserss───➤  Attempt to list and get TGTs for those users that have the property
+╰────Gobuster────➤  Gobuster is a tool used to brute-force URIs in web sites, DNS subdomains and Virtual Host names on target web servers.
 ╰─────hakku──────➤  Penetration testing tools.
 ╰────hatcloud────➤  Real IP CloudFlare server searcher.
 ╰─────hunner─────➤  Penetracion tool with sql vulnerabilityScan xxs vulnerabilityDos sitesBrutforce FtpBrutforse SShBrutforse and emails.
@@ -435,7 +437,6 @@ case "$SCRIPT_NAME" in
 			else
 				exec python2 "$PREFIX/bin/$SCRIPT_NAME" "-h"
 			fi
-
 		else
 			STDERR
 		fi
@@ -506,6 +507,19 @@ case "$SCRIPT_NAME" in
 		if [ -e $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py ]; then
 			cd $TMP_PATH/$SCRIPT_NAME
 			exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py "$2" "$@"
+			cd $BACK
+		else
+			STDERR
+		fi
+		;;
+	gobuster)
+		if [ -e $GO_PATH/bin/$SCRIPT_NAME ]; then
+			cd $GO_PATH/bin
+			if [ $2 ]; then
+				exec $GO_PATH/bin/$SCRIPT_NAME "$2" "$@"
+			else
+				exec $GO_PATH/bin/$SCRIPT_NAME "-h"
+			fi
 			cd $BACK
 		else
 			STDERR
