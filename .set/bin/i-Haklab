@@ -118,8 +118,9 @@ Arguments  |    options     |    Description
 |   ╰──────➤──hotmail/live──➤ example: i-Haklab bfgmail victim@live.com passwords.txt
 ╰──bfftp───➤─user─passwd─ip─➤ Start a brute force attack with hydra at ftp server
 |    ╰─────➤────────────────➤ example: i-Haklab bfftp users.txt passwords.txt 0.0.0.0
-╰forwarding➤────────────────➤ Start a SSH client to request TCP port forwarding from server and proxy
-|    ╰─────➤─────domain─────➤ Start a SSH client to request port forwarding with especific dns | example: i-Haklab forwarding mydomain
+╰forwarding➤────────────────➤ Start a SSH client to request TCP port forwarding from server and proxy.
+     ╰─────➤──port_number───➤ Set a specific port number (default 4546 or 80 for rooted device)
+|    ╰─────➤───subdomain────➤ Set a specitic subdomain | example: i-Haklab forwarding <myport> <my-subdomain>
 |__________________________________________________________________________________________\n\n"
 elif [ $1 = list ]; then
 	banner
@@ -490,34 +491,42 @@ elif [ $1 = forwarding ] && [ -z $2 ]; then
 	if [ $SSH = "1" ]; then 
 		killall -2 ssh > /dev/null 2>&1
 	fi
-	printf "$Y\n[?]->$W Protocol to use :$W\n"
-	while read -p "[tcp/ssh]:─➤ " PTU && [ -z $PTU ]; do
-		continue
-	done
 	banner
 	chk-ssh
-	if [ $PTU = ssh ] || [ $PTU = tcp ]; then
-		ssh -R 80:$LOCALHOST:$LPORT $PTU.localhost.run
+	if [ ! -d $HOME/localtunnel-server ]; then
+		printf "$R\n[w]-> ERROR :$W Localtunnel-server is not installed\n"
 	else
-		printf "$R[w]-> ERROR :$W wrong connection\n"
-		exit
+		$(which lt) -p $LPORT --print-requests
 	fi
-elif [ $1 = forwarding ] && [ $2 ]; then
-	LINK=$2
+elif [ $1 = forwarding ] && [ $2 ] && [ -z $3 ]; then
+	LPORT=$2
 	if [ $SSH = "1" ]; then 
 		killall -2 ssh > /dev/null 2>&1
 	fi
-	printf "$Y\n[?]->$W Protocol to use :$W\n"
-        while read -p "[tcp/ssh]:─➤ " PTU && [ -z $PTU ]; do
-                continue
-        done
         banner
         chk-ssh
-        if [ $PTU = ssh ] || [ $PTU = tcp ]; then
-		ssh -R 80:$LOCALHOST:$LPORT $LINK@$PTU.localhost.run
-	else
-                printf "$R[w]-> ERROR :$W wrong connection\n"
-                exit
+        if [ ! -d $HOME/localtunnel-server ]; then
+                printf "$R\n[w]-> ERROR :$W Localtunnel-server is not installed\n"
+        else
+		if [ $LPORT = "80" ]; then
+			chk-sudo
+		fi
+		$(which lt) -p $LPORT --print-requests
+	fi
+elif [ $1 = forwarding ] && [ $2 ] && [ $3 ]; then
+	LPORT=$2
+	if [ $SSH = "1" ]; then
+		killall -2 ssh > /dev/null 2>&1
+	fi
+		banner
+		chk-ssh
+	if [ ! -d $HOME/localtunnel-server ]; then
+                printf "$R\n[w]-> ERROR :$W Localtunnel-server is not installed\n"
+        else
+		if [ $LPORT = "80" ]; then
+			chk-sudo
+		fi
+		$(which lt) -p $LPORT -s $3 --print-requests
         fi
 elif [ $1 = handler ] && [ -z $2 ]; then
 	banner
