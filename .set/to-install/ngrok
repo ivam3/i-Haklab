@@ -3,8 +3,10 @@
 IFS=$'\n\t'
 trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
-arch=`dpkg --print-architecture`
-function ctrl_c() {
+arch=$(uname -a | grep -o 'arm' | head -n1)
+arch2=$(uname -a | grep -o 'Android' | head -n1)
+
+ctrl_c() {
                 echo
                 printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
 }
@@ -45,17 +47,29 @@ Advice() {
 	printf "$Y\n[!]-> NGROK tunnels are only available after you sign up.\n      Sign up at: https://ngrok.com/signup\n\n      If you have already signed up, make sure your authtoken is installed.\n      Your authtoken is available\n      on your dashboard: https://dashboard.ngrok.com\n$W"
 }
 Install() {
-        if [ $arch = "aarch64" -o $arch = "arm64" ]; then
-                unzip ~/i-Haklab/.set/to-install/ngrok-2.2.8-linux-arm64.zip -d $PREFIX/bin/
-        elif [ $arch = "armhf" -o $arch = "armv7l" ]; then
-                unzip ~/i-Haklab/.set/to-install/ngrok-2.2.8-linux-arm64.zip -d $PREFIX/bin/
-        elif [ $arch = "arm" ]; then
-                unzip ~/i-Haklab/.set/to-install/ngrok-stable-linux-arm.zip -d $PREFIX/bin/
-        else
-                printf "$R\n\n[W]:-> O-ops!!$W sorry unknown architecture\n\n"
-                sleep 3
-        fi
-        ENDING-SCRIPT
+	command -v wget 
+	if [ $arch == 'arm' ] || [ $arch2 == 'Android' ] ; then
+		wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip > /dev/null 2>&1
+		if [ -e ngrok-stable-linux-arm.zip ]; then
+			unzip ngrok-stable-linux-arm.zip > /dev/null 2>&1
+			chmod +x ngrok
+			rm -rf ngrok-stable-linux-arm.zip
+		else
+			printf "$R[w]-> ERROR :$W Can't download ngrok\n"
+			exit
+		fi
+	else
+		wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip > /dev/null 2>&1
+		if [ -e ngrok-stable-linux-386.zip ]; then
+			unzip ngrok-stable-linux-386.zip > /dev/null 2>&1
+			chmod +x ngrok
+			rm -rf ngrok-stable-linux-386.zip
+		else
+			printf "$R[w]-> ERROR :$W Can't download ngrok\n"
+			exit
+		fi
+	fi
+	ENDING-SCRIPT
         }
 function ENDING-SCRIPT {
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
