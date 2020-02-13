@@ -83,6 +83,7 @@ if [ -z $SCRIPT_NAME ]; then
 ╰─────rhawk──────➤  Information Gathering and Vulnerability Scanning.
 ╰──────rsf───────➤  Exploitation framework dedicated to embedded routers.
 ╰───saycheese────➤  Grab target's webcam shots by link.
+╰───sayhello─────➤  Grab target's short voice audio by link.
 ╰─────seeker─────➤  Accurately Locate Smartphones using Social Engineering.
 ╰──shellphish────➤  Script de automatizacion de servidor phishing para 18 redes sociales.
 ╰──shellsploit───➤  Powerful phishing tool.
@@ -355,6 +356,15 @@ case "$SCRIPT_NAME" in
                 fi
                 ;;
 	saycheese)
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        exec bash "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.sh"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
+	sayhello)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/$SCRIPT_NAME
                         exec bash "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.sh"
