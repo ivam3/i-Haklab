@@ -496,10 +496,13 @@ elif [ $1 = forwarding ] && [ -z $2 ]; then
 	if [ ! -d $HOME/localtunnel-server ]; then
 		printf "$R\n[w]-> ERROR :$W Localtunnel-server is not installed\n"
 	else
+		LPORT=4546
+		printf "$R\n[w]-> No port specified"
+		sleep 1
+		printf "$Y\n[!]-> Using default$W : $LPORT\n$G"
 		$(which lt) -p $LPORT --print-requests
 	fi
 elif [ $1 = forwarding ] && [ $2 ] && [ -z $3 ]; then
-	LPORT=$2
 	if [ $SSH = "1" ]; then 
 		killall -2 ssh > /dev/null 2>&1
 	fi
@@ -508,9 +511,15 @@ elif [ $1 = forwarding ] && [ $2 ] && [ -z $3 ]; then
         if [ ! -d $HOME/localtunnel-server ]; then
                 printf "$R\n[w]-> ERROR :$W Localtunnel-server is not installed\n"
         else
-		if [ $LPORT = "80" ]; then
-			chk-sudo
+		if [ $2 -gt 1000 ]; then
+			LPORT=$2
+		else
+			LPORT=4546
+			printf "$R\n[w]-> ERROR :$W Invalid port"
+			sleep 1
+			printf "$Y\n[!] using default$W : $LPORT\n"
 		fi
+		printf "$G"
 		$(which lt) -p $LPORT --print-requests
 	fi
 elif [ $1 = forwarding ] && [ $2 ] && [ $3 ]; then
@@ -523,9 +532,15 @@ elif [ $1 = forwarding ] && [ $2 ] && [ $3 ]; then
 	if [ ! -d $HOME/localtunnel-server ]; then
                 printf "$R\n[w]-> ERROR :$W Localtunnel-server is not installed\n"
         else
-		if [ $LPORT = "80" ]; then
-			chk-sudo
+		if [ $2 -gt 1000 ]; then
+			LPORT=$2
+		else
+			LPORT=4546
+			printf "$R\n[w]-> ERROR :$W Invalid port"
+			sleep 1
+			printf "$Y\n[!] using default$W : $LPORT\n"
 		fi
+		printf "$G"
 		$(which lt) -p $LPORT -s $3 --print-requests
         fi
 elif [ $1 = handler ] && [ -z $2 ]; then
