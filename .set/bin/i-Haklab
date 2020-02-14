@@ -442,6 +442,7 @@ elif [ $1 = paylink ] && [ $2 = soa5 ]; then
         else
                 printf "$R[w]->$W File paylink-nexam-soa5.rc already exist\n"
         fi
+cxc() {
 elif [ $1 = paylink ] && [ $2 = evilserver ]; then
 	chk-sudo
 	chk-msf
@@ -487,6 +488,7 @@ clean() {
 		php -S $LOCALHOST:$LPORT -t $SERVERPATH > /dev/null
 	fi
 	clean
+}
 elif [ $1 = forwarding ] && [ -z $2 ]; then
 	if [ $SSH = "1" ]; then 
 		killall -2 ssh > /dev/null 2>&1
@@ -523,7 +525,6 @@ elif [ $1 = forwarding ] && [ $2 ] && [ -z $3 ]; then
 		$(which lt) -p $LPORT --print-requests
 	fi
 elif [ $1 = forwarding ] && [ $2 ] && [ $3 ]; then
-	LPORT=$2
 	if [ $SSH = "1" ]; then
 		killall -2 ssh > /dev/null 2>&1
 	fi
