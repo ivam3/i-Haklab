@@ -75,6 +75,7 @@ if [ -z $SCRIPT_NAME ]; then
 ╰─────hunner─────➤  Penetracion tool with sql vulnerabilityScan xxs vulnerabilityDos sitesBrutforce FtpBrutforse SShBrutforse and emails.
 ╰─ipgeolocation──➤  Ip accurately geolocatetor.
 ╰────kerbrute────➤  Perform kerberos bruteforcing by using the Impacket library.
+╰───lockphish────➤ 
 ╰─────nikto──────➤  Web server scanner which performs comprehensive tests against web servers for multiple items.
 ╰──phoneinfoga───➤  Scan phone numbers to first gather standard information.
 ╰────pybelt──────➤  Complete open source hackers tool.
@@ -323,6 +324,15 @@ case "$SCRIPT_NAME" in
                         STDERR
                 fi
 		;;
+	lockphish)
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        exec bash "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.sh"
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
 	nikto)
 		if [ $CHECKROOT = "root" ]; then
 			command -v sudo > /dev/null || bash $TMP_PATH/i-Haklab/.set/to-install/instasudo
