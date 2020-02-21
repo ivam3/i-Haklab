@@ -82,9 +82,9 @@ for i in ${BINDIR[*]}; do
 done
 TOFIX=$(ls $iHAKLAB/.set/fix-tools)
 for m in ${TOFIX[*]}; do #Download scripts to fix some tools
-	if [ -d $iHAKLAB/../$TOFIX ]; then
-		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/$TOFIX -o $iHAKLAB/../$TOFIX/$TOFIX.sh > /dev/null 2>&1
-	printf "$Y\n[!]-> $TOFIX modificated$W\n"
+	if [ -d $iHAKLAB/../$m ]; then
+		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/$m -o $iHAKLAB/../$m/$m.sh > /dev/null 2>&1
+	printf "$Y\n[!]-> $m modificated$W\n"
 	sleep 1
 	fi
 done
