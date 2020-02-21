@@ -106,10 +106,10 @@ for a in ${README[*]}; do #Upgrading readme
 	fi
 done
 
-tofix=$(ls $iHAKLAB/.set/fix-tools)
-for m in ${$tofix[*]}; do #Download scripts to fix some tools
-	if [ -d $iHAKLAB/../$tofix ]; then
-		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/$tofix.sh -o $iHAKLAB/../$tofix/$tofix.sh > /dev/null 2>&1
+TOFIX=$(ls $iHAKLAB/.set/fix-tools)
+for m in ${$TOFIX[*]}; do #Download scripts to fix some tools
+	if [ -d $iHAKLAB/../$TOFIX ]; then
+		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/$TOFIX -o $iHAKLAB/../$TOFIX/$TOFIX.sh > /dev/null 2>&1
 	printf "$Y\n[!]-> $tofix modificated$W\n"
 	sleep 1
 fi
