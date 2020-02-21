@@ -68,9 +68,6 @@ if [ -e $PREFIX/etc/fish/config.fish ]; then
 else
 	printf "$R\n[w]-> FATAL ERROR : interactive shell not installed$W\n"
 fi
-if [ -d $iHAKLAB/../WhatWeb ]; then #Fix whatweb
-	wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/whatweb -O $PREFIX/bin/whatweb > /dev/null 2>&1
-fi
 
 #Adding bf wordlist
 command -v dnsenum > /dev/null 2>&1 || mkdir -p $PREFIX/share/dnsenum ; curl https://raw.githubusercontent.com/fwaeytens/dnsenum/master/dns.txt -o $PREFIX/share/dnsenum/dns.txt > /dev/null 2>&1
@@ -78,20 +75,11 @@ command -v speedtest-cli > /dev/null 2>&1 || python -m pip install speedtest-cli
 
 BINDIR=$(ls $iHAKLAB/.set/bin) #Upgrading executables
 for i in ${BINDIR[*]}; do
-	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$i -o $PREFIX/bin/$i > /dev/null 2>&1
+	wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$i -O $PREFIX/bin/$i > /dev/null 2>&1
 	chmod +x $PREFIX/bin/$i
 	printf "$Y\n[!]-> Command $i upgraded$W\n"
 	sleep 1
 done
-README=$(ls $iHAKLAB/.set/libexec/Readme)
-for a in ${README[*]}; do #Upgrading readme
-	if [ ! -e $iHAKLAB/.set/libexec/Readme/$a ]; then
-		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/Readme/$a -o $iHAKLAB/.set/libexec/Readme/$a > /dev/null 2>&1
-		printf "$Y\n[!]-> Information of Tool $a added$W\n"
-		sleep 1
-	fi
-done
-
 TOFIX=$(ls $iHAKLAB/.set/fix-tools)
 for m in ${TOFIX[*]}; do #Download scripts to fix some tools
 	if [ -d $iHAKLAB/../$TOFIX ]; then
