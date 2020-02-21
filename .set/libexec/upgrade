@@ -76,6 +76,13 @@ fi
 command -v dnsenum > /dev/null 2>&1 || mkdir -p $PREFIX/share/dnsenum ; curl https://raw.githubusercontent.com/fwaeytens/dnsenum/master/dns.txt -o $PREFIX/share/dnsenum/dns.txt > /dev/null 2>&1
 command -v speedtest-cli > /dev/null 2>&1 || python -m pip install speedtest-cli /dev/null 2>&1
 
+FNC=$(ls $iHAKLAB/.set/functions) #Upgrading functions
+if [ -d $HOME/.config/fish/functions ]; then
+	rm $HOME/.config/fish/functions/* > /dev/null 2>&1
+else
+	mkdir -p $HOME/.config/fish/functions > /dev/null 2>&1
+fi
+
 BINDIR=$(ls $iHAKLAB/.set/bin) #Upgrading executables
 for i in ${BINDIR[*]}; do
 	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$i -o $PREFIX/bin/$i > /dev/null 2>&1
@@ -84,28 +91,6 @@ for i in ${BINDIR[*]}; do
 	sleep 1
 done
 
-if [ -d $iHAKLAB/../saycheese ]; then
-	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/saycheese.sh -o $iHAKLAB/../saycheese/saycheese.sh > /dev/null 2>&1
-	printf "$Y\n[!]-> Saycheese modificated$W\n"
-	sleep 1
-fi
-if [ -d $iHAKLAB/../shellphish ]; then
-	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/sellphish.sh -o $iHAKLAB/../shellphish/shellphish.sh > /dev/null 2>&1
-	printf "$Y\n[!]-> Shellphis modificated$W\n"
-	sleep 1
-fi
-if [ -d $iHAKLAB/../sayhello ]; then
-	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/sayhello.sh -o $iHAKLAB/../sayhello/sayhello.sh > /dev/null 2>&1
-        printf "$Y\n[!]-> Sayhello modificated$W\n"
-        sleep 1
-fi
-
-FNC=$(ls $iHAKLAB/.set/functions) #Upgrading functions
-if [ -d $HOME/.config/fish/functions ]; then
-	rm $HOME/.config/fish/functions/* > /dev/null 2>&1
-else
-	mkdir -p $HOME/.config/fish/functions > /dev/null 2>&1
-fi
 bash $iHAKLAB/.set/to-install/functions > /dev/null 2>&1
 for v in ${FNC[*]}; do
 	printf "$Y\n[!]-> Function $v added$W\n"
@@ -120,6 +105,15 @@ for a in ${README[*]}; do #Upgrading readme
 		sleep 1
 	fi
 done
+
+tofix=$(ls $iHAKLAB/.set/fix-tools)
+for m in ${$tofix[*]}; do #Download scripts to fix some tools
+	if [ -d $iHAKLAB/../$tofix ]; then
+		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/$tofix.sh -o $iHAKLAB/../$tofix/$tofix.sh > /dev/null 2>&1
+	printf "$Y\n[!]-> $tofix modificated$W\n"
+	sleep 1
+fi
+
 for tool in exploitdb cloudbunny aquatone kerbrute GetNPUsers a2sv cryptovenom gobuster sayhello localtunnel-server lockphish; do #Upgrading tools
 	if [ ! -d $iHAKLAB/../$tool ]; then
 		printf "$Y\n[!]-> $tool tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install $tool\n"

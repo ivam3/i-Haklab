@@ -4,5 +4,5 @@
 if [ ! -e $PREFIX/bin/tty-solitaire ]; then
 	apt install tty-solitaire -y
 fi
-tty-solitaire
+ttysolitaire
 #		@Ivam3
