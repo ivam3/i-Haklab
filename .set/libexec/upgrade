@@ -113,7 +113,7 @@ for m in ${$tofix[*]}; do #Download scripts to fix some tools
 	printf "$Y\n[!]-> $tofix modificated$W\n"
 	sleep 1
 fi
-
+done
 for tool in exploitdb cloudbunny aquatone kerbrute GetNPUsers a2sv cryptovenom gobuster sayhello localtunnel-server lockphish; do #Upgrading tools
 	if [ ! -d $iHAKLAB/../$tool ]; then
 		printf "$Y\n[!]-> $tool tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install $tool\n"
