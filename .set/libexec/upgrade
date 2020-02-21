@@ -76,13 +76,6 @@ fi
 command -v dnsenum > /dev/null 2>&1 || mkdir -p $PREFIX/share/dnsenum ; curl https://raw.githubusercontent.com/fwaeytens/dnsenum/master/dns.txt -o $PREFIX/share/dnsenum/dns.txt > /dev/null 2>&1
 command -v speedtest-cli > /dev/null 2>&1 || python -m pip install speedtest-cli /dev/null 2>&1
 
-FNC=$(ls $iHAKLAB/.set/functions) #Upgrading functions
-if [ -d $HOME/.config/fish/functions ]; then
-	rm $HOME/.config/fish/functions/* > /dev/null 2>&1
-else
-	mkdir -p $HOME/.config/fish/functions > /dev/null 2>&1
-fi
-
 BINDIR=$(ls $iHAKLAB/.set/bin) #Upgrading executables
 for i in ${BINDIR[*]}; do
 	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$i -o $PREFIX/bin/$i > /dev/null 2>&1
@@ -90,13 +83,6 @@ for i in ${BINDIR[*]}; do
 	printf "$Y\n[!]-> Command $i upgraded$W\n"
 	sleep 1
 done
-
-bash $iHAKLAB/.set/to-install/functions > /dev/null 2>&1
-for v in ${FNC[*]}; do
-	printf "$Y\n[!]-> Function $v added$W\n"
-	sleep 1
-done
-
 README=$(ls $iHAKLAB/.set/libexec/Readme)
 for a in ${README[*]}; do #Upgrading readme
 	if [ ! -e $iHAKLAB/.set/libexec/Readme/$a ]; then
@@ -110,10 +96,15 @@ TOFIX=$(ls $iHAKLAB/.set/fix-tools)
 for m in ${TOFIX[*]}; do #Download scripts to fix some tools
 	if [ -d $iHAKLAB/../$TOFIX ]; then
 		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/$TOFIX -o $iHAKLAB/../$TOFIX/$TOFIX.sh > /dev/null 2>&1
-	printf "$Y\n[!]-> $tofix modificated$W\n"
+	printf "$Y\n[!]-> $TOFIX modificated$W\n"
 	sleep 1
-fi
+	fi
 done
+
+#Upgrading functions
+bash $iHAKLAB/.set/to-install/functions > /dev/null 2>&1
+printf "$Y\n[!]-> i-Haklab functions fixed$W\n"
+
 for tool in exploitdb cloudbunny aquatone kerbrute GetNPUsers a2sv cryptovenom gobuster sayhello localtunnel-server lockphish; do #Upgrading tools
 	if [ ! -d $iHAKLAB/../$tool ]; then
 		printf "$Y\n[!]-> $tool tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install $tool\n"

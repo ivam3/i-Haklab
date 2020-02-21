@@ -1,7 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 #Created on Dec/2018
 IFS=$'\n\t'
-FNCDIR=/data/data/com.termux/files/home/.config/fish/functions
 trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
 
@@ -42,21 +41,20 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         printf "\n\n"
         sleep 1
 done
+
 #INSTALLATION
-function remove {
-	if [ -e ~/.config/fish/functions/$FNC.fish ]; then
-		rm ~/.config/fish/functions/$FNC.fish
-	fi
-}
-if [ ! -d $HOME/.config/fish/functions/ ]; then
-	mkdir -p $HOME/.config/fish/functions
+if [ -d /data/data/com.termux/files/home/.config/fish/functions ]; then
+	rm /data/data/com.termux/files/home/.config/fish/functions/*
+else
+	mkdir -p /data/data/com.termux/files/home/.config/fish/functions
 fi
+FNCDIR=/data/data/com.termux/files/home/.config/fish/functions
 FNClist=$(ls $iHAKLAB/.set/functions)
 for FNC in ${FNClist[*]}; do
-	remove
 	wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/functions/$FNC -O $FNCDIR/$FNC
 	chmod +x $FNCDIR/*
 done
+
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3
