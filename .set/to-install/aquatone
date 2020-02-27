@@ -39,18 +39,26 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-apt update && apt upgrade -y
-apt install golang -y
-printf "$Y\n[!]-> i-Haklab : It could take a while . . .\n"
-withGo() {
-	go get github.com/michenriksen/aquatone
-	chmod +x -R $HOME/go/
-	ln -s /data/data/com.termux/files/home/go/bin/aquatone ln -s /data/data/com.termux/files/usr/bin/aquatone
-}
-git clone https://github.com/michenriksen/aquatone.git $iHAKLAB/../aquatone
-chmod 711 -R $iHAKLAB/../aquatone/*
-pushd $iHAKLAB/../aquatone/
+apt update && apt upgrade
+apt install ruby golang -y
+if [ ! -d $HOME/go/src/github.com ]; then
+        mkdir -p $HOME/go/src/github.com
+fi
+GOPATH=$(grep -oE GOPATH $PREFIX/etc/fish/config.fish)
+if [ -z $GOPATH ]; then
+        sed -i "21a GOPATH=$HOME/go" $PREFIX/etc/fish/config.fish
+fi
+go get github.com/michenriksen/aquatone
+git clone https://github.com/michenriksen/aquatone.git $GOPATH/src/github.com/aquatone
+printf "$Y\n[IbyC]:-> It could take a while . . .\n$W"
+pushd $GOPATH/src/github.com/aquatone
+ln -s $GOPATH/src/github.com/aquatone $GOPATH/src/aquatone
+go get
+go build
+go install
 gem install aquatone
+popd
+chmod 711 -R $HOME/go/
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"

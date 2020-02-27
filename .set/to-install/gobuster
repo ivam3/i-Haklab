@@ -42,7 +42,7 @@ done
 apt update && apt upgrade -y
 withgo(){
 apt install golang -y
-if [ ! -d $HOME/go/src/github ]; then
+if [ ! -d $HOME/go/src/github.com ]; then
 	mkdir -p $HOME/go/src/github.com
 fi
 VAR=$(cat $PREFIX/etc/fish/config.fish | grep "GOPATH")
