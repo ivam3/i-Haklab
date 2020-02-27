@@ -231,7 +231,7 @@ case "$SCRIPT_NAME" in
 				mv $TMP_PATH/CloudBunny/api.conf.txt $TMP_PATH/CloudBunny/api.conf
 			fi
 			if [ $2 ]; then
-				exec python2 "$TMP_PATH/CloudBunny/$SCRIPT_NAME.py" "$2" "$3" "$@"
+				exec python2 "$TMP_PATH/CloudBunny/$SCRIPT_NAME.py" "$@"
 				cd $BACK
                         else
                                 exec python2 "$TMP_PATH/CloudBunny/$SCRIPT_NAME.py" "-h"

@@ -26,9 +26,9 @@ done
 if [ -e $PREFIX/libexec/colors ]; then
         rm $PREFIX/libexec/colors
 fi
-#termux-setup-storage
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/colors -o $PREFIX/libexec/colors
 source $PREFIX/libexec/colors
+
 echo $(clear)
         printf "$C"
                 echo "            -{> i-Haklab <} "
@@ -76,8 +76,12 @@ USR=$(whoami)
 	command -v sudo > /dev/null || bash /data/data/com.termux/files/home/i-Haklab/.set/to-install/instasudo
         if [ -e /data/data/com.termux/files/home/.suroot/.bashrc ]; then
                 if [ ! -O /data/data/com.termux/files/home/.suroot/.bashrc ]; then
-                                sudo chown $USR:$USR /data/data/com.termux/files/home/.suroot/.bashrc
+                                sudo chown $USR:$USR -R /data/data/com.termux/files/home/.suroot/
                 fi
+	else
+		if [ ! -d /data/data/com.termux/files/home/.suroot ]; then
+			mkdir /data/data/com.termux/files/home/.suroot
+		fi
         fi
         echo "PS1=\"\[\e[33m\][!] \[\e[31m\]Press\[\e[32m\] Ctrl d\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\"" > /data/data/com.termux/files/home/.suroot/.bashrc
         echo "export TERM=xterm-256color" >> /data/data/com.termux/files/home/.suroot/.bashrc
@@ -87,17 +91,20 @@ USR=$(whoami)
 	echo "fish" >> /data/data/com.termux/files/home/.suroot/.bashrc
         echo "#          i-Haklab by @Ivam3" >> /data/data/com.termux/files/home/.suroot/.bashrc
 fi
-if [ -L /data/data/com.termux/files/home/storage/external-1 ] && [ -z $PARTITION ]; then
-        until [ -d /data/data/com.termux/files/home/storage/external-1/roothome ]; do
-                printf "$R\n[W]-> O-ops!!$W roothome directory cannot be created\n"
-                mkdir -p /data/data/com.termux/files/home/storage/external-1/roothome
-        done
-        until [ -O /data/data/com.termux/files/home/storage/external-1/roothome ]; do
-                printf "$R\n[W]-> O-ops!!$W Your are not owner of roothome directory\n"
-                sudo chown $USR:$USR /data/data/com.termux/files/home/storage/external-1/roothome
-        done
+#::::::::::Definition of variable i-Haklab::::::::::::#
+termux-setup-storage
+SDCARD=$(ls -l $HOME/storage/external-1 | awk '{print $11}')
+if [ ! -z $SDCARD ] && [ -z $PARTITION ]; then
+	until [ -d $SDCARD/roothome ]; do
+		printf "$R\n[W]-> O-ops!!$W roothome directory cannot be created\n"
+		mkdir -p $SDCARD/roothome
+	done
+	until [ -O $SDCARD/roothome ]; do
+		printf "$R\n[W]-> O-ops!!$W Your aren't owner of roothome directory\n"
+		sudo chown $USR:$USR $SDCARD/roothome
+	done
         cp -r /data/data/com.termux/files/home/i-Haklab /data/data/com.termux/files/home/storage/external-1/roothome/
-        iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+        iHAKLAB=$SDCARD/roothome/i-Haklab
 elif [ ! -z $PARTITION ] || [ -d /data/data/com.termux ]; then
         iHAKLAB=/data/data/com.termux/files/home/i-Haklab
 else
