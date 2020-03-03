@@ -46,12 +46,10 @@ if [ -d $iHAKLAB/../shellsploit-framework ]; then
         rm -rf $iHAKLAB/../shellsploit-framework
 fi
 git clone https://github.com/vasco2016/shellsploit-framework $iHAKLAB/../shellsploit-framework
-chmod 777 $iHAKLAB/../shellsploit-framework/shellsploit.py
-python -m pip install capstone
-python -m pip install readline
-python -m pip install pefile
-python -m pip install colorama
-python -m pip install pylzma
+chmod 711 -R $iHAKLAB/../shellsploit-framework/
+for module in capstone readline pefile colorama pylzma ; do
+	python -m pip install $module
+done
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"

@@ -39,9 +39,13 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-arch=`dpkg --print-architecture`
+command -v termux-info > /dev/null 2>&1 || pkg install termux-api termux-tools -y > /dev/null 2>&1
+SOversion=$(termux-info | grep -oE '([5-9]{1}\.)([0-9]{1}\.)([0-9]{1})' | awk -F "." '{print $1}')
 pkg update && pkg upgrade
-for repo in unstable-repo git python geckodriver ; do
+if [ $SOversion => '7' ]; then
+	pkg install unstable-repo
+fi
+for repo in git python geckodriver ; do
 	pkg install $repo -y
 done
 git clone https://github.com/sundowndev/PhoneInfoga.git $iHAKLAB/../PhoneInfoga
@@ -51,9 +55,6 @@ for module in phonenumbers selenium bs4 google_api config html5lib ; do
 	python -m pip install $module
 done
 cp config.example.py config.py
-
-
-html5lib
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"

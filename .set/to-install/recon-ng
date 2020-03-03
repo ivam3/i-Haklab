@@ -45,20 +45,14 @@ done
 if [ -d $iHAKLAB/../recon-ng ]; then
         rm -rf $iHAKLAB/../recon-ng
 fi
-unzip $iHAKLAB/.set/to-install/LaNMaSteR-recon-ng.zip -d $iHAKLAB/
+wget https://github.com/ivam3/i-Haklab/raw/master/.set/to-install/LaNMaSteR-recon-ng.zip
+unzip LaNMaSteR-recon-ng.zip -d $iHAKLAB/../
+rm LaNMaSteR-recon-ng.zip
 mv $iHAKLAB/LaNMaSteR53-recon-ng-93bb9a4fb50b $iHAKLAB/recon-ng
-chmod 777 -R $iHAKLAB/../recon-ng
-python2 -m pip install dicttoxml
-python2 -m pip install dnspython
-python2 -m pip install jsonrpclib
-python2 -m pip install lxml
-python2 -m pip install mechanize
-python2 -m pip install slowaes
-python2 -m pip install XlsxWriter
-python2 -m pip install olefile
-python2 -m pip install PyPDF2
-python2 -m pip install flask
-python2 -m pip install unicodecsv
+chmod 711 -R $iHAKLAB/../recon-ng
+for module in dicttoxml dnspython jsonrpclib lxml mechanize slowaes XlsxWriter olefile PyPDF2 flask unicodecsv ; do
+	python2 -m pip install $module
+done
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"

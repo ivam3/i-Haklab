@@ -43,7 +43,7 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
 done
 #INSTALLATION
 apt update && apt upgrade
-apt install python python-dev git
+apt install python git -y
 git clone https://github.com/UndeadSec/EvilURL.git $iHAKLAB/../evilurl
 cp $iHAKLAB/../evilurl/evilurl.py $PREFIX/bin
 

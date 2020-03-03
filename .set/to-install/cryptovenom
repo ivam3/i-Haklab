@@ -62,7 +62,7 @@ method3() {
 git clone https://github.com/lockedbyte/cryptovenom $iHAKLAB/../cryptovenom
 chmod 711 -R $iHAKLAB/../cryptovenom
 
-printf "$Y[!]->$W There are 3 methods to install the repositories : choose one$Y\n[01]->$W Recomendee$Y\n[02]->$W Use it if method 01 show error$Y\n[03]->$W Use it if method 02 show error\n\n"
+printf "$Y[!]->$W There are 3 methods to install the repositories : choose one$Y\n[01]->$W BASIC$Y\n[02]->$W LDFLAGS$Y\n[03]->$W SODIUM\n\n"
 
 while read -p "[*]:-> " ANSW && [ -z $ANSW ]; do
 	continue
