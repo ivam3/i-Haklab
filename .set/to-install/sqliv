@@ -42,16 +42,24 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
+apt update && apt upgrade
+apt install python2 wget unzip -y 
 if [ -d $iHAKLAB/../sqliv ]; then
         rm -rf $iHAKLAB/../sqliv
 fi
-if [ -d $iHAKLAB/.set/to-install/.repo/sqliv ]; then
-	cp -r $iHAKLAB/.set/to-install/.repo/sqliv $iHAKLAB/../
+wget https://github.com/ivam3/i-Haklab/raw/master/.set/to-install/sqliv.zip > /dev/null 2>&1
+if [ -e sqliv.zip ]; then
+	unzip sqliv.zip $iHAKLAB/../
+	rm sqliv.zip
 else
-	printf "$R\n[W]:-> Sqliv repository has been archived by the owner.$W\n\n"
+	printf "$R[w]-> ERROR :$W Can't download sqliv\n"
+	exit
 fi
-chmod +x $iHAKLAB/../sqliv/sqliv.py
-python2 -m pip install terminaltables termcolor nyawc
+chmod 711 -R $iHAKLAB/../sqliv
+for module in terminaltables termcolor nyawc ; do
+	python2 -m pip install $module
+done
+
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3

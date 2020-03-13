@@ -45,9 +45,19 @@ done
 if [ -d $iHAKLAB/../sqlmap ]; then
         rm -rf $iHAKLAB/../sqlmap
 fi
-apt update && apt upgrade;apt install python2
-python2 -m pip install --upgrade pip
-python2 -m pip install sqlmap
+apt update && apt upgrade
+apt install python python2 git -y
+printf "$Y\n[!]->$W Choose a type of installation$Y\n[01]->$W Github$Y\n[02]->$W Python module(recommended)\n"
+while read -p "[R]-> " ANSW && [ -z $ANSW ]; do
+	continue
+done
+if [ $ANSW = '01' ] || [ $ANSW = '1' ]; then
+	git clone https://github.com/sqlmapproject/sqlmap $iHAKLAB/../sqlmap
+	chmod 711 -R $iHAKLAB/../sqlmap
+else
+	python -m pip install --upgrade pip
+	python -m pip install sqlmap
+fi
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3
