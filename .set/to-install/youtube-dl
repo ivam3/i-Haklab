@@ -43,25 +43,25 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
 done
 #INSTALLATION
 dpkg --configure -a
-        apt update && apt -y upgrade -y
-        termux-setup-storage
-                if [ -d $PREFIX/lib/python3.7/site-packages/youtube_dl ]; then
-                        yes | pip uninstall youtube_dl
-                fi
-        printf "$G[!]-> INSTALLING YOUTUBE-DL BY GABI TIPLEA$W\n"
-        sleep 1
-        apt install -y util-linux wget curl python python-dev python2
-        yes | python -m pip install youtube-dl
-	if [ -d $HOME/youtube-dl ]; then
-		rm -rf $HOME/youtube-dl
-	fi
-        mkdir -p $HOME/.config/youtube-dl
-        ln -s $PREFIX/bin $HOME/bin
-        curl https://raw.githubusercontent.com/ivam3/youtube-dl/master/.data/.netrc -o $HOME/.netrc
-        chmod 711 $HOME/.netrc
-        curl https://raw.githubusercontent.com/ivam3/youtube-dl/master/.data/LhDxGbtY -o $PREFIX/bin/termux-url-opener
-        dos2unix $PREFIX/bin/termux-url-opener
-        chmod 711 $PREFIX/bin/termux-url-opener
+apt update && apt -y upgrade -y
+if [ -d $PREFIX/lib/python3.7/site-packages/youtube_dl ]; then
+	yes | pip uninstall youtube_dl
+fi
+printf "$G[!]-> INSTALLING YOUTUBE-DL BY GABI TIPLEA$W\n"
+sleep 1
+apt install -y util-linux wget curl python python-dev python2
+yes | python -m pip install youtube-dl
+if [ -d $HOME/youtube-dl ]; then
+	rm -rf $HOME/youtube-dl
+fi
+mkdir -p $HOME/.config/youtube-dl
+ln -s $PREFIX/bin $HOME/bin
+curl https://raw.githubusercontent.com/ivam3/youtube-dl/master/.data/.netrc -o $HOME/.netrc
+chmod 711 $HOME/.netrc
+curl https://raw.githubusercontent.com/ivam3/youtube-dl/master/.data/LhDxGbtY -o $PREFIX/bin/termux-url-opener
+dos2unix $PREFIX/bin/termux-url-opener
+chmod 711 $PREFIX/bin/termux-url-opener
+
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3

@@ -48,6 +48,7 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         printf "\n\n"
         sleep 1
 done
+CHECKROOT=$(bash $iHAKLAB/.set/to-install/check-root)
 #INSTALLATION
 if [ ! -d $HOME/.suroot ]; then
 	mkdir $HOME/.suroot

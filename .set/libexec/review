@@ -49,7 +49,6 @@ done
 ls $PREFIX/var/log/login-termux >> $PREFIX/var/log/i-Haklab.log
 ls $PREFIX/libexec/banner/login-banner >> $PREFIX/var/log/i-Haklab.log
 ls $PREFIX/libexec/banner/wall-banner >> $PREFIX/var/log/i-Haklab.log
-ls $PREFIX/var/alias >> $PREFIX/var/log/i-Haklab.log
 ls $HOME/.config/fish/functions/ >> $PREFIX/var/log/i-Haklab.log
 
 #		@IVAM3
