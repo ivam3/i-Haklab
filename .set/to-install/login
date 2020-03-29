@@ -65,7 +65,7 @@ for opt in 1 2 3; do
 		echo " " >> $PREFIX/etc/bash.bashrc
 		echo "source $PREFIX/var/log/login-termux" >> $PREFIX/etc/bash.bashrc
 		echo " " >> $PREFIX/etc/bash.bashrc
-		echo "PS1=\"\[\e[33m\][!] \[\e[31m\]Type\[\e[32m\] exit\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\"" >> $PREFIX/etc/bash.bashrc
+		echo "PS1=\"\[\e[33m\][!] \[\e[31m\]Press\[\e[32m\] ctrl d\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\"" >> $PREFIX/etc/bash.bashrc
 		echo "#         @Ivam3" >> $PREFIX/etc/bash.bashrc
                 break
         else
