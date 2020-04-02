@@ -45,7 +45,7 @@ if [ -d $iHAKLAB/../shellphish ]; then
         rm -rf $iHAKLAB/../shellphish
 fi
 git clone https://github.com/thelinuxchoice/shellphish.git $iHAKLAB/../shellphish
-curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/shellphish.sh -o $iHAKLAB/../shellphish/shellphish.sh
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/shellphish -o $iHAKLAB/../shellphish/shellphish.sh
 chmod 777 $iHAKLAB/../shellphish/shellphish.sh
 if [ -e $PREFIX/bin/ngrok ]; then
         ln -s $PREFIX/bin/ngrok $iHAKLAB/../shellphish/

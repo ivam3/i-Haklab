@@ -1,0 +1,6 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#This script will install and run a termux sudoku game
+#
+command -v nudoku > /dev/null || pkg install nudoku -y
+nudoku
+#		@Ivam3

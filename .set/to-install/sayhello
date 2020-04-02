@@ -36,7 +36,7 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL SHELLPHISH . . . .$i"
+        printf "$(clear) $C STARTING TO INSTALL SAYHELLO . . . .$i"
         printf "\n\n"
         sleep 1
 done
@@ -45,7 +45,7 @@ if [ -d $iHAKLAB/../sayhello ]; then
         rm -rf $iHAKLAB/../sayhello
 fi
 git clone https://github.com/thelinuxchoice/sayhello.git $iHAKLAB/../sayhello
-curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/sayhello.sh -o $iHAKLAB/../sayhello/sayhello.sh
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/sayhello -o $iHAKLAB/../sayhello/sayhello.sh
 chmod 777 $iHAKLAB/../sayhello/sayhello.sh
 if [ -e $PREFIX/bin/ngrok ]; then
         ln -s $PREFIX/bin/ngrok $iHAKLAB/../sayhello/
@@ -54,7 +54,7 @@ else
 	if [ -e $PREFIX/bin/ngrok ]; then
 		ln -s $PREFIX/bin/ngrok $iHAKLAB/../sayhello/
 	else
-		printf "$R\n[w]-> ERROR :$W Ngrok can not be installes\n"
+		printf "$R\n[w]-> ERROR :$W Ngrok can not be installed\n"
 	fi
 fi
 

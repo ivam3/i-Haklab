@@ -32,8 +32,7 @@ else
 fi
 done
 if [ -d $iHAKLAB/../cryptovenom ]; then
-        printf "$R[w]->$W Cryptovenom exist, uninstall it if you wanna reinstall\n"
-        exit
+        rm -rf $iHAKLAB/../cryptovenom
 fi
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
@@ -59,6 +58,11 @@ method3() {
 		python2 -m pip install --no-binary :all: $module
 	done
 }
+pkg update && pkg upgrade -y
+pkg install git python python2 -y
+for version in python python2 ; do
+        $version -m pip install --upgrade pip
+done
 git clone https://github.com/lockedbyte/cryptovenom $iHAKLAB/../cryptovenom
 chmod 711 -R $iHAKLAB/../cryptovenom
 

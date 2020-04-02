@@ -45,7 +45,7 @@ done
 pkg update && pkg upgrade
 pkg install apache2 php-pgsql php-fpm php-apache -y
 if [ ! -d $PREFIX/etc/apache2/default-sites/htdocs ]; then
-	mkdir -p $PREFIX/etc/apache2/default-sites/htdoc
+	mkdir -p $PREFIX/etc/apache2/default-sites/htdocs
 fi
 if [ ! -d $PREFIX/logs ]; then
 	mkdir -p $PREFIX/logs

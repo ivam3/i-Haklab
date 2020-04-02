@@ -45,9 +45,46 @@ done
 if [ -d $iHAKLAB/../Hunner ]; then
         rm -rf $iHAKLAB/../Hunner
 fi
+pkg update && pkg upgrade -y
+pkg install git python python2 -y
+for version in python python2 ; do
+        $version -m pip install --upgrade pip
+done
+Basic() {
+        for module in httplib2 ; do
+        python -m pip install $module
+done
+}
+LDFLAGS() {
+        printf "LDFLAGS=\"-L/system/lib/ -lm -lcompiler_rt\""
+        for module in httplib2 ; do
+                python -m pip install $module --global-option="build_ext" --global-option="--disable-jpeg"
+        done
+}
+SODIUM() {
+        export SODIUM_INSTALL=system
+        for module in httplib2 ; do
+                python -m pip install --no-binary :all: $module
+        done
+}
 git clone https://github.com/b3-v3r/Hunner.git $iHAKLAB/../Hunner
-chmod 777 $iHAKLAB/../Hunner/hunner.py
-pip install httplib2
+chmod +x -R $iHAKLAB/../Hunner/
+
+printf "$Y[!]->$W There are 3 methods to install the repositories : choose one$Y\n[01]->$W BASIC$Y\n[02]->$W LDFLAGS$Y\n[03]->$W SODIUM\n\n"
+
+while read -p "[*]:-> " ANSW && [ -z $ANSW ]; do
+        continue
+done
+if [ $ANSW = '1' ] || [ $ANSW = '01' ]; then
+        Basic
+elif [ $ANSW = '2' ] || [ $ANSW = '02' ]; then
+        LDFLAGS
+elif [ $ANSW = '3' ] || [ $ANSW = '03' ]; then
+        SODIUM
+else
+        printf "$R[w]->$W method $ANSW doesn't exist\n"
+        exit
+fi
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"

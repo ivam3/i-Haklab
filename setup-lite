@@ -16,7 +16,7 @@ until [ -e /data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 	exit
 done
 apt update && apt upgrade
-apt install -y fish root-repo util-linux coreutils vim python python2 ruby perl clang curl wget make openssl fish openssl-tool php zip unzip tar w3m neofetch weechat irssi tor htop bison megatools findutils git apr apr-util openssh apache2 mariadb php-apache libtool pkg-config termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner libcaca cmatrix fortune figlet man termux-api hydra megatools axel fortune apksigner -y
+apt install -y fish root-repo util-linux coreutils vim python python2 ruby perl clang curl wget make openssl fish openssl-tool php zip unzip tar w3m neofetch weechat irssi tor htop bison megatools findutils git apr apr-util openssh apache2 mariadb php-apache libtool pkg-config termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner libcaca cmatrix fortune figlet man termux-api hydra megatools axel fortune apksigner libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static -y
 python -m pip install --upgrade pip
 python2 -m pip install --upgrade pip
 for module in trufflehog speedtest-cli scapy ; do

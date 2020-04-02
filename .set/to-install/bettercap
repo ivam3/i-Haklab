@@ -45,8 +45,14 @@ done
 RUROOT=$(bash $iHAKLAB/.set/to-install/check-root)
 if [ "$RUROOT" = "root" ]; then
         apt update && apt upgrade
-	apt install ruby ruby-dev -y
+	apt install ruby -y
 	gem install bettercap
+	if [ -e $PREFIX/bin/bettercap ]; then
+		mv $PREFIX/bin/bettercap $PREFIX/bin/GEMbettercap
+	fi
+	pkg install bettercap -y
+	printf "$Y\n[!]:-> sudo GEMbettercap [for version 1]"
+	printf "$Y\n[!]:-> sudo bettercap [for version 2]\n"
 else
         printf "$R\n[W]:-> You need to be root to get Bettercap$W\n"
         sleep 1

@@ -47,12 +47,13 @@ Advice() {
 	printf "$Y\n[!]-> NGROK tunnels are only available after you sign up.\n      Sign up at: https://ngrok.com/signup\n\n      If you have already signed up, make sure your authtoken is installed.\n      Your authtoken is available\n      on your dashboard: https://dashboard.ngrok.com\n$W"
 }
 Install() {
-	command -v wget 
+	command -v wget || pkg install wget
 	if [ $arch == 'arm' ] || [ $arch2 == 'Android' ] ; then
 		wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip > /dev/null 2>&1
 		if [ -e ngrok-stable-linux-arm.zip ]; then
 			unzip ngrok-stable-linux-arm.zip > /dev/null 2>&1
 			chmod +x ngrok
+			mv ngrok $PREFIX/bin/
 			rm -rf ngrok-stable-linux-arm.zip
 		else
 			printf "$R[w]-> ERROR :$W Can't download ngrok\n"
@@ -63,6 +64,7 @@ Install() {
 		if [ -e ngrok-stable-linux-386.zip ]; then
 			unzip ngrok-stable-linux-386.zip > /dev/null 2>&1
 			chmod +x ngrok
+			mv ngrok $PREFIX/bin/
 			rm -rf ngrok-stable-linux-386.zip
 		else
 			printf "$R[w]-> ERROR :$W Can't download ngrok\n"

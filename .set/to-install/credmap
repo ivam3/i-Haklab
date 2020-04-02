@@ -45,6 +45,11 @@ done
 if [ -d $iHAKLAB/../credmap ]; then
 	rm -rf $iHAKLAB/../credmap
 fi
+pkg update && pkg upgrade -y
+pkg install git python python2 -y
+for version in python python2 ; do
+        $version -m pip install --upgrade pip
+done
 git clone https://github.com/lightos/credmap.git $iHAKLAB/../credmap
 chmod 777 $iHAKLAB/../credmap/credmap.py
 #python2 -m pip install urllib2
