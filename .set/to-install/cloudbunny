@@ -56,7 +56,7 @@ Basic() {
 done
 }
 LDFLAGS() {
-        printf "LDFLAGS=\"-L/system/lib/ -lm -lcompiler_rt\""
+        export LDFLAGS="-L/system/lib/ -lm -lcompiler_rt"
         for module in beautifulsoup4 urlparse2 PrettyTable cfscrape censys shodan configparser argparse requests ; do
                 python2 -m pip install $module --global-option="build_ext" --global-option="--disable-jpeg"
         done

@@ -47,7 +47,7 @@ method1() {
 done
 }
 method2() {
-	printf "LDFLAGS=\"-L/system/lib/ -lm -lcompiler_rt\""
+	export LDFLAGS="-L/system/lib/ -lm -lcompiler_rt"
 	for module in base58 scrypt pyblake2 pycrypto crypto bcrypt rc2 twofish geesefly skein pycipher numpy Crypto passlib base91 mom gmpy2 more_itertools argon2_cffi ; do
 		python2 -m pip install $module --global-option="build_ext" --global-option="--disable-jpeg"
 	done

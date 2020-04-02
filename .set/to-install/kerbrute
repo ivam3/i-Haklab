@@ -56,7 +56,7 @@ Basic() {
 done
 }
 LDFLAGS() {
-        printf "LDFLAGS=\"-L/system/lib/ -lm -lcompiler_rt\""
+        export LDFLAGS="-L/system/lib/ -lm -lcompiler_rt"
         for version in python python2 ; do
                 $version -m pip install -r requirements.txt --global-option="build_ext" --global-option="--disable-jpeg"
         done

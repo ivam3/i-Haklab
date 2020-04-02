@@ -54,7 +54,7 @@ Basic() {
 	done
 }
 LDFLAGS() {
-        printf "LDFLAGS=\"-L/system/lib/ -lm -lcompiler_rt\""
+        export LDFLAGS="-L/system/lib/ -lm -lcompiler_rt"
         for module in future requests pysnmp pycrypto cryptography paramiko bcrypt pynacl ; do
                 python -m pip install $module --global-option="build_ext" --global-option="--disable-jpeg"
         done

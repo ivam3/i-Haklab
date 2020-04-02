@@ -49,7 +49,7 @@ Basic() {
         python -m pip install -r requirements.txt
 }
 LDFLAGS() {
-        printf "LDFLAGS=\"-L/system/lib/ -lm -lcompiler_rt\""
+        export LDFLAGS="-L/system/lib/ -lm -lcompiler_rt"
         python -m pip install --global-option="build_ext" --global-option="--disable-jpeg" -r requirements.txt
 }
 SODIUM() {
