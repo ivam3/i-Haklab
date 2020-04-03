@@ -48,7 +48,7 @@ git clone https://github.com/thelinuxchoice/shellphish.git $iHAKLAB/../shellphis
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/shellphish -o $iHAKLAB/../shellphish/shellphish.sh
 chmod 777 $iHAKLAB/../shellphish/shellphish.sh
 if [ -e $PREFIX/bin/ngrok ]; then
-        ln -s $PREFIX/bin/ngrok $iHAKLAB/../shellphish/
+        cp $PREFIX/bin/ngrok $iHAKLAB/../shellphish/
 else
         bash $iHAKLAB/.set/to-install/ngrok
 	if [ -e $PREFIX/bin/ngrok ]; then

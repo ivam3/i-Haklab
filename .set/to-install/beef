@@ -61,7 +61,7 @@ fixbigdecimal() {
 printf "$G\n[IbyC]-> UPGRADING TERMUX$W\n"
 pkg update -y;pkg upgrade -y
 printf "$G\n[IbyC]-> INSTALLING ALL PACKAGES NEEDED$W\n"
-pkg install dirmngr ruby nodejs -y
+pkg install -y ruby nodejs #dirmngr -y
 printf "$G\n[IbyC]-> DOWNLOADING BEEF PROJECT$W\n"
 git clone https://github.com/beefproject/beef.git $PREFIX/opt/beef >/dev/null 2>&1
 #DIRBEEF=$(find ${HOME} -type d -name 'beef')
@@ -80,8 +80,8 @@ printf "$G\n[IbyC]-> ADAPTED BEEF PROJECT$W\n"
 #sed "70d" Gemfile > Gemfile2
 #sed -i "69a gem 'rubydns', '~> 2.0.2'" Gemfile2
 #cat Gemfile2 > Gemfile
-rm $PREFIX/opt/beef/Gemfile
-curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/Beef_Gemfile -o $PREFIX/opt/beef/Gemfile
+#rm $PREFIX/opt/beef/Gemfile
+#curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/Beef_Gemfile -o $PREFIX/opt/beef/Gemfile
 sed 's|passwd: "beef"|passwd: "Ivam3byCinderella"|g' -i config.yaml
 gem update --system
 gem install bundler
@@ -90,25 +90,25 @@ fixbigdecimal
 cp $PREFIX/opt/beef/README.md $iHAKLAB/.set/libexec/Readme/beef
 printf "$G\n[IbyC]-> CREATING BEEF COMMAND$W\n"
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/beef -o $PREFIX/bin/beef
-curl -O https://www.maxmind.com/en/accounts/163881/geoip/downloads/GeoLite2-City_20200107.tar.gz
-if [ -e $PREFIX/opt/beef/GeoLite2-City_20200107.tar.gz ]; then
-	gunzip GeoLite2-City_20200107.tar.gz
-	if [ -e $PREFIX/opt/beef/GeoLite2-City_20200107.tar ]; then
-		tar xvf GeoLite2-City_20200107.tar
-		rm -rf GeoLite2-City_20200107.tar
+cp $iHAKLAB/.set/to-install/GeoLite2-City_20200331.tar.gz $PREFIX/opt/beef
+if [ -e $PREFIX/opt/beef/GeoLite2-City_20200331.tar.gz ]; then
+	gunzip GeoLite2-City_20200331.tar.gz
+	if [ -e $PREFIX/opt/beef/GeoLite2-City_20200331.tar ]; then
+		tar xvf GeoLite2-City_20200331.tar
+		rm -rf GeoLite2-City_20200331.tar
 		if [ ! -d $PREFIX/opt/GeoIP ]; then
 			mkdir -p $PREFIX/opt/GeoIP
 		fi
-		if [ -d $PREFIX/opt/beef/GeoLite2-City_20200107 ]; then
-			mv GeoLite2-City_20200107/* $PREFIX/opt/GeoIP
-			rm -rf GeoLite2-City_20200107
+		if [ -d $PREFIX/opt/beef/GeoLite2-City_20200331 ]; then
+			mv GeoLite2-City_20200331/* $PREFIX/opt/GeoIP
+			rm -rf GeoLite2-City_20200331
 		fi
 	fi
 else
 	printf "$R\n[w]-> Beef database can be created$W\n"
 	exit
 fi
-chmod 711 $PREFIX/bin/beef;cd
+chmod 711 $PREFIX/bin/beef
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"

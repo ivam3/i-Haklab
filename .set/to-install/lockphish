@@ -48,11 +48,11 @@ git clone https://github.com/thelinuxchoice/lockphish.git $iHAKLAB/../lockphish
 #curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/lockphish.sh -o $iHAKLAB/../sayhello/lockphish.sh
 chmod 711 $iHAKLAB/../lockphish/*
 if [ -e $PREFIX/bin/ngrok ]; then
-        ln -s $PREFIX/bin/ngrok $iHAKLAB/../lockphish/
+        cp $PREFIX/bin/ngrok $iHAKLAB/../lockphish/
 else
         bash $iHAKLAB/.set/to-install/ngrok
 	if [ -e $PREFIX/bin/ngrok ]; then
-		ln -s $PREFIX/bin/ngrok $iHAKLAB/../lockphish/
+		cp $PREFIX/bin/ngrok $iHAKLAB/../lockphish/
 	else
 		printf "$R\n[w]-> ERROR :$W Ngrok can not be installes\n"
 	fi

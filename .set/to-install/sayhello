@@ -48,11 +48,11 @@ git clone https://github.com/thelinuxchoice/sayhello.git $iHAKLAB/../sayhello
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/sayhello -o $iHAKLAB/../sayhello/sayhello.sh
 chmod 777 $iHAKLAB/../sayhello/sayhello.sh
 if [ -e $PREFIX/bin/ngrok ]; then
-        ln -s $PREFIX/bin/ngrok $iHAKLAB/../sayhello/
+        cp $PREFIX/bin/ngrok $iHAKLAB/../sayhello/
 else
         bash $iHAKLAB/.set/to-install/ngrok
 	if [ -e $PREFIX/bin/ngrok ]; then
-		ln -s $PREFIX/bin/ngrok $iHAKLAB/../sayhello/
+		cp $PREFIX/bin/ngrok $iHAKLAB/../sayhello/
 	else
 		printf "$R\n[w]-> ERROR :$W Ngrok can not be installed\n"
 	fi
