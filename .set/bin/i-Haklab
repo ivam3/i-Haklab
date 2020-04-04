@@ -10,7 +10,7 @@ function ctrl_c() {
 banner() {
 	if [ -e $iHAKLAB/.set/libexec/banner/i-Haklab ]; then
 		bash $iHAKLAB/.set/libexec/banner/i-Haklab
-		sleep 1
+		sleep 0.5
 	fi
 }
 k-boom() {

@@ -93,7 +93,7 @@ done
 bash $iHAKLAB/.set/to-install/functions > /dev/null 2>&1
 printf "$Y\n[!]-> i-Haklab functions fixed$W\n"
 
-for tool in exploitdb cloudbunny aquatone kerbrute GetNPUsers a2sv cryptovenom gobuster sayhello localtunnel-server lockphish; do #Upgrading tools
+for tool in exploitdb cloudbunny aquatone kerbrute GetNPUsers a2sv cryptovenom gobuster sayhello localtunnel-server lockphish gophish ; do #Upgrading tools
 	if [ ! -d $iHAKLAB/../$tool ]; then
 		printf "$Y\n[!]-> $tool tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install $tool\n"
 	fi

@@ -2,6 +2,7 @@
 # Coded on Agust 2019 by Ivam3
 # This file bring a easy access to execute i-Haklab tools
 #
+iHAKLAB=$(cat $PREFIX/etc/fish/config.fish | grep iHAKLAB | awk '{print $3}')
 SCRIPT_NAME=$(basename "$1")
 BEEF_PATH="/data/data/com.termux/files/usr/opt/beef"
 GO_PATH=$(cat $PREFIX/etc/fish/config.fish | grep GOPATH | awk '{print $3}')
@@ -27,6 +28,12 @@ STDERROOT() {
 	echo "$R\n[w] i-Haklab :$W Your device is not rooted$W\n"
 	exit
 }
+Banner() {
+        if [ -e $iHAKLAB/.set/libexec/banner/i-Haklab ]; then
+                bash $iHAKLAB/.set/libexec/banner/i-Haklab
+                sleep 0.5
+        fi
+}
 #
 # Fix ruby bigdecimal extensions linking error.
 case "$(uname -m)" in
@@ -47,6 +54,7 @@ case "$(uname -m)" in
 esac
 
 if [ -z $SCRIPT_NAME ]; then
+	Banner
 	echo "$Y\n[!] Syntax :$W run [-name-of-tool/framework-]\n\n
 |─Tool/Framework─|──────────────────────Description────────────────────────────|
 ╰─────aio────────➤  Accounts autopay generator
@@ -70,6 +78,7 @@ if [ -z $SCRIPT_NAME ]; then
 ╰──────fbi───────➤  Accurate facebook account information gathering
 ╰──GetNPUserss───➤  Attempt to list and get TGTs for those users that have the property
 ╰────Gobuster────➤  Gobuster is a tool used to brute-force URIs in web sites, DNS subdomains and Virtual Host names on target web servers.
+╰────gophish─────➤  Launch simulated and monitored phishing campaigns.
 ╰─────hakku──────➤  Penetration testing tools.
 ╰────hatcloud────➤  Real IP CloudFlare server searcher.
 ╰─────hunner─────➤  Penetracion tool with sql vulnerabilityScan xxs vulnerabilityDos sitesBrutforce FtpBrutforse SShBrutforse and emails.
@@ -541,6 +550,14 @@ case "$SCRIPT_NAME" in
 				exec $GO_PATH/bin/$SCRIPT_NAME "-h"
 			fi
 			cd $BACK
+		else
+			STDERR
+		fi
+		;;
+	gophish)
+		if [ -d $GO_PATH/src/github.com/gophish/gophish/ ]; then
+			cd $GO_PATH/src/github.com/gophish/gophish
+			./gophish
 		else
 			STDERR
 		fi
