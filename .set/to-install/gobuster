@@ -50,11 +50,12 @@ if [ -z $VAR ]; then
 	sed -i "20a set GOPATH $HOME/go" $PREFIX/etc/fish/config.fish
 fi
 chmod +x -R $HOME/go/
-go get https://github.com/OJ/gobuster
-pushd $HOME/go/src/github.com/gobuster
-go get && go build
+go get github.com/OJ/gobuster
+pushd $HOME/go/src/github.com/OJ/gobuster
+go get
+go build
 go install
-ln -s /data/data/com.termux/files/home/go/bin/gobuster ln -s /data/data/com.termux/files/usr/bin/gobuster
+ln -s /data/data/com.termux/files/home/go/bin/gobuster /data/data/com.termux/files/usr/bin/gobuster
 popd
 }
 withgit(){

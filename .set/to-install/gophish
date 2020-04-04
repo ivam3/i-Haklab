@@ -1,5 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
-#Created on Dec/2018
+#Created on Feb/2020
 IFS=$'\n\t'
 trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
@@ -34,31 +34,32 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL AQUATONE. . . .$i"
+        printf "$(clear) $C STARTING TO INSTALL GOBUSTER. . . .$i"
         printf "\n\n"
         sleep 1
 done
 #INSTALLATION
-apt update && apt upgrade
-apt install ruby golang -y
+apt update && apt upgrade -y
+apt install golang -y
 if [ ! -d $HOME/go/src/github.com ]; then
-        mkdir -p $HOME/go/src/github.com
+	mkdir -p $HOME/go/src/github.com
 fi
-GOPATH=$(grep -oE GOPATH $PREFIX/etc/fish/config.fish)
-if [ -z $GOPATH ]; then
-        sed -i "21a GOPATH=$HOME/go" $PREFIX/etc/fish/config.fish
+VAR=$(cat $PREFIX/etc/fish/config.fish | grep "GOPATH")
+if [ -z $VAR ]; then
+	sed -i "20a set GOPATH $HOME/go" $PREFIX/etc/fish/config.fish
 fi
-#go get github.com/michenriksen/aquatone
-git clone https://github.com/michenriksen/aquatone.git $GOPATH/src/github.com/aquatone
-printf "$Y\n[IbyC]:-> It could take a while . . .\n$W"
-pushd $GOPATH/src/github.com/aquatone
-ln -s $GOPATH/src/github.com/aquatone $HOME/aquatone
+chmod +x -R $HOME/go/
+go get github.com/gophish/gophish
+pushd $HOME/go/src/github.com/gophish/gophish
 go get
 go build
 go install
-gem install aquatone
+ln -s /data/data/com.termux/files/home/go/bin/gophish /data/data/com.termux/files/home/go/src/github.com/gophish/gophish/gophish
+sed 's|"listen_url": "0.0.0.0:80",|"listen_url": "127.0.0.1:8080",|g' -i config.json
+#touch gophish_admin.crt
+#touch gophish_admin.key
+chmod 640 config.json
 popd
-chmod 711 -R $HOME/go/
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
