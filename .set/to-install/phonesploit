@@ -44,7 +44,7 @@ if [ -d $iHAKLAB/../PhoneSploit ]; then
 fi
 apt update && apt upgrade -y
 apt install git python python2 -y
-git clone https://github.com/metachar/PhoneSploit.git $iHAKLAB/../PhoneSploit
+git clone https://github.com/metachar/PhoneSploit.git $iHAKLAB/../phonesploit
 for v in python python2 ; do
 	$v -m pip install --upgrade pip
 	$v -m pip install colorama

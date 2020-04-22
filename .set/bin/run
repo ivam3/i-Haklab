@@ -87,6 +87,7 @@ if [ -z $SCRIPT_NAME ]; then
 ╰───lockphish────➤ 
 ╰─────nikto──────➤  Web server scanner which performs comprehensive tests against web servers for multiple items.
 ╰──phoneinfoga───➤  Scan phone numbers to first gather standard information.
+╰──phonesploit───➤  Exploit a device using open Adb ports (adbfastboot needed)
 ╰────pybelt──────➤  Complete open source hackers tool.
 ╰───recon-ng─────➤  Providing a powerful environment to conduct open source web-based reconnaissance.
 ╰──────dog───────➤  Reconnaissance Swiss Army Knife.
@@ -224,6 +225,15 @@ case "$SCRIPT_NAME" in
 			STDERR
 		fi
                 ;;
+	phonesploit)
+		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+			cd $TMP_PATH/$SCRIP_NAME
+			exec python2 "$TMP_PATH/$SCRIPT_NAME/main_linux.py"
+			cd $BACK
+		else
+			STDERR
+		fi
+		;;
 	hatcloud)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/HatCloud
