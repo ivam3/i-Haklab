@@ -70,7 +70,7 @@ else
 fi
 
 #Adding bf wordlist
-command -v dnsenum > /dev/null 2>&1 || mkdir -p $PREFIX/share/dnsenum ; curl https://raw.githubusercontent.com/fwaeytens/dnsenum/master/dns.txt -o $PREFIX/share/dnsenum/dns.txt > /dev/null 2>&1
+#command -v dnsenum > /dev/null 2>&1 || mkdir -p $PREFIX/share/dnsenum ; curl https://raw.githubusercontent.com/fwaeytens/dnsenum/master/dns.txt -o $PREFIX/share/dnsenum/dns.txt > /dev/null 2>&1
 command -v speedtest-cli > /dev/null 2>&1 || python -m pip install speedtest-cli /dev/null 2>&1
 
 BINDIR=$(ls $iHAKLAB/.set/bin) #Upgrading executables
@@ -93,7 +93,7 @@ done
 bash $iHAKLAB/.set/to-install/functions > /dev/null 2>&1
 printf "$Y\n[!]-> i-Haklab functions fixed$W\n"
 
-for tool in exploitdb cloudbunny aquatone kerbrute GetNPUsers a2sv cryptovenom gobuster sayhello localtunnel-server lockphish gophish ; do #Upgrading tools
+for tool in exploitdb cloudbunny aquatone kerbrute GetNPUsers a2sv cryptovenom gobuster sayhello localtunnel-server lockphish gophish adbfastboot phonesploit ; do #Upgrading tools
 	if [ ! -d $iHAKLAB/../$tool ]; then
 		printf "$Y\n[!]-> $tool tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install $tool\n"
 	fi
