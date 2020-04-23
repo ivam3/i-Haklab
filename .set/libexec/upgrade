@@ -73,6 +73,7 @@ fi
 #command -v dnsenum > /dev/null 2>&1 || mkdir -p $PREFIX/share/dnsenum ; curl https://raw.githubusercontent.com/fwaeytens/dnsenum/master/dns.txt -o $PREFIX/share/dnsenum/dns.txt > /dev/null 2>&1
 command -v speedtest-cli > /dev/null 2>&1 || python -m pip install speedtest-cli /dev/null 2>&1
 
+NO() {
 BINDIR=$(ls $iHAKLAB/.set/bin) #Upgrading executables
 for i in ${BINDIR[*]}; do
 	wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$i -O $PREFIX/bin/$i > /dev/null 2>&1
@@ -80,6 +81,7 @@ for i in ${BINDIR[*]}; do
 	printf "$Y\n[!]-> Command $i upgraded$W\n"
 	sleep 1
 done
+
 TOFIX=$(ls $iHAKLAB/.set/fix-tools)
 for m in ${TOFIX[*]}; do #Download scripts to fix some tools
 	if [ -d $iHAKLAB/../$m ]; then
@@ -93,12 +95,13 @@ done
 bash $iHAKLAB/.set/to-install/functions > /dev/null 2>&1
 printf "$Y\n[!]-> i-Haklab functions fixed$W\n"
 
-for tool in exploitdb cloudbunny aquatone kerbrute GetNPUsers a2sv cryptovenom gobuster sayhello localtunnel-server lockphish gophish adbfastboot phonesploit ; do #Upgrading tools
+for tool in exploitdb aquatone kerbrute GetNPUsers a2sv cryptovenom gobuster lockphish gophish adbfastboot phonesploit ; do #Upgrading tools
 	if [ ! -d $iHAKLAB/../$tool ]; then
 		printf "$Y\n[!]-> $tool tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install $tool\n"
 	fi
 	sleep 1
 done
-printf "$G\n\t[i]->$W Already up to date$G <-[i]$W\n"
+}
+printf "$G\n\t[i]->$W Already up to date$G <-[i]$W\n\n"
 
 #			@Ivam3

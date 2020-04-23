@@ -34,7 +34,7 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL GOBUSTER. . . .$i"
+        printf "$(clear) $C STARTING TO INSTALL GOPHISH. . . .$i"
         printf "\n\n"
         sleep 1
 done

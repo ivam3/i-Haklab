@@ -247,7 +247,7 @@ elif [ $1 = speedtest ]; then
 elif [ $1 = restore ]; then
 	if [ -d $iHAKLAB ]; then
 		banner
-		printf "$Y[!]->$W Restoring . .\n"
+		printf "$Y[!]->$W Restoring (It could take a while) ...\n"
 		rm -rf $iHAKLAB > /dev/null 2>&1
 		while [ ! -d $iHAKLAB ]; do
 			git clone https://github.com/Ivam3/i-Haklab.git $iHAKLAB > /dev/null 2>&1
