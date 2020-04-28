@@ -58,6 +58,8 @@ if [ "$RUROOT" = "root" ]; then
 	rm xettercap-*
 	popd
 	rm $PREFIX/$TMP_PATH/run.sh
+	rm $PREFIX/$TMP_PATH/xerosploit.py
+	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/xerosploit.py -o $PREFIX/$TMP_PATH/xerosploit.py
 else
 	printf "$R\n[W]:-> You need to be root to get Xerosploit$W\n"
         sleep 1
