@@ -73,7 +73,6 @@ fi
 #command -v dnsenum > /dev/null 2>&1 || mkdir -p $PREFIX/share/dnsenum ; curl https://raw.githubusercontent.com/fwaeytens/dnsenum/master/dns.txt -o $PREFIX/share/dnsenum/dns.txt > /dev/null 2>&1
 command -v speedtest-cli > /dev/null 2>&1 || python -m pip install speedtest-cli /dev/null 2>&1
 
-NO() {
 BINDIR=$(ls $iHAKLAB/.set/bin) #Upgrading executables
 for i in ${BINDIR[*]}; do
 	wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$i -O $PREFIX/bin/$i > /dev/null 2>&1
@@ -81,7 +80,7 @@ for i in ${BINDIR[*]}; do
 	printf "$Y\n[!]-> Command $i upgraded$W\n"
 	sleep 1
 done
-
+NO() {
 TOFIX=$(ls $iHAKLAB/.set/fix-tools)
 for m in ${TOFIX[*]}; do #Download scripts to fix some tools
 	if [ -d $iHAKLAB/../$m ]; then

@@ -49,6 +49,7 @@ if [ -z $VAR ]; then
 	sed -i "20a set GOPATH $HOME/go" $PREFIX/etc/fish/config.fish
 fi
 chmod +x -R $HOME/go/
+printf "$Y\n[!]-> It could take a while ...$W\n"
 go get github.com/gophish/gophish
 pushd $HOME/go/src/github.com/gophish/gophish
 go get

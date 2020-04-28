@@ -572,6 +572,16 @@ case "$SCRIPT_NAME" in
 			STDERR
 		fi
 		;;
+	xerosploit)
+		if [ -d $PREFIX/opt/$SCRIPT_NAME ]; then
+			command -v sudo > /dev/null || { printf "$R\n[w] i-Haklab :$W command sudo needed$R |$W please install it.\n" ; exit ; }
+			cd $PREFIX/opt/$SCRIPT_NAME
+			sudo python2 $PREFIX/opt/$SCRIPT_NAME/$SCRIPT_NAME.py
+			cd $BACK
+		else
+			STDERR
+		fi
+		;;
 	*)
 		echo "$R\n[w] i-Haklab :$W Unknown argument '$SCRIPT_NAME'\n"
 		exit 1
