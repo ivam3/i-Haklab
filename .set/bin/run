@@ -583,9 +583,9 @@ case "$SCRIPT_NAME" in
 		fi
 		;;
 	quack)
-                if [ -d $tMP_PATH/$SCRIPT_NAME ]; then
+                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
                         cd $TMP_PATH/$SCRIPT_NAME
-                        python $TMP_PATH/$SCRIPT_NAME
+                        python $SCRIPT_NAME "$2" "$@"
                         cd $BACK
                 else
                         STDERR
