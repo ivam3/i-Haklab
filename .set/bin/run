@@ -31,7 +31,7 @@ STDERROOT() {
 Banner() {
         if [ -e $iHAKLAB/.set/libexec/banner/i-Haklab ]; then
                 bash $iHAKLAB/.set/libexec/banner/i-Haklab
-                sleep 0.5
+                sleep 0.2
         fi
 }
 #
@@ -582,6 +582,15 @@ case "$SCRIPT_NAME" in
 			STDERR
 		fi
 		;;
+	quack)
+                if [ -d $tMP_PATH/$SCRIPT_NAME ]; then
+                        cd $TMP_PATH/$SCRIPT_NAME
+                        python $TMP_PATH/$SCRIPT_NAME
+                        cd $BACK
+                else
+                        STDERR
+                fi
+                ;;
 	*)
 		echo "$R\n[w] i-Haklab :$W Unknown argument '$SCRIPT_NAME'\n"
 		exit 1

