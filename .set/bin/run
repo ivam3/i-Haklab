@@ -72,12 +72,13 @@ if [ -z $SCRIPT_NAME ]; then
 ╰────credmap─────➤  A reuse credential maper in socials media.
 ╰──cryptovenom───➤  Cryptosystems and cryptoanalysis methods all in one.
 ╰────dnsenum─────➤  Enumerate DNS information of a domain and to discover non-contiguous ip blocks.
+╰──────dog───────➤  Reconnaissance Swiss Army Knife.
 ╰────evilurl─────➤  Generate unicode evil domains for IDN Homograph Attack and detect them.
 ╰───exploitdb────➤  Public exploits and corresponding vulnerable software, developed for use by penetration testers and vulnerability researchers
 ╰────fbbrute─────➤  Brute force tool to substract facebook user credencials.
 ╰──────fbi───────➤  Accurate facebook account information gathering
 ╰──GetNPUserss───➤  Attempt to list and get TGTs for those users that have the property
-╰────Gobuster────➤  Gobuster is a tool used to brute-force URIs in web sites, DNS subdomains and Virtual Host names on target web servers.
+╰────gobuster────➤  Gobuster is a tool used to brute-force URIs in web sites, DNS subdomains and Virtual Host names on target web servers.
 ╰────gophish─────➤  Launch simulated and monitored phishing campaigns.
 ╰─────hakku──────➤  Penetration testing tools.
 ╰────hatcloud────➤  Real IP CloudFlare server searcher.
@@ -89,8 +90,8 @@ if [ -z $SCRIPT_NAME ]; then
 ╰──phoneinfoga───➤  Scan phone numbers to first gather standard information.
 ╰──phonesploit───➤  Exploit a device using open Adb ports (adbfastboot needed)
 ╰────pybelt──────➤  Complete open source hackers tool.
+╰─────quack──────➤  Toolkit to spam via calls,sms,smtp.tcp,http and more
 ╰───recon-ng─────➤  Providing a powerful environment to conduct open source web-based reconnaissance.
-╰──────dog───────➤  Reconnaissance Swiss Army Knife.
 ╰─────rhawk──────➤  Information Gathering and Vulnerability Scanning.
 ╰──────rsf───────➤  Exploitation framework dedicated to embedded routers.
 ╰───saycheese────➤  Grab target's webcam shots by link.
@@ -101,6 +102,7 @@ if [ -z $SCRIPT_NAME ]; then
 ╰─────sqliv──────➤  Massive SQL injection scanner.
 ╰────sqlmap──────➤  Penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database server. 
 ╰──theharvester──➤  Gather emails, subdomains, hosts, employee names, open ports and banners from different public sources like search engines, PGP key servers and SHODAN computer database.
+╰──xerosploit────➤  Penetration testing toolkit whose goal is to perform man in the middle attacks.
 ╰──webhackshl────➤  Vulnerability analysis and information collection of websites and servers.
 ╰───whatweb──────➤  Identifie websites (DNS).
 ╰────wpscan──────➤  Black box WordPress vulnerability scanner.\n"
