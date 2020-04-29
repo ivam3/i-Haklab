@@ -74,14 +74,14 @@ fi
 command -v speedtest-cli > /dev/null 2>&1 || python -m pip install speedtest-cli /dev/null 2>&1
 
 BINDIR=$(ls $iHAKLAB/.set/bin) #Upgrading executables
-printf "$Y[!]-> Fixing some binaries files$W\n"
+printf "$Y[!]-> Fixing binaries files$W\n"
 for i in ${BINDIR[*]}; do
 	wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$i -O $PREFIX/bin/$i > /dev/null 2>&1
 	chmod +x $PREFIX/bin/$i
 done
 
 TOFIX=$(ls $iHAKLAB/.set/fix-tools)
-printf "$Y[!]-> $m Fixing executable files$W\n"
+printf "$Y[!]-> Fixing executable files$W\n"
 for m in ${TOFIX[*]}; do #Download scripts to fix some tools
 	if [ -d $iHAKLAB/../$m ]; then
 		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/$m -o $iHAKLAB/../$m/$m.sh > /dev/null 2>&1
