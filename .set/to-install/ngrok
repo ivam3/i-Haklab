@@ -77,8 +77,8 @@ function ENDING-SCRIPT {
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 }
 if [ -e $PREFIX/bin/ngrok ]; then
-        printf "$Y\n\n[!]:-> Ngrok file already exists | Do you wanna re-install it ?"
-        while read -p -n 2 "$G\n[y/Y|N/n]:->$W " yesorno [ -z $yesorno ]; do
+        printf "$Y\n\n[!]:-> Ngrok file already exists | Do you wanna re-install it ?\n"
+        while read -n 2 -p "[y/Y|N/n]:-> " yesorno && [ -z $yesorno ]; do
                 printf "$R\n[W] O-ops!!$W\n"
         done
         if [ $yesorno = 'y' -o $yesorno = 'Y' ]; then
