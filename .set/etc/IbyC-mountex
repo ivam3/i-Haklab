@@ -1,0 +1,65 @@
+#!/bin/bash
+SCRIPT_NAME=IbyC-mountex
+R='\033[1;31m'
+G='\033[1;32m'
+Goke='\033[92m'
+Glig=='\e[1;32m'
+Y='\033[1;33m'
+B='\033[1;34m'
+M='\033[1;35m'
+C='\033[1;36m'
+W='\033[0m'
+
+while [ ! $(id -u) -ne 0 ]; do
+        printf "$R\n[W]:-> You need to be a common user$W\n"
+        exit
+done
+until [ -e $PREFIX/bin/$SCRIPT_NAME ]; do
+        printf "$R\n[W]:-> $SCRIPT_NAME is not in your PATH$W\n"
+        exit
+done
+usage() {
+        printf "$G\nUsage: \n$W"
+        printf "IbyC-mountex [<open/close>]\n"
+        exit
+}
+
+SYSBIN=/system/bin
+SYSXBIN=/system/xbin
+BB=$SYSXBIN/busybox
+
+if [ -x $SYSXBIN/su ]; then
+        SU=$SYSXBIN/su
+elif [ -x /su/bin/su ]; then
+        SU=/su/bin/su
+elif [ -x /sbin/su ]; then
+        SU=/sbin/su
+else
+        echo -e "\nsu executable not found"
+        exit
+fi
+
+if [ -x $BB ] && [ $($BB --list | grep -w mount) == "mount" ]; then
+        MOUNTEX="$BB mount"
+elif [ -x $SYSBIN/mount ]; then
+        MOUNTEX="$SYSBIN/mount"
+else
+        printf "\nCannot find mount executable"
+        exit
+fi
+MOUNT_RW="$MOUNTEX -o rw,remount,rw /system"
+MOUNT_RO="$MOUNTEX -o ro,remount,ro /system"
+case $1 in
+        open)
+                $SU -c "$MOUNT_RW"
+                ;;
+        close)
+                $SU -c "$MOUNT_RO"
+                ;;
+        *)
+                usage
+                ;;
+esac
+
+# Reset echo
+#tty sane
