@@ -46,6 +46,7 @@ if [ ! -d $HOME/localtunnel-server ]; then
 	cd $HOME/localtunnel-server
 	npm install
 	npm install -g localtunnel
+	wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/openurl.js -O $PREFIX/lib/node_modules/localtunnel/node_modules/openurl/openurl.js
 else
 	printf "$R\n[w]-> Localtunnel-server is already installed\n"
 	sleep 1
