@@ -125,7 +125,7 @@ bundle install -j5
 gem install shodan
 $PREFIX/bin/find -type f -executable -exec termux-fix-shebang \{\} \;
 rm ./modules/auxiliary/gather/http_pdf_authors.rb
-termux-elf-cleaner /data/data/com.termux/files/usr/lib/ruby/gems/2.6.0/gems/pg-0.21.0/lib/pg_ext.so
+termux-elf-cleaner /data/data/com.termux/files/usr/lib/ruby/gems/2.7.0/gems/pg-0.21.0/lib/pg_ext.so
 cd $PREFIX/opt/metasploit-framework/config
 curl -LO https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/mediafire/metasploit/database.yml
 
