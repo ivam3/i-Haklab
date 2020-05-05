@@ -454,7 +454,7 @@ elif [ $1 = forwarding ] && [ -z $2 ]; then
 		printf "$R\n[w]-> No port specified"
 		sleep 1
 		printf "$Y\n[!]-> Using default$W : $LPORT\n$G"
-		$(which lt) -p $LPORT --print-requests
+		$(which lt) -h "http://serverless.social" -p $LPORT --print-requests
 	fi
 elif [ $1 = forwarding ] && [ $2 ] && [ -z $3 ]; then
 	if [ $SSH = "1" ]; then 
@@ -474,7 +474,7 @@ elif [ $1 = forwarding ] && [ $2 ] && [ -z $3 ]; then
 			printf "$Y\n[!] using default$W : $LPORT\n"
 		fi
 		printf "$G"
-		$(which lt) -p $LPORT --print-requests
+		$(which lt) -h "http://serverless.social" -p $LPORT --print-requests
 	fi
 elif [ $1 = forwarding ] && [ $2 ] && [ $3 ]; then
 	if [ $SSH = "1" ]; then
