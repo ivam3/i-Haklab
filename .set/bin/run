@@ -64,7 +64,7 @@ if [ -z $SCRIPT_NAME ]; then
 ╰─androbugs──────➤  Search vulnerabilities in .apk files
 ╰─aquatone───────➤  Search domain, subdomains, hosts scanner, headers HTTP, HTML body
 ╰─beef───────────➤  Web penetration framework
-╰─binchecker─────➤ Information gathering about credit/debit card
+╰─binchecker─────➤  Information gathering about credit/debit card
 ╰─binwalk────────➤  Searching and given binary image for embedded files and executable code.
 ╰─blackbox───────➤  Tool for Bruteforcing attacks, Information Gathering, Dorking, Cracking and Exploit web vulnerabilities.
 ╰─cc-genpro──────➤  Bins and temporal e-mails generator.
@@ -102,7 +102,7 @@ if [ -z $SCRIPT_NAME ]; then
 ╰─shellsploit────➤  Powerful phishing tool.
 ╰─sqliv──────────➤  Massive SQL injection scanner.
 ╰─sqlmap─────────➤  Penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database server. 
-╰─theharvester───➤ Gather emails, subdomains, hosts, employee names, open ports and banners from different public sources like search engines, PGP key servers and SHODAN computer database.
+╰─theharvester───➤  Gather emails, subdomains, hosts, employee names, open ports and banners from different public sources like search engines, PGP key servers and SHODAN computer database.
 ╰─xerosploit─────➤  Penetration testing toolkit whose goal is to perform man in the middle attacks.
 ╰─webhackshl─────➤  Vulnerability analysis and information collection of websites and servers.
 ╰─whatweb────────➤  Identifie websites (DNS).
@@ -597,7 +597,7 @@ case "$SCRIPT_NAME" in
 	hasher)
 		if [ -d $TMP_PATH/$SCRIP_NAME ]; then
 			cd $TMP_PATH/$SCRIPT_NAME
-			python2 $SCRIPT_NAME
+			python2 $TMP_PATH/$SCRIPT_NAME/hash.py
 			cd $BACK
 		else
 			STDERR
