@@ -1,0 +1,99 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Created on Dec/2018
+IFS=$'\n\t'
+trap ctrl_c 2
+
+R='\033[1;31m'
+G='\033[1;32m'
+Goke='\033[92m'
+Glig=='\e[1;32m'
+Y='\033[1;33m'
+B='\033[1;34m'
+M='\033[1;35m'
+C='\033[1;36m'
+W='\033[0m'
+
+ctrl_c() {
+	printf "$Y\n\n[!]$R Need a help?$B join to$R t.me/Ivam3_Bot$W\n\n"
+}
+Chao-chao() {
+	printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
+}
+Repos() {
+	printf "$Y\n[!]:-> Installing|upgrading repositories ...\n$W"
+	command -v $Py > /dev/null 2>&1 || pkg install $Py -y > /dev/null 2>&1
+	$Py -m pip install --upgrade pip > /dev/null 2>&1
+}
+Lib() {
+	for Libs in clang libtool libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static ; do
+		SCHLIB=$(pkg list-installed | awk '{print $1}' | grep -oE $Libs | head -n1)
+		if [ -z $SCHLIB ]; then
+			printf "$Y\n[!]:-> Installing libreries ...\n$W"
+			pkg install $Libs -y > /dev/null 2>&1
+		fi
+	done
+}
+Menu() {
+	printf "$B\nUSAGE :\nIbyC-fixer <[B|BASIC] [L|LDFLAGS] [S|SODIUM]> <[Py|Py2]> <module(max 4)>$W\n\nB  BASIC\tInstall module on basic\nL  LDFLAGS\tForce installation to use libraries and system compiler\nS  SODIUM\tForce the installation to use the sodium decryptor\nPy  \t\tFor python3\nPy2  \t\tFor python2\n\nExamples:\n\tIbyC-fixer BASIC Py future\n\tIbyC-fixer S Py2 colorama\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n"
+	exit
+}
+while [ ! $(id -u) -ne 0 ]; do
+	printf "$R\n[W]:-> You need to be a common user$W\n"
+	exit
+done
+until [ "$(basename "$0")" = "IbyC-fixer" ]; do
+	printf "$R\n[W]:-> Wrong file name$W\n"
+	exit
+done
+until [ -e $PREFIX/bin/IbyC-fixer ]; do
+	if [ ! -e $PREFIX/bin/IbyC-fixer ] && [ -e $PWD/IbyC-fixer ]; then
+		mv $PWD/IbyC-fixer $PREFIX/bin/IbyC-fixer > /dev/null 2>&1
+		printf "$Y[!]:-> IbyC-fixer was add to PATH$W\n"
+		sleep 1.5
+	else
+		printf "$R[W]:-> You should add IbyC-fixer to PATH$W\n"
+		exit
+	fi
+done
+while [ -z $3 ]; do
+	Menu
+done
+if [ $2 = "Py" ]; then
+	Py=python
+	Repos
+	Lib
+elif [ $2 = "Py2" ]; then
+	Py=python2
+	Repos
+	Lib
+else
+	Menu
+fi
+case $1 in
+	B|BASIC)
+		for module in $3 $4 $5 $6 ; do
+			$Py -m pip install $module
+		done
+		Chao-chao
+		;;
+	LDFLAGS|L)
+		export LDFLAGS="-L/system/lib/ -lm -lcompiler_rt"
+		for module in $3 $4 $5 $6 ; do
+			$Py -m pip install $module --global-option="build_ext" --global-option="--disable-jpeg"
+		done
+		Chao-chao
+		;;
+	SODIUM|S)
+		export SODIUM_INSTALL=system
+		for module in $3 $4 $5 $6 ; do
+			$Py -m pip install --no-binary :all: $module
+		done
+		Chao-chao
+		;;
+	*)
+		ctrl_c
+		exit
+		;;
+esac
+
+#                                               @Ivam3
