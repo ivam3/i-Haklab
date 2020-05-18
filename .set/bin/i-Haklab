@@ -120,7 +120,8 @@ Arguments  |    Options     |    Description
 ╰forwarding➤────────────────➤ Start a SSH client to request TCP port forwarding from server and proxy.
      ╰─────➤──port_number───➤ Set a specific port number (default 4546 or 80 for rooted device)
 |    ╰─────➤───subdomain────➤ Set a specitic subdomain | example: i-Haklab forwarding <myport> <my-subdomain>
-╰─phishing─➤──site─redirect─➤ Clone a specific website for phishing tests
+╰─phishing─➤──site─redirect─➤ Clone a specific website for phishing tests 
+     ╰─────➤────────────────➤ Available: facebook mfacebook
      ╰─────➤────────────────➤ example: i-Haklab mfacebook m.facebook.com
 |__________________________________________________________________________________________\n\n"
 elif [ $1 = list ]; then
