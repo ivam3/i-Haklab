@@ -3,6 +3,8 @@
 IFS=$'\n\t'
 trap ctrl_c 2
 
+FILE=$(mktemp)
+DIR=$(mktemp -d)
 R='\033[1;31m'
 G='\033[1;32m'
 Goke='\033[92m'
@@ -25,13 +27,29 @@ Repos() {
 	$Py -m pip install --upgrade pip > /dev/null 2>&1
 }
 Lib() {
-	for Libs in clang libtool libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static ; do
+	for Libs in clang libtool libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static tar wget; do
 		SCHLIB=$(pkg list-installed | awk '{print $1}' | grep -oE $Libs | head -n1)
 		if [ -z $SCHLIB ]; then
 			printf "$Y\n[!]:-> Installing libreries ...\n$W"
 			pkg install $Libs -y > /dev/null 2>&1
 		fi
 	done
+}
+Turtle() {
+        wget https://github.com/ivam3/i-Haklab/raw/master/.set/fix-tools/py_modules/turtle-0.0.2.tar.gz -O $DIR/turtle-0.0.2.tar.gz -q
+        if [ $DIR/turtle-0.0.2.tar.gz ]; then
+                pushd $DIR
+                gunzip $DIR/turtle-0.0.2.tar.gz
+                if [ $DIR/turtle-0.0.2.tar ]; then
+                        tar -xvf turtle-0.0.2.tar
+                        if [ -d $DIR/turtle-0.0.2 ]; then
+                                sed 's|      except ValueError, ve:|      except (ValueError, ve):|g' -i $DIR/turtle-0.0.2/setup.py
+				$Py -m pip install -e turtle-0.0.2
+                        fi
+                fi
+                popd
+        fi
+        rm -rf $FILE
 }
 Menu() {
 	printf "$B\nUSAGE :\nIbyC-fixer <[B|BASIC] [L|LDFLAGS] [S|SODIUM]> <[Py|Py2]> <module(max 4)>$W\n\nB  BASIC\tInstall module on basic\nL  LDFLAGS\tForce installation to use libraries and system compiler\nS  SODIUM\tForce the installation to use the sodium decryptor\nPy  \t\tFor python3\nPy2  \t\tFor python2\n\nExamples:\n\tIbyC-fixer BASIC Py future\n\tIbyC-fixer S Py2 colorama\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n"
@@ -72,21 +90,33 @@ fi
 case $1 in
 	B|BASIC)
 		for module in $3 $4 $5 $6 ; do
-			$Py -m pip install $module
+			if [ $module = turtle ]; then
+				Turtle
+			else
+				$Py -m pip install $module
+			fi
 		done
 		Chao-chao
 		;;
 	LDFLAGS|L)
 		export LDFLAGS="-L/system/lib/ -lm -lcompiler_rt"
 		for module in $3 $4 $5 $6 ; do
-			$Py -m pip install $module --global-option="build_ext" --global-option="--disable-jpeg"
+			if [ $module = turtle ]; then
+				Turtle
+			else
+				$Py -m pip install $module --global-option="build_ext" --global-option="--disable-jpeg"
+			fi
 		done
 		Chao-chao
 		;;
 	SODIUM|S)
 		export SODIUM_INSTALL=system
 		for module in $3 $4 $5 $6 ; do
-			$Py -m pip install --no-binary :all: $module
+			if [ $module = turtle ]; then
+				Turtle
+			else
+				$Py -m pip install --no-binary :all: $module
+			fi
 		done
 		Chao-chao
 		;;

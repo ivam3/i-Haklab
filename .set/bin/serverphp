@@ -3,14 +3,20 @@
 IFS=$'\n\t'
 trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
-function ctrl_c() {
-                K-boom
-		exit
+DEFAULT_DIR=$PREFIX/var/service/php/
+DIR="${1:-${DEFAULT_DIR}}"
+
+ctrl_c() {
+	K-boom
+	exit
 	}
 Banner() {
 	if [ -e $iHAKLAB/.set/libexec/banner/i-Haklab ]; then
 		bash $iHAKLAB/.set/libexec/banner/i-Haklab
 	fi
+}
+usage() {
+	printf "$G\n[usage] : serverphp <directory path>\n$W"
 }
 K-boom() {
 	if [ -e $iHAKLAB/.set/libexec/banner/k-boom ]; then
@@ -47,14 +53,14 @@ if [ ! -d $PREFIX/var/service/php ]; then
 	mkdir -p $PREFIX/var/service/php/
 fi
 Banner
-DIR=$PREFIX/var/service/php/
 LOCALHOST=$(ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255)
 command -v php > /dev/null 2>&1 || pkg install php & > /dev/null 2>&1
+usage
 if [ ! $(id -u) -ne 0 ]; then
 	command -v sudo > /dev/null 2>&1 || bash $iHAKLAB/.set/to-install/instasudo > /dev/null 2>&1
 	sudo php -S $LOCALHOST:80 -t $DIR
-	K-boom
 else
 	php -S $LOCALHOST:4546 -t $DIR
 fi
+K-boom
 #			@Ivam3

