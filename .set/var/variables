@@ -1,13 +1,11 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # This file contain all i-Haklab enviroment variables
-
+OP1="${2:-crunch}"
 if [ -d /data/data/com.termux/files/home/i-Haklab ]; then
         export iHAKLAB=/data/data/com.termux/files/home/i-Haklab
 else
         export iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 fi
-#source $iHAKLAB/.set/libexec/colors
-#source $iHAKLAB/.set/functions/functions
 
 export TOOL=$(ls $iHAKLAB/.set/to-install/ | grep -iv .zip | grep -iv instasudo | grep -iv QG | grep -iv i-Haklab_login | grep -iv check-root | grep -iv functions | grep -n -iv lock)
 
