@@ -10,14 +10,10 @@ fi
 source $iHAKLAB/.set/libexec/colors
 source $iHAKLAB/.set/var/variables
 source $iHAKLAB/.set/functions/functions
+
 SITE=$1
 REDIRECT=$2
-if [ $1 ]; then
-	echo $SITE
-fi
-if [ $2 ]; then
-	echo $REDIRECT
-fi
+
 TMP_PATH=$PREFIX/var/service/php/$SITE
 if [ ! -d $TMP_PATH ]; then
         mkdir -p $TMP_PATH
