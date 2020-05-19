@@ -1,0 +1,157 @@
+#!/bin/bash
+# This file contain all i-Haklab functions
+
+if [ -d /data/data/com.termux/files/home/i-Haklab ]; then
+	iHAKLAB=/data/data/com.termux/files/home/i-Haklab
+else
+	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+fi
+#source $iHAKLAB/.set/libexec/colors
+#source $iHAKLAB/.set/var/variables
+
+
+banner() {
+	if [ ! -e $iHAKLAB/.set/libexec/banner/i-Haklab ]; then
+		wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/banner/i-Haklab -O $iHAKLAB/.set/libexec/banner/i-Haklab > /dev/null 2>&1
+	fi
+        bash $iHAKLAB/.set/libexec/banner/i-Haklab
+        sleep 0.5
+}
+export -f banner
+
+chk-iHaklab() {
+	until [ -d $iHAKLAB ]; do
+		printf "$R\n[W]:-> i-Haklab needed$W |$Y Do y ou wanna install it?$W\n"
+        	while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
+                	continue
+        	done
+        	if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
+                	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
+                	cd ~/i-Haklab;bash setup-lite
+        	else
+                	printf "$G\n[!]-> Have a nice hacking day!!\n\n"
+                	exit
+        	fi
+	done
+}
+export -f chk-iHaklab
+
+ctrl_c() {
+	printf "$Y\n[!]$R Need a help? join to$B Telegram$R t.me/Ivam3_Bot$W\n"
+}
+export -f ctrl_c
+
+chk-Cuser() {
+	while [ ! $(id -u) -ne 0 ]; do
+        	printf "$R\n[W]:-> You need to be a common user$W\n"
+        	exit
+	done
+}
+export -f chk-Cuser
+
+chk-Ruser() {
+	while [ ! $(id -u) -eq 0 ]; do
+		printf "$R\n[W]:-> You need to be a root user$W\n"
+		exit
+	done
+}
+export -f chk-Ruser
+
+k-boom() {
+	if [ ! -e $iHAKLAB/.set/libexec/banner/k-boom ]; then
+		wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/banner/k-boom -O $iHAKLAB/.set/libexec/banner/k-boom > /dev/null 2>&1
+	fi
+	bash $iHAKLAB/.set/libexec/banner/k-boom
+}
+export -f k-boom
+
+Menu() {
+	printf "$Y\n[i]->$W i-Haklab v.1.0 (c) 2019 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. If the law is violated with it's use, this would be the responsibility of the user who handled it.\n\nSyntax: i-Haklab [-arg-] [-option-]\n
+Arguments  |    Options     |    Description
+╰─help─────➤────────────────➤ Show this help menu
+╰─list─────➤────────────────➤ List all available tools/frameworks
+╰─show─────➤──tools/books───➤ Show details about specific tool and books availables to be downloaded
+|   |           ╰─────|─────➤ example : i-Haklab show bettercap
+|   |                 ╰─────➤ example : i-Haklab show books
+|   ╰──────➤──tutorials/QG──➤ Show tutorials and Quick Guides availables
+╰─install──➤───tool─name────➤ Install tools or frameworks
+╰─remove───➤───tool─name────➤ Remove tools or frameworks
+╰─weechat──➤────────────────➤ Connect with irc Ivam3byCinderella chat
+╰─update───➤────────────────➤ Update i-Haklab
+╰─upgrade──➤────────────────➤ Upgrade i-Haklab by installing/upgrading tools
+╰speedtest─➤────────────────➤ Run a speed test of your network
+╰─restore──➤────────────────➤ Restore the main directory to fix some bugs
+╰reinstall─➤────────────────➤ Reinstall i-Haklab to factory configurations
+╰─version──➤────────────────➤ Show i-Haklab version installed
+           |       |        |
+           |       |        |
+   [--] Automatitation Arguments [--]
+Arguments  |    Options     |    Description
+╰─handler──➤──file.rc name──➤ Start handler on msfconsole with previous setting
+╰───apk────➤──inlan/outlan──➤ Create a coded payload apk with msfvenom
+|               ╰─────|─────➤ LPORT=4546 Payload=android/meterpreter/reverse_tcp apk=inlan.apk
+|                     ╰─────➤ LPORT=48263 LHOST=serveo.net apk=outlan.apk
+|                             Payload=android/meterpreter/reverse_tcp
+╰─paylink──➤─pc/nexam/soa5──➤ Create a link payload with handler
+|             ╰───|────|────➤ For targets [0]generic, [1]windows, [2]macOS and [3]linux
+|                 |    |      example: i-Haklab paylink pc 2
+|                 ╰────|────➤ For targets [0]nexxus and [29]samsung
+|                      |      example: i-Haklab paylink nexam 29
+|                      ╰────➤ For android operative system equal at version 5 to down
+╰──paypdf──➤────────────────➤ Create a pdf file with a reverse payload
+╰──payexe──➤──inlan/outlan──➤ Create a coded payload .exe with msfvenom
+|               ╰─────|─────➤ LPORT=4546 Payload=windows/meterpreter/reverse_tcp file=inlan.exe
+|                     ╰─────➤ LPORT=48263 Payload=windows/meterpreter/reverse_tcp
+|                             LHOST=serveo.net file=outlan.exe
+╰─shodan───➤────────────────➤ Search vulnerable servers using metasploit with shodan
+╰─bfmail───➤──email─passwd──➤ Start a brute force attack with hydra tool at email(hotmail/gmail) account
+|    ╰─────➤─────gmail──────➤ example: i-Haklab bfgmail victim@gmail.com passwords.txt
+|    ╰─────➤──hotmail/live──➤ example: i-Haklab bfgmail victim@live.com passwords.txt
+╰──bfftp───➤─user─passwd─ip─➤ Start a brute force attack with hydra at ftp server
+|    ╰─────➤────────────────➤ example: i-Haklab bfftp users.txt passwords.txt 0.0.0.0
+╰forwarding➤────────────────➤ Start a SSH client to request TCP port forwarding from server and proxy.
+     ╰─────➤──port_number───➤ Set a specific port number (default 4546 or 80 for rooted device)
+|    ╰─────➤───subdomain────➤ Set a specitic subdomain | example: i-Haklab forwarding <myport> <my-subdomain>
+╰─phishing─➤──site─redirect─➤ Clone a specific website for phishing tests
+     ╰─────➤────────────────➤ Available: facebook mfacebook
+     ╰─────➤────────────────➤ example: i-Haklab mfacebook m.facebook.com
+|__________________________________________________________________________________________\n\n"
+}
+export -f Menu
+
+chk-api() {
+        command -v termux-open > /dev/null || { printf "$R[w]->$W termux-tools needed$R |$W please install it"; exit; }
+}
+export -f chk-api
+
+chk-sudo() {
+        command -v sudo > /dev/null || { printf "$R[w]->$W sudo command needed$R |$W please install it"; exit; }
+}
+export -f chk-sudo
+
+chk-msf() {
+        command -v msfconsole > /dev/null || { printf "$R\n[W]->$W Metasploit needed$R |$W please install it"; exit; }
+}
+export -f chk-msf
+
+chk-php() {
+        command -v php > /dev/null || { printf "$R\n[W]->$W php not found$R |$W run apt install php"; exit; }
+}
+export -f chk-php
+
+chk-ssh() {
+        command -v ssh > /dev/null || { printf "$R\n[W]->$W ssh not found$R |$W run apt install openssh"; exit; }
+}
+export -f chk-ssh
+
+chk-mega() {
+        command -v megadl > /dev/null || { printf "$R\n[W]->$W megatools not found$R |$W run apt install megatools"; exit; }
+}
+export -f chk-mega
+
+chk-hydra() {
+        command -v hydra > /dev/null || { printf "$R\n[W]->$W hydra not found$R |$W run apt install hydra"; exit; }
+}
+export -f chk-hydra
+
+

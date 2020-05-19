@@ -1,0 +1,31 @@
+#!/bin/bash
+#This file is part of i-Haklab command
+
+if [ -d /data/data/com.termux/files/home/i-Haklab ]; then
+        iHAKLAB=/data/data/com.termux/files/home/i-Haklab                                   else
+        iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+fi
+
+source $iHAKLAB/.set/libexec/colors
+source $iHAKLAB/.set/var/variables
+source $iHAKLAB/.set/functions/functions
+
+
+if [ $SSH = "1" ]; then
+	killall -2 ssh > /dev/null 2>&1
+fi
+if [ ! -d $HOME/localtunnel-server ]; then
+	printf "$R\n[w]-> ERROR :$W Localtunnel-server is not installed\n"
+else
+        if [ $2 -gt 1000 ]; then
+		LPORT=$2
+        else
+                LPORT=4546
+                printf "$R\n[w]-> ERROR :$W Invalid port"
+                sleep 1
+                printf "$Y\n[!] using default$W : $LPORT\n"
+        fi
+        printf "$G"
+        $(which lt) -h "http://serverless.social" -p $LPORT -s $3 --print-requests
+fi
+
