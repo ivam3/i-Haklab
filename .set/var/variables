@@ -7,6 +7,8 @@ else
         export iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 fi
 
+export TMP_FILE=$(mktemp)
+
 export TOOL=$(ls $iHAKLAB/.set/to-install/ | grep -iv .zip | grep -iv instasudo | grep -iv QG | grep -iv i-Haklab_login | grep -iv check-root | grep -iv functions | grep -n -iv lock)
 
 export TARGET=(0 1 2 3 29)

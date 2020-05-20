@@ -2,7 +2,8 @@
 #
 #i-Haklab v.1.0 2019 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. Please do not use in military or secret service organizations, or for illegal purposes
 #
-#Created on Jan/2019
+#Created on Jan/2019 
+#Modify: 2020-05-20
 ####################
 
 IFS=$'\n\t'
@@ -34,12 +35,10 @@ else
 	exit
 fi
 done
-OLDver=$(cat $iHAKLAB/.set/libexec/banner/i-Haklab | grep -o v.*.*.9 | awk '{print $1}')
-NEWver=$(cat $iHAKLAB/README.md | grep -o v.*.*.9 | awk '{print $1}')
 
 #FIX SOME BUGS
-printf "$Y[!]-> Re-configurating$W\n"
-sleep 1
+printf "$Y[!]-> Re-configurating. . .$W\n"
+sleep 0.5
 if [ -e $PREFIX/etc/fish/config.fish ]; then
 	echo "# Put system-wide fish configuration entries here" > $PREFIX/etc/fish/config.fish
 	echo "# or in .fish files in conf.d/" >> $PREFIX/etc/fish/config.fish
@@ -66,40 +65,23 @@ if [ -e $PREFIX/etc/fish/config.fish ]; then
 	echo "alias postgresql=\"pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql\"" >> $PREFIX/etc/fish/config.fish
 	echo "" >> $PREFIX/etc/fish/config.fish
 else
-	printf "$R\n[w]-> FATAL ERROR : interactive shell not installed$W\n"
+	printf "$R\n[w]-> FATAL ERROR :$W interactive shell not installed$Y\n[!]-> Run$W i-Haklab reinstall$Y to fix it$W"
 fi
 
-#Adding bf wordlist
-#command -v dnsenum > /dev/null 2>&1 || mkdir -p $PREFIX/share/dnsenum ; curl https://raw.githubusercontent.com/fwaeytens/dnsenum/master/dns.txt -o $PREFIX/share/dnsenum/dns.txt > /dev/null 2>&1
-command -v speedtest-cli > /dev/null 2>&1 || python -m pip install speedtest-cli /dev/null 2>&1
-
-BINDIR=$(ls $iHAKLAB/.set/bin) #Upgrading executables
-printf "$Y[!]-> Fixing binaries files$W\n"
+######### Upgrading executables #########
+BINDIR=$(ls $iHAKLAB/.set/bin)
+printf "$Y[!]-> Upgrading commands. . .$W\n"
 for i in ${BINDIR[*]}; do
 	wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$i -O $PREFIX/bin/$i > /dev/null 2>&1
 	chmod +x $PREFIX/bin/$i
 done
 
-TOFIX=$(ls $iHAKLAB/.set/fix-tools)
-printf "$Y[!]-> Fixing executable files$W\n"
-for m in ${TOFIX[*]}; do #Download scripts to fix some tools
-	if [ -d $iHAKLAB/../$m ]; then
-		curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/$m -o $iHAKLAB/../$m/$m.sh > /dev/null 2>&1
-	fi
-done
-
 NO() {
-#Upgrading functions
-bash $iHAKLAB/.set/to-install/functions > /dev/null 2>&1
-printf "$Y\n[!]-> i-Haklab functions fixed$W\n"
+TOFIX=$(ls $iHAKLAB/.set/fix-tools)
+printf "$Y[!]-> Fixing executable files. . .$W\n"
+sleep 0.5
 
-for tool in exploitdb aquatone kerbrute GetNPUsers a2sv cryptovenom gobuster lockphish gophish adbfastboot phonesploit ; do #Upgrading tools
-	if [ ! -d $iHAKLAB/../$tool ]; then
-		printf "$Y\n[!]-> $tool tool was added to i-Haklab$W |$Y Install it running$G\n\t]>$W i-Haklab install $tool\n"
-	fi
-	sleep 1
-done
-}
 printf "$G\n\t[i]->$W Already up to date$G <-[i]$W\n\n"
+}
 
 #			@Ivam3

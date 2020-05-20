@@ -123,23 +123,6 @@ elif [ $1 = weechat ]; then
 	k-boom
 
 
-elif [ $1 = update ]; then
-	CHECK=$(cd $iHAKLAB;git pull | grep -oE Already)
-	if [ $CHECK ]; then 
-		printf "$G\n[i]->$W Already up to date$G <-[i]$W\n"
-	else
-		printf "$Y\n[i]->$W There is a new version, run i-Haklab upgrade$Y <-[i]$W\n"
-	fi
-
-
-elif [ $1 = upgrade ]; then
-	cd $iHAKLAB;git pull > /dev/null 2>&1
-	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/upgrade -o $PREFIX/tmp/upgrade > /dev/null 2>&1
-	chmod +x $PREFIX/tmp/upgrade
-	bash $PREFIX/tmp/upgrade
-	rm $PREFIX/tmp/upgrade
-
-
 elif [ $1 = speedtest ]; then
 	command -v python > /dev/null 2>&1 || apt install python -y /dev/null 2>&1
 	command -v speedtest-cli > /dev/null 2>&1 || python -m pip install speedtest-cli /dev/null 2>&1
@@ -148,20 +131,43 @@ elif [ $1 = speedtest ]; then
 	printf "$W"
 
 
-elif [ $1 = restore ]; then
-	if [ -d $iHAKLAB ]; then
-		printf "$Y[!]->$W Restoring (It could take a while) ...\n"
+elif [ $1 = upgrade ]; then
+	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/upgrade -o $TMP_FILE > /dev/null 2>&1
+	RMONTH=$(grep "Modify" $TMP_FILE | cut -d "-" -f2)
+	RDAY=$(grep "Modify" $TMP_FILE | cut -d "-" -f3)
+	LMONTH=$(stat $iHAKLAB | grep Modify | awk '{print $2}' | cut -d "-" -f2)
+	LDAY=$(stat $iHAKLAB | grep Modify | awk '{print $2}' | cut -d "-" -f3)
+
+	if [ $LMONTH -eq $RMONTH ]; then
+		if [ $LDAY -gt $RDAY ]; then
+			printf "$G\n[i]->$W Already up to date$G <-[i]$W\n"
+		else
+			printf "$Y[!]->$W Upgrading (It could take a while) ..."
+			rm -rf $iHAKLAB > /dev/null 2>&1
+			while [ ! -d $iHAKLAB ]; do
+				git clone https://github.com/Ivam3/i-Haklab.git $iHAKLAB > /dev/null 2>&1
+			done
+			if [ -d $iHAKLAB ]; then
+				bash $TMP_FILE
+				printf "$G\n[i]->$W Already up to date$G <-[i]$W\n"
+			else
+				ctrl_c
+			fi
+		fi
+	elif [ $LMONTH -gt $RMONTH ]; then
+		printf "$G\n[i]->$W Already up to date$G <-[i]$W\n"
+	else
+		printf "$Y[!]->$W Upgrading (It could take a while) ..."
 		rm -rf $iHAKLAB > /dev/null 2>&1
 		while [ ! -d $iHAKLAB ]; do
 			git clone https://github.com/Ivam3/i-Haklab.git $iHAKLAB > /dev/null 2>&1
 		done
 		if [ -d $iHAKLAB ]; then
-			printf "$G[*]->$W DONE!!\n"
+			bash $TMP_FILE
+			printf "$G\n[i]->$W Already up to date$G <-[i]$W\n"
 		else
 			ctrl_c
 		fi
-	else
-		printf "$R[w]->$W The main directory not found.\n"
 	fi
 
 
