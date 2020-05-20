@@ -98,7 +98,6 @@ if [ -z $SCRIPT_NAME ]; then
 ╰─saycheese──────➤  Grab target's webcam shots by link.
 ╰─sayhello───────➤  Grab target's short voice audio by link.
 ╰─seeker─────────➤  Accurately Locate Smartphones using Social Engineering.
-╰─shellphish─────➤  Script de automatizacion de servidor phishing para 18 redes sociales.
 ╰─shellsploit────➤  Powerful phishing tool.
 ╰─sqliv──────────➤  Massive SQL injection scanner.
 ╰─sqlmap─────────➤  Penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database server. 
@@ -413,15 +412,6 @@ case "$SCRIPT_NAME" in
 			else
 				exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "--help"
 			fi
-                        cd $BACK
-                else
-                        STDERR
-                fi
-                ;;
-	shellphish)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        exec bash "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.sh" #"$@"
                         cd $BACK
                 else
                         STDERR

@@ -131,7 +131,7 @@ elif [ $1 = speedtest ]; then
 	printf "$W"
 
 
-elif [ $1 = upgrade ]; then
+elif [ $1 = update ]; then
 	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/upgrade -o $TMP_FILE > /dev/null 2>&1
 	RMONTH=$(grep "Modify" $TMP_FILE | cut -d "-" -f2)
 	RDAY=$(grep "Modify" $TMP_FILE | cut -d "-" -f3)
@@ -169,6 +169,19 @@ elif [ $1 = upgrade ]; then
 			ctrl_c
 		fi
 	fi
+
+
+elif [ $1 = restore ]; then
+	printf "$Y[!]->$W Restoring (It could take a while) ...\n"
+        rm -rf $iHAKLAB > /dev/null 2>&1
+	while [ ! -d $iHAKLAB ]; do
+		git clone https://github.com/Ivam3/i-Haklab.git $iHAKLAB > /dev/null 2>&1
+        done
+        if [ -d $iHAKLAB ]; then
+		printf "$G[*]->$W DONE!!\n"
+        else
+		ctrl_c
+        fi
 
 
 elif [ $1 = reinstall ]; then

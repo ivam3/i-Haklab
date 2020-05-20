@@ -78,7 +78,6 @@ Arguments  |    Options     |    Description
 ╰─remove───➤───tool─name────➤ Remove tools or frameworks
 ╰─weechat──➤────────────────➤ Connect with irc Ivam3byCinderella chat
 ╰─update───➤────────────────➤ Update i-Haklab
-╰─upgrade──➤────────────────➤ Upgrade i-Haklab by installing/upgrading tools
 ╰speedtest─➤────────────────➤ Run a speed test of your network
 ╰─restore──➤────────────────➤ Restore the main directory to fix some bugs
 ╰reinstall─➤────────────────➤ Reinstall i-Haklab to factory configurations
