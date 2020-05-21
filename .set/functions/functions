@@ -79,38 +79,43 @@ Arguments  |    Options     |    Description
 ╰─restore──➤────────────────➤ Restore the main directory to fix some bugs
 ╰reinstall─➤────────────────➤ Reinstall i-Haklab to factory configurations
 ╰─version──➤────────────────➤ Show i-Haklab version installed
-           |       |        |
-           |       |        |
+|          |       |        |
+|          |       |        |
    [--] Automatitation Arguments [--]
 Arguments  |    Options     |    Description
 ╰─handler──➤──file.rc name──➤ Start handler on msfconsole with previous setting
-╰───apk────➤──inlan/outlan──➤ Create a coded payload apk with msfvenom
-|               ╰─────|─────➤ LPORT=4546 Payload=android/meterpreter/reverse_tcp apk=inlan.apk
-|                     ╰─────➤ LPORT=48263 LHOST=serveo.net apk=outlan.apk
-|                             Payload=android/meterpreter/reverse_tcp
-╰─paylink──➤─pc/nexam/soa5──➤ Create a link payload with handler
-|             ╰───|────|────➤ For targets [0]generic, [1]windows, [2]macOS and [3]linux
-|                 |    |      example: i-Haklab paylink pc 2
+╰───apk────➤──inlan/outlan──➤ Create a coded payload apk
+|    |          ╰─────|─────➤ LPORT=4546 apk=inlan.apk
+|    |                ╰─────➤ LPORT=48263 LHOST=serveo.net apk=outlan.apk
+|    ╰──────────────────────➤ Payload=android/meterpreter/reverse_tcp
+╰─paylink──➤─pc/nexam/soa5──➤ Create an infected link with payload
+|             ╰───|────|────➤ Targets: [0]generic [1]windows [2]macOS [3]linux
+|                 |    |      ex: i-Haklab paylink pc 2
 |                 ╰────|────➤ For targets [0]nexxus and [29]samsung
-|                      |      example: i-Haklab paylink nexam 29
-|                      ╰────➤ For android operative system equal at version 5 to down
+|                      |      ex: i-Haklab paylink nexam 29
+|                      ╰────➤ For android5 operative system only
 ╰──paypdf──➤────────────────➤ Create a pdf file with a reverse payload
 ╰──payexe──➤──inlan/outlan──➤ Create a coded payload .exe with msfvenom
-|               ╰─────|─────➤ LPORT=4546 Payload=windows/meterpreter/reverse_tcp file=inlan.exe
+|               ╰─────|─────➤ LPORT=4546 Payload=windows/meterpreter/reverse_tcp
 |                     ╰─────➤ LPORT=48263 Payload=windows/meterpreter/reverse_tcp
-|                             LHOST=serveo.net file=outlan.exe
-╰─shodan───➤────────────────➤ Search vulnerable servers using metasploit with shodan
-╰─bfmail───➤──email─passwd──➤ Start a brute force attack with hydra tool at email(hotmail/gmail) account
-|    ╰─────➤─────gmail──────➤ example: i-Haklab bfgmail victim@gmail.com passwords.txt
-|    ╰─────➤──hotmail/live──➤ example: i-Haklab bfgmail victim@live.com passwords.txt
-╰──bfftp───➤─user─passwd─ip─➤ Start a brute force attack with hydra at ftp server
-|    ╰─────➤────────────────➤ example: i-Haklab bfftp users.txt passwords.txt 0.0.0.0
-╰forwarding➤────────────────➤ Start a SSH client to request TCP port forwarding from server and proxy.
-     ╰─────➤──port_number───➤ Set a specific port number (default 4546 or 80 for rooted device)
-|    ╰─────➤───subdomain────➤ Set a specitic subdomain | example: i-Haklab forwarding <myport> <my-subdomain>
+|                     ╰─────➤ LHOST=serveo.net file=outlan.exe
+╰─shodan───➤────────────────➤ Search vulnerable servers using metasploit
+╰─bfmail───➤──email─passwd──➤ Start a brute force attack
+|    ╰──────────────────────➤ at email(hotmail/gmail) account
+|    ╰─────➤─────gmail──────➤ ex: i-Haklab bfgmail victim@gmail.com passwords.txt
+|    ╰─────➤──hotmail/live──➤ ex: i-Haklab bfgmail victim@live.com passwords.txt
+╰──bfftp───➤─user─passwd─ip─➤ Start a brute force attack at ftp server
+|    ╰──────────────────────➤ example: i-Haklab bfftp users.txt passwords.txt 0.0.0.0
+╰forwarding➤────────────────➤ Start a SSH client to request TCP port forwarding
+|    ╰──────────────────────➤ from server and proxy.
+|    ╰─────➤──port_number───➤ Set a specific port number 
+|                  ╰────────➤ (default 4546 or 80 for rooted device)
+|    ╰─────➤───subdomain────➤ Set a specitic subdomain
+|    ╰──────────────────────➤ ex: i-Haklab forwarding <myport> <my-subdomain>
 ╰─phishing─➤──site─redirect─➤ Clone a specific website for phishing tests
-     ╰─────➤────────────────➤ Available: facebook mfacebook
-     ╰─────➤────────────────➤ example: i-Haklab mfacebook facebook.com
+|    ╰──────────────────────➤ Available: facebook mfacebook github google
+|    ╰──────────────────────➤ instagram netflix spotify twitter
+|    ╰──────────────────────➤ example: i-Haklab mfacebook facebook.com
 |__________________________________________________________________________________________\n\n"
 }
 export -f Menu

