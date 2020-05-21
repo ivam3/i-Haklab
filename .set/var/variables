@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # This file contain all i-Haklab enviroment variables
-OP1="${2:-crunch}"
+OP1=${2:-crunch}
 if [ -d /data/data/com.termux/files/home/i-Haklab ]; then
         export iHAKLAB=/data/data/com.termux/files/home/i-Haklab
 else
@@ -19,4 +19,4 @@ export LOCALHOST=$(ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | gre
 
 export CHECKROOT=$(bash $iHAKLAB/.set/to-install/check-root)
 
-export README_TOOL=$(ls $iHAKLAB/.set/libexec/Readme/ | grep $2)
+export README_TOOL=$(ls $iHAKLAB/.set/libexec/Readme/ | grep $OP1)
