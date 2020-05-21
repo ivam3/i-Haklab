@@ -10,7 +10,7 @@ else
 	chk-iHaklab
 fi
 
-source $iHAKLAB/.set/libexec/colors
+source $iHAKLAB/.set/libexec/colors 
 source $iHAKLAB/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 chk-Cuser
@@ -132,6 +132,7 @@ elif [ $1 = speedtest ]; then
 
 
 elif [ $1 = update ]; then
+	TMP_FILE=$(mktemp)
 	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/upgrade -o $TMP_FILE > /dev/null 2>&1
 	RMONTH=$(grep "Modify" $TMP_FILE | cut -d "-" -f2)
 	RDAY=$(grep "Modify" $TMP_FILE | cut -d "-" -f3)
@@ -142,7 +143,7 @@ elif [ $1 = update ]; then
 		if [ $LDAY -gt $RDAY ]; then
 			printf "$G\n[i]->$W Already up to date$G <-[i]$W\n"
 		else
-			printf "$Y[!]->$W Upgrading (It could take a while) ..."
+			printf "$Y[!]->$W Upgrading (It could take a while) ...\n"
 			rm -rf $iHAKLAB > /dev/null 2>&1
 			while [ ! -d $iHAKLAB ]; do
 				git clone https://github.com/Ivam3/i-Haklab.git $iHAKLAB > /dev/null 2>&1
@@ -157,7 +158,7 @@ elif [ $1 = update ]; then
 	elif [ $LMONTH -gt $RMONTH ]; then
 		printf "$G\n[i]->$W Already up to date$G <-[i]$W\n"
 	else
-		printf "$Y[!]->$W Upgrading (It could take a while) ..."
+		printf "$Y[!]->$W Upgrading (It could take a while) ...\n"
 		rm -rf $iHAKLAB > /dev/null 2>&1
 		while [ ! -d $iHAKLAB ]; do
 			git clone https://github.com/Ivam3/i-Haklab.git $iHAKLAB > /dev/null 2>&1
@@ -169,6 +170,7 @@ elif [ $1 = update ]; then
 			ctrl_c
 		fi
 	fi
+	rm $TMP_FILE
 
 
 elif [ $1 = restore ]; then
@@ -328,5 +330,4 @@ elif [ $1 = phishing ] && [ $2 ] && [ $3 ]; then
 else
 	printf "$R[w]->$W Invalid argument $1 $R|$W Use help to main menu\n"
 fi
-
-#                                               @Ivam3
+#			@IVAM3

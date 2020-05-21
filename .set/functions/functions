@@ -6,9 +6,6 @@ if [ -d /data/data/com.termux/files/home/i-Haklab ]; then
 else
 	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 fi
-#source $iHAKLAB/.set/libexec/colors
-#source $iHAKLAB/.set/var/variables
-
 
 banner() {
 	if [ ! -e $iHAKLAB/.set/libexec/banner/i-Haklab ]; then
@@ -66,7 +63,7 @@ k-boom() {
 export -f k-boom
 
 Menu() {
-	printf "$Y\n[i]->$W i-Haklab v.1.0 (c) 2019 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. If the law is violated with it's use, this would be the responsibility of the user who handled it.\n\nSyntax: i-Haklab [-arg-] [-option-]\n
+	printf "$Y\n[i]->$W i-Haklab v.1.5 (c) 2020 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. If the law is violated with it's use, this would be the responsibility of the user who handled it.\n\nSyntax: i-Haklab [-arg-] [-option-]\n
 Arguments  |    Options     |    Description
 ╰─help─────➤────────────────➤ Show this help menu
 ╰─list─────➤────────────────➤ List all available tools/frameworks
@@ -113,7 +110,7 @@ Arguments  |    Options     |    Description
 |    ╰─────➤───subdomain────➤ Set a specitic subdomain | example: i-Haklab forwarding <myport> <my-subdomain>
 ╰─phishing─➤──site─redirect─➤ Clone a specific website for phishing tests
      ╰─────➤────────────────➤ Available: facebook mfacebook
-     ╰─────➤────────────────➤ example: i-Haklab mfacebook m.facebook.com
+     ╰─────➤────────────────➤ example: i-Haklab mfacebook facebook.com
 |__________________________________________________________________________________________\n\n"
 }
 export -f Menu
