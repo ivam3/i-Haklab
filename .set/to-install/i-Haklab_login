@@ -184,7 +184,6 @@ echo "source $iHAKLAB/.set/libexec/colors" >> $PREFIX/libexec/banner/wall-banner
 echo "bash /data/data/com.termux/files/usr/libexec/banner/login-banner" >> $PREFIX/libexec/banner/wall-banner
 echo "fortune | lolcat" >> $PREFIX/libexec/banner/wall-banner
 echo "echo" >> $PREFIX/libexec/banner/wall-banner
-echo "fish" >> $PREFIX/libexec/banner/wall-banner
 echo "#         	@Ivam3" >> $PREFIX/libexec/banner/wall-banner
 chmod 711 $PREFIX/var/log/login-termux
 chmod 711 -R $PREFIX/libexec/termux
