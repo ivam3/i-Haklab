@@ -166,7 +166,6 @@ case $ANSW in
 		InstaTools
 		;;
 esac
-
 bash $iHAKLAB/.set/to-install/metasploit
 bash $iHAKLAB/.set/to-install/embed+java
 TARGET=$(ls $iHAKLAB/.set/bin)
@@ -179,6 +178,12 @@ done
 if [ -d /data/data/com.termux/files/home/i-Haklab ] && [ -d /data/data/com.termux/files/home/storage/external-1/roothome/i-haklab ]; then
 	rm -rf /data/data/com.termux/files/home/i-Haklab
 fi
+THEME=$(mktemp)
+echo "#!/bin/env fish" >> $THEME
+echo "#" >> $THEME
+echo "omf install bobthefish" >> $THEME
+fish $THEME >/dev/null 2>&1
+rm $THEME
 bash $iHAKLAB/.set/libexec/review
 
 printf "$Y\n\n[!]->$G i-Haklab installed !!!$Y |$W Please restart Termux and enjoy it!!\n\n"
