@@ -63,10 +63,10 @@ for opt in 1 2 3; do
 		echo "        /data/data/com.termux/files/usr/libexec/termux/command-not-found \"$1\"" >> $PREFIX/etc/bash.bashrc
 		echo "}" >> $PREFIX/etc/bash.bashrc
 		echo " " >> $PREFIX/etc/bash.bashrc
-		echo "source $PREFIX/var/log/login-termux" >> $PREFIX/etc/bash.bashrc
+		echo "chsh -s fish" >> $PREFIX/etc/bash.bashrc
 		echo " " >> $PREFIX/etc/bash.bashrc
-		echo "PS1=\"\[\e[33m\][!] \[\e[31m\]Press\[\e[32m\] ctrl d\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\"" >> $PREFIX/etc/bash.bashrc
-		echo "#         @Ivam3" >> $PREFIX/etc/bash.bashrc
+		echo "PS1=\"$ \"" >> $PREFIX/etc/bash.bashrc
+		echo "#         @Ivam3-Haklab" >> $PREFIX/etc/bash.bashrc
                 break
         else
                 printf "$R         Access denied$Y
@@ -96,10 +96,10 @@ done
 			echo "        /data/data/com.termux/files/usr/libexec/termux/command-not-found \"$1\"" >> $PREFIX/etc/bash.bashrc
 			echo "}" >> $PREFIX/etc/bash.bashrc
 			echo " " >> $PREFIX/etc/bash.bashrc
-			echo "source $PREFIX/var/log/login-termux" >> $PREFIX/etc/bash.bashrc
+			echo "chsh -s fish" >> $PREFIX/etc/bash.bashrc
                 	echo " " >> $PREFIX/etc/bash.bashrc
-                	echo "PS1=\"\[\e[33m\][!] \[\e[31m\]Type\[\e[32m\] exit\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\"" >> $PREFIX/etc/bash.bashrc
-                	echo "#         @Ivam3" >> $PREFIX/etc/bash.bashrc
+                	echo "PS1=\"$ \"" >> $PREFIX/etc/bash.bashrc
+                	echo "#         @Ivam3-Haklab" >> $PREFIX/etc/bash.bashrc
                 else
                         printf "$R\n                     Access denied$W \n"
                         sleep 1

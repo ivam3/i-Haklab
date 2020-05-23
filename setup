@@ -15,6 +15,7 @@ until [ -d /data/data/com.termux/files/home/i-Haklab ]; do
         printf "$R\n[W]:-> i-Haklab directory must to be in home directory$W\n"
 	exit
 done
+wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/colors -O /data/data/com.termux/files/home/i-Haklab/.set/libexec/colors
 source /data/data/com.termux/files/home/i-Haklab/.set/libexec/colors
 
 echo $(clear)
@@ -115,13 +116,27 @@ fi
 #::::::::::Installation of Ohmyfish::::::::::::#
 pkg install fish -y
 curl -L http://get.oh-my.fish | fish
+echo "if status --is-login" >> $PREFIX/etc/fish/config.fish
+echo "bash /data/data/com.termux/files/usr/var/log/login-termux" >> $PREFIX/etc/fish/config.fish
+echo "end" >> $PREFIX/etc/fish/config.fish
+echo "" >> $PREFIX/etc/fish/config.fish
+echo "function on_exit --on-event fish_exit" >> $PREFIX/etc/fish/config.fish
+echo "echo 'Have a nice hacking day!!'" >> $PREFIX/etc/fish/config.fish
+echo "sleep 1" >> $PREFIX/etc/fish/config.fish
+echo "end" >> $PREFIX/etc/fish/config.fish
+echo "" >> $PREFIX/etc/fish/config.fish
+echo "set fish_theme agnoster" >> $PREFIX/etc/fish/config.fish
+echo "set iHAKLAB $iHAKLAB" >> $PREFIX/etc/fish/config.fish
 echo "set HOME /data/data/com.termux/files/home" >> $PREFIX/etc/fish/config.fish
-echo "alias postgresql=\"pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql\"" >> $PREFIX/etc/fish/config.fish
+echo "set GOPATH /data/data/com.termux/files/home/go" >> $PREFIX/etc/fish/config.fish
 echo "alias LOCALHOST=\"ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255\"" >> $PREFIX/etc/fish/config.fish
+echo "alias postgresql=\"pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql\"" >> $PREFIX/etc/fish/config.fish
+echo "" >> $PREFIX/etc/fish/config.fish
 sed "27d" ~/.config/fish/fish_variables > $PREFIX/tmp/fish_variables
 rm ~/.config/fish/fish_variables 
 mv $PREFIX/tmp/fish_variables ~/.config/fish/
 sed -i "18a set iHAKLAB $iHAKLAB" $PREFIX/etc/fish/config.fish
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim > /dev/null 2>&1
 bash $iHAKLAB/.set/to-install/functions
 bash $iHAKLAB/.set/to-install/i-Haklab_login
 if [ -e ~/ivam3-Haklab ]; then
@@ -129,10 +144,14 @@ if [ -e ~/ivam3-Haklab ]; then
 fi
 
 #::::::::::Insatalling i-Haklab tools::::::::::::#
-printf "$G\n[+]->$W The i-Haklab configuration ends.$G\n[+]->$W Now we will to install i-Haklab tools.$Y\n[?]->$W Please choose how many tools do you want :\n\n$Y• FULL :$W All tools (weigth 4.1Gb)\n$Y• LITE :$W Only a basic tools (weigth 1.9Gb)\n\n"
-while read -p "[full/lite]──➤ " ANSW && [ -z $ANSW ]; do
-        printf "$R[w}-> ERROR-2 : join to https://t.me/Ivam3_Bot$W\n"
-done
+InstaTools() {
+	printf "$G\n[+]->$W The i-Haklab configuration ends.$G\n[+]->$W Now we will to install i-Haklab tools.$Y\n[?]->$W Please choose how many tools do you want :\n\n$Y• FULL :$W All tools (weigth 4.1Gb)\n$Y• LITE :$W Only a basic tools (weigth 1.9Gb)\n\n"
+
+	while read -p "[full/lite]──➤ " ANSW && [ -z $ANSW ]; do
+		printf "$R[w}-> ERROR-2 : join to https://t.me/Ivam3_Bot$W\n"
+	done
+}
+InstaTools
 case $ANSW in
 	lite|LITE|Lite)
 		for TOOL in DoS-A-Tool ExiF binchecker blackbox crunch sqlmap vpn tmux-viewer youtube-dl evilurl ; do
@@ -149,9 +168,10 @@ case $ANSW in
 		;;
 	*)
 		printf "$R[w}-> ERROR-3 : join to https://t.me/Ivam3_Bot$W\n"
-		exit
+		InstaTools
 		;;
 esac
+
 bash $iHAKLAB/.set/to-install/metasploit
 bash $iHAKLAB/.set/to-install/embed+java
 TARGET=$(ls $iHAKLAB/.set/bin)

@@ -160,9 +160,9 @@ fi
 echo "command_not_found_handle() {" > $PREFIX/etc/bash.bashrc
 echo "        /data/data/com.termux/files/usr/libexec/termux/command-not-found \"\$1\"" >> $PREFIX/etc/bash.bashrc
 echo "}" >> $PREFIX/etc/bash.bashrc
-echo "source /data/data/com.termux/files/usr/var/log/login-termux" >> $PREFIX/etc/bash.bashrc
-echo "PS1=\"\[\e[33m\][!] \[\e[31m\]Type\[\e[32m\] exit\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\"" >> $PREFIX/etc/bash.bashrc
-echo "#				@Ivam3" >> $PREFIX/etc/bash.bashrc
+echo "chsh -s fish" >> $PREFIX/etc/bash.bashrc
+echo "PS1=\"$ \"" >> $PREFIX/etc/bash.bashrc
+echo "#				@Ivam3-Haklab" >> $PREFIX/etc/bash.bashrc
 if [ ! -e $PREFIX/libexec/termux/.Quiz ]; then
 	touch $PREFIX/libexec/termux/.Quiz
 fi
@@ -180,7 +180,7 @@ curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/banner
 echo "#!/data/data/com.termux/files/usr/bin/bash" > $PREFIX/libexec/banner/wall-banner
 echo "# Banner for i-Haklab created by @Ivam3 on Jan/2019" >> $PREFIX/libexec/banner/wall-banner
 echo "IFS=$'\n\t'" >> $PREFIX/libexec/banner/wall-banner
-echo "source /data/data/com.termux/files/usr/libexec/colors" >> $PREFIX/libexec/banner/wall-banner
+echo "source $iHAKLAB/.set/libexec/colors" >> $PREFIX/libexec/banner/wall-banner
 echo "bash /data/data/com.termux/files/usr/libexec/banner/login-banner" >> $PREFIX/libexec/banner/wall-banner
 echo "fortune | lolcat" >> $PREFIX/libexec/banner/wall-banner
 echo "echo" >> $PREFIX/libexec/banner/wall-banner
@@ -189,13 +189,6 @@ echo "#         	@Ivam3" >> $PREFIX/libexec/banner/wall-banner
 chmod 711 $PREFIX/var/log/login-termux
 chmod 711 -R $PREFIX/libexec/termux
 chmod 711 -R $PREFIX/libexec/banner
-#printf "$G[?]-> Do you wanna set loggin access to i-Haklab ?\n$Y[!]-> You can set it later executing$W $ i-Haklab install i-Haklab_login\n"
-#while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
-#	continue
-#done
-#if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
-#	Set_Ak
-#fi
 Ak=SXZhbTNieUNpbmRlcmVsbGEK
 chmod +w $PREFIX/libexec/termux/.Ivam3
 printf "$Ak" > $PREFIX/libexec/termux/.Ivam3

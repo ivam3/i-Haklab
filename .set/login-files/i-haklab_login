@@ -3,7 +3,14 @@
 #
 IFS=$'\n\t'
 trap ctrl_c 2
-source $PREFIX/libexec/colors
+if [ -d /data/data/com.termux/files/home/i-Haklab ]; then
+        iHAKLAB=/data/data/com.termux/files/home/i-Haklab
+else
+        iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+fi
+
+source $iHAKLAB/.set/libexec/colors
+
 Cinderella=$(base64 -d $PREFIX/libexec/termux/.Ivam3)
 Seque=$(base64 -d $PREFIX/libexec/termux/.Quiz)
 Secan=$(base64 -d $PREFIX/libexec/termux/.Cinderella)
