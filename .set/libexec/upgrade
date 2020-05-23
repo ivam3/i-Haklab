@@ -3,12 +3,16 @@
 #i-Haklab v.1.0 2019 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. Please do not use in military or secret service organizations, or for illegal purposes
 #
 #Created on Jan/2019 
-#Modify: 2020-05-21
+#Modify: 2020-05-23
 ####################
 
 IFS=$'\n\t'
 trap ctrl_c 2
+if [ ! -e /data/data/com.termux/files/usr/libexec/colors ]; then
+	wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/colors -O $PREFIX/libexec/colors > /dev/null 2>&1
+fi
 source /data/data/com.termux/files/usr/libexec/colors
+
 ctrl_c() {
                 echo
                 printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
@@ -43,9 +47,6 @@ omf update omf > /dev/null 2>&1
 printf "$Y[!]-> Re-configurating. . .$W\n"
 sleep 0.5
 
-if [ -e $PREFIX/libexec/colors ]; then
-	rm $PREFIX/libexec/colors
-fi
 wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/banner/i-Haklab -O $PREFIX/libexec/banner/login-banner > /dev/null 2>&1
 if [ -e $PREFIX/etc/fish/config.fish ]; then
 	echo "# Put system-wide fish configuration entries here" > $PREFIX/etc/fish/config.fish
