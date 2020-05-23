@@ -39,6 +39,11 @@ done
 #FIX SOME BUGS
 printf "$Y[!]-> Re-configurating. . .$W\n"
 sleep 0.5
+
+if [ -e $PREFIX/libexec/colors ]; then
+	rm $PREFIX/libexec/colors
+fi
+wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/banner/i-Haklab -O $PREFIX/libexec/banner/login-banner > /dev/null 2>&1
 if [ -e $PREFIX/etc/fish/config.fish ]; then
 	echo "# Put system-wide fish configuration entries here" > $PREFIX/etc/fish/config.fish
 	echo "# or in .fish files in conf.d/" >> $PREFIX/etc/fish/config.fish

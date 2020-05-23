@@ -63,13 +63,14 @@ k-boom() {
 export -f k-boom
 
 Menu() {
-	printf "$Y\n[i]->$W i-Haklab v.1.5 (c) 2020 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. If the law is violated with it's use, this would be the responsibility of the user who handled it.\n\nSyntax: i-Haklab [-arg-] [-option-]\n
-Arguments  |    Options     |    Description
+	printf "$Y\n[i]->$W i-Haklab v.1.5 (c) 2020 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. If the law is violated with it's use, this would be the responsibility of the user who handled it.\n$Y\nSyntax:$W i-Haklab [-arg-] [-option-]\n
+$Y Arguments$W  |$Y    Options$W     |$Y    Description$W
 ╰─help─────➤────────────────➤ Show this help menu
 ╰─list─────➤────────────────➤ List all available tools/frameworks
-╰─show─────➤──tools/books───➤ Show details about specific tool and books availables to be downloaded
-|   |           ╰─────|─────➤ example : i-Haklab show bettercap
-|   |                 ╰─────➤ example : i-Haklab show books
+╰─show─────➤──tools/books───➤ Show details about specific tools/books
+|   ╰───────────|─────|─────➤ availables to be downloaded
+|   |           ╰─────|─────➤ ex : i-Haklab show bettercap
+|   |                 ╰─────➤ ex : i-Haklab show books
 |   ╰──────➤──tutorials/QG──➤ Show tutorials and Quick Guides availables
 ╰─install──➤───tool─name────➤ Install tools or frameworks
 ╰─remove───➤───tool─name────➤ Remove tools or frameworks
@@ -81,7 +82,7 @@ Arguments  |    Options     |    Description
 ╰─version──➤────────────────➤ Show i-Haklab version installed
 |          |       |        |
 |          |       |        |
-   [--] Automatitation Arguments [--]
+  $Y [--] Automatitation Arguments [--]$W
 Arguments  |    Options     |    Description
 ╰─handler──➤──file.rc name──➤ Start handler on msfconsole with previous setting
 ╰───apk────➤──inlan/outlan──➤ Create a coded payload apk
@@ -115,7 +116,7 @@ Arguments  |    Options     |    Description
 ╰─phishing─➤──site─redirect─➤ Clone a specific website for phishing tests
 |    ╰──────────────────────➤ Available: facebook mfacebook github google
 |    ╰──────────────────────➤ instagram netflix spotify twitter
-|    ╰──────────────────────➤ example: i-Haklab mfacebook facebook.com
+|    ╰──────────────────────➤ ex: i-Haklab mfacebook facebook.com
 |__________________________________________________________________________________________\n\n"
 }
 export -f Menu
