@@ -2,24 +2,26 @@
 # Coded on Agust 2019 by Ivam3
 # This file bring a easy access to execute i-Haklab tools
 #
+R='\033[1;31m'
+G='\033[1;32m'
+Goke='\033[92m'
+Glig=='\e[1;32m'
+Y='\033[1;33m'
+B='\033[1;34m'
+M='\033[1;35m'
+C='\033[1;36m'
+W='\033[0m'
 iHAKLAB=$(cat $PREFIX/etc/fish/config.fish | grep iHAKLAB | awk '{print $3}')
+TMP_PATH="$iHAKLAB/.."
 SCRIPT_NAME=$(basename "$1")
 BEEF_PATH="/data/data/com.termux/files/usr/opt/beef"
 GO_PATH=$(cat $PREFIX/etc/fish/config.fish | grep GOPATH | awk '{print $3}')
-BACK=$(pwd)
+CHECKROOT=$(bash $iHAKLAB/.set/to-install/check-root)
 
-if [ ! $(id -u) -ne 0 ]; then
-	HOME=$HOME/../
-fi
-if [ -d $HOME/i-Haklab ]; then
-	TMP_PATH="$HOME"
-elif [ -d $HOME/storage/external-1/roothome/i-Haklab ]; then
-	TMP_PATH="$HOME/storage/external-1/roothome"
-else
+if [ -z $iHAKLAB ]; then
 	echo "$R\n[w]-> i-Haklab directory undefined <-[w]$W\n"
-	exit
 fi
-CHECKROOT=$(bash $TMP_PATH/i-Haklab/.set/to-install/check-root)
+
 STDERR() {
 	echo "$R\n[w] i-Haklab :$W $SCRIPT_NAME is not installed$W\n"
 	exit
@@ -112,244 +114,238 @@ fi
 case "$SCRIPT_NAME" in
 	beef|beef-xss)
 		if [ -d $BEEF_PATH ]; then
-			cd $BEEF_PATH
-			exec ruby "$BEEF_PATH/$SCRIPT_NAME" "$2" "$@"
-			cd $BACK
+			cd $BEEF_PATH > /dev/null
+			exec ruby $BEEF_PATH/$SCRIPT_NAME "$2" "$@"
+			
 		else
 			STDERR
 		fi
 		;;
 	wpscan)
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-			cd $TMP_PATH/$SCRIPT_NAME/bin
-			exec ruby "$TMP_PATH/$SCRIPT_NAME/bin/$SCRIPT_NAME" "$@"
-			cd $BACK
+			cd $TMP_PATH/$SCRIPT_NAME/bin > /dev/null
+			exec ruby $TMP_PATH/$SCRIPT_NAME/bin/$SCRIPT_NAME $@
+			
 		else
 			STDERR
 		fi
 		;;
 	androbugs)
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-			cd $TMP_PATH/$SCRIPT_NAME
-			exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$2" "$@"
-			cd $BACK
+			#cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+			exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py $2 $@
+			
 		else
 			STDERR
 		fi
 		;;
 	d-tect)
 		if [ -d $TMP_PATH/D-TECT-1 ]; then
-                        cd $TMP_PATH/D-TECT-1
-                        exec python2 "$TMP_PATH/D-TECT-1/$SCRIPT_NAME.py" "$@"
-                        cd $BACK
+                        cd $TMP_PATH/D-TECT-1 > /dev/null
+                        exec python2 $TMP_PATH/D-TECT-1/$SCRIPT_NAME.py $@
+                        
                 else
                         STDERR
 		fi
 		;;
 	adminpanel)
 		if [ -d $TMP_PATH/admin_panel ]; then
-                        cd $TMP_PATH/admin_panel
-                        exec python2 "$TMP_PATH/admin_panel/admin_panel.py" "$@"
-                        cd $BACK
+			cd $TMP_PATH/admin_panel > /dev/null
+                        exec python2 $TMP_PATH/admin_panel/admin_panel.py $@
+                        
                 else
                         STDERR
                 fi
 		;;
 	cc-genpro)
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        exec python2 "$TMP_PATH/$SCRIPT_NAME/cc-genpro1.2.py" "$@"
-                        cd $BACK
+                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+                        exec python2 $TMP_PATH/$SCRIPT_NAME/cc-genpro1.2.py $@
+                        cd $BACK > /dev/null
                 else
                         STDERR
 		fi
 		;;
 	credmap)
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
-                        cd $BACK
+                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+                        exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py $@
+                        
                 else
 			STDERR
 		fi
 		;;
 	evilurl)
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
-                        cd $BACK
+                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+                        exec python $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py $@
+                        
                 else
                         STDERR
 		fi
 		;;
 	ExiF)
 		if [ -e $TMP_PATH/$SCRIPT_NAME ]; then
-			cd $TMP_PATH/$SCRIPT_NAME
+			cd $TMP_PATH/$SCRIPT_NAME > /dev/null
 			exec bash $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME
-			cd $BACK
+			
 		else
 			STDERR
 		fi
 		;;
 	exploitdb)
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        exec bash "$TMP_PATH/$SCRIPT_NAME/searchsploit" "$2" "$@"
-                        cd $BACK
+                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+                        exec bash $TMP_PATH/$SCRIPT_NAME/searchsploit $2 $@
+                        
                 else
                         STDERR
 		fi
 		;;
 	fbbrute)
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py"
-                        cd $BACK
+                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+                        exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py
                 else
                         STDERR
 		fi
 		;;
 	fbi)
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py"
-                        cd $BACK
+                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+                        exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py
                 else
                         STDERR
 		fi
 		;;
 	phoneinfoga)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/PhoneInfoga
-                        exec python "$TMP_PATH/PhoneInfoga/$SCRIPT_NAME.py" "$2" "$@"
-                        cd $BACK
+                        cd $TMP_PATH/PhoneInfoga > /dev/null
+                        exec python $TMP_PATH/PhoneInfoga/$SCRIPT_NAME.py $2 $@
+                        
                 else
 			STDERR
 		fi
                 ;;
 	phonesploit)
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-			cd $TMP_PATH/$SCRIP_NAME
-			exec python2 "$TMP_PATH/$SCRIPT_NAME/main_linux.py"
-			cd $BACK
+			cd $TMP_PATH/$SCRIP_NAME > /dev/null
+			exec python2 $TMP_PATH/$SCRIPT_NAME/main_linux.py
+			
 		else
 			STDERR
 		fi
 		;;
 	hatcloud)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/HatCloud
-                        exec ruby "$TMP_PATH/HatCloud/$SCRIPT_NAME.rb" "$@"
-                        cd $BACK
+                        cd $TMP_PATH/HatCloud > /dev/null
+                        exec ruby $TMP_PATH/HatCloud/$SCRIPT_NAME.rb $@
                 else
                         STDERR
                 fi
                 ;;
 	cloudbunny)
 		if [ -d $TMP_PATH/CloudBunny ]; then
-			cd $TMP_PATH/CloudBunny
+			cd $TMP_PATH/CloudBunny > /dev/null
 			if [ -f $TMP_PATH/CloudBunny/api.conf.txt ]; then
 				mv $TMP_PATH/CloudBunny/api.conf.txt $TMP_PATH/CloudBunny/api.conf
 			fi
 			if [ $2 ]; then
-				exec python2 "$TMP_PATH/CloudBunny/$SCRIPT_NAME.py" "$@"
-				cd $BACK
+				exec python2 $TMP_PATH/CloudBunny/$SCRIPT_NAME.py $@
                         else
-                                exec python2 "$TMP_PATH/CloudBunny/$SCRIPT_NAME.py" "-h"
+                                exec python2 $TMP_PATH/CloudBunny/$SCRIPT_NAME.py -h
                         fi
+			
                 else
                         STDERR
                 fi
 		;;
 	hunner)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py"
-                        cd $BACK
+                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+                        exec python $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py
+                        
                 else
                         STDERR
                 fi
                 ;;
 	ipgeolocation)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/IPGeoLocation
+                        cd $TMP_PATH/IPGeoLocation > /dev/null
 			if [ ! -z $2 ]; then
-				exec python "$TMP_PATH/IPGeoLocation/$SCRIPT_NAME.py" "$2" "$@"
+				exec python $TMP_PATH/IPGeoLocation/$SCRIPT_NAME.py $2 $@
 			else
-				exec python "$TMP_PATH/IPGeoLocation/$SCRIPT_NAME.py" "-h"
+				exec python $TMP_PATH/IPGeoLocation/$SCRIPT_NAME.py -h
 			fi
-                        cd $BACK
+                        
                 else
                         STDERR
                 fi
                 ;;
 	pybelt)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/Pybelt
-                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" #"$@"
-                        cd $BACK
+                        cd $TMP_PATH/Pybelt > /dev/null
+                        exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py
                 else
                         STDERR
                 fi
                 ;;
 	rhawk)
                 if [ -d $TMP_PATH/RED_HAWK ]; then
-                        cd $TMP_PATH/RED_HAWK
-                        php "$TMP_PATH/RED_HAWK//$SCRIPT_NAME.php" #"$@"
-                        cd $BACK
+                        cd $TMP_PATH/RED_HAWK > /dev/null
+                        php $TMP_PATH/RED_HAWK/$SCRIPT_NAME.php
                 else
                         STDERR
                 fi
                 ;;
 	dog)
                 if [ -d $TMP_PATH/recondog ]; then
-			cd $TMP_PATH/recondog
+			cd $TMP_PATH/recondog > /dev/null
 			if [ $2 ]; then
-				exec python "$TMP_PATH/recondog/$SCRIPT_NAME" "$2" "$@"
+				exec python $TMP_PATH/recondog/$SCRIPT_NAME $2 $@
 			else
-				exec python "$TMP_PATH/recondog/$SCRIPT_NAME" "-h"
+				exec python $TMP_PATH/recondog/$SCRIPT_NAME -h
 			fi
-			cd $BACK
                 else
                         STDERR
                 fi
                 ;;
 	sigploit)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$@"
-                        cd $BACK
+                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+                        exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py $@
+                        
                 else
                         STDERR
                 fi
                 ;;
 	whatweb)
                 if [ -d $TMP_PATH/WhatWeb ]; then
-                        cd $TMP_PATH/WhatWeb
+                        cd $TMP_PATH/WhatWeb > /dev/null
 			if [ ! -z $2 ];then
-				exec ruby "$TMP_PATH/WhatWeb/$SCRIPT_NAME" "$2" "$@" 
+				exec ruby $TMP_PATH/WhatWeb/$SCRIPT_NAME $2 $@
 			else
-				exec ruby "$TMP_PATH/WhatWeb/$SCRIPT_NAME" "-h"
+				exec ruby $TMP_PATH/WhatWeb/$SCRIPT_NAME -h
 			fi
-                        cd $BACK
+                        
                 else
                         STDERR
                 fi
 		;;
 	hakku)
                 if [ -d $TMP_PATH/hakkuframework ]; then
-                        cd $TMP_PATH/hakkuframework
-                        exec python "$TMP_PATH/hakkuframework/$SCRIPT_NAME" #"$@"
-                        cd $BACK
+                        cd $TMP_PATH/hakkuframework > /dev/null
+                        exec python $TMP_PATH/hakkuframework/$SCRIPT_NAME
+                        
                 else
                         STDERR
                 fi
 		;;
 	lockphish)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        exec bash "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.sh"
-                        cd $BACK
+                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+                        exec bash $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.sh
+                        
                 else
                         STDERR
                 fi
@@ -358,9 +354,9 @@ case "$SCRIPT_NAME" in
 		if [ $CHECKROOT = "root" ]; then
 			command -v sudo > /dev/null || bash $TMP_PATH/i-Haklab/.set/to-install/instasudo
 			if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-				cd $TMP_PATH/$SCRIPT_NAME
-				exec sudo perl "$TMP_PATH/$SCRIPT_NAME/program/$SCRIPT_NAME.pl" "$@"
-				cd $BACK
+				cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+				exec sudo perl $TMP_PATH/$SCRIPT_NAME/program/$SCRIPT_NAME.pl $@
+				
 			else
 				STDERR
 			fi
@@ -370,76 +366,75 @@ case "$SCRIPT_NAME" in
 		;;
 	recon-ng)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME" "--no-check"
-                        cd $BACK
+                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+                        exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME --no-check
+                        
                 else
                         STDERR
                 fi
 		;;
 	rsf)
                 if [ -d $TMP_PATH/routersploit ]; then
-                        cd $TMP_PATH/routersploit
-                        exec python "$TMP_PATH/routersploit/$SCRIPT_NAME.py"
-                        cd $BACK
+                        cd $TMP_PATH/routersploit > /dev/null
+                        exec python $TMP_PATH/routersploit/$SCRIPT_NAME.py
+                        
                 else
                         STDERR
                 fi
                 ;;
 	saycheese)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        exec bash "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.sh"
-                        cd $BACK
+                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+                        exec bash $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.sh
+                        
                 else
                         STDERR
                 fi
                 ;;
 	sayhello)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        exec bash "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.sh"
-                        cd $BACK
+                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+                        exec bash $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.sh
+                        
                 else
                         STDERR
                 fi
                 ;;
 	seeker)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
+                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
 			if [ $2 ]; then
-				exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$2" "$@"
+				exec python $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py $2 $@
 			else
-				exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "--help"
+				exec python $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py --help
 			fi
-                        cd $BACK
+                        
                 else
                         STDERR
                 fi
                 ;;
 	shellsploit)
                 if [ -d $TMP_PATH/$SCRIPT_NAME-framework ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME-framework
-                        exec python "$TMP_PATH/$SCRIPT_NAME-framework/$SCRIPT_NAME.py" #"$@"
-                        cd $BACK
+                        cd $TMP_PATH/$SCRIPT_NAME-framework > /dev/null
+                        exec python $TMP_PATH/$SCRIPT_NAME-framework/$SCRIPT_NAME.py
                 else
                         STDERR
                 fi
                 ;;
 	aio)
                 if [ -d $TMP_PATH/AIOChk ]; then
-                        cd $TMP_PATH/AIOChk
-                        exec php "$TMP_PATH/AIOChk/$SCRIPT_NAME.php" #"$@"
-                        cd $BACK
+                        cd $TMP_PATH/AIOChk > /dev/null
+                        exec php $TMP_PATH/AIOChk/$SCRIPT_NAME.php
+                        
                 else
                         STDERR
                 fi
                 ;;
 	sqliv)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        exec python2 "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$2" "$@"
-                        cd $BACK
+                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+                        exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py $2 $@
+                        
                 else
                         STDERR
                 fi
@@ -447,9 +442,9 @@ case "$SCRIPT_NAME" in
 	binwalk)
 		if [ -e $PREFIX/bin/$SCRIPT_NAME ]; then
 			if [ $2 ]; then
-				exec python "$PREFIX/bin/$SCRIPT_NAME" "$2" "$@"
+				exec python $PREFIX/bin/$SCRIPT_NAME $2 $@
 			else
-				exec python "$PREFIX/bin/$SCRIPT_NAME" "-h"
+				exec python $PREFIX/bin/$SCRIPT_NAME -h
 			fi
 		else
 			STDERR
@@ -457,7 +452,7 @@ case "$SCRIPT_NAME" in
 		;;
 	bincheker)
 		if [ -e $PREFIX/bin/$SCRIPT_NAME ]; then
-			exec bash "$PREFIX/bin/$SCRIPT_NAME"
+			exec bash $PREFIX/bin/$SCRIPT_NAME
 		else
 			STDERR
 		fi
@@ -465,9 +460,9 @@ case "$SCRIPT_NAME" in
 	blackbox)
 		if [ -e $PREFIX/bin/$SCRIPT_NAME ]; then
 			if [ $2 ]; then
-				exec python2 "$PREFIX/bin/$SCRIPT_NAME" "$2" "$@"
+				exec python2 $PREFIX/bin/$SCRIPT_NAME $2 $@
 			else
-				exec python2 "$PREFIX/bin/$SCRIPT_NAME" "-h"
+				exec python2 $PREFIX/bin/$SCRIPT_NAME -h
 			fi
 		else
 			STDERR
@@ -477,7 +472,7 @@ case "$SCRIPT_NAME" in
 		if [ $CHECKROOT = "root" ]; then
 			command -v sudo > /dev/null || bash $TMP_PATH/i-Haklab/.set/to-install/instasudo
 			if [ -e $PREFIX/bin/$SCRIPT_NAME ]; then
-				exec sudo perl "$PREFIX/bin/$SCRIPT_NAME" "$2" "$@"
+				exec sudo perl $PREFIX/bin/$SCRIPT_NAME $2 $@
 			else
 				STDERR
 			fi
@@ -487,49 +482,48 @@ case "$SCRIPT_NAME" in
 		;;
 	theharvester)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py" "$2" "$@"
-                        cd $BACK
+                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+                        exec python $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py $2 $@
+                        
                 else
                         STDERR
                 fi
                 ;;
 	webhackshl)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        exec python "$TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME" #"$@"
-                        cd $BACK
+                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+                        exec python $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME
+                        
                 else
                         STDERR
                 fi
                 ;;
 	aquatone)
 		if [ -d $HOME/go/bin ]; then
-			cd $HOME/go/bin/
-			exec $HOME/go/bin/aquatone "$2" "$@"
-			cd $BACK
+			cd $HOME/go/bin/ > /dev/null
+			exec $HOME/go/bin/aquatone $2 $@
 		else
 			STDERR
 		fi
 		;;
 	kerbrute)
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-			cd $TMP_PATH/$SCRIPT_NAME
-			exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py "$2" "$@"
-			cd $BACK
+			cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+			exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py $2 $@
 		else
 			STDERR
 		fi
 		;;
 	GetNPUsers)
 		if [ -e $PREFIX/bin/$SCRIPT_NAME ]; then
-			exec python $PREFIX/bin/$SCRIPT_NAME "$2" "$@"
+			exec python $PREFIX/bin/$SCRIPT_NAME $2 $@
 		else
 			STDERR
 		fi
 		;;
 	cryptovenom)
 		if [ -e $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py ]; then
+			cd $TMP_PATH/$SCRIPT_NAME/
 			exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py
 		else
 			STDERR
@@ -537,30 +531,31 @@ case "$SCRIPT_NAME" in
 		;;
 	a2sv)
 		if [ -e $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py ]; then
-			cd $TMP_PATH/$SCRIPT_NAME
-			exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py "$2" "$@"
-			cd $BACK
+			cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+			exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py $2 $@
+			
 		else
 			STDERR
 		fi
 		;;
 	gobuster)
 		if [ -e $GO_PATH/bin/$SCRIPT_NAME ]; then
-			cd $GO_PATH/bin
+			cd $GO_PATH/bin > /dev/null
 			if [ $2 ]; then
-				exec $GO_PATH/bin/$SCRIPT_NAME "$2" "$@"
+				exec $GO_PATH/bin/$SCRIPT_NAME $2 $@
 			else
-				exec $GO_PATH/bin/$SCRIPT_NAME "-h"
+				exec $GO_PATH/bin/$SCRIPT_NAME -h
 			fi
-			cd $BACK
+			
 		else
 			STDERR
 		fi
 		;;
 	gophish)
 		if [ -d $GO_PATH/src/github.com/gophish/gophish/ ]; then
-			cd $GO_PATH/src/github.com/gophish/gophish
+			cd $GO_PATH/src/github.com/gophish/gophish > /dev/null
 			./gophish
+			
 		else
 			STDERR
 		fi
@@ -568,27 +563,27 @@ case "$SCRIPT_NAME" in
 	xerosploit)
 		if [ -d $PREFIX/opt/$SCRIPT_NAME ]; then
 			command -v sudo > /dev/null || { printf "$R\n[w] i-Haklab :$W command sudo needed$R |$W please install it.\n" ; exit ; }
-			cd $PREFIX/opt/$SCRIPT_NAME
+			cd $PREFIX/opt/$SCRIPT_NAME > /dev/null
 			sudo python2 $PREFIX/opt/$SCRIPT_NAME/$SCRIPT_NAME.py
-			cd $BACK
+			popd
 		else
 			STDERR
 		fi
 		;;
 	quack)
                 if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME
-                        python $SCRIPT_NAME "$2" "$@"
-                        cd $BACK
+                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+                        python $SCRIPT_NAME $2 $@
+                        
                 else
                         STDERR
                 fi
                 ;;
 	hasher)
 		if [ -d $TMP_PATH/$SCRIP_NAME ]; then
-			cd $TMP_PATH/$SCRIPT_NAME
+			cd $TMP_PATH/$SCRIPT_NAME > /dev/null
 			python2 $TMP_PATH/$SCRIPT_NAME/hash.py
-			cd $BACK
+			
 		else
 			STDERR
 		fi
