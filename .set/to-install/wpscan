@@ -48,7 +48,24 @@ fi
 git clone https://github.com/wpscanteam/wpscan $iHAKLAB/../wpscan
 gem install wpscan -- --use-system-libraries
 chmod 777 $iHAKLAB/../wpscan/bin/*
-cp $iHAKLAB/../wpscan/bin/* $PREFIX/bin/
+#cp $iHAKLAB/../wpscan/bin/* $PREFIX/bin/
+
+
+#:::::::::Fix linking error for Ruby Bigdecimal::::::::#
+#::::::::::::::::  native extensions. :::::::::::::::::##
+command -v patchelf || apt install -yq patchelf
+
+for i in aarch64-linux-android arm-linux-androideabi \
+    i686-linux-android x86_64-linux-android; do
+    if [ -e "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal.so" ]; then
+	    if [ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal/util.so" | grep bigdecimal.so)" ]; then
+		    exit
+	    fi
+	    patchelf --add-needed \
+		    "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal.so" \
+		    "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal/util.so"
+    fi
+done
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"

@@ -42,6 +42,7 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
+arch=`dpkg --print-architecture`
 if [ -d $iHAKLAB/../theHarvester ]; then
         rm -rf $iHAKLAB/../theHarvester
 fi
@@ -63,6 +64,13 @@ for version in python python2 ; do
 done
 git clone https://github.com/laramies/theHarvester.git $iHAKLAB/../theHarvester
 pushd $iHAKLAB/../theHarvester
+
+if [ $arch = "aarch64" -o $arch = "arm64" ] ; then
+
+elif [ $arch = "armhf" -o $arch = "armv7l" ]; then
+
+elif [ $arch = "arm" -o $arch = "i868" ]; then
+
 printf "$Y[!]->$W There are 3 methods to install the repositories : choose one$Y\n[01]->$W BASIC$Y\n[02]->$W LDFLAGS$Y\n[03]->$W SODIUM\n\n"
 
 while read -p "[*]:-> " ANSW && [ -z $ANSW ]; do

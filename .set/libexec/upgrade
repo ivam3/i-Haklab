@@ -87,13 +87,6 @@ else
 	printf "$R\n[w]-> FATAL ERROR :$W interactive shell not installed$Y\n[!]-> Run$W i-Haklab reinstall$Y to fix it$W"
 fi
 
-THEME=$(mktemp)
-echo "#!/bin/env fish" >> $THEME
-echo "#" >> $THEME
-echo "omf install bobthefish" >> $THEME
-fish $THEME >/dev/null 2>&1
-rm $THEME
-
 ######### Upgrading executables #########
 BINDIR=$(ls $iHAKLAB/.set/bin)
 printf "$Y[!]-> Upgrading commands. . .$W\n"
@@ -109,5 +102,12 @@ sleep 0.5
 
 printf "$G\n\t[i]->$W Already up to date$G <-[i]$W\n\n"
 }
+
+THEME=$(mktemp)
+echo "#!/bin/env fish" >> $THEME
+echo "#" >> $THEME
+echo "omf install bobthefish" >> $THEME
+fish $THEME > /dev/null 2>&1
+rm $THEME
 
 #			@Ivam3
