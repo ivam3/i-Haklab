@@ -90,9 +90,9 @@ Legacy() {
 	pkg upgrade -y
 	pkg install ruby libpcap autoconf -y
 	gem install bundler:1.17.3
-	curl -LO https://github.com/termux/termux-packages/files/3960686/metasploit_5.0.65_android5_all.deb.gz
-	gunzip metasploit_5.0.65_android5_all.deb.gz
-	dpkg -i metasploit_5.0.65_android5_all.deb
+	curl -LO https://github.com/termux/termux-packages/files/3960686/metasploit_$msfversion\_android5_all.deb.gz
+	gunzip metasploit_$msfversion\_android5_all.deb.gz
+	dpkg -i metasploit_$msfversion\_android5_all.deb
 	apt -f install -y
 }
 

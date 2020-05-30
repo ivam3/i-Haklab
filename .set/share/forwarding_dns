@@ -17,7 +17,7 @@ fi
 if [ ! -d $HOME/localtunnel-server ]; then
 	printf "$R\n[w]-> ERROR :$W Localtunnel-server is not installed\n"
 else
-        if [ $2 -gt 1000 ]; then
+        if [ $1 -gt 1000 ]; then
 		LPORT=$2
         else
                 LPORT=4546
@@ -26,6 +26,6 @@ else
                 printf "$Y\n[!] using default$W : $LPORT\n"
         fi
         printf "$G"
-        $(which lt) -h "http://serverless.social" -p $LPORT -s $3 --print-requests
+        $(which lt) -h "http://serverless.social" -p $LPORT -s $2 --print-requests
 fi
 

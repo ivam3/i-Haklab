@@ -11,6 +11,12 @@ B='\033[1;34m'
 M='\033[1;35m'
 C='\033[1;36m'
 W='\033[0m'
+SOversion=$(termux-info | grep -oE '([5-9]{1}\.)([0-9]{1}\.)([0-9]{1})' | awk -F "." '{print $1}')
+if [ "$SOversion" -lt '7' ]; then
+	LIBVERSION="2.6.0"
+else
+	LIBVERSION="2.7.0"
+fi
 iHAKLAB=$(cat $PREFIX/etc/fish/config.fish | grep iHAKLAB | awk '{print $3}')
 TMP_PATH="$iHAKLAB/.."
 SCRIPT_NAME=$(basename "$1")
@@ -40,16 +46,16 @@ Banner() {
 # Fix ruby bigdecimal extensions linking error.
 case "$(uname -m)" in
 	aarch64)
-		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/2.6.0/aarch64-linux-android/bigdecimal.so"
+		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBVERSION/aarch64-linux-android/bigdecimal.so"
 		;;
 	arm*)
-		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/2.6.0/arm-linux-androideabi/bigdecimal.so"
+		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBVERSION/arm-linux-androideabi/bigdecimal.so"
 		;;
 	i686)
-		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/2.6.0/i686-linux-android/bigdecimal.so"
+		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBVERSION/i686-linux-android/bigdecimal.so"
 		;;
 	x86_64)
-		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/2.6.0/x86_64-linux-android/bigdecimal.so"
+		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBVERSION/x86_64-linux-android/bigdecimal.so"
 		;;
 	*)
 		;;
