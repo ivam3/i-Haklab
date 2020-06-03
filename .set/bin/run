@@ -85,7 +85,7 @@ if [ -z $SCRIPT_NAME ]; then
 ╰─exploitdb──────➤  Public exploits and corresponding vulnerable software, developed for use by penetration testers and vulnerability researchers
 ╰─fbbrute────────➤  Brute force tool to substract facebook user credencials.
 ╰─fbi────────────➤  Accurate facebook account information gathering
-╰─GetNPUserss────➤  Attempt to list and get TGTs for those users that have the property
+╰─GetNPUsers-────➤  Attempt to list and get TGTs for those users that have the property
 ╰─gobuster───────➤  Gobuster is a tool used to brute-force URIs in web sites, DNS subdomains and Virtual Host names on target web servers.
 ╰─gophish────────➤  Launch simulated and monitored phishing campaigns.
 ╰─hakku──────────➤  Penetration testing tools.
@@ -571,7 +571,6 @@ case "$SCRIPT_NAME" in
 			command -v sudo > /dev/null || { printf "$R\n[w] i-Haklab :$W command sudo needed$R |$W please install it.\n" ; exit ; }
 			cd $PREFIX/opt/$SCRIPT_NAME > /dev/null
 			sudo python2 $PREFIX/opt/$SCRIPT_NAME/$SCRIPT_NAME.py
-			popd
 		else
 			STDERR
 		fi

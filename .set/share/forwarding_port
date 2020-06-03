@@ -18,8 +18,8 @@ fi
 if [ ! -d $HOME/localtunnel-server ]; then
 	printf "$R\n[w]-> ERROR :$W Localtunnel-server is not installed\n"
 else
-	if [ $2 -gt 1000 ]; then
-		LPORT=$2
+	if [ $1 -gt 1000 ]; then
+		LPORT=$1
         else
                 LPORT=4546
                 printf "$R\n[w]-> ERROR :$W Invalid port"
