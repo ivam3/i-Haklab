@@ -26,6 +26,7 @@ else
                 printf "$Y\n[!] using default$W : $LPORT\n"
         fi
         printf "$G"
-        $(which lt) -h "http://serverless.social" -p $LPORT -s $2 --print-requests
+	$(which ssh) -R $2:80:localhost:$LPORT serveo.net
+#	$(which lt) -h "http://serverless.social" -p $LPORT -s $2 --print-requests
 fi
 
