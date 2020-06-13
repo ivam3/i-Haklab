@@ -83,7 +83,6 @@ if [ -z $SCRIPT_NAME ]; then
 ╰─dog────────────➤  Reconnaissance Swiss Army Knife.
 ╰─evilurl────────➤  Generate unicode evil domains for IDN Homograph Attack and detect them.
 ╰─exploitdb──────➤  Public exploits and corresponding vulnerable software, developed for use by penetration testers and vulnerability researchers
-╰─fbbrute────────➤  Brute force tool to substract facebook user credencials.
 ╰─fbi────────────➤  Accurate facebook account information gathering
 ╰─GetNPUsers-────➤  Attempt to list and get TGTs for those users that have the property
 ╰─gobuster───────➤  Gobuster is a tool used to brute-force URIs in web sites, DNS subdomains and Virtual Host names on target web servers.
@@ -121,8 +120,13 @@ case "$SCRIPT_NAME" in
 	beef|beef-xss)
 		if [ -d $BEEF_PATH ]; then
 			cd $BEEF_PATH > /dev/null
-			exec ruby $BEEF_PATH/$SCRIPT_NAME "$2" "$@"
-			
+			echo "load msgrpc ServerHost=127.0.0.1 ServerPort=55552 User=msf Pass='abc123'" > $PREFIX/opt/metasploit-framework/BeeF.rc
+			echo "\033[1;33m[!]->\033[0m In a new session run :"
+			echo "      postgresql start"
+			echo "      msfconsole -r $PREFIX/opt/metasploit-framework/BeeF.rc"
+			echo "\033[1;33m[!]->\033[0m then press\033[1;32m enter\033[0m to continue"
+			read enter
+			exec ruby $BEEF_PATH/$SCRIPT_NAME
 		else
 			STDERR
 		fi
@@ -204,14 +208,6 @@ case "$SCRIPT_NAME" in
                         cd $TMP_PATH/$SCRIPT_NAME > /dev/null
                         exec bash $TMP_PATH/$SCRIPT_NAME/searchsploit $2 $@
                         
-                else
-                        STDERR
-		fi
-		;;
-	fbbrute)
-		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-                        exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py
                 else
                         STDERR
 		fi

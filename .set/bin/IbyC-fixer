@@ -52,8 +52,17 @@ Turtle() {
         rm -rf $FILE
 }
 Menu() {
-	printf "$B\nUSAGE :\nIbyC-fixer <[B|BASIC] [L|LDFLAGS] [S|SODIUM]> <[Py|Py2]> <module(max 4)>$W\n\nB  BASIC\tInstall module on basic\nL  LDFLAGS\tForce installation to use libraries and system compiler\nS  SODIUM\tForce the installation to use the sodium decryptor\nPy  \t\tFor python3\nPy2  \t\tFor python2\n\nExamples:\n\tIbyC-fixer BASIC Py future\n\tIbyC-fixer S Py2 colorama\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n"
+	printf "$B\nUSAGE :\nIbyC-fixer <[B|BASIC] [L|LDFLAGS] [S|SODIUM]> <[Py|Py2]> <[file.txt|module(max 3)]>$W\n\nB  BASIC\tInstall module on basic\nL  LDFLAGS\tForce installation to use libraries and system compiler\nS  SODIUM\tForce the installation to use the sodium decryptor\nPy  \t\tFor python3\nPy2  \t\tFor python2\n\nExamples:\n\tIbyC-fixer BASIC Py future\n\tIbyC-fixer S Py2 colorama\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n"
 	exit
+}
+Chck() {
+	for list in $3 $4 $5 ; do
+		MODULE=$(python -m pip list | awk '{print $1}' | grep $list)
+		if [ ! -z $MODULE ]; then
+			printf "$Y\n[!]:-> Module $MODULE is already exist for $Py\n$W"
+		fi
+	done
+
 }
 while [ ! $(id -u) -ne 0 ]; do
 	printf "$R\n[W]:-> You need to be a common user$W\n"
@@ -89,9 +98,12 @@ else
 fi
 case $1 in
 	B|BASIC)
-		for module in $3 $4 $5 $6 ; do
+		for module in $3 $4 $5 ; do
+			Chck
 			if [ $module = turtle ]; then
 				Turtle
+			elif [ -e $module ]; then
+				$Py -m pip install -r $module
 			else
 				$Py -m pip install $module
 			fi
@@ -100,9 +112,12 @@ case $1 in
 		;;
 	LDFLAGS|L)
 		export LDFLAGS="-L/system/lib/ -lm -lcompiler_rt"
-		for module in $3 $4 $5 $6 ; do
+		for module in $3 $4 $5 ; do
+			Chck
 			if [ $module = turtle ]; then
 				Turtle
+			elif [ -e $module ]; then
+				$Py -m pip install -r $module --global-option="build_ext" --global-option="--disable-jpeg"
 			else
 				$Py -m pip install $module --global-option="build_ext" --global-option="--disable-jpeg"
 			fi
@@ -111,9 +126,12 @@ case $1 in
 		;;
 	SODIUM|S)
 		export SODIUM_INSTALL=system
-		for module in $3 $4 $5 $6 ; do
+		for module in $3 $4 $5 ; do
+			Chck
 			if [ $module = turtle ]; then
 				Turtle
+			elif [ -e $module ]; then
+				$Py -m pip install --no-binary :all: -r $module
 			else
 				$Py -m pip install --no-binary :all: $module
 			fi

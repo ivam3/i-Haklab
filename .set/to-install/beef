@@ -64,11 +64,7 @@ printf "$G\n[IbyC]-> INSTALLING ALL PACKAGES NEEDED$W\n"
 pkg install -y ruby nodejs #dirmngr -y
 printf "$G\n[IbyC]-> DOWNLOADING BEEF PROJECT$W\n"
 git clone https://github.com/beefproject/beef.git $PREFIX/opt/beef >/dev/null 2>&1
-#DIRBEEF=$(find ${HOME} -type d -name 'beef')
-#if [ ! -z $DIRBEEF ]; then
-#        printf "$Y\n[!]-> FIXING BEEF WORKING DIRECTORY$W\n"
-#        mv $DIRBEEF $PREFIX/opt/
-#fi
+#
 if [ -d $PREFIX/opt/beef ]; then
         cd $PREFIX/opt/beef
 else
@@ -76,12 +72,7 @@ else
         exit
 fi
 printf "$G\n[IbyC]-> ADAPTED BEEF PROJECT$W\n"
-#sed 's|gem \'rubydns\', \'~> 1.*.*\'|gem \'rubydns\', \'~> 2.0.2\'|g' -i Gemfile
-#sed "70d" Gemfile > Gemfile2
-#sed -i "69a gem 'rubydns', '~> 2.0.2'" Gemfile2
-#cat Gemfile2 > Gemfile
-#rm $PREFIX/opt/beef/Gemfile
-#curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/Beef_Gemfile -o $PREFIX/opt/beef/Gemfile
+sed 's|database: "/opt/GeoIP/GeoLite2-City.mmdb"|database: "/data/data/com.termux/files/usr/opt/GeoIP/GeoLite2-City.mmdb\" |g' -i config.yaml
 sed 's|passwd: "beef"|passwd: "Ivam3byCinderella"|g' -i config.yaml
 gem update --system
 gem install bundler
@@ -90,7 +81,7 @@ fixbigdecimal
 cp $PREFIX/opt/beef/README.md $iHAKLAB/.set/libexec/Readme/beef
 printf "$G\n[IbyC]-> CREATING BEEF COMMAND$W\n"
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/beef -o $PREFIX/bin/beef
-wget https://github.com/ivam3/i-Haklab/raw/master/.set/to-install/GeoLite2-City_20200331.tar.gz -O $PREFIX/opt/beef/GeoLite-City_20200331.tar.gz
+wget https://github.com/ivam3/i-Haklab/raw/master/.set/to-install/GeoLite2-City_20200331.tar.gz -O $PREFIX/opt/beef/GeoLite2-City_20200331.tar.gz
 if [ -e $PREFIX/opt/beef/GeoLite2-City_20200331.tar.gz ]; then
 	gunzip GeoLite2-City_20200331.tar.gz
 	if [ -e $PREFIX/opt/beef/GeoLite2-City_20200331.tar ]; then
@@ -105,7 +96,7 @@ if [ -e $PREFIX/opt/beef/GeoLite2-City_20200331.tar.gz ]; then
 		fi
 	fi
 else
-	printf "$R\n[w]-> Beef database can be created$W\n"
+	printf "$R\n[w]-> Data base can't be created$W\n"
 	exit
 fi
 chmod 711 $PREFIX/bin/beef
