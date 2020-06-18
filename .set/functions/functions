@@ -72,6 +72,7 @@ $Y Arguments$W  |$Y    Options$W     |$Y    Description$W
 |   |           ╰─────|─────➤ ex : i-Haklab show bettercap
 |   |                 ╰─────➤ ex : i-Haklab show books
 |   ╰──────➤──tutorials/QG──➤ Show tutorials and Quick Guides availables
+|   ╰──────➤─────games──────➤ Show games available for play
 ╰─install──➤───tool─name────➤ Install tools or frameworks
 ╰─remove───➤───tool─name────➤ Remove tools or frameworks
 ╰─weechat──➤────────────────➤ Connect with irc Ivam3byCinderella chat
