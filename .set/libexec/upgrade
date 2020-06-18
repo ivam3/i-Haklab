@@ -40,7 +40,7 @@ else
 fi
 done
 #UPGRADE OMF
-printf "$Y[!]-> Upgrading i-Haklab shell"
+printf "$Y[!]-> Upgrading i-Haklab shell\n"
 omf update omf > /dev/null 2>&1
 
 #FIX SOME BUGS
