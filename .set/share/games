@@ -1,0 +1,144 @@
+#!/bin/bash
+#
+
+if [ -d /data/data/com.termux/files/home/i-Haklab ]; then
+	iHAKLAB=/data/data/com.termux/files/home/i-Haklab
+else
+	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+fi
+source $iHAKLAB/.set/libexec/colors
+source $iHAKLAB/.set/var/variables
+source $iHAKLAB/.set/functions/functions
+
+GAMEFILE=$1
+FILE=$(mktemp)
+TMP_PATH=$PREFIX/bin
+pkg list-all | grep game | awk -F "/" '{print $1}' > $FILE
+
+chck-game() {
+command -v $GAME > /dev/null 2>&1 || pkg install $GAME -y 
+}
+
+printf "$Y[!]-> choose a game from the list below$W\n\n"
+select GAME in $(cat $FILE) ; do
+	case "$GAME" in 
+		angband)
+			chck-game
+			exec $TMP_PATH/$GAME
+			;;
+		bastet)
+			chck-game
+			exec $TMP_PATH/$GAME
+			;;
+		brogue)
+			chck-game
+			exec $TMP_PATH/$GAME
+			;;
+		cavez-of-phear)
+			chck-game
+			exec $TMP_PATH/phear
+			;;
+		cboard)
+			chck-game
+			exec $TMP_PATH/$GAME
+			;;
+		curseofwar)
+			chck-game
+			exec $TMP_PATH/$GAME
+			;;
+		dopewars)
+			chck-game
+			exec $TMP_PATH/$GAME
+			;;
+		frotz)
+			chck-game
+			exec $TMP_PATH/$GAME $GAMEFILE
+			;;
+		game-repo)
+			chck-game
+			printf "$Y[!]-> All reporitories was installed$W\n\n"
+			;;
+		glulxe)
+			chck-game
+			exec $TMP_PATH/$GAME $GAMEFILE
+			;;
+		gnuchess)
+			chck-game
+			exec $TMP_PATH/$GAME
+			;;
+		gnugo)
+			chck-game
+			exec $TMP_PATH/$GAME
+			;;
+		gnushogi)
+			chck-game
+			exec $TMP_PATH/$GAME
+			;;
+		gnuski)
+			chck-game
+			exec $TMP_PATH/$GAME
+			;;
+		greed)
+			chck-game
+			exec $TMP_PATH/$GAME
+			;;
+		lexter)
+			chck-game
+			exec $TMP_PATH/$GAME
+			;;
+		moon-buggy)
+			chck-game
+			exec $TMP_PATH/$GAME
+			;;
+		moria)
+			chck-game
+			exec $TMP_PATH/$GAME
+			;;
+		myman)
+			chck-game
+			exec $TMP_PATH/$GAME
+			;;
+		nethack)
+			chck-game
+			exec $TMP_PATH/$GAME
+			;;
+		ninvaders)
+			chck-game
+			exec $TMP_PATH/$GAME
+			;;
+		nsnake)
+			chck-game
+			exec $TMP_PATH/$GAME
+			;;
+		nudoku)
+			chck-game
+			exec $TMP_PATH/$GAME
+			;;
+		open-adventure)
+			chck-game
+			exec $TMP_PATH/advent
+			;;
+		pacman4console)
+			chck-game
+			exec $TMP_PATH/pacman
+			;;
+		texlive-games)
+			chck-game
+			printf "$Y[!]-> All reporitories was installed$W\n\n"
+			;;
+		tty-solitaire)
+			chck-game
+			exec $TMP_PATH/ttysolitaire
+			;;
+		vitetris)
+			chck-game
+			exec $TMP_PATH/tetris
+			;;
+		*)
+			printf "$R\n[w]-> O-ops!!$Y Try again$W\n"
+			exit
+			;;
+	esac
+done
+
+rm $FILE

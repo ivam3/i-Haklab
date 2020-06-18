@@ -77,6 +77,8 @@ elif [ $1 = show ] && [ $2 ]; then
 		else
 			printf "$R[w]->$W Quick Guides was removed$R |$W please install it\n"
 		fi
+	elif [ $2 = games ]; then
+		exec bash $iHAKLAB/.set/share/games $3 $@
 	else
 		printf "$R[w]->$W Unable to locate option $2\n"
 	fi

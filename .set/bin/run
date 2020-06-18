@@ -12,7 +12,7 @@ M='\033[1;35m'
 C='\033[1;36m'
 W='\033[0m'
 SOversion=$(termux-info | grep -oE '([5-9]{1}\.)([0-9]{1}\.)([0-9]{1})' | awk -F "." '{print $1}')
-if [ "$SOversion" -lt '7' ]; then
+if [ ! -z "$OSversion" ] && [ "$SOversion" -lt '7' ]; then
 	LIBVERSION="2.6.0"
 else
 	LIBVERSION="2.7.0"
@@ -581,7 +581,7 @@ case "$SCRIPT_NAME" in
                 fi
                 ;;
 	hasher)
-		if [ -d $TMP_PATH/$SCRIP_NAME ]; then
+		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
 			cd $TMP_PATH/$SCRIPT_NAME > /dev/null
 			python2 $TMP_PATH/$SCRIPT_NAME/hash.py
 			

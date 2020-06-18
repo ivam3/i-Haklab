@@ -1,8 +1,0 @@
-#!/data/data/com.termux/files/usr/bin/bash
-#This script will install and run a termux moon buggy game
-#
-if [ ! -e $PREFIX/bin/moon-buggy ]; then
-	apt install moon-buggy -y
-fi
-moon-buggy
-#		@Ivam3

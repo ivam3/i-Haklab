@@ -1,8 +1,0 @@
-#!/data/data/com.termux/files/usr/bin/bash
-#This script will install and run a termux moon brogue game
-#
-if [ ! -e $PREFIX/bin/brogue ]; then
-	pkg install brogue -y
-fi
-brogue
-#		@Ivam3

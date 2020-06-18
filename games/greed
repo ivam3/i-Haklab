@@ -1,8 +1,0 @@
-#!/data/data/com.termux/files/usr/bin/bash
-#This script will install and run a termux greed game
-#
-if [ ! -e $PREFIX/bin/greed ]; then
-	apt install greed -y
-fi
-greed
-#		@Ivam3

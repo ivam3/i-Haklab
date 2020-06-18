@@ -1,8 +1,0 @@
-#!/data/data/com.termux/files/usr/bin/bash
-#This script will install and run a termux moon gnugo game
-#
-if [ ! -e $PREFIX/bin/gnugo ]; then
-	apt install gnugo -y
-fi
-gnugo
-#		@Ivam3

@@ -53,17 +53,23 @@ chmod 777 $iHAKLAB/../wpscan/bin/*
 
 #:::::::::Fix linking error for Ruby Bigdecimal::::::::#
 #::::::::::::::::  native extensions. :::::::::::::::::##
-command -v patchelf || apt install -yq patchelf
+SOversion=$(termux-info | grep -oE '([5-9]{1}\.)([0-9]{1}\.)([0-9]{1})' | awk -F "." '{print $1}')
+if [ ! -z "$OSversion" ] && [ "$SOversion" -lt '7' ]; then
+        LIBVERSION="2.6.0"
+else
+        LIBVERSION="2.7.0"
+fi
+command -v patchelf > /dev/null || apt install -yq patchelf
 
 for i in aarch64-linux-android arm-linux-androideabi \
     i686-linux-android x86_64-linux-android; do
-    if [ -e "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal.so" ]; then
-	    if [ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal/util.so" | grep bigdecimal.so)" ]; then
+    if [ -e "$PREFIX/lib/ruby/${LIBVERSION}/${i}/bigdecimal.so" ]; then
+	    if [ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/${LIBVERSION}/${i}/bigdecimal/util.so" | grep bigdecimal.so)" ]; then
 		    exit
 	    fi
 	    patchelf --add-needed \
-		    "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal.so" \
-		    "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal/util.so"
+		    "$PREFIX/lib/ruby/${LIBVERSION}/${i}/bigdecimal.so" \
+		    "$PREFIX/lib/ruby/${LIBVERSION}/${i}/bigdecimal/util.so"
     fi
 done
 
