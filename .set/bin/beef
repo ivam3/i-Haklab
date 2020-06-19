@@ -37,10 +37,15 @@ esac
 
 case "$SCRIPT_NAME" in
         beef|beef-xss)
-                if [ -d $BEEF_PATH ]; then
-                        cd $BEEF_PATH
-                        exec ruby "$BEEF_PATH/$SCRIPT_NAME" "$@"
-                        cd $BACK
+		if [ -d $BEEF_PATH ]; then
+                        cd $BEEF_PATH > /dev/null
+                        echo "load msgrpc ServerHost=127.0.0.1 ServerPort=55552 User=msf Pass='abc123'" > $PREFIX/opt/metasploit-framework/BeeF.rc
+                        echo "\033[1;33m[!]->\033[0m In a new session run :"
+                        echo "      postgresql start"
+                        echo "      msfconsole -r $PREFIX/opt/metasploit-framework/BeeF.rc"
+                        echo "\033[1;33m[!]->\033[0m then press\033[1;32m enter\033[0m to continue"
+                        read enter
+                        exec ruby $BEEF_PATH/$SCRIPT_NAME
                 else
                         STDERR
                 fi
