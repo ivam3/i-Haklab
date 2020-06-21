@@ -42,10 +42,9 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-apt install git -y
-git clone https://github.com/ivam3/ExiF.git $iHAKLAB/../ExiF
-chmod +x $iHAKLAB/../ExiF/*
-cd $iHAKLAB/../ExiF; bash install.sh;cd
+apt install wget -y
+wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/ExiF -O $PREFIX/bin/ExiF
+chmod 711 $PREFIX/bin/ExiF
 
 
 #ENDING SCRIPT

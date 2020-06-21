@@ -41,9 +41,9 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #UNINSTALLATION
-apt remove php -y
-apt autoremove -y
-rm -rf $iHAKLAB/../ExiF
+pkg remove exiftool -y > /dev/null 
+rm -rf $PREFIX/bin/ExiF
+apt autoremove
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W"
