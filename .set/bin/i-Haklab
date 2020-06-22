@@ -125,6 +125,11 @@ elif [ $1 = weechat ]; then
 	k-boom
 
 
+elif [ $1 = root ]; then
+	command -v proot > /dev/null || pkg install proot -y > /dev/null 
+	proot -0 -w ~ $PREFIX/bin/fish
+
+
 elif [ $1 = speedtest ]; then
 	command -v python > /dev/null 2>&1 || apt install python -y /dev/null 2>&1
 	command -v speedtest-cli > /dev/null 2>&1 || python -m pip install speedtest-cli /dev/null 2>&1
