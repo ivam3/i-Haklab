@@ -4,10 +4,19 @@ IFS=$'\n\t'
 trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
 
-function ctrl_c() {
+ctrl_c() {
                 echo
                 printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
 }
+if [ -x /system/xbin/su ]; then
+        ROOT="true"
+elif [ -x /su/bin/su ]; then
+        ROOT="true"
+elif [ -x /sbin/su ]; then
+        ROOT="true"
+else
+        ROOT="false"
+fi
 if [ ! -d ~/storage ]; then
         termux-setup-storage
 fi
@@ -96,6 +105,15 @@ arch=`dpkg --print-architecture`
                 cp $TMP_DIR/.embed/apktool $PREFIX/bin/
                 cp $TMP_DIR/openjdk/apktool.jar $PREFIX/var/spool/
                 chmod 711 $PREFIX/share/jdk8/man/ja_JP.UTF-8/man1/*
+		printf "$Y\n[!]─➤ Remember to use java you have to be root"
+		sleep 2
+                while [ $ROOT = "false" ]; do
+                        printf "$R\n[w]─➤ And your device is not rooted"
+                        sleep 2
+			printf "$G\n[+]─➤ SO run$W i-Haklab root$G\n      to simulate it before use java\n\n"
+                        sleep 5
+			break
+                done
 #
 # This Arch use Apktool from TMP_DIR
 #
