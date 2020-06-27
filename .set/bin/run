@@ -108,6 +108,7 @@ if [ -z $SCRIPT_NAME ]; then
 ╰─shellsploit────➤  Powerful phishing tool.
 ╰─sqliv──────────➤  Massive SQL injection scanner.
 ╰─sqlmap─────────➤  Penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database server. 
+╰─tangalanga─────➤  Zoom Conference scanner. This scanner will check for a random meeting id and return information if available
 ╰─theharvester───➤  Gather emails, subdomains, hosts, employee names, open ports and banners from different public sources like search engines, PGP key servers and SHODAN computer database.
 ╰─xerosploit─────➤  Penetration testing toolkit whose goal is to perform man in the middle attacks.
 ╰─webhackshl─────➤  Vulnerability analysis and information collection of websites and servers.
@@ -585,6 +586,13 @@ case "$SCRIPT_NAME" in
 			cd $TMP_PATH/$SCRIPT_NAME > /dev/null
 			python2 $TMP_PATH/$SCRIPT_NAME/hash.py
 			
+		else
+			STDERR
+		fi
+		;;
+	tangalanga)
+		if [ -d $HOME/go/src/github.com/tangalanga ] && [ -e $HOME/go/bin/tangalanga ]; then
+			exec $HOME/go/bin/tangalanga
 		else
 			STDERR
 		fi

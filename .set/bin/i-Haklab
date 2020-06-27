@@ -52,16 +52,7 @@ elif [ $1 = show ] && [ $2 ]; then
 			fi
 		fi
 	elif [ $2 = tutorials ]; then
-		cat $iHAKLAB/.set/libexec/Tutorials/List
-		printf "$G\n[?]─> Choose one option:─➤ "
-		read ANSW
-		let TUTO=$(cat $iHAKLAB/.set/libexec/Tutorials/List | grep -oE $ANSW )
-		if [ "$ANSW" = $TUTO ]; then
-			chk-api
-			termux-open https://t.me/Ivam3byCinderella/$ANSW
-		else
-			printf "$R[w]->$W Unable to locate option $ANSW\n"
-		fi
+		exec bash $iHAKLAB/.set/share/tutorials
 	elif [ $2 = QG ]; then
 		if [ -d $iHAKLAB/QuickGuides ]; then
 			ls $iHAKLAB/QuickGuides

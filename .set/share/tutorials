@@ -1,0 +1,72 @@
+#!/bin/bash
+#This file is part of i-Haklab command
+
+if [ -d /data/data/com.termux/files/home/i-Haklab ]
+then
+	iHAKLAB=/data/data/com.termux/files/home/i-Haklab
+else 
+	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+fi
+
+source $iHAKLAB/.set/libexec/colors
+source $iHAKLAB/.set/var/variables
+source $iHAKLAB/.set/functions/functions
+
+STDERR() {
+	printf "$R\n[w]─➤ O-ops!!$W Tutorial is not available on $PLATFORM\n"
+}
+
+ALLTUTOS=$(cat $iHAKLAB/.set/libexec/Tutorials/List | awk '{print $4}')
+select ANSW in $ALLTUTOS Exit ; do
+	while [ -z $ANSW ] || [ $ANSW = "Exit" ]; do
+		exit
+	done
+	printf "$G\n[+]─➤ Choose an options :$W\n"
+	select WAY in Watch Download Exit; do
+		case $WAY in
+			Watch)
+				printf "$G\n[+]─➤ Choose the platform :$W\n"
+				select PLATFORM in YouTube Telegram Exit; do
+					case $PLATFORM in
+						YouTube)
+							TUTO=$(cat $iHAKLAB/.set/libexec/Tutorials/List | grep $ANSW | awk '{print $2}')
+							if [ $TUTO = "false" ] || [ -z $TUTO ]
+							then
+								STDERR
+								exit
+							else
+								termux-open-url $TUTO
+							fi
+							;;
+						Telegram)
+							TUTO=$(cat $iHAKLAB/.set/libexec/Tutorials/List | grep $ANSW | awk '{print $1}')
+							if [ $TUTO = "false" ] || [ -z $TUTO ]
+							then
+								STDERR
+								exit
+							else
+								termux-open-url https://t.me/Ivam3byCinderella/$TUTO
+							fi
+							;;
+						Exit|*)
+							exit
+							;;
+					esac
+				done
+				;;
+			Download)
+				TUTO=$(cat $iHAKLAB/.set/libexec/Tutorials/List | grep $ANSW | awk '{print $2}')
+				if [ $TUTO = 'false' ] || [ -z $TUTO ]
+				then
+					printf "$R\n[w]─➤ O-ops!!$W Tutorial is not available to be download\n"
+					exit
+				else
+					youtubedr $TUTO
+				fi
+				;;
+			Exit|*)
+				exit
+				;;
+		esac
+	done
+done
