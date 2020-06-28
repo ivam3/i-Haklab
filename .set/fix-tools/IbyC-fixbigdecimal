@@ -1,0 +1,31 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Coded on june 2019 by @Ivam3
+#This file will fix issues with ruby gem bigdecimal
+set -euo pipefail
+IFS=$'\n\t'
+#COLORS
+		R='\033[1;31m'
+                G='\033[1;32m'
+                Y='\033[1;33m'
+                B='\033[1;34m'
+                M='\033[1;35m'
+                C='\033[1;36m'
+                W='\033[0m'
+ctrl_c() {
+        printf "$Y\n[!]$R Going me on https://t.me/Ivam3_Bot$W\n"
+}
+printf "$G\n[IbyC]-> FIXING BIG DECIMAL ISSUES$W\n"
+        apt install -yq patchelf
+        for i in aarch64-linux-android arm-linux-androideabi \
+                i686-linux-android x86_64-linux-android; do
+                        if [ -e "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal.so" ]; then
+                                if [ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal/util.so" | grep bigdecimal.so)" ]; then
+                                        exit 0
+                                fi
+                                patchelf --add-needed \
+                                        "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal.so" \
+                                        "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal/util.so"
+                        fi
+        done
+printf "$G\n[IbyC]-> FIXED!!!\n$W"
+#			@Ivam3
