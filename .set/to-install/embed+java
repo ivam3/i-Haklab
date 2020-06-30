@@ -76,10 +76,13 @@ fi
 if [ -e $PREFIX/bin/sudo ] || [ -d $HOME/.suroot ]; then
         sudo chown -R $USR:$USR $HOME/.suroot
 fi
-apt update && apt upgrade -y
-pkg install git axel wget tar apksigner aapt -y
-git clone https://github.com/ivam3/java.git ~/java
+yes | pkg update && apt upgrade && pkg install git axel wget tar apksigner aapt -y
+git clone https://github.com/ivam3/java.git ~/java 2> /dev/null
+
 TMP_DIR=$HOME/java
+apktool=$(find $PREFIX/bin -name "apktool")
+java=$(find $PREFIX/bin -name "java")
+
 mkdir -p $TMP_DIR/handler
 mkdir -p $TMP_DIR/unsign
 mkdir -p $TMP_DIR/finished
