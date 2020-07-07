@@ -165,7 +165,7 @@ InstaTools() {
 InstaTools
 case $ANSW in
 	lite|LITE|Lite)
-		for TOOL in DoS-A-Tool ExiF binchecker blackbox crunch sqlmap vpn tmux-viewer youtube-dl evilurl ; do
+		for TOOL in DoS-A-Tool ExiF binchecker blackbox crunch sqlmap vpn tmux-viewer evilurl ; do
 			bash $iHAKLAB/.set/to-install/$TOOL
 			printf "\n\n"
 		done

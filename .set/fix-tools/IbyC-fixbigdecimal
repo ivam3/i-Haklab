@@ -3,6 +3,7 @@
 #This file will fix issues with ruby gem bigdecimal
 set -euo pipefail
 IFS=$'\n\t'
+SOversion=$(termux-info | grep -oE '([5-9]{1}\.)([0-9]{1}\.)([0-9]{1})' | awk -F "." '{print $1}')
 #COLORS
 		R='\033[1;31m'
                 G='\033[1;32m'
@@ -14,17 +15,24 @@ IFS=$'\n\t'
 ctrl_c() {
         printf "$Y\n[!]$R Going me on https://t.me/Ivam3_Bot$W\n"
 }
+
+if [ $SOversion => '7' ]
+then
+	Gemversion="2.7.0"
+else
+	Gemversion="2.6.0"
+fi
 printf "$G\n[IbyC]-> FIXING BIG DECIMAL ISSUES$W\n"
         apt install -yq patchelf
         for i in aarch64-linux-android arm-linux-androideabi \
                 i686-linux-android x86_64-linux-android; do
-                        if [ -e "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal.so" ]; then
-                                if [ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal/util.so" | grep bigdecimal.so)" ]; then
+                        if [ -e "$PREFIX/lib/ruby/$Gemversion/${i}/bigdecimal.so" ]; then
+                                if [ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/$Gemversion/${i}/bigdecimal/util.so" | grep bigdecimal.so)" ]; then
                                         exit 0
                                 fi
                                 patchelf --add-needed \
-                                        "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal.so" \
-                                        "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal/util.so"
+                                        "$PREFIX/lib/ruby/$Gemversion/${i}/bigdecimal.so" \
+                                        "$PREFIX/lib/ruby/$Gemversion/${i}/bigdecimal/util.so"
                         fi
         done
 printf "$G\n[IbyC]-> FIXED!!!\n$W"
