@@ -78,6 +78,7 @@ $Y Arguments$W  |$Y    Options$W     |$Y    Description$W
 ╰─weechat──➤────────────────➤ Connect with irc Ivam3byCinderella chat
 ╰─update───➤────────────────➤ Update i-Haklab
 ╰speedtest─➤────────────────➤ Run a speed test of your network
+╰translate─➤text─2─translate➤ Command line traductor
 ╰─root─────➤────────────────➤ Simulates a super user environment
 ╰─restore──➤────────────────➤ Restore the main directory to fix some bugs
 ╰reinstall─➤────────────────➤ Reinstall i-Haklab to factory configurations

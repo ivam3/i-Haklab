@@ -128,6 +128,11 @@ elif [ $1 = speedtest ]; then
 	speedtest-cli --simple
 	printf "$W"
 
+elif [ $1 = translate ] && [ -z $2 ]; then
+	printf "$R[w]->$W Translate argument need an option\n"
+elif [ $1 = translate ] && [ $2 ]; then
+	command -v trans > /dev/null 2>&1 || { printf "$R\n[W]->$W Translate is not installed"; exit; }
+	exec $(which trans) es: "$2" | hean -n 5
 
 elif [ $1 = update ]; then
 	TMP_FILE=$(mktemp)
