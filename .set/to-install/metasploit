@@ -2,20 +2,30 @@
 #Created on Jan/2019
 IFS=$'\n\t'
 trap ctrl_c 2
-source /data/data/com.termux/files/usr/libexec/colors
-SOversion=$(termux-info | grep -oE '([5-9]{1}\.)([0-9]{1}\.)([0-9]{1})' | awk -F "." '{print $1}')
-msfversion="5.0.65"
-TMP_DIR=$PREFIX/opt/metasploit-framework
-APK=$TMP_DIR/lib/msf/core/payload/apk.rb
-function ctrl_c() {
-                echo
-                printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
-}
+
 if [ -L ~/storage/external-1 ]; then
 	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 else
         iHAKLAB=/data/data/com.termux/files/home/i-Haklab
 fi
+
+if [ -e /data/data/com.termux/files/usr/libexec/colors ]; then
+	source /data/data/com.termux/files/usr/libexec/colors
+elif [ -e $iHAKLAB/.set/libexec/colors ]; then
+	source $iHAKLAB/.set/libexec/colors
+else
+	printf "$R[w}-> ERROR-colors : join to https://t.me/Ivam3_Bot$W\n"
+	exit
+fi
+
+SOversion=$(termux-info | grep -oE '([5-9]{1}\.)([0-9]{1}\.)([0-9]{1})' | awk -F "." '{print $1}')
+msfversion="5.0.65"
+TMP_DIR=$PREFIX/opt/metasploit-framework
+APK=$TMP_DIR/lib/msf/core/payload/apk.rb
+ctrl_c() {
+	echo
+        printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
+}
 
 while [ ! $(id -u) -ne 0 ]; do
 	printf "$R\n[W]:-> You need to be a common user$W\n"
@@ -68,9 +78,7 @@ if [ -d $PREFIX/opt/metasploit-framework ]; then
 elif [ -d $HOME/metasploit-framework ]; then
 	rm -rf $HOME/metasploit-framework
 fi
-pkg uninstall metasploit -y
-pkg uninstall unstable-repo -y
-apt autoremove -y
+yes | pkg uninstall metasploit && pkg uninstall unstable-repo && apt autoremove
 }
 Termux() {
 	command -v termux-info > /dev/null 2>&1 || pkg install termux-api termux-tools -y > /dev/null 2>&1
@@ -81,14 +89,10 @@ Termux() {
 	fi
 }
 Newest() {
-	apt update -y && pkg upgrade -y
-	apt install -y util-linux autoconf util-linux bison clang coreutils axel curl findutils git apr apr-util libtool pkg-config wget make ruby termux-tools ncurses-utils ncurses unzip postgresql termux-elf-cleaner -y
-	pkg install unstable-repo -y
-	pkg install metasploit -y
+	yes | apt update && pkg upgrade && apt install util-linux autoconf util-linux bison clang coreutils axel curl findutils git apr apr-util libtool pkg-config wget make ruby termux-tools ncurses-utils ncurses unzip postgresql termux-elf-cleaner && pkg install unstable-repo && pkg install metasploit
 }
 Legacy() {
-	pkg upgrade -y
-	pkg install ruby libpcap autoconf -y
+	yes | pkg update && pkg upgrade && pkg install ruby libpcap autoconf
 	gem install bundler:1.17.3
 	curl -LO https://github.com/termux/termux-packages/files/3960686/metasploit_$msfversion\_android5_all.deb.gz
 	gunzip metasploit_$msfversion\_android5_all.deb.gz
@@ -98,8 +102,7 @@ Legacy() {
 
 Rapid7() {
 #INSTALLING DEPENDENCIES
-apt update
-apt install -y autoconf bison clang coreutils curl findutils git apr apr-util libtool pkg-config wget make termux-tools ncurses-utils ncurses unzip zip tar postgresql termux-elf-cleaner
+yes | pkg update && pkg upgrade && pkg install autoconf bison clang coreutils curl findutils git apr apr-util libtool pkg-config wget make termux-tools ncurses-utils ncurses unzip zip tar postgresql termux-elf-cleaner
 
 #DOWNLOAD METASPLOIT
 cd $PREFIX/opt
