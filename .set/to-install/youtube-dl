@@ -37,19 +37,20 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL YOUTUBE-DL. . . .$i"
+        printf "$(clear) $C INSTALLING YOUTUBE-DL-DOWNLOADER BY MILUX. . . .$i"
         printf "\n\n"
         sleep 1
 done
 #INSTALLATION
+GabiTeplea() {
 dpkg --configure -a
-apt update && apt -y upgrade -y
+yes | pkg update && pkg upgrade
 if [ -d $PREFIX/lib/python3.7/site-packages/youtube_dl ]; then
 	yes | pip uninstall youtube_dl
 fi
 printf "$G[!]-> INSTALLING YOUTUBE-DL BY GABI TIPLEA$W\n"
 sleep 1
-apt install -y util-linux wget curl python python-dev python2
+yes | pkg install util-linux wget curl python python2
 yes | python -m pip install youtube-dl
 if [ -d $HOME/youtube-dl ]; then
 	rm -rf $HOME/youtube-dl
@@ -61,6 +62,26 @@ chmod 711 $HOME/.netrc
 curl https://raw.githubusercontent.com/ivam3/youtube-dl/master/.data/LhDxGbtY -o $PREFIX/bin/termux-url-opener
 dos2unix $PREFIX/bin/termux-url-opener
 chmod 711 $PREFIX/bin/termux-url-opener
+}
+
+
+############## BY_MILUX ####################
+FILE="https://raw.githubusercontent.com/miluxmil/milux/master"
+yes | pkg update && pkg upgrade && pkg install wget
+for dir in bin .milux ; do
+        if [ ! -d ~/$dir ]
+        then
+                mkdir 1/$dir
+        fi
+done
+
+for i in termux-url-opener update; do
+        wget $FILE/$i -O ~/bin/update -q
+        chmod +x ~/bin/$i
+done
+source ~/bin/update
+_FIX
+touch $HOME/.milux/date
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
