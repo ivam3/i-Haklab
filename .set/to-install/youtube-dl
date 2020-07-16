@@ -68,16 +68,18 @@ chmod 711 $PREFIX/bin/termux-url-opener
 ############## BY_MILUX ####################
 FILE="https://raw.githubusercontent.com/miluxmil/milux/master"
 yes | pkg update && pkg upgrade && pkg install wget
-for dir in bin .milux ; do
-        if [ ! -d ~/$dir ]
-        then
-                mkdir 1/$dir
-        fi
-done
+if [ ! -d ~/.milux ]
+then
+        mkdir ~/.milux
+fi
+if [ -L ~/bin ]
+then
+        ln -s $PREFIX/bin ~/bin
+fi
 
 for i in termux-url-opener update; do
-        wget $FILE/$i -O ~/bin/update -q
-        chmod +x ~/bin/$i
+        wget $FILE/$i -O $PREFIX/bin/update -q
+        chmod +x $PREFIX/bin/$i
 done
 source ~/bin/update
 _FIX
