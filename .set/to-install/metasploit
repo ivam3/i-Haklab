@@ -128,7 +128,12 @@ bundle install -j5
 gem install shodan
 $PREFIX/bin/find -type f -executable -exec termux-fix-shebang \{\} \;
 rm ./modules/auxiliary/gather/http_pdf_authors.rb
-termux-elf-cleaner /data/data/com.termux/files/usr/lib/ruby/gems/2.7.0/gems/pg-0.21.0/lib/pg_ext.so
+if [ $SOversion => '7' ]; then
+	LIBversion=2.0.7
+else
+	LIBversion=2.6.0
+fi
+termux-elf-cleaner /data/data/com.termux/files/usr/lib/ruby/gems/$LIBversion/gems/pg-0.21.0/lib/pg_ext.so
 cd $PREFIX/opt/metasploit-framework/config
 curl -LO https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/mediafire/metasploit/database.yml
 
@@ -146,6 +151,9 @@ ln -sf $(which msfconsole) $PREFIX/bin/msfvenom
 echo "#!/data/data/com.termux/files/usr/bin/bash" > $PREFIX/opt/metasploit-framework/installer.sh
 echo "echo \"[*] Metasploit Framework installation finished.\"" >> $PREFIX/opt/metasploit-framework/installer.sh
 echo "#                 @Ivam3" >> $PREFIX/opt/metasploit-framework/installer.sh
+for i in msfconsole msfvenom ; do
+	sed 's|2.6.0|2.7.0|g' -i $PREFIX/bin/$i
+done
 }
 
 Ivam3() {
