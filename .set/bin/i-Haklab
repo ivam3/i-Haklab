@@ -135,17 +135,17 @@ elif [ $1 = translate ] && [ $2 ]; then
 #	exec $(which trans) :es "$2 $3 $4 $5" | head -n 5
 	if [ $2 = es ] || [ $2 = en ]; then
 		until [ ! -z $3 ]; do
-
-		while getopts ":$3" OPC ; do
-			case ${OPC} in
-				t)
-					TEXT=$(OPTARG)
-					$(which trans) :$2 "$TEXT" | head -n 5
-					;;
-				*)
-					printf "$Y\n[!]-> usage :$W \"i-Haklab es|en text to translate\"\n\ten --> Translate at english\n\tes --> Translate at espanish\n"
-					;;
-			esac
+			while getopts ":$3" OPC ; do
+				case ${OPC} in
+					t)
+						TEXT=$(OPTARG)
+						$(which trans) :$2 "$TEXT" | head -n 5
+						;;
+					*)
+						printf "$Y\n[!]-> usage :$W \"i-Haklab es|en text to translate\"\n\ten --> Translate at english\n\tes --> Translate at espanish\n"
+						;;
+				esac
+			done
 		done
 	else
 		printf "$R[w]->$W translate argument need an lenguaje[es|en]\n"

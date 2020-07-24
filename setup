@@ -17,7 +17,7 @@ until [ -d /data/data/com.termux/files/home/i-Haklab ]; do
 	exit
 done
 wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/colors -O /data/data/com.termux/files/usr/libexec/colors > /dev/null 2>&1
-source /data/data/com.termux/files/home/i-Haklab/.set/libexec/colors
+source /data/data/com.termux/files/usr/libexec/colors
 
 echo $(clear)
         printf "$C"
@@ -186,7 +186,7 @@ bash $iHAKLAB/.set/to-install/metasploit
 bash $iHAKLAB/.set/to-install/embed+java
 TARGET=$(ls $iHAKLAB/.set/bin)
 for exe in ${TARGET[*]}; do
-	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$exe -o $PREFIX/bin/$exe
+	wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$exe -O $PREFIX/bin/$exe -q
 	chmod +x $PREFIX/bin/$exe
 done
 
