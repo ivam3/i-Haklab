@@ -18,10 +18,10 @@ function ctrl_c() {
 #	printf "$R[W]-> You are not in home directory$W\n"
 #	exit
 #done
-until [ -e /data/sdext2/data/com.termux/files/home/tmux-viewer ] || [ -e /data/data/com.termux/files/home/tmux-viewer ]; do
-	printf "$R[W]-> Tmux-viewer file need to be in home directory$W\n"
-	exit
-done
+#until [ -e /data/sdext2/data/com.termux/files/home/tmux-viewer ] || [ -e /data/data/com.termux/files/home/tmux-viewer ]; do
+#	printf "$R[W]-> Tmux-viewer file need to be in home directory$W\n"
+#	exit
+#done
 while [ ! $(id -u) -ne 0 ]; do
         printf "$R[W]:-> You need to be a common user$W\n"
         exit
