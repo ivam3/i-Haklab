@@ -14,10 +14,10 @@ function ctrl_c() {
         M='\033[1;35m'
         C='\033[1;36m'
         W='\033[0m'
-until [ $PWD = /data/sdext2/data/com.termux/files/home ] || [ $PWD = /data/data/com.termux/files/home ]; do
-	printf "$R[W]-> You are not in home directory$W\n"
-	exit
-done
+#until [ $PWD = /data/sdext2/data/com.termux/files/home ] || [ $PWD = /data/data/com.termux/files/home ]; do
+#	printf "$R[W]-> You are not in home directory$W\n"
+#	exit
+#done
 until [ -e /data/sdext2/data/com.termux/files/home/tmux-viewer ] || [ -e /data/data/com.termux/files/home/tmux-viewer ]; do
 	printf "$R[W]-> Tmux-viewer file need to be in home directory$W\n"
 	exit
