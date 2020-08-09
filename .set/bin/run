@@ -81,6 +81,7 @@ if [ -z $SCRIPT_NAME ]; then
 ╰─cryptovenom────➤  Cryptosystems and cryptoanalysis methods all in one.
 ╰─dnsenum────────➤  Enumerate DNS information of a domain and to discover non-contiguous ip blocks.
 ╰─dog────────────➤  Reconnaissance Swiss Army Knife.
+╰─embed──────────➤  Embedded metasploit payload in legitim aplication.
 ╰─evilurl────────➤  Generate unicode evil domains for IDN Homograph Attack and detect them.
 ╰─exploitdb──────➤  Public exploits and corresponding vulnerable software, developed for use by penetration testers and vulnerability researchers
 ╰─fbi────────────➤  Accurate facebook account information gathering
@@ -194,6 +195,14 @@ case "$SCRIPT_NAME" in
                         
                 else
                         STDERR
+		fi
+		;;
+	embed)
+		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+			cd $TMP_PATH/$SCRIPT_NAME > /dev/null
+			exec ruby $TMP_PATH/$SCRIPT_NAME/EMBED.rb $@
+		else
+			STDERR
 		fi
 		;;
 	ExiF)

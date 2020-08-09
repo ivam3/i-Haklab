@@ -76,7 +76,8 @@ fi
 if [ -e $PREFIX/bin/sudo ] || [ -d $HOME/.suroot ]; then
         sudo chown -R $USR:$USR $HOME/.suroot
 fi
-yes | pkg update && apt upgrade && pkg install git axel wget tar apksigner aapt -y
+yes | pkg update && apt upgrade && pkg install git axel wget tar apksigner aapt
+git clone https://github.com/ivam3/embed.git $iHAKLAB/../embed 2> /dev/null
 git clone https://github.com/ivam3/java.git ~/java 2> /dev/null
 
 TMP_DIR=$HOME/java
@@ -86,9 +87,8 @@ java=$(find $PREFIX/bin -name "java")
 mkdir -p $TMP_DIR/handler
 mkdir -p $TMP_DIR/unsign
 mkdir -p $TMP_DIR/finished
-axel https://raw.githubusercontent.com/ivam3/embed/master/EMBED -o $PREFIX/bin/EMBED
+chmod -R 711 $iHAKLAB/../embed
 chmod -R 711 $TMP_DIR
-chmod 777 $PREFIX/bin/EMBED
 arch=`dpkg --print-architecture`
 #
 # This Arch use Apktool from TMP_DIR
