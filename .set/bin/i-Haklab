@@ -128,30 +128,6 @@ elif [ $1 = speedtest ]; then
 	speedtest-cli --simple
 	printf "$W"
 
-elif [ $1 = translate ] && [ -z $2 ]; then
-	printf "$R[w]->$W Translate argument need an option\n"
-elif [ $1 = translate ] && [ $2 ]; then
-	command -v trans > /dev/null 2>&1 || { printf "$R\n[W]->$W Translate is not installed"; exit; }
-#	exec $(which trans) :es "$2 $3 $4 $5" | head -n 5
-	if [ $2 = es ] || [ $2 = en ]; then
-		until [ ! -z $3 ]; do
-			while getopts ":$3" OPC ; do
-				case ${OPC} in
-					t)
-						TEXT=$(OPTARG)
-						$(which trans) :$2 "$TEXT" | head -n 5
-						;;
-					*)
-						printf "$Y\n[!]-> usage :$W \"i-Haklab es|en text to translate\"\n\ten --> Translate at english\n\tes --> Translate at espanish\n"
-						;;
-				esac
-			done
-		done
-	else
-		printf "$R[w]->$W translate argument need an lenguaje[es|en]\n"
-	fi
-
-
 elif [ $1 = update ]; then
 	TMP_FILE=$(mktemp)
 	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/upgrade -o $TMP_FILE > /dev/null 2>&1
