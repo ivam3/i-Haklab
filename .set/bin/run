@@ -200,7 +200,7 @@ case "$SCRIPT_NAME" in
 	embed)
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
 			cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-			exec ruby $TMP_PATH/$SCRIPT_NAME/EMBED.rb $@
+			exec ruby $TMP_PATH/$SCRIPT_NAME/EMBED.rb $2 $@
 		else
 			STDERR
 		fi
