@@ -3,7 +3,7 @@
 #This file will fix issues with ruby gem bigdecimal
 set -euo pipefail
 IFS=$'\n\t'
-SOversion=$(termux-info | grep -oE '([5-9]{1}\.)([0-9]{1}\.)([0-9]{1})' | awk -F "." '{print $1}')
+OSversion=$(ls $PREFIX/lib/ruby | grep "2.*.*" | awk -F "." '{print $2}')
 #COLORS
 		R='\033[1;31m'
                 G='\033[1;32m'
@@ -16,7 +16,7 @@ ctrl_c() {
         printf "$Y\n[!]$R Going me on https://t.me/Ivam3_Bot$W\n"
 }
 
-if [ $SOversion => '7' ]
+if [ $OSversion => '7' ]
 then
 	Gemversion="2.7.0"
 else
