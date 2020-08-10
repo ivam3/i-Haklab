@@ -16,7 +16,7 @@ ctrl_c() {
         printf "$Y\n[!]$R Going me on https://t.me/Ivam3_Bot$W\n"
 }
 
-if [ $OSversion => '7' ]
+if [ $OSversion -gt "6" ]
 then
 	Gemversion="2.7.0"
 else
