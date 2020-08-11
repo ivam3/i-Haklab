@@ -85,9 +85,11 @@ until [ -e $PREFIX/bin/IbyC-fixer ]; do
 		exit
 	fi
 done
-while [ -z $3 ]; do
+while [ -z $1 ]; do
 	Menu
 done
+
+Args(){
 if [ $2 = "Py" ]; then
 	Py=python
 	Repos
@@ -99,8 +101,11 @@ elif [ $2 = "Py2" ]; then
 else
 	Menu
 fi
+}
+
 case $1 in
 	B|BASIC)
+		Args
 		for module in $3 $4 $5 ; do
 			Chck
 			if [ $module = turtle ]; then
@@ -114,6 +119,7 @@ case $1 in
 		Chao-chao
 		;;
 	LDFLAGS|L)
+		Args
 		export LDFLAGS="-L/system/lib/ -lm -lcompiler_rt"
 		for module in $3 $4 $5 ; do
 			Chck
@@ -128,6 +134,7 @@ case $1 in
 		Chao-chao
 		;;
 	SODIUM|S)
+		Args
 		export SODIUM_INSTALL=system
 		for module in $3 $4 $5 ; do
 			Chck
