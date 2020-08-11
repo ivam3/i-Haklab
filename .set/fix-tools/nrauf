@@ -31,7 +31,7 @@ then
 	pushd $PREFIX/tmp/nrauf >/dev/null 2>&1
 	chmod +x *
 	npm install --global @warren-bank/node-remap-apktool-unicode-filenames >/dev/null 2>&1
-#	exec rauf $DIR
+	exec rauf $DIR
 	rm -rf $PREFIX/tmp/nrauf >/dev/null 2>&1
 	popd >/dev/null 2>&1
 	printf "$G[END]─➤ Done!!!$W\n"
