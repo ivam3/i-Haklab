@@ -1,0 +1,36 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Coded on july 2020 by @Ivam3
+#An script utility for remapping unicode filenames to ascii when produced by apktool
+IFS=$'\n\t'
+
+source $PREFIX/tmp/tmp.colors
+
+if [ -z $1 ]
+then
+	printf "$R\n[ERR-dir]─➤ please specify a directory$W\n"
+	exit
+else
+	DIR=$1
+fi
+
+printf "$C\n[*]─➤ Verifying and installing dependencies...$W\n";sleep 0.5
+command -v git > /dev/null || pkg install git -y > /dev/null 2>&1
+command -v npm > /dev/null || pkg install nodejs -y > /dev/null 2>&1
+
+printf "$C[*]─➤ Downloading nrauf...$W\n"
+git clone https://github.com/warren-bank/node-remap-apktool-unicode-filenames $PREFIX/tmp/nrauf > /dev/null 2>&1
+if [ -d $PREFIX/tmp/nrauf ]
+then
+	pushd $PREFIX/tmp/nrauf >/dev/null 2>&1
+	chmod +x *
+	npm install --global @warren-bank/node-remap-apktool-unicode-filenames >/dev/null 2>&1
+#	exec rauf $DIR
+	rm -rf $PREFIX/tmp/nrauf >/dev/null 2>&1
+	popd >/dev/null 2>&1
+	printf "$G[END]─➤ Done!!!$W\n"
+else
+	printf "$R[ERR-clone]─➤ Going to https://t.me/Ivam3_Bot$W\n"
+	exit
+fi
+
+#		@IVAM3
