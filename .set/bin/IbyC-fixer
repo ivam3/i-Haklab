@@ -151,7 +151,6 @@ case $1 in
 	nrauf)
 		wget $DB_iHAKLAB/fix-tools/nrauf -O $FILE -q
 		chmod +x $FILE
-		echo "fixer = $2"
 		exec $FILE $2
 		rm -rf $FILE
 		;;
