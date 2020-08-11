@@ -85,7 +85,7 @@ until [ -e $PREFIX/bin/IbyC-fixer ]; do
 		exit
 	fi
 done
-while [ -z $1 ]; do
+while [ -z $2 ]; do
 	Menu
 done
 
@@ -151,7 +151,8 @@ case $1 in
 	nrauf)
 		wget $DB_iHAKLAB/fix-tools/nrauf -O $FILE -q
 		chmod +x $FILE
-		exec $FILE $1
+		echo "fixer = $2"
+		exec $FILE $2
 		rm -rf $FILE
 		;;
 	bigdecimal)
