@@ -206,7 +206,7 @@ elif [ $1 = apk ] && [ $2 ]; then
 		printf "$R[w]->$W Argument outlan need a server as an option"
 	elif [ $2 = outlan ] && [ $3 ]; then
 		chk-msf
-		bash $iHAKLAB/.set/share/apk_outlan
+		bash $iHAKLAB/.set/share/apk_outlan $3
 	else
 		printf "$R[w]->$W invalid option\n"
 	fi
@@ -222,7 +222,7 @@ elif [ $1 = payexe ] && [ $2 ]; then
 		printf "$R[w]->$W Argument outlan need a server as an option"
 	elif [ $2 = outlan ] && [ $3 ]; then
 		chk-msf
-		bash $iHAKLAB/.set/share/payexe_outlan
+		bash $iHAKLAB/.set/share/payexe_outlan $3
 	else
                 printf "$R[w]->$W invalid option\n"
         fi
@@ -233,13 +233,13 @@ elif [ $1 = paylink ] && [ -z $2 ]; then
 elif [ $1 = paylink ] && [ $2 = pc ] && [ -z $3 ]; then
 	printf "$R[w]->$W pc options need a target\n"
 elif [ $1 = paylink ] && [ $2 = pc ] && [ $3 ]; then
-	bash $iHAKLAB/.set/share/paylink_pc
+	bash $iHAKLAB/.set/share/paylink_pc $2 $3
 elif [ $1 = paylink ] && [ $2 = nexam ] && [ -z $3 ]; then
         printf "$R[w]->$W nexam option need a target\n"
 elif [ $1 = paylink ] && [ $2 = nexam ] && [ $3 ]; then
-	bash $iHAKLAB/.set/share/paylink_nexam
+	bash $iHAKLAB/.set/share/paylink_nexam $2 $3
 elif [ $1 = paylink ] && [ $2 = soa5 ]; then
-	bash $iHAKLAB/.set/share/paylink_soa5
+	bash $iHAKLAB/.set/share/paylink_soa5 $2
 
 
 elif [ $1 = forwarding ] && [ -z $2 ]; then
@@ -247,10 +247,10 @@ elif [ $1 = forwarding ] && [ -z $2 ]; then
 	bash $iHAKLAB/.set/share/forwarding_default
 elif [ $1 = forwarding ] && [ $2 ] && [ -z $3 ]; then
 	chk-ssh
-	bash $iHAKLAB/.set/share/forwarding_port
+	bash $iHAKLAB/.set/share/forwarding_port $2
 elif [ $1 = forwarding ] && [ $2 ] && [ $3 ]; then
 	chk-ssh
-	bash $iHAKLAB/.set/share/forwarding_dns
+	bash $iHAKLAB/.set/share/forwarding_dns $2 $3
 
 
 elif [ $1 = handler ] && [ -z $2 ]; then
@@ -286,7 +286,7 @@ elif [ $1 = paypdf ] && [ -z $2 ]; then
 	printf "$R[w]->$W argument paypdf need a pdf file name\n"
 elif [ $1 = paypdf ] && [ $2 ]; then
 	chk-msf
-	bash $iHAKLAB/.set/share/paypdf
+	bash $iHAKLAB/.set/share/paypdf $2
 
 
 elif [ $1 = bfmail ] && [ -z $2 ]; then
@@ -294,7 +294,7 @@ elif [ $1 = bfmail ] && [ -z $2 ]; then
 elif [ $1 = bfmail ] && [ $2 ] && [ -z $3 ]; then
         printf "$R[w]->$W bfmail argument need a passwords file as option 2$G\n[ex]->$W i-Haklab bfmail victim@hotmail.com passwords.txt"
 elif [ $1 = bfmail ] && [ $2 ] && [ $3 ]; then
-	bash $iHAKLAB/.set/share/bfmail
+	bash $iHAKLAB/.set/share/bfmail $2 $3
 
 
 elif [ $1 = bfftp ] && [ -z $2 ]; then
