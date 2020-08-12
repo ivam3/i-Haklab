@@ -45,6 +45,12 @@ if [ -d $iHAKLAB/../fuzzdb ]; then
         rm -rf $iHAKLAB/../fuzzdb
 fi
 
+FUZZ=$(pip list | grep "wfuzz")
+if [ ! -z "$FUZZ" ]
+then
+	python -m pip uninstall wfuzz >/dev/null 2>&1
+fi
+
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot
 $W"
