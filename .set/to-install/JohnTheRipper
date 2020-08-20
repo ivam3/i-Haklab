@@ -48,9 +48,12 @@ fi
 if [ -d $iHAKLAB/../JohnTheRipper ]; then
 	rm -rf $iHAKLAB/../JohnTheRipper
 fi
-apt update && apt upgrade
-apt install -y perl git
+yes | apkg update && pkg upgrade && pkg install perl git python python2
 git clone https://github.com/magnumripper/JohnTheRipper.git $iHAKLAB/../JohnTheRipper
+if [ ! -d $iHAKLAB/../JohnTheRipper ]
+then
+	git clone https://github.com/openwall/john $iHAKLAB/../JohnTheRipper
+fi
 echo "#!/data/data/com.termux/files/usr/bin/bash" > $PREFIX/bin/john
 echo "" >> $PREFIX/bin/john
 echo 'printf "Command John will be available too soon"' >> $PREFIX/bin/john

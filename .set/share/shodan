@@ -24,6 +24,7 @@ if [ ! $(cat $APIKEYFILE) ]; then
         done
         echo $ANSW > $APIKEYFILE
 fi
+
 APIKEY=$(cat $APIKEYFILE)
 if [ -e $iHAKLAB/.set/shodan/query ]; then
 	printf "$Y[?]->$W Choose a type of search :\n"
