@@ -1,0 +1,209 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#CODED BY IVAM3 modificated on 01/sept/20
+#This script should fixed gem issues to run all MSF versions
+IFS=$'\n\t'
+trap ctrl_c 2
+ctrl_c() { printf "$R\n[W]$Y Going me on https://t.me/Ivam3_Bot$W\n" }
+
+R='\033[1;31m'
+G='\033[1;32m'
+Y='\033[1;33m'
+B='\033[1;34m'
+M='\033[1;35m'
+C='\033[1;36m'
+W='\033[0m'
+MSFv="5.0.94"
+MSF="$PREfIX/opt/metasploit-framework"
+SHLL=$(echo $SHELL | awk -F "/" '{print $8}')
+iHDB="https://github.com/ivam3/i-Haklab/raw/master/.set"
+R7DB="https://github.com/rapid7/metasploit-framework/archive"
+PGv=$(find $PREFIX/lib/ruby/gems/2.7.0/gems -iname pg_ext.so | awk -F "/" '{print $12}' | head -n 1)
+SO=$(termux-info |awk '$1 < 11 {print $1}' |tail -n 1)
+NOKOGIRIv="1.10.4"
+CASE=$(uname -m)
+
+#:::::::::DEFINITIONS:::::::#
+if [ "$SO" -lt "7" ]
+then
+	GEMS=2.6.0
+else
+	GEMS=2.7.0
+	REPO="unstable-repo"
+fi
+
+if [ $SHLL = fish ]; then
+	INITFILE="$PREFIX/etc/fish/config.fish"
+else
+	INITFILE="$PREFIX/etc/bash.bashrc"
+fi
+
+if [ $CASE = "aarch64" ]
+then
+	ARCH="aarch64-linux-android"
+elif [ $CASE = "arm" ]
+then
+	ARCH="arm-linux-androideabi"
+elif [ $CASE = "i686" ]
+then
+	ARCH="i686-linux-android"
+elif [ $CASE = "x86_64" ]
+then
+	ARCH="x86_64-linux-android"
+else
+	printf "$R[ERR]─➤ Your architecture is uncompatible\n$W"
+	exit
+fi
+
+msfdb(){
+	if [ ! -d $PREFIX/var/lib/postgresql ]; then
+		mkdir -p $PREFIX/var/lib/postgresql
+	fi
+	wget $iHDB/fix-tools//msfupdate $MSF/msfupdate -q
+	chmod +x $MSF/msfupdate
+	wget https://raw.githubusercontent.com/ivam3/java/master/.embed/apk.rb -O $MSF/lib/msf/core/payload/apk.rb -q
+	initdb $PREFIX/var/lib/postgresql
+	pg_ctl -D $PREFIX/var/lib/postgresql start
+	createuser msf
+	createdb msf_database
+	if ! cat $INITFILE | grep -oE "postgresql" --silent; then
+		sed -i "4a alias postgresql=\"pg_ctl -D $PREFIX/var/lib/postgresql\"" $INITFILE
+	fi
+	! command -v i-Haklab > /dev/null || gem install lolcat
+}
+
+Banner() {
+echo $(clear)
+printf "$C"
+	echo "   -{(Ru)by (G)em (i)ssue (R)esolved } "
+	echo "                - RuGiR -"
+        echo "              -{ Coded by } "
+printf "$G"
+        echo "      =============================="
+        echo "      .___.                 ______,"
+        echo "      |   |__ ______   ___  \_____ \ "
+        echo "      |   \ \/ /\__ \ /   \   _(__ <,"
+        echo "      |   |\   / __ \| Y Y \ /      \ "
+        echo "      |___| \_/ (____|__|_| /______ /"
+        echo "                     \/    \/      \/ "
+        echo "      ====== By ___ Cinderella ======"
+        echo
+printf "$C"
+        echo "          [---] Join me on [---]"
+        echo "[-] www.youtube.com/c/Ivam3byCinderella [-]"
+        echo "      [-] t.me/Ivam3byCinderella [-]"
+	echo "            [-] t.me/ivam3 [-]"
+	printf "$G\n\t[¿]->$W Choose an option $G<-[?]$G\n{01}$W Reinstall the Termux metasploit$G\n{02}$W Fix Gems issues with RuGiR steps$G\n{03}$W Reinstall the Rapid7 metasploit$G\n{04}$W DPKG error (step 01)$G\n{05}$W DPKG issues (step 02)$G\n{99}$W exit\n\n$G"
+
+while read -p "[-]─➤ " ANW && [ -z $ANW ]; do
+	printf "$R[w]-> Please chosse an option\n"
+done
+main
+}
+
+main() {
+if [ "$ANW" = "01" -o "$ANW" = "1" ]; then
+	while [ $SO -lt "7" ]; do
+		printf "$Y\n[!]─➤ Option only available on Android 7+\n"
+		Banner
+	done
+	yes | pkg remove ruby unstable-repo && apt autoremove
+	for i in $PREFIX/lib/ruby $MSF ; do
+		if [ -d $i ]; then
+			rm -rf $i
+		fi
+	done
+	yes | apt update --fix-missing && pkg upgrade && pkg install git ruby unstable-repo && apt install --reinstall ruby && pkg install metasploit
+	msfdb
+	printf "\n\n$C ::::::::: METASPLOIT INSTALLED :::::::::$W\n"
+	printf " The data base can be active with command\n\t$G   > postgresql start <$W\n"
+	printf "      Now you can run it with command$G\n\t$G   >    msfconsole    <\n"
+
+elif [ "$ANW" = "02" -o "$ANW" = "2" ]; then
+#Adding updated gems at Gemfile.local
+	yes | apt remove ruby && apt autoremove
+	if [ -d $PREFIX/lib/ruby/ ]; then
+		rm -rf $PREFIX/lib/ruby
+	fi
+	yes | apt update --fix-missing && pkg upgrade && pkg install git ruby && apt install --reinstall ruby
+	pushd $MSF
+	gem install bundler
+	gem install nokogiri -v "$NOKOGIRIv" -- --using-system-libraries
+	bundle config build.nokogiri -- using-system-libraries
+	echo "$PREFIX/lib/ruby/gems/$GEMS/extensions/$ARCH/$GEMS/nokogiri-$NOKOGIRIv" >> Gemfile.local
+	sed '/rbnacl/d' -i Gemfile.lock
+	sed '/rbnacl/d' -i metasploit-framework.gemspec
+	sed 's|nokogiri (1.*)|nokogiri (1.10.4)|g' -i Gemfile.lock
+	bundle install --gemfile Gemfile.local
+	rm Gemfile.local
+	bundle install --full-index
+	bundle update nokogiri --full-index
+	msfdb
+	popd
+	printf "\n\n$C ::::::::: METASPLOIT INSTALLED :::::::::$W\n"
+	printf " The data base can be active with command\n\t$G   > postgresql start <$W\n"
+	printf "      Now you can run it with command$G\n\t$G   >    msfconsole    <\n"
+
+elif [ $ANW == "03" ] || [ $ANW == "3" ]; then
+	printf "$Y\n[?]-> Type metasploit version\n[Default=$MSFv]-➤$W "
+	read ANSW
+	MSFv="${ANSW:-${MSFv}}"yes | apt remove ruby && apt autoremove
+	for i in $PREFIX/lib/ruby $MSF ; do
+		if [ -d $i ]; then
+			rm -rf $i
+		fi
+	done
+	pkg autoremove metasploit && pkg remove unstable-repo && apt autoremove && apt update --fix-missing && pkg upgrade && pkg install git ruby autoconf bison clang coreutils curl findutils git apr apr-util libtool pkg-config wget make termux-tools ncurses-utils ncurses unzip zip tar postgresql termux-elf-cleaner && apt install --reinstall ruby
+	if [ ! -d $PREFIX/opt ]; then
+		mkdir -p $PREFIX/opt
+	fi
+	pushd $PREFIX/opt
+	curl -LO $R7DB/$MSFv.tar.gz
+	tar -xf $PREFIX/opt/$MSFv.tar.gz
+	mv $MSF-$version $MSF
+	rm $PREFIX/opt/$MSFv.tar.gz
+	cd $MSF
+	sed '/rbnacl/d' -i Gemfile.lock
+	sed '/rbnacl/d' -i metasploit-framework.gemspec
+	gem install bundler
+	sed 's|nokogiri (1.*)|nokogiri (1.10.4)|g' -i Gemfile.lock
+	gem install nokogiri -v '1.10.4' -- --use-system-libraries
+	gem update --system
+	bundle install -j5
+	$PREFIX/bin/find -type f -executable -exec termux-fix-shebang \{\} \;
+	rm $MSF/modules/auxiliary/gather/http_pdf_authors.rb
+	termux-elf-cleaner /data/data/com.termux/files/usr/lib/ruby/gems/$GEMS/gems/$PGv/lib/pg_ext.so
+	wget https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/mediafire/metasploit/database.yml -O $MSF/config/database.yml -q
+	msfdb
+	wget https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/mediafire/metasploit/msfconsole -O $PREFIX/bin/msfconsole -q && chmod +x $PREFIX/bin/msfconsole
+	ln -sf $(which msfconsole) $PREFIX/bin/msfvenom
+	echo "#!/data/data/com.termux/files/usr/bin/bash" > $PREFIX/opt/metasploit-framework/installer.sh
+	echo "echo \"[*] Metasploit Framework installation finished.\"" >> $PREFIX/opt/metasploit-framework/installer.sh
+	echo "#                 @Ivam3" >> $PREFIX/opt/metasploit-framework/installer.sh
+	msfdb
+	printf "\n\n$C ::::::::: METASPLOIT INSTALLED :::::::::$W\n"
+	printf " The data base can be active with command\n\t$G   > postgresql start <$W\n"
+	printf "      Now you can run it with command$G\n\t$G   >    msfconsole    <\n"
+
+elif [ $ANW == "04" ] || [ $ANW == "4" ]; then
+	printf "$Y[!]->$W This process just try to fix dpkg issues$Y<-[!]$W\n"
+	printf "$Y[!]->$W so you have to reinstall metasploit with$Y<-[!]$W\n"
+	printf "$Y[!]->$W   IbyC-metassploit or msfupdste files   $Y<-[!]$W\n"
+	printf "$Y[!]->$W        Press$G ENTER$W to continue      $Y<-[!]$W\n"
+	read enter
+	yes |dpkg --configure -a
+	yes |pkg remove openssl openssl-tool && apt autoremove && pkg update --fix-missing && pkg upgrade && pkg install --reinstall ruby
+	printf "\n$Y            ::::::::::$R WARNING !!!$Y ::::::::::$W\n"
+	printf "$Y[!]->$W This process removed some essential repositories$Y<-[!]$W\n"
+	printf "$Y[!]->$W  and those will be needed by Termux works so, $Y<-[!]$W\n"
+	printf "$Y[!]->$W you have to reinstall it once again after finish$Y<-[!]$W\n"
+	printf "$Y[!]->$W the metasploit installation and to do this you  $Y<-[!]$W\n"
+	printf "$Y[!]->$W have run RuGiR once again and choose opcion 05  $Y<-[!]$W\n"
+elif [ $ANW == "05" ] || [ $ANW == "5" ]; then
+	yes |pkg install openssl openssl-tool
+else
+	ctlr_c
+	exit
+fi
+}
+
+#				@IbyC
