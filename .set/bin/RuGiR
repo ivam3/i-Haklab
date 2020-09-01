@@ -16,11 +16,11 @@ C='\033[1;36m'
 W='\033[0m'
 MSFv="5.0.94"
 MSF="$PREfIX/opt/metasploit-framework"
-SHLL=$(echo $SHELL |awk -F "/" '{print $8}' |awk -F "." '{print $1}')
+SHLL=$(echo $SHELL |awk -F "/" '{print $8}')
 iHDB="https://github.com/ivam3/i-Haklab/raw/master/.set"
 R7DB="https://github.com/rapid7/metasploit-framework/archive"
 PGv=$(find $PREFIX/lib/ruby/gems/2.7.0/gems -iname pg_ext.so | awk -F "/" '{print $12}' | head -n 1)
-SO=$(termux-info |awk '$1 < 11 {print $1}' |tail -n 1)
+SO=$(termux-info |awk '$1 < 11 {print $1}' |tail -n 1 |awk -F "." '{print $1}')
 NOKOGIRIv="1.10.4"
 CASE=$(uname -m)
 
