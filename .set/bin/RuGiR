@@ -3,7 +3,9 @@
 #This script should fixed gem issues to run all MSF versions
 IFS=$'\n\t'
 trap ctrl_c 2
-ctrl_c() { printf "$R\n[W]$Y Going me on https://t.me/Ivam3_Bot$W\n" }
+ctrl_c() {
+	printf "$Y\n[!]─➤ Going me on https://t.me/Ivam3_Bot$W\n"
+}
 
 R='\033[1;31m'
 G='\033[1;32m'
@@ -14,7 +16,7 @@ C='\033[1;36m'
 W='\033[0m'
 MSFv="5.0.94"
 MSF="$PREfIX/opt/metasploit-framework"
-SHLL=$(echo $SHELL | awk -F "/" '{print $8}')
+SHLL=$(echo $SHELL |awk -F "/" '{print $8}' |awk -F "." '{print $1}')
 iHDB="https://github.com/ivam3/i-Haklab/raw/master/.set"
 R7DB="https://github.com/rapid7/metasploit-framework/archive"
 PGv=$(find $PREFIX/lib/ruby/gems/2.7.0/gems -iname pg_ext.so | awk -F "/" '{print $12}' | head -n 1)
@@ -92,10 +94,10 @@ printf "$C"
         echo "[-] www.youtube.com/c/Ivam3byCinderella [-]"
         echo "      [-] t.me/Ivam3byCinderella [-]"
 	echo "            [-] t.me/ivam3 [-]"
-	printf "$G\n\t[¿]->$W Choose an option $G<-[?]$G\n{01}$W Reinstall the Termux metasploit$G\n{02}$W Fix Gems issues with RuGiR steps$G\n{03}$W Reinstall the Rapid7 metasploit$G\n{04}$W DPKG error (step 01)$G\n{05}$W DPKG issues (step 02)$G\n{99}$W exit\n\n$G"
+	printf "$G\n\t[¿]─>$W Choose an option $G<-[?]$G\n{01}$W Reinstall the Termux metasploit$G\n{02}$W Fix Gems issues with RuGiR steps$G\n{03}$W Reinstall the Rapid7 metasploit$G\n{04}$W DPKG error (step 01)$G\n{05}$W DPKG issues (step 02)$G\n{99}$W exit\n\n$G"
 
 while read -p "[-]─➤ " ANW && [ -z $ANW ]; do
-	printf "$R[w]-> Please chosse an option\n"
+	printf "$R[w]─➤ Please chosse an option\n"
 done
 main
 }
@@ -144,7 +146,7 @@ elif [ "$ANW" = "02" -o "$ANW" = "2" ]; then
 	printf "      Now you can run it with command$G\n\t$G   >    msfconsole    <\n"
 
 elif [ $ANW == "03" ] || [ $ANW == "3" ]; then
-	printf "$Y\n[?]-> Type metasploit version\n[Default=$MSFv]-➤$W "
+	printf "$Y\n[?]─➤ Type metasploit version\n[Default=$MSFv]-➤$W "
 	read ANSW
 	MSFv="${ANSW:-${MSFv}}"yes | apt remove ruby && apt autoremove
 	for i in $PREFIX/lib/ruby $MSF ; do
@@ -177,7 +179,7 @@ elif [ $ANW == "03" ] || [ $ANW == "3" ]; then
 	wget https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/mediafire/metasploit/msfconsole -O $PREFIX/bin/msfconsole -q && chmod +x $PREFIX/bin/msfconsole
 	ln -sf $(which msfconsole) $PREFIX/bin/msfvenom
 	echo "#!/data/data/com.termux/files/usr/bin/bash" > $PREFIX/opt/metasploit-framework/installer.sh
-	echo "echo \"[*] Metasploit Framework installation finished.\"" >> $PREFIX/opt/metasploit-framework/installer.sh
+	echo "echo \"[*]─➤ Metasploit Framework installation finished.\"" >> $PREFIX/opt/metasploit-framework/installer.sh
 	echo "#                 @Ivam3" >> $PREFIX/opt/metasploit-framework/installer.sh
 	msfdb
 	printf "\n\n$C ::::::::: METASPLOIT INSTALLED :::::::::$W\n"
@@ -201,9 +203,10 @@ elif [ $ANW == "04" ] || [ $ANW == "4" ]; then
 elif [ $ANW == "05" ] || [ $ANW == "5" ]; then
 	yes |pkg install openssl openssl-tool
 else
-	ctlr_c
+	ctrl_c
 	exit
 fi
 }
+Banner
 
 #				@IbyC
