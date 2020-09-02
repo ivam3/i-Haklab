@@ -20,8 +20,18 @@ fi
 
 TOOL="metasploit"
 UNAME=$(uname -m)
-PGv=$(find $PREFIX/lib/ruby/gems/$GEMS/gems -iname pg_ext.so | awk -F "/" '{print $12}' | head -n 1)
 SOv=$(termux-info |awk '$1 < 11 {print $1}' |tail -n 1 |awk -F "." '{print $1}')
+if [ "$SOv" -lt "7" ]
+then
+	Tmux=False
+	R7=True
+        GEMS=2.6.0
+else
+	Tmux=True
+	R7=False
+        GEMS=2.7.0
+fi
+PGv=$(find $PREFIX/lib/ruby/gems/$GEMS/gems -iname pg_ext.so | awk -F "/" '{print $12}' | head -n 1)
 JAVADB="https://raw.githubusercontent.com/ivam3/java/master"
 R7DB="https://github.com/rapid7/metasploit-framework/archive"
 iHDB="https://github.com/ivam3/i-Haklab/raw/master/.set"
@@ -40,7 +50,7 @@ C='\033[1;36m'
 W='\033[0m'
 
 ctrl_c() {
-	printf "$R\n[w] Need a help? [w]$B\n\t Telegram : t.me/Ivam3_Bot$W\n"
+	printf "$R\n\n\t[w] Need a help? [w]$B\n      Telegram : t.me/Ivam3_Bot$W\n"
 	exit
 }
 
@@ -70,13 +80,6 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
 done
 
 #:::::::::DEFINITIONS:::::::#
-if [ "$SOv" -lt "7" ]
-then
-        GEMS=2.6.0
-else
-        GEMS=2.7.0
-fi
-
 if [ $SHLL = fish ]; then
         INITFILE="$PREFIX/etc/fish/config.fish"
 else
@@ -101,7 +104,7 @@ else
 fi
 
 Garbage() {
-for i in $TOOL unstable-repo postgresql $MSFDIR $HOME/$TOOL-framework ; do
+for i in $TOOL unstable-repo $MSFDIR $HOME/$TOOL-framework ; do
         if [ -d $i ]; then
                 rm -rf $i >/dev/null 2>&1
         fi
@@ -221,7 +224,7 @@ Rapid7() {
 MAIN() {
 	printf "$G[+]─➤ Reading environment ...\n"
 	sleep 2
-	printf "[+]─➤ Platform$Y =$W\tTermux$G\n[+]─➤ Android version$Y =$W\t$SOv$G\n[+]─➤ Architecture$Y =$W\t$ARCH$G\n[+]─➤ Ruby Gems version$Y =$W\t$GEMS$G\n[+]─➤ Ruby PG version$Y =$W\t$PGv$G\n[+]─➤ Configuration file$Y =$W\t$INITFILE$G\n[+]─➤ Termux $TOOL$Y =$W\t$ToR7$G\n[+]─➤ Rapid7 $TOOL$Y =$W\t$ToR7$G\n[+]─➤ $TOOL version$Y =$W\t$MSFv$G\n\n$C         Press$G ENTER$C to continue"
+	printf "[+]─➤ Platform$Y            =$W Termux$G\n[+]─➤ Android version$Y     =$W $SOv$G\n[+]─➤ Architecture$Y        =$W $ARCH$G\n[+]─➤ Ruby Gems version$Y   =$W $GEMS$G\n[+]─➤ Ruby PG version$Y     =$W $PGv$G\n[+]─➤ Configuration file$Y  =$W $INITFILE$G\n[+]─➤ Termux $TOOL$Y   =$W $Tmux$G\n[+]─➤ Rapid7 $TOOL$Y   =$W $R7$G\n[+]─➤ $TOOL version$Y  =$W $MSFv$G\n\n$C         Press$G ENTER$C to continue"
         read enter
 	if [ $SOv -lt "7" ]
 	then
@@ -281,7 +284,7 @@ if [ -d ~/metasploit-framework ] || [ -d $MSFDIR ]; then
 	if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
 		MAIN
 	else
-		printf "$G\n[!]─➤ Keeping Metasploit...\n\n"
+		printf "$G\n[+]─➤ Metasploit keeped!!\n\n"
 		sleep 1
 	fi
 else
