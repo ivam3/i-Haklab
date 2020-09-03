@@ -42,19 +42,26 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
+OSv=$(termux-info |awk '$1 < 11 {print $1}' |tail -n 1 |awk -F "." '{print $1}')
+if [ "$SOv" -lt "7" ]
+then
+	GEMS="2.6.0"
+else
+	GEMS="2.7.0"
+fi
 
 fixbigdecimal() {
         printf "$G\n[IbyC]-> FIXING BIG DECIMAL ISSUES$W\n"
         apt install -yq patchelf
         for i in aarch64-linux-android arm-linux-androideabi \
                 i686-linux-android x86_64-linux-android; do
-                        if [ -e "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal.so" ]; then
-                                if [ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal/util.so" | grep bigdecimal.so)" ]; then
+                        if [ -e "$PREFIX/lib/ruby/$GEMS/${i}/bigdecimal.so" ]; then
+                                if [ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/$GEMS/${i}/bigdecimal/util.so" | grep bigdecimal.so)" ]; then
                                         exit 0
                                 fi
                                 patchelf --add-needed \
-                                        "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal.so" \
-                                        "$PREFIX/lib/ruby/2.6.0/${i}/bigdecimal/util.so"
+                                        "$PREFIX/lib/ruby/$GEMS/${i}/bigdecimal.so" \
+                                        "$PREFIX/lib/ruby/$GEMS/${i}/bigdecimal/util.so"
                         fi
         done
 }
@@ -68,7 +75,7 @@ git clone https://github.com/beefproject/beef.git $PREFIX/opt/beef >/dev/null 2>
 if [ -d $PREFIX/opt/beef ]; then
         cd $PREFIX/opt/beef
 else
-        printf "$Y\n[!]-> NOT SUCH BEEF WORKING DIRECTORY$W\n"
+        printf "$R\n[ERR-DIR]-> SOMETHING WAS WRONG | TRY AGAIN.$W\n"
         exit
 fi
 printf "$G\n[IbyC]-> ADAPTED BEEF PROJECT$W\n"

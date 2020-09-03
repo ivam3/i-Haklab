@@ -5,31 +5,32 @@
 SCRIPT_NAME=$(basename "$0")
 BEEF_PATH="/data/data/com.termux/files/usr/opt/beef"
 BACK=$(pwd)
-SOversion=$(termux-info | grep -oE '([5-9]{1}\.)([0-9]{1}\.)([0-9]{1})' | awk -F "." '{print $1}')
-if [ -z $SOversion ] || [ "$SOversion" -gt '7' ] ; then
-       LIBVERSION="2.7.0"
+OSv=$(termux-info |awk '$1 < 11 {print $1}' |tail -n 1 |awk -F "." '{print $1}')
+if [ -z $OSv ] || [ "$OSv" -lt '7' ] ; then
+	GEMS="2.6.0"
 else
-        LIBVERSION="2.6.0"
+	GEMS="2.7.0"
 fi
 #
 STDERR() {
         echo "[w]-> BeeF is not installed." 
         exit
 }
+
 #
 # Fix ruby bigdecimal extensions linking error.
 case "$(uname -m)" in
         aarch64)
-                export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBVERSION/aarch64-linux-android/bigdecimal.so"
+                export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$GEMS/aarch64-linux-android/bigdecimal.so"
                 ;;
         arm*)
-                export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBVERSION/arm-linux-androideabi/bigdecimal.so"
+                export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$GEMS/arm-linux-androideabi/bigdecimal.so"
                 ;;
         i686)
-                export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBVERSION/i686-linux-android/bigdecimal.so"
+                export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$GEMS/i686-linux-android/bigdecimal.so"
                 ;;
         x86_64)
-                export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBVERSION/x86_64-linux-android/bigdecimal.so"
+                export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$GEMS/x86_64-linux-android/bigdecimal.so"
                 ;;
         *)
                 ;;
