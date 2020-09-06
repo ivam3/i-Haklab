@@ -44,7 +44,11 @@ done
 if [ -d $iHAKLAB/../sayhello ]; then
         rm -rf $iHAKLAB/../sayhello
 fi
-git clone https://github.com/thelinuxchoice/sayhello.git $iHAKLAB/../sayhello
+#git clone https://github.com/thelinuxchoice/sayhello.git $iHAKLAB/../sayhello
+pushd $iHAKLAB/../
+wget https://github.com/ivam3/i-Haklab/raw/master/.set/to-install/sayhello.zip -q
+unzip sayhello.zip
+rm -rf $iHAKLAB/../sayhello.zip
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/sayhello -o $iHAKLAB/../sayhello/sayhello.sh
 chmod 777 $iHAKLAB/../sayhello/sayhello.sh
 if [ -e $PREFIX/bin/ngrok ]; then
@@ -57,7 +61,7 @@ else
 		printf "$R\n[w]-> ERROR :$W Ngrok can not be installed\n"
 	fi
 fi
-
+popd
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3

@@ -39,7 +39,11 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-git clone https://github.com/thelinuxchoice/saycheese $iHAKLAB/../saycheese
+pushd $iHAKLAB/../
+wget https://github.com/ivam3/i-Haklab/raw/master/.set/to-install/saycheese.zip -q
+unzip saycheese.zip
+rm -rf $iHAKLAB/../saycheese.zip
+#git clone https://github.com/thelinuxchoice/saycheese $iHAKLAB/../saycheese
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/saycheese -o $iHAKLAB/../saycheese/saycheese.sh
 chmod +x $iHAKLAB/../saycheese/*
 if [ -e $PREFIX/bin/ngrok ]; then
@@ -52,6 +56,7 @@ else
                 printf "$R\n[w]-> ERROR :$W Ngrok can not be installed\n"
         fi
 fi
+popd
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
 #                                               @Ivam3
