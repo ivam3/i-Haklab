@@ -112,6 +112,7 @@ if [ -z $SCRIPT_NAME ]; then
 ╰─sqlmap─────────➤  Penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database server. 
 ╰─tangalanga─────➤  Zoom Conference scanner. This scanner will check for a random meeting id and return information if available
 ╰─theharvester───➤  Gather emails, subdomains, hosts, employee names, open ports and banners from different public sources like search engines, PGP key servers and SHODAN computer database.
+╰─vt─────────────➤  VirusTotal: an command line service that analyzes files and URLs enabling the detection of viruses, worms, trojans and other kinds of malicious content using antivirus engines and website scanners.
 ╰─xerosploit─────➤  Penetration testing toolkit whose goal is to perform man in the middle attacks.
 ╰─webhackshl─────➤  Vulnerability analysis and information collection of websites and servers.
 ╰─whatweb────────➤  Identifie websites (DNS).
@@ -615,6 +616,14 @@ case "$SCRIPT_NAME" in
                         STDERR
                 fi
                 ;;
+	vt)
+		if [ -d ~/go/src/github.com/VirusTotal/vt-go/ ] && [ -e ~/go/bin/vt ]; then
+			cd ~/go/bin/
+			exec vt $2 $@
+		else
+			STDERR
+		fi
+		;;
 	*)
 		echo "$R\n[w] i-Haklab :$W Unknown argument '$SCRIPT_NAME'\n"
 		exit 1

@@ -1,0 +1,61 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Created on Feb/2020
+IFS=$'\n\t'
+trap ctrl_c 2
+source /data/data/com.termux/files/usr/libexec/colors
+
+function ctrl_c() {
+                echo
+                printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
+}
+if [ -L ~/storage/external-1 ]; then
+	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+else
+        iHAKLAB=/data/data/com.termux/files/home/i-Haklab
+fi
+
+while [ ! $(id -u) -ne 0 ]; do
+	printf "$R\n[W]:-> You need to be a common user$W\n"
+	exit
+done
+until [ -d $iHAKLAB ]; do
+	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do you wanna install it?$W\n"
+	while read -p "       [yes/no]:-> " yesorno && [ -z $yesorno ]; do
+		continue
+	done
+if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
+	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
+        cd ~/i-Haklab;bash setup-lite
+else 
+	printf "$G\n[!]-> Have a nice hacking day!!\n\n"
+	exit
+fi
+done
+
+echo $(clear)
+for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
+        printf "$(clear) $C STARTING TO INSTALL VIRUSTOTAL. . . .$i"
+        printf "\n\n"
+        sleep 1
+done
+#INSTALLATION
+apt update && apt upgrade -y
+apt install golang -y
+if [ ! -d $HOME/go/src/github.com ]; then
+	mkdir -p $HOME/go/src/github.com
+fi
+VAR=$(cat $PREFIX/etc/fish/config.fish | grep "GOPATH")
+if [ -z $VAR ]; then
+	sed -i "20a set GOPATH $HOME/go" $PREFIX/etc/fish/config.fish
+fi
+chmod +x -R $HOME/go/
+printf "$Y\n[!]-> It could take a while ...$W\n"
+go get -d github.com/VirusTotal/vt-cli/vt
+pushd $HOME/go/src/github.com/VirusTotal/vt-cli
+make install
+ln -s $HOME/go/bin/vt $PREFIX/bin/vt
+popd
+
+#ENDING SCRIPT
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
+#                                               @Ivam3
