@@ -54,6 +54,7 @@ go get -d github.com/VirusTotal/vt-cli/vt
 pushd $HOME/go/src/github.com/VirusTotal/vt-cli
 make install
 ln -s $HOME/go/bin/vt $PREFIX/bin/vt
+exec vt completion bash > $PREFIX/etc/bash_completion.d/vt
 popd
 
 #ENDING SCRIPT
