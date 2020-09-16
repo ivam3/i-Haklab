@@ -73,9 +73,9 @@ for v in python python2 ; do
 	$v -m pip install --upgrade pip
 done
 
-for module in trufflehog wheel speedtest-cli scapy wfuzz ; do
+for module in trufflehog wheel speedtest-cli scapy wfuzz h8mail ; do
         for v in python python2 ; do
-		$v -m pip install $module
+		$v -m pip install $module 
 	done
 done
 

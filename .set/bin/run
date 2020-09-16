@@ -88,6 +88,7 @@ if [ -z $SCRIPT_NAME ]; then
 ╰─GetNPUsers-────➤  Attempt to list and get TGTs for those users that have the property
 ╰─gobuster───────➤  Gobuster is a tool used to brute-force URIs in web sites, DNS subdomains and Virtual Host names on target web servers.
 ╰─gophish────────➤  Launch simulated and monitored phishing campaigns.
+╰─h8mail─────────➤  Password breach hunting tool, locally or using premium services
 ╰─hakku──────────➤  Penetration testing tools.
 ╰─hasher─────────➤  Hash cracker that has supported more than 7 types of hashes
 ╰─hatcloud───────➤  Real IP CloudFlare server searcher.
@@ -622,6 +623,13 @@ case "$SCRIPT_NAME" in
 			exec vt $2 $@
 		else
 			STDERR
+		fi
+		;;
+	h8mail)
+		if ! python -m pip list | grep -oE "h8mail" >/dev/null; then
+			STDERR
+		else
+			exec h8mail $2 $@
 		fi
 		;;
 	*)
