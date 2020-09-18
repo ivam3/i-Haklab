@@ -66,8 +66,7 @@ SODIUM() {
 
 command -v termux-info > /dev/null 2>&1 || pkg install termux-api termux-tools -y > /dev/null 2>&1
 
-SOversion=$(termux-info | grep -oE '([5-9]{1}\.)([0-9]{1}\.)([0-9]{1})' | awk -F "." '{print $1}')
-
+SOversion=$(termux-info |awk '$1 < 11 {print $1}' |tail -n 1 |awk -F "." '{print $1}')
 pkg update && pkg upgrade -y
 
 if [ $SOversion => '7' ]; then
