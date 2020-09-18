@@ -89,7 +89,7 @@ fi
 if [ $UNAME = "aarch64" ]
 then
         ARCH="aarch64-linux-android"
-elif [ $UNAME = "arm" ]
+elif [ $UNAME = "arm" ] || [ $UNAME = "armv8l" ]
 then
         ARCH="arm-linux-androideabi"
 elif [ $UNAME = "i686" ]
