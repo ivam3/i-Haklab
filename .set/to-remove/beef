@@ -41,15 +41,12 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #UNINSTALLATION
-apt remove dirmngr
-cd $PREFIX/etc/apt/
-echo "# The main termux repository:" > $PREFIX/etc/apt/sources.list
-echo "deb https://termux.net stable main" >> $PREFIX/etc/apt/sources.list
-cd;apt remove beef-xss
-rm -rf $PREFIX/share/beef-xss
-apt autoremove
+for i in $PREFIX/opt/beef $PREFIX/bin/beef $PREFIX/opt/GeoIP ; do
+	if [ -d $i ] || [  -e $i ]; then
+		rm -rf $i
+	fi
+done
 
 #ENDING SCRIPT
-printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot
-$W"
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3

@@ -3,10 +3,21 @@
 #
 IFS=$'\n\t'
 trap ctrl_c 2
+
 if [ -d /data/data/com.termux/files/home/i-Haklab ]; then
         iHAKLAB=/data/data/com.termux/files/home/i-Haklab
 else
         iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+fi
+
+if [ -x /system/xbin/su ]; then
+        ROOT="true"
+elif [ -x /su/bin/su ]; then
+        ROOT="true"
+elif [ -x /sbin/su ]; then
+        ROOT="true"
+else
+        ROOT="false"
 fi
 
 source $iHAKLAB/.set/libexec/colors
@@ -14,21 +25,25 @@ source $iHAKLAB/.set/libexec/colors
 Cinderella=$(base64 -d $PREFIX/libexec/termux/.Ivam3)
 Seque=$(base64 -d $PREFIX/libexec/termux/.Quiz)
 Secan=$(base64 -d $PREFIX/libexec/termux/.Cinderella)
-function ctrl_c() {
+
+ctrl_c() {
 	printf "$Y
           [!]:->$R t.me/Ivam3byCinderella$Y <-:[!]$W"
 }
+
 function change_ak {
 	echo $(clear)
 	source $PREFIX/libexec/banner/login-banner
+	sleep 1
 	printf "$C"
-	until read -n 1 -p "                Forgot your access key ?
+	until read -n 2 -p "                 < Configuration Menu >
 
             1) Get one new Access Key.
             2) Change your Security question.
             3) Change your Security answer.
+	    4) Uninstall i-Haklab.
             0) Exit
-            >> " Chak && [ $Chak -lt 4 ]; do
+            >> " Chak && [ $Chak -lt 5 ]; do
     	echo $(clear)
 	source $PREFIX/libexec/banner/login-banner
 	printf "$C"
@@ -38,7 +53,7 @@ function change_ak {
 		case_Chak
         }
 
-function case_Chak {
+case_Chak() {
 	case $Chak in
 		1)
 			echo $(clear)
@@ -129,14 +144,57 @@ function case_Chak {
                                 change_ak
                                 fi
 			;;
+		4)
+			printf "$B"
+			while read -s -p "                    >> ACCESS KEY <<
+				" Ivam3 && [ -z $Ivam3 ];do
+				printf "$R
+                     Access denied$B\n"
+	     		done
+			if [ $Ivam3 = $Cinderella ]; then
+				source $PREFIX/libexec/banner/login-banner
+				printf "$Y
+        [!!]:->$R i-Haklab will be uninstall$Y<-:[!!]
+                It could take a while ...\n"
+				sleep 3
+				SDCARD=$(ls -l $HOME/storage/external-1 | awk '{print $11}')
+				TARGET=$(ls $iHAKLAB/.set/to-remove/)
+				if [ -d $SDCARD/roothome ]; then
+					rm -rf $SDCARD/roothome > /dev/null 2>&1
+				else
+					for tool in ${TARGET[*]}; do
+						bash $iHAKLAB/.set/to-remove/$tool > /dev/null 2>&1
+					done
+				fi
+				for erase in java go adbfiles .beef .milux .msf4 .ngrok2 .tor .w3m .npm .recon-ng .gem .weechat .wfuzz .ssh i-Haklab ; do
+					if [ -d $HOME/$erase ]; then
+						rm -rf $HOME/$erase > /dev/null 2>&1
+					fi
+				done
+				if [ $ROOT = true ]; then
+					wget https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/mediafire/sudo -O $PREFIX/bin/sudo -q
+					sudo rm -rf $PREFIX > /dev/null 2>&1
+				else
+					rm -rf $PREFIX > /dev/null 2>&1
+				fi
+				printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\nThank you for use i-Haklab, see you in the next hack$W\n"
+				sleep 3
+				clear
+				exec reset
+			else
+				printf "$R
+                     Access denied$B\n"
+				sleep 1
+				main
+			fi
+			;;
 		0)
-			echo $(clear)
-                        source $PREFIX/var/log/login-termux
+			main
                         ;;
         esac
 }
 
-function set_ak {
+set_ak() {
 	printf "$Newak" > $PREFIX/libexec/termux/.tmp-ak
 	chmod +w $PREFIX/libexec/termux/.Ivam3
 	base64 $PREFIX/libexec/termux/.tmp-ak > $PREFIX/libexec/termux/.Ivam3
@@ -145,7 +203,7 @@ function set_ak {
 	check-Ak
 }
 
-function set_quiz {
+set_quiz() {
 	printf "$NewQ" > $PREFIX/libexec/termux/.tmp-quiz
 	chmod +w $PREFIX/libexec/termux/.Quiz
 	base64 $PREFIX/libexec/termux/.tmp-quiz > $PREFIX/libexec/termux/.Quiz
@@ -156,7 +214,8 @@ function set_quiz {
 	echo $(clear)
 	source $PREFIX/var/log/login-termux
 }
-function set_answ {
+
+set_answ() {
 	printf "$NewA" > $PREFIX/libexec/termux/.tmp-answ
 	chmod +w $PREFIX/libexec/termux/.Cinderella
 	base64 $PREFIX/libexec/termux/.tmp-answ > $PREFIX/libexec/termux/.Cinderella
@@ -169,7 +228,7 @@ function set_answ {
 	source $PREFIX/var/log/login-termux
 }
 
-function check-Ak {
+check-Ak() {
 	echo
 	if [ $Newak = $Cinderella ]; then
 		echo
@@ -186,48 +245,54 @@ function check-Ak {
 }
 
 # LOGIN
-for opt in 1 2 3; do
-        let try=opt++
-	echo $(clear)
-	source $PREFIX/libexec/banner/login-banner
-        printf "$B"
-        while read -s -p "                    >> ACCESS KEY <<
-	    " Ivam3 && [ -z $Ivam3 ];do
-	printf "$R          Access denied$B \n"
-        done
-	
-	if [ $Ivam3 = $Cinderella ]; then
+main() {
+	for opt in 1 2 3 4; do
+		let try=opt++
 		echo $(clear)
-                source $PREFIX/libexec/banner/wall-banner
-		break
-        else
-		printf "$R          Access denied$Y
-	               (try $try - 3) \n"
-		sleep 1
-		echo
-        fi
-done
-	if [ $try = 3 ]; then
+		source $PREFIX/libexec/banner/login-banner
+		printf "$B"
+		while read -s -p "                    >> ACCESS KEY <<
+			" Ivam3 && [ -z $Ivam3 ];do
+			printf "$R
+                     Access denied$B\n"
+		done
+		if [ $Ivam3 = $Cinderella ]; then
+			echo $(clear)
+			source $PREFIX/libexec/banner/wall-banner
+			break
+		elif [ $Ivam3 = "IbyC" ]; then
+			sleep 2
+			change_ak
+		else
+			printf "$R
+		     Access denied$Y\n\t\t      (try $try - 3)\n"
+			sleep 1
+			echo
+		fi
+	done
+
+	if [ $try -gt 3 ]; then
 		printf "$Y                 O-ops!! Too many tries$W"
 		sleep 3
 		echo $(clear)
 		source $PREFIX/libexec/banner/login-banner
 		printf "$Y"
-		printf "        [!] Let's try with the security question$G"
-		echo "
-		"
+		printf "        [!] Let's try with the security question$G\n\n"
+		
 		while read -s -p "             $Seque " Quiz && [ -z $Quiz ]; do
-			echo ""
-			printf "$Y          [!]:->$R t.me/Ivam3byCinderella$Y <-:[!]$W \n"
+			printf "\n\n$Y          [!]:->$R t.me/Ivam3byCinderella$Y <-:[!]$W \n"
 		done
+
 		if [ $Quiz = $Secan ]; then
 			printf "$W"
 			echo $(clear)
 			source $PREFIX/libexec/banner/wall-banner
 		else
-			printf "$R\n                     Access denied$W \n"
+			printf "$R\n\t\t      Access denied$W \n"
 			sleep 1
-			change_ak
+			main
 		fi
 	fi
+}
+main
 #				IbyC

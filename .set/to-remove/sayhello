@@ -3,7 +3,6 @@
 IFS=$'\n\t'
 trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
-
 function ctrl_c() {
                 echo
                 printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
@@ -18,7 +17,7 @@ else
 fi
 
 while [ ! $(id -u) -ne 0 ]; do
-	printf "$R[W]:-> You need to be a common user$W\n"
+	printf "$R\n[W]:-> You need to be a common user$W\n"
 	exit
 done
 until [ -d $iHAKLAB ]; do
@@ -37,19 +36,15 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO UNINSTALL TERMUX GAMES$W"
+        printf "$(clear) $C STARTING TO UNINSTALL SAYHELLO . . . .$i"
         printf "\n\n"
         sleep 1
 done
 #UNINSTALLATION
-if [ -e $iHAKLAB/games/2048 ]; then
-        rm $iHAKLAB/games/2048
-fi
-if [ -e $PREFIX/bin/2048 ]; then
-	rm $PREFIX/bin/2048
+if [ -d $iHAKLAB/../sayhello ]; then
+        rm -rf $iHAKLAB/../sayhello
 fi
 
 #ENDING SCRIPT
-printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot
-$W"
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3

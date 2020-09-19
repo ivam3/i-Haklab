@@ -18,7 +18,7 @@ else
 fi
 
 while [ ! $(id -u) -ne 0 ]; do
-	printf "$R[W]:-> You need to be a common user$W\n"
+	printf "$R\n[W]:-> You need to be a common user$W\n"
 	exit
 done
 until [ -d $iHAKLAB ]; do
@@ -35,20 +35,22 @@ else
 fi
 done
 
+if [ -d $iHAKLAB/../AIOChk ]; then
+	printf "$R[w]->$W AIOChk exist, uninstall it if you wanna reinstall\n"
+	exit
+fi
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO UNINSTALL TERMUX GAMES$W"
+        printf "$(clear) $C STARTING TO UNINSTALL SPOTICHK. . . .$i"
         printf "\n\n"
         sleep 1
 done
 #UNINSTALLATION
-if [ -e $iHAKLAB/games/brogue ]; then
-        rm $iHAKLAB/games/brogue
+
+if [ -d $iHAKLAB/../AIOChk ]; then
+	rm -rf $iHAKLAB/../AIOChk
 fi
-if [ -e $PREFIX/bin/brogue ]; then
-        rm $PREFIX/bin/brogue
-fi
+
 #ENDING SCRIPT
-printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot
-$W"
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3

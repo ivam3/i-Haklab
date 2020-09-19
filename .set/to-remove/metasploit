@@ -40,7 +40,14 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #UNINSTALLATION
-apt remove -y postgresq-dev ruby ruby-dev libgrpc-dev postgresql
+SOversion=$(termux-info |awk '$1 < 11 {print $1}' |tail -n 1 |awk -F "." '{print $1}')
+command -v termux-info > /dev/null 2>&1 || pkg install termux-api termux-tools -y > /dev/null 2>&1
+if [ $SOversion => '7' ]; then
+	pkg remove metasploit -y > /dev/null >2&1
+else
+	apt remove ruby postgresql -y > /dev/null >2&1
+fi
+
 if [ -d $PREFIX/lib/ruby ]; then
 	rm -rf $PREFIX/lib/ruby
 fi
@@ -61,6 +68,7 @@ fi
 rm -rf $PREFIX/var/lib/postgresql
 rm -rf ~/.msf4
 apt autoremove
+
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot
 $W"

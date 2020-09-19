@@ -43,37 +43,21 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
 done
 #UNINSTALLATION
 if [ -d $HOME/java ]; then
-                rm -rf $HOME/java
-        fi
-        if [ -L $PREFIX/bin/signapk ]; then
-                rm $PREFIX/bin/signapk
-        fi
-        if [ -L $PREFIX/bin/zzipalign ]; then
-                rm $PREFIX/bin/zzipalign
-        fi
-        if [ -L $PREFIX/bin/apktool ]; then
-                rm $PREFIX/bin/apktool
-        fi
-        if [ -L $PREFIX/bin/java ] || [ -e $PREFIX/bin/java ]; then
-                rm $PREFIX/bin/java
-        fi
-        if [ -L $PREFIX/bin/EMBED ] || [ -e $PREFIX/bin/EMBED ]; then
-                rm $PREFIX/bin/EMBED
-        fi
-pkg remove apksigner aapt -y
-TMP_DIR=$HOME/java
-rm -rf $TMP_DIR
-if [ -e $PREFIX/share/jdk8_aarch64.tar.gz ]; then
-        rm $PREFIX/share/jdk8_aarch64.tar.gz 
+	rm -rf $HOME/java
 fi
-if [ -e $PREFIX/share/jdk8_arm.tar.gz ]; then
-	rm $PREFIX/share/jdk8_arm.tar.gz
+
+for i in signapk zzipalign apktool java EMBED glib jdk8 bin; do
+	if [ -L $i ] || [ -e $i ]; then
+		rm -rf $PREFIX/bin/$i > /dev/null >2&1
+	fi
+	if [ -d $i ]; then
+		rm -rf $PREFIX/share/$i > /dev/null >2&1
+	fi
+done
+yes |pkg remove apksigner aapt && apt auoremove
+if [ -e $PREFIX/var/spool/apktool.jar ]; then
+	rm -rf $PREFIX/var/spool/apktool.jar > /dev/null >2&1
 fi
-rm -rf $PREFIX/share/glib
-rm -rf $PREFIX/share/jdk8
-rm -rf $PREFIX/share/bin
-rm -rf $HOME/java/
-rm -rf $PREFIX/var/spool/apktool.jar
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot
