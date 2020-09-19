@@ -47,7 +47,9 @@ omf update omf > /dev/null 2>&1
 printf "$Y[!]-> Re-configurating. . .$W\n"
 sleep 0.5
 
-wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/banner/i-Haklab -O $PREFIX/libexec/banner/login-banner > /dev/null 2>&1
+wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/login-files/i-haklab_login -O $PREFIX/var/log/login-termux -q
+wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/banner/i-Haklab -O $PREFIX/libexec/banner/login-banner -q
+
 if [ -e $PREFIX/etc/fish/config.fish ]; then
 	echo "# Put system-wide fish configuration entries here" > $PREFIX/etc/fish/config.fish
 	echo "# or in .fish files in conf.d/" >> $PREFIX/etc/fish/config.fish
