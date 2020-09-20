@@ -1,4 +1,5 @@
 # i-Haklab v.2.0 2020 by @Ivam3
+
 	DISCLAIMER
 If the law is violated with it's use, this would be the responsibility of the user who handled it..
 Ivam3 is not responsible for the misuse that can be given to everything that this laboratory entails
@@ -30,7 +31,8 @@ i-Haklab will ......
 
 - At the end of its installation you will only have to restart Termux and it will show an loggin screen asking you for the access key, which by default will be "Ivam3byCinderella", and can be modified from its configuration menu that is shown when using "IbyC" as the access key.
 
-#COMMANDS
+# COMMANDS
+
 There are several commands in i-Haklab that facilitate the use of Termux:
 
 - i-Haklab: it is the main command that helps to update and use i-Haklab with automations of various processes such as the installation/uninstallation of tools, visualization of user guides for the tools, download of hacking books, access to the community tutorials, payload creation automation, metaploit handler activation, brute force attacks, phishing among others.
@@ -57,38 +59,40 @@ utomates the solving processes..
 - lock: Block the termux screen and it will only be unlocked with said password or answering the security question. It is worth mentioning that these access codes are encrypted for your security.
 
 
-#IRC chat Ivam3byCinderella
+# IRC CHAT Ivam3byCinderella
+
 IRC (Internet Relay Chat) is an application layer protocol that facilitates communication in the form of text. The chat process works on a client/server networking model. Under the command <i-Haklab> we will find the <weechat> argument, with which you can join the official IRC Ivam3byCinderella where u can contact another i-Haklab.
 
 **** If you want to suggest some tool, do it in the section of suggestions of community bot in https://t.me/Ivam3_Bot
 
-# Books available in i-Haklab
+# BOOKS AVAILABLES
 
-01: Aprende html
-02: Chema alonso coleccion
-03: Comandos basicos linux
-04: Cracking sin secretos
-05: Conviertete en hacker by incube2
-06: Ethical hacking
-07: Hacking con python
-08: Hacking etico 101
-09: Hacking mexico seguridadofensiva nv.1
-10: Hacking the hacker
-11: Manual hacking dispositivos moviles
-12: Metasploit para pentesters
-13: My sql
-14: Nmap by computaxion
-15: Programa en C
-16: Programa en C++
-17: Programa en bash
-18: Programacion en perl
-19: Programacion en php
-20: Programacion en ruby
-21: Python para todos
+- Aprende html
+- Chema alonso coleccion
+- Comandos basicos linux
+- Cracking sin secretos
+- Conviertete en hacker by incube2
+- Ethical hacking
+- Hacking con python
+- Hacking etico 101
+- Hacking mexico seguridadofensiva nv.1
+- Hacking the hacker
+- Manual hacking dispositivos moviles
+- Metasploit para pentesters
+- My sql
+- Nmap by computaxion
+- Programa en C
+- Programa en C++
+- Programa en bash
+- Programacion en perl
+- Programacion en php
+- Programacion en ruby
+- Python para todos
 
 **** If you want to suggest some book do it in the section of suggestions of my bot in https://t.me/Ivam3_Bot
 
-#UPDATE AT NEWEST VERSION 
+# UPDATE AT NEWEST VERSION 
+
 i-Haklab is constantly updating tools and improvements. To stay updated you just have to run:
 	]> i-Haklab update
 And if it locates ones you should run:
@@ -96,4 +100,4 @@ And if it locates ones you should run:
 
 *** HAVE A NICE HACKING DAY!!!!
 
-# 						@Ivam3
+# 			@Ivam3
