@@ -83,6 +83,7 @@ if [ -e $PREFIX/etc/fish/config.fish ]; then
 	echo "set GOPATH /data/data/com.termux/files/home/go" >> $PREFIX/etc/fish/config.fish
 	echo "set iHAKLAB $iHAKLAB" >> $PREFIX/etc/fish/config.fish
 	echo "alias LOCALHOST=\"ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255\"" >> $PREFIX/etc/fish/config.fish
+	echo "alias serverapache=\"apachectl\"" >> $PREFIX/etc/fish/config.fish
 	echo "alias postgresql=\"pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql\"" >> $PREFIX/etc/fish/config.fish
 	echo "" >> $PREFIX/etc/fish/config.fish
 else

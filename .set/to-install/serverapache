@@ -58,7 +58,8 @@ echo "</FilesMatch>" >> $PREFIX/etc/apache2/httpd.conf
 echo "LoadModule authn_file_module /data/data/com.termux/files/usr/libexec/apache2/mod_authn_file.so" >> $PREFIX/etc/apache2/httpd.conf
 echo "LoadModule authz_core_module /data/data/com.termux/files/usr/libexec/apache2/mod_authz_core.so" >> $PREFIX/etc/apache2/httpd.conf
 echo "LoadModule authz_host_module /data/data/com.termux/files/usr/libexec/apache2/mod_authz_host.so" >> $PREFIX/etc/apache2/httpd.conf
-echo "LoadModule mpm_worker_module /data/data/com.termux/files/usr/libexec/apache2/mod_mpm_worker.so" >> $PREFIX/etc/apache2/httpd.conf
+echo "#LoadModule mpm_worker_module /data/data/com.termux/files/usr/libexec/apache2/mod_mpm_worker.so" >> $PREFIX/etc/apache2/httpd.conf
+echo "LoadModule mpm_prefork_module /data/data/com.termux/files/usr/libexec/apache2/mod_mpm_prefork.so" >> $PREFIX/etc/apache2/httpd.conf
 echo "" >> $PREFIX/etc/apache2/httpd.conf
 echo "#Global configurations" >> $PREFIX/etc/apache2/httpd.conf
 echo "ServerName localhost" >> $PREFIX/etc/apache2/httpd.conf
