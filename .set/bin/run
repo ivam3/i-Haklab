@@ -68,6 +68,7 @@ if [ -z $SCRIPT_NAME ]; then
 ╰─aio────────────➤  Accounts autopay generator
 ╰─d-tect─────────➤  Search web vulnerabilities
 ╰─a2sv───────────➤  Find web SSL vulnerabilities
+╰─acccheck───────➤  A password dictionary attack tool that targets windows authentication via the SMB protocol
 ╰─adminpanel─────➤  Admin panel web searcher.
 ╰─androbugs──────➤  Search vulnerabilities in .apk files
 ╰─aquatone───────➤  Search domain, subdomains, hosts scanner, headers HTTP, HTML body
@@ -630,6 +631,14 @@ case "$SCRIPT_NAME" in
 			STDERR
 		else
 			exec h8mail $2 $@
+		fi
+		;;
+	acccheck)
+		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+			cd $TMP_PATH/$SCRIPT_NAME
+			perl $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.pl $2 $@
+		else
+			STDERR
 		fi
 		;;
 	*)
