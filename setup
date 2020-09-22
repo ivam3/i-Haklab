@@ -151,6 +151,7 @@ echo "" >> $PREFIX/etc/fish/config.fish
 sed -i "18a set iHAKLAB $iHAKLAB" $PREFIX/etc/fish/config.fish
 bash $iHAKLAB/.set/to-install/functions
 bash $iHAKLAB/.set/to-install/i-Haklab_login
+gem install fortune
 if [ -e ~/ivam3-Haklab ]; then
 	rm ~/ivam3-Haklab
 fi
