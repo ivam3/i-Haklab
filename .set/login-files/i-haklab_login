@@ -259,6 +259,7 @@ main() {
 		if [ $Ivam3 = $Cinderella ]; then
 			echo $(clear)
 			source $PREFIX/libexec/banner/wall-banner
+			break
 		elif [ $Ivam3 = "set" ]; then
 			sleep 2
 			change_ak
