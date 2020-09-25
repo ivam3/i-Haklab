@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 #Created on Dec/2018
 IFS=$'\n\t'
-TOOL="translate"
+TOOL="TRANSLATE"
 trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
 

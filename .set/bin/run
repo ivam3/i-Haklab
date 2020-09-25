@@ -77,6 +77,7 @@ if [ -z $SCRIPT_NAME ]; then
 ╰─binwalk────────➤  Searching and given binary image for embedded files and executable code.
 ╰─blackbox───────➤  Tool for Bruteforcing attacks, Information Gathering, Dorking, Cracking and Exploit web vulnerabilities.
 ╰─cc-genpro──────➤  Bins and temporal e-mails generator.
+╰─cewl───────────➤  CeWL is a ruby app which spiders a given URL to a specified depth, optionally following external links, and returns a list of words which can then be used for password crackers.
 ╰─cloudbunny─────➤  Real IP server searcher under Shodan, Censys y Zoomeye.
 ╰─credmap────────➤  A reuse credential maper in socials media.
 ╰─cryptovenom────➤  Cryptosystems and cryptoanalysis methods all in one.
@@ -637,6 +638,14 @@ case "$SCRIPT_NAME" in
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
 			cd $TMP_PATH/$SCRIPT_NAME
 			perl $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.pl $2 $@
+		else
+			STDERR
+		fi
+		;;
+	cewl)
+		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+			cd $TMP_PATH/$SCRIPT_NAME
+			ruby $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.rb $2 $@
 		else
 			STDERR
 		fi

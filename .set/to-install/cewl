@@ -1,5 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
-#Created on Dec/2018
+#Created on Feb/2020
 IFS=$'\n\t'
 trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
@@ -8,9 +8,6 @@ function ctrl_c() {
                 echo
                 printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
 }
-if [ ! -d ~/storage ]; then
-        termux-setup-storage
-fi
 if [ -L ~/storage/external-1 ]; then
 	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 else
@@ -23,36 +20,36 @@ while [ ! $(id -u) -ne 0 ]; do
 done
 until [ -d $iHAKLAB ]; do
 	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do you wanna install it?$W\n"
-	while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
+	while read -p "       [yes/no]:-> " yesorno && [ -z $yesorno ]; do
 		continue
 	done
 if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
 	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
-        cd ~/i-Haklab;bash setup
+        cd ~/i-Haklab;bash setup-lite
 else 
-	printf "$G[!]-> Have a nice hacking day!!\n"
+	printf "$G\n[!]-> Have a nice hacking day!!\n\n"
 	exit
 fi
 done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL TERMUX VIEWER. . . .$i\n$W\n"
+        printf "$(clear) $C STARTING TO INSTALL CEWL. . . .$i"
+        printf "\n\n"
         sleep 1
 done
 #INSTALLATION
-apt update -y > /dev/null 2>&1
-apt upgrade -y > /dev/null 2>&1
-for i in openssh tmate ; do
-	pkg install $i -y > /dev/null 2>&1
-done
-if [ ! -d ~/.ssh ]; then
-        mkdir -p ~/.ssh
+yes | pkg update && pkg upgrade && pkg install ruby git
+if [ -d $iHAKLAB/../cewl ]; then
+	rm -rf $iHAKLAB/../cewl
 fi
-if [ ! -e ~/.ssh/id_rsa ]; then
-        ssh-keygen -t rsa -f ~/.ssh/id_rsa
-fi
+git clone https://github.com/digininja/CeWL $iHAKLAB/../cewl >/dev/null 2>&1
+pushd $iHAKLAB/../cewl
+chmod +x -R $iHAKLAB/../cewl
+bundle install
+popd
+
 
 #ENDING SCRIPT
-printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
 #                                               @Ivam3

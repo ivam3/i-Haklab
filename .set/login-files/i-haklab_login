@@ -251,7 +251,7 @@ main() {
 		echo $(clear)
 		source $PREFIX/libexec/banner/login-banner
 		printf "$B"
-		while read -s -p "                    >> ACCESS KEY <<
+		while read -s -n 4 -p "                    >> ACCESS KEY <<
 			" Ivam3 && [ -z $Ivam3 ];do
 			printf "$R
                      Access denied$B\n"
@@ -259,8 +259,7 @@ main() {
 		if [ $Ivam3 = $Cinderella ]; then
 			echo $(clear)
 			source $PREFIX/libexec/banner/wall-banner
-			break
-		elif [ $Ivam3 = "IbyC" ]; then
+		elif [ $Ivam3 = "set" ]; then
 			sleep 2
 			change_ak
 		else

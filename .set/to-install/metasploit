@@ -74,8 +74,7 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL METASPLOIT FRAMEWORK. . . .$i"
-        printf "\n\n"
+        printf "$(clear) $C STARTING TO INSTALL METASPLOIT FRAMEWORK. . . .$i\n$W\n"
         sleep 1
 done
 
@@ -165,7 +164,7 @@ Rapid7() {
 	Garbage #:::FUNCTION::#
 	yes |pkg update && pkg upgrade && pkg install ruby libpcap autoconf
 	gem install bundler:2.1.4
-	pushd $PREFIX/opt
+	cd $PREFIX/opt
         curl -LO $R7DB/$MSFv.tar.gz
         tar -xf $PREFIX/opt/$MSFv.tar.gz
         mv $MSFDIR-$MSFv $MSFDIR

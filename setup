@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/data/data/com.termux/files/usr/bin/bash
 #This script will install i-Haklab v.1.5 2020 by Ivam3 - It is a hacking laboratory that contains open source tools recommended by Ivam3.
 IFS=$'\n\t'
 trap ctrl_c 2
@@ -16,8 +16,16 @@ until [ -d /data/data/com.termux/files/home/i-Haklab ]; do
         printf "$R\n[W]:-> i-Haklab directory must to be in home directory$W\n"
 	exit
 done
+
+mkdir -p $HOME/.termux/&&echo "extra-keys = [['ESC','/','-','HOME','UP','END','PGUP'],['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN']]" > $HOME/.termux/termux.properties&&echo "$rst"
+
+command -v wget > /dev/null 2>&1 || apt install wget -y > /dev/null 2>&1
 wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/colors -O /data/data/com.termux/files/usr/libexec/colors > /dev/null 2>&1
 source /data/data/com.termux/files/usr/libexec/colors
+
+printf "$Y\n[!]:-> Please bring permissions at Termux and press enter\n$W"
+termux-setup-storage
+read enter
 
 echo $(clear)
         printf "$C"
@@ -63,10 +71,10 @@ echo $(clear)
 
 #::::::::::Installation of dependencies::::::::::::#
 command -v termux-info > /dev/null 2>&1 || pkg install termux-api termux-tools -y > /dev/null 2>&1
-if [ $SOversion => '7' ]; then
-	yes | pkg update && pkg upgrade && pkg install fish root-repo util-linux coreutils vim python python2 ruby perl clang curl wget make openssl fish openssl-tool php zip unzip tar w3m neofetch weechat irssi tor torsocks proxychains-ng htop bison megatools findutils git apr apr-util openssh apache2 mariadb php-apache libtool pkg-config termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner libcaca cmatrix fortune figlet man termux-api hydra megatools axel fortune apksigner libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static gnupg gpgme libassuan libgcrypt libgpg-error dnsutils debianutils sqlite sqlmap dirb wireless-tools mlocate;updatedb
+if [ $SOversion -gt "6" ]; then
+	yes | pkg update && pkg upgrade && pkg install fish root-repo unstable-repo fortune util-linux coreutils vim python python2 ruby perl clang curl wget make openssl openssl-tool php zip unzip tar w3m neofetch weechat irssi tor torsocks proxychains-ng htop bison megatools findutils git apr apr-util openssh apache2 mariadb php-apache libtool pkg-config termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner libcaca cmatrix fortune figlet man termux-api hydra megatools axel fortune apksigner libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static gnupg gpgme libassuan libgcrypt libgpg-error dnsutils debianutils sqlite dirb mlocate;updatedb
 else
-	yes | pkg update && pkg upgrade && pkg install fish root-repo util-linux coreutils vim python python2 ruby perl clang curl wget make openssl fish openssl-tool php zip unzip tar w3m neofetch weechat irssi tor torsocks proxychains-ng htop bison megatools findutils git apr apr-util openssh apache2 mariadb php-apache libtool pkg-config termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner libcaca cmatrix fortune figlet man termux-api hydra megatools axel fortune apksigner libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static gnupg gpgme libassuan libgcrypt libgpg-error dnsutils debianutils sqlite sqlmap mlocate;updatedb
+	yes | pkg update && pkg upgrade && pkg install fish root-repo util-linux coreutils fortune vim python python2 ruby perl clang curl wget make openssl openssl-tool php zip mlocate unzip tar w3m neofetch weechat irssi tor torsocks proxychains-ng htop bison megatools findutils git apr apr-util openssh apache2 mariadb php-apache libtool pkg-config termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner libcaca cmatrix fortune figlet man termux-api hydra megatools axel fortune apksigner libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static gnupg gpgme libassuan libgcrypt libgpg-error dnsutils debianutils sqlite sqlmap;updatedb
 fi
 
 for v in python python2 ; do
@@ -163,7 +171,7 @@ InstaTools() {
 	while read -p "[full/lite]──➤ " ANSW && [ -z $ANSW ]; do
 		printf "$R[w}-> ERROR-2 : join to https://t.me/Ivam3_Bot$W\n"
 	done
-}
+
 #InstaTools
 #case $ANSW in
 #	lite|LITE|Lite)
