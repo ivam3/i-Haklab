@@ -165,33 +165,9 @@ if [ -e ~/ivam3-Haklab ]; then
 fi
 
 #::::::::::Insatalling i-Haklab tools::::::::::::#
-InstaTools() {
-	printf "$G\n[+]->$W The i-Haklab configuration ends.$G\n[+]->$W Now, we will install i-Haklab tools.$Y\n[?]->$W Please choose how many tools do you want :\n\n$Y• FULL :$W All tools (weigth 4.1Gb)\n$Y• LITE :$W Only a basic tools (weigth 1.9Gb)\n\n"
-
-	while read -p "[full/lite]──➤ " ANSW && [ -z $ANSW ]; do
-		printf "$R[w}-> ERROR-2 : join to https://t.me/Ivam3_Bot$W\n"
-	done
-}
-#InstaTools
-#case $ANSW in
-#	lite|LITE|Lite)
-
 for TOOL in DoS-A-Tool ExiF binchecker blackbox crunch vpn tmux-viewer evilurl translate ; do
 	bash $iHAKLAB/.set/to-install/$TOOL
 done
-
-#		;;
-#	full|FULL|Full)
-#		SRCH=$(ls $iHAKLAB/.set/to-install/ | grep -iv .zip | grep -iv metasploit | grep -iv embed+java | grep -iv instasudo | grep -iv checkroot | grep -iv i-haklab_login | grep -iv login | grep -iv functions | grep -iv QG | grep -iv dnsenum)
-#		for TOOL in $SRCH ; do
-#			bash $iHAKLAB/.set/to-install/$TOOL
-#		done
-#		;;
-#	*)
-#		printf "$R[w}-> ERROR-3 : join to https://t.me/Ivam3_Bot$W\n"
-#		InstaTools
-#		;;
-#esac
 
 bash $iHAKLAB/.set/to-install/metasploit
 bash $iHAKLAB/.set/to-install/embed+java
