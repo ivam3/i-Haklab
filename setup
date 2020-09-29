@@ -171,7 +171,7 @@ InstaTools() {
 	while read -p "[full/lite]──➤ " ANSW && [ -z $ANSW ]; do
 		printf "$R[w}-> ERROR-2 : join to https://t.me/Ivam3_Bot$W\n"
 	done
-
+}
 #InstaTools
 #case $ANSW in
 #	lite|LITE|Lite)
