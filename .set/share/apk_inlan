@@ -2,8 +2,9 @@
 #This file is part of i-Haklab command
 
 if [ -d /data/data/com.termux/files/home/i-Haklab ]; then
-        iHAKLAB=/data/data/com.termux/files/home/i-Haklab                                   else
-        iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+	iHAKLAB=/data/data/com.termux/files/home/i-Haklab
+else
+	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 fi
 source $iHAKLAB/.set/libexec/colors
 source $iHAKLAB/.set/var/variables
