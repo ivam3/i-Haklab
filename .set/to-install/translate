@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 #Created on Dec/2018
 IFS=$'\n\t'
-TOOL="TRANSLATE"
+TOOL="translate"
 trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
 
@@ -38,19 +38,19 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL $TOOL. . . .$i"
+        printf "$(clear) $C STARTING TO INSTALL TRANSLATE. . . .$i"
         printf "\n\n"
         sleep 1
 done
 #INSTALLATION
-if [ -d $iHAKLAB/../$TOOL ]; then
-        rm -rf $iHAKLAB/../$TOOL
+if [ -d $iHAKLAB/../$TOOL-shell ]; then
+        rm -rf $iHAKLAB/../$TOOL-shell
 fi
 
 yes | pkg update && pkg upgrade && pkg install git golang
-git clone https://github.com/soimort/translate-shell.git $iHAKLAB/../$TOOL
-chmod +x -R $iHAKLAB/../$TOOL
-pushd $iHAKLAB/../$TOOL
+git clone https://github.com/soimort/translate-shell.git $iHAKLAB/../$TOOL-shell
+chmod +x -R $iHAKLAB/../$TOOL-shell
+pushd $iHAKLAB/../$TOOL-shell
 make && make install
 popd
 

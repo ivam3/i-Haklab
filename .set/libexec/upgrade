@@ -3,7 +3,7 @@
 #i-Haklab v.1.0 2019 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. Please do not use in military or secret service organizations, or for illegal purposes
 #
 #Created on Jan/2019 
-#Modify: 2020-09-30
+#Modify: 2020-10-07
 ####################
 
 IFS=$'\n\t'
@@ -85,6 +85,7 @@ if [ -e $PREFIX/etc/fish/config.fish ]; then
 	echo "alias LOCALHOST=\"ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255\"" >> $PREFIX/etc/fish/config.fish
 	echo "alias serverapache=\"apachectl\"" >> $PREFIX/etc/fish/config.fish
 	echo "alias postgresql=\"pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql\"" >> $PREFIX/etc/fish/config.fish
+	echo "alias traductor=\"gawk -f (curl -Ls git.io/translate | psub) -- -shell\"" >> $PREFIX/etc/fish/config.fish
 	echo "" >> $PREFIX/etc/fish/config.fish
 else
 	printf "$R\n[w]-> FATAL ERROR :$W interactive shell not installed$Y\n[!]-> Run$W i-Haklab reinstall$Y to fix it$W"
