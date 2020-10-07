@@ -8,12 +8,8 @@ function ctrl_c() {
                 echo
                 printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
 }
-if [ -L ~/storage/external-1 ]; then
-	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
-else
-        iHAKLAB=/data/data/com.termux/files/home/i-Haklab
-fi
 
+iHAKLAB=$(cat $PREFIX/etc/fish/config.fish | grep iHAKLAB | awk '{print $3}')
 while [ ! $(id -u) -ne 0 ]; do
 	printf "$R\n[W]:-> You need to be a common user$W\n"
 	exit
@@ -39,13 +35,13 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-arch=$(uname -a | grep -o 'arm' | head -n1)
-arch2=$(uname -a | grep -o 'Android' | head -n1)
-if [ $arch == 'arm' ] || [ $arch2 == 'Android' ] ; then
-	bits=32
-else
+if [ "$(uname -m)" = 'aarch64' ] || [ "$(uname -m)" = 'x86_64' ]
+then
 	bits=64
+else
+	bits=32
 fi
+
 Basic() {
         for module in phonenumbers selenium bs4 google_api config html5lib ; do
 		python -m pip install $module
@@ -65,25 +61,25 @@ SODIUM() {
 }
 
 command -v termux-info > /dev/null 2>&1 || pkg install termux-api termux-tools -y > /dev/null 2>&1
-
 SOversion=$(termux-info |awk '$1 < 11 {print $1}' |tail -n 1 |awk -F "." '{print $1}')
-pkg update && pkg upgrade -y
-
-if [ $SOversion => '7' ]; then
+yes |pkg update && pkg upgrade
+if [ $SOversion -gt '6' ]; then
 	pkg install unstable-repo
 fi
 
 for repo in git python python2 geckodriver ; do
 	pkg install $repo -y
 done
+
 command -v geckodriver > /dev/null 2>&1 || cd $iHAKLAB/.set/to-install;tar -xvf geckodriver-v0.24.0-linux$bits.tar.gz.zip;mv geckodriver $PREFIX/bin/;chmod +x $PREFIX/bin/geckodriver; /dev/null 2>&1
+
 for version in python python2 ; do
         $version -m pip install --upgrade pip
 done
 
 git clone https://github.com/sundowndev/PhoneInfoga.git $iHAKLAB/../PhoneInfoga
 pushd $iHAKLAB/../PhoneInfoga
-wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/phoneinfoga.py -O $iHAKLAB/../PhoneInfoga/phoneinfoga.py
+wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/phoneinfoga.py -O $iHAKLAB/../PhoneInfoga/phoneinfoga.py -q
 
 printf "$Y[!]->$W There are 3 methods to install the repositories : choose one$Y\n[01]->$W BASIC$Y\n[02]->$W LDFLAGS$Y\n[03]->$W SODIUM\n\n"
 
