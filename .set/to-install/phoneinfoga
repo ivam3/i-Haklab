@@ -70,14 +70,21 @@ fi
 for repo in git python python2 geckodriver ; do
 	pkg install $repo -y
 done
-
-command -v geckodriver > /dev/null 2>&1 || cd $iHAKLAB/.set/to-install;tar -xvf geckodriver-v0.24.0-linux$bits.tar.gz.zip;mv geckodriver $PREFIX/bin/;chmod +x $PREFIX/bin/geckodriver; /dev/null 2>&1
-
 for version in python python2 ; do
         $version -m pip install --upgrade pip
+	$version -m pip install geckodriver-autoinstaller
 done
 
-git clone https://github.com/sundowndev/PhoneInfoga.git $iHAKLAB/../PhoneInfoga
+if ! $(which geckodriver)
+then
+        wget https://github.com/mozilla/geckodriver/releases/download/v0.27.0/geckodriver-v0.27.0-linux$bits.tar.gz -q
+        tar -xvzf geckodriver-v0.27.0-linux$bits.tar.gz > /dev/null 2>&1
+        rm geckodriver-v0.27.0-linux$bits.tar.gz
+        mv geckodriver $PREFIX/bin/
+        chmod +x $PREFIX/bin/geckodriver
+fi
+
+git clone https://github.com/sundowndev/PhoneInfoga.git $iHAKLAB/../PhoneInfoga > /dev/null 2>&1
 pushd $iHAKLAB/../PhoneInfoga
 wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/phoneinfoga.py -O $iHAKLAB/../PhoneInfoga/phoneinfoga.py -q
 
