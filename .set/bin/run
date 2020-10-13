@@ -118,6 +118,7 @@ if [ -z $SCRIPT_NAME ]; then
 ╰─vt─────────────➤  VirusTotal: an command line service that analyzes files and URLs enabling the detection of viruses, worms, trojans and other kinds of malicious content using antivirus engines and website scanners.
 ╰─xerosploit─────➤  Penetration testing toolkit whose goal is to perform man in the middle attacks.
 ╰─webhackshl─────➤  Vulnerability analysis and information collection of websites and servers.
+╰─wbruter────────➤  Brute force & dictionary attacking methods to various stuff
 ╰─whatweb────────➤  Identifie websites (DNS).
 ╰─wpscan─────────➤  Black box WordPress vulnerability scanner.\n"
 	exit
@@ -650,6 +651,13 @@ case "$SCRIPT_NAME" in
 			STDERR
 		fi
 		;;
+	wbruter)
+		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
+			cd $TMP_PATH/$SCRIPT_NAME
+			bash $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME $2 $@
+		else
+			STDERR
+		fi
 	*)
 		echo "$R\n[w] i-Haklab :$W Unknown argument '$SCRIPT_NAME'\n"
 		exit 1
