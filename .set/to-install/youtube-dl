@@ -72,7 +72,7 @@ if [ ! -d ~/.milux ]
 then
         mkdir ~/.milux
 fi
-if [ -L ~/bin ]
+if [ ! -L ~/bin ]
 then
         ln -s $PREFIX/bin ~/bin
 fi
