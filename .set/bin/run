@@ -658,6 +658,7 @@ case "$SCRIPT_NAME" in
 		else
 			STDERR
 		fi
+		;;
 	*)
 		echo "$R\n[w] i-Haklab :$W Unknown argument '$SCRIPT_NAME'\n"
 		exit 1
