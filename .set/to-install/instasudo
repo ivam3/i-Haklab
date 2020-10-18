@@ -102,9 +102,11 @@ if [ "$CHECKROOT" = "root" ]; then
         stty sane
         if [ -e $PREFIX/bin/applets/sudo ]; then
                 rm $PREFIX/bin/applets/sudo
+	elif [ -e $PREFIX/bin/sudo ]; then
+		rm $PREFIX/bin/sudo
         fi
         wget https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/mediafire/sudo -O $PREFIX/bin/sudo
-        chmod +x $PREFIX/bin/applets/sudo
+        chmod +x $PREFIX/bin/sudo
         sudo echo "HOME=/data/data/com.termux/files/home/storage/external-1/roothome" >> ~/.suroot/.bashrc
 else
         printf "$R[W]:-> DEVICE NOT ROOTED$W\n\n"
