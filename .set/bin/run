@@ -630,10 +630,9 @@ case "$SCRIPT_NAME" in
 		;;
 	h8mail)
 		if ! python -m pip list | grep -oE "h8mail" >/dev/null; then
-			STDERR
-		else
-			exec h8mail $2 $@
+			python -m pip install h8mail requests
 		fi
+		exec h8mail $2 $@
 		;;
 	acccheck)
 		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
