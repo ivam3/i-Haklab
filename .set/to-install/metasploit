@@ -98,8 +98,8 @@ elif [ $UNAME = "x86_64" ]
 then
         ARCH="x86_64-linux-android"
 else
-        printf "$R[ERR]─➤ Your architecture is uncompatible\n$W"
-        exit
+#	printf "$R[ERR]─➤ Your architecture is uncompatible\n$W"
+        ARCH="Unkonwn architecture"
 fi
 
 Garbage() {
