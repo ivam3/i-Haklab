@@ -19,6 +19,14 @@ done
 
 mkdir -p $HOME/.termux/&&echo "extra-keys = [['ESC','/','-','HOME','UP','END','PGUP'],['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN']]" > $HOME/.termux/termux.properties&&echo "$rst"
 
+if [ -d $HOME/.local ]; then
+	rm -rf $HOME/.local
+fi
+if [ -d $HOME/.config ]; then
+	rm -rf $HOME/.config
+fi
+if command -v fish ;then apt remove fish && apt autoremove; fi
+
 command -v wget > /dev/null 2>&1 || apt install wget -y > /dev/null 2>&1
 wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/colors -O /data/data/com.termux/files/usr/libexec/colors > /dev/null 2>&1
 source /data/data/com.termux/files/usr/libexec/colors

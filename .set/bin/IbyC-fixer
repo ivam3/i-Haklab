@@ -90,11 +90,11 @@ while [ -z $2 ]; do
 done
 
 Args(){
-if [ $2 = "Py" ]; then
+if [ "$2" = 'Py' ]; then
 	Py=python
 	Repos
 	Lib
-elif [ $2 = "Py2" ]; then
+elif [ "$2" = "Py2" ]; then
 	Py=python2
 	Repos
 	Lib
