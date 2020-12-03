@@ -34,14 +34,21 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL WBRUTER. . . .$i"
+        printf "$(clear) $C STARTING TO UNINSTALL AMASS. . . .$i"
         printf "\n\n"
         sleep 1
 done
-#INSTALLATION
-yes | pkg update && pkg upgrade
-git clone https://github.com/wuseman/WBRUTER.git $iHAKLAB/../wbruter > /dev/null 2>&1
-chmod +x -R $iHAKLAB/../wbruter
+#UNINSTALLATION
+for i in github.com/knq github.com/mailru github.com/rakyll github.com/yl2chen github.com/mailru github.com/andybalholm github.com/mattn github.com/gobwas github.com/fatih github.com/PuerkitoBio github.com/VividCortex github.com/beorn7 github.com/cespare github.com/temoto net github.com/dennwc github.com/tylertreat github.com/miekg github.com/boltdb github.com/go-sql-driver github.com/hidal-go go.uber.org github.com/chromedp github.com/yuin github.com/cenkalti github.com/geziyor github.com/google github.com/dghubble github.com/jmoiron golang.org github.com/dghubble github.com/gogo github.com/cloudflare google.golang.org github.com/cjoudrey layeh.com github.com/matttproud github.com/golang github.com/go-kit github.com/prometheus github.com/cayleygraph github.com/geziyor github.com/OWASP; do
+	if [ $GOPATH/$i ]
+	then
+		rm -rf $GOPATH/$i
+	fi
+done
+if [ $GOPATH/bin/amass ]
+then
+	rm $GOPATH/bin/amass
+fi
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"

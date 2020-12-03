@@ -34,14 +34,26 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL WBRUTER. . . .$i"
+        printf "$(clear) $C STARTING TO INSTALL AMASS. . . .$i"
         printf "\n\n"
         sleep 1
 done
 #INSTALLATION
-yes | pkg update && pkg upgrade
-git clone https://github.com/wuseman/WBRUTER.git $iHAKLAB/../wbruter > /dev/null 2>&1
-chmod +x -R $iHAKLAB/../wbruter
+yes |pkg update && pkg upgrade && pkg install golang
+if [ ! -d $HOME/go/src/github.com ]; then
+	mkdir -p $HOME/go/src/github.com
+fi
+VAR=$(cat $PREFIX/etc/fish/config.fish | grep "GOPATH")
+if [ -z $VAR ]; then
+	sed -i "20a set GOPATH $HOME/go" $PREFIX/etc/fish/config.fish
+fi
+chmod +x -R $HOME/go/
+export GO111MODULE=on
+go get -v github.com/OWASP/Amass/v3/...
+if [ ! -l /data/data/com.termux/files/usr/bin/amass ] && [ -e /data/data/com.termux/files/home/go/bin/amass ]
+then
+	ln -s /data/data/com.termux/files/home/go/bin/amass /data/data/com.termux/files/usr/bin/amass
+fi
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"

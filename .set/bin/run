@@ -658,6 +658,14 @@ case "$SCRIPT_NAME" in
 			STDERR
 		fi
 		;;
+	amass)
+		if [ -e ~/go/bin/amass ]; then
+                        cd ~/go/bin/
+                        exec amass $2 $@
+                else
+                        STDERR
+                fi
+		;;
 	*)
 		echo "$R\n[w] i-Haklab :$W Unknown argument '$SCRIPT_NAME'\n"
 		exit 1
