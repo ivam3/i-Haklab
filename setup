@@ -174,7 +174,7 @@ if [ -e ~/ivam3-Haklab ]; then
 fi
 
 #::::::::::Insatalling i-Haklab tools::::::::::::#
-for TOOL in DoS-A-Tool ExiF binchecker blackbox crunch vpn tmux-viewer evilurl translate ; do
+for TOOL in DoS-A-Tool ExiF binchecker blackbox crunch vpn tmux-viewer evilurl; do
 	bash $iHAKLAB/.set/to-install/$TOOL
 done
 
