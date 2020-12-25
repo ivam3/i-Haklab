@@ -50,7 +50,7 @@ fi
 chmod +x -R $HOME/go/
 export GO111MODULE=on
 go get -v github.com/OWASP/Amass/v3/...
-if [ ! -l /data/data/com.termux/files/usr/bin/amass ] && [ -e /data/data/com.termux/files/home/go/bin/amass ]
+if [ ! -e /data/data/com.termux/files/usr/bin/amass ] && [ -e /data/data/com.termux/files/home/go/bin/amass ]
 then
 	ln -s /data/data/com.termux/files/home/go/bin/amass /data/data/com.termux/files/usr/bin/amass
 fi
