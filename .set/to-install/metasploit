@@ -153,13 +153,6 @@ Ending() {
 	printf "        If msfconsole didn't run\n         execute the file RuGiR\n       (Ruby Gem issues Resolved)\n    to try to fix it with another steps\n\t$G   >       RuGiR      <$W\n\n"
 }
 
-Termux() {
-	Garbage
-	yes | pkg update && pkg upgrade && pkg install util-linux autoconf util-linux bison clang coreutils axel curl findutils git apr apr-util libtool pkg-config wget make ruby termux-tools ncurses-utils ncurses unzip postgresql termux-elf-cleaner && pkg install unstable-repo && pkg install metasploit
-	Ivam3
-	Ending
-}
-
 Rapid7() {
 	Garbage #:::FUNCTION::#
 	yes |pkg update && pkg upgrade && pkg install ruby libpcap autoconf
@@ -218,6 +211,30 @@ Rapid7() {
         echo "#                 @Ivam3" >> $PREFIX/opt/metasploit-framework/installer.sh
 	Ivam3
 	Ending
+}
+
+Termux() {
+        Garbage
+        yes|pkg update && pkg upgrade
+        for i in util-linux autoconf bison clang coreutils axel curl findutils git apr apr-util libtool pkg-config wget make ruby termux-tools ncurses-utils ncurses unzip postgresql termux-elf-cleaner unstable-repo metasploit; do
+                PKG=$(pkg list-all|grep -o $i)
+                if [ ! -z $PKG ]
+                then
+                        yes|pkg install $i
+                else
+                        printf "$Y\n[!]─➤ No such repository $i\n$W"
+                fi
+        done
+        MSF=$(pkg list-all|grep -o "metasploit")
+        if [ -z $MSF ]
+        then
+                printf "$R\n[w]─➤$W No such$R metasploit$W in Termux repositories"
+                printf "$G\n[+]─➤$W Metasploit will be installed from the$B Rapid7$W repositories\n"
+                sleep 1
+        fi
+        Rapid7
+        Ivam3
+        Ending
 }
 
 MAIN() {
