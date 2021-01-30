@@ -113,12 +113,23 @@ for i in $TOOL unstable-repo $MSFDIR $HOME/$TOOL-framework ; do
         fi
 done
 }
+UPandINSTALL() {
+	yes|pkg update && pkg upgrade
+        for i in libiconv zlib autoconf bison clang coreutils curl findutils apr apr-util libffi libgmp libpcap postgresql readline libsqlite openssl libtool libxml2 libxslt ncurses pkg-config wget make ruby libgrpc termux-tools ncurses-utils ncurses unzip zip tar termux-elf-cleaner util-linux axel unstable-repo; do
+                PKG=$(pkg list-all|grep -o $i)
+                if [ ! -z $PKG ]
+                then
+                        yes|pkg install $i
+                else
+                        printf "$R\n[w]─➤ The repository $i is not candidate$W\n"
+			sleep 1
+                fi
+        done
+}
 msfdb(){
         if [ ! -d $PREFIX/var/lib/postgresql ]; then
                 mkdir -p $PREFIX/var/lib/postgresql
         fi
-        wget $iHDB/fix-tools//msfupdate $MSFDIR/msfupdate -q
-        chmod +x $MSFDIR/msfupdate
         wget https://raw.githubusercontent.com/ivam3/java/master/.embed/apk.rb -O $MSFDIR/lib/msf/core/payload/apk.rb -q
         initdb $PREFIX/var/lib/postgresql
         pg_ctl -D $PREFIX/var/lib/postgresql start
@@ -138,7 +149,6 @@ msfdb(){
         fi
         ! command -v i-Haklab > /dev/null || gem install lolcat
 }
-
 Ivam3() {
 	wget $JAVADB/.embed/apk.rb -O $MSFDIR/lib/msf/core/payload/apk.rb -q
 	wget $iHDB/.set/bin/RuGiR -O $PREFIX/bin/RuGiR -q
@@ -146,33 +156,45 @@ Ivam3() {
 }
 
 Ending() {
-	printf "\n\n$C ::::::::: METASPLOIT INSTALLED :::::::::$W\n"
-	printf " The data base can be active with command\n\t$G   > postgresql start <$W\n"
-	printf "      Now you can run it with command$G\n\t$G   >    msfconsole    <\n"
-	printf "\n$R :::::::::::::: ADVERSMENT ::::::::::::::$W\n"
-	printf "        If msfconsole didn't run\n         execute the file RuGiR\n       (Ruby Gem issues Resolved)\n    to try to fix it with another steps\n\t$G   >       RuGiR      <$W\n\n"
+	if [ -d $MSFDIR ]
+        then
+                printf "\n\n$C ::::::::: METASPLOIT INSTALLED :::::::::$W\n"
+                printf " The data base can be active with command\n\t$G   > postgresql start <$W\n"
+                printf "      Now you can run it with command$G\n\t$G   >    msfconsole    <\n"
+                printf "\n$R :::::::::::::: ADVERSMENT ::::::::::::::$W\n"
+                printf "        If msfconsole didn't run\n         execute the file RuGiR\n       (Ruby Gem issues Resolved)\n    to try to fix it with another steps\n\t$G   >       RuGiR      <$W\n\n"
+        else
+                printf "$R\n[ERR-MSFDIR]─➤ Going to https://t.me/Ivam3_Bot$W\n"
+        fi
 }
 
 Rapid7() {
-	Garbage #:::FUNCTION::#
-	yes |pkg update && pkg upgrade && pkg install ruby libpcap autoconf
-	gem install bundler:2.1.4
-	cd $PREFIX/opt
+	Garbage #::FUNCTION::#
+        UPandINSTALL #::Upgrade and install available repositories::#
+        gem install bundler:2.1.4
+        if [ ! -d $PREFIX/opt ]; then
+                mkdir -p $PREFIX/opt
+        fi
+        cd $PREFIX/opt
         curl -LO $R7DB/$MSFv.tar.gz
         tar -xf $PREFIX/opt/$MSFv.tar.gz
         mv $MSFDIR-$MSFv $MSFDIR
         rm $PREFIX/opt/$MSFv.tar.gz
         cd $MSFDIR
+        if [ "$(gem list -i rubygems-update 2>/dev/null)" = "false" ]
+	then
+                gem install --no-document --verbose rubygems-update
+        fi
         sed '/rbnacl/d' -i Gemfile.lock
         sed '/rbnacl/d' -i metasploit-framework.gemspec
-        gem install bundler
+        gem install --no-document --verbose bundler:2.2.7
         sed 's|nokogiri (1.*)|nokogiri (1.10.4)|g' -i Gemfile.lock
         gem install nokogiri -v '1.10.4' -- --use-system-libraries
         gem update --system
-        bundle install -j5
-        $PREFIX/bin/find -type f -executable -exec termux-fix-shebang \{\} \;
+        bundle install -j3
+        $PREFIX/bin/find $MSFDIR -type f -executable -print0 | xargs -0 -r termux-fix-shebang
         rm $MSFDIR/modules/auxiliary/gather/http_pdf_authors.rb
-        termux-elf-cleaner $PREFIX/lib/ruby/gems/$GEMS/gems/$PGv/lib/pg_ext.so
+        $PREFIX/bin/find $PREFIX/lib/ruby/gems -type f -iname \*.so -print0 | xargs -0 -r termux-elf-cleaner
 	msfdb #:::FUNCTION::#
 #:::::::MSFCONSOLE MSFVENOM FILES:::::::#
 	echo "#!/data/data/com.termux/files/usr/bin/sh" > $PREFIX/bin/msfconsole
@@ -214,25 +236,18 @@ Rapid7() {
 }
 
 Termux() {
-        Garbage
-        yes|pkg update && pkg upgrade
-        for i in util-linux autoconf bison clang coreutils axel curl findutils git apr apr-util libtool pkg-config wget make ruby termux-tools ncurses-utils ncurses unzip postgresql termux-elf-cleaner unstable-repo metasploit; do
-                PKG=$(pkg list-all|grep -o $i)
-                if [ ! -z $PKG ]
-                then
-                        yes|pkg install $i
-                else
-                        printf "$Y\n[!]─➤ No such repository $i\n$W"
-                fi
-        done
+	Garbage
         MSF=$(pkg list-all|grep -o "metasploit")
         if [ -z $MSF ]
         then
                 printf "$R\n[w]─➤$W No such$R metasploit$W in Termux repositories"
                 printf "$G\n[+]─➤$W Metasploit will be installed from the$B Rapid7$W repositories\n"
                 sleep 1
+                Rapid7
+        else
+                UPandINSTALL
+                yes|pkg install $MSF
         fi
-        Rapid7
         Ivam3
         Ending
 }
