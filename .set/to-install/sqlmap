@@ -4,9 +4,8 @@ IFS=$'\n\t'
 trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
 
-function ctrl_c() {
-                echo
-                printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
+ctrl_c(){
+	printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
 }
 if [ ! -d ~/storage ]; then
         termux-setup-storage
@@ -26,47 +25,73 @@ until [ -d $iHAKLAB ]; do
 	while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
 		continue
 	done
-if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
-	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
-        cd ~/i-Haklab;bash setup
-else 
-	printf "$G[!]-> Have a nice hacking day!!\n"
-	exit
-fi
+	if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]
+	then
+		git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
+		cd ~/i-Haklab;bash setup
+	else 
+		printf "$G[!]-> Have a nice hacking day!!\n"
+		exit
+	fi
 done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL SQLMAP. . . .$i"
+	printf "$(clear) $C STARTING TO INSTALL SQLMAP. . . .$i"
         printf "\n\n"
         sleep 1
 done
-#INSTALLATION
-yes | pkg update && pkg upgrade
-command -v termux-info > /dev/null 2>&1 || pkg install termux-api termux-tools -y > /dev/null 2>&1
-SOversion=$(termux-info |awk '$1 < 11 {print $1}' |tail -n 1 |awk -F "." '{print $1}')
-if [ $SOversion -gt '6' ]; then
-        pkg install unstable-repo sqlmap -y
-else
+
+#::::::::INSTALLATION:::::::::#
+Termux(){
+	for i in unstable-repo sqlmap; do
+		PKG=$(pkg list-all|grep -o $i)
+		if [ ! -z "$PKG" ]
+		then
+			printf "$G\n[+]─➤$W Installing the repository $i $W\n"
+			yes|pkg install $i >/dev/null 2>&1
+		else
+			printf "$R\n[w]─➤$W The repository $i is not candidate$W\n"
+			sleep 1
+		fi
+	done
+}
+
+Python(){
+	yes|pkg install python python2 git
+	for i in python python2 ; do
+		$i -m pip --no-color install --upgrade pip -q
+		$i -m pip --no-color install sqlmap -q
+	done
+}
+Github(){
 	if [ -d $iHAKLAB/../sqlmap ]; then
 		rm -rf $iHAKLAB/../sqlmap
 	fi
-	apt install python python2 git -y
-	for i in python python2 ; do
-		$i -m pip install --upgrade pip
-	done
+	git clone https://github.com/sqlmapproject/sqlmap $iHAKLAB/../sqlmap
+	chmod 711 -R $iHAKLAB/../sqlmap
+}
 
-	printf "$Y\n[!]->$W Choose a type of installation$Y\n[01]->$W Github$Y\n[02]->$W Python module(recommended)\n"
-	while read -p "[R]-> " ANSW && [ -z $ANSW ]; do
-		continue
-	done
-	if [ $ANSW = '01' ] || [ $ANSW = '1' ]; then
-		git clone https://github.com/sqlmapproject/sqlmap $iHAKLAB/../sqlmap
-		chmod 711 -R $iHAKLAB/../sqlmap
-	else
-		python -m pip install sqlmap
-	fi
-fi
+printf "$C#::::::::::::::::::::::::::::::::::::#$Y\n[!?]->$W Choose a type of installation$G\n[01]->$W Termux repositories$G\n[02]->$W Github$G\n[03]->$W Python-pip modules\n"
+while read -p "[R]-> " ANSW && [ -z $ANSW ]; do
+	continue
+done
+yes|pkg update && pkg upgrade
+case $ANSW in
+	01|1)
+		Termux
+		;;
+	02|2)
+		Github
+		;;
+	03|3)
+		Python
+		;;
+	*)
+		ctrl_c
+		exit
+		;;
+esac
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
