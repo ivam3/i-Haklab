@@ -35,13 +35,15 @@ done
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
         printf "$(clear) $C STARTING TO UNINSTALL REDHAWK. . . .$i"
-        printf "\n\n"
+        printf "\n$W\n"
         sleep 1
 done
 #UNINSTALLATION
-if [ -d $iHAKLAB/../RED_HAWK ]; then
-        rm -rf $iHAKLAB/../RED_HAWK
-fi
+for del in RED_HAWK redhawk;do
+	if [ -d $iHAKLAB/../$del ]; then
+		rm -rf $iHAKLAB/../$del
+	fi
+done
 apt remove php -y
 apt autoremove
 

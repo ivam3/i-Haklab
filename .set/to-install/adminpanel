@@ -42,18 +42,18 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-if [ -d $iHAKLAB/../admin_panel ]; then
-        rm -rf $iHAKLAB/../admin_panel
-fi
-pkg update && pkg upgrade -y
-pkg install git python python2 -y
+for del in admin_panel adminpanel;do
+	if [ -d $iHAKLAB/../$del ]; then
+		rm -rf $iHAKLAB/../$del
+	fi
+done
+yes|pkg update && pkg upgrade && pkg install git python python2
 for version in python python2 ; do
         $version -m pip install --upgrade pip
 done
-git clone https://github.com/Techzindia/admin_penal.git $iHAKLAB/../admin_panel
-chmod 777 $iHAKLAB/../admin_panel/admin_panel_finder.py
-mv $iHAKLAB/../admin_panel/admin_panel_finder.py $iHAKLAB/../admin_panel/admin_panel.py
-#python2 -m pip install urllib2
+git clone https://github.com/Techzindia/admin_penal.git $iHAKLAB/../adminpanel
+chmod 777 $iHAKLAB/../adminpanel/admin_panel_finder.py
+mv $iHAKLAB/../adminpanel/adminpanel_finder.py $iHAKLAB/../adminpanel/adminpanel.py
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"

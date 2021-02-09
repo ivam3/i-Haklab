@@ -1,71 +1,85 @@
-#!/data/data/com.termux/files/usr/bin/sh
-# Coded on Agust 2019 by Ivam3
+#!/data/data/com.termux/files/usr/bin/bash
+# Coded on Agust 2019 and upgraded on Feb 2021 by Ivam3
 # This file bring a easy access to execute i-Haklab tools
 #
-R='\033[1;31m'
-G='\033[1;32m'
-Goke='\033[92m'
-Glig=='\e[1;32m'
-Y='\033[1;33m'
-B='\033[1;34m'
-M='\033[1;35m'
-C='\033[1;36m'
-W='\033[0m'
-SOversion=$(termux-info | grep -oE '([5-9]{1}\.)([0-9]{1}\.)([0-9]{1})' | awk -F "." '{print $1}')
-if [ ! -z "$OSversion" ] && [ "$SOversion" -lt '7' ]; then
-	LIBVERSION="2.6.0"
-else
-	LIBVERSION="2.7.0"
-fi
+#::::COLORS::::#
+source $PREFIX/libexec/colors || wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/colors -O /data/data/com.termux/files/usr/libexec/colors > /dev/null 2>&1
+
+#::::VARIABLES::::#
+TOOL=$(basename "$1")
+GOPATH=$(cat $PREFIX/etc/fish/config.fish | grep GOPATH | awk '{print $3}')
 iHAKLAB=$(cat $PREFIX/etc/fish/config.fish | grep iHAKLAB | awk '{print $3}')
-TMP_PATH="$iHAKLAB/.."
-SCRIPT_NAME=$(basename "$1")
-BEEF_PATH="/data/data/com.termux/files/usr/opt/beef"
-GO_PATH=$(cat $PREFIX/etc/fish/config.fish | grep GOPATH | awk '{print $3}')
-CHECKROOT=$(bash $iHAKLAB/.set/to-install/check-root)
-
-if [ -z $iHAKLAB ]; then
-	echo "$R\n[w]-> i-Haklab directory undefined <-[w]$W\n"
-fi
-
-STDERR() {
-	echo "$R\n[w] i-Haklab :$W $SCRIPT_NAME is not installed$W\n"
+until [ -d $iHAKLAB ]; do
+	printf "$R\n[w]-> i-Haklab directory undefined$Y\n[!]-> run i-Haklab reinstall to fix it$W\n"
 	exit
-}
-STDERROOT() {
-	echo "$R\n[w] i-Haklab :$W Your device is not rooted$W\n"
+done
+TOOLPATH="$iHAKLAB/../$TOOL"
+
+#::::FUNCTIONS::::#
+STDERR(){
+	printf "$R\n[w] i-Haklab :$W $TOOL is not installed$W\n"
 	exit
-}
-Banner() {
+	}
+STDERROOT(){
+	printf "$R\n[w] i-Haklab :$W Your device is not rooted$W\n"
+	exit
+	}
+Banner(){
         if [ -e $iHAKLAB/.set/libexec/banner/i-Haklab ]; then
                 bash $iHAKLAB/.set/libexec/banner/i-Haklab
-                sleep 0.2
+                sleep 0.1
         fi
-}
-#
-# Fix ruby bigdecimal extensions linking error.
+	}
+running(){
+	for i in . .. ... ....;do
+		printf "$G$(clear)[+]-> i-Haklab running $i\n$W"
+		sleep 0.1
+	done
+	}
+CheckPath(){
+	if [ -d $TOOLPATH ]; then
+                running
+                cd $TOOLPATH
+                clear
+                return 0
+        else
+                return 1
+        fi
+	}
+CheckRoot(){
+	CHECKROOT=$(bash $iHAKLAB/.set/to-install/check-root)
+	if [ $CHECKROOT = "root" ]; then
+		command -v sudo > /dev/null || bash $TMP_PATH/i-Haklab/.set/to-install/instasudo
+		return 0
+	else
+		STDERROOT
+	fi
+	}
+
+#::::FIXING RUBY BIGDECIMAL EXYENSIONS LINKING ERROR::::#
+LIBv=$(ls $PREFIX/lib/ruby |grep '[0-9].[0-9].[0-9]')
 case "$(uname -m)" in
 	aarch64)
-		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBVERSION/aarch64-linux-android/bigdecimal.so"
+		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBv/aarch64-linux-android/bigdecimal.so"
 		;;
 	arm*)
-		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBVERSION/arm-linux-androideabi/bigdecimal.so"
+		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBv/arm-linux-androideabi/bigdecimal.so"
 		;;
 	i686)
-		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBVERSION/i686-linux-android/bigdecimal.so"
+		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBv/i686-linux-android/bigdecimal.so"
 		;;
 	x86_64)
-		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBVERSION/x86_64-linux-android/bigdecimal.so"
+		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBv/x86_64-linux-android/bigdecimal.so"
 		;;
 	*)
 		;;
 esac
 
-if [ -z $SCRIPT_NAME ]; then
+if [ -z $TOOL ]; then
 	Banner
-	echo "$Y\n[!] Syntax :$W run [-name-of-tool/framework-]\n\n
+	printf "$Y\n[!] Syntax :$W run [-name-of-tool/framework-]\n\n
 |─Tool/Framework─|──────────────────────Description────────────────────────────|
-╰─aio────────────➤  Accounts autopay generator
+╰─aiochk─────────➤  Accounts autopay generator
 ╰─d-tect─────────➤  Search web vulnerabilities
 ╰─a2sv───────────➤  Find web SSL vulnerabilities
 ╰─acccheck───────➤  A password dictionary attack tool that targets windows authentication via the SMB protocol
@@ -79,10 +93,11 @@ if [ -z $SCRIPT_NAME ]; then
 ╰─cc-genpro──────➤  Bins and temporal e-mails generator.
 ╰─cewl───────────➤  CeWL is a ruby app which spiders a given URL to a specified depth, optionally following external links, and returns a list of words which can then be used for password crackers.
 ╰─cloudbunny─────➤  Real IP server searcher under Shodan, Censys y Zoomeye.
+╰─converter──────➤  Simple multimedia converter.
 ╰─credmap────────➤  A reuse credential maper in socials media.
 ╰─cryptovenom────➤  Cryptosystems and cryptoanalysis methods all in one.
 ╰─dnsenum────────➤  Enumerate DNS information of a domain and to discover non-contiguous ip blocks.
-╰─dog────────────➤  Reconnaissance Swiss Army Knife.
+╰─DoS─A─Tool─────➤  Denied of service attack tool.
 ╰─embed──────────➤  Embedded metasploit payload in legitim aplication.
 ╰─evilurl────────➤  Generate unicode evil domains for IDN Homograph Attack and detect them.
 ╰─exploitdb──────➤  Public exploits and corresponding vulnerable software, developed for use by penetration testers and vulnerability researchers
@@ -103,14 +118,16 @@ if [ -z $SCRIPT_NAME ]; then
 ╰─phonesploit────➤  Exploit a device using open tcp ports (adbfastboot needed)
 ╰─pybelt─────────➤  Complete open source hackers tool.
 ╰─quack──────────➤  Toolkit to spam via calls,sms,smtp.tcp,http and more
+╰─recondog───────➤  Reconnaissance Swiss Army Knife.
 ╰─recon-ng───────➤  Providing a powerful environment to conduct open source web-based reconnaissance.
 ╰─rhawk──────────➤  Information Gathering and Vulnerability Scanning.
-╰─rsf────────────➤  Exploitation framework dedicated to embedded routers.
+╰─routersploit───➤  Exploitation framework dedicated to embedded routers.
 ╰─saycheese──────➤  Grab target's webcam shots by link.
 ╰─sayhello───────➤  Grab target's short voice audio by link.
 ╰─seeker─────────➤  Accurately Locate Smartphones using Social Engineering.
 ╰─sherlock───────➤  Find usernames across many social networks.
 ╰─shellsploit────➤  Powerful phishing tool.
+╰─sigploit───────➤  Signaling security testing framework dedicated to Telecom Security
 ╰─sqliv──────────➤  Massive SQL injection scanner.
 ╰─sqlmap─────────➤  Penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database server. 
 ╰─tangalanga─────➤  Zoom Conference scanner. This scanner will check for a random meeting id and return information if available
@@ -124,550 +141,229 @@ if [ -z $SCRIPT_NAME ]; then
 	exit
 fi
 
-case "$SCRIPT_NAME" in
-	beef|beef-xss)
-		if [ -d $BEEF_PATH ]; then
-			cd $BEEF_PATH > /dev/null
-			echo "load msgrpc ServerHost=127.0.0.1 ServerPort=55552 User=msf Pass='abc123'" > $PREFIX/opt/metasploit-framework/BeeF.rc
-			echo "\033[1;33m[!]->\033[0m In a new session run :"
-			echo "      postgresql start"
-			echo "      msfconsole -r $PREFIX/opt/metasploit-framework/BeeF.rc"
-			echo "\033[1;33m[!]->\033[0m then press\033[1;32m enter\033[0m to continue"
+case "$TOOL" in
+	beef)
+		if [ -d $PREFIX/opt/beef ]; then
+			running
+			BEEF_PATH="$PREFIX/opt/beef"
+			cd $BEEF_PATH
+			echo "load msgrpc ServerHost=127.0.0.1 ServerPort=55552 User=msf Pass='abc123'" > $PREFIX/opt/metasploit-framework/BeeF.rc 
+			printf "$Y\n[!]->$W In a new session run :\n      postgresql start\n      msfconsole -r \$PREFIX/opt/metasploit-framework/BeeF.rc\n$Y[!]->$W then press$G enter$W to continue"
 			read enter
-			exec ruby $BEEF_PATH/$SCRIPT_NAME
+			exec ruby $BEEF_PATH/$TOOL
 		else
 			STDERR
 		fi
 		;;
+	embed|hatcloud|cewl)
+                if CheckPath;then
+			exec ruby $TOOLPATH/$TOOL.rb ${@:2}
+                else
+                        STDERR
+                fi
+                ;;
 	wpscan)
-		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-			cd $TMP_PATH/$SCRIPT_NAME/bin > /dev/null
-			exec ruby $TMP_PATH/$SCRIPT_NAME/bin/$SCRIPT_NAME $@
+		if CheckPath;then
+			exec ruby $TOOLPATH/bin/$TOOL ${@:2}
+		else
+			STDERR
+		fi
+		;;
+#::::PYTHON2 TOOLS::::#
+	androbugs|d-tect|adminpanel|credmap|fbi|cloudbunny|pybelt|sigploit|sqliv|kerbrute|cryptovenom|a2sv)
+		if [ -f $TOOLPATH/api.conf.txt ]; then
+			mv $TOOLPATH/api.conf.txt $TOOLPATH/api.conf
+		fi
+		if CheckPath;then
+			exec python2 $TOOLPATH/$TOOL.py ${@:2}
 			
 		else
 			STDERR
 		fi
 		;;
-	androbugs)
-		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-			#cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-			exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py $2 $@
-			
-		else
-			STDERR
-		fi
-		;;
-	d-tect)
-		if [ -d $TMP_PATH/D-TECT-1 ]; then
-                        cd $TMP_PATH/D-TECT-1 > /dev/null
-                        exec python2 $TMP_PATH/D-TECT-1/$SCRIPT_NAME.py $@
-                        
+	cc-genpro)
+		if CheckPath;then
+			exec python2 $TOOLPATH/$TOOL\1.2.py ${@:2}
                 else
                         STDERR
 		fi
 		;;
-	adminpanel)
-		if [ -d $TMP_PATH/admin_panel ]; then
-			cd $TMP_PATH/admin_panel > /dev/null
-                        exec python2 $TMP_PATH/admin_panel/admin_panel.py $@
-                        
+	hasher)
+		if CheckPath;then
+			exec python2 $TOOLPATH/hash.py
+		else
+			STDERR
+		fi
+		;;
+	phonesploit)
+		if CheckPath;then
+			exec python2 $TOOLPATH/main_linux.py
+		else
+			STDERR
+		fi
+		;;
+	recon-ng)
+                if CheckPath;then
+			exec python2 $TOOLPATH/$TOOL --no-check
                 else
                         STDERR
                 fi
 		;;
-	cc-genpro)
-		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-                        exec python2 $TMP_PATH/$SCRIPT_NAME/cc-genpro1.2.py $@
-                        cd $BACK > /dev/null
-                else
-                        STDERR
-		fi
-		;;
-	credmap)
-		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-                        exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py $@
-                        
-                else
-			STDERR
-		fi
-		;;
-	evilurl)
-		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-                        exec python $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py $@
-                        
-                else
-                        STDERR
-		fi
-		;;
-	embed)
-		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-			cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-			exec ruby $TMP_PATH/$SCRIPT_NAME/EMBED.rb $2 $@
+	xerosploit)
+		CheckRoot
+		running
+		if [ -d $PREFIX/opt/$TOOL ]; then
+			cd $PREFIX/opt/$TOOL
+			exec sudo python2 $PREFIX/opt/$TOOL/$TOOL.py
 		else
 			STDERR
 		fi
 		;;
-	ExiF)
-		if [ -e $TMP_PATH/$SCRIPT_NAME ]; then
-			cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-			exec bash $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME
-			
+#::::PYTHON TOOLS::::#
+	evilurl|phoneinfoga|hunner|ipgeolocation|seeker|shellsploit|theharvester)
+		if CheckPath;then
+			exec python $TOOLPATH/$TOOL.py ${@:2}
+                else
+                        STDERR
+		fi
+		;;
+	hakku|webhackshl|quack)
+                if CheckPath;then
+			exec python $TOOLPATH/$TOOL
+                else
+                        STDERR
+                fi
+		;;
+	h8mail)
+		running
+		if ! python -m pip list | grep -oE "h8mail" >/dev/null; then
+			python -m pip install h8mail requests
+		fi
+		exec h8mail ${@:2}
+		;;
+	recondog)
+		if CheckPath;then
+			exec python $TOOLPATH/dog ${@:2}
+                else
+                        STDERR
+                fi
+                ;;
+	routersploit)
+                if CheckPath;then
+			exec python $TOOLPATH/rsf.py
+                else
+                        STDERR
+                fi
+                ;;
+	sherlock)
+		if CheckPath;then
+			exec python $TOOLPATH/$TOOL/$TOOL.py ${@:2}
+                else
+                        STDERR
+                fi
+                ;;
+#::::BASH TOOLS::::#
+	ExiF|wbruter|lockphish|saycheese|sayhello)
+		if CheckPath;then
+			exec bash $TOOLPATH/$TOOL ${@:2}
 		else
 			STDERR
 		fi
 		;;
 	exploitdb)
-		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-                        exec bash $TMP_PATH/$SCRIPT_NAME/searchsploit $2 $@
-                        
+		if CheckPath;then
+			exec bash $TOOLPATH/searchsploit ${@:2}
                 else
                         STDERR
 		fi
 		;;
-	fbi)
-		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-                        exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py
-                else
-                        STDERR
-		fi
-		;;
-	phoneinfoga)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/PhoneInfoga > /dev/null
-                        exec python $TMP_PATH/PhoneInfoga/$SCRIPT_NAME.py $2 $@
-                        
-                else
-			STDERR
-		fi
-                ;;
-	phonesploit)
-		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-			cd $TMP_PATH/$SCRIP_NAME > /dev/null
-			exec python2 $TMP_PATH/$SCRIPT_NAME/main_linux.py
-			
-		else
-			STDERR
-		fi
-		;;
-	hatcloud)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/HatCloud > /dev/null
-                        exec ruby $TMP_PATH/HatCloud/$SCRIPT_NAME.rb $@
-                else
-                        STDERR
-                fi
-                ;;
-	cloudbunny)
-		if [ -d $TMP_PATH/CloudBunny ]; then
-			cd $TMP_PATH/CloudBunny > /dev/null
-			if [ -f $TMP_PATH/CloudBunny/api.conf.txt ]; then
-				mv $TMP_PATH/CloudBunny/api.conf.txt $TMP_PATH/CloudBunny/api.conf
-			fi
-			if [ $2 ]; then
-				exec python2 $TMP_PATH/CloudBunny/$SCRIPT_NAME.py $@
-                        else
-                                exec python2 $TMP_PATH/CloudBunny/$SCRIPT_NAME.py -h
-                        fi
-			
-                else
-                        STDERR
-                fi
-		;;
-	hunner)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-                        exec python $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py
-                        
-                else
-                        STDERR
-                fi
-                ;;
-	ipgeolocation)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/IPGeoLocation > /dev/null
-			if [ ! -z $2 ]; then
-				exec python $TMP_PATH/IPGeoLocation/$SCRIPT_NAME.py $2 $@
-			else
-				exec python $TMP_PATH/IPGeoLocation/$SCRIPT_NAME.py -h
-			fi
-                        
-                else
-                        STDERR
-                fi
-                ;;
-	pybelt)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/Pybelt > /dev/null
-                        exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py
-                else
-                        STDERR
-                fi
-                ;;
+#::::PHP TOOLS::::#
 	rhawk)
-                if [ -d $TMP_PATH/RED_HAWK ]; then
-                        cd $TMP_PATH/RED_HAWK > /dev/null
-                        php $TMP_PATH/RED_HAWK/$SCRIPT_NAME.php
+                if CheckPath;then
+			php $TOOLPATH/$TOOL.php
                 else
                         STDERR
                 fi
                 ;;
-	dog)
-                if [ -d $TMP_PATH/recondog ]; then
-			cd $TMP_PATH/recondog > /dev/null
-			if [ $2 ]; then
-				exec python $TMP_PATH/recondog/$SCRIPT_NAME $2 $@
-			else
-				exec python $TMP_PATH/recondog/$SCRIPT_NAME -h
-			fi
+	aiochk)
+                if CheckPath;then
+			exec php $TOOLPATH/aio.php 
                 else
                         STDERR
                 fi
                 ;;
-	sigploit)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-                        exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py $@
-                        
-                else
-                        STDERR
-                fi
-                ;;
-	whatweb)
-                if [ -d $TMP_PATH/WhatWeb ]; then
-                        cd $TMP_PATH/WhatWeb > /dev/null
-			if [ ! -z $2 ];then
-				exec ruby $TMP_PATH/WhatWeb/$SCRIPT_NAME $2 $@
-			else
-				exec ruby $TMP_PATH/WhatWeb/$SCRIPT_NAME -h
-			fi
-                        
-                else
-                        STDERR
-                fi
+#::::PERL TOOLS::::#
+	acccheck)
+		if CheckPath;then
+			exec perl $TOOLPATH/$TOOL.pl ${@:2}
+		else
+			STDERR
+		fi
 		;;
-	hakku)
-                if [ -d $TMP_PATH/hakkuframework ]; then
-                        cd $TMP_PATH/hakkuframework > /dev/null
-                        exec python $TMP_PATH/hakkuframework/$SCRIPT_NAME
-                        
-                else
-                        STDERR
-                fi
-		;;
-	lockphish)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-                        exec bash $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.sh
-                        
-                else
-                        STDERR
-                fi
-                ;;
 	nikto)
-		if [ $CHECKROOT = "root" ]; then
-			command -v sudo > /dev/null || bash $TMP_PATH/i-Haklab/.set/to-install/instasudo
-			if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-				cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-				exec sudo perl $TMP_PATH/$SCRIPT_NAME/program/$SCRIPT_NAME.pl $@
-				
-			else
-				STDERR
-			fi
-		else
-			STDERROOT
-		fi
-		;;
-	recon-ng)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-                        exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME --no-check
-                        
-                else
-                        STDERR
-                fi
-		;;
-	rsf)
-                if [ -d $TMP_PATH/routersploit ]; then
-                        cd $TMP_PATH/routersploit > /dev/null
-                        exec python $TMP_PATH/routersploit/$SCRIPT_NAME.py
-                        
-                else
-                        STDERR
-                fi
-                ;;
-	saycheese)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-                        exec bash $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.sh
-                        
-                else
-                        STDERR
-                fi
-                ;;
-	sayhello)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-                        exec bash $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.sh
-                        
-                else
-                        STDERR
-                fi
-                ;;
-	seeker)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-			if [ $2 ]; then
-				exec python $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py $2 $@
-			else
-				exec python $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py --help
-			fi
-                        
-                else
-                        STDERR
-                fi
-                ;;
-	shellsploit)
-                if [ -d $TMP_PATH/$SCRIPT_NAME-framework ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME-framework > /dev/null
-                        exec python $TMP_PATH/$SCRIPT_NAME-framework/$SCRIPT_NAME.py
-                else
-                        STDERR
-                fi
-                ;;
-	aio)
-                if [ -d $TMP_PATH/AIOChk ]; then
-                        cd $TMP_PATH/AIOChk > /dev/null
-                        exec php $TMP_PATH/AIOChk/$SCRIPT_NAME.php
-                        
-                else
-                        STDERR
-                fi
-                ;;
-	sqliv)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-                        exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py $2 $@
-                        
-                else
-                        STDERR
-                fi
-                ;;
-	binwalk)
-		if [ -e $PREFIX/bin/$SCRIPT_NAME ]; then
-			if [ $2 ]; then
-				exec python $PREFIX/bin/$SCRIPT_NAME $2 $@
-			else
-				exec python $PREFIX/bin/$SCRIPT_NAME -h
-			fi
+		CheckRoot
+		if CheckPath;then
+			exec sudo perl $TOOLPATH/program/$TOOL.pl ${@:2}
 		else
 			STDERR
 		fi
 		;;
-	bincheker)
-		if [ -e $PREFIX/bin/$SCRIPT_NAME ]; then
-			exec bash $PREFIX/bin/$SCRIPT_NAME
-		else
-			STDERR
-		fi
-		;;
-	blackbox)
-		if [ -e $PREFIX/bin/$SCRIPT_NAME ]; then
-			if [ $2 ]; then
-				exec python2 $PREFIX/bin/$SCRIPT_NAME $2 $@
-			else
-				exec python2 $PREFIX/bin/$SCRIPT_NAME -h
-			fi
+#::::TOOLS IN BIN::::#
+	bincheker|binwalk|blackbox|converter|GetNPUsers|whatweb|DoS-A-Tool)
+		running
+		if [ -e $PREFIX/bin/$TOOL ]; then
+			exec $PREFIX/bin/$TOOL ${@:2}
 		else
 			STDERR
 		fi
 		;;
 	dnsenum)
-		if [ $CHECKROOT = "root" ]; then
-			command -v sudo > /dev/null || bash $TMP_PATH/i-Haklab/.set/to-install/instasudo
-			if [ -e $PREFIX/bin/$SCRIPT_NAME ]; then
-				exec sudo perl $PREFIX/bin/$SCRIPT_NAME $2 $@
-			else
-				STDERR
-			fi
-		else
-			STDERROOT
-		fi
-		;;
-	theharvester)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-                        exec python $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py $2 $@
-                        
-                else
-                        STDERR
-                fi
-                ;;
-	webhackshl)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-                        exec python $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME
-                        
-                else
-                        STDERR
-                fi
-                ;;
-	aquatone)
-		if [ -d $HOME/go/bin ]; then
-			cd $HOME/go/bin/ > /dev/null
-			exec $HOME/go/bin/aquatone $2 $@
+		CheckRoot
+		running
+		if [ -e $PREFIX/bin/$TOOL ]; then
+			exec sudo $PREFIX/bin/$TOOL ${@:2}
 		else
 			STDERR
 		fi
 		;;
-	kerbrute)
-		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-			cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-			exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py $2 $@
-		else
-			STDERR
-		fi
-		;;
-	GetNPUsers)
-		if [ -e $PREFIX/bin/$SCRIPT_NAME ]; then
-			exec python $PREFIX/bin/$SCRIPT_NAME $2 $@
-		else
-			STDERR
-		fi
-		;;
-	cryptovenom)
-		if [ -e $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py ]; then
-			cd $TMP_PATH/$SCRIPT_NAME/
-			exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py
-		else
-			STDERR
-		fi
-		;;
-	a2sv)
-		if [ -e $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py ]; then
-			cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-			exec python2 $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.py $2 $@
-			
-		else
-			STDERR
-		fi
-		;;
-	gobuster)
-		if [ -e $GO_PATH/bin/$SCRIPT_NAME ]; then
-			cd $GO_PATH/bin > /dev/null
-			if [ $2 ]; then
-				exec $GO_PATH/bin/$SCRIPT_NAME $2 $@
-			else
-				exec $GO_PATH/bin/$SCRIPT_NAME -h
-			fi
-			
+#::::GO TOOLS::::#
+	aquatone|gobuster)
+		running
+		if [ -e $GOPATH/bin/$TOOL ]; then
+			cd $GOPATH/bin
+			exec $GOPATH/bin/$TOOL ${@:2}
 		else
 			STDERR
 		fi
 		;;
 	gophish)
-		if [ -d $GO_PATH/src/github.com/gophish/gophish/ ]; then
-			cd $GO_PATH/src/github.com/gophish/gophish > /dev/null
-			./gophish
-			
-		else
-			STDERR
-		fi
-		;;
-	xerosploit)
-		if [ -d $PREFIX/opt/$SCRIPT_NAME ]; then
-			command -v sudo > /dev/null || { printf "$R\n[w] i-Haklab :$W command sudo needed$R |$W please install it.\n" ; exit ; }
-			cd $PREFIX/opt/$SCRIPT_NAME > /dev/null
-			sudo python2 $PREFIX/opt/$SCRIPT_NAME/$SCRIPT_NAME.py
-		else
-			STDERR
-		fi
-		;;
-	quack)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-                        python $SCRIPT_NAME $2 $@
-                        
-                else
-                        STDERR
-                fi
-                ;;
-	hasher)
-		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-			cd $TMP_PATH/$SCRIPT_NAME > /dev/null
-			python2 $TMP_PATH/$SCRIPT_NAME/hash.py
-			
+		running
+		if [ -d $GOPATH/src/github.com/$TOOL/$TOOL ]; then
+			cd $GOPATH/src/github.com/$TOOL/$TOOL
+			./$TOOL
 		else
 			STDERR
 		fi
 		;;
 	tangalanga)
-		if [ -d $HOME/go/src/github.com/tangalanga ] && [ -e $HOME/go/bin/tangalanga ]; then
-			exec $HOME/go/bin/tangalanga
+		running
+		if [ -d $GOPATH/src/github.com/$TOOL ] && [ -e $GOPATH/bin/$TOOL ]; then
+			exec $GOPATH/bin/$TOOL
 		else
 			STDERR
 		fi
 		;;
-	sherlock)
-                if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-                        cd $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME > /dev/null
-                        python $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME/$SCRIPT_NAME.py $2 $@
-                else
-                        STDERR
-                fi
-                ;;
 	vt)
-		if [ -d ~/go/src/github.com/VirusTotal/vt-go/ ] && [ -e ~/go/bin/vt ]; then
-			cd ~/go/bin/
-			exec vt $2 $@
+		running
+		if [ -d $GOPATH/src/github.com/VirusTotal/$TOOL-go ] && [ -e $GOPATH/bin/$TOOL ]; then
+			cd $GOPATH/bin/
+			exec $TOOL ${@:2}
 		else
 			STDERR
 		fi
-		;;
-	h8mail)
-		if ! python -m pip list | grep -oE "h8mail" >/dev/null; then
-			python -m pip install h8mail requests
-		fi
-		exec h8mail $2 $@
-		;;
-	acccheck)
-		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-			cd $TMP_PATH/$SCRIPT_NAME
-			perl $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.pl $2 $@
-		else
-			STDERR
-		fi
-		;;
-	cewl)
-		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-			cd $TMP_PATH/$SCRIPT_NAME
-			ruby $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME.rb $2 $@
-		else
-			STDERR
-		fi
-		;;
-	wbruter)
-		if [ -d $TMP_PATH/$SCRIPT_NAME ]; then
-			cd $TMP_PATH/$SCRIPT_NAME
-			bash $TMP_PATH/$SCRIPT_NAME/$SCRIPT_NAME $2 $@
-		else
-			STDERR
-		fi
-		;;
-	amass)
-		if [ -e ~/go/bin/amass ]; then
-                        cd ~/go/bin/
-                        exec amass $2 $@
-                else
-                        STDERR
-                fi
 		;;
 	*)
-		echo "$R\n[w] i-Haklab :$W Unknown argument '$SCRIPT_NAME'\n"
+		printf "$R\n[w] i-Haklab :$W Unknown argument $TOOL\n"
 		exit 1
 		;;
 esac

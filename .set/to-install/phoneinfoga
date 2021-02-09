@@ -35,6 +35,12 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
+for del in PhoneInfoga phoneinfoga;do
+        if [ -d $iHAKLAB/../$del ];then
+                rm -rf $iHAKLAB/../$del
+        fi
+done
+
 if [ "$(uname -m)" = 'aarch64' ] || [ "$(uname -m)" = 'x86_64' ]
 then
 	bits=64
@@ -84,9 +90,9 @@ then
         chmod +x $PREFIX/bin/geckodriver
 fi
 
-git clone https://github.com/sundowndev/PhoneInfoga.git $iHAKLAB/../PhoneInfoga > /dev/null 2>&1
-pushd $iHAKLAB/../PhoneInfoga
-wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/phoneinfoga.py -O $iHAKLAB/../PhoneInfoga/phoneinfoga.py -q
+git clone https://github.com/sundowndev/PhoneInfoga.git $iHAKLAB/../phoneinfoga > /dev/null 2>&1
+pushd $iHAKLAB/../phoninfoga
+wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/phoneinfoga.py -O $iHAKLAB/../phoneinfoga/phoneinfoga.py -q
 
 printf "$Y[!]->$W There are 3 methods to install the repositories : choose one$Y\n[01]->$W BASIC$Y\n[02]->$W LDFLAGS$Y\n[03]->$W SODIUM\n\n"
 

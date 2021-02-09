@@ -34,14 +34,15 @@ fi
 done
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO UNINSTALL HAKKU. . . .$i"
-        printf "\n\n"
+        printf "$(clear) $C STARTING TO UNINSTALL HAKKU. . . .$i\n$W\n"
         sleep 1
 done
 #UNINSTALLATION
-if [ -d $iHAKLAB/../hakkuframework ]; then
-        rm -rf $iHAKLAB/../hakkuframework
-fi
+for del in hakkuframework hakku;do
+	if [ -d $iHAKLAB/../$del ]; then
+		rm -rf $iHAKLAB/../$del
+	fi
+done
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W"

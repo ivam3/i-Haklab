@@ -4,7 +4,7 @@ IFS=$'\n\t'
 trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
 
-function ctrl_c() {
+ctrl_c() {
                 echo
                 printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
 }
@@ -41,13 +41,15 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         printf "\n\n"
         sleep 1
 done
-if [ -d $iHAKLAB/../D-TECT-1 ]; then
-	rm -rf $iHAKLAB/../D-TECT-1
-fi
+for del in D-TECT-1 d-tect; do
+	if [ -d $iHAKLAB/../$del ]; then
+		rm -rf $iHAKLAB/../$del
+	fi
+done
 Basic() {
         for module in colorama beautifulsoup ; do
-        python2 -m pip install $module
-done
+		python2 -m pip install $module
+	done
 }
 LDFLAGS() {
         export LDFLAGS="-L/system/lib/ -lm -lcompiler_rt"
@@ -61,13 +63,12 @@ SODIUM() {
                 python2 -m pip install --no-binary :all: $module
         done
 }
-pkg update && pkg upgrade -y
-pkg install git python2 -y
+yes|pkg update && pkg upgrade && pkg install git python2
 for version in python python2 ; do
         $version -m pip install --upgrade pip
 done
-git clone https://github.com/shawarkhanethicalhacker/D-TECT-1.git $iHAKLAB/../D-TECT-1
-chmod +x -R $iHAKLAB/../D-TECT-1/*
+git clone https://github.com/shawarkhanethicalhacker/D-TECT-1.git $iHAKLAB/../d-tect
+chmod +x -R $iHAKLAB/../d-tect/*
 
 printf "$Y[!]->$W There are 3 methods to install the repositories : choose one$Y\n[01]->$W BASIC$Y\n[02]->$W LDFLAGS$Y\n[03]->$W SODIUM\n\n"
 

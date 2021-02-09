@@ -38,8 +38,12 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         printf "\n\n"
         sleep 1
 done
-#INSTALLATION
-rm -rf $iHAKLAB/../PhoneInfoga
+#UNINSTALLATION
+for del in PhoneInfoga phoneinfoga;do
+	if [ -d $iHAKLAB/../$del ];then
+		rm -rf $iHAKLAB/../$del
+	fi
+done
 pkg remove geckodriver
 apt autoremove
 

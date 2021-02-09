@@ -44,12 +44,12 @@ done
 if [ -d $iHAKLAB/../sayhello ]; then
         rm -rf $iHAKLAB/../sayhello
 fi
-#git clone https://github.com/thelinuxchoice/sayhello.git $iHAKLAB/../sayhello
+
 pushd $iHAKLAB/../
 wget https://github.com/ivam3/i-Haklab/raw/master/.set/to-install/sayhello.zip -q
 unzip sayhello.zip
 rm -rf $iHAKLAB/../sayhello.zip
-curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/sayhello -o $iHAKLAB/../sayhello/sayhello.sh
+curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/sayhello -o $iHAKLAB/../sayhello/sayhello
 chmod 777 $iHAKLAB/../sayhello/sayhello.sh
 if [ -e $PREFIX/bin/ngrok ]; then
         cp $PREFIX/bin/ngrok $iHAKLAB/../sayhello/

@@ -38,13 +38,16 @@ done
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
         printf "$(clear) $C STARTING TO INSTALL RECONDOG. . . .$i"
-        printf "\n\n"
+        printf "\n$W\n"
         sleep 1
 done
 #INSTALLATION
-if [ -d $iHAKLAB/../ReconDog ]; then
-        rm -rf $iHAKLAB/../ReconDog
-fi
+for del in ReconDog recondog;do
+	if [ -d $iHAKLAB/../$del ]; then
+		rm -rf $iHAKLAB/../$del
+	fi
+done
+
 Basic() {
         for module in requests tld ; do
 		python2 -m pip install $module
@@ -67,8 +70,8 @@ pkg install git python2 -y
 for version in python python2 ; do
         $version -m pip install --upgrade pip
 done
-git clone https://github.com/s0md3v/ReconDog.git $iHAKLAB/../ReconDog
-chmod +x -R $iHAKLAB/../ReconDog/
+git clone https://github.com/s0md3v/ReconDog.git $iHAKLAB/../recondog
+chmod +x -R $iHAKLAB/../recondog/
 
 printf "$Y[!]->$W There are 3 methods to install the repositories : choose one$Y\n[01]->$W BASIC$Y\n[02]->$W LDFLAGS$Y\n[03]->$W SODIUM\n\n"
 

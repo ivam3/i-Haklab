@@ -35,25 +35,16 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO UNINSTALL RECON-NG. . . .$i"
-        printf "\n\n"
+        printf "$(clear) $C STARTING TO UNINSTALL RECON-NG. . . .$i\n$W\n"
         sleep 1
 done
 #UNINSTALLATION
-if [ -d $iHAKLAB/../LaNMaSteR-recon-ng ]; then
-        rm -rf $iHAKLAB/../LaNMaSteR-recon-ng
+if [ -d $iHAKLAB/../recon-ng ]; then
+        rm -rf $iHAKLAB/../recon-ng
 fi
-python2 -m pip uninstall dicttoxml
-python2 -m pip uninstall dnspython
-python2 -m pip uninstall jsonrpclib
-python2 -m pip uninstall lxml
-python2 -m pip uninstall mechanize
-python2 -m pip uninstall slowaes
-python2 -m pip uninstall XlsxWriter
-python2 -m pip uninstall olefile
-python2 -m pip uninstall PyPDF2
-python2 -m pip uninstall flask
-python2 -m pip uninstall unicodecsv
+for mod in dicttoxml dnspython jsonrpclib lxml mechanize slowaes XlsxWriter olefile PyPDF2 flask unicodecsv;do
+	python2 -m pip uninstall $mod
+done
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot

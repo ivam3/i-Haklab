@@ -42,10 +42,11 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #UNINSTALLATION
-if [ -d $iHAKLAB/../admin_panel ]; then
-        rm -rf $iHAKLAB/../admin_panel
-fi
-python2 -m pip uninstall urllib2
+for del in admin_panel adminpanel;do
+	if [ -d $iHAKLAB/../$del ]; then
+		rm -rf $iHAKLAB/../$del
+	fi
+done
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot

@@ -40,9 +40,11 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #UNINSTALLATION
-if [ -d $iHAKLAB/../HatCloud ]; then
-        rm -rf $iHAKLAB/../HatCloud
-fi
+for del in HatCloud hatcloud;do
+	if [ -d $iHAKLAB/../$del ]; then
+        	rm -rf $iHAKLAB/../$del
+	fi
+done
 if [ -e $PREFIX/bin/hatcloud ]; then
         rm $PREFIX/bin/hatcloud
 fi

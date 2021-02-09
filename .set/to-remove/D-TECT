@@ -41,10 +41,13 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         printf "\n\n"
         sleep 1
 done
-if [ -d $iHAKLAB/../D-TECT-1 ]; then
-	rm -rf $iHAKLAB/../D-TECT-1
-fi
+for del in D-TEDT-1 d-tect; do
+	if [ -d $iHAKLAB/../$del ]; then
+		rm -rf $iHAKLAB/../$del
+	fi
+done
 python2 -m pip uninstall colorama beautifulsoup
+
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W"
 #                                               @Ivam3

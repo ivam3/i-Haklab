@@ -41,15 +41,16 @@ if [ -d $iHAKLAB/../AIOChk ]; then
 fi
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO UNINSTALL SPOTICHK. . . .$i"
-        printf "\n\n"
+        printf "$(clear) $C STARTING TO UNINSTALL SPOTICHK. . . .$i\n$W\n"
         sleep 1
 done
-#UNINSTALLATION
 
-if [ -d $iHAKLAB/../AIOChk ]; then
-	rm -rf $iHAKLAB/../AIOChk
-fi
+#UNINSTALLATION
+for del in AIOChk aiochk;do
+	if [ -d $iHAKLAB/../$del ]; then
+		rm -rf $iHAKLAB/../$del
+	fi
+done
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"

@@ -42,16 +42,9 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-OSv=$(termux-info |awk '$1 < 11 {print $1}' |tail -n 1 |awk -F "." '{print $1}')
-if [ "$SOv" -lt "7" ]
-then
-	GEMS="2.6.0"
-else
-	GEMS="2.7.0"
-fi
-
 fixbigdecimal() {
-        printf "$G\n[IbyC]-> FIXING BIG DECIMAL ISSUES$W\n"
+        printf "$G\n[+]-> FIXING BIG DECIMAL ISSUES$W\n"
+	GEMS=$(ls $PREFIX/lib/ruby |grep '[0-9].[0-9].[0-9]')
         apt install -yq patchelf
         for i in aarch64-linux-android arm-linux-androideabi \
                 i686-linux-android x86_64-linux-android; do
@@ -65,11 +58,11 @@ fixbigdecimal() {
                         fi
         done
 }
-printf "$G\n[IbyC]-> UPGRADING TERMUX$W\n"
+printf "$G\n[+]-> UPGRADING TERMUX$W\n"
 pkg update -y;pkg upgrade -y
-printf "$G\n[IbyC]-> INSTALLING ALL PACKAGES NEEDED$W\n"
+printf "$G\n[+]-> INSTALLING ALL PACKAGES NEEDED$W\n"
 pkg install -y ruby nodejs #dirmngr -y
-printf "$G\n[IbyC]-> DOWNLOADING BEEF PROJECT$W\n"
+printf "$G\n[+]-> DOWNLOADING BEEF PROJECT$W\n"
 git clone https://github.com/beefproject/beef.git $PREFIX/opt/beef >/dev/null 2>&1
 #
 if [ -d $PREFIX/opt/beef ]; then
@@ -78,7 +71,7 @@ else
         printf "$R\n[ERR-DIR]-> SOMETHING WAS WRONG | TRY AGAIN.$W\n"
         exit
 fi
-printf "$G\n[IbyC]-> ADAPTED BEEF PROJECT$W\n"
+printf "$G\n[+]-> ADAPTING BEEF PROJECT$W\n"
 sed 's|database: "/opt/GeoIP/GeoLite2-City.mmdb"|database: "/data/data/com.termux/files/usr/opt/GeoIP/GeoLite2-City.mmdb\" |g' -i config.yaml
 sed 's|passwd: "beef"|passwd: "Ivam3byCinderella"|g' -i config.yaml
 gem update --system
@@ -86,7 +79,7 @@ gem install bundler
 bundle install
 fixbigdecimal
 cp $PREFIX/opt/beef/README.md $iHAKLAB/.set/libexec/Readme/beef
-printf "$G\n[IbyC]-> CREATING BEEF COMMAND$W\n"
+printf "$G\n[+]-> CREATING BEEF COMMAND$W\n"
 curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/beef -o $PREFIX/bin/beef
 wget https://github.com/ivam3/i-Haklab/raw/master/.set/to-install/GeoLite2-City_20200331.tar.gz -O $PREFIX/opt/beef/GeoLite2-City_20200331.tar.gz
 if [ -e $PREFIX/opt/beef/GeoLite2-City_20200331.tar.gz ]; then

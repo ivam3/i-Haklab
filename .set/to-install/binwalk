@@ -37,9 +37,8 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL BINWALK. . . .$i"
-        printf "\n\n"
-        sleep 1
+        printf "$(clear) $C STARTING TO INSTALL BINWALK. . . .$i\n$W\n"
+	sleep 1
 done
 #INSTALLATION
 git clone https://github.com/ReFirmLabs/binwalk $iHAKLAB/../binwalk

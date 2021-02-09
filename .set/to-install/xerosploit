@@ -39,27 +39,25 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-TMP_PATH=opt/xerosploit
+TMPPATH=$PREFIX/opt/xerosploit
 RUROOT=$(bash $iHAKLAB/.set/to-install/check-root)
 if [ "$RUROOT" = "root" ]; then
-	if [ -d $PREFIX/$TMP_PATH/xerosploit ]; then
-		rm -rf $PREFIX/$TMP_PATH/xerosploit
+	if [ -d $TMPPATH/xerosploit ]; then
+		rm -rf $TMPPATH/xerosploit
 	fi
-	pkg update && pkg upgrade -y
-	pkg install -y git nmap hping3 build-essential python python2 ruby git libpcap
-	git clone https://github.com/LionSec/xerosploit.git $PREFIX/$TMP_PATH/xerosploit
+	yes|pkg update && pkg upgrade && pkg install git nmap hping3 build-essential python python2 ruby git libpcap
+	git clone https://github.com/LionSec/xerosploit.git $TMPPATH/xerosploit
 	for i in python2 python ; do
 		$i -m pip install tabulate terminaltables
 	done
-	chmod +x -R $PREFIX/$TMP_PATH/tools
-	pushd $PREFIX/$TMP_PATH/tools/bettercap/
+	chmod +x -R $TMPPATH/tools
+	cd $TMPPATH/tools/bettercap/
 	gem build bettercap.*
 	gem install xettercap-*
-	rm xettercap-*
-	popd
-	rm $PREFIX/$TMP_PATH/run.sh
-	rm $PREFIX/$TMP_PATH/xerosploit.py
-	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/xerosploit.py -o $PREFIX/$TMP_PATH/xerosploit.py
+	for del in xettercap-* $TMPPATH/run.sh $TMPPATH/xerosploit.py;do
+		rm -rf $del
+	done
+	curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/xerosploit.py -o $TMPPATH/xerosploit.py
 else
 	printf "$R\n[W]:-> You need to be root to get Xerosploit$W\n"
         sleep 1

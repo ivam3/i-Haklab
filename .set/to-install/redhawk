@@ -37,16 +37,18 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL REDHAWK. . . .$i"
+        printf "$(clear)$C STARTING TO INSTALL REDHAWK. . . .$i $W"
         printf "\n\n"
         sleep 1
 done
 #INSTALLATION
-if [ -d $iHAKLAB/../RED_HAWK ]; then
-        rm -rf $iHAKLAB/../RED_HAWK
-fi
-git clone https://github.com/Tuhinshubhra/RED_HAWK.git $iHAKLAB/../RED_HAWK
-chmod +x $iHAKLAB/../RED_HAWK/rhawk.php
+for del in RED_HAWK rhawk; do
+	if [ -d $iHAKLAB/../$del ]; then
+		rm -rf $iHAKLAB/../$del
+	fi
+done
+git clone https://github.com/Tuhinshubhra/RED_HAWK.git $iHAKLAB/../rhawk
+chmod +x $iHAKLAB/../rhawk/rhawk.php
 pkg install php -y
 
 #ENDING SCRIPT

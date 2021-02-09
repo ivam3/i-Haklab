@@ -38,26 +38,30 @@ done
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
         printf "$(clear) $C STARTING TO INSTALL WHATWEB. . . .$i"
-        printf "\n\n"
+        printf "\n$W\n"
         sleep 1
 done
 #INSTALLATION
-if [ -d $iHAKLAB/../WhatWeb ]; then
-        rm -rf $iHAKLAB/../WhatWeb
-fi
-function install {
+for del in WhatWeb whatweb;do
+	if [ -d $iHAKLAB/../$del ]; then
+		rm -rf $iHAKLAB/../$del
+	fi
+done
+
+install(){
+	git clone https://github.com/urbanadventurer/WhatWeb $iHAKLAB/../whatweb
 	cd $iHAKLAB/../WhatWeb
 	gem update --system 
 	gem install bundler
 	gem install nokogiri -v 1.8.0 -- --use-system-libraries
-}
-apt update && apt upgrade -y
-apt install ruby git
-git clone https://github.com/urbanadventurer/WhatWeb $iHAKLAB/../WhatWeb
+	}
+
+yes|pkg update && pkg upgrade && pkg install ruby git
 command -v msfconsole > /dev/null || install
 wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/whatweb -O $PREFIX/bin/whatweb
 chmod 711 $PREFIX/bin/whatweb
 touch $PREFIX/etc/hosts
+
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3

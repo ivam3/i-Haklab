@@ -47,6 +47,7 @@ fi
 #git clone https://github.com/thelinuxchoice/lockphish.git $iHAKLAB/../lockphish
 git clone https://github.com/JasonJerry/lockphish $iHAKLAB/../lockphish
 #curl https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/fix-tools/lockphish.sh -o $iHAKLAB/../sayhello/lockphish.sh
+mv $iHAKLAB/../lockphish/lockphish.sh $iHAKLAB/../lockphish/lockphish
 chmod 711 $iHAKLAB/../lockphish/*
 if [ -e $PREFIX/bin/ngrok ]; then
         cp $PREFIX/bin/ngrok $iHAKLAB/../lockphish/

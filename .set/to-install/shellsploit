@@ -37,14 +37,16 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO INSTALL SHELLSPLOIT. . . .$i"
-        printf "\n\n"
+        printf "$(clear) $C STARTING TO INSTALL SHELLSPLOIT. . . .$i\n$W\n"
         sleep 1
 done
+
 #INSTALLATION
-if [ -d $iHAKLAB/../shellsploit-framework ]; then
-        rm -rf $iHAKLAB/../shellsploit-framework
-fi
+for del in shellsploit-framework shellsploit;do
+	if [ -d $iHAKLAB/../$del ]; then
+		rm -rf $iHAKLAB/../$del
+	fi
+done
 
 Basic() {
         for module in capstone readline pefile colorama pylzma ; do
@@ -68,8 +70,8 @@ pkg install git python python2 -y
 for version in python python2 ; do
         $version -m pip install --upgrade pip
 done
-git clone https://github.com/vasco2016/shellsploit-framework $iHAKLAB/../shellsploit-framework
-chmod 711 -R $iHAKLAB/../shellsploit-framework/
+git clone https://github.com/vasco2016/shellsploit-framework $iHAKLAB/../shellsploit
+chmod 711 -R $iHAKLAB/../shellsploit
 
 printf "$Y[!]->$W There are 3 methods to install the repositories : choose one$Y\n[01]->$W BASIC$Y\n[02]->$W LDFLAGS$Y\n[03]->$W SODIUM\n\n"
 

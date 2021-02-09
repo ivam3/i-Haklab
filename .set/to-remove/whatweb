@@ -38,13 +38,15 @@ done
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
         printf "$(clear) $C STARTING TO REMOVE WHATWEB. . . .$i"
-        printf "\n\n"
+        printf "\n$W\n"
         sleep 1
 done
 #UNINSTALLATION
-if [ -d $iHAKLAB/../WhatWeb ]; then
-        rm -rf $iHAKLAB/../WhatWeb
-fi
+for del in WhatWeb whatweb;do
+	if [ -d $iHAKLAB/../$del ]; then
+		rm -rf $iHAKLAB/../$del
+	fi
+done
 function remove {
 	apt remove ruby -y
 	apt autoremove

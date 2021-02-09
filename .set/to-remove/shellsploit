@@ -35,19 +35,19 @@ done
 
 echo $(clear)
 for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
-        printf "$(clear) $C STARTING TO UNINSTALL SHELLSPLOIT. . . .$i"
-        printf "\n\n"
+        printf "$(clear) $C STARTING TO UNINSTALL SHELLSPLOIT. . . .$i\n$W\n"
         sleep 1
 done
+
 #UNINSTALLATION
-if [ -d $iHAKLAB/../shellsploit-framework ]; then
-        rm -rf $iHAKLAB/../shellsploit-framework
-fi
-python -m pip uninstall capstone
-python -m pip uninstall readline
-python -m pip uninstall pefile
-python -m pip uninstall colorama
-python -m pip uninstall pylzma
+for del in shellsploit-framework shellsploit;do
+	if [ -d $iHAKLAB/../$del ]; then
+		rm -rf $iHAKLAB/../$del
+	fi
+done
+for mod in capstone readline pefile colorama pylzma;do
+	python -m pip uninstall $del
+done
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot
