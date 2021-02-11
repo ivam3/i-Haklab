@@ -26,5 +26,6 @@ else
                 sleep 1
                 printf "$Y\n[!] using default$W : $LPORT\n"
         fi
-        $(which lt) -h "http://serverless.social" -p $LPORT --print-requests
+	chk-tunnel
+        $(which lt) -h "http://$TUNNEL" -p $LPORT --print-requests
 fi
