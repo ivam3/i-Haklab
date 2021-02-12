@@ -30,7 +30,7 @@ Tmux=$(pkg list-all|grep -o "metasploit")
 SHLL=$(echo $SHELL |awk -F "/" '{print $8}')
 MSFDIR=$PREFIX/opt/metasploit-framework
 APK=$MSFDIR/lib/msf/core/payload/apk.rb
-MSFv="6.0.20"
+MSFv="6.0.27"
 R='\033[1;31m'
 G='\033[1;32m'
 Goke='\033[92m'
@@ -194,14 +194,18 @@ Rapid7() {
 	rm Gemfile.lock
 #        sed '/rbnacl/d' -i Gemfile.lock
         sed '/rbnacl/d' -i metasploit-framework.gemspec
+	sed "s|gem 'sqlite3', '~>1.*.*'|gem 'sqlite3', '~>1.4.2'|g" -i Gemfile
         gem install --no-document --verbose bundler:2.2.9 #2.2.7
-	sed "s|gem 'sqlite3', '~>1.*.*'|gem 'sqlite3', '~>1.3.13'|g" -i Gemfile
 #       sed 's|nokogiri (1.*)|nokogiri (1.10.4)|g' -i Gemfile.lock
 #	sed 's|pcaprub (0.*)|pcaprub (0.12.4)|g' -i Gemfile.lock
 #	sed 's|ttfunk (1.*)|ttfunk (1.7.0)|g' -i Gemfile.lock
 #       gem install nokogiri -v '1.10.4' -- --use-system-libraries
-	for gem in nokogiri pcaprub net-ssh metasploit-credential;do
+	for gem in nokogiri pcaprub net-ssh metasploit-credential actionpack;do
+		gem uninstall $gem --all
+		cd $HOME
                 gem install $gem -- --use-system-libraries
+		cd $MSFDIR
+		bundle update $gem
         done
         gem update --system
         bundle install -j3
