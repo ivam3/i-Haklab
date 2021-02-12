@@ -14,26 +14,20 @@ OSversion=$(ls $PREFIX/lib/ruby | grep "2.*.*" | awk -F "." '{print $2}')
                 W='\033[0m'
 ctrl_c() {
         printf "$Y\n[!]$R Going me on https://t.me/Ivam3_Bot$W\n"
-}
+	}
 
-if [ $OSversion -gt "6" ]
-then
-	Gemversion="2.7.0"
-else
-	Gemversion="2.6.0"
-fi
+GEMS=$(ls $PREFIX/lib/ruby |grep '[0-9].[0-9].[0-9]')
+LINUXANDROID=$(find $PREFIX/lib/ruby/$GEMS -iname "bigdecimal.so" |awk -F "/" '{print $10}')
+
 printf "$G\n[IbyC]-> FIXING BIG DECIMAL ISSUES$W\n"
-        apt install -yq patchelf
-        for i in aarch64-linux-android arm-linux-androideabi \
-                i686-linux-android x86_64-linux-android; do
-                        if [ -e "$PREFIX/lib/ruby/$Gemversion/${i}/bigdecimal.so" ]; then
-                                if [ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/$Gemversion/${i}/bigdecimal/util.so" | grep bigdecimal.so)" ]; then
-                                        exit 0
-                                fi
-                                patchelf --add-needed \
-                                        "$PREFIX/lib/ruby/$Gemversion/${i}/bigdecimal.so" \
-                                        "$PREFIX/lib/ruby/$Gemversion/${i}/bigdecimal/util.so"
-                        fi
-        done
+yes|apt install -yq patchelf >/dev/null 2>&1
+if [ -e "$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal.so" ]; then
+	if [ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal/util.so" | grep bigdecimal.so)" ]; then
+		exit 0
+	fi
+	patchelf --add-needed \
+		"$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal.so" \
+		"$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal/util.so"
+fi
 printf "$G\n[IbyC]-> FIXED!!!\n$W"
 #			@Ivam3

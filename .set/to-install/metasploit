@@ -111,7 +111,7 @@ UPandINSTALL() {
                 PKG=$(pkg list-all|grep -o $i)
                 if [ ! -z "$PKG" ]
                 then
-                        printf "$R\n[+]─➤$W Installing the repository $i $W\n"
+                        printf "$G\n[+]─➤$W Installing the repository $i $W\n"
                         yes|pkg install $i >/dev/null 2>&1
                 else
                         printf "$R\n[w]─➤$W The repository $i is not candidate$W\n"
@@ -146,6 +146,18 @@ Ivam3() {
 	wget $JAVADB/.embed/apk.rb -O $MSFDIR/lib/msf/core/payload/apk.rb -q
 	wget $iHDB/.set/bin/RuGiR -O $PREFIX/bin/RuGiR -q
 	chmod +x $PREFIX/bin/RuGiR
+
+#:::: FIXING BIG DECIMAL ISSUES ::::#
+LINUXANDROID=$(find $PREFIX/lib/ruby/$GEMS -iname "bigdecimal.so" |awk -F "/" '{print $10}')
+        yes|apt install -yq patchelf >/dev/null 2>&1
+        if [ -e "$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal.so" ]; then
+                if [ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal/util.so" | grep bigdecimal.so)" ]; then
+                        exit 0
+                fi
+                patchelf --add-needed \
+                        "$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal.so" \
+                        "$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal/util.so"
+        fi
 }
 
 Ending() {
@@ -181,7 +193,9 @@ Rapid7() {
         sed '/rbnacl/d' -i Gemfile.lock
         sed '/rbnacl/d' -i metasploit-framework.gemspec
         gem install --no-document --verbose bundler:2.2.7
-        sed 's|nokogiri (1.*)|nokogiri (1.10.4)|g' -i Gemfile.lock
+        sed 's|nokogiri (1.*)|nokogiri (1.11.1)|g' -i Gemfile.lock
+	sed 's|pcaprub (0.*)|pcaprub (1.12.4)|g' -i Gemfile.lock
+	sed 's|ttfunk (1.*)|ttfunk (1.7.0)|g' -i Gemfile.lock
         gem install nokogiri -v '1.10.4' -- --use-system-libraries
         gem update --system
         bundle install -j3
@@ -190,22 +204,23 @@ Rapid7() {
         $PREFIX/bin/find $PREFIX/lib/ruby/gems -type f -iname \*.so -print0 | xargs -0 -r termux-elf-cleaner
 	msfdb #:::FUNCTION::#
 #:::::::MSFCONSOLE MSFVENOM FILES:::::::#
+	BIGDECIMAL=$(find $PREFIX/lib/ruby/$GEMS -iname "bigdecimal.so")
 	echo "#!/data/data/com.termux/files/usr/bin/sh" > $PREFIX/bin/msfconsole
 	echo "SCRIPT_NAME=\$(basename \"\$0\")" >> $PREFIX/bin/msfconsole
 	echo "METASPLOIT_PATH=\"\${PREFIX}/opt/metasploit-framework\"" >> $PREFIX/bin/msfconsole
 	echo "# Fix ruby bigdecimal extensions linking error." >> $PREFIX/bin/msfconsole
 	echo "case \"\$(uname -m)\" in" >> $PREFIX/bin/msfconsole
 	echo "        aarch64)" >> $PREFIX/bin/msfconsole
-	echo "                export LD_PRELOAD=\"\${PREFIX}/lib/ruby/$GEMS/aarch64-linux-android/bigdecimal.so:\$LD_PRELOAD\"" >> $PREFIX/bin/msfconsole
+	echo "                export LD_PRELOAD=\"$BIGDECIMAL:\$LD_PRELOAD\"" >> $PREFIX/bin/msfconsole
 	echo "                ;;" >> $PREFIX/bin/msfconsole
 	echo "        arm*)" >> $PREFIX/bin/msfconsole
-	echo "                export LD_PRELOAD=\"\${PREFIX}/lib/ruby/$GEMS/arm-linux-androideabi/bigdecimal.so:\$LD_PRELOAD\"" >> $PREFIX/bin/msfconsole
+	echo "                export LD_PRELOAD=\"$BIGDECIMAL:\$LD_PRELOAD\"" >> $PREFIX/bin/msfconsole
 	echo "                ;;" >> $PREFIX/bin/msfconsole
 	echo "        i686)" >> $PREFIX/bin/msfconsole
-	echo "                export LD_PRELOAD=\"\${PREFIX}/lib/ruby/$GEMS/i686-linux-android/bigdecimal.so:\$LD_PRELOAD\"" >> $PREFIX/bin/msfconsole
+	echo "                export LD_PRELOAD=\"$BIGDECIMAL:\$LD_PRELOAD\"" >> $PREFIX/bin/msfconsole
 	echo "                ;;" >> $PREFIX/bin/msfconsole
 	echo "        x86_64)" >> $PREFIX/bin/msfconsole
-	echo "                export LD_PRELOAD=\"\${PREFIX}/lib/ruby/$GEMS/x86_64-linux-android/bigdecimal.so:\$LD_PRELOAD\""
+	echo "                export LD_PRELOAD=\"$BIGDECIMAL:\$LD_PRELOAD\""
 	echo "                ;;" >> $PREFIX/bin/msfconsole
 	echo "        *)" >> $PREFIX/bin/msfconsole
 	echo "                ;;" >> $PREFIX/bin/msfconsole
@@ -249,9 +264,9 @@ MAIN() {
 	else
 		printf "$Y\n[!]─➤$W Metasploit found in Termux repositories"
 		printf "$G\n[+]─➤$W Metasploit will be installed from the$B Termux$W repositories\n"
-		Termux
 		printf "\n$C         Press$G ENTER$C to continue"
 		read enter
+		Termux
 	fi
 }
 
