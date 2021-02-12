@@ -194,6 +194,7 @@ Rapid7() {
 	#::::CONFIG VERSION OF GEMS IN GEMFILE.LOCK::::#
 	sed '/rbnacl/d' -i Gemfile.lock
 	sed 's|nokogiri (1.*)|nokogiri (1.11.1)|g' -i Gemfile.lock
+	sed 's|sqlite3 (1.*)|sqlite3 (1.4.2)|g' -i Gemfile.lock
 	sed 's|pcaprub (0.*)|pcaprub (0.12.4)|g' -i Gemfile.lock
 	sed 's|ttfunk (1.*)|ttfunk (1.7.0)|g' -i Gemfile.lock
         sed '/rbnacl/d' -i metasploit-framework.gemspec
