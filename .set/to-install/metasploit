@@ -177,7 +177,6 @@ Ending() {
 Rapid7() {
 	Garbage #::FUNCTION::#
         UPandINSTALL #::Upgrade and install available repositories::#
-        gem install bundler:2.1.4
         if [ ! -d $PREFIX/opt ]; then
                 mkdir -p $PREFIX/opt
         fi
@@ -187,24 +186,29 @@ Rapid7() {
         mv $MSFDIR-$MSFv $MSFDIR
         rm $PREFIX/opt/$MSFv.tar.gz
         cd $MSFDIR
+	gem install bundler:2.2.9 -- --use-system-libraries
         if [ "$(gem list -i rubygems-update 2>/dev/null)" = "false" ]
 	then
                 gem install --no-document --verbose rubygems-update
         fi
-	rm Gemfile.lock
-#        sed '/rbnacl/d' -i Gemfile.lock
+	#::::CONFIG VERSION OF GEMS IN GEMFILE.LOCK::::#
+	sed '/rbnacl/d' -i Gemfile.lock
+	sed 's|nokogiri (1.*)|nokogiri (1.11.1)|g' -i Gemfile.lock
+	sed 's|pcaprub (0.*)|pcaprub (0.12.4)|g' -i Gemfile.lock
+	sed 's|ttfunk (1.*)|ttfunk (1.7.0)|g' -i Gemfile.lock
         sed '/rbnacl/d' -i metasploit-framework.gemspec
+	#::::CONFIG VERSION OF GEMS IN GEMFILE::::#
 	sed "s|gem 'sqlite3', '~>1.*.*'|gem 'sqlite3', '~>1.4.2'|g" -i Gemfile
+	sed -i "7a gem 'webrick', '~> 1.7'" Gemfile
+	#::::INSTALL ADAPTED GEMS::::#
         gem install --no-document --verbose bundler:2.2.9 #2.2.7
-#       sed 's|nokogiri (1.*)|nokogiri (1.10.4)|g' -i Gemfile.lock
-#	sed 's|pcaprub (0.*)|pcaprub (0.12.4)|g' -i Gemfile.lock
-#	sed 's|ttfunk (1.*)|ttfunk (1.7.0)|g' -i Gemfile.lock
-#       gem install nokogiri -v '1.10.4' -- --use-system-libraries
-	for gem in nokogiri pcaprub net-ssh metasploit-credential actionpack;do
-		gem uninstall $gem --all
-		cd $HOME
+	gem install nokogiri -v '1.11.1' -- --use-system-libraries
+	gem install webrick -v '1.7' -- --use-system-libraries
+	#::::CLEAN INSTALLATION OF SOME REBELDS GEMS xD!::::#
+	for gem in net-ssh metasploit-credential actionpack pdf-reader;do
+		yes|gem uninstall $gem --all
+		gem cleanup $gem
                 gem install $gem -- --use-system-libraries
-		cd $MSFDIR
 		bundle update $gem
         done
         gem update --system
@@ -250,7 +254,7 @@ MAIN() {
 	if [ -z $Tmux ];then
 		printf "$R\n[w]─➤$W No such$R metasploit$W in Termux repositories"
 		printf "$G\n[+]─➤$W Metasploit will be installed from the$B Rapid7$W repositories\n"
-		printf "\n$C         Press$G ENTER$C to continue"
+		printf "\n$C         Press$G ENTER$C to continue$W"
 		read enter
 		Rapid7
 	else
