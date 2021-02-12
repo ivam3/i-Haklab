@@ -3,7 +3,9 @@
 #This file will fix issues with ruby gem bigdecimal
 set -euo pipefail
 IFS=$'\n\t'
-OSversion=$(ls $PREFIX/lib/ruby | grep "2.*.*" | awk -F "." '{print $2}')
+
+GEMS=$(ls $PREFIX/lib/ruby |grep '[0-9].[0-9].[0-9]')
+LINUXANDROID=$(find $PREFIX/lib/ruby/$GEMS -iname "bigdecimal.so" |awk -F "/" '{print $10}')
 #COLORS
 		R='\033[1;31m'
                 G='\033[1;32m'
@@ -15,9 +17,6 @@ OSversion=$(ls $PREFIX/lib/ruby | grep "2.*.*" | awk -F "." '{print $2}')
 ctrl_c() {
         printf "$Y\n[!]$R Going me on https://t.me/Ivam3_Bot$W\n"
 	}
-
-GEMS=$(ls $PREFIX/lib/ruby |grep '[0-9].[0-9].[0-9]')
-LINUXANDROID=$(find $PREFIX/lib/ruby/$GEMS -iname "bigdecimal.so" |awk -F "/" '{print $10}')
 
 printf "$G\n[IbyC]-> FIXING BIG DECIMAL ISSUES$W\n"
 yes|apt install -yq patchelf >/dev/null 2>&1
