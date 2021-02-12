@@ -95,6 +95,7 @@ else
 fi
 
 Garbage() {
+	yes|dpkg -l | grep '^rc' | awk '{print $2}' | xargs apt purge
 for i in $TOOL unstable-repo $MSFDIR $HOME/$TOOL-framework ; do
         if [ -d $i ]; then
                 rm -rf $i >/dev/null 2>&1
@@ -190,13 +191,18 @@ Rapid7() {
 	then
                 gem install --no-document --verbose rubygems-update
         fi
-        sed '/rbnacl/d' -i Gemfile.lock
+	rm Gemfile.lock
+#        sed '/rbnacl/d' -i Gemfile.lock
         sed '/rbnacl/d' -i metasploit-framework.gemspec
-        gem install --no-document --verbose bundler:2.2.7
-        sed 's|nokogiri (1.*)|nokogiri (1.11.1)|g' -i Gemfile.lock
-	sed 's|pcaprub (0.*)|pcaprub (1.12.4)|g' -i Gemfile.lock
-	sed 's|ttfunk (1.*)|ttfunk (1.7.0)|g' -i Gemfile.lock
-        gem install nokogiri -v '1.10.4' -- --use-system-libraries
+        gem install --no-document --verbose bundler:2.2.9 #2.2.7
+	sed "s|gem 'sqlite3', '~>1.*.*'|gem 'sqlite3', '~>1.3.13'|g" -i Gemfile
+#       sed 's|nokogiri (1.*)|nokogiri (1.10.4)|g' -i Gemfile.lock
+#	sed 's|pcaprub (0.*)|pcaprub (0.12.4)|g' -i Gemfile.lock
+#	sed 's|ttfunk (1.*)|ttfunk (1.7.0)|g' -i Gemfile.lock
+#       gem install nokogiri -v '1.10.4' -- --use-system-libraries
+	for gem in nokogiri pcaprub net-ssh metasploit-credential;do
+                gem install $gem -- --use-system-libraries
+        done
         gem update --system
         bundle install -j3
         $PREFIX/bin/find $MSFDIR -type f -executable -print0 | xargs -0 -r termux-fix-shebang
@@ -209,22 +215,7 @@ Rapid7() {
 	echo "SCRIPT_NAME=\$(basename \"\$0\")" >> $PREFIX/bin/msfconsole
 	echo "METASPLOIT_PATH=\"\${PREFIX}/opt/metasploit-framework\"" >> $PREFIX/bin/msfconsole
 	echo "# Fix ruby bigdecimal extensions linking error." >> $PREFIX/bin/msfconsole
-	echo "case \"\$(uname -m)\" in" >> $PREFIX/bin/msfconsole
-	echo "        aarch64)" >> $PREFIX/bin/msfconsole
-	echo "                export LD_PRELOAD=\"$BIGDECIMAL:\$LD_PRELOAD\"" >> $PREFIX/bin/msfconsole
-	echo "                ;;" >> $PREFIX/bin/msfconsole
-	echo "        arm*)" >> $PREFIX/bin/msfconsole
-	echo "                export LD_PRELOAD=\"$BIGDECIMAL:\$LD_PRELOAD\"" >> $PREFIX/bin/msfconsole
-	echo "                ;;" >> $PREFIX/bin/msfconsole
-	echo "        i686)" >> $PREFIX/bin/msfconsole
-	echo "                export LD_PRELOAD=\"$BIGDECIMAL:\$LD_PRELOAD\"" >> $PREFIX/bin/msfconsole
-	echo "                ;;" >> $PREFIX/bin/msfconsole
-	echo "        x86_64)" >> $PREFIX/bin/msfconsole
-	echo "                export LD_PRELOAD=\"$BIGDECIMAL:\$LD_PRELOAD\""
-	echo "                ;;" >> $PREFIX/bin/msfconsole
-	echo "        *)" >> $PREFIX/bin/msfconsole
-	echo "                ;;" >> $PREFIX/bin/msfconsole
-	echo "esac" >> $PREFIX/bin/msfconsole
+	echo "export LD_PRELOAD=\"$BIGDECIMAL:\$LD_PRELOAD\"" >> $PREFIX/bin/msfconsole
 	echo "case \"\$SCRIPT_NAME\" in" >> $PREFIX/bin/msfconsole
 	echo "        msfconsole|msfvenom)" >> $PREFIX/bin/msfconsole
 	echo "                exec ruby \"\$METASPLOIT_PATH/\$SCRIPT_NAME\" \"\$@\"" >> $PREFIX/bin/msfconsole
@@ -236,9 +227,6 @@ Rapid7() {
 	echo "esac" >> $PREFIX/bin/msfconsole
 	chmod +x $PREFIX/bin/msfconsole
         ln -sf $(which msfconsole) $PREFIX/bin/msfvenom
-        echo "#!/data/data/com.termux/files/usr/bin/bash" > $PREFIX/opt/metasploit-framework/installer.sh
-        echo "echo \"[*]─➤ Metasploit Framework installation finished.\"" >> $PREFIX/opt/metasploit-framework/installer.sh
-        echo "#                 @Ivam3" >> $PREFIX/opt/metasploit-framework/installer.sh
 	Ivam3
 	Ending
 }
@@ -264,7 +252,7 @@ MAIN() {
 	else
 		printf "$Y\n[!]─➤$W Metasploit found in Termux repositories"
 		printf "$G\n[+]─➤$W Metasploit will be installed from the$B Termux$W repositories\n"
-		printf "\n$C         Press$G ENTER$C to continue"
+		printf "\n$C         Press$G ENTER$C to continue$W"
 		read enter
 		Termux
 	fi

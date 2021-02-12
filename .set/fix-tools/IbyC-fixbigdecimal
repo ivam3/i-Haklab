@@ -18,7 +18,7 @@ ctrl_c() {
         printf "$Y\n[!]$R Going me on https://t.me/Ivam3_Bot$W\n"
 	}
 
-printf "$G\n[IbyC]-> FIXING BIG DECIMAL ISSUES$W\n"
+printf "$G\n[IbyC]-> FIXING BIGDECIMAL ISSUES$W\n"
 yes|apt install -yq patchelf >/dev/null 2>&1
 if [ -e "$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal.so" ]; then
 	if [ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal/util.so" | grep bigdecimal.so)" ]; then
