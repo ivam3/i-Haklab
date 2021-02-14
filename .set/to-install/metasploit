@@ -21,8 +21,6 @@ fi
 TOOL="metasploit"
 UNAME=$(uname -m)
 SOv=$(termux-info |awk '$1 < 11 {print $1}' |tail -n 1 |awk -F "." '{print $1}')
-GEMS=$(ls $PREFIX/lib/ruby |grep '[0-9].[0-9].[0-9]')
-PGv=$(find $PREFIX/lib/ruby/gems/$GEMS/gems -iname pg_ext.so | awk -F "/" '{print $12}' | head -n 1)
 JAVADB="https://raw.githubusercontent.com/ivam3/java/master"
 R7DB="https://github.com/rapid7/metasploit-framework/archive"
 iHDB="https://github.com/ivam3/i-Haklab/raw/master/.set"
@@ -90,7 +88,6 @@ elif [ $UNAME = "x86_64" ]
 then
         ARCH="x86_64-linux-android"
 else
-#	printf "$R[ERR]─➤ Your architecture is uncompatible\n$W"
         ARCH="Unkonwn architecture"
 fi
 
@@ -107,18 +104,23 @@ for i in $TOOL unstable-repo $MSFDIR $HOME/$TOOL-framework ; do
 done
 }
 UPandINSTALL() {
+	#::Upgrade and install available repositories::#
 	yes|pkg update && pkg upgrade
-        for i in libiconv zlib autoconf bison clang coreutils curl findutils apr apr-util libffi libgmp libpcap postgresql readline libsqlite openssl libtool libxml2 libxslt ncurses pkg-config wget make ruby libgrpc ncurses-utils ncurses unzip zip tar termux-elf-cleaner util-linux axel unstable-repo; do
-                PKG=$(pkg list-all|grep -o $i)
-                if [ ! -z "$PKG" ]
-                then
-                        printf "$G\n[+]─➤$W Installing the repository $i $W\n"
-                        yes|pkg install $i >/dev/null 2>&1
-                else
-                        printf "$R\n[w]─➤$W The repository $i is not candidate$W\n"
-                        sleep 1
-                fi
-        done
+	for i in libiconv zlib autoconf bison clang coreutils curl findutils apr apr-util libffi libgmp libpcap postgresql readline libsqlite openssl libtool libxml2 libxslt ncurses pkg-config wget make ruby libgrpc ncurses-utils ncurses unzip zip tar termux-elf-cleaner util-linux axel unstable-repo; do
+		GOTIT=$(pkg list-installed | grep -oE $i)
+		PKG=$(pkg list-all|grep -o $i)
+		if [ ! -z "$PKG" ] && [ -z "$GOTIT" ]; then
+			printf "$G\n[+]─➤$W Installing the repository $i $W\n"
+			yes|pkg install $i >/dev/null 2>&1
+		elif [ ! -z "$PKG" ] && [ ! -z "$GOTIT" ]; then
+			continue
+		else
+			printf "$R\n[w]─➤$W The repository $i is not candidate$W\n"
+			sleep 1
+		fi
+	done
+	GEMS=$(ls $PREFIX/lib/ruby |grep '[0-9].[0-9].[0-9]')
+	PGv=$(find $PREFIX/lib/ruby/gems/$GEMS/gems -iname pg_ext.so | awk -F "/" '{print $12}' | head -n 1)
 }
 msfdb(){
         if [ ! -d $PREFIX/var/lib/postgresql ]; then
@@ -175,8 +177,8 @@ Ending() {
 }
 
 Rapid7() {
-	Garbage #::FUNCTION::#
-        UPandINSTALL #::Upgrade and install available repositories::#
+	Garbage
+        UPandINSTALL
         if [ ! -d $PREFIX/opt ]; then
                 mkdir -p $PREFIX/opt
         fi
@@ -191,33 +193,36 @@ Rapid7() {
 	then
                 gem install --no-document --verbose rubygems-update
         fi
-	#::::CONFIG VERSION OF GEMS IN GEMFILE.LOCK::::#
+
+#::::CONFIG VERSION OF GEMS IN GEMFILE.LOCK::::#
 	sed '/rbnacl/d' -i Gemfile.lock
 	sed 's|nokogiri (1.*)|nokogiri (1.11.1)|g' -i Gemfile.lock
 	sed 's|sqlite3 (1.*)|sqlite3 (1.4.2)|g' -i Gemfile.lock
 	sed 's|pcaprub (0.*)|pcaprub (0.12.4)|g' -i Gemfile.lock
 	sed 's|ttfunk (1.*)|ttfunk (1.7.0)|g' -i Gemfile.lock
+	sed 's|actionpack (5.*)|actionpack (6.1.2.1)|g' -i Gemfile.lock
+	sed 's|actionview (= 5.*)|actionview (= 6.1.2.1)|g' -i Gemfile.lock
+	sed 's|activesupport (= 5.*|activesupport (= 6.1.2.1)|g' -i Gemfile.lock
         sed '/rbnacl/d' -i metasploit-framework.gemspec
-	#::::CONFIG VERSION OF GEMS IN GEMFILE::::#
+
+#::::CONFIG VERSION OF GEMS IN GEMFILE::::#
 	sed "s|gem 'sqlite3', '~>1.*.*'|gem 'sqlite3', '~>1.4.2'|g" -i Gemfile
 	sed -i "7a gem 'webrick', '~> 1.7'" Gemfile
-	#::::INSTALL ADAPTED GEMS::::#
+
+#::::INSTALL ADAPTED GEMS::::#
         gem install --no-document --verbose bundler:2.2.9 #2.2.7
 	gem install nokogiri -v '1.11.1' -- --use-system-libraries
 	gem install webrick -v '1.7' -- --use-system-libraries
-	#::::CLEAN INSTALLATION OF SOME REBELDS GEMS xD!::::#
-	for gem in net-ssh metasploit-credential actionpack pdf-reader;do
-		yes|gem uninstall $gem --all
-		gem cleanup $gem
-                gem install $gem -- --use-system-libraries
-		bundle update $gem
-        done
+	gem install actionpack -v '6.1.2.1' -- --use-system-libraries
+
+#::::CLEAN INSTALLATION OF SOME REBELDS GEMS xD!::::#
         gem update --system
         bundle install -j3
         $PREFIX/bin/find $MSFDIR -type f -executable -print0 | xargs -0 -r termux-fix-shebang
         rm $MSFDIR/modules/auxiliary/gather/http_pdf_authors.rb
         $PREFIX/bin/find $PREFIX/lib/ruby/gems -type f -iname \*.so -print0 | xargs -0 -r termux-elf-cleaner
-	msfdb #:::FUNCTION::#
+	msfdb
+
 #:::::::MSFCONSOLE MSFVENOM FILES:::::::#
 	BIGDECIMAL=$(find $PREFIX/lib/ruby/$GEMS -iname "bigdecimal.so")
 	echo "#!/data/data/com.termux/files/usr/bin/sh" > $PREFIX/bin/msfconsole
