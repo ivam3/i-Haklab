@@ -160,15 +160,23 @@ elif [[ ${1} == "--remove" || ${1} == "-r" ]];then
 apt autoremove ${2}
   fi
 fi
-}
+} 
 
-
+printf "$G\n\r [+]─➤ Installing ...$W "
 wget ${iHDB}/.set/bin/RuGiR -O ${PREFIX}/bin/RuGiR -q
 chmod +x ${PREFIX}/bin/RuGiR
+printf "RuGiR\r"
+sleep 0.5
+printf "$G\r [+]─➤ Installing ...$W "
+! command -v i-Haklab >/dev/null || gem install lolcat >/dev/null 2>&1
+printf "lolcat\r"
+sleep 0.5
+printf "$G\r [+]─➤ Installing ...$W "
 if ! cat ${INITFILE} | grep -oE "postgresql" --silent;then
 	sed -i "4a alias postgresql=\"pg_ctl -D ${PREFIX}/var/lib/postgresql\"" $INITFILE
 fi
-! command -v i-Haklab >/dev/null || gem install lolcat >/dev/null 2>&1
+printf "postgresql\r\n"
+sleep 0.5
 
 if [ -d ${PREFIX}/opt/metasploit-framework ];then
 	wget $JAVADB/.embed/apk.rb -O ${PREFIX}/opt/metasploit-framework/lib/msf/core/payload/apk.rb -q
