@@ -167,6 +167,7 @@ case $1 in
 		wget -q "${DB_iHAKLAB}/fix-tools/fixmetasploit" -O $FILE
 		bash $FILE --install ruby=2.7.2 -r apt install metasploit -y
 		rm $FILE
+		echo "$@"
 		;;
 	RuGiR)
 		wget $DB_iHAKLAB/bin/RuGiR -O $PREFIX/bin/RuGiR -q
