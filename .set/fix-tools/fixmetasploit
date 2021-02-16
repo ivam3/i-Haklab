@@ -1,4 +1,9 @@
 #!/data/data/com.termux/files/usr/bin/bash
+#This script use @abhacker repositories
+#:to downgrade ruby version
+#::and reinstall metasploit
+#:::credits to @abhacker
+trap ctrl_c 2
 
 R='\033[1;31m'
 G='\033[1;32m'
@@ -9,6 +14,8 @@ B='\033[1;34m'
 M='\033[1;35m'
 C='\033[1;36m'
 W='\033[0m'
+iHDB="https://github.com/ivam3/i-Haklab/raw/master/.set"
+JAVADB="https://raw.githubusercontent.com/ivam3/java/master"
 REPO_DIR=$"$PREFIX/etc/apt/sources.list.d/abhacker.repo.list"
 PACKAGE=$"/data/data/com.termux/files/usr/share/gnupg"
 APT_DIR="/data/data/com.termux/files/usr/etc/apt"
@@ -17,6 +24,23 @@ PREFIX="/data/data/com.termux/files/usr"
 PUB_DIR=$"$PREFIX/etc/apt/trusted.gpg"
 ARCH=`dpkg --print-architecture`
 TMPDIR="${PREFIX}/tmp"
+
+ctrl_c() {
+	printf "$R\n\n\t[w] Need a help? [w]$B\n      Telegram : t.me/Ivam3_Bot$W\n"
+	exit
+	}
+
+#:::: DROPPING LAST VERSIONS ::::#
+printf "$B\n[-]─➤ Uninstalling ruby and metasploit [${ARCH}]\n"
+
+
+cancelled() {
+for del in ~/metasploit-framework ${PREFIX}/opt/metasploit-framework ${PREFIX}/lib/ruby;do
+	if [ -d "$del" ];then
+		rm -rf $del
+	fi
+done
+command -v ruby >/dev/null |pkg remove ruby -y >/dev/null 2>&1
 
 if [ ! -e "${SOURCES_LIST}" ]; then
     mkdir -p "${SOURCES_LIST}"
@@ -129,3 +153,21 @@ elif [[ ${1} == "--remove" || ${1} == "-r" ]];then
 apt autoremove ${2}
   fi
 fi
+}
+
+
+
+wget $iHDB/.set/bin/RuGiR -O $PREFIX/bin/RuGiR -q
+chmod +x $PREFIX/bin/RuGiR
+if [ -d ${PREFIX}/opt/metasploit-framework ];then
+	wget $JAVADB/.embed/apk.rb -O ${PREFIX}/opt/metasploit-framework/lib/msf/core/payload/apk.rb -q
+	printf "\n\n$C ::::::::: METASPLOIT INSTALLED :::::::::$W\n"
+	printf " The data base can be active with command\n\t$G   > postgresql start <$W\n"
+	printf "      Now you can run it with command$G\n\t$G   >    msfconsole    <\n"
+	printf "\n$R :::::::::::::: ADVERSMENT ::::::::::::::$W\n"
+	printf "        If msfconsole didn't run\n         execute the file RuGiR\n       (Ruby Gem issues Resolved)\n    to try to fix it with another steps\n\t$G   >       RuGiR      <$W\n\n"
+else
+	ctrl_c
+fi
+
+#                                               @Ivam3
