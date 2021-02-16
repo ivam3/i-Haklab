@@ -13,12 +13,11 @@ connection() {
 	curl -Is http://www.google.com &> /dev/null
 	}
 true() {
-	printf "$G \e\n [+]\n ╰───➤$W Connecting to github.io ... "
+	printf "$G\n[+]\n ╰───➤$W Connecting to github.io\n"
 	sleep 1
-	printf "$G DONE!!\n"
 	}
 false() {
-	printf "$G\n[+]\n ╰───➤$W Connecting to github.io...$R\n"
+	printf "$G\n[+]\n ╰───➤$W Connecting to github.io$R\n"
 	sleep 1
 	printf "[ERROR]\n   ╰───➤$W Re-connecting to github.io...$R\n"
 	sleep 0.7
@@ -50,9 +49,8 @@ if [ ! -d "$PACKAGE" ];then
 
 #:::: DOWNLOADING SIGNED KEY ::::#
 grep -q "abhackerofficial@gmail.com" $PUB_DIR &> /dev/null
-printf "\e\n $G [+]\n ╰───➤$W Adding Public GPG Key [${ARCH}]...\n"
+printf "$G\n[+]\n ╰───➤$W Adding Public GPG Key [${ARCH}]\n"
 curl -fsSL https://abhackerofficial.github.io/abhacker.repo/abhacker.repo.key | apt-key add &> /dev/null &
-printf "$G DONE!!\n"
 fi
 
 if [ ! -f "$PREFIX/etc/raw_keys" ];then
@@ -89,10 +87,10 @@ x86_64_architecture() {
 
 #:::: ABHACKERS's REPOSITORY::::#
 if [ -f "$REPO_DIR" ];then
-	printf "$Y\n[!]\n ╰───➤$W ABHacker's Repository Already exists [${ARCH}]...\n"
+	printf "$Y\n[!]\n ╰───➤$W ABHacker's Repository Already exists [${ARCH}]\n"
 	sleep 1
 else
-	printf "$G\n[+]\n ╰───➤$W Adding ABHacker's Repository [${ARCH}]...\n"
+	printf "$G\n[+]\n ╰───➤$W Adding ABHacker's Repository [${ARCH}]\n"
 	sleep 1
 	case "$ARCH" in
 		aarch64)
@@ -113,9 +111,8 @@ else
 	esac
 fi
 
-printf "$G \e\n [+]\n ╰───➤$W Updating Termux [${ARCH}]... "
+printf "$G\n[+]\n ╰───➤$W Updating Termux [${ARCH}]\n"
 yes|pkg update && pkg upgrade >/dev/null 2>&1
-printf "$G DONE!!"
 printf "$G\n[+]\n ╰───➤$W Install package  : apt install <pkg> ... "
 
 if [[ ${1} == "--install" || ${1} == "-i" ]];then
