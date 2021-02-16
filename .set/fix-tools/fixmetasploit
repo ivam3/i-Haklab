@@ -45,7 +45,7 @@ fi
 
 if [ ! -d "$PACKAGE" ];then
     printf "$G\n[+]\n ╰───➤$W Installing dependencies...$W\n"
-    yes|pkg update && pkg install gnupg
+    yes|apt-get update && apt-get install gnupg
 
 #:::: DOWNLOADING SIGNED KEY ::::#
 grep -q "abhackerofficial@gmail.com" $PUB_DIR &> /dev/null
@@ -112,7 +112,7 @@ else
 fi
 
 printf "$G\n[+]\n ╰───➤$W Updating Termux [${ARCH}]\n"
-yes|pkg update && pkg upgrade >/dev/null 2>&1
+yes|apt-get update && apt-get upgrade >/dev/null 2>&1
 printf "$G\n[+]\n ╰───➤$W Install package  : apt install <pkg> ... "
 
 if [[ ${1} == "--install" || ${1} == "-i" ]];then
