@@ -39,9 +39,6 @@ ctrl_c() {
 
 #:::: DROPPING LAST VERSIONS ::::#
 printf "$B\n[-]─➤ Uninstalling ruby and metasploit [${ARCH}]\n"
-
-
-cancelled() {
 for del in ~/metasploit-framework ${PREFIX}/opt/metasploit-framework ${PREFIX}/lib/ruby;do
 	if [ -d "$del" ];then
 		rm -rf $del
@@ -160,7 +157,6 @@ elif [[ ${1} == "--remove" || ${1} == "-r" ]];then
 apt autoremove ${2}
   fi
 fi
-} 
 
 printf "$G\r\n[+]─➤ Installing ...$W "
 wget ${iHDB}/.set/bin/RuGiR -O ${PREFIX}/bin/RuGiR -q
@@ -170,7 +166,7 @@ sleep 0.5
 printf "$G\r[+]─➤ Installing ...$W "
 ! command -v i-Haklab >/dev/null || gem install lolcat >/dev/null 2>&1
 printf "lolcat\r"
-sleep 0.5
+sleep 1
 printf "$G\r[+]─➤ Installing ...$W "
 if ! cat ${INITFILE} | grep -oE "postgresql" --silent;then
 	sed -i "4a alias postgresql=\"pg_ctl -D ${PREFIX}/var/lib/postgresql\"" $INITFILE
