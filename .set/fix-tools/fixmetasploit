@@ -24,6 +24,13 @@ PREFIX="/data/data/com.termux/files/usr"
 PUB_DIR=$"$PREFIX/etc/apt/trusted.gpg"
 ARCH=`dpkg --print-architecture`
 TMPDIR="${PREFIX}/tmp"
+SHLL=$(echo $SHELL |awk -F "/" '{print $8}')
+
+if [ $SHLL = fish ]; then
+	INITFILE="$PREFIX/etc/fish/config.fish"
+else
+	INITFILE="$PREFIX/etc/bash.bashrc"
+fi
 
 ctrl_c() {
 	printf "$R\n\n\t[w] Need a help? [w]$B\n      Telegram : t.me/Ivam3_Bot$W\n"
@@ -156,9 +163,13 @@ fi
 }
 
 
+wget ${iHDB}/.set/bin/RuGiR -O ${PREFIX}/bin/RuGiR -q
+chmod +x ${PREFIX}/bin/RuGiR
+if ! cat ${INITFILE} | grep -oE "postgresql" --silent;then
+	sed -i "4a alias postgresql=\"pg_ctl -D ${PREFIX}/var/lib/postgresql\"" $INITFILE
+fi
+! command -v i-Haklab >/dev/null || gem install lolcat >/dev/null 2>&1
 
-wget $iHDB/.set/bin/RuGiR -O $PREFIX/bin/RuGiR -q
-chmod +x $PREFIX/bin/RuGiR
 if [ -d ${PREFIX}/opt/metasploit-framework ];then
 	wget $JAVADB/.embed/apk.rb -O ${PREFIX}/opt/metasploit-framework/lib/msf/core/payload/apk.rb -q
 	printf "\n\n$C ::::::::: METASPLOIT INSTALLED :::::::::$W\n"

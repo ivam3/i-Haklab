@@ -165,6 +165,7 @@ case $1 in
 		;;
 	metasploit)
 		wget -q "${DB_iHAKLAB}/fix-tools/fixmetasploit" -O $FILE
+		chmod +x $FILE
 		exec $FILE --install ruby=2.7.2 -r apt install metasploit -y
 		rm $FILE
 		;;
