@@ -120,9 +120,14 @@ else
 	esac
 fi
 
-printf "$G\n[+]\n ╰───➤$W Updating Termux [${ARCH}]\n"
-yes|apt-get update && apt-get upgrade >/dev/null 2>&1
-printf "$G\n[+]\n ╰───➤$W Install package  : apt install <pkg> ... "
+#printf "$G\n[+]\n ╰───➤$W Updating Termux [${ARCH}]\n"
+#apt-get update >/dev/null 2>&1
+#printf "$G\n[+]\n ╰───➤$W Install package  : apt install <pkg> ... "
+
+printf "\r\e[93mUpdating Termux emulator [${ARCH}]...              \n\e[0m"
+apt-get update
+echo -e "\e[94mInstall package  : apt install <pkg> ..."
+echo -e "GitHub help page : https://github.com/abhackerofficial/abhacker.repo\e[0m"
 
 if [[ ${1} == "--install" || ${1} == "-i" ]];then
 	if [[ ${#2} -gt "0" ]];then
