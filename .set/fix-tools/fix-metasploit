@@ -1,0 +1,146 @@
+#!/bin/env bash
+
+export REPO_DIR=$"$PREFIX/etc/apt/sources.list.d/abhacker.repo.list"
+export PACKAGE=$"/data/data/com.termux/files/usr/share/gnupg"
+export APT_DIR="/data/data/com.termux/files/usr/etc/apt"
+export SOURCES_LIST="${APT_DIR}/sources.list.d"
+export PREFIX="/data/data/com.termux/files/usr"
+export PUB_DIR=$"$PREFIX/etc/apt/trusted.gpg"
+export ARCH=`dpkg --print-architecture`
+export TMPDIR="${PREFIX}/tmp"
+
+connection() {
+	curl -Is http://www.google.com &> /dev/null
+	}
+true() {
+	printf "\n$G[+]\n ╰───➤$W Connecting to github.io ...\n"
+	}
+false() {
+	printf "\n$G[+]\n ╰───➤$W Connecting to github.io...$R\n"
+	sleep 0.5
+	printf "[ERROR]\n   ╰───➤$W Failed connect to github.io...$R\n"
+	connection || printf "   ╰───➤ Connection error code : $?\n$W"
+}
+
+connections() {
+	connection
+	if [[ $? -eq 0 ]];then
+		connection | true
+	else
+		connection | false
+		exit
+	fi
+}
+
+connections
+
+if [ ! -e "${SOURCES_LIST}" ]; then
+    mkdir -p "${SOURCES_LIST}"
+fi
+
+if [ ! -e "${TMPDIR}" ]; then
+    mkdir -p "${TMPDIR}"
+fi
+
+if [ ! -d "$PACKAGE" ];then
+    printf "$G\n[+]\n ╰───➤$W Installing dependencies...$W\n"
+    yes|pkg update && pkg install gnupg
+
+#:::: DOWNLOADING SIGNED KEY ::::#
+grep -q "abhackerofficial@gmail.com" $PUB_DIR &> /dev/null
+printf "\n$G[+]\n ╰───➤$W Adding Public GPG Key [${ARCH}]...\n"
+   curl -fsSL https://abhackerofficial.github.io/abhacker.repo/abhacker.repo.key | apt-key add &> /dev/null &
+fi
+
+if [ ! -f "$PREFIX/etc/raw_keys" ];then
+	mkdir -p ${PREFIX}/etc/raw_keys
+fi
+
+if [ ! -f "$PREFIX/etc/raw_keys/abhacker.repo.key" ];then
+	curl -fsSL https://github.com/abhackerofficial/abhacker.repo/raw/master/abhacker.repo.key | cat &> ${PREFIX}/etc/raw_keys/abhacker.repo.key &
+fi
+
+get1=`curl -fsSL https://github.com/abhackerofficial/abhacker.repo/raw/master/abhacker.repo.key | awk NR==3 &`
+get2=`cat $PREFIX/etc/raw_keys/abhacker.repo.key | awk NR==3`
+
+if [[ ${get1} != ${get2} ]];then
+	printf "\n$G[+]\n ╰───➤$W Adding Public GPG Key [${ARCH}]...\n"
+	curl -fsSL https://github.com/abhackerofficial/abhacker.repo/raw/master/abhacker.repo.key | cat &> ${PREFIX}/etc/raw_keys/abhacker.repo.key &
+	curl -fsSL https://github.com/abhackerofficial/abhacker.repo/raw/master/abhacker.repo.key | apt-key add &> /dev/null
+else
+	printf "\n$Y[!]\n ╰───➤$W Public GPG Key Already exists [${ARCH}]...\n"
+fi
+
+aarch64_architecture() {
+	printf "# abhacker's repository\ndeb [arch=all,aarch64] https://abhackerofficial.github.io/abhacker.repo/ abhacker main" > "${SOURCES_LIST}/abhacker.repo.list"
+	}
+arm_architecture() {
+	printf "# abhacker's repository\ndeb [arch=all,arm] https://abhackerofficial.github.io/abhacker.repo/ abhacker main" > "${SOURCES_LIST}/abhacker.repo.list"
+	}
+i686_architecture() {
+	printf "# abhacker's repository\ndeb [arch=all,i686] https://abhackerofficial.github.io/abhacker.repo/ abhacker main" > "${SOURCES_LIST}/abhacker.repo.list"
+	}
+x86_64_architecture() {
+	printf "# abhacker's repository\ndeb [arch=all,x86_64] https://abhackerofficial.github.io/abhacker.repo/ abhacker main" > "${SOURCES_LIST}/abhacker.repo.list"
+	}
+
+#:::: ABHACKERS's REPOSITORY::::#
+if [ -f "$REPO_DIR" ];then
+	printf "\n$Y[!]\n ╰───➤$W ABHacker's Repository Already exists [${ARCH}]...\n"
+else
+	printf "\n$G[+]\n ╰───➤$W Adding ABHacker's Repository [${ARCH}]...\n"
+	sleep 0.5
+	case "$ARCH" in
+		aarch64)
+			aarch64_architecture
+			;;
+		arm)
+			arm_architecture
+			;;
+		armhf)
+			arm_architecture
+			;;
+		i686)
+			i686_architecture
+			;;
+		x86_64)
+			x86_64_architecture
+			;;
+	esac
+fi
+
+printf "$G\n[+]\n ╰───➤$W Updating Termux [${ARCH}]...\n"
+yes|pkg update && pkg upgrade
+printf "$G\n[+]\n ╰───➤$W Install package  : apt install <pkg> ...\n"
+
+if [[ ${1} == "--install" || ${1} == "-i" ]];then
+	if [[ ${#2} -gt "0" ]];then
+		apt install "${2}"
+		if [[ ${3} == "--run" || ${3} == "-r" ]];then
+			if [[ ${#3} -gt "0" ]];then
+				${4} $5 $6 $7 $8 $9
+			fi
+		fi
+	fi
+
+elif [[ ${1} == "--update" || ${1} == "-u" ]];then
+	if [[ ${#2} -gt "0" ]];then
+		apt upgrade "${2}"
+	fi
+
+elif [[ ${1} == "--list" || ${1} == "-l" ]];then
+	list() {
+		apt list | grep -a "abhacker" | head -n -0
+		}
+	printf "`list`\n" | cut -d ":" -f 2
+
+elif [[ ${1} == "--show" || ${1} == "-s" ]];then
+	if [[ ${#2} -gt "0" ]];then
+		apt search ${2}
+	fi
+
+elif [[ ${1} == "--remove" || ${1} == "-r" ]];then
+	if [[ ${#2} -gt "0" ]];then
+		apt autoremove ${2}
+	fi
+fi

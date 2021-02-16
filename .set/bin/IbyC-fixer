@@ -19,15 +19,15 @@ W='\033[0m'
 
 ctrl_c() {
 	printf "$Y\n\n[!]$R Need a help?$B join to$R t.me/Ivam3_Bot$W\n\n"
-}
+	}
 Chao-chao() {
 	printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
-}
+	}
 Repos() {
 	printf "$Y\n[!]:-> Installing|upgrading repositories ...\n$W"
 	command -v $Py > /dev/null 2>&1 || pkg install $Py -y > /dev/null 2>&1
 	$Py -m pip install --upgrade pip > /dev/null 2>&1
-}
+	}
 Lib() {
 	for Libs in clang libtool libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static tar wget; do
 		SCHLIB=$(pkg list-installed | awk '{print $1}' | grep -oE $Libs | head -n1)
@@ -36,7 +36,7 @@ Lib() {
 			pkg install $Libs -y > /dev/null 2>&1
 		fi
 	done
-}
+	}	
 Turtle() {
         wget https://github.com/ivam3/i-Haklab/raw/master/.set/fix-tools/py_modules/turtle-0.0.2.tar.gz -O $DIR/turtle-0.0.2.tar.gz -q
         if [ $DIR/turtle-0.0.2.tar.gz ]; then
@@ -52,14 +52,14 @@ Turtle() {
                 popd
         fi
         rm -rf $FILE
-}
+	}
 Menu() {
 	printf "$B\n[USAGE-01]-> To fix python modules:$G\nIbyC-fixer <[B|BASIC] [L|LDFLAGS] [S|SODIUM]> <[Py|Py2]> <[file.txt|module(max 3)]>$W\n\nB  BASIC\tInstall module on basic\nL  LDFLAGS\tForce installation to use libraries and system compiler\nS  SODIUM\tForce the installation to use the sodium decryptor\nPy  \t\tFor python3\nPy2  \t\tFor python2\n\nExamples:\n\tIbyC-fixer BASIC Py future\n\tIbyC-fixer S Py2 colorama\n\n"
-	printf "$B\n[USAGE-02]-> To fix an specific issue:$G\nIbyC-fixer <[bigdecimal|nrauf|RuGiR]> <option>$W\n\nbigdecimal\t\tTo fix ruby gem bigdecimal issues\nnrauf       dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nRuGiR\t\tTo fix metasploit instalation\n\nExamples:\n\tIbyC-fixer bigdecimal\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n"
+	printf "$B\n[USAGE-02]-> To fix an specific issue:$G\nIbyC-fixer <[bigdecimal|nrauf|metasploit|RuGiR]> <option>$W\n\nbigdecimal\t\tTo fix ruby gem bigdecimal issues\nnrauf       dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nmetasploit\t\tTo fix metasploit instalation\nRuGiR\t\tTo fix ruby gems instalation\n\nExamples:\n\tIbyC-fixer bigdecimal\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n"
 	exit
-}
+	}
 Chck() {
-	for list in $3 $4 $5 ; do
+	for list in ${@:2} ; do
 		MODULE=$(python -m pip list | awk '{print $1}' | grep $list)
 		if [ ! -z $MODULE ]; then
 			printf "$Y\n[!]:-> Module $MODULE is already exist for $Py\n$W"
@@ -85,7 +85,7 @@ until [ -e $PREFIX/bin/IbyC-fixer ]; do
 		exit
 	fi
 done
-while [ -z $2 ]; do
+while [ -z $1 ]; do
 	Menu
 done
 
@@ -102,11 +102,12 @@ else
 	Menu
 fi
 }
-
+command -v curl >/dev/null 2>&1 || pkg install curl -y >/dev/null 2>&1
+curl -Ls "${DB_iHAKLAB}/libexec/banner/Ivam3"|bash
 case $1 in
 	B|BASIC)
 		Args
-		for module in $3 $4 $5 ; do
+		for module in ${@:3} ; do
 			Chck
 			if [ $module = turtle ]; then
 				Turtle
@@ -121,7 +122,7 @@ case $1 in
 	LDFLAGS|L)
 		Args
 		export LDFLAGS="-L/system/lib/ -lm -lcompiler_rt"
-		for module in $3 $4 $5 ; do
+		for module in ${@:3} ; do
 			Chck
 			if [ $module = turtle ]; then
 				Turtle
@@ -136,7 +137,7 @@ case $1 in
 	SODIUM|S)
 		Args
 		export SODIUM_INSTALL=system
-		for module in $3 $4 $5 ; do
+		for module in ${@:3} ; do
 			Chck
 			if [ $module = turtle ]; then
 				Turtle
@@ -155,9 +156,12 @@ case $1 in
 		rm -rf $FILE
 		;;
 	bigdecimal)
-		wget $DB_iHAKLAB/fix-tools/IbyC-fixbigdecimal -O $FILE.fbd -q
-		chmod +x $FILE.fbd
-		exec $FILE.fbd
+		curl -Ls "${DB_iHAKLAB}/fix-tools/IbyC-fixbigdecimal"|bash
+		;;
+	metasploit)
+		curl -LOs "${DB_iHAKLAB}/fix-tools/fixmetasploit" -o $FILE
+		bash $FILE --install ruby=2.7.2 -r apt install metasploit -y
+		rm $FILE
 		;;
 	RuGiR)
 		wget $DB_iHAKLAB/bin/RuGiR -O $PREFIX/bin/RuGiR -q
