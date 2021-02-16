@@ -13,7 +13,7 @@ connection() {
 	curl -Is http://www.google.com &> /dev/null
 	}
 true() {
-	printf "$G\e\n[+]\n ╰───➤$W Connecting to github.io ... "
+	printf "$G \e\n [+]\n ╰───➤$W Connecting to github.io ... "
 	sleep 1
 	printf "$G DONE!!\n"
 	}
@@ -50,7 +50,7 @@ if [ ! -d "$PACKAGE" ];then
 
 #:::: DOWNLOADING SIGNED KEY ::::#
 grep -q "abhackerofficial@gmail.com" $PUB_DIR &> /dev/null
-printf "\e\n$G[+]\n ╰───➤$W Adding Public GPG Key [${ARCH}]...\n"
+printf "\e\n $G [+]\n ╰───➤$W Adding Public GPG Key [${ARCH}]...\n"
 curl -fsSL https://abhackerofficial.github.io/abhacker.repo/abhacker.repo.key | apt-key add &> /dev/null &
 printf "$G DONE!!\n"
 fi
@@ -113,7 +113,7 @@ else
 	esac
 fi
 
-printf "$G\e\n[+]\n ╰───➤$W Updating Termux [${ARCH}]... "
+printf "$G \e\n [+]\n ╰───➤$W Updating Termux [${ARCH}]... "
 yes|pkg update && pkg upgrade >/dev/null 2>&1
 printf "$G DONE!!"
 printf "$G\n[+]\n ╰───➤$W Install package  : apt install <pkg> ... "
