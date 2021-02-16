@@ -6,7 +6,6 @@ trap ctrl_c 2
 DB_iHAKLAB="https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set"
 DB_IVAM3="https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/installer"
 FILE=$(mktemp)
-DIR=$(mktemp -d)
 R='\033[1;31m'
 G='\033[1;32m'
 Goke='\033[92m'
@@ -41,6 +40,7 @@ Lib() {
 	done
 	}	
 Turtle() {
+	DIR=$(mktemp -d)
         wget https://github.com/ivam3/i-Haklab/raw/master/.set/fix-tools/py_modules/turtle-0.0.2.tar.gz -O $DIR/turtle-0.0.2.tar.gz -q
         if [ $DIR/turtle-0.0.2.tar.gz ]; then
                 pushd $DIR
@@ -54,7 +54,7 @@ Turtle() {
                 fi
                 popd
         fi
-        rm -rf $FILE
+        rm -rf $DIR
 	}
 Menu() {
 	printf "$B\n[USAGE-01]-> To fix python modules:$G\nIbyC-fixer <[B|BASIC] [L|LDFLAGS] [S|SODIUM]> <[Py|Py2]> <[file.txt|module(max 3)]>$W\n\nB  BASIC\tInstall module on basic\nL  LDFLAGS\tForce installation to use libraries and system compiler\nS  SODIUM\tForce the installation to use the sodium decryptor\nPy  \t\tFor python3\nPy2  \t\tFor python2\n\nExamples:\n\tIbyC-fixer BASIC Py future\n\tIbyC-fixer S Py2 colorama\n\n"
@@ -151,16 +151,20 @@ case $1 in
 		Chao-chao
 		;;
 	nrauf)
-		wget $DB_iHAKLAB/fix-tools/nrauf -O $FILE -q
-		chmod +x $FILE
-		exec $FILE $2
-		rm -rf $FILE
+		if [ $2 ];then
+			wget $DB_iHAKLAB/fix-tools/nrauf -O $FILE -q
+			chmod +x $FILE
+			exec $FILE $2
+			rm -rf $FILE
+		else
+			printf "$R\n[ERR]─➤$W Apk file unallocated\n"
+		fi
 		;;
 	bigdecimal)
 		curl -Ls "${DB_iHAKLAB}/fix-tools/fixbigdecimal"|bash
 		;;
 	metasploit)
-		curl -LOs "${DB_iHAKLAB}/fix-tools/fixmetasploit" -o $FILE
+		wget -q "${DB_iHAKLAB}/fix-tools/fixmetasploit" -O $FILE
 		bash $FILE --install ruby=2.7.2 -r apt install metasploit -y
 		rm $FILE
 		;;

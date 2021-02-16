@@ -13,12 +13,15 @@ connection() {
 	curl -Is http://www.google.com &> /dev/null
 	}
 true() {
-	printf "\n$G[+]\n ╰───➤$W Connecting to github.io ...\n"
+	printf "$G\e\n[+]\n ╰───➤$W Connecting to github.io ... "
+	sleep 1
+	printf "$G DONE!!\n"
 	}
 false() {
-	printf "\n$G[+]\n ╰───➤$W Connecting to github.io...$R\n"
-	sleep 0.5
-	printf "[ERROR]\n   ╰───➤$W Failed connect to github.io...$R\n"
+	printf "$G\n[+]\n ╰───➤$W Connecting to github.io...$R\n"
+	sleep 1
+	printf "[ERROR]\n   ╰───➤$W Re-connecting to github.io...$R\n"
+	sleep 0.7
 	connection || printf "   ╰───➤ Connection error code : $?\n$W"
 }
 
@@ -33,7 +36,6 @@ connections() {
 }
 
 connections
-
 if [ ! -e "${SOURCES_LIST}" ]; then
     mkdir -p "${SOURCES_LIST}"
 fi
@@ -48,8 +50,9 @@ if [ ! -d "$PACKAGE" ];then
 
 #:::: DOWNLOADING SIGNED KEY ::::#
 grep -q "abhackerofficial@gmail.com" $PUB_DIR &> /dev/null
-printf "\n$G[+]\n ╰───➤$W Adding Public GPG Key [${ARCH}]...\n"
-   curl -fsSL https://abhackerofficial.github.io/abhacker.repo/abhacker.repo.key | apt-key add &> /dev/null &
+printf "\e\n$G[+]\n ╰───➤$W Adding Public GPG Key [${ARCH}]...\n"
+curl -fsSL https://abhackerofficial.github.io/abhacker.repo/abhacker.repo.key | apt-key add &> /dev/null &
+printf "$G DONE!!\n"
 fi
 
 if [ ! -f "$PREFIX/etc/raw_keys" ];then
@@ -64,32 +67,33 @@ get1=`curl -fsSL https://github.com/abhackerofficial/abhacker.repo/raw/master/ab
 get2=`cat $PREFIX/etc/raw_keys/abhacker.repo.key | awk NR==3`
 
 if [[ ${get1} != ${get2} ]];then
-	printf "\n$G[+]\n ╰───➤$W Adding Public GPG Key [${ARCH}]...\n"
+	printf "$G\n[+]\n ╰───➤$W Adding Public GPG Key [${ARCH}]...\n"
 	curl -fsSL https://github.com/abhackerofficial/abhacker.repo/raw/master/abhacker.repo.key | cat &> ${PREFIX}/etc/raw_keys/abhacker.repo.key &
 	curl -fsSL https://github.com/abhackerofficial/abhacker.repo/raw/master/abhacker.repo.key | apt-key add &> /dev/null
 else
-	printf "\n$Y[!]\n ╰───➤$W Public GPG Key Already exists [${ARCH}]...\n"
+	printf "$Y\n[!]\n ╰───➤$W Public GPG Key Already exists [${ARCH}]...\n"
 fi
 
 aarch64_architecture() {
-	printf "# abhacker's repository\ndeb [arch=all,aarch64] https://abhackerofficial.github.io/abhacker.repo/ abhacker main" > "${SOURCES_LIST}/abhacker.repo.list"
+	echo "# abhacker's repository\ndeb [arch=all,aarch64] https://abhackerofficial.github.io/abhacker.repo/ abhacker main" > "${SOURCES_LIST}/abhacker.repo.list"
 	}
 arm_architecture() {
-	printf "# abhacker's repository\ndeb [arch=all,arm] https://abhackerofficial.github.io/abhacker.repo/ abhacker main" > "${SOURCES_LIST}/abhacker.repo.list"
+	echo "# abhacker's repository\ndeb [arch=all,arm] https://abhackerofficial.github.io/abhacker.repo/ abhacker main" > "${SOURCES_LIST}/abhacker.repo.list"
 	}
 i686_architecture() {
-	printf "# abhacker's repository\ndeb [arch=all,i686] https://abhackerofficial.github.io/abhacker.repo/ abhacker main" > "${SOURCES_LIST}/abhacker.repo.list"
+	echo "# abhacker's repository\ndeb [arch=all,i686] https://abhackerofficial.github.io/abhacker.repo/ abhacker main" > "${SOURCES_LIST}/abhacker.repo.list"
 	}
 x86_64_architecture() {
-	printf "# abhacker's repository\ndeb [arch=all,x86_64] https://abhackerofficial.github.io/abhacker.repo/ abhacker main" > "${SOURCES_LIST}/abhacker.repo.list"
+	echo "# abhacker's repository\ndeb [arch=all,x86_64] https://abhackerofficial.github.io/abhacker.repo/ abhacker main" > "${SOURCES_LIST}/abhacker.repo.list"
 	}
 
 #:::: ABHACKERS's REPOSITORY::::#
 if [ -f "$REPO_DIR" ];then
-	printf "\n$Y[!]\n ╰───➤$W ABHacker's Repository Already exists [${ARCH}]...\n"
+	printf "$Y\n[!]\n ╰───➤$W ABHacker's Repository Already exists [${ARCH}]...\n"
+	sleep 1
 else
-	printf "\n$G[+]\n ╰───➤$W Adding ABHacker's Repository [${ARCH}]...\n"
-	sleep 0.5
+	printf "$G\n[+]\n ╰───➤$W Adding ABHacker's Repository [${ARCH}]...\n"
+	sleep 1
 	case "$ARCH" in
 		aarch64)
 			aarch64_architecture
@@ -109,9 +113,10 @@ else
 	esac
 fi
 
-printf "$G\n[+]\n ╰───➤$W Updating Termux [${ARCH}]...\n"
-yes|pkg update && pkg upgrade
-printf "$G\n[+]\n ╰───➤$W Install package  : apt install <pkg> ...\n"
+printf "$G\e\n[+]\n ╰───➤$W Updating Termux [${ARCH}]... "
+yes|pkg update && pkg upgrade >/dev/null 2>&1
+printf "$G DONE!!"
+printf "$G\n[+]\n ╰───➤$W Install package  : apt install <pkg> ... "
 
 if [[ ${1} == "--install" || ${1} == "-i" ]];then
 	if [[ ${#2} -gt "0" ]];then
