@@ -155,3 +155,4 @@ elif [[ ${1} == "--remove" || ${1} == "-r" ]];then
 		apt autoremove ${2}
 	fi
 fi
+echo "$1 $2 $3 $4 ${#2}"
