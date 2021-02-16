@@ -1,13 +1,22 @@
-#!/bin/env bash
+#!/data/data/com.termux/files/usr/bin/env bash
 
-export REPO_DIR=$"$PREFIX/etc/apt/sources.list.d/abhacker.repo.list"
-export PACKAGE=$"/data/data/com.termux/files/usr/share/gnupg"
-export APT_DIR="/data/data/com.termux/files/usr/etc/apt"
-export SOURCES_LIST="${APT_DIR}/sources.list.d"
-export PREFIX="/data/data/com.termux/files/usr"
-export PUB_DIR=$"$PREFIX/etc/apt/trusted.gpg"
-export ARCH=`dpkg --print-architecture`
-export TMPDIR="${PREFIX}/tmp"
+R='\033[1;31m'
+G='\033[1;32m'
+Goke='\033[92m'
+Glig=='\e[1;32m'
+Y='\033[1;33m'
+B='\033[1;34m'
+M='\033[1;35m'
+C='\033[1;36m'
+W='\033[0m'
+REPO_DIR=$"$PREFIX/etc/apt/sources.list.d/abhacker.repo.list"
+PACKAGE=$"/data/data/com.termux/files/usr/share/gnupg"
+APT_DIR="/data/data/com.termux/files/usr/etc/apt"
+SOURCES_LIST="${APT_DIR}/sources.list.d"
+PREFIX="/data/data/com.termux/files/usr"
+PUB_DIR=$"$PREFIX/etc/apt/trusted.gpg"
+ARCH=`dpkg --print-architecture`
+TMPDIR="${PREFIX}/tmp"
 
 connection() {
 	curl -Is http://www.google.com &> /dev/null
