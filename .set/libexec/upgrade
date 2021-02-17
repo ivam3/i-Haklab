@@ -40,7 +40,7 @@ else
 fi
 done
 #TRASH
-printf "$G[+]-> Dropping the trash\n"
+printf "$Y[-]-> Dropping the trash\n"
 sleep 0.5
 wget -q https://raw.githubusercontent.com/ivam3/DoS-A-Tool/master/DoS-A-Tool -O $PREFIX/bin/DoS-A-Tool
 if [ -e $PREFIX/bin/Ivam3 ];then
