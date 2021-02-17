@@ -3,7 +3,7 @@
 #i-Haklab v.2.0 2020 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. Please do not use in military or secret service organizations, or for illegal purposes
 #
 #Created on Jan/2019 
-#Modify: 2021-02-13
+#Modify: 2021-02-17
 ####################
 
 IFS=$'\n\t'
@@ -39,8 +39,17 @@ else
 	exit
 fi
 done
+#TRASH
+printf "$G[+]-> Dropping the trash\n"
+sleep 0.5
+wget -q https://raw.githubusercontent.com/ivam3/DoS-A-Tool/master/DoS-A-Tool -O $PREFIX/bin/DoS-A-Tool
+if [ -e $PREFIX/bin/Ivam3 ];then
+	rm -rf $PREFIX/bin/Ivam3
+fi
+
 #UPGRADE OMF
 printf "$Y[!]-> Upgrading i-Haklab shell\n"
+sleep 0.5
 omf update omf > /dev/null 2>&1
 
 #FIX SOME BUGS
