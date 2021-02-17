@@ -41,14 +41,13 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #INSTALLATION
-if [ -e $PREFIX/bin/DoS-A-Tool ]; then
-        rm -rf $PREFIX/bin/DoS-A-Tool
+if [ -d $iHAKLAB/../DoS-A-Tool ]; then
+        rm -rf $iHAKLAB/../DoS-A-Tool
 fi
-if [ -e $PREFIX/bin/Ivam3 ]; then
-        rm -rf $PREFIX/bin/Ivam3
-fi
-curl https://raw.githubusercontent.com/ivam3/DoS-A-Tool/master/DoS-A-Tool -o $PREFIX/bin/DoS-A-Tool
-chmod +x $PREFIX/bin/*
+yes|pkg update && pkg upgrade && pkg install git perl
+git clone https://github.com/Ivam3/DoS-A-Tool.git $iHAKLAB/../DoS-A-Tool
+chmod +x $iHAKLAB/../DoS-A-Tool/*
+
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3

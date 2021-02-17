@@ -46,6 +46,9 @@ fi
 if [ -e $PREFIX/bin/Ivam3 ]; then
         rm -rf $PREFIX/bin/Ivam3
 fi
+if [ -d $iHAKLAB/../DoS-A-Tool ];then
+	rm -rf $iHAKLAB/../DoS-A-Tool
+fi
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W"
 #                                               @Ivam3

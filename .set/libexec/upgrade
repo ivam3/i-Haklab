@@ -42,10 +42,10 @@ done
 #TRASH
 printf "$Y[-]-> Dropping the trash\n"
 sleep 0.5
-wget -q https://raw.githubusercontent.com/ivam3/DoS-A-Tool/master/DoS-A-Tool -O $PREFIX/bin/DoS-A-Tool
-if [ -e $PREFIX/bin/Ivam3 ];then
-	rm -rf $PREFIX/bin/Ivam3
-fi
+for del in DoS-A-Tool Ivam3;do
+	if [ -e $PREFIX/bin/$del ];then
+		rm -rf $PREFIX/bin/$del
+	fi
 
 #UPGRADE OMF
 printf "$Y[!]-> Upgrading i-Haklab shell\n"
