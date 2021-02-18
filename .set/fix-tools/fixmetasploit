@@ -159,11 +159,6 @@ apt autoremove ${2}
 fi
 
 printf "$G\r\n[+]─➤ Installing ...$W "
-wget ${iHDB}/.set/bin/RuGiR -O ${PREFIX}/bin/RuGiR -q
-chmod +x ${PREFIX}/bin/RuGiR
-printf "RuGiR\r"
-sleep 0.5
-printf "$G\r[+]─➤ Installing ...$W "
 ! command -v i-Haklab >/dev/null || gem install lolcat >/dev/null 2>&1
 printf "lolcat\r"
 sleep 1

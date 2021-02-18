@@ -145,8 +145,8 @@ msfdb(){
 }
 Ivam3() {
 	wget $JAVADB/.embed/apk.rb -O $MSFDIR/lib/msf/core/payload/apk.rb -q
-	wget $iHDB/.set/bin/RuGiR -O $PREFIX/bin/RuGiR -q
-	chmod +x $PREFIX/bin/RuGiR
+	wget $iHDB/.set/bin/IbyC-fixer -O $PREFIX/bin/IbyC-fixer -q
+	chmod +x $PREFIX/bin/IbyC-fixer
 
 #:::: FIXING BIG DECIMAL ISSUES ::::#
 LINUXANDROID=$(find $PREFIX/lib/ruby/$GEMS -iname "bigdecimal.so" |awk -F "/" '{print $10}')
@@ -168,7 +168,7 @@ Ending() {
                 printf " The data base can be active with command\n\t$G   > postgresql start <$W\n"
                 printf "      Now you can run it with command$G\n\t$G   >    msfconsole    <\n"
                 printf "\n$R :::::::::::::: ADVERSMENT ::::::::::::::$W\n"
-                printf "        If msfconsole didn't run\n         execute the file RuGiR\n       (Ruby Gem issues Resolved)\n    to try to fix it with another steps\n\t$G   >       RuGiR      <$W\n\n"
+                printf "        If msfconsole didn't run\n       execute the file IbyC-fixer\n  to try to fix it with another steps\n\t$G   >   IbyC-fixer   <$W\n\n"
         else
                 printf "$R\n[ERR-MSFDIR]─➤ Going to https://t.me/Ivam3_Bot$W\n"
         fi

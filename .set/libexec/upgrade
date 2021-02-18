@@ -42,7 +42,7 @@ done
 #TRASH
 printf "$Y[-]-> Dropping the trash\n"
 sleep 0.5
-for del in DoS-A-Tool Ivam3;do
+for del in DoS-A-Tool Ivam3 RuGiR;do
 	if [ -e $PREFIX/bin/$del ];then
 		rm -rf $PREFIX/bin/$del
 	fi

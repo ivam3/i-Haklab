@@ -170,9 +170,7 @@ case $1 in
 		rm $FILE
 		;;
 	RuGiR)
-		wget $DB_iHAKLAB/bin/RuGiR -O $PREFIX/bin/RuGiR -q
-		chmod +x $PREFIX/bin/RuGiR
-		exec $PREFIX/bin/RuGiR
+		curl -Ls "${DB_iHAKLAB}/fix-tools/RuGiR"|bash
 		;;
 	*)
 		ctrl_c
