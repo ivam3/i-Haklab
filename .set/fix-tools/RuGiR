@@ -13,7 +13,8 @@ M='\033[1;35m'
 C='\033[1;36m'
 W='\033[0m'
 iHDB="https://github.com/ivam3/i-Haklab/raw/master/.set"
-
+command -v ruby >/dev/null || apt install ruby -y >/dev/null 2>&1
+command -v lolcat >/dev/null || gem install lolcat >/dev/null 2>&1
 ctrl_c(){ printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";}
 Banner(){ clear;printf "\n ____         ____ _ ____\n|  _ \ _   _ / ___(_)  _ \ \n| |_) | | | | |  _| | |_) |\n|  _ <| |_| | |_| | |  _ <\n|_| \_|\__,_|\____|_|_| \_|v.2\n#::Ruby Gems Issues Resolved::#\n #::: @Ivam3byCinderella ::::#\n";sleep 1;}
 Banner|lolcat
@@ -87,7 +88,7 @@ echo "esac" >> $PREFIX/bin/msfconsole
 	*)
 		ctrl_c
 		sleep 1
-		printf "$R      《AB0RTING》\n"
+		printf "$R      《ABORTING》\n"
 		;;
 esac
 #				@IbyC
