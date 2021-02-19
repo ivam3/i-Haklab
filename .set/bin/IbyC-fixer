@@ -120,7 +120,8 @@ else
         sleep 1
 fi
 
-$(clear);curl -Ls "${iHDB}/libexec/banner/Ivam3"|bash
+$(clear)
+curl -Ls "${iHDB}/libexec/banner/Ivam3"|bash
 while [ -z $1 ]; do
 	Menu
 done
