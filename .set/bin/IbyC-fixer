@@ -106,6 +106,7 @@ until [ -e $PREFIX/bin/IbyC-fixer ]; do
 	fi
 done
 
+NO(){
 declare -a INSTADATE=($(ls -l $PREFIX/bin/IbyC-fixer|awk -F " " '{print $6,$7}') $(curl -Ls $iHDB/bin/IbyC-fixer|grep "UPGRADED"|awk -F "/" '{print $2,$3}'))
 printf "$Y[!]─➤$W Looking for updates..";
 sleep 1
@@ -119,9 +120,8 @@ else
         echo "$G.UPDATED$W"
         sleep 1
 fi
-
-$(clear)
-curl -Ls "${iHDB}/libexec/banner/Ivam3"|bash
+}
+clear;curl -Ls "${iHDB}/libexec/banner/Ivam3"|bash
 while [ -z $1 ]; do
 	Menu
 done
