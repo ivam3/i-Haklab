@@ -57,8 +57,8 @@ Turtle() {
         rm -rf $DIR
 	}
 Menu() {
-	printf "$B\n[USAGE-01]-> To fix python modules:$G\nIbyC-fixer <[B|BASIC] [L|LDFLAGS] [S|SODIUM]> <[Py|Py2]> <[file.txt|module(max 3)]>$W\n\nB  BASIC\tInstall module on basic\nL  LDFLAGS\tForce installation to use libraries and system compiler\nS  SODIUM\tForce the installation to use the sodium decryptor\nPy  \t\tFor python3\nPy2  \t\tFor python2\n\nExamples:\n\tIbyC-fixer BASIC Py future\n\tIbyC-fixer S Py2 colorama\n\n"
-	printf "$B\n[USAGE-02]-> To fix an specific issue:$G\nIbyC-fixer <[bigdecimal|nrauf|metasploit|RuGiR]> <option>$W\n\nbigdecimal\t\tTo fix ruby gem bigdecimal issues\nnrauf       dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nmetasploit\t\tTo fix metasploit instalation\nRuGiR\t\t\tTo fix ruby gems instalation\n\nExamples:\n\tIbyC-fixer bigdecimal\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n"
+	printf $B"[USAGE-01]-> To fix python modules:$G\nIbyC-fixer <[B|BASIC] [L|LDFLAGS] [S|SODIUM]> <[Py|Py2]> <[file.txt|module(max 3)]>$W\n\nB  BASIC\tInstall module on basic\nL  LDFLAGS\tForce installation to use libraries and system compiler\nS  SODIUM\tForce the installation to use the sodium decryptor\nPy  \t\tFor python3\nPy2  \t\tFor python2\n\nExamples:\n\tIbyC-fixer BASIC Py future\n\tIbyC-fixer S Py2 colorama\n"
+	printf "$B\n[USAGE-02]-> To fix an specific issue:$G\nIbyC-fixer <[nrauf|metasploit|RuGiR]> <option>$W\n\nnrauf       dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nmetasploit\t\tTo fix metasploit instalation\nRuGiR\t\t\tTo fix ruby gems issues\n\nExamples:\n\tIbyC-fixer RuGiR\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n\n"
 	exit
 	}
 Chck() {
@@ -159,9 +159,6 @@ case $1 in
 		else
 			printf "$R\n[ERR]─➤$W Apk file unallocated\n"
 		fi
-		;;
-	bigdecimal)
-		curl -Ls "${DB_iHAKLAB}/fix-tools/fixbigdecimal"|bash
 		;;
 	metasploit)
 		wget -q "${DB_iHAKLAB}/fix-tools/fixmetasploit" -O $FILE

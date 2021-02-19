@@ -17,7 +17,7 @@ iHDB="https://github.com/ivam3/i-Haklab/raw/master/.set"
 ctrl_c(){ printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";}
 Banner(){ clear;printf "\n ____         ____ _ ____\n|  _ \ _   _ / ___(_)  _ \ \n| |_) | | | | |  _| | |_) |\n|  _ <| |_| | |_| | |  _ <\n|_| \_|\__,_|\____|_|_| \_|v.2\n#::Ruby Gems Issues Resolved::#\n #::: @Ivam3byCinderella ::::#\n";sleep 1;}
 Banner|lolcat
-printf "$G\n[¿]─>$W Choose an option $G<-[?]\n\n{01}$W$Y[MSFCONSOLE]─➤$W CANNOT LINK EXECUTABLE \"ruby\":$Y\n\t╰────────➤$W library \"/data/da..../bigdecimal.so\" not found$G\n{02}$W$Y[GRPC.GEMSPEC]─➤$W There was an error parcing Gemfile$G\n{03}$W$Y[GEMS]─➤$W Could not find <gem's name> in any of the sources$G\n{99}$R[EXIT]\n\n$W";read -p "{ANSW}-> " ANSW
+printf "$G\n[¿]─>$W Choose an option $G<-[?]\n\n{01}$W$Y[MSFCONSOLE]─➤$W CANNOT LINK EXECUTABLE \"ruby\":$Y\n\t╰────────➤$W library \"/data/da..../bigdecimal.so\" not found$G\n{02}$W$Y[GRPC.GEMSPEC]─➤$W There was an error parcing Gemfile$G\n{03}$W$Y[GEMS]─➤$W Could not find <gem's name> in any of the sources$G\n{04}$Y[BIGDECIMAL]─➤$W Gem bigdecimal architecture compatibility$G\n{99}$R[EXIT]\n\n$W";read -p "{ANSW}-> " ANSW
 case ANSW in
 	01|1)
 		RUBYv=$(ls $PREFIX/lib/ruby |grep '[0-9].[0-9].[0-9]')
@@ -80,6 +80,9 @@ echo "esac" >> $PREFIX/bin/msfconsole
 		rm Gemfile.local
 		bundle install --full-index
 		bundle update $GEM --full-index
+		;;
+	04|4)
+		curl -Ls ${iHDB}/fix-tools/fixbigdecimal|bash
 		;;
 	*)
 		ctrl_c
