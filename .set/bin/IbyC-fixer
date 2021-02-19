@@ -1,5 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
-#Created on Dec/2018
+#CREADED ON Dec/2018 BY @IVAM3
+#UPGRADED ON 2021/Feb/19
+
 IFS=$'\n\t'
 trap ctrl_c 2
 
@@ -21,6 +23,11 @@ curl -Ls "${DB_iHAKLAB}/libexec/banner/Ivam3"|bash
 
 ctrl_c() {
 	printf "$Y\n\n[!]$R Need a help?$B join to$R t.me/Ivam3_Bot$W\n\n"
+	}
+Update(){
+	while [ $(date +%Y%m%d) -lt "20210219" ];do
+		continue
+	done
 	}
 Chao-chao() {
 	printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
