@@ -4,9 +4,10 @@
 
 IFS=$'\n\t'
 trap ctrl_c 2
+command -v curl >/dev/null 2>&1 || pkg install curl -y >/dev/null 2>&1
 
-DB_iHAKLAB="https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set"
-DB_IVAM3="https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/installer"
+iHDB="https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set"
+IbyCDB="https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/installer"
 FILE=$(mktemp)
 R='\033[1;31m'
 G='\033[1;32m'
@@ -18,16 +19,8 @@ M='\033[1;35m'
 C='\033[1;36m'
 W='\033[0m'
 
-command -v curl >/dev/null 2>&1 || pkg install curl -y >/dev/null 2>&1
-curl -Ls "${DB_iHAKLAB}/libexec/banner/Ivam3"|bash
-
 ctrl_c() {
 	printf "$Y\n\n[!]$R Need a help?$B join to$R t.me/Ivam3_Bot$W\n\n"
-	}
-Update(){
-	while [ $(date +%Y%m%d) -lt "20210219" ];do
-		continue
-	done
 	}
 Chao-chao() {
 	printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
@@ -48,7 +41,7 @@ Lib() {
 	}	
 Turtle() {
 	DIR=$(mktemp -d)
-        wget https://github.com/ivam3/i-Haklab/raw/master/.set/fix-tools/py_modules/turtle-0.0.2.tar.gz -O $DIR/turtle-0.0.2.tar.gz -q
+        wget $iHDB/fix-tools/py_modules/turtle-0.0.2.tar.gz -O $DIR/turtle-0.0.2.tar.gz -q
         if [ $DIR/turtle-0.0.2.tar.gz ]; then
                 pushd $DIR
                 gunzip $DIR/turtle-0.0.2.tar.gz
@@ -76,7 +69,21 @@ Chck() {
 		fi
 	done
 
+	}
+Args(){
+if [ "$2" = 'Py' ]; then
+	Py=python
+	Repos
+	Lib
+elif [ "$2" = "Py2" ]; then
+	Py=python2
+	Repos
+	Lib
+else
+	Menu
+fi
 }
+
 while [ ! $(id -u) -ne 0 ]; do
 	printf "$R\n[W]:-> You need to be a common user$W\n"
 	exit
@@ -95,23 +102,27 @@ until [ -e $PREFIX/bin/IbyC-fixer ]; do
 		exit
 	fi
 done
+
+declare -a INSTADATE=($(ls -l $PREFIX/bin/IbyC-fixer|awk -F " " '{print $6,$7}') $(curl -Ls $iHDB/bin/Iby
+C-fixer|grep "UPGRADED"|awk -F "/" '{print $2,$3}'))
+printf "$Y[!]->$W Looking for updates..";
+sleep 1
+if [ "${INSTADATE[0]}" != "${INSTADATE[2]}" ] || [ "${INSTADATE[1]}" -lt "${INSTADATE[3]}" ];then
+        printf "$Y.Upgrading";
+        sleep 2
+	wget -q $iHDB/bin/IbyC-fixer -O $PREFIX/bin/IbyC-fixer
+        printf "$G..DONE!!$W"
+        sleep 1
+else
+        echo "$G.UPDATED$W\n"
+        sleep 1
+fi
+
+curl -Ls "${iHDB}/libexec/banner/Ivam3"|bash
 while [ -z $1 ]; do
 	Menu
 done
 
-Args(){
-if [ "$2" = 'Py' ]; then
-	Py=python
-	Repos
-	Lib
-elif [ "$2" = "Py2" ]; then
-	Py=python2
-	Repos
-	Lib
-else
-	Menu
-fi
-}
 case $1 in
 	B|BASIC)
 		Args
@@ -159,7 +170,7 @@ case $1 in
 		;;
 	nrauf)
 		if [ $2 ];then
-			wget $DB_iHAKLAB/fix-tools/nrauf -O $FILE -q
+			wget $iHDB/fix-tools/nrauf -O $FILE -q
 			chmod +x $FILE
 			exec $FILE $2
 			rm -rf $FILE
@@ -168,13 +179,13 @@ case $1 in
 		fi
 		;;
 	metasploit)
-		wget -q "${DB_iHAKLAB}/fix-tools/fixmetasploit" -O $FILE
+		wget -q "${iHDB}/fix-tools/fixmetasploit" -O $FILE
 		chmod +x $FILE
 		exec $FILE --install ruby=2.7.2 -r apt install metasploit -y
 		rm $FILE
 		;;
 	RuGiR)
-		curl -Ls "${DB_iHAKLAB}/fix-tools/RuGiR"|bash
+		curl -Ls "${iHDB}/fix-tools/RuGiR"|bash
 		;;
 	*)
 		ctrl_c
