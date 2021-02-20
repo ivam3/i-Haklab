@@ -308,6 +308,7 @@ case "$TOOL" in
 			STDERR
 		fi
 		;;
+
 #::::TOOLS IN BIN::::#
 	bincheker|binwalk|blackbox|converter|GetNPUsers|whatweb|DoS-A-Tool)
 		running
@@ -362,6 +363,19 @@ case "$TOOL" in
 			STDERR
 		fi
 		;;
+
+#:::: BINARIES ::::#
+	john)
+		if [ $PREFIX/opt/john ];then
+			running
+			cd $PREFIX/opt/john
+			clear
+			./john ${@:2}
+		else
+			STDERR
+		fi
+		;;
+
 	*)
 		printf "$R\n[w] i-Haklab :$W Unknown argument $TOOL\n"
 		exit 1
