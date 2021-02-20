@@ -24,10 +24,8 @@ banner
 if [ -z $1 ] || [ $1 = help ]; then
 	Menu
 
-
 elif [ $1 = list ]; then
 	printf "$TOOL"
-
 
 elif [ $1 = show ] && [ -z $2 ]; then
         printf "$R[w]->$W Show argument need an option\n"

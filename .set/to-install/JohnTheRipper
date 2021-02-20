@@ -4,10 +4,7 @@ IFS=$'\n\t'
 trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
 
-function ctrl_c() {
-                echo
-                printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
-}
+ctrl_c(){ printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";}
 if [ ! -d ~/storage ]; then
         termux-setup-storage
 fi
@@ -41,25 +38,47 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         printf "\n\n"
         sleep 1
 done
+
 #INSTALLATION
-if [ -e $PREFIX/bin/john ]; then
-        rm $PREFIX/bin/john
-fi
-if [ -d $iHAKLAB/../JohnTheRipper ]; then
-	rm -rf $iHAKLAB/../JohnTheRipper
-fi
-yes | apkg update && pkg upgrade && pkg install perl git python python2
-git clone https://github.com/magnumripper/JohnTheRipper.git $iHAKLAB/../JohnTheRipper
-if [ ! -d $iHAKLAB/../JohnTheRipper ]
-then
-	git clone https://github.com/openwall/john $iHAKLAB/../JohnTheRipper
-fi
-echo "#!/data/data/com.termux/files/usr/bin/bash" > $PREFIX/bin/john
-echo "" >> $PREFIX/bin/john
-echo 'printf "Command John will be available too soon"' >> $PREFIX/bin/john
-echo "" >> $PREFIX/bin/john
-echo "#\t\t @Ivam3" >> $PREFIX/bin/john
-chmod 711 $PREFIX/bin/john
+JTRv="1.8.0"
+JTRtar="https://download.openwall.net/pub/projects/john/contrib/android/john-$JTRv-android-1.tar.gz"
+
+for del in $PREFIX/bin/john $iHAKLAB/../JohnTheRipper $PREFIX/opt/john $TMPDIR/john-$JTRv-android;do
+	if [ -e $del ] || [ -d $del ];then
+		rm -rf $del
+	fi
+done
+
+yes|pkg update && pkg upgrade && pkg install wget
+wget -q $JTRtar -O $TMPDIR/john-$JTRv-android-1.tar.gz
+cd $TMPDIR;tar -xvzf john-$JTRv-android-1.tar.gz
+rm -rf john-$JTRv-android-1.tar.gz
+mkdir -p $PREFIX/opt/john
+JTR="$PREFIX/opt/john"
+mv $TMPDIR/john-$JTRv-android/user/* $JTR
+ln -s $JTR/john.conf $JTR/john.ini
+case $(uname -a) in
+#	declare -a arch=(arm64-v8a  armeabi  armeabi-v7a  mips  mips64  x86  x86_64)
+    aarch64)
+        mv $TMPDIR/john-$JTRv-android/libs/arm64-v8a/* $JTR
+        ;;
+    arm)
+        mv $TMPDIR/john-$JTRv-android/libs/armeabi/* $JTR
+        ;;
+    armhf)
+        mv $TMPDIR/john-$JTRv-android/libs/armeabi-v7a/* $JTR
+        ;;
+    i686)
+        mv $TMPDIR/john-$JTRv-android/libs/x86/* $JTR
+        ;;
+    x86_64)
+        mv $TMPDIR/john-$JTRv-android/libs/x86_64/* $JTR
+        ;;
+esac
+rm -rf $TMPDIR/john-$JTRv-android
+chmod +x $JTR/*
+ln -s $JTR/john $PREFIX/bin/john
+
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3

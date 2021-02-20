@@ -42,14 +42,11 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         sleep 1
 done
 #UNINSTALLATION
-if [ -e $PREFIX/bin/john ]; then
-        rm $PREFIX/bin/john
-fi
-if [ -d $iHAKLAB/../JohnTheRipper ]; then
-	rm -rf $iHAKLAB/../JohnTheRipper
-fi
-apt remove -y perl git
-apt autoremove
+for del in $PREFIX/bin/john $iHAKLAB/../JohnTheRipper $PREFIX/opt/john $PREFIX/tmp/john-1.8.0-android;do
+        if [ -e $del ] || [ -d $del ];then
+                rm -rf $del
+        fi
+done
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
