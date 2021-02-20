@@ -187,7 +187,10 @@ case $1 in
 		rm $FILE
 		;;
 	RuGiR)
-		curl -Ls "${iHDB}/fix-tools/RuGiR"|bash
+		curl -Ls "${iHDB}/fix-tools/RuGiR" -o $FILE
+		chmod +x $FILE
+		exec $FILE
+		rm -rf $FILE
 		;;
 	*)
 		ctrl_c
