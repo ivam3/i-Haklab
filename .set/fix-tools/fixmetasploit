@@ -172,7 +172,7 @@ if [ -d ${PREFIX}/opt/metasploit-framework ];then
 	printf " The data base can be active with command\n\t$G   > postgresql start <$W\n"
 	printf "      Now you can run it with command$G\n\t$G   >    msfconsole    <\n"
 	printf "\n$R :::::::::::::: ADVERSMENT ::::::::::::::$W\n"
-	printf "        If msfconsole didn't run\n         execute the file RuGiR\n       (Ruby Gem issues Resolved)\n    to try to fix it with another steps\n\t$G   >       RuGiR      <$W\n\n"
+	printf "        If msfconsole didn't run\n         execute the file RuGiR\n       (Ruby Gem issues Resolved)\n    to try to fix it with another steps\n\t$G   > IbyC-fixer RuGiR <$W\n\n"
 else
 	ctrl_c
 fi
