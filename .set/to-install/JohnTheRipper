@@ -57,7 +57,7 @@ mkdir -p $PREFIX/opt/john
 JTR="$PREFIX/opt/john"
 mv $TMPDIR/john-$JTRv-android/user/* $JTR
 ln -s $JTR/john.conf $JTR/john.ini
-case $(uname -a) in
+case $(uname -m) in
 #	declare -a arch=(arm64-v8a  armeabi  armeabi-v7a  mips  mips64  x86  x86_64)
     aarch64)
         mv $TMPDIR/john-$JTRv-android/libs/arm64-v8a/* $JTR
