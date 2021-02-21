@@ -77,7 +77,20 @@ case $(uname -m) in
 esac
 rm -rf $TMPDIR/john-$JTRv-android
 chmod +x $JTR/*
-ln -s $JTR/john $PREFIX/bin/john
+echo "#!/data/data/com.termux/files/usr/bin/bash" > $PREFIX/bin/john
+echo "#This script find and execute johntheripper tool" >> $PREFIX/bin/john
+echo "#" >> $PREFIX/bin/john
+echo "R='\033[1;31m'"  >> $PREFIX/bin/john
+echo "W='\033[0m'" >> $PREFIX/bin/john
+echo " " >> $PREFIX/bin/john
+echo "if [ -d $PREFIX/opt/john ];then" >> $PREFIX/bin/john
+echo "        cd $PREFIX/opt/john" >> $PREFIX/bin/john
+echo "        ./john" >> $PREFIX/bin/john
+echo "else" >> $PREFIX/bin/john
+echo "        printf \"\$R[ERROR]─➤ JohnTheRipper is not installed\$W\"" >> $PREFIX/bin/john
+echo "fi" >> $PREFIX/bin/john
+echo "#            @Ivam3" >> $PREFIX/bin/john
+chmod +x $PREFIX/bin/john
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"

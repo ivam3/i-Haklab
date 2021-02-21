@@ -40,12 +40,13 @@ else
 fi
 done
 #TRASH
-printf "$Y[-]-> Dropping the trash\n"
+printf "$Y[-]-> Dropping the trash\n$W"
 sleep 0.5
 for del in DoS-A-Tool Ivam3 RuGiR;do
 	if [ -e $PREFIX/bin/$del ];then
 		rm -rf $PREFIX/bin/$del
 	fi
+done
 
 #UPGRADE OMF
 printf "$Y[!]-> Upgrading i-Haklab shell\n"
@@ -104,7 +105,7 @@ fi
 BINDIR=$(ls $iHAKLAB/.set/bin)
 printf "$Y[!]-> Upgrading commands. . .$W\n"
 for i in ${BINDIR[*]}; do
-	wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$i -O $PREFIX/bin/$i > /dev/null 2>&1
+	wget -q https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$i -O $PREFIX/bin/$i
 	chmod +x $PREFIX/bin/$i
 done
 
