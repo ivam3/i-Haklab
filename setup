@@ -6,17 +6,17 @@ PARTITION=$(echo "$PWD" | grep -o sdext2)
 iHDB="https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set"
 
 command -v curl >/dev/null 2>&1 || apt install curl -y >/dev/null 2>&1
-curl -LOs ${iHDB}/libexec/colors -o /data/data/com.termux/files/usr/libexec/colors > /dev/null 2>&1
+curl -Ls ${iHDB}/libexec/colors -o /data/data/com.termux/files/usr/libexec/colors
 source /data/data/com.termux/files/usr/libexec/colors
 
 ctrl_c(){ printf "$Y\n\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n\n";}
 
 while [ ! $(id -u) -ne 0 ]; do
-	printf "$R\n[W]:-> You need to be a common user to install i-Haklab$W\n"
+	printf "$R\n[W]─➤ You need to be a common user to install i-Haklab$W\n"
 	exit
 done
 until [ -d /data/data/com.termux/files/home/i-Haklab ]; do
-        printf "$R\n[W]:-> i-Haklab directory must to be in home directory$W\n"
+        printf "$R\n[W]─➤ i-Haklab directory must to be in home directory$W\n"
 	exit
 done
 
@@ -32,50 +32,49 @@ if [ -d $HOME/.config ]; then
 fi
 if command -v fish ;then yes|apt remove fish && apt autoremove; fi
 
-printf "$Y\n[!]─➤$W Head to app configuration and provides storage permissions to termux$Y\n ╰─➤$W when finished press enter\n$W"
+printf "$Y\n[!]─➤$W Head to app configuration and provides storage permissions to termux$Y\n ╰─➤$W when finished$G press enter\n$W"
 read enter
-termux-setup-storage
 
 #::::::::::Installation of dependencies::::::::::::#
 yes|pkg update && pkg upgrade
 for repo in fish root-repo unstable-repo fortune util-linux coreutils vim python python2 ruby perl clang curl wget make openssl openssl-tool php zip unzip tar w3m neofetch weechat irssi tor torsocks proxychains-ng htop bison megatools findutils git apr apr-util openssh apache2 mariadb php-apache pkg-config termux-api termux-tools termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner cmatrix figlet man termux-api hydra axel fortune apksigner autoconf libffi libgmp libpcap readline libsqlite libgrpc libiconv libcaca libtool libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static zlib libassuan libgcrypt libgpg-error gnupg gpgme dnsutils debianutils sqlite dirb mlocate sqlmap crunch translate-shell; do
-	GOTIT=$(pkg list-installed | grep -oE $i)
-	PKG=$(pkg list-all|grep -o $i)
+	GOTIT=$(pkg list-installed | grep -oE $repo)
+	PKG=$(pkg list-all|grep -o $repo)
 	if [ ! -z "$PKG" ] && [ -z "$GOTIT" ];then
-		printf "$G\n[+]─➤$W Installing the repository $i $W\n"
-		yes|pkg install $i >/dev/null 2>&1
+		printf "$G\n[+]─➤$W Installing the repository $repo $W\n"
+		yes|pkg install $repo >/dev/null 2>&1
 	elif [ ! -z "$PKG" ] && [ ! -z "$GOTIT" ]; then
 		continue
 	else
-		printf "$R\n[w]─➤$W The repository $i is not candidate$W\n"
+		printf "$R\n[w]─➤$W The repository $repo is not candidate$W\n"
 		sleep 1
 	fi
 done
 updatedb
 for v in python python2 ; do
-	$v -m pip install --upgrade pip
+	$v -m pip --no-color install --upgrade pip
 done
 
 for module in trufflehog wheel speedtest-cli scapy wfuzz h8mail ; do
         for v in python python2 ; do
-		$v -m pip install $module 
+		$v -m pip --no-color install $module 
 	done
 done
 
 #::::::::::Searching for root permissions::::::::::::#
 CHECKROOT=$(bash /data/data/com.termux/files/home/i-Haklab/.set/to-install/check-root)
 USR=$(whoami)
-	if [ $CHECKROOT = "root" ]; then
+if [ $CHECKROOT = "root" ]; then
 	command -v sudo > /dev/null || bash /data/data/com.termux/files/home/i-Haklab/.set/to-install/instasudo
-        if [ -e /data/data/com.termux/files/home/.suroot/.bashrc ]; then
-                if [ ! -O /data/data/com.termux/files/home/.suroot/.bashrc ]; then
-                                sudo chown $USR:$USR -R /data/data/com.termux/files/home/.suroot/
-                fi
+	if [ -e /data/data/com.termux/files/home/.suroot/.bashrc ]; then
+		if [ ! -O /data/data/com.termux/files/home/.suroot/.bashrc ]; then
+			sudo chown $USR:$USR -R /data/data/com.termux/files/home/.suroot
+		fi
 	else
 		if [ ! -d /data/data/com.termux/files/home/.suroot ]; then
 			mkdir /data/data/com.termux/files/home/.suroot
 		fi
-        fi
+	fi
         echo "PS1=\"\[\e[33m\][!] \[\e[31m\]Press\[\e[32m\] Ctrl d\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\"" > /data/data/com.termux/files/home/.suroot/.bashrc
         echo "export TERM=xterm-256color" >> /data/data/com.termux/files/home/.suroot/.bashrc
         echo "export LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib" >> /data/data/com.termux/files/home/.suroot/.bashrc
@@ -86,35 +85,38 @@ USR=$(whoami)
 fi
 
 #::::::::::Definition of variable i-Haklab::::::::::::#
-termux-setup-storage
+printf "$G\n[+]─➤ Getting access to external storage...$W"
+sleep 1
+yes|termux-setup-storage
 SDCARD=$(ls -l $HOME/storage/external-1 | awk '{print $11}')
 if [ ! -z $SDCARD ] && [ -z $PARTITION ]; then
 	until [ -d $SDCARD/roothome ]; do
-		printf "$R\n[W]-> O-ops!!$W roothome directory cannot be created"
-		sleep 0.5
-		printf "$Y\n[!]-> trying to fix it . . .\n$W"
+		printf "$R Access denied$W"
+		sleep 1
+		printf "$Y Retrieving$W"
 		sleep 0.5
 		mkdir -p $SDCARD/roothome
 	done
-	until [ -O $SDCARD/roothome ]; do
-		printf "$R\n[W]-> O-ops!!$W Your aren't owner of roothome directory"
-		sleep 0.5
-		printf "$Y\n[!]-> trying to fix it . . .\n$W"
+	until [ -O $SDCARD/roothome ] && [ $CHECKROOT = "root" ]; do
+		printf "$G DONE!!$W\n"
+		sleep 1
+		printf "$Y\n[!]─➤ Fixing permissions...$W"
 		sleep 0.5
 		sudo chown $USR:$USR $SDCARD/roothome
 	done
+	printf "$G DONE!!$W\n"
+	sleep 1
         cp -r /data/data/com.termux/files/home/i-Haklab /data/data/com.termux/files/home/storage/external-1/roothome/
         iHAKLAB=$SDCARD/roothome/i-Haklab
 elif [ ! -z $PARTITION ] || [ -d /data/data/com.termux ]; then
         iHAKLAB=/data/data/com.termux/files/home/i-Haklab
 else
-        printf "$R\n[W]-> STORAGE ACCESS DENIED$W\n"
+        printf "$R\n[W]─➤ STORAGE ACCESS DENIED$W\n"
 	exit
 fi
 
 #::::::::::Installation of Ohmyfish::::::::::::#
-pkg install fish -y
-curl -L http://get.oh-my.fish | fish
+curl -Ls http://get.oh-my.fish | fish
 echo "if status --is-login" >> $PREFIX/etc/fish/config.fish
 echo "bash /data/data/com.termux/files/usr/var/log/login-termux" >> $PREFIX/etc/fish/config.fish
 echo "end" >> $PREFIX/etc/fish/config.fish
@@ -165,6 +167,6 @@ fish $THEME >/dev/null 2>&1
 rm $THEME
 bash $iHAKLAB/.set/libexec/review
 
-printf "$Y\n\n[!]->$G i-Haklab installed !!!$Y |$W Please restart Termux and enjoy it!!\n\n"
+printf "$Y\n\n[!]─➤$G i-Haklab installed !!!$Y |$W Please restart Termux and enjoy it!!\n\n"
 
 #		@Ivam3

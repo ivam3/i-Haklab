@@ -3,10 +3,8 @@
 IFS=$'\n\t'
 trap ctrl_c 2
 PARTITION=$(echo "$PWD" | grep -o sdext2)
-ctrl_c() {
-	echo
-	printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
-}
+ctrl_c(){ printf "$Y\n\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n\n";}
+
 while [ ! $(id -u) -ne 0 ]; do
 	printf "$R\n[W]:-> You need to be a common user to install i-Haklab$W\n"
 	exit
@@ -26,15 +24,33 @@ source $iHAKLAB/.set/functions/functions
 
 banner
 #:::::::::: Set colors :::::::::::#
-wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/colors -O /data/data/com.termux/files/usr/libexec/colors > /dev/null 2>&1
+command -v curl >/dev/null || pkg install curl -y >/dev/null 2>&1
+curl -Ls https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/colors -o /data/data/com.termux/files/usr/libexec/colors
 
 #::::::::::Installation of dependencies::::::::::::#
-apt update && apt upgrade -y
-apt install -y fish root-repo util-linux coreutils vim python python2 ruby perl clang curl wget make openssl fish openssl-tool php zip unzip tar w3m neofetch weechat irssi tor htop bison megatools findutils git apr apr-util openssh apache2 mariadb php-apache libtool pkg-config termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner libcaca cmatrix fortune figlet man termux-api hydra megatools axel fortune apksigner libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static gnupg gpgme libassuan libgcrypt libgpg-error -y
-python -m pip install --upgrade pip
-python2 -m pip install --upgrade pip
-for module in trufflehog speedtest-cli scapy ; do
-        python -m pip install $module
+yes|pkg update && pkg upgrade
+for repo in fish root-repo unstable-repo fortune util-linux coreutils vim python python2 ruby perl clang curl wget make openssl openssl-tool php zip unzip tar w3m neofetch weechat irssi tor torsocks proxychains-ng htop bison megatools findutils git apr apr-util openssh apache2 mariadb php-apache pkg-config termux-api termux-tools termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner cmatrix figlet man termux-api hydra axel fortune apksigner autoconf libffi libgmp libpcap readline libsqlite libgrpc libiconv libcaca libtool libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static zlib libassuan libgcrypt libgpg-error gnupg gpgme dnsutils debianutils sqlite dirb mlocate sqlmap crunch translate-shell; do
+        GOTIT=$(pkg list-installed | grep -oE $repo)
+        PKG=$(pkg list-all|grep -o $repo)
+        if [ ! -z "$PKG" ] && [ -z "$GOTIT" ];then
+                printf "$G\n[+]─➤$W Installing the repository $repo $W\n"
+                yes|pkg install $repo >/dev/null 2>&1
+        elif [ ! -z "$PKG" ] && [ ! -z "$GOTIT" ]; then
+                continue
+        else
+                printf "$R\n[w]─➤$W The repository $repo is not candidate$W\n"
+                sleep 1
+        fi
+done
+updatedb
+for v in python python2 ; do
+        $v -m pip --no-color install --upgrade pip
+done
+
+for module in trufflehog wheel speedtest-cli scapy wfuzz h8mail ; do
+        for v in python python2 ; do
+                $v -m pip --no-color install $module
+        done
 done
 
 #::::::::::Searching for root permissions::::::::::::#
