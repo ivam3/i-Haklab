@@ -1,10 +1,9 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-#date: october 5 2018
-#update: December 15 2018
+#update 2021
+#Functions
+#imagemagick
 
-
-#colors
 C='\033[1;36m'
 G='\033[1;32m'
 R='\033[1;31m'
@@ -13,196 +12,182 @@ B='\033[1;34m'
 P='\033[1;35m'
 RE='\033[0m'
 
-#version
-VERSION="v1.2"
-Ol
+command -v ffmpeg > /dev/null 2>&1 || { echo >&2 "Al parecer no tienes FFMPEG, espera";sleep 2;apt install -y ffmpeg;bash $0 ; }
+command -v mogrify > /dev/null 2>&1 || { echo >&2 "Al parecer no tienes imagemagick, espera" ; sleep 2 ; apt install -y imagemagick ; bash $0 ; }
 
-#start code
-
-trap "ctrl_c" 2
-function ctrl_c {
-	if [ -e ~/tmp ]; then
-		rm tmp
-	fi
-	if [ -e ~/ruta ]; then
-		rm ruta
-	fi
-	banner
-	echo -e "$G Bye bye.."
-	sleep 1
-	exit 1
-}
-
-PWD=$(pwd)
-
-
-if [ -e $HOME/.milux/converter.mlx ] ; then
-
-function banner {
+function _Logo {
         clear
-        echo -e "$C"
-        echo -e "
-                               _
-  ___ ___  _ ____   _____ _ __| |_ ___ _ __
- / __/ _ \| '_ \ \ / / _ \ '__| __/ _ \ '__|
-| (_| (_) | | | \ V /  __/ |  | ||  __/ |		Codificado
- \___\___/|_| |_|\_/ \___|_|   \__\___|_|  $RE By [M]iLu{×}_"
-        echo -e "$RE"
+        echo -e "$P"
+echo -e "
+      \_/
+     (* *)
+    __)#(__
+   ( )...( )(_)  $G C O N V E R T E R$P
+   || |_| ||//     $G      By$P
+>==() | | ()/      $G </[M]iLu{×}_> | DNP | 2021$P
+    _(___)_
+   [-]   [-]  $RE      Music - Video - Images
+   "   
 
 }
 
-banner
-echo -e $G"		Bienvenido al conversor multimedia$C $VERSION
+function _Menu() {
+	_Logo
+	echo -e $G"Elije una opcion
 
-     		 $RE ENTER$G Para continuar..$RE"
-read ENTER
-
-function convert {
-banner
-echo -e $Y"Ingresa la ruta donde se encuentra tu archivo.$C
-"
-while read -p " >>" RUTA && [ -z $RUTA ];do
-	echo -e $R"[*]$Y Debes ingresar una ruta valida$RE"
-done
-
-if [ "$(ls -A $RUTA)" ];then
-
-if [ -d "$RUTA" ];then
-	while [ -z $OPTION ];do
-	banner
-	echo -e $G"leyendo..$RE"
-	sleep 2
-	ls $RUTA > ruta;cat -n ruta
-	echo -e "$G 
-	Selecciona tu archivo a convertir$C
+	[$RE 1$G ]$Y Audio $G
+	[$RE 2$G ]$Y Imagen $G
+	[$RE 3$G ]$Y Video $G
+	[$RE 4$G ]$Y Acerca de.. $G
+	[$RE 0$G ]$Y Salir $G
 	"
-	read -p " >>" OPTION 
-		if [ -z $OPTION ];then
-			banner
-                        echo -e $R"[X]$Y No escribiste nada$C"
-			sleep 2
-		fi
+	read -p " >> " OPT
 
-	done
-	FILE=$(head -n $OPTION ruta | tail -n+$OPTION ruta )
-	echo "$FILE" > tmp | sed -i "2,1000d" tmp
-	NAMESONG=$(cat tmp)
-	F="${NAMESONG##*.}"
-	NAME=$(basename $RUTA/"$NAMESONG" .$F )
-	while [ -z $EXIT ];do
-		
-		if [ -d $RUTA/$NAMESONG ];then
-			banner
-			echo -e $R"[X]$Y Error! Seleccionaste un directorio$C"
-			sleep 2
-			bash $0
-		fi
+	case $OPT in
+		1)
+			MODE="- Audio -";FR1=mp3;FR2=wma;FR3=ogg
+			_Main
+			;;
+		2)
+			MODE="- Imagen -";FR1=jpeg;FR2=png;FR3=jpg
+			_Main
+			;;
+		3)
+			MODE="- Video -";FR1=avi;FR2=wmv;FR3=mp4
+			_Main
+			;;
+		4)
+			_About
+			;;
+		0)
+			_Logo
+			echo -e $G"bye bye.."
+			exit
+			;;
+	esac
 
-	banner
-	echo -e "$Y Ingresa el formato de salida,$RE Ejemplo:$C mp3, wma, wmv, avi etc.$RE
-	"
-
-	while read -p " >>" EXIT && [ -z $EXIT ] || [ "$EXIT" = "apk" ] || [ "$EXIT" = "doc" ] || [ "$EXIT" = "docx" ] || [ "$EXIT" = "xls" ] || [ "$EXIT" = "xlsx" ] || [ "$EXIT" = "pdf" ] || [ "$EXIT" = "py" ] || [ "$EXIT" = "sh" ] || [ "$EXIT" = "txt" ] ;do
-		echo -e $R"[X]$Y No escribiste nada o formato incopatible $RE"
-		sleep 1
-	done
-
-
-	while [ -z $SINO ];do
-	banner
-	echo -e $G"La informacion, es correcta? s/n
-                "
-	sleep 1
-        echo -e $P"Formato a convertir:$RE .$EXIT"
-        sleep 1
-        echo -e $P"Cancion:$RE $NAMESONG $C
-	"
-	while read -p " >>" SINO && [ -z $SINO ];do
-		echo -e $R"[X]$Y No escribiste nada$C"
-		sleep 1
-	done
-
-
-		if [ $SINO = "s" ] || [ $SINO = "S" ] || [ $SINO = "y" ] || [ $SINO = "Y" ];then
-		ffmpeg -i "$RUTA/$NAMESONG" "$RUTA/$NAME.$EXIT"
-		banner
-		echo -e $G"[*]$P Deseas conservar el archivo original? s/n$C"
-		while read -p ">> " CONSERVAR && [ -z $CONSERVAR ];do
-			echo -e $R"[X]$Y No escribiste nada$C"
-			sleep 1
-		done
-		
-	if [ $CONSERVAR = "s" ] || [ $CONSERVAR = "S" ] || [ $CONSERVAR = "y" ] || [ $CONSERVAR = "Y" ];then
-			rm -rf ruta tmp 
-		else
-			rm -rf ruta tmp $RUTA/"$NAMESONG"
-	fi
-
-		banner
-		echo -e $G"[*]$RE Listo se ha guardado como "$RUTA/$NAME.$EXIT""
-		sleep 2
-		echo -e $G"[*]$RE hasta luego!"
-		sleep 2
-		echo -e $G"[*]$RE ENTER Para continuar"
-		read ENTER
-		bash $0
-	else
-		bash $0
-	fi
-done
-		if [ -z $SINO ];then
-                        banner                                                                       echo -e $R"[X]$Y No escribiste nada$C"
-			sleep 2
-                fi
-
-	if [ -z $SINO ];then
-                        banner                                                                       echo -e $R"[X]$Y No escribiste nada$C"                                       sleep 2
-         fi
-	done
-else
-	banner
-	echo -e $R"[X]$Y Ruta invalida$C"
-	sleep 2
-	convert
-fi
-else
-	banner
-	echo -e $R"[X]$Y Ruta no existe!$C"
-	sleep 3
-	convert
-fi
 }
-convert
 
 
+function _Main() { 
+_Logo
+echo -e $G"Escribe la ruta donde se encuentra\ntu archivo a convertir$RE Ejem.:$R /sdcard/MiFolder$RE"
 
-if [ -z "$RUTA" ];then
-	echo -e $R"[*]$Y No ingresaste nada$C"
-	sleep 2
-fi
+while read -p "$MODE >> " RUTA && [ -z $RUTA ];do
+	echo -e $R"[!]$Y Debes ingresar una ruta valida
+$RE"
+done
+ls $RUTA > /dev/null 2>&1;C1=$?
 
-
+if [ "$C1" = "0" ];then
+	_Continue
 else
-	#function update {
-		
-#}
-
-	clear
-	echo -e $C"Instalando herramientas basicas..$RE"
-	sleep 5
-	apt -y update && apt -y upgrade
-	pkg install -y ffmpeg whiptail
-	ln -s $PWD/$0 /data/data/com.termux/files/usr/bin/converter
-	mkdir ~/.milux
-	echo "Hola! No me elimines" > $HOME/.milux/converter.mlx
-	echo "$VERSION" > $HOME/.milux/version.mlx
-	
-	if (whiptail --title "Milux Converter v1.0" --yes-button "Acepto" --no-button "No acepto" --yesno "Gracias por utilizar mi script.\n al tocar Acepto  estas de acuerdo en el uso correcto y respetando\n el codigo asi como el banner y todo lo que conlleva este script se utiliza ffmpeg como motor principal \n sugerencia miluxmil@yahoo.com" 10 78) then
+	echo -e $R"[!]$Y Ruta no existe, verificala$RE";sleep 3
 	bash $0
-else
-	banner
-	echo -e $C"Seleccionaste No Acepto$RE"
-	sleep 2
+fi
+}
+
+function _Music() {
+	ffmpeg -i $RUTA/"$FILE2" "$RUTA/${FILE2%.*}".$EXIT
+}
+function _Image(){
+	echo -e $G"Convirtiendo espera..."
+mogrify -format $EXIT $RUTA/"$FILE2" 
+}
+function _Video(){
+	ffmpeg -i $RUTA/"$FILE2" "$RUTA/${FILE2%.*}".$EXIT
+} 
+
+
+function _Continue() {
+	_Logo
+	ls $RUTA |cat -n
+	echo -e "$G"
+	while read -p "Selecciona una opcion >> " OPTION && [ -z $OPTION ];do
+	echo -e $R"[!]$Y Debes ingresar una opcion$RE"
+done
+FILE2=$(ls $RUTA |sed "$OPTION q;d" |cut -d ";" -f2,6)
+
+if [ -d $RUTA/$FILE2 ];then
+	echo -e $Y"[X]$R Error! Seleccionaste un directorio\nreiniciando script$C";sleep 3;bash $0
 fi
 
+_Logo
+echo -e "$Y Ingresa el formato de salida,$RE Ejemplo:$C $FR1, $FR2, $FR3 etc.$RE"
+while read -p " >> " EXIT && [ -z $EXIT ];do
+echo -e $R"[X]$Y No escribiste nada o Formato incopatible $RE";sleep 1
+done
+
+_Logo
+echo -e $G"La informacion, es correcta? s/n"
+echo -e $G"Archivo:$Y $FILE2 $RE";sleep 1
+echo -e $G"Formato:$Y $EXIT $RE";sleep 1
+while read -p " >> " SINO && [ -z $SINO ];do                    echo -e $R"[X]$Y No escribiste nada$C"
+	sleep 1
+done
+
+if [ $SINO = "s" ] || [ $SINO = "S" ] || [ $SINO = "y" ] || [ $SINO = "Y" ];then
+	echo -e "$G "
+	if [ "$MODE" = "- Audio -" ];then
+		_Music
+	elif [ "$MODE" = "- Imagen -" ];then
+		_Image
+	elif [ "$MODE" = "- Video -" ];then
+		_Video
+	fi
+	_Logo
+	echo -e $G"Archivo original:$RE "$FILE2""
+	echo -e $G"Deseas conservar el archivo original?"
+	read -p "s/n >> " SN
+	if [ $SN = "s" ] || [ $SN = "S" ];then
+		_OK
+		_Continue
+	elif [ $SN = "n" ] || [ $SN = "N" ];then
+		rm "$RUTA/$FILE2"
+		_OK
+		_Continue
+	else
+		_Logo
+		echo -e "Opcion invalida"
+		sleep 2
+		_Continue
+	fi
 fi
+}
+
+function _OK() {
+	_Logo
+	echo -e "$Y Convertido correctamente!\n Guardado como...$G ${FILE2%.*}.$EXIT\n$Y En:$G $RUTA $RE"
+	read -n 1 -p "ENTER To continue.."
+}
+
+function _Error() {
+	_Logo
+	echo -e "$R[!]$Y Ocurrio un error vuelve a intentarlo!"
+	sleep 3;bash $0
+}
+
+function _About(){
+	clear
+	echo -e $G"
+	            C O N V E R T E R
+		           by
+		</[M]iLu{×}_> | DNP | 2021
+
+   CONVERTER$RE Creado para DNP (Developer New Programmers)
+              Desarrollado por$G </[M]iLu{×}_>$RE
+        para el canal$G https://t.me/Ivam3by_Cinderella$RE
+	        bot ayuda$G https://t.me/Ivam3_Bot$RE
+	
+      	  Este script esta creado para facilitar
+        el cambio de formatos multimedia, utilizando
+    FFMPEG y imagemagick  para su correcto funcionamiento
+
+		¡GRACIAS POR INSTALAR CONVERTER!
+  $C             </[M]iLu{×}_>$G https://t.me/miluxmil$RE
+    "
+    read -n 1 -p "ENTER To Continue.."
+    bash $0
+}
+	
+_Menu
