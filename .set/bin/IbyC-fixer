@@ -192,6 +192,13 @@ case $1 in
 		exec $FILE
 		rm -rf $FILE
 		;;
+	downgradedRepo)
+		while [ ! -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ];do
+			printf "$R[w]─➤ Abhacker repositories needed\n$W"
+			exit
+		done
+		exec apt install ${@:2} -y
+		;;
 	*)
 		ctrl_c
 		exit
