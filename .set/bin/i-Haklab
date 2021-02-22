@@ -86,6 +86,11 @@ elif [ $1 = install ] && [ $2 ]; then
 		sleep 1
 		apt install $2 -y
 	fi
+	if [ $(ruby -v |cut -c 6-10) == "3.0.0" ] && [ -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ];then
+		printf "$Y[!]->$W downgrading ruby to 2.7.2..."
+		apt install ruby=2.7.2 >/dev/null 2>&1
+		printf "$G DONE!!$W\n"
+	fi
 
 
 elif [ $1 = remove ] && [ -z $2 ]; then
