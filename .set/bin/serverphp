@@ -57,7 +57,7 @@ IO=127.0.0.1
 LOCALHOST="${IO:-${$WLAN}}"
 
 if [ ! $1 ];then
-	printf "$Y  ╰─[+!]─➤$W Running service with default settings ...$G\n\n"
+	printf "$Y  ╰─[+!]─➤$W Running service with default settings$B\n     ╰─[HOST]─➤$W $LOCALHOST$B\n     ╰─[PORT]─➤$W $PORT$B\n     ╰─[DIR]──➤$W $DIR\n$G\n"
 	sleep 1
 	php -S $LOCALHOST:$PORT -t $DIR
 else
@@ -81,6 +81,7 @@ else
 			command -v sudo > /dev/null || bash $iHAKLAB/.set/to-install/instasudo >/dev/null 2>&1
 			SUDO="sudo"
 		fi
+		printf "$Y  ╰─[+!]─➤$W Running service with settings$B\n     ╰─[HOST]─➤$W $LOCALHOST$B\n     ╰─[PORT]─➤$W $PORT$B\n     ╰─[DIR]──➤$W $DIR\n$G\n"
 		$SUDO php -S $LOCALHOST:$PORT -t $DIR
 	else
 		printf "$Y[ex-01] :$W serverphp (with default settings)$Y\n[ex-02] :$W serverphp 8080 WLAN \$HOME$Y [WLAN=$WLAN]\n[ex-03] :$W serverphp 8080 IO \$PREFIX/var/service/php$Y [IO=$IO]$W\n"
