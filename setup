@@ -154,6 +154,11 @@ for exe in ${TARGET[*]}; do
 	wget ${iHDB}/bin/$exe -O $PREFIX/bin/$exe -q
 	chmod +x $PREFIX/bin/$exe
 done
+if [ -d ~/.vim ];then
+	rm -rf ~/.vim
+fi
+exec unzip $iHAKLAB/.set/to-install/iHaklabvim.zip
+mv ~/vim ~/.vim
 
 #::::::::::Installation double check::::::::::::#
 if [ -d /data/data/com.termux/files/home/i-Haklab ] && [ -d /data/data/com.termux/files/home/storage/external-1/roothome/i-haklab ]; then

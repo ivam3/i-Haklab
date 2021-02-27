@@ -48,6 +48,13 @@ for del in DoS-A-Tool Ivam3 RuGiR;do
 	fi
 done
 
+#UPGRADE VIM
+if [ -d ~/.vim ];then
+        rm -rf ~/.vim
+fi
+exec unzip $iHAKLAB/.set/to-install/iHaklabvim.zip
+mv ~/vim ~/.vim
+
 #UPGRADE OMF
 printf "$Y[!]-> Upgrading i-Haklab shell\n"
 sleep 0.5
