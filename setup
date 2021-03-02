@@ -97,13 +97,13 @@ if [ ! -z $SDCARD ] && [ -z $PARTITION ]; then
 		sleep 0.5
 		mkdir -p $SDCARD/roothome
 	done
-	until [ -O $SDCARD/roothome ] && [ $CHECKROOT = "root" ]; do
-		printf "$G DONE!!$W\n"
-		sleep 1
-		printf "$Y\n[!]─➤ Fixing permissions...$W"
-		sleep 0.5
-		sudo chown $USR:$USR $SDCARD/roothome
-	done
+#	until [ -O $SDCARD/roothome ] && [ $CHECKROOT = "root" ]; do
+#		printf "$G DONE!!$W\n"
+#		sleep 1
+#		printf "$Y\n[!]─➤ Fixing permissions...$W"
+#		sleep 0.5
+#		sudo chown $USR:$USR $SDCARD/roothome
+#	done
 	printf "$G DONE!!$W\n"
 	sleep 1
         cp -r /data/data/com.termux/files/home/i-Haklab /data/data/com.termux/files/home/storage/external-1/roothome/
