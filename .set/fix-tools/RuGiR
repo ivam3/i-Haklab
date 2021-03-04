@@ -32,7 +32,7 @@ echo "case \"\$SCRIPT_NAME\" in" >> $PREFIX/bin/msfconsole
 echo "	msfconsole)" >> $PREFIX/bin/msfconsole
 echo "		if [ ! -d \"$PREFIX/var/lib/postgresql\" ];then" >> $PREFIX/bin/msfconsole
 echo "			mkdir -p \"$PREFIX/var/lib/postgresql\"" >> $PREFIX/bin/msfconsole
-echo "			initdb \"${PREFIX}/var/lib/postgresql" >> $PREFIX/bin/msfconsole
+echo "			initdb \"${PREFIX}/var/lib/postgresql\"" >> $PREFIX/bin/msfconsole
 echo "		fi" >> $PREFIX/bin/msfconsole
 echo "		if ! pg_ctl -D \"${PREFIX}/var/lib/postgresql\" status > /dev/null 2>&1; then" >> $PREFIX/bin/msfconsole
 echo "			pg_ctl -D \"${PREFIX}/var/lib/postgresql\" start --silent" >> $PREFIX/bin/msfconsole
