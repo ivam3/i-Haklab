@@ -54,7 +54,7 @@ Turtle() {
 	}
 Menu() {
 	printf $B"[USAGE-01]─➤ To fix python modules:$G\nIbyC-fixer <[B|BASIC] [L|LDFLAGS] [S|SODIUM]> <[Py|Py2]> <[file.txt|module(max 3)]>$W\n\nB  BASIC\tInstall module on basic\nL  LDFLAGS\tForce installation to use libraries and system compiler\nS  SODIUM\tForce the installation to use the sodium decryptor\nPy  \t\tFor python3\nPy2  \t\tFor python2\n\nExamples:\n\tIbyC-fixer BASIC Py future\n\tIbyC-fixer S Py2 colorama\n"
-	printf "$B\n[USAGE-02]─➤ To fix an specific issue:$G\nIbyC-fixer <[nrauf|metasploit|downgradeRepo|RuGiR]> <option>$W\n\nnrauf         dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nmetasploit\t\t\tTo fix metasploit instalation\ndowngradeRepo repo=version\tDowngrade apt|pkg reporitory tospecific version\nRuGiR\t\t\t\tTo fix ruby gems issues\n\nExamples:\n\tIbyC-fixer RuGiR\n\tIbyC-fixer downgradeRepo ruby=2.7.2\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n\n"
+	printf "$B\n[USAGE-02]─➤ To fix an specific issue:$G\nIbyC-fixer <[nrauf|metasploit|downgradeRepo|RuGiR]> <option>$W\n\nnrauf         dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nmetasploit\t\t\tTo fix metasploit instalation\ndowngradeRepo repo=version\tDowngrade apt|pkg reporitory tospecific version\nRuGiR\t\t\t\tTo fix ruby gems issues\nngrok\t\t\t\tInstall ngrok-server from Abhacker repositories\n\nExamples:\n\tIbyC-fixer RuGiR\n\tIbyC-fixer downgradeRepo ruby=2.7.2\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n\n"
 	exit
 	}
 Chck() {
@@ -193,17 +193,35 @@ case $1 in
 		rm -rf $FILE
 		;;
 	downgradeRepo)
-		if [ ! -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ];then
-			printf "$R[w]─➤ Abhacker repositories needed\n$W"
+		while [ ! $2 ];do
+			printf "$R[w]─➤ An argument needed$W\n\n"
 			exit
+		done
+		if [ ! -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ];then
+			printf "$Y[!]─➤ Installing Abhacker repositories ...$G "
+			wget -q "${iHDB}/fix-tools/instAbhackerRepo" -O $FILE
+			chmod +x $FILE
+			exec $FILE --install ${@:2} >/dev/null 2>&1
+			rm $FILE
+			printf "DONE!!$W\n"
 		else
-			while [ ! $2 ];do
-				printf "$R[w]─➤ An argument needed$W\n\n"
-				exit
-			done
 			exec apt install ${@:2} -y
 		fi
 		;;
+	ngrok)
+		if [ ! -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ];then
+			printf "$Y[!]─➤ Installing Abhacker repositories ...$G "
+			wget -q "${iHDB}/fix-tools/instAbhackerRepo" -O $FILE
+			chmod +x $FILE
+			exec $FILE --install ngrok-server >/dev/null 2>&1
+			rm $FILE
+			printf "DONE!!$W\n"
+		else
+			printf "$G[+]─➤$W Installing Ngrok from Abhacker repositories ...$G "
+			exec apt install ngrok-server -y >/dev/null 2>&1
+			printf "DONE!!$W\n"
+                fi
+                ;;
 	*)
 		ctrl_c
 		exit
