@@ -103,6 +103,7 @@ if [ -z $TOOL ]; then
 ╰─exploitdb──────➤  Public exploits and corresponding vulnerable software, developed for use by penetration testers and vulnerability researchers
 ╰─fbi────────────➤  Accurate facebook account information gathering
 ╰─GetNPUsers-────➤  Attempt to list and get TGTs for those users that have the property
+╰─ghost──────────➤  
 ╰─gobuster───────➤  Gobuster is a tool used to brute-force URIs in web sites, DNS subdomains and Virtual Host names on target web servers.
 ╰─gophish────────➤  Launch simulated and monitored phishing campaigns.
 ╰─h8mail─────────➤  Password breach hunting tool, locally or using premium services
@@ -219,7 +220,7 @@ case "$TOOL" in
 			STDERR
 		fi
 		;;
-#::::PYTHON TOOLS::::#
+#::::PYTHON3 TOOLS::::#
 	evilurl|phoneinfoga|hunner|ipgeolocation|seeker|shellsploit|theharvester)
 		if CheckPath;then
 			exec python $TOOLPATH/$TOOL.py ${@:2}
@@ -227,7 +228,7 @@ case "$TOOL" in
                         STDERR
 		fi
 		;;
-	hakku|webhackshl|quack)
+	hakku|webhackshl|quack|ghost)
                 if CheckPath;then
 			exec python $TOOLPATH/$TOOL
                 else
