@@ -25,11 +25,11 @@ i-Haklab will ......
 
 - The rest of the tools can be installed or uninstalled individually by:
 
-	]> i-Haklab install/remove <tool name>
+        ]> i-Haklab install/remove <name of tool>
 
 - Either install or uninstall all at once:
 
-	]> i-Haklab install/remove all_tools
+        ]> i-Haklab install/remove all_tools
 
 - Once tools/frameworks installation ended the OMF shell configuration will the next. on it, i-Haklab will activate the OMF shell, and you will notice it when a welcome message to the new shell appears ... when this happens you will have to wait 2min and execute the command "exit "for the continuation of its installation.
 
