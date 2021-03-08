@@ -4,8 +4,9 @@
 If the law is violated with it's use, this would be the responsibility of the user who handled it..
 Ivam3 is not responsible for the misuse that can be given to everything that this laboratory entails
 
-To get help about how to use it join to irc chat in i-Haklab command
-		: $ i-Haklab weechat
+To get help about how to use it join to irc chat in i-Haklab command :
+
+        $ i-Haklab weechat
 
 To report some issues join to >> https://t.me/Ivam3_Bot
 
@@ -19,12 +20,15 @@ i-Haklab will ......
 - check if your android device has some root, if so, it will install the sudo command.
 - check if termux has permission to access the external memory, thus, in there it will create a directory called homeroot and there will install the tools and/or frameworks. otherwise they will be installed in the directory /data/data/com.termux/files/home. By the way, in case of Termux is installed in a second partition of your external memory those will be in /data/sdext2/data/com.termux/files/home.
 - i-Haklab has more than 80 tools of which only the main ones are installed (15) with a total weight of 1.9GB. -DoS-A-Tool -ExiF -Binchecker -Blackbox -Crunch -VPN -Tmux-viewer -Evilurl -Translate -Metasploit -EMBED -Java -Hydra -Nmap -H8mail So, you can see the list of all tools available under the command:
-	]> i-Haklab list
+
+        ]> i-Haklab list
 
 - The rest of the tools can be installed or uninstalled individually by:
+
 	]> i-Haklab install/remove <tool name>
 
 - Either install or uninstall all at once:
+
 	]> i-Haklab install/remove all_tools
 
 - Once tools/frameworks installation ended the OMF shell configuration will the next. on it, i-Haklab will activate the OMF shell, and you will notice it when a welcome message to the new shell appears ... when this happens you will have to wait 2min and execute the command "exit "for the continuation of its installation.
@@ -94,7 +98,8 @@ IRC (Internet Relay Chat) is an application layer protocol that facilitates comm
 # UPDATE AT NEWEST VERSION 
 
 i-Haklab is constantly updating tools and improvements. To stay updated you just have to run:
-	 i-Haklab update
+
+	 ]> i-Haklab update
 
 *** HAVE A NICE HACKING DAY!!!!
 
