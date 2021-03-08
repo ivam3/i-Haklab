@@ -94,9 +94,7 @@ IRC (Internet Relay Chat) is an application layer protocol that facilitates comm
 # UPDATE AT NEWEST VERSION 
 
 i-Haklab is constantly updating tools and improvements. To stay updated you just have to run:
-	]> i-Haklab update
-And if it locates ones you should run:
-	]> i-Haklab restore
+	 i-Haklab update
 
 *** HAVE A NICE HACKING DAY!!!!
 
