@@ -55,7 +55,7 @@ for v in python python2 ; do
 	$v -m pip --no-color install --upgrade pip
 done
 
-for module in trufflehog wheel speedtest-cli scapy wfuzz h8mail ; do
+for module in trufflehog wheel speedtest-cli scapy wfuzz h8mail objection; do
         for v in python python2 ; do
 		$v -m pip --no-color install $module 
 	done

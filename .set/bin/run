@@ -103,7 +103,7 @@ if [ -z $TOOL ]; then
 ╰─exploitdb──────➤  Public exploits and corresponding vulnerable software, developed for use by penetration testers and vulnerability researchers
 ╰─fbi────────────➤  Accurate facebook account information gathering
 ╰─GetNPUsers-────➤  Attempt to list and get TGTs for those users that have the property
-╰─ghost──────────➤  
+╰─ghost──────────➤  Framework that exploits the Android Debug Bridge to remotely access an Android device.
 ╰─gobuster───────➤  Gobuster is a tool used to brute-force URIs in web sites, DNS subdomains and Virtual Host names on target web servers.
 ╰─gophish────────➤  Launch simulated and monitored phishing campaigns.
 ╰─h8mail─────────➤  Password breach hunting tool, locally or using premium services
@@ -115,6 +115,7 @@ if [ -z $TOOL ]; then
 ╰─kerbrute───────➤  Perform kerberos bruteforcing by using the Impacket library.
 ╰─lockphish──────➤  A minimal ramsomwarte hijacking device login
 ╰─nikto──────────➤  Web server scanner which performs comprehensive tests against web servers for multiple items.
+╰─objection──────➤  runtime mobile exploration toolkit.
 ╰─phoneinfoga────➤  Scan phone numbers to first gather standard information.
 ╰─phonesploit────➤  Exploit a device using open tcp ports (adbfastboot needed)
 ╰─pybelt─────────➤  Complete open source hackers tool.
@@ -235,12 +236,12 @@ case "$TOOL" in
                         STDERR
                 fi
 		;;
-	h8mail)
+	h8mail|objection)
 		running
 		if ! python -m pip list | grep -oE "h8mail" >/dev/null; then
 			python -m pip install h8mail requests
 		fi
-		exec h8mail ${@:2}
+		exec $TOOL ${@:2}
 		;;
 	recondog)
 		if CheckPath;then
