@@ -85,7 +85,7 @@ echo "W='\033[0m'" >> $PREFIX/bin/john
 echo " " >> $PREFIX/bin/john
 echo "if [ -d $PREFIX/opt/john ];then" >> $PREFIX/bin/john
 echo "        cd $PREFIX/opt/john" >> $PREFIX/bin/john
-echo "        ./john" >> $PREFIX/bin/john
+echo "        ./john \$@" >> $PREFIX/bin/john
 echo "else" >> $PREFIX/bin/john
 echo "        printf \"\$R[ERROR]─➤ JohnTheRipper is not installed\$W\"" >> $PREFIX/bin/john
 echo "fi" >> $PREFIX/bin/john

