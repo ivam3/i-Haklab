@@ -60,6 +60,13 @@ printf "$Y[!]-> Upgrading i-Haklab shell\n"
 sleep 0.5
 omf update omf > /dev/null 2>&1
 
+THEME=$(mktemp)
+echo "#!/bin/env fish" >> $THEME
+echo "#" >> $THEME
+echo "omf install bobthefish" >> $THEME
+fish $THEME > /dev/null 2>&1
+rm $THEME
+
 #FIX SOME BUGS
 printf "$Y[!]-> Re-configurating. . .$W\n"
 sleep 0.5
@@ -123,12 +130,4 @@ sleep 0.5
 
 printf "$G\n\t[i]->$W Already up to date$G <-[i]$W\n\n"
 }
-
-THEME=$(mktemp)
-echo "#!/bin/env fish" >> $THEME
-echo "#" >> $THEME
-echo "omf install bobthefish" >> $THEME
-fish $THEME > /dev/null 2>&1
-rm $THEME
-
 #			@Ivam3
