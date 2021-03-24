@@ -79,6 +79,7 @@ $Y Arguments$W  |$Y    Options$W     |$Y    Description$W
 ╰─update───➤────────────────➤ Update i-Haklab
 ╰speedtest─➤────────────────➤ Run a speed test of your network
 ╰─root─────➤────────────────➤ Simulates a super user environment
+╰─share────➤────────────────➤ Share files and directories remotely and securely
 ╰─restore──➤────────────────➤ Restore the main directory to fix some bugs
 ╰reinstall─➤────────────────➤ Reinstall i-Haklab to factory configurations
 ╰─version──➤────────────────➤ Show i-Haklab version installed
@@ -157,6 +158,11 @@ chk-hydra() {
         command -v hydra > /dev/null || { printf "$R\n[W]->$W hydra not found$R |$W run apt install hydra"; exit; }
 }
 export -f chk-hydra
+
+chk-ffsend() {
+        command -v ffsend > /dev/null || apt install ffsend -y >/dev/null 2>&1
+}
+export -f chk-ffsend
 
 chk-tunnel() {
 	if ping -q -c 1 -W 1 serverless.social >/dev/null 2>&1;then
