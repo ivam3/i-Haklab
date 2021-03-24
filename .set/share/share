@@ -12,7 +12,7 @@ source $iHAKLAB/.set/libexec/colors
 #source $iHAKLAB/.set/var/variables
 #source $iHAKLAB/.set/functions/functions
 
-STDERR() { printf "$Y   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";}
+STDERR() { printf "$Y\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bot$W\n";}
 
 if [ $1 = "upload" ]; then
 	while [ $3 ]; do
@@ -27,12 +27,12 @@ if [ $1 = "upload" ]; then
 			printf "$G\n[+]-➤ Link to share :$W $link\n"
 			rm $file.link
 		else
-			printf "$R\n      《ERR LINK》\n"
+			printf "$R\n\t      《ERR LINK》\n"
 			STDERR
 		fi
 		rm $file;exit
 	else
-		printf "$R《FILE DOESN'T EXISTS》\n"
+		printf "$R\t\t 《FILE DOESN'T EXISTS》\n"
 		STDERR
 		exit
 	fi
@@ -44,9 +44,9 @@ elif [ $1 = "download" ]; then
 	rm $file.exists
 	if [ "$exists" = "true" ]; then
 		ffsend d $2 -q
-		printf "$G《DOWNLOAD COMPLETED》\n"
+		printf "$G\t\t 《DOWNLOAD COMPLETED》\n"
 	else
-		printf "$R 《FILE DOESN'T EXISTS》\n"
+		printf "$R\t\t 《FILE DOESN'T EXISTS》\n"
 		STDERR
 	fi
 	rm $file;exit
