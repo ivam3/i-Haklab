@@ -79,7 +79,11 @@ $Y Arguments$W  |$Y    Options$W     |$Y    Description$W
 ╰─update───➤────────────────➤ Update i-Haklab
 ╰speedtest─➤────────────────➤ Run a speed test of your network
 ╰─root─────➤────────────────➤ Simulates a super user environment
-╰─share────➤────────────────➤ Share files and directories remotely and securely
+╰─share────➤upload/download─➤ Share files and directories remotely and securely
+|             ╰───────|─────➤ Upload file and/or directory to share
+|             ╰───────|─────➤ ex: i-Haklab share upload file.txt password(optional)
+|                     ╰─────➤ Download files and/or directory shared
+|                     ╰─────➤ ex: i-Haklab share download https://send.vis.ee/download/...
 ╰─restore──➤────────────────➤ Restore the main directory to fix some bugs
 ╰reinstall─➤────────────────➤ Reinstall i-Haklab to factory configurations
 ╰─version──➤────────────────➤ Show i-Haklab version installed
