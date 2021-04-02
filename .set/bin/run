@@ -124,6 +124,7 @@ if [ -z $TOOL ]; then
 ╰─recon-ng───────➤  Providing a powerful environment to conduct open source web-based reconnaissance.
 ╰─rhawk──────────➤  Information Gathering and Vulnerability Scanning.
 ╰─routersploit───➤  Exploitation framework dedicated to embedded routers.
+╰─slowhttptest───➤  Simulate some Application Layer DoS attacks by prolonging HTTP connections.
 ╰─saycheese──────➤  Grab target's webcam shots by link.
 ╰─sayhello───────➤  Grab target's short voice audio by link.
 ╰─seeker─────────➤  Accurately Locate Smartphones using Social Engineering.
@@ -368,7 +369,7 @@ case "$TOOL" in
 
 #:::: BINARIES ::::#
 	john)
-		if [ $PREFIX/opt/john ];then
+		if [ -d $PREFIX/opt/john ];then
 			running
 			cd $PREFIX/opt/john
 			clear
@@ -377,7 +378,13 @@ case "$TOOL" in
 			STDERR
 		fi
 		;;
-
+	slowhttptest)
+		if CheckPath;then
+			slowhttptest ${@:2}
+		else
+			STDERR
+		fi
+		;;
 	*)
 		printf "$R\n[w] i-Haklab :$W Unknown argument $TOOL\n"
 		exit 1
