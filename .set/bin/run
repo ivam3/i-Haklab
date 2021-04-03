@@ -266,7 +266,7 @@ case "$TOOL" in
                 fi
                 ;;
 #::::BASH TOOLS::::#
-	ExiF|wbruter|lockphish|saycheese|sayhello)
+	wbruter|lockphish|saycheese|sayhello)
 		if CheckPath;then
 			exec bash $TOOLPATH/$TOOL ${@:2}
 		else
@@ -313,7 +313,7 @@ case "$TOOL" in
 		;;
 
 #::::TOOLS IN BIN::::#
-	bincheker|binwalk|blackbox|converter|GetNPUsers|whatweb|DoS-A-Tool)
+	ExiF|bincheker|binwalk|blackbox|converter|GetNPUsers|whatweb|DoS-A-Tool)
 		running
 		if [ -e $PREFIX/bin/$TOOL ]; then
 			exec $PREFIX/bin/$TOOL ${@:2}
