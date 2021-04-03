@@ -46,12 +46,12 @@ fi
 
 yes|pkg update && pkg upgrade && pkg install wget make automake
 wget http://http.kali.org/pool/main/s/stegsnow/stegsnow_20130616.orig.tar.gz -O $TMPDIR/stegsnow_20130616.orig.tar.gz
-if [[ -e $TMPDIR/stegsnow_20130616.orig.tar.gz ]]; then
-	tar -zcvf $TMPDIR/stegsnow_20130616.orig.tar.gz
-	if [[ -d $TMPDIR/snow-20130616 ]]; then
+if [ -e $TMPDIR/stegsnow_20130616.orig.tar.gz ]; then
+	cd $TMPDIR;tar -xvzf $TMPDIR/stegsnow_20130616.orig.tar.gz
+	if [ -d $TMPDIR/snow-20130616 ]; then
 		cd $TMPDIR/snow-20130616/
 		make
-		if [[ -e $TMPDIR/snow-20130616/snow ]]; then
+		if [ -e $TMPDIR/snow-20130616/snow ]; then
 			mv $TMPDIR/snow-20130616/snow $PREFIX/bin
 			rm -rf $TMPDIR/snow-20130616/
 			rm -rf $TMPDIR/stegsnow_20130616.orig.tar.gz
