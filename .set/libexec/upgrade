@@ -8,26 +8,24 @@
 
 IFS=$'\n\t'
 trap ctrl_c 2
+
 if [ ! -e /data/data/com.termux/files/usr/libexec/colors ]; then
 	wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/colors -O $PREFIX/libexec/colors > /dev/null 2>&1
 fi
 source /data/data/com.termux/files/usr/libexec/colors
+ctrl_c() { printf "$Y\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bot$W\n";}
 
-ctrl_c() {
-                echo
-                printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
-}
 if [ -L ~/storage/external-1 ]; then
 	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 else
         iHAKLAB=/data/data/com.termux/files/home/i-Haklab
 fi
 while [ ! $(id -u) -ne 0 ]; do
-	printf "$R\n[W]:-> You need to be a common user$W\n"
+	printf "$R\n[W]─➤ You need to be a common user$W\n"
 	exit
 done
 until [ -d $iHAKLAB ]; do
-	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do you wanna install it?$W\n"
+	printf "$R\n[W]─➤ i-Haklab needed$W |$Y Do you wanna install it?$W\n"
 	while read -p "       [yes/no]:-> " yesorno && [ -z $yesorno ]; do
 		continue
 	done
@@ -35,12 +33,12 @@ if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
 	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
         cd ~/i-Haklab;chmod 711 *;bash setup-lite
 else 
-	printf "$G\n[!]-> Have a nice hacking day!!\n\n"
+	printf "$G\n[!]─➤ Have a nice hacking day!!\n\n"
 	exit
 fi
 done
 #TRASH
-printf "$Y[-]-> Dropping the trash\n$W"
+printf "$Y[-]─➤ Dropping the trash\n$W"
 sleep 0.5
 for del in DoS-A-Tool Ivam3 RuGiR;do
 	if [ -e $PREFIX/bin/$del ];then
@@ -53,10 +51,12 @@ if [ -d ~/.vim ];then
         rm -rf ~/.vim
 fi
 cd;exec unzip $iHAKLAB/.set/to-install/iHaklabvim.zip
-mv ~/vim ~/.vim
+if [[ -d ~/vim ]]; then
+	mv ~/vim ~/.vim
+fi
 
 #UPGRADE OMF
-printf "$Y[!]-> Upgrading i-Haklab shell\n"
+printf "$Y[!]─➤ Upgrading i-Haklab shell\n"
 sleep 0.5
 omf update omf > /dev/null 2>&1
 
@@ -68,7 +68,7 @@ fish $THEME > /dev/null 2>&1
 rm $THEME
 
 #FIX SOME BUGS
-printf "$Y[!]-> Re-configurating. . .$W\n"
+printf "$Y[!]─➤ Re-configurating. . .$W\n"
 sleep 0.5
 
 wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/login-files/i-haklab_login -O $PREFIX/var/log/login-termux -q
@@ -112,12 +112,12 @@ if [ -e $PREFIX/etc/fish/config.fish ]; then
 	echo "alias traductor=\"gawk -f (curl -Ls git.io/translate | psub) -- -shell\"" >> $PREFIX/etc/fish/config.fish
 	echo "" >> $PREFIX/etc/fish/config.fish
 else
-	printf "$R\n[w]-> FATAL ERROR :$W interactive shell not installed$Y\n[!]-> Run$W i-Haklab reinstall$Y to fix it$W"
+	printf "$R\n[w]─➤ FATAL ERROR :$W interactive shell not installed$Y\n[!]─➤ Run$W i-Haklab reinstall$Y to fix it$W"
 fi
 
 ######### Upgrading executables #########
 BINDIR=$(ls $iHAKLAB/.set/bin)
-printf "$Y[!]-> Upgrading commands. . .$W\n"
+printf "$Y[!]─➤ Upgrading commands. . .$W\n"
 for i in ${BINDIR[*]}; do
 	wget -q https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/bin/$i -O $PREFIX/bin/$i
 	chmod +x $PREFIX/bin/$i
@@ -125,9 +125,9 @@ done
 
 NO() {
 TOFIX=$(ls $iHAKLAB/.set/fix-tools)
-printf "$Y[!]-> Fixing executable files. . .$W\n"
+printf "$Y[!]─➤ Fixing executable files. . .$W\n"
 sleep 0.5
 
-printf "$G\n\t[i]->$W Already up to date$G <-[i]$W\n\n"
+printf "$G\n\t[i]─➤$W Already up to date$G <-[i]$W\n\n"
 }
 #			@Ivam3

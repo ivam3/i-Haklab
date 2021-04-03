@@ -1,0 +1,46 @@
+#!/bin/bash
+#This file is part of i-Haklab command
+
+if [ -d /data/data/com.termux/files/home/i-Haklab ]
+then
+        iHAKLAB=/data/data/com.termux/files/home/i-Haklab
+else
+        iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+fi
+
+source $iHAKLAB/.set/libexec/colors
+source $iHAKLAB/.set/functions/functions
+
+STDERR() { printf "$Y\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bot$W\n";}
+
+chk-snow
+if [ $1 = "encode" ]; then
+	while read -p "[message or file]─➤ " msg && [ -z $msg ]; do
+                continue
+        done
+        while read -p "[file to encode]─➤ " file2encode && [ -z $file2encode ]; do
+                continue
+        done
+        while read -p "[encoded name of file]─➤ " encodedfile && [ -z $encodedfile ]; do
+                continue
+        done
+        read -p "[password {empty=none}]─➤ " passwd
+        if [ -e $msg ] && [ -z passwd ];then
+                $(which snow) -C -f $msg $file2encode $encodedfile
+        elif [ -e $msg ] && [ ! -z passwd ];then
+                $(which snow) -C -p "$passwd" -f $msg $file2encode $encodedfile
+        elif [ ! -z $passwd ];then
+                $(which snow) -C -p "$passwd" -m "$msg" $file2encode $encodedfile
+        else
+                $(which snow) -C -m "$msg" $file2encode $encodedfile
+        fi
+elif [ $1 = "decode" ]; then
+	read -p "[password {empty=none}]─➤ " passwd
+        if [ ! -z $passwd ]; then
+                $(which snow) -C -p "$passwd" $decodefile
+        else
+                $(which snow) -C $decodefile
+        fi
+else
+	STDERR
+fi
