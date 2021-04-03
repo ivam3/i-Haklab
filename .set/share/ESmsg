@@ -35,11 +35,14 @@ if [ $1 = "encode" ]; then
                 $(which snow) -C -m "$msg" $file2encode $encodedfile
         fi
 elif [ $1 = "decode" ]; then
+	while read -p "[file to decode]─➤ " file2decode && [ -z $file2decode ]; do
+		continue
+	done
 	read -p "[password {empty=none}]─➤ " passwd
         if [ ! -z $passwd ]; then
-                $(which snow) -C -p "$passwd" $decodefile
+                $(which snow) -C -p "$passwd" $file2decode
         else
-                $(which snow) -C $decodefile
+                $(which snow) -C $file2decode
         fi
 else
 	STDERR

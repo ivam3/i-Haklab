@@ -1,6 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 #Created on Dec/2018
 IFS=$'\n\t'
+trap ctrl_c 2
 
 if [ -d /data/data/com.termux/files/home/i-Haklab ]; then
 	iHAKLAB=/data/data/com.termux/files/home/i-Haklab
@@ -13,6 +14,7 @@ fi
 source $iHAKLAB/.set/libexec/colors 
 source $iHAKLAB/.set/var/variables
 source $iHAKLAB/.set/functions/functions
+ctrl_c() { k-boom;}
 chk-Cuser
 
 if [ "$CHECKROOT" = "root" ]; then

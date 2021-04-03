@@ -102,7 +102,7 @@ $Y Arguments$W  |$Y    Options$W     |$Y    Description$W
 |    ╰──────────────────────➤ at email(hotmail/gmail) account
 |    ╰─────➤─────gmail──────➤ ex: i-Haklab bfgmail victim@gmail.com passwords.txt
 |    ╰─────➤──hotmail/live──➤ ex: i-Haklab bfgmail victim@live.com passwords.txt
-|──ESmsg───➤─encode/decode──➤ Encode|decode secret message into a file (txt,png,jpg)
+|──ESmsg───➤─encode/decode──➤ Encode|decode secret message into a ASCII file.
 ╰forwarding➤────────────────➤ Start a SSH client to request TCP port forwarding
 |    ╰──────────────────────➤ from server and proxy.
 |    ╰─────➤──port_number───➤ Set a specific port number 
