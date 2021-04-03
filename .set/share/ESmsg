@@ -15,7 +15,7 @@ STDERR() { printf "$Y\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bo
 
 chk-snow
 if [ $1 = "encode" ]; then
-	while read -p "[message or file]─➤ " msg && [ -z $msg ]; do
+	while read -p "[message or file]─➤ " msg && [ -z "$msg" ]; do
                 continue
         done
         while read -p "[file to encode]─➤ " file2encode && [ -z $file2encode ]; do
@@ -25,9 +25,9 @@ if [ $1 = "encode" ]; then
                 continue
         done
         read -p "[password {empty=none}]─➤ " passwd
-        if [ -e $msg ] && [ -z passwd ];then
+        if [ -e "$msg" ] && [ -z passwd ];then
                 $(which snow) -C -f $msg $file2encode $encodedfile
-        elif [ -e $msg ] && [ ! -z passwd ];then
+        elif [ -e "$msg" ] && [ ! -z passwd ];then
                 $(which snow) -C -p "$passwd" -f $msg $file2encode $encodedfile
         elif [ ! -z $passwd ];then
                 $(which snow) -C -p "$passwd" -m "$msg" $file2encode $encodedfile
