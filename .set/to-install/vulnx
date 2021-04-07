@@ -51,6 +51,7 @@ git clone https://github.com/anouarbensaad/vulnx $iHAKLAB/../vulnx
 cd $iHAKLAB/../vulnx
 chmod +x $iHAKLAB/../vulnx/install.sh
 bash install.sh
+cd;rm -rf $iHAKLAB/../vulnx
 
 #ENDING SCRIPT
 printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
