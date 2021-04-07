@@ -136,6 +136,7 @@ if [ -z $TOOL ]; then
 ╰─tangalanga─────➤  Zoom Conference scanner. This scanner will check for a random meeting id and return information if available
 ╰─theharvester───➤  Gather emails, subdomains, hosts, employee names, open ports and banners from different public sources like search engines, PGP key servers and SHODAN computer database.
 ╰─vt─────────────➤  VirusTotal: an command line service that analyzes files and URLs enabling the detection of viruses, worms, trojans and other kinds of malicious content using antivirus engines and website scanners.
+╰─vulnx──────────➤  Intelligent bot auto shell injector that detect vulnerabilities in multiple types of cms.
 ╰─xerosploit─────➤  Penetration testing toolkit whose goal is to perform man in the middle attacks.
 ╰─webhackshl─────➤  Vulnerability analysis and information collection of websites and servers.
 ╰─wbruter────────➤  Brute force & dictionary attacking methods to various stuff
@@ -313,7 +314,7 @@ case "$TOOL" in
 		;;
 
 #::::TOOLS IN BIN::::#
-	ExiF|bincheker|binwalk|blackbox|converter|GetNPUsers|whatweb|DoS-A-Tool)
+	ExiF|bincheker|binwalk|blackbox|converter|GetNPUsers|whatweb|DoS-A-Tool|vulnx)
 		running
 		if [ -e $PREFIX/bin/$TOOL ]; then
 			exec $PREFIX/bin/$TOOL ${@:2}
