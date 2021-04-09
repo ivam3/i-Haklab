@@ -21,8 +21,10 @@ if [ $1 = "upload" ]; then
 	done
 	if [ -e $2 ] || [ -d $2 ]; then
 		file=$(mktemp)
+		printf "$Y\t\t  《 UPLOADING ... 》\r";
 		ffsend u $2 $passwd -y -q > $file.link
 		link=$(cat $file.link)
+		printf "$Y\t\t  《UPLOAD COMPLETED》\n"
 		if [ ! -z $link ]; then
 			printf "$G\n[+]-➤ Link to share :$W $link\n"
 			rm $file.link
@@ -43,6 +45,7 @@ elif [ $1 = "download" ]; then
 	exists=$(cat $file.exists|head -n 1|awk -F " " '{print $2}')
 	rm $file.exists
 	if [ "$exists" = "true" ]; then
+		printf "$Y\t\t 《 DOWNLOADING ... 》\r";
 		ffsend d $2 -q
 		printf "$G\t\t 《DOWNLOAD COMPLETED》\n"
 	else
