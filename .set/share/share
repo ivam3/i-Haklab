@@ -10,7 +10,7 @@ fi
 
 source $iHAKLAB/.set/libexec/colors
 #source $iHAKLAB/.set/var/variables
-#source $iHAKLAB/.set/functions/functions
+source $iHAKLAB/.set/functions/functions
 
 STDERR() { printf "$Y\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bot$W\n";}
 
@@ -45,9 +45,10 @@ elif [ $1 = "download" ]; then
 	exists=$(cat $file.exists|head -n 1|awk -F " " '{print $2}')
 	rm $file.exists
 	if [ "$exists" = "true" ]; then
-		printf "$Y\t\t 《 DOWNLOADING ... 》\r";
+		printf "$Y\t\t 《 DOWNLOADING ... 》\n"
 		ffsend d $2 -q
-		printf "$G\t\t 《DOWNLOAD COMPLETED》\n"
+		banner
+		printf "$G\r\t\t 《DOWNLOAD COMPLETED》\n"
 	else
 		printf "$R\t\t 《FILE DOESN'T EXISTS》\n"
 		STDERR
