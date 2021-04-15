@@ -121,14 +121,13 @@ $Y Arguments$W  |$Y    Options$W     |$Y    Description$W
 |                      |      ex: i-Haklab paylink nexam 29
 |                      ╰────➤ For android5 operative system only
 ╰─paypdf───➤────────────────➤ Create a pdf file with a reverse payload
-╰─phishing─➤──site─redirect─➤ Clone a specific website for phishing tests
-|    ╰──────────────────────➤ Available: facebook mfacebook github google
-|    ╰──────────────────────➤ instagram netflix spotify twitter
-|    ╰──────────────────────➤ ex: i-Haklab mfacebook facebook.com
 ╰─shodan───➤────────────────➤ Search vulnerable servers using metasploit
 |__________________________________________________________________________________________\n\n"
 }
-export -f Menu
+#╰─phishing─➤──site─redirect─➤ Clone a specific website for phishing tests
+#|    ╰──────────────────────➤ Available: facebook mfacebook github google
+#|    ╰──────────────────────➤ instagram netflix spotify twitter
+#|    ╰──────────────────────➤ ex: i-Haklab mfacebook facebook.comexport -f Menu
 
 chk-api() {
         command -v termux-open > /dev/null || { printf "$R[w]->$W termux-tools needed$R |$W please install it"; exit; }

@@ -205,7 +205,7 @@ case $1 in
 			rm $FILE
 			printf "DONE!!$W\n"
 		else
-			exec apt install ${@:2} -y
+			exec apt install ${@:2}
 		fi
 		;;
 	ngrok)
