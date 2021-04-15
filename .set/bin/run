@@ -114,6 +114,7 @@ if [ -z $TOOL ]; then
 ╰─ipgeolocation──➤  Ip accurately geolocatetor.
 ╰─kerbrute───────➤  Perform kerberos bruteforcing by using the Impacket library.
 ╰─lockphish──────➤  A minimal ramsomwarte hijacking device login
+╰─nexphisher─────➤  Advanced phishing tool.
 ╰─nikto──────────➤  Web server scanner which performs comprehensive tests against web servers for multiple items.
 ╰─objection──────➤  runtime mobile exploration toolkit.
 ╰─phoneinfoga────➤  Scan phone numbers to first gather standard information.
@@ -267,7 +268,7 @@ case "$TOOL" in
                 fi
                 ;;
 #::::BASH TOOLS::::#
-	wbruter|lockphish|saycheese|sayhello)
+	wbruter|lockphish|saycheese|sayhello|nexphisher)
 		if CheckPath;then
 			exec bash $TOOLPATH/$TOOL ${@:2}
 		else
