@@ -46,15 +46,17 @@ for del in DoS-A-Tool Ivam3 RuGiR;do
 	fi
 done
 
+cxc() {
 #UPGRADE VIM
 printf "$Y[!]─➤ Adding predictive text to vim$W\n"
-if [ -d ~/.vim ];then
+if [ -d ~/.vim ]; then
         rm -rf ~/.vim
 fi
 cd;exec unzip -q $iHAKLAB/.set/to-install/iHaklabvim.zip
-if [[ -d $HOME/vim ]]; then
+if [ -d $HOME/vim ]; then
 	mv $HOME/vim $HOME/.vim
 fi
+}
 
 #UPGRADE OMF
 printf "$Y[!]─➤ Upgrading i-Haklab shell$W\n"
