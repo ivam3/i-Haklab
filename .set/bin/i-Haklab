@@ -337,14 +337,13 @@ elif [ $1 = bfftp ] && [ $2 ] && [ $3 ] && [ $4 ]; then
 		ctrl_c
         fi
 
-CXC(){
-elif [ $1 = phishing ] && [ -z $2 ];then
-	printf "$R[w]─➤$W Argument phishing needs a website as an option1"
-elif [ $1 = phishing ] && [ $2 ] && [ -z $3 ]; then
-	printf "$R[w]─➤$W Argument phishing needs a redirection as an option2"
-elif [ $1 = phishing ] && [ $2 ] && [ $3 ]; then
-	bash $iHAKLAB/.set/share/phishing $2 $3
-}
+
+#elif [ $1 = phishing ] && [ -z $2 ];then
+#	printf "$R[w]─➤$W Argument phishing needs a website as an option1"
+#elif [ $1 = phishing ] && [ $2 ] && [ -z $3 ]; then
+#	printf "$R[w]─➤$W Argument phishing needs a redirection as an option2"
+#elif [ $1 = phishing ] && [ $2 ] && [ $3 ]; then
+#	bash $iHAKLAB/.set/share/phishing $2 $3
 
 
 elif [ $1 = ESmsg ] && [ -z $2 ]; then
