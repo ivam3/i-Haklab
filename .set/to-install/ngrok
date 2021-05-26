@@ -48,7 +48,7 @@ Advice() {
 }
 Install() {
 	command -v wget || pkg install wget
-	if [ $arch == 'arm' ] || [ $arch2 == 'Android' ] ; then
+	if [ $arch = 'arm' ] || [ $arch2 = 'Android' ] ; then
 		wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip > /dev/null 2>&1
 		if [ -e ngrok-stable-linux-arm.zip ]; then
 			unzip ngrok-stable-linux-arm.zip > /dev/null 2>&1

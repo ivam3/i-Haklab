@@ -136,8 +136,8 @@ msfdb(){
 	echo "  password:" >> $MSFDIR/config/database.yml
 	echo "  host: 127.0.0.1" >> $MSFDIR/config/database.yml
 	echo "  port: 5432" >> $MSFDIR/config/database.yml
-	echo "  pool: 75"
-	echo "  timeout: 5"
+	echo "  pool: 75" >> $MSFDIR/config/database.yml
+	echo "  timeout: 5" >> $MSFDIR/config/database.yml
         if ! cat $INITFILE | grep -oE "postgresql" --silent; then
                 sed -i "4a alias postgresql=\"pg_ctl -D $PREFIX/var/lib/postgresql\"" $INITFILE
         fi
