@@ -52,7 +52,7 @@ chmod 777 $iHAKLAB/../seeker/template/nearyou/php/info.txt
 chmod 777 $iHAKLAB/../seeker/template/nearyou/php/result.txt
 python -m pip install requests
 if [ -e $PREFIX/bin/ngrok ]; then
-        ln -s $PREFIX/bin/ngrok ~/seeker/Ngrok/
+        cp $PREFIX/bin/ngrok $iHAKLAB/../seeker/Ngrok/
 else
         bash $iHAKLAB/.set/to-install/ngrok
         cp $PREFIX/bin/ngrok $iHAKLAB/../seeker/Ngrok/
