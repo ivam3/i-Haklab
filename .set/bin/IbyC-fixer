@@ -218,7 +218,7 @@ case $1 in
 			printf "DONE!!$W\n"
 		else
 			printf "$G[+]─➤$W Installing Ngrok from Abhacker repositories ...$G "
-			exec apt install ngrok-server -y >/dev/null 2>&1
+			apt install ngrok-server -y > /dev/null 2>&1;
 			printf "DONE!!$W\n"
                 fi
                 ;;
