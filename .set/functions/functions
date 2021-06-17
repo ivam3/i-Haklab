@@ -171,9 +171,9 @@ export -f chk-ffsend
 
 chk-tunnel() {
 	if ping -q -c 1 -W 1 serverless.social >/dev/null 2>&1;then
-		TUNNEL="serverless.social"
-	elif ping -q -c 1 -W 1 localtunnel.me >/dev/null 2>&1;then
 		TUNNEL="localtunnel.me"
+	elif ping -q -c 1 -W 1 localtunnel.me >/dev/null 2>&1;then
+		TUNNEL="serverless.social"
 	else
 		printf "$R\n[W]->$W Server not available$R |$W try it later\n"
 		exit
