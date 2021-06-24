@@ -21,7 +21,8 @@ if [[ "$CHKTOR" -gt 0 ]]; then
 	printf "$R[w]-> TOR's connection is inactive$W\n"
 	exit
 else
-	proxychains4 w3m cualesmiip.com | grep "IP real" 
+	IP=$(proxychains4 w3m cualesmiip.com | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}')
+	printf "[Your VPN IP]$G $IP$W"
 fi
 #			@Ivam3
 

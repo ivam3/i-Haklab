@@ -79,11 +79,6 @@ $Y Arguments$W  |$Y    Options$W     |$Y    Description$W
 ╰─update───➤────────────────➤ Update i-Haklab
 ╰speedtest─➤────────────────➤ Run a speed test of your network
 ╰─root─────➤────────────────➤ Simulates a super user environment
-╰─share────➤upload/download─➤ Share files and directories remotely and securely
-|             ╰───────|─────➤ Upload file and/or directory to share
-|             ╰───────|─────➤ ex: i-Haklab share upload file.txt password(optional)
-|                     ╰─────➤ Download files and/or directory shared
-|                     ╰─────➤ ex: i-Haklab share download https://send.vis.ee/download/...
 ╰─restore──➤────────────────➤ Restore the main directory to fix some bugs
 ╰reinstall─➤────────────────➤ Reinstall i-Haklab to factory configurations
 ╰─version──➤────────────────➤ Show i-Haklab version installed
@@ -121,7 +116,12 @@ $Y Arguments$W  |$Y    Options$W     |$Y    Description$W
 |                      |      ex: i-Haklab paylink nexam 29
 |                      ╰────➤ For android5 operative system only
 ╰─paypdf───➤────────────────➤ Create a pdf file with a reverse payload
-╰─shodan───➤────────────────➤ Search vulnerable servers using metasploit
+╰─share────➤upload/download─➤ Share files and directories remotely and securely
+|             ╰───────|─────➤ Upload file and/or directory to share
+|             ╰───────|─────➤ ex: i-Haklab share upload file.txt password(optional)
+|                     ╰─────➤ Download files and/or directory shared
+|                     ╰─────➤ ex: i-Haklab share download https://send.vis.ee/download/...
+╰─shodan───➤────────────────➤ Search vulnerable webcam servers using metasploit
 |__________________________________________________________________________________________\n\n"
 }
 #╰─phishing─➤──site─redirect─➤ Clone a specific website for phishing tests
