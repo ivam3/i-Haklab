@@ -209,7 +209,7 @@ elif [ $1 = share ] && [ $2 ] && [ -z $3 ]; then
 	elif [ $2 = download ]; then 
 		printf "$R[w]─➤$W specify file link\n"
 	else
-		ctrl_c
+		printf "$R[w]─➤$W Invalid option: $2\n"
 	fi
 elif [ $1 = share ] && [ $2 ] && [ $3 ]; then
 	chk-ffsend

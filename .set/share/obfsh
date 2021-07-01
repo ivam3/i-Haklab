@@ -1,0 +1,707 @@
+#! /bin/sh
+# #############################################################################
+
+       NAME_="obfsh"
+       HTML_="obfuscate shell script"
+    PURPOSE_="shell script obfuscator"
+   SYNOPSIS_="$NAME_ [-cd <n>] [-ej <n1>-<n2>] [-g <n1>-<n2>+<n3>-<n4>] [-vhmli] -f <file> [file...]"
+   REQUIRES_="standard GNU commands"
+    VERSION_="1.2"
+       DATE_="2001-10-12; last update: 2004-08-09"
+     AUTHOR_="Dawid Michalczyk <dm@eonworks.com>"
+        URL_="www.comp.eonworks.com"
+   CATEGORY_="misc"
+   PLATFORM_="Linux"
+      SHELL_="bash"
+ DISTRIBUTE_="yes"
+
+# #############################################################################
+# This program is distributed under the terms of the GNU General Public License
+
+# HISTORY:
+# 2001-10-12 v1.0
+# 2003-12-20 v1.1 - major rewrite
+# 2004-08-09 v1.2 - added some more input checking, minor cosmetic changes
+
+# TODO:
+# - speed up header/footer generation
+
+
+# -------------------------------------------
+# user defined variables start
+# -------------------------------------------
+
+# add as much deciving code and comment variables as desired
+
+# add/remove deceiving comments here
+deceiving_comment[0]="# comment"
+deceiving_comment[1]="# comment"
+
+# add/remove deceiving code here, make sure it won't interfere with the 
+# real code in the script to obfuscate
+deceiving_code[0]="a=1; c=0"
+deceiving_code[1]='f_() { while read l; do echo $l; done < $f ; }'
+
+# -------------------------------------------
+# user defined variables end
+# -------------------------------------------
+
+usage () {
+
+echo >&2 "$NAME_ $VERSION_ - $PURPOSE_
+Usage: $SYNOPSIS_
+Requires: $REQUIRES_
+Options:
+    -c <n>, insert deceiving comments for every n line
+    -d <n>, insert deceiving code for every n line
+    -e <n1>-<n2>, prepend each line with a random number of spaces ranging
+       from n1 to n2
+    -f <file>, file to obfuscate
+    -g <n1>-<n2>+<n3>-<n4>, insert gibberish header and footer of n2 lines
+       long with each line n1 signs long, n3-n4 being range of characters
+       to generate from. See the manual for more details.
+    -h, usage and options (this help)
+    -i, remove blank lines, comments, leading and trailing spaces and tabs
+    -j <n1>-<n2>, insert n1 empty lines for every n2 line
+    -m, manual
+    -l, see this script"
+
+    exit 1
+}
+
+manual () { echo >&2 "
+
+NAME
+
+    $NAME_ - $PURPOSE_
+
+SYNOPSIS
+
+    $SYNOPSIS_
+
+DESCRIPTION
+
+    $NAME_ is quite flexible and can obfuscate any type of shell script. The
+    obfuscated script version is printed to stdo. The original script is not
+    modified.
+
+    Using $NAME_ options cleverly, one may fool more then just a casual intruder
+    or snooper, and certainly make understanding of the obfuscated script harder
+    and more time consuming.
+
+OPTIONS
+
+    -c <n>, insert deceiving comment for every n line. In the User Defined
+       Variables section, you can add deceiving comments that will
+       be added to the obfuscated script to further the obfuscation.
+
+    -d <n>, insert deceiving code for every n line. In the User Defined
+       Variables section, you can write deceiving code that will
+       be added to the obfuscated script to further the obfuscation.
+       Make sure that the deceiving code does not interfere with the
+       real code. This option should be used with caution.
+
+    -e <n1>-<n2> prepend each line with a random number of spaces ranging from
+       n1 to n2. Basically specify a range from which random number of spaces
+       will be generated.
+
+    -f <file>, script to obfuscate
+
+    -g <n1>-<n2>+<n3>-<n4>, insert gibberish header and footer of n1 lines long
+       with each line n2 signs long. The n3-n4 refer to a range of signs from
+       which to generate the random gibberish. The minimum n3 is 100 and the
+       maximum n4 is 309. See string_randomSigns() for all elements of range.
+
+    -h, usage and options (help)
+
+    -i, remove blank lines, comments, leading and trailing spaces and tabs.
+        As for comments, all lines starting with a #, or white space following
+        a # are removed.
+
+    -j <n1>-<n2>, insert n1 empty lines for every n2 line.
+
+AUTHOR
+
+    $AUTHOR_ Suggestions and bug reports are welcome.
+    For updates and more scripts visit $URL_
+
+"; exit 1; }
+
+# ===========================================================================
+# ENVIRONMENT SETUP
+# ===========================================================================
+
+umask 077
+
+# tmp file set up
+tmp_dir=$TMPDIR/${RANDOM}
+mkdir $tmp_dir
+tmp_1=$tmp_dir/tmp.${RANDOM}${RANDOM}
+tmp_2=$tmp_dir/tmp.${RANDOM}${RANDOM}
+tmp_3=$tmp_dir/tmp.${RANDOM}${RANDOM}
+
+# signal trapping and tmp file removal
+trap 'rm -f $tmp_1 $tmp_2 $tmp_3; rmdir $tmp_dir >/dev/null 2>&1' 0
+trap "exit 1" 1 2 3 15
+
+# ===========================================================================
+# LIB FUNCTIONS
+# ===========================================================================
+
+
+lang_fncArgCheck () {
+
+    # argument checking
+    local _args
+    ((_args = $# - 2))
+    if (( $1 > $_args ));then
+
+        echo "function error: ${FUNCNAME}(): missing arg(s) passed to $(eval echo \${$#})(); requires $1 arg(s)"
+        exit 1
+
+    fi
+ }
+
+
+math_isInteger() {
+
+    # argument checking
+    lang_fncArgCheck 1 $1 $FUNCNAME
+
+    case $1 in
+       *[!0-9]*) return 1;;
+       *) return 0;;
+    esac
+
+}
+
+math_randFromRange() {
+
+    # argument checking
+    lang_fncArgCheck 2 $1 $2 $FUNCNAME
+    
+    math_isInteger $1
+    [ $? != 0 ] && { echo >&2 argument ${1} passed to $FUNCNAME not an integer ; exit 1; }
+
+    math_isInteger $2
+    [ $? != 0 ] && { echo >&2 argument ${2} passed to $FUNCNAME not an integer ; exit 1; }
+
+    local _rand=$((($RANDOM % ($2 - $1 + 1) + $1)))
+    echo $_rand
+
+}
+
+string_returnSignNTimes() {
+
+    # argument checking
+    lang_fncArgCheck 2 $1 $2 $FUNCNAME
+
+    local _c=0
+    while (( $1 != $_c ));do
+        echo -n $2
+        ((_c++))
+    done
+
+}
+
+string_randomSigns() {
+    
+    # argument checking
+    lang_fncArgCheck 3 $1 $2 $3 $FUNCNAME
+ 
+    local _sign
+
+    _sign[100]=a
+    _sign[101]=b
+    _sign[102]=c
+    _sign[103]=d
+    _sign[104]=e
+    _sign[105]=f
+    _sign[106]=g
+    _sign[107]=h
+    _sign[108]=i
+    _sign[109]=j
+    _sign[110]=k
+    _sign[111]=l
+    _sign[112]=m
+    _sign[113]=n
+    _sign[114]=o
+    _sign[115]=p
+    _sign[116]=q
+    _sign[117]=r
+    _sign[118]=s
+    _sign[119]=t
+    _sign[120]=u
+    _sign[121]=v
+    _sign[122]=w
+    _sign[123]=x
+    _sign[124]=y
+    _sign[125]=z
+    _sign[126]=A
+    _sign[127]=B
+    _sign[128]=C
+    _sign[129]=D
+    _sign[130]=E
+    _sign[131]=F
+    _sign[132]=G
+    _sign[133]=H
+    _sign[134]=I
+    _sign[135]=J
+    _sign[136]=K
+    _sign[137]=L
+    _sign[138]=M
+    _sign[139]=N
+    _sign[140]=O
+    _sign[141]=P
+    _sign[142]=Q
+    _sign[143]=R
+    _sign[144]=S
+    _sign[145]=T
+    _sign[146]=U
+    _sign[147]=V
+    _sign[148]=W
+    _sign[149]=X
+    _sign[150]=Y
+    _sign[151]=Z
+    _sign[152]=0
+    _sign[153]=1
+    _sign[154]=2
+    _sign[155]=3
+    _sign[156]=4
+    _sign[157]=5
+    _sign[158]=6
+    _sign[159]=7
+    _sign[160]=8
+    _sign[161]=9
+    _sign[162]=0
+    _sign[163]=1
+    _sign[164]=2
+    _sign[165]=3
+    _sign[166]=4
+    _sign[167]=5
+    _sign[168]=6
+    _sign[169]=7
+    _sign[170]=8
+    _sign[171]=9
+    _sign[172]=0
+    _sign[173]=1
+    _sign[174]=2
+    _sign[175]=3
+    _sign[176]=4
+    _sign[177]=5
+    _sign[178]=6
+    _sign[179]=7
+    _sign[180]=8
+    _sign[181]=9
+    _sign[182]=0
+    _sign[183]=1
+    _sign[184]=2
+    _sign[185]=3
+    _sign[186]=4
+    _sign[187]=5
+    _sign[188]=6
+    _sign[189]=7
+    _sign[190]=8
+    _sign[191]=9
+    _sign[192]=0
+    _sign[193]=1
+    _sign[194]=2
+    _sign[195]=3
+    _sign[196]=4
+    _sign[197]=5
+    _sign[198]=6
+    _sign[199]=7
+    _sign[200]=8
+    _sign[201]=9
+    _sign[202]=0
+    _sign[203]=1
+    _sign[204]=2
+    _sign[205]="¤"
+    _sign[206]="%"
+    _sign[207]="&"
+    _sign[208]="]"
+    _sign[209]="/"
+    _sign[210]="("
+    _sign[211]=")"
+    _sign[212]="["
+    _sign[213]="{"
+    _sign[214]="}"
+    _sign[215]="+"
+    _sign[216]="?"
+    _sign[217]="£"
+    _sign[218]="*"
+    _sign[219]="$"
+    _sign[220]="+"
+    _sign[221]="-"
+    _sign[222]="~"
+    _sign[223]=":"
+    _sign[224]=";"
+    _sign[225]="_"
+    _sign[226]="="
+    _sign[227]="¾"
+    _sign[228]="½"
+    _sign[229]="§"
+    _sign[230]=","
+    _sign[231]="."
+    _sign[232]="¤"
+    _sign[233]="%"
+    _sign[234]="&"
+    _sign[235]="]"
+    _sign[236]="-"
+    _sign[237]="("
+    _sign[238]=")"
+    _sign[239]="["
+    _sign[240]="{"
+    _sign[241]="}"
+    _sign[242]="+"
+    _sign[243]="?"
+    _sign[244]="£"
+    _sign[245]="*"
+    _sign[246]="$"
+    _sign[247]="?"
+    _sign[248]="£"
+    _sign[249]="!"
+    _sign[250]="&"
+    _sign[251]="?"
+    _sign[252]="="
+    _sign[253]="%"
+    _sign[254]="."
+    _sign[255]=":"
+    _sign[256]=";"
+    _sign[257]="¤"
+    _sign[258]=" "
+    _sign[259]=" "
+    _sign[260]=" "
+    _sign[261]=" "
+    _sign[262]=" "
+    _sign[263]=" "
+    _sign[264]=" "
+    _sign[265]=" "
+    _sign[266]=" "
+    _sign[267]=" "
+    _sign[268]=" "
+    _sign[269]="  "
+    _sign[270]="  "
+    _sign[271]="  "
+    _sign[272]="  "
+    _sign[273]="  "
+    _sign[274]="  "
+    _sign[275]="  "
+    _sign[276]="  "
+    _sign[277]="  "
+    _sign[278]="  "
+    _sign[279]="  "
+    _sign[280]="  "
+    _sign[281]="   "
+    _sign[282]="   "
+    _sign[283]="   "
+    _sign[284]="   "
+    _sign[285]="   "
+    _sign[286]="   "
+    _sign[287]="   "
+    _sign[288]="   "
+    _sign[289]="   "
+    _sign[290]="    "
+    _sign[291]="    "
+    _sign[292]="    "
+    _sign[293]="    "
+    _sign[294]="    "
+    _sign[295]="    "
+    _sign[296]="    "
+    _sign[297]="     "
+    _sign[298]="     "
+    _sign[299]="     "
+    _sign[300]="     "
+    _sign[301]="     "
+    _sign[302]="     "
+    _sign[303]="      "
+    _sign[304]="      "
+    _sign[305]="      "
+    _sign[306]="      "
+    _sign[307]="      "
+    _sign[308]="      "
+    _sign[309]="      "
+               
+    # checking for proper range
+    if (( $2 > (( ${#_sign[*]} + 100 )) )) || (( $2 < 100 )); then
+        echo "invalid range passed to ${FUNCNAME}, range is 100 - "$((( ${#_sign[*]} + 100 )))
+        exit 1
+    elif (( $3 > (( ${#_sign[*]} + 100 )) )) || (( $3 < 100 )); then
+        echo "invalid range passed to ${FUNCNAME}, range is 100 - "$((( ${#_sign[*]} + 100 )))
+        exit 1
+    fi
+
+
+    local _ac=0
+    while (( $1 > _ac )); do
+        local _num=${RANDOM:0:3}
+        if (( $_num >= $2 )) && (( $_num <= $3 )); then
+            echo -n "${_sign[$_num]}"
+            ((_ac++))
+        fi     
+    done       
+               
+}
+
+text_generateGibberish(){
+
+    # argument checking
+    lang_fncArgCheck 4 $1 $2 $3 $4 $FUNCNAME
+
+    local _c=0
+    while (( $2 != _c ));do
+        echo $(string_randomSigns $1 $3 $4)
+        ((_c++))
+    done
+
+}
+
+text_listFile () {
+
+    # argument checking
+    lang_fncArgCheck 1 $1 $FUNCNAME
+
+    # function
+    local IFS=
+    local _i
+    while read -r _i; do
+        printf "%s\n" "$_i"
+    done < "$1"
+
+}
+
+# ===========================================================================
+# LOCAL FUNCTIONS
+# ===========================================================================
+
+is_arg_integer() {
+
+    math_isInteger $1 
+    [ $? != 0 ] && { echo >&2 the argument to $2 option must be an integer ; exit 1; }
+
+}
+
+# ===========================================================================
+# OPTION AND ARGUMENT HANDLING
+# ===========================================================================
+
+# option defaults
+add_cmnt=off        # add deceiving comment for every n line
+add_code=off        # add deceiving code for every n line
+prepend=off         # prepend each line with a random n from within a range of
+gibberish=off       # gibberish header
+cleanup=off         # remove blank lines, comments, leading and trailing spaces and tabs
+add_blanks=off      # insert n blanks for every n line
+
+# args check
+[ $# -eq 0 ] && { echo >&2 missing argument, type $NAME_ -h for help; exit 1; }
+
+while getopts c:d:e:f:g:hij:k:lm options; do
+
+    case $options in
+
+        c) add_cmnt=$OPTARG ;;
+        d) add_code=$OPTARG ;;
+        e) prepend=$OPTARG ;;   
+        f) file=$OPTARG ;;
+        g) gibberish=$OPTARG ;;
+        h) usage ;;
+        i) cleanup=on ;;
+        j) add_blanks=$OPTARG ;;
+        l) more $0; exit 1 ;;
+        m) manual ;;
+       \?) echo invalid argument, type $NAME_ -h for help; exit 1 ;;
+        
+    esac
+
+done
+shift $(( $OPTIND - 1 ))
+
+[ -f $file ] || { echo >&2 file $file does not exist ; exit 1; }
+[ $file ] || { echo >&2 file input missing ; exit 1; }
+
+# ===========================================================================
+# MAIN
+# ===========================================================================
+
+touch $tmp_1 $tmp_2 $tmp_3
+cp $file $tmp_2
+
+
+# ------------------------------------------------------
+# inserting deceiving code for every n line.
+# ------------------------------------------------------
+
+c=0
+c2=0
+if [[ $add_code != off ]]; then
+
+    is_arg_integer $add_code -d
+    oldifs=$IFS ; IFS=
+    while read -r line; do # we need to read in raw mode, to disable backslash escaping...
+
+        if (($c2 == $add_code)); then 
+            # add deceiving comments for every n line
+            if (( c < ${#deceiving_code[*]} )); then
+                printf "%s\n" "${deceiving_code[c]}" >> $tmp_1
+                ((c++))
+            fi
+            c2=0
+        fi
+
+        ((c2++))
+        printf "%s\n" "$line" >> $tmp_1
+    done < $tmp_2
+    IFS=$oldifs
+    mv $tmp_1 $tmp_2
+
+fi
+
+
+# ------------------------------------------------------
+# removing blanks, comments, leading, trailing spaces and tabs
+# ------------------------------------------------------
+
+if [[ $cleanup != off ]]; then
+
+    sed -e '2,$ {/^ *$/d ; /^ *#/d ; /^[ \t] *#/d ; /*^/d ; s/^[ \t]*// ; s/*[ \t]$// ; s/ $//}' $tmp_2 > $tmp_1
+    mv $tmp_1 $tmp_2
+
+fi
+
+
+# ------------------------------------------------------
+# inserting deceiving comments for every n line
+# ------------------------------------------------------
+
+c=0
+c2=0
+if [[ $add_cmnt != off ]]; then
+
+    is_arg_integer $add_cmnt -c
+    oldifs=$IFS ; IFS=
+    while read -r line; do
+
+        if (($c2 == $add_cmnt)); then 
+            # add deceiving comments for every n line
+            if (( c < ${#deceiving_comment[*]} )); then
+                printf "%s\n" "${deceiving_comment[c]}" >> $tmp_1
+                ((c++))
+            fi
+            c2=0
+        fi
+
+        ((c2++))
+        printf "%s\n" "$line" >> $tmp_1
+    done < $tmp_2
+    IFS=$oldifs
+    mv $tmp_1 $tmp_2
+fi
+
+
+# ------------------------------------------------------
+# inserting n empty lines for every n line
+# ------------------------------------------------------
+
+c2=0
+if [[ $add_blanks != off ]]; then
+
+    is_arg_integer ${add_blanks##*-} -j
+    is_arg_integer ${add_blanks%%-*} -j
+
+    oldifs=$IFS ; IFS=
+    while read -r line; do
+        
+        if (( $c2 == ${add_blanks##*-} )); then 
+            # add n blanks for every n line
+            for (( c = 0 ; c < ${add_blanks%%-*} ; c++)); do
+                echo >> $tmp_1
+            done
+            c2=0
+        fi
+
+        ((c2++))
+        printf "%s\n" "$line" >> $tmp_1
+    done < $tmp_2
+    IFS=$oldifs
+    mv $tmp_1 $tmp_2
+
+fi
+
+# ------------------------------------------------------
+# prepending each line with a random number of spaces
+# ------------------------------------------------------
+
+if [[ $prepend != off ]]; then
+
+    is_arg_integer ${prepend%%-*} -e
+    is_arg_integer ${prepend##*-} -e
+
+    c=0
+    oldifs=$IFS ; IFS=
+    while read -r line; do
+
+        if (( c == 0)); then # skipping shebang
+            printf "%s\n" "$line" >> $tmp_1
+        else
+            prep=$(math_randFromRange ${prepend%%-*} ${prepend##*-})
+            printf "%b%s\n" $(string_returnSignNTimes ${prep} "\\040") "$line" >> $tmp_1
+        fi
+
+    ((c++))
+    done < $tmp_2
+    IFS=$oldifs
+    mv $tmp_1 $tmp_2
+
+fi
+
+
+# ------------------------------------------------------
+# adding gibberish header and footer
+# ------------------------------------------------------
+
+if [[ $gibberish != off ]]; then
+                         
+    signs=${gibberish%%+*} # n1-n2 - nr of signs per line and nr of lines
+    range=${gibberish#*+}  # n3-n4 - range of signs to generate from
+
+    is_arg_integer ${range%%-*} -g
+    is_arg_integer ${range##*-} -g
+
+    is_arg_integer ${signs##*-} -g
+    is_arg_integer ${signs%%-*} -g
+
+    # validating range input
+    if (( ${range%%-*} < 100 || ${range%%-*} > 309 )) \
+    || (( ${range##*-} > 309 || ${range##*-} < 100 )) \
+    || (( ${range%%-*} > ${range##*-} ));then
+        echo >&2 the n3-n4 integer arguments to the -g option must be between
+        echo >&2 100 and 309, both inclusive. n3 must not be bigger then n4.
+        exit 1
+    fi 
+
+    c=0
+    oldifs=$IFS ; IFS=
+    while read -r line; do
+
+        if (( c == 0)); then # skipping shebang
+            printf "%s\n" "$line" >> $tmp_1 
+            d=${gibberish%%-*} # to make the first line of same length as other lines
+            echo : "'"$(string_randomSigns $(((d-=3))) ${range%%-*} ${range##*-}) >> $tmp_3
+            text_generateGibberish ${signs%%-*} ${signs##*-} ${range%%-*} ${range##*-} >> $tmp_3
+            echo -e $(string_returnSignNTimes ${signs%%-*} "\\040")"'" >> $tmp_3
+            text_listFile $tmp_3 >> $tmp_1
+        else
+            printf "%s\n" "$line" >> $tmp_1
+        fi
+
+        ((c++))
+    done < $tmp_2
+    text_listFile $tmp_3 >> $tmp_1
+    IFS=$oldifs
+    mv $tmp_1 $tmp_2
+
+fi
+
+text_listFile $tmp_2
+

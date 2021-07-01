@@ -57,7 +57,7 @@ CheckRoot(){
 	}
 
 #::::FIXING RUBY BIGDECIMAL EXYENSIONS LINKING ERROR::::#
-LIBv=$(ls $PREFIX/lib/ruby |grep '[0-9].[0-9].[0-9]')
+LIBv=$(ls $PREFIX/lib/ruby |grep -m 1 '[0-9].[0-9].[0-9]')
 case "$(uname -m)" in
 	aarch64)
 		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBv/aarch64-linux-android/bigdecimal.so"

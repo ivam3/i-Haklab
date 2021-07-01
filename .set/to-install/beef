@@ -44,7 +44,7 @@ done
 #INSTALLATION
 fixbigdecimal() {
         printf "$G\n[+]-> FIXING BIG DECIMAL ISSUES$W\n"
-	GEMS=$(ls $PREFIX/lib/ruby |grep '[0-9].[0-9].[0-9]')
+	GEMS=$(ls $PREFIX/lib/ruby |grep -m 1 '[0-9].[0-9].[0-9]')
         apt install -yq patchelf
         for i in aarch64-linux-android arm-linux-androideabi \
                 i686-linux-android x86_64-linux-android; do

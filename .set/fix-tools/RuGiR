@@ -21,7 +21,7 @@ Banner|lolcat
 printf "$G\n[¿]─>$W Choose an option $G<-[?]\n\n{01}$W$Y[MSFCONSOLE]─➤$W CANNOT LINK EXECUTABLE \"ruby\":$Y\n\t╰────────➤$W library \"/data/da..../bigdecimal.so\" not found$G\n{02}$W$Y[GRPC.GEMSPEC]─➤$W There was an error parcing Gemfile$G\n{03}$W$Y[GEMS]─➤$W Could not find <gem's name> in any of the sources$G\n{04}$Y[BIGDECIMAL]─➤$W Gem bigdecimal architecture compatibility$G\n{99}$R[EXIT]\n\n$W";read -p "{ANSW}-> " ANSW
 case $ANSW in
 	01|1)
-		RUBYv=$(ls $PREFIX/lib/ruby |grep '[0-9].[0-9].[0-9]')
+		RUBYv=$(ls $PREFIX/lib/ruby |grep -m 1 '[0-9].[0-9].[0-9]')
 		BIGDECIMAL=$(find $PREFIX/lib/ruby/${RUBYv} -iname "bigdecimal.so")
 echo "#!/data/data/com.termux/files/usr/bin/sh" > $PREFIX/bin/msfconsole
 echo "SCRIPT_NAME=\$(basename \"\$0\")" >> $PREFIX/bin/msfconsole
@@ -72,7 +72,7 @@ echo "esac" >> $PREFIX/bin/msfconsole
 		gem install bundler
 		gem install $GEM -v "$GEMv" -- --using-system-libraries
 		bundle config build.$GEM -- using-system-libraries
-		RUBYv=$(ls $PREFIX/lib/ruby |grep '[0-9].[0-9].[0-9]')
+		RUBYv=$(ls $PREFIX/lib/ruby |grep -m 1 '[0-9].[0-9].[0-9]')
 		RUBYext=$(find $PREFIX/lib/ruby/gems/${RUBYv}/extensions -iname "${GEM}-${GEMv}")
 		echo "$RUBYext" >> Gemfile.local
 		sed '/rbnacl/d' -i Gemfile.lock
