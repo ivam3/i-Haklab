@@ -41,30 +41,34 @@ for repo in fish root-repo unstable-repo fortune util-linux coreutils vim python
 	GOTIT=$(pkg list-installed | grep -oE $repo)
 	PKG=$(pkg list-all|grep -o $repo)
 	if [ ! -z "$PKG" ] && [ -z "$GOTIT" ];then
-		printf "$G\n[+]─➤$W Installing the repository $repo $W\n"
+		printf "$G\n[+]─➤$W Installing the repository $repo\n"
 		yes|pkg install $repo >/dev/null 2>&1
 	elif [ ! -z "$PKG" ] && [ ! -z "$GOTIT" ]; then
 		continue
 	else
-		printf "$R\n[w]─➤$W The repository $repo is not candidate$W\n"
+		printf "$R\n[w]─➤$W The repository $repo is not candidate\n"
 		sleep 1
 	fi
 done
 updatedb
+printf "$G\n[+]─➤$W Installing required python modules\n"
 for v in python python2 ; do
-	$v -m pip --no-color install --upgrade pip
+	$v -m pip --no-color --quiet install --upgrade pip
 done
 
 for module in trufflehog wheel speedtest-cli scapy wfuzz h8mail objection frida; do
         for v in python python2 ; do
-		$v -m pip --no-color install $module 
+		$v -m pip --no-color --quiet install $module 
 	done
 done
 
 #::::::::::Searching for root permissions::::::::::::#
+printf "$G\n[+]─➤$W Checking for root permissions ..";
 CHECKROOT=$(bash /data/data/com.termux/files/home/i-Haklab/.set/to-install/check-root)
 USR=$(whoami)
 if [ $CHECKROOT = "root" ]; then
+	printf "$G. GOT IT!!$W\n"
+	printf "$G\n[+]─➤$W Build root enviroment ..";
 	command -v sudo > /dev/null || bash /data/data/com.termux/files/home/i-Haklab/.set/to-install/instasudo
 	if [ -e /data/data/com.termux/files/home/.suroot/.bashrc ]; then
 		if [ ! -O /data/data/com.termux/files/home/.suroot/.bashrc ]; then
@@ -82,18 +86,20 @@ if [ $CHECKROOT = "root" ]; then
         echo "HOME=/data/data/com.termux/files/home" >> /data/data/com.termux/files/home/.suroot/.bashrc
 	echo "fish" >> /data/data/com.termux/files/home/.suroot/.bashrc
         echo "#          i-Haklab by @Ivam3" >> /data/data/com.termux/files/home/.suroot/.bashrc
+	printf "$G. DONE!!$W\n"
 fi
 
 #::::::::::Definition of variable i-Haklab::::::::::::#
-printf "$G\n[+]─➤ Getting access to external storage...$W"
+printf "$G\n[+]─➤ Getting access to external storage..$W";
 sleep 1
 yes|termux-setup-storage
 SDCARD=$(ls -l $HOME/storage/external-1 | awk '{print $11}')
 if [ ! -z $SDCARD ] && [ -z $PARTITION ]; then
+	mkdir -p $SDCARD/roothome
 	until [ -d $SDCARD/roothome ]; do
-		printf "$R Access denied$W"
+		printf "$R. Access denied$W";
 		sleep 1
-		printf "$Y Retrieving$W"
+		printf "$Y. Retrieving$W";
 		sleep 0.5
 		mkdir -p $SDCARD/roothome
 	done
@@ -104,18 +110,29 @@ if [ ! -z $SDCARD ] && [ -z $PARTITION ]; then
 #		sleep 0.5
 #		sudo chown $USR:$USR $SDCARD/roothome
 #	done
-	printf "$G DONE!!$W\n"
+	printf "$G. DONE!!$W\n"
 	sleep 1
-        cp -r /data/data/com.termux/files/home/i-Haklab /data/data/com.termux/files/home/storage/external-1/roothome/
-        iHAKLAB=$SDCARD/roothome/i-Haklab
+	printf "$G\n[+]─➤ Moving i-Haklab directory to external storage..$W";
+        cp -r $HOME/i-Haklab $SDCARD/roothome/
+	until [ -d $SDCARD/roothome/i-Haklab ]; do
+		printf "$R. Access denied$W";
+		sleep 1
+		printf "$Y. Retrieving$W";
+		sleep 0.5
+		cp -r $HOME/i-Haklab $SDCARD/roothome/
+	done
+	rm -rf $HOME/i-Haklab
+	iHAKLAB=$SDCARD/roothome/i-Haklab
+	printf "$G. DONE!!$W\n"
 elif [ ! -z $PARTITION ] || [ -d /data/data/com.termux ]; then
         iHAKLAB=/data/data/com.termux/files/home/i-Haklab
 else
         printf "$R\n[W]─➤ STORAGE ACCESS DENIED$W\n"
-	exit
+	ctrl_c;exit
 fi
 
 #::::::::::Installation of Ohmyfish::::::::::::#
+printf "$G\n[+]─➤ Installing interactive shell..$W";
 curl -Ls http://get.oh-my.fish | fish
 echo "if status --is-login" >> $PREFIX/etc/fish/config.fish
 echo "bash /data/data/com.termux/files/usr/var/log/login-termux" >> $PREFIX/etc/fish/config.fish
@@ -135,41 +152,51 @@ echo "alias postgresql=\"pg_ctl -D /data/data/com.termux/files/usr/var/lib/postg
 echo "alias traductor=\"gawk -f (curl -Ls git.io/translate | psub) -- -shell\"" >> $PREFIX/etc/fish/config.fish
 echo "" >> $PREFIX/etc/fish/config.fish
 sed -i "22a set iHAKLAB $iHAKLAB" $PREFIX/etc/fish/config.fish
-bash $iHAKLAB/.set/to-install/functions
-bash $iHAKLAB/.set/to-install/i-Haklab_login
-gem install fortune
-if [ -e ~/ivam3-Haklab ]; then
-	rm ~/ivam3-Haklab
-fi
-
-#::::::::::Insatalling i-Haklab tools::::::::::::#
-for TOOL in DoS-A-Tool ExiF binchecker blackbox crunch vpn tmux-viewer evilurl; do
-	bash $iHAKLAB/.set/to-install/$TOOL
-done
-
-bash $iHAKLAB/.set/to-install/metasploit
-bash $iHAKLAB/.set/to-install/embed+java
-TARGET=$(ls $iHAKLAB/.set/bin)
-for exe in ${TARGET[*]}; do
-	wget ${iHDB}/bin/$exe -O $PREFIX/bin/$exe -q
-	chmod +x $PREFIX/bin/$exe
-done
-if [ -d ~/.vim ];then
-	rm -rf ~/.vim
-fi
-exec unzip $iHAKLAB/.set/to-install/iHaklabvim.zip
-mv ~/vim ~/.vim
-
-#::::::::::Installation double check::::::::::::#
-if [ -d /data/data/com.termux/files/home/i-Haklab ] && [ -d /data/data/com.termux/files/home/storage/external-1/roothome/i-haklab ]; then
-	rm -rf /data/data/com.termux/files/home/i-Haklab
-fi
 THEME=$(mktemp)
 echo "#!/bin/env fish" >> $THEME
 echo "#" >> $THEME
 echo "omf install bobthefish" >> $THEME
 fish $THEME >/dev/null 2>&1
 rm $THEME
+if [ -d ~/.vim ];then
+	rm -rf ~/.vim
+fi
+wget -q ${iHDB}/to-install/iHaklabvim.zip -O ~/iHaklabvim.zip
+if [ -e ~/iHaklabvim.zip ]; then
+	cd;unzip -q ~/iHaklabvim.zip
+	mv ~/vim ~/.vim
+else
+	printf "$R\n[W]─➤$W VIM text predictable failure\n"
+	sleep 2
+fi
+bash $iHAKLAB/.set/to-install/functions
+bash $iHAKLAB/.set/to-install/i-Haklab_login
+gem install fortune
+if [ -e ~/ivam3-Haklab ]; then
+	rm -rf ~/ivam3-Haklab
+fi
+printf "$G. DONE!!$W\n"
+sleep 1
+
+#::::::::::Insatalling i-Haklab tools::::::::::::#
+printf "$G\n[+]─➤ Installing binary tools..$W";
+TARGET=$(ls $iHAKLAB/.set/bin)
+for exe in ${TARGET[*]}; do
+	wget ${iHDB}/bin/$exe -O $PREFIX/bin/$exe -q
+	chmod +x $PREFIX/bin/$exe
+done
+printf "$G. DONE!!$W\n"
+sleep 1
+printf "$G\n[+]─➤ Installing principal external tools..$W"
+sleep 1
+for TOOL in DoS-A-Tool ExiF binchecker blackbox crunch vpn tmux-viewer evilurl; do
+	bash $iHAKLAB/.set/to-install/$TOOL
+done
+
+#::::::::::Installation double check::::::::::::#
+if [ -d /data/data/com.termux/files/home/i-Haklab ] && [ -d /data/data/com.termux/files/home/storage/external-1/roothome/i-haklab ]; then
+	rm -rf /data/data/com.termux/files/home/i-Haklab
+fi
 bash $iHAKLAB/.set/libexec/review
 
 printf "$Y\n\n[!]─➤$G i-Haklab installed !!!$Y |$W Please restart Termux and enjoy it!!\n\n"

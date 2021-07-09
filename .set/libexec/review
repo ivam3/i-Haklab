@@ -35,7 +35,7 @@ done
 #FILE.LOG
 
 touch $PREFIX/var/log/i-Haklab.log
-echo $iHAKLAB >> $PREFIX/var/log/i-Haklab.log
+echo $iHAKLAB > $PREFIX/var/log/i-Haklab.log
 echo "<bash.rc>" >> $PREFIX/var/log/i-Haklab.log
 cat $PREFIX/etc/bash.bashrc >> $PREFIX/var/log/i-Haklab.log
 echo "<config.fish>" >> $PREFIX/var/log/i-Haklab.log
