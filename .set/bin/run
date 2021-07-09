@@ -129,6 +129,9 @@ if [ -z $TOOL ]; then
 ╰─saycheese──────➤  Grab target's webcam shots by link.
 ╰─sayhello───────➤  Grab target's short voice audio by link.
 ╰─seeker─────────➤  Accurately Locate Smartphones using Social Engineering.
+╰─shc─/─unshc────➤  Encode an decode bash scripting files.
+|  ╰──────|──────➤  enconde ex: shc -v -r -T -f <file to enconde>
+|         ╰──────➤  decode ex: unshc <encoded file.sh.x> -o <decoded file.sh>
 ╰─sherlock───────➤  Find usernames across many social networks.
 ╰─shellsploit────➤  Powerful phishing tool.
 ╰─sigploit───────➤  Signaling security testing framework dedicated to Telecom Security
@@ -315,7 +318,7 @@ case "$TOOL" in
 		;;
 
 #::::TOOLS IN BIN::::#
-	ExiF|bincheker|binwalk|blackbox|converter|GetNPUsers|whatweb|DoS-A-Tool|vulnx)
+	ExiF|bincheker|binwalk|blackbox|converter|GetNPUsers|whatweb|DoS-A-Tool|vulnx|shc|unshc)
 		running
 		if [ -e $PREFIX/bin/$TOOL ]; then
 			exec $PREFIX/bin/$TOOL ${@:2}

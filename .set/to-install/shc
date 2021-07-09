@@ -1,0 +1,77 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Created on March/2021
+IFS=$'\n\t'
+trap ctrl_c 2
+source /data/data/com.termux/files/usr/libexec/colors
+
+ctrl_c(){ printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";}
+if [ ! -d ~/storage ]; then
+        termux-setup-storage
+fi
+if [ -L ~/storage/external-1 ]; then
+	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+else
+        iHAKLAB=/data/data/com.termux/files/home/i-Haklab
+fi
+
+while [ ! $(id -u) -ne 0 ]; do
+	printf "$R\n[W]:-> You need to be a common user$W\n"
+	exit
+done
+until [ -d $iHAKLAB ]; do
+	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do you wanna install it?$W\n"
+	while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
+		continue
+	done
+if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
+	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
+        cd ~/i-Haklab;bash setup
+else 
+	printf "$G[!]-> Have a nice hacking day!!\n"
+	exit
+fi
+done
+
+echo $(clear)
+for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-CINDERELLA; do
+        printf "$(clear) $C STARTING TO INSTALL SHC. . . .$i"
+        printf "\n\n"
+        sleep 1
+done
+
+#INSTALLATION
+shcVer="3.8.9"
+for i in $DIR/shc $PREFIX/bin/shc;do
+	if [ -d $i ] || [ -e $i ];then
+		rm -rf $i
+        fi
+done
+yes|pkg update && pkg upgrade && pkg install wget make
+wget -q http://www.datsi.fi.upm.es/~frosal/sources/shc-$shcVer.tgz -O $TMPDIR/shc-$shcVer.tgz
+if [ -e $TMPDIR/shc-$shcVer.tgz ]; then
+        cd $TMPDIR
+        tar -xvzf $TMPDIR/shc-$shcVer.tgz
+        rm -rf $TMPDIR/shc-$shcVer.tgz
+        if [ -d $TMPDIR/shc-$shcVer ]; then
+                cd $TMPDIR/shc-$shcVer
+                make;make install
+                if [ -e $TMPDIR/shc-$shcVer/shc ]; then
+                        mv $TMPDIR/shc-$shcVer/shc $PREFIX/bin/
+                        rm -rf $TMPDIR/shc-$shcVer
+                else
+                        printf "$R\n[ERR-make]─➤$W Going to https://t.me/Ivam3_Bot"
+                        rm -rf $TMPDIR/shc-$shcVer.tgz
+                        exit
+                fi
+                wget -q https://raw.githubusercontent.com/yanncam/UnSHc/master/latest/unshc.sh -O $PREFIX/bin/unshc
+                sed 's|/tmp/XXXXXX|$PREFIX/tmp/XXXXXX|g' -i $PREFIX/bin/unshc
+                chmod +x $PREFIX/bin/*
+        fi
+else
+        printf "$R\n[ERR-shc]─➤$W Going to https://t.me/Ivam3_Bot"
+        exit
+fi
+
+#ENDING SCRIPT
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
+#                                               @Ivam3
