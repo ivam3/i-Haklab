@@ -235,17 +235,21 @@ case "$TOOL" in
                         STDERR
 		fi
 		;;
-	hakku|webhackshl|quack|ghost)
+	hakku|webhackshl|ghost)
                 if CheckPath;then
 			exec python $TOOLPATH/$TOOL
                 else
                         STDERR
                 fi
 		;;
-	h8mail|objection)
+	h8mail|objection|quack)
 		running
-		if ! python -m pip list | grep -oE "h8mail" >/dev/null; then
-			python -m pip install h8mail requests
+		if ! python -m pip list | grep -oE "$TOOL" >/dev/null; then
+			if [ $TOOL = "h8mail" ]; then
+				python -m pip --no-color --quiet install h8mail requests
+			elif [ $TOOL = "objection" ]; then
+				python -m pip --no-color --quiet install objection pexpect
+			fi
 		fi
 		exec $TOOL ${@:2}
 		;;

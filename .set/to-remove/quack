@@ -1,13 +1,13 @@
 #!/data/data/com.termux/files/usr/bin/bash
-#Created on Feb/2020
+#Created on March/2021
 IFS=$'\n\t'
 trap ctrl_c 2
 source /data/data/com.termux/files/usr/libexec/colors
 
-function ctrl_c() {
-                echo
-                printf "$Y\n\n[!]$R Going me on$B Telegram$R t.me/Ivam3byCinderella$W\n\n"
-}
+ctrl_c(){ printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";}
+if [ ! -d ~/storage ]; then
+        termux-setup-storage
+fi
 if [ -L ~/storage/external-1 ]; then
 	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
 else
@@ -20,14 +20,14 @@ while [ ! $(id -u) -ne 0 ]; do
 done
 until [ -d $iHAKLAB ]; do
 	printf "$R\n[W]:-> i-Haklab needed$W |$Y Do you wanna install it?$W\n"
-	while read -p "       [yes/no]:-> " yesorno && [ -z $yesorno ]; do
+	while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
 		continue
 	done
 if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
 	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
-        cd ~/i-Haklab;bash setup-lite
+        cd ~/i-Haklab;bash setup
 else 
-	printf "$G\n[!]-> Have a nice hacking day!!\n\n"
+	printf "$G[!]-> Have a nice hacking day!!\n"
 	exit
 fi
 done
@@ -38,16 +38,12 @@ for i in  ------------------@ IVAM3-------------@ IVAM3-by----------@ IVAM3-by-C
         printf "\n\n"
         sleep 1
 done
+
 #INSTALLATION
-if [ -d $iHAKLAB/../quack ]; then
-	rm -rf $iHAKLAB/../quack
+if [ -e $PREFIX/bin/quack ]; then
+	rm -rf $PREFIX/bin/quack
 fi
-for module in phonenumbers requests scapy wget argparse ; do
-	for py in python python2 ; do
-		$py -m pip uninstall --no-binary :all: $module
-	done
-done
 
 #ENDING SCRIPT
-printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n   To fix issues going to$B t.me/Ivam3_Bot$W"
+printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n"
 #                                               @Ivam3

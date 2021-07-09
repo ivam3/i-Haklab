@@ -60,7 +60,7 @@ if [ -e $TMPDIR/shc-$shcVer.tgz ]; then
                         rm -rf $TMPDIR/shc-$shcVer
                 else
                         printf "$R\n[ERR-make]─➤$W Going to https://t.me/Ivam3_Bot"
-                        rm -rf $TMPDIR/shc-$shcVer.tgz
+                        rm -rf $TMPDIR/shc-$shcVer
                         exit
                 fi
                 wget -q https://raw.githubusercontent.com/yanncam/UnSHc/master/latest/unshc.sh -O $PREFIX/bin/unshc
