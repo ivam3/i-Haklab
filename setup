@@ -18,7 +18,7 @@ fi
 if [ -d ~/.config ]; then
 	rm -rf ~/.config
 fi
-if command -v fish ;then yes|apt remove fish && apt autoremove; fi
+if command -v fish >/dev/null;then yes|apt remove fish && apt autoremove; fi
 
 printf "$Y\n(_>)─➤$W Head to app configuration and provides storage permissions to termux.$Y\n ╰─➤$W when finished$G press enter\n$W"
 read enter
@@ -31,7 +31,7 @@ for repo in fish root-repo unstable-repo fortune util-linux coreutils vim python
 	PKG=$(pkg list-all|grep -o $repo)
 	if [ ! -z "$PKG" ] && [ -z "$GOTIT" ];then
 		printf "$G(_>)─➤$W Installing the repository $repo.\n"
-		yes|pkg install $repo >/dev/null 2>&1
+		yes|pkg install $repo
 	elif [ ! -z "$PKG" ] && [ ! -z "$GOTIT" ]; then
 		continue
 	else
@@ -39,7 +39,7 @@ for repo in fish root-repo unstable-repo fortune util-linux coreutils vim python
 		sleep 1
 	fi
 done
-printf "$G(_>)─➤$W Installing Abhacker repositories."
+printf "$G\n(_>)─➤$W Installing Abhacker repositories."
 if [ ! -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ];then
 	TMPabh=$(mktemp)
 	wget -q --tries=20 "${iHDB}/fix-tools/instAbhackerRepo" -O $TMPabh
@@ -47,11 +47,11 @@ if [ ! -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ];then
 fi
 
 #::: UPDATING LOCATE DATA BASE :::#
-printf "$G(_>)─➤$W Updating data base."
+printf "$G\n(_>)─➤$W Updating data base."
 ${which} updatedb
 printf "$G. DONE$W"
 
-printf "$G(_>)─➤$W Installing required python modules.\n"
+printf "$G\n(_>)─➤$W Installing required python modules.\n"
 for v in python python2 ; do
 	$v -m pip --no-color --quiet --no-cache-dir install --upgrade pip
 done
@@ -63,16 +63,16 @@ done
 
 #::::::::::Definition of variable TOOLS::::::::::::#
 printf "$G\n(_>)─➤ Getting access to external storage..$W";
-yes|termux-setup-storage
+yes|termux-setup-storage 2>/dev/null
 if [ -w $TOOLS ];then
 	printf "$G. DONE!!$W\n"
 else
-	printf "$R. FAIL!!$W"
+	printf "$R. FAIL!!$W\n"
 fi
 
 #::::::::::Installation of Ohmyfish::::::::::::#
-printf "$G\n(_>)─➤ Installing interactive shell.$W"
-[[ -d ~/.local/share/omf ]] &&  rm -rf ~/.local/share/omf
+printf "$G\n(_>)─➤ Installing interactive shell.$W\n"
+[[ -d ~/.local/share/omf ]] && rm -rf ~/.local/share/omf
 [[ -d ~/.config/omf ]] && rm -rf ~/.config/omf/
 git config --global core.autocrlf
 curl -Ls http://get.oh-my.fish | fish
@@ -82,7 +82,7 @@ bash /data/data/com.termux/files/usr/var/log/login-termux
 end
 
 function on_exit --on-event fish_exit
-rm -rf $TMPDIR/*
+rm -rf /data/data/com.termux/files/usr/tmp/*
 echo 'Have a nice hacking day!!'
 sleep 1
 end
@@ -103,7 +103,6 @@ cat <<- CONF > $TMP_fish
 omf install bobthefish
 CONF
 fish $TMP_fish >/dev/null 2>&1
-rm $TMP_fish
 cat <<- CONF > $PREFIX/etc/bash.bashrc
 # Command history tweaks:
 # - Append history instead of overwriting
@@ -140,9 +139,9 @@ if [ -e $TMPDIR/iHaklabvim.zip ]; then
 	unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
 	rm -f $TMPDIR/iHaklabvim.zip
 	mv $TMPDIR/vim ~/.vim
-	printf "$G. DONE!!$W"
+	printf "$G. DONE!!$W\n"
 else
-	printf "$R. FAIL!!$W"
+	printf "$R. FAIL!!$W\n"
 fi
 sleep 2
 wget -q --tries=20 $iHDB/functions/unset.fish -O ~/.config/fish/functions/unset.fish
