@@ -62,10 +62,12 @@ for module in trufflehog wheel speedtest-cli scapy wfuzz h8mail objection frida;
 done
 
 #::::::::::Definition of variable TOOLS::::::::::::#
-printf "$G\n(_>)─➤ Getting access to external storage..$W";
+printf "$G\n(_>)─➤ Getting access to external storage...$W"
 yes|termux-setup-storage 2>/dev/null
+printf "$Y\n(_>)─➤$W Access..\n";
+sleep 0.5
 if [ -w $TOOLS ];then
-	printf "$G. DONE!!$W\n"
+	printf "$G. DONE||$W\n"
 else
 	printf "$R. FAIL!!$W\n"
 fi
@@ -143,8 +145,7 @@ if [ -e $TMPDIR/iHaklabvim.zip ]; then
 else
 	printf "$R. FAIL!!$W\n"
 fi
-sleep 2
-wget -q --tries=20 $iHDB/functions/unset.fish -O ~/.config/fish/functions/unset.fish
+#wget -q --tries=20 $iHDB/functions/unset.fish -O  ~/.config/fish/functions/unset.fish
 bash $iHAKLAB/.set/to-install/i-Haklab_login
 
 #::::::::::Insatalling i-Haklab tools::::::::::::#
