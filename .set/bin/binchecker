@@ -2,7 +2,9 @@
 #Coded by @Ivam3 on January 2019
 #Contact: https://t.me/Ivam3
 IFS=$'\n\t'
-source /data/data/com.termux/files/usr/libexec/colors
+source $PREFIX/share/i-Haklab/.set/var/variables
+source $PREFIX/share/i-Haklab/.set/functions/functions
+chk-iHaklab
 
 printf "$G
    ___  _____  __  _______           __
@@ -11,11 +13,11 @@ printf "$G
 /____/___/_/|_/  \___/_//_/\__/\__/_/\_\\__/_/$W v.1.0
 
 $Y"
-printf "$Y[Set]$G Input BIN $W"
-while read -p ">> " BIN && [ -z $BIN ]; do
-	printf "\n$R[W] O-ops!! Please set a BIN$W\n"
+printf "$Y(_>)─➤$G Input BIN $W"
+while read -p "(_>)─➤ " BIN && [ -z $BIN ]; do
+	printf "\n$R(_>)─➤$W Please set a BIN\n"
 done
-printf "\n$Y[!]->$G Checking..\n\n"
+printf "\n$Y(_>)─➤$G Checking..\n\n"
 if [ $BIN ]
 then
 curl -H "Accept-Version: 3" "https://lookup.binlist.net/$BIN"

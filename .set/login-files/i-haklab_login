@@ -3,24 +3,7 @@
 #
 IFS=$'\n\t'
 trap ctrl_c 2
-
-if [ -d /data/data/com.termux/files/home/i-Haklab ]; then
-        iHAKLAB=/data/data/com.termux/files/home/i-Haklab
-else
-        iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
-fi
-
-if [ -x /system/xbin/su ]; then
-        ROOT="true"
-elif [ -x /su/bin/su ]; then
-        ROOT="true"
-elif [ -x /sbin/su ]; then
-        ROOT="true"
-else
-        ROOT="false"
-fi
-
-source $iHAKLAB/.set/libexec/colors
+source /data/data/com.termux/files/usr/share/i-Haklab/.set/var/variables
 
 Cinderella=$(base64 -d $PREFIX/libexec/termux/.Ivam3)
 Seque=$(base64 -d $PREFIX/libexec/termux/.Quiz)
@@ -159,8 +142,8 @@ case_Chak() {
 				sleep 3
 				SDCARD=$(ls -l $HOME/storage/external-1 | awk '{print $11}')
 				TARGET=$(ls $iHAKLAB/.set/to-remove/)
-				if [ -d $SDCARD/roothome ]; then
-					rm -rf $SDCARD/roothome > /dev/null 2>&1
+				if [ -d $SDCARD/tools ]; then
+					rm -rf $SDCARD/tools > /dev/null 2>&1
 				else
 					for tool in ${TARGET[*]}; do
 						bash $iHAKLAB/.set/to-remove/$tool > /dev/null 2>&1
@@ -171,8 +154,7 @@ case_Chak() {
 						rm -rf $HOME/$erase > /dev/null 2>&1
 					fi
 				done
-				if [ $ROOT = true ]; then
-					wget https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/mediafire/sudo -O $PREFIX/bin/sudo -q
+				if chk-root;then
 					sudo rm -rf $PREFIX > /dev/null 2>&1
 				else
 					rm -rf $PREFIX > /dev/null 2>&1

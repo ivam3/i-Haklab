@@ -1,41 +1,17 @@
-#!/data/data/com.termux/files/usr/bin/bash
-# Coded on Agust 2019 and upgraded on Feb 2021 by Ivam3
+#!/usr/bin/bash
+# Coded on Agust 2019 and upgraded on July 2021 by Ivam3
 # This file bring a easy access to execute i-Haklab tools
 #
-#::::COLORS::::#
-source $PREFIX/libexec/colors || wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/colors -O /data/data/com.termux/files/usr/libexec/colors > /dev/null 2>&1
-
+source $PREFIX/share/i-Haklab/.set/var/variables
+source $iHAKLAB/.set/functions/functions
+chk-iHaklab
 #::::VARIABLES::::#
 TOOL=$(basename "$1")
+TOOLPATH="$TOOLS/$TOOL"
 GOPATH=$(cat $PREFIX/etc/fish/config.fish | grep GOPATH | awk '{print $3}')
-iHAKLAB=$(cat $PREFIX/etc/fish/config.fish | grep iHAKLAB | awk '{print $3}')
-until [ -d $iHAKLAB ]; do
-	printf "$R\n[w]-> i-Haklab directory undefined$Y\n[!]-> run i-Haklab reinstall to fix it$W\n"
-	exit
-done
-TOOLPATH="$iHAKLAB/../$TOOL"
 
 #::::FUNCTIONS::::#
-STDERR(){
-	printf "$R\n[w] i-Haklab :$W $TOOL is not installed$W\n"
-	exit
-	}
-STDERROOT(){
-	printf "$R\n[w] i-Haklab :$W Your device is not rooted$W\n"
-	exit
-	}
-Banner(){
-        if [ -e $iHAKLAB/.set/libexec/banner/i-Haklab ]; then
-                bash $iHAKLAB/.set/libexec/banner/i-Haklab
-                sleep 0.5
-        fi
-	}
-running(){
-	for i in . .. ... ....;do
-		printf "$G$(clear)[+]-> i-Haklab running $i\n$W"
-		sleep 0.1
-	done
-	}
+STDERR(){ printf "$R\n(_>)─➤$W $TOOL is not installed$W\n";exit;}
 CheckPath(){
 	if [ -d $TOOLPATH ]; then
                 running
@@ -47,39 +23,41 @@ CheckPath(){
         fi
 	}
 CheckRoot(){
-	CHECKROOT=$(bash $iHAKLAB/.set/to-install/check-root)
-	if [ $CHECKROOT = "root" ]; then
-		command -v sudo > /dev/null || bash $TMP_PATH/i-Haklab/.set/to-install/instasudo
+	if chk-root;then
 		return 0
 	else
 		STDERROOT
 	fi
-	}
+}
 
 #::::FIXING RUBY BIGDECIMAL EXYENSIONS LINKING ERROR::::#
-LIBv=$(ls $PREFIX/lib/ruby |grep -m 1 '[0-9].[0-9].[0-9]')
-case "$(uname -m)" in
-	aarch64)
-		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBv/aarch64-linux-android/bigdecimal.so"
-		;;
-	arm*)
-		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBv/arm-linux-androideabi/bigdecimal.so"
-		;;
-	i686)
-		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBv/i686-linux-android/bigdecimal.so"
-		;;
-	x86_64)
-		export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBv/x86_64-linux-android/bigdecimal.so"
-		;;
-	*)
-		;;
-esac
+bigdecimalPATH(){
+	RUBYv=$(ls $PREFIX/lib/ruby |grep -m 1 '[0-9].[0-9].[0-9]')
+	case "$(uname -m)" in
+		aarch64)
+			export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$RUBYv/aarch64-linux-android/bigdecimal.so"
+			;;
+		armv8l)
+			export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$LIBv/arm-linux-androideabi/bigdecimal.so"
+			;;
+		arm*)
+			export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$RUBYv/arm-linux-androideabi/bigdecimal.so"
+			;;
+		i686)
+			export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$RUBYv/i686-linux-android/bigdecimal.so"
+			;;
+		x86_64)
+			export LD_PRELOAD="$LD_PRELOAD:/data/data/com.termux/files/usr/lib/ruby/$RUBYv/x86_64-linux-android/bigdecimal.so"
+			;;
+		*)
+			;;
+	esac
+}
 
 if [ -z $TOOL ]; then
-	Banner
+	banner
 	printf "$Y\n[!] Syntax :$W run [-name-of-tool/framework-]\n\n
 |─Tool/Framework─|──────────────────────Description────────────────────────────|
-╰─aiochk─────────➤  Accounts autopay generator
 ╰─d-tect─────────➤  Search web vulnerabilities
 ╰─a2sv───────────➤  Find web SSL vulnerabilities
 ╰─acccheck───────➤  A password dictionary attack tool that targets windows authentication via the SMB protocol
@@ -139,31 +117,34 @@ if [ -z $TOOL ]; then
 ╰─sqlmap─────────➤  Penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database server. 
 ╰─tangalanga─────➤  Zoom Conference scanner. This scanner will check for a random meeting id and return information if available
 ╰─theharvester───➤  Gather emails, subdomains, hosts, employee names, open ports and banners from different public sources like search engines, PGP key servers and SHODAN computer database.
+╰─userrecon──────➤  Find usernames across over 75 social networks.
 ╰─vt─────────────➤  VirusTotal: an command line service that analyzes files and URLs enabling the detection of viruses, worms, trojans and other kinds of malicious content using antivirus engines and website scanners.
 ╰─vulnx──────────➤  Intelligent bot auto shell injector that detect vulnerabilities in multiple types of cms.
 ╰─xerosploit─────➤  Penetration testing toolkit whose goal is to perform man in the middle attacks.
 ╰─webhackshl─────➤  Vulnerability analysis and information collection of websites and servers.
+╰─websploit──────➤  
 ╰─wbruter────────➤  Brute force & dictionary attacking methods to various stuff
 ╰─whatweb────────➤  Identifie websites (DNS).
-╰─wpscan─────────➤  Black box WordPress vulnerability scanner.\n"
-	exit
+╰─wpscan─────────➤  Black box WordPress vulnerability scanner.
+╰─youtube─dl─────➤  Download media files from youtube,spotify,facebook,tiktok and Dalymotion.\n";exit
 fi
 
 case "$TOOL" in
 	beef)
-		if [ -d $PREFIX/opt/beef ]; then
+		bigdecimalPATH
+		if [ -d $PREFIX/opt/$TOOL ]; then
 			running
-			BEEF_PATH="$PREFIX/opt/beef"
-			cd $BEEF_PATH
-			echo "load msgrpc ServerHost=127.0.0.1 ServerPort=55552 User=msf Pass='abc123'" > $PREFIX/opt/metasploit-framework/BeeF.rc 
-			printf "$Y\n[!]->$W In a new session run :\n      postgresql start\n      msfconsole -r \$PREFIX/opt/metasploit-framework/BeeF.rc\n$Y[!]->$W then press$G enter$W to continue"
+			cd $PREFIX/opt/$TOOL
+			echo "load msgrpc ServerHost=127.0.0.1 ServerPort=55552 User=msf Pass='abc123'" > $PREFIX/opt/metasploit-framework/$TOOL.rc 
+			printf "$Y\n(_>)─➤$W In a new session run :\n      postgresql start\n      msfconsole -r \$PREFIX/opt/metasploit-framework/BeeF.rc\n$Y(_>)─➤$W then press$G enter$W to continue"
 			read enter
-			exec ruby $BEEF_PATH/$TOOL
+			exec ruby $PREFIX/opt/$TOOL/$TOOL
 		else
 			STDERR
 		fi
 		;;
 	embed|hatcloud|cewl)
+		bigdecimalPATH
                 if CheckPath;then
 			exec ruby $TOOLPATH/$TOOL.rb ${@:2}
                 else
@@ -171,6 +152,7 @@ case "$TOOL" in
                 fi
                 ;;
 	wpscan)
+		bigdecimalPATH
 		if CheckPath;then
 			exec ruby $TOOLPATH/bin/$TOOL ${@:2}
 		else
@@ -178,7 +160,7 @@ case "$TOOL" in
 		fi
 		;;
 #::::PYTHON2 TOOLS::::#
-	androbugs|d-tect|adminpanel|credmap|fbi|cloudbunny|pybelt|sigploit|sqliv|kerbrute|cryptovenom|a2sv)
+	androbugs|d-tect|adminpanel|credmap|fbi|cloudbunny|pybelt|sigploit|sqliv|kerbrute|cryptovenom|a2sv|websploit)
 		if [ -f $TOOLPATH/api.conf.txt ]; then
 			mv $TOOLPATH/api.conf.txt $TOOLPATH/api.conf
 		fi
@@ -210,13 +192,6 @@ case "$TOOL" in
 			STDERR
 		fi
 		;;
-	recon-ng)
-                if CheckPath;then
-			exec python2 $TOOLPATH/$TOOL --no-check
-                else
-                        STDERR
-                fi
-		;;
 	xerosploit)
 		CheckRoot
 		running
@@ -228,14 +203,14 @@ case "$TOOL" in
 		fi
 		;;
 #::::PYTHON3 TOOLS::::#
-	evilurl|phoneinfoga|hunner|ipgeolocation|seeker|shellsploit|theharvester)
+	evilurl|phoneinfoga|hunner|ipgeolocation|seeker|shellsploit|theharvester|vulnx)
 		if CheckPath;then
 			exec python $TOOLPATH/$TOOL.py ${@:2}
                 else
                         STDERR
 		fi
 		;;
-	hakku|webhackshl|ghost)
+	hakku|webhackshl|ghost|recon-ng)
                 if CheckPath;then
 			exec python $TOOLPATH/$TOOL
                 else
@@ -252,6 +227,13 @@ case "$TOOL" in
 			fi
 		fi
 		exec $TOOL ${@:2}
+		;;
+	osintgram)
+		if CheckPath;then
+			exec python $TOOLPATH/main.py ${@:2}
+		else
+			STDERR
+		fi
 		;;
 	recondog)
 		if CheckPath;then
@@ -274,8 +256,17 @@ case "$TOOL" in
                         STDERR
                 fi
                 ;;
+	sqlmap)
+		if CheckPath;then
+			exec python $TOOLPATH/$TOOL.py ${@:2}
+		elif -e $PREFIX/bin/$TOOL;then
+			exec $PREFIX/bin/$TOOL ${@:2}
+		else
+			STDERR
+		fi
+		;;
 #::::BASH TOOLS::::#
-	wbruter|lockphish|saycheese|sayhello|nexphisher)
+	wbruter|lockphish|saycheese|sayhello|nexphisher|userrecon)
 		if CheckPath;then
 			exec bash $TOOLPATH/$TOOL ${@:2}
 		else
@@ -293,13 +284,6 @@ case "$TOOL" in
 	rhawk)
                 if CheckPath;then
 			php $TOOLPATH/$TOOL.php
-                else
-                        STDERR
-                fi
-                ;;
-	aiochk)
-                if CheckPath;then
-			exec php $TOOLPATH/aio.php 
                 else
                         STDERR
                 fi
@@ -322,7 +306,7 @@ case "$TOOL" in
 		;;
 
 #::::TOOLS IN BIN::::#
-	ExiF|bincheker|binwalk|blackbox|converter|GetNPUsers|whatweb|DoS-A-Tool|vulnx|shc|unshc)
+	ExiF|bincheker|binwalk|blackbox|converter|crunch|GetNPUsers|whatweb|DoS-A-Tool|youtube-dl|shc|unshc|wfuzz|hydra|xhydra)
 		running
 		if [ -e $PREFIX/bin/$TOOL ]; then
 			exec $PREFIX/bin/$TOOL ${@:2}
@@ -335,6 +319,13 @@ case "$TOOL" in
 		running
 		if [ -e $PREFIX/bin/$TOOL ]; then
 			exec sudo $PREFIX/bin/$TOOL ${@:2}
+		else
+			STDERR
+		fi
+		;;
+	torvpn|IbyC-fixer|pagekite|sudo|serverphp|serverapache|postgresql|traductor)
+		if [ -e $PREFIX/bin/$TOOL ] || [ $(grep -oE "$TOOL" $PREFIX/etc/fish/config.fish) ]; then
+			printf "$R(_>)_To_run_it_just_type:─➤$W $TOOL"
 		else
 			STDERR
 		fi
@@ -371,6 +362,7 @@ case "$TOOL" in
 		if [ -d $GOPATH/src/github.com/VirusTotal/$TOOL-go ] && [ -e $GOPATH/bin/$TOOL ]; then
 			cd $GOPATH/bin/
 			exec $TOOL ${@:2}
+		elif [ $PREFIX/bin/$TOOL ]; then                                                                                exec $PREFIX/bin/$TOOL ${@:2}
 		else
 			STDERR
 		fi
@@ -378,9 +370,9 @@ case "$TOOL" in
 
 #:::: BINARIES ::::#
 	john)
-		if [ -d $PREFIX/opt/john ];then
+		if [ -d $PREFIX/opt/JohnTheRipper ];then
 			running
-			cd $PREFIX/opt/john
+			cd $PREFIX/opt/JohnTheRipper
 			clear
 			./john ${@:2}
 		else
@@ -389,7 +381,7 @@ case "$TOOL" in
 		;;
 	slowhttptest)
 		if CheckPath;then
-			slowhttptest ${@:2}
+			$TOOL ${@:2}
 		else
 			STDERR
 		fi

@@ -1,17 +1,7 @@
-#!/bin/bash
+#!/usr/bin/bash
 #This file is part of i-Haklab command
-
-if [ -d /data/data/com.termux/files/home/i-Haklab ]
-then
-        iHAKLAB=/data/data/com.termux/files/home/i-Haklab
-else
-        iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
-fi
-
-source $iHAKLAB/.set/libexec/colors
-#source $iHAKLAB/.set/var/variables
+source $PREFIX/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
-
 STDERR() { printf "$Y\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bot$W\n";}
 
 if [ $1 = "upload" ]; then
@@ -26,7 +16,7 @@ if [ $1 = "upload" ]; then
 		link=$(cat $file.link)
 		printf "$Y\t\t  《UPLOAD COMPLETED》\n"
 		if [ ! -z $link ]; then
-			printf "$G\n[+]-➤ Link to share :$W $link\n"
+			printf "$G\n(_>)_Link_to_share─➤$W $link\n"
 			rm $file.link
 		else
 			printf "$R\n\t      《ERR LINK》\n"

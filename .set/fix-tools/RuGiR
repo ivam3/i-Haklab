@@ -12,47 +12,49 @@ B='\033[1;34m'
 M='\033[1;35m'
 C='\033[1;36m'
 W='\033[0m'
+RUBYv=$(ls $PREFIX/lib/ruby |grep -m 1 '[0-9].[0-9].[0-9]')
 iHDB="https://github.com/ivam3/i-Haklab/raw/master/.set"
 command -v ruby >/dev/null || apt install ruby -y >/dev/null 2>&1
 command -v lolcat >/dev/null || gem install lolcat >/dev/null 2>&1
 ctrl_c(){ printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";}
 Banner(){ clear;printf "\n ____         ____ _ ____\n|  _ \ _   _ / ___(_)  _ \ \n| |_) | | | | |  _| | |_) |\n|  _ <| |_| | |_| | |  _ <\n|_| \_|\__,_|\____|_|_| \_|v.2\n#::Ruby Gems Issues Resolved::#\n #::: @Ivam3byCinderella ::::#\n";sleep 1;}
 Banner|lolcat
-printf "$G\n[¿]─>$W Choose an option $G<-[?]\n\n{01}$W$Y[MSFCONSOLE]─➤$W CANNOT LINK EXECUTABLE \"ruby\":$Y\n\t╰────────➤$W library \"/data/da..../bigdecimal.so\" not found$G\n{02}$W$Y[GRPC.GEMSPEC]─➤$W There was an error parcing Gemfile$G\n{03}$W$Y[GEMS]─➤$W Could not find <gem's name> in any of the sources$G\n{04}$Y[BIGDECIMAL]─➤$W Gem bigdecimal architecture compatibility$G\n{99}$R[EXIT]\n\n$W";read -p "{ANSW}-> " ANSW
+printf "$G\n[¿]─>$W Choose an option $G<-[?]\n\n{01}$W$Y[MSFCONSOLE]─➤$W CANNOT LINK EXECUTABLE \"ruby\":$Y\n\t╰────────➤$W library \"/data/da..../bigdecimal.so\" not found$G\n{02}$W$Y[GRPC.GEMSPEC]─➤$W There was an error parcing Gemfile$G\n{03}$W$Y[GEMS]─➤$W Could not find <gem's name> in any of the sources$G\n{04}$Y[BIGDECIMAL]─➤$W Gem bigdecimal architecture compatibility$G\n{05}$Y[BUNDLER]─➤$W You have already activated bundler 2.1.4, but your Gemfile requires bundler 2.2.11$G\n{99}$R[EXIT]\n\n$W";read -p "{ANSW}-> " ANSW
 case $ANSW in
 	01|1)
-		RUBYv=$(ls $PREFIX/lib/ruby |grep -m 1 '[0-9].[0-9].[0-9]')
 		BIGDECIMAL=$(find $PREFIX/lib/ruby/${RUBYv} -iname "bigdecimal.so")
-echo "#!/data/data/com.termux/files/usr/bin/sh" > $PREFIX/bin/msfconsole
-echo "SCRIPT_NAME=\$(basename \"\$0\")" >> $PREFIX/bin/msfconsole
-echo "METASPLOIT_PATH=\"\${PREFIX}/opt/metasploit-framework\"" >> $PREFIX/bin/msfconsole
-echo "# Fix ruby bigdecimal extensions linking error." >> $PREFIX/bin/msfconsole
-echo "export LD_PRELOAD=\"${BIGDECIMAL}:\$LD_PRELOAD\"" >> $PREFIX/bin/msfconsole
-echo "case \"\$SCRIPT_NAME\" in" >> $PREFIX/bin/msfconsole
-echo "	msfconsole)" >> $PREFIX/bin/msfconsole
-echo "		if [ ! -d \"$PREFIX/var/lib/postgresql\" ];then" >> $PREFIX/bin/msfconsole
-echo "			mkdir -p \"$PREFIX/var/lib/postgresql\"" >> $PREFIX/bin/msfconsole
-echo "			initdb \"${PREFIX}/var/lib/postgresql\"" >> $PREFIX/bin/msfconsole
-echo "		fi" >> $PREFIX/bin/msfconsole
-echo "		if ! pg_ctl -D \"${PREFIX}/var/lib/postgresql\" status > /dev/null 2>&1; then" >> $PREFIX/bin/msfconsole
-echo "			pg_ctl -D \"${PREFIX}/var/lib/postgresql\" start --silent" >> $PREFIX/bin/msfconsole
-echo "		fi" >> $PREFIX/bin/msfconsole
-echo "		if [ -z \"\$(psql postgres -tAc \"SELECT 1 FROM pg_roles WHERE rolname='msf'\")\" ];then" >> $PREFIX/bin/msfconsole
-echo "			createuser msf" >> $PREFIX/bin/msfconsole
-echo "		fi" >> $PREFIX/bin/msfconsole
-echo "		if [ -z \"\$(psql -l | grep msf_database)\" ];then" >> $PREFIX/bin/msfconsole
-echo "			createdb msf_database" >> $PREFIX/bin/msfconsole
-echo "		fi" >> $PREFIX/bin/msfconsole
-echo "		exec ruby \"\$METASPLOIT_PATH/\$SCRIPT_NAME\" \"\$@\"" >> $PREFIX/bin/msfconsole
-echo "		;;" >> $PREFIX/bin/msfconsole
-echo "	msfd|msfrpc|msfrpcd|msfvenom)" >> $PREFIX/bin/msfconsole
-echo "		exec ruby \"\$METASPLOIT_PATH/\$SCRIPT_NAME\" \"\$@\"" >> $PREFIX/bin/msfconsole
-echo "		;;" >> $PREFIX/bin/msfconsole
-echo "	*)" >> $PREFIX/bin/msfconsole
-echo "		echo \"[!] Unknown Metasploit command '\$SCRIPT_NAME'.\"" >> $PREFIX/bin/msfconsole
-echo "		exit 1" >> $PREFIX/bin/msfconsole
-echo "		;;" >> $PREFIX/bin/msfconsole
-echo "esac" >> $PREFIX/bin/msfconsole
+		cat <<- CONF > $PREFIX/bin/msfconsole
+#!/data/data/com.termux/files/usr/bin/sh
+SCRIPT_NAME=\$(basename "\$0")
+METASPLOIT_PATH="${PREFIX}/opt/metasploit-framework"
+# Fix ruby bigdecimal extensions linking error.
+export LD_PRELOAD="${BIGDECIMAL}:\$LD_PRELOAD"
+case "\$SCRIPT_NAME" in
+        msfconsole)
+                if [ ! -d "$PREFIX/var/lib/postgresql" ];then
+                        mkdir -p "$PREFIX/var/lib/postgresql"
+                        initdb "${PREFIX}/var/lib/postgresql"
+                fi
+                if ! pg_ctl -D "${PREFIX}/var/lib/postgresql" status > /dev/null 2>&1; then
+                        pg_ctl -D "${PREFIX}/var/lib/postgresql" start --silent
+                fi
+                if [ -z "\$(psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='msf'")" ];then
+                        createuser msf
+                fi
+                if [ -z "\$(psql -l | grep msf_database)" ];then
+                        createdb msf_database
+                fi
+                exec ruby "\$METASPLOIT_PATH/\$SCRIPT_NAME" "\$@"
+                ;;
+        msfd|msfrpc|msfrpcd|msfvenom)
+                exec ruby "\$METASPLOIT_PATH/\$SCRIPT_NAME" "\$@"
+                ;;
+        *)
+                echo "[!] Unknown Metasploit command '\$SCRIPT_NAME'."
+                exit 1
+                ;;
+esac
+CONF
 		chmod +x $PREFIX/bin/msfconsole
 		ln -sf $(which msfconsole) $PREFIX/bin/msfvenom
 		;;
@@ -60,19 +62,18 @@ echo "esac" >> $PREFIX/bin/msfconsole
 		yes|pkg clean && pkg autoclean && pkg autoremove && pkg update --fix-missing && pkg --configure -a && pkg update --fix-missing && pkg upgrade && pkg install clang
 		;;
 	03|3)
-		while read -p " [Gems name]─➤ " GEM && [ -z $GEM ];do
+		while read -p " (Gems name)─➤ " GEM && [ -z $GEM ];do
 			ctrl_c
 		done
-		while read -p " [Version]─➤ " GEMv && [ -z $GEMv ];do
+		while read -p " (Version)─➤ " GEMv && [ -z $GEMv ];do
 			GEMv=">= 0.1"
 		done
-		while read -p " [Gemfile path]─➤ " GEMfile && [ -z $GEMfile ];do
+		while read -p " (Gemfile path)─➤ " GEMfile && [ -z $GEMfile ];do
 			ctrl_c
 		done
 		gem install bundler
 		gem install $GEM -v "$GEMv" -- --using-system-libraries
 		bundle config build.$GEM -- using-system-libraries
-		RUBYv=$(ls $PREFIX/lib/ruby |grep -m 1 '[0-9].[0-9].[0-9]')
 		RUBYext=$(find $PREFIX/lib/ruby/gems/${RUBYv}/extensions -iname "${GEM}-${GEMv}")
 		echo "$RUBYext" >> Gemfile.local
 		sed '/rbnacl/d' -i Gemfile.lock
@@ -84,6 +85,18 @@ echo "esac" >> $PREFIX/bin/msfconsole
 		;;
 	04|4)
 		curl -Ls ${iHDB}/fix-tools/fixbigdecimal|bash
+		;;
+	05|5)
+		while read -p "(_>)_Version_to_remove_{ex_2.1.4}─➤ " OLDv && [ -z $OLDv ];do
+			continue
+		done
+		while read -p "(_>)_Version_to_install_{ex_2.2.11}─➤ " NEWv && [ -z $NEWv ];do
+			continue
+		done
+		gem install bundler:$NEWv
+		if [ -e $PREFIX/lib/ruby/gems/$RUBYv/specifications/default/bundler-$OLDv.gemspec ];then
+			rm $PREFIX/lib/ruby/gems/$RUBYv/specifications/default/bundler-$OLDv.gemspec
+		fi
 		;;
 	*)
 		ctrl_c

@@ -1,4 +1,4 @@
-# i-Haklab v.2.0 2020 by @Ivam3
+# i-Haklab v.3.0 2021 by @Ivam3
 
 	DISCLAIMER
 If the law is violated with it's use, this would be the responsibility of the user who handled it..
@@ -12,14 +12,14 @@ To report some issues join to >> https://t.me/Ivam3_Bot
 
 # What is i-Haklab ?
 
-- i-Haklab Is a hacking laboratory that contains open source tools recommended by Ivam3 with automation hacking commands. i-Haklab use oh my fish insteractive shell, to get help about its use going to >> https://fishshell.com/docs/current/tutorial.html.
+- i-Haklab is a hacking laboratory for Termux that contains open source tools for pentesting, scan/find vulnerabilities, explotation and post-explotation recommended by Ivam3 with automation hacking commands and many guides and tutorials to learn use it. i-Haklab use oh my fish insteractive shell, to get help about its use going to >> https://fishshell.com/docs/current/tutorial.html.
 
 # Process during installation
 
 i-Haklab will ......
 - check if your android device has some root, if so, it will install the sudo command.
-- check if termux has permission to access the external memory, thus, in there it will create a directory called homeroot and there will install the tools and/or frameworks. otherwise they will be installed in the directory /data/data/com.termux/files/home. By the way, in case of Termux is installed in a second partition of your external memory those will be in /data/sdext2/data/com.termux/files/home.
-- i-Haklab has more than 80 tools of which only the main ones are installed (15) with a total weight of 1.9GB. -DoS-A-Tool -ExiF -Binchecker -Blackbox -Crunch -VPN -Tmux-viewer -Evilurl -Translate -Metasploit -EMBED -Java -Hydra -Nmap -H8mail So, you can see the list of all tools available under the command:
+- check if termux has permission to access the external memory, thus, in there it will create a directory called 'tools' and there will install the tools and/or frameworks. otherwise they will be installed in the directory /data/data/com.termux/files/usr/share/tools. By the way, in case of Termux is installed in a second partition of your external memory those will be in /data/sdext2/data/com.termux/files/use/share/tools.
+- i-Haklab has more than 80 tools of which only the main ones are installed (15) with a total weight of 1.9GB. -DoS-A-Tool -ExiF -Binchecker -Blackbox -Crunch -VPN -Tmate -Evilurl -Translate -Metasploit -EMBED -Java -Hydra -Nmap -H8mail So, you can see the list of all tools available under the command:
 
         ]> i-Haklab list
 
@@ -41,7 +41,7 @@ There are several commands in i-Haklab that facilitate the use of Termux:
 
 - i-Haklab: it is the main command that helps to update and use i-Haklab with automations of various processes such as the installation/uninstallation of tools, visualization of user guides for the tools, download of hacking books, access to the community tutorials, payload creation automation, metaploit handler activation, brute force attacks, phishing among others.
 
-- run: facilitates the execution of all external tools adapted to Termux by i-Haklab. Termux natives such as nmap hydra metasploit run directly.
+- run: facilitates the execution of all external tools adapted to Termux by i-Haklab. Termux natives such as nmap run directly.
 
 - LOCALHOST: returns the private ip of your local network
 
@@ -56,6 +56,12 @@ There are several commands in i-Haklab that facilitate the use of Termux:
 - serverapache: activates the apache server under port 8080 and port 80 if it is run as root user
 
 - postgresql start / stop / restart: enables stops and restarts the metasploit database.
+
+- traductor: init a shell to traslate any text.
+
+- vncserver: init a GUI client-server.
+
+- vncserver kill :1: kill the client-server.
 
 - IbyC-fixer: we know that each Android is different and this can generate various errors in the installation processes of ruby gems, python modules, among others. And this command is the i-Haklab solver that a
 utomates the solving processes..

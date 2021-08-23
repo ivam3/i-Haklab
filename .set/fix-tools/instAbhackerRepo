@@ -36,13 +36,13 @@ if [ ! -e "${TMPDIR}" ]; then
 fi
 
 if [ ! -d "$PACKAGE" ];then
-    printf "$G\n[+]─➤ Installing dependencies$W\n"
+    printf "$G\n(_>)─➤ Installing dependencies$W\n"
     yes|pkg update && pkg install gnupg >/dev/null 2>&1
 fi
 
 #:::: DOWNLOADING SIGNED KEY ::::#
 grep -q "abhackerofficial@gmail.com" $PUB_DIR &> /dev/null
-printf "$G\n[+]─➤ Adding Public GPG Key [${ARCH}]\n"
+printf "$G\n(_>)─➤ Adding Public GPG Key [${ARCH}]\n"
 curl -fsSL https://abhackerofficial.github.io/abhacker.repo/abhacker.repo.key | apt-key add &> /dev/null &
 
 if [ ! -f "$PREFIX/etc/raw_keys" ];then
@@ -57,11 +57,11 @@ get1=`curl -fsSL https://github.com/abhackerofficial/abhacker.repo/raw/master/ab
 get2=`cat $PREFIX/etc/raw_keys/abhacker.repo.key | awk NR==3`
 
 if [[ ${get1} != ${get2} ]];then
-	printf "$G\n[+]─➤ Adding Public GPG Key [${ARCH}]\n"
+	printf "$G\n(_>)─➤ Adding Public GPG Key [${ARCH}]\n"
 	curl -fsSL https://github.com/abhackerofficial/abhacker.repo/raw/master/abhacker.repo.key | cat &> ${PREFIX}/etc/raw_keys/abhacker.repo.key &
 	curl -fsSL https://github.com/abhackerofficial/abhacker.repo/raw/master/abhacker.repo.key | apt-key add &> /dev/null
 else
-	printf "$Y\n[!]─➤ Public GPG Key Already exists [${ARCH}]\n"
+	printf "$Y\n(_>)─➤ Public GPG Key Already exists [${ARCH}]\n"
 fi
 
 aarch64_architecture() {
@@ -79,10 +79,10 @@ x86_64_architecture() {
 
 #:::: ABHACKERS's REPOSITORY::::#
 if [ -f "$REPO_DIR" ];then
-	printf "$Y\n[!]─➤ ABHacker's Repository Already exists [${ARCH}]\n"
+	printf "$Y\n(_>)─➤ ABHacker's Repository Already exists [${ARCH}]\n"
 	sleep 1
 else
-	printf "$G\n[+]─➤ Adding ABHacker's Repository [${ARCH}]\n"
+	printf "$G\n(_>)─➤ Adding ABHacker's Repository [${ARCH}]\n"
 	sleep 1
 	case "$ARCH" in
 		aarch64)
@@ -103,9 +103,9 @@ else
 	esac
 fi
 
-printf "$G\n[+]─➤ Updating Termux [${ARCH}]\n$W"
+printf "$G\n(_>)─➤ Updating Termux [${ARCH}]\n$W"
 apt-get update >/dev/null 2>&1
-printf "$G\n[+]─➤ Install package : apt install <pkg>$W"
+printf "$G\n(_>)─➤ Install package : apt install <pkg>$W"
 
 if [[ ${1} == "--install" || ${1} == "-i" ]];then
  if [[ ${#2} -gt "0" ]];then
@@ -139,4 +139,4 @@ apt autoremove ${2}
   fi
 fi
 
-#                                               @Ivam3
+#                  i-Haklab by @Ivam3

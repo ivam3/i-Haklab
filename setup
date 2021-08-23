@@ -1,204 +1,198 @@
 #!/data/data/com.termux/files/usr/bin/bash
-#This script will install i-Haklab v.1.5 2020 by Ivam3 - It is a hacking laboratory that contains open source tools recommended by Ivam3.
+#This script will install i-Haklab v.3.0 2021 by Ivam3 - It is a hacking laboratory that contains open source tools recommended by Ivam3.
 IFS=$'\n\t'
 trap ctrl_c 2
-PARTITION=$(echo "$PWD" | grep -o sdext2)
-iHDB="https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set"
+ctrl_c() { printf "$Y\n\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n\n";}
 
-command -v curl >/dev/null 2>&1 || apt install curl -y >/dev/null 2>&1
-curl -Ls ${iHDB}/libexec/colors -o /data/data/com.termux/files/usr/libexec/colors
-source /data/data/com.termux/files/usr/libexec/colors
+printf "Running..."
+[[ -d $PREFIX/share/i-Haklab ]]	|| cp -r $PWD/../i-Haklab $PREFIX/share/
+source $PREFIX/share/i-Haklab/.set/var/variables
+source $iHAKLAB/.set/functions/functions
+chk-Cuser
+clear;banner;sleep 3
+${which} mkdir -p ~/.termux && echo "extra-keys = [['ESC','/','-','HOME','UP','END','PGUP'],['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN']]" > ~/.termux/termux.properties && echo "$rst"
 
-ctrl_c(){ printf "$Y\n\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n\n";}
-
-while [ ! $(id -u) -ne 0 ]; do
-	printf "$R\n[W]─➤ You need to be a common user to install i-Haklab$W\n"
-	exit
-done
-until [ -d /data/data/com.termux/files/home/i-Haklab ]; do
-        printf "$R\n[W]─➤ i-Haklab directory must to be in home directory$W\n"
-	exit
-done
-
-clear;curl -Ls "${iHDB}/libexec/banner/IbyC"|bash
-
-mkdir -p $HOME/.termux && echo "extra-keys = [['ESC','/','-','HOME','UP','END','PGUP'],['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN']]" > $HOME/.termux/termux.properties && echo "$rst"
-
-if [ -d $HOME/.local ]; then
-	rm -rf $HOME/.local
+if [ -d ~/.local ]; then
+	rm -rf ~/.local
 fi
-if [ -d $HOME/.config ]; then
-	rm -rf $HOME/.config
+if [ -d ~/.config ]; then
+	rm -rf ~/.config
 fi
 if command -v fish ;then yes|apt remove fish && apt autoremove; fi
 
-printf "$Y\n[!]─➤$W Head to app configuration and provides storage permissions to termux$Y\n ╰─➤$W when finished$G press enter\n$W"
+printf "$Y\n(_>)─➤$W Head to app configuration and provides storage permissions to termux.$Y\n ╰─➤$W when finished$G press enter\n$W"
 read enter
 
 #::::::::::Installation of dependencies::::::::::::#
+printf "$G(_>)─➤$W Upgrading and installing Termux packages.\n"
 yes|pkg update && pkg upgrade
-for repo in fish root-repo unstable-repo fortune util-linux coreutils vim python python2 ruby perl clang curl wget make openssl openssl-tool php zip unzip tar w3m neofetch weechat irssi tor torsocks proxychains-ng htop bison megatools findutils git apr apr-util openssh apache2 mariadb php-apache pkg-config termux-api termux-tools termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner cmatrix figlet man termux-api axel fortune apksigner autoconf libffi libgmp libpcap readline libsqlite libgrpc libiconv libcaca libtool libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static zlib libassuan libgcrypt libgpg-error gnupg gpgme dnsutils debianutils sqlite dirb mlocate sqlmap crunch translate-shell ffsend; do
+for repo in fish root-repo unstable-repo fortune util-linux coreutils vim python python2 ruby perl clang curl wget gawk make openssl openssl-tool php zip unzip tar w3m neofetch weechat irssi tor torsocks proxychains-ng htop bison megatools findutils git apr apr-util openssh apache2 mariadb php-apache pkg-config termux-api termux-tools termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner cmatrix figlet man termux-api axel fortune apksigner autoconf libffi libgmp libpcap readline libsqlite libgrpc libiconv libcaca libtool libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static zlib libassuan libgcrypt libgpg-error youtubedr gnupg gpgme dnsutils debianutils sqlite dirb mlocate sqlmap crunch translate-shell ffsend x11-repo; do
 	GOTIT=$(pkg list-installed | grep -oE $repo)
 	PKG=$(pkg list-all|grep -o $repo)
 	if [ ! -z "$PKG" ] && [ -z "$GOTIT" ];then
-		printf "$G\n[+]─➤$W Installing the repository $repo\n"
+		printf "$G(_>)─➤$W Installing the repository $repo.\n"
 		yes|pkg install $repo >/dev/null 2>&1
 	elif [ ! -z "$PKG" ] && [ ! -z "$GOTIT" ]; then
 		continue
 	else
-		printf "$R\n[w]─➤$W The repository $repo is not candidate\n"
+		printf "$R(_>)─➤$W The repository $repo is not candidate.\n"
 		sleep 1
 	fi
 done
-updatedb
-printf "$G\n[+]─➤$W Installing required python modules\n"
-for v in python python2 ; do
-	$v -m pip --no-color --quiet install --upgrade pip
-done
-
-for module in trufflehog wheel speedtest-cli scapy wfuzz h8mail objection frida; do
-        for v in python python2 ; do
-		$v -m pip --no-color --quiet install $module 
-	done
-done
-
-#::::::::::Searching for root permissions::::::::::::#
-printf "$G\n[+]─➤$W Checking for root permissions ..";
-CHECKROOT=$(bash /data/data/com.termux/files/home/i-Haklab/.set/to-install/check-root)
-USR=$(whoami)
-if [ $CHECKROOT = "root" ]; then
-	printf "$G. GOT IT!!$W\n"
-	printf "$G\n[+]─➤$W Build root enviroment ..";
-	command -v sudo > /dev/null || bash /data/data/com.termux/files/home/i-Haklab/.set/to-install/instasudo
-	if [ -e /data/data/com.termux/files/home/.suroot/.bashrc ]; then
-		if [ ! -O /data/data/com.termux/files/home/.suroot/.bashrc ]; then
-			sudo chown $USR:$USR -R /data/data/com.termux/files/home/.suroot
-		fi
-	else
-		if [ ! -d /data/data/com.termux/files/home/.suroot ]; then
-			mkdir /data/data/com.termux/files/home/.suroot
-		fi
-	fi
-        echo "PS1=\"\[\e[33m\][!] \[\e[31m\]Press\[\e[32m\] Ctrl d\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\"" > /data/data/com.termux/files/home/.suroot/.bashrc
-        echo "export TERM=xterm-256color" >> /data/data/com.termux/files/home/.suroot/.bashrc
-        echo "export LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib" >> /data/data/com.termux/files/home/.suroot/.bashrc
-        echo "export PATH=/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:/system/xbin:/system/bin" >> /data/data/com.termux/files/home/.suroot/.bashrc
-        echo "HOME=/data/data/com.termux/files/home" >> /data/data/com.termux/files/home/.suroot/.bashrc
-	echo "fish" >> /data/data/com.termux/files/home/.suroot/.bashrc
-        echo "#          i-Haklab by @Ivam3" >> /data/data/com.termux/files/home/.suroot/.bashrc
-	printf "$G. DONE!!$W\n"
+printf "$G(_>)─➤$W Installing Abhacker repositories."
+if [ ! -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ];then
+	TMPabh=$(mktemp)
+	wget -q --tries=20 "${iHDB}/fix-tools/instAbhackerRepo" -O $TMPabh
+        chmod +x $TMPabh
 fi
 
-#::::::::::Definition of variable i-Haklab::::::::::::#
-printf "$G\n[+]─➤ Getting access to external storage..$W";
-sleep 1
+#::: UPDATING LOCATE DATA BASE :::#
+printf "$G(_>)─➤$W Updating data base."
+${which} updatedb
+printf "$G. DONE$W"
+
+printf "$G(_>)─➤$W Installing required python modules.\n"
+for v in python python2 ; do
+	$v -m pip --no-color --quiet --no-cache-dir install --upgrade pip
+done
+for module in trufflehog wheel speedtest-cli scapy wfuzz h8mail objection frida; do
+        for v in python python2 ; do
+		$v -m pip --no-color --quiet --no-cache-dir install $module 
+	done
+done
+
+#::::::::::Definition of variable TOOLS::::::::::::#
+printf "$G\n(_>)─➤ Getting access to external storage..$W";
 yes|termux-setup-storage
-SDCARD=$(ls -l $HOME/storage/external-1 | awk '{print $11}')
-if [ ! -z $SDCARD ] && [ -z $PARTITION ]; then
-	mkdir -p $SDCARD/roothome
-	until [ -d $SDCARD/roothome ]; do
-		printf "$R. Access denied$W";
-		sleep 1
-		printf "$Y. Retrieving$W";
-		sleep 0.5
-		mkdir -p $SDCARD/roothome
-	done
-#	until [ -O $SDCARD/roothome ] && [ $CHECKROOT = "root" ]; do
-#		printf "$G DONE!!$W\n"
-#		sleep 1
-#		printf "$Y\n[!]─➤ Fixing permissions...$W"
-#		sleep 0.5
-#		sudo chown $USR:$USR $SDCARD/roothome
-#	done
+if [ -w $TOOLS ];then
 	printf "$G. DONE!!$W\n"
-	sleep 1
-	printf "$G\n[+]─➤ Moving i-Haklab directory to external storage..$W";
-        cp -r $HOME/i-Haklab $SDCARD/roothome/
-	until [ -d $SDCARD/roothome/i-Haklab ]; do
-		printf "$R. Access denied$W";
-		sleep 1
-		printf "$Y. Retrieving$W";
-		sleep 0.5
-		cp -r $HOME/i-Haklab $SDCARD/roothome/
-	done
-	rm -rf $HOME/i-Haklab
-	iHAKLAB=$SDCARD/roothome/i-Haklab
-	printf "$G. DONE!!$W\n"
-elif [ ! -z $PARTITION ] || [ -d /data/data/com.termux ]; then
-        iHAKLAB=/data/data/com.termux/files/home/i-Haklab
 else
-        printf "$R\n[W]─➤ STORAGE ACCESS DENIED$W\n"
-	ctrl_c;exit
+	printf "$R. FAIL!!$W"
 fi
 
 #::::::::::Installation of Ohmyfish::::::::::::#
-printf "$G\n[+]─➤ Installing interactive shell..$W";
+printf "$G\n(_>)─➤ Installing interactive shell.$W"
+[[ -d ~/.local/share/omf ]] &&  rm -rf ~/.local/share/omf
+[[ -d ~/.config/omf ]] && rm -rf ~/.config/omf/
+git config --global core.autocrlf
 curl -Ls http://get.oh-my.fish | fish
-echo "if status --is-login" >> $PREFIX/etc/fish/config.fish
-echo "bash /data/data/com.termux/files/usr/var/log/login-termux" >> $PREFIX/etc/fish/config.fish
-echo "end" >> $PREFIX/etc/fish/config.fish
-echo "" >> $PREFIX/etc/fish/config.fish
-echo "function on_exit --on-event fish_exit" >> $PREFIX/etc/fish/config.fish
-echo "echo 'Have a nice hacking day!!'" >> $PREFIX/etc/fish/config.fish
-echo "sleep 1" >> $PREFIX/etc/fish/config.fish
-echo "end" >> $PREFIX/etc/fish/config.fish
-echo "" >> $PREFIX/etc/fish/config.fish
-echo "set fish_theme bobthefish" >> $PREFIX/etc/fish/config.fish
-echo "set HOME /data/data/com.termux/files/home" >> $PREFIX/etc/fish/config.fish
-echo "set GOPATH /data/data/com.termux/files/home/go" >> $PREFIX/etc/fish/config.fish
-echo "alias LOCALHOST=\"ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255\"" >> $PREFIX/etc/fish/config.fish
-echo "alias serverapache=\"apachectl\"" >> $PREFIX/etc/fish/config.fish
-echo "alias postgresql=\"pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql\"" >> $PREFIX/etc/fish/config.fish
-echo "alias traductor=\"gawk -f (curl -Ls git.io/translate | psub) -- -shell\"" >> $PREFIX/etc/fish/config.fish
-echo "" >> $PREFIX/etc/fish/config.fish
-sed -i "22a set iHAKLAB $iHAKLAB" $PREFIX/etc/fish/config.fish
-THEME=$(mktemp)
-echo "#!/bin/env fish" >> $THEME
-echo "#" >> $THEME
-echo "omf install bobthefish" >> $THEME
-fish $THEME >/dev/null 2>&1
-rm $THEME
+cat <<- CONF >> $PREFIX/etc/fish/config.fish
+if status --is-login
+bash /data/data/com.termux/files/usr/var/log/login-termux
+end
+
+function on_exit --on-event fish_exit
+rm -rf $TMPDIR/*
+echo 'Have a nice hacking day!!'
+sleep 1
+end
+
+set fish_theme bobthefish
+set HOME /data/data/com.termux/files/home
+set GOPATH /data/data/com.termux/files/home/go
+set GOROOT /data/data/com.termux/files/usr/lib/go
+set iHAKLAB /data/data/com.termux/files/usr/share/i-Haklab
+alias LOCALHOST="ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255"
+alias serverapache="apachectl"
+alias postgresql="pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql"
+alias traductor="gawk -f (curl -Ls git.io/translate | psub) -- -shell"
+CONF
+TMP_fish=$(mktemp)
+cat <<- CONF > $TMP_fish
+#!/bin/env fish
+omf install bobthefish
+CONF
+fish $TMP_fish >/dev/null 2>&1
+rm $TMP_fish
+cat <<- CONF > $PREFIX/etc/bash.bashrc
+# Command history tweaks:
+# - Append history instead of overwriting
+#   when shell exits.
+# - When using history substitution, do not
+#   exec command immediately.
+# - Do not save to history commands starting
+#   with space.
+# - Do not save duplicated commands.
+shopt -s histappend
+shopt -s histverify
+export HISTCONTROL=ignoreboth
+chsh -s fish
+# Default command line prompt.
+PROMPT_DIRTRIM=2
+PS1='\[\e[0;32m\]\w\[\e[0m\] \[\e[0;97m\]\$\[\e[0m\] '
+
+# Handles nonexistent commands.
+# If user has entered command which invokes non-available
+# utility, command-not-found will give a package suggestions.
+if [ -x /data/data/com.termux/files/usr/libexec/termux/command-not-found ]; then
+        command_not_found_handle() {
+                /data/data/com.termux/files/usr/libexec/termux/command-not-found "$1"
+        }
+fi
+CONF
+
+printf "$G\n(_>)─➤ Installing VIM predictable text..$W";
 if [ -d ~/.vim ];then
 	rm -rf ~/.vim
 fi
-wget -q ${iHDB}/to-install/iHaklabvim.zip -O ~/iHaklabvim.zip
-if [ -e ~/iHaklabvim.zip ]; then
-	cd;unzip -q ~/iHaklabvim.zip
-	mv ~/vim ~/.vim
+wget -q --tries=20 ${iHDB}/to-install/iHaklabvim.zip -O $TMPDIR/iHaklabvim.zip
+if [ -e $TMPDIR/iHaklabvim.zip ]; then
+	unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
+	rm -f $TMPDIR/iHaklabvim.zip
+	mv $TMPDIR/vim ~/.vim
+	printf "$G. DONE!!$W"
 else
-	printf "$R\n[W]─➤$W VIM text predictable failure\n"
-	sleep 2
+	printf "$R. FAIL!!$W"
 fi
-bash $iHAKLAB/.set/to-install/functions
+sleep 2
+wget -q --tries=20 $iHDB/functions/unset.fish -O ~/.config/fish/functions/unset.fish
 bash $iHAKLAB/.set/to-install/i-Haklab_login
-gem install fortune
-if [ -e ~/ivam3-Haklab ]; then
-	rm -rf ~/ivam3-Haklab
-fi
-printf "$G. DONE!!$W\n"
-sleep 1
 
 #::::::::::Insatalling i-Haklab tools::::::::::::#
-printf "$G\n[+]─➤ Installing binary tools..$W";
-TARGET=$(ls $iHAKLAB/.set/bin)
-for exe in ${TARGET[*]}; do
-	wget ${iHDB}/bin/$exe -O $PREFIX/bin/$exe -q
-	chmod +x $PREFIX/bin/$exe
-done
-printf "$G. DONE!!$W\n"
+printf "$G\n(_>)─➤$W Installing principal external tools."
 sleep 1
-printf "$G\n[+]─➤ Installing principal external tools..$W"
-sleep 1
-for TOOL in DoS-A-Tool ExiF binchecker blackbox crunch vpn tmux-viewer evilurl; do
-	bash $iHAKLAB/.set/to-install/$TOOL
+for TOOL in 
+	IbyC-fixer converter serverphp DoS-A-Tool ExiF embed binchecker blackbox crunch vpn evilurl localtunnel-server pagekite lock;do
+	bash $iHAKLAB/.set/share/install $TOOL
 done
-
-#::::::::::Installation double check::::::::::::#
-if [ -d /data/data/com.termux/files/home/i-Haklab ] && [ -d /data/data/com.termux/files/home/storage/external-1/roothome/i-haklab ]; then
-	rm -rf /data/data/com.termux/files/home/i-Haklab
+if ! command -v msfconsole;then
+printf "$G\n(_>)─➤$W Installing metasploit-framework."
+        bash <(curl -fsSL "http://git.io/abhacker-repo") --install metasploit -y
 fi
-bash $iHAKLAB/.set/libexec/review
+printf "$G\n(_>)─➤$W Downgrading ruby version..";
+        exec $TMPabh --install "ruby=2.7.2" >/dev/null 2>&1
+printf "$G. DONE!!$W\n"
+printf "$G\n(_>)─➤$W Installing ngrok..";
+[[ $(command -v ngrok) ]] && mv $(command -v ngrok) $(command -v ngrok).io
+	exec $TMPabh --install ngrok-server >/dev/null 2>&1
+printf "$G. DONE!!$W\n"
+        rm $TMPabh
+printf "$G\n(_>)─➤$W Downloading brute force wordlist$G\n  ╰───────────➤$W it could take a while..";
+git clone --quiet https://github.com/jeanphorn/wordlist $iHAKLAB/wordlist
+wget -q --tries=20 https://www.scrapmaker.com/data/wordlists/dictionaries/rockyou.txt -O $iHAKLAB/wordlist/rockyou.txt
+printf "$G. DONE!!$W\n"
 
-printf "$Y\n\n[!]─➤$G i-Haklab installed !!!$Y |$W Please restart Termux and enjoy it!!\n\n"
+#::::::::::Searching for root permissions::::::::::::#
+if chk-root;then
+	wget -q --tries=20 $iHDB/bin/sudo -O $PREFIX/bin/sudo
+        if [[ -e ~/.suroot/.bashrc ]];then
+                [[ -O ~/.suroot/.bashrc ]] || sudo chown $USER:$USER -R ~/.suroot/
+        else
+		[[ -d ~/.suroot ]] || mkdir ~/.suroot
+        fi
+        cat <<- CONF > ~/.suroot/.bashrc
+PS1=\"\[\e[33m\][!] \[\e[31m\]Press\[\e[32m\] Ctrl d\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\""
+export TERM=xterm-256color
+export LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib
+export PATH=/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:/system/xbin:/system/bin
+HOME=/data/data/com.termux/files/home
+fish
+#          i-Haklab by @Ivam3
+CONF
+fi
 
-#		@Ivam3
+[[ $PWD != $iHAKLAB ]] && rm -rf $PWD
+bash $iHAKLAB/.set/share/review #LOGFILE
+
+printf "$Y\n\n(_>)─➤$G i-Haklab installed !!!$Y |$W Please restart Termux and enjoy it!!\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n\n"
+#		i-Haklab by @Ivam3

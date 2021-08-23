@@ -37,6 +37,7 @@ TELEGRAM	YOUTUBE				NAME_OF_TUTORIAL
 50	false				➤ PHISHING:Weeman_Framework(2da parte):Hacking_Facebook inLAN
 52	false				➤ PHISHING:Weeman_Framework(3ra parte):Hacking_Facebook Subdominio
 54	false				➤ NGROK:Instalacion
+false   https://youtu.be/Y_r5NUWn4xA    ➤ NGROK:conexion_via_ssh
 56	false				➤ PHISHING:WEEMAN_Framework(4ta parte):Hacking_Facebook_outLAN
 58	false				➤ PHISHING:Shellphish Framework:Hacking_redes_sociales
 297	false				➤ SAYCHEESE:Hack_webcam_con_un_link_(outlan)
@@ -62,9 +63,13 @@ TELEGRAM	YOUTUBE				NAME_OF_TUTORIAL
 231	https://youtu.be/krsDN2c6iac	➤ i-Haklab:Tips_de_uso_1ra_parte
 233	https://youtu.be/oQy2D99wxos	➤ i-Haklab:Tips_de_uso_2da_parte
 244	https://youtu.be/0POMqR6IVbQ	➤ i-Haklab:Tips_de_uso_3ra_parte
+false   https://youtu.be/EHkU1sqDYd4    ➤ i-Haklab:Oculta_mensajes_en_archivos
+false   https://youtu.be/KJh3u-oeRGc    ➤ i-Haklab:Comparte_archivos_de_termux_a_termux
+false   https://youtu.be/vlzzPgE5unA    ➤ i-Haklab:Crea_links_con_subdominio_personalizado
 83	https://youtu.be/jWvLi6qy1_A	➤ CURSO_DE_PROGRAMACIÓN_EN_BASH_1ra_Parte
 85	https://youtu.be/pGU5f-7FtTI	➤ CURSO_DE_PROGRAMACIÓN_EN_BASH_2da_Parte
 87	https://youtu.be/i0prEBotzhE	➤ CURSO_DE_PROGRAMACIÓN_EN_BASH_3ra_Parte
+false   https://youtu.be/YHzv_G-MMl0    ➤ Asigna_contraseña_codificada_a_scripts_para_su_ejecucion
 264	https://youtu.be/qVVLP99G1VI    ➤ OFUSCODE:Oculta_codigo_bash_script
 false	https://youtu.be/7WBKX9SFHlc	➤ SET_cap.especial:metasploit
 488	https://youtu.be/suMFPqrwD_c	➤ SET_cap.01:ngrok

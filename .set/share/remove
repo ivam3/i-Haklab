@@ -1,0 +1,420 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Created on July/2021
+IFS=$'\n\t'
+trap ctrl_c 2
+source $PREFIX/share/i-Haklab/.set/var/variables
+source $iHAKLAB/.set/functions/functions
+ctrl_c(){ printf "$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";}
+
+while [[ ! -d $TOOLS/$1 ]] || [[ ! -e $PREFIX/bin/$1 ]] || [[ ! -d $PREFIX/opt/$1 ]] [[ ! -e ~/go/bin/$1  ]] || [[ $1  = kalilinux ]];do
+	printf "$R\n(_>)─➤ $1 isn't installed";exit
+done
+
+Err() { printf "$R\n(_>)─➤$W Remove failed";ctrl_c;exit;}
+PIPup() {
+	for PYv in python python2 ;do
+		$PYv -m pip install --no-color --quiet --upgrade pip
+	done
+}
+rmMainDir() {
+	if chk-root;then
+		user=sudo
+	else
+		user=exec
+	fi
+	for path in $TOOLS $PREFIX/bin $PREFIX/opt ~/go/bin;do
+		if [[ $path/$1 ]];then
+			$user rm -rf $path/$1
+		fi
+	done
+}
+rmPYmodules() { python$PYv -m pip uninstall --quiet --no-color -r $TMPDIR/deps2drop;}
+alert() { printf "$Y\n(_>)─➤$W The main $1 directory has been removed$Y\n(_>)─➤$W About dependencies: these could be necessary for another tool and these are :\n"
+	cat -n $TMPDIR/deps2drop|sort
+	printf "(_>)─➤$W To drop them press$G ENTER$W or$R ctrl+c$W to keep them\n"
+	read enter
+	PIPup
+	rmPYmodules
+	rm -f $TMPDIR/deps2drop
+}
+if [[ $SHLL = fish ]]; then
+	INITFILE="$PREFIX/etc/fish/config.fish"
+else
+	INITFILE="$PREFIX/etc/bash.bashrc"
+fi
+
+running
+case "$1" in
+	kalilinux)
+		yes|apt install curl && curl https://raw.githubusercontent.com/AndronixApp/AndronixOrigin/master/Uninstall/Kali/UNI-kali.sh|bash
+		;;
+	#::ON BIN TOOLS::#
+	binwalk|beef|cewl|evilurl|ghost|hakku|hatcloud|exploitdb|lockphish|nexphisher|saycheese|sayhello|wbruter|ExiF|binchecker|IbyC-fixer|blackbox|converter|serverphp|hydra|JohnTheRipper|ngrok|shc|slowhttptest|snow|whatweb|wpscan|DoS-A-Tool|acccheck|rhawk|nikto)
+		if [[ $1 = beef ]]; then
+			rm -rf $PREFIX/opt/GeoIP
+		fi
+		if [[ $1 = hydra ]];then
+			yes|apt remove make automake
+		fi
+		if [[ $1 = JohnTheRipper ]]; then
+			rm -f $PREFIX/bin/john
+		fi
+		if [[ $1 = shc ]];then
+			rm -f $PREFIX/bin/un$1
+		fi
+		rmMainDir
+		;;
+	#:::PYTHON3:::#
+	fuzzdb)
+		rmMainDir
+		printf "wfuzz" > $TMPDIR/deps2drop
+		alert
+		;;
+	getnpusers)
+		rmMainDir
+		printf "urllib3\nrequests\nmock\nidna\nbiopython\nrust\nimpacket" > $TMPDIR/deps2drop;alert
+		;;
+	hunner)
+		rmMainDir
+		printf "httplib2" > $TMPDIR/deps2drop
+		alert
+		;;
+	ipgeolocation)
+		rmMainDir
+		printf "termcolor\ncolorama" > $TMPDIR/deps2drop
+		alert
+		;;
+	osintgram)
+		rmMainDir
+		printf "requests==2.24.0\nrequests-toolbelt==0.9.1\ngeopy\nprettytable==0.7.2\ninstagram-private-api==1.6.0\ngnureadline" > $MPDIR/deps2drop
+		alert
+		;;
+	phoneinfoga)
+		yes|apt remove geckodriver
+		rmMainDir
+		if $(which geckodriver);then
+			rm -f $PREFIX/bin/geckodriver
+		fi
+		printf "phonenumbers\nselenium\nbs4\ngoogle_api\nconfig\nhtml5lib\ngeckodriver-autoinstaller" > $TMPDIR/deps2drop
+		alert
+		;;
+	quack)
+		rmMainDir
+		printf "install\nsetuptools\nphonenumbers\nrequests\nscapy\nwget\nargparse" > $TMPDIR/deps2drop
+		alert
+		;;
+	recon-ng)
+		yes|apt remove libxml2 libxml2-static libxml2-utils libxslt libxslt-static
+		rmMainDir
+		printf "dicttoxml\ndnspython\njsonrpclib\nlxml\nmechanize\nslowaes\nXlsxWriter\nolefile\nPyPDF2\nflask\nunicodecsv" > $TMPDIR/deps2drop
+		alert
+		;;
+	routersploit)
+		rmMainDir
+		printf "future\nrequests\npysnmp\npycrypto\ncryptography\nparamiko\nbcrypt\npynacl" > $TMPDIR/deps2drop
+		alert
+		;;
+	seeker)
+		rmMainDir
+		printf "requests" > $TMPDIR/deps2drop
+		alert
+		;;
+	shellsploit)
+		rmMainDir
+		printf "capstone\nreadline\npefile\ncolorama\npylzma" > $TMPDIR/deps2drop
+		alert
+		;;
+	sherlock)
+		rmMainDir
+		printf "beautifulsoup\nbs\ncertifi\ncolorama\nlxml\nPySocks\nrequests\nrequests-futures\nsoupsieve\nstem\ntorrequest" >> $TMPDIR/deps2drop
+		alert
+		;;
+	sqlmap)
+		if [[ -d $TOOLS/$1 ]];then
+			rmMainDir
+		else
+			printf "sqlmap" > $TMPDIR/deps2drop
+			alert
+		fi
+		;;
+	theharvester)
+		yes|apt remove libxml2 libxml2-static libxml2-utils libxslt libxslt-static
+		rmMainDir
+		cat $TOOLS/$1/deps2drop > $TMPDIR/deps2drop
+		alert
+		;;
+	vulnx)
+		rmMainDir
+		cat $TOOLS/$1/deps2drop > $TMPDIR/deps2drop
+		alert
+		;;
+	#::PYTHON2::#
+	a2sv)
+		Pyv="2"
+		rmMainDir
+		printf "argparse\nnetaddr" > $TMPDIR/deps2drop
+		alert
+		;;
+	adminpanel|androbugs|cc-genpro|websploit)
+		PYv="2"
+		rmMainDir
+		;;
+	d-tect)
+		PYv="2"
+		rmMainDir
+		printf "colorama\nbeautifulsoup" > $TMPDIR/deps2drop
+		alert
+		;;
+	cloudbunny)
+		PYv="2"
+		rmMainDir
+		printf "certificates" > $TMPDIR/deps2drop
+		alert
+		;;
+	credmap)
+		PYv="2"
+		rmMainDir
+		printf "urllib2" > $TMPDIR/deps2drop
+		alert
+		;;
+	cryptovenom)
+		PYv="2"
+		rmMainDir
+		printf "base58\nscrypt\npyblake2\npycrypto\ncrypto\nbcrypt\nrc2\ntwofish\ngeesefly\nskein pycipher\nnumpy\nCrypto\npasslib\nbase91\nmom\ngmpy2\nmore_itertools\nargon2_cffi" > $TMPDIR/deps2drop
+		alert
+		;;
+	fbi|recondog)
+		PYv="2"
+		rmMainDir
+		printf "requests" > $TMPDIR/deps2drop
+		alert
+		;;
+	hasher)
+		PYv="2"
+		rmMainDir
+		printf "progressbar\npasslib" > $TMPDIR/deps2drop
+		alert
+		;;
+	kerbrute)
+		PYv="2"
+		rmMainDir
+		printf "impacket" > $TMPDIR/deps2drop
+		alert
+		;;
+	phonesploit)
+		PYv="2"
+		rmMainDir
+		printf "colorama" > $TMPDIR/deps2drop
+		alert
+		;;
+	pybelt)
+		PYv="2"
+		rmMainDir
+		cat $TOOLS/$1/deps2drop > $TMPDIR/deps2drop
+		alert
+		;;
+	sqliv)
+		yes|apt remove libxml2 libxml2-static libxml2-utils libxslt libxslt-static
+		PYv="2"
+		rmMainDir
+		printf "terminaltables\ntermcolor\nnyawc" > $TMPDIR/deps2drop
+		alert
+		;;
+	#::BASH::#
+	login)
+		if $(grep "login-termux" $INITFILE);then
+			sed 's|/data/data/com.termux/files/usr/var/log/login-termux|/data/data/com.termux/files/usr/libexec/banner/wall-banner|g' -i $INITFILE
+		else
+			printf "$R\n(_>)─➤ Login is already inactive"
+		fi
+		;;
+	userrecon)
+		rmMainDir
+		;;
+	#::BIN::#
+	adbfastboot)
+		for BIN in adb adb.bin fastboot fastboot-armeabi;do
+			if [[ -e $PREFIX/bin/$BIN ]];then
+				rm -f $PREFIX/bin/$BIN
+			fi
+		done
+		if [[ -d ~/adbfiles ]];then
+			rm -rf ~/adbfiles
+		fi
+		;;
+	desktop-xfce4)
+		yes|pkg remove xfce4 xfce4-taskmanager dosbox xfce4-terminal python-tkinter htop neofetch loqui vim-gtk the-powder-toy galculator xorg-xhost mpv-x ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk3 gtk2 mtpaint leafpad hexchat netsurf recordmydesktop feh audacious;yes|pkg remove xfce4-* kvantum zenity mate-terminal mate-settings-daemon dbus-glib dconf termux-api wireshark-gtk
+		for i in .vnc .icons .themes .config Desktop Downloads Templates Public Documents Pictures Video Music backgrounds;do
+			if [[ ~/$1 ]]; then
+				rm -rf ~/$i
+			fi
+		done
+		for v in music stopdesktop startdesktop; do
+			if [[ $PREFIX/bin/$v ]];then
+				rm -rf $PREFIX/bin/$v
+			fi
+		done
+		;;
+	java)
+		rmMainDir
+		yes|apt remove aapt apksigner apksigner-old;yes|apt autoremove
+		for i in java apktool signapk keytool;do
+			rm -f $PREFIX/bin/$i
+		done
+		rm -rf $PREFIX/share/jdk8 $PREFIX/share/glib $PREFIX/var/spool
+		;;
+	localtunnel-server)
+		npm uninstall localtunnel
+		rm -rf $PREFIX/lib/node_modules/localtunnel
+		;;
+	serverapache)
+		yes|apt remove php apache2 php-pgsql php-fpm php-apache mariadb phpmyadmin
+		yes|apt autoremove
+		rm -rf $PREFIX/etc/apache2 $PREFIX/etc/phpmyadmin
+		if grep "$1" $INITFILE;then
+			sed 's|alias serverapache="apachectl"||g' -i $INITFILE
+		fi
+		;;
+	torvpn)
+		yes|apt remove tor torsocks proxychains-ng
+		yes|apt autoremove
+		rm -rf $PREFIX/etc/tor $PREFIX/etc/proxychains.conf
+		for i in myip mypip swip ; do
+			rm -f $PREFIX/bin/$i
+		done
+		;;
+	youtubedr|youtube-dl|converter)
+		if [[ $1 = youtube-dl ]];then
+			PYv=""
+			rmMainDir
+			printf "$1" > $TMPDIR/deps2drop
+			alert
+			rm -rf ~/.config/youtube-dl ~/bin ~/.netrc  $PREFIX/bin/termux-url-opener
+		elif [[ $1 = youtubedr ]];then
+			yes|apt remove $1
+		elif [[ $1 = converter ]];then
+			rmMainDir
+			rm -rf ~/.milux
+		fi
+		;;#::RUBY::#
+	embed)
+		yes|apt remove axel apksigner aapt
+		rmMainDir
+		;;
+	metasploit)
+		rmMainDir
+		yes|apt remove patchelf;yes apt autoremove
+		rm -rf $PREFIX/var/lib/postgresql $PREFIX/var/lib/postgresql $PREFIX/bin/msfconsole $PREFIX/bin/msfvenom
+		sed 's|alias postgresql="pg_ctl -D $PREFIX/var/lib/postgresql||g' -i $INITFILE
+		;;
+	#::GO::
+	amass)
+		goEnv
+		export GO111MODULE=on
+		go get -v github.com/OWASP/Amass/v3/...
+		ln -s ~/go/bin/$1 $PREFIX/bin/$1
+		chmod 750 -R ~/go
+		;;
+	aquatone)
+		goEnv
+		#go get github.com/michenriksen/$1
+		git clone --quiet https://github.com/michenriksen/$1 ~/go/src/github.com/$1
+		cd ~/go/src/github.com/$1
+		go get
+		go build
+		go install
+		ln -s ~/go/src/github.com/$1/$1 ~/go/bin/$1
+		gem install $1
+		chmod 750 -R ~/go
+		;;
+	gobuster)
+		goEnv
+		go get github.com/OJ/$1
+		cd ~/go/src/github.com/OJ/$1
+		go get
+		go build
+		go install
+		ln -s $HOME/go/bin/$1 $PREFIX/bin/$1
+		chmod 750 -R ~/go
+		;;
+	gophish)
+		goEnv
+		go get github.com/$1/$1
+		chmod 777 -R ~/go
+		cd ~/go/src/github.com/$1/$1@v0.11.0
+		go get
+		go build
+		go install
+		ln -s $HOME/go/bin/$1 $HOME/go/src/github.com/$1/$1/$1@v0.11.0 
+		sed 's|"listen_url": "0.0.0.0:80",|"listen_url": "127.0.0.1:8080",|g' -i config.json
+		chmod 700 -R ~/go
+		chmod 640 config.json
+		;;
+	tangalanga)
+		goEnv
+		git clone --quiet github.com/elcuervo/tangalanga.git ~/go/src/github.com/tangalanga
+		chmod 750 -R ~/go/src/github.com/tangalanga
+		cd ~/go/src/github.com/tangalanga
+		go get
+		go build
+		go install
+		;;
+	virustotal)
+		yes|apt remove $1-cli
+		for i in rm -rf ~/go/src/github.com/VirusTotal ~/go/bin/vt $PREFIX/bin/vt $PREFIX/etc/bash_completion.d/vt;do
+			if [[ $i ]]; then
+				rm -rf $i
+			fi
+		done
+		;;
+	#::ROOT::#
+	aircrack-ng)
+		yes|apt remove aircrack-ng ethtool macchanger
+		;;
+	bettercap)
+		gem uninstall bettercap
+		;;
+	dnsenum)
+		chk-sudo
+		rmMainDir
+		for repo in WWW::Mechanize Net::IP Net::DNS Net::Netmask XML::Writer String::Random ; do
+			cpan uninstall $repo
+		done
+		if [[ -d $PREFIX/share/$1 ]];then
+			sudo rm -f $PREFIX/share/$1
+		fi
+		if [ -d ~/.$1 ];then
+			rm -rf ~/.$1
+		fi
+		;;
+	webhackshl)
+		rmMainDir
+		printf "fierce" > $TMPDIR/deps2drop
+		alert
+		;;
+	xerosploit)
+		PYv="2"
+		rmMainDir
+		printf "tabulate\nterminaltables" > $TMPDIR/deps2drop
+		alert
+		;;
+	sudo)
+		chk-sudo
+		sudo rm -rf ~/.suroot $PREFIX/bin/$1
+		;;
+	*)
+		printf "$R(_>)─➤$W Unable to locate $1 on i-Haklab\n"
+                sleep 0.5
+                printf "$G(_>)─➤$W Trying with Advance Packect Tool (APT)...\n"
+                if [[ $(pkg list-all|grep -oE "$1") ]];then
+                        yes|apt remove $1
+                else
+                        printf "$R(_>)─➤$W Tool $1 doesn't exist\n"
+                        exit
+                fi
+
+		;;
+esac
+k-boom
+#             i-Haklab by @Ivam3
+

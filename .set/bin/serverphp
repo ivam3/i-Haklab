@@ -2,53 +2,17 @@
 #Created on Dec/2018
 IFS=$'\n\t'
 trap ctrl_c 2
-source /data/data/com.termux/files/usr/libexec/colors
-
+source $PREFIX/share/i-Haklab/.set/var/variables
+source $iHAKLAB/.set/var/functions/functions
+command -v php > /dev/null 2>&1 || pkg install php & > /dev/null 2>&1
 ctrl_c(){ K-boom;exit;}
-Banner() {
-	if [ -e $iHAKLAB/.set/libexec/banner/i-Haklab ]; then
-		bash $iHAKLAB/.set/libexec/banner/i-Haklab
-	fi
-	}
-usage(){ printf "$G\n[usage] :$W serverphp <wlan|io> <port number> <directory path>\n";}
-K-boom() {
-	if [ -e $iHAKLAB/.set/libexec/banner/k-boom ]; then
-		bash $iHAKLAB/.set/libexec/banner/k-boom
-	fi
-	}
-if [ ! -d $HOME/storage ]; then
-        termux-setup-storage
-fi
-if [ -d /data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab ]; then
-	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
-elif [ -d /data/data/com.termux/files/home/i-Haklab ]; then
-        iHAKLAB=/data/data/com.termux/files/home/i-Haklab
-else
-        printf "$R\n[W]:-> i-Haklab needed$W |$Y Do you wanna install it?$W\n"
-        while read -p "[yes/no]:-> " yesorno && [ -z $yesorno ]; do
-                continue
-        done
-	if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
-		if [ ! $(id -u) -ne 0 ]; then
-			printf "$R\n[W]:-> You need to be a common user$W\n"
-			exit
-		else
-			git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
-			cd ~/i-Haklab;bash setup
-		fi
-	else
-		printf "$G[!]-> Have a nice hacking day!!\n"
-		exit
-	fi
-fi
+usage(){ printf "$G\n(_>)_usage:─➤$W serverphp <wlan|io> <port number> <directory path>\n";}
+chk-iHaklab
 
 if [ ! -d $PREFIX/var/service/php ]; then
 	mkdir -p $PREFIX/var/service/php/
 fi
-
-command -v php > /dev/null 2>&1 || pkg install php & > /dev/null 2>&1
-
-Banner;usage
+banner;usage
 DEFAULT_DIR=$PREFIX/var/service/php/
 DIR="${3:-${DEFAULT_DIR}}"
 PORT=4546
@@ -57,8 +21,9 @@ IO=127.0.0.1
 LOCALHOST="${IO:-${$WLAN}}"
 
 if [ ! $1 ];then
-	printf "$Y  ╰─[+!]─➤$W Running service with default settings$B\n     ╰─[HOST]─➤$W $LOCALHOST$B\n     ╰─[PORT]─➤$W $PORT$B\n     ╰─[DIR]──➤$W $DIR\n$G\n"
+	printf "$Y  ╰─(_>)─➤$W Running service with default settings$B\n     ╰─[HOST]─➤$W $LOCALHOST$B\n     ╰─[PORT]─➤$W $PORT$B\n     ╰─[DIR]──➤$W $DIR\n$G\n"
 	sleep 1
+
 	php -S $LOCALHOST:$PORT -t $DIR
 else
 	if [ $# -eq "3" ];then
@@ -81,12 +46,11 @@ else
 			command -v sudo > /dev/null || bash $iHAKLAB/.set/to-install/instasudo >/dev/null 2>&1
 			SUDO="sudo"
 		fi
-		printf "$Y  ╰─[+!]─➤$W Running service with settings$B\n     ╰─[HOST]─➤$W $LOCALHOST$B\n     ╰─[PORT]─➤$W $PORT$B\n     ╰─[DIR]──➤$W $DIR\n$G\n"
+		printf "$Y  ╰─(_>)─➤$W Running service with settings$B\n     ╰─[HOST]─➤$W $LOCALHOST$B\n     ╰─[PORT]─➤$W $PORT$B\n     ╰─[DIR]──➤$W $DIR\n$G\n"
 		$SUDO php -S $LOCALHOST:$PORT -t $DIR
 	else
 		printf "$Y[ex-01] :$W serverphp (with default settings)$Y\n[ex-02] :$W serverphp 8080 WLAN \$HOME$Y [WLAN=$WLAN]\n[ex-03] :$W serverphp 8080 IO \$PREFIX/var/service/php$Y [IO=$IO]$W\n"
 		exit
 	fi
 fi
-#K-boom
-#			@Ivam3
+#			i-Haklab by @Ivam3

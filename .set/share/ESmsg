@@ -1,30 +1,20 @@
 #!/bin/bash
 #This file is part of i-Haklab command
-
-if [ -d /data/data/com.termux/files/home/i-Haklab ]
-then
-        iHAKLAB=/data/data/com.termux/files/home/i-Haklab
-else
-        iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
-fi
-
-source $iHAKLAB/.set/libexec/colors
+source $PREFIX/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
-
-STDERR() { printf "$Y\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bot$W\n";}
-
+STDERR(){ printf "$R(_>)─➤$W missing argument, type i-Haklab -h for help";exit;}
 chk-snow
 if [ $1 = "encode" ]; then
-	while read -p "[message or file]─➤ " msg && [ -z "$msg" ]; do
+	while read -p "(_>)_message_or_file─➤ " msg && [ -z "$msg" ]; do
                 continue
         done
-        while read -p "[file to encode]─➤ " file2encode && [ -z $file2encode ]; do
+	while read -p "(_>)_file_to_encode─➤ " file2encode && [ -z $file2encode ]; do
                 continue
         done
-        while read -p "[encoded name of file]─➤ " encodedfile && [ -z $encodedfile ]; do
+	while read -p "(_>)_encoded_name_of_file─➤ " encodedfile && [ -z $encodedfile ]; do
                 continue
         done
-        read -p "[password {empty=none}]─➤ " passwd
+	read -p "(_>)_password_{empty=none}─➤ " passwd
         if [ -e "$msg" ] && [ -z passwd ];then
                 $(which snow) -C -f $msg $file2encode $encodedfile
         elif [ -e "$msg" ] && [ ! -z passwd ];then
@@ -35,10 +25,10 @@ if [ $1 = "encode" ]; then
                 $(which snow) -C -m "$msg" $file2encode $encodedfile
         fi
 elif [ $1 = "decode" ]; then
-	while read -p "[file to decode]─➤ " file2decode && [ -z $file2decode ]; do
+	while read -p "(_>)_file_to_decode─➤ " file2decode && [ -z $file2decode ]; do
 		continue
 	done
-	read -p "[password {empty=none}]─➤ " passwd
+	read -p "(_>)_password_{empty=none}─➤ " passwd
         if [ ! -z $passwd ]; then
                 $(which snow) -C -p "$passwd" $file2decode
         else

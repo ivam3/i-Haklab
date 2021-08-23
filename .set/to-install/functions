@@ -2,7 +2,7 @@
 #Created on Dec/2018
 IFS=$'\n\t'
 trap ctrl_c 2
-source /data/data/com.termux/files/usr/libexec/colors
+source $iHAKLAB/.set/var/variables
 
 function ctrl_c() {
                 echo
@@ -12,9 +12,9 @@ if [ ! -d ~/storage ]; then
         termux-setup-storage
 fi
 if [ -L ~/storage/external-1 ]; then
-	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/tools/i-Haklab
 else
-        iHAKLAB=/data/data/com.termux/files/home/i-Haklab
+        iHAKLAB=/data/data/com.termux/files/usr/share/tools/i-Haklab
 fi
 
 while [ ! $(id -u) -ne 0 ]; do

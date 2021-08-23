@@ -1,0 +1,112 @@
+#!/usr/bin/bash
+#i-Haklab v.3.0 2021 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3.
+#Created on Jan/2019 
+#Modify: 2021-09-15
+####################
+IFS=$'\n\t'
+trap ctrl_c 2
+R='\033[1;31m'
+G='\033[1;32m'
+Goke='\033[92m'
+Glig=='\e[1;32m'
+Y='\033[1;33m'
+B='\033[1;34m'
+M='\033[1;35m'
+C='\033[1;36m'
+W='\033[0m'
+ctrl_c() { printf "$Y\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bot$W\n";
+microSD=$(df|tail -n 2|awk -F " " '{print $6}'|grep -iv "emulated")
+oldIH=$(grep "iHAKLAB" $PREFIX/etc/fish/config.fish|awk -F " " '{print $3}')
+rm -rf $oldIH
+[[ -d $PREFIX/share/i-Haklab ]] && rm -rf $PREFIX/share/i-Haklab
+git clone --quiet https://github.com/ivam3/i-Haklab.git $PREFIX/share/i-Haklab
+
+#TRASH
+printf "$Y(_>)─➤$W Dropping the trash\n"
+sleep 0.5
+[[ -e $PREFIX/libexec/colors ]] && rm -f $PREFIX/libexec/colors
+for del in DoS-A-Tool Ivam3 RuGiR;do
+	[[ -e $PREFIX/bin/$del ]] && rm -rf $PREFIX/bin/$del
+done
+[[ -d ~/java ]] && rm -rf ~/java
+[[ -d ~/localtunnel-server ]] && rm -rf ~/localtunnel-server
+[[ -d ~/aiochk ]] && rm -rf ~/aiochk
+if [[ -d ~/storage/external-1/roothome ]];then
+	mv ~/storage/external-1/roothome ~/storage/external-1/tools
+else
+	[[ -d $PREFIX/share/tools ]] || mkdir $PREFIX/share/tools
+	for i in $(cat $PREFIX/share/i-Haklab/.set/libexec/Tools/listoftools) rhawk Pybelt IPGeoLocation Hunner HatCloud AndroBugs;do
+		[[ ~/$i ]] && mv ~/$i $PREFIX/share/tools
+
+	done
+fi
+source $PREFIX/share/i-Haklab/.set/var/variables
+source $iHAKLAB/.set/functions/functions
+
+#UPGRADING
+if $(grep -oE "fortune" $PREFIX/libexec/banner/wall-banner);then
+	cp -r $PREFIX/share/i-Haklab ~/
+	cd ~/i-Haklab;chmod +x setup;bash setup
+else
+	source $PREFIX/share/i-Haklab/.set/var/variables
+	source $iHAKLAB/.set/functions/functions
+
+	#UPGRADE OMF
+	printf "$Y(_>)─➤$W Upgrading i-Haklab shell\n";sleep 0.5
+	omf update omf > /dev/null 2>&1
+	THEME=$(mktemp)
+	printf "#!/bin/env fish\nomf install bobthefish" >> $THEME
+	fish $THEME > /dev/null 2>&1
+	rm $THEME
+
+	#FIX SOME BUGS
+	printf "$Y(_>)─➤$W Re-configurating. . .\n";sleep 0.5
+	wget -q $iHDB/login-files/i-haklab_login -O $PREFIX/var/log/login-termux
+	wget -q $iHDB/libexec/banner/i-Haklab -O $PREFIX/libexec/banner/login-banner
+	cat <<- CONF > 
+	# Put system-wide fish configuration entries here
+	# or in .fish files in conf.d/
+	# Files in conf.d can be overridden by the user
+	# by files with the same name in /fish/conf.d
+	# This file is run by all fish instances.
+	# To include configuration only for login shells, use
+	# if status --is-login
+	#    ...
+	# end
+	# To include configuration only for interactive shells, use
+	# if status --is-interactive
+	#   ...
+	# end
+
+	function __fish_command_not_found_handler --on-event fish_command_not_found
+	       /data/data/com.termux/files/usr/libexec/termux/command-not-found [1]
+        end
+	if status --is-login
+                bash /data/data/com.termux/files/usr/libexec/banner/wall-banner
+	end
+
+	function on_exit --on-event fish_exit
+	        echo 'Have a nice hacking day!!'
+		sleep 1
+	end
+	
+	set fish_theme bobthefish
+	set HOME /data/data/com.termux/files/home
+	set GOPATH /data/data/com.termux/files/home/go
+	set GOROOT /data/data/com.termux/files/usr/lib/go
+	set iHAKLAB /data/data/com.termux/files/home/storage/external-1/roothome/i-Haklab
+	alias LOCALHOST="ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255"
+	alias serverapache="apachectl"
+	alias postgresql="pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql"
+	alias traductor="gawk -f (curl -Ls git.io/translate | psub) -- -shell"
+	CONF
+
+	######### Upgrading executables #########
+	BINDIR=$(ls $iHAKLAB/.set/bin)
+	printf "$Y(_>)─➤$W Upgrading commands. . .$W\n"
+	for i in ${BINDIR[*]}; do
+		wget -q $iHDB/bin/$i -O $PREFIX/bin/$i
+		chmod +x $PREFIX/bin/$i
+	done
+fi
+#       i-Haklab by @Ivam3

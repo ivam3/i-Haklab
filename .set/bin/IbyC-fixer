@@ -22,7 +22,7 @@ W='\033[0m'
 ctrl_c(){ printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";}
 Chao-chao(){ printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n";}
 Repos() {
-	printf "$Y\n[!]─➤ Installing|upgrading repositories ...\n$W"
+	printf "$Y\n(_>)─➤ Installing|upgrading repositories ...\n$W"
 	command -v $Py > /dev/null 2>&1 || pkg install $Py -y > /dev/null 2>&1
 	$Py -m pip install --upgrade pip > /dev/null 2>&1
 	}
@@ -30,7 +30,7 @@ Lib() {
 	for Libs in clang libtool libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static tar wget; do
 		SCHLIB=$(pkg list-installed | awk '{print $1}' | grep -oE $Libs | head -n1)
 		if [ -z $SCHLIB ]; then
-			printf "$Y\n[!]─➤ Installing libreries ...\n$W"
+			printf "$Y\n(_>)─➤ Installing libreries ...\n$W"
 			pkg install $Libs -y > /dev/null 2>&1
 		fi
 	done
@@ -53,15 +53,15 @@ Turtle() {
         rm -rf $DIR
 	}
 Menu() {
-	printf $B"[USAGE-01]─➤ To fix python modules:$G\nIbyC-fixer <[B|BASIC] [L|LDFLAGS] [S|SODIUM]> <[Py|Py2]> <[file.txt|module(max 3)]>$W\n\nB  BASIC\tInstall module on basic\nL  LDFLAGS\tForce installation to use libraries and system compiler\nS  SODIUM\tForce the installation to use the sodium decryptor\nPy  \t\tFor python3\nPy2  \t\tFor python2\n\nExamples:\n\tIbyC-fixer BASIC Py future\n\tIbyC-fixer S Py2 colorama\n"
-	printf "$B\n[USAGE-02]─➤ To fix an specific issue:$G\nIbyC-fixer <[nrauf|metasploit|downgradeRepo|RuGiR]> <option>$W\n\nnrauf         dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nmetasploit\t\t\tTo fix metasploit instalation\ndowngradeRepo repo=version\tDowngrade apt|pkg reporitory tospecific version\nRuGiR\t\t\t\tTo fix ruby gems issues\nngrok\t\t\t\tInstall ngrok-server from Abhacker repositories\n\nExamples:\n\tIbyC-fixer RuGiR\n\tIbyC-fixer downgradeRepo ruby=2.7.2\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n\n"
+	printf $B"(USAGE-01)─➤ To fix python modules:$G\nIbyC-fixer <[B|BASIC] [L|LDFLAGS] [S|SODIUM]> <[Py|Py2]> <[file.txt|module(max 3)]>$W\n\nB  BASIC\tInstall module on basic\nL  LDFLAGS\tForce installation to use libraries and system compiler\nS  SODIUM\tForce the installation to use the sodium decryptor\nPy  \t\tFor python3\nPy2  \t\tFor python2\n\nExamples:\n\tIbyC-fixer BASIC Py future\n\tIbyC-fixer S Py2 colorama\n"
+	printf "$B\n(USAGE-02)─➤ To fix an specific issue:$G\nIbyC-fixer <[nrauf|metasploit|downgradeRepo|RuGiR]> <option>$W\n\nnrauf         dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nmetasploit\t\t\tTo fix metasploit instalation\ndowngradeRepo repo=version\tDowngrade apt|pkg reporitory tospecific version\nRuGiR\t\t\t\tTo fix ruby gems issues\nngrok\t\t\t\tInstall ngrok-server from Abhacker repositories\n\nExamples:\n\tIbyC-fixer RuGiR\n\tIbyC-fixer downgradeRepo ruby=2.7.2\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n\n"
 	exit
 	}
 Chck() {
 	for list in ${@:2} ; do
 		MODULE=$(python -m pip list | awk '{print $1}' | grep $list)
 		if [ ! -z $MODULE ]; then
-			printf "$Y\n[!]─➤ Module $MODULE is already exist for $Py\n$W"
+			printf "$Y\n(_>)─➤ Module $MODULE is already exist for $Py\n$W"
 		fi
 	done
 
@@ -81,11 +81,11 @@ fi
 }
 
 while [ ! $(id -u) -ne 0 ]; do
-	printf "$R\n[W]─➤ You need to be a common user$W\n"
+	printf "$R\n(_>)─➤ You need to be a common user$W\n"
 	exit
 done
 until [ "$(basename "$0")" = "IbyC-fixer" ]; do
-	printf "$R\n[W]─➤ Wrong file name$Y | "
+	printf "$R\n(_>)─➤ Wrong file name$Y | "
         sleep 1
         printf "fixing it";sleep 2
         printf ".";sleep 0.7
@@ -98,16 +98,16 @@ done
 until [ -e $PREFIX/bin/IbyC-fixer ]; do
 	if [ ! -e $PREFIX/bin/IbyC-fixer ] && [ -e $PWD/IbyC-fixer ]; then
 		mv $PWD/IbyC-fixer $PREFIX/bin/IbyC-fixer > /dev/null 2>&1
-		printf "$Y[!]─➤ IbyC-fixer was add to PATH$W\n"
+		printf "$Y(_>)─➤ IbyC-fixer was add to PATH$W\n"
 		sleep 1.5
 	else
-		printf "$R[W]─➤ You should add IbyC-fixer to PATH$W\n"
+		printf "$R(_>)─➤ You should add IbyC-fixer to PATH$W\n"
 		exit
 	fi
 done
 
 declare -a INSTADATE=($(ls -l $PREFIX/bin/IbyC-fixer|awk -F " " '{print $6,$7}') $(curl -Ls $iHDB/bin/IbyC-fixer|grep "UPGRADED"|awk -F "/" '{print $2,$3}'))
-printf "$Y[!]─➤$W Looking for updates..";
+printf "$Y(_>)─➤$W Looking for updates..";
 sleep 1
 if [ "${INSTADATE[0]}" != "${INSTADATE[2]}" ] || [ "${INSTADATE[1]}" -lt "${INSTADATE[3]}" ];then
         printf "$Y.Upgrading";
@@ -177,7 +177,7 @@ case $1 in
 			exec $FILE $2
 			rm -rf $FILE
 		else
-			printf "$R\n[ERR]─➤$W Apk file unallocated\n"
+			printf "$R\n(_>)─➤$W Apk file unallocated\n"
 		fi
 		;;
 	metasploit)
@@ -194,11 +194,11 @@ case $1 in
 		;;
 	downgradeRepo)
 		while [ ! $2 ];do
-			printf "$R[w]─➤ An argument needed$W\n\n"
+			printf "$R(_>)─➤ An argument needed$W\n\n"
 			exit
 		done
 		if [ ! -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ];then
-			printf "$Y[!]─➤ Installing Abhacker repositories ...$G "
+			printf "$Y(_>)─➤ Installing Abhacker repositories ...$G "
 			wget -q "${iHDB}/fix-tools/instAbhackerRepo" -O $FILE
 			chmod +x $FILE
 			exec $FILE --install ${@:2} >/dev/null 2>&1
@@ -210,14 +210,14 @@ case $1 in
 		;;
 	ngrok)
 		if [ ! -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ];then
-			printf "$Y[!]─➤ Installing Abhacker repositories ...$G "
+			printf "$Y(_>)─➤ Installing Abhacker repositories ...$G "
 			wget -q "${iHDB}/fix-tools/instAbhackerRepo" -O $FILE
 			chmod +x $FILE
 			exec $FILE --install ngrok-server >/dev/null 2>&1
 			rm $FILE
 			printf "DONE!!$W\n"
 		else
-			printf "$G[+]─➤$W Installing Ngrok from Abhacker repositories ...$G "
+			printf "$G(_>)─➤$W Installing Ngrok from Abhacker repositories ...$G "
 			apt install ngrok-server -y > /dev/null 2>&1;
 			printf "DONE!!$W\n"
                 fi
