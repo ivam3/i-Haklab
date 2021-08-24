@@ -9,7 +9,10 @@ if [[ ! -d $iHAKLAB/wordlist ]];then
 	command -v git >/dev/null || yes|apt install git
 	git clone --quiet https://github.com/jeanphorn/wordlist $iHAKLAB/wordlist
 fi
-[[ -d $iHAKLAB/wordlist/rockyou.txt ]] || wget -q https://www.scrapmaker.com/data/wordlists/dictionaries/rockyou.txt -O $iHAKLAB/wordlist/rockyou.txt
+if [[ ! -d $iHAKLAB/wordlist/rockyou.txt ]];then
+	printf "$G(_>)─➤$W Installing wordlist rockyou...{$Y it could take a while$W}\n"
+	wget -q https://www.scrapmaker.com/data/wordlists/dictionaries/rockyou.txt -O $iHAKLAB/wordlist/rockyou.txt
+fi
 STDERR(){ printf "$R(_>)─➤$W missing argument, type i-Haklab -h for help";exit;}
 
 if [[ $2 = mail ]];then

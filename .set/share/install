@@ -472,7 +472,9 @@ case "$1" in
 		wget -q $iHDB/fix-tools/ngrok -O $TOOLS/$1
 		;;
 	login)
-		if $(grep "wall-banner" $INITFILE);then
+		if ! -e $PREFIX/libexec/termux/.Ivam3;then
+			bash $iHAKLAB/.set/to-install/i-Haklab_login
+		elif $(grep "wall-banner" $INITFILE);then
 			yes|apt install ruby && gem install lolcat
 			sed 's|/data/data/com.termux/files/usr/libexec/banner/wall-banner|/data/data/com.termux/files/usr/var/log/login-termux|g' -i $INITFILE
 		else

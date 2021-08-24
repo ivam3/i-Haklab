@@ -86,7 +86,7 @@ printf "$Y\n(_>)─➤ Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'
 curl -Ls http://get.oh-my.fish | fish
 cat <<- CONF >> $PREFIX/etc/fish/config.fish
 if status --is-login
-bash /data/data/com.termux/files/usr/var/log/login-termux
+bash /data/data/com.termux/files/usr/libexec/banner/wall-banner
 end
 
 function on_exit --on-event fish_exit
@@ -139,26 +139,20 @@ fi
 CONF
 
 printf "$G\n(_>)─➤ Installing VIM predictable text..$W";
-if [ -d ~/.vim ];then
-	rm -rf ~/.vim
-fi
+[[ -d ~/.vim ]] && rm -rf ~/.vim
 wget -q --tries=20 ${iHDB}/to-install/iHaklabvim.zip -O $TMPDIR/iHaklabvim.zip
-if [ -e $TMPDIR/iHaklabvim.zip ]; then
-	unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
-	rm -f $TMPDIR/iHaklabvim.zip
-	mv $TMPDIR/vim ~/.vim
-	printf "$G. DONE!!$W\n\n"
-else
-	printf "$R. FAIL!!$W\n\n"
-fi
-wget -q --tries=20 $iHDB/functions/unset.fish -O  ~/.config/fish/functions/unset.fish
-bash $iHAKLAB/.set/to-install/i-Haklab_login
+unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
+rm -f $TMPDIR/iHaklabvim.zip
+mv $TMPDIR/vim ~/.vim
+printf "$G. DONE!!\n"
+wget -q --tries=20 $iHDB/functions/unset.fish -O  ~/.config/fish/functions/unset.fis
 
 #::::::::::Insatalling i-Haklab tools::::::::::::#
 printf "$G\n(_>)─➤$W Installing principal external tools."
 sleep 1
 for TOOL in IbyC-fixer converter serverphp DoS-A-Tool ExiF embed binchecker blackbox crunch vpn evilurl localtunnel-server pagekite lock;do
 	bash $iHAKLAB/.set/share/install $TOOL
+	printf "$G\n(_>)─➤$W press enter to continue\n"
 	read enter
 done
 if ! command -v msfconsole >/dev/null;then
@@ -170,6 +164,7 @@ printf "$G\n(_>)─➤$W Installing ngrok-server by AbHacker..";
 	exec $TMPabh --install ngrok-server >/dev/null 2>&1
 printf "$G. DONE!!$W\n"
         rm $TMPabh
+	
 printf "$G\n(_>)─➤$W Downloading brute force wordlist$G\n  ╰───────────➤$W it could take a while..";
 git clone --quiet https://github.com/jeanphorn/wordlist $iHAKLAB/wordlist
 wget -q --tries=20 https://www.scrapmaker.com/data/wordlists/dictionaries/rockyou.txt -O $iHAKLAB/wordlist/rockyou.txt
