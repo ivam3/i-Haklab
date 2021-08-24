@@ -100,7 +100,7 @@ elif [[ $(basename $1) = QG ]];then
 		fi
 	done
 elif [[ $(basename $1) = alltools ]];then
-	cat -n $iHAKLAB/.set/libexec/tools/listoftools
+	cat -n $iHAKLAB/.set/libexec/Tools/listoftools
 elif [[ $(basename $1) = instatools ]]; then
 	file=$(mktemp)
 	for i in $(cat $HOME/Ivam3/repositories/i-Haklab/.set/libexec/tools/listoftools);do

@@ -526,7 +526,6 @@ case "$1" in
 		apt autoremove;yes|pkg install xfce4 xfce4-taskmanager dosbox xfce4-terminal python-tkinter htop neofetch loqui vim-gtk the-powder-toy galculator xorg-xhost mpv-x ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk3 gtk2 mtpaint leafpad hexchat netsurf recordmydesktop feh audacious;yes|pkg install xfce4-* kvantum zenity mate-terminal mate-settings-daemon dbus-glib dconf termux-api wireshark-gtk
 		for i in music stopdesktop startdesktop; do
 			cp -rf ~/termux-desktop-xfce/$i $PREFIX/bin
-
 		done
 		for v in backgrounds .icons .themes .vnc .config; do
 			cp -rf ~/termux-desktop-xfce/$v $HOME
@@ -554,12 +553,10 @@ case "$1" in
 				cp $TOOLS/$1/x$1 $PREFIX/bin/
 				rm -rf $TOOLS/$1
 			else
-				printf "$R\n\t      《ERR COMPILE》\n"
-				Err
+				printf "$R\n\t      《ERR COMPILE》\n";Err
 			fi
 		else
-			printf "$R\n\t      《ERR CLONE》\n"
-			Err
+			printf "$R\n\t      《ERR CLONE》\n";Err
 		fi
 		;;
 	JohnTheRipper)

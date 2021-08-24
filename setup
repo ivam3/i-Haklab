@@ -96,6 +96,7 @@ sleep 1
 end
 
 set fish_theme bobthefish
+set -g theme_nerd_fonts yes
 set HOME /data/data/com.termux/files/home
 set GOPATH /data/data/com.termux/files/home/go
 set GOROOT /data/data/com.termux/files/usr/lib/go
@@ -146,27 +147,11 @@ rm -f $TMPDIR/iHaklabvim.zip
 mv $TMPDIR/vim ~/.vim
 wget -q --tries=20 $iHDB/functions/unset.fish -O  ~/.config/fish/functions/unset.fis
 
-#::::::::::Insatalling i-Haklab tools::::::::::::#
-printf "$G\n(_>)─➤$W Installing principal external tools."
-chmod 750 $iHAKLAB/.set/bin/*
-cp $iHAKLAB/.set/bin/* $PREFIX/bin
-for TOOL in DoS-A-Tool ExiF embed evilurl localtunnel-server;do
-	bash $iHAKLAB/.set/share/install $TOOL
-done
-if ! command -v msfconsole >/dev/null;then
-printf "$G\n(_>)─➤$W Installing metasploit-framework."
-        bash <(curl -fsSL "http://git.io/abhacker-repo") --install metasploit -y
-fi
-printf "$G\n(_>)─➤$W Installing ngrok-server by AbHacker..";
-[[ $(command -v ngrok) ]] && mv $(command -v ngrok) $(command -v ngrok).io
-bash $TMPabh --install ngrok-server >/dev/null 2>&1
-printf "$G. DONE!!$W\n"
-rm $TMPabh
-
 #::::::::::Insatalling i-Haklab's login::::::::::::#
 [[ -e $PREFIX/var/log/login-termux ]] && rm -f $PREFIX/var/log/login-termux
 [[ -e $PREFIX/etc/bashito ]] && rm -f $PREFIX/etc/bashito
 [[ -e $PREFIX/etc/motd ]] && rm -f $PREFIX/etc/motd
+[[ -e $PREFIX/etc/motd.dpkg-old ]] && rm -f $PREFIX/etc/motd.dpkg-old
 for i in Quiz Ivam3 Cinderella;do
         [[ -e $PREFIX/libexec/termux/.$i ]] || touch $PREFIX/libexec/termux/.$i
 done
@@ -193,6 +178,23 @@ chmod -w $PREFIX/libexec/termux/.Quiz
 chmod +w $PREFIX/libexec/termux/.Cinderella
 printf "SXZhbTNieUNpbmRlcmVsbGEK" > $PREFIX/libexec/termux/.Cinderella
 chmod -w $PREFIX/libexec/termux/.Cinderella
+
+#::::::::::Insatalling i-Haklab tools::::::::::::#
+printf "$G\n(_>)─➤$W Installing principal external tools."
+chmod 750 $iHAKLAB/.set/bin/*
+cp $iHAKLAB/.set/bin/* $PREFIX/bin
+if ! command -v msfconsole >/dev/null;then
+printf "$G\n(_>)─➤$W Installing metasploit-framework."
+        bash <(curl -fsSL "http://git.io/abhacker-repo") --install metasploit -y
+fi
+printf "$G\n(_>)─➤$W Installing ngrok-server by AbHacker..";
+[[ $(command -v ngrok) ]] && mv $(command -v ngrok) $(command -v ngrok).io
+bash $TMPabh --install ngrok-server >/dev/null 2>&1
+printf "$G. DONE!!$W\n"
+rm $TMPabh
+for TOOL in DoS-A-Tool ExiF embed evilurl localtunnel-server desktop-xfce;do
+	bash $iHAKLAB/.set/share/install $TOOL
+done
 
 #::::::::::Searching for root permissions::::::::::::#
 if chk-root;then
