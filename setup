@@ -149,8 +149,9 @@ wget -q --tries=20 $iHDB/functions/unset.fish -O  ~/.config/fish/functions/unset
 
 #::::::::::Insatalling i-Haklab tools::::::::::::#
 printf "$G\n(_>)─➤$W Installing principal external tools."
-sleep 1
-for TOOL in IbyC-fixer converter serverphp DoS-A-Tool ExiF embed binchecker blackbox crunch vpn evilurl localtunnel-server pagekite lock;do
+chmod 750 $iHAKLAB/.set/bin/*
+cp $iHAKLAB/.set/bin/* $PREFIX/bin
+for TOOL in DoS-A-Tool ExiF embed evilurl localtunnel-server;do
 	bash $iHAKLAB/.set/share/install $TOOL
 	printf "$G\n(_>)─➤$W press enter to continue\n"
 	read enter
