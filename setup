@@ -97,6 +97,7 @@ end
 
 set fish_theme bobthefish
 set -g theme_nerd_fonts yes
+set DISPLAY=localhost:1
 set HOME /data/data/com.termux/files/home
 set GOPATH /data/data/com.termux/files/home/go
 set GOROOT /data/data/com.termux/files/usr/lib/go
@@ -195,6 +196,20 @@ rm $TMPabh
 for TOOL in DoS-A-Tool ExiF embed evilurl localtunnel-server desktop-xfce;do
 	bash $iHAKLAB/.set/share/install $TOOL
 done
+[[ -d ~/.vnc ]] || mkdir ~/.vnc
+cat <<- CONF > ~/.vnc/xstartup
+#!/data/data/com.termux/files/usr/bin/sh
+## This file is executed during VNC server
+## startup.
+
+# Launch terminal emulator Aterm.
+# Requires package 'aterm'.
+aterm -geometry 160x48+20+20 -ls &
+
+# Launch Tab Window Manager.
+# Requires package 'xorg-twm'.
+startxfce4
+CONF
 
 #::::::::::Searching for root permissions::::::::::::#
 if chk-root;then

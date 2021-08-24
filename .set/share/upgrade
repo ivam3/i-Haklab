@@ -86,6 +86,7 @@ else
 		sleep 1
 	end
 	
+	set DISPLAY=localhost:1
 	set fish_theme bobthefish
 	set -g theme_nerd_fonts yes
 	set HOME /data/data/com.termux/files/home

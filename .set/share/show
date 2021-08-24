@@ -103,6 +103,7 @@ elif [[ $(basename $1) = alltools ]];then
 	cat -n $iHAKLAB/.set/libexec/Tools/listoftools
 elif [[ $(basename $1) = instatools ]]; then
 	file=$(mktemp)
+	pkg list-installed|awk -F "/" '{print $1}' > $file
 	for i in $(cat $HOME/Ivam3/repositories/i-Haklab/.set/libexec/tools/listoftools);do
 		if [[ -d $HOME/storage/external-1/roothome/$i ]] || [[ -d $PREFIX/opt/$i ]] || [[ $(command -v $i) ]] || [[ -d $PREFIX/opt/$i-framework ]] || [[ -e ~/go/bin/$1 ]];then
 			echo $i >> $file
