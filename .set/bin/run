@@ -259,7 +259,7 @@ case "$TOOL" in
 	sqlmap)
 		if CheckPath;then
 			exec python $TOOLPATH/$TOOL.py ${@:2}
-		elif -e $PREFIX/bin/$TOOL;then
+		elif [[ -e $PREFIX/bin/$TOOL ]];then
 			exec $PREFIX/bin/$TOOL ${@:2}
 		else
 			STDERR

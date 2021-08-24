@@ -167,9 +167,9 @@ $Y OPTIONS$W|$Y   Arguments$W   |$Y    Description$W
 |    ╰──example─for─ftp+IP──────{─i-Haklab bf ftp 10.10.10.16
 |    ╰──example─for─mail+email──{─i-Haklab bf mail ivam3@hotmail.com
 |
-|──ESmsg───➤───<encode/decode>──➤ Encode|decode secret message into a ASCII file.
+|──ESmsg───+───<encode/decode>──➤ Encode|decode secret message into a ASCII file.
 |
-╰forwarding➤─<port─+─subdomain>─➤ Start a SSH client to request TCP port forwarding
+╰forwarding+─<port─+─subdomain>─➤ Start a SSH client to request TCP port forwarding
 |    ╰──example─────────────{─i-Haklab forwarding 4444 my-subdomain-}
 |
 ╰─handler──+─<nome─of─file.rc>──➤ Start handler on msfconsole with previous setting
