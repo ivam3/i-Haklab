@@ -7,7 +7,7 @@ source $iHAKLAB/.set/functions/functions
 ctrl_c(){ printf "$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";}
 
 while [ -d $TOOLS/$1 ] || [ -e $PREFIX/bin/$1 ] || [ -d $PREFIX/opt/$1 ] [ -e ~/go/bin/$1  ];do
-	printf "$R\n(_>)─➤ $1 it's already in your path";exit
+	printf "$R\n(_>)─➤$W $1 it's already in your path";exit
 done
 
 Err() { printf "$R\n(_>)─➤$W Installation failed";ctrl_c;exit;}

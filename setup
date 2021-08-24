@@ -3,13 +3,17 @@
 IFS=$'\n\t'
 trap ctrl_c 2
 ctrl_c() { printf "$Y\n\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n\n";}
-
-printf "Running..."
-[[ -d $PREFIX/share/i-Haklab ]]	|| cp -r $PWD/../i-Haklab $PREFIX/share/
+while [ -d ~/i-Haklab ] && [ $PWD = $HOME/i-Haklab ]do
+	printf "$R\n(_>)─➤$W i-Haklab must to be in HOME path.\n"
+	ctrl_c;exit
+done
+printf "Running...";sleep 0.5
+[[ -d $PREFIX/share/i-Haklab ]] && rm -rf $PREFIX/share/i-Haklab
+cp -r ~/-Haklab $PREFIX/share
 source $PREFIX/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 chk-Cuser
-clear;banner;sleep 3
+clear;banner;sleep 0.5
 ${which} mkdir -p ~/.termux && echo "extra-keys = [['ESC','/','-','HOME','UP','END','PGUP'],['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN']]" > ~/.termux/termux.properties && echo "$rst"
 
 if [ -d ~/.local ]; then
@@ -78,7 +82,7 @@ printf "$G\n(_>)─➤ Installing interactive shell.$W\n"
 [[ -d ~/.local/share/omf ]] && rm -rf ~/.local/share/omf
 [[ -d ~/.config/omf ]] && rm -rf ~/.config/omf/
 git config --global core.autocrlf
-printf "$Y\n(_>)─➤$W Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'$Y\n ╰─➤$W when it happen hold on for 01 minute and then type exit to continue\n"
+printf "$Y\n(_>)─➤ Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'\n ╰─➤$W when it happen hold on for one minute and then type exit to continue\n"
 curl -Ls http://get.oh-my.fish | fish
 cat <<- CONF >> $PREFIX/etc/fish/config.fish
 if status --is-login
