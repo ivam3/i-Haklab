@@ -26,9 +26,11 @@ read enter
 #::::::::::Installation of dependencies::::::::::::#
 printf "$G(_>)─➤$W Upgrading and installing Termux packages.\n"
 yes|pkg update && pkg upgrade
+apt list|awk -F "/" '{print $1}' > $TMPDIR/alltools.tmp
+pkg list-installed|awk -F "/" '{print $1}' > $TMPDIR/installed.tmp
 for repo in fish root-repo unstable-repo fortune util-linux coreutils vim python python2 ruby perl clang curl wget gawk make openssl openssl-tool php zip unzip tar w3m neofetch weechat irssi tor torsocks proxychains-ng htop bison megatools findutils git apr apr-util openssh apache2 mariadb php-apache pkg-config termux-api termux-tools termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner cmatrix figlet man termux-api axel fortune apksigner autoconf libffi libgmp libpcap readline libsqlite libgrpc libiconv libcaca libtool libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static zlib libassuan libgcrypt libgpg-error youtubedr gnupg gpgme dnsutils debianutils sqlite dirb mlocate sqlmap crunch translate-shell ffsend x11-repo; do
-	GOTIT=$(pkg list-installed | grep -oE $repo)
-	PKG=$(pkg list-all|grep -o $repo)
+	GOTIT=$(grep -oE $repo $TMPDIR/installed.tmp)
+	PKG=$(grep -o $repo $TMPDIR/alltools.tmp)
 	if [ ! -z "$PKG" ] && [ -z "$GOTIT" ];then
 		printf "$G(_>)─➤$W Installing the repository $repo.\n"
 		yes|pkg install $repo
@@ -39,6 +41,7 @@ for repo in fish root-repo unstable-repo fortune util-linux coreutils vim python
 		sleep 1
 	fi
 done
+rm -f $TMPDIR/alltools.tmp $TMPDIR/installed.tmp
 printf "$G\n(_>)─➤$W Installing Abhacker repositories."
 if [ ! -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ];then
 	TMPabh=$(mktemp)
@@ -75,7 +78,7 @@ printf "$G\n(_>)─➤ Installing interactive shell.$W\n"
 [[ -d ~/.local/share/omf ]] && rm -rf ~/.local/share/omf
 [[ -d ~/.config/omf ]] && rm -rf ~/.config/omf/
 git config --global core.autocrlf
-print "$Y\n(_>)─➤$W Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'$Y\n ╰─➤$W when it happen hold on for 01 minute and then type exit to continue\n"
+printf "$Y\n(_>)─➤$W Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'$Y\n ╰─➤$W when it happen hold on for 01 minute and then type exit to continue\n"
 curl -Ls http://get.oh-my.fish | fish
 cat <<- CONF >> $PREFIX/etc/fish/config.fish
 if status --is-login
@@ -150,11 +153,10 @@ bash $iHAKLAB/.set/to-install/i-Haklab_login
 #::::::::::Insatalling i-Haklab tools::::::::::::#
 printf "$G\n(_>)─➤$W Installing principal external tools."
 sleep 1
-for TOOL in 
-	IbyC-fixer converter serverphp DoS-A-Tool ExiF embed binchecker blackbox crunch vpn evilurl localtunnel-server pagekite lock;do
+for TOOL in IbyC-fixer converter serverphp DoS-A-Tool ExiF embed binchecker blackbox crunch vpn evilurl localtunnel-server pagekite lock;do
 	bash $iHAKLAB/.set/share/install $TOOL
 done
-if ! command -v msfconsole;then
+if ! command -v msfconsole >/dev/null;then
 printf "$G\n(_>)─➤$W Installing metasploit-framework."
         bash <(curl -fsSL "http://git.io/abhacker-repo") --install metasploit -y
 fi
