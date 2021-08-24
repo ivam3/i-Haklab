@@ -142,5 +142,5 @@ printf "$Anw" > $PREFIX/libexec/termux/.Cinderella
 chmod -w $PREFIX/libexec/termux/.Cinderella
 
 #ENDING SCRIPT
-printf "$G\n(_>)-> :::::::::::::::::: DONE !! ::::::::::::::::::: <-(<_)$W\nFor more information about i-Haklab run i-Haklab show i-Haklab$Y\n   To fix issues going to$B t.me/Ivam3_Bot$W"
+printf "$G\n (_>)-> :::::::::::::::::: DONE !! ::::::::::::::::::: <-(<_)$W\nFor more information about i-Haklab run i-Haklab show i-Haklab$Y\n\t   To fix issues going to$B t.me/Ivam3_Bot$W"
 #       i-Haklab by @Ivam3

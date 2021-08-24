@@ -53,30 +53,29 @@ printf "$G. DONE$W"
 
 printf "$G\n(_>)─➤$W Installing required python modules.\n"
 for v in python python2 ; do
-	$v -m pip --no-color --quiet --no-cache-dir install --upgrade pip
+	$v -m pip --no-color --quiet --no-cache-dir install --upgrade pip 2>/dev/null
 done
-for module in trufflehog wheel speedtest-cli scapy wfuzz h8mail objection frida; do
-        for v in python python2 ; do
-		$v -m pip --no-color --quiet --no-cache-dir install $module 
-	done
+for module in trufflehog wheel speedtest-cli scapy wfuzz h8mail objection frida;do
+	python -m pip --no-color --quiet --no-cache-dir install $module 
 done
 
 #::::::::::Definition of variable TOOLS::::::::::::#
 printf "$G\n(_>)─➤ Getting access to external storage...$W"
-yes|termux-setup-storage 2>/dev/null
-printf "$Y\n(_>)─➤$W Access..\n";
+printf "$Y\n(_>)─➤$W Access..";
 sleep 0.5
 if [ -w $TOOLS ];then
 	printf "$G. DONE||$W\n"
 else
 	printf "$R. FAIL!!$W\n"
 fi
+yes|termux-setup-storage
 
 #::::::::::Installation of Ohmyfish::::::::::::#
 printf "$G\n(_>)─➤ Installing interactive shell.$W\n"
 [[ -d ~/.local/share/omf ]] && rm -rf ~/.local/share/omf
 [[ -d ~/.config/omf ]] && rm -rf ~/.config/omf/
 git config --global core.autocrlf
+print "$Y\n(_>)─➤$W Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'$Y\n ╰─➤$W when it happen hold on for 01 minute and then type exit to continue\n"
 curl -Ls http://get.oh-my.fish | fish
 cat <<- CONF >> $PREFIX/etc/fish/config.fish
 if status --is-login
@@ -141,11 +140,11 @@ if [ -e $TMPDIR/iHaklabvim.zip ]; then
 	unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
 	rm -f $TMPDIR/iHaklabvim.zip
 	mv $TMPDIR/vim ~/.vim
-	printf "$G. DONE!!$W\n"
+	printf "$G. DONE!!$W\n\n"
 else
-	printf "$R. FAIL!!$W\n"
+	printf "$R. FAIL!!$W\n\n"
 fi
-#wget -q --tries=20 $iHDB/functions/unset.fish -O  ~/.config/fish/functions/unset.fish
+wget -q --tries=20 $iHDB/functions/unset.fish -O  ~/.config/fish/functions/unset.fish
 bash $iHAKLAB/.set/to-install/i-Haklab_login
 
 #::::::::::Insatalling i-Haklab tools::::::::::::#
