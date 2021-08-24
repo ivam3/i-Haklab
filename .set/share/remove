@@ -6,9 +6,9 @@ source $PREFIX/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 ctrl_c(){ printf "$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";}
 
-while [[ ! -d $TOOLS/$1 ]] || [[ ! -e $PREFIX/bin/$1 ]] || [[ ! -d $PREFIX/opt/$1 ]] [[ ! -e ~/go/bin/$1  ]] || [[ $1  = kalilinux ]];do
-	printf "$R\n(_>)─➤ $1 isn't installed";exit
-done
+#if [ ! -d $TOOLS/$1 ] || [ ! -e $PREFIX/bin/$1 ] || [ ! -d $PREFIX/opt/$1 ] || [ ! -e ~/go/bin/$1 ];then
+#	printf "$R\n(_>)─➤$W $1 isn't installed";exit
+#fi
 
 Err() { printf "$R\n(_>)─➤$W Remove failed";ctrl_c;exit;}
 PIPup() {
@@ -19,11 +19,10 @@ PIPup() {
 rmMainDir() {
 	if chk-root;then
 		user=sudo
-	else
-		user=exec
 	fi
 	for path in $TOOLS $PREFIX/bin $PREFIX/opt ~/go/bin;do
 		if [[ $path/$1 ]];then
+			echo "$path/$1"
 			$user rm -rf $path/$1
 		fi
 	done
@@ -417,4 +416,3 @@ case "$1" in
 esac
 k-boom
 #             i-Haklab by @Ivam3
-

@@ -4,9 +4,10 @@ IFS=$'\n\t'
 trap ctrl_c 2
 source $PREFIX/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
+tool=$1
 ctrl_c(){ printf "$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";}
-
-while [ -d $TOOLS/$1 ] || [ -e $PREFIX/bin/$1 ] || [ -d $PREFIX/opt/$1 ] [ -e ~/go/bin/$1  ];do
+echo $tool;read enter
+while [ -d $TOOLS/$tool ] || [ -e $PREFIX/bin/$tool ] || [ -d $PREFIX/opt/$tool ] || [ -e ~/go/bin/$tool ];do
 	printf "$R\n(_>)─➤$W $1 it's already in your path";exit
 done
 
@@ -1150,7 +1151,7 @@ CONF
 		fi
 		;;
 	sudo)
-		if chk-root;then
+		if [[ chk-root ]];then
 			yes|apt install curl
 			if [ ! -d $HOME/.suroot ]; then
 				mkdir ~/.suroot
@@ -1179,7 +1180,7 @@ CONF
 			#set root user enviroment
 			printf "$G(_>)─➤$W Build root enviroment ..";
 			wget -q $iHDB/.set/bin/$1 -O $PREFIX/bin
-			if [ -e ~/.suroot/.bashrc ]; then
+			if [ -e ~/.suroot/.bashrc ];then
 				for opt in 1 2 3 4;do
 					if [ ! -O ~/.suroot/.bashrc ]; then
 						let try=opt++
@@ -1252,6 +1253,7 @@ CONF
 		fi
 		;;
 esac
+
 if [[ $(ruby -v |cut -c 6-10) != "2.7.2" ]];then
 	bash <(curl -fsSL "http://git.io/abhacker-repo") --install ruby=2.7.2 -y
 	gem install bundler:2.2.11
@@ -1259,8 +1261,6 @@ if [[ $(ruby -v |cut -c 6-10) != "2.7.2" ]];then
 	printf "$G(_>)─➤$W DONE!!\n"
 fi
 
-
 #ENDING SCRIPT
-printf "$G\n(_>)-> :::::::::::::::::: DONE !! ::::::::::::::::::: <-(<_)$W\nFor more information about $1 run i-Haklab show $1$Y\n   To fix issues going to$B t.me/Ivam3_Bot$W"
+printf "$G\n (_>)-> :::::::::::::::::: DONE !! ::::::::::::::::::: <-(<_)$W\nFor more information about $1 run i-Haklab show $1$Y\n\t   To fix issues going to$B t.me/Ivam3_Bot$W"
 #             i-Haklab by @Ivam3
-
