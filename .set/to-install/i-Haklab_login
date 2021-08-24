@@ -112,7 +112,7 @@ Define_Answer() {
 [[ -e $PREFIX/etc/bashito ]] && rm -f $PREFIX/etc/bashito
 [[ -e $PREFIX/etc/motd ]] && rm -f $PREFIX/etc/motd
 for i in Quiz Ivam3 Cinderella;do
-	[[ -e $PREFIX/libexec/termux/.$i ]] || touch $PREFIX/libexec/termux/.Quiz
+	[[ -e $PREFIX/libexec/termux/.$i ]] || touch $PREFIX/libexec/termux/.$i
 done
 [[ -d $PREFIX/libexec/banner ]] || mkdir -p $PREFIX/libexec/banner
 wget -q $iHDB/login-files/i-haklab_login -O $PREFIX/var/log/login-termux

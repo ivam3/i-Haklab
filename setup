@@ -164,11 +164,37 @@ printf "$G\n(_>)─➤$W Installing ngrok-server by AbHacker..";
 	exec $TMPabh --install ngrok-server >/dev/null 2>&1
 printf "$G. DONE!!$W\n"
         rm $TMPabh
-	
-printf "$G\n(_>)─➤$W Downloading brute force wordlist$G\n  ╰───────────➤$W it could take a while..";
-git clone --quiet https://github.com/jeanphorn/wordlist $iHAKLAB/wordlist
-wget -q --tries=20 https://www.scrapmaker.com/data/wordlists/dictionaries/rockyou.txt -O $iHAKLAB/wordlist/rockyou.txt
-printf "$G. DONE!!$W\n"
+
+#::::::::::Insatalling i-Haklab's login::::::::::::#
+[[ -e $PREFIX/var/log/login-termux ]] && rm -f $PREFIX/var/log/login-termux
+[[ -e $PREFIX/etc/bashito ]] && rm -f $PREFIX/etc/bashito
+[[ -e $PREFIX/etc/motd ]] && rm -f $PREFIX/etc/motd
+for i in Quiz Ivam3 Cinderella;do
+        [[ -e $PREFIX/libexec/termux/.$i ]] || touch $PREFIX/libexec/termux/.$i
+done
+[[ -d $PREFIX/libexec/banner ]] || mkdir -p $PREFIX/libexec/banner
+wget -q $iHDB/login-files/i-haklab_login -O $PREFIX/var/log/login-termux
+wget -q $iHDB/libexec/banner/i-Haklab -O $PREFIX/libexec/banner/login-banner
+cat <<- CONF > $PREFIX/libexec/banner/wall-banner
+#!/usr/bin/bash
+#Banner for i-Haklab created by @Ivam3 on Jan/2019
+IFS=$'\n\t'
+source $iHAKLAB/.set/var/variables
+bash /data/data/com.termux/files/usr/libexec/banner/login-banner
+#        i-Haklab by @Ivam3
+CONF
+chmod 711 $PREFIX/var/log/login-termux
+chmod 711 -R $PREFIX/libexec/termux
+chmod 711 -R $PREFIX/libexec/banner
+chmod +w $PREFIX/libexec/termux/.Ivam3
+printf "SXZhbTNieUNpbmRlcmVsbGEK" > $PREFIX/libexec/termux/.Ivam3
+chmod -w $PREFIX/libexec/termux/.Ivam3
+chmod +w $PREFIX/libexec/termux/.Quiz
+printf "VGhlIGFjY2VzcyBrZXkgaXMgSXZhbTNieUNpbmRlcmVsbGEK" > $PREFIX/libexec/termux/.Quiz
+chmod -w $PREFIX/libexec/termux/.Quiz
+chmod +w $PREFIX/libexec/termux/.Cinderella
+printf "SXZhbTNieUNpbmRlcmVsbGEK" > $PREFIX/libexec/termux/.Cinderella
+chmod -w $PREFIX/libexec/termux/.Cinderella
 
 #::::::::::Searching for root permissions::::::::::::#
 if chk-root;then
