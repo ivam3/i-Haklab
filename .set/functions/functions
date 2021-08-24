@@ -150,7 +150,7 @@ $Y OPTIONS$W|$Y   Arguments$W   |$Y    Description$W
 ╰─restore───➤───────────────────➤ Restore the main directory to fix some bugs
 ╰─root──────➤───────────────────➤ Simulates a super user environment
 ╰─show──────+─────alltools──────➤ List all tools/frameworks available on i-Haklab
-|   ╰───────+──────tools────────➤ Show all installed tools/framewotks
+|   ╰───────+────instatools─────➤ Show all installed tools/framewotks
 |   ╰───────+──────games────────➤ Show all games available to play on Termux
 |   ╰───────+──────books────────➤ Show all books available to download
 |   ╰───────+─────tutorials─────➤ Show tutorials available
@@ -166,14 +166,20 @@ $Y OPTIONS$W|$Y   Arguments$W   |$Y    Description$W
 ╰───bf─────+─ftp/mail+IP/email──➤ Brute force attack at server ftp or smtp(hotmail|live|gmail)
 |    ╰──example─for─ftp+IP──────{─i-Haklab bf ftp 10.10.10.16
 |    ╰──example─for─mail+email──{─i-Haklab bf mail ivam3@hotmail.com
+|
 |──ESmsg───➤───<encode/decode>──➤ Encode|decode secret message into a ASCII file.
+|
 ╰forwarding➤─<port─+─subdomain>─➤ Start a SSH client to request TCP port forwarding
 |    ╰──example─────────────{─i-Haklab forwarding 4444 my-subdomain-}
+|
 ╰─handler──+─<nome─of─file.rc>──➤ Start handler on msfconsole with previous setting
+|
 |─payapk───+─<tunnelDNS─+─port>─➤ Create a coded payload apk
 |    ╰──example─for─outlan──────{─i-Haklab payapk 6.tcp.ngrok.io 23453─}
+|
 |─payexe───+─<tunnelDNS─+─port>─➤ Create a coded payload .exe
 |    ╰──example─for─inlan───────{─i-Haklab payapk 192.168.0.1 8080─}
+|
 |─paypdf───+─<tunnelDNS─+─port>─➤ Create a coded payload .pdf
 |    ╰──example─for─default─set─{─i-Haklab payapk─}
 ╰─share────+─<upload/download>──➤ Share files and directories remotely and securely

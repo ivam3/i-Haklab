@@ -18,7 +18,7 @@ case "$1" in
 		printf "$G(_>)─➤$W i-Haklab $(grep -om 1 "v.*.*" $iHAKLAB/README.md|awk '{print $1}') 2021 by Ivam3 - It is a hacking laboratory that contains open source tools recommended by Ivam3."
 		;;
 	about)
-		[[ $2 ]] && cat $iHAKLAB/.set/libexec/Readme/$2 || STDERR
+		[[ -e $iHAKLAB/.set/libexec/Tools/Readme/$2 ]] && cat $iHAKLAB/.set/libexec/Tools/Readme/$2 || STDERR
 		;;
 	install|remove)
 		if [[ $2 ]];then
