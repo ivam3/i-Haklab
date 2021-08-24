@@ -82,7 +82,7 @@ printf "$G\n(_>)─➤ Installing interactive shell.$W\n"
 [[ -d ~/.local/share/omf ]] && rm -rf ~/.local/share/omf
 [[ -d ~/.config/omf ]] && rm -rf ~/.config/omf/
 git config --global core.autocrlf
-printf "$Y\n(_>)─➤ Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'\n ╰─➤ when it happen hold on for one minute and then type exit to continue\n"
+printf "$Y\n(_>)─➤ Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'\n ╰─➤ when it happen hold on for one minute and then type exit to continue$W\n"
 curl -Ls http://get.oh-my.fish | fish
 cat <<- CONF >> $PREFIX/etc/fish/config.fish
 if status --is-login
@@ -159,6 +159,7 @@ printf "$G\n(_>)─➤$W Installing principal external tools."
 sleep 1
 for TOOL in IbyC-fixer converter serverphp DoS-A-Tool ExiF embed binchecker blackbox crunch vpn evilurl localtunnel-server pagekite lock;do
 	bash $iHAKLAB/.set/share/install $TOOL
+	read enter
 done
 if ! command -v msfconsole >/dev/null;then
 printf "$G\n(_>)─➤$W Installing metasploit-framework."

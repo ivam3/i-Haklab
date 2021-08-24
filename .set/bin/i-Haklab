@@ -23,7 +23,8 @@ case "$1" in
 	install|remove)
 		if [[ $2 ]];then
 			for i in ${@:2};do
-				bash $iHAKLAB/.set/share/$1 $i
+				printf "$R(_>)─➤$W $1 it's not available for beta version"
+				#bash $iHAKLAB/.set/share/$1 $i
 			done
 		else
 			STDERR

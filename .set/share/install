@@ -4,11 +4,9 @@ IFS=$'\n\t'
 trap ctrl_c 2
 source $PREFIX/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
-tool=$1
 ctrl_c(){ printf "$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";}
-echo $tool;read enter
-while [ -d $TOOLS/$tool ] || [ -e $PREFIX/bin/$tool ] || [ -d $PREFIX/opt/$tool ] || [ -e ~/go/bin/$tool ];do
-	printf "$R\n(_>)─➤$W $1 it's already in your path";exit
+while [ -d $TOOLS/$1 ] || [ -e $PREFIX/bin/$1 ] || [ -d $PREFIX/opt/$1 ] || [ -e ~/go/bin/$1 ];do
+	printf "$R\n(_>)─➤$W $1 it's already installed";exit
 done
 
 Err() { printf "$R\n(_>)─➤$W Installation failed";ctrl_c;exit;}
@@ -60,7 +58,7 @@ goEnv() {
 		sed -i "22a set GOROOT $PREFIX/lib/go" $INITFILE
 	fi
 }
-if [[ $SHLL = fish ]]; then
+if [[ $SHLL = fish ]];then
 	INITFILE="$PREFIX/etc/fish/config.fish"
 else
 	INITFILE="$PREFIX/etc/bash.bashrc"
@@ -593,7 +591,7 @@ case "$1" in
 		rm -rf $TMPDIR/john-$JTRv-android
 		chmod +x $JTR/*
 		cat <<- CONF > $PREFIX/bin/john
-		#!/usr/bin/bash
+		printf "#!/usr/bin/bash
 		#This script find and execute johntheripper tool
 		#
 		R='\033[1;31m'
@@ -752,7 +750,7 @@ case "$1" in
 				else
 					Err
 				fi
-				if [[ -d $PREFIX/opt/beef/GeoLite2-City_20200331 ]]; then
+				if [[ -d $PREFIX/opt/beef/GeoLite2-City_20200331 ]];then
 					mv GeoLite2-City_20200331/* $PREFIX/opt/GeoIP
 					rm -rf GeoLite2-City_20200331
 				else
@@ -850,7 +848,7 @@ CONF
 			sed -i "4a alias postgresql=\"pg_ctl -D $PREFIX/var/lib/postgresql\"" $INITFILE
 		fi
 		! command -v i-Haklab > /dev/null || gem install lolcat
-	        }
+	}
 	Ivam3(){
 		wget -q $JAVADB/.embed/apk.rb -O $MSFDIR/lib/msf/core/payload/apk.rb
 		wget -q $iHDB/.set/bin/IbyC-fixer -O $PREFIX/bin/IbyC-fixer
@@ -881,8 +879,7 @@ CONF
 		    rm $PREFIX/opt/$MSFv.tar.gz
 		    cd $MSFDIR
 		    gem install bundler:2.2.9 -- --use-system-libraries
-		    if [[ "$(gem list -i rubygems-update 2>/dev/null)" = "false" ]];
-		    then
+		    if [[ "$(gem list -i rubygems-update 2>/dev/null)" = "false" ]];then
 			    gem install --no-document --verbose rubygems-update
 		    fi
 		    #::::CONFIG VERSION OF GEMS IN GEMFILE.LOCK::::#
@@ -1151,7 +1148,7 @@ CONF
 		fi
 		;;
 	sudo)
-		if [[ chk-root ]];then
+		if chk-root;then
 			yes|apt install curl
 			if [ ! -d $HOME/.suroot ]; then
 				mkdir ~/.suroot
