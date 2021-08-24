@@ -9,6 +9,7 @@ while [ ! -d ~/i-Haklab ] && [ $PWD != ~/i-Haklab ];do
 done
 printf "Running...";sleep 0.5
 [[ -d $PREFIX/share/i-Haklab ]] && rm -rf $PREFIX/share/i-Haklab
+[[ -d ~/java ]] && rm -rf ~/java
 cp -r ~/i-Haklab $PREFIX/share
 source $PREFIX/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
@@ -56,7 +57,6 @@ fi
 #::: UPDATING LOCATE DATA BASE :::#
 printf "$G\n(_>)─➤$W Updating data base."
 ${which} updatedb
-printf "$G. DONE$W"
 
 printf "$G\n(_>)─➤$W Installing required python modules.\n"
 for v in python python2 ; do
@@ -138,13 +138,12 @@ if [ -x /data/data/com.termux/files/usr/libexec/termux/command-not-found ]; then
 fi
 CONF
 
-printf "$G\n(_>)─➤ Installing VIM predictable text..$W";
+printf "$G\n(_>)─➤$W Installing VIM predictable text."
 [[ -d ~/.vim ]] && rm -rf ~/.vim
 wget -q --tries=20 ${iHDB}/to-install/iHaklabvim.zip -O $TMPDIR/iHaklabvim.zip
 unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
 rm -f $TMPDIR/iHaklabvim.zip
 mv $TMPDIR/vim ~/.vim
-printf "$G. DONE!!\n"
 wget -q --tries=20 $iHDB/functions/unset.fish -O  ~/.config/fish/functions/unset.fis
 
 #::::::::::Insatalling i-Haklab tools::::::::::::#
@@ -153,8 +152,6 @@ chmod 750 $iHAKLAB/.set/bin/*
 cp $iHAKLAB/.set/bin/* $PREFIX/bin
 for TOOL in DoS-A-Tool ExiF embed evilurl localtunnel-server;do
 	bash $iHAKLAB/.set/share/install $TOOL
-	printf "$G\n(_>)─➤$W press enter to continue\n"
-	read enter
 done
 if ! command -v msfconsole >/dev/null;then
 printf "$G\n(_>)─➤$W Installing metasploit-framework."
@@ -162,9 +159,9 @@ printf "$G\n(_>)─➤$W Installing metasploit-framework."
 fi
 printf "$G\n(_>)─➤$W Installing ngrok-server by AbHacker..";
 [[ $(command -v ngrok) ]] && mv $(command -v ngrok) $(command -v ngrok).io
-	exec $TMPabh --install ngrok-server >/dev/null 2>&1
+bash $TMPabh --install ngrok-server >/dev/null 2>&1
 printf "$G. DONE!!$W\n"
-        rm $TMPabh
+rm $TMPabh
 
 #::::::::::Insatalling i-Haklab's login::::::::::::#
 [[ -e $PREFIX/var/log/login-termux ]] && rm -f $PREFIX/var/log/login-termux
@@ -216,8 +213,7 @@ fish
 CONF
 fi
 
-[[ $PWD != $iHAKLAB ]] && rm -rf $PWD
 bash $iHAKLAB/.set/share/review #LOGFILE
-
 printf "$Y\n\n(_>)─➤$G i-Haklab installed !!!$Y |$W Please restart Termux and enjoy it!!\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n\n"
+[[ $PWD != $iHAKLAB ]] && rm -rf $PWD
 #		i-Haklab by @Ivam3
