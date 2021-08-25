@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/data/data/com.termux/files/usr/bin/bash
 #i-Haklab v.3.0 2021 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3.
 #Created on Jan/2019 
 #Modify: 2021-09-15
@@ -14,10 +14,9 @@ B='\033[1;34m'
 M='\033[1;35m'
 C='\033[1;36m'
 W='\033[0m'
-ctrl_c() { printf "$Y\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bot$W\n";
+ctrl_c() { printf "$Y\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bot$W\n";}
 microSD=$(df|tail -n 2|awk -F " " '{print $6}'|grep -iv "emulated")
 oldIH=$(grep "iHAKLAB" $PREFIX/etc/fish/config.fish|awk -F " " '{print $3}')
-rm -rf $oldIH
 
 #TRASH
 printf "$Y(_>)─➤$W Dropping the trash\n"
@@ -28,19 +27,19 @@ for del in DoS-A-Tool Ivam3 RuGiR;do
 done
 [[ -d ~/java ]] && rm -rf ~/java
 [[ -d ~/localtunnel-server ]] && rm -rf ~/localtunnel-server
-[[ -d ~/aiochk ]] && rm -rf ~/aiochk
+[[ -d $PREFIX/bin/aiochk ]] && rm -rf $PREFIX/bin/aiochk
 if [[ -d ~/storage/external-1/roothome ]];then
 	mv ~/storage/external-1/roothome ~/storage/external-1/tools
 else
 	[[ -d $PREFIX/share/tools ]] || mkdir $PREFIX/share/tools
 	for i in $(cat $PREFIX/share/i-Haklab/.set/libexec/Tools/listoftools) rhawk Pybelt IPGeoLocation Hunner HatCloud AndroBugs;do
-		[[ ~/$i ]] && mv ~/$i $PREFIX/share/tools
-
+		[[ -d ~/$i ]] && mv ~/$i $PREFIX/share/tools
 	done
 fi
 
 #UPGRADING
 if $(bash $PREFIX/libexec/banner/wall-banner|grep -oE "v_2.0");then
+	rm -rf $oldIH
 	git clone --quiet https://github.com/ivam3/i-Haklab.git ~/i-Haklab
 	cd ~/i-Haklab;chmod +x setup;bash setup
 else
@@ -49,17 +48,17 @@ else
 
 	#UPGRADE OMF
 	printf "$Y(_>)─➤$W Upgrading i-Haklab shell\n";sleep 0.5
-	omf update omf > /dev/null 2>&1
+	omf update omf >/dev/null 2>&1
 	THEME=$(mktemp)
 	printf "#!/bin/env fish\nomf install bobthefish" >> $THEME
-	fish $THEME > /dev/null 2>&1
-	rm $THEME
+	fish $THEME >/dev/null 2>&1
+	rm $THEME 2>/dev/null
 
 	#FIX SOME BUGS
 	printf "$Y(_>)─➤$W Re-configurating. . .\n";sleep 0.5
 	wget -q $iHDB/login-files/i-haklab_login -O $PREFIX/var/log/login-termux
 	wget -q $iHDB/libexec/banner/i-Haklab -O $PREFIX/libexec/banner/login-banner
-	cat <<- CONF > 
+	cat <<- CONF > $PREFIX/etc/fish/config.fish
 	# Put system-wide fish configuration entries here
 	# or in .fish files in conf.d/
 	# Files in conf.d can be overridden by the user
@@ -75,18 +74,19 @@ else
 	# end
 
 	function __fish_command_not_found_handler --on-event fish_command_not_found
-	       /data/data/com.termux/files/usr/libexec/termux/command-not-found [1]
-        end
+		/data/data/com.termux/files/usr/libexec/termux/command-not-found [1]
+	end
+
 	if status --is-login
-                bash /data/data/com.termux/files/usr/libexec/banner/wall-banner
+		bash /data/data/com.termux/files/usr/libexec/banner/wall-banner
 	end
 
 	function on_exit --on-event fish_exit
-	        echo 'Have a nice hacking day!!'
+		echo 'Have a nice hacking day!!'
 		sleep 1
 	end
 	
-	set DISPLAY=localhost:1
+	set DISPLAY localhost:1
 	set fish_theme bobthefish
 	set -g theme_nerd_fonts yes
 	set HOME /data/data/com.termux/files/home
@@ -107,4 +107,27 @@ else
 		chmod +x $PREFIX/bin/$i
 	done
 fi
+$PREFIX/libexec/banner/wall-banner
+printf "$G
+(_>)─➤$W i-Haklab upgraded at version 3.0-beta$G
+ ╰─────$Y~☆ New features:$G
+ ╰──────────$Y~☆$W code cleaner that optimizes the use of RAM$G
+ ╰──────────$Y~☆$W obsolete tools removed$G
+ ╰──────────$Y~☆$W list all installed tools with i-Haklab+show+listalltools$G
+ ╰──────────$Y~☆$W common wordlist for brute force attacks added$G
+ ╰──────────$Y~☆$W IbyC-fixer + RuGiR updated to fix possible issues$G
+ ╰──────────$Y~☆$W vim predictable text$G
+ ╰──────────$Y~☆$W easy execution of fake root as command 'sudo'$G
+ ╰──────────$Y~☆$W enable and desable login access with i-Haklab+install/remove$G
+ ╰──────────$Y~☆$W install/remove more than 1 tool at the same time $G
+ ╰──────────$Y~☆$W java 8 added$G
+ ╰──────────$Y~☆$W verbosity applied at remove to deleting all dependencies too$G
+ ╰──────────$Y~☆$W ngrok,ngrok.io and pagekite server added$G
+ ╰──────────$Y~☆$W all abhacker repositories added$G
+ ╰──────────$Y~☆$W metasploit easy and fast installation$G
+ ╰──────────$Y~☆$W graphical environment with VNC-app$G
+ ╰──────────$Y~☆$W automated installation and configuration x11-pkg$G
+ ╰──────────$Y~☆$W wireshark xhydra and vim editor on graphical enviroment$G
+ |
+ ╰───────────➤$W to report issues goin to$B https://t.me/Ivam3_Bot.\n\n"
 #       i-Haklab by @Ivam3
