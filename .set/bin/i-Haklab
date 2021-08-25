@@ -57,10 +57,10 @@ case "$1" in
 		speedtest-cli
 		;;
 	update)
-		TMP_FILE=$(mktemp)
-		wget -q $iHDB/share/upgrade -O $TMP_FILE
-		RMONTH=$(grep "Modify" $TMP_FILE | cut -d "-" -f2)
-		RDAY=$(grep "Modify" $TMP_FILE | cut -d "-" -f3)
+		TMP_FILE1=$(mktemp)
+		wget -q $iHDB/share/upgrade -O $TMP_FILE1
+		RMONTH=$(grep "Modify" $TMP_FILE1 | cut -d "-" -f2)
+		RDAY=$(grep "Modify" $TMP_FILE1 | cut -d "-" -f3)
 		LMONTH=$(stat $iHAKLAB | grep Modify | awk '{print $2}' | cut -d "-" -f2)
 		LDAY=$(stat $iHAKLAB | grep Modify | awk '{print $2}' | cut -d "-" -f3)
 		Done(){ printf "$G\n(_>)─>$W Already up to date$G <-(<_)$W\n";}
@@ -72,7 +72,7 @@ case "$1" in
 				rm -rf $iHAKLAB
 				git clone --quiet https://github.com/Ivam3/i-Haklab.git $iHAKLAB
 				if [ -d $iHAKLAB ];then
-					bash $TMP_FILE
+					bash $TMP_FILE1
 					Done
 				else
 					k-boom
@@ -87,13 +87,13 @@ case "$1" in
 				git clone --quiet https://github.com/Ivam3/i-Haklab.git $iHAKLAB
 			done
 			if [ -d $iHAKLAB ]; then
-				bash $TMP_FILE
+				bash $TMP_FILE1
 				Done
 			else
 				k-boom
 			fi
 		fi
-		rm $TMP_FILE
+		rm $TMP_FILE1
 		;;
 	weechat)
 		[[ -e $PREFIX/bin/weechat ]] || yes|apt install weechat
