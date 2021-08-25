@@ -66,7 +66,7 @@ if [[ -d $TOOLS/$toInstall ]] || [[ -e $PREFIX/bin/$toInstall ]] || [[ -d $PREFI
 	printf "$R(_>)─➤$W $toInstall it's already installed";exit
 fi
 running
-yes|apt update && apt upgrade
+#yes|apt update && apt upgrade
 case "$toInstall" in
 	alltools)
 		alltools=$(cat $iHAKLAB/.set/libexec/Tools/listoftools)
@@ -76,11 +76,7 @@ case "$toInstall" in
 		;;
 	kalilinux)
 		yes|pkg install wget curl proot tar -y && wget https://raw.githubusercontent.com/AndronixApp/AndronixOrigin/master/Installer/Kali/kali-xfce.sh -O kali-xfce.sh && chmod +x kali-xfce.sh && bash kali-xfce.sh 
-		cat <<- CONF > ~/kali-fs/etc/apt/sources.list
-		deb [trusted=yes]  https://http.kali.org/kali kali-rolling main contrib non-free
-		deb http://ftp.debian.org/debian buster main
-		deb http://ftp.debian.org/debian buster-updates main
-		CONF
+		printf "deb [trusted=yes]  https://http.kali.org/kali kali-rolling main contrib non-free\ndeb http://ftp.debian.org/debian buster main\ndeb http://ftp.debian.org/debian buster-updates main" > ~/kali-fs/etc/apt/sources.list
 		printf "$G(_>)─➤$W Follow the the next steps$G\t
 		(01)─➤$W run $toInstall < ./start-kali.sh >$G\t
 		(02)─➤$W update $toInstall < apt-get update && apt-get upgrade >$G\t
@@ -173,11 +169,7 @@ case "$toInstall" in
 					while read -p "(_>)_passwd─➤ " passwd && [ -z $passwd ];do
 						continue
 					done
-					cat <<- CONF > $TOOLS/$toInstall/config/credentials.ini
-					[Credentials]
-					username = $user
-					password = $passwd
-					CONF
+					printf "[Credentials]\nusername = $user\npassword = $passwd" > $TOOLS/$toInstall/config/credentials.ini
 					;;
 				*)
 					printf "$Y(_>)─➤$W Don't forget set your credentials at file: $TOOLS/$toInstall/config/credentials.ini"
@@ -590,20 +582,18 @@ case "$toInstall" in
 		esac
 		rm -rf $TMPDIR/john-$JTRv-android
 		chmod +x $JTR/*
-		cat <<- CONF > $PREFIX/bin/john
 		printf "#!/usr/bin/bash
 		#This script find and execute johntheripper tool
 		#
-		R='\033[1;31m'
-		W='\033[0m'
+		R='\\033[1;31m'
+		W='\\033[0m'
 		if [ -d \$PREFIX/opt/john ];then
 		       cd \$PREFIX/opt/john
 		       ./john \$@
 	        else
 		       printf \"\$R(_>)─➤\$W JohnTheRipper is not installed\$W\"
 		fi
-		#            i-Haklab by @Ivam3
-		CONF
+		#            i-Haklab by @Ivam3" > $PREFIX/bin/john
 		chmod +x $PREFIX/bin/john
 		;;
 	java)
@@ -833,17 +823,15 @@ case "$toInstall" in
 		pg_ctl -D $PREFIX/var/lib/postgresql start
 		createuser msf
 		createdb msf_database
-		cat <<- CONF > $MSFDIR/config/database.yml
-production:
-  adapter: postgresql
-  database: msf_database
-  username: msf
-  password:
-  host: 127.0.0.1
-  port: 5432
-  pool: 75
-  timeout: 5
-CONF
+		printf "production:
+		adapter: postgresql
+		database: msf_database
+		username: msf
+		password:
+		host: 127.0.0.1
+		port: 5432
+		pool: 75
+		timeout: 5" > $MSFDIR/config/database.yml
 		if ! cat $INITFILE | grep -oE "postgresql" --silent;then
 			sed -i "4a alias postgresql=\"pg_ctl -D $PREFIX/var/lib/postgresql\"" $INITFILE
 		fi
@@ -908,23 +896,21 @@ CONF
 		    $PREFIX/bin/find $PREFIX/lib/ruby/gems -type f -iname \*.so -print0|xargs -0 -r termux-elf-cleaner
 		    msfdb
 		    #:::::::MSFCONSOLE\MSFVENOM FILES:::::::#
-		    BIGDECIMAL=$(find $PREFIX/lib/ruby/$RUBYv -iname "bigdecimal.so")
-		    cat <<- CONF > $PREFIX/bin/msfconsole
-#!/usr/bin/sh
-SCRIPT_NAME=\$(basename "\$0")
-METASPLOIT_PATH="\${PREFIX}/opt/metasploit-framework"
-#Fix ruby bigdecimal extensions linking error.
-export LD_PRELOAD="$BIGDECIMAL:\$LD_PRELOAD"
-case "\$SCRIPT_NAME" in
-        msfconsole|msfvenom)
-                exec ruby "\$METASPLOIT_PATH/\$SCRIPT_NAME\" "\$@"
-                ;;
-        *)
-                echo "[!] Unknown Metasploit command '\$SCRIPT_NAME'."
-                exit 1
-		;;
-esac
-CONF
+		    BIGDECIMAL=$(find $PREFIX/lib/ruby/$RUBYv -iname \"bigdecimal.so\")
+		    printf "#!/usr/bin/sh
+		    SCRIPT_NAME=\$(basename \"\$0\")
+		    METASPLOIT_PATH=\"\${PREFIX}/opt/metasploit-framework\"
+		    #Fix ruby bigdecimal extensions linking error.
+		    export LD_PRELOAD=\"$BIGDECIMAL:\$LD_PRELOAD\"
+		    case \"\$SCRIPT_NAME\" in
+			    msfconsole|msfvenom)
+				    exec ruby \"\$METASPLOIT_PATH/\$SCRIPT_NAME\" \"\$@\"
+				    ;;
+			    *)
+				    echo \"[!] Unknown Metasploit command '\$SCRIPT_NAME'.\"
+				    exit 1
+				    ;;
+		    esac" > $PREFIX/bin/msfconsole
 		    chmod +x $PREFIX/bin/msfconsole
 		    ln -sf $(which msfconsole) $PREFIX/bin/msfvenom
 		    Ivam3
@@ -954,8 +940,7 @@ CONF
 	    cd $TOOLS/$toInstall
 	    gem update --system 
 	    gem install bundler
-	    cat <<- CONF > $PREFIX/bin/$toInstall
-	    #!/usr/bin/bash
+	    printf "#!/usr/bin/bash
 	    # Coded on Agust 2019 by Ivam3 and upgraded on July 2021
 	    IFS=$'\\n\\t'
 	    R='\\033[1;31m'
@@ -965,11 +950,10 @@ CONF
 		   exec ruby $TOOLS/whatWeb/whatweb \${@:1}
 		   popd
 	   else
-	           printf "$R(_>)─➤$W Whatweb is not installed."
+	           printf \"\$R(_>)─➤\$W Whatweb is not installed.\"
 		   exit
 	    fi
-	    #                       i-Haklab by @Ivam3
-	    CONF
+	    #                       i-Haklab by @Ivam3" > $PREFIX/bin/$toInstall
 	    chmod 711 $PREFIX/bin/whatweb
 	    if ! $PREFIX/etc/hosts;then
 		touch $PREFIX/etc/hosts
@@ -1145,97 +1129,6 @@ CONF
 				rm -rf $del
 			done
 			wget -q $iHDB/fix-tools/$toInstall.py -O $TMPPATH/$toInstall.py
-		fi
-		;;
-	sudo)
-		if chk-root;then
-			yes|apt install curl
-			if [[ ! -d $HOME/.suroot ]];then
-				mkdir ~/.suroot
-				touch ~/.suroot/.bashrc
-			fi
-			#set colored=true to turn on colored error messages
-			#set colored=false to turn off colored error messages
-			colored=true
-			#red=1 green=2 yellow=3
-			color() {
-				if [ $colored == "true" ];then
-					echo "$(tput setaf $toInstall)${*:2}$(tput sgr0)"
-				else
-					echo "${*:2}"
-				fi
-			        }
-			SYSBIN=/system/bin
-			SYSXBIN=/system/xbin
-			BB=$SYSXBIN/busybox
-			PRE=/data/data/com.termux/files
-			ROOT_HOME=$PRE/home/.suroot
-			BINPRE=$PRE/usr/bin
-			LDLP="export LD_LIBRARY_PATH=$PRE/usr/lib"
-			CMDLINE="PATH=$PATH:$SYSXBIN:$SYSBIN;$LDLP;HOME=$ROOT_HOME;cd $PWD"
-
-			#set root user enviroment
-			printf "$G(_>)─➤$W Build root enviroment ..";
-			wget -q $iHDB/.set/bin/$1 -O $PREFIX/bin
-			if [ -e ~/.suroot/.bashrc ];then
-				for opt in 1 2 3 4;do
-					if [ ! -O ~/.suroot/.bashrc ]; then
-						let try=opt++
-						sudo ${which} chown $USER:$USER -R ~/.suroot
-						if [ $try -gt 3 ];then
-							printf "$R. DENIED$Y\n(_>)─➤$W to fix it try 'chmod $USER:$USER -R ~/.suroot' and reinstall\n";Err
-						fi
-					fi
-				done
-			else
-				if [ ! -d ~/.suroot ]; then
-					${which} mkdir ~/.suroot
-				fi
-			fi
-			cat <<- CONF > ~/.suroot/.bashrc
-			PS1="\[\e[33m\][!] \[\e[31m\]Press\[\e[32m\] Ctrl d\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]"
-			export TERM=xterm-256color
-			export LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib
-			export PATH=/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:/system/xbin:/system/bin
-			HOME=/data/data/com.termux/files/home
-			fish
-			#          i-Haklab by @Ivam3"
-			CONF
-			if [ -x $SYSXBIN/su ]; then
-				SU=$SYSXBIN/su
-			elif [ -x /su/bin/su ]; then
-				SU=/su/bin/su
-			elif [ -x /sbin/su ]; then
-				SU=/sbin/su
-			fi
-			if [ ! -d $ROOT_HOME ]; then
-				if [ -x $BB ] && [ $($BB --list | grep -w mount) == "mount" ]; then
-					MOUNTEX="$BB mount"
-				elif [ -x $SYSBIN/mount ]; then
-					MOUNTEX="$SYSBIN/mount"
-				fi
-				MOUNT_RW="$MOUNTEX -o rw,remount,rw /system"
-				MOUNT_RO="$MOUNTEX -o ro,remount,ro /system"
-				$SU -c "$MOUNT_RW"
-				$SU -c "mkdir $ROOT_HOME"
-				$SU -c "chmod 700 $ROOT_HOME"
-				BASHRC="'PS1=\"# \"\nexport TERM=$TERM\n$LDLP\nexport PATH=$PATH:$SYSXBIN:$SYSBIN'"
-				$SU -c "echo -e $BASHRC > $ROOT_HOME/.bashrc"
-				$SU -c "chmod 700 $ROOT_HOME/.bashrc"
-				$SU -c "$MOUNT_RO"
-			fi
-			# Reset echo
-			stty sane
-			if [ -e $PREFIX/bin/applets/sudo ]; then
-				rm $PREFIX/bin/applets/sudo
-			elif [ -e $PREFIX/bin/sudo ]; then
-				rm $PREFIX/bin/sudo
-			fi
-			curl -Ls $iHDB/bin/$toInstall -o $PREFIX/bin/$toInstall
-			chmod 750 $PREFIX/bin/$toInstall
-			printf "$G. DONE!!$W"
-		else
-			STDERROOT
 		fi
 		;;
 	*)
