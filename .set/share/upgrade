@@ -50,7 +50,7 @@ else
 	printf "$Y(_>)─➤$W Upgrading i-Haklab shell\n";sleep 0.5
 	omf update omf >/dev/null 2>&1
 	THEME=$(mktemp)
-	printf "#!/bin/env fish\nomf install bobthefish" >> $THEME
+	printf "#!/bin/env fish\nomf install bobthefish" > $THEME
 	fish $THEME >/dev/null 2>&1
 	rm $THEME 2>/dev/null
 
