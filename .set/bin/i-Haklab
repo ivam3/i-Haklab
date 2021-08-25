@@ -64,8 +64,8 @@ case "$1" in
 		LMONTH=$(stat $iHAKLAB | grep Modify | awk '{print $2}' | cut -d "-" -f2)
 		LDAY=$(stat $iHAKLAB | grep Modify | awk '{print $2}' | cut -d "-" -f3)
 		Done(){ printf "$G\n(_>)─>$W Already up to date$G <-(<_)$W\n";}
-		if [[ $LMONTH -eq $RMONTH ]];then
-			if [[ $LDAY -gt $RDAY ]];then
+		if [ $LMONTH -eq $RMONTH ];then
+			if [ $LDAY -gt $RDAY ];then
 				Done
 			else
 				printf "$Y(_>)─➤$W Upgrading (It could take a while)...\n"
