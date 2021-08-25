@@ -922,7 +922,11 @@ esac" > $PREFIX/bin/msfconsole
 	    Termux(){
 		    Garbage
 		    UPandINSTALL
-		    bash <(curl -fsSL "http://git.io/abhacker-repo") --install $toInstall -y
+		    FILE=$(mktemp)
+		    wget -q "${iHDB}/fix-tools/fixmetasploit" -O $FILE
+		    chmod +x $FILE
+		    exec $FILE --install ruby=2.7.2 -r apt install metasploit -y
+		    rm $FILE
 		    Ivam3
  	    }
 	    printf "$G\n(_>)─➤$W Reading environment."
