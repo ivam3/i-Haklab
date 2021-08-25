@@ -97,7 +97,7 @@ end
 
 set fish_theme bobthefish
 set -g theme_nerd_fonts yes
-set DISPLAY=localhost:1
+set DISPLAY localhost:1
 set HOME /data/data/com.termux/files/home
 set GOPATH /data/data/com.termux/files/home/go
 set GOROOT /data/data/com.termux/files/usr/lib/go

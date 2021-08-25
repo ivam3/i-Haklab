@@ -4,11 +4,8 @@ IFS=$'\n\t'
 trap ctrl_c 2
 source $PREFIX/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
+toInstall="$1"
 ctrl_c(){ printf "$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";}
-while [ -d $TOOLS/$1 ] || [ -e $PREFIX/bin/$1 ] || [ -d $PREFIX/opt/$1 ] || [ -e ~/go/bin/$1 ];do
-	printf "$R\n(_>)─➤$W $1 it's already installed";exit
-done
-
 Err() { printf "$R\n(_>)─➤$W Installation failed";ctrl_c;exit;}
 PIPup() {
 	for PYv in python python2 ;do
@@ -58,15 +55,19 @@ goEnv() {
 		sed -i "22a set GOROOT $PREFIX/lib/go" $INITFILE
 	fi
 }
+
 if [[ $SHLL = fish ]];then
 	INITFILE="$PREFIX/etc/fish/config.fish"
 else
 	INITFILE="$PREFIX/etc/bash.bashrc"
 fi
 
+if [[ -d $TOOLS/$toInstall ]] || [[ -e $PREFIX/bin/$toInstall ]] || [[ -d $PREFIX/opt/$toInstall ]] || [[ -e ~/go/bin/$toInstall ]];then
+	printf "$R(_>)─➤$W $toInstall it's already installed";exit
+fi
 running
-yes|apt update && apt upgrade
-case "$1" in
+#yes|apt update && apt upgrade
+case "$toInstall" in
 	alltools)
 		alltools=$(cat $iHAKLAB/.set/libexec/Tools/listoftools)
 		for i in ${alltools[*]};do
@@ -81,8 +82,8 @@ case "$1" in
 		deb http://ftp.debian.org/debian buster-updates main
 		CONF
 		printf "$G(_>)─➤$W Follow the the next steps$G\t
-		(01)─➤$W run $1 < ./start-kali.sh >$G\t
-		(02)─➤$W update $1 < apt-get update && apt-get upgrade >$G\t
+		(01)─➤$W run $toInstall < ./start-kali.sh >$G\t
+		(02)─➤$W update $toInstall < apt-get update && apt-get upgrade >$G\t
 		(03)─➤$W start vnc server < vncserver :1 > on this step you have to set a password$G\t
 		(04)─➤$W download vnc viewer app from https://bit.ly/2VUguQM$G\t
 		(05)─➤$W open the app, touch the plus(+) bottom and set a new connection with address as localhost:1 and name as Kali Linux$G\t
@@ -92,23 +93,23 @@ case "$1" in
 	binwalk)
 		yes|apt install git python
 		PIPup
-		git clone --quiet https://github.com/ReFirmLabs/$1 $TOOLS/$1
-		cd $TOOLS/$1
+		git clone --quiet https://github.com/ReFirmLabs/$toInstall $TOOLS/$toInstall
+		cd $TOOLS/$toInstall
 		chmod 750 *
 		python setup.py install
 		;;
 	evilurl)
 		yes|apt install python git
-		git clone --quiet https://github.com/UndeadSec/EvilURL.git $TOOLS/$1
+		git clone --quiet https://github.com/UndeadSec/EvilURL.git $TOOLS/$toInstall
 		;;
 	fuzzdb)
 		yes|apt install git wget python
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/fuzzdb-project/$1.git --depth 1 $TOOLS/$1
-		wget -q $iHDB/wordlist/$1/big.txt -O $TOOLS/$1/wordlists-user-passwd/big.txt
-		wget -q $iHDB/wordlist/$1/common.txt -O $TOOLS/$1/wordlists-misc/common.txt
-		chmod +x -R $TOOLS/$1
+		git clone --quiet https://github.com/fuzzdb-project/$toInstall.git --depth 1 $TOOLS/$toInstall
+		wget -q $iHDB/wordlist/$toInstall/big.txt -O $TOOLS/$toInstall/wordlists-user-passwd/big.txt
+		wget -q $iHDB/wordlist/$toInstall/common.txt -O $TOOLS/$toInstall/wordlists-misc/common.txt
+		chmod +x -R $TOOLS/$toInstall
 		printf "wfuzz" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -117,29 +118,29 @@ case "$1" in
 		yes|apt install git wget python rust
 		PIPup
 		Pyv=""
-		wget -q https://raw.githubusercontent.com/SecureAuthCorp/impacket/master/examples/GetNPUsers.py -O $PREFIX/bin/$1
+		wget -q https://raw.githubusercontent.com/SecureAuthCorp/impacket/master/examples/GetNPUsers.py -O $PREFIX/bin/$toInstall
 		printf "urllib3\nrequests\nmock\nidna\nbiopython\nrust\nimpacket" > $TMPDIR/requirements.txt
 		PYmodules
-		chmod 711 $PREFIX/bin/$1
+		chmod 711 $PREFIX/bin/$toInstall
 		rm -f $TMPDIR/requirements.txt
 		yes|apt remove rust;apt autoremove
 		;;
 	ghost)
 		yes|apt install python openssl git
-		git clone --quiet https://github.com/EntySec/ghost $TOOLS/$1
-		chmod +x -R $TOOLS/$1
+		git clone --quiet https://github.com/EntySec/ghost $TOOLS/$toInstall
+		chmod +x -R $TOOLS/$toInstall
 		;;
 	hakku)
 		yes|apt install git python
-		git clone --quiet https://github.com/4shadoww/hakkuframework.git $TOOLS/$1
-		chmod 750 $TOOLS/$1/$1
+		git clone --quiet https://github.com/4shadoww/hakkuframework.git $TOOLS/$toInstall
+		chmod 750 $TOOLS/$toInstall/$toInstall
 		;;
 	hunner)
 		yes|apt install git python
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/b3-v3r/Hunner.git $TOOL/$1
-		chmod 750 -R $TOOLS/$1
+		git clone --quiet https://github.com/b3-v3r/Hunner.git $TOOL/$toInstall
+		chmod 750 -R $TOOLS/$toInstall
 		printf "httplib2" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -148,7 +149,7 @@ case "$1" in
 		yes|apt install python git
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/maldevel/IPGeoLocation.git $TOOLS/$1  
+		git clone --quiet https://github.com/maldevel/IPGeoLocation.git $TOOLS/$toInstall
 		printf "termcolor\ncolorama" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -157,12 +158,12 @@ case "$1" in
 		yes|apt install python git
 		PIPup
 		Pyv=""
-		git clone --quiet https://github.com/datalux/Osintgram.git $TOOLS/$1
-		cat $TOOLS/$1/requirements.txt > $TMPDIR/requirements.txt
+		git clone --quiet https://github.com/datalux/Osintgram.git $TOOLS/$toInstall
+		cat $TOOLS/$toInstall/requirements.txt > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
 		PS3="(_>)─➤ "
-		printf "$Y(_>)─➤$W $1 needs an instagram acccount credentials."
+		printf "$Y(_>)─➤$W $toInstall needs an instagram acccount credentials."
 		select way in Set_credentials Skip_this_step;do
 			case $way in
 				Set_credentials)
@@ -172,14 +173,14 @@ case "$1" in
 					while read -p "(_>)_passwd─➤ " passwd && [ -z $passwd ];do
 						continue
 					done
-					cat <<- CONF > $TOOLS/$1/config/credentials.ini
+					cat <<- CONF > $TOOLS/$toInstall/config/credentials.ini
 					[Credentials]
 					username = $user
 					password = $passwd
 					CONF
 					;;
 				*)
-					printf "$Y(_>)─➤$W Don't forget set your credentials at file: $TOOLS/$1/config/credentials.ini"
+					printf "$Y(_>)─➤$W Don't forget set your credentials at file: $TOOLS/$toInstall/config/credentials.ini"
 					ctrl_c;exit
 					;;
 			esac
@@ -189,9 +190,9 @@ case "$1" in
 		yes|apt install python git wget unstable-repo geckodriver
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/sundowndev/PhoneInfoga.git $TOOLS/$1
-		wget -q $iHDB/fix-tools/$1.py -O $TOOLS/$1/$1.py
-		cp $TOOLS/$1/config.example.py $TOOLS/$1/config.py
+		git clone --quiet https://github.com/sundowndev/PhoneInfoga.git $TOOLS/$toInstall
+		wget -q $iHDB/fix-tools/$toInstall.py -O $TOOLS/$toInstall/$toInstall.py
+		cp $TOOLS/$toInstall/config.example.py $TOOLS/$toInstall/config.py
 		if [[ "$(uname -m)" = 'aarch64' ]] || [[ "$(uname -m)" = 'x86_64' ]];then
 			bits=64
 		else
@@ -222,8 +223,8 @@ case "$1" in
 		yes|apt install git python libxml2 libxml2-static libxml2-utils libxslt libxslt-static
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/lanmaster53/$1 $TOOLS/$1
-		chmod 750 -R $TOOLS/$1
+		git clone --quiet https://github.com/lanmaster53/$toInstall $TOOLS/$toInstall
+		chmod 750 -R $TOOLS/$toInstall
 		printf "dicttoxml\ndnspython\njsonrpclib\nlxml\nmechanize\nslowaes\nXlsxWriter\nolefile\nPyPDF2\nflask\nunicodecsv" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -232,8 +233,8 @@ case "$1" in
 		apt install git python
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/threat9/$1.git $TOOLS/$1
-		chmod 750 -R $TOOLS/$1
+		git clone --quiet https://github.com/threat9/$toInstall.git $TOOLS/$toInstall
+		chmod 750 -R $TOOLS/$toInstall
 		printf "future\nrequests\npysnmp\npycrypto\ncryptography\nparamiko\nbcrypt\npynacl" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -242,10 +243,10 @@ case "$1" in
 		yes|apt install git python
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/thewhiteh4t/$1.git $TOOLS/$1
-		mkdir -p $TOOLS/$1/Ngrok
-		wget -q $iHDB/fix-tools/ngrok -O $TOOLS/$1/Ngrok/ngrok
-		chmod 750 -R $TOOLS/$1/*
+		git clone --quiet https://github.com/thewhiteh4t/$toInstall.git $TOOLS/$toInstall
+		mkdir -p $TOOLS/$toInstall/Ngrok
+		wget -q $iHDB/fix-tools/ngrok -O $TOOLS/$toInstall/Ngrok/ngrok
+		chmod 750 -R $TOOLS/$toInstall/*
 		printf "requests" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -254,8 +255,8 @@ case "$1" in
 		yes|apt install git python
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/vasco2016/$1-framework $TOOLS/$1
-		chmod 711 -R $TOOLS/$1
+		git clone --quiet https://github.com/vasco2016/$toInstall-framework $TOOLS/$toInstall
+		chmod 711 -R $TOOLS/$toInstall
 		printf "capstone\nreadline\npefile\ncolorama\npylzma" > $TMPDIR/requirements.txt
 		PYmodule
 		rm -f $TMPDIR/requirements.txt
@@ -264,8 +265,8 @@ case "$1" in
 		yes|apt install git python
 		PIPup
 		PY=""
-		git clone --quiet https://github.com/$1-project/$1.git $TOOL/$1
-		chmod 750 -R $TOOLS/$1
+		git clone --quiet https://github.com/$toInstall-project/$toInstall.git $TOOL/$toInstall
+		chmod 750 -R $TOOLS/$toInstall
 		printf "beautifulsoup\nbs\ncertifi\ncolorama\nlxml\nPySocks\nrequests\nrequests-futures\nsoupsieve\nstem\ntorrequest" >> $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -283,8 +284,8 @@ case "$1" in
 			PYmodules
 			rm -f $TMPDIR/requirements.txt
 		elif [[ $ANSW = 2 ]] || [[ $ANSW = 02 ]];then
-			git clone --quiet https://github.com/$1project/$1 $TOOLS/$1
-			chmod 750 -R $TOOLS/$1
+			git clone --quiet https://github.com/$toInstallproject/$toInstall $TOOLS/$toInstall
+			chmod 750 -R $TOOLS/$toInstall
 		else
 			Err
 		fi
@@ -293,8 +294,8 @@ case "$1" in
 		yes|apt install git python libxml2 libxml2-static libxml2-utils libxslt libxslt-static rust
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/laramies/theHarvester.git $TOOLS/$1
-		cat $TOOLS/$1/requirements/dev.txt > $TMPDIR/requirements.txt
+		git clone --quiet https://github.com/laramies/theHarvester.git $TOOLS/$toInstall
+		cat $TOOLS/$toInstall/requirements/dev.txt > $TMPDIR/requirements.txt
 		sed -i 's|/etc/theHarvester|/data/data/com.termux/files/usr/etc/theHarvester|g' setup.py
 		python setup.py install
 		PYmodules
@@ -305,9 +306,9 @@ case "$1" in
 		yes|apt install git python
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/anouarbensaad/$1 $TOOLS/$1
-		rm $TOOLS/$1/install.sh
-		cat $TOOLS/$1/requirements.txt > $TMPDIR/requirements.txt
+		git clone --quiet https://github.com/anouarbensaad/$toInstall $TOOLS/$toInstall
+		rm $TOOLS/$toInstall/install.sh
+		cat $TOOLS/$toInstall/requirements.txt > $TMPDIR/requirements.txt
 		PYmodules
 		rm -rf $TMPDIR/requirements.txt
 		;;
@@ -316,27 +317,27 @@ case "$1" in
 		yes|apt install git python2 openssl
 		PIPup
 		Pyv="2"
-		git clone --quiet https://github.com/hahwul/$1.git $TOOLS/$1
-		chmod +x $TOOLS/$1/*
+		git clone --quiet https://github.com/hahwul/$toInstall.git $TOOLS/$toInstall
+		chmod +x $TOOLS/$toInstall/*
 		printf "argparse\nnetaddr" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
 		;;
 	adminpanel)
 		yes|apt install git python2
-		git clone --quiet https://github.com/Techzindia/admin_penal.git $TOOLS/$1
-		chmod 750 $TOOLS/$1/admin_panel_finder.py
-		mv $TOOLS/$1/admin_panel_finder.py $TOOLS/$1/$1.py
+		git clone --quiet https://github.com/Techzindia/admin_penal.git $TOOLS/$toInstall
+		chmod 750 $TOOLS/$toInstall/admin_panel_finder.py
+		mv $TOOLS/$toInstall/admin_panel_finder.py $TOOLS/$toInstall/$toInstall.py
 		;;
 	androbugs)
 		yes|apt install git python2
-		git clone --quiet https://github.com/AndroBugs/AndroBugs_Framework.git $TOOLS/$1
+		git clone --quiet https://github.com/AndroBugs/AndroBugs_Framework.git $TOOLS/$toInstall
 		;;
 	d-tect)
 		yes|apt install git python2
 		PIPup
 		PYv="2"
-		git clone --quiet https://github.com/shawarkhanethicalhacker/D-TECT-1.git $TOOLS/$1
+		git clone --quiet https://github.com/shawarkhanethicalhacker/D-TECT-1.git $TOOLS/$toInstall
 		chmod +x -R $TOOLS/$1/*
 		printf "colorama\nbeautifulsoup" > $TMPDIR/requirements.txt
 		PYmodules
@@ -344,15 +345,15 @@ case "$1" in
 		;;
 	cc-genpro)
 		yes|apt install git python2 neofetch
-		git clone --quiet https://github.com/HackeRStrategy/cc-genpro1.2 $TOOLS/$1
-		chmod 750 $TOOLS/$1/*
+		git clone --quiet https://github.com/HackeRStrategy/cc-genpro1.2 $TOOLS/$toInstall
+		chmod 750 $TOOLS/$toInstall/*
 		;;
 	cloudbunny)
 		yes|apt install python2 git
 		PIPup
 		PYv="2"
-		git clone --quiet https://github.com/Warflop/CloudBunny.git $TOOLS/$1
-		chmod +x -R $TOOLS/$1
+		git clone --quiet https://github.com/Warflop/CloudBunny.git $TOOLS/$toInstall
+		chmod +x -R $TOOLS/$toInstall
 		printf "certificates" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -361,8 +362,8 @@ case "$1" in
 		yes|apt install python2 git
 		PYPup
 		PYv="2"
-		git clone --quiet https://github.com/lightos/$1.git $TOOLS/$1
-		chmod 750 $TOOLS/$1/$1.py
+		git clone --quiet https://github.com/lightos/$toInstall.git $TOOLS/$toInstall
+		chmod 750 $TOOLS/$toInstall/$toInstall.py
 		printf "urllib2" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -371,9 +372,9 @@ case "$1" in
 		yes|apt install git python2
 		PIPup
 		PYv="2"
-		git clone --quiet https://github.com/lockedbyte/$1 $TOOLS/$1
-		cp $TOOLS/$1/aux/$1.py $TOOLS/$1
-		chmod 711 -R $TOOLS/$1
+		git clone --quiet https://github.com/lockedbyte/$toInstall $TOOLS/$toInstall
+		cp $TOOLS/$toInstall/aux/$toInstall.py $TOOLS/$toInstall
+		chmod 711 -R $TOOLS/$toInstall
 		printf "base58\nscrypt\npyblake2\npycrypto\ncrypto\nbcrypt\nrc2\ntwofish\ngeesefly\nskein pycipher\nnumpy\nCrypto\npasslib\nbase91\nmom\ngmpy2\nmore_itertools\nargon2_cffi" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -382,8 +383,8 @@ case "$1" in
 		yes|apt install git python2
 		PIPup
 		PYv="2"
-		git clone --quiet https://github.com/xHak9x/$1.git $TOOLS/$1
-		chmod +x -R $TOOLS/$1
+		git clone --quiet https://github.com/xHak9x/$toInstall.git $TOOLS/$toInstall
+		chmod +x -R $TOOLS/$toInstall
 		printf "requests" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -392,7 +393,7 @@ case "$1" in
 		yes|apt install git python2
 		PIPup
 		PYv="2"
-		git clone --quiet https://github.com/CiKu370/$1.git $TOOLS/$1
+		git clone --quiet https://github.com/CiKu370/$toInstall.git $TOOLS/$toInstall
 		printf "progressbar\npasslib" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -401,8 +402,8 @@ case "$1" in
 		yes|apt install git python2 rust
 		PIPup
 		PYv="2"
-		git clone --quiet https://github.com/TarlogicSecurity/kerbrute.git $TOOLS/$1
-		chmod 750 -R $TOOLS/$1
+		git clone --quiet https://github.com/TarlogicSecurity/kerbrute.git $TOOLS/$toInstall
+		chmod 750 -R $TOOLS/$toInstall
 		printf "impacket" > $TMPDIR/requirements.txt
 		PYmodules
 		yes|apt remove rust;apt autoremove
@@ -413,7 +414,7 @@ case "$1" in
 		yes|apt install git python2
 		PIPup
 		PYv="2"
-		git clone --quiet https://github.com/metachar/PhoneSploit.git $TOOLS/$1
+		git clone --quiet https://github.com/metachar/PhoneSploit.git $TOOLS/$toInstall
 		printf "colorama" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -422,10 +423,10 @@ case "$1" in
 		yes|apt install git python2
 		PIPup
 		PYv="2"
-		git clone --quiet https://github.com/Ekultek/Pybelt.git $TOOLS/$1
-		chmod +x -R $TOOLS/$1
+		git clone --quiet https://github.com/Ekultek/Pybelt.git $TOOLS/$toInstall
+		chmod +x -R $TOOLS/$toInstall
 		sed 's|beautifulsoup4==4.5.3|beautifulsoup4==4.7.1|g' -i requirements.txt
-		cat $TOOLS/$1/requirements.txt > $TMPDIR/requirements.txt
+		cat $TOOLS/$toInstall/requirements.txt > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
 		;;
@@ -433,8 +434,8 @@ case "$1" in
 		yes|apt install git python2
 		PIPup
 		PYv="2"
-		git clone --quiet https://github.com/s0md3v/ReconDog.git $TOOLS/$1
-		chmod 750 -R $TOOLS/$1
+		git clone --quiet https://github.com/s0md3v/ReconDog.git $TOOLS/$toInstall
+		chmod 750 -R $TOOLS/$toInstall
 		printf "requests\ntld" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -443,10 +444,10 @@ case "$1" in
 		yes|apt install python2 wget unzip libxml2 libxml2-static libxml2-utils libxslt libxslt-static
 		PIPup
 		PYv="2"
-		wget -q $iHDB/to-install/$1.zip
-		unzip -q $1.zip -d $TOOLS
-		rm $1.zip
-		chmod 750 -R $TOOLS/$1
+		wget -q $iHDB/to-install/$toInstall.zip
+		unzip -q $toInstall.zip -d $TOOLS
+		rm $toInstall.zip
+		chmod 750 -R $TOOLS/$toInstall
 		printf "terminaltables\ntermcolor\nnyawc" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -454,27 +455,27 @@ case "$1" in
 	websploit)
 		yes|apt install git python2
 		PIPup
-		git clone --quiet https://github.com/The404Hacking/$1 $TOOLS/$1
-		chmod +x -R $TOOLS/$1
+		git clone --quiet https://github.com/The404Hacking/$toInstall $TOOLS/$toInstall
+		chmod +x -R $TOOLS/$toInstall
 		;;
 	#::BASH::#
 	exploitdb)
 		yes|apt install git wget
-		git clone --quiet https://github.com/offensive-security/$1.git $TOOLS/$1
-		chmod +x $TOOLS/$1/*
+		git clone --quiet https://github.com/offensive-security/$toInstall.git $TOOLS/$toInstall
+		chmod +x $TOOLS/$toInstall/*
 		wget -q $iHDB/fix-tools/searchsploit -O ~/.searchsploit_rc
 		;;
 	lockphish)
 		yes|apt install git wget
-		git clone --quiet https://github.com/JasonJerry/$1 $TOOLS/$1
-		mv $TOOLS/$1/$1.sh $TOOLS/$1/$1
-		chmod 711 $TOOLS/$1/*
-		wget -q $iHDB/fix-tools/ngrok -O $TOOLS/$1
+		git clone --quiet https://github.com/JasonJerry/$toInstall $TOOLS/$toInstall
+		mv $TOOLS/$toInstall/$toInstall.sh $TOOLS/$toInstall/$toInstall
+		chmod 711 $TOOLS/$toInstall/*
+		wget -q $iHDB/fix-tools/ngrok -O $TOOLS/$toInstall
 		;;
 	login)
-		if ! -e $PREFIX/libexec/termux/.Ivam3;then
+		if [[ ! -e $PREFIX/libexec/termux/.Ivam3 ]];then
 			bash $iHAKLAB/.set/to-install/i-Haklab_login
-		elif $(grep "wall-banner" $INITFILE);then
+		elif [[ $(grep "wall-banner" $INITFILE) ]];then
 			yes|apt install ruby && gem install lolcat
 			sed 's|/data/data/com.termux/files/usr/libexec/banner/wall-banner|/data/data/com.termux/files/usr/var/log/login-termux|g' -i $INITFILE
 		else
@@ -483,30 +484,30 @@ case "$1" in
 		;;
 	nexphisher)
 		yes|apt install git
-		git clone --quiet https://github.com/htr-tech/$1 $TOOLS/$1
-		chmod +x $TOOLS/$1/*
-		cd $TOOLS/$1
+		git clone --quiet https://github.com/htr-tech/$toInstall $TOOLS/$toInstall
+		chmod +x $TOOLS/$toInstall/*
+		cd $TOOLS/$toInstall
 		bash tmux_setup
 		;;
 	saycheese|sayhello)
 		yes|apt install wget unzip openssh
-		wget -q $iHDB/to-install/$1.zip -O $TMPDIR/$1.zip
-		unzip -q $TMPDIR/$1.zip -d $TOOLS
-		rm -rf $TMPDIR/$1.zip
-		wget -q $iHDB/fix-tools/$1 -O $TOOLS/$1/$1
-		wget -q $iHDB/fix-tools/ngrok -O $TOOLS/$1/ngrok
-		chmod +x $TOOLS/$1/*
+		wget -q $iHDB/to-install/$toInstall.zip -O $TMPDIR/$toInstall.zip
+		unzip -q $TMPDIR/$toInstall.zip -d $TOOLS
+		rm -rf $TMPDIR/$toInstall.zip
+		wget -q $iHDB/fix-tools/$toInstall -O $TOOLS/$toInstall/$toInstall
+		wget -q $iHDB/fix-tools/ngrok -O $TOOLS/$toInstall/ngrok
+		chmod +x $TOOLS/$toInstall/*
 		;;
 	userrecon)
 		yes|apt install git
-		git clone --quiet https://github.com/issamelferkh/userrecon $TOOLS/$1
-		mv $TOOLS/$1/$1.sh $TOOLS/$1/$1
-		chmod 750 $TOOLS/$1/$1
+		git clone --quiet https://github.com/issamelferkh/userrecon $TOOLS/$toInstall
+		mv $TOOLS/$toInstall/$toInstall.sh $TOOLS/$toInstall/$toInstall
+		chmod 750 $TOOLS/$toInstall/$toInstall
 		;;
 	wbruter)
 		yes|apt install git
-		git clone --quiet https://github.com/wuseman/WBRUTER.git $TOOLS/$1
-		chmod +750 -R $TOOLS/$1
+		git clone --quiet https://github.com/wuseman/WBRUTER.git $TOOLS/$toInstall
+		chmod +750 -R $TOOLS/$toInstall
 		;;
 	#::BIN::#
 	adbfastboot)
@@ -524,11 +525,11 @@ case "$1" in
 		done
 		mv ./music $PREFIX/bin/music
 		apt autoremove;yes|pkg install xfce4 xfce4-taskmanager dosbox xfce4-terminal python-tkinter htop neofetch loqui vim-gtk the-powder-toy galculator xorg-xhost mpv-x ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk3 gtk2 mtpaint leafpad hexchat netsurf recordmydesktop feh audacious;yes|pkg install xfce4-* kvantum zenity mate-terminal mate-settings-daemon dbus-glib dconf termux-api wireshark-gtk
-		for i in music stopdesktop startdesktop; do
-			cp -rf ~/termux-desktop-xfce/$i $PREFIX/bin
+		for v in music stopdesktop startdesktop; do
+			cp -rf ~/termux-desktop-xfce/$v $PREFIX/bin
 		done
-		for v in backgrounds .icons .themes .vnc .config; do
-			cp -rf ~/termux-desktop-xfce/$v $HOME
+		for a in backgrounds .icons .themes .vnc .config; do
+			cp -rf ~/termux-desktop-xfce/$a $HOME
 		done
 		mkdir ~/Desktop ~/Downloads ~/Templates ~/Public ~/Documents ~/Pictures ~/Video
 		cp -rf $HOME/termux-desktop-xfce/README.desktop $HOME/Desktop
@@ -538,20 +539,20 @@ case "$1" in
 		;;
 	ExiF|binchecker|crunch|i-Haklab|IbyC-fixer|blackbox|converter|lock|pagekite|serverphp|torvpn)
 		yes|apt install curl
-		curl -Ls $iHDB/bin/$1 -o $PREFIX/bin/$1
-		chmod 750 $PREFIX/bin/$1
+		curl -Ls $iHDB/bin/$toInstall -o $PREFIX/bin/$toInstall
+		chmod 750 $PREFIX/bin/$toInstall
 		;;
 	hydra)
 		yes|apt install git make automake
-		git clone --quiet https://github.com/vanhauser-thc/thc-$1 $TOOLS/$1
-		if [ -d $TOOLS/$1 ]; then
-			cd $TOOLS/$1
+		git clone --quiet https://github.com/vanhauser-thc/thc-$toInstall $TOOLS/$toInstall
+		if [[ -d $TOOLS/$toInstall ]];then
+			cd $TOOLS/$toInstall
 			./configure && make && make install
-			if [ -e $TOOLS/$1/$1 ] && [ -e $TOOLS/$1/x$1 ];then
-				chmod +x $TOOLS/$1/*
-				cp $TOOLS/$1/$1 $PREFIX/bin/
-				cp $TOOLS/$1/x$1 $PREFIX/bin/
-				rm -rf $TOOLS/$1
+			if [[ -e $TOOLS/$toInstall/$toInstall ]] && [[ -e $TOOLS/$toInstall/x$toInstall ]];then
+				chmod +x $TOOLS/$toInstall/*
+				cp $TOOLS/$toInstall/$toInstall $PREFIX/bin/
+				cp $TOOLS/$toInstall/x$toInstall $PREFIX/bin/
+				rm -rf $TOOLS/$toInstall
 			else
 				printf "$R\n\t      《ERR COMPILE》\n";Err
 			fi
@@ -567,7 +568,7 @@ case "$1" in
 		tar -xvzf $TMPDIR/john-$JTRv-android-1.tar.gz -C $TMPDIR
 		rm -rf $TMPDIR/john-$JTRv-android-1.tar.gz
 		mkdir -p $PREFIX/opt/john
-		JTR="$PREFIX/opt/$1"
+		JTR="$PREFIX/opt/$toInstall"
 		mv $TMPDIR/john-$JTRv-android/user/* $JTR
 		ln -s $JTR/john.conf $JTR/john.ini
 		case $(uname -m) in
@@ -615,12 +616,12 @@ case "$1" in
 		;;
 	localtunnel-server)
 		yes|apt install nodejs git
-		git clone --quiet git://github.com/defunctzombie/$1.git $TOOLS/$1
-		cd $TOOLS/$1
+		git clone --quiet git://github.com/defunctzombie/$toInstall.git $TOOLS/$toInstall
+		cd $TOOLS/$toInstall
 		npm install
 		npm install -g localtunnel
 		wget -q $iHDB/fix-tools/openurl.js -O $PREFIX/lib/node_modules/localtunnel/node_modules/openurl/openurl.js
-		rm -rf $TOOLS/$1
+		rm -rf $TOOLS/$toInstall
 		;;
 	ngrok)
 		arch=$(uname -a|grep -o 'arm'|head -n1)
@@ -638,7 +639,7 @@ case "$1" in
 			fi
 		else
 			wget -q https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip
-			if [ -e ngrok-stable-linux-386.zip ]; then
+			if [[ -e ngrok-stable-linux-386.zip ]];then
 				unzip -q ngrok-stable-linux-386.zip
 				chmod +x ngrok
 				mv ngrok $PREFIX/bin/
@@ -657,43 +658,43 @@ case "$1" in
 		yes|apt install php apache2 php-pgsql php-fpm php-apache mariadb phpmyadmin
 		wget -q $iHDB/etc/apache2/httpd.conf -O $PREFIX/etc/apache2/httpd.conf
 		wget -q $iHDB/etc/phpmyadmin/config.inc.php -O $PREFIX/etc/phpmyadmin/config.inc.php
-		if ! grep "$1" $INITFILE;then
-			echo "alias $1=\"apachectl\""
+		if ! grep "$toInstall" $INITFILE;then
+			echo "alias $toInstall=\"apachectl\""
 		fi
-		printf "$G\n\n(_>)_to_run_it─➤$W $1 start$G\n(_>)_to_stop_it─➤$W $1 stop$G\n(_>)_to_open_it─➤$W open http://localhost:8080\n"
+		printf "$G\n\n(_>)_to_run_it─➤$W $toInstall start$G\n(_>)_to_stop_it─➤$W $toInstall stop$G\n(_>)_to_open_it─➤$W open http://localhost:8080\n"
 		;;
 	shc)
 		shcVer="3.8.9"
 		yes|apt install wget make
-		wget -q http://www.datsi.fi.upm.es/~frosal/sources/$1-$shcVer.tgz -O $TMPDIR/$1-$shcVer.tgz
-		tar -xvzf $TMPDIR/$1-$shcVer.tgz -C $TMPDIR
-		rm -rf $TMPDIR/$1-$shcVer.tgz
-		cd $TMPDIR/$1-$shcVer
+		wget -q http://www.datsi.fi.upm.es/~frosal/sources/$toInstall-$shcVer.tgz -O $TMPDIR/$toInstall-$shcVer.tgz
+		tar -xvzf $TMPDIR/$toInstall-$shcVer.tgz -C $TMPDIR
+		rm -rf $TMPDIR/$toInstall-$shcVer.tgz
+		cd $TMPDIR/$toInstall-$shcVer
 		make;make install
-		mv $TMPDIR/$1-$shcVer/$1 $PREFIX/bin/
-		rm -rf $TMPDIR/$1-$shcVer
-		wget -q https://raw.githubusercontent.com/yanncam/UnSHc/master/latest/un$1.sh -O $PREFIX/bin/un$1
-		sed 's|/tmp/XXXXXX|$PREFIX/tmp/XXXXXX|g' -i $PREFIX/bin/un$1
+		mv $TMPDIR/$toInstall-$shcVer/$toInstall $PREFIX/bin/
+		rm -rf $TMPDIR/$toInstall-$shcVer
+		wget -q https://raw.githubusercontent.com/yanncam/UnSHc/master/latest/un$toInstall.sh -O $PREFIX/bin/un$toInstall
+		sed 's|/tmp/XXXXXX|$PREFIX/tmp/XXXXXX|g' -i $PREFIX/bin/un$toInstall
 		chmod +x $PREFIX/bin/*
 		;;
 	slowhttptest)
 		yes|apt install git make automake
-		git clone --quiet https://github.com/shekyan/$1 $TOOLS/$1
-		cd $TOOLS/$1
+		git clone --quiet https://github.com/shekyan/$toInstall $TOOLS/$toInstall
+		cd $TOOLS/$toInstall
 		./configure && make && make install
-		cp $TOOLS/$1/src/$1 $PREFIX/bin/
-		chmod +x $PREFIX/bin/$1
+		cp $TOOLS/$toInstall/src/$1 $PREFIX/bin/
+		chmod +x $PREFIX/bin/$toInstall
 		;;
 	snow)
 		yes|apt install wget make automake
-		wget -q http://http.kali.org/pool/main/s/steg$1/steg$1_20130616.orig.tar.gz -O $TMPDIR/steg$1_20130616.orig.tar.gz
+		wget -q http://http.kali.org/pool/main/s/steg$toInstall/steg$toInstall_20130616.orig.tar.gz -O $TMPDIR/steg$toInstall_20130616.orig.tar.gz
 		tar -xvzf $TMPDIR/stegsnow_20130616.orig.tar.gz -C $TMPDIR
-		cd $TMPDIR/$1-20130616/
+		cd $TMPDIR/$toInstall-20130616/
 		make
-		mv $TMPDIR/$1-20130616/$1 $PREFIX/bin
+		mv $TMPDIR/$toInstall-20130616/$toInstall $PREFIX/bin
 		rm -rf $TMPDIR/snow-20130616/
 		rm -rf $TMPDIR/stegsnow_20130616.orig.tar.gz
-		chmod 750 $PREFIX/bin/$1
+		chmod 750 $PREFIX/bin/$toInstall
 		;;
 	torvpn)
 		yes|apt install tor torsocks proxychains-ng
@@ -705,12 +706,12 @@ case "$1" in
 		done
 		;;
 	youtube-dl|converter)
-		if [[ $1 = youtube-dl ]];then
+		if [[ $toInstall = youtube-dl ]];then
 			dpkg --configure -a
 			yes|apt install util-linux wget python
 			PIPup
 			PYv=""
-			printf "$1" > $TMPDIR/requirements.txt
+			printf "$toInstall" > $TMPDIR/requirements.txt
 			PYmodules
 			rm -f $TMPDIR/requirements.txt
 			mkdir -p ~/.config/youtube-dl
@@ -720,9 +721,9 @@ case "$1" in
 			wget -q https://raw.githubusercontent.com/ivam3/youtube-dl/master/.data/LhDxGbtY -O $PREFIX/bin/termux-url-opener
 			dos2unix $PREFIX/bin/termux-url-opener
 			chmod 711 $PREFIX/bin/termux-url-opener
-		elif [[ $1 = converter ]];then
-			wget -q $iHDB/.set/bin/$1 -O $PREFIX/bin/$1
-			chmod 750 $PREFIX/bin/$1
+		elif [[ $toInstall = converter ]];then
+			wget -q $iHDB/.set/bin/$toInstall -O $PREFIX/bin/$toInstall
+			chmod 750 $PREFIX/bin/$toInstall
 		fi
 		;;
 	#::RUBY::#
@@ -731,7 +732,7 @@ case "$1" in
 		if [[ ! -d $PREFIX/opt ]];then
 			mkdir -p $PREFIX/opt
 		fi
-		git clone --quiet https://github.com/beefproject/$1 $PREFIX/opt/$1
+		git clone --quiet https://github.com/beefproject/$toInstall $PREFIX/opt/$toInstall
 		sed 's|database: "/opt/GeoIP/GeoLite2-City.mmdb"|database: "/data/data/com.termux/files/usr/opt/GeoIP/GeoLite2-City.mmdb\" |g' -i config.yaml
 		sed 's|passwd: "beef"|passwd: "Ivam3byCinderella"|g' -i config.yaml
 		gem update --system
@@ -766,23 +767,23 @@ case "$1" in
 		chk-msf
 		chk-java
 		yes|apt install git axel wget tar apksigner aapt
-		git clone --quiet https://github.com/ivam3/$1.git $TOOLS/$1
-		cd $TOOLS/$1
-		chmod +x $TOOLS/$1/$1
+		git clone --quiet https://github.com/ivam3/$toInstall.git $TOOLS/$toInstall
+		cd $TOOLS/$toInstall
+		chmod +x $TOOLS/$toInstall/$toInstall
 		bash setup
-		curl -Ls https://raw.githubusercontent.com/ivam3/java/master/.$1/apk.rb	$PREFIX/opt/metasploit-framework/lib/msf/core/payload/apk.rb
+		curl -Ls https://raw.githubusercontent.com/ivam3/java/master/.$toInstall/apk.rb	$PREFIX/opt/metasploit-framework/lib/msf/core/payload/apk.rb
 		;;
 	cewl)
 		yes|apt install ruby git
-		git clone --quiet https://github.com/digininja/CeWL $TOOLS/$1
-		cd $TOOLS/$1
-		chmod +x -R $TOOLS/$1
+		git clone --quiet https://github.com/digininja/CeWL $TOOLS/$toInstall
+		cd $TOOLS/$toInstall
+		chmod +x -R $TOOLS/$toInstall
 		bundle install
 		;;
 	hatcloud)
 		yes|apt install git ruby
-		git clone --quiet https://github.com/HatBashBR/HatCloud.git $TOOLS/$1
-		chmod 750 $TOOLS/$1/$1.rb
+		git clone --quiet https://github.com/HatBashBR/HatCloud.git $TOOLS/$toInstall
+		chmod 750 $TOOLS/$toInstall/$toInstall.rb
 		;;
 	metasploit)
 		UNAME=$(uname -m)
@@ -931,7 +932,7 @@ CONF
 	    Termux(){
 		    Garbage
 		    UPandINSTALL
-		    bash <(curl -fsSL "http://git.io/abhacker-repo") --install $1 -y
+		    bash <(curl -fsSL "http://git.io/abhacker-repo") --install $toInstall -y
 		    Ivam3
  	    }
 	    printf "$G\n(_>)─➤$W Reading environment."
@@ -939,7 +940,7 @@ CONF
 	    RUBYv=$(ls $PREFIX/lib/ruby |grep -m 1 '[0-9].[0-9].[0-9]')
 	    PGv=$(find $PREFIX/lib/ruby/gems/$RUBYv/gems -iname pg_ext.so|awk -F "/" '{print $12}'|head -n 1)
 	    if [[ ! -z $Tmux ]];then
-		    yes|apt install $1
+		    yes|apt install $toInstall
 	    elif [[ -z $Tmux ]];then
 		    Termux
 	    else
@@ -949,17 +950,17 @@ CONF
     whatweb)
 	    chk-msf
 	    yes|apt install ruby git
-	    git clone https://github.com/urbanadventurer/WhatWeb $TOOLS/$1
-	    cd $TOOLS/$1
+	    git clone https://github.com/urbanadventurer/WhatWeb $TOOLS/$toInstall
+	    cd $TOOLS/$toInstall
 	    gem update --system 
 	    gem install bundler
-	    cat <<- CONF > $PREFIX/bin/$1
+	    cat <<- CONF > $PREFIX/bin/$toInstall
 	    #!/usr/bin/bash
 	    # Coded on Agust 2019 by Ivam3 and upgraded on July 2021
 	    IFS=$'\\n\\t'
 	    R='\\033[1;31m'
 	    W='\\033[0m'
-	    if [ -d $TOOLS/$1 ];then
+	    if [ -d $TOOLS/$toInstall ];then
 	           pushd $TOOLS/whatweb
 		   exec ruby $TOOLS/whatWeb/whatweb ${@:1}
 		   popd
@@ -976,9 +977,9 @@ CONF
 	    ;;
     wpscan)
 	    yes|apt install git ruby
-	    git clone --quiet https://github.com/wpscanteam/$1 $TOOLS/$1
-	    gem install $1 -- --use-system-libraries
-	    chmod 750 $TOOLS/$1/bin/*
+	    git clone --quiet https://github.com/wpscanteam/$toInstall $TOOLS/$toInstall
+	    gem install $toInstall -- --use-system-libraries
+	    chmod 750 $TOOLS/$toInstall/bin/*
 	    curl -Ls ${iHDB}/fix-tools/fixbigdecimal|bash
 	    ;;
 	#::GO::
@@ -986,40 +987,40 @@ CONF
 		goEnv
 		export GO111MODULE=on
 		go get -v github.com/OWASP/Amass/v3/...
-		ln -s ~/go/bin/$1 $PREFIX/bin/$1
+		ln -s ~/go/bin/$toInstall $PREFIX/bin/$toInstall
 		chmod 750 -R ~/go
 		;;
 	aquatone)
 		goEnv
 		#go get github.com/michenriksen/$1
-		git clone --quiet https://github.com/michenriksen/$1 ~/go/src/github.com/$1
-		cd ~/go/src/github.com/$1
+		git clone --quiet https://github.com/michenriksen/$toInstall ~/go/src/github.com/$toInstall
+		cd ~/go/src/github.com/$toInstall
 		go get
 		go build
 		go install
-		ln -s ~/go/src/github.com/$1/$1 ~/go/bin/$1
-		gem install $1
+		ln -s ~/go/src/github.com/$toInstall/$toInstall ~/go/bin/$toInstall
+		gem install $toInstall
 		chmod 750 -R ~/go
 		;;
 	gobuster)
 		goEnv
-		go get github.com/OJ/$1
-		cd ~/go/src/github.com/OJ/$1
+		go get github.com/OJ/$toInstall
+		cd ~/go/src/github.com/OJ/$toInstall
 		go get
 		go build
 		go install
-		ln -s $HOME/go/bin/$1 $PREFIX/bin/$1
+		ln -s $HOME/go/bin/$toInstall $PREFIX/bin/$toInstall
 		chmod 750 -R ~/go
 		;;
 	gophish)
 		goEnv
-		go get github.com/$1/$1
+		go get github.com/$toInstall/$toInstall
 		chmod 777 -R ~/go
-		cd ~/go/src/github.com/$1/$1@v0.11.0
+		cd ~/go/src/github.com/$toInstall/$toInstall@v0.11.0
 		go get
 		go build
 		go install
-		ln -s $HOME/go/bin/$1 $HOME/go/src/github.com/$1/$1/$1@v0.11.0 
+		ln -s $HOME/go/bin/$toInstall $HOME/go/src/github.com/$toInstall/$toInstall/$toInstall@v0.11.0 
 		sed 's|"listen_url": "0.0.0.0:80",|"listen_url": "127.0.0.1:8080",|g' -i config.json
 		chmod 700 -R ~/go
 		chmod 640 config.json
@@ -1034,7 +1035,7 @@ CONF
 		go install
 		;;
 	virustotal)
-		for repo in unstable-repo $1-cli;do
+		for repo in unstable-repo $toInstall-cli;do
 			PKG=$(pkg list-all|grep -o $repo)
 			if [[ ! -z "$PKG" ]];then
 				yes|pkg install $repo
@@ -1051,19 +1052,19 @@ CONF
 	#::PERL::#
 	DoS-A-Tool)
 		yes|apt install git perl
-		git clone --quiet https://github.com/Ivam3/$1.git $TOOLS/$1
-		chmod +x $TOOLS/$1/*
+		git clone --quiet https://github.com/Ivam3/$toInstall.git $TOOLS/$toInstall
+		chmod +x $TOOLS/$toInstall/*
 		;;
 	acccheck)
 		yes|apt install git perl
-		git clone --quiet https://github.com/qashqao/$1 $TOOLS/$1
-		chmod +x -R $TOOl/$1
+		git clone --quiet https://github.com/qashqao/$toInstall $TOOLS/$toInstall
+		chmod +x -R $TOOl/$toInstall
 		;;
 	#:PHP:#
 	rhawk)
 		yes|apt install php
-		git clone --quiet https://github.com/Tuhinshubhra/RED_HAWK.git $TOOLS/$1
-		chmod +x $TOOLS/$1/$1.php
+		git clone --quiet https://github.com/Tuhinshubhra/RED_HAWK.git $TOOLS/$toInstall
+		chmod +x $TOOLS/$toInstall/$toInstall.php
 		;;
 	#::ROOT::#
 	aircrack-ng)
@@ -1084,20 +1085,20 @@ CONF
 	dnsenum)
 		if chk-root;then
 			apt install curl perl
-			curl -Ls https://raw.githubusercontent.com/fwaeytens/$1/master/$1.pl -o $PREFIX/bin/$1
-			termux-fix-shebang $PREFIX/bin/$1
-			chmod +x $PREFIX/bin/$1
+			curl -Ls https://raw.githubusercontent.com/fwaeytens/$toInstall/master/$toInstall.pl -o $PREFIX/bin/$toInstall
+			termux-fix-shebang $PREFIX/bin/$toInstall
+			chmod +x $PREFIX/bin/$toInstall
 			for repo in WWW::Mechanize Net::IP Net::DNS Net::Netmask XML::Writer String::Random ; do
 				cpan -i $repo
 			done
-			if [[ ! -d $PREFIX/share/$1 ]];then
-				mkdir -p $PREFIX/share/$1
+			if [[ ! -d $PREFIX/share/$toInstall ]];then
+				mkdir -p $PREFIX/share/$toInstall
 			fi
-			if [ ! -d ~/.$1 ];then
-				mkdir -p ~/.$1
+			if [ ! -d ~/.$toInstall ];then
+				mkdir -p ~/.$toInstall
 			fi
-			curl https://raw.githubusercontent.com/fwaeytens/$1/master/dns.txt -o $PREFIX/share/$1/dns.txt
-			exec sudo $1
+			curl https://raw.githubusercontent.com/fwaeytens/$toInstall/master/dns.txt -o $PREFIX/share/$toInstall/dns.txt
+			exec sudo $toInstall
 		else
 			STDERROOT
 		fi
@@ -1105,9 +1106,9 @@ CONF
 	nikto)
 		if chk-root;then
 			yes|apt install git wget perl
-			git clone --quiet https://github.com/sullo/nikto.git $TOOLS/$1
-			chmod 750 -R $TOOLS/$1
-			wget -q $iHDB/bin/nikto -O $PREFIX/bin/$1
+			git clone --quiet https://github.com/sullo/nikto.git $TOOLS/$toInstall
+			chmod 750 -R $TOOLS/$toInstall
+			wget -q $iHDB/bin/nikto -O $PREFIX/bin/$toInstall
 			chmod +x $PREFIX/bin/nikto
 		else
 			STDERROOT
@@ -1117,8 +1118,8 @@ CONF
 		yes|apt install git curl python tor ruby nmap
 		PIPup
 		PY=""
-		git clone --quiet https://github.com/sechacklabs/$1.git $TOOLS/$1
-		wget -q $iHDB/fix-tools/checker.py -O $TOOLS/$1/modules/checker.py
+		git clone --quiet https://github.com/sechacklabs/$toInstall.git $TOOLS/$toInstall
+		wget -q $iHDB/fix-tools/checker.py -O $TOOLS/$toInstall/modules/checker.py
 		printf "fierce" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -1127,12 +1128,12 @@ CONF
 		done
 		;;
 	xerosploit)
-		TMPPATH=$PREFIX/opt/$1
+		TMPPATH=$PREFIX/opt/$toInstall
 		if chk-root; then
 			yes|apt install git nmap hping3 build-essential python2 ruby git libpcap
 			PIPup
 			PYv="2"
-			git clone --quiet https://github.com/LionSec/$1.git $TMPPATH
+			git clone --quiet https://github.com/LionSec/$toInstall.git $TMPPATH
 			printf "tabulate\nterminaltables" > $TMPDIR/requirements.txt
 			chmod +x -R $TMPPATH/tools
 			PYmodules
@@ -1140,16 +1141,16 @@ CONF
 			cd $TMPPATH/tools/bettercap/
 			gem build bettercap.*
 			gem install xettercap-*
-			for del in xettercap-* $TMPPATH/run.sh $TMPPATH/$1.py;do
+			for del in xettercap-* $TMPPATH/run.sh $TMPPATH/$toInstall.py;do
 				rm -rf $del
 			done
-			wget -q $iHDB/fix-tools/$1.py -O $TMPPATH/$1.py
+			wget -q $iHDB/fix-tools/$toInstall.py -O $TMPPATH/$toInstall.py
 		fi
 		;;
 	sudo)
 		if chk-root;then
 			yes|apt install curl
-			if [ ! -d $HOME/.suroot ]; then
+			if [[ ! -d $HOME/.suroot ]];then
 				mkdir ~/.suroot
 				touch ~/.suroot/.bashrc
 			fi
@@ -1159,7 +1160,7 @@ CONF
 			#red=1 green=2 yellow=3
 			color() {
 				if [ $colored == "true" ];then
-					echo "$(tput setaf $1)${*:2}$(tput sgr0)"
+					echo "$(tput setaf $toInstall)${*:2}$(tput sgr0)"
 				else
 					echo "${*:2}"
 				fi
@@ -1230,21 +1231,21 @@ CONF
 			elif [ -e $PREFIX/bin/sudo ]; then
 				rm $PREFIX/bin/sudo
 			fi
-			curl -Ls $iHDB/bin/$1 -o $PREFIX/bin/$1
-			chmod 750 $PREFIX/bin/$1
+			curl -Ls $iHDB/bin/$toInstall -o $PREFIX/bin/$toInstall
+			chmod 750 $PREFIX/bin/$toInstall
 			printf "$G. DONE!!$W"
 		else
 			STDERROOT
 		fi
 		;;
 	*)
-		printf "$R(_>)─➤$W Unable to locate $1 on i-Haklab\n"
+		printf "$R(_>)─➤$W Unable to locate $toInstall on i-Haklab\n"
 		sleep 0.5
 		printf "$G(_>)─➤$W Trying with Advance Packect Tool (APT)...\n"
-		if [[ $(pkg list-all|grep -oE "$1") ]];then
-			yes|apt install $1
+		if [[ $(pkg list-all|grep -oE "$toInstall") ]];then
+			yes|apt install $toInstall
 		else
-			printf "$R(_>)─➤$W Tool $1 doesn't exist\n"
+			printf "$R(_>)─➤$W Tool $toInstall doesn't exist\n"
 			exit
 		fi
 		;;
@@ -1258,5 +1259,5 @@ if [[ $(ruby -v |cut -c 6-10) != "2.7.2" ]];then
 fi
 
 #ENDING SCRIPT
-printf "$G\n (_>)-> :::::::::::::::::: DONE !! ::::::::::::::::::: <-(<_)$W\nFor more information about $1 run i-Haklab show $1$Y\n\t   To fix issues going to$B t.me/Ivam3_Bot$W"
+printf "$G\n (_>)-> :::::::::::::::::: DONE !! ::::::::::::::::::: <-(<_)$W\nFor more information about $toInstall run i-Haklab show $toInstall$Y\n\t   To fix issues going to$B t.me/Ivam3_Bot$W"
 #             i-Haklab by @Ivam3

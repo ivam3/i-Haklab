@@ -78,9 +78,9 @@ chk-root(){
         if [[ -x /system/xbin/su ]] || [[ -x /su/bin/su ]] || [[ -x /sbin/su ]];then
 		chk-sudo
                 return 0
-        else
+	else
                 return 1
-        fi
+	fi
         }
 export -f chk-root
 

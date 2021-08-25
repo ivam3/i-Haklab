@@ -4,11 +4,12 @@ IFS=$'\n\t'
 trap ctrl_c 2
 source $PREFIX/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
+toRemove="$1"
 ctrl_c(){ printf "$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";}
 
-#if [ ! -d $TOOLS/$1 ] || [ ! -e $PREFIX/bin/$1 ] || [ ! -d $PREFIX/opt/$1 ] || [ ! -e ~/go/bin/$1 ];then
-#	printf "$R\n(_>)─➤$W $1 isn't installed";exit
-#fi
+if [ ! -d $TOOLS/$toRemove ] && [ ! -e $PREFIX/bin/$toRemove ] && [ ! -d $PREFIX/opt/$toRemove ] && [ ! -e ~/go/bin/$toRemove ];then
+	printf "$R(_>)─➤$W $toRemove isn't installed";exit
+fi
 
 Err() { printf "$R\n(_>)─➤$W Remove failed";ctrl_c;exit;}
 PIPup() {
@@ -21,14 +22,13 @@ rmMainDir() {
 		user=sudo
 	fi
 	for path in $TOOLS $PREFIX/bin $PREFIX/opt ~/go/bin;do
-		if [[ $path/$1 ]];then
-			echo "$path/$1"
-			$user rm -rf $path/$1
+		if [[ -d $path/$toRemove ]] || [[ -e $path/$toRemove ]];then
+			$user rm -rf $path/$toRemove
 		fi
 	done
 }
 rmPYmodules() { python$PYv -m pip uninstall --quiet --no-color -r $TMPDIR/deps2drop;}
-alert() { printf "$Y\n(_>)─➤$W The main $1 directory has been removed$Y\n(_>)─➤$W About dependencies: these could be necessary for another tool and these are :\n"
+alert() { printf "$Y\n(_>)─➤$W The main $toRemove directory has been removed$Y\n(_>)─➤$W About dependencies: these could be necessary for another tool and these are :\n"
 	cat -n $TMPDIR/deps2drop|sort
 	printf "(_>)─➤$W To drop them press$G ENTER$W or$R ctrl+c$W to keep them\n"
 	read enter
@@ -43,23 +43,23 @@ else
 fi
 
 running
-case "$1" in
+case "$toRemove" in
 	kalilinux)
 		yes|apt install curl && curl https://raw.githubusercontent.com/AndronixApp/AndronixOrigin/master/Uninstall/Kali/UNI-kali.sh|bash
 		;;
 	#::ON BIN TOOLS::#
 	binwalk|beef|cewl|evilurl|ghost|hakku|hatcloud|exploitdb|lockphish|nexphisher|saycheese|sayhello|wbruter|ExiF|binchecker|IbyC-fixer|blackbox|converter|serverphp|hydra|JohnTheRipper|ngrok|shc|slowhttptest|snow|whatweb|wpscan|DoS-A-Tool|acccheck|rhawk|nikto)
-		if [[ $1 = beef ]]; then
+		if [[ $toRemove = beef ]]; then
 			rm -rf $PREFIX/opt/GeoIP
 		fi
-		if [[ $1 = hydra ]];then
+		if [[ $toRemove = hydra ]];then
 			yes|apt remove make automake
 		fi
-		if [[ $1 = JohnTheRipper ]]; then
+		if [[ $toRemove = JohnTheRipper ]]; then
 			rm -f $PREFIX/bin/john
 		fi
-		if [[ $1 = shc ]];then
-			rm -f $PREFIX/bin/un$1
+		if [[ $toRemove = shc ]];then
+			rm -f $PREFIX/bin/un$toRemove
 		fi
 		rmMainDir
 		;;
@@ -129,7 +129,7 @@ case "$1" in
 		alert
 		;;
 	sqlmap)
-		if [[ -d $TOOLS/$1 ]];then
+		if [[ -d $TOOLS/$toRemove ]];then
 			rmMainDir
 		else
 			printf "sqlmap" > $TMPDIR/deps2drop
@@ -139,12 +139,12 @@ case "$1" in
 	theharvester)
 		yes|apt remove libxml2 libxml2-static libxml2-utils libxslt libxslt-static
 		rmMainDir
-		cat $TOOLS/$1/deps2drop > $TMPDIR/deps2drop
+		cat $TOOLS/$toRemove/deps2drop > $TMPDIR/deps2drop
 		alert
 		;;
 	vulnx)
 		rmMainDir
-		cat $TOOLS/$1/deps2drop > $TMPDIR/deps2drop
+		cat $TOOLS/$toRemove/deps2drop > $TMPDIR/deps2drop
 		alert
 		;;
 	#::PYTHON2::#
@@ -209,7 +209,7 @@ case "$1" in
 	pybelt)
 		PYv="2"
 		rmMainDir
-		cat $TOOLS/$1/deps2drop > $TMPDIR/deps2drop
+		cat $TOOLS/$toRemove/deps2drop > $TMPDIR/deps2drop
 		alert
 		;;
 	sqliv)
@@ -244,7 +244,7 @@ case "$1" in
 	desktop-xfce4)
 		yes|pkg remove xfce4 xfce4-taskmanager dosbox xfce4-terminal python-tkinter htop neofetch loqui vim-gtk the-powder-toy galculator xorg-xhost mpv-x ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk3 gtk2 mtpaint leafpad hexchat netsurf recordmydesktop feh audacious;yes|pkg remove xfce4-* kvantum zenity mate-terminal mate-settings-daemon dbus-glib dconf termux-api wireshark-gtk
 		for i in .vnc .icons .themes .config Desktop Downloads Templates Public Documents Pictures Video Music backgrounds;do
-			if [[ ~/$1 ]]; then
+			if [[ ~/$toRemove ]]; then
 				rm -rf ~/$i
 			fi
 		done
@@ -270,7 +270,7 @@ case "$1" in
 		yes|apt remove php apache2 php-pgsql php-fpm php-apache mariadb phpmyadmin
 		yes|apt autoremove
 		rm -rf $PREFIX/etc/apache2 $PREFIX/etc/phpmyadmin
-		if grep "$1" $INITFILE;then
+		if grep "$toRemove" $INITFILE;then
 			sed 's|alias serverapache="apachectl"||g' -i $INITFILE
 		fi
 		;;
@@ -283,15 +283,15 @@ case "$1" in
 		done
 		;;
 	youtubedr|youtube-dl|converter)
-		if [[ $1 = youtube-dl ]];then
+		if [[ $toRemove = youtube-dl ]];then
 			PYv=""
 			rmMainDir
-			printf "$1" > $TMPDIR/deps2drop
+			printf "$toRemove" > $TMPDIR/deps2drop
 			alert
 			rm -rf ~/.config/youtube-dl ~/bin ~/.netrc  $PREFIX/bin/termux-url-opener
-		elif [[ $1 = youtubedr ]];then
-			yes|apt remove $1
-		elif [[ $1 = converter ]];then
+		elif [[ $toRemove = youtubedr ]];then
+			yes|apt remove $toRemove
+		elif [[ $toRemove = converter ]];then
 			rmMainDir
 			rm -rf ~/.milux
 		fi
@@ -311,40 +311,40 @@ case "$1" in
 		goEnv
 		export GO111MODULE=on
 		go get -v github.com/OWASP/Amass/v3/...
-		ln -s ~/go/bin/$1 $PREFIX/bin/$1
+		ln -s ~/go/bin/$toRemove $PREFIX/bin/$toRemove
 		chmod 750 -R ~/go
 		;;
 	aquatone)
 		goEnv
-		#go get github.com/michenriksen/$1
-		git clone --quiet https://github.com/michenriksen/$1 ~/go/src/github.com/$1
-		cd ~/go/src/github.com/$1
+		#go get github.com/michenriksen/$toRemove
+		git clone --quiet https://github.com/michenriksen/$toRemove ~/go/src/github.com/$toRemove
+		cd ~/go/src/github.com/$toRemove
 		go get
 		go build
 		go install
-		ln -s ~/go/src/github.com/$1/$1 ~/go/bin/$1
-		gem install $1
+		ln -s ~/go/src/github.com/$toRemove/$toRemove ~/go/bin/$toRemove
+		gem install $toRemove
 		chmod 750 -R ~/go
 		;;
 	gobuster)
 		goEnv
-		go get github.com/OJ/$1
-		cd ~/go/src/github.com/OJ/$1
+		go get github.com/OJ/$toRemove
+		cd ~/go/src/github.com/OJ/$toRemove
 		go get
 		go build
 		go install
-		ln -s $HOME/go/bin/$1 $PREFIX/bin/$1
+		ln -s $HOME/go/bin/$toRemove $PREFIX/bin/$toRemove
 		chmod 750 -R ~/go
 		;;
 	gophish)
 		goEnv
-		go get github.com/$1/$1
+		go get github.com/$toRemove/$toRemove
 		chmod 777 -R ~/go
-		cd ~/go/src/github.com/$1/$1@v0.11.0
+		cd ~/go/src/github.com/$toRemove/$toRemove@v0.11.0
 		go get
 		go build
 		go install
-		ln -s $HOME/go/bin/$1 $HOME/go/src/github.com/$1/$1/$1@v0.11.0 
+		ln -s $HOME/go/bin/$toRemove $HOME/go/src/github.com/$toRemove/$toRemove/$toRemove@v0.11.0 
 		sed 's|"listen_url": "0.0.0.0:80",|"listen_url": "127.0.0.1:8080",|g' -i config.json
 		chmod 700 -R ~/go
 		chmod 640 config.json
@@ -359,7 +359,7 @@ case "$1" in
 		go install
 		;;
 	virustotal)
-		yes|apt remove $1-cli
+		yes|apt remove $toRemove-cli
 		for i in rm -rf ~/go/src/github.com/VirusTotal ~/go/bin/vt $PREFIX/bin/vt $PREFIX/etc/bash_completion.d/vt;do
 			if [[ $i ]]; then
 				rm -rf $i
@@ -379,11 +379,11 @@ case "$1" in
 		for repo in WWW::Mechanize Net::IP Net::DNS Net::Netmask XML::Writer String::Random ; do
 			cpan uninstall $repo
 		done
-		if [[ -d $PREFIX/share/$1 ]];then
-			sudo rm -f $PREFIX/share/$1
+		if [[ -d $PREFIX/share/$toRemove ]];then
+			sudo rm -f $PREFIX/share/$toRemove
 		fi
-		if [ -d ~/.$1 ];then
-			rm -rf ~/.$1
+		if [ -d ~/.$toRemove ];then
+			rm -rf ~/.$toRemove
 		fi
 		;;
 	webhackshl)
@@ -399,16 +399,16 @@ case "$1" in
 		;;
 	sudo)
 		chk-sudo
-		sudo rm -rf ~/.suroot $PREFIX/bin/$1
+		sudo rm -rf ~/.suroot $PREFIX/bin/$toRemove
 		;;
 	*)
-		printf "$R(_>)─➤$W Unable to locate $1 on i-Haklab\n"
+		printf "$R(_>)─➤$W Unable to locate $toRemove on i-Haklab\n"
                 sleep 0.5
                 printf "$G(_>)─➤$W Trying with Advance Packect Tool (APT)...\n"
-                if [[ $(pkg list-all|grep -oE "$1") ]];then
-                        yes|apt remove $1
+                if [[ $(pkg list-all|grep -oE "$toRemove") ]];then
+                        yes|apt remove $toRemove
                 else
-                        printf "$R(_>)─➤$W Tool $1 doesn't exist\n"
+                        printf "$R(_>)─➤$W Tool $toRemove doesn't exist\n"
                         exit
                 fi
 
