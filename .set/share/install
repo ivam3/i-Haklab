@@ -42,12 +42,9 @@ PYmodules() {
 }
 goEnv() {
 	yes|apt install golang
-	if [[ ! -d ~/go/src/github.com ]];then
-		mkdir -p $HOME/go/src/github.com
-	fi
-	if [[ ! -d $PREFIX/lib/go/src/github.com ]];then
-		mkdir -p $PREFIX/lib/go/src/github.com
-	fi
+	[[ -d ~/go/pkg/mod/github.com ]] || mkdir -p $HOME/go/pkg/mod/github.com
+	[[ -d $PREFIX/lib/go/src ]] || mkdir -p $PREFIX/lib/go/src
+
 	if ! $(grep -oE "GOPATH" $INITFILE);then
 		sed -i "21a set GOPATH $HOME/go" $INITFILE
 	fi
@@ -996,26 +993,22 @@ esac" > $PREFIX/bin/msfconsole
 		;;
 	gobuster)
 		goEnv
-		go get github.com/OJ/$toInstall
-		cd ~/go/src/github.com/OJ/$toInstall
-		go get
-		go build
-		go install
-		ln -s $HOME/go/bin/$toInstall $PREFIX/bin/$toInstall
-		chmod 750 -R ~/go
+		go install github.com/OJ/$toInstall/v3@latest
+		chmod 751 -R ~/go
+		gob=$(find ~/go/pkg/mod/github.com -iname $toInstall)
+		ln -s $gob/$(ls $gob) $PREFIX/lib/go/src/$toInstall
+		cd $gob/$(ls $gob)
+		go get && go build && go install
 		;;
 	gophish)
 		goEnv
 		go get github.com/$toInstall/$toInstall
-		chmod 777 -R ~/go
-		cd ~/go/src/github.com/$toInstall/$toInstall@v0.11.0
-		go get
-		go build
-		go install
-		ln -s $HOME/go/bin/$toInstall $HOME/go/src/github.com/$toInstall/$toInstall/$toInstall@v0.11.0 
-		sed 's|"listen_url": "0.0.0.0:80",|"listen_url": "127.0.0.1:8080",|g' -i config.json
-		chmod 700 -R ~/go
-		chmod 640 config.json
+		chmod 751 -R ~/go
+		gop1=$(find ~/go/pkg/mod/github.com -type d -iname $toInstall|head -n 1)
+		gop2=$(ls $gop1|grep $toInstall)
+		ln -s ~/go/bin/$toInstall $gop1/$gop2/$toInstall
+		sed 's|"listen_url": "0.0.0.0:80",|"listen_url": "127.0.0.1:8080",|g' -i $gop1/$gop2/config.json
+		chmod 640 $gop1/$gop2/config.json
 		;;
 	tangalanga)
 		goEnv
