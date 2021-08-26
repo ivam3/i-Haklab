@@ -308,43 +308,22 @@ case "$toRemove" in
 	#::GO::
 	amass)
                 goa=$(find ~/go/pkg/mod/github.com -type d -iname "!$toInstall"|head -n 1)
-                rm -f $PREFIX/lib/go/src/$toInstall
-                rm -rf $gob
+                rm -rf $gob $PREFIX/lib/go/src/$toInstall
 		;;
 	aquatone)
 		gem remove --quiet --silent $toInstall
 		;;
 	gobuster)
-		goEnv
-		go get github.com/OJ/$toRemove
-		cd ~/go/src/github.com/OJ/$toRemove
-		go get
-		go build
-		go install
-		ln -s $HOME/go/bin/$toRemove $PREFIX/bin/$toRemove
-		chmod 750 -R ~/go
+                gob=$(find ~/go/pkg/mod/github.com -iname $toInstall)
+                rm -rf $gob $PREFIX/lib/go/src/$toInstall
 		;;
 	gophish)
-		goEnv
-		go get github.com/$toRemove/$toRemove
-		chmod 777 -R ~/go
-		cd ~/go/src/github.com/$toRemove/$toRemove@v0.11.0
-		go get
-		go build
-		go install
-		ln -s $HOME/go/bin/$toRemove $HOME/go/src/github.com/$toRemove/$toRemove/$toRemove@v0.11.0 
-		sed 's|"listen_url": "0.0.0.0:80",|"listen_url": "127.0.0.1:8080",|g' -i config.json
-		chmod 700 -R ~/go
-		chmod 640 config.json
-		;;
+                gop1=$(find ~/go/pkg/mod/github.com -type d -iname $toInstall|head -n 1)
+                rm -rf $gop1
+                ;;
 	tangalanga)
-		goEnv
-		git clone --quiet github.com/elcuervo/tangalanga.git ~/go/src/github.com/tangalanga
-		chmod 750 -R ~/go/src/github.com/tangalanga
-		cd ~/go/src/github.com/tangalanga
-		go get
-		go build
-		go install
+                got=$(find ~/go/pkg/mod/github.com -type d -iname "$toInstall*")
+		rm -rf $got
 		;;
 	virustotal)
 		yes|apt remove $toRemove-cli
