@@ -122,8 +122,6 @@ cat <<- CONF > $PREFIX/etc/bash.bashrc
 shopt -s histappend
 shopt -s histverify
 export HISTCONTROL=ignoreboth
-cd $PREFIX/share/i-Haklab
-git pull
 chsh -s fish
 # Default command line prompt.
 PROMPT_DIRTRIM=2

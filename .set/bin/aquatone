@@ -1,0 +1,42 @@
+#!/usr/bin/bash
+#Coded on Agust 2021 by Ivam3
+#This file bring a easy access to execute aquatone tool on i-Haklab framework.
+IFS=$'\n\t'
+trap ctrl_c 2
+ctrl_c() { printf "$Y\n\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n\n";}
+R='\033[1;31m'
+G='\033[1;32m'
+Y='\033[1;33m'
+B='\033[1;34m'
+W='\033[0m'
+until [ -d ~/aquatone ];do
+	printf "$R(_>)─➤$W $(basename $0) is not installed$W\n"
+	exit
+done
+
+while [ ! -e ~/aquatone/.keys.yml ];do
+	if [[ ! $(grep "shodan" ~/aquatone/.keys.yml) ]];then
+		printf "$Y\n(_>)_enter_your_shodan_APIKEY─➤ "
+		while read shodanKey && [ -z $shodanKey ];do
+			printf "$R\n(_>)─➤$W shodan APIKEY needed...$R Aborting.$W"
+			exit
+		done
+	fi
+	if [[ ! $(grep "virustotal" ~/aquatone/.keys.yml) ]];then
+                printf "$Y\n(_>)_enter_your_virustotal_APIKEY─➤ "
+                while read shodanKey && [ -z $vtKey ];do
+                        printf "$R\n(_>)─➤ virustotal APIKEY needed...$R Aborting.$W"
+                        exit
+                done
+        fi
+done
+$(basename $0)-discover --set-key shodan $shodanKey >/dev/null 2>&1
+$(basename $0)-discover --set-key virustotal $vtKey >/dev/null 2>&1
+
+while [ -z $1 ];do
+	printf "$G\n(_>)_usage─➤$W $(basename $0) <[discover|gather|scan|takeover|--help]>$G\n |\n ╰───ex1:─────➤$W $(basename $0) discover --domain example.com$G\n ╰───ex2:─────➤$W $(basename $0) gather --domain example.com$G\n ╰───ex3:─────➤$W $(basename $0) scan --domain example.com$G\n ╰───ex4:─────➤$W $(basename $0) takeover --domain example.com$G\n ╰─for─help───➤$W $(basename $0) <[discover|gather|scan|takeover]> --help$G\n";exit
+done
+
+${which} $(basename $0)-$(basename $1) ${@:2}
+
+#         i-Haklab by @Ivam3
