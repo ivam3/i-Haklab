@@ -178,11 +178,12 @@ chmod 750 $iHAKLAB/.set/bin/*
 cp $iHAKLAB/.set/bin/* $PREFIX/bin
 if ! command -v msfconsole >/dev/null;then
 	printf "$G\n(_>)─➤$W Installing metasploit-framework."
-	bash $TMPabh --install metasploit >/dev/null 2>&1
+	bash $TMPabh --install metasploit ruby=2.7.2 >/dev/null 2>&1
 	wget -q $JAVADB/.embed/apk.rb -O $MSFDIR/lib/msf/core/payload/apk.rb
 	wget -q $iHDB/.set/bin/IbyC-fixer -O $PREFIX/bin/IbyC-fixer
         chmod +x $PREFIX/bin/IbyC-fixer
-#:::: FIXING BIG DECIMAL ISSUES ::::#
+	#:::: FIXING BIG DECIMAL ISSUES ::::#
+	RUBYv=$(ls $PREFIX/lib/ruby |grep -m 1 '[0-9].[0-9].[0-9]')
         LINUXANDROID=$(find $PREFIX/lib/ruby/$RUBYv -iname "bigdecimal.so"|awk -F "/" '{print $10}')
         yes|apt install -yq patchelf >/dev/null 2>&1
         if [[ -e "$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal.so" ]];then
