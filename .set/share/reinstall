@@ -234,20 +234,20 @@ bash $iHAKLAB/.set/share/review #LOGFILE
 printf "$G\n\n
 (_>)─➤$W i-Haklab installed !!!$Y\n
 (_>)─➤$W Main commands$Y
- ╰────────➤ run:$W i-Haklab -h :───────────:to automate process$Y
- ╰────────➤ run:$W run <name of tool> :────:to execute installed tool$Y
- ╰────────➤ run:$W omf theme :─────────────:to change a theme$Y
- ╰────────➤ run:$W lock :──────────────────:to block screen$Y
- ╰────────➤ run:$W IbyC :──────────────────:to fix termux's issues$Y
- ╰────────➤ run:$W LOCALHOST :─────────────:to show local ip$Y
- ╰────────➤ run:$W serverphp :─────────────:to start php server$Y
- ╰────────➤ run:$W traductor :─────────────:to init a translate shell$Y
- ╰────────➤ run:$W serverapache :──────────:to start apache server$Y
- ╰────────➤ run:$W torvpn :────────────────:to use a proxy connection$Y
- ╰────────➤ run:$W postgresql start :──────:to start postgresql data base$Y
- ╰────────➤ run:$W vncserver :─────────────:to init graphical enviroment on vnc app$Y
- ╰────────➤ run:$W sudo <some commands> :──:to run commands as fake root user$Y
- ╰────────➤ run:$W i-Haklab about i-Haklab :for all usage guide$G
+ ╰────────➤ run:$W i-Haklab -h :───────────────:to automate process$Y
+ ╰────────➤ run:$W run <name of tool> :────────:to execute installed tool$Y
+ ╰────────➤ run:$W omf theme <name of theme>:──:to change a theme$Y
+ ╰────────➤ run:$W lock :──────────────────────:to block screen$Y
+ ╰────────➤ run:$W IbyC-fixer :────────────────:to fix termux's issues$Y
+ ╰────────➤ run:$W LOCALHOST :─────────────────:to show local ip$Y
+ ╰────────➤ run:$W serverphp :─────────────────:to start php server$Y
+ ╰────────➤ run:$W traductor :─────────────────:to init a translate shell$Y
+ ╰────────➤ run:$W serverapache :──────────────:to start apache server$Y
+ ╰────────➤ run:$W torvpn :────────────────────:to use a proxy connection$Y
+ ╰────────➤ run:$W postgresql start :──────────:to start postgresql data base$Y
+ ╰────────➤ run:$W vncserver :─────────────────:to init graphical enviroment on vnc app$Y
+ ╰────────➤ run:$W sudo <some commands> :──────:to run commands as fake root user$Y
+ ╰────────➤ run:$W i-Haklab about i-Haklab :───:for all usage guide$G
 (_>)─➤$W To fix issues going to$B t.me/Ivam3_Bot$G
 (_>)─➤$W press$G enter$W to start\n"
 read enter;exec login

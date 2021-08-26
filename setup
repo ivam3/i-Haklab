@@ -239,7 +239,7 @@ printf "$G\n\n
  ╰────────➤ run:$W run <name of tool> :────:to execute installed tool$Y
  ╰────────➤ run:$W omf theme :─────────────:to change a theme$Y
  ╰────────➤ run:$W lock :──────────────────:to block screen$Y
- ╰────────➤ run:$W IbyC :──────────────────:to fix termux's issues$Y
+ ╰────────➤ run:$W IbyC-fixer :────────────:to fix termux's issues$Y
  ╰────────➤ run:$W LOCALHOST :─────────────:to show local ip$Y
  ╰────────➤ run:$W serverphp :─────────────:to start php server$Y
  ╰────────➤ run:$W traductor :─────────────:to init a translate shell$Y
