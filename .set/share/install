@@ -976,8 +976,11 @@ esac" > $PREFIX/bin/msfconsole
 		goEnv
 		export GO111MODULE=on
 		go get -v github.com/OWASP/Amass/v3/...
-		ln -s ~/go/bin/$toInstall $PREFIX/bin/$toInstall
-		chmod 750 -R ~/go
+		chmod 751 -R ~/go
+		goa=$(find ~/go/pkg/mod/github.com -type d -iname "!$toInstall"|head -n 1)
+		ln -s $goa/$(ls $goa) $PREFIX/lib/go/src/$toInstall
+		cd $gob/$(ls $gob)
+		go get && go build && go install
 		;;
 	aquatone)
 		goEnv
