@@ -53,7 +53,7 @@ goEnv() {
 	fi
 }
 
-if [[ $SHLL = fish ]];then
+if [[ $SHELL = $PREFIX/bin/fish ]];then
 	INITFILE="$PREFIX/etc/fish/config.fish"
 else
 	INITFILE="$PREFIX/etc/bash.bashrc"
@@ -63,7 +63,7 @@ if [[ -d $TOOLS/$toInstall ]] || [[ -e $PREFIX/bin/$toInstall ]] || [[ -d $PREFI
 	printf "$R(_>)─➤$W $toInstall it's already installed";exit
 fi
 running
-#yes|apt update && apt upgrade
+yes|apt update && apt upgrade
 case "$toInstall" in
 	alltools)
 		alltools=$(cat $iHAKLAB/.set/libexec/Tools/listoftools)
@@ -465,12 +465,14 @@ case "$toInstall" in
 		chmod 711 $TOOLS/$toInstall/*
 		wget -q $iHDB/fix-tools/ngrok -O $TOOLS/$toInstall
 		;;
-	login)
+	login-termux)
 		if [[ ! -e $PREFIX/libexec/termux/.Ivam3 ]];then
 			bash $iHAKLAB/.set/to-install/i-Haklab_login
+			${which} login
 		elif [[ $(grep "wall-banner" $INITFILE) ]];then
 			yes|apt install ruby && gem install lolcat
 			sed 's|/data/data/com.termux/files/usr/libexec/banner/wall-banner|/data/data/com.termux/files/usr/var/log/login-termux|g' -i $INITFILE
+			${which} login
 		else
 			printf "$R\n(_>)─➤ Login is already active"
 		fi
@@ -983,16 +985,17 @@ esac" > $PREFIX/bin/msfconsole
 		go get && go build && go install
 		;;
 	aquatone)
-		goEnv
+		gem install --quiet --silent $toInstall
+#		goEnv
 		#go get github.com/michenriksen/$1
-		git clone --quiet https://github.com/michenriksen/$toInstall ~/go/src/github.com/$toInstall
-		cd ~/go/src/github.com/$toInstall
-		go get
-		go build
-		go install
-		ln -s ~/go/src/github.com/$toInstall/$toInstall ~/go/bin/$toInstall
-		gem install $toInstall
-		chmod 750 -R ~/go
+#		git clone --quiet https://github.com/michenriksen/$toInstall ~/go/src/github.com/$toInstall
+#		cd ~/go/src/github.com/$toInstall
+#		go get
+#		go build
+#		go install
+#		ln -s ~/go/src/github.com/$toInstall/$toInstall ~/go/bin/$toInstall
+#		gem install $toInstall
+#		chmod 750 -R ~/go
 		;;
 	gobuster)
 		goEnv
@@ -1015,9 +1018,10 @@ esac" > $PREFIX/bin/msfconsole
 		;;
 	tangalanga)
 		goEnv
-		git clone --quiet github.com/elcuervo/tangalanga.git ~/go/src/github.com/tangalanga
-		chmod 750 -R ~/go/src/github.com/tangalanga
-		cd ~/go/src/github.com/tangalanga
+		go get github.com/elcuervo/$toInstall
+		chmod 751 -R ~/go
+		got=$(find ~/go/pkg/mod/github.com -type d -iname "$toInstall*")
+		cd $got
 		go get
 		go build
 		go install

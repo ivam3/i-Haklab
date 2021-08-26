@@ -36,4 +36,3 @@ export RPORT="80"
 export SSH=$(netstat | grep -c "ssh")
 export TARGET=(0 1 2 3 29)
 export UNAME=$(uname -m)
-
