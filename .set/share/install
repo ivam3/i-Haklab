@@ -985,17 +985,11 @@ esac" > $PREFIX/bin/msfconsole
 		go get && go build && go install
 		;;
 	aquatone)
+		goEnv
+		git clone --quiet https://github.com/michenriksen/$toInstall ~/go/pkg/mod/github.com/$toInstall
+		ln -s $HOME/go/pkg/mod/github.com/$toInstall $HOME/$toInstall
+		wget -q $iHDB/bin/$toInstall -O $PREFIX/bin/$toInstall
 		gem install --quiet --silent $toInstall
-#		goEnv
-		#go get github.com/michenriksen/$1
-#		git clone --quiet https://github.com/michenriksen/$toInstall ~/go/src/github.com/$toInstall
-#		cd ~/go/src/github.com/$toInstall
-#		go get
-#		go build
-#		go install
-#		ln -s ~/go/src/github.com/$toInstall/$toInstall ~/go/bin/$toInstall
-#		gem install $toInstall
-#		chmod 750 -R ~/go
 		;;
 	gobuster)
 		goEnv

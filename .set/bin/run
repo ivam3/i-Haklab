@@ -331,7 +331,7 @@ case "$TOOL" in
 		fi
 		;;
 #::::GO TOOLS::::#
-	aquatone|gobuster)
+	gophish|gobuster|tangalanga)
 		running
 		if [ -e $GOPATH/bin/$TOOL ]; then
 			cd $GOPATH/bin
@@ -340,29 +340,13 @@ case "$TOOL" in
 			STDERR
 		fi
 		;;
-	gophish)
-		running
-		if [ -d $GOPATH/src/github.com/$TOOL/$TOOL ]; then
-			cd $GOPATH/src/github.com/$TOOL/$TOOL
-			./$TOOL
-		else
-			STDERR
-		fi
-		;;
-	tangalanga)
-		running
-		if [ -d $GOPATH/src/github.com/$TOOL ] && [ -e $GOPATH/bin/$TOOL ]; then
-			exec $GOPATH/bin/$TOOL
-		else
-			STDERR
-		fi
-		;;
-	vt)
+	vt|aquatone)
 		running
 		if [ -d $GOPATH/src/github.com/VirusTotal/$TOOL-go ] && [ -e $GOPATH/bin/$TOOL ]; then
 			cd $GOPATH/bin/
 			exec $TOOL ${@:2}
-		elif [ $PREFIX/bin/$TOOL ]; then                                                                                exec $PREFIX/bin/$TOOL ${@:2}
+		elif [ $PREFIX/bin/$TOOL ]; then
+			exec $PREFIX/bin/$TOOL ${@:2}
 		else
 			STDERR
 		fi
@@ -387,7 +371,7 @@ case "$TOOL" in
 		fi
 		;;
 	*)
-		printf "$R\n[w] i-Haklab :$W Unknown argument $TOOL\n"
+		printf "$R\n(_>)─➤$W Unknown argument $TOOL\n"
 		exit 1
 		;;
 esac

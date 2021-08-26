@@ -307,22 +307,23 @@ case "$toRemove" in
 		;;
 	#::GO::
 	amass)
-                goa=$(find ~/go/pkg/mod/github.com -type d -iname "!$toInstall"|head -n 1)
-                rm -rf $gob $PREFIX/lib/go/src/$toInstall
+                goa=$(find ~/go/pkg/mod/github.com -type d -iname "!$toRemove"|head -n 1)
+                rm -rf $gob $PREFIX/lib/go/src/$toRemove
 		;;
 	aquatone)
-		gem remove --quiet --silent $toInstall
+		rm -rf ~/go/pkg/mod/github.com/$toRemove ~/$toRemove
+		gem remove --quiet --silent $toRemove $PREFIX/bin/$toRemove
 		;;
 	gobuster)
-                gob=$(find ~/go/pkg/mod/github.com -iname $toInstall)
-                rm -rf $gob $PREFIX/lib/go/src/$toInstall
+                gob=$(find ~/go/pkg/mod/github.com -iname $toRemove)
+                rm -rf $gob $PREFIX/lib/go/src/$toRemove
 		;;
 	gophish)
-                gop1=$(find ~/go/pkg/mod/github.com -type d -iname $toInstall|head -n 1)
+                gop1=$(find ~/go/pkg/mod/github.com -type d -iname $toRemove|head -n 1)
                 rm -rf $gop1
                 ;;
 	tangalanga)
-                got=$(find ~/go/pkg/mod/github.com -type d -iname "$toInstall*")
+                got=$(find ~/go/pkg/mod/github.com -type d -iname "$toRemove*")
 		rm -rf $got
 		;;
 	virustotal)
