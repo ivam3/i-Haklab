@@ -69,29 +69,15 @@ case "$1" in
 				Done
 			else
 				printf "$Y(_>)─➤$W Upgrading (It could take a while)...\n"
-				rm -rf $iHAKLAB
-				git clone --quiet https://github.com/Ivam3/i-Haklab.git $iHAKLAB
-				if [ -d $iHAKLAB ];then
-					bash $TMP_FILE1
-					Done
-				else
-					k-boom
-				fi
+				bash $TMP_FILE1
+				Done
 			fi
 		elif [ $LMONTH -gt $RMONTH ]; then
 			Done
 		else
 			printf "$Y(_>)─➤$W Upgrading (It could take a while)...\n"
-			rm -rf $iHAKLAB
-			while [ ! -d $iHAKLAB ]; do
-				git clone --quiet https://github.com/Ivam3/i-Haklab.git $iHAKLAB
-			done
-			if [ -d $iHAKLAB ]; then
-				bash $TMP_FILE1
-				Done
-			else
-				k-boom
-			fi
+			bash $TMP_FILE1
+			Done
 		fi
 		rm $TMP_FILE1
 		;;
