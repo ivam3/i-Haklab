@@ -1,19 +1,13 @@
-#!/data/data/com.termux/files/usr/bin/bash
-#This script will install i-Haklab v.3.0 2021 by Ivam3 - It is a hacking laboratory that contains open source tools recommended by Ivam3.
+#!/usr/bin/bash
+#This script will turn to default settings i-Haklab v.3.0 2021 by Ivam3 - It is a hacking laboratory that contains open source tools recommended by Ivam3.
 IFS=$'\n\t'
 trap ctrl_c 2
 ctrl_c() { printf "$Y\n\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n\n";}
-while [ ! -d ~/i-Haklab ] && [ $PWD != ~/i-Haklab ];do
-	printf "$R\n(_>)─➤$W i-Haklab must to be in HOME path.\n"
-	ctrl_c;exit
-done
+
 printf "Running...";sleep 0.5
-[[ -d $PREFIX/share/i-Haklab ]] && rm -rf $PREFIX/share/i-Haklab
 [[ -d ~/java ]] && rm -rf ~/java
-cp -r ~/i-Haklab $PREFIX/share
 source $PREFIX/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
-chk-Cuser
 clear;banner;sleep 0.5
 ${which} mkdir -p ~/.termux && echo "extra-keys = [['ESC','/','-','HOME','UP','END','PGUP'],['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN']]" > ~/.termux/termux.properties && echo "$rst"
 
@@ -22,6 +16,9 @@ if [ -d ~/.local ]; then
 fi
 if [ -d ~/.config/fish ]; then
 	rm -rf ~/.config/fish
+fi
+if [ -d ~/.config/omf ];then
+	rm -rf ~/.config/omf
 fi
 if command -v fish >/dev/null;then yes|apt remove fish && apt autoremove; fi
 
@@ -125,6 +122,8 @@ cat <<- CONF > $PREFIX/etc/bash.bashrc
 shopt -s histappend
 shopt -s histverify
 export HISTCONTROL=ignoreboth
+cd $PREFIX/share/i-Haklab
+git pull
 chsh -s fish
 # Default command line prompt.
 PROMPT_DIRTRIM=2
@@ -139,6 +138,14 @@ if [ -x /data/data/com.termux/files/usr/libexec/termux/command-not-found ]; then
         }
 fi
 CONF
+
+printf "$G\n(_>)─➤$W Installing VIM predictable text."
+[[ -d ~/.vim ]] && rm -rf ~/.vim
+wget -q --tries=20 ${iHDB}/to-install/iHaklabvim.zip -O $TMPDIR/iHaklabvim.zip
+unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
+rm -f $TMPDIR/iHaklabvim.zip
+mv $TMPDIR/vim ~/.vim
+wget -q --tries=20 $iHDB/functions/unset.fish -O  ~/.config/fish/functions/unset.fis
 
 #::::::::::Insatalling i-Haklab's login::::::::::::#
 [[ -e $PREFIX/var/log/login-termux ]] && rm -f $PREFIX/var/log/login-termux
@@ -177,26 +184,18 @@ printf "$G\n(_>)─➤$W Installing principal external tools."
 chmod 750 $iHAKLAB/.set/bin/*
 cp $iHAKLAB/.set/bin/* $PREFIX/bin
 if ! command -v msfconsole >/dev/null;then
-	printf "$G\n(_>)─➤$W Installing metasploit-framework."
-	bash $TMPabh --install metasploit >/dev/null 2>&1
+printf "$G\n(_>)─➤$W Installing metasploit-framework."
+        bash <(curl -fsSL "http://git.io/abhacker-repo") --install metasploit -y
 fi
+for TOOL in DoS-A-Tool ExiF embed evilurl localtunnel-server ngrok desktop-xfce;do
+	bash $iHAKLAB/.set/share/install $TOOL
+done
 
-printf "$G\n(_>)─➤$W Installing ngrok.io ngrok-ssh and ngrok-server."
+printf "$G\n(_>)─➤$W Installing ngrok ngrok-ssh and ngrok-server by AbHacker."
 [[ $(command -v ngrok) ]] && mv $(command -v ngrok) $(command -v ngrok).io
 bash $TMPabh --install ngrok-server >/dev/null 2>&1
 rm $TMPabh
 
-printf "$G\n(_>)─➤$W Installing VIM predictable text."
-[[ -d ~/.vim ]] && rm -rf ~/.vim
-wget -q --tries=20 ${iHDB}/to-install/iHaklabvim.zip -O $TMPDIR/iHaklabvim.zip
-unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
-rm -f $TMPDIR/iHaklabvim.zip
-mv $TMPDIR/vim ~/.vim
-wget -q --tries=20 $iHDB/functions/unset.fish -O  ~/.config/fish/functions/unset.fis
-
-for TOOL in DoS-A-Tool ExiF embed evilurl localtunnel-server desktop-xfce;do
-	bash $iHAKLAB/.set/share/install $TOOL
-done
 [[ -d ~/.vnc ]] || mkdir ~/.vnc
 cat <<- CONF > ~/.vnc/xstartup
 #!/data/data/com.termux/files/usr/bin/sh

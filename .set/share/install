@@ -1240,14 +1240,6 @@ esac" > $PREFIX/bin/msfconsole
 		fi
 		;;
 esac
-
-if [[ $(ruby -v |cut -c 6-10) != "2.7.2" ]];then
-	bash <(curl -fsSL "http://git.io/abhacker-repo") --install ruby=2.7.2 -y
-	gem install bundler:2.2.11
-	rm -rf $PREFIX/lib/ruby/gems/2.7.0/specifications/default/bundler-2.1.4.gemspec
-	printf "$G(_>)─➤$W DONE!!\n"
-fi
-
 #ENDING SCRIPT
-printf "$G\n (_>)-> :::::::::::::::::: DONE !! ::::::::::::::::::: <-(<_)$W\nFor more information about $toInstall run i-Haklab show $toInstall$Y\n\t   To fix issues going to$B t.me/Ivam3_Bot$W"
+printf "$G\n (_>)-> :::::::::::::::::: DONE !! ::::::::::::::::::: <-(<_)$W\nFor more information about $toInstall run i-Haklab about $toInstall$Y\n\t   To fix issues going to$B t.me/Ivam3_Bot$W"
 #             i-Haklab by @Ivam3
