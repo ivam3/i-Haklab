@@ -107,7 +107,7 @@ else
 		chmod +x $PREFIX/bin/$i
 	done
 fi
-$PREFIX/libexec/banner/wall-banner
+bash $PREFIX/libexec/banner/wall-banner
 printf "$G
 (_>)─➤$W i-Haklab upgraded at version 3.0-beta$G
  ╰─────$Y~☆ New features:$G
@@ -129,5 +129,5 @@ printf "$G
  ╰──────────$Y~☆$W automated installation and configuration x11-pkg$G
  ╰──────────$Y~☆$W wireshark xhydra and vim editor on graphical enviroment$G
  |
- ╰───────────➤$W to report issues goin to$B https://t.me/Ivam3_Bot.\n\n"
+ ╰───────────➤$W to report issues goin to$B https://t.me/Ivam3_Bot."
 #       i-Haklab by @Ivam3
