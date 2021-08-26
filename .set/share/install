@@ -856,6 +856,20 @@ case "$toInstall" in
 				"$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal.so" \
 				"$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal/util.so"
 		fi
+		printf "#!/usr/bin/sh
+		SCRIPT_NAME=\$(basename \"\$0\")
+		METASPLOIT_PATH=\"\${PREFIX}/opt/metasploit-framework\"
+		#Fix ruby bigdecimal extensions linking error.
+		export LD_PRELOAD=\"$LINUXANDROID:\$LD_PRELOAD\"
+		case \"\$SCRIPT_NAME\" in
+			msfconsole|msfvenom)
+				exec ruby \"\$METASPLOIT_PATH/\$SCRIPT_NAME\" \"\$@\"
+				;;
+			*)
+				echo \"[!] Unknown Metasploit command '\$SCRIPT_NAME'.\"
+				exit 1
+				;;
+		esac" > $PREFIX/bin/msfconsole
 	}
 	    Rapid7(){
 		    Garbage
