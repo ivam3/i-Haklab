@@ -7,6 +7,7 @@ source $iHAKLAB/.set/functions/functions
 toInstall="$1"
 ctrl_c(){ printf "$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";}
 Err() { printf "$R\n(_>)─➤$W Installation failed";ctrl_c;exit;}
+PS(){ printf "$G(_>)─➤$W Installing python modules.\n ╰─────➤$W (it could take a while)...\n";}
 PIPup() {
 	for PYv in python python2 ;do
 		$PYv -m pip install --no-color --quiet --upgrade pip
@@ -24,17 +25,17 @@ SODIUM() {
 	python$PYv -m pip install --quiet --no-cache-dir --no-binary :all: -r $TMPDIR/requirements.txt
 }
 PYmodules() {
-	printf "$Y(_>)─➤$W There are 3 methods of installing the modules: choose one$Y\n(01)─➤$W BASIC$Y\n(02)─➤$W LDFLAGS$Y\n(03)─➤$W SODIUM\n\n"
+	printf "$G(_>)─➤$W There are 3 methods of installing the modules: choose one$Y\n ╰───(01)─➤$W BASIC$Y\n ╰───(02)─➤$W LDFLAGS$Y\n ╰───(03)─➤$W SODIUM\n\n"
 
 	while read -p "(_>)─➤ " ANSW && [ -z $ANSW ]; do
 		continue
 	done
 	if [[ $ANSW = '1' ]] || [[ $ANSW = '01' ]]; then
-		BASIC
+		PS;BASIC
 	elif [[ $ANSW = '2' ]] || [[ $ANSW = '02' ]]; then
-		LDFLAGS
+		PS;LDFLAGS
 	elif [[ $ANSW = '3' ]] || [[ $ANSW = '03' ]]; then
-		SODIUM
+		PS;SODIUM
 	else
 		printf "$R(_>)─➤$W method $ANSW doesn't exist\n"
 		exit 0
@@ -218,7 +219,7 @@ case "$toInstall" in
 		PYv=""
 		git clone --quiet https://github.com/lanmaster53/$toInstall $TOOLS/$toInstall
 		chmod 750 -R $TOOLS/$toInstall
-		printf "dicttoxml\ndnspython\njsonrpclib\nlxml\nmechanize\nslowaes\nXlsxWriter\nolefile\nPyPDF2\nflask\nunicodecsv" > $TMPDIR/requirements.txt
+		printf "PYyaml\nshodan\ndicttoxml\ndnspython\njsonrpclib\nlxml\nmechanize\nslowaes\nXlsxWriter\nolefile\nPyPDF2\nflask\nunicodecsv" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
 		;;
@@ -538,22 +539,20 @@ case "$toInstall" in
 		chmod 750 $PREFIX/bin/$toInstall
 		;;
 	hydra)
-		yes|apt install git make automake
-		git clone --quiet https://github.com/vanhauser-thc/thc-$toInstall $TOOLS/$toInstall
-		if [[ -d $TOOLS/$toInstall ]];then
-			cd $TOOLS/$toInstall
-			./configure && make && make install
-			if [[ -e $TOOLS/$toInstall/$toInstall ]] && [[ -e $TOOLS/$toInstall/x$toInstall ]];then
-				chmod +x $TOOLS/$toInstall/*
-				cp $TOOLS/$toInstall/$toInstall $PREFIX/bin/
-				cp $TOOLS/$toInstall/x$toInstall $PREFIX/bin/
-				rm -rf $TOOLS/$toInstall
-			else
-				printf "$R\n\t      《ERR COMPILE》\n";Err
-			fi
-		else
-			printf "$R\n\t      《ERR CLONE》\n";Err
-		fi
+		yes|apt install git make automake -y
+		git clone --quiet https://github.com/vanhauser-thc/thc-$toInstall $PREFIX/opt/thc-$toInstall
+		cd $PREFIX/opt/thc-$toInstall
+		sh configure;make;make install
+		if [[ -e $PREFIX/opt/thc-$toInstall/$toInstall ]] && [[ -e $PREFIX/opt/thc-$toInstall/x$toInstall ]]
+                then
+			chmod +x $PREFIX/opt/thc-$toInstall/*
+			cp $PREFIX/opt/thc-$toInstall/$toInstall $PREFIX/bin/
+			cp $PREFIX/opt/thc-$toInstall/x$toInstall $PREFIX/bin/
+			cp -r $PREFIX/opt/thc-$toInstall $TOOLS/$toInstall
+			rm -rf $PREFIX/opt/thc-$toInstall
+                else
+                        printf "$R\n\t      《ERR COMPILE》\n";Err
+                fi
 		;;
 	JohnTheRipper)
 		JTRv="1.8.0"
