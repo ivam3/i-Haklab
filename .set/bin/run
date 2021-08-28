@@ -203,7 +203,7 @@ case "$TOOL" in
 		fi
 		;;
 #::::PYTHON3 TOOLS::::#
-	evilurl|phoneinfoga|hunner|ipgeolocation|seeker|shellsploit|theharvester|vulnx)
+	evilurl|phoneinfoga|hunner|infoga|ipgeolocation|seeker|shellsploit|NULL-theharvester-NULL|vulnx)
 		if CheckPath;then
 			exec python $TOOLPATH/$TOOL.py ${@:2}
                 else

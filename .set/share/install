@@ -60,11 +60,12 @@ else
 	INITFILE="$PREFIX/etc/bash.bashrc"
 fi
 
+[[ $toInstall = desktop-xfce4 ]] && toInstall=xfce4-about
 if [[ -d $TOOLS/$toInstall ]] || [[ -e $PREFIX/bin/$toInstall ]] || [[ -d $PREFIX/opt/$toInstall ]] || [[ -e ~/go/bin/$toInstall ]];then
-	printf "$R(_>)─➤$W $toInstall it's already installed";exit
+	printf "$R(_>)─➤$W $1 it's already installed";exit
 fi
 running
-yes|apt update && apt upgrade
+yes|apt autoremove && apt update && yes|apt upgrade 
 case "$toInstall" in
 	alltools)
 		alltools=$(cat $iHAKLAB/.set/libexec/Tools/listoftools)
@@ -140,6 +141,15 @@ case "$toInstall" in
 		git clone --quiet https://github.com/b3-v3r/Hunner.git $TOOL/$toInstall
 		chmod 750 -R $TOOLS/$toInstall
 		printf "httplib2" > $TMPDIR/requirements.txt
+		PYmodules
+		rm -f $TMPDIR/requirements.txt
+		;;
+	infoga)
+		yes|apt install python git
+		PIPup
+		PYv=""
+		git clone --quiet https://github.com/m4ll0k/$toInstall $TOOLS/$toInstall
+		cat $TOOLS/$toInstall/requirements.txt > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
 		;;
@@ -284,7 +294,7 @@ case "$toInstall" in
 			Err
 		fi
 		;;
-	theharvester)
+	NULL-theharvester-NULL)
 		yes|apt install git python libxml2 libxml2-static libxml2-utils libxslt libxslt-static rust
 		PIPup
 		PYv=""
@@ -515,7 +525,7 @@ case "$toInstall" in
 			mkdir $HOME/adbfiles
 		fi
 		;;
-	desktop-xfce4)
+	desktop-xfce4|xfce4-about)
 		for i in vnc icons themes config;do
 			rm -rf ~/.$i
 		done
@@ -1248,5 +1258,5 @@ esac" > $PREFIX/bin/msfconsole
 		;;
 esac
 #ENDING SCRIPT
-printf "$G\n (_>)-> :::::::::::::::::: DONE !! ::::::::::::::::::: <-(<_)$W\nFor more information about $toInstall run i-Haklab about $toInstall$Y\n\t   To fix issues going to$B t.me/Ivam3_Bot$W"
+printf "$G\n\n (_>)-> :::::::::::::::::: DONE !! ::::::::::::::::::: <-(<_)$W\nFor more information about $1 execute: i-Haklab about $1$Y\n\t   To fix issues going to$B t.me/Ivam3_Bot$W\n\n"
 #             i-Haklab by @Ivam3
