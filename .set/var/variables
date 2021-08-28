@@ -3,7 +3,7 @@
 OP1=${2:-crunch}
 
 export iHAKLAB=/data/data/com.termux/files/usr/share/i-Haklab
-microSD=$(df|tail -n 2|awk -F " " '{print $6}'|grep -iv "emulated")
+microSD=$(df|tail -n 2|awk -F " " '{print $6}'|grep -iv "emulated"|head -n 1)
 if [ -d $microSD/Android/data/com.termux/files ] && [ -w $microSD/Android/data/com.termux/files ]; then
 	if [ ! -d $microSD/Android/data/com.termux/files/tools ];then
 		mkdir $microSD/Android/data/com.termux/files/tools

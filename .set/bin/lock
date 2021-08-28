@@ -1,6 +1,5 @@
-#!/data/data/com.termux/files/usr/bin/bash
-# This files will lock the active session
-
-command -v cacafire > /dev/null || pkg install libcaca
-cacafire
-source /data/data/com.termux/files/usr/var/log/login-termux
+#!/usr/bin/bash
+#This files will lock the active session
+command -v cacafire >/dev/null || yes|apt install libcaca
+cacafire;login
+#         i-Haklab by Ivam3
