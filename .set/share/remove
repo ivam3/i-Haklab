@@ -5,7 +5,7 @@ trap ctrl_c 2
 source $PREFIX/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 toRemove="$1"
-ctrl_c(){ printf "$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";}
+ctrl_c(){ printf "$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";exit;}
 
 if [ ! -d $TOOLS/$toRemove ] && [ ! -e $PREFIX/bin/$toRemove ] && [ ! -d $PREFIX/opt/$toRemove ] && [ ! -e ~/go/bin/$toRemove ];then
 	printf "$R(_>)─➤$W $toRemove isn't installed";exit
@@ -13,7 +13,7 @@ fi
 
 Err() { printf "$R\n(_>)─➤$W Remove failed";ctrl_c;exit;}
 PIPup() {
-	for PYv in python python2 ;do
+	for PYv in python2 python;do
 		$PYv -m pip install --no-color --quiet --upgrade pip
 	done
 }
@@ -62,8 +62,11 @@ case "$toRemove" in
 			rm -f $PREFIX/bin/un$toRemove
 		fi
 		rmMainDir
+		;;#:::PYTHON3:::#
+	h8mail|objection)
+		printf "$toRemove" > $TMPDIR/deps2drop
+		alert
 		;;
-	#:::PYTHON3:::#
 	fuzzdb)
 		rmMainDir
 		printf "wfuzz" > $TMPDIR/deps2drop
@@ -86,6 +89,11 @@ case "$toRemove" in
 	osintgram)
 		rmMainDir
 		printf "requests==2.24.0\nrequests-toolbelt==0.9.1\ngeopy\nprettytable==0.7.2\ninstagram-private-api==1.6.0\ngnureadline" > $MPDIR/deps2drop
+		alert
+		;;
+	phomber|vulnx)
+		cat $TOOLS/$toRemove/requirements.txt > $TMPDIR/deps2drop
+		rmMainDir
 		alert
 		;;
 	phoneinfoga)
@@ -138,13 +146,8 @@ case "$toRemove" in
 		;;
 	theharvester)
 		yes|apt remove libxml2 libxml2-static libxml2-utils libxslt libxslt-static
+		cat $TOOLS/$toRemove/requirements.txt > $TMPDIR/deps2drop
 		rmMainDir
-		cat $TOOLS/$toRemove/deps2drop > $TMPDIR/deps2drop
-		alert
-		;;
-	vulnx)
-		rmMainDir
-		cat $TOOLS/$toRemove/deps2drop > $TMPDIR/deps2drop
 		alert
 		;;
 	#::PYTHON2::#

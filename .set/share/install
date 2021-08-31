@@ -9,7 +9,7 @@ ctrl_c(){ printf "$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";
 Err() { printf "$R\n(_>)─➤$W Installation failed";ctrl_c;exit;}
 PS(){ printf "$G(_>)─➤$W Installing python modules.\n ╰─────➤$W (it could take a while)...\n";}
 PIPup() {
-	for PYv in python python2 ;do
+	for PYv in python2 python ;do
 		$PYv -m pip install --no-color --quiet --upgrade pip
 	done
 }
@@ -87,8 +87,15 @@ case "$toInstall" in
 		(04)─➤$W download vnc viewer app from https://bit.ly/2VUguQM$G\t
 		(05)─➤$W open the app, touch the plus(+) bottom and set a new connection with address as localhost:1 and name as Kali Linux$G\t
 		(06)─➤$W type your password and enjoy it!!\n"
-		;;
-	#::PYTHON3::#
+		;;#::PYTHON3::#
+	h8mail|objection)
+		yes|apt install python
+		PIPup
+		PYv=""
+		printf "$toinstall" > $TMPDIR/requirements.txt
+		PYmodules
+		rm -f $TMPDIR/requirements.txt
+	;;
 	binwalk)
 		yes|apt install git python
 		PIPup
@@ -190,20 +197,48 @@ case "$toInstall" in
 			esac
 		done
 		;;
-	phoneinfoga)
+	phomber)
+		yes|apt install python git
+		PIPup
+		PYv=""
+		git clone --quiet https://github.com/s41r4j/phomber $TOOLS/$toInstall
+		cat $TOOLS/$toInstall/requirements.txt > $TMPDIR/requirements.txt
+		PYmodules
+		rm -f $TMPDIR/requirements.txt
+		PS3="(_>)─➤ "
+		printf "$Y(_>)─➤$W $toInstall needs an API key from opencagedata.com."
+		select way in Set_credentials Skip_this_step;do
+			case $way in
+				Set_credentials)
+					while read -p "(_>)_username─➤ " username && [ -z $username ];do
+						continue
+					done
+					while read -p "(_>)_passwd─➤ " passwd && [ -z $passwd ];do
+						continue
+					done
+					printf "[Credentials]\nusername = $username\npassword = $passwd" > $TOOLS/$toInstall/config/credentials.ini
+					;;
+				*)
+					printf "$Y(_>)─➤$W Don't forget set your credentials at file: $TOOLS/$toInstall/config/credentials.ini"
+					ctrl_c
+					;;
+			esac
+		done
+		;;
+	NULL-phoneinfoga-NULL)
 		yes|apt install python git wget unstable-repo geckodriver
 		PIPup
 		PYv=""
 		git clone --quiet https://github.com/sundowndev/PhoneInfoga.git $TOOLS/$toInstall
 		wget -q $iHDB/fix-tools/$toInstall.py -O $TOOLS/$toInstall/$toInstall.py
 		cp $TOOLS/$toInstall/config.example.py $TOOLS/$toInstall/config.py
-		if [[ "$(uname -m)" = 'aarch64' ]] || [[ "$(uname -m)" = 'x86_64' ]];then
+		if [ "$(uname -m)" = 'aarch64' ] || [ "$(uname -m)" = 'x86_64' ];then
 			bits=64
 		else
 			bits=32
 		fi
 		if ! $(which geckodriver);then
-			wget -q https://github.com/mozilla/geckodriver/releases/download/v0.29.1/geckodriver-v0.29.1-linux$bits.tar.gz $TMPDIR/geckodriver-v0.29.1-linux$bits.tar.gz
+			wget -q https://github.com/mozilla/geckodriver/releases/download/v0.29.1/geckodriver-v0.29.1-linux$bits.tar.gz -O $TMPDIR/geckodriver-v0.29.1-linux$bits.tar.gz
 			tar -xvzf $TMPDIR/geckodriver-v0.29.1-linux$bits.tar.gz -C $TMPDIR > /dev/null 2>&1
 			rm $TMPDIR/geckodriver-v0.29.1-linux$bits.tar.gz
 			mv $TMPDIR/geckodriver $PREFIX/bin/
@@ -524,6 +559,20 @@ case "$toInstall" in
 		if [[ ! -d $HOME/adbfiles ]];then
 			mkdir $HOME/adbfiles
 		fi
+		;;
+	code-server)
+		yes|install build-essential python git nodejs yarn
+		yarn global add code-server
+		printf "$G(_>)_Set_a_login_password:─➤$W "
+		while read -p ":─➤ " passwd && [ -z $passwd ];do
+			continue
+		done
+		cat <<- CONF > ~/.config/code-server/config.yaml
+		bind-addr: 127.0.0.1:8080
+		auth: password
+		password: $passwd
+		cert: false
+		CONF
 		;;
 	desktop-xfce4|xfce4-about)
 		for i in vnc icons themes config;do
@@ -1029,7 +1078,13 @@ esac" > $PREFIX/bin/msfconsole
 		chmod 751 -R ~/go
 		gop1=$(find ~/go/pkg/mod/github.com -type d -iname $toInstall|head -n 1)
 		gop2=$(ls $gop1|grep $toInstall)
-		ln -s ~/go/bin/$toInstall $gop1/$gop2/$toInstall
+		mv ~/go/bin/$toInstall $gop1/$gop2/$toInstall
+		cat <<- CONF > ~/go/bin/$toInstall
+		#!/usr/bin/bash
+		cd $gop1/$gop2
+		exec $gop1/$gop2/$toInstall
+		#           i-Haklab by Ivam3.
+		CONF
 		sed 's|"listen_url": "0.0.0.0:80",|"listen_url": "127.0.0.1:8080",|g' -i $gop1/$gop2/config.json
 		chmod 640 $gop1/$gop2/config.json
 		;;

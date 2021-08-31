@@ -95,7 +95,7 @@ if [ -z $TOOL ]; then
 ╰─nexphisher─────➤  Advanced phishing tool.
 ╰─nikto──────────➤  Web server scanner which performs comprehensive tests against web servers for multiple items.
 ╰─objection──────➤  runtime mobile exploration toolkit.
-╰─phoneinfoga────➤  Scan phone numbers to first gather standard information.
+╰─phomber────────➤  Scan phone numbers to first gather standard information.
 ╰─phonesploit────➤  Exploit a device using open tcp ports (adbfastboot needed)
 ╰─pybelt─────────➤  Complete open source hackers tool.
 ╰─quack──────────➤  Toolkit to spam via calls,sms,smtp.tcp,http and more
@@ -116,7 +116,6 @@ if [ -z $TOOL ]; then
 ╰─sqliv──────────➤  Massive SQL injection scanner.
 ╰─sqlmap─────────➤  Penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database server. 
 ╰─tangalanga─────➤  Zoom Conference scanner. This scanner will check for a random meeting id and return information if available
-╰─theharvester───➤  Gather emails, subdomains, hosts, employee names, open ports and banners from different public sources like search engines, PGP key servers and SHODAN computer database.
 ╰─userrecon──────➤  Find usernames across over 75 social networks.
 ╰─vt─────────────➤  VirusTotal: an command line service that analyzes files and URLs enabling the detection of viruses, worms, trojans and other kinds of malicious content using antivirus engines and website scanners.
 ╰─vulnx──────────➤  Intelligent bot auto shell injector that detect vulnerabilities in multiple types of cms.
@@ -126,7 +125,9 @@ if [ -z $TOOL ]; then
 ╰─wbruter────────➤  Brute force & dictionary attacking methods to various stuff
 ╰─whatweb────────➤  Identifie websites (DNS).
 ╰─wpscan─────────➤  Black box WordPress vulnerability scanner.
-╰─youtube─dl─────➤  Download media files from youtube,spotify,facebook,tiktok and Dalymotion.\n";exit
+╰─youtube─dl─────➤  Download media files from youtube,spotify,facebook,tiktok and Dalymotion.\n"
+#╰─theharvester───➤  Gather emails, subdomains, hosts, employee names, open ports and banners from different public sources like search engines, PGP key servers and SHODAN computer database.
+exit
 fi
 
 case "$TOOL" in
@@ -203,7 +204,7 @@ case "$TOOL" in
 		fi
 		;;
 #::::PYTHON3 TOOLS::::#
-	evilurl|phoneinfoga|hunner|infoga|ipgeolocation|seeker|shellsploit|NULL-theharvester-NULL|vulnx)
+	evilurl|NULL-phoneinfoga-NULL|phomber|hunner|infoga|ipgeolocation|seeker|shellsploit|NULL-theharvester-NULL|vulnx)
 		if CheckPath;then
 			exec python $TOOLPATH/$TOOL.py ${@:2}
                 else
