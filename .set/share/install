@@ -279,12 +279,13 @@ case "$toInstall" in
 		rm -f $TMPDIR/requirements.txt
 		;;
 	seeker)
+		[[ -e $PREFIX/bin/ngrok ]] || { printf >&2 "$R\n(_>)─➤ ERROR :$W ngrok is not installed\n";ctrl_c;}
 		yes|apt install git python
 		PIPup
 		PYv=""
 		git clone --quiet https://github.com/thewhiteh4t/$toInstall.git $TOOLS/$toInstall
 		mkdir -p $TOOLS/$toInstall/Ngrok
-		wget -q $iHDB/fix-tools/ngrok -O $TOOLS/$toInstall/Ngrok/ngrok
+		cp ~/.ngrok2/ngrok $TOOLS/$toInstall/Ngrok/
 		chmod 750 -R $TOOLS/$toInstall/*
 		printf "requests" > $TMPDIR/requirements.txt
 		PYmodules
@@ -505,11 +506,11 @@ case "$toInstall" in
 		wget -q $iHDB/fix-tools/searchsploit -O ~/.searchsploit_rc
 		;;
 	lockphish)
+		[[ -e $PREFIX/bin/ngrok ]] || { printf >&2 "$R\n(_>)─➤ ERROR :$W ngrok is not installed\n";ctrl_c;}
 		yes|apt install git wget
 		git clone --quiet https://github.com/JasonJerry/$toInstall $TOOLS/$toInstall
 		mv $TOOLS/$toInstall/$toInstall.sh $TOOLS/$toInstall/$toInstall
 		chmod 711 $TOOLS/$toInstall/*
-		wget -q $iHDB/fix-tools/ngrok -O $TOOLS/$toInstall
 		;;
 	login-termux)
 		if [[ ! -e $PREFIX/libexec/termux/.Ivam3 ]];then
@@ -524,6 +525,7 @@ case "$toInstall" in
 		fi
 		;;
 	nexphisher)
+		[[ -e $PREFIX/bin/ngrok ]] || { printf >&2 "$R\n(_>)─➤ ERROR :$W ngrok is not installed\n";ctrl_c;}
 		yes|apt install git
 		git clone --quiet https://github.com/htr-tech/$toInstall $TOOLS/$toInstall
 		chmod +x $TOOLS/$toInstall/*
@@ -531,12 +533,12 @@ case "$toInstall" in
 		bash tmux_setup
 		;;
 	saycheese|sayhello)
+		[[ -e $PREFIX/bin/ngrok ]] || { printf >&2 "$R\n(_>)─➤ ERROR :$W ngrok is not installed\n";ctrl_c;}
 		yes|apt install wget unzip openssh
 		wget -q $iHDB/to-install/$toInstall.zip -O $TMPDIR/$toInstall.zip
 		unzip -q $TMPDIR/$toInstall.zip -d $TOOLS
 		rm -rf $TMPDIR/$toInstall.zip
 		wget -q $iHDB/fix-tools/$toInstall -O $TOOLS/$toInstall/$toInstall
-		wget -q $iHDB/fix-tools/ngrok -O $TOOLS/$toInstall/ngrok
 		chmod +x $TOOLS/$toInstall/*
 		;;
 	userrecon)
@@ -675,35 +677,37 @@ case "$toInstall" in
 		rm -rf $TOOLS/$toInstall
 		;;
 	ngrok)
-		arch=$(uname -a|grep -o 'arm'|head -n1)
+		arch1=$(uname -a|grep -o 'arm'|head -n1)
 		arch2=$(uname -a|grep -o 'Android'|head -n1)
 		command -v wget || pkg install wget
-		if [[ $arch = 'arm' ]] || [[ $arch2 = 'Android' ]];then
-			wget -q https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip
-			if [[ -e ngrok-stable-linux-arm.zip ]];then
-				unzip -q ngrok-stable-linux-arm.zip
-				chmod +x ngrok
-				mv ngrok $PREFIX/bin/
-				rm -rf ngrok-stable-linux-arm.zip
-			else
-				Err
-			fi
+		[[ -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ]] && yes|apt install ngrok-server
+		[[ $arch1 = 'arm' ]] || [[ $arch2 = 'Android' ]] && arch=arm || arch=386
+		wget -q 
+		https://bin.equinox.io/c/4VmDzA7iaHb/$1-stable-linux-$arch.zip -O $TMPDIR/$1-stable-linux-$arch.zip
+		if [[ -e $TMPDIR/$1-stable-linux-$arch.zip ]];then
+			[[ -d ~/.ngrok2 ]] || mkdir -p ~/.ngrok2
+			unzip -q $1-stable-linux-arm.zip -d ~/.ngrok2
+			rm -rf $1-stable-linux-$arch.zip
+			printf "#!/bin/bash\n#THIS SCRIPT EXECUTE NGROK TO AVOID 'bad address' ERROR\nexec $HOME/.ngrok/ngrok \${@:1}\n#     i-Haklab by Ivam3" > $PREFIX/bin/$1.io
+			chmod +x ~/.ngrok2/$1 $PREFIX/bin/$1.io
+			PS3="(_>)─➤ "
+			printf "$Y(_>)─➤$W $toInstall needs an authtoken from $1.com."
+			select way in Set_authtoken Skip_this_step;do
+				case $way in
+					Set_authtoken)
+						while read -p "(_>)_authtoken─➤ " token && [ -z $token ];do
+							continue
+						done
+						ngrok authtoken $token
+						;;
+					*)
+						printf "$Y(_>)─➤$W Don't forget set your token running: $toInstall authtoken <your-token>";ctrl_c
+						;;
+				esac
+			done
 		else
-			wget -q https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip
-			if [[ -e ngrok-stable-linux-386.zip ]];then
-				unzip -q ngrok-stable-linux-386.zip
-				chmod +x ngrok
-				mv ngrok $PREFIX/bin/
-				rm -rf ngrok-stable-linux-386.zip
-			else
-				Err
-			fi
+			Err
 		fi
-		printf "$Y\n(_>)─➤$W NGROK tunnels are only available after you sign up.\n      Sign up at:$G https://ngrok.com/signup\n$W\n      If you have already signed up, type your authtoken to set it.\n      Your authtoken is available\n      on your dashboard:$G https://dashboard.ngrok.com$W\n"
-		while read -p "(_>)_authtoken─➤ " at && [ -z $at ];do
-			continue
-		done
-		exec ngrok authtoken $at
 		;;
 	serverapache)
 		yes|apt install php apache2 php-pgsql php-fpm php-apache mariadb phpmyadmin

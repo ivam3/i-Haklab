@@ -61,8 +61,14 @@ case "$toRemove" in
 		if [[ $toRemove = shc ]];then
 			rm -f $PREFIX/bin/un$toRemove
 		fi
+		if [[ $toremove = ngrok ]];then
+			rm -rf ~/.ngrok2
+			rm -f $PREFIX/bin/ngrok
+			rm -f $PREFIX/bin/ngrok.io
+		fi
 		rmMainDir
-		;;#:::PYTHON3:::#
+		;;
+	#:::PYTHON3:::#
 	h8mail|objection)
 		printf "$toRemove" > $TMPDIR/deps2drop
 		alert
