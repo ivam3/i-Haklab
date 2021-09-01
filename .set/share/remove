@@ -244,6 +244,11 @@ case "$toRemove" in
 			rm -rf ~/adbfiles
 		fi
 		;;
+	code-server)
+		yes|apt remove build-essential python git nodejs yarn
+		yes|apt autoremove
+		[[ -d ~/.config/code-server ]] && rm -rf ~/.config/code-server
+		;;
 	desktop-xfce4)
 		yes|pkg remove xfce4 xfce4-taskmanager dosbox xfce4-terminal python-tkinter htop neofetch loqui vim-gtk the-powder-toy galculator xorg-xhost mpv-x ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk3 gtk2 mtpaint leafpad hexchat netsurf recordmydesktop feh audacious;yes|pkg remove xfce4-* kvantum zenity mate-terminal mate-settings-daemon dbus-glib dconf termux-api wireshark-gtk
 		for i in .vnc .icons .themes .config Desktop Downloads Templates Public Documents Pictures Video Music backgrounds;do

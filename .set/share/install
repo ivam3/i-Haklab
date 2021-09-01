@@ -561,7 +561,7 @@ case "$toInstall" in
 		fi
 		;;
 	code-server)
-		yes|install build-essential python git nodejs yarn
+		yes|apt install build-essential python git nodejs yarn
 		yarn global add code-server
 		printf "$G(_>)_Set_a_login_password:─➤$W "
 		while read -p ":─➤ " passwd && [ -z $passwd ];do
