@@ -564,12 +564,13 @@ case "$toInstall" in
 		;;
 	code-server)
 		yes|apt install build-essential python git nodejs yarn
-		yarn global add code-server
-		printf "$G(_>)_Set_a_login_password:─➤$W "
+		yarn global add $toInstall
+		printf "$G(_>)_Set_a_login_password$W "
 		while read -p ":─➤ " passwd && [ -z $passwd ];do
 			continue
 		done
-		cat <<- CONF > ~/.config/code-server/config.yaml
+		[[ -d ~/.config/code-server ]] || mkdir -p ~/.config/$toInstall
+		cat <<- CONF > ~/.config/$toInstall/config.yaml
 		bind-addr: 127.0.0.1:8080
 		auth: password
 		password: $passwd
