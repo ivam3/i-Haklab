@@ -47,6 +47,9 @@ case "$toRemove" in
 	kalilinux)
 		yes|apt install curl && curl https://raw.githubusercontent.com/AndronixApp/AndronixOrigin/master/Uninstall/Kali/UNI-kali.sh|bash
 		;;
+	termuxwayland)
+		yes|apt remove wayland && yes|apt autoremve
+		;;
 	#::ON BIN TOOLS::#
 	binwalk|beef|cewl|evilurl|ghost|hakku|hatcloud|exploitdb|lockphish|nexphisher|saycheese|sayhello|wbruter|ExiF|binchecker|IbyC-fixer|blackbox|converter|serverphp|hydra|JohnTheRipper|ngrok|shc|slowhttptest|snow|whatweb|wpscan|DoS-A-Tool|acccheck|rhawk|nikto)
 		if [[ $toRemove = beef ]]; then

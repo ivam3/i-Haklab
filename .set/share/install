@@ -87,7 +87,8 @@ case "$toInstall" in
 		(04)─➤$W download vnc viewer app from https://bit.ly/2VUguQM$G\t
 		(05)─➤$W open the app, touch the plus(+) bottom and set a new connection with address as localhost:1 and name as Kali Linux$G\t
 		(06)─➤$W type your password and enjoy it!!\n"
-		;;#::PYTHON3::#
+		;;
+	#::PYTHON3::#
 	h8mail|objection)
 		yes|apt install python
 		PIPup
@@ -95,7 +96,16 @@ case "$toInstall" in
 		printf "$toinstall" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
-	;;
+		;;
+	termux-wayland)
+		yes|apt install x11-repo xwayland
+		wget -q https://github.com/WMCB-Tech/termux-wayland/releases/download/v1.02.04/Termux-Wayland.apk -O $TMPDIR/Termux-Wayland.apk
+		termux-open $TMPDIR/Termux-Wayland.apk
+		export XDG_RUNTIME_DIR=${TMPDIR}
+		Xwayland :1 >/dev/null &
+		env DISPLAY=:1 xfce4-session
+		rm -rf $TMPDIR/Termux-Wayland.apk
+		;;
 	binwalk)
 		yes|apt install git python
 		PIPup
