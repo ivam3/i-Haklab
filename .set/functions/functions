@@ -163,9 +163,9 @@ $Y OPTIONS$W|$Y   Arguments$W   |$Y    Description$W
 |           |                   |
   $Y [--] Automatitation Arguments [--]$W
   OPTIONS  |     ARGUMENTS      |    DESCRIPTIONS
-╰───bf─────+─ftp/mail+IP/email──➤ Brute force attack at server ftp or smtp(hotmail|live|gmail)
-|    ╰──example─for─ftp+IP──────{─i-Haklab bf ftp 10.10.10.16
-|    ╰──example─for─mail+email──{─i-Haklab bf mail ivam3@hotmail.com
+╰───bf─────+─ftp|mail|ssh───────➤ Brute force attack at ssh,ftp or smtp(hotmail|live|gmail) server
+|    ╰──example─for─ftp─────────{─i-Haklab bf ftp
+|    ╰──example─for─mail────────{─i-Haklab bf mail ivam3@hotmail.com
 |
 |──ESmsg───+───<encode/decode>──➤ Encode|decode secret message into a ASCII file.
 |

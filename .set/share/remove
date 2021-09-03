@@ -62,9 +62,11 @@ case "$toRemove" in
 			rm -f $PREFIX/bin/un$toRemove
 		fi
 		if [[ $toremove = ngrok ]];then
+			[ -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ] && yes|apt remove ngrok-server
 			rm -rf ~/.ngrok2
 			rm -f $PREFIX/bin/ngrok
 			rm -f $PREFIX/bin/ngrok.io
+			apt autoremove
 		fi
 		rmMainDir
 		;;
