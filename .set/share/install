@@ -604,7 +604,7 @@ case "$toInstall" in
 		yes|apt install git make automake -y
 		git clone --quiet https://github.com/vanhauser-thc/thc-$toInstall $PREFIX/opt/thc-$toInstall
 		cd $PREFIX/opt/thc-$toInstall
-		sh configure;make;make install
+		make clean && sh configure;make;make install
 		if [[ -e $PREFIX/opt/thc-$toInstall/$toInstall ]] && [[ -e $PREFIX/opt/thc-$toInstall/x$toInstall ]]
                 then
 			chmod +x $PREFIX/opt/thc-$toInstall/*
