@@ -719,7 +719,7 @@ case "$toInstall" in
 		fi
 		printf "$G\n\n(_>)_to_run_it─➤$W $toInstall start$G\n(_>)_to_stop_it─➤$W $toInstall stop$G\n(_>)_to_open_it─➤$W open http://localhost:8080\n"
 		;;
-	shc)
+	shc|unshc)
 		shcVer="3.8.9"
 		yes|apt install wget make
 		wget -q http://www.datsi.fi.upm.es/~frosal/sources/$toInstall-$shcVer.tgz -O $TMPDIR/$toInstall-$shcVer.tgz
@@ -788,27 +788,30 @@ case "$toInstall" in
 		if [[ ! -d $PREFIX/opt ]];then
 			mkdir -p $PREFIX/opt
 		fi
-		git clone --quiet https://github.com/beefproject/$toInstall $PREFIX/opt/$toInstall
+		git clone --quiet https://github.com/$1project/$toInstall $PREFIX/opt/$toInstall
 		sed 's|database: "/opt/GeoIP/GeoLite2-City.mmdb"|database: "/data/data/com.termux/files/usr/opt/GeoIP/GeoLite2-City.mmdb\" |g' -i config.yaml
 		sed 's|passwd: "beef"|passwd: "Ivam3byCinderella"|g' -i config.yaml
+		cd $PREFIX/opt/$toInstall
 		gem update --system
-		gem install bundler
+		gem install bundler/
 		bundle install
 		curl -Ls ${iHDB}/fix-tools/fixbigdecimal|bash
-		wget -q $iHDB/to-install/GeoLite2-City_20200331.tar.gz -O $PREFIX/opt/beef/GeoLite2-City_20200331.tar.gz
-		if [[ -e $PREFIX/opt/beef/GeoLite2-City_20200331.tar.gz ]];then
-			gunzip GeoLite2-City_20200331.tar.gz
-			if [[ -e $PREFIX/opt/beef/GeoLite2-City_20200331.tar ]];then
-				tar xvf GeoLite2-City_20200331.tar
-				rm -rf GeoLite2-City_20200331.tar
+		wget -q $iHDB/bin/$1 -O $PREFIX/bin/$1
+		chmod +x $PREFIX/bin/$1
+		wget -q $iHDB/to-install/GeoLite2-City_20200331.tar.gz -O $PREFIX/opt/$1/GeoLite2-City_20200331.tar.gz
+		if [[ -e $PREFIX/opt/$1/GeoLite2-City_20200331.tar.gz ]];then
+			gunzip $PREFIX/opt/$1/GeoLite2-City_20200331.tar.gz
+			if [[ -e $PREFIX/opt/$1/GeoLite2-City_20200331.tar ]];then
+				tar xvf $PREFIX/opt/$1/GeoLite2-City_20200331.tar
+				rm -rf $PREFIX/opt/$1/GeoLite2-City_20200331.tar
 				if [[ ! -d $PREFIX/opt/GeoIP ]];then
 					mkdir -p $PREFIX/opt/GeoIP
 				else
 					Err
 				fi
-				if [[ -d $PREFIX/opt/beef/GeoLite2-City_20200331 ]];then
-					mv GeoLite2-City_20200331/* $PREFIX/opt/GeoIP
-					rm -rf GeoLite2-City_20200331
+				if [[ -d $PREFIX/opt/$1/GeoLite2-City_20200331 ]];then
+					mv $PREFIX/opt/$1/GeoLite2-City_20200331/* $PREFIX/opt/GeoIP
+					rm -rf $PREFIX/opt/$1/GeoLite2-City_20200331
 				else
 					Err
 				fi
@@ -920,20 +923,6 @@ case "$toInstall" in
 				"$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal.so" \
 				"$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal/util.so"
 		fi
-		printf "#!/usr/bin/sh
-		SCRIPT_NAME=\$(basename \"\$0\")
-		METASPLOIT_PATH=\"\${PREFIX}/opt/metasploit-framework\"
-		#Fix ruby bigdecimal extensions linking error.
-		export LD_PRELOAD=\"$LINUXANDROID:\$LD_PRELOAD\"
-		case \"\$SCRIPT_NAME\" in
-			msfconsole|msfvenom)
-				exec ruby \"\$METASPLOIT_PATH/\$SCRIPT_NAME\" \"\$@\"
-				;;
-			*)
-				echo \"[!] Unknown Metasploit command '\$SCRIPT_NAME'.\"
-				exit 1
-				;;
-		esac" > $PREFIX/bin/msfconsole
 	}
 	    Rapid7(){
 		    Garbage
@@ -976,6 +965,10 @@ case "$toInstall" in
 		    rm $MSFDIR/modules/auxiliary/gather/http_pdf_authors.rb
 		    $PREFIX/bin/find $PREFIX/lib/ruby/gems -type f -iname \*.so -print0|xargs -0 -r termux-elf-cleaner
 		    msfdb
+		    binfile
+		    Ivam3
+	            }
+	    binfile(){
 		    #:::::::MSFCONSOLE\MSFVENOM FILES:::::::#
 		    BIGDECIMAL=$(find $PREFIX/lib/ruby/$RUBYv -iname "bigdecimal.so")
 		    printf "#!/usr/bin/sh
@@ -1013,8 +1006,10 @@ esac" > $PREFIX/bin/msfconsole
 	    PGv=$(find $PREFIX/lib/ruby/gems/$RUBYv/gems -iname pg_ext.so|awk -F "/" '{print $12}'|head -n 1)
 	    if [[ ! -z $Tmux ]];then
 		    yes|apt install $toInstall
+		    binfile
 	    elif [[ -z $Tmux ]];then
 		    Termux
+		    binfile
 	    else
 		    Rapid7
 	    fi

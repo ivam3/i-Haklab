@@ -93,6 +93,7 @@ else
 	set GOPATH /data/data/com.termux/files/home/go
 	set GOROOT /data/data/com.termux/files/usr/lib/go
 	set iHAKLAB /data/data/com.termux/files/usr/share/i-Haklab
+	set TOOLS $TOOLS
 	alias LOCALHOST="ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255"
 	alias serverapache="apachectl"
 	alias postgresql="pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql"
