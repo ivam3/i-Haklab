@@ -275,11 +275,13 @@ case "$toRemove" in
 		;;
 	java)
 		rmMainDir
-		yes|apt remove aapt apksigner apksigner-old;yes|apt autoremove
+		yes|apt remove aapt apksigner apksigner-old openjdk-17;yes|apt autoremove
 		for i in java apktool signapk keytool;do
 			rm -f $PREFIX/bin/$i
 		done
-		rm -rf $PREFIX/share/jdk8 $PREFIX/share/glib $PREFIX/var/spool
+		for v in share/jdk8 share/glib $var/spool opt/openjdk;do
+			[[ -d $PREFIX/$v ]] && rm -rf $PREFIX/$v
+		done
 		;;
 	localtunnel-server)
 		npm uninstall localtunnel

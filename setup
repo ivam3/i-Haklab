@@ -33,7 +33,7 @@ printf "$G(_>)─➤$W Upgrading and installing Termux packages.\n"
 yes|pkg update && pkg upgrade
 apt list|awk -F "/" '{print $1}' > $TMPDIR/alltools.tmp
 pkg list-installed|awk -F "/" '{print $1}' > $TMPDIR/installed.tmp
-for repo in fish root-repo unstable-repo fortune util-linux coreutils vim python python2 ruby perl clang curl wget gawk make openssl openssl-tool php zip unzip tar w3m neofetch weechat irssi tor torsocks proxychains-ng htop bison megatools findutils git apr apr-util openssh apache2 mariadb php-apache pkg-config termux-api termux-tools termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner cmatrix figlet man termux-api axel fortune apksigner autoconf libffi libgmp libpcap readline libsqlite nmap libgrpc libiconv libcaca libtool libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static zlib libassuan libgcrypt libgpg-error youtubedr gnupg gpgme dnsutils debianutils sqlite dirb mlocate tigervnc crunch translate-shell ffsend x11-repo; do
+for repo in fish root-repo unstable-repo fortune util-linux coreutils vim python python2 openjdk-17 ruby perl clang curl wget gawk make openssl openssl-tool php zip unzip tar w3m neofetch weechat irssi tor torsocks proxychains-ng htop bison megatools findutils git apr apr-util openssh apache2 mariadb php-apache pkg-config termux-api termux-tools termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner cmatrix figlet man termux-api axel fortune apksigner autoconf libffi libgmp libpcap readline libsqlite nmap libgrpc libiconv libcaca libtool libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static zlib libassuan libgcrypt libgpg-error youtubedr gnupg gpgme dnsutils debianutils sqlite dirb mlocate tigervnc crunch translate-shell ffsend x11-repo; do
 	GOTIT=$(grep -oE $repo $TMPDIR/installed.tmp)
 	PKG=$(grep -o $repo $TMPDIR/alltools.tmp)
 	if [ ! -z "$PKG" ] && [ -z "$GOTIT" ];then
@@ -175,7 +175,7 @@ chmod -w $PREFIX/libexec/termux/.Cinderella
 #::::::::::Insatalling i-Haklab tools::::::::::::#
 printf "$G\n(_>)─➤$W Installing principal external tools."
 chmod 750 $iHAKLAB/.set/bin/*
-cp $iHAKLAB/.set/bin/* $PREFIX/bin
+cp $iHAKLAB/.set/bin/* $PREFIX/bin/
 if ! command -v msfconsole >/dev/null;then
 	printf "$G\n(_>)─➤$W Installing metasploit-framework."
 	bash $TMPabh --install metasploit ruby=2.7.2 >/dev/null 2>&1
@@ -221,8 +221,8 @@ wget -q --tries=20 ${iHDB}/to-install/iHaklabvim.zip -O $TMPDIR/iHaklabvim.zip
 unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
 rm -f $TMPDIR/iHaklabvim.zip
 mv $TMPDIR/vim ~/.vim
-wget -q --tries=20 $iHDB/functions/unset.fish -O  ~/.config/fish/functions/unset.fis
 
+wget -q --tries=20 $iHDB/functions/unset.fish -O  ~/.config/fish/functions/unset.fis
 for TOOL in DoS-A-Tool ExiF embed evilurl localtunnel-server desktop-xfce;do
 	bash $iHAKLAB/.set/share/install $TOOL
 done
@@ -275,8 +275,9 @@ printf "$G\n\n
  ╰────────➤ run:$W serverapache :──────────:to start apache server$Y
  ╰────────➤ run:$W torvpn :────────────────:to use a proxy connection$Y
  ╰────────➤ run:$W postgresql start :──────:to start postgresql data base$Y
+ ╰────────➤ run:$W Xwayland :──────────────:to init graphical enviroment on Termux:Wayland app$Y
  ╰────────➤ run:$W vncserver :─────────────:to init graphical enviroment on vnc app$Y
- ╰────────➤ run:$W sudo <some commands> :──:to run commands as fake root user$Y
+ ╰────────➤ run:$W sudo <some commands> :──:to run commands as super user whithout rooted device$Y
  ╰────────➤ run:$W i-Haklab about i-Haklab :for all usage guide$G
 (_>)─➤$W To fix issues going to$B t.me/Ivam3_Bot$G
 (_>)─➤$W press$G enter$W to start\n"

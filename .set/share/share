@@ -2,8 +2,7 @@
 #This file is part of i-Haklab command
 source $PREFIX/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
-STDERR() { printf "$Y\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bot$W\n";}
-
+[[ $1 ]] || STDERR
 if [ $1 = "upload" ]; then
 	while [ $3 ]; do
 		passwd="--password $3"

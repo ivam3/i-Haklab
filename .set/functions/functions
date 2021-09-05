@@ -31,6 +31,9 @@ export -f running
 STDERROOT(){ printf "$R\n(_>)─➤$W Rooted device required";exit;}
 export -f STDERROOT
 
+STDERR(){ printf "$R(_>)─➤$W missing argument, type i-Haklab -h for help";exit;}
+export -f STDERR
+
 chk-iHaklab() {
 	until [ -d $iHAKLAB ]; do
 		printf "$R\n(_>)─➤ i-Haklab needed$W |$Y Do you wanna install it?$W\n"
@@ -148,7 +151,7 @@ $Y OPTIONS$W|$Y   Arguments$W   |$Y    Description$W
 ╰─remove────+──<name─of─tool>───➤ Remove an specifics installed tools/frameworks
 |   ╰───────+─────alltools──────➤ Remove all installed tools/frameworks
 ╰─restore───➤───────────────────➤ Restore the main directory to fix some bugs
-╰─root──────➤───────────────────➤ Simulates a super user environment
+╰─root──────➤───────────────────➤ Simulates a super user environment with proot
 ╰─show──────+─────alltools──────➤ List all tools/frameworks available on i-Haklab
 |   ╰───────+────instatools─────➤ Show all installed tools/framewotks
 |   ╰───────+──────games────────➤ Show all games available to play on Termux
@@ -163,30 +166,32 @@ $Y OPTIONS$W|$Y   Arguments$W   |$Y    Description$W
 |           |                   |
   $Y [--] Automatitation Arguments [--]$W
   OPTIONS  |     ARGUMENTS      |    DESCRIPTIONS
-╰───bf─────+─ftp|mail|ssh───────➤ Brute force attack at ssh,ftp or smtp(hotmail|live|gmail) server
+╰───bf─────+─ftp|mail|ssh|telnet➤ Brute force attack at several servers.
 |    ╰──example─for─ftp─────────{─i-Haklab bf ftp
-|    ╰──example─for─mail────────{─i-Haklab bf mail ivam3@hotmail.com
+|    ╰──example─for─mail────────{─i-Haklab bf mail ivam3@live.com, gmail or live.com
 |
-|──ESmsg───+───<encode/decode>──➤ Encode|decode secret message into a ASCII file.
+╰──esmsg───+──encode/decode─────➤ Encode|decode secret message into a ASCII file.
+|                   ╰──example──{─i-Haklab esmsg <encode/decode-}
 |
 ╰forwarding+─<port─+─subdomain>─➤ Start a SSH client to request TCP port forwarding
 |    ╰──example─────────────{─i-Haklab forwarding 4444 my-subdomain-}
 |
 ╰─handler──+─<nome─of─file.rc>──➤ Start handler on msfconsole with previous setting
 |
-|─payapk───+─<tunnelDNS─+─port>─➤ Create a coded payload apk
-|    ╰──example─for─outlan──────{─i-Haklab payapk 6.tcp.ngrok.io 23453─}
+╰───msf────+─dirscan─+─IPtarget─➤ Enumerate directories/subdirecotires from a server.
+|    |         ╰──example───────{─i-Haklab msf dirscan 10.10.10.242-}
+|    ╰─────+─payapk─+─tun0:port─➤ Create a coded payload .apk
+|    |         ╰─ex─for─outlan──{─i-Haklab payapk 6.tcp.ngrok.io 23453─}
+|    ╰─────+─payexe─+─tun0:port─➤ Create a coded payload .exe
+|    |         ╰─ex─for─inlan───{─i-Haklab payexe 192.168.0.1 8080─}
+|    ╰─────+─paypdf─+─tun0:port─➤ Create a coded payload .pdf
+|    |         ╰─ex─default─set─{─i-Haklab paypdf─}
+|    ╰─────+──────shodan────────➤ Search vulnerable webcam servers using metasploit
 |
-|─payexe───+─<tunnelDNS─+─port>─➤ Create a coded payload .exe
-|    ╰──example─for─inlan───────{─i-Haklab payapk 192.168.0.1 8080─}
-|
-|─paypdf───+─<tunnelDNS─+─port>─➤ Create a coded payload .pdf
-|    ╰──example─for─default─set─{─i-Haklab payapk─}
 ╰─share────+─<upload/download>──➤ Share files and directories remotely and securely
 |               ╰───────|───────{─i-Haklab share upload file.txt password(optional)─}
 |                       ╰───────{i-Haklab share download https://send.vis.ee/download/..─}
-╰─shodan───➤────────────────────➤ Search vulnerable webcam servers using metasploit
-|__________________________________________________________________________________________\n\n"
+╰─────────────────────────────────────────────────────────────────────────────────────────|\n\n"
 }
 export -f Menu
 

@@ -5,9 +5,9 @@
 source $PREFIX/share/i-Haklab/.set/var/variables
 command -v proot >/dev/null || yes|apt install proot
 if [[ $1 = "root" ]]; then
-        proot -0 -w ~ $SHELL
+        termux-chroot
 elif [[ -z $1 ]]; then
         printf "$Y(_>)─➤$W usage: sudo <root|file to execute as root privilegies>\n$Y ╰─────➤$W ex1: sudo root\tTo run a shell as fake root user\n$Y ╰─────➤$W ex2: sudo script.sh\tTo run some script as fake root user\n"
 else
-        exec proot -0 ${answ} "$@" 2>&1
+        exec termux-chroot "$@" 2>&1
 fi

@@ -56,6 +56,9 @@ elif [[ $1 = ftp ]];then
 elif [[ $1 = ssh ]];then
 	setTarget;setuserWL;setWordlist
 	alert;hydra -L $userWL -P $wordlist $target -t 4 ssh
+elif [[ $1 = telnet ]]; then
+	setTarget;setuserWL;setWordlist
+	alert;hydra $target telnet -L $userWL -P $wordlist -t 32 -s 23 -e ns -f -V
 else
 	STDERR
 

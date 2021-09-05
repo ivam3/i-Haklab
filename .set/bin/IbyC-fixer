@@ -181,9 +181,11 @@ case $1 in
 		fi
 		;;
 	metasploit)
+		[[ -d $PREFIX/var/lib/postgresql ]] && rm -rf $PREFIX/var/lib/postgresql
 		wget -q "${iHDB}/fix-tools/fixmetasploit" -O $FILE
 		chmod +x $FILE
 		exec $FILE --install ruby=2.7.2 -r apt install metasploit -y
+		yes|apt autoremove
 		rm $FILE
 		;;
 	RuGiR)

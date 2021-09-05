@@ -2,7 +2,7 @@
 #This file is part of i-Haklab command
 source $PREFIX/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
-STDERR(){ printf "$R(_>)─➤$W missing argument, type i-Haklab -h for help";exit;}
+[[ $1 ]] || STDERR
 chk-snow
 if [ $1 = "encode" ]; then
 	while read -p "(_>)_message_or_file─➤ " msg && [ -z "$msg" ]; do

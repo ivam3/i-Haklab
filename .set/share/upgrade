@@ -117,6 +117,7 @@ printf "$G
  ╰──────────$Y~☆$W common wordlist for brute force attacks added$G
  ╰──────────$Y~☆$W IbyC-fixer + RuGiR updated to fix possible issues$G
  ╰──────────$Y~☆$W vim predictable text$G
+ ╰──────────$Y~☆$W code server for a best programer enviroment$G
  ╰──────────$Y~☆$W easy execution of fake root as command 'sudo'$G
  ╰──────────$Y~☆$W enable and desable login access with i-Haklab+install/remove$G
  ╰──────────$Y~☆$W install/remove more than 1 tool at the same time $G
@@ -125,7 +126,7 @@ printf "$G
  ╰──────────$Y~☆$W ngrok,ngrok.io and pagekite server added$G
  ╰──────────$Y~☆$W all abhacker repositories added$G
  ╰──────────$Y~☆$W metasploit easy and fast installation$G
- ╰──────────$Y~☆$W graphical environment with VNC-app$G
+ ╰──────────$Y~☆$W graphical environment with Termux:wayland or VNC-app$G
  ╰──────────$Y~☆$W automated installation and configuration x11-pkg$G
  ╰──────────$Y~☆$W wireshark xhydra and vim editor on graphical enviroment$G
  |

@@ -8,7 +8,6 @@ ctrl_c(){ printf "$Y\n\n\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3
 chk-iHaklab
 chk-Cuser
 [ $# -eq 0 ] && { printf >&2 "$R(_>)─➤$W missing argument, type $(basename $0) -h for help";exit;}
-STDERR(){ printf "$R(_>)─➤$W missing argument, type $(basename $0) -h for help";exit;}
 clear;banner
 case "$1" in
 	-h|help)
@@ -61,8 +60,8 @@ case "$1" in
 		bash $iHAKLAB/.set/share/reinstall
 		;;
 	root)
-		command -v sudo >/dev/null || wget -q $iHDB/bin/sudo -O $PREFIX/bin/sudo
-		exec sudo root
+		command -v proot >/dev/null || yes|apt install proot;clear
+		exec proot -0 -w ~ $SHELL
 		;;
 	show)
 		[[ $2 ]] && bash $iHAKLAB/.set/share/$1 ${@:2} || STDERR
@@ -98,25 +97,23 @@ case "$1" in
 		fi
 		rm $TMP_FILE1
 		;;
+	Xwayland)
+		for i in x11-repo xwayland;do
+			[[ $(pkg list-all|grep -oE "$i") ]] || yes|pkg install $i
+		done
+		cd ~/
+		export XDG_RUNTIME_DIR=${TMPDIR}
+		Xwayland :1 >/dev/null &
+		env DISPLAY=:1 xfce4-session
+		;;
 	weechat)
 		[[ -e $PREFIX/bin/weechat ]] || yes|apt install weechat
 		printf "$Y\n   (_>)─>$W After start weechat type the next commands$Y <─(<_)$Y\n/server add freenode chat.freenode.net/6697 -ssl -autoconnect\n    /set irc.server.freenode.autojoin #Ivam3byCinderella\n                   /connect freenode\n                  /nick your-nickname\n               /join #Ivam3byCinderella$G\n               $R(w)-> USE SOME VPN <-(w)$G\n\n                 Press enter to start$W\n"
 		read enter;weechat;k-boom
 		;;
-#:::AUTOMATED COMMAND:::#
-	bf|forwarding)
+	#:::AUTOMATED COMMAND:::#
+	bf|esmsg|forwarding|msf|share)
 		bash $iHAKLAB/.set/share/$1 ${@:2}
-		;;
-	payapk|payexe|paypdf|shodan)
-		if [ -z $2 ] || [ $2 -a "$3" -eq "$3" ] 2>/dev/null
-		then
-			bash $iHAKLAB/.set/share/msf ${@}
-		else
-			STDERR
-		fi
-		;;
-	share|Esmsg)
-		[[ $2 ]] && bash $iHAKLAB/.set/share/$1 ${@:2} || STDERR
 		;;
 	*)
 		STDERR

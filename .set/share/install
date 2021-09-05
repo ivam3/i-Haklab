@@ -97,15 +97,6 @@ case "$toInstall" in
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
 		;;
-	termux-wayland)
-		yes|apt install x11-repo xwayland
-		wget -q https://github.com/WMCB-Tech/termux-wayland/releases/download/v1.02.04/Termux-Wayland.apk -O $TMPDIR/Termux-Wayland.apk
-		termux-open $TMPDIR/Termux-Wayland.apk
-		export XDG_RUNTIME_DIR=${TMPDIR}
-		Xwayland :1 >/dev/null &
-		env DISPLAY=:1 xfce4-session
-		rm -rf $TMPDIR/Termux-Wayland.apk
-		;;
 	binwalk)
 		yes|apt install git python
 		PIPup
@@ -592,7 +583,7 @@ case "$toInstall" in
 			rm -rf ~/.$i
 		done
 		mv ./music $PREFIX/bin/music
-		apt autoremove;yes|pkg install xfce4 xfce4-taskmanager dosbox xfce4-terminal python-tkinter htop neofetch loqui vim-gtk the-powder-toy galculator xorg-xhost mpv-x ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk3 gtk2 mtpaint leafpad hexchat netsurf recordmydesktop feh audacious;yes|pkg install xfce4-* kvantum zenity mate-terminal mate-settings-daemon dbus-glib dconf termux-api wireshark-gtk
+		apt autoremove;yes|pkg install xfce4 xfce4-taskmanager dosbox xfce4-terminal python-tkinter htop neofetch loqui vim-gtk the-powder-toy galculator xorg-xhost mpv-x ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk3 gtk2 mtpaint leafpad hexchat otter-browser recordmydesktop feh audacious;yes|pkg install xfce4-* kvantum zenity mate-terminal mate-settings-daemon dbus-glib dconf termux-api wireshark-gtk
 		for v in music stopdesktop startdesktop; do
 			cp -rf ~/termux-desktop-xfce/$v $PREFIX/bin
 		done
@@ -891,9 +882,10 @@ case "$toInstall" in
 		}
 	msfdb(){
 		if [[ ! -d $PREFIX/var/lib/postgresql ]];then
-			mkdir -p $PREFIX/var/lib/postgresql
+			rm -rf $PREFIX/var/lib/postgresql
 		fi
 		wget -q $JAVADB/.embed/apk.rb -O $MSFDIR/lib/msf/core/payload/apk.rb -q
+		mkdir -p $PREFIX/var/lib/postgresql
 		initdb $PREFIX/var/lib/postgresql
 		pg_ctl -D $PREFIX/var/lib/postgresql start
 		createuser msf
@@ -1010,6 +1002,7 @@ esac" > $PREFIX/bin/msfconsole
 		    FILE=$(mktemp)
 		    wget -q "${iHDB}/fix-tools/fixmetasploit" -O $FILE
 		    chmod +x $FILE
+		    [[ -d $PREFIX/var/lib/postgresql ]] && rm -rf $PREFIX/var/lib/postgresql
 		    exec $FILE --install ruby=2.7.2 -r apt install metasploit -y
 		    rm $FILE
 		    Ivam3
