@@ -124,6 +124,7 @@ if [ -z $TOOL ]; then
 ╰─vt─────────────➤  VirusTotal: an command line service that analyzes files and URLs enabling the detection of viruses, worms, trojans and other kinds of malicious content using antivirus engines and website scanners.
 ╰─vulnx──────────➤  Intelligent bot auto shell injector that detect vulnerabilities in multiple types of cms.
 ╰─xerosploit─────➤  Penetration testing toolkit whose goal is to perform man in the middle attacks.
+╰─Xwayland───────➤  Run a Termux official graphical enviroment with Termux:Wayland app.
 ╰─webhackshl─────➤  Vulnerability analysis and information collection of websites and servers.
 ╰─websploit──────➤  
 ╰─wbruter────────➤  Brute force & dictionary attacking methods to various stuff
@@ -335,6 +336,15 @@ case "$TOOL" in
 			STDERR
 		fi
 		;;
+	Xwayland)
+		[[ $(ps aux|grep "xwayland"|head -n 1 >/dev/null) ]] || { printf >&2 "$R(_>)─➤$W Xwayland server is inactive, active it first and try again";exit;}
+		for i in x11-repo xwayland;do
+			[[ $(pkg list-all|grep -oE "$i") ]] || yes|pkg install $i
+		done
+		export XDG_RUNTIME_DIR=${TMPDIR}
+                Xwayland :1 >/dev/null 2>/dev/null &
+		env DISPLAY=:1 xfce4-session
+                ;;
 #::::GO TOOLS::::#
 	gophish|gobuster|tangalanga)
 		running

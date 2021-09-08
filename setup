@@ -90,7 +90,6 @@ bash /data/data/com.termux/files/usr/libexec/banner/wall-banner
 end
 
 function on_exit --on-event fish_exit
-rm -rf /data/data/com.termux/files/usr/tmp/*
 echo 'Have a nice hacking day!!'
 sleep 1
 end
