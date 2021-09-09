@@ -90,7 +90,7 @@ CONF
 		while read -p "(_>)_Version_to_remove_{ex_2.1.4}─➤ " OLDv && [ -z $OLDv ];do
 			continue
 		done
-		while read -p "(_>)_Version_to_install_{ex_2.2.11}─➤ " NEWv && [ -z $NEWv ];do
+		while read -p "(_>)_Version_to_install_{ex_2.2.26}─➤ " NEWv && [ -z $NEWv ];do
 			continue
 		done
 		gem install bundler:$NEWv

