@@ -61,6 +61,7 @@ else
 fi
 
 [[ $toInstall = desktop-xfce4 ]] && toInstall=xfce4-about
+[[ $toInstall = localtunnel-server ]] && toInstall="lt"
 if [[ -d $TOOLS/$toInstall ]] || [[ -e $PREFIX/bin/$toInstall ]] || [[ -d $PREFIX/opt/$toInstall ]] || [[ -e ~/go/bin/$toInstall ]];then
 	printf "$R(_>)─➤$W $1 it's already installed";exit
 fi
@@ -670,7 +671,7 @@ case "$toInstall" in
                 bash setup java8
                 rm -rf $PREFIX/share/java
 		;;
-	localtunnel-server)
+	localtunnel-server|lt)
 		yes|apt install nodejs git
 		git clone --quiet git://github.com/defunctzombie/$toInstall.git $TOOLS/$toInstall
 		cd $TOOLS/$toInstall
