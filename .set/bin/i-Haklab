@@ -2,7 +2,7 @@
 #Created on Dec/2018 and upgraded on Ago/2021 by @Ivam3
 IFS=$'\n\t'
 trap ctrl_c 2
-[[ $(basename $0) != i-Haklab ]] && mv $PREFIX/bin/$(basename $0) $PREFIX/bin/i-Haklab;exit
+[[ $(basename $0) != i-Haklab ]] && { mv $PREFIX/bin/$(basename $0) $PREFIX/bin/i-Haklab;exit;}
 source $PREFIX/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 ctrl_c(){ printf "$Y\n\n\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bot$W\n\n";exit;}
