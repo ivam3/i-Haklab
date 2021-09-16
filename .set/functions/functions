@@ -176,7 +176,7 @@ $Y OPTIONS$W|$Y   Arguments$W   |$Y    Description$W
 ╰forwarding+─<port─+─subdomain>─➤ Start a SSH client to request TCP port forwarding
 |    ╰──example─────────────{─i-Haklab forwarding 4444 my-subdomain-}
 |
-╰─handler──+─<nome─of─file.rc>──➤ Start handler on msfconsole with previous setting
+╰─handler──+─<name─of─file.rc>──➤ Start handler on msfconsole with previous setting
 |
 ╰───msf────+─dirscan─+─IPtarget─➤ Enumerate directories/subdirecotires from a server.
 |    |         ╰──example───────{─i-Haklab msf dirscan 10.10.10.242-}
