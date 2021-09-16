@@ -104,7 +104,7 @@ case "$1" in
 		read enter;weechat;k-boom
 		;;
 	#:::AUTOMATED COMMAND:::#
-	bf|esmsg|forwarding|msf|share)
+	bf|esmsg|forwarding|msf|ransomux|share)
 		bash $iHAKLAB/.set/share/$1 ${@:2}
 		;;
 	*)

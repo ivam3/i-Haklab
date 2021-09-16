@@ -110,7 +110,7 @@ else
 fi
 bash $PREFIX/libexec/banner/wall-banner
 printf "$G
-(_>)─➤$W i-Haklab upgraded at version 3.0-beta$G
+(_>)─➤$W i-Haklab upgraded at version 3.0$G
  ╰─────$Y~☆ New features:$G
  ╰──────────$Y~☆$W code cleaner that optimizes the use of RAM$G
  ╰──────────$Y~☆$W obsolete tools removed$G
