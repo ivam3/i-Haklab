@@ -141,8 +141,8 @@ case "$TOOL" in
 		if [ -d $PREFIX/opt/$TOOL ]; then
 			running
 			cd $PREFIX/opt/$TOOL
-			echo "load msgrpc ServerHost=127.0.0.1 ServerPort=55552 User=msf Pass='abc123'" > $PREFIX/opt/metasploit-framework/$TOOL.rc 
-			printf "$Y\n(_>)─➤$W In a new session run :\n      postgresql start\n      msfconsole -r \$PREFIX/opt/metasploit-framework/BeeF.rc\n$Y(_>)─➤$W then press$G enter$W to continue"
+			echo "load msgrpc ServerHost=127.0.0.1 ServerPort=55552 User=msf Pass='abc123' SSL=y" > $PREFIX/opt/metasploit-framework/$TOOL.rc 
+			printf "$Y\n(_>)─➤$W In a new session run :\n      postgresql start\n      msfconsole -r \$PREFIX/opt/metasploit-framework/$TOOL.rc\n$Y(_>)─➤$W then press$G enter$W to continue"
 			read enter
 			exec ruby $PREFIX/opt/$TOOL/$TOOL
 		else

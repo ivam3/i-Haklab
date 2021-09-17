@@ -17,7 +17,7 @@ STDERR() { printf "$R(_>)─➤$W BeeF is not installed.";exit;}
 export LD_PRELOAD="$LD_PRELOAD:$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal.so"
 if [[ -d $BEEF_PATH ]];then
 	cd $BEEF_PATH
-	printf "load msgrpc ServerHost=127.0.0.1 ServerPort=55552 User=msf Pass='abc123'" > $MSF_PATH/beef.rc
+	printf "load msgrpc ServerHost=127.0.0.1 ServerPort=55552 User=msf Pass='abc123' SSL=y" > $MSF_PATH/beef.rc
 	printf "$Y(_>)─➤ In a new session run :$W\n      msfconsole -r $MSF_PATH/beef.rc\n\n$G(_>)─➤$W then press$G enter$W to continue\n"
         read enter
         exec ruby $BEEF_PATH/$SCRIPT_NAME

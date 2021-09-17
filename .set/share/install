@@ -791,8 +791,9 @@ case "$toInstall" in
 			mkdir -p $PREFIX/opt
 		fi
 		git clone --quiet https://github.com/$1project/$toInstall $PREFIX/opt/$toInstall
-		sed 's|database: "/opt/GeoIP/GeoLite2-City.mmdb"|database: "/data/data/com.termux/files/usr/opt/GeoIP/GeoLite2-City.mmdb\" |g' -i config.yaml
+		sed "s|database: '/opt/GeoIP/GeoLite2-City.mmdb'|database: '/data/data/com.termux/files/usr/opt/GeoIP/GeoLite2-City.mmdb'|g" -i config.yaml
 		sed 's|passwd: "beef"|passwd: "Ivam3byCinderella"|g' -i config.yaml
+		sed '155 s|enable: false|enable: true|g' -i config.yaml
 		cd $PREFIX/opt/$toInstall
 		gem update --system
 		gem install bundler/

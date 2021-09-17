@@ -87,6 +87,14 @@ chk-root(){
         }
 export -f chk-root
 
+chk-network(){
+        until ping -q -c1 -W 1 8.8.8.8 >/dev/null 2>/dev/null;do
+		printf "$R(_>)─➤ Please connect to internet$W\n"
+		exit
+	done
+}
+export chk-network
+
 chk-msf() {
         command -v msfconsole > /dev/null || { printf "$R\n(_>)─➤$W Metasploit needed$R |$W run i-Haklab install metasploit";exit; }
 }
