@@ -93,7 +93,7 @@ chk-network(){
 		exit
 	done
 }
-export chk-network
+export -f chk-network
 
 chk-msf() {
         command -v msfconsole > /dev/null || { printf "$R\n(_>)─➤$W Metasploit needed$R |$W run i-Haklab install metasploit";exit; }
