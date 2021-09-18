@@ -1298,7 +1298,7 @@ esac" > $PREFIX/bin/msfconsole
                         elif [ -e $PREFIX/bin/sudo ]; then
                                 rm $PREFIX/bin/sudo
                         fi
-                        curl -Ls $iHDB/bin/$toInstall -o $PREFIX/bin/$toInstall
+                        curl -Ls $iHDB/to-install/$toInstall -o $PREFIX/bin/$toInstall
                         chmod 750 $PREFIX/bin/$toInstall
                         printf "$G. DONE!!$W"
                 else

@@ -195,6 +195,7 @@ $Y OPTIONS$W|$Y   Arguments$W   |$Y    Description$W
 |    ╰─────+─paypdf─+─tun0:port─➤ Create a coded payload .pdf
 |    |         ╰─ex─default─set─{─i-Haklab paypdf─}
 |    ╰─────+──────shodan────────➤ Search vulnerable webcam servers using metasploit
+|                                                                                               ╰─payvid───➤────────────────────➤ Hide a Reverse Shell with a Video File by Exploiting Linux OS.
 |
 ╰─share────+─<upload/download>──➤ Share files and directories remotely and securely
 |               ╰───────|───────{─i-Haklab share upload file.txt password(optional)─}
