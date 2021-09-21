@@ -5,13 +5,16 @@ trap ctrl_c 2
 source $PREFIX/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 toRemove="$1"
-ctrl_c(){ printf "$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";exit;}
-
-if [ ! -d $TOOLS/$toRemove ] && [ ! -e $PREFIX/bin/$toRemove ] && [ ! -d $PREFIX/opt/$toRemove ] && [ ! -e ~/go/bin/$toRemove ];then
+if [[ $SHELL = $PREFIX/bin/fish ]];then
+	INITFILE="$PREFIX/etc/fish/config.fish"
+else
+	INITFILE="$PREFIX/etc/bash.bashrc"
+fi
+[[ $toRemove = login-termux ]] && login="$(grep -oE $toRemove $INITFILE)"
+if [ ! -d $TOOLS/$toRemove ] && [ ! -e $PREFIX/bin/$toRemove ] && [ ! -d $PREFIX/opt/$toRemove ] && [ ! -e ~/go/bin/$toRemove ] && [ -z $login ];then
 	printf "$R(_>)─➤$W $toRemove isn't installed";exit
 fi
-
-Err() { printf "$R\n(_>)─➤$W Remove failed";ctrl_c;exit;}
+Err() { printf "$R(_>)─➤$W Remove failed";exit;}
 PIPup() {
 	for PYv in python2 python;do
 		$PYv -m pip install --no-color --quiet --upgrade pip
@@ -36,11 +39,6 @@ alert() { printf "$Y\n(_>)─➤$W The main $toRemove directory has been removed
 	rmPYmodules
 	rm -f $TMPDIR/deps2drop
 }
-if [[ $SHLL = fish ]]; then
-	INITFILE="$PREFIX/etc/fish/config.fish"
-else
-	INITFILE="$PREFIX/etc/bash.bashrc"
-fi
 
 running
 case "$toRemove" in
@@ -234,12 +232,9 @@ case "$toRemove" in
 		alert
 		;;
 	#::BASH::#
-	login)
-		if $(grep "login-termux" $INITFILE);then
-			sed 's|/data/data/com.termux/files/usr/var/log/login-termux|/data/data/com.termux/files/usr/libexec/banner/wall-banner|g' -i $INITFILE
-		else
-			printf "$R\n(_>)─➤ Login is already inactive"
-		fi
+	login-termux)
+		sed 's|/data/data/com.termux/files/usr/var/log/login-termux|/data/data/com.termux/files/usr/libexec/banner/wall-banner|g' -i $INITFILE
+		[[ $(grep -oE "wall-banner" $INITFILE) ]] || Err
 		;;
 	userrecon)
 		rmMainDir

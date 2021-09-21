@@ -62,7 +62,8 @@ fi
 
 [[ $toInstall = desktop-xfce4 ]] && toInstall=xfce4-about
 [[ $toInstall = localtunnel-server ]] && toInstall="lt"
-if [[ -d $TOOLS/$toInstall ]] || [[ -e $PREFIX/bin/$toInstall ]] || [[ -d $PREFIX/opt/$toInstall ]] || [[ -e ~/go/bin/$toInstall ]];then
+[[ $toInstall = login-termux ]] && login="$(grep -oE "$toInstall" $INITFILE)"
+if [[ -d $TOOLS/$toInstall ]] || [[ -e $PREFIX/bin/$toInstall ]] || [[ -d $PREFIX/opt/$toInstall ]] || [[ -e ~/go/bin/$toInstall ]] || [[ ! -z $login ]];then
 	printf "$R(_>)─➤$W $1 it's already installed";exit
 fi
 running
@@ -522,7 +523,6 @@ case "$toInstall" in
 		elif [[ $(grep "wall-banner" $INITFILE) ]];then
 			yes|apt install ruby && gem install lolcat
 			sed 's|/data/data/com.termux/files/usr/libexec/banner/wall-banner|/data/data/com.termux/files/usr/var/log/login-termux|g' -i $INITFILE
-			${which} login
 		else
 			printf "$R\n(_>)─➤ Login is already active"
 		fi
@@ -978,7 +978,9 @@ case "$toInstall" in
 SCRIPT_NAME=\$(basename \"\$0\")
 METASPLOIT_PATH=\"\${PREFIX}/opt/metasploit-framework\"
 #Fix ruby bigdecimal extensions linking error.
-export LD_PRELOAD=\"$BIGDECIMAL:\$LD_PRELOAD\"
+RUBYv=\$(ls \$PREFIX/lib/ruby |grep -m 1 \'[0-9].[0-9].[0-9]\')
+BIGDECIMAL=\$(find \$PREFIX/lib/ruby/\$RUBYv -iname \"bigdecimal.so\")
+export LD_PRELOAD=\"\$BIGDECIMAL:\$LD_PRELOAD\"
 case \"\$SCRIPT_NAME\" in
         msfconsole|msfvenom)
                 exec ruby \"\$METASPLOIT_PATH/\$SCRIPT_NAME\" \"\$@\"
@@ -1001,7 +1003,7 @@ esac" > $PREFIX/bin/msfconsole
 		    [[ -d $PREFIX/var/lib/postgresql ]] && rm -rf $PREFIX/var/lib/postgresql
 		    exec $FILE --install ruby=2.7.2 -r apt install metasploit -y
 		    rm $FILE
-		    Ivam3
+		    binfile
  	    }
 	    printf "$G\n(_>)─➤$W Reading environment."
 	    command -v termux-info > /dev/null || yes|apt install termux-api termux-tools
