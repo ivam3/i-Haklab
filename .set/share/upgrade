@@ -43,6 +43,8 @@ if $(bash $PREFIX/libexec/banner/wall-banner|grep -oE "v_2.0");then
 	git clone --quiet https://github.com/ivam3/i-Haklab.git ~/i-Haklab
 	cd ~/i-Haklab;chmod +x setup;bash setup
 else
+	wget -q $iHDB/functions/functions -O $iHAKLAB/.set/functions/functions
+	wget -q $iHDB/var/variables -O $iHAKLAB/.set/var/variables
 	source $PREFIX/share/i-Haklab/.set/var/variables
 	source $iHAKLAB/.set/functions/functions
 
