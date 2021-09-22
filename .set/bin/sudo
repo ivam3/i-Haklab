@@ -3,11 +3,11 @@
 #This script simulate a root enviroment shell or execute a script as fake root user
 #This script not make root androd systems, not execute or create a real root user.
 source $PREFIX/share/i-Haklab/.set/var/variables
-command -v proot >/dev/null || yes|apt install proot
+command -v fakeroot >/dev/null || yes|apt install fakeroot
 if [[ $1 = "root" ]]; then
-        termux-chroot
+        fakeroot
 elif [[ -z $1 ]]; then
         printf "$Y(_>)─➤$W usage: sudo <root|file to execute as root privilegies>\n$Y ╰─────➤$W ex1: sudo root\tTo run a shell as fake root user\n$Y ╰─────➤$W ex2: sudo script.sh\tTo run some script as fake root user\n"
 else
-        exec termux-chroot "$@" 2>&1
+        exec fakeroot -- $PWD/"$@" 2>&1
 fi
