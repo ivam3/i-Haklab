@@ -99,9 +99,31 @@ case "$1" in
 		rm $TMP_FILE1
 		;;
 	weechat)
-		[[ -e $PREFIX/bin/weechat ]] || yes|apt install weechat
-		printf "$Y\n   (_>)─>$W After start weechat type the next commands$Y <─(<_)$Y\n/server add freenode chat.freenode.net/6697 -ssl -autoconnect\n    /set irc.server.freenode.autojoin #Ivam3byCinderella\n                   /connect freenode\n                  /nick your-nickname\n               /join #Ivam3byCinderella$G\n               $R(w)-> USE SOME VPN <-(w)$G\n\n                 Press enter to start$W\n"
-		read enter;weechat;k-boom
+		command -v weechat >/dev/null 2>&1 || yes|apt install weechat
+		command -v openssl >/dev/null 2>&1 || yes|apt install openssl-tool
+		if [[ ! -e ~/.weechat/certs/freenode.pem ]];then
+			printf "$Y(_>)─>$W Before starting got to create a username and password in irc.com/login/sso\n$Y ╰────➤$W press$G enter$W to continue or$R ctrl_c$W to abort it";read enter
+			openssl req -x509 -new -newkey rsa:4096 -sha256 -days 1096 -nodes -out freenode.pem -keyout freenode.pem
+			mkdir -p ~/.weechat/certs;mv freenode.pem ~/.weechat/certs
+printf "$Y(_>)─>$W if this is your first time using weechat: after start weechat type the next commands$Y
+ ╰────➤$W otherwise,$R ignore it$Y
+        /server add -auto -ssl -ssl_cert ~/.weechat/certs/freenode.pem -network freenode chat.freenode.net 6697
+	/server add freenode chat.freenode.net/6697 -ssl --autoconnect
+	/set irc.server.freenode.addresses \"chat.freenode.net/6697\"
+	/set irc.server.freenode.ssl on
+	/set irc.server.freenode.sasl_mechanism PLAIN
+	/set irc.server.freenode.sasl_username <nickname>
+	/set irc.server.freenode.sasl_password <password>
+	/save
+	/secure passphrase <passphrase>
+	/secure set freenode_password <password>
+	/set irc.server.freenode.sasl_password \"\${sec.data.freenode_password}\"
+	/set irc.server.freenode.autojoin #Ivam3byCinderella
+	/connect freenode
+	/join #Ivam3byCinderella$G\n\n                 Press enter to start$W\n"
+	read enter
+		fi
+		weechat;k-boom
 		;;
 	#:::AUTOMATED COMMAND:::#
 	bf|esmsg|forwarding|msf|payvid|ransomux|share)
