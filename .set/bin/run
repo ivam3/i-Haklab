@@ -337,7 +337,7 @@ case "$TOOL" in
 		fi
 		;;
 	Xwayland)
-		[[ $(ps aux|grep "xwayland"|head -n 1 >/dev/null) ]] || { printf >&2 "$R(_>)─➤$W Xwayland server is inactive, active it first and try again";exit;}
+		[[ $(ps aux|grep -o "x11"|head -n 1 >/dev/null) ]] || { printf >&2 "$R(_>)─➤$W Xwayland server is inactive, active it first and try again";exit;}
 		for i in x11-repo xwayland;do
 			[[ $(pkg list-all|grep -oE "$i") ]] || yes|pkg install $i
 		done

@@ -3,9 +3,9 @@
 IFS=$'\n\t'
 trap ctrl_c 2
 source $PREFIX/share/i-Haklab/.set/var/variables
-source $iHAKLAB/.set/var/functions/functions
+source $iHAKLAB/.set/functions/functions
 command -v php > /dev/null 2>&1 || pkg install php & > /dev/null 2>&1
-ctrl_c(){ K-boom;exit;}
+ctrl_c(){ k-boom;exit;}
 usage(){ printf "$G\n(_>)_usage:─➤$W serverphp <wlan|io> <port number> <directory path>\n";}
 chk-iHaklab
 

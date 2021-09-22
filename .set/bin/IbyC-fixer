@@ -1,11 +1,12 @@
 #!/data/data/com.termux/files/usr/bin/bash
 #CREADED ON Dec/2018 BY @IVAM3
-#UPGRADED ON 2021/Feb/19
+#UPGRADED ON 2021/Sep/30
 
 IFS=$'\n\t'
 trap ctrl_c 2
-command -v curl >/dev/null 2>&1 || pkg install curl -y >/dev/null 2>&1
-
+command -v curl >/dev/null || yes|apt install curl >/dev/null 2>&1
+command -v ruby >/dev/null || yes|apt install ruby >/dev/null 2>&1
+command -v lolcat >/dev/null || yes|gem install lolcat >/dev/null 2>&1
 iHDB="https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set"
 IbyCDB="https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/installer"
 FILE=$(mktemp)
@@ -120,7 +121,7 @@ else
         sleep 1
 fi
 
-clear;curl -Ls "${iHDB}/libexec/banner/Ivam3"|bash
+clear;curl -Ls "${iHDB}/libexec/banner/fixer"|bash|lolcat
 while [ -z $1 ]; do
 	Menu
 done
