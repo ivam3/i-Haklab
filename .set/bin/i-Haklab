@@ -80,7 +80,7 @@ case "$1" in
 		RDAY=$(grep "Modify" $TMP_FILE1 | cut -d "-" -f3)
 		LMONTH=$(stat $iHAKLAB | grep Modify | awk '{print $2}' | cut -d "-" -f2)
 		LDAY=$(stat $iHAKLAB | grep Modify | awk '{print $2}' | cut -d "-" -f3)
-		Done(){ printf "$G\n\t\t(_>)─>$W Already up to date$G <-(<_)$W\n";}
+		Done(){ printf "$G\n\t    (_>)─>$W Already up to date$G <-(<_)$W\n";}
 		if [ $LMONTH -eq $RMONTH ];then
 			if [ $LDAY -gt $RDAY ];then
 				Done
