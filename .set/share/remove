@@ -100,7 +100,7 @@ case "$toRemove" in
 		printf "requests==2.24.0\nrequests-toolbelt==0.9.1\ngeopy\nprettytable==0.7.2\ninstagram-private-api==1.6.0\ngnureadline" > $MPDIR/deps2drop
 		alert
 		;;
-	phomber|vulnx)
+	phomber|vulnx|sublist3r)
 		cat $TOOLS/$toRemove/requirements.txt > $TMPDIR/deps2drop
 		rmMainDir
 		alert

@@ -314,6 +314,14 @@ case "$toInstall" in
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
 		;;
+	sublist3r)
+		yes|apt install python git
+                PIPup
+                PYv=""
+                git clone --quiet https://github.com/aboul3la/Sublist3r.git $TOOLS/$toInstall
+                cat $TOOLS/$toInstall/requirements.txt > $TMPDIR/requirements.txt                                              PYmodules
+                rm -f $TMPDIR/requirements.txt
+		;;
 	sqlmap)
 		printf "$C#::::::::::::::::::::::::::::::::::::#$Y\n(_>)─➤$W Choose a type of installation$G\n(_>)_01─➤$W Python-pip modules$G\n(_>)_02─➤$W Github\n"
 		while read -p "(_>)─➤ " ANSW && [ -z $ANSW ]; do

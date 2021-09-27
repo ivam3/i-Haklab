@@ -121,7 +121,9 @@ printf "$Y(_>)─>$W if this is your first time using weechat: after start weech
 	/set irc.server.freenode.autojoin #Ivam3byCinderella
 	/connect freenode
 	/join #Ivam3byCinderella$G\n\n                 Press enter to start$W\n"
-	read enter
+	                read enter
+		else
+			printf "$Y(_>)─➤$W After weechat started type the command :$G /connect freenode$W\n                 Press$G enter$W to start$W\n";read enter
 		fi
 		weechat;k-boom
 		;;
