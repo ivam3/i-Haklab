@@ -62,6 +62,7 @@ fi
 
 [[ $toInstall = desktop-xfce4 ]] && toInstall=xfce4-about
 [[ $toInstall = localtunnel-server ]] && toInstall="lt"
+[[ $toInstall = JohnTheRipper ]] && toInstall="john"
 [[ $toInstall = login-termux ]] && login="$(grep -oE "$toInstall" $INITFILE)"
 if [[ -d $TOOLS/$toInstall ]] || [[ -e $PREFIX/bin/$toInstall ]] || [[ -d $PREFIX/opt/$toInstall ]] || [[ -e ~/go/bin/$toInstall ]] || [[ ! -z $login ]];then
 	printf "$R(_>)─➤$W $1 it's already installed";exit
@@ -411,7 +412,7 @@ case "$toInstall" in
 		;;
 	credmap)
 		yes|apt install python2 git
-		PYPup
+		PIPup
 		PYv="2"
 		git clone --quiet https://github.com/lightos/$toInstall.git $TOOLS/$toInstall
 		chmod 750 $TOOLS/$toInstall/$toInstall.py
@@ -627,7 +628,7 @@ case "$toInstall" in
                         printf "$R\n\t      《ERR COMPILE》\n";Err
                 fi
 		;;
-	JohnTheRipper)
+	JohnTheRipper|john)
 		JTRv="1.8.0"
 		JTRtar="https://download.openwall.net/pub/projects/john/contrib/android/john-$JTRv-android-1.tar.gz"
 		yes|apt install wget
@@ -635,7 +636,7 @@ case "$toInstall" in
 		tar -xvzf $TMPDIR/john-$JTRv-android-1.tar.gz -C $TMPDIR
 		rm -rf $TMPDIR/john-$JTRv-android-1.tar.gz
 		mkdir -p $PREFIX/opt/john
-		JTR="$PREFIX/opt/$toInstall"
+		JTR="$PREFIX/opt/john"
 		mv $TMPDIR/john-$JTRv-android/user/* $JTR
 		ln -s $JTR/john.conf $JTR/john.ini
 		case $(uname -m) in

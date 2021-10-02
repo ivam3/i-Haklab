@@ -369,9 +369,9 @@ case "$TOOL" in
 
 #:::: BINARIES ::::#
 	john)
-		if [ -d $PREFIX/opt/JohnTheRipper ];then
+		if [ -d $PREFIX/opt/john ];then
 			running
-			cd $PREFIX/opt/JohnTheRipper
+			cd $PREFIX/opt/john
 			clear
 			./john ${@:2}
 		else
