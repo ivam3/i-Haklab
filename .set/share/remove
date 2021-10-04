@@ -10,6 +10,7 @@ if [[ $SHELL = $PREFIX/bin/fish ]];then
 else
 	INITFILE="$PREFIX/etc/bash.bashrc"
 fi
+[[ $toRemove = twifo-cli ]] && toRemove="twifo"
 [[ $toRemove = login-termux ]] && login="$(grep -oE $toRemove $INITFILE)"
 if [ ! -d $TOOLS/$toRemove ] && [ ! -e $PREFIX/bin/$toRemove ] && [ ! -d $PREFIX/opt/$toRemove ] && [ ! -e ~/go/bin/$toRemove ] && [ -z $login ];then
 	printf "$R(_>)─➤$W $toRemove isn't installed";exit
@@ -297,6 +298,9 @@ case "$toRemove" in
 		for i in myip mypip swip ; do
 			rm -f $PREFIX/bin/$i
 		done
+		;;
+	twifo-cli|twifo)
+		npm uninstall $toInstall-cli
 		;;
 	youtubedr|youtube-dl|converter)
 		if [[ $toRemove = youtube-dl ]];then

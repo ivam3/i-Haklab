@@ -64,6 +64,7 @@ fi
 [[ $toInstall = localtunnel-server ]] && toInstall="lt"
 [[ $toInstall = JohnTheRipper ]] && toInstall="john"
 [[ $toInstall = login-termux ]] && login="$(grep -oE "$toInstall" $INITFILE)"
+[[ $toInstall = twifo-cli ]] && toInstall="twifo"
 if [[ -d $TOOLS/$toInstall ]] || [[ -e $PREFIX/bin/$toInstall ]] || [[ -d $PREFIX/opt/$toInstall ]] || [[ -e ~/go/bin/$toInstall ]] || [[ ! -z $login ]];then
 	printf "$R(_>)─➤$W $1 it's already installed";exit
 fi
@@ -772,6 +773,10 @@ case "$toInstall" in
 			chmod 750 $PREFIX/bin/$i
 		done
 		;;
+	twifo-cli|twifo)
+		yes|apt install nodejs
+		npm install -global $toInstall-cli
+		;;
 	youtube-dl|converter)
 		if [[ $toInstall = youtube-dl ]];then
 			dpkg --configure -a
@@ -1329,5 +1334,5 @@ esac" > $PREFIX/bin/msfconsole
 		;;
 esac
 #ENDING SCRIPT
-printf "$G\n\n (_>)-> :::::::::::::::::: DONE !! ::::::::::::::::::: <-(<_)$W\nFor more information about $1 execute: i-Haklab about $1$Y\n\t   To fix issues going to$B t.me/Ivam3_Bot$W\n\n"
+printf "$G\n\n (_>)-> :::::::::::::::::: DONE !! ::::::::::::::::::: <-(<_)$Y\n\tTo run $1 execute :$G run $toInstall$W\nFor more information execute: i-Haklab about $1$Y\n\t   To fix issues going to$B t.me/Ivam3_Bot$W\n\n"
 #             i-Haklab by @Ivam3
