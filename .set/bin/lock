@@ -1,5 +1,0 @@
-#!/usr/bin/bash
-#This files will lock the active session
-command -v cacafire >/dev/null || yes|apt install libcaca
-cacafire;login
-#         i-Haklab by Ivam3
