@@ -2,7 +2,7 @@
 #This script will install i-Haklab v.3.0 2021 by Ivam3 - It is a hacking laboratory that contains open source tools recommended by Ivam3.
 IFS=$'\n\t'
 trap ctrl_c 2
-ctrl_c() { printf "$Y\n\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n\n";}
+ctrl_c() { printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";}
 while [ ! -d ~/i-Haklab ] && [ $PWD != ~/i-Haklab ];do
 	printf "$R\n(_>)─➤$W i-Haklab must to be in HOME path.\n"
 	ctrl_c;exit

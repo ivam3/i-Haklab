@@ -73,6 +73,11 @@ case "$toRemove" in
 		rmMainDir
 		;;
 	#:::PYTHON3:::#
+	botgram)
+		rmMainDir
+		printf "numpy telethon requests configparser" > $TMPDIR/deps2drop
+		alert
+		;;
 	h8mail|objection)
 		printf "$toRemove" > $TMPDIR/deps2drop
 		alert
