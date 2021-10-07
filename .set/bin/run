@@ -219,7 +219,6 @@ case "$TOOL" in
 		;;
 	botgram)
 		if CheckPath;then
-			[[ -z $2 ]] && { banner;printf >&2 "$R(_>)─➤$W $TOOL need an argument";exit;}
 			PS3="(_>)─➤ "
 			printf "$Y(_>)─➤$W Choose an opcion to run $TOOL.\n\n"
 			select opc in add2group getdata sendmsg setup exit;do
