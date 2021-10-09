@@ -2,7 +2,7 @@
 
 - Botgram help you to fetch all information about Telegram group members that you manage. It automates the mass sending of messages and the addition of members to other groups from the command line (CLI).
 
-#Setting
+# Setting
 
 - In order for botgram manage your account, it needs the identifier number (ID) and the hash of the Telegram API to be able to connect remotely to your account. In turn, the second authentication factor must be deactivated from Telegram settings. And for this you must go to the section "API development tools" of the official Telegram site at :
 

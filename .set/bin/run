@@ -350,7 +350,9 @@ case "$TOOL" in
 		fi
 		;;
 	Xwayland)
-		[[ $(ps aux|grep -o "x11"|head -n 1 >/dev/null) ]] || { printf >&2 "$R(_>)─➤$W Xwayland server is inactive, active it first and try again";exit;}
+		ps aux > $TMPDIR/ps.tmp
+		[[ $(grep -o "com.termux.x11" $TMPDIR/ps.tmp) ]] || { printf >&2 "$R(_>)─➤$W Xwayland server is inactive, active it first and try again";rm $TMPDIR/ps.tmp;exit;}
+		rm $TMPDIR/ps.tmp
 		for i in x11-repo xwayland;do
 			[[ $(pkg list-all|grep -oE "$i") ]] || yes|pkg install $i
 		done
