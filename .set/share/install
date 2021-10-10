@@ -522,8 +522,12 @@ case "$toInstall" in
 		PIPup
 		git clone --quiet https://github.com/The404Hacking/$toInstall $TOOLS/$toInstall
 		chmod +x -R $TOOLS/$toInstall
+		;;#::BASH::#
+	ExiF)
+		yes|apt install wget exiftool
+		wget -q https://raw.githubusercontent.com/ivam3/Exif/master/ExiF -O $TOOLS/$toInstall
+		chmod 751 $TOOLS/$toInstall
 		;;
-	#::BASH::#
 	exploitdb)
 		yes|apt install git wget
 		git clone --quiet https://github.com/offensive-security/$toInstall.git $TOOLS/$toInstall
@@ -620,10 +624,10 @@ case "$toInstall" in
 		sed 's|/twm &|xfce4-session &|g' -i ~/.vnc/xstartup
 		printf "$G\nDONE!!$Y\n\nNOW GO TO PLAY STORE AND DOWNLOAD VNC SERVER APP$G\n[RUN ON TERMUX]─➤$W vncserver$G\n      ╰─────────➤ At first time, you will be prompted for setting up passwords$Y\nOPEN VNC APP AND SET NETWORK ADDRESS AS : localhost:1$G\n[TO STOP IT]─➤$W vncserver -kill :1\n"
 		;;
-	ExiF|binchecker|crunch|i-Haklab|IbyC-fixer|blackbox|converter|lock|pagekite|serverphp|torvpn)
+	binchecker|crunch|i-Haklab|IbyC-fixer|blackbox|converter|lock|pagekite|serverphp|torvpn)
 		yes|apt install curl
 		curl -Ls $iHDB/bin/$toInstall -o $PREFIX/bin/$toInstall
-		chmod 750 $PREFIX/bin/$toInstall
+		chmod 751 $PREFIX/bin/$toInstall
 		;;
 	hydra)
 		yes|apt install git make automake -y
@@ -1148,9 +1152,10 @@ esac" > $PREFIX/bin/msfconsole
 		;;
 	#::PERL::#
 	DoS-A-Tool)
-		yes|apt install git perl
-		git clone --quiet https://github.com/Ivam3/$toInstall.git $TOOLS/$toInstall
-		chmod +x $TOOLS/$toInstall/*
+		yes|apt install wget perl
+		wget -q https://raw.githubusercontent.com/ivam3/$toInstall/master/$toInstall -O $PREFIX/bin/$toInstall
+		chmod +x $PREFIX/bin/$toInstall
+		dos2unix $PREFIX/bin/$toInstall
 		;;
 	acccheck)
 		yes|apt install git perl
