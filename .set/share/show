@@ -69,7 +69,7 @@ elif [[ $(basename $1) = tutorials ]];then
 					if [ $TUTO = 'false' ] || [ -z $TUTO ];then
 						printf "$R\n(_>)─➤$W Tutorial is not available to be download\n";exit
 					else
-						youtubedr $TUTO
+						youtubedr download $TUTO
 					fi
 					;;
 				Exit|*)
