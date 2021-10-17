@@ -81,8 +81,9 @@ elif [[ $(basename $1) = tutorials ]];then
 elif [[ $(basename $1) = books ]];then
 	select book in $(cat $iHAKLAB/.set/libexec/Books/List|awk '{print $1}') Exit;do
 		link=$(cat -n $iHAKLAB/.set/libexec/Books/List|head -n $REPLY|tail -n 1|awk '{print $NF}')
+		[[ -d $iHAKLAB/books ]] || mkdir -p $iHAKLAB/books
 		if [[ $REPLY -le $(cat -n $iHAKLAB/.set/libexec/Books/List|tail -n 1|awk '{print $1}') ]];then
-			chk-mega;megadl --path=$iHAKLAB/books https://mega.nz/$link;break
+			chk-mega;megadl --path=$iHAKLAB/books/ https://mega.nz/$link;break
 		elif [[ $book = Exit ]];then
 			break
 		else
