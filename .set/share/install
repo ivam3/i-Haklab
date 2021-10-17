@@ -560,6 +560,7 @@ case "$toInstall" in
 		chmod +x $TOOLS/$toInstall/*
 		cd $TOOLS/$toInstall
 		bash tmux_setup
+		wget -q $iHDB/.fix-tools/$toInstall -O $TOOLS/$toInstall/$toInstall
 		;;
 	saycheese|sayhello)
 		[[ -e $PREFIX/bin/ngrok ]] || { printf >&2 "$R\n(_>)─➤ ERROR :$W ngrok is not installed\n";ctrl_c;}
