@@ -65,6 +65,7 @@ fi
 [[ $toInstall = JohnTheRipper ]] && toInstall="john"
 [[ $toInstall = login-termux ]] && login="$(grep -oE "$toInstall" $INITFILE)"
 [[ $toInstall = twifo-cli ]] && toInstall="twifo"
+[[ $toInstall = wfuzz ]] && toInstall="fuzzdb"
 if [[ -d $TOOLS/$toInstall ]] || [[ -e $PREFIX/bin/$toInstall ]] || [[ -d $PREFIX/opt/$toInstall ]] || [[ -e ~/go/bin/$toInstall ]] || [[ ! -z $login ]];then
 	printf "$R(_>)─➤$W $1 it's already installed";exit
 fi
@@ -554,7 +555,7 @@ case "$toInstall" in
 		fi
 		;;
 	nexphisher)
-		[[ -e $PREFIX/bin/ngrok ]] || { printf >&2 "$R\n(_>)─➤ ERROR :$W ngrok is not installed\n";ctrl_c;}
+		[[ -e $PREFIX/bin/ngrok ]] || { printf >&2 "$R\n(_>)─➤ ERROR :$W ngrok is not installed\n";ctrl_c;exit;}
 		yes|apt install git
 		git clone --quiet https://github.com/htr-tech/$toInstall $TOOLS/$toInstall
 		chmod +x $TOOLS/$toInstall/*
