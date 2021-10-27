@@ -721,6 +721,7 @@ case "$toInstall" in
 			rm -rf $TMPDIR/$1-stable-linux-$arch.zip
 			printf "#!/bin/bash\n#THIS SCRIPT EXECUTE NGROK TO AVOID 'bad address' ERROR\nexec termux-chroot $HOME/.ngrok2/ngrok \${@:1}\n#     i-Haklab by Ivam3" > $PREFIX/bin/$1.io
 			chmod +x ~/.ngrok2/$1 $PREFIX/bin/$1.io
+			#sed -i 's|link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")|curl -sSL http://localhost:4040/api/tunnels|cut -d '"' -f14|awk -F "/" '{print $3}'|cut -d ":" -f2|g' $PREFIX/bin/$toInstall
 			PS3="(_>)─➤ "
 			printf "$Y(_>)─➤$W $toInstall needs an authtoken from $1.com$Y\n"
 			select way in Set_authtoken Skip_this_step;do
@@ -781,6 +782,12 @@ case "$toInstall" in
 		rm -rf $TMPDIR/snow-20130616/
 		rm -rf $TMPDIR/stegsnow_20130616.orig.tar.gz
 		chmod 750 $PREFIX/bin/$toInstall
+		;;
+	tmux)
+		yes|apt install tmux git
+		cd;git clone https://github.com/gpakosz/.tmux.git
+		ln -s -f .tmux/.tmux.conf
+		cp .tmux/.tmux.conf.local .
 		;;
 	torvpn)
 		yes|apt install tor torsocks proxychains-ng
