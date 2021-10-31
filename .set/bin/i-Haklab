@@ -26,7 +26,7 @@ case "$1" in
 				bash $iHAKLAB/.set/share/$1 $i
 			done
 			if [[ $(ruby -v |cut -c 6-10) != "2.7.2" ]];then
-				printf "$Y(_>)─➤$W Downgrading ruby at version 2.7.2.."
+				printf "$Y(_>)─➤$W Downgrading ruby at version 2.7.2..\n"
 #		bash <(curl -fsSL "http://git.io/abhacker-repo") --install ruby=2.7.2
 				if [ ! -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ];then
 					printf "$Y(_>)─➤$W Installing Abhacker repositories.$G"

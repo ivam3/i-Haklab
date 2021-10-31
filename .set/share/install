@@ -116,15 +116,21 @@ case "$toInstall" in
 		git clone --quiet https://github.com/ivam3/$toInstall $TOOLS/$toInstall
 		cd $TOOLS/$toInstall
 		chmod 750 *
-		printf "numpy telethon requests configparser" > $TMPDIR/requirements.txt
-                PYmodules
+		printf "numpy\ntelethon\nrequests\nconfigparser" > $TMPDIR/requirements.txt
+		PYmodules
 		rm -f $TMPDIR/requirements.txt
 		python setup.py --install
 		python setup.py --config
 		;;
 	evilurl)
 		yes|apt install python git
+		PIPup
+		PYv=""
 		git clone --quiet https://github.com/UndeadSec/EvilURL.git $TOOLS/$toInstall
+		chmod +x -R $TOOLS/$toInstall
+		printf "python-nmap\npython-whois" > $TMPDIR/requirements.txt
+		PYmodules
+		rm -rf $TMPDIR/requirements.txt
 		;;
 	fuzzdb)
 		yes|apt install git wget python

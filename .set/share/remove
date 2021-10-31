@@ -296,6 +296,12 @@ case "$toRemove" in
 			sed 's|alias serverapache="apachectl"||g' -i $INITFILE
 		fi
 		;;
+	tmux)
+		yes|apt remove --purge tmux;apt autoremove
+		[[ -d ~/.tmux ]] && rm -rf ~/.tmux
+		[[ -e ~/.tmux.conf ]] && rm -rf ~/.tmux.conf
+		[[ -e ~/.tmux.conf.local ]] && rm -rf ~/.tmux.conf.local
+		;;
 	torvpn)
 		yes|apt remove tor torsocks proxychains-ng
 		yes|apt autoremove
