@@ -1,5 +1,3 @@
-DoS-A-Tool
-ExiF
 acccheck
 adbfastboot
 adminpanel
@@ -22,11 +20,13 @@ converter
 credmap
 crunch
 d-tect
+DoS-A-Tool
 desktop-xfce4
 dirb
 dnsenum
 embed
 evilurl
+ExiF
 exploitdb
 fbi
 fuzzdb

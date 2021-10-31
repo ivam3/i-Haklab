@@ -619,7 +619,7 @@ case "$toInstall" in
 			rm -rf ~/.$i
 		done
 		mv ./music $PREFIX/bin/music
-		apt autoremove;yes|pkg install xfce4 xfce4-taskmanager dosbox xfce4-terminal python-tkinter htop neofetch loqui vim-gtk the-powder-toy galculator xorg-xhost mpv-x ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk3 gtk2 mtpaint leafpad hexchat otter-browser recordmydesktop feh audacious;yes|pkg install xfce4-* kvantum zenity mate-terminal mate-settings-daemon dbus-glib dconf termux-api wireshark-gtk
+		apt autoremove;yes|pkg install x11-repo xwayland xfce4 xfce4-taskmanager dosbox xfce4-terminal python-tkinter htop neofetch loqui vim-gtk the-powder-toy galculator xorg-xhost mpv-x ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk3 gtk2 mtpaint leafpad hexchat otter-browser recordmydesktop feh audacious;yes|pkg install xfce4-* kvantum zenity mate-terminal mate-settings-daemon dbus-glib dconf termux-api wireshark-gtk
 		for v in music stopdesktop startdesktop; do
 			cp -rf ~/termux-desktop-xfce/$v $PREFIX/bin
 		done

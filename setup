@@ -276,11 +276,11 @@ printf "$G\n\n
  ╰────────➤ run:$W serverapache :──────────:to start apache server$Y
  ╰────────➤ run:$W torvpn :────────────────:to use a proxy connection$Y
  ╰────────➤ run:$W postgresql start :──────:to start postgresql data base$Y
- ╰────────➤ run:$W Xwayland :──────────────:to init graphical enviroment on Termux:Wayland app$Y
+ ╰────────➤ run:$W run Xwayland :──────────:to init graphical enviroment on Termux:Wayland app$Y
  ╰────────➤ run:$W vncserver :─────────────:to init graphical enviroment on vnc app$Y
  ╰────────➤ run:$W sudo <some commands> :──:to run commands as super user whithout rooted device$Y
  ╰────────➤ run:$W i-Haklab about i-Haklab :for all usage guide$G
 (_>)─➤$W To fix issues going to$B t.me/Ivam3_Bot$G
-(_>)─➤$W press$G enter$W to start\n"
+(_>)─➤$W press$G enter$W and reestart Termux\n"
 read enter;exec login
 #		i-Haklab by @Ivam3
