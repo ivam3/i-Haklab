@@ -118,7 +118,7 @@ else
 	for i in $(ls $iHAKLAB/.set/to-install/.termux);do
 		wget -q --tries=20 $iHDB/to-install/$i -O ~/.termux/$i
 	done
-	[[ -l ~/.termux/shell ]] || ln -s $PREFIX/bin/fish ~/.termux/shell
+	[[ -e ~/.termux/shell ]] || ln -s $PREFIX/bin/fish ~/.termux/shell
 
 	printf "$G\n(_>)─➤$W Installing VIM predictable text.\n"
 	[[ -d ~/.vim ]] && rm -rf ~/.vim
