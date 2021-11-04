@@ -15,7 +15,6 @@ source $PREFIX/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 chk-Cuser
 clear;banner;sleep 0.5
-${which} mkdir -p ~/.termux && echo "extra-keys = [['ESC','/','-','HOME','UP','END','PGUP'],['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN']]" > ~/.termux/termux.properties && echo "$rst"
 
 if [ -d ~/.local ]; then
 	rm -rf ~/.local
@@ -56,7 +55,7 @@ fi
 
 #::: UPDATING LOCATE DATA BASE :::#
 printf "$G\n(_>)─➤$W Updating data base."
-${which} updatedb
+exec updatedb
 
 printf "$G\n(_>)─➤$W Installing required python modules.\n"
 for v in python python2 ; do
@@ -83,7 +82,7 @@ printf "$G\n(_>)─➤ Installing interactive shell.$W\n"
 [[ -d ~/.config/omf ]] && rm -rf ~/.config/omf/
 git config --global core.autocrlf
 printf "$Y\n(_>)─➤ Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'\n ╰─➤ when it happen hold on for one minute and then type exit to continue$W\n"
-curl -Ls http://get.oh-my.fish | fish
+curl -Ls $iHDB/to-install/get.oh-my.fish|fish
 cat <<- CONF >> $PREFIX/etc/fish/config.fish
 if status --is-login
 bash /data/data/com.termux/files/usr/libexec/banner/wall-banner
@@ -291,7 +290,7 @@ printf "$G\n\n
  ╰────────➤ run:$W sudo <some commands> :──:to run commands as super user whithout rooted device$Y
  ╰────────➤ run:$W i-Haklab about i-Haklab :for all usage guide$G
 (_>)─➤$W To fix issues going to$B t.me/Ivam3_Bot$G
-(_>)─➤$W press$G enter$W and reestart Termux\n"
+(_>)─➤$W press$G enter$W and please reestart Termux\n"
 [[ -d ~/i-Haklab ]] && rm -rf ~/i-Haklab
 read enter;exec login
 #		i-Haklab by @Ivam3

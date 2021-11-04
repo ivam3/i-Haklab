@@ -16,13 +16,13 @@ if [ $1 = "encode" ]; then
         done
 	read -p "(_>)_password_{empty=none}─➤ " passwd
         if [ -e "$msg" ] && [ -z passwd ];then
-                $(which snow) -C -f $msg $file2encode $encodedfile
+                $(command -v snow) -C -f $msg $file2encode $encodedfile
         elif [ -e "$msg" ] && [ ! -z passwd ];then
-                $(which snow) -C -p "$passwd" -f $msg $file2encode $encodedfile
+                $(command -v snow) -C -p "$passwd" -f $msg $file2encode $encodedfile
         elif [ ! -z $passwd ];then
-                $(which snow) -C -p "$passwd" -m "$msg" $file2encode $encodedfile
+                $(command -v snow) -C -p "$passwd" -m "$msg" $file2encode $encodedfile
         else
-                $(which snow) -C -m "$msg" $file2encode $encodedfile
+                $(command -v snow) -C -m "$msg" $file2encode $encodedfile
         fi
 elif [ $1 = "decode" ]; then
 	while read -p "(_>)_file_to_decode─➤ " file2decode && [ -z $file2decode ]; do
@@ -30,9 +30,9 @@ elif [ $1 = "decode" ]; then
 	done
 	read -p "(_>)_password_{empty=none}─➤ " passwd
         if [ ! -z $passwd ]; then
-                $(which snow) -C -p "$passwd" $file2decode
+                $(command -v snow) -C -p "$passwd" $file2decode
         else
-                $(which snow) -C $file2decode
+                $(command -v snow) -C $file2decode
         fi
 else
 	STDERR

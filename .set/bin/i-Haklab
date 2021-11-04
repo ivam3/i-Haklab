@@ -22,6 +22,7 @@ case "$1" in
 		;;
 	install|remove)
 		if [[ $2 ]];then
+			[[ $(grep "$2" $iHAKLAB/.set/libexec/Tools/listoftools) ]] || { printf >&2 "$R(_>)─➤$W Tool $2 doesn't exist in i-Haklab\n";exit;}
 			for i in ${@:2};do
 				bash $iHAKLAB/.set/share/$1 $i
 			done

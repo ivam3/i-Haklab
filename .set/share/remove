@@ -115,7 +115,7 @@ case "$toRemove" in
 	phoneinfoga)
 		yes|apt remove geckodriver
 		rmMainDir
-		if $(which geckodriver);then
+		if $(command -v geckodriver);then
 			rm -f $PREFIX/bin/geckodriver
 		fi
 		printf "phonenumbers\nselenium\nbs4\ngoogle_api\nconfig\nhtml5lib\ngeckodriver-autoinstaller" > $TMPDIR/deps2drop

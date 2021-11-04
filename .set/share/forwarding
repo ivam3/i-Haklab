@@ -7,8 +7,8 @@ if [ $SSH = "1" ]; then
 	killall -2 ssh > /dev/null 2>&1
 fi
 [[ $(command -v lt) ]] || { printf >&2 "$R\n(_>)─➤ ERROR :$W Localtunnel-server is not installed\n";exit;}
-default(){ config;$(which lt) -h "http://$TUNNEL" -p $LPORT --print-requests;}
-subdomain(){ config;$(which lt) -h "http://$TUNNEL" -p $LPORT -s $SUBDOMAIN --print-requests;}
+default(){ config;$(command -v lt) -h "http://$TUNNEL" -p $LPORT --print-requests;}
+subdomain(){ config;$(command -v lt) -h "http://$TUNNEL" -p $LPORT -s $SUBDOMAIN --print-requests;}
 config(){ printf "$Y\n(_>)_USAGE─➤$W i-Haklab forwarding <port/domain>$G\n(_>)_PORT─➤$W $LPORT$G\n(_>)_DOMAIN─➤$W $SUBDOMAIN$G\n(_>)─➤$W ";}
 chk-tunnel
 if [ "$2" -eq "$2" ] 2>/dev/null && [ $3 ]

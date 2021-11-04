@@ -1,24 +1,21 @@
-#!/usr/bin/bash
-#This script will turn to default settings i-Haklab v.3.0 2021 by Ivam3 - It is a hacking laboratory that contains open source tools recommended by Ivam3.
+#!/data/data/com.termux/files/usr/bin/bash
+#This script will install i-Haklab v.3.0 2021 by Ivam3 - It is a hacking laboratory that contains open source tools recommended by Ivam3.
 IFS=$'\n\t'
 trap ctrl_c 2
-ctrl_c() { printf "$Y\n\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n\n";}
-
+ctrl_c() { printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";}
 printf "Running...";sleep 0.5
+[[ -d $PREFIX/share/i-Haklab ]] && rm -rf $PREFIX/share/i-Haklab
 [[ -d ~/java ]] && rm -rf ~/java
+git clone https://github.com/ivam3/i-Haklab.git $PREFIX/share/i-Haklab
 source $PREFIX/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
+chk-Cuser
 clear;banner;sleep 0.5
-${which} mkdir -p ~/.termux && echo "extra-keys = [['ESC','/','-','HOME','UP','END','PGUP'],['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN']]" > ~/.termux/termux.properties && echo "$rst"
-
 if [ -d ~/.local ]; then
 	rm -rf ~/.local
 fi
 if [ -d ~/.config/fish ]; then
 	rm -rf ~/.config/fish
-fi
-if [ -d ~/.config/omf ];then
-	rm -rf ~/.config/omf
 fi
 if command -v fish >/dev/null;then yes|apt remove fish && apt autoremove; fi
 
@@ -30,7 +27,7 @@ printf "$G(_>)─➤$W Upgrading and installing Termux packages.\n"
 yes|pkg update && pkg upgrade
 apt list|awk -F "/" '{print $1}' > $TMPDIR/alltools.tmp
 pkg list-installed|awk -F "/" '{print $1}' > $TMPDIR/installed.tmp
-for repo in fish root-repo unstable-repo fortune util-linux coreutils vim python python2 ruby perl clang curl wget gawk make openssl openssl-tool php zip unzip tar w3m neofetch weechat irssi tor torsocks proxychains-ng htop bison megatools findutils git apr apr-util openssh apache2 mariadb php-apache pkg-config termux-api termux-tools termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner cmatrix figlet man termux-api axel fortune apksigner autoconf libffi libgmp libpcap readline libsqlite libgrpc libiconv libcaca libtool libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static zlib libassuan libgcrypt libgpg-error youtubedr gnupg gpgme dnsutils debianutils sqlite dirb mlocate tigervnc crunch translate-shell ffsend x11-repo; do
+for repo in fish root-repo unstable-repo fortune util-linux coreutils vim python python2 openjdk-17 ruby perl clang curl wget gawk make openssl openssl-tool php zip unzip tar w3m neofetch weechat irssi tor torsocks proxychains-ng htop bison megatools findutils git apr apr-util openssh apache2 mariadb php-apache pkg-config termux-api termux-tools termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner cmatrix figlet man termux-api axel fortune apksigner autoconf libffi libgmp libpcap readline libsqlite nmap libgrpc libiconv libcaca libtool libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static zlib libassuan libgcrypt libgpg-error youtubedr gnupg gpgme dnsutils debianutils sqlite dirb mlocate tigervnc crunch translate-shell ffsend x11-repo hexedit dns2tcp tmux; do
 	GOTIT=$(grep -oE $repo $TMPDIR/installed.tmp)
 	PKG=$(grep -o $repo $TMPDIR/alltools.tmp)
 	if [ ! -z "$PKG" ] && [ -z "$GOTIT" ];then
@@ -53,7 +50,7 @@ fi
 
 #::: UPDATING LOCATE DATA BASE :::#
 printf "$G\n(_>)─➤$W Updating data base."
-${which} updatedb
+exec updatedb
 
 printf "$G\n(_>)─➤$W Installing required python modules.\n"
 for v in python python2 ; do
@@ -80,7 +77,7 @@ printf "$G\n(_>)─➤ Installing interactive shell.$W\n"
 [[ -d ~/.config/omf ]] && rm -rf ~/.config/omf/
 git config --global core.autocrlf
 printf "$Y\n(_>)─➤ Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'\n ╰─➤ when it happen hold on for one minute and then type exit to continue$W\n"
-curl -Ls http://get.oh-my.fish | fish
+curl -Ls $iHDB/to-install/get.oh-my.fish|fish
 cat <<- CONF >> $PREFIX/etc/fish/config.fish
 if status --is-login
 bash /data/data/com.termux/files/usr/libexec/banner/wall-banner
@@ -137,14 +134,6 @@ if [ -x /data/data/com.termux/files/usr/libexec/termux/command-not-found ]; then
 fi
 CONF
 
-printf "$G\n(_>)─➤$W Installing VIM predictable text."
-[[ -d ~/.vim ]] && rm -rf ~/.vim
-wget -q --tries=20 ${iHDB}/to-install/iHaklabvim.zip -O $TMPDIR/iHaklabvim.zip
-unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
-rm -f $TMPDIR/iHaklabvim.zip
-mv $TMPDIR/vim ~/.vim
-wget -q --tries=20 $iHDB/functions/unset.fish -O  ~/.config/fish/functions/unset.fis
-
 #::::::::::Insatalling i-Haklab's login::::::::::::#
 [[ -e $PREFIX/var/log/login-termux ]] && rm -f $PREFIX/var/log/login-termux
 [[ -e $PREFIX/etc/bashito ]] && rm -f $PREFIX/etc/bashito
@@ -160,7 +149,6 @@ cat <<- CONF > $PREFIX/libexec/banner/wall-banner
 #!/usr/bin/bash
 #Banner for i-Haklab created by @Ivam3 on Jan/2019
 IFS=$'\n\t'
-source $iHAKLAB/.set/var/variables
 bash /data/data/com.termux/files/usr/libexec/banner/login-banner
 #        i-Haklab by @Ivam3
 CONF
@@ -180,20 +168,71 @@ chmod -w $PREFIX/libexec/termux/.Cinderella
 #::::::::::Insatalling i-Haklab tools::::::::::::#
 printf "$G\n(_>)─➤$W Installing principal external tools."
 chmod 750 $iHAKLAB/.set/bin/*
-cp $iHAKLAB/.set/bin/* $PREFIX/bin
+cp $iHAKLAB/.set/bin/* $PREFIX/bin/
 if ! command -v msfconsole >/dev/null;then
-printf "$G\n(_>)─➤$W Installing metasploit-framework."
-        bash <(curl -fsSL "http://git.io/abhacker-repo") --install metasploit -y
+	printf "$G\n(_>)─➤$W Installing metasploit-framework."
+	bash $TMPabh --install metasploit ruby=2.7.2 >/dev/null 2>&1
+	wget -q $JAVADB/.embed/apk.rb -O $MSFDIR/lib/msf/core/payload/apk.rb
+	wget -q $iHDB/.set/bin/IbyC-fixer -O $PREFIX/bin/IbyC-fixer
+        chmod +x $PREFIX/bin/IbyC-fixer
+	#:::: FIXING BIG DECIMAL ISSUES ::::#
+	RUBYv=$(ls $PREFIX/lib/ruby |grep -m 1 '[0-9].[0-9].[0-9]')
+        LINUXANDROID=$(find $PREFIX/lib/ruby/$RUBYv -iname "bigdecimal.so"|awk -F "/" '{print $10}')
+        yes|apt install -yq patchelf >/dev/null 2>&1
+        if [[ -e "$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal.so" ]];then
+		if [[ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal/util.so"|grep bigdecimal.so)" ]];then
+			exit 0
+		fi
+	patchelf --add-needed \
+		"$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal.so" \
+		"$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal/util.so"
+	fi
+	printf "#!/usr/bin/sh
+        SCRIPT_NAME=\$(basename \"\$0\")
+        METASPLOIT_PATH=\"\${PREFIX}/opt/metasploit-framework\"
+        #Fix ruby bigdecimal extensions linking error.
+        export LD_PRELOAD=\"$LINUXANDROID:\$LD_PRELOAD\"
+        case \"\$SCRIPT_NAME\" in
+                msfconsole|msfvenom)
+                        exec ruby \"\$METASPLOIT_PATH/\$SCRIPT_NAME\" \"\$@\"
+                        ;;
+                *)
+                        echo \"[!] Unknown Metasploit command '\$SCRIPT_NAME'.\"
+                        exit 1
+                        ;;
+        esac" > $PREFIX/bin/msfconsole
 fi
-for TOOL in DoS-A-Tool ExiF embed evilurl localtunnel-server ngrok desktop-xfce;do
-	bash $iHAKLAB/.set/share/install $TOOL
-done
 
-printf "$G\n(_>)─➤$W Installing ngrok ngrok-ssh and ngrok-server by AbHacker."
+printf "$G\n(_>)─➤$W Installing ngrok.io ngrok-ssh and ngrok-server."
 [[ $(command -v ngrok) ]] && mv $(command -v ngrok) $(command -v ngrok).io
 bash $TMPabh --install ngrok-server >/dev/null 2>&1
 rm $TMPabh
 
+printf "$G\n(_>)─➤$W Installing VIM predictable text."
+[[ -d ~/.vim ]] && rm -rf ~/.vim
+wget -q --tries=20 ${iHDB}/to-install/iHaklabvim.zip -O $TMPDIR/iHaklabvim.zip
+unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
+rm -f $TMPDIR/iHaklabvim.zip
+mv $TMPDIR/iHaklabvim/vim ~/.vim
+mv $TMPDIR/iHaklabvim/vim/.vimrc ~/
+rm -f $TMPDIR/iHaklabvim
+printf "$Y\n(_>)─➤$W ALERT!!$Y\n ╰───➤$W Before to use VIM open it and type:$G :PlugUpdate$Y\n ╰───➤$W To update all the new features.$Y\n ╰───➤$W press$G enter$W to continue\n"
+read enter
+
+printf "$G\n(_>)─➤$W Setting i-Haklab style."
+[[ -d ~/.termux ]] || mkdir -p ~/.termux
+for i in $(ls $iHDB/to-install/.termux/);do
+	wget -q --tries=20 $iHDB/to-install/$i -O ~/.termux/$i
+done
+ln -s $PREFIX/bin/fish ~/.termux/shell
+
+#:::: Set VNC server ::::#
+printf "$G\n(_>)─➤$W Setting vncserver."
+wget -q --tries=20 $iHDB/functions/unset.fish -O  ~/.config/fish/functions/unset.fis
+for TOOL in DoS-A-Tool ExiF embed evilurl localtunnel-server desktop-xfce;do
+	bash $iHAKLAB/.set/share/install $TOOL
+done
+exec vncserver :1
 [[ -d ~/.vnc ]] || mkdir ~/.vnc
 cat <<- CONF > ~/.vnc/xstartup
 #!/data/data/com.termux/files/usr/bin/sh
@@ -208,6 +247,7 @@ aterm -geometry 160x48+20+20 -ls &
 # Requires package 'xorg-twm'.
 startxfce4
 CONF
+vncserver -kill :1 >/dev/null 2>/dev/null &
 
 #::::::::::Searching for root permissions::::::::::::#
 if chk-root;then
@@ -232,21 +272,23 @@ bash $iHAKLAB/.set/share/review #LOGFILE
 printf "$G\n\n
 (_>)─➤$W i-Haklab installed !!!$Y\n
 (_>)─➤$W Main commands$Y
- ╰────────➤ run:$W i-Haklab -h :───────────────:to automate process$Y
- ╰────────➤ run:$W run <name of tool> :────────:to execute installed tool$Y
- ╰────────➤ run:$W omf theme <name of theme>:──:to change a theme$Y
- ╰────────➤ run:$W lock :──────────────────────:to block screen$Y
- ╰────────➤ run:$W IbyC-fixer :────────────────:to fix termux's issues$Y
- ╰────────➤ run:$W LOCALHOST :─────────────────:to show local ip$Y
- ╰────────➤ run:$W serverphp :─────────────────:to start php server$Y
- ╰────────➤ run:$W traductor :─────────────────:to init a translate shell$Y
- ╰────────➤ run:$W serverapache :──────────────:to start apache server$Y
- ╰────────➤ run:$W torvpn :────────────────────:to use a proxy connection$Y
- ╰────────➤ run:$W postgresql start :──────────:to start postgresql data base$Y
- ╰────────➤ run:$W vncserver :─────────────────:to init graphical enviroment on vnc app$Y
- ╰────────➤ run:$W sudo <some commands> :──────:to run commands as fake root user$Y
- ╰────────➤ run:$W i-Haklab about i-Haklab :───:for all usage guide$G
+ ╰────────➤ run:$W i-Haklab -h :───────────:to automate process$Y
+ ╰────────➤ run:$W run <name of tool> :────:to execute installed tool$Y
+ ╰────────➤ run:$W omf theme :─────────────:to change a theme$Y
+ ╰────────➤ run:$W lock :──────────────────:to block screen$Y
+ ╰────────➤ run:$W IbyC-fixer :────────────:to fix termux's issues$Y
+ ╰────────➤ run:$W LOCALHOST :─────────────:to show local ip$Y
+ ╰────────➤ run:$W serverphp :─────────────:to start php server$Y
+ ╰────────➤ run:$W traductor :─────────────:to init a translate shell$Y
+ ╰────────➤ run:$W serverapache :──────────:to start apache server$Y
+ ╰────────➤ run:$W torvpn :────────────────:to use a proxy connection$Y
+ ╰────────➤ run:$W postgresql start :──────:to start postgresql data base$Y
+ ╰────────➤ run:$W run Xwayland :──────────:to init graphical enviroment on Termux:Wayland app$Y
+ ╰────────➤ run:$W vncserver :─────────────:to init graphical enviroment on vnc app$Y
+ ╰────────➤ run:$W sudo <some commands> :──:to run commands as super user whithout rooted device$Y
+ ╰────────➤ run:$W i-Haklab about i-Haklab :for all usage guide$G
 (_>)─➤$W To fix issues going to$B t.me/Ivam3_Bot$G
-(_>)─➤$W press$G enter$W to start\n"
+(_>)─➤$W press$G enter$W and plaease reestart Termux\n"
+[[ -d ~/i-Haklab ]] && rm -rf ~/i-Haklab
 read enter;exec login
 #		i-Haklab by @Ivam3

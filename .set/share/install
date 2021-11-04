@@ -261,7 +261,7 @@ case "$toInstall" in
 		else
 			bits=32
 		fi
-		if ! $(which geckodriver);then
+		if ! $(command -v geckodriver);then
 			wget -q https://github.com/mozilla/geckodriver/releases/download/v0.29.1/geckodriver-v0.29.1-linux$bits.tar.gz -O $TMPDIR/geckodriver-v0.29.1-linux$bits.tar.gz
 			tar -xvzf $TMPDIR/geckodriver-v0.29.1-linux$bits.tar.gz -C $TMPDIR > /dev/null 2>&1
 			rm $TMPDIR/geckodriver-v0.29.1-linux$bits.tar.gz
@@ -551,8 +551,7 @@ case "$toInstall" in
 		;;
 	login-termux)
 		if [[ ! -e $PREFIX/libexec/termux/.Ivam3 ]];then
-			bash $iHAKLAB/.set/to-install/i-Haklab_login
-			${which} login
+			bash $iHAKLAB/.set/to-install/i-Haklab_login;login
 		elif [[ $(grep "wall-banner" $INITFILE) ]];then
 			yes|apt install ruby && gem install lolcat
 			sed 's|/data/data/com.termux/files/usr/libexec/banner/wall-banner|/data/data/com.termux/files/usr/var/log/login-termux|g' -i $INITFILE
@@ -600,8 +599,9 @@ case "$toInstall" in
 		fi
 		;;
 	code-server)
-		yes|apt install build-essential python git nodejs yarn
-		yarn global add $toInstall
+		yes|apt install build-essential python git nodejs-lts yarn
+		yarn config set ignore-engines true
+		yarn global add $toInstall --ignore-engines
 		printf "$G(_>)_Set_a_login_password$W "
 		while read -p ":─➤ " passwd && [ -z $passwd ];do
 			continue
@@ -619,7 +619,7 @@ case "$toInstall" in
 			rm -rf ~/.$i
 		done
 		mv ./music $PREFIX/bin/music
-		apt autoremove;yes|pkg install x11-repo xwayland xfce4 xfce4-taskmanager dosbox xfce4-terminal python-tkinter htop neofetch loqui vim-gtk the-powder-toy galculator xorg-xhost mpv-x ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk3 gtk2 mtpaint leafpad hexchat otter-browser recordmydesktop feh audacious;yes|pkg install xfce4-* kvantum zenity mate-terminal mate-settings-daemon dbus-glib dconf termux-api wireshark-gtk
+		apt autoremove;yes|pkg install x11-repo xfce4 xfce4-taskmanager dosbox xfce4-terminal python-tkinter htop neofetch loqui vim-gtk the-powder-toy galculator xorg-xhost mpv-x ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk3 gtk2 mtpaint leafpad hexchat otter-browser recordmydesktop feh audacious lxqt-themes papirus-icon-theme lxappearance fluent-icon-theme fluent-gtk-theme;yes|pkg install xfce4-* kvantum zenity mate-terminal mate-settings-daemon dbus-glib dconf termux-api wireshark-gtk
 		for v in music stopdesktop startdesktop; do
 			cp -rf ~/termux-desktop-xfce/$v $PREFIX/bin
 		done
@@ -628,7 +628,8 @@ case "$toInstall" in
 		done
 		mkdir ~/Desktop ~/Downloads ~/Templates ~/Public ~/Documents ~/Pictures ~/Video
 		cp -rf $HOME/termux-desktop-xfce/README.desktop $HOME/Desktop
-		ln -s $HOME/storage/music $HOME/Music 
+		ln -s $HOME/storage/music $HOME/Music
+		exec vncserver;sleep 3
 		sed 's|/twm &|xfce4-session &|g' -i ~/.vnc/xstartup
 		printf "$G\nDONE!!$Y\n\nNOW GO TO PLAY STORE AND DOWNLOAD VNC SERVER APP$G\n[RUN ON TERMUX]─➤$W vncserver$G\n      ╰─────────➤ At first time, you will be prompted for setting up passwords$Y\nOPEN VNC APP AND SET NETWORK ADDRESS AS : localhost:1$G\n[TO STOP IT]─➤$W vncserver -kill :1\n"
 		;;
@@ -664,6 +665,7 @@ case "$toInstall" in
 		JTR="$PREFIX/opt/john"
 		mv $TMPDIR/john-$JTRv-android/user/* $JTR
 		ln -s $JTR/john.conf $JTR/john.ini
+		sleep 2
 		case $(uname -m) in
 			aarch64)
 				mv $TMPDIR/john-$JTRv-android/libs/arm64-v8a/* $JTR
@@ -684,17 +686,16 @@ case "$toInstall" in
 		rm -rf $TMPDIR/john-$JTRv-android
 		chmod +x $JTR/*
 		printf "#!/usr/bin/bash
-		#This script find and execute johntheripper tool
-		#
-		R='\033[1;31m'
-		W='\033[0m'
-		if [ -d \$PREFIX/opt/john ];then
-		       cd \$PREFIX/opt/john
-		       ./john \$@
-	        else
-		       printf \"\$R(_>)─➤\$W JohnTheRipper is not installed\$W\"
-		fi
-		#            i-Haklab by @Ivam3" > $PREFIX/bin/john
+#This script find and execute johntheripper tool
+R='\\033[1;31m'
+W='\\033[0m'
+if [ -d \$PREFIX/opt/john ];then
+	cd \$PREFIX/opt/john
+	./john \$@
+else
+	printf \"\$R(_>)─➤\$W JohnTheRipper is not installed\$W\"
+fi
+#            i-Haklab by @Ivam3" > $PREFIX/bin/john
 		chmod +x $PREFIX/bin/john
 		;;
 	java)
@@ -1036,7 +1037,7 @@ case \"\$SCRIPT_NAME\" in
 		;;
 esac" > $PREFIX/bin/msfconsole
 		    chmod +x $PREFIX/bin/msfconsole
-		    ln -sf $(which msfconsole) $PREFIX/bin/msfvenom
+		    ln -sf $(command -v msfconsole) $PREFIX/bin/msfvenom
 		    Ivam3
 	    }
 	    Termux(){
@@ -1137,6 +1138,7 @@ esac" > $PREFIX/bin/msfconsole
 		exec $gop1/$gop2/$toInstall
 		#           i-Haklab by Ivam3.
 		CONF
+		chmod +x ~/go/bin/$toInstall
 		sed 's|"listen_url": "0.0.0.0:80",|"listen_url": "127.0.0.1:8080",|g' -i $gop1/$gop2/config.json
 		chmod 640 $gop1/$gop2/config.json
 		;;
@@ -1298,7 +1300,7 @@ esac" > $PREFIX/bin/msfconsole
                                 for opt in 1 2 3 4;do
                                         if [ ! -O ~/.suroot/.bashrc ]; then
                                                 let try=opt++
-                                                sudo ${which} chown $USER:$USER -R ~/.suroot
+                                                sudo chown $USER:$USER -R ~/.suroot
                                                 if [ $try -gt 3 ];then
                                                         printf "$R. DENIED$Y\n(_>)─➤$W to fix it try 'chmod $USER:$USER -R ~/.suroot' and reinstall\n";Err
                                                 fi
@@ -1306,7 +1308,7 @@ esac" > $PREFIX/bin/msfconsole
                                 done
                         else
                                 if [ ! -d ~/.suroot ]; then
-                                        ${which} mkdir ~/.suroot
+                                        mkdir ~/.suroot
                                 fi
                         fi
                         printf "PS1=\"\[\e[33m\][!] \[\e[31m\]Press\[\e[32m\] Ctrl d\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\"

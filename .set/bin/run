@@ -8,7 +8,7 @@ chk-iHaklab
 #::::VARIABLES::::#
 TOOL=$(basename "$1")
 TOOLPATH="$TOOLS/$TOOL"
-GOPATH=$(cat $PREFIX/etc/fish/config.fish | grep GOPATH | awk '{print $3}')
+GOPATH=$(cat $PREFIX/etc/fish/config.fish|grep "GOPATH"|awk '{print $3}'|head -n 1)
 
 #::::FUNCTIONS::::#
 STDERR(){ printf "$R\n(_>)─➤$W $TOOL is not installed$W\n";exit;}
@@ -351,16 +351,17 @@ case "$TOOL" in
 		;;
 	Xwayland)
 		for i in x11-repo xwayland termux-x11;do
-			[[ $(pkg list-all|grep -oE "$i") ]] || yes|pkg install $i
+			[[ $(pkg list-installed|grep -oE "$i") ]] || yes|pkg install $i
 		done
 		export XDG_RUNTIME_DIR=${TMPDIR}
-    termux-x11 :1 >/dev/null 2>/dev/null &
-		env DISPLAY=:1 xfce4-session
+    termux-x11 :0 >/dev/null 2>/dev/null &
+		sleep 3
+		env DISPLAY=:0 xfce4-session
                 ;;
 #::::GO TOOLS::::#
 	gophish|gobuster|tangalanga)
 		running
-		if [ -e $GOPATH/bin/$TOOL ]; then
+		if [[ -e $GOPATH/bin/$TOOL ]]; then
 			cd $GOPATH/bin
 			exec $GOPATH/bin/$TOOL ${@:2}
 		else
