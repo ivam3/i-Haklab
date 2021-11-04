@@ -115,7 +115,7 @@ else
 
 	printf "$G\n(_>)─➤$W Setting i-Haklab style."
 	[[ -d ~/.termux ]] || mkdir -p ~/.termux
-	for i in $(ls $iHDB/to-install/.termux/);do
+	for i in $(ls $iHAKLAB/to-install/.termux/);do
 		wget -q --tries=20 $iHDB/to-install/$i -O ~/.termux/$i
 	done
 	ln -s $PREFIX/bin/fish ~/.termux/shell
