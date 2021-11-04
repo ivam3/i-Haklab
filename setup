@@ -222,7 +222,17 @@ rm -f $TMPDIR/iHaklabvim.zip
 mv $TMPDIR/iHaklabvim/vim ~/.vim
 mv $TMPDIR/iHaklabvim/vim/.vimrc ~/
 rm -f $TMPDIR/iHaklabvim
+printf "$Y\n(_>)─➤$W ALERT!!$Y\n ╰───➤$W Before to use VIM open it and type:$G :PlugUpdate$Y\n ╰───➤$W To update all the new features.$Y\n ╰───➤$W press$G enter$W to continue\n"
+read enter
 
+printf "$G\n(_>)─➤$W Setting i-Haklab style."
+[[ -d ~/.termux ]] || mkdir -p ~/.termux
+for i in $(ls $iHDB/to-install/.termux/);do
+	wget -q --tries=20 $iHDB/to-install/$i -O ~/.termux/$i
+done
+ln -s $PREFIX/bin/fish ~/.termux/shell
+
+#:::: Set VNC server ::::#
 wget -q --tries=20 $iHDB/functions/unset.fish -O  ~/.config/fish/functions/unset.fis
 for TOOL in DoS-A-Tool ExiF embed evilurl localtunnel-server desktop-xfce;do
 	bash $iHAKLAB/.set/share/install $TOOL
@@ -282,5 +292,6 @@ printf "$G\n\n
  ╰────────➤ run:$W i-Haklab about i-Haklab :for all usage guide$G
 (_>)─➤$W To fix issues going to$B t.me/Ivam3_Bot$G
 (_>)─➤$W press$G enter$W and reestart Termux\n"
+[[ -d ~/i-Haklab ]] && rm -rf ~/i-Haklab
 read enter;exec login
 #		i-Haklab by @Ivam3

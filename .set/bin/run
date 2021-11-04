@@ -350,16 +350,11 @@ case "$TOOL" in
 		fi
 		;;
 	Xwayland)
-		[[ -d $PREFIX/libexec/termux-x11 ]] || mkdir -p $PREFIX/libexec/termux-x11
-		[[ -e $PREFIX/libexec/termux-x11/termux-startx11 ]] || touch $PREFIX/libexec/termux-x11/termux-startx11
-		ps aux > $TMPDIR/ps.tmp
-		[[ $(grep -o "com.termux.x11" $TMPDIR/ps.tmp) ]] || { printf >&2 "$R(_>)─➤$W Xwayland server is inactive, active it first and try again";rm $TMPDIR/ps.tmp;exit;}
-		rm $TMPDIR/ps.tmp
-		for i in x11-repo xwayland;do
+		for i in x11-repo xwayland termux-x11;do
 			[[ $(pkg list-all|grep -oE "$i") ]] || yes|pkg install $i
 		done
 		export XDG_RUNTIME_DIR=${TMPDIR}
-    Xwayland :1 >/dev/null 2>/dev/null &
+    termux-x11 :1 >/dev/null 2>/dev/null &
 		env DISPLAY=:1 xfce4-session
                 ;;
 #::::GO TOOLS::::#

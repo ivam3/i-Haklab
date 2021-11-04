@@ -10,10 +10,11 @@ if [[ $SHELL = $PREFIX/bin/fish ]];then
 else
 	INITFILE="$PREFIX/etc/bash.bashrc"
 fi
+[[ $toRemove = kalilinux ]] && toRemove="kali-fs"
 [[ $toRemove = twifo-cli ]] && toRemove="twifo"
 [[ $toRemove = login-termux ]] && login="$(grep -oE $toRemove $INITFILE)"
-if [ ! -d $TOOLS/$toRemove ] && [ ! -e $PREFIX/bin/$toRemove ] && [ ! -d $PREFIX/opt/$toRemove ] && [ ! -e ~/go/bin/$toRemove ] && [ -z $login ];then
-	printf "$R(_>)─➤$W $toRemove isn't installed";exit
+if [ ! -d $TOOLS/$toRemove ] && [ ! -e $PREFIX/bin/$toRemove ] && [ ! -d $PREFIX/opt/$toRemove ] && [ ! -e ~/go/bin/$toRemove ] && [ ! -d ~/$toRemove ] && [ -z $login ];then
+	printf "$R(_>)─➤$W $1 isn't installed";exit
 fi
 Err() { printf "$R(_>)─➤$W Remove failed";exit;}
 PIPup() {
@@ -43,7 +44,7 @@ alert() { printf "$Y\n(_>)─➤$W The main $toRemove directory has been removed
 
 running
 case "$toRemove" in
-	kalilinux)
+	kalilinux|kali-fs)
 		yes|apt install curl && curl https://raw.githubusercontent.com/AndronixApp/AndronixOrigin/master/Uninstall/Kali/UNI-kali.sh|bash
 		;;
 	termuxwayland)
@@ -401,7 +402,7 @@ case "$toRemove" in
 		sudo rm -rf ~/.suroot $PREFIX/bin/$toRemove
 		;;
 	*)
-		printf "$R(_>)─➤$W Unable to locate $toRemove on i-Haklab\n"
+		printf "$R(_>)─➤$W Unable to locate $1 on i-Haklab\n"
                 sleep 0.5
                 printf "$G(_>)─➤$W Trying with Advance Packect Tool (APT)...\n"
                 if [[ $(pkg list-all|grep -oE "$toRemove") ]];then

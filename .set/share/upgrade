@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 #i-Haklab v.3.0 2021 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3.
 #Created on Jan/2019 
-#Modify: 2021-10-20
+#Modify: 2021-11-20
 ####################
 IFS=$'\n\t'
 trap ctrl_c 2
@@ -109,7 +109,26 @@ else
 		wget -q $iHDB/bin/$i -O $PREFIX/bin/$i
 		chmod +x $PREFIX/bin/$i
 	done
+
+	printf "$G\n(_>)─➤$W Setting i-Haklab style."
+	[[ -d ~/.termux ]] || mkdir -p ~/.termux
+	for i in $(ls $iHDB/to-install/.termux/);do
+		wget -q --tries=20 $iHDB/to-install/$i -O ~/.termux/$i
+	done
+	ln -s $PREFIX/bin/fish ~/.termux/shell
+
+	printf "$G\n(_>)─➤$W Installing VIM predictable text."
+	[[ -d ~/.vim ]] && rm -rf ~/.vim
+	wget -q --tries=20 ${iHDB}/to-install/iHaklabvim.zip -O $TMPDIR/iHaklabvim.zip
+	unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
+	rm -f $TMPDIR/iHaklabvim.zip
+	mv $TMPDIR/iHaklabvim/vim ~/.vim
+	mv $TMPDIR/iHaklabvim/vim/.vimrc ~/
+	rm -f $TMPDIR/iHaklabvim
+	printf "$Y\n(_>)─➤$W ALERT!!$Y\n ╰───➤$W Before to use VIM open it and type:$G :PlugUpdate$Y\n ╰───➤$W To update all the new features.$Y\n ╰───➤$W press$G enter$W to continue\n"
+	read enter
 fi
+
 bash $PREFIX/libexec/banner/wall-banner
 printf "$G
 (_>)─➤$W i-Haklab upgraded at version 3.0$G

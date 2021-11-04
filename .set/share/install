@@ -81,9 +81,9 @@ case "$toInstall" in
 	kalilinux)
 		yes|pkg install wget curl proot tar -y && wget https://raw.githubusercontent.com/AndronixApp/AndronixOrigin/master/Installer/Kali/kali-xfce.sh -O kali-xfce.sh && chmod +x kali-xfce.sh && bash kali-xfce.sh 
 		cat <<- CONF > ~/kali-fs/etc/apt/sources.list
-		deb [trusted=yes]  https://http.kali.org/kali kali-rolling main contrib non-free
-		deb http://ftp.debian.org/debian buster main
-		deb http://ftp.debian.org/debian buster-updates main
+		deb [trusted=yes]  http://http.kali.org/kali kali-rolling main contrib non-free
+		#deb http://ftp.debian.org/debian buster main
+		#deb http://ftp.debian.org/debian buster-updates main
 		CONF
 		printf "$G(_>)─➤$W Follow the the next steps$G\t
 		(01)─➤$W run $toInstall < ./start-kali.sh >$G\t
