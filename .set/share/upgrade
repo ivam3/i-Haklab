@@ -113,21 +113,21 @@ else
 		chmod +x $PREFIX/bin/$i
 	done
 
-	printf "$G\n(_>)─➤$W Setting i-Haklab style."
+	printf "$G\n(_>)─➤$W Setting i-Haklab style.\n"
 	[[ -d ~/.termux ]] || mkdir -p ~/.termux
 	for i in $(ls $iHAKLAB/.set/to-install/.termux);do
 		wget -q --tries=20 $iHDB/to-install/$i -O ~/.termux/$i
 	done
-	ln -s $PREFIX/bin/fish ~/.termux/shell
+	[[ -l ~/.termux/shell ]] || ln -s $PREFIX/bin/fish ~/.termux/shell
 
-	printf "$G\n(_>)─➤$W Installing VIM predictable text."
+	printf "$G\n(_>)─➤$W Installing VIM predictable text.\n"
 	[[ -d ~/.vim ]] && rm -rf ~/.vim
 	wget -q --tries=20 ${iHDB}/to-install/iHaklabvim.zip -O $TMPDIR/iHaklabvim.zip
 	unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
-	rm -f $TMPDIR/iHaklabvim.zip
+	rm -rf $TMPDIR/iHaklabvim.zip
 	mv $TMPDIR/iHaklabvim/vim ~/.vim
 	mv $TMPDIR/iHaklabvim/vim/.vimrc ~/
-	rm -f $TMPDIR/iHaklabvim
+	rm -rf $TMPDIR/iHaklabvim
 	printf "$Y\n(_>)─➤ ALERT!!\n ╰───➤$W Before to use VIM open it and type:$G :PlugUpdate$Y\n ╰───➤$W To update all the new features.$Y\n ╰───➤$W press$G enter$W to continue\n"
 	read enter
 fi
