@@ -126,7 +126,7 @@ else
 	unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
 	rm -rf $TMPDIR/iHaklabvim.zip
 	mv $TMPDIR/iHaklabvim/vim ~/.vim
-	mv $TMPDIR/iHaklabvim/vim/.vimrc ~/
+	mv $TMPDIR/iHaklabvim/.vimrc ~/
 	rm -rf $TMPDIR/iHaklabvim
 	printf "$Y\n(_>)─➤ ALERT!!\n ╰───➤$W Before to use VIM open it and type:$G :PlugUpdate$Y\n ╰───➤$W To update all the new features.$Y\n ╰───➤$W press$G enter$W to continue\n"
 	read enter
