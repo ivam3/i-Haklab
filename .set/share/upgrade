@@ -137,20 +137,20 @@ CONF
 
 	######### Upgrading executables #########
 	BINDIR=$(ls $iHAKLAB/.set/bin)
-	printf "$Y(_>)─➤$W Upgrading commands. . .$W\n"
+	printf "$Y(_>)─➤$W Upgrading commands. . .$W\na"
 	for i in ${BINDIR[*]}; do
 		wget -q $iHDB/bin/$i -O $PREFIX/bin/$i
 		chmod +x $PREFIX/bin/$i
 	done
 
-	printf "$G\n(_>)─➤$W Setting i-Haklab style.\n"
+	printf "$G(_>)─➤$W Setting i-Haklab style.\n"
 	[[ -d ~/.termux ]] || mkdir -p ~/.termux
 	for i in $(ls $iHAKLAB/.set/to-install/.termux);do
 		wget -q --tries=20 $iHDB/to-install/$i -O ~/.termux/$i
 	done
 	[[ -e ~/.termux/shell ]] || ln -s $PREFIX/bin/fish ~/.termux/shell
 
-	printf "$G\n(_>)─➤$W Installing VIM predictable text.\n"
+	printf "$G(_>)─➤$W Installing VIM predictable text.\n"
 	[[ -d ~/.vim ]] && rm -rf ~/.vim
 	wget -q --tries=20 ${iHDB}/to-install/iHaklabvim.zip -O $TMPDIR/iHaklabvim.zip
 	unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
@@ -158,7 +158,7 @@ CONF
 	mv $TMPDIR/iHaklabvim/vim ~/.vim
 	mv $TMPDIR/iHaklabvim/.vimrc ~/
 	rm -rf $TMPDIR/iHaklabvim
-	printf "$Y\n(_>)─➤ ALERT!!\n ╰───➤$W Before to use VIM open it and type:$G :PlugUpdate$Y\n ╰───➤$W To update all the new features.$Y\n ╰───➤$W press$G enter$W to continue\n"
+	printf "$Y(_>)─➤ ALERT!!\n ╰───➤$W Before to use VIM open it and type:$G :PlugUpdate$Y\n ╰───➤$W To update all the new features.$Y\n ╰───➤$W press$G enter$W to continue\n"
 	read enter
 fi
 
