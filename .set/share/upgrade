@@ -53,13 +53,12 @@ else
 
 	#UPGRADE OMF
 	printf "$Y(_>)─➤$W Upgrading i-Haklab shell\n";sleep 0.
-NO(){
-	[[ -d ~/.local/share/omf ]] && rm -rf ~/.local/share/omf
-	[[ -d ~/.config/omf ]] && rm -rf ~/.config/omf/
-	git config --global core.autocrlf
-	printf "$Y\n(_>)─➤ Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'\n ╰─➤ when it happen hold on for one minute and then type exit to continue$W\n"
-	curl -Ls $iHDB/to-install/get.oh-my.fish|fish >/dev/null 2>/dev/null &
-}
+#	[[ -d ~/.local/share/omf ]] && rm -rf ~/.local/share/omf
+#	[[ -d ~/.config/omf ]] && rm -rf ~/.config/omf/
+#	git config --global core.autocrlf
+#	printf "$Y\n(_>)─➤ Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'\n ╰─➤ when it happen hold on for one minute and then type exit to continue$W\n"
+#	curl -Ls $iHDB/to-install/get.oh-my.fish|fish >/dev/null 2>/dev/null &
+
 	cat <<- CONF >> $PREFIX/etc/fish/config.fish
 if status --is-login
 bash /data/data/com.termux/files/usr/libexec/banner/wall-banner
