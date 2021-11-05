@@ -27,7 +27,7 @@ ctrl_c(){ printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";
 Chao-chao(){ printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n";}
 Repos() {
 	printf "$Y\n(_>)─➤ Installing|upgrading repositories ...\n$W"
-	[[ -e $PREFIX/bin/$Py ]] || yes|apt install $Py >/dev/null 2>&1
+	command -v $Py > /dev/null 2>&1 || yes|apt install $Py >/dev/null 2>&1
 	$Py -m pip --quiet --no-color install --upgrade pip
 	}
 Lib() {
@@ -172,10 +172,10 @@ case $opc in
 		Chao-chao
 		;;
 	nrauf)
-		if [ $2 ];then
+		if [ $opc2 ];then
 			wget $iHDB/fix-tools/nrauf -O $FILE -q
 			chmod +x $FILE
-			exec $FILE $2
+			exec $FILE $opc2
 			rm -rf $FILE
 		else
 			printf "$R\n(_>)─➤$W Apk file unallocated\n"
@@ -196,7 +196,7 @@ case $opc in
 		rm -rf $FILE
 		;;
 	downgradeRepo)
-		while [ ! $2 ];do
+		while [ ! $opc2 ];do
 			printf "$R(_>)─➤ An argument needed$W\n\n"
 			exit
 		done
