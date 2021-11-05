@@ -58,7 +58,7 @@ Menu() {
 	printf $B"(USAGE-01)─➤ To fix python modules:$G\nIbyC-fixer <[B|BASIC] [L|LDFLAGS] [S|SODIUM]> <[Py|Py2]> <[file.txt|module(max 3)]>$W\n\nB  BASIC\tInstall module on basic\nL  LDFLAGS\tForce installation to use libraries and system compiler\nS  SODIUM\tForce the installation to use the sodium decryptor\nPy  \t\tFor python3\nPy2  \t\tFor python2\n\nExamples:\n\tIbyC-fixer BASIC Py future\n\tIbyC-fixer S Py2 colorama\n"
 	printf "$B\n(USAGE-02)─➤ To fix an specific issue:$G\nIbyC-fixer <[nrauf|metasploit|downgradeRepo|RuGiR]> <option>$W\n\nnrauf         dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nmetasploit\t\t\tTo fix metasploit instalation\ndowngradeRepo repo=version\tDowngrade apt|pkg reporitory tospecific version\nRuGiR\t\t\t\tTo fix ruby gems issues\nngrok\t\t\t\tInstall ngrok-server from Abhacker repositories\n\nExamples:\n\tIbyC-fixer RuGiR\n\tIbyC-fixer downgradeRepo ruby=2.7.2\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n\n"
 	exit
-	}
+}
 Chck() {
 	for list in ${@:2} ; do
 		MODULE=$(python -m pip list | awk '{print $1}' | grep $list)
@@ -66,20 +66,19 @@ Chck() {
 			printf "$Y\n(_>)─➤ Module $MODULE is already exist for $Py\n$W"
 		fi
 	done
-
-	}
+}
 Args(){
-if [ "$2" = 'Py' ]; then
-	Py=python
-	Repos
-	Lib
-elif [ "$2" = "Py2" ]; then
-	Py=python2
-	Repos
-	Lib
-else
-	Menu
-fi
+	if [ "$2" = 'Py' ]; then
+		Py=python
+		Repos
+		Lib
+	elif [ "$2" = "Py2" ]; then
+		Py=python2
+		Repos
+		Lib
+	else
+		Menu
+	fi
 }
 
 while [ ! $(id -u) -ne 0 ]; do
@@ -88,17 +87,17 @@ while [ ! $(id -u) -ne 0 ]; do
 done
 until [ "$(basename "$0")" = "IbyC-fixer" ]; do
 	printf "$R\n(_>)─➤ Wrong file name$Y | "
-        sleep 1
-        printf "fixing it";sleep 2
-        printf ".";sleep 0.7
-        printf "..";sleep 0.5
-        printf "...";sleep 0.2
-        mv $PWD/$(basename "$0") $PREFIX/bin/IbyC-fixer >/dev/null 2>&1
-        printf "$G DONE!!$W\n";sleep 1
-        exit
+	sleep 1
+  printf "fixing it";sleep 2
+  printf ".";sleep 0.7
+  printf "..";sleep 0.5
+  printf "...";sleep 0.2
+  mv $PWD/$(basename "$0") $PREFIX/bin/IbyC-fixer >/dev/null 2>&1
+  printf "$G DONE!!$W\n";sleep 1
+  exit
 done
 until [ -e $PREFIX/bin/IbyC-fixer ]; do
-	if [ ! -e $PREFIX/bin/IbyC-fixer ] && [ -e $PWD/IbyC-fixer ]; then
+	if [ ! -e $PREFIX/bin/IbyC-fixer ] && [ -e $PWD/IbyC-fixer ];then
 		mv $PWD/IbyC-fixer $PREFIX/bin/IbyC-fixer > /dev/null 2>&1
 		printf "$Y(_>)─➤ IbyC-fixer was add to PATH$W\n"
 		sleep 1.5
@@ -114,9 +113,9 @@ sleep 1
 if [ "${INSTADATE[0]}" != "${INSTADATE[2]}" ] || [ "${INSTADATE[1]}" -lt "${INSTADATE[3]}" ];then
         printf "$Y.Upgrading";
         sleep 2
-	wget -q $iHDB/bin/IbyC-fixer -O $PREFIX/bin/IbyC-fixer
-        printf "$G..DONE!!$W"
-        sleep 1
+				wget -q $iHDB/bin/IbyC-fixer -O $PREFIX/bin/IbyC-fixer
+				printf "$G..DONE!!$W"
+				sleep 1
 else
         echo "$G.UPDATED$W"
         sleep 1
@@ -224,8 +223,8 @@ case $1 in
 			printf "$G(_>)─➤$W Installing Ngrok from Abhacker repositories ...$G "
 			apt install ngrok-server -y > /dev/null 2>&1;
 			printf "DONE!!$W\n"
-                fi
-                ;;
+		fi
+		;;
 	*)
 		ctrl_c
 		exit
