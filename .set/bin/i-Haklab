@@ -27,10 +27,10 @@ case "$1" in
 				bash $iHAKLAB/.set/share/$1 $i
 			done
 			if [[ $(ruby -v |cut -c 6-10) != "2.7.2" ]];then
-				printf "$Y(_>)─➤$W Downgrading ruby at version 2.7.2..\n"
+				printf "$Y\n(_>)─➤$W Downgrading ruby at version 2.7.2.."
 #		bash <(curl -fsSL "http://git.io/abhacker-repo") --install ruby=2.7.2
 				if [ ! -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ];then
-					printf "$Y(_>)─➤$W Installing Abhacker repositories.$G"
+					printf "$Y\n(_>)─➤$W Installing Abhacker repositories..$G"
 					wget -q "${iHDB}/fix-tools/instAbhackerRepo" -O $TMPDIR/abh.tmp
 					chmod +x $TMPDIR/abh.tmp
 					exec $TMPDIR/abh.tmp --install ruby=2.7.2 >/dev/null 2>/dev/null

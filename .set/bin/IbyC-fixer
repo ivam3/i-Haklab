@@ -10,6 +10,7 @@ command -v lolcat >/dev/null || yes|gem install lolcat >/dev/null 2>&1
 iHDB="https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set"
 IbyCDB="https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/installer"
 FILE=$(mktemp)
+opc="$1"
 R='\033[1;31m'
 G='\033[1;32m'
 Goke='\033[92m'
@@ -122,7 +123,7 @@ else
 fi
 
 clear;curl -Ls "${iHDB}/libexec/banner/fixer"|bash|lolcat
-while [ -z $1 ]; do
+while [ -z $opc ]; do
 	Menu
 done
 
