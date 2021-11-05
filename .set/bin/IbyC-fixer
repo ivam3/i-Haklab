@@ -11,6 +11,8 @@ iHDB="https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set"
 IbyCDB="https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/installer"
 FILE=$(mktemp)
 opc="$1"
+opc2="$2"
+opc3="${@:3}"
 R='\033[1;31m'
 G='\033[1;32m'
 Goke='\033[92m'
@@ -25,15 +27,15 @@ ctrl_c(){ printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";
 Chao-chao(){ printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n";}
 Repos() {
 	printf "$Y\n(_>)─➤ Installing|upgrading repositories ...\n$W"
-	command -v $Py > /dev/null 2>&1 || pkg install $Py -y > /dev/null 2>&1
-	$Py -m pip install --upgrade pip > /dev/null 2>&1
+	[[ -e $PREFIX/bin/$Py ]] || yes|apt install $Py >/dev/null 2>&1
+	$Py -m pip --quiet --no-color install --upgrade pip
 	}
 Lib() {
 	for Libs in clang libtool libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static tar wget; do
 		SCHLIB=$(pkg list-installed | awk '{print $1}' | grep -oE $Libs | head -n1)
 		if [ -z $SCHLIB ]; then
 			printf "$Y\n(_>)─➤ Installing libreries ...\n$W"
-			pkg install $Libs -y > /dev/null 2>&1
+			yes|apt install $Libs >/dev/null 2>&1
 		fi
 	done
 	}	
@@ -68,11 +70,11 @@ Chck() {
 	done
 }
 Args(){
-	if [ "$2" = 'Py' ]; then
+	if [ "$opc2" = 'Py' ]; then
 		Py=python
 		Repos
 		Lib
-	elif [ "$2" = "Py2" ]; then
+	elif [ "$opc2" = "Py2" ]; then
 		Py=python2
 		Repos
 		Lib
@@ -122,11 +124,9 @@ else
 fi
 
 clear;curl -Ls "${iHDB}/libexec/banner/fixer"|bash|lolcat
-while [ -z $opc ]; do
-	Menu
-done
+[[ -z $opc ]] && Menu
 
-case $1 in
+case $opc in
 	B|BASIC)
 		Args
 		for module in ${@:3} ; do
