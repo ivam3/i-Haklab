@@ -93,7 +93,7 @@ echo 'Have a nice hacking day!!'
 sleep 1
 end
 
-set fish_theme bobthefish
+set fish_theme bira
 set -g theme_nerd_fonts yes
 set DISPLAY localhost:1
 set HOME /data/data/com.termux/files/home
@@ -109,7 +109,7 @@ CONF
 TMP_fish=$(mktemp)
 cat <<- CONF > $TMP_fish
 #!/bin/env fish
-omf install bobthefish
+omf install bira
 CONF
 fish $TMP_fish >/dev/null 2>&1
 cat <<- CONF > $PREFIX/etc/bash.bashrc

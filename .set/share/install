@@ -527,6 +527,7 @@ case "$toInstall" in
 	websploit)
 		yes|apt install git python2
 		PIPup
+		PYv="2"
 		git clone --quiet https://github.com/The404Hacking/$toInstall $TOOLS/$toInstall
 		chmod +x -R $TOOLS/$toInstall
 		printf "numpy\n" > $TMPDIR/requirements.txt

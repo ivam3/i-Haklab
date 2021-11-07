@@ -325,7 +325,7 @@ case "$TOOL" in
 		;;
 
 #::::TOOLS IN BIN::::#
-	ExiF|bincheker|binwalk|blackbox|code-server|converter|crunch|DoS-A-Tool|GetNPUsers|pagekite|shc|unshc|snow|wfuzz|whatweb|hydra|xhydra|youtube-dl)
+	ExiF|bincheker|binwalk|blackbox|code-server|converter|crunch|DoS-A-Tool|dirb|GetNPUsers|pagekite|shc|unshc|snow|wfuzz|whatweb|hydra|xhydra|youtube-dl)
 		running
 		if [ -e $PREFIX/bin/$TOOL ]; then
 			exec $PREFIX/bin/$TOOL ${@:2}
