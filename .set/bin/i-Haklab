@@ -62,7 +62,7 @@ case "$1" in
 		bash $iHAKLAB/.set/share/reinstall
 		;;
 	root)
-		command -v proot >/dev/null || yes|apt install proot;clear
+		command -v proot >/dev/null || { yes|apt install proot;clear;}
 		exec proot -0 -w ~ $SHELL
 		;;
 	show)

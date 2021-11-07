@@ -755,6 +755,8 @@ fi
 		;;
 	serverapache)
 		yes|apt install php apache2 php-pgsql php-fpm php-apache mariadb phpmyadmin
+		[[ -d $PREFIX/etc/apache2 ]] || mkdir -p $PREFIX/etc/apache2
+		[[ -d $PREFIX/etc/phpmyadmin ]] || mkdir -p $PREFIX/etc/phpmyadmin
 		wget -q $iHDB/etc/apache2/httpd.conf -O $PREFIX/etc/apache2/httpd.conf
 		wget -q $iHDB/etc/phpmyadmin/config.inc.php -O $PREFIX/etc/phpmyadmin/config.inc.php
 		if ! grep "$toInstall" $INITFILE;then
@@ -797,9 +799,11 @@ fi
 		;;
 	tmux)
 		yes|apt install tmux git
-		cd;git clone https://github.com/gpakosz/.tmux.git
-		ln -s -f .tmux/.tmux.conf
-		cp .tmux/.tmux.conf.local .
+		[[ -d $HOME/.tmux ]] && rm -rf $HOME/.tmux
+		git clone https://github.com/gpakosz/.tmux.git $HOME/.tmux
+		ln -s -f $HOME/.tmux/.tmux.conf
+		cp $HOME/.tmux/.tmux.conf.local .
+		sed -i "11a set-option -g default-shell $PREFIX/bin/fish" ~/.tmux/.tmux.conf
 		;;
 	torvpn)
 		yes|apt install tor torsocks proxychains-ng

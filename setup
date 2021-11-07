@@ -221,8 +221,8 @@ rm -f $TMPDIR/iHaklabvim.zip
 mv $TMPDIR/iHaklabvim/vim ~/.vim
 mv $TMPDIR/iHaklabvim/vim/.vimrc ~/
 rm -f $TMPDIR/iHaklabvim
-printf "$Y\n(_>)─➤$W ALERT!!$Y\n ╰───➤$W Before to use VIM open it and type:$G :PlugUpdate$Y\n ╰───➤$W To update all the new features.$Y\n ╰───➤$W press$G enter$W to continue\n"
-read enter
+printf "$Y\n(_>)─➤$W ALERT!!$Y\n ╰───➤$W Text editor VIM will be updated$Y\n ╰───➤$W When it finishes press twice:$G :q.$Y\n ╰───➤$W press$G enter$W to start\n"
+read enter;exec vim +PlugUpdate
 
 printf "$G\n(_>)─➤$W Setting i-Haklab style."
 [[ -d ~/.termux ]] || mkdir -p ~/.termux

@@ -357,7 +357,7 @@ case "$TOOL" in
     termux-x11 :0 >/dev/null 2>/dev/null &
 		sleep 3
 		env DISPLAY=:0 xfce4-session
-                ;;
+		;;
 #::::GO TOOLS::::#
 	gophish|gobuster|tangalanga)
 		running
