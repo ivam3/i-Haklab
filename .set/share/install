@@ -723,7 +723,7 @@ fi
 		arch1=$(uname -a|grep -o 'arm'|head -n1)
 		arch2=$(uname -a|grep -o 'Android'|head -n1)
 		command -v wget >/dev/null || pkg install wget
-		[ -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ] && yes|apt install ngrok-server;yes|apt reinstall ngrok-server || bash $iHAKLAB/.set/fix-tools/instAbhackerRepo --install ngrok-server
+		[ -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ] && yes|apt install ngrok-server;yes|apt reinstall ngrok-server || curl -sSL $(iHDB)/fix-tools/instAbhackerRepo|bash --install ngrok-server
 		[[ $arch1 = 'arm' ]] || [[ $arch2 = 'Android' ]] && arch=arm || arch=386
 		wget -q https://bin.equinox.io/c/4VmDzA7iaHb/$1-stable-linux-$arch.zip -O $TMPDIR/$1-stable-linux-$arch.zip
 		if [[ -e $TMPDIR/$1-stable-linux-$arch.zip ]];then

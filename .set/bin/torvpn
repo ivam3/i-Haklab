@@ -31,6 +31,7 @@ case $1 in
      ip        | show current tun0 ip address
      pip       | show current tun0 public ip address
      swip      | swap to a random ip address
+		 start     | turn on tor connections
      stop      | turn off tor connections
  any-command   | run an specific process over tor connections.
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n
@@ -39,15 +40,18 @@ ex: $(basename $0) pip
 		;;
 	ip)
 		runTor
-		printf "$G(_>)_Your VPN IP:─➤$W $ip$W"
+		printf "$G(_>)_Your_VPN_IP:─➤$W $ip$W"
 		;;
 	pip)
-		printf "$G(_>)_Your public IP:─➤$W $(curl -s ifconfig.so)"
+		printf "$G(_>)_Your_public_IP:─➤$W $(curl -s ifconfig.so)"
 		;;
 	swip)
 		runTor
 		killall -HUP --quiet tor;sleep 0.5
-		printf "$G(_>)_Your VPN IP was swapped at:─➤$W $ip\n"
+		printf "$G(_>)_Your_VPN_IP_was_swapped_at:─➤$W $ip\n"
+		;;
+	start)
+		runTor
 		;;
 	stop)
 		killall tor

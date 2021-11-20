@@ -232,7 +232,8 @@ done
 ln -s $PREFIX/bin/fish ~/.termux/shell
 
 #:::: Set VNC server ::::#
-wget -q --tries=20 $iHDB/functions/unset.fish -O  ~/.config/fish/functions/unset.fis
+wget -q --tries=20 $iHDB/functions/unset.fish -O ~/.config/fish/functions/unset.fish
+wget -q --tries=20 $iHDB/functions/fish_greeting.fish -O ~/.config/fish/functions/fish_greeting.fish
 for TOOL in DoS-A-Tool ExiF embed evilurl localtunnel-server desktop-xfce;do
 	bash $iHAKLAB/.set/share/install $TOOL
 done
