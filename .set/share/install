@@ -602,6 +602,30 @@ case "$toInstall" in
 			mkdir $HOME/adbfiles
 		fi
 		;;
+	burpsuite)
+		yes|pkg install openjdk-17
+		printf "$G\n(_>)─➤ Installing $toInstall (It could take a while)...\n"
+		wget -q $(iHDB)/to-install/burpsuite_community_v2021.10.2.jar -O $TOOLS/$toInstall.jar
+		cat <<- CONF $PREFIX/bin/$toInstall
+#!/usr/bin/bash
+#This file execute a burp suite on Termux:Wayland interface
+#You should install it before to run this scripta
+[[ \$(file $TMPDIR/*|grep -o "socket") >/dev/null ]]	|| {	printf >&2 "\$R(_>)─➤\$W Termux:Wayland server isn't running...\$R aborting.\$W";exit;}
+export JAVA_HOME="$PREFIX/opt/openjdk"
+export LIB_DIR="\$JAVA_HOME/lib"
+export LD_LIB_DIR="$PREFIX/lib"
+export LD_LIBRARY_PATH="\$LD_LIB_DIR:\$LIB_DIR"
+export DISPLAY=:0
+umask 000
+
+[[ \$(uname -m) = "aarch64" ]] || { printf >&2 "\$R(_>)─➤\$W Incompatible architecture";exit;}
+[[ \$(command -v java) ]] || yes|pkg install openjdk-17
+[[ -e $TOOLS/burpsuite.jar ]] || { printf >&2 "Burpsuite is not installed... aborting.";exit;}
+exec \$(command -v java) -Djava.library.path="\$LD_LIBRARY_PATH" --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -jar $TOOLS/burpsuite.jar -p \$JAVA_HOME "\$@"
+rm -rf $TMPDIR/*.tmp
+CONF
+    chmod 755 $PREFIX/bin/$toInstall
+		;;
 	code-server)
 		yes|apt install build-essential python git nodejs-lts yarn
 		yarn config set ignore-engines true
@@ -706,9 +730,9 @@ fi
 		yes|apt install git
 		git clone --quiet https://github.com/ivam3/java.git $PREFIX/share/java
 		cd $PREFIX/share/java
-                chmod -R 711 $PREFIX/share/java
-                bash setup java8
-                rm -rf $PREFIX/share/java
+		chmod -R 711 $PREFIX/share/java
+		bash setup java8
+		rm -rf $PREFIX/share/java
 		;;
 	localtunnel-server|lt)
 		yes|apt install nodejs git
@@ -767,15 +791,16 @@ fi
 	shc|unshc)
 		shcVer="3.8.9"
 		yes|apt install wget make
-		wget -q http://www.datsi.fi.upm.es/~frosal/sources/$toInstall-$shcVer.tgz -O $TMPDIR/$toInstall-$shcVer.tgz
-		tar -xvzf $TMPDIR/$toInstall-$shcVer.tgz -C $TMPDIR
-		rm -rf $TMPDIR/$toInstall-$shcVer.tgz
-		cd $TMPDIR/$toInstall-$shcVer
+		wget -q http://www.datsi.fi.upm.es/~frosal/sources/shc-$shcVer.tgz -O $TMPDIR/shc-$shcVer.tgz
+		tar -xvzf $TMPDIR/shc-$shcVer.tgz -C $TMPDIR
+		rm -rf $TMPDIR/shc-$shcVer.tgz
+		cd $TMPDIR/shc-$shcVer
 		make;make install
-		mv $TMPDIR/$toInstall-$shcVer/$toInstall $PREFIX/bin/
-		rm -rf $TMPDIR/$toInstall-$shcVer
-		wget -q https://raw.githubusercontent.com/yanncam/UnSHc/master/latest/un$toInstall.sh -O $PREFIX/bin/un$toInstall
-		sed 's|/tmp/XXXXXX|$PREFIX/tmp/XXXXXX|g' -i $PREFIX/bin/un$toInstall
+		mv $TMPDIR/shc-$shcVer/$toInstall $PREFIX/bin/
+		rm -rf $TMPDIR/shc-$shcVer
+		wget -q https://raw.githubusercontent.com/yanncam/UnSHc/master/latest/unshc.sh -O $PREFIX/bin/unshc
+		sed 's|which|command -v|g' -i $PREFIX/bin/unshc
+		sed 's|/tmp/XXXXXX|$PREFIX/tmp/XXXXXX|g' -i $PREFIX/bin/unshc
 		chmod +x $PREFIX/bin/*
 		;;
 	slowhttptest)
@@ -849,8 +874,9 @@ fi
 		sed "s|database: '/opt/GeoIP/GeoLite2-City.mmdb'|database: '/data/data/com.termux/files/usr/opt/GeoIP/GeoLite2-City.mmdb'|g" -i config.yaml
 		sed 's|passwd: "beef"|passwd: "Ivam3byCinderella"|g' -i config.yaml
 		sed '155 s|enable: false|enable: true|g' -i config.yaml
+		sed "s|ssl_version: 'TLS1'|ssl_version: 'TLS1.2'|g" -i $PREFIX/opt/$toInstall/extensions/metasploit/config.yaml
 		cd $PREFIX/opt/$toInstall
-		gem update --system
+		update --system
 		gem install bundler/
 		bundle install
 		curl -Ls ${iHDB}/fix-tools/fixbigdecimal|bash

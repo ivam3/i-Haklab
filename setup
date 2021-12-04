@@ -55,7 +55,7 @@ fi
 
 #::: UPDATING LOCATE DATA BASE :::#
 printf "$G\n(_>)─➤$W Updating data base."
-exec updatedb
+updatedb
 
 printf "$G\n(_>)─➤$W Installing required python modules.\n"
 for v in python python2 ; do
