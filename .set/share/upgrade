@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 #i-Haklab v.3.0 2021 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3.
 #Created on Jan/2019 
-#Modify: 2021-11-20
+#Modify: 2022-01-13
 ####################
 IFS=$'\n\t'
 trap ctrl_c 2
@@ -60,6 +60,19 @@ else
 #	curl -Ls $iHDB/to-install/get.oh-my.fish|fish >/dev/null 2>/dev/null &
 
 	cat <<- CONF >> $PREFIX/etc/fish/config.fish
+# Put system-wide fish configuration entries here
+# or in .fish files in conf.d/
+# Files in conf.d can be overridden by the user
+# by files with the same name in /fish/conf.d
+# This file is run by all fish instances.
+# To include configuration only for login shells, use
+# if status --is-login
+#    ...
+# end
+# To include configuration only for interactive shells, use
+# if status --is-interactive
+#   ...
+# end
 if status --is-login
 bash /data/data/com.termux/files/usr/libexec/banner/wall-banner
 end
@@ -69,12 +82,14 @@ echo 'Have a nice hacking day!!'
 sleep 1
 end
 
-set fish_theme bobthefish
+set fish_theme bira
 set -g theme_nerd_fonts yes
-set DISPLAY localhost:1
+set DISPLAY localhost:0
 set HOME /data/data/com.termux/files/home
 set GOPATH /data/data/com.termux/files/home/go
 set GOROOT /data/data/com.termux/files/usr/lib/go
+set LD_LIBRARY_PATH /data/data/com.termux/files/usr/lib
+set JAVA_HOME /data/data/com.termux/files/usr/opt/openjdk
 set iHAKLAB /data/data/com.termux/files/usr/share/i-Haklab
 set TOOLS $TOOLS
 alias LOCALHOST="ifconfig 2>/dev/null|grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}'|grep -v 255|grep -v 127|tail -n 1"
@@ -85,7 +100,7 @@ CONF
 	TMP_fish=$(mktemp)
 	cat <<- CONF > $TMP_fish
 #!/bin/env fish
-omf install bobthefish
+omf install bira
 CONF
 	fish $TMP_fish >/dev/null 2>&1
 
@@ -93,49 +108,8 @@ CONF
 	printf "$Y(_>)─➤$W Re-configurating. . .\n";sleep 0.5
 	wget -q $iHDB/login-files/i-haklab_login -O $PREFIX/var/log/login-termux
 	wget -q $iHDB/libexec/banner/i-Haklab -O $PREFIX/libexec/banner/login-banner
-	cat <<- CONF > $PREFIX/etc/fish/config.fish
-	# Put system-wide fish configuration entries here
-	# or in .fish files in conf.d/
-	# Files in conf.d can be overridden by the user
-	# by files with the same name in /fish/conf.d
-	# This file is run by all fish instances.
-	# To include configuration only for login shells, use
-	# if status --is-login
-	#    ...
-	# end
-	# To include configuration only for interactive shells, use
-	# if status --is-interactive
-	#   ...
-	# end
 
-	function __fish_command_not_found_handler --on-event fish_command_not_found
-		/data/data/com.termux/files/usr/libexec/termux/command-not-found [1]
-	end
-
-	if status --is-login
-		bash /data/data/com.termux/files/usr/libexec/banner/wall-banner
-	end
-
-	function on_exit --on-event fish_exit
-		echo 'Have a nice hacking day!!'
-		sleep 1
-	end
-	
-	set DISPLAY localhost:1
-	set fish_theme bobthefish
-	set -g theme_nerd_fonts yes
-	set HOME /data/data/com.termux/files/home
-	set GOPATH /data/data/com.termux/files/home/go
-	set GOROOT /data/data/com.termux/files/usr/lib/go
-	set iHAKLAB /data/data/com.termux/files/usr/share/i-Haklab
-	set TOOLS $TOOLS
-	alias LOCALHOST="ifconfig 2>/dev/null|grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}'|grep -v 255|grep -v 127|tail -n 1"
-	alias serverapache="apachectl"
-	alias postgresql="pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql"
-	alias traductor="gawk -f (curl -Ls git.io/translate | psub) -- -shell"
-	CONF
-
-	######### Upgrading executables #########
+######### Upgrading executables #########
 	BINDIR=$(ls $iHAKLAB/.set/bin)
 	printf "$Y(_>)─➤$W Upgrading commands. . .$W\na"
 	for i in ${BINDIR[*]}; do

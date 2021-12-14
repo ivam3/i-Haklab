@@ -486,7 +486,7 @@ case "$toInstall" in
 		yes|apt install git python2
 		PIPup
 		PYv="2"
-		git clone --quiet https://github.com/metachar/PhoneSploit.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/aerosol-can/PhoneSploit.git $TOOLS/$toInstall
 		printf "colorama" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
