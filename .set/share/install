@@ -930,6 +930,7 @@ fi
 		;;
 	metasploit)
 		v="6.1.20_all"
+		yes|apt install autoconf patchelf bison apr apr-util postgresql libgrpc libtool wget termux-elf-cleaner ruby build-essential
 		wget -q $iHDB/to-install/metasploit-framework_$v.deb -O $TMPDIR/metasploit-framework_$v.deb
 		dpkg -i $TMPDIR/metasploit-framework_$v.deb
 		rm -rf $TMPDIR/metasploit-framework_$v.deb
