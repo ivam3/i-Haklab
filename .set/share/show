@@ -1,6 +1,5 @@
 #!/usr/bin/bash
-#
-source $PREFIX/share/i-Haklab/.set/var/variables
+source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 PS3="(_>)_number:─➤ "
 STDERR(){ printf "$R(_>)─➤$W missing argument, type $(basename $0) -h for help";exit;}
@@ -105,8 +104,8 @@ elif [[ $(basename $1) = alltools ]];then
 elif [[ $(basename $1) = instatools ]]; then
 	file=$(mktemp)
 	pkg list-installed|awk -F "/" '{print $1}' > $file
-	for i in $(cat $HOME/Ivam3/repositories/i-Haklab/.set/libexec/tools/listoftools);do
-		if [[ -d $HOME/storage/external-1/roothome/$i ]] || [[ -d $PREFIX/opt/$i ]] || [[ $(command -v $i) ]] || [[ -d $PREFIX/opt/$i-framework ]] || [[ -e ~/go/bin/$1 ]];then
+	for i in $(cat $HOME/.local/share/i-Haklab/.set/libexec/tools/listoftools);do
+		if [[ -d $TOOLS/$i ]] || [[ -d $PREFIX/opt/$i ]] || [[ $(command -v $i) ]] || [[ -d $PREFIX/opt/$i-framework ]] || [[ -e ~/go/bin/$1 ]];then
 			echo $i >> $file
 		elif [[ $i = JohnTheRipper ]] && [[ -d $PREFIX/opt/john ]];then
 			echo $i >> $file

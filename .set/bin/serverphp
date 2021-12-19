@@ -2,18 +2,15 @@
 #Created on Dec/2018
 IFS=$'\n\t'
 trap ctrl_c 2
-source $PREFIX/share/i-Haklab/.set/var/variables
+source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
-command -v php > /dev/null 2>&1 || pkg install php & > /dev/null 2>&1
+command -v php > /dev/null 2>&1 || yes|apt install php & >/dev/null 2>/dev/null
 ctrl_c(){ k-boom;exit;}
 usage(){ printf "$G\n(_>)_usage:─➤$W serverphp <wlan|io> <port number> <directory path>\n";}
 chk-iHaklab
-
-if [ ! -d $PREFIX/var/service/php ]; then
-	mkdir -p $PREFIX/var/service/php/
-fi
+[[ ! -d $HOME/.local/var/service/www ]] && mkdir -p $HOME/.local/var/service/www
 banner;usage
-DEFAULT_DIR=$PREFIX/var/service/php/
+DEFAULT_DIR=$HOME/.local/var/service/www
 DIR="${3:-${DEFAULT_DIR}}"
 PORT=4546
 WLAN=$(ifconfig wlan0 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255)

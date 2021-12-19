@@ -1,7 +1,7 @@
 #!/bin/bash
 # This file contain all i-Haklab functions
 
-iHAKLAB=/data/data/com.termux/files/usr/share/i-Haklab
+iHAKLAB=/data/data/com.termux/files/home/.local/share/i-Haklab
 
 banner() {
 	if [ ! -e $iHAKLAB/.set/libexec/banner/i-Haklab ]; then

@@ -1,6 +1,5 @@
 #!/usr/bin/bash
-#
-source $PREFIX/share/i-Haklab/.set/var/variables
+source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 PS3="$G(_>)_number:─➤ "
 TMP_PATH=$PREFIX/bin

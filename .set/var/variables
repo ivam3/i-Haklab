@@ -2,18 +2,18 @@
 # This file contain all i-Haklab enviroment variables
 OP1=${2:-crunch}
 
-export iHAKLAB=/data/data/com.termux/files/usr/share/i-Haklab
+export iHAKLAB=/data/data/com.termux/files/home/.local/share/i-Haklab
 microSD=$(df|tail -n 2|awk -F " " '{print $6}'|grep -iv "emulated"|head -n 1)
 if [ -d $microSD/Android/data/com.termux/files ] && [ -w $microSD/Android/data/com.termux/files ]; then
 	if [ ! -d $microSD/Android/data/com.termux/files/tools ];then
 		mkdir $microSD/Android/data/com.termux/files/tools
 	fi
 	export TOOLS=$microSD/Android/data/com.termux/files/tools
-elif [ -d /data/data/com.termux/files/usr/share/tools ];then
-	export TOOLS=/data/data/com.termux/files/usr/share/tools
+elif [ -d /data/data/com.termux/files/home/.local/share/tools ];then
+	export TOOLS=/data/data/com.termux/files/home/.local/share/tools
 else
-	mkdir -p /data/data/com.termux/files/usr/share/tools
-	export TOOLS=/data/data/com.termux/files/usr/share/tools
+	mkdir -p /data/data/com.termux/files/home/.local/share/tools
+	export TOOLS=/data/data/com.termux/files/home/.local/share/tools
 fi
 
 export R='\033[1;31m'

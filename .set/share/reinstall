@@ -4,10 +4,10 @@ IFS=$'\n\t'
 trap ctrl_c 2
 ctrl_c() { printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";}
 printf "Running...";sleep 0.5
-[[ -d $PREFIX/share/i-Haklab ]] && rm -rf $PREFIX/share/i-Haklab
+[[ -d $HOME/.local/share/i-Haklab ]] && rm -rf $HOME/.local/share/i-Haklab
 [[ -d ~/java ]] && rm -rf ~/java
-git clone https://github.com/ivam3/i-Haklab.git $PREFIX/share/i-Haklab
-source $PREFIX/share/i-Haklab/.set/var/variables
+git clone https://github.com/ivam3/i-Haklab.git $HOME/.local/share/i-Haklab
+source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 chk-Cuser
 clear;banner;sleep 0.5
@@ -27,7 +27,7 @@ printf "$G(_>)─➤$W Upgrading and installing Termux packages.\n"
 yes|pkg update && pkg upgrade
 apt list|awk -F "/" '{print $1}' > $TMPDIR/alltools.tmp
 pkg list-installed|awk -F "/" '{print $1}' > $TMPDIR/installed.tmp
-for repo in fish root-repo unstable-repo fortune util-linux coreutils vim python python2 openjdk-17 ruby perl clang curl wget gawk make openssl openssl-tool php zip unzip tar w3m neofetch weechat irssi tor torsocks proxychains-ng htop bison megatools findutils git apr apr-util openssh apache2 mariadb php-apache pkg-config termux-api termux-tools termux-tools ncurses-utils ncurses postgresql termux-elf-cleaner cmatrix figlet man termux-api axel fortune apksigner autoconf libffi libgmp libpcap readline libsqlite nmap libgrpc libiconv libcaca libtool libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static zlib libassuan libgcrypt libgpg-error youtubedr gnupg gpgme dnsutils debianutils sqlite dirb mlocate tigervnc crunch translate-shell ffsend x11-repo hexedit dns2tcp tmux; do
+for repo in $(cat $iHAKLAB/.set/to-install/listOfpkg);do
 	GOTIT=$(grep -oE $repo $TMPDIR/installed.tmp)
 	PKG=$(grep -o $repo $TMPDIR/alltools.tmp)
 	if [ ! -z "$PKG" ] && [ -z "$GOTIT" ];then
@@ -80,7 +80,7 @@ printf "$Y\n(_>)─➤ Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'
 curl -Ls $iHDB/to-install/get.oh-my.fish|fish
 cat <<- CONF >> $PREFIX/etc/fish/config.fish
 if status --is-login
-bash /data/data/com.termux/files/usr/libexec/banner/wall-banner
+bash /data/data/com.termux/files/home/.local/etc/i-Haklab/wall-banner
 end
 
 function on_exit --on-event fish_exit
@@ -88,13 +88,16 @@ echo 'Have a nice hacking day!!'
 sleep 1
 end
 
-set fish_theme bobthefish
+set fish_theme bira
 set -g theme_nerd_fonts yes
-set DISPLAY localhost:1
+set DISPLAY localhost:0
+set PATH $HOME/.local/bin:$PATH
 set HOME /data/data/com.termux/files/home
 set GOPATH /data/data/com.termux/files/home/go
 set GOROOT /data/data/com.termux/files/usr/lib/go
-set iHAKLAB /data/data/com.termux/files/usr/share/i-Haklab
+set JAVA_HOME /data/data/com.termux/files/usr/opt/openjdk
+set iHAKLAB /data/data/com.termux/files/home/.local/share/i-Haklab
+set LD_LIBRARY_PATH $HOME/.local/lib:/data/data/com.termux/files/usr/lib
 set TOOLS $TOOLS
 alias LOCALHOST="ifconfig 2>/dev/null|grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}'|grep -v 255|grep -v 127|tail -n 1"
 alias serverapache="apachectl"
@@ -107,87 +110,65 @@ cat <<- CONF > $TMP_fish
 omf install bobthefish
 CONF
 fish $TMP_fish >/dev/null 2>&1
-cat <<- CONF > $PREFIX/etc/bash.bashrc
-# Command history tweaks:
-# - Append history instead of overwriting
-#   when shell exits.
-# - When using history substitution, do not
-#   exec command immediately.
-# - Do not save to history commands starting
-#   with space.
-# - Do not save duplicated commands.
-shopt -s histappend
-shopt -s histverify
-export HISTCONTROL=ignoreboth
+cat <<- CONF > $HOME/.bashrc
+export PATH=$HOME/.local/bin:$PATH
+export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
 chsh -s fish
-# Default command line prompt.
-PROMPT_DIRTRIM=2
-PS1='\[\e[0;32m\]\w\[\e[0m\] \[\e[0;97m\]\$\[\e[0m\] '
-
-# Handles nonexistent commands.
-# If user has entered command which invokes non-available
-# utility, command-not-found will give a package suggestions.
-if [ -x /data/data/com.termux/files/usr/libexec/termux/command-not-found ]; then
-        command_not_found_handle() {
-                /data/data/com.termux/files/usr/libexec/termux/command-not-found "$1"
-        }
-fi
 CONF
 
 #::::::::::Insatalling i-Haklab's login::::::::::::#
-[[ -e $PREFIX/var/log/login-termux ]] && rm -f $PREFIX/var/log/login-termux
+[[ -e $HOME/.local/etc/i-Haklab/login-termux ]] && rm -f $HOME/etc/i-Haklab/login-termux
 [[ -e $PREFIX/etc/bashito ]] && rm -f $PREFIX/etc/bashito
 [[ -e $PREFIX/etc/motd ]] && rm -f $PREFIX/etc/motd
 [[ -e $PREFIX/etc/motd.dpkg-old ]] && rm -f $PREFIX/etc/motd.dpkg-old
 for i in Quiz Ivam3 Cinderella;do
-        [[ -e $PREFIX/libexec/termux/.$i ]] || touch $PREFIX/libexec/termux/.$i
+        [[ -e $HOME/.local/etc/i-Haklab/.$i ]] || touch $HOME/.local/etc/i-Haklab/.$i
 done
-[[ -d $PREFIX/libexec/banner ]] || mkdir -p $PREFIX/libexec/banner
-wget -q $iHDB/login-files/i-haklab_login -O $PREFIX/var/log/login-termux
-wget -q $iHDB/libexec/banner/i-Haklab -O $PREFIX/libexec/banner/login-banner
-cat <<- CONF > $PREFIX/libexec/banner/wall-banner
+[[ -d $HOME/.local/etc/i-Haklab ]] || mkdir -p $HOME/.local/etc/i-Haklab
+wget -q $iHDB/to-install/login-termux -O $HOME/.local/etc/i-Haklab/login-termux
+wget -q $iHDB/libexec/banner/i-Haklab -O $HOME/.local/etc/i-Haklab/login-banner
+cat <<- CONF > $HOME/.local/etc/i-Haklab/wall-banner
 #!/usr/bin/bash
 #Banner for i-Haklab created by @Ivam3 on Jan/2019
 IFS=$'\n\t'
-bash /data/data/com.termux/files/usr/libexec/banner/login-banner
+bash $HOME/.local/etc/i-Haklab/login-banner
 #        i-Haklab by @Ivam3
 CONF
-chmod 711 $PREFIX/var/log/login-termux
-chmod 711 -R $PREFIX/libexec/termux
-chmod 711 -R $PREFIX/libexec/banner
-chmod +w $PREFIX/libexec/termux/.Ivam3
-printf "SXZhbTNieUNpbmRlcmVsbGEK" > $PREFIX/libexec/termux/.Ivam3
-chmod -w $PREFIX/libexec/termux/.Ivam3
-chmod +w $PREFIX/libexec/termux/.Quiz
-printf "VGhlIGFjY2VzcyBrZXkgaXMgSXZhbTNieUNpbmRlcmVsbGEK" > $PREFIX/libexec/termux/.Quiz
-chmod -w $PREFIX/libexec/termux/.Quiz
-chmod +w $PREFIX/libexec/termux/.Cinderella
-printf "SXZhbTNieUNpbmRlcmVsbGEK" > $PREFIX/libexec/termux/.Cinderella
-chmod -w $PREFIX/libexec/termux/.Cinderella
+chmod 711 -R $HOME/.local/etc
+chmod +w $HOME/.local/etc/i-Haklab/.Ivam3
+printf "SXZhbTNieUNpbmRlcmVsbGEK" > $HOME/.local/etc/i-Haklab/.Ivam3
+chmod -w $HOME/.local/etc/i-Haklab/.Ivam3
+chmod +w $HOME/.local/etc/i-Haklab/.Quiz
+printf "VGhlIGFjY2VzcyBrZXkgaXMgSXZhbTNieUNpbmRlcmVsbGEK" > $HOME/.local/etc/i-Haklab/.Quiz
+chmod -w $HOME/.local/etc/i-Haklab/.Quiz
+chmod +w $HOME/.local/etc/i-Haklab/.Cinderella
+printf "SXZhbTNieUNpbmRlcmVsbGEK" > $HOME/.local/etc/i-Haklab/.Cinderella
+chmod -w $HOME/.local/etc/i-Haklab/.Cinderella
 
 #::::::::::Insatalling i-Haklab tools::::::::::::#
 printf "$G\n(_>)─➤$W Installing principal external tools."
 chmod 750 $iHAKLAB/.set/bin/*
-cp $iHAKLAB/.set/bin/* $PREFIX/bin/
+cp $iHAKLAB/.set/bin/* $HOME/.local/bin
+
 if ! command -v msfconsole >/dev/null;then
-	printf "$G\n(_>)─➤$W Installing metasploit-framework."
-	bash $TMPabh --install metasploit ruby=2.7.2 >/dev/null 2>&1
-	wget -q $JAVADB/.embed/apk.rb -O $MSFDIR/lib/msf/core/payload/apk.rb
-	wget -q $iHDB/.set/bin/IbyC-fixer -O $PREFIX/bin/IbyC-fixer
-        chmod +x $PREFIX/bin/IbyC-fixer
-	#:::: FIXING BIG DECIMAL ISSUES ::::#
-	RUBYv=$(ls $PREFIX/lib/ruby |grep -m 1 '[0-9].[0-9].[0-9]')
+        printf "$G\n(_>)─➤$W Installing metasploit-framework."
+        bash $TMPabh --install metasploit ruby=2.7.2 >/dev/null 2>&1
+        wget -q $JAVADB/.embed/apk.rb -O $MSFDIR/lib/msf/core/payload/apk.rb
+        wget -q $iHDB/.set/bin/IbyC-fixer -O $HOME/.local/bin/IbyC-fixer
+        chmod +x $HOME/.local/bin/IbyC-fixer
+        #:::: FIXING BIG DECIMAL ISSUES ::::#
+        RUBYv=$(ls $PREFIX/lib/ruby |grep -m 1 '[0-9].[0-9].[0-9]')
         LINUXANDROID=$(find $PREFIX/lib/ruby/$RUBYv -iname "bigdecimal.so"|awk -F "/" '{print $10}')
         yes|apt install -yq patchelf >/dev/null 2>&1
         if [[ -e "$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal.so" ]];then
-		if [[ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal/util.so"|grep bigdecimal.so)" ]];then
-			exit 0
-		fi
-	patchelf --add-needed \
-		"$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal.so" \
-		"$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal/util.so"
-	fi
-	printf "#!/usr/bin/sh
+                if [[ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal/util.so"|grep bigdecimal.so)" ]];then
+                        exit 0
+                fi
+        patchelf --add-needed \
+                "$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal.so" \
+                "$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal/util.so"
+        fi
+        printf "#!/usr/bin/sh
         SCRIPT_NAME=\$(basename \"\$0\")
         METASPLOIT_PATH=\"\${PREFIX}/opt/metasploit-framework\"
         #Fix ruby bigdecimal extensions linking error.
@@ -216,8 +197,7 @@ rm -f $TMPDIR/iHaklabvim.zip
 mv $TMPDIR/iHaklabvim/vim ~/.vim
 mv $TMPDIR/iHaklabvim/vim/.vimrc ~/
 rm -f $TMPDIR/iHaklabvim
-printf "$Y\n(_>)─➤$W ALERT!!$Y\n ╰───➤$W Before to use VIM open it and type:$G :PlugUpdate$Y\n ╰───➤$W To update all the new features.$Y\n ╰───➤$W press$G enter$W to continue\n"
-read enter
+vim +PlugUpdate +x +x
 
 printf "$G\n(_>)─➤$W Setting i-Haklab style."
 [[ -d ~/.termux ]] || mkdir -p ~/.termux
@@ -261,7 +241,7 @@ if chk-root;then
 PS1=\"\[\e[33m\][!] \[\e[31m\]Press\[\e[32m\] Ctrl d\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\""
 export TERM=xterm-256color
 export LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib
-export PATH=/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:/system/xbin:/system/bin
+export PATH=/data/data/com.termux/files/home/.local/bin:/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:/system/xbin:/system/bin
 HOME=/data/data/com.termux/files/home
 fish
 #          i-Haklab by @Ivam3
@@ -288,7 +268,7 @@ printf "$G\n\n
  ╰────────➤ run:$W sudo <some commands> :──:to run commands as super user whithout rooted device$Y
  ╰────────➤ run:$W i-Haklab about i-Haklab :for all usage guide$G
 (_>)─➤$W To fix issues going to$B t.me/Ivam3_Bot$G
-(_>)─➤$W press$G enter$W and plaease reestart Termux\n"
+(_>)─➤$W press$G enter$W to reestart Termux\n"
 [[ -d ~/i-Haklab ]] && rm -rf ~/i-Haklab
-read enter;exec login
+read enter;exec reset
 #		i-Haklab by @Ivam3

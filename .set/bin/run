@@ -2,7 +2,7 @@
 # Coded on Agust 2019 and upgraded on July 2021 by Ivam3
 # This file bring a easy access to execute i-Haklab tools
 #
-source $PREFIX/share/i-Haklab/.set/var/variables
+source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 chk-iHaklab
 #::::VARIABLES::::#
@@ -68,6 +68,7 @@ if [ -z $TOOL ]; then
 ╰─binchecker─────➤  Information gathering about credit/debit card
 ╰─binwalk────────➤  Searching and given binary image for embedded files and executable code.
 ╰─blackbox───────➤  Tool for Bruteforcing attacks, Information Gathering, Dorking, Cracking and Exploit web vulnerabilities.
+╰─burpsuite──────➤  Web security tester's toolkit.
 ╰─botgram────────➤  Scraper Telegram's groups information and manage it from CLi.
 ╰─cc-genpro──────➤  Bins and temporal e-mails generator.
 ╰─cewl───────────➤  CeWL is a ruby app which spiders a given URL to a specified depth, optionally following external links, and returns a list of words which can then be used for password crackers.
@@ -152,12 +153,12 @@ case "$TOOL" in
 		;;
 	embed|hatcloud|cewl)
 		bigdecimalPATH
-                if CheckPath;then
+		if CheckPath;then
 			exec ruby $TOOLPATH/$TOOL.rb ${@:2}
-                else
-                        STDERR
-                fi
-                ;;
+		else
+			STDERR
+		fi
+		;;
 	wpscan)
 		bigdecimalPATH
 		if CheckPath;then
@@ -173,7 +174,6 @@ case "$TOOL" in
 		fi
 		if CheckPath;then
 			exec python2 $TOOLPATH/$TOOL.py ${@:2}
-			
 		else
 			STDERR
 		fi
@@ -181,8 +181,8 @@ case "$TOOL" in
 	cc-genpro)
 		if CheckPath;then
 			exec python2 $TOOLPATH/$TOOL\1.2.py ${@:2}
-                else
-                        STDERR
+		else
+			STDERR
 		fi
 		;;
 	hasher)
@@ -213,8 +213,8 @@ case "$TOOL" in
 	evilurl|NULL-phoneinfoga-NULL|phomber|hunner|infoga|ipgeolocation|seeker|shellsploit|sublist3r|NULL-theharvester-NULL|vulnx)
 		if CheckPath;then
 			exec python $TOOLPATH/$TOOL.py ${@:2}
-                else
-                        STDERR
+		else
+			STDERR
 		fi
 		;;
 	botgram)
@@ -225,16 +225,16 @@ case "$TOOL" in
 				[[ $opc = "exit" ]] && exit
 				exec python $TOOLPATH/$opc.py ${@:2}
 			done
-                else
-                        STDERR
-                fi
+		else
+			STDERR
+		fi
 		;;
 	hakku|webhackshl|ghost|recon-ng)
-                if CheckPath;then
+		if CheckPath;then
 			exec python $TOOLPATH/$TOOL
-                else
-                        STDERR
-                fi
+		else
+			STDERR
+		fi
 		;;
 	h8mail|objection|quack)
 		running
@@ -257,24 +257,24 @@ case "$TOOL" in
 	recondog)
 		if CheckPath;then
 			exec python $TOOLPATH/dog ${@:2}
-                else
-                        STDERR
-                fi
-                ;;
+		else
+			STDERR
+		fi
+		;;
 	routersploit)
-                if CheckPath;then
+		if CheckPath;then
 			exec python $TOOLPATH/rsf.py
-                else
-                        STDERR
-                fi
-                ;;
+		else
+			STDERR
+		fi
+		;;
 	sherlock)
 		if CheckPath;then
 			exec python $TOOLPATH/$TOOL/$TOOL.py ${@:2}
-                else
-                        STDERR
-                fi
-                ;;
+		else
+			STDERR
+		fi
+		;;
 	sqlmap)
 		if CheckPath;then
 			exec python $TOOLPATH/$TOOL.py ${@:2}
@@ -295,18 +295,18 @@ case "$TOOL" in
 	exploitdb)
 		if CheckPath;then
 			exec bash $TOOLPATH/searchsploit ${@:2}
-                else
-                        STDERR
+		else
+			STDERR
 		fi
 		;;
 #::::PHP TOOLS::::#
 	rhawk)
-                if CheckPath;then
-			php $TOOLPATH/$TOOL.php
-                else
-                        STDERR
-                fi
-                ;;
+	if CheckPath;then
+		php $TOOLPATH/$TOOL.php
+	else
+		STDERR
+	fi
+	;;
 #::::PERL TOOLS::::#
 	acccheck)
 		if CheckPath;then
@@ -323,11 +323,12 @@ case "$TOOL" in
 			STDERR
 		fi
 		;;
-
 #::::TOOLS IN BIN::::#
 	ExiF|bincheker|binwalk|blackbox|burpsuite|code-server|converter|crunch|DoS-A-Tool|dirb|GetNPUsers|pagekite|shc|unshc|snow|wfuzz|whatweb|hydra|xhydra|youtube-dl)
 		running
-		if [ -e $PREFIX/bin/$TOOL ]; then
+		if [ -e $HOME/.local/bin/$TOOL ]; then
+			exec $HOME/.local/bin/$TOOL ${@:2}
+		elif [ -e $PREFIX/bin/$TOOL ]; then
 			exec $PREFIX/bin/$TOOL ${@:2}
 		else
 			STDERR
@@ -336,14 +337,14 @@ case "$TOOL" in
 	dnsenum)
 		CheckRoot
 		running
-		if [ -e $PREFIX/bin/$TOOL ]; then
-			exec sudo $PREFIX/bin/$TOOL ${@:2}
+		if [ -e $HOME/.local/bin/$TOOL ]; then
+			exec sudo $HOME/.local/bin/$TOOL ${@:2}
 		else
 			STDERR
 		fi
 		;;
 	torvpn|IbyC-fixer|pagekite|sudo|serverphp|serverapache|postgresql|traductor)
-		if [ -e $PREFIX/bin/$TOOL ] || [ $(grep -oE "$TOOL" $PREFIX/etc/fish/config.fish) ]; then
+		if [ -e $HOME/.local/bin/$TOOL ] || [ $(grep -oE "$TOOL" $PREFIX/etc/fish/config.fish) ]; then
 			printf "$R(_>)_To_run_it_just_type:─➤$W $TOOL"
 		else
 			STDERR
@@ -373,8 +374,8 @@ case "$TOOL" in
 		if [ -d $GOPATH/src/github.com/VirusTotal/$TOOL-go ] && [ -e $GOPATH/bin/$TOOL ]; then
 			cd $GOPATH/bin/
 			exec $TOOL ${@:2}
-		elif [ $PREFIX/bin/$TOOL ]; then
-			exec $PREFIX/bin/$TOOL ${@:2}
+		elif [ $HOME/.local/bin/$TOOL ]; then
+			exec $HOME/.local/bin/$TOOL ${@:2}
 		else
 			STDERR
 		fi

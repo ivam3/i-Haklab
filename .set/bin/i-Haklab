@@ -2,8 +2,8 @@
 #Created on Dec/2018 and upgraded on Ago/2021 by @Ivam3
 IFS=$'\n\t'
 trap ctrl_c 2
-[[ $(basename $0) != i-Haklab ]] && { mv $PREFIX/bin/$(basename $0) $PREFIX/bin/i-Haklab;exit;}
-source $PREFIX/share/i-Haklab/.set/var/variables
+[[ $(basename $0) != i-Haklab ]] && { mv $HOME/.local/bin/$(basename $0) $HOME/.local/bin/i-Haklab;exit;}
+source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 ctrl_c(){ printf "$Y\n\n\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bot$W\n\n";exit;}
 chk-iHaklab
@@ -26,9 +26,10 @@ case "$1" in
 			for i in ${@:2};do
 				bash $iHAKLAB/.set/share/$1 $i
 			done
+	INACTIVE(){
 			if [[ $(ruby -v |cut -c 6-10) != "2.7.2" ]];then
 				printf "$Y\n(_>)─➤$W Downgrading ruby at version 2.7.2.."
-#		bash <(curl -fsSL "http://git.io/abhacker-repo") --install ruby=2.7.2
+				bash <(curl -fsSL "http://git.io/abhacker-repo") --install ruby=2.7.2
 				if [ ! -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ];then
 					printf "$Y\n(_>)─➤$W Installing Abhacker repositories..$G"
 					wget -q "${iHDB}/fix-tools/instAbhackerRepo" -O $TMPDIR/abh.tmp
@@ -43,6 +44,7 @@ case "$1" in
 				rm -rf $PREFIX/lib/ruby/gems/2.7.0/specifications/default/bundler-2.1.4.gemspec
 				printf "$G.DONE!!$W\n"
 			fi
+		}
 		else
 			STDERR
 		fi

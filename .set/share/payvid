@@ -2,7 +2,7 @@
 #This file is part of i-Haklab command
 #
 trap ctrl_c 2
-source $PREFIX/share/i-Haklab/.set/var/variables
+source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 killps(){ [[ $(ps aux|grep -o ngrok|head -n1) ]] && pkill -f -2 ngrok >/dev/null 2>&1;killall -2 ngrok >/dev/null 2>&1;}
 ctrl_c(){ killps;}

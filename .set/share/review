@@ -2,24 +2,25 @@
 #Created on sept/2019
 IFS=$'\n\t'
 log=$PREFIX/var/log/iHaklab.log
-source $PREFIX/share/i-Haklab/.set/var/variables
+source $HOME/.local/share/i-Haklab/.set/var/variables
 echo "VAR = $iHAKLAB" > $log
 echo "####:::::bash.rc::::########" >> $log
 cat $PREFIX/etc/bash.bashrc >> $log
+cat $HOME/.bashrc >> $log
 echo "####:::::fish::::########" >> $log
 cat $PREFIX/etc/fish/config.fish >> $log
 echo "####:::::password::::########" >> $log
 for i in Ivam3 Cinderella Quiz ; do
-	ls $PREFIX/libexec/termux/.$i >> $log
+	ls $HOME/.local/etc/i-Haklab/.$i >> $log
 done
 echo "####:::::commands::::########" >> $log
-for c in run i-Haklab sudo fish lock myip mypip swip; do
+for c in run i-Haklab sudo fish lock msfconsole myip mypip swip; do
 	echo "$c = $(command -v $c)" >> $log
 done
 echo "####:::::banners::::########" >> $log
-ls $PREFIX/var/log/login-termux >> $log
-ls $PREFIX/libexec/banner/login-banner >> $log
-ls $PREFIX/libexec/banner/wall-banner >> $log
+ls $HOME/.local/etc/i-Haklab/login-termux >> $log
+ls $HOME/.local/etc/i-Haklab/login-banner >> $log
+ls $HOME/.local/etc/i-Haklab/wall-banner >> $log
 ls $HOME/.config/fish/functions/ >> $log
 echo "####:::::tools::::########" >> $log
 ls $iHAKLAB/../ >> $log

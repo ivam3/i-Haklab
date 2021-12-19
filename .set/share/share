@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 #This file is part of i-Haklab command
-source $PREFIX/share/i-Haklab/.set/var/variables
+source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 [[ $1 ]] || STDERR
 if [ $1 = "upload" ]; then

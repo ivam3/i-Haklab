@@ -3,7 +3,7 @@
 IFS=$'\n\t'
 trap ctrl_c 2
 ctrl_c(){ printf "\n$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";}
-source $PREFIX/share/i-Haklab/.set/var/variables
+source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 toRemove="$1"
 if [[ $SHELL = $PREFIX/bin/fish ]];then
@@ -14,7 +14,7 @@ fi
 [[ $toRemove = kalilinux ]] && toRemove="kali-fs"
 [[ $toRemove = twifo-cli ]] && toRemove="twifo"
 [[ $toRemove = login-termux ]] && login="$(grep -oE $toRemove $INITFILE)"
-if [ ! -d $TOOLS/$toRemove ] && [ ! -e $PREFIX/bin/$toRemove ] && [ ! -d $PREFIX/opt/$toRemove ] && [ ! -e ~/go/bin/$toRemove ] && [ ! -d ~/$toRemove ] && [ -z $login ];then
+if [ ! -d $TOOLS/$toRemove ] && [ ! -e $HOME/.local/bin/$toRemove ] && [ ! -e $PREFIX/bin/$toRemove ] && [ ! -d $PREFIX/opt/$toRemove ] && [ ! -e ~/go/bin/$toRemove ] && [ ! -d ~/$toRemove ] && [ -z $login ];then
 	printf "$R(_>)─➤$W $1 isn't installed";exit
 fi
 Err() { printf "$R(_>)─➤$W Remove failed";exit;}
@@ -27,7 +27,7 @@ rmMainDir() {
 	if chk-root;then
 		user=sudo
 	fi
-	for path in $TOOLS $PREFIX/bin $PREFIX/opt ~/go/bin;do
+	for path in $TOOLS $HOME/.local/bin $PREFIX/bin $PREFIX/opt ~/go/bin;do
 		if [[ -d $path/$toRemove ]] || [[ -e $path/$toRemove ]];then
 			$user rm -rf $path/$toRemove
 		fi
@@ -60,16 +60,16 @@ case "$toRemove" in
 			yes|apt remove make automake
 		fi
 		if [[ $toRemove = JohnTheRipper ]]; then
-			rm -f $PREFIX/bin/john
+			rm -f $HOME/.local/bin/john
 		fi
 		if [[ $toRemove = shc ]];then
-			rm -f $PREFIX/bin/un$toRemove
+			rm -f $HOME/.local/bin/un$toRemove
 		fi
 		if [[ $toremove = ngrok ]];then
 			[ -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ] && yes|apt remove ngrok-server
 			rm -rf ~/.ngrok2
 			rm -f $PREFIX/bin/ngrok
-			rm -f $PREFIX/bin/ngrok.io
+			rm -f $HOME/.local/bin/ngrok.io
 			apt autoremove
 		fi
 		rmMainDir
@@ -241,7 +241,7 @@ case "$toRemove" in
 		;;
 	#::BASH::#
 	login-termux)
-		sed 's|/data/data/com.termux/files/usr/var/log/login-termux|/data/data/com.termux/files/usr/libexec/banner/wall-banner|g' -i $INITFILE
+		sed 's|/data/data/com.termux/files/home/.local/etc/i-Haklab/login-termux|/data/data/com.termux/files/home/.local/etc/i-Haklab/wall-banner|g' -i $INITFILE
 		[[ $(grep -oE "wall-banner" $INITFILE) ]] || Err
 		;;
 	userrecon)
@@ -250,8 +250,8 @@ case "$toRemove" in
 	#::BIN::#
 	adbfastboot)
 		for BIN in adb adb.bin fastboot fastboot-armeabi;do
-			if [[ -e $PREFIX/bin/$BIN ]];then
-				rm -f $PREFIX/bin/$BIN
+			if [[ -e $HOME/.local/bin/$BIN ]];then
+				rm -f $HOME/.local/bin/$BIN
 			fi
 		done
 		if [[ -d ~/adbfiles ]];then
@@ -259,7 +259,7 @@ case "$toRemove" in
 		fi
 		;;
 	burpsuite)
-		[[ -e $PREFIX/bin/burpsuite ]] && rm -rf $PREFIX/bin/burpsuite
+		[[ -e $HOME/.local/bin/burpsuite ]] && rm -rf $HOME/.local/bin/burpsuite
 		[[ -e $TOOLS/burpsuite.jar ]] && rm -rf $TOOLS/burpsuite.jar
 		;;
 	code-server)
@@ -312,9 +312,7 @@ case "$toRemove" in
 		yes|apt remove tor torsocks proxychains-ng
 		yes|apt autoremove
 		rm -rf $PREFIX/etc/tor $PREFIX/etc/proxychains.conf
-		for i in myip mypip swip ; do
-			rm -f $PREFIX/bin/$i
-		done
+		rm -f $HOME/.local/bin/$i
 		;;
 	twifo-cli|twifo)
 		npm uninstall $toInstall-cli
@@ -325,7 +323,7 @@ case "$toRemove" in
 			rmMainDir
 			printf "$toRemove" > $TMPDIR/deps2drop
 			alert
-			rm -rf ~/.config/youtube-dl ~/bin ~/.netrc  $PREFIX/bin/termux-url-opener
+			rm -rf ~/.config/youtube-dl ~/bin ~/.netrc $HOME/.local/bin/termux-url-opener
 		elif [[ $toRemove = youtubedr ]];then
 			yes|apt remove $toRemove
 		elif [[ $toRemove = converter ]];then
@@ -339,28 +337,28 @@ case "$toRemove" in
 		;;
 	metasploit)
 		rmMainDir
-		yes|apt remove patchelf metasploit;yes apt autoremove
-		rm -rf $PREFIX/var/lib/postgresql $PREFIX/var/lib/postgresql
+		yes|apt remove patchelf metasploit;yes|apt autoremove
+		rm -rf $PREFIX/var/lib/postgresql
 		;;
-	#::GO::
+		#::GO::
 	amass)
-                goa=$(find ~/go/pkg/mod/github.com -type d -iname "!$toRemove"|head -n 1)
-                rm -rf $gob $PREFIX/lib/go/src/$toRemove
+		goa=$(find ~/go/pkg/mod/github.com -type d -iname "!$toRemove"|head -n 1)
+    rm -rf $gob $PREFIX/lib/go/src/$toRemove
 		;;
 	aquatone)
 		rm -rf ~/go/pkg/mod/github.com/$toRemove ~/$toRemove
 		gem remove --quiet --silent $toRemove $PREFIX/bin/$toRemove
 		;;
 	gobuster)
-                gob=$(find ~/go/pkg/mod/github.com -iname $toRemove)
-                rm -rf $gob $PREFIX/lib/go/src/$toRemove
+		gob=$(find ~/go/pkg/mod/github.com -iname $toRemove)
+    rm -rf $gob $PREFIX/lib/go/src/$toRemove
 		;;
 	gophish)
-                gop1=$(find ~/go/pkg/mod/github.com -type d -iname $toRemove|head -n 1)
-                rm -rf $gop1
-                ;;
+		gop1=$(find ~/go/pkg/mod/github.com -type d -iname $toRemove|head -n 1)
+    rm -rf $gop1
+		;;
 	tangalanga)
-                got=$(find ~/go/pkg/mod/github.com -type d -iname "$toRemove*")
+		got=$(find ~/go/pkg/mod/github.com -type d -iname "$toRemove*")
 		rm -rf $got
 		;;
 	virustotal)
@@ -384,8 +382,8 @@ case "$toRemove" in
 		for repo in WWW::Mechanize Net::IP Net::DNS Net::Netmask XML::Writer String::Random ; do
 			cpan uninstall $repo
 		done
-		if [[ -d $PREFIX/share/$toRemove ]];then
-			sudo rm -f $PREFIX/share/$toRemove
+		if [[ -d $HOME/.local/share/$toRemove ]];then
+			sudo rm -f $HOME/.local/share/$toRemove
 		fi
 		if [ -d ~/.$toRemove ];then
 			rm -rf ~/.$toRemove
@@ -404,19 +402,18 @@ case "$toRemove" in
 		;;
 	sudo)
 		chk-sudo
-		sudo rm -rf ~/.suroot $PREFIX/bin/$toRemove
+		sudo rm -rf ~/.suroot $HOME/.local/bin/$toRemove
 		;;
 	*)
 		printf "$R(_>)─➤$W Unable to locate $1 on i-Haklab\n"
-                sleep 0.5
-                printf "$G(_>)─➤$W Trying with Advance Packect Tool (APT)...\n"
-                if [[ $(pkg list-all|grep -oE "$toRemove") ]];then
-                        yes|apt remove $toRemove
-                else
-                        printf "$R(_>)─➤$W Tool $toRemove doesn't exist\n"
-                        exit
-                fi
-
+    sleep 0.5
+		printf "$G(_>)─➤$W Trying with Advance Packect Tool (APT)...\n"
+    if [[ $(pkg list-all|grep -oE "$toRemove") ]];then
+			yes|apt remove $toRemove
+		else
+			printf "$R(_>)─➤$W Tool $toRemove doesn't exist\n"
+      exit
+		fi
 		;;
 esac
 k-boom

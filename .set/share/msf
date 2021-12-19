@@ -1,7 +1,7 @@
 #!/bin/bash
 #This file is part of i-Haklab command
 #
-source $PREFIX/share/i-Haklab/.set/var/variables
+source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 opts=$1
 HOST=${2:-$LOCALHOST}
