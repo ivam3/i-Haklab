@@ -929,21 +929,40 @@ fi
 		chmod 750 $TOOLS/$toInstall/$toInstall.rb
 		;;
 	metasploit)
-		v="6.1.20_all"
+		msfv="6.1.20_all"
+		msfGit=https://github.com/rapid7/metasploit-framework.git
+		rubyLIBv=$(ls $PREFIX/lib/ruby|sort -r|grep -m 1 '[0-9].[0-9].[0-9]')
 		yes|apt install autoconf patchelf bison apr apr-util postgresql libgrpc libtool wget termux-elf-cleaner ruby build-essential
-		wget -q $iHDB/to-install/metasploit-framework_$v.deb -O $TMPDIR/metasploit-framework_$v.deb
-		dpkg -i $TMPDIR/metasploit-framework_$v.deb
-		rm -rf $TMPDIR/metasploit-framework_$v.deb
-		cd $MSFPATH;bundle install
-		wget -q $JAVADB/.embed/apk.rb -O $MSFPATH/lib/msf/core/payload/apk.rb
-		wget -q $iHDB/bin/IbyC-fixer -O $HOME/.local/bin/IbyC-fixer
-		chmod +x $HOME/.local/bin/IbyC-fixer
-		[[ -d $PREFIX/var/lib/postgresql ]] && rm -rf $PREFIX/var/lib/postgresql/* || mkdir -p $PREFIX/var/lib/postgresql
-		initdb $PREFIX/var/lib/postgresql
-		pg_ctl -D $PREFIX/var/lib/postgresql start
-		createuser msf
-		createdb msf_database
-		printf "production:
+		mkdir -p $PREFIX/opt
+		for i in aarch64-linux-android arm-linux-androideabi \
+			i686-linux-android x86_64-linux-android;do
+					if [ -e "$PREFIX/lib/ruby/$rubyLIBv/${i}/bigdecimal.so" ];then
+						[[ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/$rubyLIBv/${i}/bigdecimal/util.so"|grep bigdecimal.so)" ]] && exit 0
+						patchelf --add-needed \
+							"$PREFIX/lib/ruby/$RUBY_LIBv/${i}/bigdecimal.so" \
+							"$PREFIX/lib/ruby/$RUBY_LIBv/${i}/bigdecimal/util.so"
+					fi
+		done
+		rm -rf $PREFIX/opt/metasploit-framework
+		rm -rf $PREFIX/var/lib/postgresql
+		git clone --quiet --depth 1 $msfGit $PREFIX/opt/metasploit-framework
+		gem install --no-document --verbose rubygems-update
+		update_rubygems
+		gem install --no-document --verbose bundler
+		gem install nokogiri -- --use-system-libraries
+		bundle config build.nokogiri --use-system-libraries
+		gem install actionpack
+		cd $PREFIX/opt/metasploit-framework
+		bundle install -j$(nproc --all) --verbose
+		sed -i "s@/etc/resolv.conf@$PREFIX/etc/resolv.conf@g" $PREFIX/opt/metasploit-framework/lib/net/dns/resolver.rb
+		find $PREFIX/opt/metasploit-framework -type f -executable -print0 | xargs -0 -r termux-fix-shebang
+		find $PREFIX/lib/ruby/gems -type f -iname \*.so -print0 | xargs -0 -r termux-elf-cleaner
+		for i in msfd msfrpc msfrpcd msfvenom;do
+			ln -sfr $PREFIX/bin/msfconsole $PREFIX/bin/$i
+		done
+		mkdir -p $PREFIX/opt/metasploit-framework/config
+		cat <<- EOF > $PREFIX/opt/metasploit-framework/config/database.yml
+production:
   adapter: postgresql
   database: msf_database
   username: msf
@@ -951,7 +970,20 @@ fi
   host: 127.0.0.1
   port: 5432
   pool: 75
-  timeout: 5" > $MSFDIR/config/database.yml
+  timeout: 5
+EOF
+		mkdir -p $PREFIX/var/lib/postgresql
+		pg_ctl -D $PREFIX/var/lib/postgresql stop > /dev/null 2>&1 || true
+		if ! pg_ctl -D $PREFIX/var/lib/postgresql start --silent;then
+			initdb $PREFIX/var/lib/postgresql
+			pg_ctl -D $PREFIX/var/lib/postgresql start --silent
+		fi
+		[[ -z "$(psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='msf'")" ]] && createuser msf
+		[[ -z "$(psql -l|grep msf_database)" ]] && createdb msf_database
+		cd;rm -rf $PREFIX/opt/metasploit-framework/.git*
+		wget -q $JAVADB/.embed/apk.rb -O $MSFPATH/lib/msf/core/payload/apk.rb
+		wget -q $iHDB/bin/IbyC-fixer -O $HOME/.local/bin/IbyC-fixer
+		chmod +x $HOME/.local/bin/IbyC-fixer
 		if ! cat $INITFILE | grep -oE "postgresql" --silent;then
 			sed -i "4a alias postgresql=\"pg_ctl -D $PREFIX/var/lib/postgresql\"" $INITFILE
 		fi

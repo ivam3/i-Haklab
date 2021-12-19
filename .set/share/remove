@@ -337,8 +337,8 @@ case "$toRemove" in
 		;;
 	metasploit)
 		rmMainDir
-		yes|apt remove patchelf metasploit;yes|apt autoremove
 		rm -rf $PREFIX/var/lib/postgresql
+		yes|apt remove patchelf metasploit;yes|apt autoremove
 		;;
 		#::GO::
 	amass)
