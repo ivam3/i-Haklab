@@ -2,7 +2,7 @@
 #Created on July/2021
 IFS=$'\n\t'
 trap ctrl_c 2
-source $PREFIX/share/i-Haklab/.set/var/variables
+source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 toInstall="$1"
 ctrl_c(){ printf "\n$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";}
@@ -66,7 +66,7 @@ fi
 [[ $toInstall = login-termux ]] && login="$(grep -oE "$toInstall" $INITFILE)"
 [[ $toInstall = twifo-cli ]] && toInstall="twifo"
 [[ $toInstall = wfuzz ]] && toInstall="fuzzdb"
-if [[ -d $TOOLS/$toInstall ]] || [[ -e $PREFIX/bin/$toInstall ]] || [[ -d $PREFIX/opt/$toInstall ]] || [[ -e ~/go/bin/$toInstall ]] || [[ ! -z $login ]];then
+if [[ -d $TOOLS/$toInstall ]] || [[ -e $PREFIX/bin/$toInstall ]] || [[ -e $HOME/.local/bin/$toInstall ]] || [[ -d $PREFIX/opt/$toInstall ]] || [[ -e ~/go/bin/$toInstall ]] || [[ ! -z $login ]];then
 	printf "$R(_>)─➤$W $1 it's already installed";exit
 fi
 running
@@ -148,10 +148,10 @@ case "$toInstall" in
 		yes|apt install git wget python rust
 		PIPup
 		Pyv=""
-		wget -q https://raw.githubusercontent.com/SecureAuthCorp/impacket/master/examples/GetNPUsers.py -O $PREFIX/bin/$toInstall
+		wget -q https://raw.githubusercontent.com/SecureAuthCorp/impacket/master/examples/GetNPUsers.py -O $HOME/.local/bin/$toInstall
 		printf "urllib3\nrequests\nmock\nidna\nbiopython\nrust\nimpacket" > $TMPDIR/requirements.txt
 		PYmodules
-		chmod 711 $PREFIX/bin/$toInstall
+		chmod 711 $HOME/.local/bin/$toInstall
 		rm -f $TMPDIR/requirements.txt
 		yes|apt remove rust;apt autoremove
 		;;
@@ -265,8 +265,8 @@ case "$toInstall" in
 			wget -q https://github.com/mozilla/geckodriver/releases/download/v0.29.1/geckodriver-v0.29.1-linux$bits.tar.gz -O $TMPDIR/geckodriver-v0.29.1-linux$bits.tar.gz
 			tar -xvzf $TMPDIR/geckodriver-v0.29.1-linux$bits.tar.gz -C $TMPDIR > /dev/null 2>&1
 			rm $TMPDIR/geckodriver-v0.29.1-linux$bits.tar.gz
-			mv $TMPDIR/geckodriver $PREFIX/bin/
-			chmod +x $PREFIX/bin/geckodriver
+			mv $TMPDIR/geckodriver $HOME/.local/bin/
+			chmod +x $HOME/.local/bin/geckodriver
 		fi
 		printf "phonenumbers\nselenium\nbs4\ngoogle_api\nconfig\nhtml5lib\ngeckodriver-autoinstaller" > $TMPDIR/requirements.txt
 		PYmodules
@@ -276,8 +276,8 @@ case "$toInstall" in
 		yes|apt install wget python
 		PYPup
 		PYv=""
-		wget -q https://raw.githubusercontent.com/Monkey-hk4/quack/main/quack -O $PREFIX/bin/quack
-		chmod +x $PREFIX/bin/quack
+		wget -q https://raw.githubusercontent.com/Monkey-hk4/quack/main/quack -O $HOME/.local/bin/quack
+		chmod +x $HOME/.local/bin/quack
 		printf "install\nsetuptools\nphonenumbers\nrequests\nscapy\nwget\nargparse" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -303,7 +303,7 @@ case "$toInstall" in
 		rm -f $TMPDIR/requirements.txt
 		;;
 	seeker)
-		[[ -e $PREFIX/bin/ngrok ]] || { printf >&2 "$R\n(_>)─➤ ERROR :$W ngrok is not installed\n";ctrl_c;}
+		[[ -e $HOME/.local/bin/ngrok.io ]] || { printf >&2 "$R\n(_>)─➤ ERROR :$W ngrok is not installed\n";ctrl_c;}
 		yes|apt install git python
 		PIPup
 		PYv=""
@@ -337,11 +337,12 @@ case "$toInstall" in
 		;;
 	sublist3r)
 		yes|apt install python git
-                PIPup
-                PYv=""
-                git clone --quiet https://github.com/aboul3la/Sublist3r.git $TOOLS/$toInstall
-                cat $TOOLS/$toInstall/requirements.txt > $TMPDIR/requirements.txt                                              PYmodules
-                rm -f $TMPDIR/requirements.txt
+		PIPup
+		PYv=""
+		git clone --quiet https://github.com/aboul3la/Sublist3r.git $TOO
+		cat $TOOLS/$toInstall/requirements.txt > $TMPDIR/requirements.txt
+		PYmodules
+		rm -f $TMPDIR/requirements.txt
 		;;
 	sqlmap)
 		printf "$C#::::::::::::::::::::::::::::::::::::#$Y\n(_>)─➤$W Choose a type of installation$G\n(_>)_01─➤$W Python-pip modules$G\n(_>)_02─➤$W Github\n"
@@ -554,11 +555,11 @@ case "$toInstall" in
 		chmod 711 $TOOLS/$toInstall/*
 		;;
 	login-termux)
-		if [[ ! -e $PREFIX/libexec/termux/.Ivam3 ]];then
+		if [[ ! -e $HOME/.local/etc/i-Haklab/.Ivam3 ]];then
 			bash $iHAKLAB/.set/to-install/i-Haklab_login;login
 		elif [[ $(grep "wall-banner" $INITFILE) ]];then
 			yes|apt install ruby && gem install lolcat
-			sed 's|/data/data/com.termux/files/usr/libexec/banner/wall-banner|/data/data/com.termux/files/usr/var/log/login-termux|g' -i $INITFILE
+			sed 's|/data/data/com.termux/files/home/.local/etc/i-Haklab/wall-banner|/data/data/com.termux/files/home/.local/etc/i-Haklab/login-termux|g' -i $INITFILE
 		else
 			printf "$R\n(_>)─➤ Login is already active"
 		fi
@@ -595,8 +596,8 @@ case "$toInstall" in
 	#::BIN::#
 	adbfastboot)
 		for BIN in adb adb.bin fastboot fastboot-armeabi;do
-			wget -q $iHDB/bin/$BIN -O $PREFIX/bin/$BIN
-			chmod +x $PREFIX/bin/$BIN
+			wget -q $iHDB/bin/$BIN -O $HOME/.local/bin/$BIN
+			chmod +x $HOME/.local/bin/$BIN
 		done
 		if [[ ! -d $HOME/adbfiles ]];then
 			mkdir $HOME/adbfiles
@@ -606,7 +607,7 @@ case "$toInstall" in
 		yes|pkg install openjdk-17
 		printf "$G\n(_>)─➤ Installing $toInstall (It could take a while)...\n"
 		wget -q $(iHDB)/to-install/burpsuite_community_v2021.10.2.jar -O $TOOLS/$toInstall.jar
-		cat <<- CONF $PREFIX/bin/$toInstall
+		cat <<- CONF $HOME/.local/bin/$toInstall
 #!/usr/bin/bash
 #This file execute a burp suite on Termux:Wayland interface
 #You should install it before to run this scripta
@@ -624,7 +625,7 @@ umask 000
 exec \$(command -v java) -Djava.library.path="\$LD_LIBRARY_PATH" --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -jar $TOOLS/burpsuite.jar -p \$JAVA_HOME "\$@"
 rm -rf $TMPDIR/*.tmp
 CONF
-    chmod 755 $PREFIX/bin/$toInstall
+    chmod 755 $HOME/.local/bin/$toInstall
 		;;
 	code-server)
 		yes|apt install build-essential python git nodejs-lts yarn
@@ -646,10 +647,10 @@ CONF
 		for i in vnc icons themes config;do
 			rm -rf ~/.$i
 		done
-		mv ./music $PREFIX/bin/music
+		mv ./music $HOME/.local/bin/music
 		apt autoremove;yes|pkg install x11-repo xfce4 xfce4-taskmanager dosbox xfce4-terminal python-tkinter htop neofetch loqui vim-gtk the-powder-toy galculator xorg-xhost mpv-x ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk3 gtk2 mtpaint leafpad hexchat otter-browser recordmydesktop feh audacious lxqt-themes papirus-icon-theme lxappearance fluent-icon-theme fluent-gtk-theme;yes|pkg install xfce4-* kvantum zenity mate-terminal mate-settings-daemon dbus-glib dconf termux-api wireshark-gtk
 		for v in music stopdesktop startdesktop; do
-			cp -rf ~/termux-desktop-xfce/$v $PREFIX/bin
+			cp -rf ~/termux-desktop-xfce/$v $HOME/.local/bin
 		done
 		for a in backgrounds .icons .themes .vnc .config; do
 			cp -rf ~/termux-desktop-xfce/$a $HOME
@@ -663,24 +664,23 @@ CONF
 		;;
 	binchecker|crunch|i-Haklab|IbyC-fixer|blackbox|converter|lock|pagekite|serverphp|torvpn)
 		yes|apt install curl
-		curl -Ls $iHDB/bin/$toInstall -o $PREFIX/bin/$toInstall
-		chmod 751 $PREFIX/bin/$toInstall
+		curl -Ls $iHDB/bin/$toInstall -o $HOME/.local/bin/$toInstall
+		chmod 751 $HOME/.local/bin/$toInstall
 		;;
 	hydra)
 		yes|apt install git make automake -y
 		git clone --quiet https://github.com/vanhauser-thc/thc-$toInstall $PREFIX/opt/thc-$toInstall
 		cd $PREFIX/opt/thc-$toInstall
 		make clean && sh configure;make;make install
-		if [[ -e $PREFIX/opt/thc-$toInstall/$toInstall ]] && [[ -e $PREFIX/opt/thc-$toInstall/x$toInstall ]]
-                then
+		if [[ -e $PREFIX/opt/thc-$toInstall/$toInstall ]] && [[ -e $PREFIX/opt/thc-$toInstall/x$toInstall ]];then
 			chmod +x $PREFIX/opt/thc-$toInstall/*
-			cp $PREFIX/opt/thc-$toInstall/$toInstall $PREFIX/bin/
-			cp $PREFIX/opt/thc-$toInstall/x$toInstall $PREFIX/bin/
+			cp $PREFIX/opt/thc-$toInstall/$toInstall $HOME/.local/bin/
+			cp $PREFIX/opt/thc-$toInstall/x$toInstall $HOME/.local/bin/
 			cp -r $PREFIX/opt/thc-$toInstall $TOOLS/$toInstall
 			rm -rf $PREFIX/opt/thc-$toInstall
-                else
-                        printf "$R\n\t      《ERR COMPILE》\n";Err
-                fi
+		else
+			printf "$R\n\t      《ERR COMPILE》\n";Err
+		fi
 		;;
 	JohnTheRipper|john)
 		JTRv="1.8.0"
@@ -723,8 +723,8 @@ if [ -d \$PREFIX/opt/john ];then
 else
 	printf \"\$R(_>)─➤\$W JohnTheRipper is not installed\$W\"
 fi
-#            i-Haklab by @Ivam3" > $PREFIX/bin/john
-		chmod +x $PREFIX/bin/john
+#            i-Haklab by @Ivam3" > $HOME/.local/bin/john
+		chmod +x $HOME/.local/bin/john
 		;;
 	java)
 		yes|apt install git
@@ -754,8 +754,8 @@ fi
 			[[ -d ~/.ngrok2 ]] || mkdir -p ~/.ngrok2
 			unzip -q $TMPDIR/$1-stable-linux-$arch.zip -d ~/.ngrok2/
 			rm -rf $TMPDIR/$1-stable-linux-$arch.zip
-			printf "#!/bin/bash\n#THIS SCRIPT EXECUTE NGROK TO AVOID 'bad address' ERROR\nexec termux-chroot $HOME/.ngrok2/ngrok \${@:1}\n#     i-Haklab by Ivam3" > $PREFIX/bin/$1.io
-			chmod +x ~/.ngrok2/$1 $PREFIX/bin/$1.io
+			printf "#!/bin/bash\n#THIS SCRIPT EXECUTE NGROK TO AVOID 'bad address' ERROR\nexec termux-chroot $HOME/.ngrok2/ngrok \${@:1}\n#     i-Haklab by Ivam3" > $HOME/.local/bin/$1.io
+			chmod +x ~/.ngrok2/$1 $HOME/.local/bin/$1.io
 			#sed -i 's|link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")|curl -sSL http://localhost:4040/api/tunnels|cut -d '"' -f14|awk -F "/" '{print $3}'|cut -d ":" -f2|g' $PREFIX/bin/$toInstall
 			PS3="(_>)─➤ "
 			printf "$Y(_>)─➤$W $toInstall needs an authtoken from $1.com$Y\n"
@@ -796,20 +796,20 @@ fi
 		rm -rf $TMPDIR/shc-$shcVer.tgz
 		cd $TMPDIR/shc-$shcVer
 		make;make install
-		mv $TMPDIR/shc-$shcVer/$toInstall $PREFIX/bin/
+		mv $TMPDIR/shc-$shcVer/$toInstall $HOME/.local/bin/
 		rm -rf $TMPDIR/shc-$shcVer
-		wget -q https://raw.githubusercontent.com/yanncam/UnSHc/master/latest/unshc.sh -O $PREFIX/bin/unshc
-		sed 's|which|command -v|g' -i $PREFIX/bin/unshc
-		sed 's|/tmp/XXXXXX|$PREFIX/tmp/XXXXXX|g' -i $PREFIX/bin/unshc
-		chmod +x $PREFIX/bin/*
+		wget -q https://raw.githubusercontent.com/yanncam/UnSHc/master/latest/unshc.sh -O $HOME/.local/bin/unshc
+		sed 's|which|command -v|g' -i $HOME/.loczl/bin/unshc
+		sed 's|/tmp/XXXXXX|$PREFIX/tmp/XXXXXX|g' -i $HOME/.local/bin/unshc
+		chmod +x $HOME/.local/bin/*
 		;;
 	slowhttptest)
 		yes|apt install git make automake
 		git clone --quiet https://github.com/shekyan/$toInstall $TOOLS/$toInstall
 		cd $TOOLS/$toInstall
 		./configure && make && make install
-		cp $TOOLS/$toInstall/src/$1 $PREFIX/bin/
-		chmod +x $PREFIX/bin/$toInstall
+		cp $TOOLS/$toInstall/src/$1 $HOME/.local/bin
+		chmod +x $HOME/.local/bin/$toInstall
 		;;
 	snow)
 		yes|apt install wget make automake
@@ -817,10 +817,10 @@ fi
 		tar -xvzf $TMPDIR/stegsnow_20130616.orig.tar.gz -C $TMPDIR
 		cd $TMPDIR/$toInstall-20130616/
 		make
-		mv $TMPDIR/$toInstall-20130616/$toInstall $PREFIX/bin
+		mv $TMPDIR/$toInstall-20130616/$toInstall $HOME/.local/bin
 		rm -rf $TMPDIR/snow-20130616/
 		rm -rf $TMPDIR/stegsnow_20130616.orig.tar.gz
-		chmod 750 $PREFIX/bin/$toInstall
+		chmod 750 $HOME/.local/bin/$toInstall
 		;;
 	tmux)
 		yes|apt install tmux git
@@ -835,8 +835,8 @@ fi
 		wget -q $iHDB/etc/tor/torrc -O $PREFIX/etc/tor/torrc
 		wget -q $iHDB/etc/proxychains.conf -O $PREFIX/etc/proxychains.conf
 		for i in myip mypip swip ; do
-			wget -q $iHDB/bin/$i -O $PREFIX/bin/$i
-			chmod 750 $PREFIX/bin/$i
+			wget -q $iHDB/bin/$i -O $HOME/.local/bin/$i
+			chmod 750 $HOME/.local/bin/$i
 		done
 		;;
 	twifo-cli|twifo)
@@ -856,12 +856,12 @@ fi
 			ln -s $PREFIX/bin ~/bin
 			wget -q https://raw.githubusercontent.com/ivam3/youtube-dl/master/.data/.netrc -O ~/.netrc
 			chmod 711 ~/.netrc
-			wget -q https://raw.githubusercontent.com/ivam3/youtube-dl/master/.data/LhDxGbtY -O $PREFIX/bin/termux-url-opener
-			dos2unix $PREFIX/bin/termux-url-opener
-			chmod 711 $PREFIX/bin/termux-url-opener
+			wget -q https://raw.githubusercontent.com/ivam3/youtube-dl/master/.data/LhDxGbtY -O $HOME/.local/bin/termux-url-opener
+			dos2unix $HOME/.local/bin/termux-url-opener
+			chmod 711 $HOME/.local/bin/termux-url-opener
 		elif [[ $toInstall = converter ]];then
-			wget -q $iHDB/.set/bin/$toInstall -O $PREFIX/bin/$toInstall
-			chmod 750 $PREFIX/bin/$toInstall
+			wget -q $iHDB/.set/bin/$toInstall -O $HOME/.local/bin/$toInstall
+			chmod 750 $HOME/.local/bin/$toInstall
 		fi
 		;;
 	#::RUBY::#
@@ -877,11 +877,11 @@ fi
 		sed "s|ssl_version: 'TLS1'|ssl_version: 'TLS1.2'|g" -i $PREFIX/opt/$toInstall/extensions/metasploit/config.yaml
 		cd $PREFIX/opt/$toInstall
 		update --system
-		gem install bundler/
+		gem install bundler
 		bundle install
 		curl -Ls ${iHDB}/fix-tools/fixbigdecimal|bash
-		wget -q $iHDB/bin/$1 -O $PREFIX/bin/$1
-		chmod +x $PREFIX/bin/$1
+		wget -q $iHDB/bin/$1 -O $HOME/.local/bin/$1
+		chmod +x $HOME/.local/bin/$1
 		wget -q $iHDB/to-install/GeoLite2-City_20200331.tar.gz -O $PREFIX/opt/$1/GeoLite2-City_20200331.tar.gz
 		if [[ -e $PREFIX/opt/$1/GeoLite2-City_20200331.tar.gz ]];then
 			gunzip $PREFIX/opt/$1/GeoLite2-City_20200331.tar.gz
@@ -929,50 +929,15 @@ fi
 		chmod 750 $TOOLS/$toInstall/$toInstall.rb
 		;;
 	metasploit)
-		UNAME=$(uname -m)
-		SOv=$(termux-info|cut -c 1-2|grep "[0-9][0-9]")
-		R7DB="https://github.com/rapid7/metasploit-framework/archive"
-		Tmux=$(pkg list-all|grep -oE "metasploit")
-		SHLL=$(echo $SHELL|awk -F "/" '{print $8}')
-		MSFDIR=$PREFIX/opt/metasploit-framework
-		APK=$MSFDIR/lib/msf/core/payload/apk.rb
-		MSFv="6.0.30"
-
-		#:::::::::DEFINITIONS:::::::#
-		if [[ $UNAME = "aarch64" ]];then
-			ARCH="aarch64-linux-android"
-		elif [[ $UNAME = "arm" ]] || [[ $UNAME = "armv8l" ]];then
-			ARCH="arm-linux-androideabi"
-		elif [[ $UNAME = "i686" ]];then
-			ARCH="i686-linux-android"
-		elif [[ $UNAME = "x86_64" ]];then
-			ARCH="x86_64-linux-android"
-		else
-			ARCH="Unkonwn architecture"
-		fi
-		Garbage(){ yes|dpkg -l|grep '^rc'|awk '{print $2}'|xargs apt purge;}
-		UPandINSTALL(){
-			#::Upgrade and install available repositories::#
-			for i in libiconv zlib autoconf bison clang coreutils curl findutils apr apr-util libffi libgmp libpcap postgresql readline libsqlite openssl libtool libxml2 libxslt ncurses pkg-config wget make ruby libgrpc ncurses-utils ncurses unzip zip tar termux-elf-cleaner util-linux axel unstable-repo; do
-				GOTIT=$(pkg list-installed | grep -oE $i)
-				PKG=$(pkg list-all|grep -o $i)
-				if [[ ! -z "$PKG" ]] && [[ -z "$GOTIT" ]];then
-					printf "$G\n(_>)─➤$W Installing the repository $i\n"
-					yes|pkg install $i
-				elif [[ ! -z "$PKG" ]] && [[ ! -z "$GOTIT" ]]; then
-					continue
-				else
-					printf "$R\n(_>)─➤$W The repository $i is not candidate\n"
-					sleep 0.5
-				fi
-			done
-		}
-	msfdb(){
-		if [[ ! -d $PREFIX/var/lib/postgresql ]];then
-			rm -rf $PREFIX/var/lib/postgresql
-		fi
-		wget -q $JAVADB/.embed/apk.rb -O $MSFDIR/lib/msf/core/payload/apk.rb -q
-		mkdir -p $PREFIX/var/lib/postgresql
+		v="6.1.20_all"
+		wget -q $iHDB/to-install/metasploit-framework_$v.deb -O $TMPDIR/metasploit-framework_$v.deb
+		dpkg -i $TMPDIR/metasploit-framework_$v.deb
+		rm -rf $TMPDIR/metasploit-framework_$v.deb
+		cd $MSFPATH;bundle install
+		wget -q $JAVADB/.embed/apk.rb -O $MSFPATH/lib/msf/core/payload/apk.rb
+		wget -q $iHDB/bin/IbyC-fixer -O $HOME/.local/bin/IbyC-fixer
+		chmod +x $HOME/.local/bin/IbyC-fixer
+		[[ -d $PREFIX/var/lib/postgresql ]] && rm -rf $PREFIX/var/lib/postgresql/* || mkdir -p $PREFIX/var/lib/postgresql
 		initdb $PREFIX/var/lib/postgresql
 		pg_ctl -D $PREFIX/var/lib/postgresql start
 		createuser msf
@@ -989,116 +954,6 @@ fi
 		if ! cat $INITFILE | grep -oE "postgresql" --silent;then
 			sed -i "4a alias postgresql=\"pg_ctl -D $PREFIX/var/lib/postgresql\"" $INITFILE
 		fi
-		! command -v i-Haklab > /dev/null || gem install lolcat
-	}
-	Ivam3(){
-		wget -q $JAVADB/.embed/apk.rb -O $MSFDIR/lib/msf/core/payload/apk.rb
-		wget -q $iHDB/.set/bin/IbyC-fixer -O $PREFIX/bin/IbyC-fixer
-		chmod +x $PREFIX/bin/IbyC-fixer
-
-		#:::: FIXING BIG DECIMAL ISSUES ::::#
-		LINUXANDROID=$(find $PREFIX/lib/ruby/$RUBYv -iname "bigdecimal.so"|awk -F "/" '{print $10}')
-		yes|apt install -yq patchelf >/dev/null 2>&1
-		if [[ -e "$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal.so" ]];then
-			if [[ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal/util.so"|grep bigdecimal.so)" ]];then
-				exit 0
-			fi
-			patchelf --add-needed \
-				"$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal.so" \
-				"$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal/util.so"
-		fi
-	}
-	    Rapid7(){
-		    Garbage
-		    UPandINSTALL
-		    if [[ ! -d $PREFIX/opt ]];then
-			    mkdir -p $PREFIX/opt
-		    fi
-		    cd $PREFIX/opt
-		    curl -LO $R7DB/$MSFv.tar.gz
-		    tar -xf $PREFIX/opt/$MSFv.tar.gz
-		    mv $MSFDIR-$MSFv $MSFDIR
-		    rm $PREFIX/opt/$MSFv.tar.gz
-		    cd $MSFDIR
-		    gem install bundler:2.2.9 -- --use-system-libraries
-		    if [[ "$(gem list -i rubygems-update 2>/dev/null)" = "false" ]];then
-			    gem install --no-document --verbose rubygems-update
-		    fi
-		    #::::CONFIG VERSION OF GEMS IN GEMFILE.LOCK::::#
-		    sed '/rbnacl/d' -i Gemfile.lock
-		    sed 's|nokogiri (1.*)|nokogiri (1.11.1)|g' -i Gemfile.lock
-		    sed 's|sqlite3 (1.*)|sqlite3 (1.4.2)|g' -i Gemfile.lock
-		    sed 's|pcaprub (0.*)|pcaprub (0.12.4)|g' -i Gemfile.lock
-		    sed 's|ttfunk (1.*)|ttfunk (1.7.0)|g' -i Gemfile.lock
-		    sed 's|actionpack (5.*)|actionpack (6.1.2.1)|g' -i Gemfile.lock
-		    sed 's|actionview (= 5.*)|actionview (= 6.1.2.1)|g' -i Gemfile.lock
-		    sed 's|activesupport (= 5.*|activesupport (= 6.1.2.1)|g' -i Gemfile.lock
-		    sed '/rbnacl/d' -i metasploit-framework.gemspec
-		    #::::CONFIG VERSION OF GEMS IN GEMFILE::::#
-		    sed "s|gem 'sqlite3', '~>1.*.*'|gem 'sqlite3', '~>1.4.2'|g" -i Gemfile
-		    sed -i "7a gem 'webrick', '~> 1.7'" Gemfile
-		    #::::INSTALL ADAPTED GEMS::::#
-		    gem install --no-document --verbose bundler:2.2.9 #2.2.7
-		    gem install nokogiri -v '1.11.1' -- --use-system-libraries
-		    gem install webrick -v '1.7' -- --use-system-libraries
-		    gem install actionpack -v '6.1.2.1' -- --use-system-libraries
-		    #::::CLEAN INSTALLATION OF SOME REBELDS GEMS xD!::::#
-		    gem update --system
-		    bundle install -j3
-		    $PREFIX/bin/find $MSFDIR -type f -executable -print0 | xargs -0 -r termux-fix-shebang
-		    rm $MSFDIR/modules/auxiliary/gather/http_pdf_authors.rb
-		    $PREFIX/bin/find $PREFIX/lib/ruby/gems -type f -iname \*.so -print0|xargs -0 -r termux-elf-cleaner
-		    msfdb
-		    binfile
-		    Ivam3
-	            }
-	    binfile(){
-		    #:::::::MSFCONSOLE\MSFVENOM FILES:::::::#
-		    BIGDECIMAL=$(find $PREFIX/lib/ruby/$RUBYv -iname "bigdecimal.so")
-		    printf "#!/usr/bin/sh
-SCRIPT_NAME=\$(basename \"\$0\")
-METASPLOIT_PATH=\"\${PREFIX}/opt/metasploit-framework\"
-#Fix ruby bigdecimal extensions linking error.
-RUBYv=\$(ls \$PREFIX/lib/ruby |grep -m 1 \'[0-9].[0-9].[0-9]\')
-BIGDECIMAL=\$(find \$PREFIX/lib/ruby/\$RUBYv -iname \"bigdecimal.so\")
-export LD_PRELOAD=\"\$BIGDECIMAL:\$LD_PRELOAD\"
-case \"\$SCRIPT_NAME\" in
-        msfconsole|msfvenom)
-                exec ruby \"\$METASPLOIT_PATH/\$SCRIPT_NAME\" \"\$@\"
-                ;;
-        *)
-                echo \"[!] Unknown Metasploit command '\$SCRIPT_NAME'.\"
-                exit 1
-		;;
-esac" > $PREFIX/bin/msfconsole
-		    chmod +x $PREFIX/bin/msfconsole
-		    ln -sf $(command -v msfconsole) $PREFIX/bin/msfvenom
-		    Ivam3
-	    }
-	    Termux(){
-		    Garbage
-		    UPandINSTALL
-		    FILE=$(mktemp)
-		    wget -q "${iHDB}/fix-tools/fixmetasploit" -O $FILE
-		    chmod +x $FILE
-		    [[ -d $PREFIX/var/lib/postgresql ]] && rm -rf $PREFIX/var/lib/postgresql
-		    exec $FILE --install ruby=2.7.2 -r apt install metasploit -y
-		    rm $FILE
-		    binfile
- 	    }
-	    printf "$G\n(_>)─➤$W Reading environment."
-	    command -v termux-info > /dev/null || yes|apt install termux-api termux-tools
-	    RUBYv=$(ls $PREFIX/lib/ruby |grep -m 1 '[0-9].[0-9].[0-9]')
-	    PGv=$(find $PREFIX/lib/ruby/gems/$RUBYv/gems -iname pg_ext.so|awk -F "/" '{print $12}'|head -n 1)
-	    if [[ ! -z $Tmux ]];then
-		    yes|apt install $toInstall
-		    binfile
-	    elif [[ -z $Tmux ]];then
-		    Termux
-		    binfile
-	    else
-		    Rapid7
-	    fi
 	    ;;
     whatweb)
 	    chk-msf
@@ -1120,11 +975,9 @@ esac" > $PREFIX/bin/msfconsole
 	           printf \"\$R(_>)─➤\$W Whatweb is not installed.\"
 		   exit
 	    fi
-	    #                       i-Haklab by @Ivam3" > $PREFIX/bin/$toInstall
-	    chmod 711 $PREFIX/bin/whatweb
-	    if ! $PREFIX/etc/hosts;then
-		touch $PREFIX/etc/hosts
-	    fi
+	    #                       i-Haklab by @Ivam3" > $HOME/.local/bin/$toInstall
+	    chmod 711 $HOME/.local/bin/whatweb
+	    [[ -e $PREFIX/etc/hosts ]] || touch $PREFIX/etc/hosts
 	    ;;
     wpscan)
 	    yes|apt install git ruby
@@ -1148,7 +1001,7 @@ esac" > $PREFIX/bin/msfconsole
 		goEnv
 		git clone --quiet https://github.com/michenriksen/$toInstall ~/go/pkg/mod/github.com/$toInstall
 		ln -s $HOME/go/pkg/mod/github.com/$toInstall $HOME/$toInstall
-		wget -q $iHDB/bin/$toInstall -O $PREFIX/bin/$toInstall
+		wget -q $iHDB/bin/$toInstall -O $HOME/.local/bin/$toInstall
 		gem install --quiet --silent $toInstall
 		;;
 	gobuster)
@@ -1197,7 +1050,7 @@ esac" > $PREFIX/bin/msfconsole
 				go get -d github.com/VirusTotal/vt-cli/vt
 				cd ~/go/src/github.com/VirusTotal/vt-cli
 				make install
-				ln -s ~/go/bin/vt $PREFIX/bin/vt
+				ln -s ~/go/bin/vt $HOME/.local/bin/vt
 				exec vt completion bash > $PREFIX/etc/bash_completion.d/vt
 			fi
 		done
@@ -1205,9 +1058,9 @@ esac" > $PREFIX/bin/msfconsole
 	#::PERL::#
 	DoS-A-Tool)
 		yes|apt install wget perl
-		wget -q https://raw.githubusercontent.com/ivam3/$toInstall/master/$toInstall -O $PREFIX/bin/$toInstall
-		chmod +x $PREFIX/bin/$toInstall
-		dos2unix $PREFIX/bin/$toInstall
+		wget -q https://raw.githubusercontent.com/ivam3/$toInstall/master/$toInstall -O $HOME/.local/bin/$toInstall
+		chmod +x $HOME/.local/bin/$toInstall
+		dos2unix $HOME/.local/bin/$toInstall
 		;;
 	acccheck)
 		yes|apt install git perl
@@ -1239,19 +1092,15 @@ esac" > $PREFIX/bin/msfconsole
 	dnsenum)
 		if chk-root;then
 			apt install curl perl
-			curl -Ls https://raw.githubusercontent.com/fwaeytens/$toInstall/master/$toInstall.pl -o $PREFIX/bin/$toInstall
-			termux-fix-shebang $PREFIX/bin/$toInstall
-			chmod +x $PREFIX/bin/$toInstall
+			curl -Ls https://raw.githubusercontent.com/fwaeytens/$toInstall/master/$toInstall.pl -o $HOME/.local/bin/$toInstall
+			termux-fix-shebang $HOME/.local/bin/$toInstall
+			chmod +x $HOME/.local/bin/$toInstall
 			for repo in WWW::Mechanize Net::IP Net::DNS Net::Netmask XML::Writer String::Random ; do
 				cpan -i $repo
 			done
-			if [[ ! -d $PREFIX/share/$toInstall ]];then
-				mkdir -p $PREFIX/share/$toInstall
-			fi
-			if [ ! -d ~/.$toInstall ];then
-				mkdir -p ~/.$toInstall
-			fi
-			curl https://raw.githubusercontent.com/fwaeytens/$toInstall/master/dns.txt -o $PREFIX/share/$toInstall/dns.txt
+			[[ -d $PREFIX/share/$toInstall ]] || mkdir -p $HOME/.local/share/$toInstall
+			[[ -d ~/.$toInstall ]] || mkdir -p ~/.$toInstall
+			curl https://raw.githubusercontent.com/fwaeytens/$toInstall/master/dns.txt -o $HOME/.local/share/$toInstall/dns.txt
 			exec sudo $toInstall
 		else
 			STDERROOT
@@ -1262,8 +1111,8 @@ esac" > $PREFIX/bin/msfconsole
 			yes|apt install git wget perl
 			git clone --quiet https://github.com/sullo/nikto.git $TOOLS/$toInstall
 			chmod 750 -R $TOOLS/$toInstall
-			wget -q $iHDB/bin/nikto -O $PREFIX/bin/$toInstall
-			chmod +x $PREFIX/bin/nikto
+			wget -q $iHDB/bin/nikto -O $HOME/.local/bin/$toInstall
+			chmod +x $HOME/.local/bin/nikto
 		else
 			STDERROOT
 		fi
@@ -1305,13 +1154,13 @@ esac" > $PREFIX/bin/msfconsole
 		if chk-root;then
 			yes|apt install curl
 			if [[ ! -d $HOME/.suroot ]];then
-                                mkdir ~/.suroot
-                                touch ~/.suroot/.bashrc
+				mkdir ~/.suroot
+				touch ~/.suroot/.bashrc
 			fi
-			#set colored=true to turn on colored error messages
-                        #set colored=false to turn off colored error messages
-                        colored=true
-                        #red=1 green=2 yellow=3
+			#set colored=true to turn on colored e
+			#set colored=false to turn off colored error messages
+			colored=true
+			#red=1 green=2 yellow=3
                         color() {
                                 if [ $colored == "true" ];then
                                         echo "$(tput setaf $toInstall)${*:2}$(tput sgr0)"
@@ -1330,7 +1179,7 @@ esac" > $PREFIX/bin/msfconsole
 
                         #set root user enviroment
                         printf "$G(_>)─➤$W Build root enviroment ..";
-                        wget -q $iHDB/.set/bin/$1 -O $PREFIX/bin
+                        wget -q $iHDB/.set/bin/$1 -O $HOME/.local/bin
                         if [ -e ~/.suroot/.bashrc ];then
                                 for opt in 1 2 3 4;do
                                         if [ ! -O ~/.suroot/.bashrc ]; then
@@ -1349,7 +1198,7 @@ esac" > $PREFIX/bin/msfconsole
                         printf "PS1=\"\[\e[33m\][!] \[\e[31m\]Press\[\e[32m\] Ctrl d\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\"
                         export TERM=xterm-256color
                         export LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib
-                        export PATH=/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:/system/xbin:/system/bin
+                        export PATH=/data/data/com.termux/files/home/.local/bin:/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:/system/xbin:/system/bin
                         HOME=/data/data/com.termux/files/home
                         fish
                         #          i-Haklab by @Ivam3" > ~/.suroot/.bashrc
@@ -1383,8 +1232,8 @@ esac" > $PREFIX/bin/msfconsole
                         elif [ -e $PREFIX/bin/sudo ]; then
                                 rm $PREFIX/bin/sudo
                         fi
-                        curl -Ls $iHDB/to-install/$toInstall -o $PREFIX/bin/$toInstall
-                        chmod 750 $PREFIX/bin/$toInstall
+                        curl -Ls $iHDB/to-install/$toInstall -o $HOME/.local/bin/$toInstall
+                        chmod 750 $HOME/.local/bin/$toInstall
                         printf "$G. DONE!!$W"
                 else
                         STDERROOT
