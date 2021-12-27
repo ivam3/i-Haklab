@@ -2,7 +2,7 @@
 #CODE BY @IVAM3 TO SIMULATE A ROOT USER IN TERMUXX
 #This script simulate a root enviroment shell or execute a script as fake root user
 #This script not make root androd systems, not execute or create a real root user.
-source $PREFIX/share/i-Haklab/.set/var/variables
+source $HOME/.local/share/i-Haklab/.set/var/variables
 command -v proot >/dev/null || yes|apt install proot
 if [[ $1 = "root" ]]; then
         termux-chroot
