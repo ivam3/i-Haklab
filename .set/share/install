@@ -604,26 +604,24 @@ case "$toInstall" in
 		fi
 		;;
 	burpsuite)
-		yes|pkg install openjdk-17
+		[[ -e $PREFIX/bin/java ]] && yes|pkg remove openjdk-17
 		printf "$G\n(_>)─➤ Installing $toInstall (It could take a while)...\n"
-		wget -q https://portswigger.net/burp/releases/download -O $TOOLS/$toInstall.jar
+		wget -q --tries=20 https://github.com/termux/termux-packages/suites/4742204683/artifacts/131051875 -O $TMPDIR/termux-packages-aarch64.zip
+		unzip $TMPDIR/termux-packages-aarch64.zip -d $TM0DIR
+		tar xvf $TMPDIR/debs-aarch64-1e2023f351d547b82494edfb0f5baac0fd490370.tar -O debs/openjdk-17_17.0-17_aarch64.deb > $TMPDIR/openjdk-17_17.0-17_aarch64.deb
+		dpkg -i $TMPDIR/openjdk-17_17.0-17_aarch64.deb
+		rm -rf $TMPDIR/*
+		wget -q --tries=20 https://portswigger.net/burp/releases/download -O $TOOLS/$toInstall.jar
 		cat <<- CONF $HOME/.local/bin/$toInstall
 #!/usr/bin/bash
 #This file execute a burp suite on Termux:Wayland interface
 #You should install it before to run this scripta
-[[ \$(file $TMPDIR/*|grep -o "socket") >/dev/null ]]	|| {	printf >&2 "\$R(_>)─➤\$W Termux:Wayland server isn't running...\$R aborting.\$W";exit;}
-export JAVA_HOME="$PREFIX/opt/openjdk"
-export LIB_DIR="\$JAVA_HOME/lib"
-export LD_LIB_DIR="$PREFIX/lib"
-export LD_LIBRARY_PATH="\$LD_LIB_DIR:\$LIB_DIR"
+[[ \$(uname -m) = "aarch64" ]] || { printf >&2 "\$R(_>)─➤\$W Incompatible architecture";exit;}
+[[ -e $TOOLS/burpsuite.jar ]] || { printf >&2 "\$R(_>)─➤\$W Burpsuite is not installed...\$R aborting.\$W";exit;}
+[[ \$(file \$TMPDIR/*|grep -o "socket") >/dev/null ]] || { printf >&2 "\$R(_>)─➤\$W Termux:Wayland server isn't running...\$R aborting.\$W";exit;}
 export DISPLAY=:0
 umask 000
-
-[[ \$(uname -m) = "aarch64" ]] || { printf >&2 "\$R(_>)─➤\$W Incompatible architecture";exit;}
-[[ \$(command -v java) ]] || yes|pkg install openjdk-17
-[[ -e $TOOLS/burpsuite.jar ]] || { printf >&2 "Burpsuite is not installed... aborting.";exit;}
-exec \$(command -v java) -Djava.library.path="\$LD_LIBRARY_PATH" --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -jar $TOOLS/burpsuite.jar -p \$JAVA_HOME "\$@"
-rm -rf $TMPDIR/*.tmp
+exec \$(command -v java) --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -jar $TOOLS/burpsuite.jar
 CONF
     chmod 755 $HOME/.local/bin/$toInstall
 		;;
