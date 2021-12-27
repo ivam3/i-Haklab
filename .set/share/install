@@ -606,7 +606,7 @@ case "$toInstall" in
 	burpsuite)
 		yes|pkg install openjdk-17
 		printf "$G\n(_>)─➤ Installing $toInstall (It could take a while)...\n"
-		wget -q $(iHDB)/to-install/burpsuite_community_v2021.10.2.jar -O $TOOLS/$toInstall.jar
+		wget -q https://portswigger.net/burp/releases/download -O $TOOLS/$toInstall.jar
 		cat <<- CONF $HOME/.local/bin/$toInstall
 #!/usr/bin/bash
 #This file execute a burp suite on Termux:Wayland interface
