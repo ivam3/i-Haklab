@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 #CREADED ON Dec/2018 BY @IVAM3
-#UPGRADED ON 2021/Sep/30
+#UPGRADED ON 2021/Dec/31
 
 IFS=$'\n\t'
 trap ctrl_c 2
@@ -109,7 +109,7 @@ until [ -e $PREFIX/bin/IbyC-fixer ]; do
 	fi
 done
 
-declare -a INSTADATE=($(ls -l $PREFIX/bin/IbyC-fixer|awk -F " " '{print $6,$7}') $(curl -Ls $iHDB/bin/IbyC-fixer|grep "UPGRADED"|awk -F "/" '{print $2,$3}'))
+declare -a INSTADATE=($(ls -l $PREFIX/bin/IbyC-fixer|awk -F " " '{print $6,$7}') $(curl -sSL $iHDB/bin/IbyC-fixer|grep "UPGRADED ON"|awk -F "/" '{print $2,$3}'))
 printf "$Y(_>)─➤$W Looking for updates..";
 sleep 1
 if [ "${INSTADATE[0]}" != "${INSTADATE[2]}" ] || [ "${INSTADATE[1]}" -lt "${INSTADATE[3]}" ];then
