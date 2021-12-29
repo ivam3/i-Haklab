@@ -18,7 +18,7 @@ ctrl_c() { printf "$Y\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bo
 
 mkdir -p ~/.local/{bin,etc/i-Haklab,lib,share,tools,var/service/www}
 printf "$Y(_>)─➤$W Dropping the trash\n"
-[[ -d $PREFIX/share/i-Haklab ]] && rm -rf $PREFIX/share/i-Haklab
+[[ -d $HOME/.local/share/i-Haklab ]] && rm -rf $HOME/.local/share/i-Haklab
 git clone --quiet https://github.com/ivam3/i-Haklab.git ~/.local/share/i-Haklab
 binTools=$(ls $iHAKLAB/.set/bin)
 source $HOME/.local/share/i-Haklab/.set/var/variables
