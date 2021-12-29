@@ -123,6 +123,7 @@ else
         sleep 1
 fi
 
+[[ -e ~/.local/bin/IbyC-fixer ]] && rm ~/.local/bin/IbyC-fixer
 clear;curl -Ls "${iHDB}/libexec/banner/fixer"|bash|lolcat
 [[ -z $opc ]] && Menu
 
