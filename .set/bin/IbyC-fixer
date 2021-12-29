@@ -27,7 +27,7 @@ ctrl_c(){ printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";
 Chao-chao(){ printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n";}
 Repos() {
 	printf "$Y\n(_>)─➤ Installing|upgrading repositories ...\n$W"
-	command -v $Py > /dev/null 2>&1 || yes|apt install $Py >/dev/null 2>&1
+	yes|apt reinstall $Py
 	$Py -m pip --quiet --no-color install --upgrade pip
 	}
 Lib() {
@@ -35,7 +35,7 @@ Lib() {
 		SCHLIB=$(pkg list-installed | awk '{print $1}' | grep -oE $Libs | head -n1)
 		if [ -z $SCHLIB ]; then
 			printf "$Y\n(_>)─➤ Installing libreries ...\n$W"
-			yes|apt install $Libs >/dev/null 2>&1
+			yes|apt install $Libs 2>/dev/null
 		fi
 	done
 	}	
@@ -57,13 +57,13 @@ Turtle() {
         rm -rf $DIR
 	}
 Menu() {
-	printf $B"(USAGE-01)─➤ To fix python modules:$G\nIbyC-fixer <[B|BASIC] [L|LDFLAGS] [S|SODIUM]> <[Py|Py2]> <[file.txt|module(max 3)]>$W\n\nB  BASIC\tInstall module on basic\nL  LDFLAGS\tForce installation to use libraries and system compiler\nS  SODIUM\tForce the installation to use the sodium decryptor\nPy  \t\tFor python3\nPy2  \t\tFor python2\n\nExamples:\n\tIbyC-fixer BASIC Py future\n\tIbyC-fixer S Py2 colorama\n"
+	printf $B"(USAGE-01)─➤ To fix python modules:$G\nIbyC-fixer <[B|BASIC] [L|LDFLAGS] [RCBT|RUST_CARGO_TARGET] [S|SODIUM]> <[Py|Py2]> <[file.txt|module(max 3)]>$W\n\nB  BASIC\tInstall module on basic\nL  LDFLAGS\tForce installation to use libraries and system compiler\nRCBT  RUST_CARGO_TARGET\tForce installation specifying Android as target platform\nS  SODIUM\tForce the installation to use the sodium decryptor\nPy  \t\tFor python3\nPy2  \t\tFor python2\n\nExamples:\n\tIbyC-fixer BASIC Py future\n\tIbyC-fixer S Py2 colorama\n"
 	printf "$B\n(USAGE-02)─➤ To fix an specific issue:$G\nIbyC-fixer <[nrauf|metasploit|downgradeRepo|RuGiR]> <option>$W\n\nnrauf         dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nmetasploit\t\t\tTo fix metasploit instalation\ndowngradeRepo repo=version\tDowngrade apt|pkg reporitory tospecific version\nRuGiR\t\t\t\tTo fix ruby gems issues\nngrok\t\t\t\tInstall ngrok-server from Abhacker repositories\n\nExamples:\n\tIbyC-fixer RuGiR\n\tIbyC-fixer downgradeRepo ruby=2.7.2\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n\n"
 	exit
 }
 Chck() {
 	for list in ${@:2} ; do
-		MODULE=$(python -m pip list | awk '{print $1}' | grep $list)
+		MODULE=$(python -m pip list|awk '{print $1}'|grep $list)
 		if [ ! -z $MODULE ]; then
 			printf "$Y\n(_>)─➤ Module $MODULE is already exist for $Py\n$W"
 		fi
@@ -155,6 +155,22 @@ case $opc in
 			fi
 		done
 		Chao-chao
+		;;
+	RUST_CARGO_TARGET|RCBT)
+		Args
+		yes|apt install rust
+		export CARGO_BUILD_TARGET=$(rustc --version --verbose|sed -n 's|host: ||p')
+		for module in ${@:3};do
+			Chck
+			if [ $module = turtle ]; then
+				Turtle
+			elif [ -e $module ]; then
+				$Py -m pip install -r $module
+			else
+				$Py -m pip install $module
+			fi
+		done
+		Chao-chao	
 		;;
 	SODIUM|S)
 		Args
