@@ -959,7 +959,7 @@ fi
 		cat <<- EOF > $PREFIX/bin/msfconsole
 #!/data/data/com.termux/files/usr/bin/sh
 
-SCRIPT_NAME=\$(basename "$0")
+SCRIPT_NAME=\$(basename "\$0")
 METASPLOIT_PATH="$PREFIX/opt/metasploit-framework"
 
 case "\$SCRIPT_NAME" in
