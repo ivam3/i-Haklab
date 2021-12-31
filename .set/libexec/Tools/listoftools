@@ -6,6 +6,7 @@ amass
 androbugs
 apksigner
 aquatone
+bdg
 beef
 bettercap
 binchecker
@@ -64,6 +65,7 @@ phonesploit
 postgresql
 pybelt
 quack
+radare2
 recon-ng
 recondog
 rhash
