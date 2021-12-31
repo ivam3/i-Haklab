@@ -343,7 +343,7 @@ case "$TOOL" in
 			STDERR
 		fi
 		;;
-	torvpn|IbyC-fixer|pagekite|sudo|serverphp|serverapache|postgresql|traductor)
+	gdb|IbyC-fixer|pagekite|postgresql|radare2|sudo|serverphp|serverapache|torvpn|traductor)
 		if [ -e $HOME/.local/bin/$TOOL ] || [ $(grep -oE "$TOOL" $PREFIX/etc/fish/config.fish) ]; then
 			printf "$R(_>)_To_run_it_just_type:─➤$W $TOOL"
 		else
