@@ -94,7 +94,7 @@ case "$toInstall" in
 		(06)─➤$W type your password and enjoy it!!\n"
 		;;
 	#::PYTHON3::#
-	h8mail|objection)
+	h8mail|objection|osrframework)
 		yes|apt install python
 		PIPup
 		PYv=""

@@ -83,6 +83,7 @@ if [ -z $TOOL ]; then
 ╰─evilurl────────➤  Generate unicode evil domains for IDN Homograph Attack and detect them.
 ╰─exploitdb──────➤  Public exploits and corresponding vulnerable software, developed for use by penetration testers and vulnerability researchers
 ╰─fbi────────────➤  Accurate facebook account information gathering
+╰─gdb────────────➤  Debbuger and disassembler tool to trace and modify the execution of a program.
 ╰─GetNPUsers-────➤  Attempt to list and get TGTs for those users that have the property
 ╰─ghost──────────➤  Framework that exploits the Android Debug Bridge to remotely access an Android device.
 ╰─gobuster───────➤  Gobuster is a tool used to brute-force URIs in web sites, DNS subdomains and Virtual Host names on target web servers.
@@ -99,11 +100,13 @@ if [ -z $TOOL ]; then
 ╰─nikto──────────➤  Web server scanner which performs comprehensive tests against web servers for multiple items.
 ╰─objection──────➤  Runtime mobile exploration toolkit.
 ╰─osintgram──────➤  Analysis on Instagram account of any users by its nickname.
+╰─osrframework───➤  Set of libraries to perform Open Source Intelligence Network tasks(OSINT).
 ╰─phomber────────➤  Scan phone numbers to first gather standard information.
 ╰─pagekite───────➤  Expose multiple local servers (SSH and HTTP) to out LAN.
 ╰─phonesploit────➤  Exploit a device using open tcp ports (adbfastboot needed)
 ╰─pybelt─────────➤  Complete open source hackers tool.
 ╰─quack──────────➤  Toolkit to spam via calls,sms,smtp.tcp,http and more
+╰─radare2────────➤  Reverse engineering framework and command-line toolset.
 ╰─recondog───────➤  Reconnaissance Swiss Army Knife.
 ╰─recon-ng───────➤  Providing a powerful environment to conduct open source web-based reconnaissance.
 ╰─rhawk──────────➤  Information Gathering and Vulnerability Scanning.

@@ -80,7 +80,7 @@ case "$toRemove" in
 		printf "numpy telethon requests configparser" > $TMPDIR/deps2drop
 		alert
 		;;
-	h8mail|objection)
+	h8mail|objection|osrframework)
 		printf "$toRemove" > $TMPDIR/deps2drop
 		alert
 		;;
