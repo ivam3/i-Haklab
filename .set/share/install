@@ -931,7 +931,7 @@ fi
 		msfv="6.1.20_all"
 		msfGit=https://github.com/rapid7/metasploit-framework.git
 		rubyLIBv=$(ls $PREFIX/lib/ruby|sort -r|grep -m 1 '[0-9].[0-9].[0-9]')
-		yes|apt install autoconf patchelf bison apr apr-util postgresql libgrpc libtool wget termux-elf-cleaner ruby build-essential
+		yes|apt install autoconf patchelf bison apr apr-util postgresql libgrpc libtool libcap wget termux-elf-cleaner ruby build-essential binutils
 		mkdir -p $PREFIX/opt
 		for i in aarch64-linux-android arm-linux-androideabi \
 			i686-linux-android x86_64-linux-android;do

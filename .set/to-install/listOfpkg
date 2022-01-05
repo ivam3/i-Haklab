@@ -12,6 +12,7 @@ autoconf
 axel
 bison
 clang
+cmake
 cmatrix
 coreutils
 crunch
@@ -61,6 +62,7 @@ mlocate
 ncurses
 ncurses-utils
 neofetch
+ninja
 nmap
 openjdk-17
 openssh
