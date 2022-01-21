@@ -945,10 +945,12 @@ fi
 		rm -rf $PREFIX/opt/metasploit-framework
 		rm -rf $PREFIX/var/lib/postgresql
 		git clone --quiet --depth 1 $msfGit $PREFIX/opt/metasploit-framework
+		sed -i "5a gem 'net-smtp', require: false" $PREFIX/opt/metasploit-framework/Gemfile
 		gem install --no-document --verbose rubygems-update
 		update_rubygems
 		gem install --no-document --verbose bundler
-		gem install nokogiri -- --use-system-libraries
+		gem install rails --platform=ruby -- --use-system-libraries
+		gen install nokogiri --platform=ruby -- --use-system-libraries
 		bundle config build.nokogiri --use-system-libraries
 		gem install actionpack
 		cd $PREFIX/opt/metasploit-framework

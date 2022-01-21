@@ -6,6 +6,7 @@ util-linux
 x11-repo
 apache2
 apksigner
+apktool
 apr
 apr-util
 autoconf
@@ -26,6 +27,7 @@ figlet
 findutils
 fish
 gawk
+gdb
 git
 gnupg
 gpgme

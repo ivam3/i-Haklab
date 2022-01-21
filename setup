@@ -91,7 +91,7 @@ end
 
 set fish_theme bira
 set -g theme_nerd_fonts yes
-set DISPLAY localhost:0
+set DISPLAY :0
 set PATH $HOME/.local/bin:$PATH
 set HOME /data/data/com.termux/files/home
 set GOPATH /data/data/com.termux/files/home/go
@@ -155,6 +155,9 @@ printf "$G\n(_>)─➤$W Installing ngrok.io ngrok-ssh and ngrok-server."
 [[ $(command -v ngrok) ]] && mv $(command -v ngrok) $(command -v ngrok).io
 bash $TMPabh --install ngrok-server >/dev/null 2>&1
 rm $TMPabh
+
+printf "$G\n(_>)─➤$W Installing Python Exploit Development Assistance for GDB."
+curl -Ls ${iHDB}/to-install/gdb_peda.sh|bash
 
 printf "$G\n(_>)─➤$W Installing VIM predictable text."
 [[ -d ~/.vim ]] && rm -rf ~/.vim

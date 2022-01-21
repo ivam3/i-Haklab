@@ -131,7 +131,7 @@ printf "$Y(_>)─>$W if this is your first time using weechat: after start weech
 		weechat;k-boom
 		;;
 	#:::AUTOMATED COMMAND:::#
-	bf|esmsg|forwarding|msf|payvid|ransomux|share)
+	bf|esmsg|forwarding|msf|payvid|phonescan|ransomux|share)
 		bash $iHAKLAB/.set/share/$1 ${@:2}
 		;;
 	*)
