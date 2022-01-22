@@ -100,7 +100,7 @@ if [ -z $TOOL ]; then
 ╰─nikto──────────➤  Web server scanner which performs comprehensive tests against web servers for multiple items.
 ╰─objection──────➤  Runtime mobile exploration toolkit.
 ╰─osintgram──────➤  Analysis on Instagram account of any users by its nickname.
-╰─osrframework───➤  Set of libraries to perform Open Source Intelligence Network tasks(OSINT).
+╰osrframework-cli➤  Set of libraries to perform Open Source Intelligence Network tasks(OSINT).
 ╰─phomber────────➤  Scan phone numbers to first gather standard information.
 ╰─pagekite───────➤  Expose multiple local servers (SSH and HTTP) to out LAN.
 ╰─phonesploit────➤  Exploit a device using open tcp ports (adbfastboot needed)
@@ -239,18 +239,15 @@ case "$TOOL" in
 			STDERR
 		fi
 		;;
-	h8mail|objection|quack)
+	h8mail|objection|osrframework)
 		running
-		if ! python -m pip list | grep -oE "$TOOL" >/dev/null; then
-			if [ $TOOL = "h8mail" ]; then
-				python -m pip --no-color --quiet install h8mail requests
-			elif [ $TOOL = "objection" ]; then
-				python -m pip --no-color --quiet install objection pexpect
-			fi
+		if ! python -m pip list | grep -oE "$TOOL" >/dev/null 2>/dev/null;then
+			python -m pip --no-color --quiet install $TOOL requests pexpect
 		fi
-		exec $TOOL ${@:2}
+		[[ $TOOL = "osrframework" ]] && TOOL=osrf
+		exec $(command -v $TOOL) ${@:2}
 		;;
-	osintgram)
+	quack)
 		if CheckPath;then
 			exec python $TOOLPATH/main.py ${@:2}
 		else

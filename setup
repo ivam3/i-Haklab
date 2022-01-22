@@ -159,6 +159,23 @@ rm $TMPabh
 printf "$G\n(_>)─➤$W Installing Python Exploit Development Assistance for GDB."
 curl -Ls ${iHDB}/to-install/gdb_peda.sh|bash
 
+printf "$G\n(_>)─➤$W Set nano configuration..."
+cat <<- CONF > $HOME/.nanorc
+set linenumbers
+set historylog
+set tabsize 4
+set autoindent
+set mouse
+set titlecolor white,gray
+set statuscolor white,red
+set keycolor white,gray
+set functioncolor green
+set numbercolor white,gray
+set softwrap
+set softwrap
+#set nohelp
+CONF
+
 printf "$G\n(_>)─➤$W Installing VIM predictable text."
 [[ -d ~/.vim ]] && rm -rf ~/.vim
 wget -q --tries=20 ${iHDB}/to-install/iHaklabvim.zip -O $TMPDIR/iHaklabvim.zip
@@ -217,6 +234,8 @@ CONF
 fi
 
 bash $iHAKLAB/.set/share/review #LOGFILE
+[[ -d ~/i-Haklab ]] && rm -rf ~/i-Haklab
+
 printf "$G\n\n
 (_>)─➤$W i-Haklab installed !!!$Y\n
 (_>)─➤$W Main commands$Y
@@ -237,6 +256,5 @@ printf "$G\n\n
  ╰────────➤ run:$W i-Haklab about i-Haklab :for all usage guide$G
 (_>)─➤$W To fix issues going to$B t.me/Ivam3_Bot$G
 (_>)─➤$W press$G enter$W to reestart Termux\n"
-[[ -d ~/i-Haklab ]] && rm -rf ~/i-Haklab
 read enter;exec reset
 #		i-Haklab by @Ivam3
