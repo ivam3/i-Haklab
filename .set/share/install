@@ -78,8 +78,19 @@ case "$toInstall" in
 			bash $iHAKLAB/.set/share/install $i
 		done
 		;;
+	dex2jar)
+		link="https://github.com/pxb1988/dex2jar/releases/download"
+		releases="v2.2-SNAPSHOT-2021-10-31"
+		zipFile="dex-tools-2.2-SNAPSHOT-2021-10-31.zip"
+		yes|apt install wget unzip openjdk-17
+		wget --quiet --tries=20 $link/$releases/$zipFile -O $TMPDIR/$toInstall.zip
+		unzip $TMPDIR/$toInstall.zip -d $TOOLS
+		d2jDIR=$(ls $TOOLS|grep dex-tools)
+		mv $TOOLS/$d2jDIR $TOOLS/$toInstall
+		rm -rf $TMPDIR/$toInstall.zip
+		;;
 	kalilinux)
-		yes|pkg install wget curl proot tar -y && wget https://raw.githubusercontent.com/AndronixApp/AndronixOrigin/master/Installer/Kali/kali-xfce.sh -O kali-xfce.sh && chmod +x kali-xfce.sh && bash kali-xfce.sh 
+		yes|pkg install wget curl proot tar && wget https://raw.githubusercontent.com/AndronixApp/AndronixOrigin/master/Installer/Kali/kali-xfce.sh -O kali-xfce.sh && chmod +x kali-xfce.sh && bash kali-xfce.sh 
 		cat <<- CONF > ~/kali-fs/etc/apt/sources.list
 		deb [trusted=yes]  http://http.kali.org/kali kali-rolling main contrib non-free
 		#deb http://ftp.debian.org/debian buster main

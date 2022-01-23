@@ -244,7 +244,7 @@ case "$toRemove" in
 		sed 's|/data/data/com.termux/files/home/.local/etc/i-Haklab/login-termux|/data/data/com.termux/files/home/.local/etc/i-Haklab/wall-banner|g' -i $INITFILE
 		[[ $(grep -oE "wall-banner" $INITFILE) ]] || Err
 		;;
-	userrecon)
+	userrecon|dex2jar)
 		rmMainDir
 		;;
 	#::BIN::#

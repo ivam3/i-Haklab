@@ -1,0 +1,27 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Created on Jan/2022
+IFS=$'\n\t'
+trap ctrl_c 2
+source $HOME/.local/share/i-Haklab/.set/var/variables
+source $iHAKLAB/.set/functions/functions
+ctrl_c(){ printf "\n$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";exit 0;}
+[[ -d $TOOLS/dex2jar ]] || { printf "$R\n(_>)─➤$W dex2jar is not installed..$R Aborting.$W";exit;}
+file=$(mktemp)
+echo "AVAILABLE TOOLS" > $file
+echo "$(ls $TOOLS/dex2jar/*.sh|cut -d "/" -f10|cut -d "." -f1)" >> $file
+
+usage(){
+	printf "$Y(_>)_usage :─➤$W run dex2jar <tool> <options + arguments>\n$Y ╰──➤$W Example : run dex2jar d2j-dex2jar -f ~/path/to/apk_to_decompile.apk$G\n"
+	printTable "/" "$(cat $file)"
+	rm $file 2>/dev/null;printf "$W\n";exit 0
+}
+[[ -z $1 ]] && usage
+tool=$(grep $1 $file)
+if [ -z $1 ] || [ -z $tool ] 2>/dev/null
+then
+	usage
+else
+	bash $(ls $TOOLS/dex2jar/$tool.sh) ${@:2};rm $file 2>/dev/null
+fi
+
+#             i-Haklab by @Ivam3

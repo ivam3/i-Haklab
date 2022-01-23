@@ -77,6 +77,7 @@ if [ -z $TOOL ]; then
 ╰─converter──────➤  Simple multimedia converter.
 ╰─credmap────────➤  A reuse credential maper in socials media.
 ╰─cryptovenom────➤  Cryptosystems and cryptoanalysis methods all in one.
+╰─dex2jar────────➤  Tools to work with android .dex and java .class files.
 ╰─dnsenum────────➤  Enumerate DNS information of a domain and to discover non-contiguous ip blocks.
 ╰─DoS─A─Tool─────➤  Denied of service attack tool.
 ╰─embed──────────➤  Embedded metasploit payload in legitim aplication.
@@ -244,7 +245,7 @@ case "$TOOL" in
 		if ! python -m pip list | grep -oE "$TOOL" >/dev/null 2>/dev/null;then
 			python -m pip --no-color --quiet install $TOOL requests pexpect
 		fi
-		[[ $TOOL = "osrframework" ]] && exec $iHAKLAB/.set/share/osrframework ${@:2}
+		[[ $TOOL = "osrframework" ]] && exec $HOME/.local/bin/osrframework ${@:2}
 		exec $(command -v $TOOL) ${@:2}
 		;;
 	quack)
@@ -324,12 +325,12 @@ case "$TOOL" in
 		fi
 		;;
 #::::TOOLS IN BIN::::#
-	ExiF|bincheker|binwalk|blackbox|burpsuite|code-server|converter|crunch|DoS-A-Tool|dirb|GetNPUsers|pagekite|shc|unshc|snow|wfuzz|whatweb|hydra|xhydra|youtube-dl)
+	dex2jar|ExiF|bincheker|binwalk|blackbox|burpsuite|code-server|converter|crunch|DoS-A-Tool|dirb|GetNPUsers|pagekite|shc|unshc|snow|wfuzz|whatweb|hydra|xhydra|youtube-dl)
 		running
 		if [ -e $HOME/.local/bin/$TOOL ]; then
-			exec $HOME/.local/bin/$TOOL ${@:2}
+			bash $HOME/.local/bin/$TOOL ${@:2}
 		elif [ -e $PREFIX/bin/$TOOL ]; then
-			exec $PREFIX/bin/$TOOL ${@:2}
+			bash $PREFIX/bin/$TOOL ${@:2}
 		else
 			STDERR
 		fi
