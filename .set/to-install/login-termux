@@ -18,7 +18,7 @@ change_ak(){
             1) Get one new Access Key.
             2) Change your Security question.
             3) Change your Security answer.
-						4) Uninstall i-Haklab.
+            4) Uninstall i-Haklab.
             0) Exit
             >> " Chak && [ $Chak -lt 5 ]; do
     	echo $(clear)
@@ -125,7 +125,7 @@ case_Chak(){
                 It could take a while ...\n"
 				sleep 3
 				for erase in Music downloads Desktop Pictures bin storage Documents Public Video java go adbfiles .bashrc .beef .local/ .milux .msf4 .ngrok2 .tor .w3m .npm .recon-ng .suroot .ssh .gem .weechat .wfuzz;do
-					[[ -d $HOME/$erase ] && rm -rf $HOME/$erase > /dev/null 2>/dev/null
+					[[ -d $HOME/$erase ]] && rm -rf $HOME/$erase > /dev/null 2>/dev/null
 				done
 				[[ -d $TOOLS ]] && rm -rf $TOOLS > /dev/null 2>/dev/null
 				rm -rf $PREFIX > /dev/null 2>/dev/null
@@ -147,36 +147,36 @@ case_Chak(){
 }
 
 set_ak() {
-	printf "$Newak" > $HOME/.local/etc/.tmp-ak
-	chmod +w $HOME/.local/etc/.Ivam3
-	base64 $HOME/.local/etc/.tmp-ak > $HOME/.local/etc/.Ivam3
-	chmod -w $HOME/.local/etc/.Ivam3
-	rm $HOME/.local/etc/.tmp-ak
+	printf "$Newak" > $HOME/.local/etc/i-Haklab/.tmp-ak
+	chmod +w $HOME/.local/etc/i-Haklab/.Ivam3
+	base64 $HOME/.local/etc/i-Haklab/.tmp-ak > $HOME/.local/etc/i-Haklab/.Ivam3
+	chmod -w $HOME/.local/etc/i-Haklab/.Ivam3
+	rm $HOME/.local/etc/i-Haklab/.tmp-ak
 	check-Ak
 }
 
 set_quiz() {
-	printf "$NewQ" > $HOME/.local/etc/.tmp-quiz
-	chmod +w $HOME/.local/etc/.Quiz
-	base64 $HOME/.local/etc/.tmp-quiz > $HOME/.local/etc/.Quiz
-	chmod -w $HOME/.local/etc/.Quiz
-	rm $HOME/.local/etc/.tmp-quiz
+	printf "$NewQ" > $HOME/.local/etc/i-Haklab/.tmp-quiz
+	chmod +w $HOME/.local/etc/i-Haklab/.Quiz
+	base64 $HOME/.local/etc/i-Haklab/.tmp-quiz > $HOME/.local/etc/i-Haklab/.Quiz
+	chmod -w $HOME/.local/etc/i-Haklab/.Quiz
+	rm $HOME/.local/etc/i-Haklab/.tmp-quiz
 	printf "$Y            Your Security Question was changed$W"
 	sleep 3
 	echo $(clear)
-	source $HOME/.local/etc/login-termux
+	source $HOME/.local/etc/i-Haklab/login-termux
 }
 
 set_answ() {
-	printf "$NewA" > $HOME/.local/etc/.tmp-answ
-	chmod +w $HOME/.local/etc/.Cinderella
-	base64 $HOME/.local/etc/.tmp-answ > $HOME/.local/etc/.Cinderella
-	chmod -w $HOME/.local/etc/.Cinderella
-	rm $HOME/.local/etc/.tmp-answ
+	printf "$NewA" > $HOME/.local/etc/i-Haklab/.tmp-answ
+	chmod +w $HOME/.local/etc/i-Haklab/.Cinderella
+	base64 $HOME/.local/etc/i-Haklab/.tmp-answ > $HOME/.local/etc/i-HAklab/.Cinderella
+	chmod -w $HOME/.local/etc/i-Haklab/.Cinderella
+	rm $HOME/.local/etc/i-Haklab/.tmp-answ
 	printf "\n\n$G            Your Security Answer was changed$W"
 	sleep 3
 	echo $(clear)
-	source $HOME/.local/etc/login-termux
+	source $HOME/.local/etc/i-Haklab/login-termux
 }
 
 check-Ak() {
@@ -185,12 +185,12 @@ check-Ak() {
 		printf "\n\n$G             Your Access Key was changed $W"
 		sleep 5
 		echo $(clear)
-		source $HOME/.local/etc/login-termux
+		source $HOME/.local/etc/i-Haklab/login-termux
 	else
 		printf "$R
     O-ops!!   Something was wrong"
    		echo $(clear)
-		source $HOME/.local/etc/login-termux
+		source $HOME/.local/etc/i-Haklab/login-termux
 	fi
 }
 
@@ -199,7 +199,7 @@ main() {
 	for opt in 1 2 3 4; do
 		let try=opt++
 		echo $(clear)
-		source $HOME/.local/etc/login-banner
+		source $HOME/.local/etc/i-Haklab/login-banner
 		printf "$B"
 		while read -s -p "                  (_>) ACCESS KEY (<_)
 	    >>or type 'IbyC' for settings<<
@@ -209,7 +209,7 @@ main() {
 		done
 		if [ $Ivam3 = $Cinderella ]; then
 			echo $(clear)
-			source $HOME/.local/etc/wall-banner
+			source $HOME/.local/etc/i-Haklab/wall-banner
 			break
 		elif [ $Ivam3 = "IbyC" ]; then
 			sleep 2
@@ -226,7 +226,7 @@ main() {
 		printf "$Y                 O-ops!! Too many tries$W"
 		sleep 3
 		echo $(clear)
-		source $HOME/.local/etc/login-banner
+		source $HOME/.local/etc/i-Haklab/login-banner
 		printf "$Y"
 		printf "        [!] Let's try with the security question$G\n\n"
 		
@@ -237,7 +237,7 @@ main() {
 		if [ $Quiz = $Secan ]; then
 			printf "$W"
 			echo $(clear)
-			source $HOME/.local/etc/wall-banner
+			source $HOME/.local/etc/i-Haklab/wall-banner
 		else
 			printf "$R\n\t\t      Access denied$W \n"
 			sleep 1

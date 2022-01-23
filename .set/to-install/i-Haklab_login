@@ -111,7 +111,7 @@ for i in Quiz Ivam3 Cinderella;do
 	[[ -e $HOME/.local/etc/i-Haklab/.$i ]] || touch $HOME/.local/etc/i-Haklab/.$i
 done
 [[ -d $HOME/.local/etc/i-Haklab ]] || mkdir -p $HOME/.local/etc/i-Haklab
-wget -q $iHDB/to-install/i-haklab_login -O $HOME/.local/etc/i-Haklab/login-termux
+wget -q $iHDB/to-install/login-termux -O $HOME/.local/etc/i-Haklab/login-termux
 wget -q $iHDB/libexec/banner/i-Haklab -O $HOME/.local/etc/i-Haklab/login-banner
 cat <<- CONF > $HOME/.local/etc/i-Haklab/wall-banner
 #!/usr/bin/bash

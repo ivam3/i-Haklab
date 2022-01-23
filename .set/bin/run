@@ -100,7 +100,7 @@ if [ -z $TOOL ]; then
 ╰─nikto──────────➤  Web server scanner which performs comprehensive tests against web servers for multiple items.
 ╰─objection──────➤  Runtime mobile exploration toolkit.
 ╰─osintgram──────➤  Analysis on Instagram account of any users by its nickname.
-╰osrframework-cli➤  Set of libraries to perform Open Source Intelligence Network tasks(OSINT).
+╰─osrframework───➤  Set of libraries to perform Open Source Intelligence Network tasks(OSINT).
 ╰─phomber────────➤  Scan phone numbers to first gather standard information.
 ╰─pagekite───────➤  Expose multiple local servers (SSH and HTTP) to out LAN.
 ╰─phonesploit────➤  Exploit a device using open tcp ports (adbfastboot needed)
@@ -131,7 +131,7 @@ if [ -z $TOOL ]; then
 ╰─xerosploit─────➤  Penetration testing toolkit whose goal is to perform man in the middle attacks.
 ╰─Xwayland───────➤  Run a Termux official graphical enviroment with Termux:Wayland app.
 ╰─webhackshl─────➤  Vulnerability analysis and information collection of websites and servers.
-╰─websploit──────➤  
+╰─websploit──────➤  Scan and analysis remote system in order to find various type of vulnerabilites.
 ╰─wbruter────────➤  Brute force & dictionary attacking methods to various stuff
 ╰─whatweb────────➤  Identifie websites (DNS).
 ╰─wpscan─────────➤  Black box WordPress vulnerability scanner.
@@ -244,7 +244,7 @@ case "$TOOL" in
 		if ! python -m pip list | grep -oE "$TOOL" >/dev/null 2>/dev/null;then
 			python -m pip --no-color --quiet install $TOOL requests pexpect
 		fi
-		[[ $TOOL = "osrframework" ]] && TOOL=osrf
+		[[ $TOOL = "osrframework" ]] && exec $iHAKLAB/.set/share/osrframework ${@:2}
 		exec $(command -v $TOOL) ${@:2}
 		;;
 	quack)
