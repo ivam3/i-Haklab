@@ -961,7 +961,7 @@ fi
 		update_rubygems
 		gem install --no-document --verbose bundler
 		gem install rails --platform=ruby -- --use-system-libraries
-		gen install nokogiri --platform=ruby -- --use-system-libraries
+		gem install nokogiri --platform=ruby -- --use-system-libraries
 		bundle config build.nokogiri --use-system-libraries
 		gem install actionpack
 		cd $PREFIX/opt/metasploit-framework
