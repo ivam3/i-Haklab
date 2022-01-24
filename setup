@@ -12,7 +12,7 @@ printf "Running...";sleep 0.5
 [[ -d ~/.config/fish ]] && rm -rf ~/.config/fish
 [[ -d $PREFIX/share/i-Haklab ]] && rm -rf $PREFIX/share/i-Haklab
 [[ -d ~/java ]] && rm -rf ~/java
-mkdir -p ~/.local/{bin,etc/i-Haklab,lib,share,tools,var/service/www}
+mkdir -p ~/.local/{etc/i-Haklab,lib,share,tools,var/service/www}
 cp -r ~/i-Haklab $HOME/.local/share
 source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
@@ -92,7 +92,7 @@ end
 set fish_theme bira
 set -g theme_nerd_fonts yes
 set DISPLAY :0
-set PATH $HOME/.local/bin:$PATH
+set PATH $HOME/.local/bin:$PREFIX/bin
 set HOME /data/data/com.termux/files/home
 set GOPATH /data/data/com.termux/files/home/go
 set GOROOT /data/data/com.termux/files/usr/lib/go
@@ -112,7 +112,7 @@ omf install bira
 CONF
 fish $TMP_fish >/dev/null 2>&1
 cat <<- CONF > $HOME/.bashrc
-export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.local/bin:$PREFIX/bin
 export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
 chsh -s fish
 CONF
@@ -149,7 +149,7 @@ chmod -w $HOME/.local/etc/i-Haklab/.Cinderella
 #::::::::::Insatalling i-Haklab tools::::::::::::#
 printf "$G\n(_>)─➤$W Installing principal external tools."
 chmod 750 $iHAKLAB/.set/bin/*
-cp $iHAKLAB/.set/bin/* $HOME/.local/bin
+ln -s $iHAKLAB/.set/bin $HOME/.local/bin
 
 printf "$G\n(_>)─➤$W Installing ngrok.io ngrok-ssh and ngrok-server."
 [[ $(command -v ngrok) ]] && mv $(command -v ngrok) $(command -v ngrok).io

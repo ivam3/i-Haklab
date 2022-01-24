@@ -5,6 +5,7 @@
 ####################
 IFS=$'\n\t'
 trap ctrl_c 2
+s5=$(sleep 0.5)
 R='\033[1;31m'
 G='\033[1;32m'
 Goke='\033[92m'
@@ -14,27 +15,33 @@ B='\033[1;34m'
 M='\033[1;35m'
 C='\033[1;36m'
 W='\033[0m'
+binTools=$(ls $HOME/.local/share/i-Haklab/.set/bin)
 ctrl_c() { printf "$Y\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bot$W\n";}
 
-mkdir -p ~/.local/{bin,etc/i-Haklab,lib,share,tools,var/service/www}
-printf "$Y(_>)─➤$W Dropping the trash\n"
+printf "$Y(_>)─➤$W Removing oldest i-Haklab version\n";$s5
+[[ -d $HOME/.local/bin ]] && rm -rf $HOME/.local/bin
 [[ -d $HOME/.local/share/i-Haklab ]] && rm -rf $HOME/.local/share/i-Haklab
-git clone --quiet https://github.com/ivam3/i-Haklab.git ~/.local/share/i-Haklab
-binTools=$(ls $iHAKLAB/.set/bin)
-source $HOME/.local/share/i-Haklab/.set/var/variables
-source $iHAKLAB/.set/functions/functions
 [[ -d $PREFIX/libexec/banner ]] && rm -rf $PREFIX/libexec/banner
 [[ -e $PREFIX/var/log/login-termux ]] && rm $PREFIX/var/log/login-termux
+[[ -d ~/.vim ]] && rm -rf ~/.vim
+for v in ${binTools[*]};do
+	[[ -e $PREFIX/bin/$v ]] && rm $PREFIX/bin/$v
+done
 for i in Quiz Cinderella Ivam3;do
 	[[ -e $PREFIX/libexec/termux/.$i ]] && mv $PREFIX/libexec/termux/.$i $HOME/.local/etc/i-Haklab
 done
-for v in $binTools;do
-	[[ -e $PREFIX/bin/$v ]] && rm $PREFIX/bin/$v
-done
+
+printf "$Y(_>)─➤$W Installing newest i-Haklab version\n"
+git clone --quiet https://github.com/ivam3/i-Haklab.git ~/.local/share/i-Haklab
+[[ -d ~/.local/share/i-Haklab ]] || { printf "$R(_>)─➤$W i-Haklab directory missing..$R Aborting.$W";exit 1;}
+source $HOME/.local/share/i-Haklab/.set/var/variables
+source $iHAKLAB/.set/functions/functions
+mkdir -p ~/.local/{etc/i-Haklab,lib,share,tools,var/service/www}
+ln -s $iHAKLAB/.set/bin $HOME/.local/bin
 
 #UPGRADE OMF
-printf "$Y(_>)─➤$W Reconfigure startup settings\n";sleep 0.5
-cat <<- CONF >> $PREFIX/etc/fish/config.fish
+printf "$Y(_>)─➤$W Reconfigure startup settings\n";$s5
+cat <<- CONF > $PREFIX/etc/fish/config.fish
 if status --is-login
 bash /data/data/com.termux/files/home/.local/etc/i-Haklab/wall-banner
 end
@@ -46,14 +53,14 @@ end
 
 set fish_theme bira
 set -g theme_nerd_fonts yes
-set DISPLAY localhost:0
-set PATH $HOME/.local/bin:$PATH
+set DISPLAY :0
+set PATH $HOME/.local/bin:$PREFIX/bin
 set HOME /data/data/com.termux/files/home
 set GOPATH /data/data/com.termux/files/home/go
 set GOROOT /data/data/com.termux/files/usr/lib/go
 set JAVA_HOME /data/data/com.termux/files/usr/opt/openjdk
 set iHAKLAB /data/data/com.termux/files/home/.local/share/i-Haklab
-set LD_LIBRARY_PATH $HOME/.local/lib:/data/data/com.termux/files/usr/lib
+set LD_LIBRARY_PATH $HOME/.local/lib:$PREFIX/lib
 set TOOLS $TOOLS
 alias LOCALHOST="ifconfig 2>/dev/null|grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}'|grep -v 255|grep -v 127|tail -n 1"
 alias serverapache="apachectl"
@@ -62,8 +69,8 @@ alias traductor="gawk -f (curl -Ls git.io/translate | psub) -- -shell"
 CONF
 
 cat <<- CONF > $HOME/.bashrc
-export PATH=$HOME/.local/bin:$PATH
-export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
+export PATH=$HOME/.local/bin:$PREFIX/bin
+export LD_LIBRARY_PATH=$HOME/.local/lib:$PREFIX/lib
 chsh -s fish
 CONF
 
@@ -84,10 +91,10 @@ set softwrap
 CONF
 
 ######### Setting login banner #########
-[[ -e $HOME/.local/etc/i-Haklab/login-termux ]] && rm -f $HOME/etc/i-Haklab/login-termux
+[[ -e $HOME/.local/etc/i-Haklab/login-termux ]] && rm -rf $HOME/.local/etc/i-Haklab/login-termux
 [[ -e $PREFIX/etc/bashito ]] && rm -f $PREFIX/etc/bashito
 [[ -e $PREFIX/etc/motd ]] && rm -f $PREFIX/etc/motd
-[[ -e $PREFIX/etc/motd.dpkg-old ]] && rm -f $PREFIX/etc/motd.dpkg-old
+[[ -e $PREFIX/etc/motd.dpkg-old ]] && rm -rf $PREFIX/etc/motd.dpkg-old
 for a in Quiz Ivam3 Cinderella;do
 	[[ -e $HOME/.local/etc/i-Haklab/.$a ]] || touch $HOME/.local/etc/i-Haklab/.$a
 done
@@ -113,21 +120,33 @@ printf "SXZhbTNieUNpbmRlcmVsbGEK" > $HOME/.local/etc/i-Haklab/.Cinderella
 chmod -w $HOME/.local/etc/i-Haklab/.Cinderella
 
 ######### Upgrading executables #########
-printf "$Y(_>)─➤$W Upgrading commands. . .$W\na"
-for a in ${binTools[*]}; do
-	wget -q $iHDB/bin/$a -O $HOME/.local/bin/$a
-	chmod +x $HOME/.local/bin/$a
-done
+printf "$Y(_>)─➤$W Upgrading commands. . .$W\n";$s5
+chmod 750 $iHAKLAB/.set/bin/*
+[[ -h $HOME/.local/bin ]] || ln -s $iHAKLAB/.set/bin $HOME/.local/bin
 
-printf "$G(_>)─➤$W Setting i-Haklab style.\n"
+printf "$G(_>)─➤$W Setting i-Haklab style.\n";$s5
 [[ -d ~/.termux ]] || mkdir -p ~/.termux
 for i in $(ls $iHAKLAB/.set/to-install/.termux);do
 	wget -q --tries=20 $iHDB/to-install/$i -O ~/.termux/$i
 done
 [[ -e ~/.termux/shell ]] || ln -s $PREFIX/bin/fish ~/.termux/shell
 
-printf "$G(_>)─➤$W Installing VIM predictable text.\n"
-[[ -d ~/.vim ]] && rm -rf ~/.vim
+printf "$G(_>)─➤$W Installing NANO and VIM predictable text.\n";$s5
+cat <<- CONF > $HOME/.nanorc
+set linenumbers
+set historylog
+set tabsize 4
+set autoindent
+set mouse
+set titlecolor white,gray
+set statuscolor white,red
+set keycolor white,gray
+set functioncolor green
+set numbercolor white,gray
+set softwrap
+set softwrap
+#set nohelp
+CONF
 wget -q --tries=20 ${iHDB}/to-install/iHaklabvim.zip -O $TMPDIR/iHaklabvim.zip
 unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
 rm -f $TMPDIR/iHaklabvim.zip
@@ -150,14 +169,14 @@ printf "$G
  ╰──────────$Y~☆$W easy execution of fake root as command 'sudo'$G
  ╰──────────$Y~☆$W enable and desable login access with i-Haklab+install/remove$G
  ╰──────────$Y~☆$W install/remove more than 1 tool at the same time $G
- ╰──────────$Y~☆$W java 8 added$G
+ ╰──────────$Y~☆$W java 17 added$G
  ╰──────────$Y~☆$W verbosity applied at remove to deleting all dependencies too$G
  ╰──────────$Y~☆$W ngrok,ngrok.io and pagekite server added$G
  ╰──────────$Y~☆$W all abhacker repositories added$G
  ╰──────────$Y~☆$W metasploit easy and fast installation$G
  ╰──────────$Y~☆$W graphical environment with Termux:wayland or VNC-app$G
  ╰──────────$Y~☆$W automated installation and configuration x11-pkg$G
- ╰──────────$Y~☆$W wireshark xhydra and vim editor on graphical enviroment$G
+ ╰──────────$Y~☆$W wireshark xhydra vscode and vim editor on graphical enviroment$G
  |
  ╰───────────➤$W to report issues goin to$B https://t.me/Ivam3_Bot."
 #       i-Haklab by @Ivam3

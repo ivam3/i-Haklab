@@ -941,8 +941,10 @@ fi
 		;;
 	metasploit)
 		msfv="6.1.20_all"
-		msfGit=https://github.com/rapid7/metasploit-framework.git
+		msfGit="https://github.com/rapid7/metasploit-framework.git"
 		rubyLIBv=$(ls $PREFIX/lib/ruby|sort -r|grep -m 1 '[0-9].[0-9].[0-9]')
+		[[ -d $PREFIX/opt/metasploit-framework ]] && rm -rf $PREFIX/opt/metasploit-framework
+		[[ -d $PREFIX/var/lib/postgresql ]] && rm -rf $PREFIX/var/lib/postgresql
 		yes|apt install autoconf patchelf bison apr apr-util postgresql libgrpc libtool libcap wget termux-elf-cleaner ruby build-essential binutils
 		mkdir -p $PREFIX/opt
 		for i in aarch64-linux-android arm-linux-androideabi \
@@ -954,9 +956,8 @@ fi
 							"$PREFIX/lib/ruby/$RUBY_LIBv/${i}/bigdecimal/util.so"
 					fi
 		done
-		rm -rf $PREFIX/opt/metasploit-framework
-		rm -rf $PREFIX/var/lib/postgresql
 		git clone --quiet --depth 1 $msfGit $PREFIX/opt/metasploit-framework
+		[[ -d $PREFIX/opt/metasploit-framework ]] || { printf "$R\n(_>)─➤$W Metasploit directory missing...$R Aborting.$W";exit;}
 		sed -i "5a gem 'net-smtp', require: false" $PREFIX/opt/metasploit-framework/Gemfile
 		gem install --no-document --verbose rubygems-update
 		update_rubygems
