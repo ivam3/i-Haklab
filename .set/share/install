@@ -83,6 +83,7 @@ case "$toInstall" in
 		releases="v2.2-SNAPSHOT-2021-10-31"
 		zipFile="dex-tools-2.2-SNAPSHOT-2021-10-31.zip"
 		yes|apt install wget unzip openjdk-17
+		wget --quiet --tries=20 $iHDB/bin/$toInstall -O $HOME/.local/bin/$toInstall
 		wget --quiet --tries=20 $link/$releases/$zipFile -O $TMPDIR/$toInstall.zip
 		unzip $TMPDIR/$toInstall.zip -d $TOOLS
 		d2jDIR=$(ls $TOOLS|grep dex-tools)
