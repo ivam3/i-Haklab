@@ -76,6 +76,7 @@ php-apache
 pkg-config
 postgresql
 proxychains-ng
+pulseaudio
 python
 python2
 readline
