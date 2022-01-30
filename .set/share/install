@@ -970,6 +970,7 @@ fi
 		cd $PREFIX/opt/metasploit-framework
 		bundle install -j$(nproc --all) --verbose
 		sed -i "s@/etc/resolv.conf@$PREFIX/etc/resolv.conf@g" $PREFIX/opt/metasploit-framework/lib/net/dns/resolver.rb
+		sed -i "s|\\\c|\\\C\\-\\\s|g" $PREFIX/opt/metasploit-framework/lib/msf/core/exploit/remote/vim_soap.rb
 		find $PREFIX/opt/metasploit-framework -type f -executable -print0 | xargs -0 -r termux-fix-shebang
 		find $PREFIX/lib/ruby/gems -type f -iname \*.so -print0 | xargs -0 -r termux-elf-cleaner
 		cat <<- EOF > $PREFIX/bin/msfconsole
