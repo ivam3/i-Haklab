@@ -962,6 +962,7 @@ fi
 		gem install --no-document --verbose rubygems-update
 		update_rubygems
 		gem install --no-document --verbose bundler
+		bundle update --bundler
 		gem install rails --platform=ruby -- --use-system-libraries
 		gem install nokogiri --platform=ruby -- --use-system-libraries
 		bundle config build.nokogiri --use-system-libraries
