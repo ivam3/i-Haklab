@@ -12,7 +12,7 @@ printf "Running...";sleep 0.5
 [[ -d ~/.config/fish ]] && rm -rf ~/.config/fish
 [[ -d $PREFIX/share/i-Haklab ]] && rm -rf $PREFIX/share/i-Haklab
 [[ -d ~/java ]] && rm -rf ~/java
-mkdir -p ~/.local/{etc/i-Haklab,lib,share,tools,var/service/www}
+mkdir -p ~/.local/{etc/i-Haklab,etc/fish,lib,share,tools,var/service/www}
 cp -r ~/i-Haklab $HOME/.local/share
 source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
@@ -79,7 +79,7 @@ printf "$G\n(_>)─➤ Installing interactive shell.$W\n"
 git config --global core.autocrlf
 printf "$Y\n(_>)─➤ Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'\n ╰─➤ when it happen hold on for one minute and then type exit to continue$W\n"
 curl -Ls $iHDB/to-install/get.oh-my.fish|fish
-cat <<- CONF >> $PREFIX/etc/fish/config.fish
+cat <<- CONF > ~/.local/etc/fish/config.fish
 if status --is-login
 bash /data/data/com.termux/files/home/.local/etc/i-Haklab/wall-banner
 end
@@ -108,6 +108,8 @@ alias traductor="gawk -f (curl -Ls git.io/translate | psub) -- -shell"
 pulseaudio --start --exit-idle-time=-1
 pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1
 CONF
+[[ -e $PREFIX/etc/fish/config.fish ]] && rm -rf $PREFIX/etc/fish/config.fish
+ln -s $HOME/.local/etc/fish/config.fish $PREFIX/etc/fish/config.fish
 TMP_fish=$(mktemp)
 cat <<- CONF > $TMP_fish
 #!/bin/env fish
@@ -116,8 +118,12 @@ CONF
 fish $TMP_fish >/dev/null 2>&1
 cat <<- CONF > $HOME/.bashrc
 export PATH=$HOME/.local/bin:$PREFIX/bin
-export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
-chsh -s fish
+export LD_LIBRARY_PATH=$HOME/.local/lib:$PREFIX/lib
+if [[ ! $(grep -oE "i-Haklab" $PREFIX/etc/fish/config.fish >/dev/null) ]];
+then
+     rm -rf $PREFIX/etc/fish/config.fish
+		 ln -s $HOME/.local/etc/fish/config.fish $PREFIX/etc/fish/config.fish
+fi
 CONF
 
 #::::::::::Insatalling i-Haklab's login::::::::::::#

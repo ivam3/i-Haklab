@@ -12,16 +12,18 @@ B='\033[1;34m'
 M='\033[1;35m'
 C='\033[1;36m'
 W='\033[0m'
+
+for tool in tor curl w3m proxychains-ng;do
+	srch=$(pkg list-installed 2>/dev/null|awk -F "/" '{print $1}'|grep ^$tool)
+	[[ -z $srch ]] && { apt install $tool 2>/dev/null;clear;}
+done
+[[ $# -eq 0 ]] && { printf >&2 "$R(_>)─➤$W missing argument, type $(basename $0) -h for help";exit;}
+
 runTor(){ 
 	chk_tor=$(curl --socks5-hostname localhost:9050 -s https://www.google.com > /dev/null;echo $?)
 	[[ $chk_tor -gt 0 ]] && { printf >&2 "$R(_>)─➤$W TOR's connection is inactive$Y\n ╰──➤ Connecting...$W\n";sleep 3;tor >/dev/null 2>/dev/null &}
 	ip=$(proxychains4 -q w3m cualesmiip.com 2>/dev/null|grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}')	
 }
-
-for tool in tor curl w3m proxychains4;do
-	[[ -e $PREFIX/bin/$tool ]] || { apt install $tool 2>/dev/null;clear;}
-done
-[ $# -eq 0 ] && { printf >&2 "$R(_>)─➤$W missing argument, type $(basename $0) -h for help";exit;}
 
 case $1 in
 	-h|help|--help)
@@ -31,7 +33,7 @@ case $1 in
      ip        | show current tun0 ip address
      pip       | show current tun0 public ip address
      swip      | swap to a random ip address
-		 start     | turn on tor connections
+     start     | turn on tor connections
      stop      | turn off tor connections
  any-command   | run an specific process over tor connections.
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n
