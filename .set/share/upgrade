@@ -30,7 +30,7 @@ done
 
 printf "$Y(_>)─➤$W Installing newest i-Haklab version\n"
 git clone --quiet https://github.com/ivam3/i-Haklab.git ~/.local/share/i-Haklab
-[[ -d ~/.local/share/i-Haklab ]] || { printf "$R(_>)─➤$W i-Haklab directory missing..$R Aborting.$W";exit 1;}
+[[ -d ~/.local/share/i-Haklab ]] || { printf "$R(_>)─➤$W i-Haklab directory missing..$R Aborting.$W";exit;}
 source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 mkdir -p ~/.local/{etc/i-Haklab,etc/fish,lib,share,tools,var/service/www}
