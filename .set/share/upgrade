@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 #i-Haklab v.3.0 2021 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3.
 #Created on Jan/2019 
-#Modify: 2022-01-31
+#Modify: 2022-02-15
 ####################
 IFS=$'\n\t'
 trap ctrl_c 2
@@ -27,22 +27,22 @@ printf "$Y(_>)─➤$W Removing oldest i-Haklab version\n";$s5
 for v in ${binTools[*]};do
 	[[ -e $PREFIX/bin/$v ]] && rm $PREFIX/bin/$v
 done
-for i in Quiz Cinderella Ivam3;do
-	[[ -e $PREFIX/libexec/termux/.$i ]] && mv $PREFIX/libexec/termux/.$i $HOME/.local/etc/i-Haklab
-done
 
 printf "$Y(_>)─➤$W Installing newest i-Haklab version\n"
 git clone --quiet https://github.com/ivam3/i-Haklab.git ~/.local/share/i-Haklab
 [[ -d ~/.local/share/i-Haklab ]] || { printf "$R(_>)─➤$W i-Haklab directory missing..$R Aborting.$W";exit 1;}
 source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
-mkdir -p ~/.local/{etc/i-Haklab,lib,share,tools,var/service/www}
+mkdir -p ~/.local/{etc/i-Haklab,etc/fish,lib,share,tools,var/service/www}
 ln -s $iHAKLAB/.set/bin $HOME/.local/bin
+for i in Quiz Cinderella Ivam3;do
+	[[ -e $PREFIX/libexec/termux/.$i ]] && mv $PREFIX/libexec/termux/.$i $HOME/.local/etc/i-Haklab
+done
 yes|apt install pulseaudio
 
 #UPGRADE OMF
 printf "$Y(_>)─➤$W Reconfigure startup settings\n";$s5
-cat <<- CONF > $PREFIX/etc/fish/config.fish
+cat <<- CONF > $HOME/.local/etc/fish/config.fish
 if status --is-login
 bash /data/data/com.termux/files/home/.local/etc/i-Haklab/wall-banner
 end
@@ -71,10 +71,16 @@ alias traductor="gawk -f (curl -Ls git.io/translate | psub) -- -shell"
 pulseaudio --start --exit-idle-time=-1
 pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1
 CONF
+[[ -e $PREFIX/etc/fish/config.fish ]] && rm -rf $PREFIX/etc/fish/config.fish || mkdir -p $PREFIX/etc/fish
+ln -s $HOME/.local/etc/fish/config.fish $PREFIX/etc/fish/config.fish
 
 cat <<- CONF > $HOME/.bashrc
 export PATH=$HOME/.local/bin:$PREFIX/bin
 export LD_LIBRARY_PATH=$HOME/.local/lib:$PREFIX/lib
+if [[ ! $(grep -oE "i-Haklab" $PREFIX/etc/fish/config.fish >/dev/null) ]]; then
+     rm -rf $PREFIX/etc/fish/config.fish
+		 ln -s $HOME/.local/etc/fish/config.fish $PREFIX/etc/fish/config.fish
+fi
 chsh -s fish
 CONF
 
