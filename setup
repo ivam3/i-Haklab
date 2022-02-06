@@ -119,11 +119,8 @@ fish $TMP_fish >/dev/null 2>&1
 cat <<- CONF > $HOME/.bashrc
 export PATH=$HOME/.local/bin:$PREFIX/bin
 export LD_LIBRARY_PATH=$HOME/.local/lib:$PREFIX/lib
-if [[ ! $(grep -oE "i-Haklab" $PREFIX/etc/fish/config.fish >/dev/null) ]];
-then
-     rm -rf $PREFIX/etc/fish/config.fish
-		 ln -s $HOME/.local/etc/fish/config.fish $PREFIX/etc/fish/config.fish
-fi
+[[ ! \$(grep -oE "i-Haklab" $PREFIX/etc/fish/config.fish >/dev/null) ]] && rm -rf $PREFIX/etc/fish/config.fish;ln -s $HOME/.local/etc/fish/config.fish $PREFIX/etc/fish/config.fish
+chsh -s fish
 CONF
 
 #::::::::::Insatalling i-Haklab's login::::::::::::#
