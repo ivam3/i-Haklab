@@ -19,8 +19,6 @@ binTools=$(ls $HOME/.local/share/i-Haklab/.set/bin)
 ctrl_c() { printf "$Y\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bot$W\n";}
 
 printf "$Y(_>)─➤$W Removing oldest i-Haklab version\n";$s5
-[[ -d $HOME/.local/bin ]] && rm -rf $HOME/.local/bin
-[[ -d $HOME/.local/share/i-Haklab ]] && rm -rf $HOME/.local/share/i-Haklab
 [[ -d $PREFIX/libexec/banner ]] && rm -rf $PREFIX/libexec/banner
 [[ -e $PREFIX/var/log/login-termux ]] && rm $PREFIX/var/log/login-termux
 [[ -d ~/.vim ]] && rm -rf ~/.vim
@@ -29,16 +27,17 @@ for v in ${binTools[*]};do
 done
 
 printf "$Y(_>)─➤$W Installing newest i-Haklab version\n"
-git clone --quiet https://github.com/ivam3/i-Haklab.git ~/.local/share/i-Haklab
-[[ -d ~/.local/share/i-Haklab ]] || { printf "$R(_>)─➤$W i-Haklab directory missing..$R Aborting.$W";exit;}
+git clone --quiet https://github.com/ivam3/i-Haklab.git ~/.local/share/iHaklab
+[[ -d $HOME/.local/share/iHaklab ]] && rm -rf $HOME/.local/share/i-Haklab;mv ~/.local/share/iHaklab ~/.local/share/i-Haklab || { printf "$R(_>)─➤$W i-Haklab directory missing..$R Aborting.$W";exit;}
 source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 mkdir -p ~/.local/{etc/i-Haklab,etc/fish,lib,share,tools,var/service/www}
+[[ -d $HOME/.local/bin ]] && rm -rf $HOME/.local/bin
 ln -s $iHAKLAB/.set/bin $HOME/.local/bin
 for i in Quiz Cinderella Ivam3;do
 	[[ -e $PREFIX/libexec/termux/.$i ]] && mv $PREFIX/libexec/termux/.$i $HOME/.local/etc/i-Haklab
 done
-yes|apt install pulseaudio
+command -v pulseaudio >/dev/null || yes|apt install pulseaudio
 
 #UPGRADE OMF
 printf "$Y(_>)─➤$W Reconfigure startup settings\n";$s5
