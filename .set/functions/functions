@@ -34,6 +34,21 @@ export -f STDERROOT
 STDERR(){ printf "$R(_>)─➤$W missing argument, type i-Haklab -h for help";exit;}
 export -f STDERR
 
+APTupdate(){
+	for count in {1..4};do
+		if [[ $(apt update|grep "All packages are up to date.") ]]
+		then
+			break
+		elif [[ count -eq 3 ]]
+    then
+			printf "$R\n(_>)─➤ APT ERROR$W |$Y try using IbyC-fixer$W";exit
+    else
+			yes|apt upgrade
+		fi
+	done
+}
+export -f APTupdate
+
 chk-iHaklab() {
 	until [ -d $iHAKLAB ]; do
 		printf "$R\n(_>)─➤ i-Haklab needed$W |$Y Do you wanna install it?$W\n"

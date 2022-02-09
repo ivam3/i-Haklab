@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 #CREADED ON Dec/2018 BY @IVAM3
-#UPGRADED ON 2021/Dec/31
+#UPGRADED ON 2022/Feb/9
 
 IFS=$'\n\t'
 trap ctrl_c 2
@@ -59,7 +59,7 @@ Turtle() {
 	}
 Menu() {
 	printf $B"(USAGE-01)─➤ To fix python modules:$G\nIbyC-fixer <[B|BASIC] [L|LDFLAGS] [RCBT|RUST_CARGO_TARGET] [S|SODIUM]> <[Py|Py2]> <[file.txt|module(max 3)]>$W\n\nB  BASIC\tInstall module on basic\nL  LDFLAGS\tForce installation to use libraries and system compiler\nRCBT  RUST_CARGO_TARGET\tForce installation specifying Android as target platform\nS  SODIUM\tForce the installation to use the sodium decryptor\nPy  \t\tFor python3\nPy2  \t\tFor python2\n\nExamples:\n\tIbyC-fixer BASIC Py future\n\tIbyC-fixer S Py2 colorama\n"
-	printf "$B\n(USAGE-02)─➤ To fix an specific issue:$G\nIbyC-fixer <[nrauf|metasploit|downgradeRepo|RuGiR]> <option>$W\n\nnrauf         dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nmetasploit\t\t\tTo fix metasploit instalation\ndowngradeRepo repo=version\tDowngrade apt|pkg reporitory tospecific version\nRuGiR\t\t\t\tTo fix ruby gems issues\nngrok\t\t\t\tInstall ngrok-server from Abhacker repositories\n\nExamples:\n\tIbyC-fixer RuGiR\n\tIbyC-fixer downgradeRepo ruby=2.7.2\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n\n"
+	printf "$B\n(USAGE-02)─➤ To fix an specific issue:$G\nIbyC-fixer <[apt|nrauf|metasploit|downgradeRepo|RuGiR]> <option>$W\n\napt\t\t\t\tSearch and fix some errores on APT/PKG with dpkg\nnrauf         dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nmetasploit\t\t\tTo fix metasploit instalation\ndowngradeRepo repo=version\tDowngrade apt|pkg reporitory tospecific version\nRuGiR\t\t\t\tTo fix ruby gems issues\nngrok\t\t\t\tInstall ngrok-server from Abhacker repositories\n\nExamples:\n\tIbyC-fixer RuGiR\n\tIbyC-fixer downgradeRepo ruby=2.7.2\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n\n"
 	exit
 }
 Chck() {
@@ -113,7 +113,7 @@ done
 declare -a INSTADATE=($(ls -l $binPATH/IbyC-fixer|awk -F " " '{print $6,$7}') $(curl -sSL $iHDB/bin/IbyC-fixer|grep "UPGRADED ON"|awk -F "/" '{print $2,$3}'))
 printf "$Y(_>)─➤$W Looking for updates..";
 sleep 1
-if [ "${INSTADATE[0]}" != "${INSTADATE[2]}" ] || [ "${INSTADATE[1]}" -lt "${INSTADATE[3]}" ];then
+if [[ "${INSTADATE[0]}" != "${INSTADATE[2]}" ]] || [[ "${INSTADATE[1]}" -lt "${INSTADATE[3]}" ]];then
         printf "$Y.Upgrading";
         sleep 2
 				wget -q $iHDB/bin/IbyC-fixer -O $binPATH/IbyC-fixer
@@ -197,6 +197,16 @@ case $opc in
 		else
 			printf "$R\n(_>)─➤$W Apk file unallocated\n"
 		fi
+		;;
+	apt)
+		yes|apt update > $FILE
+		yes|apt upgrade >> $FILE
+		apt clean && apt autoremove
+		[[ $(grep -oE "E: Sub-process" $FILE) ]] && dpkg --configure -a
+		[[ $(grep -oE "E: Failed to fetch" $FILE) ]] && apt --fix-broken install
+		[[ $(grep -oE "E: Unable to fetch" $FILE) ]] && apt update --fix-missing
+		[[ $(grep -oE "is not signed" $FILE) ]] || [[ $(grep -oE "NO_PUBKEY" $FILE) ]] && echo "deb https://packages-cf.termux.org/apt/termux-main/ stable main" > $PREFIX/etc/apt/sources.list;rm -rf $PREFIX/etc/apt/sources.list.d/*;dpkg --configure -a
+		rm $FILE
 		;;
 	metasploit)
 		[[ -d $PREFIX/var/lib/postgresql ]] && rm -rf $PREFIX/var/lib/postgresql

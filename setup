@@ -25,10 +25,10 @@ read enter
 
 #::::::::::Installation of dependencies::::::::::::#
 printf "$G(_>)─➤$W Upgrading and installing Termux packages.\n"
-yes|pkg update && pkg upgrade
+APTupdate
 apt list|awk -F "/" '{print $1}' > $TMPDIR/alltools.tmp
 pkg list-installed|awk -F "/" '{print $1}' > $TMPDIR/installed.tmp
-for repo in $(cat .set/to-install/listOfpkg); do
+for repo in $(cat $iHAKLAB/.set/to-install/listOfpkg); do
 	GOTIT=$(grep -oE $repo $TMPDIR/installed.tmp)
 	PKG=$(grep -o $repo $TMPDIR/alltools.tmp)
 	if [ ! -z "$PKG" ] && [ -z "$GOTIT" ];then

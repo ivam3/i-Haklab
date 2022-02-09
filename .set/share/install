@@ -70,7 +70,8 @@ if [[ -d $TOOLS/$toInstall ]] || [[ -e $PREFIX/bin/$toInstall ]] || [[ -e $HOME/
 	printf "$R(_>)─➤$W $1 it's already installed";exit
 fi
 running
-yes|apt autoremove && apt update && yes|apt upgrade 
+yes|apt autoremove
+APTupdate
 case "$toInstall" in
 	alltools)
 		alltools=$(cat $iHAKLAB/.set/libexec/Tools/listoftools)
