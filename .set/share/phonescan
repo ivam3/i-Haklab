@@ -20,7 +20,7 @@ saveKEY(){
 
 if [[ -z $phonescanKEY ]]
 then
-	printf "$Y(_>)─➤$W Type your API key $Y|$W Get it on https://apilayer.com/account\n"
+	printf "$Y(_>)─➤$W Type your API key $Y|$W Get it on https://numverify.com/dashboard\n"
 	saveKEY
 elif [[ $1 = "setKEY" ]]
 then
