@@ -2,7 +2,7 @@
 #Created on July/2021
 IFS=$'\n\t'
 trap ctrl_c 2
-ctrl_c(){ printf "\n$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";}
+ctrl_c(){ printf "\n$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";exit;}
 source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 toRemove="$1"

@@ -213,8 +213,8 @@ $Y OPTIONS$W|$Y   Arguments$W   |$Y    Description$W
 |
 ╰─payvid───➤────────────────────➤ Hide a Reverse Shell with a Video File by Exploiting Linux OS.
 |
-╰─phonescan+─<phonenumber>──────➤ A phone number scaner
-|              ╰──example───────{─i-Haklab phonescan +525584923476─}
+╰─phonescan+─<phonenumber>──────➤ A phone number information scaner
+|              ╰──example───────{─i-Haklab phonescan 525584923476─}
 |
 ╰─ransomux─➤────────────────────➤ Create a ransomware to be exploitable on android.
 ╰─share────+─<upload/download>──➤ Share files and directories remotely and securely
