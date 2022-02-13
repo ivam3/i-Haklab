@@ -606,6 +606,7 @@ case "$toInstall" in
 		git clone --quiet https://github.com/wuseman/WBRUTER.git $TOOLS/$toInstall
 		chmod +750 -R $TOOLS/$toInstall
 		;;
+
 	#::BIN::#
 	adbfastboot)
 		for BIN in adb adb.bin fastboot fastboot-armeabi;do
@@ -639,6 +640,7 @@ exec \$(command -v java) --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-
 CONF
     chmod 755 $HOME/.local/bin/$toInstall
 		;;
+
 	code-server)
 		yes|apt install build-essential python git nodejs-lts yarn
 		yarn config set ignore-engines true
@@ -655,20 +657,23 @@ CONF
 		cert: false
 		CONF
 		;;
+
 	desktop-xfce4|xfce4-about)
-		for i in vnc icons themes config;do
-			rm -rf ~/.$i
+		for i in vnc icons themes config;do;rm -rf ~/.$i;done
+		pkgsList="x11-repo xfce4 xfce4-taskmanager dosbox xfce4-terminal python-tkinter htop neofetch loqui vim-gtk the-powder-toy galculator xorg-xhost mpv-x ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk3 gtk2 mtpaint leafpad hexchat otter-browser recordmydesktop feh audacious lxqt-themes papirus-icon-theme lxappearance fluent-icon-theme fluent-gtk-theme kvantum zenity mate-terminal mate-settings-daemon dbus-glib dconf termux-api wireshark-gtk $(apt search xfce4-*|grep -E "x11"|awk -F "/" '{print $1}')"
+		for pkg in "${pkgsList[@]}"; do
+			yes|apt install "$pkg"
+			ipkg=$(pkg list-installed $pkg 2>/dev/null|tail -n 1)
+			checkpkg=${ipkg%/*}
+			if [[ "$checkpkg" == "$pkg" ]]
+			then
+				printf "$G\n(_>)─➤ Package $pkg installed successfully.$W\n"
+				continue
+			else
+				printf "$R\n(_>)─➤ Error installing $pkg, Aborting...$W\n";exit
+			fi
 		done
-		mv ./music $HOME/.local/bin/music
-		apt autoremove;yes|pkg install x11-repo xfce4 xfce4-taskmanager dosbox xfce4-terminal python-tkinter htop neofetch loqui vim-gtk the-powder-toy galculator xorg-xhost mpv-x ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk3 gtk2 mtpaint leafpad hexchat otter-browser recordmydesktop feh audacious lxqt-themes papirus-icon-theme lxappearance fluent-icon-theme fluent-gtk-theme;yes|pkg install xfce4-* kvantum zenity mate-terminal mate-settings-daemon dbus-glib dconf termux-api wireshark-gtk
-		for v in music stopdesktop startdesktop; do
-			cp -rf ~/termux-desktop-xfce/$v $HOME/.local/bin
-		done
-		for a in backgrounds .icons .themes .vnc .config; do
-			cp -rf ~/termux-desktop-xfce/$a $HOME
-		done
-		mkdir ~/Desktop ~/Downloads ~/Templates ~/Public ~/Documents ~/Pictures ~/Video
-		cp -rf $HOME/termux-desktop-xfce/README.desktop $HOME/Desktop
+		mkdir -p $HOME/{Desktop,Downloads,Templates,Public,Documents,Pictures,Video}
 		ln -s $HOME/storage/music $HOME/Music
 		exec vncserver;sleep 3
 		sed 's|/twm &|xfce4-session &|g' -i ~/.vnc/xstartup
