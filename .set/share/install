@@ -659,7 +659,9 @@ CONF
 		;;
 
 	desktop-xfce4|xfce4-about)
-		for i in vnc icons themes config;do;rm -rf ~/.$i;done
+		for i in vnc icons themes config;do
+			rm -rf ~/.$i
+		done
 		pkgsList="x11-repo xfce4 xfce4-taskmanager dosbox xfce4-terminal python-tkinter neofetch loqui vim-gtk the-powder-toy galculator xorg-xhost mpv-x ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk3 gtk2 mtpaint leafpad hexchat otter-browser recordmydesktop feh audacious lxqt-themes papirus-icon-theme lxappearance fluent-icon-theme fluent-gtk-theme kvantum zenity mate-terminal mate-settings-daemon dbus-glib dconf termux-api wireshark-gtk $(apt search xfce4-*|grep -E "x11"|awk -F "/" '{print $1}')"
 		for pkg in "${pkgsList[@]}"; do
 			yes|apt install "$pkg"
