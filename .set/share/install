@@ -73,12 +73,6 @@ running
 yes|apt autoremove
 APTupdate
 case "$toInstall" in
-	alltools)
-		alltools=$(cat $iHAKLAB/.set/libexec/Tools/listoftools)
-		for i in ${alltools[*]};do
-			bash $iHAKLAB/.set/share/install $i
-		done
-		;;
 	dex2jar)
 		link="https://github.com/pxb1988/dex2jar/releases/download"
 		releases="v2.2-SNAPSHOT-2021-10-31"

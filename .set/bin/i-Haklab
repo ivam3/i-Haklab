@@ -22,15 +22,29 @@ case "$1" in
 		;;
 	install|remove)
 		if [[ $2 ]];then
-			[[ $(grep "$2" $iHAKLAB/.set/libexec/Tools/listoftools) ]] || { printf >&2 "$R(_>)─➤$W Tool $2 doesn't exist in i-Haklab$Y\n ╰─➤$W Trying APT repositories...\n";yes|apt install ${@:2};exit;}
 			for i in ${@:2};do
-				bash $iHAKLAB/.set/share/$1 $i
+				if [[ $2 = "alltools" ]]
+				then
+					alltools=$(cat $iHAKLAB/.set/libexec/Tools/listoftools)
+					for i in ${alltools[*]};do
+						bash $iHAKLAB/.set/share/$1 $i
+					done
+					exit
+				elif [[ $(grep "$i" $iHAKLAB/.set/libexec/Tools/listoftools) ]]
+				then
+					bash $iHAKLAB/.set/share/$1 $i
+				else
+						printf >&2 "$R(_>)─➤$W Tool $i doesn't exist in i-Haklab$Y\n ╰─➤$W Trying APT repositories...\n"
+						yes|apt $1 $i
+				fi
 			done
-	INACTIVE(){
-			if [[ $(ruby -v |cut -c 6-10) != "2.7.2" ]];then
+	  inactive(){
+			if [[ $(ruby -v |cut -c 6-10) != "2.7.2" ]]
+			then
 				printf "$Y\n(_>)─➤$W Downgrading ruby at version 2.7.2.."
 				bash <(curl -fsSL "http://git.io/abhacker-repo") --install ruby=2.7.2
-				if [ ! -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ];then
+				if [ ! -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ]
+				then
 					printf "$Y\n(_>)─➤$W Installing Abhacker repositories..$G"
 					wget -q "${iHDB}/fix-tools/instAbhackerRepo" -O $TMPDIR/abh.tmp
 					chmod +x $TMPDIR/abh.tmp
