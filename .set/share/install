@@ -961,18 +961,22 @@ fi
 		done
 		git clone --quiet --depth 1 $msfGit $PREFIX/opt/metasploit-framework
 		[[ -d $PREFIX/opt/metasploit-framework ]] || { printf "$R\n(_>)─➤$W Metasploit directory missing...$R Aborting.$W";exit;}
+		cd $PREFIX/opt/metasploit-framework
 		sed -i "5a gem 'net-smtp', require: false" $PREFIX/opt/metasploit-framework/Gemfile
 		gem install --no-document --verbose rubygems-update
 		update_rubygems
 		gem install --no-document --verbose bundler
+		bundle install -j$(nproc --all) --verbose
 		bundle update --bundler
+		yes|gem uninstall rails
 		gem install rails --platform=ruby -- --use-system-libraries
+		yes|gem uninstall nokogiri
 		gem install nokogiri --platform=ruby -- --use-system-libraries
 		bundle config build.nokogiri --use-system-libraries
+		yes|gem uninstall actionpack
 		gem install actionpack
-		cd $PREFIX/opt/metasploit-framework
-		bundle install -j$(nproc --all) --verbose
 		sed -i "s@/etc/resolv.conf@$PREFIX/etc/resolv.conf@g" $PREFIX/opt/metasploit-framework/lib/net/dns/resolver.rb
+		sed -i "s|array[@index] = (value.nil? ? NULL : value)|#array[@index] = (value.nil? ? NULL : value)|g" $PREFIX/lib/ruby/gems/3.1.0/gems/concurrent-ruby-1.1.9/lib/concurrent-ruby/concurrent/atomic/ruby_thread_local_var.rb
 		sed -i "s|\\\c|\\\C\\-\\\s|g" $PREFIX/opt/metasploit-framework/lib/msf/core/exploit/remote/vim_soap.rb
 		find $PREFIX/opt/metasploit-framework -type f -executable -print0 | xargs -0 -r termux-fix-shebang
 		find $PREFIX/lib/ruby/gems -type f -iname \*.so -print0 | xargs -0 -r termux-elf-cleaner
