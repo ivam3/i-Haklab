@@ -196,13 +196,6 @@ case "$TOOL" in
 			STDERR
 		fi
 		;;
-	phonesploit)
-		if CheckPath;then
-			exec python2 $TOOLPATH/main_linux.py
-		else
-			STDERR
-		fi
-		;;
 	xerosploit)
 		CheckRoot
 		running
@@ -214,7 +207,7 @@ case "$TOOL" in
 		fi
 		;;
 #::::PYTHON3 TOOLS::::#
-	evilurl|NULL-phoneinfoga-NULL|phomber|hunner|infoga|ipgeolocation|seeker|shellsploit|sublist3r|NULL-theharvester-NULL|vulnx)
+	evilurl|NULL-phoneinfoga-NULL|phomber|hunner|infoga|ipgeolocation|phonesploit|seeker|shellsploit|sublist3r|NULL-theharvester-NULL|vulnx)
 		if CheckPath;then
 			exec python $TOOLPATH/$TOOL.py ${@:2}
 		else

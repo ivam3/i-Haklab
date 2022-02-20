@@ -279,6 +279,16 @@ case "$toInstall" in
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
 		;;
+	phonesploit)
+		command -v adb > /dev/null 2>&1 || exec i-Haklab install abdfastboot
+		yes|apt install git python
+		PIPup
+		PYv=""
+		git clone --quiet https://github.com/aerosol-can/PhoneSploit.git $TOOLS/$toInstall
+		printf "colorama" > $TMPDIR/requirements.txt
+		PYmodules
+		rm -f $TMPDIR/requirements.txt
+		;;
 	quack)
 		yes|apt install wget python
 		PYPup
@@ -487,16 +497,6 @@ case "$toInstall" in
 		printf "impacket" > $TMPDIR/requirements.txt
 		PYmodules
 		yes|apt remove rust;apt autoremove
-		rm -f $TMPDIR/requirements.txt
-		;;
-	phonesploit)
-		command -v adb > /dev/null 2>&1 || exec i-Haklab install abdfastboot
-		yes|apt install git python2
-		PIPup
-		PYv="2"
-		git clone --quiet https://github.com/aerosol-can/PhoneSploit.git $TOOLS/$toInstall
-		printf "colorama" > $TMPDIR/requirements.txt
-		PYmodules
 		rm -f $TMPDIR/requirements.txt
 		;;
 	pybelt)
