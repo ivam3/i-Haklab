@@ -945,8 +945,9 @@ fi
 		[[ -d $PREFIX/lib/ruby ]] && rm -rf $PREFIX/lib/ruby;yes|apt remove ruby;yes|apt autoremove
 		msfv="6.1.20_all"
 		msfGit="https://github.com/rapid7/metasploit-framework.git"
+		msfDir="$PREFIX/opt/metasploit-framework"
 		rubyLIBv=$(ls $PREFIX/lib/ruby|sort -r|grep -m 1 '[0-9].[0-9].[0-9]')
-		[[ -d $PREFIX/opt/metasploit-framework ]] && rm -rf $PREFIX/opt/metasploit-framework
+		[[ -d $PREFIX/opt/metasploit-framework ]] && rm -rf $msfDir
 		[[ -d $PREFIX/var/lib/postgresql ]] && rm -rf $PREFIX/var/lib/postgresql
 		yes|apt install autoconf patchelf bison apr apr-util postgresql libgrpc libtool libcap wget termux-elf-cleaner ruby build-essential binutils
 		mkdir -p $PREFIX/opt
@@ -959,10 +960,10 @@ fi
 							"$PREFIX/lib/ruby/$rubyLIBv/${i}/bigdecimal/util.so"
 					fi
 		done
-		git clone --quiet --depth 1 $msfGit $PREFIX/opt/metasploit-framework
-		[[ -d $PREFIX/opt/metasploit-framework ]] || { printf "$R\n(_>)─➤$W Metasploit directory missing...$R Aborting.$W";exit;}
-		cd $PREFIX/opt/metasploit-framework
-		sed -i "5a gem 'net-smtp', require: false" $PREFIX/opt/metasploit-framework/Gemfile
+		git clone --quiet --depth 1 $msfGit $msfDir
+		[[ -d $msfDir ]] || { printf "$R\n(_>)─➤$W Metasploit directory missing...$R Aborting.$W";exit;}
+		cd $msfDir
+		sed -i "5a gem 'net-smtp', require: false" $msfDir/Gemfile
 		gem install --no-document --verbose rubygems-update
 		update_rubygems
 		gem install --no-document --verbose bundler
@@ -975,22 +976,24 @@ fi
 		bundle config build.nokogiri --use-system-libraries
 		yes|gem uninstall actionpack
 		gem install actionpack
-		sed -i "s@/etc/resolv.conf@$PREFIX/etc/resolv.conf@g" $PREFIX/opt/metasploit-framework/lib/net/dns/resolver.rb
-		sed -i "s|array[@index] = (value.nil? ? NULL : value)|#array[@index] = (value.nil? ? NULL : value)|g" $PREFIX/lib/ruby/gems/3.1.0/gems/concurrent-ruby-1.1.9/lib/concurrent-ruby/concurrent/atomic/ruby_thread_local_var.rb
-		sed -i "s|\\\c|\\\C\\-\\\s|g" $PREFIX/opt/metasploit-framework/lib/msf/core/exploit/remote/vim_soap.rb
-		find $PREFIX/opt/metasploit-framework -type f -executable -print0 | xargs -0 -r termux-fix-shebang
+		sed -i "s@/etc/resolv.conf@$PREFIX/etc/resolv.conf@g" $msfDir/lib/net/dns/resolver.rb
+		for i in $(find $PREFIX/lib/ruby/ -type f -iname ruby_thread_local_var.rb);do
+			sed -i "s|array[@index] = (value.nil? ? NULL : value)| |g" $i
+		done
+		sed -i "s|\\\c|\\\C\\-\\\s|g" $msfDir/lib/msf/core/exploit/remote/vim_soap.rb
+		find $msfDir -type f -executable -print0 | xargs -0 -r termux-fix-shebang
 		find $PREFIX/lib/ruby/gems -type f -iname \*.so -print0 | xargs -0 -r termux-elf-cleaner
 		cat <<- EOF > $PREFIX/bin/msfconsole
 #!/data/data/com.termux/files/usr/bin/sh
 
 SCRIPT_NAME=\$(basename "\$0")
-METASPLOIT_PATH="$PREFIX/opt/metasploit-framework"
+METASPLOIT_PATH="$msfDir"
 
 case "\$SCRIPT_NAME" in
         msfconsole)
                 if [ ! -d "$PREFIX/var/lib/postgresql" ]; then
                         mkdir -p "$PREFIX/var/lib/postgresql"
-                        initdb "$PREFIX/var/lib/postgresql"
+                        initdb "$PREFIX/var/lib/postgresql" >/dev/null
                 fi
                 if ! pg_ctl -D "$PREFIX/var/lib/postgresql" status > /dev/null 2>/dev/null; then
                         pg_ctl --silent -D "$PREFIX/var/lib/postgresql" start >/dev/null
@@ -1016,8 +1019,8 @@ EOF
 		for i in msfd msfrpc msfrpcd msfvenom;do
 			ln -sfr $PREFIX/bin/msfconsole $PREFIX/bin/$i
 		done
-		mkdir -p $PREFIX/opt/metasploit-framework/config
-		cat <<- EOF > $PREFIX/opt/metasploit-framework/config/database.yml
+		mkdir -p $msfDir/config
+		cat <<- EOF > $msfDir/config/database.yml
 production:
   adapter: postgresql
   database: msf_database
@@ -1036,8 +1039,8 @@ EOF
 		fi
 		[[ -z "$(psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='msf'")" ]] && createuser msf
 		[[ -z "$(psql -l|grep msf_database)" ]] && createdb msf_database
-		cd;rm -rf $PREFIX/opt/metasploit-framework/.git*
-		wget -q $JAVADB/.embed/apk.rb -O $PREFIX/opt/metasploit-framework/lib/msf/core/payload/apk.rb
+		cd;rm -rf $msfDir/.git*
+		wget -q $JAVADB/.embed/apk.rb -O $msfDir/lib/msf/core/payload/apk.rb
 		if ! cat $INITFILE | grep -oE "postgresql" --silent;then
 			sed -i "4a alias postgresql=\"pg_ctl -D $PREFIX/var/lib/postgresql\"" $INITFILE
 		fi

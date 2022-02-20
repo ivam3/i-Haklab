@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 #i-Haklab v.3.0 2021 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3.
 #Created on Jan/2019 
-#Modify: 2022-02-15
+#Modify: 2022-02-28
 ####################
 IFS=$'\n\t'
 trap ctrl_c 2
@@ -67,7 +67,7 @@ alias LOCALHOST="ifconfig 2>/dev/null|grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}'|gre
 alias serverapache="apachectl"
 alias postgresql="pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql"
 alias traductor="gawk -f (curl -Ls git.io/translate | psub) -- -shell"
-pulseaudio --start --exit-idle-time=-1
+pulseaudio --start --exit-idle-time=-1 2>/dev/null
 pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1
 CONF
 [[ -e $PREFIX/etc/fish/config.fish ]] && rm -rf $PREFIX/etc/fish/config.fish || mkdir -p $PREFIX/etc/fish
