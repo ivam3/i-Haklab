@@ -291,7 +291,7 @@ case "$toInstall" in
 		;;
 	quack)
 		yes|apt install wget python
-		PYPup
+		PIPup
 		PYv=""
 		wget -q https://raw.githubusercontent.com/Monkey-hk4/quack/main/quack -O $HOME/.local/bin/quack
 		chmod +x $HOME/.local/bin/quack
