@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 #CREADED ON Dec/2018 BY @IVAM3
-#UPGRADED ON 2022/Feb/9
+#UPGRADED ON 2022/Feb/28
 
 IFS=$'\n\t'
 trap ctrl_c 2
@@ -203,7 +203,7 @@ case $opc in
 		yes|apt upgrade >> $FILE
 		apt clean && apt autoremove
 		[[ $(grep -oE "E: Sub-process" $FILE) ]] && dpkg --configure -a
-		[[ $(grep -oE "E: Failed to fetch" $FILE) ]] && apt --fix-broken install
+		[[ $(grep -oE "E: Failed to fetch" $FILE) ]] || [[ $(grep -oE "E: Unmet" $FILE) ]] || [[ $(grep -oE "Broken pipe" $FILE) ]] && apt --fix-broken install
 		[[ $(grep -oE "E: Unable to fetch" $FILE) ]] && apt update --fix-missing
 		[[ $(grep -oE "is not signed" $FILE) ]] || [[ $(grep -oE "NO_PUBKEY" $FILE) ]] && echo "deb https://packages-cf.termux.org/apt/termux-main/ stable main" > $PREFIX/etc/apt/sources.list;rm -rf $PREFIX/etc/apt/sources.list.d/*;dpkg --configure -a
 		rm $FILE
