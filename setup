@@ -105,6 +105,7 @@ alias LOCALHOST="ifconfig 2>/dev/null|grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}'|gre
 alias serverapache="apachectl"
 alias postgresql="pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql"
 alias traductor="gawk -f (curl -Ls git.io/translate | psub) -- -shell"
+alias ngrokSSH="ssh -R 443:localhost:8080 -oHostKeyAlgorithms=+ssh-rsa -oPubkeyAcceptedKeyTypes=+ssh-rsa tunnel.us.ngrok.com"
 pulseaudio --start --exit-idle-time=-1 2>/dev/null
 pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1
 CONF
@@ -161,6 +162,9 @@ printf "$G\n(_>)─➤$W Installing ngrok.io ngrok-ssh and ngrok-server."
 [[ $(command -v ngrok) ]] && mv $(command -v ngrok) $(command -v ngrok).io
 bash $TMPabh --install ngrok-server >/dev/null 2>&1
 rm $TMPabh
+[[ -d ~/.ssh ]] || mkdir ~/.ssh 
+[[ -e ~/.ssh/config ]] || touch ~/.ssh/config
+printf "host tunnel.us.ngrok.com\n\tHostkeyAlgorithms +ssh-rsa\n\tPubkeyAcceptedAlgorithms +ssh-rsa\n" >> ~/.ssh/config
 
 printf "$G\n(_>)─➤$W Installing Python Exploit Development Assistance for GDB."
 curl -Ls ${iHDB}/to-install/gdb_peda.sh|bash
