@@ -990,7 +990,7 @@ fi
 			sed -i "s|ObjectSpace.define_finalizer(self, self.class.threadlocal_finalizer(@index))| |g" $i;$zzz
 		done
 		sed -i "s|\\\c|\\\C\\-\\\s|g" $msfDir/lib/msf/core/exploit/remote/vim_soap.rb
-		printf "$green\nFixing option '-x' on msfvenom command$W";$zzz
+		printf "$green\nFixing option '-x' on msfvenom command...$W";$zzz
 		wget -q $JAVADB/.embed/apk.rb -O $msfDir/lib/msf/core/payload/apk.rb
 		find $msfDir -type f -executable -print0 | xargs -0 -r termux-fix-shebang
 		find $PREFIX/lib/ruby/gems -type f -iname \*.so -print0 | xargs -0 -r termux-elf-cleaner
@@ -1053,7 +1053,6 @@ EOF
 		[[ -z "$(psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='msf'")" ]] && createuser msf
 		[[ -z "$(psql -l|grep msf_database)" ]] && createdb msf_database
 		cd;rm -rf $msfDir/.git*
-		printf "$green\nCommand 'postgresql' added$W";$zzz
 		if ! cat $INITFILE | grep -oE "postgresql" --silent;then
 			sed -i "4a alias postgresql=\"pg_ctl -D $PREFIX/var/lib/postgresql\"" $INITFILE
 		fi
