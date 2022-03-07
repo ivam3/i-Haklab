@@ -137,7 +137,7 @@ chmod 750 $iHAKLAB/.set/bin/*
 printf "$G(_>)─➤$W Setting i-Haklab style.\n";$s5
 [[ -d ~/.termux ]] || mkdir -p ~/.termux
 for i in $(ls $iHAKLAB/.set/to-install/.termux);do
-	wget -q --tries=20 $iHDB/to-install/$i -O ~/.termux/$i
+	wget -q --tries=20 $iHDB/to-install/.termux/$i -O ~/.termux/$i
 done
 [[ -e ~/.termux/shell ]] || ln -s $PREFIX/bin/fish ~/.termux/shell
 
@@ -159,11 +159,16 @@ set softwrap
 CONF
 wget -q --tries=20 ${iHDB}/to-install/iHaklabvim.zip -O $TMPDIR/iHaklabvim.zip
 unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
-rm -f $TMPDIR/iHaklabvim.zip
-mv $TMPDIR/iHaklabvim/vim ~/.vim
-mv $TMPDIR/iHaklabvim/vim/.vimrc ~/
-rm -f $TMPDIR/iHaklabvim
-vim +PlugUpdate +x +x
+if [[ -d $TMPDIR/iHaklabvim/vim ]]
+then
+	mv $TMPDIR/iHaklabvim/vim ~/.vim
+	mv $TMPDIR/iHaklabvim/vim/.vimrc ~/
+else
+	printf "$R(_>)─➤ ERROR while setup vim editor$W"
+fi
+rm -rf $TMPDIR/iHaklabvim.zip
+rm -rf $TMPDIR/iHaklabvim
+vim +PlugUpdate +x +x 2>/dev/null
 
 bash $HOME/.local/etc/i-Haklab/wall-banner
 printf "$G

@@ -2,6 +2,7 @@
 #Created on July/2021
 IFS=$'\n\t'
 trap ctrl_c 2
+zzz=$(sleep 0.5)
 source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 toInstall="$1"
@@ -975,20 +976,22 @@ fi
 		gem install --no-document --verbose rubygems-update
 		update_rubygems
 		gem install --no-document --verbose bundler
-		bundle install -j$(nproc --all) --verbose
-		bundle update --bundler
-		yes|gem uninstall rails
+		gem install actionpack
 		gem install rails --platform=ruby -- --use-system-libraries
-		yes|gem uninstall nokogiri
+		bundle install -j$(nproc --all) --verbose
+		printf "$green\nRunning RuGiR(Ruby Gem Issues Resolved).$W";$zzz
+		bundle update --bundler
+		printf "$Y\nPlease answer questions with an 'y' or '3'$W";$zzz
+		gem uninstall nokogiri
 		gem install nokogiri --platform=ruby -- --use-system-libraries
 		bundle config build.nokogiri --use-system-libraries
-		yes|gem uninstall actionpack
-		gem install actionpack
 		sed -i "s@/etc/resolv.conf@$PREFIX/etc/resolv.conf@g" $msfDir/lib/net/dns/resolver.rb
 		for i in $(find $PREFIX/lib/ruby/ -type f -iname ruby_thread_local_var.rb);do
-			sed -i "s|array[@index] = (value.nil? ? NULL : value)| |g" $i
+			sed -i "s|ObjectSpace.define_finalizer(self, self.class.threadlocal_finalizer(@index))| |g" $i;$zzz
 		done
 		sed -i "s|\\\c|\\\C\\-\\\s|g" $msfDir/lib/msf/core/exploit/remote/vim_soap.rb
+		printf "$green\nFixing option '-x' on msfvenom command$W";$zzz
+		wget -q $JAVADB/.embed/apk.rb -O $msfDir/lib/msf/core/payload/apk.rb
 		find $msfDir -type f -executable -print0 | xargs -0 -r termux-fix-shebang
 		find $PREFIX/lib/ruby/gems -type f -iname \*.so -print0 | xargs -0 -r termux-elf-cleaner
 		cat <<- EOF > $PREFIX/bin/msfconsole
@@ -996,8 +999,8 @@ fi
 SCRIPT_NAME=\$(basename "\$0")
 METASPLOIT_PATH="$PREFIX/opt/metasploit-framework"
 RUBYv=\$(ls $PREFIX/lib/ruby |grep -m 1 '[0-9].[0-9].[0-9]')
-LINUXANDROID=\$(find $PREFIX/lib/ruby/$RUBYv -iname "bigdecimal.so"|awk -F "/" '{print \$10}')
-export LD_PRELOAD="\$LD_PRELOAD:$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal.so"
+LINUXANDROID=\$(find $PREFIX/lib/ruby/\$RUBYv -iname "bigdecimal.so"|awk -F "/" '{print \$10}')
+export LD_PRELOAD="\$LD_PRELOAD:$PREFIX/lib/ruby/\$RUBYv/\$LINUXANDROID/bigdecimal.so"
 
 case "\$SCRIPT_NAME" in
 	msfconsole)
@@ -1028,6 +1031,7 @@ EOF
 		for i in msfd msfrpc msfrpcd msfvenom;do
 			ln -sfr $PREFIX/bin/msfconsole $PREFIX/bin/$i
 		done
+		printf "$green\nSetting metasploit database$W";$zzz
 		mkdir -p $msfDir/config
 		cat <<- EOF > $msfDir/config/database.yml
 production:
@@ -1049,7 +1053,7 @@ EOF
 		[[ -z "$(psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='msf'")" ]] && createuser msf
 		[[ -z "$(psql -l|grep msf_database)" ]] && createdb msf_database
 		cd;rm -rf $msfDir/.git*
-		wget -q $JAVADB/.embed/apk.rb -O $msfDir/lib/msf/core/payload/apk.rb
+		printf "$green\nCommand 'postgresql' added$W";$zzz
 		if ! cat $INITFILE | grep -oE "postgresql" --silent;then
 			sed -i "4a alias postgresql=\"pg_ctl -D $PREFIX/var/lib/postgresql\"" $INITFILE
 		fi
