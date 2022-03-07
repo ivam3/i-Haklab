@@ -992,35 +992,36 @@ fi
 		find $msfDir -type f -executable -print0 | xargs -0 -r termux-fix-shebang
 		find $PREFIX/lib/ruby/gems -type f -iname \*.so -print0 | xargs -0 -r termux-elf-cleaner
 		cat <<- EOF > $PREFIX/bin/msfconsole
-#!/data/data/com.termux/files/usr/bin/sh
-
+#!/data/data/com.termux/files/usr/bin/bash
 SCRIPT_NAME=\$(basename "\$0")
-METASPLOIT_PATH="$msfDir"
+METASPLOIT_PATH="$PREFIX/opt/metasploit-framework"
+RUBYv=\$(ls $PREFIX/lib/ruby |grep -m 1 '[0-9].[0-9].[0-9]')
+LINUXANDROID=\$(find $PREFIX/lib/ruby/$RUBYv -iname "bigdecimal.so"|awk -F "/" '{print \$10}')
+export LD_PRELOAD="\$LD_PRELOAD:$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal.so"
 
 case "\$SCRIPT_NAME" in
-        msfconsole)
-                if [ ! -d "$PREFIX/var/lib/postgresql" ]; then
-                        mkdir -p "$PREFIX/var/lib/postgresql"
-                        initdb "$PREFIX/var/lib/postgresql" >/dev/null
-                fi
-                if ! pg_ctl -D "$PREFIX/var/lib/postgresql" status > /dev/null 2>/dev/null; then
-                        pg_ctl --silent -D "$PREFIX/var/lib/postgresql" start >/dev/null
-                fi
-                if [ -z "\$(psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='msf'")" ]; then
-                        createuser msf
-                fi
-                if [ -z "\$(psql -l | grep msf_database)" ]; then
-                        createdb msf_database
-                fi
-                exec ruby "\$METASPLOIT_PATH/\$SCRIPT_NAME" "\$@"
-                ;;
-        msfd|msfrpc|msfrpcd|msfvenom)
-                exec ruby "\$METASPLOIT_PATH/\$SCRIPT_NAME" "\$@"
-                ;;
-        *)
-                echo "[!] Unknown Metasploit command '\$SCRIPT_NAME'."
-                exit 1
-                ;;
+	msfconsole)
+		if [[ ! -d "$PREFIX/var/lib/postgresql" ]]
+		then
+			mkdir -p "$PREFIX/var/lib/postgresql"
+      initdb "$PREFIX/var/lib/postgresql" >/dev/null 2>/dev/null
+    fi
+    if ! pg_ctl -D "$PREFIX/var/lib/postgresql" status > /dev/null 2>&1
+		then
+			pg_ctl -D "$PREFIX/var/lib/postgresql" start --silent
+		fi
+    [[ -z "\$(psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='msf'")" ]] && createuser msf
+    [[ -z "\$(psql -l | grep msf_database)" ]] && createdb msf_database
+    exec ruby "\$METASPLOIT_PATH/\$SCRIPT_NAME" "\$@"
+		;;
+	msfd|msfrpc|msfrpcd|msfvenom)
+		[[ -e $HOME/.local/share/apktool/framework/1.apk ]] && rm $HOME/.local/share/apktool/framework/1.apk
+		exec ruby "\$METASPLOIT_PATH/\$SCRIPT_NAME" "\$@"
+		;;
+	*)
+		echo "[!] Unknown Metasploit command '\$SCRIPT_NAME'."
+		exit 1
+		;;
 esac
 EOF
 		chmod 755 $PREFIX/bin/msfconsole
