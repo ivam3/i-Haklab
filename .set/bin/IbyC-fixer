@@ -227,30 +227,13 @@ case $opc in
 			printf "$R(_>)─➤ An argument needed$W\n\n"
 			exit
 		done
-		if [ ! -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ];then
-			printf "$Y(_>)─➤ Installing Abhacker repositories ...$G "
-			wget -q "${iHDB}/fix-tools/instAbhackerRepo" -O $FILE
-			chmod +x $FILE
-			exec $FILE --install ${@:2} >/dev/null 2>&1
-			rm $FILE
-			printf "DONE!!$W\n"
-		else
-			exec apt install ${@:2}
-		fi
+		bash <(curl -fsSL "http://git.io/abhacker-repo") --install ${@:2}
+		[[ -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ]] && rm -rf $PREFIX/etc/apt/sources.list.d/abhacker.repo.list
 		;;
 	ngrok)
-		if [ ! -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ];then
-			printf "$Y(_>)─➤ Installing Abhacker repositories ...$G "
-			wget -q "${iHDB}/fix-tools/instAbhackerRepo" -O $FILE
-			chmod +x $FILE
-			exec $FILE --install ngrok-server >/dev/null 2>&1
-			rm $FILE
-			printf "DONE!!$W\n"
-		else
 			printf "$G(_>)─➤$W Installing Ngrok from Abhacker repositories ...$G "
-			apt install ngrok-server -y > /dev/null 2>&1;
-			printf "DONE!!$W\n"
-		fi
+			bash <(curl -fsSL "http://git.io/abhacker-repo") --install ngrok-server
+			[[ -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ]] && rm -rf $PREFIX/etc/apt/sources.list.d/abhacker.repo.list
 		;;
 	*)
 		ctrl_c

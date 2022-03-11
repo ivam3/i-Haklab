@@ -38,6 +38,10 @@ case "$1" in
 						yes|apt $1 $i
 				fi
 			done
+			if [[ -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ]]
+			then
+				rm -rf $PREFIX/etc/apt/sources.list.d/abhacker.repo.list
+			fi
 	  inactive(){
 			if [[ $(ruby -v |cut -c 6-10) != "2.7.2" ]]
 			then

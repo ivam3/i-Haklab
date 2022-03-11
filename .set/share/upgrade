@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 #i-Haklab v.3.0 2021 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3.
 #Created on Jan/2019 
-#Modify: 2022-03-07
+#Modify: 2022-03-15
 ####################
 IFS=$'\n\t'
 trap ctrl_c 2
@@ -19,6 +19,7 @@ binTools=$(ls $HOME/.local/share/i-Haklab/.set/bin)
 ctrl_c() { printf "$Y\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bot$W\n";}
 
 printf "$Y(_>)─➤$W Removing oldest i-Haklab version\n";$s5
+[[ -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ]] && rm -rf $PREFIX/etc/apt/sources.list.d/abhacker.repo.list
 [[ -d $PREFIX/libexec/banner ]] && rm -rf $PREFIX/libexec/banner
 [[ -e $PREFIX/var/log/login-termux ]] && rm $PREFIX/var/log/login-termux
 [[ -d ~/.vim ]] && rm -rf ~/.vim

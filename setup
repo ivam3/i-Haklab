@@ -42,12 +42,6 @@ for repo in $(cat $iHAKLAB/.set/to-install/listOfpkg); do
 done
 yes|apt install $(cat $TMPDIR/toInstallList.tmp)
 rm -rf $TMPDIR/*.tmp
-printf "$G\n(_>)─➤$W Installing Abhacker repositories."
-if [ ! -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ];then
-	TMPabh=$(mktemp)
-	wget -q --tries=20 "${iHDB}/fix-tools/instAbhackerRepo" -O $TMPabh
-        chmod +x $TMPabh
-fi
 
 #::: UPDATING LOCATE DATA BASE :::#
 printf "$G\n(_>)─➤$W Updating data base."
@@ -72,13 +66,128 @@ else
 fi
 yes|termux-setup-storage
 
+#::::::::::Insatalling i-Haklab's login::::::::::::#
+[[ -e $HOME/.local/etc/i-Haklab/login-termux ]] && rm -f $HOME/etc/i-Haklab/login-termux
+[[ -e $PREFIX/etc/bashito ]] && rm -f $PREFIX/etc/bashito
+[[ -e $PREFIX/etc/motd ]] && rm -f $PREFIX/etc/motd
+[[ -e $PREFIX/etc/motd.dpkg-old ]] && rm -f $PREFIX/etc/motd.dpkg-old
+for i in Quiz Ivam3 Cinderella;do
+	[[ -e $HOME/.local/etc/i-Haklab/.$i ]] || touch $HOME/.local/etc/i-Haklab/.$i
+done
+[[ -d $HOME/.local/etc/i-Haklab ]] || mkdir -p $HOME/.local/etc/i-Haklab
+wget -q $iHDB/to-install/login-termux -O $HOME/.local/etc/i-Haklab/login-termux
+wget -q $iHDB/libexec/banner/i-Haklab -O $HOME/.local/etc/i-Haklab/login-banner
+cat <<- CONF > $HOME/.local/etc/i-Haklab/wall-banner
+#!/usr/bin/bash
+#Banner for i-Haklab created by @Ivam3 on Jan/2019
+IFS=$'\n\t'
+bash $HOME/.local/etc/i-Haklab/login-banner
+#        i-Haklab by @Ivam3
+CONF
+chmod 711 -R $HOME/.local/etc
+chmod +w $HOME/.local/etc/i-Haklab/.Ivam3
+printf "SXZhbTNieUNpbmRlcmVsbGEK" > $HOME/.local/etc/i-Haklab/.Ivam3
+chmod -w $HOME/.local/etc/i-Haklab/.Ivam3
+chmod +w $HOME/.local/etc/i-Haklab/.Quiz
+printf "VGhlIGFjY2VzcyBrZXkgaXMgSXZhbTNieUNpbmRlcmVsbGEK" > $HOME/.local/etc/i-Haklab/.Quiz
+chmod -w $HOME/.local/etc/i-Haklab/.Quiz
+chmod +w $HOME/.local/etc/i-Haklab/.Cinderella
+printf "SXZhbTNieUNpbmRlcmVsbGEK" > $HOME/.local/etc/i-Haklab/.Cinderella
+chmod -w $HOME/.local/etc/i-Haklab/.Cinderella
+
+#::::::::::Insatalling i-Haklab tools::::::::::::#
+printf "$G\n(_>)─➤$W Installing principal external tools."
+chmod 750 $iHAKLAB/.set/bin/*
+ln -s $iHAKLAB/.set/bin $HOME/.local/bin
+
+printf "$G\n(_>)─➤$W Installing Python Exploit Development Assistance for GDB."
+curl -Ls ${iHDB}/to-install/gdb_peda.sh|bash
+
+printf "$G\n(_>)─➤$W Set nano configuration..."
+cat <<- CONF > $HOME/.nanorc
+set linenumbers
+set historylog
+set tabsize 4
+set autoindent
+set mouse
+set titlecolor white,gray
+set statuscolor white,red
+set keycolor white,gray
+set functioncolor green
+set numbercolor white,gray
+set softwrap
+set softwrap
+#set nohelp
+CONF
+
+printf "$G\n(_>)─➤$W Installing VIM predictable text."
+[[ -d ~/.vim ]] && rm -rf ~/.vim
+wget -q --tries=20 ${iHDB}/to-install/iHaklabvim.zip -O $TMPDIR/iHaklabvim.zip
+unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
+if [[ -d $TMPDIR/iHaklabvim ]];then
+	mv $(find $TMPDIR/iHaklabvim -type d -iname "vim") ~/.vim
+	mv $(find $TMPDIR/iHaklabvim/ -type f -iname ".vimrc") ~/
+else
+	printf "$R(_>)─➤ ERROR while setup vim editor$W"
+fi
+rm -rf $TMPDIR/iHaklabvim.zip
+rm -rf $TMPDIR/iHaklabvim
+vim +PlugUpdate +x +x 2>/dev/null
+
+printf "$G\n(_>)─➤$W Setting i-Haklab style."
+[[ -d ~/.termux ]] || mkdir -p ~/.termux
+for i in $(ls $iHAKLAB/.set/to-install/.termux/);do
+	wget -q --tries=20 ${iHDB}/to-install/$i -O ~/.termux/$i
+done
+ln -s $PREFIX/bin/fish ~/.termux/shell
+
+#:::: Set VNC server ::::#
+wget -q --tries=20 ${iHDB}/functions/unset.fish -O ~/.config/fish/functions/unset.fish
+wget -q --tries=20 ${iHDB}/functions/fish_greeting.fish -O ~/.config/fish/functions/fish_greeting.fish
+[[ -d ~/.vnc ]] || mkdir ~/.vnc
+cat <<- CONF > ~/.vnc/xstartup
+#!/data/data/com.termux/files/usr/bin/sh
+## This file is executed during VNC server
+## startup.
+
+# Launch terminal emulator Aterm.
+# Requires package 'aterm'.
+aterm -geometry 160x48+20+20 -ls &
+
+# Launch Tab Window Manager.
+# Requires package 'xorg-twm'.
+startxfce4
+CONF
+
+#::::::::::Searching for root permissions::::::::::::#
+if chk-root;then
+	wget -q --tries=20 $iHDB/bin/sudo -O $HOME/.local/bin/sudo
+        if [[ -e ~/.suroot/.bashrc ]];then
+                [[ -O ~/.suroot/.bashrc ]] || sudo chown $USER:$USER -R ~/.suroot/
+        else
+		[[ -d ~/.suroot ]] || mkdir ~/.suroot
+        fi
+        cat <<- CONF > ~/.suroot/.bashrc
+PS1=\"\[\e[33m\][!] \[\e[31m\]Press\[\e[32m\] Ctrl d\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\""
+export TERM=xterm-256color
+export LD_LIBRARY_PATH=$HOME/.local/lib:/data/data/com.termux/files/usr/lib
+export PATH=$HOME/.local/bin:/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:/system/xbin:/system/bin
+HOME=/data/data/com.termux/files/home
+fish
+#          i-Haklab by @Ivam3
+CONF
+fi
+
+#::::::::::Installation of basic tools::::::::::::#
+for TOOL in DoS-A-Tool ExiF localtunnel-server ngrok;do
+	bash $iHAKLAB/.set/share/install $TOOL
+done
+
 #::::::::::Installation of Ohmyfish::::::::::::#
 printf "$G\n(_>)─➤ Installing interactive shell.$W\n"
 [[ -d ~/.local/share/omf ]] && rm -rf ~/.local/share/omf
 [[ -d ~/.config/omf ]] && rm -rf ~/.config/omf/
 git config --global core.autocrlf
-printf "$Y\n(_>)─➤ Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'\n ╰─➤ when it happen hold on for one minute and then type exit to continue$W\n"
-curl -Ls $iHDB/to-install/get.oh-my.fish|fish
 cat <<- CONF > ~/.local/etc/fish/config.fish
 if status --is-login
 bash /data/data/com.termux/files/home/.local/etc/i-Haklab/wall-banner
@@ -123,130 +232,8 @@ export LD_LIBRARY_PATH=$HOME/.local/lib:$PREFIX/lib
 [[ ! \$(grep -oE "i-Haklab" $PREFIX/etc/fish/config.fish >/dev/null) ]] && rm -rf $PREFIX/etc/fish/config.fish;ln -s $HOME/.local/etc/fish/config.fish $PREFIX/etc/fish/config.fish
 chsh -s fish
 CONF
-
-#::::::::::Insatalling i-Haklab's login::::::::::::#
-[[ -e $HOME/.local/etc/i-Haklab/login-termux ]] && rm -f $HOME/etc/i-Haklab/login-termux
-[[ -e $PREFIX/etc/bashito ]] && rm -f $PREFIX/etc/bashito
-[[ -e $PREFIX/etc/motd ]] && rm -f $PREFIX/etc/motd
-[[ -e $PREFIX/etc/motd.dpkg-old ]] && rm -f $PREFIX/etc/motd.dpkg-old
-for i in Quiz Ivam3 Cinderella;do
-	[[ -e $HOME/.local/etc/i-Haklab/.$i ]] || touch $HOME/.local/etc/i-Haklab/.$i
-done
-[[ -d $HOME/.local/etc/i-Haklab ]] || mkdir -p $HOME/.local/etc/i-Haklab
-wget -q $iHDB/to-install/login-termux -O $HOME/.local/etc/i-Haklab/login-termux
-wget -q $iHDB/libexec/banner/i-Haklab -O $HOME/.local/etc/i-Haklab/login-banner
-cat <<- CONF > $HOME/.local/etc/i-Haklab/wall-banner
-#!/usr/bin/bash
-#Banner for i-Haklab created by @Ivam3 on Jan/2019
-IFS=$'\n\t'
-bash $HOME/.local/etc/i-Haklab/login-banner
-#        i-Haklab by @Ivam3
-CONF
-chmod 711 -R $HOME/.local/etc
-chmod +w $HOME/.local/etc/i-Haklab/.Ivam3
-printf "SXZhbTNieUNpbmRlcmVsbGEK" > $HOME/.local/etc/i-Haklab/.Ivam3
-chmod -w $HOME/.local/etc/i-Haklab/.Ivam3
-chmod +w $HOME/.local/etc/i-Haklab/.Quiz
-printf "VGhlIGFjY2VzcyBrZXkgaXMgSXZhbTNieUNpbmRlcmVsbGEK" > $HOME/.local/etc/i-Haklab/.Quiz
-chmod -w $HOME/.local/etc/i-Haklab/.Quiz
-chmod +w $HOME/.local/etc/i-Haklab/.Cinderella
-printf "SXZhbTNieUNpbmRlcmVsbGEK" > $HOME/.local/etc/i-Haklab/.Cinderella
-chmod -w $HOME/.local/etc/i-Haklab/.Cinderella
-
-#::::::::::Insatalling i-Haklab tools::::::::::::#
-printf "$G\n(_>)─➤$W Installing principal external tools."
-chmod 750 $iHAKLAB/.set/bin/*
-ln -s $iHAKLAB/.set/bin $HOME/.local/bin
-
-printf "$G\n(_>)─➤$W Installing ngrok.io ngrok-ssh and ngrok-server."
-[[ $(command -v ngrok) ]] && mv $(command -v ngrok) $(command -v ngrok).io
-bash $TMPabh --install ngrok-server >/dev/null 2>&1
-rm $TMPabh
-[[ -d ~/.ssh ]] || mkdir ~/.ssh 
-[[ -e ~/.ssh/config ]] || touch ~/.ssh/config
-printf "host tunnel.us.ngrok.com\n\tHostkeyAlgorithms +ssh-rsa\n\tPubkeyAcceptedAlgorithms +ssh-rsa\n" >> ~/.ssh/config
-
-printf "$G\n(_>)─➤$W Installing Python Exploit Development Assistance for GDB."
-curl -Ls ${iHDB}/to-install/gdb_peda.sh|bash
-
-printf "$G\n(_>)─➤$W Set nano configuration..."
-cat <<- CONF > $HOME/.nanorc
-set linenumbers
-set historylog
-set tabsize 4
-set autoindent
-set mouse
-set titlecolor white,gray
-set statuscolor white,red
-set keycolor white,gray
-set functioncolor green
-set numbercolor white,gray
-set softwrap
-set softwrap
-#set nohelp
-CONF
-
-printf "$G\n(_>)─➤$W Installing VIM predictable text."
-[[ -d ~/.vim ]] && rm -rf ~/.vim
-wget -q --tries=20 ${iHDB}/to-install/iHaklabvim.zip -O $TMPDIR/iHaklabvim.zip
-unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
-if [[ -d $TMPDIR/iHaklabvim/vim ]]
-then
-	mv $TMPDIR/iHaklabvim/vim ~/.vim
-	mv $TMPDIR/iHaklabvim/vim/.vimrc ~/
-else
-	printf "$R(_>)─➤ ERROR while setup vim editor$W"
-fi
-rm -rf $TMPDIR/iHaklabvim.zip
-rm -rf $TMPDIR/iHaklabvim
-vim +PlugUpdate +x +x 2>/dev/null
-
-printf "$G\n(_>)─➤$W Setting i-Haklab style."
-[[ -d ~/.termux ]] || mkdir -p ~/.termux
-for i in $(ls $iHDB/to-install/.termux/);do
-	wget -q --tries=20 $iHDB/to-install/$i -O ~/.termux/$i
-done
-ln -s $PREFIX/bin/fish ~/.termux/shell
-
-#:::: Set VNC server ::::#
-wget -q --tries=20 $iHDB/functions/unset.fish -O ~/.config/fish/functions/unset.fish
-wget -q --tries=20 $iHDB/functions/fish_greeting.fish -O ~/.config/fish/functions/fish_greeting.fish
-for TOOL in DoS-A-Tool ExiF embed evilurl localtunnel-server desktop-xfce metasploit;do
-	bash $iHAKLAB/.set/share/install $TOOL
-done
-[[ -d ~/.vnc ]] || mkdir ~/.vnc
-cat <<- CONF > ~/.vnc/xstartup
-#!/data/data/com.termux/files/usr/bin/sh
-## This file is executed during VNC server
-## startup.
-
-# Launch terminal emulator Aterm.
-# Requires package 'aterm'.
-aterm -geometry 160x48+20+20 -ls &
-
-# Launch Tab Window Manager.
-# Requires package 'xorg-twm'.
-startxfce4
-CONF
-
-#::::::::::Searching for root permissions::::::::::::#
-if chk-root;then
-	wget -q --tries=20 $iHDB/bin/sudo -O $HOME/.local/bin/sudo
-        if [[ -e ~/.suroot/.bashrc ]];then
-                [[ -O ~/.suroot/.bashrc ]] || sudo chown $USER:$USER -R ~/.suroot/
-        else
-		[[ -d ~/.suroot ]] || mkdir ~/.suroot
-        fi
-        cat <<- CONF > ~/.suroot/.bashrc
-PS1=\"\[\e[33m\][!] \[\e[31m\]Press\[\e[32m\] Ctrl d\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\""
-export TERM=xterm-256color
-export LD_LIBRARY_PATH=$HOME/.local/lib:/data/data/com.termux/files/usr/lib
-export PATH=$HOME/.local/bin:/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:/system/xbin:/system/bin
-HOME=/data/data/com.termux/files/home
-fish
-#          i-Haklab by @Ivam3
-CONF
-fi
+printf "$Y\n(_>)─➤ Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'\n ╰─➤ when it happen hold on for one minute and then type exit to continue$W\n"
+curl -Ls $iHDB/to-install/get.oh-my.fish|fish
 
 bash $iHAKLAB/.set/share/review #LOGFILE
 [[ -d ~/i-Haklab ]] && rm -rf ~/i-Haklab
