@@ -323,9 +323,10 @@ case "$toRemove" in
 			rmMainDir
 			printf "$toRemove" > $TMPDIR/deps2drop
 			alert
-			rm -rf ~/.config/youtube-dl ~/bin ~/.netrc $HOME/.local/bin/termux-url-opener
+			rm -rf ~/.config/youtube-dl ~/bin ~/.netrc $PREFIX/bin/termux-url-opener
 		elif [[ $toRemove = youtubedr ]];then
 			yes|apt remove $toRemove
+			rm -rf ~/.config/youtube-dl ~/bin ~/.netrc $PREFIX/bin/termux-url-opener
 		elif [[ $toRemove = converter ]];then
 			rmMainDir
 			rm -rf ~/.milux

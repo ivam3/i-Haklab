@@ -868,7 +868,50 @@ fi
 		yes|apt install nodejs
 		npm install -global $toInstall-cli
 		;;
-	youtube-dl|converter)
+	youtube-dl|youtubedr|converter)
+		setFiles(){
+			cat <<- CONF > $HOME/.netrc
+#!$PREFIX/bin/bash
+#
+machine <extractor> login <login> password <password>
+#
+#Follow my example:
+#
+#machine youtube login myaccount@gmail.com password my_youtube_password
+#machine twitch login my_twitch_account_name password my_twitch_password
+CONF
+			chmod 711 ~/.netrc
+			cat <<- CONF > $PREFIX/bin/termux-url-opener
+#!$PREFIX/bin/bash
+#
+echo "Choose a format :"
+echo "For audio only press 1"
+echo "For video 360p press 2"
+echo "For video 480p press 3"
+echo "For video 720p press 4"
+echo "For video 1080p press 5"
+read option
+command='-no-mtime -o /data/data/com.termux/files/home/storage/shared/Youtube/%(title)s.%(ext)s -f'
+if [ "\$option" -eq "1" ]; then
+    echo "\$command 140" > $HOME/.config/youtube-dl/config
+    exec $executable "\$1"
+elif [ "\$option" -eq "2" ]; then
+    echo "\$command \"best[height<=360]\"" > $HOME/.config/youtube-dl/config
+    exec $executable "\$1"
+elif [ "\$option" -eq "3" ]; then
+    echo "\$command \"best[height<=480]\"" > $HOME/.config/youtube-dl/config
+    exec $executable "\$1"
+elif [ "\$option" -eq "4" ]; then
+    echo "\$command \"best[height<=720]\"" > $HOME/.config/youtube-dl/config
+    exec $executable "\$1"
+elif [ "\$option" -eq "5" ]; then
+    echo "\$command \"best[height<=1080]\"" > $HOME/.config/youtube-dl/config
+    exec $executable "\$1"
+fi
+CONF
+			dos2unix $PREFIX/bin/termux-url-opener
+			chmod 711 $PREFIX/bin/termux-url-opener
+	  }
 		if [[ $toInstall = youtube-dl ]];then
 			dpkg --configure -a
 			yes|apt install util-linux wget python
@@ -879,14 +922,15 @@ fi
 			rm -f $TMPDIR/requirements.txt
 			mkdir -p ~/.config/youtube-dl
 			ln -s $PREFIX/bin ~/bin
-			wget -q https://raw.githubusercontent.com/ivam3/youtube-dl/master/.data/.netrc -O ~/.netrc
-			chmod 711 ~/.netrc
-			wget -q https://raw.githubusercontent.com/ivam3/youtube-dl/master/.data/LhDxGbtY -O $HOME/.local/bin/termux-url-opener
-			dos2unix $HOME/.local/bin/termux-url-opener
-			chmod 711 $HOME/.local/bin/termux-url-opener
+			executable=$toInstall
+			setFiles
+		elif [[ $toInstall = youtubedr ]];then
+			yes|apt install youtubedr
+			executable="$toInstall download"
+			setFiles
 		elif [[ $toInstall = converter ]];then
-			wget -q $iHDB/.set/bin/$toInstall -O $HOME/.local/bin/$toInstall
-			chmod 750 $HOME/.local/bin/$toInstall
+			wget -q --tries=20 ${iHDB}/.set/bin/$toInstall -O $PREFIX/bin/$toInstall
+			chmod 750 $PREFIX/bin/$toInstall
 		fi
 		;;
 	#::RUBY::#
