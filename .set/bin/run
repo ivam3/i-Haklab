@@ -394,7 +394,7 @@ case "$TOOL" in
 		fi
 		;;
 	*)
-		[[ $TOOL = "metasploit" ]] && { printf "$R\n(_>)─➤ To run metasploit use commands :$W msfconsole or msfvenom";exit}
+		[[ $TOOL = "metasploit" ]] && { printf "$R\n(_>)─➤ To run metasploit use commands :$W msfconsole or msfvenom";exit;}
 		printf "$R\n(_>)─➤$W Unknown argument $TOOL\n"
 		exit 1
 		;;
