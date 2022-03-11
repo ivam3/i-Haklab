@@ -758,12 +758,12 @@ fi
 		;;
 	localtunnel-server|lt)
 		yes|apt install nodejs git
-		git clone --quiet git://github.com/defunctzombie/localtunnel.git $TOOLS/localtunnel
-		cd $TOOLS/localtunnel
+		git clone --quiet https://github.com/localtunnel/localtunnel $TOOLS/localtunnel-server
+		cd $TOOLS/localtunnel-server
 		npm install
 		npm install -g localtunnel
 		wget -q --tries=20 ${iHDB}/fix-tools/openurl.js -O $PREFIX/lib/node_modules/localtunnel/node_modules/openurl/openurl.js
-		rm -rf $TOOLS/localtunnel
+		rm -rf $TOOLS/localtunnel-server
 		;;
 	ngrok)
 		arch1=$(uname -a|grep -o 'arm'|head -n1)
