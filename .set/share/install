@@ -1056,7 +1056,7 @@ case "\$SCRIPT_NAME" in
 			mkdir -p "$PREFIX/var/lib/postgresql"
       initdb "$PREFIX/var/lib/postgresql" >/dev/null 2>/dev/null
     fi
-    if ! pg_ctl -D "$PREFIX/var/lib/postgresql" status > /dev/null 2>&1
+    if ! pg_ctl -D "$PREFIX/var/lib/postgresql" status >/dev/null 2>/dev/null
 		then
 			pg_ctl -D "$PREFIX/var/lib/postgresql" start --silent >/dev/null 2>/dev/null
 		fi

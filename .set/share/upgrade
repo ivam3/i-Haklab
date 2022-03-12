@@ -75,7 +75,7 @@ cp $iHAKLAB/.set/functions/*.fish $HOME/.config/fish/functions/
 cat <<- CONF > $HOME/.bashrc
 export PATH=$HOME/.local/bin:$PREFIX/bin
 export LD_LIBRARY_PATH=$HOME/.local/lib:$PREFIX/lib
-if [[ ! $(grep -oE "i-Haklab" $PREFIX/etc/fish/config.fish >/dev/null) ]]; then
+if [[ ! \$(grep -oE "i-Haklab" $PREFIX/etc/fish/config.fish >/dev/null) ]]; then
      rm -rf $PREFIX/etc/fish/config.fish
 		 ln -s $HOME/.local/etc/fish/config.fish $PREFIX/etc/fish/config.fish
 fi
@@ -155,12 +155,13 @@ set softwrap
 set softwrap
 #set nohelp
 CONF
+
+[[ -d ~/.vim ]] && rm -rf ~/.vim
 wget -q --tries=20 ${iHDB}/to-install/iHaklabvim.zip -O $TMPDIR/iHaklabvim.zip
 unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
-if [[ -d $TMPDIR/iHaklabvim/vim ]]
-then
-	mv $TMPDIR/iHaklabvim/vim ~/.vim
-	mv $TMPDIR/iHaklabvim/vim/.vimrc ~/
+if [[ -d $TMPDIR/iHaklabvim ]];then
+	mv $(find $TMPDIR/iHaklabvim -type d -iname "vim") ~/.vim
+	mv $(find $TMPDIR/iHaklabvim/ -type f -iname ".vimrc") ~/
 else
 	printf "$R(_>)─➤ ERROR while setup vim editor$W"
 fi

@@ -40,23 +40,23 @@ Lib() {
 		fi
 	done
 	}	
-Turtle() {
+Turtle(){
 	DIR=$(mktemp -d)
-        wget $iHDB/fix-tools/py_modules/turtle-0.0.2.tar.gz -O $DIR/turtle-0.0.2.tar.gz -q
-        if [ $DIR/turtle-0.0.2.tar.gz ]; then
-                pushd $DIR
-                gunzip $DIR/turtle-0.0.2.tar.gz
-                if [ $DIR/turtle-0.0.2.tar ]; then
-                        tar -xvf turtle-0.0.2.tar
-                        if [ -d $DIR/turtle-0.0.2 ]; then
-                                sed 's|      except ValueError, ve:|      except (ValueError, ve):|g' -i $DIR/turtle-0.0.2/setup.py
+	wget $iHDB/fix-tools/py_modules/turtle-0.0.2.tar.gz -O $DIR/turtle-0.0.2.tar.gz -q
+	if [ $DIR/turtle-0.0.2.tar.gz ]; then
+		pushd $DIR
+    gunzip $DIR/turtle-0.0.2.tar.gz
+    if [ $DIR/turtle-0.0.2.tar ]; then
+			tar -xvf turtle-0.0.2.tar
+      if [ -d $DIR/turtle-0.0.2 ]; then
+				sed 's|      except ValueError, ve:|      except (ValueError, ve):|g' -i $DIR/turtle-0.0.2/setup.py
 				$Py -m pip install -e turtle-0.0.2
-                        fi
-                fi
-                popd
-        fi
-        rm -rf $DIR
-	}
+      fi
+    fi
+    popd
+  fi
+  rm -rf $DIR
+}
 Menu() {
 	printf $B"(USAGE-01)─➤ To fix python modules:$G\nIbyC-fixer <[B|BASIC] [L|LDFLAGS] [RCBT|RUST_CARGO_TARGET] [S|SODIUM]> <[Py|Py2]> <[file.txt|module(max 3)]>$W\n\nB  BASIC\tInstall module on basic\nL  LDFLAGS\tForce installation to use libraries and system compiler\nRCBT  RUST_CARGO_TARGET\tForce installation specifying Android as target platform\nS  SODIUM\tForce the installation to use the sodium decryptor\nPy  \t\tFor python3\nPy2  \t\tFor python2\n\nExamples:\n\tIbyC-fixer BASIC Py future\n\tIbyC-fixer S Py2 colorama\n"
 	printf "$B\n(USAGE-02)─➤ To fix an specific issue:$G\nIbyC-fixer <[apt|nrauf|metasploit|downgradeRepo|RuGiR]> <option>$W\n\napt\t\t\t\tSearch and fix some errores on APT/PKG with dpkg\nnrauf         dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nmetasploit\t\t\tTo fix metasploit instalation\ndowngradeRepo repo=version\tDowngrade apt|pkg reporitory tospecific version\nRuGiR\t\t\t\tTo fix ruby gems issues\nngrok\t\t\t\tInstall ngrok-server from Abhacker repositories\n\nExamples:\n\tIbyC-fixer RuGiR\n\tIbyC-fixer downgradeRepo ruby=2.7.2\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n\n"
