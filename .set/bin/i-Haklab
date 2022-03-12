@@ -78,7 +78,7 @@ case "$1" in
 		fi
 		;;
 	reinstall)
-		bash <(curl -fsSL "${iHDB}/share/reinstall")
+		bash <(curl -fsSL "${iHDB}/../setup")
 		;;
 	root)
 		command -v proot >/dev/null || { yes|apt install proot;clear;}
