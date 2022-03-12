@@ -13,14 +13,14 @@ GOPATH=$(cat $PREFIX/etc/fish/config.fish|grep "GOPATH"|awk '{print $3}'|head -n
 #::::FUNCTIONS::::#
 STDERR(){ printf "$R\n(_>)─➤$W $TOOL is not installed$W\n";exit;}
 CheckPath(){
-	if [ -d $TOOLPATH ]; then
-                running
-                cd $TOOLPATH
-                clear
-                return 0
-        else
-                return 1
-        fi
+	if [[ -d $TOOLPATH ]] || [[ -e $(command -v $TOOL) ]] 2>/dev/null; then
+		running
+    cd $TOOLPATH
+    clear
+    return 0
+  else
+    return 1
+  fi
 	}
 CheckRoot(){
 	if chk-root;then
@@ -309,6 +309,13 @@ case "$TOOL" in
 			STDERR
 		fi
 		;;
+	DoS-A-Tool)
+		if CheckPath;then
+			exec perl $(command -v $TOOL) ${@:2}
+		else
+			STDERR
+		fi
+		;;
 	nikto)
 		CheckRoot
 		if CheckPath;then
@@ -318,7 +325,7 @@ case "$TOOL" in
 		fi
 		;;
 #::::TOOLS IN BIN::::#
-	dex2jar|ExiF|bincheker|binwalk|blackbox|burpsuite|code-server|converter|crunch|DoS-A-Tool|dirb|GetNPUsers|msfconsole|msfvenom|pagekite|shc|unshc|snow|wfuzz|whatweb|hydra|xhydra|youtube-dl)
+	dex2jar|ExiF|bincheker|binwalk|blackbox|burpsuite|code-server|converter|crunch|dirb|GetNPUsers|msfconsole|msfvenom|pagekite|shc|unshc|snow|wfuzz|whatweb|hydra|xhydra|youtube-dl)
 		running
 		if [ -e $HOME/.local/bin/$TOOL ]; then
 			bash $HOME/.local/bin/$TOOL ${@:2}
