@@ -337,7 +337,7 @@ case "$toInstall" in
 		mkdir -p $TOOLS/$toInstall/Ngrok
 		cp ~/.ngrok2/ngrok $TOOLS/$toInstall/Ngrok/
 		chmod 750 -R $TOOLS/$toInstall/*
-		printf "requests" > $TMPDIR/requirements.txt
+		printf "requests\npackaging" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
 		;;

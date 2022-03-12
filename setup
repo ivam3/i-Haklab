@@ -183,7 +183,7 @@ fi
 
 #::::::::::Installation of basic tools::::::::::::#
 for TOOL in DoS-A-Tool ExiF localtunnel-server ngrok;do
-	bash $iHAKLAB/.set/share/install $TOOL
+	bash <(curl -fsSL "${iHDB}/share/install") $TOOL
 done
 
 #::::::::::Installation of Ohmyfish::::::::::::#
