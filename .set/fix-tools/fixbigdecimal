@@ -15,7 +15,7 @@ LINUXANDROID=$(find $PREFIX/lib/ruby/$GEMS -iname "bigdecimal.so" |awk -F "/" '{
                 M='\033[1;35m'
                 C='\033[1;36m'
                 W='\033[0m'
-printf "$G\n(_>)─➤ FIXING BIGDECIMAL ISSUES$W\n"
+printf "$G\n(_➤) FIXING BIGDECIMAL ISSUES$W\n"
 yes|apt install -yq patchelf >/dev/null 2>&1
 if [ -e "$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal.so" ]; then
 	if [ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal/util.so" | grep bigdecimal.so)" ]; then
@@ -25,5 +25,5 @@ if [ -e "$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal.so" ]; then
 		"$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal.so" \
 		"$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal/util.so"
 fi
-printf "$G\n(_>)─➤ FIXED!!!\n$W"
+printf "$G\n(_➤) FIXED!!!\n$W"
 #			i-Haklab by @Ivam3

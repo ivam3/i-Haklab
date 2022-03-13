@@ -27,7 +27,7 @@ W='\033[0m'
 ctrl_c(){ printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";}
 Chao-chao(){ printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n";}
 Repos() {
-	printf "$Y\n(_>)─➤ Installing|upgrading repositories ...\n$W"
+	printf "$Y\n(_➤) Installing|upgrading repositories ...\n$W"
 	yes|apt reinstall $Py
 	$Py -m pip --quiet --no-color install --upgrade pip
 	}
@@ -35,7 +35,7 @@ Lib() {
 	for Libs in clang libtool libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static tar wget; do
 		SCHLIB=$(pkg list-installed | awk '{print $1}' | grep -oE $Libs | head -n1)
 		if [ -z $SCHLIB ]; then
-			printf "$Y\n(_>)─➤ Installing libreries ...\n$W"
+			printf "$Y\n(_➤) Installing libreries ...\n$W"
 			yes|apt install $Libs 2>/dev/null
 		fi
 	done
@@ -66,7 +66,7 @@ Chck() {
 	for list in ${@:2} ; do
 		MODULE=$(python -m pip list|awk '{print $1}'|grep $list)
 		if [ ! -z $MODULE ]; then
-			printf "$Y\n(_>)─➤ Module $MODULE is already exist for $Py\n$W"
+			printf "$Y\n(_➤) Module $MODULE is already exist for $Py\n$W"
 		fi
 	done
 }
@@ -85,11 +85,11 @@ Args(){
 }
 
 while [ ! $(id -u) -ne 0 ]; do
-	printf "$R\n(_>)─➤ You need to be a common user$W\n"
+	printf "$R\n(_➤) You need to be a common user$W\n"
 	exit
 done
 until [ "$(basename "$0")" = "IbyC-fixer" ]; do
-	printf "$R\n(_>)─➤ Wrong file name$Y | "
+	printf "$R\n(_➤) Wrong file name$Y | "
 	sleep 1
   printf "fixing it";sleep 2
   printf ".";sleep 0.7
@@ -102,16 +102,16 @@ done
 until [ -e $binPATH/IbyC-fixer ]; do
 	if [ ! -e $binPATH/IbyC-fixer ] && [ -e $PWD/IbyC-fixer ];then
 		mv $PWD/IbyC-fixer $binPATH/IbyC-fixer > /dev/null 2>&1
-		printf "$Y(_>)─➤ IbyC-fixer was add to PATH$W\n"
+		printf "$Y(_➤) IbyC-fixer was add to PATH$W\n"
 		sleep 1.5
 	else
-		printf "$R(_>)─➤ You should add IbyC-fixer to PATH$W\n"
+		printf "$R(_➤) You should add IbyC-fixer to PATH$W\n"
 		exit
 	fi
 done
 
 declare -a INSTADATE=($(ls -l $binPATH/IbyC-fixer|awk -F " " '{print $6,$7}') $(curl -sSL $iHDB/bin/IbyC-fixer|grep "UPGRADED ON"|awk -F "/" '{print $2,$3}'))
-printf "$Y(_>)─➤$W Looking for updates..";
+printf "$Y(_➤)$W Looking for updates..";
 sleep 1
 if [[ "${INSTADATE[0]}" != "${INSTADATE[2]}" ]] || [[ "${INSTADATE[1]}" -lt "${INSTADATE[3]}" ]];then
         printf "$Y.Upgrading";
@@ -195,7 +195,7 @@ case $opc in
 			exec $FILE $opc2
 			rm -rf $FILE
 		else
-			printf "$R\n(_>)─➤$W Apk file unallocated\n"
+			printf "$R\n(_➤)$W Apk file unallocated\n"
 		fi
 		;;
 	apt)
@@ -224,14 +224,14 @@ case $opc in
 		;;
 	downgradeRepo)
 		while [ ! $opc2 ];do
-			printf "$R(_>)─➤ An argument needed$W\n\n"
+			printf "$R(_➤) An argument needed$W\n\n"
 			exit
 		done
 		bash <(curl -fsSL "http://git.io/abhacker-repo") --install ${@:2}
 		[[ -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ]] && rm -rf $PREFIX/etc/apt/sources.list.d/abhacker.repo.list
 		;;
 	ngrok)
-			printf "$G(_>)─➤$W Installing Ngrok from Abhacker repositories ...$G "
+			printf "$G(_➤)$W Installing Ngrok from Abhacker repositories ...$G "
 			bash <(curl -fsSL "http://git.io/abhacker-repo") --install ngrok-server
 			[[ -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ]] && rm -rf $PREFIX/etc/apt/sources.list.d/abhacker.repo.list
 		;;

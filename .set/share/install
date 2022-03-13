@@ -7,8 +7,8 @@ source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 toInstall="$1"
 ctrl_c(){ printf "\n$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";}
-Err() { printf "$R\n(_>)─➤$W Installation failed";ctrl_c;exit;}
-PS(){ printf "$G(_>)─➤$W Installing python modules.\n ╰─────➤$W (it could take a while)...\n";}
+Err() { printf "$R\n(_➤)$W Installation failed";ctrl_c;exit;}
+PS(){ printf "$G(_➤)$W Installing python modules.\n ╰─────➤$W (it could take a while)...\n";}
 PIPup() {
 	for PYv in python2 python ;do
 		$PYv -m pip install --no-color --quiet --upgrade pip
@@ -32,9 +32,9 @@ RUST() {
 	yes|apt purge rust
 }
 PYmodules() {
-	printf "$G(_>)─➤$W There are 3 methods of installing the modules: choose one$Y\n ╰───(01)─➤$W BASIC$Y\n ╰───(02)─➤$W LDFLAGS$Y\n ╰───(03)─➤$W SODIUM$Y\n ╰───(04)─➤$W RUST\n\n"
+	printf "$G(_➤)$W There are 3 methods of installing the modules: choose one$Y\n ╰───(01)─➤$W BASIC$Y\n ╰───(02)─➤$W LDFLAGS$Y\n ╰───(03)─➤$W SODIUM$Y\n ╰───(04)─➤$W RUST\n\n"
 
-	while read -p "(_>)─➤ " ANSW && [ -z $ANSW ]; do
+	while read -p "(_➤) " ANSW && [ -z $ANSW ]; do
 		continue
 	done
 	if [[ $ANSW = '1' ]] || [[ $ANSW = '01' ]]; then
@@ -46,7 +46,7 @@ PYmodules() {
 	elif [[ $ANSW = '4' ]] || [[ $ANSW = '04' ]]; then
 		PS;RUST
 	else
-		printf "$R(_>)─➤$W method $ANSW doesn't exist\n"
+		printf "$R(_➤)$W method $ANSW doesn't exist\n"
 		exit 0
 	fi
 }
@@ -76,9 +76,9 @@ fi
 [[ $toInstall = twifo-cli ]] && toInstall="twifo"
 [[ $toInstall = wfuzz ]] && toInstall="fuzzdb"
 if [[ -d $TOOLS/$toInstall ]] || [[ -e $PREFIX/bin/$toInstall ]] || [[ -e $HOME/.local/bin/$toInstall ]] || [[ -d $PREFIX/opt/$toInstall ]] || [[ -e ~/go/bin/$toInstall ]] || [[ ! -z $login ]];then
-	printf "$R(_>)─➤$W $1 it's already installed";exit
+	printf "$R(_➤)$W $1 it's already installed";exit
 fi
-running
+running 3
 yes|apt autoremove
 APTupdate
 case "$toInstall" in
@@ -101,7 +101,7 @@ case "$toInstall" in
 		#deb http://ftp.debian.org/debian buster main
 		#deb http://ftp.debian.org/debian buster-updates main
 		CONF
-		printf "$G(_>)─➤$W Follow the the next steps$G\t
+		printf "$G(_➤)$W Follow the the next steps$G\t
 		(01)─➤$W run $toInstall < ./start-kali.sh >$G\t
 		(02)─➤$W update $toInstall < apt-get update && apt-get upgrade >$G\t
 		(03)─➤$W start vnc server < vncserver :1 > on this step you have to set a password$G\t
@@ -217,8 +217,8 @@ case "$toInstall" in
 		cat $TOOLS/$toInstall/requirements.txt > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
-		PS3="(_>)─➤ "
-		printf "$Y(_>)─➤$W $toInstall needs an instagram acccount credentials."
+		PS3="(_➤) "
+		printf "$Y(_➤)$W $toInstall needs an instagram acccount credentials."
 		select way in Set_credentials Skip_this_step;do
 			case $way in
 				Set_credentials)
@@ -231,7 +231,7 @@ case "$toInstall" in
 					printf "[Credentials]\nusername = $username\npassword = $passwd" > $TOOLS/$toInstall/config/credentials.ini
 					;;
 				*)
-					printf "$Y(_>)─➤$W Don't forget set your credentials at file: $TOOLS/$toInstall/config/credentials.ini"
+					printf "$Y(_➤)$W Don't forget set your credentials at file: $TOOLS/$toInstall/config/credentials.ini"
 					ctrl_c;exit
 					;;
 			esac
@@ -245,8 +245,8 @@ case "$toInstall" in
 		cat $TOOLS/$toInstall/requirements.txt > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
-		PS3="(_>)─➤ "
-		printf "$Y(_>)─➤$W $toInstall needs an API key from opencagedata.com."
+		PS3="(_➤) "
+		printf "$Y(_➤)$W $toInstall needs an API key from opencagedata.com."
 		select way in Set_credentials Skip_this_step;do
 			case $way in
 				Set_credentials)
@@ -259,7 +259,7 @@ case "$toInstall" in
 					printf "[Credentials]\nusername = $username\npassword = $passwd" > $TOOLS/$toInstall/config/credentials.ini
 					;;
 				*)
-					printf "$Y(_>)─➤$W Don't forget set your credentials at file: $TOOLS/$toInstall/config/credentials.ini"
+					printf "$Y(_➤)$W Don't forget set your credentials at file: $TOOLS/$toInstall/config/credentials.ini"
 					ctrl_c
 					;;
 			esac
@@ -329,7 +329,7 @@ case "$toInstall" in
 		rm -f $TMPDIR/requirements.txt
 		;;
 	seeker)
-		[[ -e $HOME/.local/bin/ngrok.io ]] || { printf >&2 "$R\n(_>)─➤ ERROR :$W ngrok is not installed\n";ctrl_c;}
+		[[ -e $HOME/.local/bin/ngrok.io ]] || { printf >&2 "$R\n(_➤) ERROR :$W ngrok is not installed\n";ctrl_c;}
 		yes|apt install git python
 		PIPup
 		PYv=""
@@ -371,8 +371,8 @@ case "$toInstall" in
 		rm -f $TMPDIR/requirements.txt
 		;;
 	sqlmap)
-		printf "$C#::::::::::::::::::::::::::::::::::::#$Y\n(_>)─➤$W Choose a type of installation$G\n(_>)_01─➤$W Python-pip modules$G\n(_>)_02─➤$W Github\n"
-		while read -p "(_>)─➤ " ANSW && [ -z $ANSW ]; do
+		printf "$C#::::::::::::::::::::::::::::::::::::#$Y\n(_➤)$W Choose a type of installation$G\n(_>)_01─➤$W Python-pip modules$G\n(_>)_02─➤$W Github\n"
+		while read -p "(_➤) " ANSW && [ -z $ANSW ]; do
 			continue
 		done
 		if [[ $ANSW = 1 ]] || [[ $ANSW = 01 ]];then
@@ -563,7 +563,7 @@ case "$toInstall" in
 		wget -q $iHDB/fix-tools/searchsploit -O ~/.searchsploit_rc
 		;;
 	lockphish)
-		[[ -e $PREFIX/bin/ngrok ]] || { printf >&2 "$R\n(_>)─➤ ERROR :$W ngrok is not installed\n";ctrl_c;}
+		[[ -e $PREFIX/bin/ngrok ]] || { printf >&2 "$R\n(_➤) ERROR :$W ngrok is not installed\n";ctrl_c;}
 		yes|apt install git wget
 		git clone --quiet https://github.com/JasonJerry/$toInstall $TOOLS/$toInstall
 		rm -f $TOOLS/$toInstall/$toInstall.sh 
@@ -577,11 +577,11 @@ case "$toInstall" in
 			yes|apt install ruby && gem install lolcat
 			sed 's|/data/data/com.termux/files/home/.local/etc/i-Haklab/wall-banner|/data/data/com.termux/files/home/.local/etc/i-Haklab/login-termux|g' -i $INITFILE
 		else
-			printf "$R\n(_>)─➤ Login is already active"
+			printf "$R\n(_➤) Login is already active"
 		fi
 		;;
 	nexphisher)
-		[[ -e $PREFIX/bin/ngrok ]] || { printf >&2 "$R\n(_>)─➤ ERROR :$W ngrok is not installed\n";ctrl_c;exit;}
+		[[ -e $PREFIX/bin/ngrok ]] || { printf >&2 "$R\n(_➤) ERROR :$W ngrok is not installed\n";ctrl_c;exit;}
 		yes|apt install git
 		git clone --quiet https://github.com/htr-tech/$toInstall $TOOLS/$toInstall
 		chmod +x $TOOLS/$toInstall/*
@@ -590,7 +590,7 @@ case "$toInstall" in
 		wget -q $iHDB/fix-tools/$toInstall -O $TOOLS/$toInstall/$toInstall
 		;;
 	saycheese|sayhello)
-		[[ -e $PREFIX/bin/ngrok ]] || { printf >&2 "$R\n(_>)─➤ ERROR :$W ngrok is not installed\n";ctrl_c;}
+		[[ -e $PREFIX/bin/ngrok ]] || { printf >&2 "$R\n(_➤) ERROR :$W ngrok is not installed\n";ctrl_c;}
 		yes|apt install wget unzip openssh
 		wget -q $iHDB/to-install/$toInstall.zip -O $TMPDIR/$toInstall.zip
 		unzip -q $TMPDIR/$toInstall.zip -d $TOOLS
@@ -622,7 +622,7 @@ case "$toInstall" in
 		;;
 	burpsuite)
 		[[ -e $PREFIX/bin/java ]] && yes|pkg remove openjdk-17
-		printf "$G\n(_>)─➤ Installing $toInstall (It could take a while)...\n"
+		printf "$G\n(_➤) Installing $toInstall (It could take a while)...\n"
 		wget -q --tries=20 https://github.com/termux/termux-packages/suites/4742204683/artifacts/131051875 -O $TMPDIR/termux-packages-aarch64.zip
 		unzip $TMPDIR/termux-packages-aarch64.zip -d $TM0DIR
 		tar xvf $TMPDIR/debs-aarch64-1e2023f351d547b82494edfb0f5baac0fd490370.tar -O debs/openjdk-17_17.0-17_aarch64.deb > $TMPDIR/openjdk-17_17.0-17_aarch64.deb
@@ -634,9 +634,9 @@ case "$toInstall" in
 #!/usr/bin/bash
 #This file execute a burp suite on Termux:Wayland interface
 #You should install it before to run this scripta
-[[ \$(uname -m) = "aarch64" ]] || { printf >&2 "\$R(_>)─➤\$W Incompatible architecture";exit;}
-[[ -e $TOOLS/burpsuite.jar ]] || { printf >&2 "\$R(_>)─➤\$W Burpsuite is not installed...\$R aborting.\$W";exit;}
-[[ \$(file \$TMPDIR/*|grep -o "socket") >/dev/null ]] || { printf >&2 "\$R(_>)─➤\$W Termux:Wayland server isn't running...\$R aborting.\$W";exit;}
+[[ \$(uname -m) = "aarch64" ]] || { printf >&2 "\$R(_➤)\$W Incompatible architecture";exit;}
+[[ -e $TOOLS/burpsuite.jar ]] || { printf >&2 "\$R(_➤)\$W Burpsuite is not installed...\$R aborting.\$W";exit;}
+[[ \$(file \$TMPDIR/*|grep -o "socket") >/dev/null ]] || { printf >&2 "\$R(_➤)\$W Termux:Wayland server isn't running...\$R aborting.\$W";exit;}
 export DISPLAY=:0
 umask 000
 exec \$(command -v java) --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -jar $TOOLS/burpsuite.jar
@@ -672,10 +672,10 @@ CONF
 			checkpkg=${ipkg%/*}
 			if [[ "$checkpkg" == "$pkg" ]]
 			then
-				printf "$G\n(_>)─➤ Package $pkg installed successfully.$W\n"
+				printf "$G\n(_➤) Package $pkg installed successfully.$W\n"
 				continue
 			else
-				printf "$R\n(_>)─➤ Error installing $pkg, Aborting...$W\n";exit
+				printf "$R\n(_➤) Error installing $pkg, Aborting...$W\n";exit
 			fi
 		done
 		mkdir -p $HOME/{Desktop,Downloads,Templates,Public,Documents,Pictures,Video}
@@ -743,7 +743,7 @@ if [ -d \$PREFIX/opt/john ];then
 	cd \$PREFIX/opt/john
 	./john \$@
 else
-	printf \"\$R(_>)─➤\$W JohnTheRipper is not installed\$W\"
+	printf \"\$R(_➤)\$W JohnTheRipper is not installed\$W\"
 fi
 #            i-Haklab by @Ivam3" > $HOME/.local/bin/john
 		chmod +x $HOME/.local/bin/john
@@ -782,8 +782,8 @@ fi
 			rm -rf $TMPDIR/$1-stable-linux-$arch.zip
 			printf "#!/bin/bash\n#THIS SCRIPT EXECUTE NGROK TO AVOID 'bad address' ERROR\nexec termux-chroot $HOME/.ngrok2/ngrok \${@:1}\n#     i-Haklab by Ivam3" > $HOME/.local/bin/$1.io
 			chmod +x ~/.ngrok2/$1 $HOME/.local/bin/$1.io
-			PS3="(_>)─➤ "
-			printf "$Y(_>)─➤$W $toInstall needs an authtoken from $1.com$Y\n"
+			PS3="(_➤) "
+			printf "$Y(_➤)$W $toInstall needs an authtoken from $1.com$Y\n"
 			select way in Set_authtoken Skip_this_step;do
 				case $way in
 					Set_authtoken)
@@ -794,7 +794,7 @@ fi
 						break
 						;;
 					*)
-						printf "$Y(_>)─➤$W Don't forget set your token running:$Y\n ╰─────➤$W $toInstall authtoken <your-token>";exit
+						printf "$Y(_➤)$W Don't forget set your token running:$Y\n ╰─────➤$W $toInstall authtoken <your-token>";exit
 						;;
 				esac
 			done
@@ -1017,7 +1017,7 @@ CONF
 					fi
 		done
 		git clone --quiet --depth 1 $msfGit $msfDir
-		[[ -d $msfDir ]] || { printf "$R\n(_>)─➤$W Metasploit directory missing...$R Aborting.$W";exit;}
+		[[ -d $msfDir ]] || { printf "$R\n(_➤)$W Metasploit directory missing...$R Aborting.$W";exit;}
 		cd $msfDir
 		sed -i "5a gem 'net-smtp', require: false" $msfDir/Gemfile
 		gem install --no-document --verbose rubygems-update
@@ -1121,7 +1121,7 @@ EOF
 		   exec ruby $TOOLS/whatWeb/whatweb \${@:1}
 		   popd
 	   else
-	           printf \"\$R(_>)─➤\$W Whatweb is not installed.\"
+	           printf \"\$R(_➤)\$W Whatweb is not installed.\"
 		   exit
 	    fi
 	    #                       i-Haklab by @Ivam3" > $HOME/.local/bin/$toInstall
@@ -1327,7 +1327,7 @@ EOF
                         CMDLINE="PATH=$PATH:$SYSXBIN:$SYSBIN;$LDLP;HOME=$ROOT_HOME;cd $PWD"
 
                         #set root user enviroment
-                        printf "$G(_>)─➤$W Build root enviroment ..";
+                        printf "$G(_➤)$W Build root enviroment ..";
                         wget -q $iHDB/.set/bin/$1 -O $HOME/.local/bin
                         if [ -e ~/.suroot/.bashrc ];then
                                 for opt in 1 2 3 4;do
@@ -1335,7 +1335,7 @@ EOF
                                                 let try=opt++
                                                 sudo chown $USER:$USER -R ~/.suroot
                                                 if [ $try -gt 3 ];then
-                                                        printf "$R. DENIED$Y\n(_>)─➤$W to fix it try 'chmod $USER:$USER -R ~/.suroot' and reinstall\n";Err
+                                                        printf "$R. DENIED$Y\n(_➤)$W to fix it try 'chmod $USER:$USER -R ~/.suroot' and reinstall\n";Err
                                                 fi
                                         fi
                                 done
@@ -1389,13 +1389,13 @@ EOF
                 fi
                 ;;
 	*)
-		printf "$R(_>)─➤$W Unable to locate $toInstall on i-Haklab\n"
+		printf "$R(_➤)$W Unable to locate $toInstall on i-Haklab\n"
 		sleep 0.5
-		printf "$G(_>)─➤$W Trying with Advance Packect Tool (APT)...\n"
+		printf "$G(_➤)$W Trying with Advance Packect Tool (APT)...\n"
 		if [[ $(pkg list-all|grep -oE "$toInstall") ]];then
 			yes|apt install $toInstall
 		else
-			printf "$R(_>)─➤$W Tool $toInstall doesn't exist\n"
+			printf "$R(_➤)$W Tool $toInstall doesn't exist\n"
 			exit
 		fi
 		;;

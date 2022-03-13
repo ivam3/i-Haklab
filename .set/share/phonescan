@@ -6,9 +6,9 @@ source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 key=$(grep "phonescanKEY" $iHAKLAB/.set/var/variables)
 ctrl_c(){ printf "$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W";exit;}
-Err() { printf "$R(_>)─➤$W Enter a valid phone number";exit;}
+Err() { printf "$R(_➤)$W Enter a valid phone number";exit;}
 usage(){
-	printf "$R(_>)─➤$W Usage : i-Haklab phonescan [<529876543210>|setKEY <your API key>]\n"
+	printf "$R(_➤)$W Usage : i-Haklab phonescan [<529876543210>|setKEY <your API key>]\n"
 	exit
 }
 saveKEY(){
@@ -20,11 +20,11 @@ saveKEY(){
 
 if [[ -z $phonescanKEY ]]
 then
-	printf "$Y(_>)─➤$W Type your API key $Y|$W Get it on https://numverify.com/dashboard\n"
+	printf "$Y(_➤)$W Type your API key $Y|$W Get it on https://numverify.com/dashboard\n"
 	saveKEY
 elif [[ $1 = "setKEY" ]]
 then
-	printf "$Y(_>)─➤$W Type your API Key\n"
+	printf "$Y(_➤)$W Type your API Key\n"
 	saveKEY
 elif [[ $1 ]] && [ "$1" -eq "$1" ] 2>/dev/null
 then

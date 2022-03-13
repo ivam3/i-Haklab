@@ -2,10 +2,10 @@
 source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 PS3="(_>)_number:─➤ "
-STDERR(){ printf "$R(_>)─➤$W missing argument, type $(basename $0) -h for help";exit;}
+STDERR(){ printf "$R(_➤)$W missing argument, type $(basename $0) -h for help";exit;}
 if [[ $(basename $1) = games ]];then
 	TMP_PATH=$PREFIX/bin
-	printf "$Y(_>)─➤$W choose a game from the list below\n\n"
+	printf "$Y(_➤)$W choose a game from the list below\n\n"
 	select GAME in $(pkg list-all|grep gam|grep -iv game-repo|awk -F "/" '{print $1}') Exit;do
 		if [[ $GAME = Exit ]];then
 			exit
@@ -31,14 +31,14 @@ if [[ $(basename $1) = games ]];then
 		k-boom
 	done
 elif [[ $(basename $1) = tutorials ]];then
-	STDERR() { printf "$R\n(_>)─➤$W Tutorial is not available on $PLATFORM\n";}
+	STDERR() { printf "$R\n(_➤)$W Tutorial is not available on $PLATFORM\n";}
 	select ANSW in $(cat $iHAKLAB/.set/libexec/Tutorials/List|awk '{print $4}') Exit;do
 		[[ $ANSW = Exit ]] && exit
-		printf "$G\n(_>)─➤$W Choose an options :$W\n"
+		printf "$G\n(_➤)$W Choose an options :$W\n"
 		select WAY in Watch Download Exit;do
 			case $WAY in
 				Watch)
-					printf "$G\n(_>)─➤$W Choose the platform :$W\n"
+					printf "$G\n(_➤)$W Choose the platform :$W\n"
 					select PLATFORM in YouTube Telegram Exit;do
 						case $PLATFORM in
 							YouTube)
@@ -66,7 +66,7 @@ elif [[ $(basename $1) = tutorials ]];then
 				Download)
 					TUTO=$(cat $iHAKLAB/.set/libexec/Tutorials/List | grep $ANSW | awk '{print $2}')
 					if [ $TUTO = 'false' ] || [ -z $TUTO ];then
-						printf "$R\n(_>)─➤$W Tutorial is not available to be download\n";exit
+						printf "$R\n(_➤)$W Tutorial is not available to be download\n";exit
 					else
 						youtubedr download $TUTO
 					fi
@@ -111,7 +111,7 @@ elif [[ $(basename $1) = instatools ]]; then
 			echo $i >> $file
 		fi
 	done
-	printf "$G\n(_>)─➤$W Tools in PATH...\n"
+	printf "$G\n(_➤)$W Tools in PATH...\n"
 	cat -n $file
 	rm -f $file
 else

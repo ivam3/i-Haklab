@@ -11,14 +11,14 @@ R='\033[1;31m'
 G='\033[1;32m'
 Y='\033[1;33m'
 W='\033[0m'
-STDERR() { printf "$R(_>)─➤$W BeeF is not installed.";exit;}
+STDERR() { printf "$R(_➤)$W BeeF is not installed.";exit;}
 
 #::: Fix ruby bigdecimal extensions linking error :::#
 export LD_PRELOAD="$LD_PRELOAD:$PREFIX/lib/ruby/$RUBYv/$LINUXANDROID/bigdecimal.so"
 if [[ -d $BEEF_PATH ]];then
 	cd $BEEF_PATH
 	printf "load msgrpc ServerHost=127.0.0.1 ServerPort=55552 User=msf Pass='abc123' SSL=y" > $MSF_PATH/beef.rc
-	printf "$Y(_>)─➤ In a new session run :$W\n      msfconsole -r $MSF_PATH/beef.rc\n\n$G(_>)─➤$W then press$G enter$W to continue\n"
+	printf "$Y(_➤) In a new session run :$W\n      msfconsole -r $MSF_PATH/beef.rc\n\n$G(_➤)$W then press$G enter$W to continue\n"
         read enter
         exec ruby $BEEF_PATH/$SCRIPT_NAME
 else

@@ -4,11 +4,11 @@ source $iHAKLAB/.set/functions/functions
 PS3="$G(_>)_number:─➤ "
 TMP_PATH=$PREFIX/bin
 chck-game() { command -v $GAME >/dev/null || pkg install $GAME -y;}
-printf "$Y(_>)─➤$W choose a game from the list below"
+printf "$Y(_➤)$W choose a game from the list below"
 select GAME in $(apt list|grep gam|grep -iv game-repo|awk -F "/" '{print $1}') Exit;do
 	chck-game
 	if [ $REPLAY != $REPLAY ];then
-		printf "$R(_>)─➤$W type a number\n"
+		printf "$R(_➤)$W type a number\n"
 	elif [[ $GAME = Exit ]];then
 		exit
 	elif [[ $GAME = cavez-of-phear ]];then

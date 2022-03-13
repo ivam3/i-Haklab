@@ -26,7 +26,7 @@ set LHOST $HOST
 set LPORT $PORT
 run
 CONF
-	printf "$Y(_>)─➤$W HOST= $HOST\n$Y(_>)─➤$W PORT= $PORT\n$Y(_>)─➤$W Payload= $PAYLOAD\n$Y(_>)─➤$W Handler file= $opts.rc\n"
+	printf "$Y(_➤)$W HOST= $HOST\n$Y(_➤)$W PORT= $PORT\n$Y(_➤)$W Payload= $PAYLOAD\n$Y(_➤)$W Handler file= $opts.rc\n"
 	$user msfconsole -q -r $rcFiles/$opts.rc
 }
 
@@ -75,23 +75,23 @@ case $opts in
 		fi
 		APIKEYFILE=$MSFPATH/documentation/api/apikey
 		if [[ ! $(cat $APIKEYFILE) ]];then
-			printf "$Y(_>)─➤$W Type your shodan APIKEY "
-			while read -p "(_>)─➤ " ANSW && [ -z $ANSW ]; do
-				printf "$R(_>)─➤$W Go to www.shodan.io to get your APIKEY\n"
+			printf "$Y(_➤)$W Type your shodan APIKEY "
+			while read -p "(_➤) " ANSW && [ -z $ANSW ]; do
+				printf "$R(_➤)$W Go to www.shodan.io to get your APIKEY\n"
 				exit
 			done
 			echo $ANSW > $APIKEYFILE
 		fi
 		APIKEY=$(cat $APIKEYFILE)
 		if [ -e $iHAKLAB/.set/shodan/query ]; then
-			printf "$Y(_>)─➤$W Choose a type of search :\n"
+			printf "$Y(_➤)$W Choose a type of search :\n"
 			cat $iHAKLAB/.set/shodan/query | sort
 			echo
-			while read -p "(_>)─➤ " QUERY && [ -z $QUERY ];do
+			while read -p "(_➤) " QUERY && [ -z $QUERY ];do
 				continue
 			done
 		else
-			printf "$R(_>)─➤ ERROR :$W Not such query file\n"
+			printf "$R(_➤) ERROR :$W Not such query file\n"
 		fi
 		cat <<- CONF > $rcFiles/$opts.rc
 		use auxiliary/gather/shodan_search
@@ -99,7 +99,7 @@ case $opts in
 		set QUERY "$QUERY"
 		run
 		CONF
-		printf "$Y(_>)─➤$W If some target need user/passwd you can use those:\n"
+		printf "$Y(_➤)$W If some target need user/passwd you can use those:\n"
 		cat $iHAKLAB/.set/shodan/usrpasswd.txt
 		printf "\n\tpress$G ENTER$W to continue\n"
 		read enter

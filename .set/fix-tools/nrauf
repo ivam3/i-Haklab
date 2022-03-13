@@ -20,11 +20,11 @@ else
 	DIR=$1
 fi
 
-printf "$C\n(_>)─➤ Verifying and installing dependencies.$W\n";sleep 0.5
+printf "$C\n(_➤) Verifying and installing dependencies.$W\n";sleep 0.5
 command -v git > /dev/null || pkg install git -y > /dev/null 2>&1
 command -v npm > /dev/null || pkg install nodejs -y > /dev/null 2>&1
 
-printf "$C(_>)─➤ Downloading nrauf.$W\n"
+printf "$C(_➤) Downloading nrauf.$W\n"
 git clone https://github.com/warren-bank/node-remap-apktool-unicode-filenames $PREFIX/tmp/nrauf > /dev/null 2>&1
 if [ -d $PREFIX/tmp/nrauf ]
 then
@@ -34,7 +34,7 @@ then
 	exec rauf $DIR
 	rm -rf $PREFIX/tmp/nrauf >/dev/null 2>&1
 	popd >/dev/null 2>&1
-	printf "$G(_>)─➤ Done!!!$W\n"
+	printf "$G(_➤) Done!!!$W\n"
 else
 	printf "$R(_>)_ERR-clone:─➤ Going to https://t.me/Ivam3_Bot$W\n"
 	exit

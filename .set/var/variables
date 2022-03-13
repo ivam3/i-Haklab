@@ -3,6 +3,10 @@
 OP1=${2:-crunch}
 
 export iHAKLAB=/data/data/com.termux/files/home/.local/share/i-Haklab
+
+[[ -e $HOME/.local/var/log/i-Haklab.log ]] || touch $HOME/.local/var/log/i-Haklab.log
+export LOGFILE=$HOME/.local/var/log/i-Haklab.log
+
 microSD=$(df|tail -n 2|awk -F " " '{print $6}'|grep -iv "emulated"|head -n 1)
 if [ -d $microSD/Android/data/com.termux/files ] && [ -w $microSD/Android/data/com.termux/files ]; then
 	if [ ! -d $microSD/Android/data/com.termux/files/tools ];then
@@ -16,6 +20,7 @@ else
 	export TOOLS=/data/data/com.termux/files/home/.local/share/tools
 fi
 
+export version='v.3.0'
 export R='\033[1;31m'
 export G='\033[1;32m'
 export Goke='\033[92m'

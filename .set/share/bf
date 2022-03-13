@@ -5,28 +5,28 @@ source $iHAKLAB/.set/functions/functions
 chk-hydra
 
 if [[ ! -d $iHAKLAB/wordlist ]];then
-	printf "$G(_>)─➤$W Installing dependencies and wordlist...{$Y it could take a while $W}\n"
+	printf "$G(_➤)$W Installing dependencies and wordlist...{$Y it could take a while $W}\n"
 	command -v git >/dev/null || yes|apt install git
 	git clone --quiet https://github.com/jeanphorn/wordlist $iHAKLAB/wordlist
 fi
 if [[ ! -e $iHAKLAB/wordlist/rockyou.txt ]];then
-	printf "$G(_>)─➤$W Installing wordlist rockyou...{$Y it could take a while $W}\n"
+	printf "$G(_➤)$W Installing wordlist rockyou...{$Y it could take a while $W}\n"
 	wget -q https://www.scrapmaker.com/data/wordlists/dictionaries/rockyou.txt -O $iHAKLAB/wordlist/rockyou.txt
 fi
-STDERR(){ printf "$R(_>)─➤$W missing argument, type i-Haklab -h for help";exit;}
+STDERR(){ printf "$R(_➤)$W missing argument, type i-Haklab -h for help";exit;}
 alert(){ printf "\n\t       $R(_>)─> USE SOME VPN <─(<_)$W\n\t\t  press$G enter$W to start\n";read enter;}
 setTarget(){
 	printf "$Y(_>)_set_host:─➤ ";read target
-	[[ -z $target ]] && { printf 2>&1 "$R(_>)─➤$W Host not specified... Aborting\n";exit;}
+	[[ -z $target ]] && { printf 2>&1 "$R(_➤)$W Host not specified... Aborting\n";exit;}
 }
 setuserWL(){
 	printf "$Y(_>)_user_wordlist_{$W default: usernames.txt $Y}\n ╰─────➤ ";read usernames
-	[[ -e $usernames ]] || { printf 2>&1 "$R(_>)─➤$W file doesn't exists. Using default.$W\n";}
+	[[ -e $usernames ]] || { printf 2>&1 "$R(_➤)$W file doesn't exists. Using default.$W\n";}
 	userWL=${usernames:-$iHAKLAB/wordlist/usernames.txt}
 }
 setWordlist(){
 	printf "$Y(_>)_password_wordlist_{$W default: rockyou.txt $Y}\n ╰─────➤ ";read wordlist
-	[[ -e $wordlist ]] || { printf 2>&1 "$R(_>)─➤$W file doesn't exists. Using default.$W\n";}
+	[[ -e $wordlist ]] || { printf 2>&1 "$R(_➤)$W file doesn't exists. Using default.$W\n";}
 	wordlist=${wordlist:-$iHAKLAB/wordlist/rockyou.txt}
 }
 

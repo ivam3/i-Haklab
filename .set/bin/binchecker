@@ -19,11 +19,11 @@ printf "$G\n(_>)_Input_BIN$W"
 while read -p ":─➤ " BIN && [ -z $BIN ]; do
 	printf "$R(_>)_Set_a_BIN$W"
 done
-printf "$Y(_>)─➤$W Checking...";sleep 0.5
+printf "$Y(_➤)$W Checking...";sleep 0.5
 if [ $BIN -eq $BIN ] 2>/dev/null
 then
 printf ".";sleep 0.5;printf "..\n";sleep 0.5
 curl -H "Accept-Version: 3" "https://lookup.binlist.net/$BIN"
 else
-printf "\n$R(_>)─➤$W Invalid input\n"
+printf "\n$R(_➤)$W Invalid input\n"
 fi

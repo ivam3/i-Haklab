@@ -5,7 +5,7 @@ trap ctrl_c 2
 source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 ctrl_c(){ printf "\n$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";}
-[[ -d $TOOLS/osrframework ]] || { printf "$R\n(_>)─➤$W osrframework is not installed..$R Aborting.$W";exit;}
+[[ -d $TOOLS/osrframework ]] || { printf "$R\n(_➤)$W osrframework is not installed..$R Aborting.$W";exit;}
 
 usage(){
 	printf "$Y(_>)_usage :─➤$W run osrframework <alias_generator|checkfy|domainfy|mailfy|osrf|phonefy|searchfy|usufy>\n$Y ╰─────➤$W INFORMATION :$G\n

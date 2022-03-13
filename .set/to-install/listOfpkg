@@ -11,6 +11,7 @@ apr
 apr-util
 autoconf
 axel
+bc
 bison
 clang
 cmake
@@ -77,6 +78,7 @@ pkg-config
 postgresql
 proxychains-ng
 pulseaudio
+pv
 python
 python2
 readline

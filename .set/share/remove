@@ -15,9 +15,9 @@ fi
 [[ $toRemove = twifo-cli ]] && toRemove="twifo"
 [[ $toRemove = login-termux ]] && login="$(grep -oE $toRemove $INITFILE)"
 if [ ! -d $TOOLS/$toRemove ] && [ ! -e $HOME/.local/bin/$toRemove ] && [ ! -e $PREFIX/bin/$toRemove ] && [ ! -d $PREFIX/opt/$toRemove ] && [ ! -e ~/go/bin/$toRemove ] && [ ! -d ~/$toRemove ] && [ -z $login ];then
-	printf "$R(_>)─➤$W $1 isn't installed";exit
+	printf "$R(_➤)$W $1 isn't installed";exit
 fi
-Err() { printf "$R(_>)─➤$W Remove failed";exit;}
+Err() { printf "$R(_➤)$W Remove failed";exit;}
 PIPup() {
 	for PYv in python2 python;do
 		$PYv -m pip install --no-color --quiet --upgrade pip
@@ -34,16 +34,16 @@ rmMainDir() {
 	done
 }
 rmPYmodules() { python$PYv -m pip uninstall --quiet --no-color -r $TMPDIR/deps2drop;}
-alert() { printf "$Y\n(_>)─➤$W The main $toRemove directory has been removed$Y\n(_>)─➤$W About dependencies: these could be necessary for another tool and these are :\n"
+alert() { printf "$Y\n(_➤)$W The main $toRemove directory has been removed$Y\n(_➤)$W About dependencies: these could be necessary for another tool and these are :\n"
 	cat -n $TMPDIR/deps2drop|sort
-	printf "(_>)─➤$W To drop them press$G ENTER$W or$R ctrl+c$W to keep them\n"
+	printf "(_➤)$W To drop them press$G ENTER$W or$R ctrl+c$W to keep them\n"
 	read enter
 	PIPup
 	rmPYmodules
 	rm -f $TMPDIR/deps2drop
 }
 
-running
+running 3
 case "$toRemove" in
 	kalilinux|kali-fs)
 		yes|apt install curl && curl https://raw.githubusercontent.com/AndronixApp/AndronixOrigin/master/Uninstall/Kali/UNI-kali.sh|bash
@@ -406,13 +406,13 @@ case "$toRemove" in
 		sudo rm -rf ~/.suroot $HOME/.local/bin/$toRemove
 		;;
 	*)
-		printf "$R(_>)─➤$W Unable to locate $1 on i-Haklab\n"
+		printf "$R(_➤)$W Unable to locate $1 on i-Haklab\n"
     sleep 0.5
-		printf "$G(_>)─➤$W Trying with Advance Packect Tool (APT)...\n"
+		printf "$G(_➤)$W Trying with Advance Packect Tool (APT)...\n"
     if [[ $(pkg list-all|grep -oE "$toRemove") ]];then
 			yes|apt remove $toRemove
 		else
-			printf "$R(_>)─➤$W Tool $toRemove doesn't exist\n"
+			printf "$R(_➤)$W Tool $toRemove doesn't exist\n"
       exit
 		fi
 		;;

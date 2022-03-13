@@ -10,7 +10,7 @@ Y='\033[1;33m'
 B='\033[1;34m'
 W='\033[0m'
 until [ -d ~/aquatone ];do
-	printf "$R(_>)─➤$W $(basename $0) is not installed$W\n"
+	printf "$R(_➤)$W $(basename $0) is not installed$W\n"
 	exit
 done
 
@@ -18,14 +18,14 @@ while [ ! -e ~/aquatone/.keys.yml ];do
 	if [[ ! $(grep "shodan" ~/aquatone/.keys.yml) ]];then
 		printf "$Y\n(_>)_enter_your_shodan_APIKEY─➤ "
 		while read shodanKey && [ -z $shodanKey ];do
-			printf "$R\n(_>)─➤$W shodan APIKEY needed...$R Aborting.$W"
+			printf "$R\n(_➤)$W shodan APIKEY needed...$R Aborting.$W"
 			exit
 		done
 	fi
 	if [[ ! $(grep "virustotal" ~/aquatone/.keys.yml) ]];then
                 printf "$Y\n(_>)_enter_your_virustotal_APIKEY─➤ "
                 while read shodanKey && [ -z $vtKey ];do
-                        printf "$R\n(_>)─➤ virustotal APIKEY needed...$R Aborting.$W"
+                        printf "$R\n(_➤) virustotal APIKEY needed...$R Aborting.$W"
                         exit
                 done
         fi

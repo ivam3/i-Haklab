@@ -11,10 +11,9 @@ TOOLPATH="$TOOLS/$TOOL"
 GOPATH=$(cat $PREFIX/etc/fish/config.fish|grep "GOPATH"|awk '{print $3}'|head -n 1)
 
 #::::FUNCTIONS::::#
-STDERR(){ printf "$R\n(_>)─➤$W $TOOL is not installed$W\n";exit;}
+STDERR(){ printf "$R\n(_➤)$W $TOOL is not installed$W\n";exit;}
 CheckPath(){
 	if [[ -d $TOOLPATH ]] || [[ -e $(command -v $TOOL) ]] 2>/dev/null; then
-		running
     cd $TOOLPATH 2>/dev/null
     clear
     return 0
@@ -57,7 +56,7 @@ bigdecimalPATH(){
 if [ -z $TOOL ]; then
 	banner
 	printf "$Y\n[!] Syntax :$W run [-name-of-tool/framework-]\n\n
-|─Tool/Framework─|──────────────────────Description────────────────────────────|
+|─Tool/Framework──|─────────────────────────────Description────────────────────────────|
 ╰─d-tect─────────➤  Search web vulnerabilities
 ╰─a2sv───────────➤  Find web SSL vulnerabilities
 ╰─acccheck───────➤  A password dictionary attack tool that targets windows authentication via the SMB protocol
@@ -141,14 +140,14 @@ if [ -z $TOOL ]; then
 exit
 fi
 
+running 1
 case "$TOOL" in
 	beef)
 		bigdecimalPATH
 		if [ -d $PREFIX/opt/$TOOL ]; then
-			running
 			cd $PREFIX/opt/$TOOL
 			echo "load msgrpc ServerHost=127.0.0.1 ServerPort=55552 User=msf Pass='abc123' SSL=y" > $PREFIX/opt/metasploit-framework/$TOOL.rc 
-			printf "$Y\n(_>)─➤$W In a new session run :\n      postgresql start\n      msfconsole -r \$PREFIX/opt/metasploit-framework/$TOOL.rc\n$Y(_>)─➤$W then press$G enter$W to continue"
+			printf "$Y\n(_➤)$W In a new session run :\n      postgresql start\n      msfconsole -r \$PREFIX/opt/metasploit-framework/$TOOL.rc\n$Y(_➤)$W then press$G enter$W to continue"
 			read enter
 			exec ruby $PREFIX/opt/$TOOL/$TOOL
 		else
@@ -198,7 +197,6 @@ case "$TOOL" in
 		;;
 	xerosploit)
 		CheckRoot
-		running
 		if [ -d $PREFIX/opt/$TOOL ]; then
 			cd $PREFIX/opt/$TOOL
 			exec sudo python2 $PREFIX/opt/$TOOL/$TOOL.py
@@ -216,8 +214,8 @@ case "$TOOL" in
 		;;
 	botgram)
 		if CheckPath;then
-			PS3="(_>)─➤ "
-			printf "$Y(_>)─➤$W Choose an opcion to run $TOOL.\n\n"
+			PS3="(_➤) "
+			printf "$Y(_➤)$W Choose an opcion to run $TOOL.\n\n"
 			select opc in add2group getdata sendmsg setup exit;do
 				[[ $opc = "exit" ]] && exit
 				exec python $TOOLPATH/$opc.py ${@:2}
@@ -234,7 +232,6 @@ case "$TOOL" in
 		fi
 		;;
 	h8mail|objection|osrframework)
-		running
 		if ! python -m pip list | grep -oE "$TOOL" >/dev/null 2>/dev/null;then
 			python -m pip --no-color --quiet install $TOOL requests pexpect
 		fi
@@ -326,7 +323,6 @@ case "$TOOL" in
 		;;
 #::::TOOLS IN BIN::::#
 	dex2jar|ExiF|bincheker|binwalk|blackbox|burpsuite|code-server|converter|crunch|dirb|GetNPUsers|msfconsole|msfvenom|pagekite|shc|unshc|snow|wfuzz|whatweb|hydra|xhydra|youtube-dl)
-		running
 		if [ -e $HOME/.local/bin/$TOOL ]; then
 			bash $HOME/.local/bin/$TOOL ${@:2}
 		elif [ -e $PREFIX/bin/$TOOL ]; then
@@ -337,7 +333,6 @@ case "$TOOL" in
 		;;
 	dnsenum)
 		CheckRoot
-		running
 		if [ -e $HOME/.local/bin/$TOOL ]; then
 			exec sudo $HOME/.local/bin/$TOOL ${@:2}
 		else
@@ -362,7 +357,6 @@ case "$TOOL" in
 		;;
 #::::GO TOOLS::::#
 	gophish|gobuster|tangalanga)
-		running
 		if [[ -e $GOPATH/bin/$TOOL ]]; then
 			cd $GOPATH/bin
 			exec $GOPATH/bin/$TOOL ${@:2}
@@ -371,7 +365,6 @@ case "$TOOL" in
 		fi
 		;;
 	vt|aquatone)
-		running
 		if [ -d $GOPATH/src/github.com/VirusTotal/$TOOL-go ] && [ -e $GOPATH/bin/$TOOL ]; then
 			cd $GOPATH/bin/
 			exec $TOOL ${@:2}
@@ -385,7 +378,6 @@ case "$TOOL" in
 #:::: BINARIES ::::#
 	john)
 		if [ -d $PREFIX/opt/john ];then
-			running
 			cd $PREFIX/opt/john
 			clear
 			./john ${@:2}
@@ -401,8 +393,8 @@ case "$TOOL" in
 		fi
 		;;
 	*)
-		[[ $TOOL = "metasploit" ]] && { printf "$R\n(_>)─➤ To run metasploit use commands :$W msfconsole or msfvenom";exit;}
-		printf "$R\n(_>)─➤$W Unknown argument $TOOL\n"
+		[[ $TOOL = "metasploit" ]] && { printf "$R\n(_➤) To run metasploit use commands :$W msfconsole or msfvenom";exit;}
+		printf "$R\n(_➤)$W Unknown argument $TOOL\n"
 		exit 1
 		;;
 esac

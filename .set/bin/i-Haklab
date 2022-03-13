@@ -8,14 +8,14 @@ source $iHAKLAB/.set/functions/functions
 ctrl_c(){ printf "$Y\n\n\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bot$W\n\n";exit;}
 chk-iHaklab
 chk-Cuser
-[ $# -eq 0 ] && { printf >&2 "$R(_>)─➤$W missing argument, type $(basename $0) -h for help";exit;}
+[ $# -eq 0 ] && { printf >&2 "$R(_➤)$W missing argument, type $(basename $0) -h for help";exit;}
 clear;banner
 case "$1" in
 	-h|help)
 		Menu
 		;;
 	-v|version)
-		printf "$G(_>)─➤$W i-Haklab $(grep -om 1 "v.*.*" $iHAKLAB/README.md|awk '{print $1}') 2021 by Ivam3 - It is a hacking laboratory that contains open source tools recommended by Ivam3."
+		printf "$G(_➤)$W i-Haklab $(grep -om 1 "v.*.*" $iHAKLAB/README.md|awk '{print $1}') 2021 by Ivam3 - It is a hacking laboratory that contains open source tools recommended by Ivam3."
 		;;
 	about)
 		[[ -e $iHAKLAB/.set/libexec/Tools/Readme/$2 ]] && cat $iHAKLAB/.set/libexec/Tools/Readme/$2 || STDERR
@@ -34,7 +34,7 @@ case "$1" in
 				then
 					bash <(curl -fsSL "${iHDB}/share/$1") $i
 				else
-						printf >&2 "$R(_>)─➤$W Tool $i doesn't exist in i-Haklab$Y\n ╰─➤$W Trying APT repositories...\n"
+						printf >&2 "$R(_➤)$W Tool $i doesn't exist in i-Haklab$Y\n ╰─➤$W Trying APT repositories...\n"
 						yes|apt $1 $i
 				fi
 			done
@@ -45,16 +45,16 @@ case "$1" in
 	  inactive(){
 			if [[ $(ruby -v |cut -c 6-10) != "2.7.2" ]]
 			then
-				printf "$Y\n(_>)─➤$W Downgrading ruby at version 2.7.2.."
+				printf "$Y\n(_➤)$W Downgrading ruby at version 2.7.2.."
 				bash <(curl -fsSL "http://git.io/abhacker-repo") --install ruby=2.7.2
 				if [ ! -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ]
 				then
-					printf "$Y\n(_>)─➤$W Installing Abhacker repositories..$G"
+					printf "$Y\n(_➤)$W Installing Abhacker repositories..$G"
 					wget -q "${iHDB}/fix-tools/instAbhackerRepo" -O $TMPDIR/abh.tmp
 					chmod +x $TMPDIR/abh.tmp
 					exec $TMPDIR/abh.tmp --install ruby=2.7.2 >/dev/null 2>/dev/null
 					rm $TMPDIR/abh.tmp
-					printf "$G(_>)─➤$W DONE!!\n"
+					printf "$G(_➤)$W DONE!!\n"
 				else
 					exec yes|apt install ruby=2.7.2 >/dev/null 2>/dev/null
 				fi
@@ -68,13 +68,13 @@ case "$1" in
 		fi
 		;;
 	restore)
-		printf "$Y(_>)─➤$W Restoring (It could take a while)..";
+		printf "$Y(_➤)$W Restoring (It could take a while)..";
 		rm -rf $iHAKLAB
 		git clone --quiet https://github.com/Ivam3/i-Haklab $iHAKLAB
 		if [[ -d $iHAKLAB ]];then
 			printf "$G. DONE!!$W\n"
 		else
-			printf "$R\n(_>)─➤ ERR_restore";ctrl_c
+			printf "$R\n(_➤) ERR_restore";ctrl_c
 		fi
 		;;
 	reinstall)
@@ -90,7 +90,7 @@ case "$1" in
 	speedtest)
 		command -v python >/dev/null || yes|apt install python >/dev/null 2>&1
 		command -v speedtest-cli >/dev/null || python -m pip install --no-color --quiet --no-cache-dir speedtest-cli
-		printf "$Y(_>)─➤$W Running speed test.\n"
+		printf "$Y(_➤)$W Running speed test.\n"
 		speedtest-cli
 		;;
 	update)
@@ -105,14 +105,14 @@ case "$1" in
 			if [[ $LDAY -gt $RDAY ]];then
 				Done
 			else
-				printf "$G(_>)─➤$W Upgrading i-Haklab...\n"
+				printf "$G(_➤)$W Upgrading i-Haklab...\n"
 				bash $TMP_FILE1
 				Done
 			fi
 		elif [[ $LMONTH -gt $RMONTH ]]; then
 			Done
 		else
-			printf "$Y(_>)─➤$W Upgrading i-Haklab...\n"
+			printf "$Y(_➤)$W Upgrading i-Haklab...\n"
 			bash $TMP_FILE1
 			Done
 		fi
@@ -143,7 +143,7 @@ printf "$Y(_>)─>$W if this is your first time using weechat: after start weech
 	/join #Ivam3byCinderella$G\n\n                 Press enter to start$W\n"
 	                read enter
 		else
-			printf "$Y(_>)─➤$W After weechat started type the command :$G /connect freenode$W\n                 Press$G enter$W to start$W\n";read enter
+			printf "$Y(_➤)$W After weechat started type the command :$G /connect freenode$W\n                 Press$G enter$W to start$W\n";read enter
 		fi
 		weechat;k-boom
 		;;

