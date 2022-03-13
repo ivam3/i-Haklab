@@ -15,7 +15,7 @@ STDERR(){ printf "$R\n(_>)─➤$W $TOOL is not installed$W\n";exit;}
 CheckPath(){
 	if [[ -d $TOOLPATH ]] || [[ -e $(command -v $TOOL) ]] 2>/dev/null; then
 		running
-    cd $TOOLPATH
+    cd $TOOLPATH 2>/dev/null
     clear
     return 0
   else
