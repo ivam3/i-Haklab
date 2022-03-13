@@ -228,7 +228,9 @@ cat <<- CONF > $HOME/.bashrc
 export PATH=$HOME/.local/bin:$PREFIX/bin
 export LD_LIBRARY_PATH=$HOME/.local/lib:$PREFIX/lib
 [[ ! \$(grep -oE "i-Haklab" $PREFIX/etc/fish/config.fish >/dev/null) ]] && rm -rf $PREFIX/etc/fish/config.fish;ln -s $HOME/.local/etc/fish/config.fish $PREFIX/etc/fish/config.fish
+[[ -d ~/.local/share/i-Haklab ]] || { printf >&2 "[+] i-Haklab main directory missing, restoring (It could take a while)...\\n";yes|apt install git;git clone --quiet https://github.com/ivam3/i-Haklab ~/.local/share/i-Haklab;}
 chsh -s fish
+exit
 CONF
 printf "$Y\n(_>)─➤ Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'\n ╰─➤ when it happen hold on for one minute and then type exit to continue$W\n"
 curl -Ls $iHDB/to-install/get.oh-my.fish|fish

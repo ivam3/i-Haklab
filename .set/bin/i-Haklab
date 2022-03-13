@@ -70,7 +70,7 @@ case "$1" in
 	restore)
 		printf "$Y(_>)─➤$W Restoring (It could take a while)..";
 		rm -rf $iHAKLAB
-		git clone --quiet https://github.com/Ivam3/i-Haklab.git $iHAKLAB
+		git clone --quiet https://github.com/Ivam3/i-Haklab $iHAKLAB
 		if [[ -d $iHAKLAB ]];then
 			printf "$G. DONE!!$W\n"
 		else
