@@ -72,6 +72,7 @@ case "$1" in
 		rm -rf $iHAKLAB
 		git clone --quiet https://github.com/Ivam3/i-Haklab $iHAKLAB
 		if [[ -d $iHAKLAB ]];then
+			chmod +x -R $iHAKLAB
 			printf "$G. DONE!!$W\n"
 		else
 			printf "$R\n(_➤) ERR_restore";ctrl_c
