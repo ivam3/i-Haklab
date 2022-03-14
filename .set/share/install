@@ -690,19 +690,16 @@ CONF
 		chmod 751 $HOME/.local/bin/$toInstall
 		;;
 	hydra)
-		yes|apt install git make automake -y
+		yes|apt install git cmake make automake libgcrypt libssh libidn openssl openssl-tool
 		git clone --quiet https://github.com/vanhauser-thc/thc-$toInstall $PREFIX/opt/thc-$toInstall
-		cd $PREFIX/opt/thc-$toInstall
-		make clean && sh configure;make;make install
-		if [[ -e $PREFIX/opt/thc-$toInstall/$toInstall ]] && [[ -e $PREFIX/opt/thc-$toInstall/x$toInstall ]];then
-			chmod +x $PREFIX/opt/thc-$toInstall/*
-			cp $PREFIX/opt/thc-$toInstall/$toInstall $HOME/.local/bin/
-			cp $PREFIX/opt/thc-$toInstall/x$toInstall $HOME/.local/bin/
-			cp -r $PREFIX/opt/thc-$toInstall $TOOLS/$toInstall
-			rm -rf $PREFIX/opt/thc-$toInstall
-		else
-			printf "$R\n\t      《ERR COMPILE》\n";Err
-		fi
+		hpath=$PREFIX/opt/thc-$toInstall
+		chmod 750 -R $hpath
+		cd $hpath;make clean && sh configure --prefix=$PREFIX;make;make install
+		cd $hpath/$toInstall-gtk;sh make_xhydra.sh
+		for i in $toInstall x$toInstall;do
+			[[ -e $hpath/$i ]] && chmod +x $hpath/$i;cp $hpath/$i $HOME/.local/bin/ || printf "$R\n   《ERR TO COMPILE $i》\n"
+		done
+		rm -rf $hpath
 		;;
 	JohnTheRipper|john)
 		JTRv="1.8.0"
