@@ -694,6 +694,7 @@ CONF
 		git clone --quiet https://github.com/vanhauser-thc/thc-$toInstall $PREFIX/opt/thc-$toInstall
 		hpath=$PREFIX/opt/thc-$toInstall
 		chmod 750 -R $hpath
+		sed -i 's|wait3(NULL, WNOHANG, NULL);|wait4(NULL, WNOHANG, NULL, NULL);|g' $hpath/$toInstall.c
 		cd $hpath;make clean && sh configure --prefix=$PREFIX;make;make install
 		cd $hpath/$toInstall-gtk;sh make_xhydra.sh
 		for i in $toInstall x$toInstall;do
