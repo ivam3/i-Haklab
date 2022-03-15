@@ -5,7 +5,7 @@ trap ctrl_c 2
 source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 ctrl_c(){ printf "\n$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";exit 0;}
-[[ -d $TOOLS/dex2jar ]] || { printf "$R\n(_➤)$W dex2jar is not installed..$R Aborting.$W";exit;}
+[[ -e $HOME/.local/bin/dex2jar ]] || [[ -e $PREFIX/bin/dex2jar ]] || { printf "$R\n(_➤)$W dex2jar is not installed..$R Aborting.$W";exit;}
 file=$(mktemp)
 echo "AVAILABLE TOOLS" > $file
 echo "$(ls $TOOLS/dex2jar/*.sh|cut -d "/" -f10|cut -d "." -f1)" >> $file
