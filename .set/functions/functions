@@ -29,7 +29,6 @@ running(){
 		for i in "${spinner[@]}";do
 			tput civis
 			printf  "$green\r(_➤) Searching\t$i\b\b\b\b\b\b\b\b";
-			sleep 0.25
     done
   done
   tput cnorm
