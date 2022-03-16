@@ -18,6 +18,7 @@ source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 chk-Cuser
 clear;banner;sleep 0.5
+yes|apt install ncurses-utils &>/dev/null 2>/dev/null
 if command -v fish >/dev/null;then yes|apt remove fish && apt autoremove; fi
 
 printf "$Y\n(_➤)$W Head to app configuration and provides storage permissions to termux.$Y\n ╰─➤$W when finished$G press enter\n$W"
