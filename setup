@@ -193,10 +193,7 @@ done
 
 #::::::::::Installation of Ohmyfish::::::::::::#
 printf "$G\n(_➤) Installing interactive shell.$W\n"
-[[ -d ~/.local/share/omf ]] && rm -rf ~/.local/share/omf
-[[ -d ~/.config/omf ]] && rm -rf ~/.config/omf/
-git config --global core.autocrlf
-cat <<- CONF > ~/.local/etc/fish/config.fish
+cat <<- CONF > $HOME/.local/etc/fish/config.fish
 if status --is-login
 bash /data/data/com.termux/files/home/.local/etc/i-Haklab/wall-banner
 end
@@ -221,14 +218,13 @@ set TOOLS $TOOLS
 pulseaudio --start --exit-idle-time=-1 2>/dev/null
 pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1
 CONF
+
+[[ -d ~/.local/share/omf ]] && rm -rf ~/.local/share/omf
+[[ -d ~/.config/omf ]] && rm -rf ~/.config/omf/
+git config --global core.autocrlf
 [[ -e $PREFIX/etc/fish/config.fish ]] && rm -rf $PREFIX/etc/fish/config.fish
-ln -s $HOME/.local/etc/fish/config.fish $PREFIX/etc/fish/config.fish
-TMP_fish=$(mktemp)
-cat <<- CONF > $TMP_fish
-#!/bin/env fish
-omf install bira
-CONF
-fish $TMP_fish &>/dev/null 2>>$LOGFILE
+ln -s $HOME/.local/etc/fish/config.fish $PREFIX/etc/fish/config.fish 2>>$LOGFILE
+
 cat <<- CONF > $HOME/.bashrc
 export PATH=$HOME/.local/bin:$PREFIX/bin
 export LD_LIBRARY_PATH=$HOME/.local/lib:$PREFIX/lib
@@ -248,7 +244,13 @@ else
 fi
 CONF
 printf "$Y\n(_➤) Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'\n ╰─➤ when it happen hold on for one minute and then type exit to continue$W\n"
-curl -Ls $iHDB/to-install/get.oh-my.fish|fish &>/dev/null 2>>$LOGFILE
+curl -Ls $iHDB/to-install/get.oh-my.fish|fish 2>>$LOGFILE
+TMP_fish=$(mktemp)
+cat <<- CONF > $TMP_fish
+#!/bin/env fish
+omf install bira
+CONF
+fish $TMP_fish &>/dev/null 2>>$LOGFILE
 
 bash $iHAKLAB/.set/share/review #LOGFILE
 [[ -d ~/i-Haklab ]] && rm -rf ~/i-Haklab
