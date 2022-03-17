@@ -232,10 +232,20 @@ fish $TMP_fish &>/dev/null 2>>$LOGFILE
 cat <<- CONF > $HOME/.bashrc
 export PATH=$HOME/.local/bin:$PREFIX/bin
 export LD_LIBRARY_PATH=$HOME/.local/lib:$PREFIX/lib
-[[ ! \$(grep -oE "i-Haklab" $PREFIX/etc/fish/config.fish >/dev/null) ]] && rm -rf $PREFIX/etc/fish/config.fish;ln -s $HOME/.local/etc/fish/config.fish $PREFIX/etc/fish/config.fish
-[[ -d ~/.local/share/i-Haklab ]] || { printf >&2 "[+] i-Haklab main directory missing, restoring (It could take a while)...\\n";yes|apt install git;git clone --quiet https://github.com/ivam3/i-Haklab ~/.local/share/i-Haklab &U chmod +x -R ~/.local/share/i-Haklab;}
-chsh -s fish
-exit
+if [[ -e $PREFIX/bin/fish ]]
+then
+	if [[ ! \$(grep -oE "i-Haklab" $PREFIX/etc/fish/config.fish >/dev/null) ]] && [[ ! -h $PREFIX/etc/fish/config.fish ]]
+	then
+		rm $PREFIX/etc/fish/config.fish
+		ln -s $HOME/.local/etc/fish/config.fish $PREFIX/etc/fish/config.fish
+	fi
+	[[ -d ~/.local/share/i-Haklab ]] || { printf >&2 "[+] i-Haklab main directory missing, restoring (It could take a while)...\\n";yes|apt install git;mkdir -p $HOME/.local/share 2>/dev/null;git clone --quiet https://github.com/ivam3/i-Haklab $HOME/.local/share/i-Haklab && chmod +x -R $HOME/.local/share/i-Haklab;}
+	chsh -s fish
+	exit
+else
+	yes|apt install fish &>/dev/null 2>/dev/null
+	exec $HOME/.bashrc
+fi
 CONF
 printf "$Y\n(_➤) Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'\n ╰─➤ when it happen hold on for one minute and then type exit to continue$W\n"
 curl -Ls $iHDB/to-install/get.oh-my.fish|fish &>/dev/null 2>>$LOGFILE
