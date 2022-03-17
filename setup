@@ -140,14 +140,16 @@ vim +PlugUpdate +x +x 2>>$LOGFILE
 printf "$G\n(_➤)$W Setting i-Haklab style."
 [[ -d ~/.termux ]] || mkdir -p ~/.termux
 for i in $(ls $iHAKLAB/.set/to-install/.termux/);do
-	wget -q --tries=20 ${iHDB}/to-install/$i -O ~/.termux/$i
+	wget -q --tries=20 ${iHDB}/to-install/$i -O $HOME/.termux/$i
 done
-ln -s $PREFIX/bin/fish ~/.termux/shell
+ln -s $PREFIX/bin/fish $HOME/.termux/shell 2>/dev/null
 
 #:::: Set functions ::::#
-wget -q --tries=20 ${iHDB}/functions/unset.fish -O ~/.config/fish/functions/unset.fish
-wget -q --tries=20 ${iHDB}/functions/fish_greeting.fish -O ~/.config/fish/functions/fish_greeting.fish
-cp $iHAKLAB/.set/functions/*.fish $HOME/.config/fish/functions/
+fun=$(ls $iHAKLAB/.set/functions/*.fish|awk -F "/" '{print $NF}')
+mkdir -p $HOME/.config/fish/functions
+for f in ${fun[*]};do
+	wget -q --tries=20 ${iHDB}/functions/$f -O $HOME/.config/fish/functions/$f
+done
 
 #:::: Set VNC server ::::#
 [[ -d ~/.vnc ]] || mkdir ~/.vnc
