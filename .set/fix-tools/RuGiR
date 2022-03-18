@@ -19,7 +19,7 @@ command -v lolcat >/dev/null || gem install lolcat >/dev/null 2>&1
 ctrl_c(){ printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";}
 Banner(){ clear;printf "\n ____         ____ _ ____\n|  _ \ _   _ / ___(_)  _ \ \n| |_) | | | | |  _| | |_) |\n|  _ <| |_| | |_| | |  _ <\n|_| \_|\__,_|\____|_|_| \_|v.2\n#::Ruby Gems Issues Resolved::#\n #::: @Ivam3byCinderella ::::#\n";sleep 1;}
 Banner|lolcat
-printf "$G\n[¿]─>$W Choose an option $G<-[?]\n\n{01}$W$Y[MSFCONSOLE]─➤$W CANNOT LINK EXECUTABLE \"ruby\":$Y\n\t╰────────➤$W library \"/data/da..../bigdecimal.so\" not found$G\n{02}$W$Y[GRPC.GEMSPEC]─➤$W There was an error parcing Gemfile$G\n{03}$W$Y[GEMS]─➤$W Could not find <gem's name> in any of the sources$G\n{04}$Y[BIGDECIMAL]─➤$W Gem bigdecimal architecture compatibility$G\n{05}$Y[BUNDLER]─➤$W You have already activated bundler 2.1.4, but your Gemfile requires bundler 2.2.11$G\n{99}$R[EXIT]\n\n$W";read -p "{ANSW}-> " ANSW
+printf "$G\n[¿]─>$W Choose an option $G<-[?]\n\n{01}$W$Y[MSFCONSOLE]─➤$W CANNOT LINK EXECUTABLE \"ruby\":$Y\n\t╰────────➤$W library \"/data/da..../bigdecimal.so\" not found$G\n{02}$W$Y[GRPC.GEMSPEC]─➤$W There was an error parcing Gemfile$G\n{03}$W$Y[GEMS]─➤$W Could not find <gem's name> in any of the sources$G\n{04}$Y[BIGDECIMAL]─➤$W Gem bigdecimal architecture compatibility$G\n{05}$Y[BUNDLER]─➤$W You have already activated bundler 2.1.4, but your Gemfile requires bundler 2.2.11$G\n{06}$Y[UNNSOPORTED openssl:::cipher]─➤$W There is a separate '-ciphersuites' option to the 'ciphers' command$G\n{99}$R[EXIT]\n\n$W";read -p "{ANSW}-> " ANSW
 case $ANSW in
 	01|1)
 		BIGDECIMAL=$(find $PREFIX/lib/ruby/${RUBYv} -iname "bigdecimal.so")
@@ -97,6 +97,13 @@ CONF
 		if [ -e $PREFIX/lib/ruby/gems/$RUBYv/specifications/default/bundler-$OLDv.gemspec ];then
 			rm $PREFIX/lib/ruby/gems/$RUBYv/specifications/default/bundler-$OLDv.gemspec
 		fi
+		;;
+	06|6)
+		GEMPATH=$PREFIX/lib/ruby/gems/$RUBYv/gems/hrr_rb_ssh-0.4.2/lib/hrr_rb_ssh/transport
+		sed -i '13,15 {s/^/#/}' $GEMPATH/encryption_algorithm/functionable.rb
+		for i in 256 384 521;do
+			sed -i '14 {s/^/#/}' $GEMPATH/server_host_key_algorithm/ecdsa_sha2_nistp$i.rb
+		done
 		;;
 	*)
 		ctrl_c
