@@ -1039,6 +1039,11 @@ CONF
 		wget -q $JAVADB/.embed/apk.rb -O $msfDir/lib/msf/core/payload/apk.rb
 		find $msfDir -type f -executable -print0 | xargs -0 -r termux-fix-shebang
 		find $PREFIX/lib/ruby/gems -type f -iname \*.so -print0 | xargs -0 -r termux-elf-cleaner
+		GEMPATH=$PREFIX/lib/ruby/gems/$rubyLIBv/gems/hrr_rb_ssh-0.4.2/lib/hrr_rb_ssh/transport
+		sed -i '13,15 {s/^/#/}' $GEMPATH/encryption_algorithm/functionable.rb
+		for i in 256 384 521;do
+			sed -i '14 {s/^/#/}' $GEMPATH/server_host_key_algorithm/ecdsa_sha2_nistp$i.rb
+		done
 		cat <<- EOF > $PREFIX/bin/msfconsole
 #!/data/data/com.termux/files/usr/bin/bash
 SCRIPT_NAME=\$(basename "\$0")
