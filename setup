@@ -13,6 +13,7 @@ mkdir -p ~/.local/{bin,etc/i-Haklab,etc/fish,lib,share,tools,var/service/www,var
 if [[ -d $HOME/i-Haklab ]];then
 	cp -r $HOME/i-Haklab $HOME/.local/share
 else
+	yes|apt install git >/dev/null 2>/dev/null
 	git clone --quite https://github.com/ivam3/i-Haklab $HOME/.local/share/i-Haklab
 fi
 source $HOME/.local/share/i-Haklab/.set/var/variables
