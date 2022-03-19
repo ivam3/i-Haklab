@@ -32,7 +32,7 @@ git clone --quiet https://github.com/ivam3/i-Haklab.git ~/.local/share/iHaklab
 [[ -d $HOME/.local/share/iHaklab ]] && rm -rf $HOME/.local/share/i-Haklab;mv ~/.local/share/iHaklab ~/.local/share/i-Haklab || { printf "$R(_➤)$W i-Haklab directory missing..$R Aborting.$W";exit;}
 source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
-mkdir -p ~/.local/{etc/i-Haklab,etc/fish,lib,share,tools,var/service/www}
+mkdir -p ~/.local/{bin,etc/i-Haklab,etc/fish,lib,share,tools,var/service/www}
 [[ -d $HOME/.local/bin ]] && rm -rf $HOME/.local/bin
 ln -s $iHAKLAB/.set/bin $HOME/.local/bin
 for i in Quiz Cinderella Ivam3;do
@@ -69,17 +69,29 @@ pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymou
 CONF
 [[ -e $PREFIX/etc/fish/config.fish ]] && rm -rf $PREFIX/etc/fish/config.fish || mkdir -p $PREFIX/etc/fish
 ln -s $HOME/.local/etc/fish/config.fish $PREFIX/etc/fish/config.fish
-[[ -d $HOME/.config/fish/functions ]] || mkdir -p $HOME/.config/fish/functions
-cp $iHAKLAB/.set/functions/*.fish $HOME/.config/fish/functions/
+[[ -d $HOME/.config/fish/functions ]] && rm -rf $HOME/.config/fish/functions/
+mkdir -p $HOME/.config/fish/functions
+fun=$(ls $iHAKLAB/.set/functions/*.fish|awk -F "/" '{print $NF}')
+for f in ${fun[*]};do
+	ln -s $iHAKLAB/.set/functions/$f $HOME/.config/fish/functions/ 2>>$LOGFILE
+done
 
 cat <<- CONF > $HOME/.bashrc
 export PATH=$HOME/.local/bin:$PREFIX/bin
 export LD_LIBRARY_PATH=$HOME/.local/lib:$PREFIX/lib
-if [[ ! \$(grep -oE "i-Haklab" $PREFIX/etc/fish/config.fish >/dev/null) ]]; then
-     rm -rf $PREFIX/etc/fish/config.fish
-		 ln -s $HOME/.local/etc/fish/config.fish $PREFIX/etc/fish/config.fish
+if [[ -e $PREFIX/bin/fish ]]
+then
+	if [[ ! \$(grep -oE "i-Haklab" $PREFIX/etc/fish/config.fish >/dev/null) ]] && [[ ! -h $PREFIX/etc/fish/config.fish ]]
+	then
+		rm $PREFIX/etc/fish/config.fish
+		ln -s $HOME/.local/etc/fish/config.fish $PREFIX/etc/fish/config.fish
+  fi
+  [[ -d ~/.local/share/i-Haklab ]] || { printf >&2 "[+] i-Haklab main directory missing, restoring (It could take a while)...\\n";yes|apt install git;mkdir -p $HOME/.local/share 2>/dev/null;git clone --quiet https://github.com/ivam3/i-Haklab $HOME/.local/share/i-Haklab && chmod +x -R $HOME/.local/share/i-Haklab;}
+  chsh -s fish
+else
+	yes|apt install fish &>/dev/null 2>/dev/null
+  exec $HOME/.bashrc
 fi
-chsh -s fish
 CONF
 
 cat <<- CONF > $HOME/.nanorc
@@ -130,7 +142,9 @@ chmod -w $HOME/.local/etc/i-Haklab/.Cinderella
 ######### Upgrading executables #########
 printf "$Y(_➤)$W Upgrading commands. . .$W\n";$s5
 chmod 750 $iHAKLAB/.set/bin/*
-[[ -h $HOME/.local/bin ]] || ln -s $iHAKLAB/.set/bin $HOME/.local/bin
+for f in $(ls $iHAKLAB/.set/bin/);do
+	ln -s $iHAKLAB/.set/bin/$f $HOME/.local/bin/ 2>>$LOGFILE
+done
 
 printf "$G(_➤)$W Setting i-Haklab style.\n";$s5
 [[ -d ~/.termux ]] || mkdir -p ~/.termux
