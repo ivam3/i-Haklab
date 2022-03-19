@@ -255,10 +255,9 @@ cat <<- CONF > $TMP_fish
 #!/bin/env fish
 omf install bira
 CONF
-fish $TMP_fish &>/dev/null 2>>$LOGFILE
-termux-reload-settings
+fish $TMP_fish 2>>$LOGFILE
 
-[[ -d ~/i-Haklab ]] && rm -rf ~/i-Haklab
+[[ -d $HOME/i-Haklab ]] && rm -rf $HOME/i-Haklab;cd
 printf "$G\n\n
 (_➤)$W i-Haklab installed !!!$Y\n
 (_➤)$W Main commands$Y
@@ -280,6 +279,6 @@ printf "$G\n\n
  ╰────────➤ run:$W sudo <some commands> :──:to run commands as super user whithout rooted device$Y
  ╰────────➤ run:$W i-Haklab about i-Haklab :for all usage guide$G
 (_➤)$W To fix issues going to$B t.me/Ivam3_Bot$G
-(_➤)$W press$G enter$W to reestart Termux\n"
-read enter;exec reset
+(_➤)$W press$G enter$W and please reestart Termux\n"
+read enter
 #		i-Haklab by @Ivam3

@@ -49,7 +49,7 @@ APTupdate(){
 			echo "All packages are up to date."
 			break
 		elif [[ $count -eq 3 ]]; then
-			printf "$R\n(_➤) APT ERROR$W |$Y try using IbyC-fixer$W"
+			printf "$R\n(_➤) APT ERROR$W |$Y try using IbyC-fixer$W\n"
 			break
     else
 			yes|apt upgrade &>/dev/null 2>>$LOGFILE

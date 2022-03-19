@@ -76,7 +76,7 @@ fi
 [[ $toInstall = twifo-cli ]] && toInstall="twifo"
 [[ $toInstall = wfuzz ]] && toInstall="fuzzdb"
 if [[ -d $TOOLS/$toInstall ]] || [[ -e $PREFIX/bin/$toInstall ]] || [[ -e $HOME/.local/bin/$toInstall ]] || [[ -d $PREFIX/opt/$toInstall ]] || [[ -e ~/go/bin/$toInstall ]] || [[ ! -z $login ]];then
-	printf "$R(_➤)$W $1 it's already installed";exit
+	printf "$R(_➤)$W $1 it's already installed\n";exit
 fi
 running 3
 yes|apt autoremove
