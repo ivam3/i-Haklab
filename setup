@@ -3,22 +3,28 @@
 IFS=$'\n\t'
 trap ctrl_c 2
 ctrl_c() { printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";}
-printf "\n(_➤) Cleanning enviroment up (It could take a while)...\n"
+if [[ $PWD != $HOME/i-Haklab ]] || [[ ! -e $PWD/$(basename $0) ]];then
+	printf "$R(_➤)$W i-Haklab must to be in HOME path.\n"
+	printf "$R(_➤)$W You must to be into i-Haklab directory.\n"
+	ctrl_c;exit
+fi
+
+#::::::::::CLEANING::::::::::#
+echo -en "\e[32m"
+printf "\n(_➤) Cleaning up the environment (It could take a while)...\n"
+echo -en "\e[49m"
 [[ -d ~/.local ]] && rm -rf ~/.local/* || mkdir ~/.local
 [[ -d ~/.config/fish ]] && rm -rf ~/.config/fish
 [[ -d $PREFIX/share/i-Haklab ]] && rm -rf $PREFIX/share/i-Haklab
 [[ -d $HOME/.local/share/i-Haklab ]] && rm -rf $HOME/.local/share/i-Haklab
 [[ -d ~/java ]] && rm -rf ~/java
 mkdir -p ~/.local/{bin,etc/i-Haklab,etc/fish,lib,share,tools,var/service/www,var/log}
-if [[ -d $HOME/i-Haklab ]];then
-	cp -r $HOME/i-Haklab $HOME/.local/share
-else
-	yes|apt install git >/dev/null 2>/dev/null
-	git clone --quite https://github.com/ivam3/i-Haklab $HOME/.local/share/i-Haklab
-fi
+cp -r $PWD $HOME/.local/share
 source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 chk-Cuser
+
+#:::::::::: MAIN ::::::::::#
 clear;banner;sleep 0.5
 yes|apt install ncurses-utils &>/dev/null 2>>$LOGFILE
 if command -v fish >/dev/null;then
@@ -257,7 +263,8 @@ omf install bira
 CONF
 fish $TMP_fish 2>>$LOGFILE
 
-[[ -d $HOME/i-Haklab ]] && rm -rf $HOME/i-Haklab;cd
+[[ -d $HOME/i-Haklab ]] && rm -rf $HOME/i-Haklab
+cd;tput cnorm;tput init;banner
 printf "$G\n\n
 (_➤)$W i-Haklab installed !!!$Y\n
 (_➤)$W Main commands$Y
