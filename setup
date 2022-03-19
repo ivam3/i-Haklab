@@ -286,6 +286,7 @@ printf "$G\n\n
  ╰────────➤ run:$W sudo <some commands> :──:to run commands as super user whithout rooted device$Y
  ╰────────➤ run:$W i-Haklab about i-Haklab :for all usage guide$G
 (_➤)$W To fix issues going to$B t.me/Ivam3_Bot$G
-(_➤)$W press$G enter$W and please reestart Termux\n"
+(_➤)$W press$G enter$W to reestart Termux\n"
 read enter
+killall $(echo $SHELL|awk -F "/" '{print $NF}')
 #		i-Haklab by @Ivam3
