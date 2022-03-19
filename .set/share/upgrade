@@ -24,7 +24,7 @@ printf "$Y(_➤)$W Removing oldest i-Haklab version\n";$s5
 [[ -e $PREFIX/var/log/login-termux ]] && rm $PREFIX/var/log/login-termux
 [[ -d ~/.vim ]] && rm -rf ~/.vim
 for v in ${binTools[*]};do
-	[[ -e $PREFIX/bin/$v ]] && rm $PREFIX/bin/$v
+	[[ -e $HOME/.local/bin/$v ]] && rm $HOME/.local/bin/$v
 done
 
 printf "$Y(_➤)$W Installing newest i-Haklab version\n"

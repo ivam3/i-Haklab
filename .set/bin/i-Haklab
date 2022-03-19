@@ -79,7 +79,11 @@ case "$1" in
 		fi
 		;;
 	reinstall)
-		bash <(curl -fsSL "${iHDB}/../setup")
+		printf "$Y(_➤)$W Downloading i-Haklab (It could take a while)..."
+		[[ -d $HOME/i-Haklab ]] && rm -rf $HOME/i-Haklab
+		git clone --quiet https://github.com/ivam3/i-Haklab $HOME/i-Haklab
+		chmod 750 -R $HOME/i-Haklab/*;cd $HOME/i-Haklab
+		bash setup
 		;;
 	root)
 		command -v proot >/dev/null || { yes|apt install proot;clear;}

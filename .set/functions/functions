@@ -44,7 +44,7 @@ export -f STDERR
 
 APTupdate(){
 	for count in {1..4};do
-		if [[ $(apt update|grep "All packages are up to date.") ]] &>/dev/null
+		if [[ $(apt update|grep "All packages are up to date.") ]] &>/dev/null 2>>$LOGFILE
 		then
 			echo "All packages are up to date."
 			break
@@ -52,7 +52,7 @@ APTupdate(){
 			printf "$R\n(_➤) APT ERROR$W |$Y try using IbyC-fixer$W"
 			break
     else
-			yes|apt upgrade &>/dev/null
+			yes|apt upgrade &>/dev/null 2>>$LOGFILE
 		fi
 	done
 }

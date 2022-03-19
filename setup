@@ -1,26 +1,29 @@
 #!/data/data/com.termux/files/usr/bin/bash
-#This script will install i-Haklab v.3.0 2021 by Ivam3 - It is a hacking laboratory that contains open source tools recommended by Ivam3.
+#This script will install i-Haklab v.3.1 2022 - It is a hacking laboratory that contains open source tools recommended by Ivam3.
 IFS=$'\n\t'
 trap ctrl_c 2
 ctrl_c() { printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";}
-while [ ! -d ~/i-Haklab ] && [ $PWD != ~/i-Haklab ];do
-	printf "$R\n(_➤)$W i-Haklab must to be in HOME path.\n"
-	ctrl_c;exit
-done
-printf "Running...";sleep 0.5
+printf "\n(_➤) Cleanning enviroment up (It could take a while)...\n"
 [[ -d ~/.local ]] && rm -rf ~/.local/* || mkdir ~/.local
 [[ -d ~/.config/fish ]] && rm -rf ~/.config/fish
 [[ -d $PREFIX/share/i-Haklab ]] && rm -rf $PREFIX/share/i-Haklab
+[[ -d $HOME/.local/share/i-Haklab ]] && rm -rf $HOME/.local/share/i-Haklab
 [[ -d ~/java ]] && rm -rf ~/java
-mkdir -p ~/.local/{etc/i-Haklab,etc/fish,lib,share,tools,var/service/www,var/log}
-cp -r ~/i-Haklab $HOME/.local/share
+mkdir -p ~/.local/{bin,etc/i-Haklab,etc/fish,lib,share,tools,var/service/www,var/log}
+if [[ -d $HOME/i-Haklab ]];then
+	cp -r $HOME/i-Haklab $HOME/.local/share
+else
+	git clone --quite https://github.com/ivam3/i-Haklab $HOME/share/i-Haklab
+fi
 source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 chk-Cuser
 clear;banner;sleep 0.5
-yes|apt install ncurses-utils &>/dev/null 2>/dev/null
-if command -v fish >/dev/null;then yes|apt remove fish && apt autoremove; fi
-
+yes|apt install ncurses-utils &>/dev/null 2>>$LOGFILE
+if command -v fish >/dev/null;then
+	yes|apt remove fish &>/dev/null 2>>$LOGFILE
+	yes|apt autoremove &>/dev/null 2>>$LOGFILE
+fi
 printf "$Y\n(_➤)$W Head to app configuration and provides storage permissions to termux.$Y\n ╰─➤$W when finished$G press enter\n$W"
 read enter
 
@@ -37,7 +40,7 @@ for repo in $(cat $iHAKLAB/.set/to-install/listOfpkg); do
 	elif [ ! -z "$PKG" ] && [ ! -z "$GOTIT" ]; then
 		continue
 	else
-		printf "$R(_➤)$W The repository $repo is not candidate.\n"
+		printf "$Y(_➤)$W The repository $repo is not candidate.\n"
 		sleep 1
 	fi
 done
@@ -59,8 +62,7 @@ for module in trufflehog wheel speedtest-cli scapy wfuzz h8mail osrframework obj
 done
 
 #::::::::::Definition of variable TOOLS::::::::::::#
-printf "$G\n(_➤) Getting access to external storage...$W"
-printf "$Y\n(_➤)$W Access..";
+printf "$G(_➤)$W Getting access to external storage..";
 sleep 0.5
 if [ -w $TOOLS ];then
 	printf "$G. DONE||$W\n"
@@ -69,7 +71,7 @@ else
 fi
 yes|termux-setup-storage
 
-#::::::::::Insatalling i-Haklab's login::::::::::::#
+#::::::::::Installing i-Haklab's login::::::::::::#
 [[ -e $HOME/.local/etc/i-Haklab/login-termux ]] && rm -f $HOME/etc/i-Haklab/login-termux
 [[ -e $PREFIX/etc/bashito ]] && rm -f $PREFIX/etc/bashito
 [[ -e $PREFIX/etc/motd ]] && rm -f $PREFIX/etc/motd
@@ -100,13 +102,16 @@ chmod -w $HOME/.local/etc/i-Haklab/.Cinderella
 
 #::::::::::Insatalling i-Haklab tools::::::::::::#
 printf "$G\n(_➤)$W Installing principal external tools."
-chmod 750 $iHAKLAB/.set/bin/*
-ln -s $iHAKLAB/.set/bin $HOME/.local/bin
+chmod +x $iHAKLAB/.set/bin/*
+for f in $(ls $iHAKLAB/.set/bin/);do
+	ln -s $iHAKLAB/.set/bin/$f $HOME/.local/bin/ 2>>$LOGFILE
+done
 
 printf "$G\n(_➤)$W Installing Python Exploit Development Assistance for GDB."
-curl -Ls ${iHDB}/to-install/gdb_peda.sh|bash
+[[ -d $TOOLS/peda ]] && rm -rf $TOOLS/peda
+curl -Ls ${iHDB}/to-install/gdb_peda.sh|bash 2>>$LOGFILE
 
-printf "$G\n(_➤)$W Set nano configuration..."
+printf "$G\n(_➤)$W Set nano configuration."
 cat <<- CONF > $HOME/.nanorc
 set linenumbers
 set historylog
@@ -128,27 +133,27 @@ printf "$G\n(_➤)$W Installing VIM predictable text."
 wget -q --tries=20 ${iHDB}/to-install/iHaklabvim.zip -O $TMPDIR/iHaklabvim.zip
 unzip -q $TMPDIR/iHaklabvim.zip -d $TMPDIR
 if [[ -d $TMPDIR/iHaklabvim ]];then
-	mv $(find $TMPDIR/iHaklabvim -type d -iname "vim") ~/.vim
-	mv $(find $TMPDIR/iHaklabvim/ -type f -iname ".vimrc") ~/
+	mv $TMPDIR/iHaklabvim/vim $HOME/.vim
+	mv $TMPDIR/iHaklabvim/.vimrc $HOME
 else
-	printf "$R(_➤) ERROR while setup vim editor$W"
+	printf "$R\n(_➤) ERROR while setup vim editor$W"
 fi
 rm -rf $TMPDIR/iHaklabvim.zip
 rm -rf $TMPDIR/iHaklabvim
 vim +PlugUpdate +x +x 2>>$LOGFILE
 
 printf "$G\n(_➤)$W Setting i-Haklab style."
-[[ -d ~/.termux ]] || mkdir -p ~/.termux
+[[ -d $HOME/.termux ]] || mkdir -p $HOME/.termux
 for i in $(ls $iHAKLAB/.set/to-install/.termux/);do
-	wget -q --tries=20 ${iHDB}/to-install/$i -O $HOME/.termux/$i
+	wget -q --tries=20 ${iHDB}/to-install/.termux/$i -O $HOME/.termux/$i
 done
-ln -s $PREFIX/bin/fish $HOME/.termux/shell 2>/dev/null
+ln -s $PREFIX/bin/fish $HOME/.termux/shell 2>>$LOGFILE
 
 #:::: Set functions ::::#
 fun=$(ls $iHAKLAB/.set/functions/*.fish|awk -F "/" '{print $NF}')
 mkdir -p $HOME/.config/fish/functions
 for f in ${fun[*]};do
-	wget -q --tries=20 ${iHDB}/functions/$f -O $HOME/.config/fish/functions/$f
+	ln -s $iHAKLAB/.set/functions/$f $HOME/.config/fish/functions/ 2>>$LOGFILE
 done
 
 #:::: Set VNC server ::::#
@@ -192,7 +197,7 @@ for TOOL in DoS-A-Tool ExiF localtunnel-server ngrok;do
 done
 
 #::::::::::Installation of Ohmyfish::::::::::::#
-printf "$G\n(_➤) Installing interactive shell.$W\n"
+printf "$G\n(_➤)$W Installing interactive shell.\n"
 cat <<- CONF > $HOME/.local/etc/fish/config.fish
 if status --is-login
 bash /data/data/com.termux/files/home/.local/etc/i-Haklab/wall-banner
@@ -237,7 +242,6 @@ then
 	fi
 	[[ -d ~/.local/share/i-Haklab ]] || { printf >&2 "[+] i-Haklab main directory missing, restoring (It could take a while)...\\n";yes|apt install git;mkdir -p $HOME/.local/share 2>/dev/null;git clone --quiet https://github.com/ivam3/i-Haklab $HOME/.local/share/i-Haklab && chmod +x -R $HOME/.local/share/i-Haklab;}
 	chsh -s fish
-	exit
 else
 	yes|apt install fish &>/dev/null 2>/dev/null
 	exec $HOME/.bashrc
@@ -251,10 +255,9 @@ cat <<- CONF > $TMP_fish
 omf install bira
 CONF
 fish $TMP_fish &>/dev/null 2>>$LOGFILE
+termux-reload-settings
 
-bash $iHAKLAB/.set/share/review #LOGFILE
 [[ -d ~/i-Haklab ]] && rm -rf ~/i-Haklab
-
 printf "$G\n\n
 (_➤)$W i-Haklab installed !!!$Y\n
 (_➤)$W Main commands$Y
@@ -277,5 +280,5 @@ printf "$G\n\n
  ╰────────➤ run:$W i-Haklab about i-Haklab :for all usage guide$G
 (_➤)$W To fix issues going to$B t.me/Ivam3_Bot$G
 (_➤)$W press$G enter$W to reestart Termux\n"
-read enter;termux-reload-settings;exec reset
+read enter;exec reset
 #		i-Haklab by @Ivam3
