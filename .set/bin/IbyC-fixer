@@ -6,7 +6,7 @@ IFS=$'\n\t'
 trap ctrl_c 2
 command -v curl >/dev/null || yes|apt install curl >/dev/null 2>&1
 command -v ruby >/dev/null || yes|apt install ruby >/dev/null 2>&1
-command -v lolcat >/dev/null || yes|gem install lolcat >/dev/null 2>&1
+yes|gem install lolcat >/dev/null 2>/dev/null
 iHDB="https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set"
 IbyCDB="https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/installer"
 [[ -d $HOME/.local/bin ]] && binPATH="$HOME/.local/bin" || binPATH="$PREFIX/bin"
