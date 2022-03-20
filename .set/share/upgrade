@@ -138,6 +138,7 @@ else
 fi
 rm -rf $TMPDIR/iHaklabvim.zip
 rm -rf $TMPDIR/iHaklabvim
+printf "$Y(_➤)$W Press$green ENTER$W to continue.\n"
 vim +PlugUpdate +x +x 2>/dev/null
 
 #::::: INSTALL OMF

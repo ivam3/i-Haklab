@@ -147,6 +147,7 @@ else
 fi
 rm -rf $TMPDIR/iHaklabvim.zip
 rm -rf $TMPDIR/iHaklabvim
+printf "$Y(_➤)$W Press$green ENTER$W to continue.\n"
 vim +PlugUpdate +x +x 2>>$LOGFILE
 
 printf "$G\n(_➤)$W Setting i-Haklab style."
@@ -264,7 +265,7 @@ CONF
 fish $TMP_fish 2>>$LOGFILE
 
 [[ -d $HOME/i-Haklab ]] && rm -rf $HOME/i-Haklab
-cd;tput cnorm;tput init;banner
+cd;tput init;banner
 printf "$G\n\n
 (_➤)$W i-Haklab installed !!!$Y\n
 (_➤)$W Main commands$Y
@@ -287,6 +288,5 @@ printf "$G\n\n
  ╰────────➤ run:$W i-Haklab about i-Haklab :for all usage guide$G
 (_➤)$W To fix issues going to$B t.me/Ivam3_Bot$G
 (_➤)$W press$G enter$W to reestart Termux\n"
-read enter
 killall $(echo $SHELL|awk -F "/" '{print $NF}')
 #		i-Haklab by @Ivam3

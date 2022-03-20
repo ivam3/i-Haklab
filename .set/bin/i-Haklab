@@ -110,7 +110,7 @@ case "$1" in
 			if [[ $LDAY -gt $RDAY ]];then
 				Done
 			else
-				printf "$G(_➤)$W Upgrading i-Haklab...\n"
+				printf "$green(_➤)$W Upgrading i-Haklab...\n"
 				bash $TMP_FILE1
 				Done
 			fi
