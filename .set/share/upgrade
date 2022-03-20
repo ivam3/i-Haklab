@@ -9,19 +9,22 @@ s5=$(sleep 0.5)
 binTools=$(ls $HOME/.local/share/i-Haklab/.set/bin)
 ctrl_c() { printf "$Y\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bot$W\n";}
 
+yes|apt install ncurses-utils locate &>/dev/null 2>>$LOGFILE
 printf "$Y(_➤)$W Removing oldest i-Haklab version\n";$s5
 [[ -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ]] && rm -rf $PREFIX/etc/apt/sources.list.d/abhacker.repo.list
 [[ -d $PREFIX/libexec/banner ]] && rm -rf $PREFIX/libexec/banner
 [[ -e $PREFIX/var/log/login-termux ]] && rm $PREFIX/var/log/login-termux
 
-printf "$Y(_➤)$W Installing newest i-Haklab version\n"
+printf "$green(_➤)$W Installing newest i-Haklab version\n"
 git clone --quiet https://github.com/ivam3/i-Haklab.git $HOME/.local/share/iHaklab
 [[ -d $HOME/.local/share/iHaklab ]] && rm -rf $HOME/.local/share/i-Haklab;mv ~/.local/share/iHaklab ~/.local/share/i-Haklab || { printf "$R(_➤)$W i-Haklab directory missing..$R Aborting.$W";exit;}
 
 #::::: BUILD TREE DIRECTORIES
+printf "$green(_➤)$W Creating the directories tree.\n"
 mkdir -p ~/.local/{bin,etc/i-Haklab,etc/fish,lib,share,tools,var/service/www}
 
 #::::: SET FUNC AND VAR :::::#
+printf "$green(_➤)$W Setting variables, functions and binaries.\n"
 source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 chmod 750 -R $iHAKLAB
@@ -41,15 +44,17 @@ for b in $(ls $iHAKLAB/.set/bin);do
 done
 
 #::::: RELOCATE LOGIN ACCESS KEYS
+printf "$green(_➤)$W Setting the i-Haklab access key.\n"
 for i in Quiz Cinderella Ivam3;do
 	[[ -e $PREFIX/libexec/termux/.$i ]] && mv $PREFIX/libexec/termux/.$i $HOME/.local/etc/i-Haklab
 done
 command -v pulseaudio >/dev/null || yes|apt install pulseaudio
 
 #::::: SET i-HAKLAB STARTUP
-printf "$Y(_➤)$W Reconfigure startup settings\n";$s5
-motd=$(ls $PREFIX/etc/|grep "motd")
-[[ ! -z $motd ]] && rm $motd
+printf "$green(_➤)$W Reconfigure startup settings\n";$s5
+for motd in $(ls $PREFIX/etc/|grep "motd");do
+	rm $PREFIX/etc/$motd
+done
 [[ -e $PREFIX/etc/fish/config.fish ]] && rm $PREFIX/etc/fish/config.fish
 mkdir -p $PREFIX/etc/fish 2>>$LOGFILE
 cat <<- CONF > $HOME/.local/etc/fish/config.fish
@@ -97,7 +102,7 @@ else
 fi
 CONF
 
-printf "$G(_➤)$W Setting i-Haklab style.\n";$s5
+printf "$green(_➤)$W Setting i-Haklab style.\n";$s5
 [[ -d ~/.termux ]] || mkdir -p ~/.termux
 for i in $(ls $iHAKLAB/.set/to-install/.termux);do
 	wget -q --tries=20 $iHDB/to-install/.termux/$i -O ~/.termux/$i
@@ -105,7 +110,7 @@ done
 [[ -e ~/.termux/shell ]] || ln -s $PREFIX/bin/fish ~/.termux/shell
 
 #::::: EET NANO AND VIM TEXT EDITORS
-printf "$G(_➤)$W Installing NANO and VIM predictable text.\n";$s5
+printf "$green(_➤)$W Installing NANO and VIM predictable text.\n";$s5
 cat <<- CONF > $HOME/.nanorc
 set linenumbers
 set historylog
@@ -136,7 +141,7 @@ rm -rf $TMPDIR/iHaklabvim
 vim +PlugUpdate +x +x 2>/dev/null
 
 #::::: INSTALL OMF
-if [[ ! -e $PREFIX/bin/omf ]];then
+if [[ ! -d $HOME/.local/share/omf ]];then
 	printf "$Y\n(_➤) Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'\n ╰─➤ when it happen hold on for one minute and then type exit to continue$W\n"
 	curl -Ls $iHDB/to-install/get.oh-my.fish|fish 2>>$LOGFILE
 	TMP_fish=$(mktemp)
@@ -147,10 +152,10 @@ CONF
 	fish $TMP_fish 2>>$LOGFILE
 fi
 
-cd;tput cnorm;tput init
+cd;tput init
 bash $HOME/.local/etc/i-Haklab/wall-banner
 printf "$G
-(_➤)$W i-Haklab upgraded at version 3.0$G
+(_➤)$W i-Haklab upgraded at version 3.1$G
  ╰─────$Y~☆ New features:$G
  ╰──────────$Y~☆$W code cleaner that optimizes the use of RAM$G
  ╰──────────$Y~☆$W obsolete tools removed$G
@@ -172,4 +177,6 @@ printf "$G
  ╰──────────$Y~☆$W wireshark xhydra vscode and vim editor on graphical enviroment$G
  |
  ╰───────────➤$W to report issues goin to$B https://t.me/Ivam3_Bot."
+
+updatedb;killall $(echo $SHELL|awk -F "/" '{print $NF}')
 #       i-Haklab by @Ivam3
