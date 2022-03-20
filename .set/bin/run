@@ -126,6 +126,7 @@ if [ -z $TOOL ]; then
 ╰─sqliv──────────➤  Massive SQL injection scanner.
 ╰─sqlmap─────────➤  Penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database server. 
 ╰─tangalanga─────➤  Zoom Conference scanner. This scanner will check for a random meeting id and return information if available
+╰─trape──────────➤  OSINT analysis and research tool.
 ╰─userrecon──────➤  Find usernames across over 75 social networks.
 ╰─vt─────────────➤  VirusTotal: an command line service that analyzes files and URLs enabling the detection of viruses, worms, trojans and other kinds of malicious content using antivirus engines and website scanners.
 ╰─vulnx──────────➤  Intelligent bot auto shell injector that detect vulnerabilities in multiple types of cms.
@@ -206,7 +207,7 @@ case "$TOOL" in
 		fi
 		;;
 #::::PYTHON3 TOOLS::::#
-	evilurl|NULL-phoneinfoga-NULL|phomber|hunner|infoga|ipgeolocation|phonesploit|seeker|shellsploit|sublist3r|NULL-theharvester-NULL|vulnx)
+	evilurl|NULL-phoneinfoga-NULL|phomber|hunner|infoga|ipgeolocation|phonesploit|seeker|shellsploit|sublist3r|NULL-theharvester-NULL|trape|vulnx)
 		if CheckPath;then
 			exec python $TOOLPATH/$TOOL.py ${@:2}
 		else

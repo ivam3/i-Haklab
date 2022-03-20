@@ -401,6 +401,15 @@ case "$toInstall" in
 		rm -f $TMPDIR/requirements.txt
 		yes|apt remove rust && apt autoremove
 		;;
+	trape)
+		yes|apt install git python
+		PIPup
+		Pyv=""
+		git clone --quiet https://github.com/jofpin/$toinstall $TOOLS/$toInstall
+		cat $TOOLS/$toInstall/requirements.txt > $TMPDIR/requirements.txt
+		PYmodules
+		rm -rf $TMPDIR/requirements.txt
+		;;
 	vulnx)
 		yes|apt install git python
 		PIPup
