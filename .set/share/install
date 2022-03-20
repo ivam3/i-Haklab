@@ -1003,7 +1003,7 @@ CONF
 		rubyLIBv=$(ls $PREFIX/lib/ruby|sort -r|grep -m 1 '[0-9].[0-9].[0-9]')
 		[[ -d $PREFIX/opt/metasploit-framework ]] && rm -rf $msfDir
 		[[ -d $PREFIX/var/lib/postgresql ]] && rm -rf $PREFIX/var/lib/postgresql
-		yes|apt install autoconf patchelf bison apr apr-util postgresql libgrpc libtool libcap wget termux-elf-cleaner ruby build-essential binutils
+		yes|apt install autoconf patchelf bison apr apr-util postgresql libgrpc libtool libcap wget termux-elf-cleaner ruby build-essential binutils apktool apksigner aapt aapt2 openjdk-17
 		mkdir -p $PREFIX/opt
 		for i in aarch64-linux-android arm-linux-androideabi \
 			i686-linux-android x86_64-linux-android;do
