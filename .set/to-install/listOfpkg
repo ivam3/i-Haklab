@@ -11,6 +11,7 @@ apr
 apr-util
 autoconf
 axel
+bat
 bc
 bison
 clang

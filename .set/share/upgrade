@@ -9,7 +9,7 @@ s5=$(sleep 0.5)
 binTools=$(ls $HOME/.local/share/i-Haklab/.set/bin)
 ctrl_c() { printf "$Y\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bot$W\n";}
 
-yes|apt install ncurses-utils locate &>/dev/null 2>>$LOGFILE
+yes|apt install bat ncurses-utils locate &>/dev/null 2>>$LOGFILE
 printf "$Y(_➤)$W Removing oldest i-Haklab version\n";$s5
 [[ -e $PREFIX/etc/apt/sources.list.d/abhacker.repo.list ]] && rm -rf $PREFIX/etc/apt/sources.list.d/abhacker.repo.list
 [[ -d $PREFIX/libexec/banner ]] && rm -rf $PREFIX/libexec/banner
