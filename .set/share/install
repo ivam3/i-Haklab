@@ -947,6 +947,7 @@ CONF
 			mkdir -p $PREFIX/opt
 		fi
 		git clone --quiet https://github.com/$1project/$toInstall $PREFIX/opt/$toInstall
+		sed -i "5a gem 'net-smtp', require: false" $PREFIX/opt/$toInstall/Gemfile
 		sed "s|database: '/opt/GeoIP/GeoLite2-City.mmdb'|database: '/data/data/com.termux/files/usr/opt/GeoIP/GeoLite2-City.mmdb'|g" -i config.yaml
 		sed 's|passwd: "beef"|passwd: "Ivam3byCinderella"|g' -i config.yaml
 		sed '155 s|enable: false|enable: true|g' -i config.yaml
@@ -1033,7 +1034,7 @@ CONF
 		gem install actionpack
 		gem install rails --platform=ruby -- --use-system-libraries
 		bundle install -j$(nproc --all) --verbose
-		printf "$green\nRunning RuGiR(Ruby Gem Issues Resolved).$W";$zzz
+		printf "$green\nRunning RuGiR(Ruby Gem Issues Resolved).\n$W";$zzz
 		bundle update --bundler
 		printf "$Y\nPlease answer questions with an 'y' or '3'$W";$zzz
 		gem uninstall nokogiri
