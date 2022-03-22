@@ -228,6 +228,7 @@ set JAVA_HOME /data/data/com.termux/files/usr/opt/openjdk
 set iHAKLAB /data/data/com.termux/files/home/.local/share/i-Haklab
 set LD_LIBRARY_PATH $HOME/.local/lib:$PREFIX/lib
 set TOOLS $TOOLS
+alias bat="bat -f --theme 'Visual Studio Dark+'"
 pulseaudio --start --exit-idle-time=-1 2>/dev/null
 pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1
 CONF
