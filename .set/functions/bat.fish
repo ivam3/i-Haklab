@@ -1,3 +1,3 @@
 function bat
-   bat --style header,rule,snip,changes,header --theme 'Visual Studio Dark+' $argv
+  bat --style header,rule,snip,changes --theme 'Visual Studio Dark+' -f $argv
 end
