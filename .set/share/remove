@@ -282,7 +282,7 @@ case "$toRemove" in
 		;;
 	java)
 		rmMainDir
-		yes|apt remove aapt apksigner openjdk-17;yes|apt autoremove
+		yes|apt remove aapt apksigner openjdk-17 openjdk-9-jre-headless;yes|apt autoremove
 		for i in java apktool signapk keytool;do
 			rm -f $PREFIX/bin/$i
 		done
