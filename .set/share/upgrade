@@ -42,6 +42,7 @@ for b in $(ls $iHAKLAB/.set/bin);do
 		ln -s $iHAKLAB/.set/bin/$b $HOME/.local/bin/ 2>>$LOGFILE
 	fi
 done
+chmod 750 $iHAKLAB/.set/bin/*
 
 #::::: RELOCATE LOGIN ACCESS KEYS
 printf "$green(_➤)$W Setting the i-Haklab access key.\n"
