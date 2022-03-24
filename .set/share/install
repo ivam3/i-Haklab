@@ -730,7 +730,7 @@ CONF
 			[[ -d ~/.$i ]] && rm -rf ~/.$i
 		done
 		echo "deb [trusted=yes arch=all] https://Yisus7u7.github.io/termux-desktop-xfce/packages desktop-xfce extras" > $PREFIX/etc/apt/sources.list.d/termux-desktop-xfce.list;apt update >/dev/null 2>/dev/null
-		for pkg in x11-repo xfce4 xfce4-taskmanager xfce4-goodies termux-api dosbox xfce4-terminal python-tkinter neofetch loqui the-powder-toy galculator xorg-xhost mpv ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk2 gtk3 mtpaint leafpad otter-browser recordmydesktop feh audacious lxqt-themes papirus-icon-theme lxappearance fluent-icon-theme fluent-gtk-theme kvantum zenity dbus-glib dconf $(apt search 'xfce4-' 2>/dev/null|grep '/'|awk -F '/' '{print $1}') breeze-cursor-theme ttf-microsoft-cascadia; do
+		for pkg in x11-repo termux-x11 termux-gui-package xwayland xfce4 xfce4-taskmanager xfce4-goodies termux-api cmake-curses-gui git-gui dosbox xfce4-terminal python-tkinter neofetch loqui the-powder-toy galculator xorg-xhost mpv ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver libx11-static tigervnc geany geany-plugins gtk2 gtk3 mtpaint leafpad otter-browser recordmydesktop feh audacious lxqt-themes papirus-icon-theme lxappearance fluent-icon-theme fluent-gtk-theme kvantum zenity dbus-glib dconf $(apt search 'xfce4-' 2>/dev/null|grep '/'|awk -F '/' '{print $1}') breeze-cursor-theme ttf-microsoft-cascadia; do
 			ipkg=$(pkg list-installed 2>/dev/null|grep "$pkg"|awk -F "/" '{print $1}') >/dev/null
 #			checkpkg=${ipkg%/*}
 			if [[ -z $ipkg ]]

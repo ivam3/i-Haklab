@@ -351,10 +351,10 @@ case "$TOOL" in
 		;;
 	Xwayland)
 		for i in x11-repo xwayland termux-x11;do
-			[[ $(pkg list-installed|grep -oE "$i") ]] || yes|pkg install $i
+			[[ $(pkg list-installed 2>/dev/null|grep -oE "$i") ]] || yes|pkg install $i
 		done
 		export XDG_RUNTIME_DIR=${TMPDIR}
-    termux-x11 :0 >/dev/null 2>/dev/null &
+    termux-x11 :0 >/dev/null &
 		sleep 3
 		env DISPLAY=:0 xfce4-session
 		;;
