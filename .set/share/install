@@ -730,7 +730,7 @@ CONF
 			[[ -d ~/.$i ]] && rm -rf ~/.$i
 		done
 		pkgsList="x11-repo xfce4 xfce4-taskmanager dosbox xfce4-terminal python-tkinter neofetch loqui vim-gtk the-powder-toy galculator xorg-xhost mpv-x ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk3 gtk2 mtpaint leafpad hexchat otter-browser recordmydesktop feh audacious lxqt-themes papirus-icon-theme lxappearance fluent-icon-theme fluent-gtk-theme kvantum zenity mate-terminal mate-settings-daemon dbus-glib dconf termux-api wireshark-gtk $(apt search "xfce4-" 2>/dev/null|grep -E "x11"|awk -F "/" '{print $1}')"
-		for pkg in ${pkgsList[@]}; do
+		for pkg in ${pkgsList[*]}; do
 			yes|apt install "$pkg"
 			ipkg=$(pkg list-installed $pkg 2>/dev/null|tail -n 1)
 			checkpkg=${ipkg%/*}
@@ -739,7 +739,7 @@ CONF
 				printf "$G\n(_➤) Package $pkg installed successfully.$W\n"
 				continue
 			else
-				printf "$R\n(_➤) Error installing $pkg, Aborting...$W\n";exit
+				printf "$R\n(_➤) Error installing $pkg, Aborting...$W\n"
 			fi
 		done
 		mkdir -p $HOME/{Desktop,Downloads,Templates,Public,Documents,Pictures,Video}
