@@ -729,24 +729,36 @@ CONF
 		for i in vnc icons themes config; do
 			[[ -d ~/.$i ]] && rm -rf ~/.$i
 		done
-		pkgsList="x11-repo xfce4 xfce4-taskmanager dosbox xfce4-terminal python-tkinter neofetch loqui vim-gtk the-powder-toy galculator xorg-xhost mpv-x ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk3 gtk2 mtpaint leafpad hexchat otter-browser recordmydesktop feh audacious lxqt-themes papirus-icon-theme lxappearance fluent-icon-theme fluent-gtk-theme kvantum zenity mate-terminal mate-settings-daemon dbus-glib dconf termux-api wireshark-gtk $(apt search "xfce4-" 2>/dev/null|grep -E "x11"|awk -F "/" '{print $1}')"
-		for pkg in ${pkgsList[*]}; do
-			yes|apt install "$pkg"
-			ipkg=$(pkg list-installed $pkg 2>/dev/null|tail -n 1)
-			checkpkg=${ipkg%/*}
-			if [[ "$checkpkg" == "$pkg" ]]
+		echo "deb [trusted=yes arch=all] https://Yisus7u7.github.io/termux-desktop-xfce/packages desktop-xfce extras" > $PREFIX/etc/apt/sources.list.d/termux-desktop-xfce.list;apt update >/dev/null 2>/dev/null
+		for pkg in x11-repo xfce4 xfce4-taskmanager xfce4-goodies termux-api dosbox xfce4-terminal python-tkinter neofetch loqui the-powder-toy galculator xorg-xhost mpv ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk2 gtk3 mtpaint leafpad otter-browser recordmydesktop feh audacious lxqt-themes papirus-icon-theme lxappearance fluent-icon-theme fluent-gtk-theme kvantum zenity dbus-glib dconf $(apt search 'xfce4-' 2>/dev/null|grep '/'|awk -F '/' '{print $1}') breeze-cursor-theme ttf-microsoft-cascadia; do
+			ipkg=$(pkg list-installed 2>/dev/null|grep "$pkg"|awk -F "/" '{print $1}') >/dev/null
+#			checkpkg=${ipkg%/*}
+			if [[ -z $ipkg ]]
 			then
-				printf "$G\n(_➤) Package $pkg installed successfully.$W\n"
-				continue
+				printf "$G(_➤)$W Installing package $pkg...$W\n"
+				yes|apt install $pkg 2>$LOGFILE
 			else
-				printf "$R\n(_➤) Error installing $pkg, Aborting...$W\n"
+				printf "$Y(_➤)$W Package $pkg installed successfully.$W\n"
 			fi
 		done
-		mkdir -p $HOME/{Desktop,Downloads,Templates,Public,Documents,Pictures,Video}
+		[[ -d $HOME/.backup ]] && rm -rf $HOME/.backup
+		mkdir -p $HOME/{Desktop,Downloads,Templates,Public,Documents,Pictures,Videos,.backup}
 		ln -s $HOME/storage/music $HOME/Music
+		[[ -d $HOME/.config ]] && mv $HOME/.config $HOME/.backup
+		wget -q https://github.com/Yisus7u7/termux-desktop-xfce/releases/download/desktop-5.0.3/data.tar.xz -O $TMPDIR/data.tar.xz
+		tar -xvf data.tar.xz -C $HOME
+		rm $TMPDIR/data.tar.xz
+		file2restore=$(diff -q $HOME/.backup/.config/ $HOME/.config/|grep -iv "backup"|awk -F ' ' '{print $NF}')
+		for f in ${file2restore[*]};do
+			cp -r $HOME/.config/$file2restore $HOME/.backup/.config
+		done
+		rm -rf $HOME/.config
+		mv $HOME/.backup/.config $HOME/.config
+		rm -rf $HOME/.backup
 		exec vncserver;sleep 3
 		sed 's|/twm &|xfce4-session &|g' -i ~/.vnc/xstartup
-		printf "$G\nDONE!!$Y\n\nNOW GO TO PLAY STORE AND DOWNLOAD VNC SERVER APP$G\n[RUN ON TERMUX]─➤$W vncserver$G\n      ╰─────────➤ At first time, you will be prompted for setting up passwords$Y\nOPEN VNC APP AND SET NETWORK ADDRESS AS : localhost:1$G\n[TO STOP IT]─➤$W vncserver -kill :1\n"
+		printf "$Y\nNOW GO TO PLAY STORE AND DOWNLOAD VNC SERVER APP\nOR GO TO GITHUB AND DOWNLOAD TERMUX WAYLAND APP$G\n[$green RUN BY VNC$G ]─➤$W vncserver$G\n      ╰─────────➤$W At first time, you will be prompted for setting up passwords$Y\n\nOPEN VNC APP AND SET NETWORK ADDRESS AS :$W localhost:1$G\n[$green TO STOP IT$G ]─➤$W vncserver -kill :1\n"
+		toInstall=Xwayland
 		;;
 	binchecker|crunch|i-Haklab|IbyC-fixer|blackbox|converter|lock|pagekite|serverphp|torvpn)
 		SearchTool
