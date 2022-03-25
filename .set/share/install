@@ -109,7 +109,7 @@ case "$toInstall" in
 		(06)─➤$W type your password and enjoy it!!\n"
 		;;
 		#::PYTHON3::#
-	h8mail|objection|osrframework)
+	h8mail|objection|osrframework|shodan)
 		SearchTool
 		yes|apt install python
 		PIPup
@@ -345,6 +345,17 @@ case "$toInstall" in
 		printf "future\nrequests\npysnmp\npycrypto\ncryptography\nparamiko\nbcrypt\npynacl" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
+		;;
+	scrapy)
+		SearchTool
+		yes|apt install python rust
+		export CARGO_BUILD_TARGET=$(rustc --version --verbose|sed -n 's|host: ||p')
+		PIPup
+		PYv=""
+		printf "$toinstall" > $TMPDIR/requirements.txt
+		PYmodules
+		rm -f $TMPDIR/requirements.txt
+		yes|apt remove rust && apt autoremove
 		;;
 	seeker)
 		SearchTool
