@@ -3,20 +3,22 @@
 IFS=$'\n\t'
 trap ctrl_c 2
 ctrl_c(){ printf "\n$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n";exit;}
+
 source $HOME/.local/share/i-Haklab/.set/var/variables
 source $iHAKLAB/.set/functions/functions
 toRemove="$1"
+
 if [[ $SHELL = $PREFIX/bin/fish ]];then
 	INITFILE="$PREFIX/etc/fish/config.fish"
 else
 	INITFILE="$PREFIX/etc/bash.bashrc"
 fi
-[[ $toRemove = kalilinux ]] && toRemove="kali-fs"
-[[ $toRemove = twifo-cli ]] && toRemove="twifo"
-[[ $toRemove = login-termux ]] && login="$(grep -oE $toRemove $INITFILE)"
-if [ ! -d $TOOLS/$toRemove ] && [ ! -e $HOME/.local/bin/$toRemove ] && [ ! -e $PREFIX/bin/$toRemove ] && [ ! -d $PREFIX/opt/$toRemove ] && [ ! -e ~/go/bin/$toRemove ] && [ ! -d ~/$toRemove ] && [ -z $login ];then
-	printf "$R(_➤)$W $1 isn't installed";exit
-fi
+
+SearchTool(){
+	if [ ! -d $TOOLS/$toRemove ] && [ ! -e $HOME/.local/bin/$toRemove ] && [ ! -e $PREFIX/bin/$toRemove ] && [ ! -d $PREFIX/opt/$toRemove ] && [ ! -e ~/go/bin/$toRemove ] && [ ! -d ~/$toRemove ] && [ -z $login ];then
+		printf "$R(_➤)$W Tool $1 isn't installed";exit
+	fi
+}
 Err() { printf "$R(_➤)$W Remove failed";exit;}
 PIPup() {
 	for PYv in python2 python;do
@@ -45,14 +47,18 @@ alert() { printf "$Y\n(_➤)$W The main $toRemove directory has been removed$Y\n
 
 running 3
 case "$toRemove" in
-	kalilinux|kali-fs)
+	kalilinux)
+		toRemove="kali-fs"
+		SearchTool
 		yes|apt install curl && curl https://raw.githubusercontent.com/AndronixApp/AndronixOrigin/master/Uninstall/Kali/UNI-kali.sh|bash
 		;;
 	termuxwayland)
+		SearchTool
 		yes|apt remove wayland && yes|apt autoremve
 		;;
 	#::ON BIN TOOLS::#
 	binwalk|beef|cewl|evilurl|ghost|hakku|hatcloud|exploitdb|lockphish|nexphisher|saycheese|sayhello|wbruter|ExiF|binchecker|IbyC-fixer|blackbox|converter|serverphp|hydra|JohnTheRipper|ngrok|shc|slowhttptest|snow|whatweb|wpscan|DoS-A-Tool|acccheck|rhawk|nikto)
+	  SearchTool
 		if [[ $toRemove = beef ]]; then
 			rm -rf $PREFIX/opt/GeoIP
 		fi
@@ -76,44 +82,53 @@ case "$toRemove" in
 		;;
 	#:::PYTHON3:::#
 	botgram)
+	  SearchTool
 		rmMainDir
 		printf "numpy telethon requests configparser" > $TMPDIR/deps2drop
 		alert
 		;;
 	h8mail|objection|osrframework|scrapy|shodan)
+		SearchTool
 		printf "$toRemove" > $TMPDIR/deps2drop
 		alert
 		;;
 	fuzzdb)
+		SearchTool
 		rmMainDir
 		printf "wfuzz" > $TMPDIR/deps2drop
 		alert
 		;;
 	getnpusers)
+		SearchTool
 		rmMainDir
 		printf "urllib3\nrequests\nmock\nidna\nbiopython\nrust\nimpacket" > $TMPDIR/deps2drop;alert
 		;;
 	hunner)
+		SearchTool
 		rmMainDir
 		printf "httplib2" > $TMPDIR/deps2drop
 		alert
 		;;
 	ipgeolocation)
+		SearchTool
 		rmMainDir
 		printf "termcolor\ncolorama" > $TMPDIR/deps2drop
 		alert
 		;;
 	osintgram)
+		SearchTool
 		rmMainDir
 		printf "requests==2.24.0\nrequests-toolbelt==0.9.1\ngeopy\nprettytable==0.7.2\ninstagram-private-api==1.6.0\ngnureadline" > $MPDIR/deps2drop
 		alert
 		;;
 	phomber|trape|sublist3r|vulnx)
+		SearchTool
 		cat $TOOLS/$toRemove/requirements.txt > $TMPDIR/deps2drop
 		rmMainDir
 		alert
 		;;
 	phoneinfoga)
+		SearchTool
 		yes|apt remove geckodriver
 		rmMainDir
 		if $(command -v geckodriver);then
@@ -123,37 +138,44 @@ case "$toRemove" in
 		alert
 		;;
 	quack)
+		SearchTool
 		rmMainDir
 		printf "install\nsetuptools\nphonenumbers\nrequests\nscapy\nwget\nargparse" > $TMPDIR/deps2drop
 		alert
 		;;
 	recon-ng)
+		SearchTool
 		yes|apt remove libxml2 libxml2-static libxml2-utils libxslt libxslt-static
 		rmMainDir
 		printf "dicttoxml\ndnspython\njsonrpclib\nlxml\nmechanize\nslowaes\nXlsxWriter\nolefile\nPyPDF2\nflask\nunicodecsv" > $TMPDIR/deps2drop
 		alert
 		;;
 	routersploit)
+		SearchTool
 		rmMainDir
 		printf "future\nrequests\npysnmp\npycrypto\ncryptography\nparamiko\nbcrypt\npynacl" > $TMPDIR/deps2drop
 		alert
 		;;
 	seeker)
+		SearchTool
 		rmMainDir
 		printf "requests" > $TMPDIR/deps2drop
 		alert
 		;;
 	shellsploit)
+		SearchTool
 		rmMainDir
 		printf "capstone\nreadline\npefile\ncolorama\npylzma" > $TMPDIR/deps2drop
 		alert
 		;;
 	sherlock)
+		SearchTool
 		rmMainDir
 		printf "beautifulsoup\nbs\ncertifi\ncolorama\nlxml\nPySocks\nrequests\nrequests-futures\nsoupsieve\nstem\ntorrequest" >> $TMPDIR/deps2drop
 		alert
 		;;
 	sqlmap)
+		SearchTool
 		if [[ -d $TOOLS/$toRemove ]];then
 			rmMainDir
 		else
@@ -162,6 +184,7 @@ case "$toRemove" in
 		fi
 		;;
 	theharvester)
+		SearchTool
 		yes|apt remove libxml2 libxml2-static libxml2-utils libxslt libxslt-static
 		cat $TOOLS/$toRemove/requirements.txt > $TMPDIR/deps2drop
 		rmMainDir
@@ -169,70 +192,82 @@ case "$toRemove" in
 		;;
 	#::PYTHON2::#
 	a2sv)
+		SearchTool
 		Pyv="2"
 		rmMainDir
 		printf "argparse\nnetaddr" > $TMPDIR/deps2drop
 		alert
 		;;
 	adminpanel|androbugs|cc-genpro|websploit)
+		SearchTool
 		PYv="2"
 		rmMainDir
 		;;
 	d-tect)
+		SearchTool
 		PYv="2"
 		rmMainDir
 		printf "colorama\nbeautifulsoup" > $TMPDIR/deps2drop
 		alert
 		;;
 	cloudbunny)
+		SearchTool
 		PYv="2"
 		rmMainDir
 		printf "certificates" > $TMPDIR/deps2drop
 		alert
 		;;
 	credmap)
+		SearchTool
 		PYv="2"
 		rmMainDir
 		printf "urllib2" > $TMPDIR/deps2drop
 		alert
 		;;
 	cryptovenom)
+		SearchTool
 		PYv="2"
 		rmMainDir
 		printf "base58\nscrypt\npyblake2\npycrypto\ncrypto\nbcrypt\nrc2\ntwofish\ngeesefly\nskein pycipher\nnumpy\nCrypto\npasslib\nbase91\nmom\ngmpy2\nmore_itertools\nargon2_cffi" > $TMPDIR/deps2drop
 		alert
 		;;
 	fbi|recondog)
+		SearchTool
 		PYv="2"
 		rmMainDir
 		printf "requests" > $TMPDIR/deps2drop
 		alert
 		;;
 	hasher)
+		SearchTool
 		PYv="2"
 		rmMainDir
 		printf "progressbar\npasslib" > $TMPDIR/deps2drop
 		alert
 		;;
 	kerbrute)
+		SearchTool
 		PYv="2"
 		rmMainDir
 		printf "impacket" > $TMPDIR/deps2drop
 		alert
 		;;
 	phonesploit)
+		SearchTool
 		PYv="2"
 		rmMainDir
 		printf "colorama" > $TMPDIR/deps2drop
 		alert
 		;;
 	pybelt)
+		SearchTool
 		PYv="2"
 		rmMainDir
 		cat $TOOLS/$toRemove/deps2drop > $TMPDIR/deps2drop
 		alert
 		;;
 	sqliv)
+		SearchTool
 		yes|apt remove libxml2 libxml2-static libxml2-utils libxslt libxslt-static
 		PYv="2"
 		rmMainDir
@@ -241,14 +276,18 @@ case "$toRemove" in
 		;;
 	#::BASH::#
 	login-termux)
+		login="$(grep -oE $toRemove $INITFILE)"
+		SearchTool
 		sed 's|/data/data/com.termux/files/home/.local/etc/i-Haklab/login-termux|/data/data/com.termux/files/home/.local/etc/i-Haklab/wall-banner|g' -i $INITFILE
 		[[ $(grep -oE "wall-banner" $INITFILE) ]] || Err
 		;;
 	userrecon|dex2jar)
+		SearchTool
 		rmMainDir
 		;;
 	#::BIN::#
 	adbfastboot)
+		SearchTool
 		for BIN in adb adb.bin fastboot fastboot-armeabi;do
 			if [[ -e $HOME/.local/bin/$BIN ]];then
 				rm -f $HOME/.local/bin/$BIN
@@ -259,15 +298,18 @@ case "$toRemove" in
 		fi
 		;;
 	burpsuite)
+		SearchTool
 		[[ -e $HOME/.local/bin/burpsuite ]] && rm -rf $HOME/.local/bin/burpsuite
 		[[ -e $TOOLS/burpsuite.jar ]] && rm -rf $TOOLS/burpsuite.jar
 		;;
 	code-server)
+		SearchTool
 		yes|apt remove build-essential python git nodejs yarn
 		yes|apt autoremove
 		[[ -d ~/.config/code-server ]] && rm -rf ~/.config/code-server
 		;;
 	desktop-xfce4)
+		SearchTool
 		yes|pkg remove xfce4 xfce4-taskmanager dosbox xfce4-terminal python-tkinter htop neofetch loqui vim-gtk the-powder-toy galculator xorg-xhost mpv-x ristretto xfce4-whiskermenu-plugin xfce4-clipman-plugin xarchiver tigervnc geany geany-plugins gtk3 gtk2 mtpaint leafpad hexchat netsurf recordmydesktop feh audacious;yes|pkg remove xfce4-* kvantum zenity mate-terminal mate-settings-daemon dbus-glib dconf termux-api wireshark-gtk
 		for i in .vnc .icons .themes .config Desktop Downloads Templates Public Documents Pictures Video Music backgrounds;do
 			if [[ ~/$toRemove ]]; then
@@ -281,6 +323,7 @@ case "$toRemove" in
 		done
 		;;
 	java)
+		SearchTool
 		rmMainDir
 		yes|apt remove aapt apksigner openjdk-17 openjdk-9-jre-headless;yes|apt autoremove
 		for i in java apktool signapk keytool;do
@@ -291,10 +334,12 @@ case "$toRemove" in
 		done
 		;;
 	localtunnel-server)
+		SearchTool
 		npm uninstall localtunnel
 		rm -rf $PREFIX/lib/node_modules/localtunnel
 		;;
 	serverapache)
+		SearchTool
 		yes|apt remove php apache2 php-pgsql php-fpm php-apache mariadb phpmyadmin
 		yes|apt autoremove
 		rm -rf $PREFIX/etc/apache2 $PREFIX/etc/phpmyadmin
@@ -303,21 +348,26 @@ case "$toRemove" in
 		fi
 		;;
 	tmux)
+		SearchTool
 		yes|apt remove --purge tmux;apt autoremove
 		[[ -d ~/.tmux ]] && rm -rf ~/.tmux
 		[[ -e ~/.tmux.conf ]] && rm -rf ~/.tmux.conf
 		[[ -e ~/.tmux.conf.local ]] && rm -rf ~/.tmux.conf.local
 		;;
 	torvpn)
+		SearchTool
 		yes|apt remove tor torsocks proxychains-ng
 		yes|apt autoremove
 		rm -rf $PREFIX/etc/tor $PREFIX/etc/proxychains.conf
 		rm -f $HOME/.local/bin/$i
 		;;
-	twifo-cli|twifo)
+	twifo-cli)
+		toRemove="twifo"
+		SearchTool
 		npm uninstall $toInstall-cli
 		;;
 	youtubedr|youtube-dl|converter)
+		SearchTool
 		if [[ $toRemove = youtube-dl ]];then
 			PYv=""
 			rmMainDir
@@ -333,36 +383,46 @@ case "$toRemove" in
 		fi
 		;;#::RUBY::#
 	embed)
+		SearchTool
 		yes|apt remove axel apksigner aapt
 		rmMainDir
 		;;
 	metasploit)
+		toRemove="metasploit-framework"
+		SearchTool
 		rmMainDir
 		rm -rf $PREFIX/var/lib/postgresql
-		yes|apt remove patchelf metasploit;yes|apt autoremove
+		yes|apt remove patchelf metasploit &>/dev/null 2>/dev/null
+		yes|apt autoremove
 		;;
 		#::GO::
 	amass)
+		SearchTool
 		goa=$(find ~/go/pkg/mod/github.com -type d -iname "!$toRemove"|head -n 1)
     rm -rf $gob $PREFIX/lib/go/src/$toRemove
 		;;
 	aquatone)
+		SearchTool
 		rm -rf ~/go/pkg/mod/github.com/$toRemove ~/$toRemove
 		gem remove --quiet --silent $toRemove $PREFIX/bin/$toRemove
 		;;
 	gobuster)
+		SearchTool
 		gob=$(find ~/go/pkg/mod/github.com -iname $toRemove)
     rm -rf $gob $PREFIX/lib/go/src/$toRemove
 		;;
 	gophish)
+		SearchTool
 		gop1=$(find ~/go/pkg/mod/github.com -type d -iname $toRemove|head -n 1)
     rm -rf $gop1
 		;;
 	tangalanga)
+		SearchTool
 		got=$(find ~/go/pkg/mod/github.com -type d -iname "$toRemove*")
 		rm -rf $got
 		;;
 	virustotal)
+		SearchTool
 		yes|apt remove $toRemove-cli
 		for i in rm -rf ~/go/src/github.com/VirusTotal ~/go/bin/vt $PREFIX/bin/vt $PREFIX/etc/bash_completion.d/vt;do
 			if [[ $i ]]; then
@@ -372,12 +432,15 @@ case "$toRemove" in
 		;;
 	#::ROOT::#
 	aircrack-ng)
+		SearchTool
 		yes|apt remove aircrack-ng ethtool macchanger
 		;;
 	bettercap)
+		SearchTool
 		gem uninstall bettercap
 		;;
 	dnsenum)
+		SearchTool
 		chk-sudo
 		rmMainDir
 		for repo in WWW::Mechanize Net::IP Net::DNS Net::Netmask XML::Writer String::Random ; do
@@ -391,28 +454,32 @@ case "$toRemove" in
 		fi
 		;;
 	webhackshl)
+		SearchTool
 		rmMainDir
 		printf "fierce" > $TMPDIR/deps2drop
 		alert
 		;;
 	xerosploit)
+		SearchTool
 		PYv="2"
 		rmMainDir
 		printf "tabulate\nterminaltables" > $TMPDIR/deps2drop
 		alert
 		;;
 	sudo)
+		SearchTool
 		chk-sudo
 		sudo rm -rf ~/.suroot $HOME/.local/bin/$toRemove
 		;;
 	*)
-		printf "$R(_➤)$W Unable to locate $1 on i-Haklab\n"
+		printf "$Y(_➤)$W Unable to locate $1 on i-Haklab\n"
     sleep 0.5
-		printf "$G(_➤)$W Trying with Advance Packect Tool (APT)...\n"
-    if [[ $(pkg list-all|grep -oE "$toRemove") ]];then
+		printf "$green(_➤)$W Trying with Advance Packect Tool (APT)...\n"
+		pkg=$(pkg list-installed 2>/dev/null|grep "$toRemove"|awk -F "/" '{print $1}')
+		if [[ ! -z $pkg ]] && [[ $pkg = $toRemove ]];then
 			yes|apt remove $toRemove
 		else
-			printf "$R(_➤)$W Tool $toRemove doesn't exist\n"
+			printf "$R(_➤)$W Tool $1 isn't installed"
       exit
 		fi
 		;;

@@ -1524,7 +1524,8 @@ EOF
 		printf "$R(_➤)$W Unable to locate $toInstall on i-Haklab\n"
 		sleep 0.5
 		printf "$G(_➤)$W Trying with Advance Packect Tool (APT)...\n"
-		if [[ $(pkg list-all|grep -oE "$toInstall") ]];then
+		pkg=$(pkg list-all 2>/dev/null|grep "$toInstall"|awk -F "/" '{print $1}') 
+		if [[ ! -z $pkg ]] && [[ $pkg = $toInstall ]];then
 			yes|apt install $toInstall
 		else
 			printf "$R(_➤)$W Tool $toInstall doesn't exist\n"

@@ -32,7 +32,7 @@ Repos() {
 	$Py -m pip --quiet --no-color install --upgrade pip
 	}
 Lib() {
-	for Libs in clang libtool libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static tar wget; do
+	for Libs in clang libtool libmpc libmpc-static libmpfr libmpfr-static libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static nodejs tar wget; do
 		SCHLIB=$(pkg list-installed | awk '{print $1}' | grep -oE $Libs | head -n1)
 		if [ -z $SCHLIB ]; then
 			printf "$Y\n(_➤) Installing libreries ...\n$W"

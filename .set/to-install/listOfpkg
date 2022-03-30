@@ -86,6 +86,7 @@ readline
 root-repo
 ruby
 sqlite
+strace
 tar
 tigervnc
 tmux
