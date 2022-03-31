@@ -3,6 +3,7 @@
 #UPGRADED ON 2022/Mar/31
 trap ctrl_c 2
 ctrl_c(){ printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";}
+StdErr(){ printf "$R(_➤)$W missing argument, type $(basename $0) -h for help\n";exit;}
 
 #:: VARIABLES ::#
 IFS=$'\n\t'
@@ -17,7 +18,9 @@ C='\033[1;36m'
 W='\033[0m'
 
 #:: INSTALLING REQUIREMENTS ::#
-yes|apt install curl wget &>/dev/null
+for i in curl wget;do
+	command -v $i 2>/dev/null || yes|apt install $i &>/dev/null
+done
 
 #:: MOVE SCRIPT TO PATH ::#
 [[ ! $(id -u) -ne 0 ]] && { printf >&2 "$R\n(_➤) You need to be a common user$W\n";exit;}
@@ -57,6 +60,7 @@ else
   echo "$G.UPDATED$W";sleep 1
 fi
 
-bash <(curl -fsSL "${iHDB}/fix-tools/IbyC-fixer") ${@:1}
+[[ $# -eq 0 ]] && StdErr
+bash <(curl -fsSL "${iHDB}/fix-tools/IbyC-fixer") $@
 
 #                                               @Ivam3

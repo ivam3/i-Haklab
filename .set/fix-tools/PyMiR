@@ -49,7 +49,7 @@ Requirements(){
 	$py -m pip --no-color --quiet --no-cache-dir install --upgrade pip 2>/dev/null
 }
 
-Banner|lolcat
+clear;Banner|lolcat
 [[ $# -eq 0 ]] && usage
 while getopts ":p:t:m:h" arg; do
 	case ${arg} in
