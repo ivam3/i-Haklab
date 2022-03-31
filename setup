@@ -257,7 +257,7 @@ else
 fi
 CONF
 printf "$Y\n(_➤) Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'\n ╰─➤ when it happen hold on for one minute and then type exit to continue$W\n"
-curl -Ls $iHDB/to-install/get.oh-my.fish|fish 2>>$LOGFILE
+fish <(curl -fsSL "${iHDB}/to-install/get.oh-my.fish") 2>>$LOGFILE
 TMP_fish=$(mktemp)
 cat <<- CONF > $TMP_fish
 #!/bin/env fish
