@@ -10,45 +10,13 @@ ctrl_c(){ printf "\n$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W\n
 Err() { printf "$R\n(_➤)$W Installation failed";ctrl_c;exit;}
 PS(){ printf "$G(_➤)$W Installing python modules.\n ╰─────➤$W (it could take a while)...\n";}
 PIPup() {
-	for PYv in python2 python ;do
-		$PYv -m pip install --no-color --quiet --upgrade pip
+	for PYv in python python2;do
+		yes|apt install $PYv >/dev/null 2>>$LOGFILE
+		$PYv -m pip --no-color --quiet --no-cache-dir install --upgrade pip 2>>$LOGFILE
 	done
 }
-BASIC() {
-        python$PYv -m pip install --quiet --no-cache-dir -r $TMPDIR/requirements.txt
-}
-LDFLAGS() {
-        export LDFLAGS="-L/system/lib/ -lm -lcompiler_rt"
-        python$PYv -m pip install --quiet --no-cache-dir --global-option="build_ext" --global-option="--disable-jpeg" -r $TMPDIR/requirements.txt
-}
-SODIUM() {
-	export SODIUM_INSTALL=system
-	python$PYv -m pip install --quiet --no-cache-dir --no-binary :all: -r $TMPDIR/requirements.txt
-}
-RUST() {
-	yes|apt install rust
-  export CARGO_BUILD_TARGET=$(rustc --version --verbose|sed -n 's|host: ||p')
-	python$PYv -m pip install --quiet --no-cache-dir -r $TMPDIR/requirements.txt
-	yes|apt purge rust
-}
-PYmodules() {
-	printf "$G(_➤)$W There are 3 methods of installing the modules: choose one$Y\n ╰───(01)─➤$W BASIC$Y\n ╰───(02)─➤$W LDFLAGS$Y\n ╰───(03)─➤$W SODIUM$Y\n ╰───(04)─➤$W RUST\n\n"
-
-	while read -p "(_➤) " ANSW && [ -z $ANSW ]; do
-		continue
-	done
-	if [[ $ANSW = '1' ]] || [[ $ANSW = '01' ]]; then
-		PS;BASIC
-	elif [[ $ANSW = '2' ]] || [[ $ANSW = '02' ]]; then
-		PS;LDFLAGS
-	elif [[ $ANSW = '3' ]] || [[ $ANSW = '03' ]]; then
-		PS;SODIUM
-	elif [[ $ANSW = '4' ]] || [[ $ANSW = '04' ]]; then
-		PS;RUST
-	else
-		printf "$R(_➤)$W method $ANSW doesn't exist\n"
-		exit 0
-	fi
+PYmodules(){
+	python$PYv -m pip --no-color --quiet --no-cache-dir install -r $TMPDIR/requirements.txt 2>>$LOGFILE
 }
 goEnv() {
 	yes|apt install golang
@@ -111,7 +79,6 @@ case "$toInstall" in
 		#::PYTHON3::#
 	h8mail|objection|osrframework|shodan)
 		SearchTool
-		yes|apt install python
 		PIPup
 		PYv=""
 		printf "$toinstall" > $TMPDIR/requirements.txt
@@ -120,7 +87,7 @@ case "$toInstall" in
 		;;
 	binwalk)
 		SearchTool
-		yes|apt install git python
+		yes|apt install git
 		PIPup
 		git clone --quiet https://github.com/ReFirmLabs/$toInstall $TOOLS/$toInstall
 		cd $TOOLS/$toInstall
@@ -129,7 +96,7 @@ case "$toInstall" in
 		;;
 	botgram)
 		SearchTool
-		yes|apt install git python
+		yes|apt install git
 		PIPup
 		git clone --quiet https://github.com/ivam3/$toInstall $TOOLS/$toInstall
 		cd $TOOLS/$toInstall
@@ -142,10 +109,10 @@ case "$toInstall" in
 		;;
 	evilurl)
 		SearchTool
-		yes|apt install python git
+		yes|apt install git
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/UndeadSec/EvilURL.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/UndeadSec/EvilURL $TOOLS/$toInstall
 		chmod +x -R $TOOLS/$toInstall
 		printf "python-nmap\npython-whois" > $TMPDIR/requirements.txt
 		PYmodules
@@ -154,10 +121,10 @@ case "$toInstall" in
 	fuzzdb|wfuzz)
 		[[ $toInstall = wfuzz ]] && toInstall="fuzzdb"
 		SearchTool
-		yes|apt install git wget python
+		yes|apt install git wget
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/fuzzdb-project/$toInstall.git --depth 1 $TOOLS/$toInstall
+		git clone --quiet https://github.com/fuzzdb-project/$toInstall --depth 1 $TOOLS/$toInstall
 		wget -q $iHDB/wordlist/$toInstall/big.txt -O $TOOLS/$toInstall/wordlists-user-passwd/big.txt
 		wget -q $iHDB/wordlist/$toInstall/common.txt -O $TOOLS/$toInstall/wordlists-misc/common.txt
 		chmod +x -R $TOOLS/$toInstall
@@ -186,7 +153,7 @@ case "$toInstall" in
 	hakku)
 		SearchTool
 		yes|apt install git python
-		git clone --quiet https://github.com/4shadoww/hakkuframework.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/4shadoww/hakkuframework $TOOLS/$toInstall
 		chmod 750 $TOOLS/$toInstall/$toInstall
 		;;
 	hunner)
@@ -194,7 +161,7 @@ case "$toInstall" in
 		yes|apt install git python
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/b3-v3r/Hunner.git $TOOL/$toInstall
+		git clone --quiet https://github.com/b3-v3r/Hunner $TOOL/$toInstall
 		chmod 750 -R $TOOLS/$toInstall
 		printf "httplib2" > $TMPDIR/requirements.txt
 		PYmodules
@@ -212,20 +179,20 @@ case "$toInstall" in
 		;;
 	ipgeolocation)
 		SearchTool
-		yes|apt install python git
+		yes|apt install git
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/maldevel/IPGeoLocation.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/maldevel/IPGeoLocation $TOOLS/$toInstall
 		printf "termcolor\ncolorama" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
 		;;
 	osintgram)
 		SearchTool
-		yes|apt install python git
+		yes|apt install git
 		PIPup
 		Pyv=""
-		git clone --quiet https://github.com/datalux/Osintgram.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/datalux/Osintgram $TOOLS/$toInstall
 		cat $TOOLS/$toInstall/requirements.txt > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -251,7 +218,7 @@ case "$toInstall" in
 		;;
 	phomber)
 		SearchTool
-		yes|apt install python git
+		yes|apt install git
 		PIPup
 		PYv=""
 		git clone --quiet https://github.com/s41r4j/phomber $TOOLS/$toInstall
@@ -283,7 +250,7 @@ case "$toInstall" in
 		yes|apt install python git wget unstable-repo geckodriver
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/sundowndev/PhoneInfoga.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/sundowndev/PhoneInfoga $TOOLS/$toInstall
 		wget -q $iHDB/fix-tools/$toInstall.py -O $TOOLS/$toInstall/$toInstall.py
 		cp $TOOLS/$toInstall/config.example.py $TOOLS/$toInstall/config.py
 		if [ "$(uname -m)" = 'aarch64' ] || [ "$(uname -m)" = 'x86_64' ];then
@@ -308,7 +275,7 @@ case "$toInstall" in
 		yes|apt install git python
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/aerosol-can/PhoneSploit.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/aerosol-can/PhoneSploit $TOOLS/$toInstall
 		printf "colorama" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -340,7 +307,7 @@ case "$toInstall" in
 		apt install git python
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/threat9/$toInstall.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/threat9/$toInstall $TOOLS/$toInstall
 		chmod 750 -R $TOOLS/$toInstall
 		printf "future\nrequests\npysnmp\npycrypto\ncryptography\nparamiko\nbcrypt\npynacl" > $TMPDIR/requirements.txt
 		PYmodules
@@ -363,7 +330,7 @@ case "$toInstall" in
 		yes|apt install git python
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/thewhiteh4t/$toInstall.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/thewhiteh4t/$toInstall $TOOLS/$toInstall
 		mkdir -p $TOOLS/$toInstall/Ngrok
 		cp ~/.ngrok2/ngrok $TOOLS/$toInstall/Ngrok/
 		chmod 750 -R $TOOLS/$toInstall/*
@@ -387,7 +354,7 @@ case "$toInstall" in
 		yes|apt install git python
 		PIPup
 		PY=""
-		git clone --quiet https://github.com/$toInstall-project/$toInstall.git $TOOL/$toInstall
+		git clone --quiet https://github.com/$toInstall-project/$toInstall $TOOL/$toInstall
 		chmod 750 -R $TOOLS/$toInstall
 		printf "beautifulsoup\nbs\ncertifi\ncolorama\nlxml\nPySocks\nrequests\nrequests-futures\nsoupsieve\nstem\ntorrequest" >> $TMPDIR/requirements.txt
 		PYmodules
@@ -398,7 +365,7 @@ case "$toInstall" in
 		yes|apt install python git
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/aboul3la/Sublist3r.git $TOO
+		git clone --quiet https://github.com/aboul3la/Sublist3r $TOO
 		cat $TOOLS/$toInstall/requirements.txt > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -428,7 +395,7 @@ case "$toInstall" in
 		yes|apt install git python libxml2 libxml2-static libxml2-utils libxslt libxslt-static rust
 		PIPup
 		PYv=""
-		git clone --quiet https://github.com/laramies/theHarvester.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/laramies/theHarvester $TOOLS/$toInstall
 		cat $TOOLS/$toInstall/requirements/dev.txt > $TMPDIR/requirements.txt
 		sed -i 's|/etc/theHarvester|/data/data/com.termux/files/usr/etc/theHarvester|g' setup.py
 		python setup.py install
@@ -463,7 +430,7 @@ case "$toInstall" in
 		yes|apt install git python2 openssl
 		PIPup
 		Pyv="2"
-		git clone --quiet https://github.com/hahwul/$toInstall.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/hahwul/$toInstall $TOOLS/$toInstall
 		chmod +x $TOOLS/$toInstall/*
 		printf "argparse\nnetaddr" > $TMPDIR/requirements.txt
 		PYmodules
@@ -472,21 +439,21 @@ case "$toInstall" in
 	adminpanel)
 		SearchTool
 		yes|apt install git python2
-		git clone --quiet https://github.com/Techzindia/admin_penal.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/Techzindia/admin_penal $TOOLS/$toInstall
 		chmod 750 $TOOLS/$toInstall/admin_panel_finder.py
 		mv $TOOLS/$toInstall/admin_panel_finder.py $TOOLS/$toInstall/$toInstall.py
 		;;
 	androbugs)
 		SearchTool
 		yes|apt install git python2
-		git clone --quiet https://github.com/AndroBugs/AndroBugs_Framework.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/AndroBugs/AndroBugs_Framework $TOOLS/$toInstall
 		;;
 	d-tect)
 		SearchTool
 		yes|apt install git python2
 		PIPup
 		PYv="2"
-		git clone --quiet https://github.com/shawarkhanethicalhacker/D-TECT-1.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/shawarkhanethicalhacker/D-TECT-1 $TOOLS/$toInstall
 		chmod +x -R $TOOLS/$1/*
 		printf "colorama\nbeautifulsoup" > $TMPDIR/requirements.txt
 		PYmodules
@@ -503,7 +470,7 @@ case "$toInstall" in
 		yes|apt install python2 git
 		PIPup
 		PYv="2"
-		git clone --quiet https://github.com/Warflop/CloudBunny.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/Warflop/CloudBunny $TOOLS/$toInstall
 		chmod +x -R $TOOLS/$toInstall
 		printf "certificates" > $TMPDIR/requirements.txt
 		PYmodules
@@ -514,7 +481,7 @@ case "$toInstall" in
 		yes|apt install python2 git
 		PIPup
 		PYv="2"
-		git clone --quiet https://github.com/lightos/$toInstall.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/lightos/$toInstall $TOOLS/$toInstall
 		chmod 750 $TOOLS/$toInstall/$toInstall.py
 		printf "urllib2" > $TMPDIR/requirements.txt
 		PYmodules
@@ -536,7 +503,7 @@ case "$toInstall" in
 		yes|apt install git python2
 		PIPup
 		PYv="2"
-		git clone --quiet https://github.com/xHak9x/$toInstall.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/xHak9x/$toInstall $TOOLS/$toInstall
 		chmod +x -R $TOOLS/$toInstall
 		printf "requests" > $TMPDIR/requirements.txt
 		PYmodules
@@ -547,7 +514,7 @@ case "$toInstall" in
 		yes|apt install git python2
 		PIPup
 		PYv="2"
-		git clone --quiet https://github.com/CiKu370/$toInstall.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/CiKu370/$toInstall $TOOLS/$toInstall
 		printf "progressbar\npasslib" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
@@ -557,7 +524,7 @@ case "$toInstall" in
 		yes|apt install git python2 rust
 		PIPup
 		PYv="2"
-		git clone --quiet https://github.com/TarlogicSecurity/kerbrute.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/TarlogicSecurity/kerbrute $TOOLS/$toInstall
 		chmod 750 -R $TOOLS/$toInstall
 		printf "impacket" > $TMPDIR/requirements.txt
 		PYmodules
@@ -569,7 +536,7 @@ case "$toInstall" in
 		yes|apt install git python2
 		PIPup
 		PYv="2"
-		git clone --quiet https://github.com/Ekultek/Pybelt.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/Ekultek/Pybelt $TOOLS/$toInstall
 		chmod +x -R $TOOLS/$toInstall
 		sed 's|beautifulsoup4==4.5.3|beautifulsoup4==4.7.1|g' -i requirements.txt
 		cat $TOOLS/$toInstall/requirements.txt > $TMPDIR/requirements.txt
@@ -581,7 +548,7 @@ case "$toInstall" in
 		yes|apt install git python2
 		PIPup
 		PYv="2"
-		git clone --quiet https://github.com/s0md3v/ReconDog.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/s0md3v/ReconDog $TOOLS/$toInstall
 		chmod 750 -R $TOOLS/$toInstall
 		printf "requests\ntld" > $TMPDIR/requirements.txt
 		PYmodules
@@ -620,7 +587,7 @@ case "$toInstall" in
 	exploitdb)
 		SearchTool
 		yes|apt install git wget
-		git clone --quiet https://github.com/offensive-security/$toInstall.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/offensive-security/$toInstall $TOOLS/$toInstall
 		chmod +x $TOOLS/$toInstall/*
 		wget -q $iHDB/fix-tools/searchsploit -O ~/.searchsploit_rc
 		;;
@@ -676,7 +643,7 @@ case "$toInstall" in
 	wbruter)
 		SearchTool
 		yes|apt install git
-		git clone --quiet https://github.com/wuseman/WBRUTER.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/wuseman/WBRUTER $TOOLS/$toInstall
 		chmod +750 -R $TOOLS/$toInstall
 		;;
 
@@ -840,7 +807,7 @@ fi
 	java)
 		SearchTool
 		yes|apt install git
-		git clone --quiet https://github.com/ivam3/java.git $PREFIX/share/java
+		git clone --quiet https://github.com/ivam3/java $PREFIX/share/java
 		cd $PREFIX/share/java
 		chmod -R 711 $PREFIX/share/java
 		bash setup java8
@@ -948,7 +915,7 @@ fi
 		SearchTool
 		yes|apt install tmux git
 		[[ -d $HOME/.tmux ]] && rm -rf $HOME/.tmux
-		git clone https://github.com/gpakosz/.tmux.git $HOME/.tmux
+		git clone https://github.com/gpakosz/.tmux $HOME/.tmux
 		ln -s -f $HOME/.tmux/.tmux.conf
 		cp $HOME/.tmux/.tmux.conf.local .
 		sed -i "11a set-option -g default-shell $PREFIX/bin/fish" ~/.tmux/.tmux.conf
@@ -1085,7 +1052,7 @@ CONF
 		chk-msf
 		chk-java
 		yes|apt install git axel wget tar apksigner aapt
-		git clone --quiet https://github.com/ivam3/$toInstall.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/ivam3/$toInstall $TOOLS/$toInstall
 		cd $TOOLS/$toInstall
 		chmod +x $TOOLS/$toInstall/$toInstall
 		bash setup
@@ -1102,7 +1069,7 @@ CONF
 	hatcloud)
 		SearchTool
 		yes|apt install git ruby
-		git clone --quiet https://github.com/HatBashBR/HatCloud.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/HatBashBR/HatCloud $TOOLS/$toInstall
 		chmod 750 $TOOLS/$toInstall/$toInstall.rb
 		;;
 	metasploit)
@@ -1345,7 +1312,7 @@ EOF
 	rhawk)
 	  SearchTool
 		yes|apt install php
-		git clone --quiet https://github.com/Tuhinshubhra/RED_HAWK.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/Tuhinshubhra/RED_HAWK $TOOLS/$toInstall
 		chmod +x $TOOLS/$toInstall/$toInstall.php
 		;;
 	#::ROOT::#
@@ -1388,7 +1355,7 @@ EOF
 		SearchTool
 		if chk-root;then
 			yes|apt install git wget perl
-			git clone --quiet https://github.com/sullo/nikto.git $TOOLS/$toInstall
+			git clone --quiet https://github.com/sullo/nikto $TOOLS/$toInstall
 			chmod 750 -R $TOOLS/$toInstall
 			wget -q $iHDB/bin/nikto -O $HOME/.local/bin/$toInstall
 			chmod +x $HOME/.local/bin/nikto
@@ -1401,7 +1368,7 @@ EOF
 		yes|apt install git curl python tor ruby nmap
 		PIPup
 		PY=""
-		git clone --quiet https://github.com/sechacklabs/$toInstall.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/sechacklabs/$toInstall $TOOLS/$toInstall
 		wget -q $iHDB/fix-tools/checker.py -O $TOOLS/$toInstall/modules/checker.py
 		printf "fierce" > $TMPDIR/requirements.txt
 		PYmodules
@@ -1417,7 +1384,7 @@ EOF
 			yes|apt install git nmap hping3 build-essential python2 ruby git libpcap
 			PIPup
 			PYv="2"
-			git clone --quiet https://github.com/LionSec/$toInstall.git $TMPPATH
+			git clone --quiet https://github.com/LionSec/$toInstall $TMPPATH
 			printf "tabulate\nterminaltables" > $TMPDIR/requirements.txt
 			chmod +x -R $TMPPATH/tools
 			PYmodules
