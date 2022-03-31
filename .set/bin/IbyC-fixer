@@ -51,7 +51,7 @@ if [[ "${INSTADATE[0]}" != "${INSTADATE[2]}" ]] || [[ "${INSTADATE[1]}" -lt "${I
 then
 	printf "$Y.Upgrading";sleep 2
 	wget -q $iHDB/bin/IbyC-fixer -O $binPATH/IbyC-fixer
-	printf "$G..DONE!!$W"
+	printf "$G..DONE!!$W\n"
 	sleep 1
 else
   echo "$G.UPDATED$W";sleep 1
