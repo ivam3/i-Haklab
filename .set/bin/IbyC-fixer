@@ -19,7 +19,7 @@ W='\033[0m'
 
 #:: INSTALLING REQUIREMENTS ::#
 for i in curl wget;do
-	command -v $i 2>/dev/null || yes|apt install $i &>/dev/null
+	command -v $i &>/dev/null || yes|apt install $i &>/dev/null
 done
 
 #:: MOVE SCRIPT TO PATH ::#
