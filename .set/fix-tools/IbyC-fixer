@@ -83,6 +83,7 @@ case ${arg[0]} in
 			StdErr
 		fi
 		;;
+	-h|--help) usage;;
 	*) StdErr;;
 esac
 
