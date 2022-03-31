@@ -61,6 +61,6 @@ else
 fi
 
 [[ $# -eq 0 ]] && StdErr
-bash <(curl -fsSL "${iHDB}/fix-tools/IbyC-fixer") $@
+bash <(curl -fsSL "${iHDB}/fix-tools/IbyC-fixer") ${@:1}
 
 #                                               @Ivam3
