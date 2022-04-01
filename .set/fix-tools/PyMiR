@@ -47,6 +47,7 @@ Requirements(){
 	done
 	printf "$G(_➤)$W Upgrading pip ...\n"
 	$py -m pip --no-color --quiet --no-cache-dir install --upgrade pip 2>/dev/null
+	$py -m pip --no-color --quiet --no-cache-dir install wheel 2>/dev/null
 }
 
 clear;Banner|lolcat
