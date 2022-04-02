@@ -166,7 +166,7 @@ fi
 printf "postgresql\r\n"
 sleep 1
 
-if [ -d ${PREFIX}/opt/metasploit-framework ] && [ -x $PREFIX/bin/mafconsole ];then
+if [ -d ${PREFIX}/opt/metasploit-framework ] && [ -x $PREFIX/bin/msfconsole ];then
 	wget $JAVADB/.embed/apk.rb -O ${PREFIX}/opt/metasploit-framework/lib/msf/core/payload/apk.rb -q
 	printf "\n\n$C ::::::::: METASPLOIT INSTALLED :::::::::$W\n"
 	printf " The data base can be active with command\n\t$G   > postgresql start <$W\n"
