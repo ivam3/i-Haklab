@@ -24,12 +24,17 @@ ctrl_c(){ printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";
 Banner(){ clear;printf "\n ____         ____ _ ____\n|  _ \ _   _ / ___(_)  _ \ \n| |_) | | | | |  _| | |_) |\n|  _ <| |_| | |_| | |  _ <\n|_| \_|\__,_|\____|_|_| \_|v.2\n#::Ruby Gems Issues Resolved::#\n #::: @Ivam3byCinderella ::::#\n";sleep 1;}
 
 Usage(){
-	printf "$G\n[¿]─>$W Choose an option $G<-[?]\n\n{01}$W$Y[MSFCONSOLE]─➤$W CANNOT LINK EXECUTABLE \"ruby\":$Y\n\t╰────────➤$W library \"/data/da..../bigdecimal.so\" not found$G\n{02}$W$Y[GRPC.GEMSPEC]─➤$W There was an error parcing Gemfile$G\n{03}$W$Y[GEMS]─➤$W Could not find <gem's name> in any of the sources$G\n{04}$Y[BIGDECIMAL]─➤$W Gem bigdecimal architecture compatibility$G\n{05}$Y[BUNDLER]─➤$W You have already activated bundler 2.1.4, but your Gemfile requires bundler 2.2.11$G\n{06}$Y[MSFCONSOLE]─➤$W UNSOPPORTED (OpenSSL::Cipher::CipherError)$G\n{99}$R[EXIT]\n\n$W";read -p "{ANSW}-> " ANSW
+	printf "$G\n[¿]─>$W Choose an option $G<-[?]\n\n{01}$W$Y[MSFCONSOLE]─➤$W CANNOT LINK EXECUTABLE \"ruby\":$Y\n\t╰────────➤$W library \"/data/da..../bigdecimal.so\" not found$G\n{02}$W$Y[GRPC.GEMSPEC]─➤$W There was an error parcing Gemfile$G\n{03}$W$Y[GEMS]─➤$W Could not find <gem's name> in any of the sources$G\n{04}$Y[BIGDECIMAL]─➤$W Gem bigdecimal architecture compatibility$G\n{05}$Y[BUNDLER]─➤$W You have already activated bundler 2.1.4, but your Gemfile requires bundler 2.2.11$G\n{06}$Y[MSFCONSOLE]─➤$W UNSOPPORTED (OpenSSL::Cipher::CipherError)$G\n{99}$R[EXIT]\n\n$W"
+	while read -p "{ANSW}-> " ANSW && [[ -z $ANSW ]]; do
+		continue
+	done
 }
+
 
 #::: MAIN :::#
 Banner|lolcat;Usage
-Result(){ [[ $1 -eq 0 ]] && printf "$G[-DONE-]$W\n" || printf "$R[-FAIL-]$W\n";}
+Result(){ sleep 1;[[ $1 -eq 0 ]] && printf "$G[-DONE-]$W\n" || printf "$R[-FAIL-]$W\n";}
+
 printf "$G\n(_➤)$W Processing with option $ANSW... "
 case $ANSW in
 	01|1)
@@ -76,13 +81,13 @@ CONF
 		;;
 	03|3)
 		while read -p " (Gems name)─➤ " GEM && [ -z $GEM ];do
-			ctrl_c
+			Result 1
 		done
 		while read -p " (Version)─➤ " GEMv && [ -z $GEMv ];do
 			GEMv=">= 0.1"
 		done
 		while read -p " (Gemfile path)─➤ " GEMfile && [ -z $GEMfile ];do
-			ctrl_c
+			Result 1
 		done
 		gem install bundler
 		gem install $GEM -v "$GEMv" -- --using-system-libraries
@@ -123,11 +128,10 @@ CONF
 		Result 0
 		;;
 	99)
-		Result 0;ctrl_c
+		Result 0;exit
 		;;
 	*)
 		Result 1;sleep 1
-		Banner|lolcat;Usage
 		;;
 esac
 #				@IbyC
