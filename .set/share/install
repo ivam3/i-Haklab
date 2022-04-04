@@ -685,6 +685,7 @@ CONF
     chmod 755 $HOME/.local/bin/$toInstall
 		;;
 	code-server)
+		[[ $(uname -m) = "aarch64" ]] || { printf >&2 "$R(_➤)$W Incompatible architecture";exit;}
 		SearchTool
 		yes|apt install build-essential python git nodejs-lts yarn
 		yarn config set ignore-engines true
