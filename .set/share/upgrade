@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 #i-Haklab v.3.1 2022 by Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3.
 #Created on Jan/2019 
-#Modify: 2022-03-30
+#Modify: 2022-04-15
 ####################
 IFS=$'\n\t'
 trap ctrl_c 2
