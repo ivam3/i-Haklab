@@ -1087,10 +1087,10 @@ CONF
 		SearchTool
 		[[ -d $PREFIX/lib/ruby ]] && rm -rf $PREFIX/lib/ruby;yes|apt remove ruby;yes|apt autoremove
 		msfv="6.1.38_all"
-		wget --quiet --tries=20 $iHDB/to-install/$toInstall_$msfv.deb -O $TMPDIR/$toInstall_$msfv.deb
+		wget --quiet --tries=20 $iHDB/to-install/metasploit-framework_$msfv.deb -O $TMPDIR/metasploit-frameworkl_$msfv.deb
 		pushd $TMPDIR
-		yes|apt install ./$toInstall_$msfv.deb
-		rm $TMPDIR/$toInstall_$msfv.deb
+		yes|apt install ./metasploit-framework_$msfv.deb
+		rm $TMPDIR/metasploit-framework_$msfv.deb
 		popd
 	    ;;
     whatweb)
