@@ -1,4 +1,3 @@
-unstable-repo
 termux-api
 termux-elf-cleaner
 termux-tools
@@ -34,7 +33,7 @@ git
 gnupg
 gpgme
 hexedit
-htop
+htop-legacy
 irssi
 libassuan
 libcaca
