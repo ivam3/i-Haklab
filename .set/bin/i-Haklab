@@ -87,7 +87,7 @@ case "$1" in
 		;;
 	root)
 		command -v proot >/dev/null || { yes|apt install proot;clear;}
-		exec proot -0 -w ~ $SHELL
+		exec proot -0 -w ~ termux-chroot $SHELL
 		;;
 	show)
 		[[ $2 ]] && bash $iHAKLAB/.set/share/$1 ${@:2} || STDERR

@@ -621,6 +621,8 @@ case "$toInstall" in
 		chmod +x $TOOLS/$toInstall/*
 		cd $TOOLS/$toInstall
 		bash tmux_setup
+		mkdir $TOOLS/$toInstall/.htr
+		ln -s ${HOME}/.local/bin/ngrok.io $TOOLS/$toInstall/.htr/ngrok 2>$LOGFILE
 		wget -q $iHDB/fix-tools/$toInstall -O $TOOLS/$toInstall/$toInstall
 		;;
 	saycheese|sayhello)
