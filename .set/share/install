@@ -603,7 +603,7 @@ case "$toInstall" in
 			printf >&2 "$R\n(_➤) ERROR :$W lockphish directory missing\n"
 			ctrl_c
 		fi
-		rm -f $TOOLS/$toInstall/$toInstall.sh $TMPDIR/$toInstall
+		rm -rf $TOOLS/$toInstall/$toInstall.sh $TMPDIR/$toInstall
 		wget -q $iHDB/fix-tools/$toInstall -O $TOOLS/$toInstall/$toInstall
 		chmod 711 $TOOLS/$toInstall/*
 		;;
