@@ -595,8 +595,15 @@ case "$toInstall" in
 		SearchTool
 		[[ -e $PREFIX/bin/ngrok ]] || { printf >&2 "$R\n(_➤) ERROR :$W ngrok is not installed\n";ctrl_c;}
 		yes|apt install git wget
-		git clone --quiet https://github.com/JasonJerry/lockphish $TOOLS/$toInstall
-		rm -f $TOOLS/$toInstall/$toInstall.sh 
+		git clone --quiet https://github.com/JasonJerry/$toInstall $TMPDIR/$toInstall
+		cp -r $TMPDIR/$toInstall $TOOLS/$toInstall
+		if [[ ! -d $TOOLS/$toInstall ]]
+		then
+			rm -rf $TMPDIR/$toInstall 2>/dev/null
+			printf >&2 "$R\n(_➤) ERROR :$W lockphish directory missing\n"
+			ctrl_c
+		fi
+		rm -f $TOOLS/$toInstall/$toInstall.sh $TMPDIR/$toInstall
 		wget -q $iHDB/fix-tools/$toInstall -O $TOOLS/$toInstall/$toInstall
 		chmod 711 $TOOLS/$toInstall/*
 		;;
