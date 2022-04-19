@@ -595,7 +595,7 @@ case "$toInstall" in
 		SearchTool
 		[[ -e $PREFIX/bin/ngrok ]] || { printf >&2 "$R\n(_➤) ERROR :$W ngrok is not installed\n";ctrl_c;}
 		yes|apt install git wget
-		git clone --quiet https://github.com/JasonJerry/$toInstall.git $TOOLS/$toInstall
+		git clone --quiet https://github.com/JasonJerry/lockphish.git $TOOLS/$toInstall
 		rm -f $TOOLS/$toInstall/$toInstall.sh 
 		wget -q $iHDB/fix-tools/$toInstall -O $TOOLS/$toInstall/$toInstall
 		chmod 711 $TOOLS/$toInstall/*
