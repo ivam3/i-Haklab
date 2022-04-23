@@ -1095,7 +1095,7 @@ CONF
 		toInstall="metasploit-framework"
 		SearchTool
 		[[ -d $PREFIX/lib/ruby ]] && rm -rf $PREFIX/lib/ruby;yes|apt remove ruby;yes|apt autoremove
-		msfv="6.1.38_all"
+		msfv="6.1.39_all"
 		wget --quiet --tries=20 $iHDB/to-install/metasploit-framework_$msfv.deb -O $TMPDIR/metasploit-framework_$msfv.deb
 		pushd $TMPDIR
 		yes|apt install ./metasploit-framework_$msfv.deb
