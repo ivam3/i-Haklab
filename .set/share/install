@@ -751,6 +751,10 @@ CONF
 	binchecker|crunch|i-Haklab|IbyC-fixer|blackbox|converter|lock|pagekite|serverphp|torvpn)
 		SearchTool
 		yes|apt install curl
+		[[ $toInstall = blackbox ]] && {
+			yes|apt install python2;
+			python2 -m pip install requests;
+		}
 		curl -Ls $iHDB/bin/$toInstall -o $HOME/.local/bin/$toInstall
 		chmod 751 $HOME/.local/bin/$toInstall
 		;;
