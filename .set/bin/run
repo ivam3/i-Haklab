@@ -325,7 +325,7 @@ case "$TOOL" in
 		fi
 		;;
 #::::TOOLS IN BIN::::#
-	dex2jar|ExiF|bincheker|binwalk|blackbox|burpsuite|code-server|converter|crunch|dirb|GetNPUsers|msfconsole|msfvenom|pagekite|shc|unshc|snow|wfuzz|whatweb|hydra|xhydra|youtube-dl)
+	dex2jar|ExiF|bincheker|binwalk|burpsuite|code-server|converter|crunch|dirb|GetNPUsers|msfconsole|msfvenom|pagekite|shc|unshc|snow|wfuzz|whatweb|hydra|xhydra|youtube-dl)
 		if [ -e $HOME/.local/bin/$TOOL ]; then
 			bash $HOME/.local/bin/$TOOL ${@:2}
 		elif [ -e $PREFIX/bin/$TOOL ]; then
@@ -342,7 +342,7 @@ case "$TOOL" in
 			STDERR
 		fi
 		;;
-	gdb|IbyC-fixer|pagekite|postgresql|radare2|sudo|serverphp|serverapache|torvpn|traductor)
+	blackbox|gdb|IbyC-fixer|pagekite|postgresql|radare2|sudo|serverphp|serverapache|torvpn|traductor)
 		if [ -e $HOME/.local/bin/$TOOL ] || [ $(grep -oE "$TOOL" $PREFIX/etc/fish/config.fish) ]; then
 			printf "$R(_>)_To_run_it_just_type:─➤$W $TOOL"
 		else
