@@ -448,6 +448,16 @@ case "$toInstall" in
 		yes|apt install git python2
 		git clone --quiet https://github.com/AndroBugs/AndroBugs_Framework $TOOLS/$toInstall
 		;;
+	blackbox)
+		SearchTool
+		yes|apt install wget python2
+		PIPup
+		PYv="2"
+		wget --tries=20 --quiet $iHDB/bin/blackbox -O $HOME/.local/bin/blackbox
+		chmod +x $HOME/.local/bin/blackbox
+		printf "requests\npasslib\npexpect" > $TMPDIR/requirements.txt
+		PYmodules
+		rm -rf $TMPDIR/requirements.txt
 	d-tect)
 		SearchTool
 		yes|apt install git python2
@@ -748,7 +758,7 @@ CONF
 		printf "$Y\nNOW GO TO PLAY STORE AND DOWNLOAD VNC SERVER APP\nOR GO TO GITHUB AND DOWNLOAD TERMUX WAYLAND APP$G\n[$green RUN BY VNC$G ]─➤$W vncserver$G\n      ╰─────────➤$W At first time, you will be prompted for setting up passwords$Y\n\nOPEN VNC APP AND SET NETWORK ADDRESS AS :$W localhost:1$G\n[$green TO STOP IT$G ]─➤$W vncserver -kill :1\n"
 		toInstall=Xwayland
 		;;
-	binchecker|crunch|i-Haklab|IbyC-fixer|blackbox|converter|lock|pagekite|serverphp|torvpn)
+	binchecker|crunch|i-Haklab|IbyC-fixer|converter|lock|pagekite|serverphp|torvpn)
 		SearchTool
 		yes|apt install curl
 		[[ $toInstall = blackbox ]] && {
