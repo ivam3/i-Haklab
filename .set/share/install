@@ -458,6 +458,7 @@ case "$toInstall" in
 		printf "requests\npasslib\npexpect" > $TMPDIR/requirements.txt
 		PYmodules
 		rm -rf $TMPDIR/requirements.txt
+		;;
 	d-tect)
 		SearchTool
 		yes|apt install git python2
