@@ -77,14 +77,7 @@ case "$toInstall" in
 		(06)─➤$W type your password and enjoy it!!\n"
 		;;
 		#::PYTHON3::#
-	h8mail|objection|osrframework|shodan)
-		SearchTool
-		PIPup
-		PYv=""
-		printf "$toinstall" > $TMPDIR/requirements.txt
-		PYmodules
-		rm -f $TMPDIR/requirements.txt
-		;;
+
 	binwalk)
 		SearchTool
 		yes|apt install git
@@ -94,19 +87,7 @@ case "$toInstall" in
 		chmod 750 *
 		python setup.py install
 		;;
-	botgram)
-		SearchTool
-		yes|apt install git
-		PIPup
-		git clone --quiet https://github.com/ivam3/$toInstall $TOOLS/$toInstall
-		cd $TOOLS/$toInstall
-		chmod 750 *
-		printf "numpy\ntelethon\nrequests\nconfigparser" > $TMPDIR/requirements.txt
-		PYmodules
-		rm -f $TMPDIR/requirements.txt
-		python setup.py --install
-		python setup.py --config
-		;;
+
 	evilurl)
 		SearchTool
 		yes|apt install git
@@ -236,11 +217,11 @@ case "$toInstall" in
 					while read -p "(_>)_passwd─➤ " passwd && [ -z $passwd ];do
 						continue
 					done
-					printf "[Credentials]\nusername = $username\npassword = $passwd" > $TOOLS/$toInstall/config/credentials.ini
+					printf "[Credentials]\nusername = $username\npassword = $passwd" > $TOOLS/$toInstall/config/credentials.ini;break
 					;;
 				*)
 					printf "$Y(_➤)$W Don't forget set your credentials at file: $TOOLS/$toInstall/config/credentials.ini"
-					ctrl_c
+					ctrl_c;break
 					;;
 			esac
 		done
@@ -313,17 +294,7 @@ case "$toInstall" in
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
 		;;
-	scrapy)
-		SearchTool
-		yes|apt install python rust
-		export CARGO_BUILD_TARGET=$(rustc --version --verbose|sed -n 's|host: ||p')
-		PIPup
-		PYv=""
-		printf "$toinstall" > $TMPDIR/requirements.txt
-		PYmodules
-		rm -f $TMPDIR/requirements.txt
-		yes|apt remove rust && apt autoremove
-		;;
+
 	seeker)
 		SearchTool
 		[[ -e $HOME/.local/bin/ngrok.io ]] || { printf >&2 "$R\n(_➤) ERROR :$W ngrok is not installed\n";ctrl_c;}
@@ -370,26 +341,7 @@ case "$toInstall" in
 		PYmodules
 		rm -f $TMPDIR/requirements.txt
 		;;
-	sqlmap)
-		SearchTool
-		printf "$C#::::::::::::::::::::::::::::::::::::#$Y\n(_➤)$W Choose a type of installation$G\n(_>)_01─➤$W Python-pip modules$G\n(_>)_02─➤$W Github\n"
-		while read -p "(_➤) " ANSW && [ -z $ANSW ]; do
-			continue
-		done
-		if [[ $ANSW = 1 ]] || [[ $ANSW = 01 ]];then
-			yes|pkg install python
-			PIPup
-			PY=""
-			printf "sqlmap" > $TMPDIR/requirements.txt
-			PYmodules
-			rm -f $TMPDIR/requirements.txt
-		elif [[ $ANSW = 2 ]] || [[ $ANSW = 02 ]];then
-			git clone --quiet https://github.com/$toInstallproject/$toInstall $TOOLS/$toInstall
-			chmod 750 -R $TOOLS/$toInstall
-		else
-			Err
-		fi
-		;;
+
 	NULL-theharvester-NULL)
 		SearchTool
 		yes|apt install git python libxml2 libxml2-static libxml2-utils libxslt libxslt-static rust
@@ -589,12 +541,7 @@ case "$toInstall" in
 		PYmodules
 		rm -rf $TMPDIR/requirements.txt
 		;;#::BASH::#
-	ExiF)
-		SearchTool
-		yes|apt install wget exiftool
-		wget -q https://raw.githubusercontent.com/ivam3/Exif/master/ExiF -O $TOOLS/$toInstall
-		chmod 751 $TOOLS/$toInstall
-		;;
+
 	exploitdb)
 		SearchTool
 		yes|apt install git wget
@@ -618,19 +565,7 @@ case "$toInstall" in
 		wget -q $iHDB/fix-tools/$toInstall -O $TOOLS/$toInstall/$toInstall
 		chmod 711 $TOOLS/$toInstall/*
 		;;
-	login-termux)
-		SearchTool
-		[[ $toInstall = login-termux ]] && login="$(grep -oE "$toInstall" $INITFILE)"
-		SearchTool
-		if [[ ! -e $HOME/.local/etc/i-Haklab/.Ivam3 ]];then
-			bash $iHAKLAB/.set/to-install/i-Haklab_login;login
-		elif [[ $(grep "wall-banner" $INITFILE) ]];then
-			yes|apt install ruby && gem install lolcat
-			sed 's|/data/data/com.termux/files/home/.local/etc/i-Haklab/wall-banner|/data/data/com.termux/files/home/.local/etc/i-Haklab/login-termux|g' -i $INITFILE
-		else
-			printf "$R\n(_➤) Login is already active"
-		fi
-		;;
+
 	nexphisher)
 		SearchTool
 		[[ -e $PREFIX/bin/ngrok ]] || { printf >&2 "$R\n(_➤) ERROR :$W ngrok is not installed\n";ctrl_c;exit;}
@@ -829,15 +764,7 @@ fi
 #            i-Haklab by @Ivam3" > $HOME/.local/bin/john
 		chmod +x $HOME/.local/bin/john
 		;;
-	java)
-		SearchTool
-		yes|apt install git
-		git clone --quiet https://github.com/ivam3/java $PREFIX/share/java
-		cd $PREFIX/share/java
-		chmod -R 711 $PREFIX/share/java
-		bash setup java8
-		rm -rf $PREFIX/share/java
-		;;
+
 	localtunnel-server|lt)
 		[[ $toInstall = localtunnel-server ]] && toInstall="lt"
 		SearchTool
@@ -896,18 +823,7 @@ EOF
 			Err
 		fi
 		;;
-	serverapache)
-		SearchTool
-		yes|apt install php apache2 php-pgsql php-fpm php-apache mariadb phpmyadmin
-		[[ -d $PREFIX/etc/apache2 ]] || mkdir -p $PREFIX/etc/apache2
-		[[ -d $PREFIX/etc/phpmyadmin ]] || mkdir -p $PREFIX/etc/phpmyadmin
-		wget -q $iHDB/etc/apache2/httpd.conf -O $PREFIX/etc/apache2/httpd.conf
-		wget -q $iHDB/etc/phpmyadmin/config.inc.php -O $PREFIX/etc/phpmyadmin/config.inc.php
-		if ! grep "$toInstall" $INITFILE;then
-			echo "alias $toInstall=\"apachectl\""
-		fi
-		printf "$G\n\n(_>)_to_run_it─➤$W $toInstall start$G\n(_>)_to_stop_it─➤$W $toInstall stop$G\n(_>)_to_open_it─➤$W open http://localhost:8080\n"
-		;;
+
 	shc|unshc)
 		SearchTool
 		shcVer="3.8.9"
@@ -945,15 +861,7 @@ EOF
 		rm -rf $TMPDIR/stegsnow_20130616.orig.tar.gz
 		chmod 750 $HOME/.local/bin/$toInstall
 		;;
-	tmux)
-		SearchTool
-		yes|apt install tmux git
-		[[ -d $HOME/.tmux ]] && rm -rf $HOME/.tmux
-		git clone https://github.com/gpakosz/.tmux $HOME/.tmux
-		ln -s -f $HOME/.tmux/.tmux.conf
-		cp $HOME/.tmux/.tmux.conf.local .
-		sed -i "11a set-option -g default-shell $PREFIX/bin/fish" ~/.tmux/.tmux.conf
-		;;
+
 	torvpn)
 		SearchTool
 		yes|apt install tor torsocks proxychains-ng
@@ -970,72 +878,7 @@ EOF
 		yes|apt install nodejs
 		npm install -global $toInstall-cli
 		;;
-	youtube-dl|youtubedr|converter)
-		SearchTool
-		setFiles(){
-			cat <<- CONF > $HOME/.netrc
-#!$PREFIX/bin/bash
-#
-machine <extractor> login <login> password <password>
-#
-#Follow my example:
-#
-#machine youtube login myaccount@gmail.com password my_youtube_password
-#machine twitch login my_twitch_account_name password my_twitch_password
-CONF
-			chmod 711 ~/.netrc
-			cat <<- CONF > $PREFIX/bin/termux-url-opener
-#!$PREFIX/bin/bash
-#
-echo "Choose a format :"
-echo "For audio only press 1"
-echo "For video 360p press 2"
-echo "For video 480p press 3"
-echo "For video 720p press 4"
-echo "For video 1080p press 5"
-read option
-command='-no-mtime -o /data/data/com.termux/files/home/storage/shared/Youtube/%(title)s.%(ext)s -f'
-if [ "\$option" -eq "1" ]; then
-    echo "\$command 140" > $HOME/.config/youtube-dl/config
-    exec $executable "\$1"
-elif [ "\$option" -eq "2" ]; then
-    echo "\$command \"best[height<=360]\"" > $HOME/.config/youtube-dl/config
-    exec $executable "\$1"
-elif [ "\$option" -eq "3" ]; then
-    echo "\$command \"best[height<=480]\"" > $HOME/.config/youtube-dl/config
-    exec $executable "\$1"
-elif [ "\$option" -eq "4" ]; then
-    echo "\$command \"best[height<=720]\"" > $HOME/.config/youtube-dl/config
-    exec $executable "\$1"
-elif [ "\$option" -eq "5" ]; then
-    echo "\$command \"best[height<=1080]\"" > $HOME/.config/youtube-dl/config
-    exec $executable "\$1"
-fi
-CONF
-			dos2unix $PREFIX/bin/termux-url-opener
-			chmod 711 $PREFIX/bin/termux-url-opener
-	  }
-		if [[ $toInstall = youtube-dl ]];then
-			dpkg --configure -a
-			yes|apt install util-linux wget python
-			PIPup
-			PYv=""
-			printf "$toInstall" > $TMPDIR/requirements.txt
-			PYmodules
-			rm -f $TMPDIR/requirements.txt
-			mkdir -p ~/.config/youtube-dl
-			ln -s $PREFIX/bin ~/bin
-			executable=$toInstall
-			setFiles
-		elif [[ $toInstall = youtubedr ]];then
-			yes|apt install youtubedr
-			executable="$toInstall download"
-			setFiles
-		elif [[ $toInstall = converter ]];then
-			wget -q --tries=20 ${iHDB}/.set/bin/$toInstall -O $PREFIX/bin/$toInstall
-			chmod 750 $PREFIX/bin/$toInstall
-		fi
-		;;
+
 	#::RUBY::#
 	beef)
 	  [[ -d $PREFIX/opt/$toInstall ]] || rm $HOME/.local/bin/$toInstall 2>/dev/null
@@ -1081,17 +924,7 @@ CONF
 			Err
 		fi
 		;;
-	embed)
-		SearchTool
-		chk-msf
-		chk-java
-		yes|apt install git axel wget tar apksigner aapt
-		git clone --quiet https://github.com/ivam3/$toInstall $TOOLS/$toInstall
-		cd $TOOLS/$toInstall
-		chmod +x $TOOLS/$toInstall/$toInstall
-		bash setup
-		curl -Ls https://raw.githubusercontent.com/ivam3/java/master/.$toInstall/apk.rb	$PREFIX/opt/metasploit-framework/lib/msf/core/payload/apk.rb
-		;;
+
 	cewl)
 		SearchTool
 		yes|apt install ruby git
@@ -1106,42 +939,6 @@ CONF
 		git clone --quiet https://github.com/HatBashBR/HatCloud $TOOLS/$toInstall
 		chmod 750 $TOOLS/$toInstall/$toInstall.rb
 		;;
-	metasploit)
-		toInstall="metasploit-framework"
-		SearchTool
-		[[ -d $PREFIX/lib/ruby ]] && rm -rf $PREFIX/lib/ruby;yes|apt remove ruby;yes|apt autoremove
-		msfv="6.1.39_all"
-		wget --quiet --tries=20 $iHDB/to-install/metasploit-framework_$msfv.deb -O $TMPDIR/metasploit-framework_$msfv.deb
-		pushd $TMPDIR
-		yes|apt install ./metasploit-framework_$msfv.deb
-		rm $TMPDIR/metasploit-framework_$msfv.deb
-		popd
-	    ;;
-    whatweb)
-			SearchTool
-	    chk-msf
-	    yes|apt install ruby git
-	    git clone https://github.com/urbanadventurer/WhatWeb $TOOLS/$toInstall
-	    cd $TOOLS/$toInstall
-	    gem update --system 
-	    gem install bundler
-	    printf "#!/usr/bin/bash
-	    # Coded on Agust 2019 by Ivam3 and upgraded on July 2021
-	    IFS=$'\\n\\t'
-	    R='\\033[1;31m'
-	    W='\\033[0m'
-	    if [ -d $TOOLS/$toInstall ];then
-	           pushd $TOOLS/whatweb
-		   exec ruby $TOOLS/whatWeb/whatweb \${@:1}
-		   popd
-	   else
-	           printf \"\$R(_➤)\$W Whatweb is not installed.\"
-		   exit
-	    fi
-	    #                       i-Haklab by @Ivam3" > $HOME/.local/bin/$toInstall
-	    chmod 711 $HOME/.local/bin/whatweb
-	    [[ -e $PREFIX/etc/hosts ]] || touch $PREFIX/etc/hosts
-	    ;;
     wpscan)
 			SearchTool
 	    yes|apt install git ruby
@@ -1226,13 +1023,7 @@ CONF
 		done
 		;;
 	#::PERL::#
-	DoS-A-Tool)
-	  SearchTool
-		yes|apt install wget perl
-		wget -q https://raw.githubusercontent.com/ivam3/$toInstall/master/$toInstall -O $HOME/.local/bin/$toInstall
-		chmod +x $HOME/.local/bin/$toInstall
-		dos2unix $HOME/.local/bin/$toInstall
-		;;
+
 	acccheck)
 		SearchTool
 		yes|apt install git perl
@@ -1247,23 +1038,6 @@ CONF
 		chmod +x $TOOLS/$toInstall/$toInstall.php
 		;;
 	#::ROOT::#
-	aircrack-ng)
-	  SearchTool
-		if chk-root;then
-			yes|apt install root-repo aircrack-ng ethtool macchanger
-		else
-			STDERROOT
-		fi
-		;;
-	bettercap)
-		SearchTool
-		if chk-root;then
-			yes|apt install ruby
-			gem install bettercap
-		else
-			STDERROOT
-		fi
-		;;
 	dnsenum)
 		SearchTool
 		if chk-root;then
@@ -1329,95 +1103,6 @@ CONF
 			wget -q $iHDB/fix-tools/$toInstall.py -O $TMPPATH/$toInstall.py
 		fi
 		;;
-	sudo)
-		if chk-root;then
-			yes|apt install curl
-			if [[ ! -d $HOME/.suroot ]];then
-				mkdir ~/.suroot
-				touch ~/.suroot/.bashrc
-			fi
-			#set colored=true to turn on colored e
-			#set colored=false to turn off colored error messages
-			colored=true
-			#red=1 green=2 yellow=3
-                        color() {
-                                if [ $colored == "true" ];then
-                                        echo "$(tput setaf $toInstall)${*:2}$(tput sgr0)"
-                                else
-                                        echo "${*:2}"
-                                fi
-                                }
-                        SYSBIN=/system/bin
-                        SYSXBIN=/system/xbin
-                        BB=$SYSXBIN/busybox
-                        PRE=/data/data/com.termux/files
-                        ROOT_HOME=$PRE/home/.suroot
-                        BINPRE=$PRE/usr/bin
-                        LDLP="export LD_LIBRARY_PATH=$PRE/usr/lib"
-                        CMDLINE="PATH=$PATH:$SYSXBIN:$SYSBIN;$LDLP;HOME=$ROOT_HOME;cd $PWD"
-
-                        #set root user enviroment
-                        printf "$G(_➤)$W Build root enviroment ..";
-                        wget -q $iHDB/.set/bin/$1 -O $HOME/.local/bin
-                        if [ -e ~/.suroot/.bashrc ];then
-                                for opt in 1 2 3 4;do
-                                        if [ ! -O ~/.suroot/.bashrc ]; then
-                                                let try=opt++
-                                                sudo chown $USER:$USER -R ~/.suroot
-                                                if [ $try -gt 3 ];then
-                                                        printf "$R. DENIED$Y\n(_➤)$W to fix it try 'chmod $USER:$USER -R ~/.suroot' and reinstall\n";Err
-                                                fi
-                                        fi
-                                done
-                        else
-                                if [ ! -d ~/.suroot ]; then
-                                        mkdir ~/.suroot
-                                fi
-                        fi
-                        printf "PS1=\"\[\e[33m\][!] \[\e[31m\]Press\[\e[32m\] Ctrl d\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\"
-                        export TERM=xterm-256color
-                        export LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib
-                        export PATH=/data/data/com.termux/files/home/.local/bin:/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:/system/xbin:/system/bin
-                        HOME=/data/data/com.termux/files/home
-                        fish
-                        #          i-Haklab by @Ivam3" > ~/.suroot/.bashrc
-                        if [ -x $SYSXBIN/su ]; then
-                                SU=$SYSXBIN/su
-                        elif [ -x /su/bin/su ]; then
-                                SU=/su/bin/su
-                        elif [ -x /sbin/su ]; then
-                                SU=/sbin/su
-                        fi
-                        if [ ! -d $ROOT_HOME ]; then
-                                if [ -x $BB ] && [ $($BB --list | grep -w mount) == "mount" ]; then
-                                        MOUNTEX="$BB mount"
-                                elif [ -x $SYSBIN/mount ]; then
-                                        MOUNTEX="$SYSBIN/mount"
-                                fi
-                                MOUNT_RW="$MOUNTEX -o rw,remount,rw /system"
-                                MOUNT_RO="$MOUNTEX -o ro,remount,ro /system"
-                                $SU -c "$MOUNT_RW"
-                                $SU -c "mkdir $ROOT_HOME"
-                                $SU -c "chmod 700 $ROOT_HOME"
-                                BASHRC="'PS1=\"# \"\nexport TERM=$TERM\n$LDLP\nexport PATH=$PATH:$SYSXBIN:$SYSBIN'"
-                                $SU -c "echo -e $BASHRC > $ROOT_HOME/.bashrc"
-                                $SU -c "chmod 700 $ROOT_HOME/.bashrc"
-                                $SU -c "$MOUNT_RO"
-                        fi
-                        # Reset echo
-                        stty sane
-                        if [ -e $PREFIX/bin/applets/sudo ]; then
-                                rm $PREFIX/bin/applets/sudo
-                        elif [ -e $PREFIX/bin/sudo ]; then
-                                rm $PREFIX/bin/sudo
-                        fi
-                        curl -Ls $iHDB/to-install/$toInstall -o $HOME/.local/bin/$toInstall
-                        chmod 750 $HOME/.local/bin/$toInstall
-                        printf "$G. DONE!!$W"
-                else
-                        STDERROOT
-                fi
-                ;;
 	*)
 		printf "$R(_➤)$W Unable to locate $toInstall on i-Haklab\n"
 		sleep 0.5
