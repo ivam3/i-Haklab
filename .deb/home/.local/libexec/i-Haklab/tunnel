@@ -1,0 +1,42 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#This file is part of i-Haklab command
+IFS=$'\n\t'
+trap ctrl_c 2
+ctrl_c(){ tput cnorm;exit 0;}
+subdomain=none
+source $HOME/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+chk-pkg lt localtunnel-server
+chk-tunnel
+getPORT
+[[ $SSH -eq 1 ]] && killall -2 ssh > /dev/null 2>&1
+
+default(){ config;$(command -v lt) -h "http://$TUNNEL" -p $LPORT --print-requests;}
+subdomain(){ config;$(command -v lt) -h "http://$TUNNEL" -p $LPORT -s $subdomain --print-requests;}
+
+usage(){ printf $Y"USAGE:$W i-Haklab tunnel <options>\n\nOPTIONS\t\tDESCRIPTION\n-h\t\tShow this menu.\t\n-p\t\tNumber of port.\n-s\t\tSubdomain.\nblank\t\tNo arguments given. Server run with default set\n$Y\n[\e[0mExample$Y]─➤$W i-Haklab tunnel$Y\n    ╰─────➤$W i-Haklab tunnel -p 8880 -s my-owner-cloud\n";tput cnorm;
+}
+
+config(){ printf $G"(_➤)$W Runnig server over:$G\n ╰─➤ LHOST:$W 127.0.0.1$G\n ╰─➤ PORT:$W $LPORT$G\n ╰─➤ SUBDOMAIN:$W $subdomain$G\n |\n(_➤)_";
+}
+
+banner
+tput civis
+while getopts s:p:h options
+do
+	case $options in
+		h) usage;exit ;;
+		p) LPORT=$OPTARG
+			[[ $LPORT != ?(-)+([:digit:]) ]] 2>/dev/null && {
+				STDERR;
+			}
+			;;
+		s) subdomain=$OPTARG ;;
+	esac
+done
+
+[[ $subdomain != none ]] && { subdomain;} || {
+	default;
+}
+tput cnorm

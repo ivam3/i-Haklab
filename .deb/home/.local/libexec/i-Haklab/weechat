@@ -1,0 +1,37 @@
+#!/data/data/com.termux/files/usr/bin/bash
+IFS=$'\n\t'
+trap ctrl_c 2
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+chk-pkg weechat weechat
+chk-pkg openssl openssl-tool
+
+[[ ! -e ~/.weechat/certs/freenode.pem ]] && {
+	printf "$Y(_>)─>$W Before starting got to create a username and password in irc.com/login/sso\n$Y ╰────➤$W press$G enter$W to continue or$R ctrl_c$W to abort it";read enter;
+	openssl req -x509 -new -newkey rsa:4096 -sha256 -days 1096 -nodes -out freenode.pem -keyout freenode.pem;
+	mkdir -p ~/.weechat/certs;
+	mv freenode.pem ~/.weechat/certs;
+	printf "$Y(_>)─>$W if this is your first time using weechat: after start weechat type the next commands$Y
+ ╰────➤$W otherwise,$R ignore it$Y
+        /server add -auto -ssl -ssl_cert ~/.weechat/certs/freenode.pem -network freenode chat.freenode.net 6697
+        /server add freenode chat.freenode.net/6697 -ssl --autoconnect
+        /set irc.server.freenode.addresses \"chat.freenode.net/6697\"
+        /set irc.server.freenode.ssl on
+        /set irc.server.freenode.sasl_mechanism PLAIN
+        /set irc.server.freenode.sasl_username <nickname>
+        /set irc.server.freenode.sasl_password <password>
+        /save
+        /secure passphrase <passphrase>
+        /secure set freenode_password <password>
+        /set irc.server.freenode.sasl_password \"\${sec.data.freenode_password}\"
+        /set irc.server.freenode.autojoin #Ivam3byCinderella
+        /connect freenode
+        /join #Ivam3byCinderella$G\n\n                 Press enter to start$W\n";
+	read enter;
+} || {
+	printf "$Y(_➤)$W After weechat started type the command :$G /connect freenode$W\n                 Press$G enter$W to start$W\n";
+	read enter;
+	weechat;
+	k-boom;
+}

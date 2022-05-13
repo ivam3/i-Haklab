@@ -1,0 +1,23 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Coded by @Ivam3 on January 2019
+#Contact: https://t.me/Ivam3
+trap ctrl_c 2
+IFS=$'\n\t'
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+chk-pkg curl curl
+chk-pkg sed sed
+chk-pkg column util-linux
+banner
+
+printf $Y"(_➤) BIN: $W";read bin
+[[ -z $bin ]] && { STDERR;}
+
+[ $bin -eq $bin ] 2>/dev/null && {
+	running time 3
+	sed -r 's|["#$%&/{}()*;]||g' <<< "$(curl -sH "Accept-Version: 3" "https://lookup.binlist.net/$bin")"|tr "," "\n"|tr ":" "="|column
+} || {
+	STDERR;
+}
+

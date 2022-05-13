@@ -1,0 +1,137 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#CODED BY IVAM3 modificated on 18/feb/2021
+#This script will fix Ruby Gems Issues
+IFS=$'\n\t'
+trap ctrl_c 2
+
+#::::::: ENVIROMENT VARIABLES :::::::#
+R='\033[1;31m'
+G='\033[1;32m'
+Y='\033[1;33m'
+B='\033[1;34m'
+M='\033[1;35m'
+C='\033[1;36m'
+W='\033[0m'
+RUBYv=$(ls $PREFIX/lib/ruby |grep -m 1 '[0-9].[0-9].[0-9]')
+iHDB="https://github.com/ivam3/i-Haklab/raw/master/.set"
+
+#::: DEPENDENCIES :::#
+command -v ruby >/dev/null || apt install ruby -y >/dev/null 2>&1
+command -v lolcat >/dev/null || gem install lolcat >/dev/null 2>&1
+
+#::: BANNERS ;::#
+ctrl_c(){ printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";exit;}
+Banner(){ clear;printf "\n ____         ____ _ ____\n|  _ \ _   _ / ___(_)  _ \ \n| |_) | | | | |  _| | |_) |\n|  _ <| |_| | |_| | |  _ <\n|_| \_|\__,_|\____|_|_| \_|v.2\n#::Ruby Gems Issues Resolved::#\n #::: @Ivam3byCinderella ::::#\n";sleep 1;}
+
+Usage(){
+	printf "$G\n[¿]─>$W Choose an option $G<-[?]\n\n{01}$W$Y[MSFCONSOLE]─➤$W CANNOT LINK EXECUTABLE \"ruby\":$Y\n\t╰────────➤$W library \"/data/da..../bigdecimal.so\" not found$G\n{02}$W$Y[GRPC.GEMSPEC]─➤$W There was an error parcing Gemfile$G\n{03}$W$Y[GEMS]─➤$W Could not find <gem's name> in any of the sources$G\n{04}$Y[BIGDECIMAL]─➤$W Gem bigdecimal architecture compatibility$G\n{05}$Y[BUNDLER]─➤$W You have already activated bundler 2.1.4, but your Gemfile requires bundler 2.2.11$G\n{06}$Y[MSFCONSOLE]─➤$W UNSOPPORTED (OpenSSL::Cipher::CipherError)$G\n{99}$R[EXIT]\n\n$W"
+	while read -p "{ANSW}-> " ANSW && [[ -z $ANSW ]]; do
+		continue
+	done
+}
+
+
+#::: MAIN :::#
+Banner|lolcat;Usage
+Result(){ sleep 1;[[ $1 -eq 0 ]] && printf "$G[-DONE-]$W\n" || printf "$R[-FAIL-]$W\n";}
+
+printf "$G\n(_➤)$W Processing with option $ANSW... "
+case $ANSW in
+	01|1)
+		BIGDECIMAL=$(find $PREFIX/lib/ruby/${RUBYv} -iname "bigdecimal.so")
+		cat <<- CONF > $PREFIX/bin/msfconsole
+#!/data/data/com.termux/files/usr/bin/sh
+SCRIPT_NAME=\$(basename "\$0")
+METASPLOIT_PATH="${PREFIX}/opt/metasploit-framework"
+# Fix ruby bigdecimal extensions linking error.
+export LD_PRELOAD="${BIGDECIMAL}:\$LD_PRELOAD"
+case "\$SCRIPT_NAME" in
+        msfconsole)
+                if [ ! -d "$PREFIX/var/lib/postgresql" ];then
+                        mkdir -p "$PREFIX/var/lib/postgresql"
+                        initdb "${PREFIX}/var/lib/postgresql"
+                fi
+                if ! pg_ctl -D "${PREFIX}/var/lib/postgresql" status > /dev/null 2>&1; then
+                        pg_ctl -D "${PREFIX}/var/lib/postgresql" start --silent
+                fi
+                if [ -z "\$(psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='msf'")" ];then
+                        createuser msf
+                fi
+                if [ -z "\$(psql -l | grep msf_database)" ];then
+                        createdb msf_database
+                fi
+                exec ruby "\$METASPLOIT_PATH/\$SCRIPT_NAME" "\$@"
+                ;;
+        msfd|msfrpc|msfrpcd|msfvenom)
+                exec ruby "\$METASPLOIT_PATH/\$SCRIPT_NAME" "\$@"
+                ;;
+        *)
+                echo "[!] Unknown Metasploit command '\$SCRIPT_NAME'."
+                exit 1
+                ;;
+esac
+CONF
+		chmod +x $PREFIX/bin/msfconsole
+		ln -sf $(which msfconsole) $PREFIX/bin/msfvenom
+		Result 0
+		;;
+	02|2)
+		yes|pkg clean && pkg autoclean && pkg autoremove && pkg update --fix-missing && pkg --configure -a && pkg update --fix-missing && pkg upgrade && pkg install clang
+		Result 0
+		;;
+	03|3)
+		while read -p " (Gems name)─➤ " GEM && [ -z $GEM ];do
+			Result 1
+		done
+		while read -p " (Version)─➤ " GEMv && [ -z $GEMv ];do
+			GEMv=">= 0.1"
+		done
+		while read -p " (Gemfile path)─➤ " GEMfile && [ -z $GEMfile ];do
+			Result 1
+		done
+		gem install bundler
+		gem install $GEM -v "$GEMv" -- --using-system-libraries
+		bundle config build.$GEM -- using-system-libraries
+		RUBYext=$(find $PREFIX/lib/ruby/gems/${RUBYv}/extensions -iname "${GEM}-${GEMv}")
+		echo "$RUBYext" >> Gemfile.local
+		sed '/rbnacl/d' -i Gemfile.lock
+		sed 's|$GEM (*.*)|$GEM ($GEMv)|g' -i Gemfile.lock
+		bundle install --gemfile Gemfile.local
+		rm Gemfile.local
+		bundle install --full-index
+		bundle update $GEM --full-index
+		Result 0
+		;;
+	04|4)
+		curl -Ls ${iHDB}/fix-tools/fixbigdecimal|bash
+		Result 0
+		;;
+	05|5)
+		while read -p "(_>)_Version_to_remove_{ex_2.1.4}─➤ " OLDv && [ -z $OLDv ];do
+			continue
+		done
+		while read -p "(_>)_Version_to_install_{ex_2.2.26}─➤ " NEWv && [ -z $NEWv ];do
+			continue
+		done
+		gem install bundler:$NEWv
+		if [ -e $PREFIX/lib/ruby/gems/$RUBYv/specifications/default/bundler-$OLDv.gemspec ];then
+			rm $PREFIX/lib/ruby/gems/$RUBYv/specifications/default/bundler-$OLDv.gemspec
+		fi
+		Result 0
+		;;
+	06|6)
+		GEMPATH=$PREFIX/lib/ruby/gems/$RUBYv/gems/hrr_rb_ssh-0.4.2/lib/hrr_rb_ssh/transport
+		sed -i '13,15 {s/^/#/}' $GEMPATH/encryption_algorithm/functionable.rb
+		for i in 256 384 521;do
+			sed -i '14 {s/^/#/}' $GEMPATH/server_host_key_algorithm/ecdsa_sha2_nistp$i.rb
+		done
+		Result 0
+		;;
+	99)
+		Result 0;exit
+		;;
+	*)
+		Result 1;sleep 1
+		;;
+esac
+#				@IbyC

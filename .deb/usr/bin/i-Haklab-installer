@@ -1,0 +1,127 @@
+#!/data/data/com.termux/files/usr/bin/bash
+IFS=$'\n\t'
+#
+# INVOKE VARIABLES AND FUNCTIONS
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+#
+# TOOLS STORAGE DIRECTORY (INTERNAL - EXTERNAL)
+echo "Getting access to external storage."
+s2=$(df|grep "fuse"|grep -iv emulated|awk -F " " '{print $6}')
+[[ -n $s2 ]] && [[ -w $s2 ]] && {
+	cp -r ${HOME}/.local/share $s2/data/com.termux/files/share;
+	rm -rf ${HOME}/.local/share;
+	ln -s $s2/data/com.termux/files/share ${HOME}/.local/share;
+}
+
+echo "Installing required python modules (It could take a while) ..."
+for v in python python2 ; do
+	$v -m pip --no-color --quiet --no-cache-dir install --upgrade pip 2>>$LOGFILE
+done
+for module in trufflehog wheel speedtest-cli frida shodan;do
+	[[ $module = shodan ]] && { python -m pip --no-color --quiet --no-cache-dir install -U --user shodan 2>>$LOGFILE;break;}
+	python -m pip --no-color --quiet --no-cache-dir install $module 2>>$LOGFILE
+done
+
+echo "Installing local tunnel server ..."
+git clone --quiet https://github.com/localtunnel/localtunnel $TMPDIR/localtunnel-server
+cd $TMPDIR/localtunnel-server
+npm install;npm install -g localtunnel
+wget -q --tries=20 ${iHDB}/etc/localtunnel/openurl.js -O $PREFIX/lib/node_modules/localtunnel/node_modules/openurl/openurl.js
+rm -rf $TMPDIR/localtunnel-server
+
+echo "Setting i-Haklab style."
+ln -s $PREFIX/bin/fish $HOME/.termux/shell 2>>$LOGFILE
+
+echo "Installing i-Haklab web service (It could take a long time) ..."
+[[ -d ${HOME}/.local/var/service ]] || mkdir -p ${HOME}/.local/var/service
+wget --tries=20 --quiet $iHDB/.local/etc/i-Haklab/www.zip -O ${HOME}/.local/var/service/www.zip
+[[ -e ${HOME}/.local/var/service/www.zip ]] && {
+	[[ -n $s2 ]] && [[ -w $s2 ]] && {
+		www="$s2/data/com.termux/files";
+		ln -s $s2/data/com.termux/files/www ${HOME}/.local/var/service/www
+	} || {
+		www="${HOME}/.local/var/service";
+	}
+	unzip -q ${HOME}/.local/var/service/www.zip -d $www;
+	rm -rf ${HOME}/.local/var/service/www.zip
+} || {
+	echo -en $R"E:$W www.zip unreachable ..$R.Aborting.$W";
+	exit 1;
+}
+
+# SET ROOT USER IF DEVICE IS ROOTED
+if chk-root;then
+	echo "Rooted device detected, setting Root user ..."
+	rm -rf ${HOME}/.config/fish/functions/sudo.fish
+	ln -s ${PREFIX}/bin/applets/sudo ${PREFIX}/bin/sudo
+	if [[ -e ${HOME}/.suroot/.bashrc ]]
+	then
+		[[ -O ${HOME}/.suroot/.bashrc ]] || sudo chown $USER:$USER -R ${HOME}/.suroot/
+  else
+		[[ -d ${HOME}/.suroot ]] || mkdir ${HOME}/.suroot
+  fi
+  cat <<- CONF > ${HOME}/.suroot/.bashrc
+PS1=\"\[\e[33m\][!] \[\e[31m\]Press\[\e[32m\] Ctrl d\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\""
+export TERM=xterm-256color
+export LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib
+export PATH=$HOME/.local/bin:/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:/system/xbin:/system/bin
+HOME=/data/data/com.termux/files/home
+fish
+#          i-Haklab by @Ivam3
+CONF
+fi
+
+# SET OMF SHELL
+echo "Setting interactive shell Oh-my-fish.\n"
+cat <<- CONF > ${HOME}/.local/etc/fish/config.fish
+if status --is-login
+bash ${HOME}/.local/libexec/i-Haklab.login
+end
+
+function on_exit --on-event fish_exit
+echo 'Have a nice hacking day!!'
+sleep 1
+end
+
+set fish_theme bira
+set -g theme_nerd_fonts yes
+set DISPLAY :0
+set PULSE_SERVER 127.0.0.1
+set PATH ${HOME}/.local/bin:${PREFIX}/bin
+set HOME /data/data/com.termux/files/home
+set GOPATH /data/data/com.termux/files/home/go
+set GOROOT /data/data/com.termux/files/usr/lib/go
+set JAVA_HOME /data/data/com.termux/files/usr/opt/openjdk
+set LD_LIBRARY_PATH ${PREFIX}/lib:${HOME}/.local/lib
+set TOOLS ${HOME}/.local/share
+alias bat="bat -f --theme 'Visual Studio Dark+'"
+CONF
+
+git config --global core.autocrlf
+[[ -e ${PREFIX}/etc/fish/config.fish ]] && rm -rf ${PREFIX}/etc/fish/config.fish
+ln -s ${HOME}/.local/etc/fish/config.fish ${PREFIX}/etc/fish/config.fish 2>>$LOGFILE
+sed -i '12a chsh -s fish' ${PREFIX}/etc/bash.bashrc
+
+cat <<- CONF > ${HOME}/.bashrc
+export PATH=${PREFIX}/bin:${HOME}/.local/bin
+export LD_LIBRARY_PATH=${PREFIX}/lib:${HOME}/.local/lib
+echo -en "\e[33mWARNING:\e[0m You are out of i-Haklab | Some commands and tools could not be running.\n"
+CONF
+
+echo -en $Y"""W:$W Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'
+   when it happen hold on for one minute and then type$Y exit$W to$W continue$W
+"""
+fish <(curl -fsSL "$iHDB/.local/etc/i-Haklab/get.oh-my.fish") 2>>$LOGFILE
+TMP_fish=$(mktemp)
+cat <<- CONF > $TMP_fish
+#!/bin/env fish
+omf install bira
+CONF
+fish $TMP_fish 2>>$LOGFILE
+
+echo "Updating mlocate data base ..."
+updatedb
+cd;tput init
+exit 0
+####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####

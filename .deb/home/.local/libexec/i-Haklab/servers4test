@@ -1,0 +1,44 @@
+#!/data/data/com.termux/files/usr/bin/bash
+IFS=$"/n/t"
+trap ctrl_c 2
+
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+chk-pkg php php
+chk-pkg mariadb mariadb
+mysqld &>/dev/null & ;pid=$(echo $!)
+banner
+
+while [ "$(ps a|awk '{print $1}'|grep $pid)" ]
+do
+	[[ $(mysql -u $(whoami) -e "use mysql;SELECT user FROM user;"|grep "root") = root ]] || {
+		mysql -u $(whoami) -e "use mysql;set password for 'root'@'localhost' = password('root');flush privileges;";
+			mysqld_safe;
+	}
+
+	select answ in bWAPP DVWA mutillidae Exit
+	do
+		[[ $answ = Exit ]] && {
+			exit 0;
+		}
+		[[ $answ = DVWA ]] && {
+			db=dvwa;
+		} || {
+			db=$answ;
+		}
+		[[ -d ${HOME}/.local/var/service/www/servers4test/$answ ]] && {
+			if [[ $(mysql -u root -proot -e "show DATABASES;"|grep $db) != $db ]]
+			then
+				mysql -u root -proot -e "create DATABASE $db;"
+			fi
+			getPORT;
+			php -S $LOOPBACK:$LPORT -t ${HOME}/.local/var/service/www/servers4test/$answ 2>>$LOGFILE;
+			kill -TERM $pid;disown $pid 2>>$LOGFILE;
+			break;
+		} || {
+			STDERR broken;
+		}
+	done
+	break
+done

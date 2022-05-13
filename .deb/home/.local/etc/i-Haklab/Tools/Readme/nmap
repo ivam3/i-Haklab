@@ -1,0 +1,31 @@
+
+:::::::::::::::::::::::::::::::::::::: NMAP QUICK GUIDE ::::::::::::::::::::::::::::::::::::::
+
+
+
+nmap -O							|	Scan fingerprint
+nmap -iL ips.txt					|	Scan ips in .txt file
+nmap -p							|	Scan an specific port
+nmap -p 20-30						|	Scan ports between 20 at 30
+nmap -p-						| 	Scan all 65,535 ports
+nmap -F							|	Fast scan
+nmap -sT						|	Scan TCP connect
+nmap -sS						|	Scan sync(puertos abiertos)
+nmap -sP						|	Localiza equipos activos
+nmap -sN						|	Null scan
+nmap -sF						|	Scan FIN
+nmap -v							|	Verbose
+nmap -sU 						|	Scan UDP
+nmap -sX						|	scan XMAS
+nmap -A							|	All=show SO/type of service
+nmap -sV						|	Scan only active service
+nmap -sV --version-intesity 0-5				|	Add intesity level at scan
+nmap -P0 -p- -sL <IPzombie> <IPvictima>			|	Scan idle
+sudo nmap -sP						|	Show all IPs in the network
+nmap -oN						|	Save results in .txt file
+nmap -oX						|	Sava results in .xml file
+nmap -sC						|	Run an specific script
+nmap --script-help=ssl-heartbleed https://m.example.com	|	Scan some webpage
+nmap --script=msrpc-enum 				|	enumerar servicios de Microsoft
+nmap --script=all					|	Scan all scripts
+nmap -sU -A -PN -n -pU68 --script=all 192.168.0.0	|	DDoS Attack

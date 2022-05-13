@@ -1,0 +1,42 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Created on July/2021
+IFS=$'\n\t'
+trap ctrl_c 2
+source $HOME/.local/etc/i-Haklab/variables
+source $iHETC/functions
+key=$(grep "phonescanKEY" $iHETC/variables)
+ctrl_c(){ printf "$Y\n   (¿) Need a help (?)$B\nTelegram : t.me/Ivam3_Bot$W";exit;}
+Err() { printf "$R(_➤)$W Enter a valid phone number";exit;}
+usage(){
+	printf "$R(_➤)$W Usage : i-Haklab phonescan [<529876543210>|setKEY <your API key>]\n"
+	exit
+}
+saveKEY(){
+	while read -p $(printf "$Y ╰───➤$W ") answ && [ -z $answ ];do
+		continue
+	done
+	sed -i "s|$key|phonescanKEY=\"$answ\"|g" $iHETC/variables
+}
+
+banner
+if [[ -z $phonescanKEY ]]
+then
+	printf "$Y(_➤)$W Type your API key $Y|$W Get it on https://numverify.com/dashboard\n"
+	saveKEY
+elif [[ $1 = "setKEY" ]]
+then
+	printf "$Y(_➤)$W Type your API Key\n"
+	saveKEY
+elif [[ $1 ]] && [ "$1" -eq "$1" ] 2>/dev/null
+then
+	num="$1"
+	url="http://apilayer.net/api/validate?access_key=$phonescanKEY&number=$num&country_code=&format=1"
+	[[ $(expr length $num) -ne 12 ]] && Err
+	printf "$Y\n  Scanning phonenumber :$W $num$G\n  ________________________________________________________\n"
+	printTable '_' "$(curl -s $url|tail -n 11|tr -d "\}|\"|,"|tr "_" " "|tr ":" "_")"
+	printf "  ________________________________________________________$W\n\n"
+	tput cnorm;exit
+else
+	usage
+fi
+

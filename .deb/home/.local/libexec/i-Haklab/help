@@ -1,0 +1,4 @@
+#!/data/data/com.termux/files/usr/bin/bash
+source /data/data/com.termux/files/home/.local/etc/i-Haklab/functions
+banner
+helpper

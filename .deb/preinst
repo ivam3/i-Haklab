@@ -1,0 +1,22 @@
+#!/data/data/com.termux/files/usr/bin/bash
+if [[ $(id -u) -eq 0 ]]
+then
+  echo -en "\e[31m(_➤)\e[0m You need to be a common user"
+  exit 1
+else
+  echo "Preparing enviroment ..."
+	[[ -d ${HOME}/.local ]] && rm -rf ${HOME}/.local/*
+	[[ -d ${PREFIX}/share/i-Haklab ]] && rm -rf ${PREFIX}/share/i-Haklab
+	[[ -e ${PREFIX}/etc/bashito ]] && rm -rf ${PREFIX}/etc/bashito
+	[[ -e ${PREFIX}/etc/motd ]] && rm -rf ${PREFIX}/etc/motd
+	[[ -e ${PREFIX}/etc/motd.dpkg-old ]] && rm -rf ${PREFIX}/etc/motd.dpkg-old
+	[[ -d ${HOME}/.local/share/omf ]] && rm -rf ${HOME}/.local/share/omf
+	[[ -d ${HOME}/.config/omf ]] && rm -rf ${HOME}/.config/omf
+	
+	echo "Setting Ivam3 repositories at Advance Package Tool(APT)."
+	[[ -d $PREFIX/etc/apt/sources.list.d ]] || mkdir -p $PREFIX/etc/apt/sources.list.d
+	wget --tries=20 --quiet "https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/ivam3-termux-packages.list" -O ${PREFIX}/etc/apt/sources.list.d/ivam3-termux-packages.list
+	echo "Setting Yisus7u7 repositories at Advance Package Tool(APT)."
+	wget --trues=20 --quiet "https://raw.githubusercontent.com/Yisus7u7/termux-desktop-xfce/gh-pages/termux-desktop-xfce.list" -O ${PREFIX}/etc/apt/sources.list.d/termux-desktop-xfce.list
+fi
+####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####

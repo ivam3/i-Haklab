@@ -1,0 +1,75 @@
+TELEGRAM	YOUTUBE				NAME_OF_TUTORIAL
+
+3	https://youtu.be/dTj8I5XWyn4	➤ TERMUX_TIPS_Cap.1
+6	https://youtu.be/EPUKlLTy52U 	➤ TERMUX_TIPS_Cap.2
+9	https://youtu.be/k_MLuC_2cF0	➤ TERMUX_TIPS_Cap.3
+10	https://youtu.be/TlhE0AkF768	➤ TERMUX_TIPS_Cap.4
+171	https://youtu.be/c07wys6al_g	➤ TERMUX_TIPS_Cap.5
+189	https://youtu.be/-kryoySMIUE    ➤ TERMUX_TIPS_Cap.6
+209	https://youtu.be/AoNmL5Hc-3Y	➤ TERMUX_TIPS_Cap.7
+293	https://youtu.be/HNS4K03DKWM	➤ TERMUX_TIPS_Cap.8
+309	https://youtu.be/mSKIlocBQck    ➤ TERMUX_TIPS_Cap.9
+342	https://youtu.be/KOFYT6prtJo    ➤ TERMUX_TIPS_Cap.10
+355	https://youtu.be/IXXjYSb7OzA	➤ TERMUX_TIPS_Cap.11
+527	https://youtu.be/IrBv_r9WCLM	➤ TERMUX_TIPS_Cap.12
+638     https://youtu.be/q8ZYED2xtuc    ➤ TERMUX_TIPS_Cap.13
+09	https://youtu.be/W7hM6xW4DiU	➤ TERMUX:Aprendamos_como_ejecutar_comandos
+15	https://youtu.be/oY73MzfZ3e4 	➤ TERMUX:Combinación_de_comandos
+17	https://youtu.be/dkrBRyykah0	➤ TERMUX:Instalando_el_comando_Sudo
+19	https://youtu.be/MVukExyXfm4	➤ TERMUX:Modifica_y/o_personaliza_el_banner_de_inicio
+96	https://youtu.be/vSrFzURavr4	➤ TERMUX:Creando_contraseña_de_acceso
+21	false				➤ TERMUX:Youtube-DL
+211	https://youtu.be/T9LMLuSfrhc	➤ METASPLOIT:Instalación
+25	false			 	➤ METASPLOIT:RuGiR
+27	false				➤ METASPLOIT:Hacking_Android_inLAN
+31	false				➤ METASPLOIT:Persistencia_en_Android
+29	false			 	➤ METASPLOIT:Hacking_Android_outLAN 
+39	false				➤ METASPLOIT:Hackeado_Android_inLAN_con_paylink
+74	false			 	➤ METASPLOIT:EMBED_Inyectando_payload_en_app_legítima_inLAN
+76	false				➤ METASPLOIT:EMBED_Inyectando_payload_en_app_legítima_outLAN
+33	false				➤ Dos-A-TooL:Ataque_distribuido_de_denegación_de_servicio
+35 	false				➤ METASPLOIT:Ataque_distribuido_de_denegación_de_servicio
+223	https://youtu.be/zN62dfc5pdk	➤ Kali-nethunter:Instalacion(no root)
+41	false				➤ HACKING_WHATSAPP_1ra_parte
+44	false				➤ HACKING_WHATSAPP_2da_parte
+46	https://youtu.be/3_NBBtZ_tgA	➤ SETOOLKIT:Instalacion
+48	false				➤ PHISHING:Weeman_Framework(1ra parte):Instalación
+50	false				➤ PHISHING:Weeman_Framework(2da parte):Hacking_Facebook inLAN
+52	false				➤ PHISHING:Weeman_Framework(3ra parte):Hacking_Facebook Subdominio
+54	false				➤ NGROK:Instalacion
+false   https://youtu.be/Y_r5NUWn4xA    ➤ NGROK:conexion_via_ssh
+56	false				➤ PHISHING:WEEMAN_Framework(4ta parte):Hacking_Facebook_outLAN
+58	false				➤ PHISHING:Shellphish Framework:Hacking_redes_sociales
+297	false				➤ SAYCHEESE:Hack_webcam_con_un_link_(outlan)
+349	https://youtu.be/YTQIlyA6c2Q	➤ TERMUX_VPN:Anonimisa_tu_ip_en_cada_proceso_hacking
+62	https://youtu.be/JCCub_dX0-Q	➤ CRUNCH:Crear_diccionearios_para_ataques_de_fuerza_bruta
+64	false				➤ FBBRUTE:Ataque_de_fuerza_bruta_a_FACEBOOK
+66	false				➤ FBI:Como_sustraer_información_de_un_Facebook_Controlado
+60	false				➤ IPGEOLOCATION:Geolocalizacion_de_IP's_en_Google_Maps
+68	false				➤ ExiF:Extrayendo_Meta_Datos
+134	https://youtu.be/bE9hVhHkJnI	➤ BETTERCAP:Instalación
+161	https://youtu.be/vBnvj9J_OO8	➤ SQLMAP:Instalación
+370	false				➤ SQLMAP:Aprende_su_uso_paso_a_paso
+303	https://youtu.be/oZ_1KawHLnA	➤ BEEF:Instalación
+312	false				➤ NIKTO:Instalación
+268	https://youtu.be/j88gokzC1S4    ➤ TMUX-VIEWER:Conexion_remota_a_Termux
+464	https://youtu.be/qftsQ3BC0YI    ➤ GOPHISH:Instalacion
+98	false				➤ DNP_Cap.1:Converter
+118	false				➤ DNP_Cap.2:FTP_Crack
+123	false				➤ DNP_Cap.3:Droid_Info
+140	false				➤ DNP_Cap.4:My_web_Site
+148	false				➤ DNP_Cap.5:Fastool
+215	false				➤ DNP_Cap.6:The_black_hack
+231	https://youtu.be/krsDN2c6iac	➤ i-Haklab:Tips_de_uso_1ra_parte
+233	https://youtu.be/oQy2D99wxos	➤ i-Haklab:Tips_de_uso_2da_parte
+244	https://youtu.be/0POMqR6IVbQ	➤ i-Haklab:Tips_de_uso_3ra_parte
+false   https://youtu.be/EHkU1sqDYd4    ➤ i-Haklab:Oculta_mensajes_en_archivos
+false   https://youtu.be/KJh3u-oeRGc    ➤ i-Haklab:Comparte_archivos_de_termux_a_termux
+false   https://youtu.be/vlzzPgE5unA    ➤ i-Haklab:Crea_links_con_subdominio_personalizado
+83	https://youtu.be/jWvLi6qy1_A	➤ CURSO_DE_PROGRAMACIÓN_EN_BASH_1ra_Parte
+85	https://youtu.be/pGU5f-7FtTI	➤ CURSO_DE_PROGRAMACIÓN_EN_BASH_2da_Parte
+87	https://youtu.be/i0prEBotzhE	➤ CURSO_DE_PROGRAMACIÓN_EN_BASH_3ra_Parte
+false   https://youtu.be/YHzv_G-MMl0    ➤ Asigna_contraseña_codificada_a_scripts_para_su_ejecucion
+264	https://youtu.be/qVVLP99G1VI    ➤ OFUSCODE:Oculta_codigo_bash_script
+false	https://youtu.be/7WBKX9SFHlc	➤ SET_cap.especial:metasploit
+488	https://youtu.be/suMFPqrwD_c	➤ SET_cap.01:ngrok

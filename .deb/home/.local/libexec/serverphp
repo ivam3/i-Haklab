@@ -1,0 +1,77 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Created on Dec/2018
+IFS=$'\n\t'
+trap ctrl_c 2
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+chk-pkg php php
+
+[[ ! -d ${HOME}/.local/var/service/www ]] && mkdir -p ${HOME}/.local/var/service/www
+dir="$HOME/.local/var/service/www"
+ip="127.0.0.1"
+port="4546"
+
+usage(){
+	echo -en $G"""(_>)_usage:─➤$W $(basename $0) -i <lo|wlan|tun> -p <por number> -d <directory path>\n
+
+|----OPTIONS----|    |----DESCRIPTION----|
+ -h\t\t\tShow this menu
+ -n <lo|wlan|tun>\tType of internet protocol network to use :
+         lo\t\tfor loopback(127.0.0.1)[default].
+         wlan\t\tfor localhost(192.x.x.x).
+         tun\t\tfor ip tunnel if it is available.
+ -p <port number>\tSpecific a number of port to use[default=4546].
+ -d <path to dir>\tPath at directory to use.
+
+$Y[ex-01] :$W serverphp (with default settings)
+$Y[ex-02] :$W serverphp -n wlan -p 8080 -d /var/service/apache2
+$Y[ex-03] :$W serverphp -n lo -p 5555 -d home/www
+""";exit 0
+	}
+
+banner
+while getopts d:n:p:h options; do
+	case $options in
+		h) usage ;;
+		d) dir=$OPTARG
+			if [[ ! -d $dir ]]
+			then
+				echo -en $R"ERROR:$W Not such directory"
+				exit 1
+			fi
+			;;
+		n) net=$OPTARG
+			ip=$(ifconfig 2>/dev/null|grep $net -A 3|grep inet|grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}'|grep -v 255|head -n 1)
+			[ -z $ip ] && { echo -en >&2 $R"ERROR:$W doesn't exist network: $net";exit;}
+			;;
+		p) port=$OPTARG
+			[ $port -eq $port ] 2>/dev/null
+			while [[ $? -ne 0 ]]
+			do
+				echo -en $R"ERROR:$W Port $port invalid .. $Y Aborting."
+				exit 1
+			done
+			if [[ $port -lt 1024 ]]
+			then
+				if [[ $(id -u) -ne 0 ]]
+				then
+					echo -en $R"ERROR$W You need to be a$Y ROOT$W user to use port:$Y $port$W"
+					exit 1
+				fi
+			fi
+			;;
+	esac
+done
+
+echo -en $Y"""
+TIPS:$W type $(basename $0) -h for help$Y
+|
+╰─(_➤)$W Running service over:$Y
+   ╰─[HOST]─➤$W $ip$Y
+   ╰─[PORT]─➤$W $port$Y
+   ╰─[DIR]──➤$W $dir$Y
+_______|_____________________________________________________$W
+
+"""
+php -S $ip:$port -t $dir;shift
+#			i-Haklab by @Ivam3
