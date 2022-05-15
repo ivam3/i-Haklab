@@ -1,0 +1,32 @@
+{
+    "name": "grandt/phpzipmerge",
+    "type": "library",
+    "description": "Merge and stream multiple Zip files on the fly.",
+    "keywords": ["phpzip", "zip", "pkzip", "archive", "compressed", "compression", "stream", "merge"],
+    "homepage": "https://github.com/Grandt/PHPZipMerge",
+    "license": "LGPL-2.1",
+    "version": "1.0.4",
+    "authors": [
+        {
+            "name": "A. Grandt",
+            "email": "php@grandt.com",
+            "homepage": "http://grandt.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Greg Kappatos",
+            "homepage": "http://websiteconnect.com.au",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "grandt/binstring": ">=1.0.0",
+        "grandt/relativepath": ">=1.0.1",
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ZipMerge\\": "src/ZipMerge"
+        }
+    }
+}

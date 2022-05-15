@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<heroes>
+	<hero>
+		<id>1</id>
+		<login>neo</login>
+		<password>trinity</password>
+		<secret>Oh why didn't I took that BLACK pill?</secret>
+		<movie>The Matrix</movie>
+		<genre>action sci-fi</genre>
+	</hero>
+	<hero>
+		<id>2</id>
+		<login>alice</login>
+		<password>loveZombies</password>
+		<secret>There's a cure!</secret>
+		<movie>Resident Evil</movie>
+		<genre>action horror sci-fi</genre>
+	</hero>
+	<hero>
+		<id>3</id>
+		<login>thor</login>
+		<password>Asgard</password>
+		<secret>Oh, no... this is Earth... isn't it?</secret>
+		<movie>Thor</movie>
+		<genre>action sci-fi</genre>
+	</hero>
+	<hero>
+		<id>4</id>
+		<login>wolverine</login>
+		<password>Log@N</password>
+		<secret>What's a Magneto?</secret>
+		<movie>X-Men</movie>
+		<genre>action sci-fi</genre>
+	</hero>
+	<hero>
+		<id>5</id>
+		<login>johnny</login>
+		<password>m3ph1st0ph3l3s</password>
+		<secret>I'm the Ghost Rider!</secret>
+		<movie>Ghost Rider</movie>
+		<genre>action sci-fi</genre>
+	</hero>
+	<hero>
+		<id>6</id>
+		<login>selene</login>
+		<password>m00n</password>
+		<secret>It wasn't the Lycans. It was you.</secret>
+		<movie>Underworld</movie>
+		<genre>action horror sci-fi</genre>
+	</hero>
+</heroes>

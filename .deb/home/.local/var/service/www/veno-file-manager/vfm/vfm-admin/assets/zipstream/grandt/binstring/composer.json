@@ -1,0 +1,30 @@
+{
+    "name": "grandt/binstring",
+    "version": "1.0.0",
+    "type": "library",
+    "description": "A class for working around the use of mbstring.func_override",
+    "keywords": ["mbstring", "binary strings"],
+    "homepage": "https://github.com/Grandt/PHPBinString",
+    "license": "LGPL-2.1",
+    "authors": [
+        {
+            "name": "A. Grandt",
+            "email": "php@grandt.com",
+            "role": "Developer"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git://github.com/Grandt/PHPBinString.git"
+        }
+    ],
+    "require": {
+        "php": ">=5.0"
+    },
+    "autoload": {
+        "classmap": [
+            "BinString.php","BinStringStatic.php"
+        ]
+    }
+}

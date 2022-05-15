@@ -1,0 +1,140 @@
+.easyeditor {
+    outline: none;
+    border: 1px solid #e9e9e9;
+    padding: 20px;
+    margin-bottom: 20px;
+    overflow-y: auto;
+}
+
+.easyeditor-toolbar {
+    border: 1px solid #e9e9e9;
+    border-bottom: 0;
+    padding: 20px 20px 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background: rgba(241, 241, 241, 0.2);
+}
+
+.easyeditor-toolbar ul:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.easyeditor-toolbar li {
+    list-style: none;
+    float: left;
+    position: relative;
+}
+
+.easyeditor-toolbar li ul {
+    position: absolute;
+    left: 0;
+    top: 31px;
+    z-index: 5;
+    display: none;
+}
+
+.easyeditor-toolbar li button {
+    background: #f4f4f4;
+    color: #777;
+    border: 1px solid #e9e9e9;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    padding: 4px 8px;
+    float: left;
+    min-width: 30px;
+    outline: none;
+    border-radius: 2px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.easyeditor-toolbar li button:hover {
+    background: #f9f9f9;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+}
+
+.easyeditor-toolbar li button:active {
+    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar-italic {
+    font-style: italic;
+}
+
+.easyeditor blockquote {
+    border-left: 2px solid #e9e9e9;
+    padding-left: 20px;
+    color: #777;
+}
+
+.easyeditor figure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    min-width: 100px;
+    max-width: 100%;
+    padding: 7px;
+    box-sizing: border-box;
+    margin: auto;
+    overflow: hidden;
+}
+
+.easyeditor figure.is-resizable {
+    resize: both;
+    border: 1px solid #0e90dc;
+    cursor: se-resize;
+}
+
+.easyeditor figure img {
+    width: 100%;
+}
+
+.easyeditor[contenteditable=true]:empty:before{
+    content: attr(placeholder);
+    display: block;
+    opacity: 0.5;
+    cursor: text;
+}
+
+.easyeditor-toolbar.is-fixed {
+    position: fixed;
+    top: 0;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    z-index: 5;
+}
+
+.easyeditor ul,
+.easyeditor ol {
+    margin-left: 30px;
+}
+
+.easyeditor-temp {
+    box-sizing: border-box;
+    font-family: Consolas, monaco, monospace, "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter" !important;
+    line-height: 18px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+}
+
+.easyeditor-character-remaining {
+    text-align: right;
+    position: relative;
+    top: -17px;
+    font-size: 90%;
+}
+
+.easyeditor-character-remaining.is-invalid {
+    color: #ff0000;
+}
+
+.easyeditor-character-remaining.is-valid {
+    color: #777;
+}

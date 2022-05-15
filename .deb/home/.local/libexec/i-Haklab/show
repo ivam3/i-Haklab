@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 IFS=$"\n\t"
 trap ctrl_c 2
-source $HOME/.local/etc/i-Haklab/variables
+source ${HOME}/.local/etc/i-Haklab/variables
 source $iHETC/functions
 PS3="(_>)_number:─➤ "
 
@@ -81,7 +81,7 @@ elif [[ $(basename $1) = alltools ]];then
 	chk-pkg column util-linux
 	cat -n $iHETC/Tools/listoftools|column
 elif [[ $(basename $1) = instatools ]]; then
-	pkg list-installed 2>/dev/null|awk -F "/" '{print $1}'|column
+	pkg list-installed 2>>$LOGFILE|awk -F "/" '{print $1}'|column
 else
 	STDERR
 fi

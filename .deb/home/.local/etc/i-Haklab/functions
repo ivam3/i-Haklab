@@ -301,7 +301,7 @@ pass(){
 		[[ $1 = Get ]] && {
 			while read -sp "Password: " pass && [[ -z $pass ]]
 			do
-				echo
+				continue
 			done;
 			until [[ $pass = $(cat $HOME/.local/etc/i-Haklab/.Ivam3byCinderella|openssl enc -aes-256-cbc -md sha512	-a -d -pbkdf2 -iter 100000	-salt -pass pass:Secret@123#) ]]
 			do

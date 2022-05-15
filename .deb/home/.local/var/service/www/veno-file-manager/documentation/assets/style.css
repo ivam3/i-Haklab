@@ -1,0 +1,231 @@
+:root{
+    --main-color: #00FF00;
+    --link-color:  #0069FD;
+    --sidebar-bg: #141A20;
+    --sidebar-color: #7996AC;
+}
+*{
+    box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+a, a:hover,
+.md a:link:hover{
+    text-decoration: none;
+}
+img{
+    max-width: 100%;
+}
+body#md {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: left;
+    margin: 0;
+    padding: 0 1.5rem;
+    max-width: none;
+    color: #555;
+    font-size: 16px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5;
+}
+body#md .md{
+    max-width: 960px;
+    display: block;
+    margin: 0 auto;
+}
+
+.md .longTOC {
+    width: 260px;
+    display: none;
+    border-right: 1px solid #dadada;
+    overflow-y:scroll;
+    font-family: inherit;
+    bottom:0px;
+    margin: 0px;
+    padding: 1rem;
+    background: var(--sidebar-bg);
+    color: var(--sidebar-color);
+    position: fixed;
+    left: 0px;
+    top: 0px;
+}
+
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    body#md {
+        position: absolute;
+        left: 260px;
+        right: 0px;
+    }
+    .md .longTOC {
+        display: block;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}
+
+
+.md .longTOC a:link, .md .longTOC a:visited{
+    color: var(--sidebar-color);
+}
+
+/* no numbering of headings */
+.md h1:before, .md h2:before, .md h3:before, .md h4:before, .md h5:before, .md h6:before { content: none; }
+
+.md a:link, .md a:visited {
+    color: var(--link-color);
+}
+
+.md .tocHeader, .md .tocNumber {
+    display: none;
+}
+
+.md a,
+.md div.title, contents, .md .tocHeader,
+.md h1, .md h2, .md h3, .md h4, .md h5, .md h6,
+.md .nonumberh1, .md .nonumberh2, .md .nonumberh3, .md .nonumberh4, .md .nonumberh5, .md .nonumberh6,
+.md .shortTOC, .md .mediumTOC, .md .longTOC {
+    font-family: inherit;
+}
+
+.md h1, .md .nonumberh1{
+    font-size: 2.2rem;
+    border-top: 1px solid #dadada;
+    border-bottom: none;
+}
+.md h2, .md .nonumberh2{
+    font-size: 1.8rem;
+}
+
+.md h3, .md .nonumberh3{
+    font-size: 1.4rem;
+}
+.md h4, .md .nonumberh4{
+    font-size: 1.2rem;
+}
+
+.md h2, .md h3, .md h4 {
+    border: none;
+}
+
+.md .tocTop {
+    font-size: 0.8rem;
+    display: block;
+}
+
+.md div.title, .md div.subtitle {
+    text-align: left;
+}
+.md div.title {
+    font-size: 2.5rem;
+}
+.md div.subtitle {
+    font-size: 1.4rem;
+}
+
+.md .tocHeader{
+    display: block;
+    background-image: url('../images/logo.svg');
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: contain;
+    background-origin: content-box;
+    height: 100px;
+    border: none;
+    /* Hide the text. */
+    text-indent: 200%;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 1em;
+    padding-top: 1em;
+    margin: 0;
+}
+
+.md div.afterTitles {
+    display: none;
+}
+
+hr{
+    height: 1px;
+    background-color: #dadada;
+    border: none;
+}
+
+.md code, .md pre{
+    font-size: 100%;
+    line-height: 1.5;
+}
+
+.md code{
+    background-color: #FFE3E1;
+}
+
+.md pre code{
+    background-color: transparent;
+}
+
+.md pre{
+    background-color: #FAFAFA;
+    padding: 1rem;
+}
+
+.md .longTOC br,
+.md .longTOC br::after {
+    display: none;
+}
+.md .longTOC > p{
+    font-size: 0;
+}
+.md .longTOC .level1,
+.md .longTOC .level2,
+.md .longTOC .level3,
+.md .longTOC .level4,
+.md .longTOC .level5,
+.md .longTOC .level6{
+    float: left;
+    clear: both;
+    padding: .5rem;
+    width: 100%;
+    font-size: 0.9rem;
+}
+.md .longTOC .level1{
+    display: block;
+    margin: 0;
+    font-size: 1rem;
+
+}
+.md .longTOC .level2{
+    display: block;
+    padding-left: 1rem;
+
+}
+.md .longTOC .level3{
+    display: none;
+    margin: 0;
+    padding-left: 1.3rem;
+}
+.md ul{
+    padding-left: 1em;
+}
+.md li.checked::before, .md li.unchecked::before {
+  width: 1em;
+  font-size: 160%;
+  line-height: 0.8;
+}
+.md .longTOC a{
+    transition: background-color .3s, color .3s;
+}
+
+.md .longTOC a.active{
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+}
