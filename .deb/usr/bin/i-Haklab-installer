@@ -38,21 +38,6 @@ wget --tries=20 --quiet https://www.scrapmaker.com/data/wordlists/dictionaries/r
 echo "Setting i-Haklab style."
 ln -s $PREFIX/bin/fish $HOME/.termux/shell 2>>$LOGFILE
 
-echo "Installing i-Haklab web service (It could take a long time) ..."
-[[ -d ${HOME}/.local/var/service ]] || mkdir -p ${HOME}/.local/var/service
-wget --tries=20 --quiet $iHDB/.local/etc/i-Haklab/www.zip -O ${HOME}/.local/var/service/www.zip
-[[ -e ${HOME}/.local/var/service/www.zip ]] && {
-	unzip -q ${HOME}/.local/var/service/www.zip -d ${HOME}/.local/var/service
-	rm -rf ${HOME}/.local/var/service/www.zip;
-	[[ -n $s2 ]] && [[ -w $s2 ]] && {
-		www="$s2/Android/data/com.termux/files";
-		mv ${HOME}/.local/var/service/www $www
-		ln -s $www/www ${HOME}/.local/var/service/www
-	}
-} || {
-	echo -en $R"E:$W www.zip unreachable ..$R.Aborting.$W\n";
-}
-
 # SET ROOT USER IF DEVICE IS ROOTED
 if chk-root;then
 	echo "Rooted device detected, setting Root user ..."

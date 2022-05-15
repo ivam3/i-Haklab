@@ -5,6 +5,14 @@ then
   exit 1
 else
   echo "Preparing enviroment ..."
+	[[ -d ${HOME}/.local/bin ]] && {
+		for link in $(ls ${HOME}/.local/bin/)
+		do
+			[[ -L ${HOME}/.local/bin/$link ]] && {
+				rm -f ${HOME}/.local/bin/$link;
+			}
+		done
+	}
 	[[ -d ${PREFIX}/share/i-Haklab ]] && rm -rf ${PREFIX}/share/i-Haklab
 	[[ -e ${PREFIX}/etc/bashito ]] && rm -rf ${PREFIX}/etc/bashito
 	[[ -e ${PREFIX}/etc/motd ]] && rm -rf ${PREFIX}/etc/motd

@@ -1,25 +1,25 @@
-#!/bin/bash
+#!/data/data/com.termux/files/usr/bin/bash
 # This file contain all i-Haklab functions
 
-iHLIBEXEC=/data/data/com.termux/files/home/.local/libexec/i-Haklab
-iHETC=/data/data/com.termux/files/home/.local/etc/i-Haklab
-iHDB=https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/packages/i-Haklab/.deb/home
-
 banner() {
-	[[ ! -e $iHETC/banner/i-Haklab ]] && {
-		wget --tries=20 --quiet $iHDB/.local/share/i-Haklab/banner/i-Haklab -O $iHETC/banner/i-Haklab &>/dev/null;
+	[[ ! -e /data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab ]] && {
+		wget --tries=20 --quiet \
+			https://raw.githubusercontent.com/ivam3/i-Haklab/master/.deb/home/.local/share/i-Haklab/banner/i-Haklab \
+				-O /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab &>/dev/null;
 	} || {
-		source $iHETC/banner/i-Haklab;
-			sleep 0.5;
-		}
+		source /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab;
+		sleep 0.5;
+	}
 }
 export -f banner
 
 k-boom() { 
-	[[ ! -e $iHETC/banner/k-boom ]] && {
-		wget --tries=20 --quiet $iHDB/.local/share/i-Haklab/banner/k-boom -O $iHETC/banner/k-boom &>/dev/null;
+	[[ ! -e /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/k-boom ]] && {
+		wget --tries=20 --quiet \
+		https://raw.githubusercontent.com/ivam3/i-Haklab/master/.deb/home/.local/share/i-Haklab/banner/k-boom \
+		-O /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/k-boom &>/dev/null;
 	} || {
-		source $iHETC/banner/k-boom;
+		source /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/k-boom;
 	}
 }
 export -f k-boom
@@ -40,7 +40,7 @@ running(){
   while [ "$(ps a|awk '{print $1}'|grep $pid)" ]; do
 		for i in "${spinner[@]}";do
 			tput civis
-			printf  "$green\r(_➤) Searching\t$i\b\b\b\b\b\b\b\b";
+			printf  "$G\r(_➤) Searching\t$i\b\b\b\b\b\b\b\b";
     done
   done
   tput cnorm
@@ -96,7 +96,7 @@ chk-Ruser() {
 export -f chk-Ruser
 
 chk-pkg(){
-	command -v $1 > /dev/null || { printf "$R(_➤)$W $1 needed$R |$W run apt install $2";exit;}
+	command -v $1 >/dev/null || { printf "$R(_➤)$W $1 needed$R |$W run apt install $2";exit;}
 }
 export -f chk-pkg
 
@@ -190,6 +190,19 @@ $Y OPTIONS$W|$Y   Arguments$W   |$Y    Description$W
 ╰─ransomux─➤────────────────────➤ Create a ransomware to be exploitable on android.
 ╰──share───➤────────────────────➤ Share files and directories remotely and securely
 |    ╰──────────────────────────{─Default credentials = Admin:password─}
+|          |                    |
+|          |                    |
+$Y       [--] DIRECT COMMANDS [--]$W
+  OPTIONS  |     ARGUMENTS      |    DESCRIPTIONS
+╰fixer──────────────────────────➤ Automate process to fix Termux issues
+╰LOCALHOST──────────────────────➤ Show the current internet protocol over LAN
+╰lock───────────────────────────➤ Block Termux's screen
+╰osrframework───────────────────➤ OSINT setoolkit
+╰postgresql─────────────────────➤ Star stop or restart postgres data base
+╰serverapache───────────────────➤ Init apache server
+╰serverphp──────────────────────➤ Init php server
+╰sudo───────────────────────────➤ Execute commands or init an enviroment as fake root user
+╰traductor──────────────────────➤ Init a command line traductor
 ╰─────────────────────────────────────────────────────────────────────────────────────────|\n\n"
 }
 export -f helpper
