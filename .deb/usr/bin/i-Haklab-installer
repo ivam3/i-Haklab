@@ -32,9 +32,6 @@ wget -q --tries=20 ${iHDB}/etc/localtunnel/openurl.js -O $PREFIX/lib/node_module
 rm -rf $TMPDIR/localtunnel
 
 echo "Installing brute force wordlists (it could take a while) ..."
-git clone --quiet https://github.com/jeanphorn/wordlist.git ${TMPDIR}/wordlist
-mv ${TMPDIR}/wordlist/* ${HOME}/.local/share/wordlist/
-rm -rf ${TMPDIR}/wordlist
 wget --tries=20 --quiet https://www.scrapmaker.com/data/wordlists/dictionaries/rockyou.txt \
 	-O ${HOME}/.local/share/wordlist/rockyou.txt
 
