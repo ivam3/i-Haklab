@@ -9,7 +9,7 @@ banner() {
 	[[ ! -e $iHETC/banner/i-Haklab ]] && {
 		wget --tries=20 --quiet $iHDB/.local/share/i-Haklab/banner/i-Haklab -O $iHETC/banner/i-Haklab &>/dev/null;
 	} || {
-		source $iHETC/banner/i-Haklab 2>$LOGFILE;
+		source $iHETC/banner/i-Haklab;
 			sleep 0.5;
 		}
 }
@@ -19,7 +19,7 @@ k-boom() {
 	[[ ! -e $iHETC/banner/k-boom ]] && {
 		wget --tries=20 --quiet $iHDB/.local/share/i-Haklab/banner/k-boom -O $iHETC/banner/k-boom &>/dev/null;
 	} || {
-		source $iHETC/banner/k-boom 2>$LOGFILE;
+		source $iHETC/banner/k-boom;
 	}
 }
 export -f k-boom
@@ -140,7 +140,7 @@ getPORT(){
 }
 export -f getPORT
 
-Menu() {
+helpper() {
 	printf "$Y\n(_➤)$W i-Haklab $version (c) 2021 by @Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. If the law is violated with it's use, this would be the responsibility of the user who handled it.\n$Y\nSyntax:$W i-Haklab [-arg-] [-option-]\n
 $Y OPTIONS$W|$Y   Arguments$W   |$Y    Description$W
 ╰─about─────+──<name─of─tool>───➤ Show informations about tool/framework
@@ -192,7 +192,7 @@ $Y OPTIONS$W|$Y   Arguments$W   |$Y    Description$W
 |    ╰──────────────────────────{─Default credentials = Admin:password─}
 ╰─────────────────────────────────────────────────────────────────────────────────────────|\n\n"
 }
-export -f Menu
+export -f helpper
 
 printTable(){
     local -r delimiter="${1}"
@@ -292,25 +292,25 @@ pass(){
 		done
 		[[ $pass = $pass2 ]] && {
 			echo $pass|openssl enc -aes-256-cbc -md sha512 -a -pbkdf2 -iter 100000 \
-			-salt -pass pass:Secret@123# > $HOME/.local/share/i-Haklab/.Ivam3byCinderella;
+			-salt -pass pass:Secret@123# > $HOME/.local/etc/i-Haklab/.Ivam3byCinderella;
 					echo -en "\e[32mNew password was successfully set.\e[0m";
 				} || { echo -en "\e[31mERROR:\e[0m Sorry, passwords do not match.";pass New;
 			}
 		}
 
-		[[ $1 = Get ]] && { 
+		[[ $1 = Get ]] && {
 			while read -sp "Password: " pass && [[ -z $pass ]]
 			do
-				continue
+				echo
 			done;
-			until [[ $pass = $(cat $HOME/.local/share/i-Haklab/.Ivam3byCinderella|openssl enc -aes-256-cbc -md sha512	-a -d -pbkdf2 -iter 100000	-salt -pass pass:Secret@123#) ]]
+			until [[ $pass = $(cat $HOME/.local/etc/i-Haklab/.Ivam3byCinderella|openssl enc -aes-256-cbc -md sha512	-a -d -pbkdf2 -iter 100000	-salt -pass pass:Secret@123#) ]]
 			do
 				echo -en "\e[31mERROR:\e[0m wrong password"
 				termux-toast -b red Wrong password
 				pass Get
 			done
 				termux-toast -b green Welcome Back $USER;
-				bash ${HOME}/.local/share/i-Haklab;
+				banner;
 			}
 
 		[[ $1 = Fingerprint ]] && { touch $TMPDIR/lock.tmp;
@@ -320,7 +320,7 @@ pass(){
 				termux-toast -b red Access denied
 			done;	rm $TMPDIR/lock.tmp;
 			termux-toast -b green Welcome Back $USER;
-			bash ${HOME}/.local/share/i-Haklab;
+			banner;
 		}
 
 		[[ $1 = Disable ]] && {

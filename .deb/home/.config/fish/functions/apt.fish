@@ -3,7 +3,7 @@ function apt
 		for i in $argv[2..-1]
 			switch $i
 				
-				case frida h8mail objection osrframework scrapy shodan speedtest-cli sqlmap wfuzz
+				case frida h8mail hashid objection osrframework scrapy shodan speedtest-cli sqlmap wfuzz
 					echo -en "\e[31mE:\e[0m $i is a python module, you should try it with \e[33m'python -m pip install $i'\e[0m\n"
 				
 				case bettercap

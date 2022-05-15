@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
 bash ${PREFIX}/bin/i-Haklab-installer
-rm -rf ${PREFIX}/bin/i-Haklab-installer
+#rm -rf ${PREFIX}/bin/i-Haklab-installer
 
 echo "[*] i-Haklab installation finished."
 echo -en """\e[33m[!] New features :
@@ -25,5 +25,4 @@ echo -en """\e[33m[!] New features :
 echo "[!] For help going to https://t.me/Ivam3_Bot."
 echo "[*] @Ivam3: thank you for use my package."
 echo -en "[!] Press\e[32m enter\e[0m to init"
-read enter;killall $(echo $SHELL|awk -F "/" '{print $NF}')
 ####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####

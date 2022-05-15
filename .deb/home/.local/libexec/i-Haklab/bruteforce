@@ -8,20 +8,6 @@ chk-pkg hydra hydra
 chk-pkg git git
 ch-pkg wget wget
 
-WL=${HOME}/.local/share/wordlist
-[[ ! -e ${HOME}/.local/share/wordlist/usernames.txt ]] && {
-	printf >&2 "$G(_➤)$W Installing dependencies and wordlist...{\e[33mit could take a while$W}\n";
-	git clone --quiet https://github.com/jeanphorn/wordlist ${TMPDIR}/wordlist;
-	cp -r ${TMPDIR}/wordlist/* $WL;
-	rm -rf ${TMPDIR}/wordlist;
-}
-
-[[ ! -e $WL/rockyou.txt ]] && {
-	printf >&2 "$G(_➤)$W Installing wordlist rockyou...{\e[33mit could take a while$W}\n";
-	wget --tries=20 --quiet https://www.scrapmaker.com/data/wordlists/dictionaries/rockyou.txt \
-		-O $WL/rockyou.txt;
-}
-
 alert(){ printf "\n\t       $R(_>)─> USE SOME VPN <─(<_)$W\n\t\t  press$G enter$W to start\n";read enter;}
 setTarget(){
 	printf "$Y(_>)_set_host_{\e[0mDNS or IP$Y}\n ╰─────➤$W";
@@ -40,6 +26,7 @@ setuserWL(){
 	done
 	userWL=${usernames:-$WL/usernames.txt}
 }
+
 setWordlist(){
 	printf "$Y(_>)_password_wordlist_{\e[0mempty=default$Y}\n ╰─────➤ "
 	while read -ei "TIP: /sdcard/wordlist/rockyou.txt" -rp " " wordlist && [[ ! -e $wordlist ]]
