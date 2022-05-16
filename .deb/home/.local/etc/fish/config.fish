@@ -1,5 +1,5 @@
 if status --is-login
-bash /data/data/com.termux/files/home/.local/libexec/passwd get
+bash /data/data/com.termux/files/home/.local/libexec/i-Haklab.login
 end
 
 function on_exit --on-event fish_exit
