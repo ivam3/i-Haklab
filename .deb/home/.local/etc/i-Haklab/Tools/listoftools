@@ -31,6 +31,7 @@ evilurl
 ExiF
 exploitdb
 fbi
+frida
 fuzzdb
 gdb
 getnpusers
@@ -51,7 +52,7 @@ java
 JohnTheRipper
 kerbrute
 kalilinux
-localtunnel-server
+localtunnel
 lockphish
 login-termux
 mariadb
@@ -86,6 +87,7 @@ sherlock
 shodan
 slowhttptest
 snow
+speedtest-cli
 sqlite
 sqliv
 sqlmap

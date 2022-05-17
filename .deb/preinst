@@ -5,22 +5,24 @@ then
   exit 1
 else
   echo "Preparing enviroment ..."
-	[[ -d ${HOME}/.local/bin ]] && {
-		for link in $(ls ${HOME}/.local/bin/)
-		do
-			[[ -L ${HOME}/.local/bin/$link ]] && {
-				rm -f ${HOME}/.local/bin/$link;
-			}
-		done
-	}
-	[[ -d ${PREFIX}/share/i-Haklab ]] && rm -rf ${PREFIX}/share/i-Haklab
-	[[ -e ${PREFIX}/etc/bashito ]] && rm -rf ${PREFIX}/etc/bashito
-	[[ -e ${PREFIX}/etc/motd ]] && rm -rf ${PREFIX}/etc/motd
-	[[ -e ${PREFIX}/etc/motd.dpkg-old ]] && rm -rf ${PREFIX}/etc/motd.dpkg-old
-	echo "Setting Ivam3 repositories at Advance Package Tool(APT)."
-	[[ -d $PREFIX/etc/apt/sources.list.d ]] || mkdir -p $PREFIX/etc/apt/sources.list.d
-	wget --tries=20 --quiet "https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/ivam3-termux-packages.list" -O ${PREFIX}/etc/apt/sources.list.d/ivam3-termux-packages.list
-	echo "Setting Yisus7u7 repositories at Advance Package Tool(APT)."
-	wget --tries=20 --quiet "https://raw.githubusercontent.com/Yisus7u7/termux-desktop-xfce/gh-pages/termux-desktop-xfce.list" -O ${PREFIX}/etc/apt/sources.list.d/termux-desktop-xfce.list
+  [[ -d ${HOME}/.local/bin ]] && {
+	  for link in $(ls ${HOME}/.local/bin/)
+	  do
+		  [[ -L ${HOME}/.local/bin/$link ]] && {
+			  rm -f ${HOME}/.local/bin/$link;
+		  }
+	  done
+  }
+  [[ -d ${HOME}/.local/share/i-Haklab ]] && rm -rf ${HOME}/.local/share/i-Haklab
+  [[ -e ${PREFIX}/etc/bashito ]] && rm -rf ${PREFIX}/etc/bashito
+  [[ -e ${PREFIX}/etc/motd ]] && rm -rf ${PREFIX}/etc/motd
+  [[ -e ${PREFIX}/etc/motd.dpkg-old ]] && rm -rf ${PREFIX}/etc/motd.dpkg-old
+  [[ -d $PREFIX/etc/apt/sources.list.d ]] || {
+	  mkdir -p $PREFIX/etc/apt/sources.list.d;
+  }
+  echo "Setting Ivam3 repositories at Advance Package Tool(APT)."
+  wget --tries=20 --quiet "https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/ivam3-termux-packages.list" -O ${PREFIX}/etc/apt/sources.list.d/ivam3-termux-packages.list
+  echo "Setting Yisus7u7 repositories at Advance Package Tool(APT)."
+  wget --tries=20 --quiet "https://raw.githubusercontent.com/Yisus7u7/termux-desktop-xfce/gh-pages/termux-desktop-xfce.list" -O ${PREFIX}/etc/apt/sources.list.d/termux-desktop-xfce.list
 fi
 ####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####

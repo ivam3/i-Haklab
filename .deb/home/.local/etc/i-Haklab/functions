@@ -139,69 +139,88 @@ getPORT(){
 export -f getPORT
 
 helpper() {
-	printf "$Y\n(_➤)$W i-Haklab $version (c) 2021 by @Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. If the law is violated with it's use, this would be the responsibility of the user who handled it.\n$Y\nSyntax:$W i-Haklab [-arg-] [-option-]\n
-$Y OPTIONS$W|$Y   Arguments$W   |$Y    Description$W
-╰─about─────+──<name─of─tool>───➤ Show informations about tool/framework
-|   ╰───example─────────────────{─i-Haklab about crunch─}
-╰─help──────➤───────────────────➤ Show this help menu
-╰─show──────+─────alltools──────➤ List all tools/frameworks available on i-Haklab
-|   ╰───────+────instatools─────➤ Show all installed tools/framewotks
-|   ╰───────+──────books────────➤ Show all books available to download
-|   ╰───────+─────tutorials─────➤ Show tutorials available
-|   ╰───────+───────QG──────────➤ Show quick guides available
-╰speedtest──➤───────────────────➤ Run a speed test of your network
-╰─version───➤───────────────────➤ Show i-Haklab version installed
-╰─weechat───➤───────────────────➤ Connect with irc Ivam3byCinderella chat
-|           |                   |
-|           |                   |
-  $Y [--] Automatitation Arguments [--]$W
-  OPTIONS  |     ARGUMENTS      |    DESCRIPTIONS
-╰bruteforce+─ftp|mail|ssh|telnet➤ Brute force attack at several servers.
-|    ╰──example─for─ftp─────────{─i-Haklab bruteforce ftp
-|    ╰──example─for─mail────────{─i-Haklab bruteforce mail ivam3@live.com, gmail or live.com
+	printf "$Y\n(_➤)$W i-Haklab $version (c) 2021 by @Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. If the law is violated with it's use, this would be the responsibility of the user who handled it.\n$Y\nSyntax:$W i-Haklab [-option-] [-args-]\n
+            $Y[--] Setting Options [--]$W
+_$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
+╰─about──────+──<name─of─tool>───➤ Show informations about tool/framework
+|   ╰────example─────────────────{─i-Haklab about crunch─}
+╰─help───────➤───────────────────➤ Show this help menu
+╰─passwd─────+────set─|─pass─────➤ Set and change the login termux
+|                 ╰─────|───────{─i-Haklab passwd set──➤ password|fingerprint
+|                       ╰───────{─i-Haklab passwd pass─➤ get a new password
+╰─setuser────➤───────────────────➤ Set i-Haklab user name
+╰─show───────+─────alltools──────➤ List all tools/frameworks available on i-Haklab
+|   ╰────────+────instatools─────➤ Show all installed tools/framewotks
+|   ╰────────+──────books────────➤ Show all books available to download
+|   ╰────────+─────tutorials─────➤ Show tutorials available
+|   ╰────────+───────QG──────────➤ Show quick guides available
+╰speedtest───➤───────────────────➤ Run a speed test of your network
+╰─version────➤───────────────────➤ Show i-Haklab version installed
+╰─weechat────➤───────────────────➤ Connect with irc Ivam3byCinderella chat
+╰─Xwayland───➤───────────────────➤ Run xserver over Termux:wayland app with xfce4 as window manager
+|            |                   |
+|            |                   |
+$Y       [--] Automatitation Options [--]$W
+_$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
+╰apkactivity─+─<path─to─apk─file>➤ Get the main activity from .apk file
 |
-╰──ESmsg───+──encode/decode─────➤ Encode|decode secret message into a ASCII file.
-|                   ╰──example──{─i-Haklab ESmsg <encode/decode-}
+╰─binchecker─➤───────────────────➤ Get informacion about BINs (CC,DC)
 |
-╰──tunnel──+─<port─+─subdomain>─➤ Start a SSH client to request TCP port forwarding
-|    ╰──example─────────────────{─i-Haklab tunnel -p 4444 -s my-subdomain-}
+╰bruteforce─+─ftp|mail|ssh|telnet➤ Brute force attack at several servers.
+|    ╰───example─for─ftp─────────{─i-Haklab bruteforce ftp
+|    ╰───example─for─mail────────{─i-Haklab bruteforce mail ivam3@live.com, gmail or live.com
 |
-╰─handler──+─<name─of─file.rc>──➤ Start handler on msfconsole with previous setting
+╰──ESmsg────+──encode/decode─────➤ Encode|decode secret message into a ASCII file.
+|                    ╰──example──{─i-Haklab ESmsg <encode/decode-}
 |
-╰───msf────+─dirscan─+─IPtarget─➤ Enumerate directories/subdirecotires from a server.
-|    |         ╰──example───────{─i-Haklab msf dirscan 10.10.10.242-}
-|    ╰─────+─embed──────────────➤ Embed a metasploit payload into legitim apk file.
-|              ╰─ex─for─outlan──{─i-Haklab msf embed 6.tcp.ngrok.io 4546 /path/to/file.apk
-|    ╰─────+─payapk─+─tun0:port─➤ Create a coded payload .apk
-|    |         ╰─ex─for─outlan──{─i-Haklab msf payapk 6.tcp.ngrok.io 23453─}
-|    ╰─────+─payexe─+─tun0:port─➤ Create a coded payload .exe
+╰──tunnel───+─<port─+─subdomain>─➤ Start a SSH client to request TCP port forwarding
+|    ╰───example─────────────────{─i-Haklab tunnel -p 4444 -s my-subdomain-}
+|
+╰─handler───+─<name─of─file.rc>──➤ Start handler on msfconsole with previous setting
+|
+╰───msf─────+─dirscan─+─IPtarget─➤ Enumerate directories/subdirecotires from a server.
+|    |          ╰──example───────{─i-Haklab msf dirscan 10.10.10.242-}
+|    ╰──────+─embed──────────────➤ Embed a metasploit payload into legitim apk file.
+|               ╰─ex─for─outlan──{─i-Haklab msf embed 6.tcp.ngrok.io 4546 /path/to/file.apk
+|    ╰──────+─payapk─+─tun0:port─➤ Create a coded payload .apk
+|    |          ╰─ex─for─outlan──{─i-Haklab msf payapk 6.tcp.ngrok.io 23453─}
+|    ╰──────+─payexe─+─tun0:port─➤ Create a coded payload .exe
 |    |         ╰─ex─for─inlan───{─i-Haklab msf payexe 192.168.0.1 8080─}
-|    ╰─────+─paypdf─+─tun0:port─➤ Create a coded payload .pdf
-|    |         ╰─ex─default─set─{─i-Haklab msf paypdf─}
-|    ╰─────+──────shodan────────➤ Search vulnerable webcam servers using metasploit
+|    ╰──────+─paypdf─+─tun0:port─➤ Create a coded payload .pdf
+|    |          ╰─ex─default─set─{─i-Haklab msf paypdf─}
+|    ╰──────+──────shodan────────➤ Search vulnerable webcam servers using metasploit
 |
-╰─payvid───➤────────────────────➤ Hide a Reverse Shell with a Video File by Exploiting Linux OS.
+╰─ngroklink─➤────────────────────➤ Show the current ngrok link
 |
-╰─phonescan+─<phonenumber>──────➤ A phone number information scaner
-|              ╰──example───────{─i-Haklab phonescan 525584923476─}
+╰─ngrokssh──➤────────────────────➤ Connect with ngrok.io servers via SSH protocol
 |
-╰─setuser──➤────────────────────➤ Set your i-Haklab user name (default=i-Haklab).
-╰──share───➤────────────────────➤ Share files and directories remotely and securely
-|    ╰──────────────────────────{─Default credentials = Admin:password─}
-|          |                    |
-|          |                    |
-$Y       [--] DIRECT COMMANDS [--]$W
-  OPTIONS  |     ARGUMENTS      |    DESCRIPTIONS
-╰fixer──────────────────────────➤ Automate process to fix Termux issues
-╰LOCALHOST──────────────────────➤ Show the current internet protocol over LAN
-╰lock───────────────────────────➤ Block Termux's screen
-╰osrframework───────────────────➤ OSINT setoolkit
-╰postgresql─────────────────────➤ Star stop or restart postgres data base
-╰serverapache───────────────────➤ Init apache server
-╰serverphp──────────────────────➤ Init php server
-╰sudo───────────────────────────➤ Execute commands or init an enviroment as fake root user
-╰traductor──────────────────────➤ Init a command line traductor
-╰─────────────────────────────────────────────────────────────────────────────────────────|\n\n"
+╰─payvid────➤────────────────────➤ Hide a Reverse Shell with a Video File by Exploiting Linux OS.
+|
+╰─phonescan─+─<phonenumber>──────➤ A phone number information scaner
+|                  ╰──example────{─i-Haklab phonescan 525584923476─}
+|
+╰servers4test────────────────────➤ Init deliberately insecure web application for pentesting.
+|
+╰──share────➤────────────────────➤ Init web server for share files remotely and securely
+|    ╰───────────────────────────{─Default credentials = Admin:password─}
+|           |                    |
+|           |                    |
+$Y          [--] DIRECT COMMANDS [--]
+$W  Those commands do not need the i-Haklab command
+             Just type the command.
+_$Y        COMMAND$W                 |$Y    DESCRIPTION$W
+╰apt─────────────────────────────➤ Install/remove and configure packages/tools/frameworks
+╰fixer───────────────────────────➤ Automate process to fix Termux issues
+╰LOCALHOST───────────────────────➤ Show the current internet protocol over LAN
+╰lock────────────────────────────➤ Block Termux's screen
+╰osrframework────────────────────➤ OSINT setoolkit
+╰omf─theme───────────────────────➤ Change Oh-my-fish theme
+╰postgresql──────────────────────➤ Star stop or restart postgres data base
+╰serverapache────────────────────➤ Init apache server
+╰serverphp───────────────────────➤ Init php server
+╰sudo────────────────────────────➤ Execute commands or init an enviroment as fake root user
+╰traductor───────────────────────➤ Init a command line traductor
+╰──────────────────────────────────────────────────────────────────────────────────────────|\n\n"
 }
 export -f helpper
 

@@ -1,8 +1,8 @@
 #!/data/data/com.termux/files/usr/bin/bash
 IFS=$'/n/t'
 trap ctrl_c 2
-source ${HOME}/.local/etc/i-Haklab/variables
-source $iHETC/functions
+source /data/data/com.termux/files/home/.local/etc/i-Haklab/variables
+source /data/data/com.termux/files/home/.local/etc/i-Haklab/functions
 
 [[ $# -eq 0 ]] && { STDERR;}
 [[ -e $iHETC/Tools/Readme/$1 ]] && {

@@ -5,10 +5,7 @@ source ${HOME}/.local/etc/i-Haklab/variables
 source $iHETC/functions
 
 chk-pkg python python
-command -v speedtest-cli >/dev/null || {
-	python -m pip install --no-color --quiet --no-cache-dir speedtest-cli;
-	ps=$(echo $!)
-}
+chk-pkg speedtest speedtest-cli 
 
 [[ -z $ps ]] && {
 	running time 1;

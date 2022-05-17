@@ -1,28 +1,9 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
 bash ${PREFIX}/bin/i-Haklab-installer
-#rm -rf ${PREFIX}/bin/i-Haklab-installer
-
+rm -rf ${PREFIX}/bin/i-Haklab-installer
 echo "[*] i-Haklab installation finished."
-echo -en """\e[33m[!] New features :
- ╰────────➤ run:\e[0m apt install <tool>\e[33m :────:\e[0mto install all i-Haklab tools\e[33m
- ╰────────➤ run:\e[0m i-Haklab -h\e[33m :───────────:\e[0mto get a usage menu\e[33m
- ╰────────➤ run:\e[0m i-Haklab ngroklink\e[33m :────:\e[0mto get a link from started ngrok server\e[33m
- ╰────────➤ run:\e[0m i-Haklab ngrokssh\e[33m :─────:\e[0mto connect to ngrok server via SSH\e[33m
- ╰────────➤ run:\e[0m i-Haklab Xwayland\e[33m :─────:\e[0mto init graphical enviroment on Termux:Wayland app\e[33m
- ╰────────➤ run:\e[0m serverphp\e[33m :─────────────:\e[0mto start php server\e[33m
- ╰────────➤ run:\e[0m serverapache\e[33m :──────────:\e[0mto start apache server\e[33m
- ╰────────➤ run:\e[0m omf theme\e[33m :─────────────:\e[0mto change a theme\e[33m
- ╰────────➤ run:\e[0m lock\e[33m :──────────────────:\e[0mto block screen\e[33m
- ╰────────➤ run:\e[0m fixer\e[33m :─────────────────:\e[0mto fix termux's issues\e[33m
- ╰────────➤ run:\e[0m LOCALHOST\e[33m :─────────────:\e[0mto show local ip\e[33m
- ╰────────➤ run:\e[0m traductor\e[33m :─────────────:\e[0mto init a translate shell\e[33m
- ╰────────➤ run:\e[0m torvpn\e[33m :────────────────:\e[0mto use a tor proxy connections\e[33m
- ╰────────➤ run:\e[0m postgresql start\e[33m :──────:\e[0mto start postgresql data base\e[33m
- ╰────────➤ run:\e[0m vncserver\e[33m :─────────────:\e[0mto init graphical enviroment on vnc app\e[33m
- ╰────────➤ run:\e[0m sudo <some commands>\e[33m :──:\e[0mto run commands as super user whithout rooted device\e[33m
- ╰────────➤ run:\e[0m i-Haklab about i-Haklab\e[33m :\e[0mfor all usage guide\e[0m\n\n"""
 echo "[!] For help going to https://t.me/Ivam3_Bot."
 echo "[*] @Ivam3: thank you for use my package."
-echo -en "[!] Press\e[32m enter\e[0m to init"
+#echo -en "[!] Press\e[32m enter\e[0m to init"
 ####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####

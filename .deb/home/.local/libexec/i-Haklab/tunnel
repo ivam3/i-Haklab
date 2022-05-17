@@ -7,7 +7,7 @@ subdomain=none
 source $HOME/.local/etc/i-Haklab/variables
 source $iHETC/functions
 
-chk-pkg lt localtunnel-server
+chk-pkg lt localtunnel
 chk-tunnel
 getPORT
 [[ $SSH -eq 1 ]] && killall -2 ssh > /dev/null 2>&1
