@@ -1,7 +1,7 @@
-#!/bin/env bash
+#!/data/data/com.termux/files/usr/bin/bash
 #
 BANNER=$(mktemp)
-base64 -d  >${BANNER}<<DIXIE
+base64 -d  >"${BANNER}"<<DIXIE
 IyEvZGF0YS9kYXRhL2NvbS50ZXJtdXgvZmlsZXMvdXNyL2Jpbi9iYXNoCiMgQmFubmVyIGZvciBp
 LUhha2xhYiB2MyAoYykyMDIwIGNyZWF0ZWQgYnkgQEl2YW0zCnNvdXJjZSAke0hPTUV9Ly5sb2Nh
 bC9ldGMvaS1IYWtsYWIvdmFyaWFibGVzCnByaW50ZiAiJChjbGVhcikkUgogICAgICAgICAgICAg
@@ -29,7 +29,6 @@ IHxffCAgXF98IHxfL1xfXyxffF98XF9cX3xcX18sX3xfLl9fLwogICAgICAgIDo6Ojo6Ojo6Ojok
 UkBJdmFtM2J5Q2luZGVyZWxsYSRCOjo6Ojo6OjoKJFdcbiIKIyAgICAgICAgICAgICAgIGktSGFr
 bGFiIGJ5IEBJdmFtMwo=
 DIXIE
-source ${BANNER}
-rm ${BANNER}
-
-#		@IVAM3
+source "${BANNER}"
+rm "${BANNER}"
+#               @IVAM3

@@ -7,7 +7,7 @@ banner() {
 			https://raw.githubusercontent.com/ivam3/i-Haklab/master/.deb/home/.local/etc/i-Haklab/banner/i-Haklab \
 				-O /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab;
 	}
-	source /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab;
+	bash /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab;
 	sleep 0.5;
 }
 export -f banner
@@ -18,7 +18,7 @@ k-boom() {
 		https://raw.githubusercontent.com/ivam3/i-Haklab/master/.deb/home/.local/etc/i-Haklab/banner/k-boom \
 		-O /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/k-boom &>/dev/null;
 	}
-	source /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/k-boom;
+	bash /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/k-boom;
 }
 export -f k-boom
 
@@ -335,7 +335,7 @@ pass(){
 			done;
 			until [[ $pass = $(cat $HOME/.local/etc/i-Haklab/.Ivam3byCinderella|openssl enc -aes-256-cbc -md sha512	-a -d -pbkdf2 -iter 100000	-salt -pass pass:Secret@123#) ]]
 			do
-				echo -en "\e[31mERROR:\e[0m wrong password"
+				echo -en "\e[31mERROR:\e[0m wrong password\n"
 				termux-toast -b red Wrong password
 				pass Get
 			done
