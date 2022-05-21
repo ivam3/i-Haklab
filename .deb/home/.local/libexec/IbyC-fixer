@@ -3,12 +3,11 @@
 #UPGRADED ON 2022/Mar/31
 trap ctrl_c 2
 ctrl_c(){ printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";}
-StdErr(){ printf "$R(_➤)$W missing argument, type IbyC-fixer -h for help\n";exit;}
+StdErr(){ printf "$R(_➤)$W missing argument, type fixer -h for help\n";exit;}
 
 #:: VARIABLES ::#
 IFS=$'\n\t'
-iHDB="https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/packages/i-Haklab/home"
-IbyCDB="https://raw.githubusercontent.com/ivam3/ivam3.github.io/master/master/installer"
+iHDB="https://raw.githubusercontent.com/ivam3/i-Haklab/master/.deb/home"
 [[ -d $HOME/.local/bin ]] && binPATH="$HOME/.local/bin" || binPATH="$PREFIX/bin"
 G=`echo -en "\e[32m"`
 R='\033[1;31m'
@@ -40,7 +39,7 @@ clear;Banner|lolcat
 case ${arg[0]} in
 	nrauf)
 		[[ -z ${arg[1]} ]] && StdErr
-		bash <(curl -fsSL "$iHDB/fix-tools/nrauf") ${arg[2]}
+		bash <(curl -fsSL "$iHDB/.local/libexec/nrauf") ${arg[2]}
 		;;
 	apt)
 		file=$(mktemp)
@@ -58,8 +57,8 @@ case ${arg[0]} in
 		bash <(curl -fsSL "http://git.io/abhacker-repo") --install ruby=2.7.2 -r apt install metasploit -y
 		yes|apt autoremove
 		;;
-	PyMiR) bash <(curl -fsSL "${iHDB}/fix-tools/PyMiR") ${@:1};;
-	RuGiR) bash <(curl -fsSL "${iHDB}/fix-tools/RuGiR") ${@:1};;
+	PyMiR) bash <(curl -fsSL "${iHDB}/.local/libexec/PyMiR") ${@:1};;
+	RuGiR) bash <(curl -fsSL "${iHDB}/.local/libexec/RuGiR") ${@:1};;
 	downgradeRepo)
 		[[ -z ${arg[1]} ]] && StdErr
 		bash <(curl -fsSL "http://git.io/abhacker-repo") --install ${@:2}

@@ -1,4 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
-source /data/data/com.termux/files/home/.local/etc/i-Haklab/functions
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
 banner
 helpper

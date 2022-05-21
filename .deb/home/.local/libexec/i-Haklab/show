@@ -1,8 +1,8 @@
 #!/data/data/com.termux/files/usr/bin/bash
-IFS=$"\n\t"
+IFS=$'\n\t'
 trap ctrl_c 2
-source /data/data/com.termux/files/home/.local/etc/i-Haklab/variables
-source /data/data/com.termux/files/home/.local/etc/i-Haklab/functions
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
 PS3="(_>)_number:─➤ "
 
 banner
@@ -11,7 +11,6 @@ then
 	STDERR
 elif [[ $1 = tutorials ]]
 then
-	chk-pkg termux-open-url termux-tools
   ERR() { printf "$R\n(_➤)$W Tutorial is not available on $PLATFORM\n";}
   select ANSW in $(cat $iHETC/listoftutorials|awk '{print $4}') Exit;do
 		[[ $ANSW = Exit ]] && exit
@@ -89,11 +88,18 @@ then
 	done
 elif [[ $1 = alltools ]]
 then
-#	chk-pkg column util-linux
-	cat -n $iHETC/Tools/listoftools|column
+	chk-pkg column util-linux
+	echo -en $Y$underline"TIP: You can install all of them with:$W apt install <tool>\n\n"
+	column $iHETC/Tools/listoftools
+	echo -en "$G\nTOTAL:$W $(wc $iHETC/Tools/listoftools|awk '{print $1}')"
 elif [[ $1 = instatools ]]
 then
-	pkg list-installed 2>>$LOGFILE|awk -F "/" '{print $1}'|column
+	chk-pkg column util-linux
+	echo -en $Y$underline"TIP: You can remove all of them with:$W apt remove <tool>\n\n"
+	pkg list-installed 2>>"$LOGFILE"|awk -F "/" '{print $1}' > $TMPDIR/instatools.tmp
+	column $TMPDIR/instatools.tmp
+	echo -en "$G\nTOTAL:$W $(wc $TMPDIR/instatools.tmp|awk '{print $1}')"
+	rm -rf $TMPDIR/instatools.tmp
 else
 	STDERR
 fi

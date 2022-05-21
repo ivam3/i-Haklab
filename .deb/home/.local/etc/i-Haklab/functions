@@ -18,7 +18,7 @@ k-boom() {
 		https://raw.githubusercontent.com/ivam3/i-Haklab/master/.deb/home/.local/etc/i-Haklab/banner/k-boom \
 		-O /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/k-boom &>/dev/null;
 	}
-	bash /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/k-boom;
+	source /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/k-boom;
 }
 export -f k-boom
 
@@ -301,6 +301,7 @@ trimString(){
 export -f trimString
 
 pass(){
+	user=$(grep "USER" ${HOME}/.local/etc/fish/config.fish|awk '{print $NF}')
 	[[ $1 = Set ]] && {
 		login=$(grep "pass" ${HOME}/.local/libexec/i-Haklab.login|head -n 1)
 		select opt in Password Fingerprint Disable Exit
@@ -308,6 +309,7 @@ pass(){
 			[[ $opt = Exit ]] && { exit 0;}
 			[[ $opt = Password ]] && { opt="Get";}
 			sed -i "s|$login|pass $opt|g" ${HOME}/.local/libexec/i-Haklab.login
+			break
 		done
 	}
 
@@ -339,7 +341,7 @@ pass(){
 				termux-toast -b red Wrong password
 				pass Get
 			done
-				termux-toast -b green Welcome Back $USER;
+			termux-toast -b green Welcome Back $user;
 				banner;
 			}
 
@@ -349,12 +351,12 @@ pass(){
 				termux-fingerprint -t "i-Haklab on Termux" -s "@Ivam3byCinderella" > $TMPDIR/lock.tmp
 				termux-toast -b red Access denied
 			done;	rm $TMPDIR/lock.tmp;
-			termux-toast -b green Welcome Back $USER;
+			termux-toast -b green Welcome Back $user;
 			banner;
 		}
 
 		[[ $1 = Disable ]] && {
-			termux-toast -b green Welcome Back $USER;
+			termux-toast -b green Welcome Back $user;
 		}
 }
 export -f pass

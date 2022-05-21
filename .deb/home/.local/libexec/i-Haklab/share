@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 #This file is part of i-Haklab command
-IFS=$"\n\t"
+IFS=$'\n\t'
 trap ctrl_c 2
 source $HOME/.local/etc/i-Haklab/variables
 source $iHETC/functions
@@ -72,11 +72,13 @@ internal(){
 }
 
 chk-pkg php php
-chk-pkg lt localtunnel-server
+chk-pkg lt localtunnel
 getPORT
 [[ -d ${HOME}/.local/var/service/www/veno-file-manager ]] && {
-	php -S $LOOPBACK:$LPORT -t ${HOME}/.local/var/service/www/veno-file-manager >$LOGFILE &;
+	banner;
+	php -S $LOOPBACK:$LPORT -t ${HOME}/.local/var/service/www/veno-file-manager/vfm 2>>$LOGFILE &
 	sleep 3;
+	echo -en $B"(➤_)$W Web server$B 2Share$W activated over:\n$B  ╰──➤$W LAN your url is: http://$LOOPBACK:$LPORT$B\n  ╰──➤$W TUN "
 	lt -h "http://localtunnel.me" -p $LPORT -s i-haklab-2share --open --print-requests;
 } || STDERR
 

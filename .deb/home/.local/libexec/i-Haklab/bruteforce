@@ -1,6 +1,6 @@
 #!/bin/bash
 #This file is part of i-Haklab command
-IFS=$"\n\t"
+IFS=$'\n\t'
 trap ctrl_c 2
 source $HOME/.local/etc/i-Haklab/variables
 source $iHETC/functions

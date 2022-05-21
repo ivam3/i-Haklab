@@ -1,5 +1,5 @@
 function apt
-	if test "$argv[1]" = "install"
+	if test "$argv[1]" = "install" -o "$argv[1]" = "reinstall"
 		for i in $argv[2..-1]
 			switch $i
 				
@@ -13,13 +13,12 @@ function apt
 					echo -e  "\e[31mE:\e[0m $i is a node module, you should try it with \e[33m'npm install -g $i'\e[0m\n"
 				
 				case '*'
-					pkg install $i
-					if grep $i /data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/listOfpkg2conf &>/dev/null
-					echo "Setting $i ..."
-					bash /data/data/com.termux/files/home/.local/libexec/pkg2conf $i
-					break
+					pkg "$argv[1]" $i
+					if grep $i /data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/listofpkg2conf &>/dev/null
+						bash /data/data/com.termux/files/home/.local/libexec/pkg2conf $i
+						break
+					end
 			end
-		end
 		end
 	else
 		pkg $argv

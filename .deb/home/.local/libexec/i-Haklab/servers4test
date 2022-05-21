@@ -1,5 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
-IFS=$"/n/t"
+IFS=$'\n\t'
 trap ctrl_c 2
 
 source ${HOME}/.local/etc/i-Haklab/variables
@@ -7,9 +7,15 @@ source $iHETC/functions
 
 chk-pkg php php
 chk-pkg mariadb mariadb
-mysqld &>/dev/null & ;pid=$(echo $!)
-banner
 
+[[ -e ${PREFIX}/var/lib/mysql/ib_logfile0 ]] && {
+	rm -rf ${PREFIX}/var/lib/mysql/ib_logfile0;
+}
+[[ -e ${PREFIX}/var/run/*.pid ]] && {
+	rm -rf ${PREFIX}/var/run/*.pid;
+}
+mysqld &>/dev/null &
+pid=$(echo $!)
 while [ "$(ps a|awk '{print $1}'|grep $pid)" ]
 do
 	[[ $(mysql -u $(whoami) -e "use mysql;SELECT user FROM user;"|grep "root") = root ]] || {
@@ -33,12 +39,19 @@ do
 				mysql -u root -proot -e "create DATABASE $db;"
 			fi
 			getPORT;
-			php -S $LOOPBACK:$LPORT -t ${HOME}/.local/var/service/www/servers4test/$answ 2>>$LOGFILE;
-			kill -TERM $pid;disown $pid 2>>$LOGFILE;
+			banner
+			echo -en $B"(➤_)$W Web server $B$answ$W activated over:$Y http://$LOOPBACK:$LPORT$B\n  ╰──➤$W press enter to$R stop$W it.\n"
+			php -S $LOOPBACK:$LPORT -t ${HOME}/.local/var/service/www/servers4test/$answ 2>>$LOGFILE &
+			termux-open-url http://$LOOPBACK:$LPORT;
+			read enter;
+			killall php mysqld 2>>$LOGFILE;
+			disown $pid 2>>$LOGFILE;
 			break;
 		} || {
+			killall mysqld 2>>$LOGFILE;
 			STDERR broken;
 		}
 	done
+	killall mysqld 2>>$LOGFILE
 	break
 done

@@ -1,12 +1,12 @@
 #!/data/data/com.termux/files/usr/bin/bash
-IFS=$"/n/t"
+IFS=$'\n\t'
 trap ctrl_c 2
 
 source ${HOME}/.local/etc/i-Haklab/variables
 source $iHETC/functions
-echo "[*] Setting $1 following i-Haklab instructions ..."
-case "$1" in
+echo -en "Setting $1 following i-Haklab instructions ...  \b"
 
+case "$1" in
 	apache2|phpmyadmin)
 		for i in apache2 phpmyadmin
 		do
@@ -176,3 +176,4 @@ CONF
 	 chmod 711 ${PREFIX}/bin/termux-url-opener
 		;;
 esac
+echo "Done"
