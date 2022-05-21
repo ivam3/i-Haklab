@@ -23,17 +23,17 @@ To get help about its use going to [OMF official site](https://fishshell.com/doc
 - CLONING THIS REPOSITORY:
 
         git clone https://github.com/ivam3/i-Haklab
-				cd i-Haklab
-				chmod +x setup
-				bash setup
+        cd i-Haklab
+        chmod +x setup
+        bash setup
 
 - ADDING AT APT SOURCES LIST
 
         apt install wget
-				mkdir -p $PREFIX/etc/apt/sources.list.d
-				wget https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/ivam3-termux-packages.list -O $PREFIX/etc/apt/sources.list.d/ivam3-termux-packages.list
-				apt update
-				apt upgrade
+        mkdir -p $PREFIX/etc/apt/sources.list.d
+        wget https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/ivam3-termux-packages.list -O $PREFIX/etc/apt/sources.list.d/ivam3-termux-packages.list
+        apt update
+        apt upgrade
 
 # i-Haklab will ......
 
@@ -116,7 +116,7 @@ There are several commands in i-Haklab that facilitate the use of Termux:
 
 i-Haklab automates the installation and configuration of a graphical environment with the xfce4 windows manager, which opens up the possibility of running tools such as wireshark and burpsuite. For this, the installation of the [Termux:Wayland](https://github.com/termux/termux-x11) application is required. Once installed it to run this enviroment just execute:
 
-         ]> i-Haklab Xwayland
+         i-Haklab Xwayland
 
 # IRC CHAT Ivam3byCinderella
 
@@ -154,6 +154,6 @@ If you want to suggest some book do it in the section of suggestions of our [Tel
 
 i-Haklab is constantly updating tools and improvements. To stay updated you just have to run:
 
-	 ]> apt update i-haklab
+	       apt update i-haklab
 
 - FOLLOW ME ON [ALL SOCIAL NETWORKS](https://wlo.link/@Ivam3)
