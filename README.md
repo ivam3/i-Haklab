@@ -7,7 +7,7 @@ The use of i-Haklab without prior mutual consistency may lead to illegal activit
 To get help join to our support groups over [TELEGRAM GROUP](https://t.me/iHaklab) 
 Or over IRC running the command :
 
-        $ i-Haklab weechat
+        i-Haklab weechat
 
 # What is Termux?
 
@@ -18,32 +18,49 @@ Or over IRC running the command :
 - i-Haklab is a hacking laboratory for Termux that contains open source tools for osint, pentesting, scan/find vulnerabilities, explotation and post-explotation recommended for me(Ivam3) with automation commands, a many guides, books and tutorials to learn how to use tools. i-Haklab use oh my fish insteractive shell to provide core infrastructure to allow you to install packages which extend or modify the look of your termux.
 To get help about its use going to [OMF official site](https://fishshell.com/docs/current/tutorial.html).
 
+# INSTALLATION.
+
+- CLONING THIS REPOSITORY:
+
+        git clone https://github.com/ivam3/i-Haklab
+				cd i-Haklab
+				chmod +x setup
+				bash setup
+
+- ADDING AT APT SOURCES LIST
+
+        apt install wget
+				mkdir -p $PREFIX/etc/apt/sources.list.d
+				wget https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/ivam3-termux-packages.list -O $PREFIX/etc/apt/sources.list.d/ivam3-termux-packages.list
+				apt update
+				apt upgrade
+
 # i-Haklab will ......
 
 - Install the command [sudo], wich provides a real root enviroment if your android device has some root mannager otherwise it provides a fake root eviroment.
-- Set Termux with interactive shell oh-my-fish, wich provides a diferent types of promtpt with command:
+- Provides a diferent types of prompt with command:
 
-        ]> omf theme
+        omf theme
 
 - Provides a login session by password(default=Ivam3byCinderella) or fingerprint(depends features device). It could set running:
 
-        ]> i-Haklab passwd set
+        i-Haklab passwd set
 
 - Or change it running:
 
-        ]> i-Haklab passwd new
+        i-Haklab passwd new
 
 - Provide you with a web site server running over your device with Termux, wich will you can share several files over all internet. Enable it running:
 
-        ]> i-Haklab share
+        i-Haklab share
 
 - Provide you with deliberately vulnerable web site servers as bWAPP, DVWA and MUTILLIDAE to practice your hacking skills searching, finding and exploting the most common vulnerabilities. Enable those running:
 
-        ]> i-Haklab server4test
+        i-Haklab server4test
 
 - Provide you more than 100 tools/frameworks with an easy install/remove over command 'apt'. You can get the list of all availables running :
 
-        ]> i-Haklab show alltools
+        i-Haklab show alltools
 
 ![i-Haklab show alltools](./.img/alltools.jpg)
 
@@ -53,27 +70,47 @@ There are several commands in i-Haklab that facilitate the use of Termux:
 
 - i-Haklab: it is the main command that helps with automations of various processes such as visualization of user guides for the tools, download of hacking books, access to the community tutorials, payload creation automation, metaploit handler activation, brute force attacks among others. See all features running:
 
-       ]> i-Haklab help
+        i-Haklab help
 
-- LOCALHOST: returns the private ip of your local network
+- Returns the private ip of your local network:
 
-- osrframework: run OSINT setoolkit
+        LOCALHOST
 
-- tornvpn: enable tor connection by proxychains4.
+- Run OSINT setoolkit:
 
-- sudo some-commands: run commands as fake root user.
+        osrframework
 
-- serverphp: activates the php server.
+- Enable tor connection by proxychains4:
 
-- serverapache: activates the apache server.
+        torvpn
 
-- postgresql start/stop/restart: enables stops and restarts the metasploit database.
+- Run commands as root user(on rooted device) or fake root user(on NOT rooted device):
 
-- traductor: init a shell to traslate any text.
+        sudo <some command>
 
-- fixer: we know that each Android is different and this can generate various errors in the installation processes of ruby gems, python modules, among others. And this command is the i-Haklab solver that automates the solving processes.
+- Enable the php server:
 
-- lock: Block the termux screen and it will only be unlocked with said password or answering the security question. It is worth mentioning that these access codes are encrypted for your security.
+        serverphp
+
+- Enable the apache server:
+
+        serverapache start/stop/restart
+
+- Enables postgresql database:
+
+        postgresql start/stop/restart
+
+- Init a shell to traslate any text:
+
+        traductor
+
+- We know that each Android is different and this can generate various errors in the installation processes of ruby gems, python modules, among others. Automates the solving processes running:
+
+        fixer
+
+- Block the termux screen and it will only be unlocked with said password or your fingerprint. It is worth mentioning that these access codes are encrypted for your security.
+
+        lock
 
 # Desktop enviroment
 
