@@ -45,29 +45,6 @@ echo "Setting interactive shell Oh-my-fish.";$z
 [[ -e ${PREFIX}/bin/fish ]] && [[ ! -L ${HOME}/.termux/shell ]] && {
 	ln -s ${PREFIX}/bin/fish $HOME/.termux/shell;
 }
-cat <<- CONF > ${HOME}/.local/etc/fish/config.fish
-if status --is-login
-bash ${HOME}/.local/libexec/i-Haklab.login
-end
-
-function on_exit --on-event fish_exit
-echo 'Have a nice hacking day!!'
-sleep 0.5
-end
-
-set fish_theme bira
-set -g theme_nerd_fonts yes
-set DISPLAY :0
-set PULSE_SERVER 127.0.0.1
-set PATH ${PREFIX}/bin:${HOME}/.local/bin
-set HOME /data/data/com.termux/files/home
-set GOPATH /data/data/com.termux/files/home/go
-set GOROOT /data/data/com.termux/files/usr/lib/go
-set JAVA_HOME /data/data/com.termux/files/usr/opt/openjdk
-set LD_LIBRARY_PATH ${PREFIX}/lib:${HOME}/.local/lib
-set TOOLS ${HOME}/.local/share
-alias bat="bat -f --theme 'Visual Studio Dark+'"
-CONF
 ln -s ${HOME}/.local/etc/fish/config.fish ${PREFIX}/etc/fish/config.fish
 [[ $(grep 'fish' -oE ${PREFIX}/etc/bash.bashrc) ]] || {
 	sed -i '12a chsh -s fish' ${PREFIX}/etc/bash.bashrc;
