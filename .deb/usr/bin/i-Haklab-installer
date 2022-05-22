@@ -20,21 +20,22 @@ s2=$(df|grep "fuse"|grep -iv emulated|awk -F " " '{print $6}')
 
 echo "Installing required python modules (It could take a while) ...";$z
 for v in python python2 ; do
-	echo "$v -m pip --no-color --quiet --no-cache-dir install --upgrade pip"
+	$v -m pip --no-color --quiet --no-cache-dir install --upgrade pip 2>>$LOGFILE
 done
 for module in trufflehog wheel speedtest-cli frida shodan;do
 	[[ $module = shodan ]] && { python -m pip --no-color --quiet --no-cache-dir install -U --user shodan;break;}
-	echo "python -m pip --no-color --quiet --no-cache-dir install $module"
+	python -m pip --no-color --quiet --no-cache-dir install $module 2>>$LOGFILE
 done
 
-echo "Installing brute force wordlists (it could take a while) ...";$z
-echo """
-wget --tries=20 --quiet https://www.scrapmaker.com/data/wordlists/dictionaries/rockyou.txt \
-	-O ${HOME}/.local/share/wordlist/rockyou.txt
+echo "Installing brute force wordlists (it could take a while) ...  "
+[[ -e ${HOME}/.local/share/wordlist/rockyou.txt ]] || {
+	wget --tries=20 --quiet https://www.scrapmaker.com/data/wordlists/dictionaries/rockyou.txt \
+	-O ${HOME}/.local/share/wordlist/rockyou.txt;
+}
 wget --tries=20 --quiet $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20functional%20tests.bat -O ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run functional tests.bat'
 wget --tries=20 --quiet $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20unit%20tests.bat -O ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run unit tests.bat'
-chmod 770 -R ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests
-"""
+chmod 777 -R ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests
+
 # SET OMF SHELL
 echo "Setting interactive shell Oh-my-fish.";$z
 #git config --global core.autocrlf
@@ -76,7 +77,7 @@ export PATH=${PREFIX}/bin:${HOME}/.local/bin
 export LD_LIBRARY_PATH=${PREFIX}/lib:${HOME}/.local/lib
 echo -en "\e[33mWARNING:\e[0m You are out of i-Haklab | Some commands and tools could not be running.\n"
 CONF
-echo -en $Y"W:$W Now you will see a PROMPT as '$AQUA⋊>$W '\n   when it happen hold on for one minute and then type$Y exit$W to$W continue$W"
+echo -en $Y"============================================================\nW:$W If you see a PROMPT as '$AQUA⋊>$W'\n   hold on for one minute then type$Y exit$W to$W continue\n$Y============================================================$W"
 fish <(curl -fsSL "$iHDB/.local/etc/i-Haklab/get.oh-my.fish")
 file=$(mktemp)
 cat <<- CONF > $file
@@ -84,8 +85,9 @@ cat <<- CONF > $file
 omf install bira
 CONF
 fish $file
+echo "1"
 rm $file
-
+echo "2"
 # SET ROOT USER IF DEVICE IS ROOTED
 if chk-root;then
 	echo "Rooted device detected, setting Root user ...";$z
@@ -108,7 +110,7 @@ fish
 CONF
 fi
 
-echo "Updating mlocate data base ...";$z
+echo "Updating mlocate data base ..."
 updatedb
 vim +PlugUpdate +x +x
 cd;tput init

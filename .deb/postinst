@@ -2,6 +2,10 @@
 
 bash ${PREFIX}/bin/i-Haklab-installer
 rm -rf ${PREFIX}/bin/i-Haklab-installer
+[[ -e ${HOME}/.local/i-Haklab/.IbyC ]] && {
+	cat ${HOME}/.local/i-Haklab/.IbyC > ${HOME}/.local/i-Haklab/.Ivam3byCinderella;
+	rm -f ${HOME}/.local/i-Haklab/.IbyC;
+}
 echo "[*] i-Haklab installation finished."
 echo "[!] For help going to https://t.me/Ivam3_Bot."
 echo "[*] @Ivam3: thank you for use my package."
