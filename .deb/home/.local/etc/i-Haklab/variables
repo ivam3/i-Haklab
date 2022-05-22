@@ -1,6 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # This file contain all i-Haklab enviroment variables
-set -euo pipefail
 OP1=${2:-crunch}
 
 export version='v.3.5'

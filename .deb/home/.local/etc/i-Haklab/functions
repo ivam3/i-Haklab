@@ -308,7 +308,7 @@ pass(){
 		do
 			[[ $opt = Exit ]] && { exit 0;}
 			[[ $opt = Password ]] && { opt="Get";}
-			sed -i "s|$login|pass $opt|g" ${HOME}/.local/libexec/i-Haklab.login
+			sed -i "4,6 {s|$login|pass $opt|}" ${HOME}/.local/libexec/i-Haklab.login
 			break
 		done
 	}
