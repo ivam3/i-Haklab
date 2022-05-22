@@ -20,25 +20,30 @@ s2=$(df|grep "fuse"|grep -iv emulated|awk -F " " '{print $6}')
 
 echo "Installing required python modules (It could take a while) ...";$z
 for v in python python2 ; do
-	$v -m pip --no-color --quiet --no-cache-dir install --upgrade pip 2>>$LOGFILE
+	echo "$v -m pip --no-color --quiet --no-cache-dir install --upgrade pip"
 done
 for module in trufflehog wheel speedtest-cli frida shodan;do
-	[[ $module = shodan ]] && { python -m pip --no-color --quiet --no-cache-dir install -U --user shodan 2>>$LOGFILE;break;}
-	python -m pip --no-color --quiet --no-cache-dir install $module 2>>$LOGFILE
+	[[ $module = shodan ]] && { python -m pip --no-color --quiet --no-cache-dir install -U --user shodan;break;}
+	echo "python -m pip --no-color --quiet --no-cache-dir install $module"
 done
 
 echo "Installing brute force wordlists (it could take a while) ...";$z
+echo """
 wget --tries=20 --quiet https://www.scrapmaker.com/data/wordlists/dictionaries/rockyou.txt \
 	-O ${HOME}/.local/share/wordlist/rockyou.txt
 wget --tries=20 --quiet $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20functional%20tests.bat -O ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run functional tests.bat'
 wget --tries=20 --quiet $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20unit%20tests.bat -O ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run unit tests.bat'
 chmod 770 -R ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests
-
-echo "Setting i-Haklab style.";$z
-ln -s $PREFIX/bin/fish $HOME/.termux/shell 2>>$LOGFILE
-
+"""
 # SET OMF SHELL
-echo "Setting interactive shell Oh-my-fish.\n";$z
+echo "Setting interactive shell Oh-my-fish.";$z
+#git config --global core.autocrlf
+[[ -e ${HOME}/.local/share/omf ]] && rm -rf ${HOME}/.local/share/omf
+[[ -e ${PREFIX}/etc/fish/config.fish ]] && rm ${PREFIX}/etc/fish/config.fish
+[[ -e ${HOME}/.config/fish/conf.d/omf.fish ]] && rm ${HOME}/.config/fish/conf.d/omf.fish
+[[ -e ${PREFIX}/bin/fish ]] && [[ ! -L ${HOME}/.termux/shell ]] && {
+	ln -s ${PREFIX}/bin/fish $HOME/.termux/shell;
+}
 cat <<- CONF > ${HOME}/.local/etc/fish/config.fish
 if status --is-login
 bash ${HOME}/.local/libexec/i-Haklab.login
@@ -46,7 +51,7 @@ end
 
 function on_exit --on-event fish_exit
 echo 'Have a nice hacking day!!'
-sleep 1
+sleep 0.5
 end
 
 set fish_theme bira
@@ -62,30 +67,23 @@ set LD_LIBRARY_PATH ${PREFIX}/lib:${HOME}/.local/lib
 set TOOLS ${HOME}/.local/share
 alias bat="bat -f --theme 'Visual Studio Dark+'"
 CONF
-
-git config --global core.autocrlf
-[[ -L ${PREFIX}/etc/fish/config.fish ]] || rm -rf ${PREFIX}/etc/fish/config.fish
-ln -s ${HOME}/.local/etc/fish/config.fish ${PREFIX}/etc/fish/config.fish 2>>$LOGFILE
-sed -i '12a chsh -s fish' ${PREFIX}/etc/bash.bashrc
-
+ln -s ${HOME}/.local/etc/fish/config.fish ${PREFIX}/etc/fish/config.fish
+[[ $(grep 'fish' -oE ${PREFIX}/etc/bash.bashrc) ]] || {
+	sed -i '12a chsh -s fish' ${PREFIX}/etc/bash.bashrc;
+}
 cat <<- CONF > ${HOME}/.bashrc
 export PATH=${PREFIX}/bin:${HOME}/.local/bin
 export LD_LIBRARY_PATH=${PREFIX}/lib:${HOME}/.local/lib
 echo -en "\e[33mWARNING:\e[0m You are out of i-Haklab | Some commands and tools could not be running.\n"
 CONF
-
-[[ -e ${HOME}/.config/fish/conf.d/omf.fish ]] || {
-	echo -en $Y"""W:$W Now you will see a PS1 as '⋊> ~/i-Haklab on master ⨯'
-	   when it happen hold on for one minute and then type$Y exit$W to$W continue$W
-	""";
-	fish <(curl -fsSL "$iHDB/.local/etc/i-Haklab/get.oh-my.fish") 2>>$LOGFILE;
-}
+echo -en $Y"W:$W Now you will see a PROMPT as '$AQUA⋊>$W '\n   when it happen hold on for one minute and then type$Y exit$W to$W continue$W"
+fish <(curl -fsSL "$iHDB/.local/etc/i-Haklab/get.oh-my.fish")
 file=$(mktemp)
 cat <<- CONF > $file
 #!/bin/env fish
 omf install bira
 CONF
-fish $file 2>>$LOGFILE
+fish $file
 rm $file
 
 # SET ROOT USER IF DEVICE IS ROOTED
@@ -112,7 +110,7 @@ fi
 
 echo "Updating mlocate data base ...";$z
 updatedb
-vim +PlugUpdate +x +x 2>>$LOGFILE
+vim +PlugUpdate +x +x
 cd;tput init
 exit 0
 ####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####

@@ -11,7 +11,6 @@
 		"usr/bin/termux-url-opener": "/data/data/com.termux/files/usr/bin/termux-url-opener",
 		"usr/bin/i-Haklab-installer": "/data/data/com.termux/files/usr/bin/i-Haklab-installer",
 		"home/.nanorc": "/data/data/com.termux/files/home/.nanorc",
-		"home/.config/fish/conf.d/omf.fish": "/data/data/com.termux/files/home/.config/fish/conf.d/omf.fish",
 		"home/.config/fish/functions/fish_greeting.fish": "/data/data/com.termux/files/home/.config/fish/functions/fish_greeting.fish",
 		"home/.config/fish/functions/github.fish": "/data/data/com.termux/files/home/.config/fish/functions/github.fish",
 		"home/.config/fish/functions/LOCALHOST.fish": "/data/data/com.termux/files/home/.config/fish/functions/LOCALHOST.fish",
