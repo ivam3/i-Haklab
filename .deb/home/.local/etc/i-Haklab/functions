@@ -303,12 +303,12 @@ export -f trimString
 pass(){
 	user=$(grep "USER" ${HOME}/.local/etc/fish/config.fish|awk '{print $NF}')
 	[[ $1 = Set ]] && {
-		login=$(grep "pass" ${HOME}/.local/libexec/i-Haklab.login|head -n 1)
+		login=$(grep "pass" ${HOME}/.local/libexec/i-Haklab.login|tail -n 1)
 		select opt in Password Fingerprint Disable Exit
 		do
 			[[ $opt = Exit ]] && { exit 0;}
 			[[ $opt = Password ]] && { opt="Get";}
-			sed -i "4,6 {s|$login|pass $opt|}" ${HOME}/.local/libexec/i-Haklab.login
+			sed -i "s|$login|pass $opt|g" $HOME/.local/libexec/i-Haklab.login
 			break
 		done
 	}
