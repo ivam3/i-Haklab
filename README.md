@@ -118,7 +118,7 @@ i-Haklab automates the installation and configuration of a graphical environment
 
     i-Haklab Xwayland
 
-![TermuxWayland](/.img/TermuxWayland.jpg*)
+![TermuxWayland](/.img/TermuxWayland.jpg)
 
 # IRC CHAT Ivam3byCinderella
 
