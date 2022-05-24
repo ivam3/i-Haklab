@@ -67,7 +67,7 @@ export -f STDERROOT
 
 STDERR(){
 	[[ $# -eq 0 ]] && {
-		printf "$R(_➤)$W missing argument, type i-Haklab help for helpper";
+		printf "$R(_➤)$W missing argument, type i-Haklab help for helpper\n";
 			exit;
 		}
 	[[ $1 = broken ]] && {
