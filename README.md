@@ -116,7 +116,8 @@ There are several commands in i-Haklab that facilitate the use of Termux:
 
 i-Haklab automates the installation and configuration of a graphical environment with the xfce4 windows manager, which opens up the possibility of running tools such as wireshark and burpsuite. For this, the installation of the [Termux:Wayland](https://github.com/termux/termux-x11) application is required. Once installed it to run this enviroment just execute:
 
-    i-Haklab Xwayland
+    apt install termux-desktop-xfce
+		i-Haklab Xwayland
 
 ![TermuxWayland](/.img/TermuxWayland.jpg)
 
