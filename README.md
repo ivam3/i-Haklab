@@ -22,45 +22,45 @@ To get help about its use going to [OMF official site](https://fishshell.com/doc
 
 - CLONING THIS REPOSITORY:
 
-	git clone https://github.com/ivam3/i-Haklab
-	cd i-Haklab
-	chmod +x setup
-	bash setup
+		git clone https://github.com/ivam3/i-Haklab
+		cd i-Haklab
+		chmod +x setup
+		bash setup
 
 - ADDING AT APT SOURCES LIST
 
-	apt install wget
-	mkdir -p $PREFIX/etc/apt/sources.list.d
-	wget https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/ivam3-termux-packages.list -O $PREFIX/etc/apt/sources.list.d/ivam3-termux-packages.list
-	apt update
-	apt upgrade
+		apt install wget
+		mkdir -p $PREFIX/etc/apt/sources.list.d
+		wget https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/ivam3-termux-packages.list -O $PREFIX/etc/apt/sources.list.d/ivam3-termux-packages.list
+		apt update
+		apt upgrade
 
 # i-Haklab will ......
 
 - Install the command [sudo], wich provides a real root enviroment if your android device has some root mannager otherwise it provides a fake root eviroment.
 - Provides a diferent types of prompt with command:
 
-	omf theme
+		omf theme
 
 - Provides a login session by password(default=Ivam3byCinderella) or fingerprint(depends features device). It could set running:
 
-	i-Haklab passwd set
+		i-Haklab passwd set
 
 - Or change it running:
 
-	i-Haklab passwd new
+		i-Haklab passwd new
 
 - Provide you with a web site server running over your device with Termux, wich will you can share several files over all internet. Enable it running:
 
-	i-Haklab share
+		i-Haklab share
 
 - Provide you with deliberately vulnerable web site servers as [bWAPP](http://www.itsecgames.com/), [DVWA](https://dvwa.co.uk/) and [MUTILLIDAE](https://github.com/webpwnized/mutillidae) to practice your hacking skills searching, finding and exploting the most common vulnerabilities. Enable those running:
 
-	i-Haklab server4test
+		i-Haklab server4test
 
 - Provide you more than 100 tools/frameworks with an easy install/remove over command 'apt'. You can get the list of all availables running :
 
-	i-Haklab show alltools
+		i-Haklab show alltools
 
 ![i-Haklab show alltools](./.img/alltools.jpg)
 
@@ -70,47 +70,47 @@ There are several commands in i-Haklab that facilitate the use of Termux:
 
 - i-Haklab: it is the main command that helps with automations of various processes such as visualization of user guides for the tools, download of hacking books, access to the community tutorials, payload creation automation, metaploit handler activation, brute force attacks among others. See all features running:
 
-	i-Haklab help
+		i-Haklab help
 
 - Returns the private ip of your local network:
 
-	LOCALHOST
+		LOCALHOST
 
 - Run OSINT setoolkit:
 
-	osrframework
+		osrframework
 
 - Enable tor connection by proxychains4:
 
-	torvpn
+		torvpn
 
 - Run commands as root user(on rooted device) or fake root user(on NOT rooted device):
 
-	sudo <some command>
+		sudo <some command>
 
 - Enable the php server:
 
-	serverphp
+		serverphp
 
 - Enable the apache server:
 
-	serverapache start/stop/restart
+		serverapache start/stop/restart
 
 - Enables postgresql database:
 
-	postgresql start/stop/restart
+		postgresql start/stop/restart
 
 - Init a shell to traslate any text:
 
-	traductor
+		traductor
 
 - We know that each Android is different and this can generate various errors in the installation processes of ruby gems, python modules, among others. Automates the solving processes running:
 
-	fixer
+		fixer
 
 - Block the termux screen and it will only be unlocked with said password or your fingerprint. It is worth mentioning that these access codes are encrypted for your security.
 
-	lock
+		lock
 
 # DESKTOP ENVIROMENT
 
