@@ -21,8 +21,7 @@ converter
 credmap
 crunch
 d-tect
-DoS-A-Tool
-desktop-xfce4
+do-a-tool
 dex2jar
 dirb
 dnsenum
@@ -95,6 +94,7 @@ stegsnow
 sublist3r
 sudo
 tangalanga
+termux-desktop-xfce
 tmux
 torvpn
 translate-shell

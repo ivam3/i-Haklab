@@ -13,7 +13,7 @@ function apt
 					echo -e  "\e[31mE:\e[0m $i is a node module, you should try it with \e[33m'npm install -g $i'\e[0m\n"
 				
 				case '*'
-					pkg "$argv[1]" $i
+					$PREFIX/bin/apt "$argv[1]" $i
 					if grep $i /data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/listofpkg2conf &>/dev/null
 						bash /data/data/com.termux/files/home/.local/libexec/pkg2conf $i
 						break
@@ -21,6 +21,6 @@ function apt
 			end
 		end
 	else
-		pkg $argv
+		$PREFIX/bin/apt $argv
 	end
 end
