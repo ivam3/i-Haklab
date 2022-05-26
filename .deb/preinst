@@ -14,11 +14,6 @@ else
 	  done
   }
   [[ -d ${HOME}/.local/share/i-Haklab ]] && rm -rf ${HOME}/.local/share/i-Haklab
-	[[ -d ${HOME}/.local/share ]] && {
-		mv ${HOME}/.local/share/* ${PREFIX}/share;
-		rm -rf ${HOME}/.local/share;
-		ln -s ${PREFIX}/share ${HOME}/.local/share;
-	}
   [[ -e ${PREFIX}/etc/bashito ]] && rm -rf ${PREFIX}/etc/bashito
   [[ -e ${PREFIX}/etc/motd ]] && rm -rf ${PREFIX}/etc/motd
   [[ -e ${PREFIX}/etc/motd.dpkg-old ]] && rm -rf ${PREFIX}/etc/motd.dpkg-old

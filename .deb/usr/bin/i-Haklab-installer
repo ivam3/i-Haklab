@@ -59,7 +59,7 @@ fish <(curl -fsSL "$iHDB/.local/etc/i-Haklab/get.oh-my.fish")
 file=$(mktemp)
 cat <<- CONF > $file
 #!/bin/env fish
-omf install bira
+omf install zish
 CONF
 fish $file
 rm $file

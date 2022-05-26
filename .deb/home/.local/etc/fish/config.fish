@@ -8,7 +8,7 @@ sleep 1
 end
 
 set USER i-Haklab
-set fish_theme bira
+set fish_theme zish
 set -g theme_nerd_fonts yes
 set DISPLAY :0
 set PULSE_SERVER 127.0.0.1
