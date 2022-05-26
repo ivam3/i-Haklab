@@ -1,6 +1,8 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # This file contain all i-Haklab functions
 
+LOGFILE='/data/data/com.termux/files/usr/var/log/i-Haklab.log'
+
 banner() {
 	[[ ! -e /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab ]] && {
 		wget --tries=20 --quiet \
