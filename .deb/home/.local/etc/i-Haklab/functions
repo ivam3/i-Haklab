@@ -356,7 +356,7 @@ pass(){
 		}
 
 		[[ $1 = Disable ]] && {
-			continue
+			echo "Access without pass" >>$LOGFILE
 #			termux-toast -b green Welcome Back $user;
 		}
 }
