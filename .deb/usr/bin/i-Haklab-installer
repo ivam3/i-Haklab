@@ -13,7 +13,7 @@ s2=$(df|grep "fuse"|grep -iv emulated|awk -F " " '{print $6}')
 	[[ -d $s2/Android/data/com.termux/files/tools ]] && [[ -s $s2/Android/data/com.termux/files/tools ]] && {
 		for tool in $(ls $s2/Android/data/com.termux/files/tools/)
 		do
-			mv $s2/Android/data/com.termux/files/tools/$tool ${PREFIX}/share/;
+			mv $s2/Android/data/com.termux/files/tools/$tool ${HOME}/.local/share/;
 		done
 	}
 }
@@ -28,9 +28,9 @@ for module in trufflehog wheel speedtest-cli frida shodan;do
 done
 
 echo "Installing brute force wordlists (it could take a while) ...  "
-[[ -e ${PREFIX}/share/wordlist/rockyou.txt ]] || {
+[[ -e ${HOME}/.local/share/wordlist/rockyou.txt ]] || {
 	wget --tries=20 --quiet https://www.scrapmaker.com/data/wordlists/dictionaries/rockyou.txt \
-	-O ${PREFIX}/share/wordlist/rockyou.txt;
+	-O ${HOME}/.local/share/wordlist/rockyou.txt;
 }
 wget --tries=20 --quiet $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20functional%20tests.bat -O ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run functional tests.bat'
 wget --tries=20 --quiet $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20unit%20tests.bat -O ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run unit tests.bat'
@@ -39,7 +39,7 @@ chmod 777 -R ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/asse
 # SET OMF SHELL
 echo "Setting interactive shell Oh-my-fish.";$z
 #git config --global core.autocrlf
-[[ -e ${PREFIX}/share/omf ]] && rm -rf ${PREFIX}/share/omf
+[[ -e ${HOME}/.local/share/omf ]] && rm -rf ${HOME}/.local/share/omf
 [[ -e ${PREFIX}/etc/fish/config.fish ]] && rm ${PREFIX}/etc/fish/config.fish
 [[ -e ${HOME}/.config/fish/conf.d/omf.fish ]] && rm ${HOME}/.config/fish/conf.d/omf.fish
 [[ -e ${PREFIX}/bin/fish ]] && [[ ! -L ${HOME}/.termux/shell ]] && {
