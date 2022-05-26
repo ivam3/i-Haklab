@@ -338,10 +338,10 @@ pass(){
 			until [[ $pass = $(cat $HOME/.local/etc/i-Haklab/.Ivam3byCinderella|openssl enc -aes-256-cbc -md sha512	-a -d -pbkdf2 -iter 100000	-salt -pass pass:Secret@123#) ]]
 			do
 				echo -en "\e[31mERROR:\e[0m wrong password\n"
-				termux-toast -b red Wrong password
+#				termux-toast -b red Wrong password
 				pass Get
 			done
-			termux-toast -b green Welcome Back $user;
+#			termux-toast -b green Welcome Back $user;
 				banner;
 			}
 
@@ -349,14 +349,15 @@ pass(){
 			until [[ $(jq -r .auth_result $TMPDIR/lock.tmp) = "AUTH_RESULT_SUCCESS" ]]
 			do
 				termux-fingerprint -t "i-Haklab on Termux" -s "@Ivam3byCinderella" > $TMPDIR/lock.tmp
-				termux-toast -b red Access denied
+#				termux-toast -b red Access denied
 			done;	rm $TMPDIR/lock.tmp;
-			termux-toast -b green Welcome Back $user;
+#			termux-toast -b green Welcome Back $user;
 			banner;
 		}
 
 		[[ $1 = Disable ]] && {
-			termux-toast -b green Welcome Back $user;
+			continue
+#			termux-toast -b green Welcome Back $user;
 		}
 }
 export -f pass
