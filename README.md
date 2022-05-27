@@ -8,15 +8,14 @@ i-Haklab weechat
 ```
 
 ### What is Termux?
-
 > [Termux](https://github.com/termux/termux-app) is a terminal emulator application that shares the same environment of the Android operating system by starting the command line of the program `shell` using the system call `execve` and redirecting the input, output and standard error flows to the screen. [Termux](https://github.com/termux/termux-app) has a vast number of packages under the `apt` manager compiled with Android NDK and patched for compatibility, generally available on GNU/Linux systems.
 
-### What is i-Haklab?
 
+### What is i-Haklab?
 > [i-Haklab]() is a hacking laboratory for [Termux](https://github.com/termux/termux-app) that contains [open source tools](https://github.com/ivam3/termux-packages) for osint, pentesting, scan/find vulnerabilities, explotation and post-explotation recommended for me [Ivam3](https://wlo.link/@Ivam3) with automation commands, a many guides, books and tutorials to learn how to use tools. [i-Haklab]() use oh my fish insteractive shell to provide core infrastructure to allow you to install packages which extend or modify the look of your termux. To get help about shell and its use going to [OMF official site](https://fishshell.com/docs/current/tutorial.html).
 
-### INSTALLATION.
 
+### INSTALLATION.
 - CLONING THIS REPOSITORY:
 ```bash
 git clone https://github.com/ivam3/i-Haklab
@@ -24,7 +23,6 @@ cd i-Haklab
 chmod +x setup
 bash setup
 ```
-
 - ADDING AT APT SOURCES LIST
 ```bash
 apt install wget
@@ -34,8 +32,8 @@ apt update
 apt upgrade
 ```
 
-### i-Haklab will ...
 
+### i-Haklab will ...
 - Provides a diferent types of prompt with command:
 ```bash
 omf theme
@@ -61,9 +59,10 @@ i-Haklab server4test
 i-Haklab show alltools
 ```
 ![i-Haklab show alltools](./.img/alltools.jpg)
+##### If you want to suggest some tool, do it in the section of suggestions of our [Telegram BOT](https://t.me/Ivam3_Bot).
+
 
 ### COMMANDS
-
 > There are several commands in [i-Haklab]() that facilitate the use of [Termux](https://github.com/termux/termux-app):
 
 - [i-Haklab](): it is the main command that helps with automations of various processes such as visualization of user guides for the tools, download of hacking books, access to the community tutorials, payload creation automation, metaploit handler activation, brute force attacks among others. See all features running:
@@ -115,8 +114,8 @@ fixer
 lock
 ```
 
-### DESKTOP ENVIROMENT
 
+### DESKTOP ENVIROMENT
 > [i-Haklab]() automates the installation and configuration of a graphical environment with the xfce4 windows manager, which opens up the possibility of running tools such as wireshark and burpsuite. For this, the installation of the [Termux:Wayland](https://github.com/termux/termux-x11) application is required. Once installed it to run this enviroment just execute:
 ```bash
 apt install termux-desktop-xfce
@@ -124,20 +123,21 @@ i-Haklab Xwayland
 ```
 ![TermuxWayland](/.img/TermuxWayland.jpg)
 
-### IRC CHAT Ivam3byCinderella
 
+### IRC CHAT Ivam3byCinderella
 > IRC (Internet Relay Chat) is an application layer protocol that facilitates communication in the form of text. The chat process works on a client/server networking model. Under the command <i-Haklab> we will find the <weechat> argument, with which you can join the official IRC Ivam3byCinderella where u can contact another i-Haklab.
-##### If you want to suggest some tool, do it in the section of suggestions of our [Telegram BOT](https://t.me/Ivam3_Bot).
+
 
 ### BOOKS AVAILABLES
 ![booksTermux](/.img/books_Termux.jpg)
 ##### If you want to suggest some book do it in the section of suggestions of our [Telegram BOT](https://t.me/Ivam3_Bot).
 
-### UPDATE AT NEWEST VERSION 
 
+### UPDATE AT NEWEST VERSION 
 > [i-Haklab]() is constantly updating tools and improvements. To stay updated you just have to run:
 ```bash
 apt update i-haklab
 ```
 
-### FOLLOW ME ON [ALL SOCIAL NETWORKS](https://wlo.link/@Ivam3)
+
+##### Join to our community [Ivam3byCinderella](https://wlo.link/@Ivam3) and check all stuffs we have for you.
