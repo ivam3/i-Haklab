@@ -2,9 +2,13 @@
 
 bash ${PREFIX}/bin/i-Haklab-installer
 rm -rf ${PREFIX}/bin/i-Haklab-installer
-[[ -e ${HOME}/.local/i-Haklab/.IbyC ]] && {
-	cat ${HOME}/.local/i-Haklab/.IbyC > ${HOME}/.local/i-Haklab/.Ivam3byCinderella;
-	rm -f ${HOME}/.local/i-Haklab/.IbyC;
+[[ -e ${HOME}/.local/etc/i-Haklab/.IbyC ]] && {
+	cat ${HOME}/.local/etc/i-Haklab/.IbyC > ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella;
+	rm -f ${HOME}/.local/etc/i-Haklab/.IbyC;
+}
+[[ -e ${HOME}/.local/libexec/i-Haklab.login.backup ]] && {
+	cat ${HOME}/.local/libexec/i-Haklab.login.backup > ${HOME}/.local/libexec/i-Haklab.login;
+	rm ${HOME}/.local/libexec/i-Haklab.login.backup;
 }
 echo "[*] i-Haklab installation finished."
 echo "[!] For help going to https://t.me/Ivam3_Bot."

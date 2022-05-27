@@ -20,8 +20,11 @@ else
   [[ -d ${PREFIX}/etc/apt/sources.list.d ]] || mkdir -p ${PREFIX}/etc/apt/sources.list.d
 	[[ -e $HOME/.local/etc/i-Haklab/.Ivam3byCinderella ]] && {
 		[[ "Ivam3byCinderella" = $(cat $HOME/.local/etc/i-Haklab/.Ivam3byCinderella|openssl enc -aes-256-cbc -md sha512 -a -d -pbkdf2 -iter 100000 -salt -pass pass:Secret@123#) ]] || {
-			cp ${HOME}/.local/i-Haklab/.Ivam3byCinderella ${HOME}/.local/i-Haklab/.IbyC;
+			cp ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella ${HOME}/.local/etc/i-Haklab/.IbyC;
 		}
+	}
+	[[ -e ${HOME}/.local/libexec/i-Haklab.login ]] && {
+		cp ${HOME}/.local/libexec/i-Haklab.login ${HOME}/.local/libexec/i-Haklab.login.backup;
 	}
   echo "Setting Ivam3 repositories at Advance Package Tool(APT)."
   wget --tries=20 --quiet "https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/ivam3-termux-packages.list" -O ${PREFIX}/etc/apt/sources.list.d/ivam3-termux-packages.list
