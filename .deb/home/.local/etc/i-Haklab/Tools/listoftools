@@ -92,7 +92,7 @@ torvpn
 translate-shell
 trape
 userrecon
-virustotal
+virustotal-cli
 vulnx
 wbruter
 webhackshl

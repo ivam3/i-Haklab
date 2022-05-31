@@ -1,7 +1,8 @@
 #!/usr/bin/bash
 #torvpn 2021 by Ivam3.
 ####################
-IFS=$'\n\t'                                                                                                    trap ctrl_c 2
+IFS=$'\n\t'
+trap ctrl_c 2
 ctrl_c() { printf "$Y\t\t   [¿] Need a help [?]$B\n\t\tTelegram : t.me/Ivam3_Bot$W\n";exit;}
 R='\033[1;31m'
 G='\033[1;32m'

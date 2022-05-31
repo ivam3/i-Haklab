@@ -1,0 +1,63 @@
+#!/data/data/com.termux/files/usr/bin/bash
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+chk-pkg tor tor
+chk-pkg curl curl
+chk-pkg proxychains4 proxychains-ng
+
+Tor=$(curl --socks5-hostname localhost:9050 \
+	-s https://www.google.com > /dev/null;echo $?)
+
+ip(){ proxychains4 -q curl -s ifconfig.so 2>/dev/null;}
+
+case "$1" in
+	start)
+		[[ Tor -eq 0 ]] && {
+			echo "Proxy is activated";
+		} || {
+			tor >/dev/null 2>/dev/null &
+			sleep 3
+			echo -en "Proxy enable over:  \b";ip;
+		}
+		;;
+	stop)
+		[[ Tor -eq 0 ]] && {
+			killall tor 2>/dev/null
+			echo "Proxy stoped.";
+		} || {
+			echo "Proxy is disabled.";
+		}
+		;;
+	ip)
+		[[ Tor -eq 0 ]] && {
+			echo -en "Proxy ip:  \b";ip;
+		} || {
+			echo "Proxy is disabled.";
+		}
+		;;
+	chip)
+		[[ Tor -eq 0 ]] && {
+			killall -HUP --quiet tor &>/dev/null
+			sleep 2
+			echo -en "IP proxy changed at:  \b";ip;
+		} || {
+			echo "Proxy is disabled.";
+		}
+		;;
+	*)
+		[[ Tor -eq 0 ]] && {
+			if command -v $1 >/dev/null -o -e $1
+			then
+				echo -en $Y"Proxy over:$W  \b";ip
+				echo
+				proxychains4 -q ${@:1} 2>/dev/null
+			else
+				echo -en $R"E:$W $1 is not an executable."
+			fi
+		} || {
+			echo "Proxy is disabled.";
+		}
+		;;
+esac
+

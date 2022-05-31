@@ -218,6 +218,7 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰osrframework────────────────────➤ OSINT setoolkit
 ╰omf─theme───────────────────────➤ Change Oh-my-fish theme
 ╰postgresql──────────────────────➤ Star stop or restart postgres data base
+╰proxy───────────────────────────➤ Execute cli commands over tor proxychains
 ╰serverapache────────────────────➤ Init apache server
 ╰serverphp───────────────────────➤ Init php server
 ╰sudo────────────────────────────➤ Execute commands or init an enviroment as fake root user
