@@ -30,6 +30,10 @@ case "$1" in
 		ln -s ${HOME}/.local/etc/phpmyadmin/config.inc.php ${PREFIX}/etc/phpmyadmin/config.inc.php
 		;;
 
+	clamav)
+		freshclam
+		;;
+
 	fish)
 		[[ -e ${PREFIX}/etc/fish/config.fish ]] && {
 			rm -f ${PREFIX}/etc/fish/config.fish 2>>$LOGFILE

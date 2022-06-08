@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.5.1",
+  "version": "3.5.2",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -54,6 +54,7 @@
 		"home/.local/etc/i-Haklab/Tools/Readme/blackbox": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/blackbox",
 		"home/.local/etc/i-Haklab/Tools/Readme/botgram": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/botgram",
 		"home/.local/etc/i-Haklab/Tools/Readme/burpsuite": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/burpsuite",
+		"home/.local/etc/i-Haklab/Tools/Readme/clamav": "/data/data/com.termux/files/home/.local/etc/i-Haklab/     Tools/Readme/clamav",
 		"home/.local/etc/i-Haklab/Tools/Readme/code-server": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/code-server",
 		"home/.local/etc/i-Haklab/Tools/Readme/credmap": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/credmap",
 		"home/.local/etc/i-Haklab/Tools/Readme/crunch": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/crunch",
@@ -107,6 +108,7 @@
 		"home/.local/etc/i-Haklab/Tools/Readme/theblackhack": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/theblackhack",
 		"home/.local/etc/i-Haklab/Tools/Readme/theharvester": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/theharvester",
 		"home/.local/etc/i-Haklab/Tools/Readme/translate": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/translate",
+		"home/.local/etc/i-Haklab/Tools/Readme/twifo-cli": "/data/data/com.termux/files/home/.local/etc/i-Haklab/     Tools/Readme/twifo-cli",
 		"home/.local/etc/i-Haklab/Tools/Readme/userrecon": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/userrecon",
 		"home/.local/etc/i-Haklab/Tools/Readme/virustotal": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/virustotal",
 		"home/.local/etc/i-Haklab/Tools/Readme/vulns": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/vulns",

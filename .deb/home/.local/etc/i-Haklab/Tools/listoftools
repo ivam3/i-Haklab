@@ -14,6 +14,7 @@ blackbox
 botgram
 burpsuite
 cewl
+clamav
 cloudbunny
 code-server
 converter
@@ -37,7 +38,7 @@ ghost
 gobuster
 gophish
 h8mail
-hakku
+hakku-framework
 hasher
 hashid
 hatcloud
@@ -91,6 +92,7 @@ tmux
 torvpn
 translate-shell
 trape
+twifo-cli
 userrecon
 virustotal-cli
 vulnx

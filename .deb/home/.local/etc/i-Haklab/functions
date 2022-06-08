@@ -48,22 +48,6 @@ running(){
 }
 export -f running
 
-APTupdate(){
-	for count in {1..4};do
-		if [[ $(apt update|grep "All packages are up to date.") ]] &>/dev/null 2>>$LOGFILE
-		then
-			echo "All packages are up to date."
-			break
-		elif [[ $count -eq 3 ]]; then
-			printf "$R\n(_➤) APT ERROR$W |$Y try run command fixer$W\n"
-			break
-    else
-			yes|apt upgrade &>/dev/null 2>>$LOGFILE
-		fi
-	done
-}
-export -f APTupdate
-
 STDERROOT(){ printf "$R\n(_➤)$W Rooted device required";exit;}
 export -f STDERROOT
 
@@ -216,6 +200,7 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰LOCALHOST───────────────────────➤ Show the current internet protocol over LAN
 ╰lock────────────────────────────➤ Block Termux's screen
 ╰osrframework────────────────────➤ OSINT setoolkit
+╰mypip───────────────────────────➤ Show your public internet protocol
 ╰omf─theme───────────────────────➤ Change Oh-my-fish theme
 ╰postgresql──────────────────────➤ Star stop or restart postgres data base
 ╰proxy───────────────────────────➤ Execute cli commands over tor proxychains
