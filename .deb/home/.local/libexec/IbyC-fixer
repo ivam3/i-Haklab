@@ -10,15 +10,37 @@ IFS=$'\n\t'
 iHDB="https://raw.githubusercontent.com/ivam3/i-Haklab/master/.deb/home"
 [[ -d $HOME/.local/bin ]] && binPATH="$HOME/.local/bin" || binPATH="$PREFIX/bin"
 G=`echo -en "\e[32m"`
-R='\033[1;31m'
-Y='\033[1;33m'
-B='\033[1;34m'
-M='\033[1;35m'
-C='\033[1;36m'
-W='\033[0m'
+R='\e[31m'
+Y='\e[33m'
+B='\e[34m'
+M='\e[35m'
+C='\e[36m'
+W='\e[0m'
 
 #:: BANNERS ::#
 Chao-chao(){ printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n";}
+
+running(){
+	[[ $1 = "time" ]] && {
+		sleep $2 &
+		n=$(echo $!);
+  }
+  [[ $1 = "ps" ]] && {
+		n=$2;
+  }
+  pid=$n
+  spinner=( '█■■■■' '■█■■■' '■■█■■' '■■■█■' '■■■■█' )
+  while [ "$(ps a|awk '{print $1}'|grep $pid)" ]
+	do
+		for i in "${spinner[@]}"
+		do
+			tput civis
+			printf  "$G\r(➤_) Running\t$i\b\b\b\b\b\b\b\b";
+    done
+  done
+  tput cnorm
+  printf "\t$W[$G¡DONE!$W]\n";
+}
 
 Banner(){
 	if [[ ! -e $PREFIX/bin/lolcat ]]
@@ -30,7 +52,7 @@ Banner(){
 }
 
 usage() {
-	printf "$B\n(USAGE)─➤$G IbyC-fixer <[apt|nrauf|metasploit|downgradeRepo|RuGiR]> <option>$W\n\napt\t\t\t\tSearch and fix some errores on APT/PKG with dpkg\nnrauf         dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nmetasploit\t\t\tAlternative metasploit installation\ndowngradeRepo repo=version\tDowngrade apt|pkg reporitory tospecific version\nRuGiR\t\t\t\tFix ruby gems issues\nPyMiR\t\t\t\tFix python module issues\nngrok\t\t\t\tInstall ngrok-server from Abhacker repositories\n\nExamples:\n\tIbyC-fixer RuGiR\n\tIbyC-fixer downgradeRepo ruby=2.7.2\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n\n"
+	printf "$B\n(USAGE)─➤$G IbyC-fixer <[apt|nrauf|localtunnel|metasploit|downgradeRepo|RuGiR]> <option>$W\n\napt\t\t\t\tSearch and fix some errores on APT/PKG with dpkg\nnrauf         dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nlocaltunnel\t\t\tfix error 'Error: Unsupported platform: android'\nmetasploit\t\t\tAlternative metasploit installation\ndowngradeRepo repo=version\tDowngrade apt|pkg reporitory tospecific version\nRuGiR\t\t\t\tFix ruby gems issues\nPyMiR\t\t\t\tFix python module issues\nngrok\t\t\t\tInstall ngrok-server from Abhacker repositories\n\nExamples:\n\tIbyC-fixer RuGiR\n\tIbyC-fixer downgradeRepo ruby=2.7.2\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n\n"
 	exit
 }
 
@@ -41,6 +63,7 @@ case ${arg[0]} in
 		[[ -z ${arg[1]} ]] && StdErr
 		bash <(curl -fsSL "$iHDB/.local/libexec/nrauf") ${arg[2]}
 		;;
+
 	apt)
 		file=$(mktemp)
 		yes|apt update > $file
@@ -52,6 +75,19 @@ case ${arg[0]} in
 		[[ $(grep -oE "is not signed" $file) ]] || [[ $(grep -oE "NO_PUBKEY" $file) ]] && echo "deb https://packages-cf.termux.org/apt/termux-main/ stable main" > $PREFIX/etc/apt/sources.list;rm -rf $PREFIX/etc/apt/sources.list.d/*;dpkg --configure -a
 		rm $file
 		;;
+	localtunnel)
+		[[ $(command -v wget) ]] >/dev/null || {
+			echo -en "$G(➤_)$W Installing dependencies ..."
+			yes|apt install wget >/dev/null 2>/dev/null;
+			ps-$(echo $#);
+			running ps $ps
+		}
+		echo -en "$G(➤_)$W Fixing ..."
+		wget --tries=20 --quiet $iHDB/.local/etc/localtunnel/openurl.js -O ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl/openurl.js
+		ps=$(echo $#)
+		running ps $ps
+		;;
+
 	metasploit)
 		[[ -d $PREFIX/var/lib/postgresql ]] && rm -rf $PREFIX/var/lib/postgresql
 		bash <(curl -fsSL "http://git.io/abhacker-repo") --install ruby=2.7.2 -r apt install metasploit -y
