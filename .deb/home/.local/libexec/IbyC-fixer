@@ -79,12 +79,12 @@ case ${arg[0]} in
 		[[ $(command -v wget) ]] >/dev/null || {
 			echo -en "$G(➤_)$W Installing dependencies ..."
 			yes|apt install wget >/dev/null 2>/dev/null;
-			ps-$(echo $#);
+			ps-$(echo $!);
 			running ps $ps
 		}
 		echo -en "$G(➤_)$W Fixing ..."
 		wget --tries=20 --quiet $iHDB/.local/etc/localtunnel/openurl.js -O ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl/openurl.js
-		ps=$(echo $#)
+		ps=$(echo $!)
 		running ps $ps
 		;;
 
