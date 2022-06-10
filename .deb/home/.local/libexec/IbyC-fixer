@@ -114,6 +114,8 @@ case ${arg[0]} in
       rm -rf $TMPDIR/ngrok-stable-linux-$arch.zip
       printf "#!/bin/bash\n#THIS SCRIPT EXECUTE NGROK TO AVOID 'bad address' ERROR\nexec termux-chroot $HOME/.ngrok2/ngrok \${@:1}\n#     i-Haklab by Ivam3" > $binPATH/ngrok.io
       chmod +x $HOME/.ngrok2/ngrok $binPATH/ngrok.io
+			echo -en $Y"WARNING:$W Now you have 2 ngrok executables 'ngrok' and 'ngrok.io'\n"
+			echo -en "$G[DONE!!]$W\n"
 		else
 			StdErr
 		fi
