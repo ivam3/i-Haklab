@@ -66,6 +66,17 @@ set softwrap
 		CONF
 		;;
 
+	neovim)
+		[[ -d ${HOME}/.config/nvim ]] && {mkdir -p ${HOME}/.config/nvim;}
+    wget --tries=20 --quiet $iHDB/.config/nvim/init.vim -O ${HOME}/.config/nvim/init.vim
+    python -m pip --no-color --quiet --no-cache-dir install neovim
+    nvim +PlugUpdate +x +x
+    ;;
+
+  privoxy)
+    echo "forward-socks5 / 127.0.0.1:9050 ." >> $PREFIX/etc/privoxy/config 
+    ;;
+
 	proxychains-ng)
 		[[ -e ${PREFIX}/etc/proxychains.conf ]] && {
 			rm -rf ${PREFIX}/etc/proxychains.conf;
@@ -75,6 +86,10 @@ set softwrap
 		}
 		ln -s ${HOME}/.local/etc/proxychains.conf ${PREFIX}/etc/proxychains.conf
 		;;
+
+  python)
+    python -m pip --no-color --quiet --no-cache-dir install bpython
+    ;;
 
 	tigervnc)
 		[[ -d ${HOME}/.vnc ]] || {

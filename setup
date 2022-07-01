@@ -6,6 +6,7 @@ command -v wget >/dev/null || {
 	echo -en "Installing dependencies ...  "
 	yes|apt install wget &>/dev/null &
 	echo -en "Done\b"
+}
 [[ -d ${PREFIX}/etc/apt/sources.list.d ]] || {
 	mkdir -p ${PREFIX}/etc/apt/sources.list.d;
 }
