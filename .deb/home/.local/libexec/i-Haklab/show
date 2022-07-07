@@ -22,7 +22,7 @@ then
 					select PLATFORM in YouTube Telegram Exit;do
 						case $PLATFORM in
 							YouTube)
-								TUTO=$(cat $iHETC/listoftutorials|grep $ANSW|awk '{print $2}')
+								TUTO=$(cat $iHETC/listoftutorials|grep $ANSW|awk '{print $2}'|head -n 1)
 								if [ $TUTO = "false" ] || [ -z $TUTO ];then
 									ERR;exit
 								else
@@ -30,7 +30,7 @@ then
 								fi
 								;;
 							Telegram)
-								TUTO=$(cat $iHETC/listoftutorials|grep $ANSW|awk '{print $1}')
+								TUTO=$(cat $iHETC/listoftutorials|grep $ANSW|awk '{print $1}'|head -n 1)
 								if [ $TUTO = "false" ] || [ -z $TUTO ];then
 									ERR;exit
 								else
@@ -45,8 +45,8 @@ then
 					;;
 				Download)
 					chk-pkg youtubedr youtubedr
-					TUTO=$(cat $iHETC/listoftutorials|grep $ANSW|awk '{print $2}')
-					if [ $TUTO = 'false' ] || [ -z $TUTO ];then
+					TUTO=$(cat $iHETC/listoftutorials|grep $ANSW|awk '{print $2}'|head -n 1)
+					if [[ $TUTO = 'false' ]] || [[ -z $TUTO ]];then
 						printf "$R\n(_➤)$W Tutorial is not available to be download\n";exit
 					else
 						youtubedr download $TUTO
