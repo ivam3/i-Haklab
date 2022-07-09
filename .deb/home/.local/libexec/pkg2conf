@@ -65,7 +65,7 @@ set softwrap
 		;;
 
 	neovim)
-		[[ -d ${HOME}/.config/nvim ]] && {mkdir -p ${HOME}/.config/nvim;}
+		[[ -d ${HOME}/.config/nvim ]] && { mkdir -p ${HOME}/.config/nvim;}
     wget --tries=20 --quiet $iHDB/.config/nvim/init.vim -O ${HOME}/.config/nvim/init.vim
     python -m pip --no-color --quiet --no-cache-dir install neovim
     nvim +PlugUpdate +x +x
