@@ -34,7 +34,7 @@ Banner(){
 }
 
 usage() {
-	printf "$B\n(USAGE)─➤$G PyMiR -t <[B|BASIC] [BL|BLAS] [L|LDFLAGS] [R|RUST] [S|SODIUM]>\n\t\t-p <[2|3]> -m <[name of modules]>$W\n\nOPTIONS :\n-t\tDetermines the type of installation, those could be :\n\t[B|BASIC]\tfor a basic type\n\t[BL|BLASS]\tswitching gcc compiler\n\t[L|LDFLAGS]\tforce installation to use libraries and system compiler\n\t[R|RUST]\tit use a rust compiler specifying Android as target platform\n\t[S|SODIUM]\tforce the installation to use the sodium decryptor\n-p\tDetermines the python version, those could be\n\t[3] for python3\n\t[2] for python2\n-m Specify the module(s) to install.\n\nExamples:\n\tPyMiR -t BASIC -p 3 -m future\n\tIbyC-fixer PyMiR -t S -p 2 -m colorama requests\n";exit
+	printf "$B\n(USAGE)─➤$G PyMiR -t <[B|BASIC] [BL|BLAS] [L|LDFLAGS] [R|RUST] [S|SODIUM]>\n\t\t-p <[2|3]> -m <[name of modules]>$W\n\nOPTIONS :\n-t\tDetermines the type of installation, those could be :\n\t[B|BASIC]\tfor a basic type\n\t[BL|BLASS]\tswitching gcc compiler\n\t[L|LDFLAGS]\tforce installation to use libraries and system compiler\n\t[R|RUST]\tit use a rust compiler specifying Android as target platform\n\t[S|SODIUM]\tforce the installation to use the sodium decryptor\n-p\tDetermines the python version, those could be\n\t[3] for python3\n\t[2] for python2\n-m Specify the module(s) to install.\n\nExamples:\n\tfixer PyMiR -t BASIC -p 3 -m future\n\tfixer PyMiR -t S -p 2 -m colorama requests\n";exit
 }
 
 #::::: REQUERIMENTS :::::#
