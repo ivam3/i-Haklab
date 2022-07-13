@@ -51,10 +51,11 @@ Requirements(){
 }
 
 clear;Banner|lolcat
-[[ $# -eq 0 ]] && usage
+[[ $# -lt 2 ]] && usage
 while getopts ":p:t:m:h" arg; do
 	case ${arg} in
 		p)
+      echo "p:$OPTARG"
 			if [[ $OPTARG -eq 2 ]]
 			then 
 				py=python2
@@ -66,13 +67,16 @@ while getopts ":p:t:m:h" arg; do
 			fi
 			;;
 		t) instaType=$OPTARG;;
-		m) echo $OPTARG > ${TMPDIR}/requirements.tmp;;
+		m)
+      [[ -z $OPTARG ]] && usage
+      echo $OPTARG > ${TMPDIR}/requirements.tmp
+      ;;
 		h) usage;;
 		*) StdErr;;
 	esac
 done
 
-[[ $# -lt 6 ]] && StdErr
+[[ $# -lt 6 ]] && usage
 Requirements
 for module in $(cat ${TMPDIR}/requirements.tmp);do
 	printf "$G(_➤)$W Installing module $module...\n"
