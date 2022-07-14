@@ -142,6 +142,12 @@ for module in $(cat ${TMPDIR}/requirements.tmp);do
 			esac
 			;;
 	esac
+  if $py -m pip list|grep -oE "^${module} "; then
+    printf "$G(_➤)$W Module $module installed successfully\n"
+  else
+    printf "$R(_➤)$W Module $module failed to install\n"
+    exit 1
+  fi
 done
 
 #                                               @Ivam3
