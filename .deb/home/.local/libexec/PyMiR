@@ -21,7 +21,16 @@ W='\033[0m'
 StdErr(){ printf "$R(_➤)$W missing argument, type PyMiR -h for help\n";exit;}
 
 #:: BANNER ::#
-Chao-chao(){ printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n";}
+Chao-chao(){
+  if $py -m pip list|grep -oE "^${module} " >/dev/null;then
+    printf "$G(_➤)$W Module $module installed successfully\n"
+    r="DONE"
+  else
+    printf "$R(_➤)$W Module $module failed to install\n"
+    r="FAIL"
+  fi
+  printf "$Y\n[!]-> ::::::::::::::: $r !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n";
+}
 
 Banner(){
 	if [[ ! -e $PREFIX/bin/lolcat ]]
@@ -55,7 +64,6 @@ clear;Banner|lolcat
 while getopts ":p:t:m:h" arg; do
 	case ${arg} in
 		p)
-      echo "p:$OPTARG"
 			if [[ $OPTARG -eq 2 ]]
 			then 
 				py=python2
@@ -112,7 +120,7 @@ for module in $(cat ${TMPDIR}/requirements.tmp);do
 		*)
 			case ${instaType} in
 				B|BASIC|Basic|basic)
-					$py -m pip --no-color --quiet --no-cache-dir install ${TMPDIR}/requirements.tmp 2>/dev/null
+					$py -m pip --no-color --quiet --no-cache-dir install -r ${TMPDIR}/requirements.tmp 2>/dev/null
 					Chao-chao
 					;;
 				BL|BLAS|Blas|blas)
@@ -120,34 +128,28 @@ for module in $(cat ${TMPDIR}/requirements.tmp);do
 					export LAPACK=$PREFIX/lib/liblapack.so
 					export CC=clang
 					export CPP=clang++
-					$py -m pip --no-color --quiet --no-cache-dir install ${TMPDIR}/requirements.tmp 2>/dev/null
+					$py -m pip --no-color --quiet --no-cache-dir install -r ${TMPDIR}/requirements.tmp 2>/dev/null
+          Chao-chao
 					;;
 				L|LDFLAGS|ldflags)
 					export LDFLAGS="-L/system/lib/ -lm -lcompiler_rt"
-					$py -m pip --no-color --quiet --no-cache-dir install ${TMPDIR}/requirements.tmp --global-option="build_ext" --global-option="--disable-jpeg" 2>/dev/null
+					$py -m pip --no-color --quiet --no-cache-dir install -r ${TMPDIR}/requirements.tmp --global-option="build_ext" --global-option="--disable-jpeg" 2>/dev/null
 					Chao-chao
 					;;
 				S|SODIOUM|Sodioum|sodioum)
 					export SODIUM_INSTALL=system
-					$py -m pip --no-color --quiet --no-cache-dir install --no-binary :all: ${TMPDIR}/requirements.tmp 2>/dev/null
+					$py -m pip --no-color --quiet --no-cache-dir install --no-binary :all: -r ${TMPDIR}/requirements.tmp 2>/dev/null
 					Chao-chao
 					;;
 				R|RUST|Rust|rust)
 					yes|apt install rust >/dev/null 2>/dev/null
 					export CARGO_BUILD_TARGET=$(rustc --version --verbose|sed -n 's|host: ||p')
-					$py -m pip --no-color --quiet --no-cache-dir install ${TMPDIR}/requirements.tmp 2>/dev/null
+					$py -m pip --no-color --quiet --no-cache-dir install -r ${TMPDIR}/requirements.tmp 2>/dev/null
 					yes|apt remove rust >/dev/null 2>/dev/null
 					Chao-chao
 					;;
 			esac
 			;;
 	esac
-  if $py -m pip list|grep -oE "^${module} "; then
-    printf "$G(_➤)$W Module $module installed successfully\n"
-  else
-    printf "$R(_➤)$W Module $module failed to install\n"
-    exit 1
-  fi
 done
-
 #                                               @Ivam3
