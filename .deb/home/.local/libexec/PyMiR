@@ -68,7 +68,7 @@ while getopts ":p:t:m:h" arg; do
 			;;
 		t) instaType=$OPTARG;;
 		m)
-      [[ -z $OPTARG ]] && usage
+      [[ -z $OPTARG ]] && { printf "$R(_➤)$W No module(s) given";exit 1;}
       echo $OPTARG > ${TMPDIR}/requirements.tmp
       ;;
 		h) usage;;
