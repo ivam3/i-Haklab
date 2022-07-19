@@ -50,7 +50,8 @@ ln -s ${HOME}/.local/etc/fish/config.fish ${PREFIX}/etc/fish/config.fish
 [[ $(grep 'fish' -oE ${PREFIX}/etc/bash.bashrc) ]] || {
 	sed -i '12a chsh -s fish' ${PREFIX}/etc/bash.bashrc;
 }
-cat <<- CONF > ${HOME}/.bashrc
+[[ -e ${HOME}/.bashrc ]] || { touch ${HOME}/.bashrc;}
+cat <<- CONF >> ${HOME}/.bashrc
 export PATH=${PREFIX}/bin:${HOME}/.local/bin
 export LD_LIBRARY_PATH=${PREFIX}/lib:${HOME}/.local/lib
 echo -en "\e[33mWARNING:\e[0m You are out of i-Haklab | Some commands and tools could not be running.\n"
