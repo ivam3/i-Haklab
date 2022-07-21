@@ -164,7 +164,7 @@ for module in $(cat ${TMPDIR}/requirements.tmp);do
 			esac
 			;;
 	esac
-  [[ -e ${TMPDIR}/requirements.tmp) ]] && { rm -rf ${TMPDIR}/requirements.tmp;}
+  [[ -e ${TMPDIR}/requirements.tmp ]] && { rm -rf ${TMPDIR}/requirements.tmp;}
   Chao-chao
 done
 
