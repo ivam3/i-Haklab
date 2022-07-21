@@ -17,11 +17,20 @@ C='\033[1;36m'
 W='\033[0m'
 
 #:: TRAPS ::#
-[[ ! $(id -u) -ne 0 ]] && { printf >&2 "$R\n(_➤) You need to be a common user$W\n";exit;}
-StdErr(){ printf "$R(_➤)$W missing argument, type PyMiR -h for help\n";exit;}
+[[ ! $(id -u) -ne 0 ]] && { printf >&2 "$R\n(➤_) You need to be a common user$W\n";exit;}
+StdErr(){ printf "$R\n(➤{)$W missing argument, type PyMiR -h for help\n";exit;}
 
 #:: BANNER ::#
-Chao-chao(){ printf "$Y\n[!]-> ::::::::::::::: DONE !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n";}
+Chao-chao(){ 
+  if $py -m pip list|grep -oE "^${module} " >/dev/null;then
+    printf "$G(➤_)$W Module $module installed successfully\n"
+    r="DONE"
+  else
+    printf "$R(➤_)$W Module $module failed to install\n"
+    r="FAIL"
+  fi
+  printf "$Y\n[!]-> ::::::::::::::: $r !! :::::::::::::::: <-[!]$G\n\tTo fix issues going to$B t.me/Ivam3_Bot$W\n";
+}
 
 Banner(){
 	if [[ ! -e $PREFIX/bin/lolcat ]]
@@ -34,18 +43,21 @@ Banner(){
 }
 
 usage() {
-	printf "$B\n(USAGE)─➤$G PyMiR -t <[B|BASIC] [BL|BLAS] [L|LDFLAGS] [R|RUST] [S|SODIUM]>\n\t\t-p <[2|3]> -m <[name of modules]>$W\n\nOPTIONS :\n-t\tDetermines the type of installation, those could be :\n\t[B|BASIC]\tfor a basic type\n\t[BL|BLASS]\tswitching gcc compiler\n\t[L|LDFLAGS]\tforce installation to use libraries and system compiler\n\t[R|RUST]\tit use a rust compiler specifying Android as target platform\n\t[S|SODIUM]\tforce the installation to use the sodium decryptor\n-p\tDetermines the python version, those could be\n\t[3] for python3\n\t[2] for python2\n-m Specify the module(s) to install.\n\nExamples:\n\tPyMiR -t BASIC -p 3 -m future\n\tIbyC-fixer PyMiR -t S -p 2 -m colorama requests\n";exit
+	printf "$B\n(USAGE)─➤$G PyMiR -t <[B|BASIC] [BL|BLAS] [L|LDFLAGS] [R|RUST] [SC|SOURCE-CODE] [S|SODIUM]>\n\t\t-p <[2|3]> -m <[name of modules]>$W\n\nOPTIONS :\n-t\tDetermines the type of installation, those could be :\n\t[B|BASIC]\tfor a basic type\n\t[BL|BLASS]\tswitching gcc compiler\n\t[L|LDFLAGS]\tforce installation to use libraries and system compiler\n\t[R|RUST]\tit use a rust compiler specifying Android as target platform\n\t[SC|SOURCE-CODE]\tInstall module using an official source code from pipi.org\n\t[S|SODIUM]\tforce the installation to use the sodium decryptor\n-p\tDetermines the python version, those could be\n\t[3] for python3\n\t[2] for python2\n-m Specify the module(s) to install.\n\nExamples:\n\tPyMiR -t BASIC -p 3 -m future\n\tfixer PyMiR -t S -p 2 -m colorama requests\n";exit
 }
 
 #::::: REQUERIMENTS :::::#
 Requirements(){
-	printf "$G(_➤)$W Installing requirements (It could take a while)...\n"
-	for req in build-essential python python2 curl tar wget ruby clang make nodejs pkg-config openblas libgmp libmpc libmpc-static libmpfr libtool libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static libjpeg-turbo libpng libzmq; do
+	printf "$G\n(➤_)$W Installing requirements (It could take a while)...\n"
+	for req in build-essential python python2 curl tar wget ruby clang make nodejs pkg-config \
+    openblas libgmp libmpc libmpc-static libmpfr libtool libxml2 libxml2-static libxml2-utils \
+    libxslt libxslt-static libsodium libsodium-static libjpeg-turbo libpng libzmq
+  do
 		if [[ ! $(pkg list-installed 2>/dev/null|grep $req|awk -F "/" '{print $1}') ]]; then
 			yes|apt install $req >/dev/null 2>/dev/null
 		fi
 	done
-	printf "$G(_➤)$W Upgrading pip ...\n"
+	printf "$G(➤_)$W Upgrading pip ...\n"
 	$py -m pip --no-color --quiet --no-cache-dir install --upgrade pip 2>/dev/null
 	$py -m pip --no-color --quiet --no-cache-dir install wheel 2>/dev/null
 }
@@ -54,29 +66,19 @@ clear;Banner|lolcat
 [[ $# -eq 0 ]] && usage
 while getopts ":p:t:m:h" arg; do
 	case ${arg} in
-		p)
-			if [[ $OPTARG -eq 2 ]]
-			then 
-				py=python2
-			elif [[ $OPTARG -eq 3 ]]
-			then
-				py=python3
-			else
-				StdErr
-			fi
-			;;
-		t) instaType=$OPTARG;;
-		m) echo $OPTARG > ${TMPDIR}/requirements.tmp;;
+		p) [[ $OPTARG -eq 2 ]] && { py=python2;} || [[ $OPTARG -eq 3 ]] && { py=python;} || { StdErr;} ;;
+		t) [[ -z $OPTARG ]] && { StdErr;} || { instaType=$OPTARG;} ;;
+		m) [[ -z $OPTARG ]] && { StdErr;} || { echo $OPTARG > ${TMPDIR}/requirements.tmp;} ;;
 		h) usage;;
 		*) StdErr;;
 	esac
 done
 
-[[ $# -lt 6 ]] && StdErr
+[[ $# -lt 6 ]] && { StdErr;}
 Requirements
 for module in $(cat ${TMPDIR}/requirements.tmp);do
-	printf "$G(_➤)$W Installing module $module...\n"
-	case ${module} in
+	printf "$G(➤_)$W Installing module $module...\n"
+  case ${module} in
 		turtle)
 			dir=$(mktemp -d)
 			wget -q --tries=20 $iHDB/fix-tools/py_modules/turtle-0.0.2.tar.gz -O $dir/turtle-0.0.2.tar.gz
@@ -97,47 +99,73 @@ for module in $(cat ${TMPDIR}/requirements.tmp);do
 			fi
 			rm -rf $dir
 			;;
-		electrum|opencv-python|asciinema|matplotlib|python-tkinter|numpy|scipy)
-			if [[ $OPTARG = numpy ]] || [[ $OPTARG = scipy ]]
-			then
-				bash <(curl -fsSL "https://its-pointless.github.io/setup-pointless-repo.sh")
-			fi
-			printf "$G(_➤)$W Installing modules (It could take a while)...\n"
-			apt install $OPTARG >/dev/null 2>/dev/null
+    electrum|opencv|asciinema|matplotlib|kinter|scipy)
+      [[ $module == opencv ]] && { modele=opencv-python;}
+      [[ $module == tkinter ]] && { modele=python-tkinter;}
+			[[ $module == scipy ]] && {
+        bash <(curl -fsSL "https://its-pointless.github.io/setup-pointless-repo.sh")
+        [[ $py == "python2" ]] && { module=python2-scipy;};
+      }
+			printf "$G(➤_)$W Installing modules (It could take a while)...\n"
+			pkg install $module >/dev/null 2>/dev/null
 			;;
 		*)
 			case ${instaType} in
 				B|BASIC|Basic|basic)
-					$py -m pip --no-color --quiet --no-cache-dir install ${TMPDIR}/requirements.tmp 2>/dev/null
-					Chao-chao
+          [[ $module == cryptography ]] && {
+            yes|apt install rust >/dev/null 2>/dev/null
+            export CARGO_BUILD_TARGET=$(rustc --version --verbose|sed -n 's|host: ||p')
+          }
+          [[ $module == numpy ]] && { MATHLIB=m;}
+          [[ $module == pandas ]] && { export CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code";}
+					[[ $module == pillow ]] && {
+            if $(uname -m|grep -q 64); then
+              export LDFLAGS="-L/system/lib64"
+            fi
+          }
+          [[ $module == pyzmq ]] && {
+            $py -m pip --no-color --quiet --no-cache-dir install pyzmq \
+              install-option="--libzmq=/data/data/com.termux/files/usr/lib/libzmq.so" 2>/dev/null
+          } || {
+            $py -m pip --no-color --quiet --no-cache-dir install $module 2>/dev/null
+            [[ $(command -v rust) ]] >/dev/null && { yes|apt remove rust >/dev/null 2>/dev/null;}
+          }
 					;;
 				BL|BLAS|Blas|blas)
 					export BLAS=$PREFIX/lib/libblas.so
 					export LAPACK=$PREFIX/lib/liblapack.so
 					export CC=clang
 					export CPP=clang++
-					$py -m pip --no-color --quiet --no-cache-dir install ${TMPDIR}/requirements.tmp 2>/dev/null
+					$py -m pip --no-color --quiet --no-cache-dir install $module 2>/dev/null
 					;;
 				L|LDFLAGS|ldflags)
 					export LDFLAGS="-L/system/lib/ -lm -lcompiler_rt"
-					$py -m pip --no-color --quiet --no-cache-dir install ${TMPDIR}/requirements.tmp --global-option="build_ext" --global-option="--disable-jpeg" 2>/dev/null
-					Chao-chao
+					$py -m pip --no-color --quiet --no-cache-dir install $module --global-option="build_ext" --global-option="--disable-jpeg" 2>/dev/null
 					;;
+        SC|SOURCE-CODE|source-code)
+          cd $TMPDIR
+          $py -m pip --no-color --quiet --no-cache-dir download $module 2>/dev/null
+          unzip $module.zip 2>/dev/null
+          cd $module
+          find . -type f -not -path '*/\.*' -exec termux-fix-shebang "{}" \; 2>/dev/null
+          $py setup.py install >/dev/null 2>/dev/null
+          rm -rf $TMPDIR/$module*;cd
+          ;;
 				S|SODIOUM|Sodioum|sodioum)
 					export SODIUM_INSTALL=system
-					$py -m pip --no-color --quiet --no-cache-dir install --no-binary :all: ${TMPDIR}/requirements.tmp 2>/dev/null
-					Chao-chao
+					$py -m pip --no-color --quiet --no-cache-dir install --no-binary :all: $module 2>/dev/null
 					;;
 				R|RUST|Rust|rust)
 					yes|apt install rust >/dev/null 2>/dev/null
 					export CARGO_BUILD_TARGET=$(rustc --version --verbose|sed -n 's|host: ||p')
-					$py -m pip --no-color --quiet --no-cache-dir install ${TMPDIR}/requirements.tmp 2>/dev/null
+					$py -m pip --no-color --quiet --no-cache-dir install $module 2>/dev/null
 					yes|apt remove rust >/dev/null 2>/dev/null
-					Chao-chao
 					;;
 			esac
 			;;
 	esac
+  [[ -e ${TMPDIR}/requirements.tmp) ]] && { rm -rf ${TMPDIR}/requirements.tmp;}
+  Chao-chao
 done
 
 #                                               @Ivam3
