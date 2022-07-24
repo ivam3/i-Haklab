@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+
+rm ~/Ivam3/repositories/termux-packages/i-haklab_*_all.deb
+cd ~/Ivam3/repositories/i-Haklab/.deb/
+git add --all
+git commit -m "update at v3.5.5"
+cat ~/Ivam3/repositories/.token|termux-clipboard-set
+git push
+termux-create-package manifiest.json
+mv *.deb ~/Ivam3/repositories/termux-packages/
+cd ~/Ivam3/repositories/termux-packages/
+bash updebs.sh
+git add --all
+git commit -m "update i-Haklab at v3.5.5"
+cat ~/Ivam3/repositories/.token|termux-clipboard-set
+git push
+
