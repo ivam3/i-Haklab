@@ -22,7 +22,7 @@ echo "Installing required python modules (It could take a while) ...";$z
 for v in python python2 ; do
 	$v -m pip --no-color --quiet --no-cache-dir install --upgrade pip 2>>$LOGFILE
 done
-for module in trufflehog wheel speedtest-cli frida shodan;do
+for module in trufflehog wheel speedtest-cli frida shodan jedi pipenv;do
 	[[ $module = shodan ]] && { python -m pip --no-color --quiet --no-cache-dir install -U --user shodan;break;}
 	python -m pip --no-color --quiet --no-cache-dir install $module 2>>$LOGFILE
 done
@@ -90,7 +90,15 @@ fi
 
 echo "Updating mlocate data base ..."
 updatedb
-vim +PlugUpdate +x +x
+
+echo "Setting vim text editor ..."
+pyPATH=$(python -m pip show jedi|grep "Location"|awk -F ":" '{print $NF}')
+cat <<- CONF > ${HOME}/.vim/coc-settings.json
+{
+  "python.jediPath": "$pyPATH"
+}
+CONF 
+vim +PluginInstall +PlugUpdate +x +x +x
 cd;tput init
 exit 0
 ####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####
