@@ -45,6 +45,7 @@ Plug 'camspiers/lens.vim' "Redimensiona el tamaño de la ventana de vim
 Plug 'tpope/vim-fugitive' "Gestión de archivos en vim
 Plug 'tpope/vim-repeat' "Repetir última acción
 Plug 'tpope/vim-surround' "Contorno de texto
+Plug 'neoclide/coc.vim', {'branch': 'release'} "Conquer Of Completion
 call plug#end()
 
 colorscheme gruvbox
@@ -57,5 +58,6 @@ nmap <Leader>s <Plug>(easymotion-s2)
 nmap <C-s> :NERDTreeFind<CR>
 nmap <C-P> :Telescope git_files hidden=true <CR>
 nmap <C-T> :Telescope live_grep <CR>
+nmap <C-t> :split term://fish<cr>
 :let g:NERDTreeWinSize=40
 nmap <C-w> :NERDTreeToggle<cr>

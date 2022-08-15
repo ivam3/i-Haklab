@@ -85,7 +85,7 @@ export PATH=$HOME/.local/bin:/data/data/com.termux/files/usr/bin:/data/data/com.
 HOME=/data/data/com.termux/files/home
 fish
 #          i-Haklab by @Ivam3
-	CONF
+CONF
 fi
 
 echo "Updating mlocate data base ..."
