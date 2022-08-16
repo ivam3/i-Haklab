@@ -93,11 +93,11 @@ updatedb
 
 echo "Setting vim text editor ..."
 pyPATH=$(python -m pip show jedi|grep "Location"|awk -F ":" '{print $NF}')
-cat <<- CONF > ${HOME}/.vim/coc-settings.json
+cat <<- EOF > ${HOME}/.vim/coc-settings.json
 {
   "python.jediPath": "$pyPATH"
 }
-CONF 
+EOF
 vim +PluginInstall +PlugUpdate +x +x +x
 cd;tput init
 exit 0
