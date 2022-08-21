@@ -40,7 +40,7 @@ running(){
   while [ "$(ps a|awk '{print $1}'|grep $pid)" ]; do
 		for i in "${spinner[@]}";do
 			tput civis
-			printf  "$G\r(_➤) Searching\t$i\b\b\b\b\b\b\b\b";
+			printf  "$G\rSearching\t$i\b\b\b\b\b\b\b\b";
     done
   done
   tput cnorm
