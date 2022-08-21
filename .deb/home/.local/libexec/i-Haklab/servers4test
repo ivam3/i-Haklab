@@ -14,18 +14,22 @@ chk-pkg mariadb mariadb
 [[ -e ${PREFIX}/var/run/*.pid ]] && {
 	rm -rf ${PREFIX}/var/run/*.pid;
 }
-mysqld &>/dev/null &
+mysqld >/dev/null 2>/dev/null &
 pid=$(echo $!)
 while [ "$(ps a|awk '{print $1}'|grep $pid)" ]
 do
-	[[ $(mysql -u $(whoami) -e "use mysql;SELECT user FROM user;"|grep "root") = root ]] || {
-		mysql -u $(whoami) -e "use mysql;set password for 'root'@'localhost' = password('root');flush privileges;";
-			mysqld_safe;
+	dbuser=$(mysql -u $(whoami) -e "use mysql;SELECT user FROM user;"|grep "root") >/dev/null 2>/dev/null
+  [[ $dbuser == root ]] || { 
+    mysql -u $(whoami) -e "use mysql;set password for 'root'@'localhost' = password('root');flush privileges;" >/dev/null 2>/dev/null;
+    mysqld_safe >/dev/null 2>/dev/null &
+    safepid=$(echo $!)
+    running ps $safepid
 	}
 
 	select answ in bWAPP DVWA mutillidae Exit
 	do
 		[[ $answ = Exit ]] && {
+      kill -TERM $pid
 			exit 0;
 		}
 		[[ $answ = DVWA ]] && {
@@ -34,24 +38,23 @@ do
 			db=$answ;
 		}
 		[[ -d ${HOME}/.local/var/service/www/servers4test/$answ ]] && {
-			if [[ $(mysql -u root -proot -e "show DATABASES;"|grep $db) != $db ]]
+			if [[ $(mysql -u root -proot -e "show DATABASES;"|grep $db) != $db ]] >/dev/null 2>/dev/null
 			then
-				mysql -u root -proot -e "create DATABASE $db;"
+				mysql -u root -proot -e "create DATABASE $db >/dev/null 2>/dev/null;"
 			fi
 			getPORT;
 			banner
 			echo -en $B"(➤_)$W Web server $B$answ$W activated over:$Y http://$LOOPBACK:$LPORT$B\n  ╰──➤$W press enter to$R stop$W it.\n"
 			php -S $LOOPBACK:$LPORT -t ${HOME}/.local/var/service/www/servers4test/$answ 2>>$LOGFILE &
-			termux-open-url http://$LOOPBACK:$LPORT;
+			PHPpid=$(echo $!)
+      termux-open-url http://$LOOPBACK:$LPORT;
 			read enter;
-			killall php mysqld 2>>$LOGFILE;
-			disown $pid 2>>$LOGFILE;
-			break;
+      kill -TERM $PHPpid;
+      break;
 		} || {
-			killall mysqld 2>>$LOGFILE;
 			STDERR broken;
 		}
-	done
-	killall mysqld 2>>$LOGFILE
-	break
+  done
+  break
 done
+kill -TERM $pid >/dev/null 2>>$LOGFILE
