@@ -16,9 +16,10 @@ chk-pkg mariadb mariadb
 }
 mysqld >/dev/null 2>/dev/null &
 pid=$(echo $!)
+sleep 3
 while [ "$(ps a|awk '{print $1}'|grep $pid)" ]
 do
-	dbuser=$(mysql -u $(whoami) -e "use mysql;SELECT user FROM user;"|grep "root") >/dev/null 2>/dev/null
+  dbuser=$(mysql -u $(whoami) -e "use mysql;SELECT user FROM user;"|grep "root")
   [[ $dbuser == root ]] || { 
     mysql -u $(whoami) -e "use mysql;set password for 'root'@'localhost' = password('root');flush privileges;" >/dev/null 2>/dev/null;
     mysqld_safe >/dev/null 2>/dev/null &

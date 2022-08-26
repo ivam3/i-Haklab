@@ -28,9 +28,9 @@ do
 	case $options in
 		h) usage;exit ;;
 		p) LPORT=$OPTARG
-			[[ $LPORT != ?(-)+([:digit:]) ]] 2>/dev/null && {
-				STDERR;
-			}
+			[ $LPORT -eq $LPORT 2>/dev/null ] || {
+        STDERR;
+      }
 			;;
 		s) subdomain=$OPTARG ;;
 	esac

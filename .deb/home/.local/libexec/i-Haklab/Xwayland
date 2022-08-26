@@ -5,13 +5,14 @@ trap ctrl_c 2
 source ${HOME}/.local/etc/i-Haklab/variables
 source $iHETC/functions
 
+chk-pkg x11-repo x11-repo
 chk-pkg Xwayland xwayland
-chk-pkg termux-x11 termux-x11
 chk-pkg pulseaudio pulseaudio
-
+ 
 export XDG_RUNTIME_DIR=${TMPDIR}
 pulseaudio --start --exit-idle-time=-1 2>/dev/null
 pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1
+am start -n com.termux.x11/com.termux.x11.MainActivity;sleep 3
 termux-x11 :0 >/dev/null &
 sleep 3
 env DISPLAY=:0 xfce4-session

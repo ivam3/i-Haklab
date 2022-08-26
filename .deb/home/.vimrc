@@ -46,6 +46,7 @@ Plug 'tpope/vim-fugitive' "Gestión de archivos en vim
 Plug 'tpope/vim-repeat' "Repetir última acción
 Plug 'tpope/vim-surround' "Contorno de texto
 Plug 'neoclide/coc.vim', {'branch': 'release'} "Conquer Of Completion
+Plug 'Yggdroot/indentLine' "Mark indent line
 call plug#end()
 
 colorscheme gruvbox
