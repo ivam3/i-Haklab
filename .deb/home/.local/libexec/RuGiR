@@ -24,8 +24,22 @@ ctrl_c(){ printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";
 Banner(){ clear;printf "\n ____         ____ _ ____\n|  _ \ _   _ / ___(_)  _ \ \n| |_) | | | | |  _| | |_) |\n|  _ <| |_| | |_| | |  _ <\n|_| \_|\__,_|\____|_|_| \_|v.2\n#::Ruby Gems Issues Resolved::#\n #::: @Ivam3byCinderella ::::#\n";sleep 1;}
 
 Usage(){
-	printf "$G\n[¿]─>$W Choose an option $G<-[?]\n\n{01}$W$Y[MSFCONSOLE]─➤$W CANNOT LINK EXECUTABLE \"ruby\":$Y\n\t╰────────➤$W library \"/data/da..../bigdecimal.so\" not found$G\n{02}$W$Y[GRPC.GEMSPEC]─➤$W There was an error parcing Gemfile$G\n{03}$W$Y[GEMS]─➤$W Could not find <gem's name> in any of the sources$G\n{04}$Y[BIGDECIMAL]─➤$W Gem bigdecimal architecture compatibility$G\n{05}$Y[BUNDLER]─➤$W You have already activated bundler 2.1.4, but your Gemfile requires bundler 2.2.11$G\n{06}$Y[MSFCONSOLE]─➤$W UNSOPPORTED (OpenSSL::Cipher::CipherError)$G\n{99}$R[EXIT]\n\n$W"
-	while read -p "{ANSW}-> " ANSW && [[ -z $ANSW ]]; do
+	echo -en """$G
+[¿]─>$W Choose an option $G<-[?]
+
+{01}$Y[MSFCONSOLE]─➤$W CANNOT LINK EXECUTABLE \"ruby\":$Y
+          ╰────────➤$W library \"/data/da../bigdecimal.so\" not found$G
+{02}$Y[GRPC.GEMSPEC]─➤$W There was an error parcing Gemfile$G
+{03}$Y[GEMS]─➤$W Could not find <gem's name> in any of the sources$G
+{04}$Y[GEMS]─➤$W <gem's name> was built against libxslt version x.x.x, but has dynamically loaded x.x.x$G
+{05}$Y[BIGDECIMAL]─➤$W Gem bigdecimal architecture compatibility$G
+{06}$Y[BUNDLER]─➤$W You have already activated bundler 2.1.4, but your Gemfile requires bundler 2.2.11$G
+{07}$Y[MSFCONSOLE]─➤$W UNSOPPORTED (OpenSSL::Cipher::CipherError)$G
+{99}$R[EXIT]
+
+$W"
+
+  while read -p "{ANSW}-> " ANSW && [[ -z $ANSW ]]; do
 		continue
 	done
 }
@@ -102,11 +116,36 @@ CONF
 		bundle update $GEM --full-index
 		Result 0
 		;;
-	04|4)
+  04|4)
+    printf "\n$G"
+		while read -p " ╰─(Gems name)─➤ " GEM && [ -z $GEM ];do
+			Result 1
+		done
+    echo -en """$G
+[¿]─>$W $GEM was installed by $G[?]
+  
+{01}$W bundle$G
+{02}$W gem$G\n"""
+		while read -n 2 -p " ╰────────➤ " CLi && [ -z $CLi ];do
+			echo "$G"
+      Result 1
+		done
+    [[ $CLi = "1" ]] || [[ $CLi = "01" ]] && {
+      bundle exec gem pristine $GEM
+      Result 0
+    } || [[ $CLi = "2" ]] || [[ $CLi = "02" ]] && {
+      gem pristine $GEM
+      Result 0
+    } || {
+      printf "$R\n[E!]$W Invalid options ...$W"
+      Result 1;exit
+    }
+    ;;
+	05|5)
 		curl -Ls ${iHDB}/fix-tools/fixbigdecimal|bash
 		Result 0
 		;;
-	05|5)
+	06|6)
 		while read -p "(_>)_Version_to_remove_{ex_2.1.4}─➤ " OLDv && [ -z $OLDv ];do
 			continue
 		done
@@ -119,7 +158,7 @@ CONF
 		fi
 		Result 0
 		;;
-	06|6)
+	07|7)
 		GEMPATH=$PREFIX/lib/ruby/gems/$RUBYv/gems/hrr_rb_ssh-0.4.2/lib/hrr_rb_ssh/transport
 		sed -i '13,15 {s/^/#/}' $GEMPATH/encryption_algorithm/functionable.rb
 		for i in 256 384 521;do

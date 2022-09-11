@@ -3,7 +3,7 @@ set number  " Muestra los números de las líneas
 set relativenumber " Conteo de lineas en base a la posicion del cursor
 set mouse=a  " Permite la integración del mouse (seleccionar texto, mover el cursor)
 set nowrap  " No dividir la línea si es muy larga
-"set cursorlinecol=2  " Resalta la línea actual
+set cursorline  " Resalta la línea actual
 set colorcolumn=120  " Muestra la columna límite a 120 caracteres
 
 " Indentación a 2 espacios
@@ -44,6 +44,7 @@ call plug#end()
 " set hidden
 nnoremap <C-n> :bnext<CR>
 nnoremap <C-p> :bprev<CR>
+
 " admin de archivos con git
 nmap <C-G> :Telescope git_files hidden=true <CR>
 nmap <C-L> :Telescope live_grep <CR>
@@ -58,8 +59,11 @@ nmap <C-t> :split term://fish<cr>
 
 "admin de archivos 
 :let g:NERDTreeWinSize=40
+""Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+"""Open NERDTreeToggle
 nmap <C-w> :NERDTreeToggle<cr>
-nmap <C-s> :NERDTreeFind<CR>
+nmap <C-s> :NERDTreeFind<cr>
 
 " COC configurations
 " Some servers have issues with backup files, see #649.
