@@ -130,7 +130,7 @@ Options:
 
   # Open a brand new shell if we are in interactive mode.
   set -q NONINTERACTIVE
-    or exec fish < /dev/tty
+    or echo " " # exec fish < /dev/tty
 
   return 0
 end

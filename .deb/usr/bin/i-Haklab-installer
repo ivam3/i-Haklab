@@ -56,7 +56,7 @@ export PATH=${PREFIX}/bin:${HOME}/.local/bin
 export LD_LIBRARY_PATH=${PREFIX}/lib:${HOME}/.local/lib
 echo -en "\e[33mWARNING:\e[0m You are out of i-Haklab | Some commands and tools could not be running.\n"
 CONF
-echo -en $Y"============================================================\nW:$W If you see a PROMPT as '$AQUA⋊>$W' or $lightgreen'$(whoami)@localhost$W'\n   hold on for one minute then type$Y exit$W to$W continue\n$Y============================================================$W\n"
+#echo -en $Y"============================================================\nW:$W If you see a PROMPT as '$AQUA⋊>$W' or $lightgreen'$(whoami)@localhost$W'\n   hold on for one minute then type$Y exit$W to$W continue\n$Y============================================================$W\n"
 fish <(curl -fsSL "$iHDB/.local/etc/i-Haklab/get.oh-my.fish")
 file=$(mktemp)
 chmod 777 $file
