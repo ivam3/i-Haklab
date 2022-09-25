@@ -1,0 +1,57 @@
+#!/usr/bin/bash
+IFS=$'\n\t'
+trap ctrl_c 2
+source $HOME/.local/etc/i-Haklab/variables
+source $iHETC/functions
+chk-pkg curl curl
+
+[[ $# -ne 1 ]] && { echo -en $R"E:$W Usage: i-Haklab $0 <URL>";exit 1;}
+
+declare -A headers=(
+	"Forwarded: 127.0.0.1"
+	"Forwarded-For: 127.0.0.1"
+	"Forwarded-For-Ip: 127.0.0.1"
+	"X-Client-IP: 127.0.0.1"
+	"X-Custom-IP-Authorization: 127.0.0.1"
+	"X-Forward: 127.0.0.1"
+	"X-Forwarded: 127.0.0.1"
+	"X-Forwarded-By: 127.0.0.1"
+	"X-Forwarded-For: 127.0.0.1"
+	"X-Forwarded-For-Original: 127.0.0.1"
+	"X-Forwared-Host: 127.0.0.1"
+	"X-Host: 127.0.0.1"
+	"X-Originating-IP: 127.0.0.1"
+	"X-Remote-IP: 127.0.0.1"
+	"X-Remote-Addr: 127.0.0.1"
+	"X-Forwarded-Server: 127.0.0.1"
+	"X-HTTP-Host-Override: 127.0.0.1"
+	"Forwarded: localhost"
+	"Forwarded-For: localhost"
+	"X-Forward: localhost"
+	"X-Forwarded: localhost"
+	"X-Forwarded-By: localhost"
+	"X-Forwarded-For: localhost"
+	"X-Forwarded-For-Original: localhost"
+	"X-Forwared-Host: localhost"
+	"X-Host: localhost"
+	"X-Remote-Addr: localhost"
+	"X-Forwarded-Server: localhost"
+)
+
+FILE=$(mktemp)
+
+banner
+echo -en "${G}[*] Staring!$W please wait...\n"
+for header in "${headers[@]}"; do
+	code=$(curl -sLgk -A 'Googlebot' "$1" -H "${header}" -o $FILE -w '%{http_code}')
+	[[ -z $old_code ]] && old_code=$code
+	[[ $code -ne $old_code ]] && {
+		header=$(echo -en "$G$header$W")
+		old_code=$code
+  } || {
+		http_code=$code
+  }
+	printf 'RESPONSE CODE: %-10s \tSIZE: %-10s \t HEADER: %-10s\n' $code $(wc -c < $FILE) "$header"
+done
+
+rm $FILE
