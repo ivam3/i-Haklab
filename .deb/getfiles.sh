@@ -35,7 +35,7 @@ rm files.txt
 cat <<- EOF > manifiest.json
 {
   "name": "i-haklab",
-  "version": "3.5.0",
+  "version": "3.5.8",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
