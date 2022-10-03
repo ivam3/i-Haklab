@@ -15,6 +15,7 @@ else
   }
 	echo "Deleting old version ..."
   [[ -d ${HOME}/.local/share/i-Haklab ]] && rm -rf ${HOME}/.local/share/i-Haklab
+  [[ -d ${HOME}/.local/share/fonts ]] && rm -rf ${HOME}/.local/share/fonts
   [[ -e ${PREFIX}/etc/bashito ]] && rm -rf ${PREFIX}/etc/bashito
   [[ -e ${PREFIX}/etc/motd ]] && rm -rf ${PREFIX}/etc/motd
   [[ -e ${PREFIX}/etc/motd.dpkg-old ]] && rm -rf ${PREFIX}/etc/motd.dpkg-old
