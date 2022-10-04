@@ -182,7 +182,9 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 |
 ╰─ngroklink─➤────────────────────➤ Show the current ngrok link
 |
-╰─ngrokssh──➤────────────────────➤ Connect with ngrok.io servers via SSH protocol
+╰─ngrokssh──➤─port+protocol+file─➤ Connect with ngrok servers via SSH protocol
+|                   ╰──example─1─{─i-Haklab ngrokssh -p 4546 -t http -f path/to/specific/id_rsa-file
+|                   ╰──example─2─{─i-Haklab ngrokssh -p 8080 -t tcp (default file:\$HOME/.ssh/id_rsa)
 |
 ╰─payvid────➤────────────────────➤ Hide a Reverse Shell with a Video File by Exploiting Linux OS.
 |
