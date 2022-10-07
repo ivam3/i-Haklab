@@ -8,9 +8,6 @@ source $iHETC/functions
 chk-pkg php php
 chk-pkg mariadb mariadb
 
-[[ -e ${PREFIX}/var/lib/mysql/ib_logfile0 ]] && {
-	rm -rf ${PREFIX}/var/lib/mysql/ib_logfile0;
-}
 [[ -e ${PREFIX}/var/run/*.pid ]] && {
 	rm -rf ${PREFIX}/var/run/*.pid;
 }
