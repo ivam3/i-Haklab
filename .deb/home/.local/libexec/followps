@@ -1,0 +1,49 @@
+#!/usr/bin/bash
+IFS=$'\n\t'
+trap ctrl_c 2
+
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+chk-pkg watch procps
+chk-pkg pstree psmisc
+chk-pkg perl perl
+banner
+pid=$1
+psbg=$!
+
+psbg(){
+  echo -en $Y"!:$W Choose a process identifier:\n\n"
+  ps a > ${TMPDIR}/psa.tmp
+  awk -F " " '{print $1}' ${TMPDIR}/psa.tmp > ${TMPDIR}/ps1.tmp
+  cat ${TMPDIR}/psa.tmp|perl -lane 'print "@F[4..$#F]";' > ${TMPDIR}/ps2.tmp
+  touch ${TMPDIR}/ps.tmp
+  paste ${TMPDIR}/ps1.tmp ${TMPDIR}/ps2.tmp ${TMPDIR}/ps.tmp
+  cat ${TMPDIR}/ps.tmp
+  while read -p "?: " pid && [ -z $pid ]; do
+    continue
+  done
+  follower
+}
+follower(){
+  [[ $(grep $pid ${TMPDIR}/ps1.tmp) ]] && {
+    rm -rf ${TMPDIR}/*.tmp
+    watch pstree -hualp $pid
+  } || {
+    echo -en $R"E:$W No such process: $pid\n"
+    psbg
+  }
+}
+
+[[ -z $pid ]] && {
+  [[ -z $psbg ]] && {
+    psbg
+  } || {
+    echo "Following the last background process[$psbg)]"
+    pid=$psbg
+    follower
+  }
+} || {
+  follower
+}
+
+#            i-Haklab by @Ivam3.

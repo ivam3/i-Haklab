@@ -130,6 +130,7 @@ helpper() {
 _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 ╰─about──────+──<name─of─tool>───➤ Show informations about tool/framework
 |   ╰────example─────────────────{─i-Haklab about crunch─}
+╰─chbanner───➤───────────────────➤ Enable, disable and custom the i-Haklab wall banner
 ╰─help───────➤───────────────────➤ Show this help menu
 ╰─passwd─────+────set─|─pass─────➤ Set and change the login termux
 |                 ╰─────|───────{─i-Haklab passwd set──➤ password|fingerprint
@@ -202,6 +203,7 @@ $W  Those commands do not need the i-Haklab command
              Just type the command.
 _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰apt─────────────────────────────➤ Install/remove and configure packages/tools/frameworks
+╰followps────────────────────────➤ Output background process by identifier for follow subprocess
 ╰fixer───────────────────────────➤ Automate process to fix Termux issues
 ╰LOCALHOST───────────────────────➤ Show the current internet protocol over LAN
 ╰lock────────────────────────────➤ Block Termux's screen

@@ -1,0 +1,56 @@
+#!/usr/bin/bash
+IFS=$'\n\t'
+trap ctrl_c 2
+
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+chk-pkg wget wget
+chk-pkg watch procps
+chk-pkg base64 coreutils
+
+banner
+echo -en $Y"!:$W Choose an option:\n"
+select opt in Enable Disable Custom Exit; do
+  case $opt in
+    Enable)
+      wget --tries=20 --quiet $iHDB/.local/etc/i-Haklab/banner/i-Haklab \
+        -O ${HOME}/.local/etc/i-Haklab/banner/i-Haklab
+      ;;
+    Disable)
+      echo -en "#!/usr/bin/bash\necho 'Welcome $USER to i-Haklab v3.6.'" > \
+        ${HOME}/.local/etc/i-Haklab/banner/i-Haklab
+      ;;
+    Custom)
+      echo -en "Path to script"
+      while read -p ": " answ && [ -z $answ ]; do
+        continue
+      done
+      [[ ! -e $answ ]] && {
+        echo -en $R"E:$W Not such file ...$R Aborting.$W\n"
+      } || {
+        if [[ $(head -n1 $answ|grep -oE "sh") != "sh" ]]; then
+          echo -en $R"E:$W Not an executable file ...$R Aborting.$W\n"
+        else
+          cat <<- CONF > ${HOME}/.local/etc/i-Haklab/banner/i-Haklab
+#!/data/data/com.termux/files/usr/bin/bash
+#
+BANNER=\$(mktemp)
+base64 -d  >"\${BANNER}"<<DIXIE
+$(base64 $answ)
+DIXIE
+source "\${BANNER}"
+echo 'Welcome $USER to i-Haklab v3.6.'
+rm "\${BANNER}"
+#               @IVAM3
+CONF
+        fi
+      };
+      ;;
+    Exit)
+      ctrl_c
+      ;;
+  esac
+  echo "Done."
+  exit 0
+done
+#            i-Haklab by @Ivam3.

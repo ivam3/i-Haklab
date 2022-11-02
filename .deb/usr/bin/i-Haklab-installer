@@ -67,20 +67,6 @@ CONF
 fish $file
 rm $file
 
-# SET SLD COMMAND ICONS
-echo "Setting lsd command icons\n"
-wget --tries=20 --quiet \
-  https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/DejaVuSansMono.zip \
-  -O ${TMPDIR}/DejaVuSansMono.zip
-[[ -e ${TMPDIR}/DejaVuSansMono.zip ]] && {
-  mkdir -p ${HOME}/.local/share/fonts
-  unzip ${TMPDIR}/DejaVuSansMono.zip -d ${HOME}/.local/share/fonts/
-  rm -rf ${TMPDIR}/DejaVuSansMono.zip
-  command -v fc-cache -fv
-} || {
-  echo -en "\e[31mE:\e[0m Icons not found\n"
-}
-
 # SET ROOT USER IF DEVICE IS ROOTED
 if chk-root;then
 	echo "Rooted device detected, setting Root user ...";$z
