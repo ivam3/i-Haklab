@@ -8,6 +8,8 @@ z=$(sleep 0.5)
 #
 # TOOLS STORAGE DIRECTORY (INTERNAL - EXTERNAL)
 echo "Getting access to external storage.";$z
+ln -s ${PREFIX}/lib/ ${HOME}/.local/
+[[ -d ${HOME}/go/bin ]] || mkdir -p ${HOME}/go/bin
 s2=$(df|grep "fuse"|grep -iv emulated|awk -F " " '{print $6}')
 [[ -n $s2 ]] && [[ -w $s2 ]] && {
 	[[ -d $s2/Android/data/com.termux/files/tools ]] && [[ -s $s2/Android/data/com.termux/files/tools ]] && {
@@ -22,7 +24,7 @@ echo "Installing required python modules (It could take a while) ...";$z
 for v in python python2 ; do
 	$v -m pip --no-color --quiet --no-cache-dir install --upgrade pip 2>>$LOGFILE
 done
-for module in trufflehog wheel speedtest-cli frida shodan jedi pipenv;do
+for module in trufflehog wheel speedtest-cli frida shodan jedi pipenv pynvim;do
 	[[ $module = shodan ]] && { python -m pip --no-color --quiet --no-cache-dir install -U --user shodan;break;}
 	python -m pip --no-color --quiet --no-cache-dir install $module 2>>$LOGFILE
 done
@@ -52,8 +54,8 @@ ln -s ${HOME}/.local/etc/fish/config.fish ${PREFIX}/etc/fish/config.fish
 }
 [[ -e ${HOME}/.bashrc ]] || { touch ${HOME}/.bashrc;}
 cat <<- CONF > ${HOME}/.bashrc
-export PATH=${PREFIX}/bin:${HOME}/.local/bin
-export LD_LIBRARY_PATH=${PREFIX}/lib:${HOME}/.local/lib
+export PATH=${PREFIX}/bin:${HOME}/.local/bin:${HOME}/go/bin
+export LD_LIBRARY_PATH=${PREFIX}/lib
 echo -en "\e[33mWARNING:\e[0m You are out of i-Haklab | Some commands and tools could not be running.\n"
 CONF
 #echo -en $Y"============================================================\nW:$W If you see a PROMPT as '$AQUA⋊>$W' or $lightgreen'$(whoami)@localhost$W'\n   hold on for one minute then type$Y exit$W to$W continue\n$Y============================================================$W\n"

@@ -4,12 +4,14 @@
 LOGFILE='/data/data/com.termux/files/usr/var/log/i-Haklab.log'
 
 banner() {
-	[[ ! -e /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab ]] && {
+  banner="/data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab"
+	[[ ! -e $banner ]] && {
 		wget --tries=20 --quiet \
 			https://raw.githubusercontent.com/ivam3/i-Haklab/master/.deb/home/.local/etc/i-Haklab/banner/i-Haklab \
-				-O /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab;
+				-O $banner;
 	}
-	bash /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab;
+  [[ $1 ]] && banner=/data/data/com.termux/files/home/.local/etc/i-Haklab/banner/custom
+	bash $banner;
 	sleep 0.5;
 }
 export -f banner

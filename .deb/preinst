@@ -5,7 +5,7 @@ then
   exit 1
 else
   [[ -d ${HOME}/.local/bin ]] && {
-		echo "Deleting old executable files ..."
+	  echo "Deleting old executable files ..."
 	  for link in $(ls ${HOME}/.local/bin/)
 	  do
 		  [[ -L ${HOME}/.local/bin/$link ]] && {
