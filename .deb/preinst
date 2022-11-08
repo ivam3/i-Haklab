@@ -13,9 +13,14 @@ else
 		  }
 	  done
   }
+  [[ -d ${HOME}/.local/lib ]] && {
+    cp -r ${HOME}/.local/lib ${PREFIX}/lib/
+    rm -rf ${HOME}/.local/lib
+  }
 	echo "Deleting old version ..."
   [[ -d ${HOME}/.local/share/i-Haklab ]] && rm -rf ${HOME}/.local/share/i-Haklab
   [[ -d ${HOME}/.local/share/fonts ]] && rm -rf ${HOME}/.local/share/fonts
+  [[ -d ${HOME}/.local/bin ]] && mv ${HOME}/.local/bin/* ${PREFIX}/bin/;rm -rf ${HOME}/.local/bin
   [[ -e ${PREFIX}/etc/bashito ]] && rm -rf ${PREFIX}/etc/bashito
   [[ -e ${PREFIX}/etc/motd ]] && rm -rf ${PREFIX}/etc/motd
   [[ -e ${PREFIX}/etc/motd.dpkg-old ]] && rm -rf ${PREFIX}/etc/motd.dpkg-old
@@ -27,6 +32,7 @@ else
 			rm -rf ${HOME}/storage/external-1/tools;
 		}
 	}
+  mkdir -p ${HOME}/go/bin
 	[[ -e $HOME/.local/etc/i-Haklab/.Ivam3byCinderella ]] && {
 		echo "Keeping previous password ..."
 		[[ "Ivam3byCinderella" = $(cat $HOME/.local/etc/i-Haklab/.Ivam3byCinderella|openssl enc -aes-256-cbc -md sha512 -a -d -pbkdf2 -iter 100000 -salt -pass pass:Secret@123#) ]] || {

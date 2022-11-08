@@ -11,6 +11,7 @@ rm -rf ${PREFIX}/bin/i-Haklab-installer
 	rm ${HOME}/.local/libexec/i-Haklab.login.backup;
 }
 echo "[*] i-Haklab installation finished."
+echo "[*] run 'i-Haklab help' for a guide."
 echo "[!] For help going to https://t.me/Ivam3_Bot."
 echo "[*] @Ivam3: thank you for use my package."
 #echo -en "[!] Press\e[32m enter\e[0m to init"
