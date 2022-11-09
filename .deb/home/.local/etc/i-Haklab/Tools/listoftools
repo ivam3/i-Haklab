@@ -5,6 +5,7 @@ aircrack-ng
 amass
 androbugs
 apksigner
+appshark
 aquatone
 bash-obfuscate
 beef
@@ -17,6 +18,7 @@ burpsuite
 cewl
 clamav
 cloudbunny
+cloudflared
 code-server
 converter
 credmap
@@ -90,7 +92,7 @@ sherlock
 shodan
 slowhttptest
 steghide
-speedtest-cli
+speedtest-go
 sqlite
 sqliv
 sqlmap
@@ -115,4 +117,5 @@ whatweb
 wpscan
 xapt-management
 xerosploit
+ytfzf
 youtubedr
