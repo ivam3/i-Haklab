@@ -97,7 +97,7 @@ cat <<- EOF > ${HOME}/.vim/coc-settings.json
   "python.jediPath": "$pyPATH"
 }
 EOF
-vim +PluginInstall +PlugUpdate +x +x +x
+vim +PluginInstall +PlugUpdate +CocInstall coc-clangd coc-sh coc-jedi +x +x +x
 cd;tput init
 exit 0
 ####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####

@@ -29,6 +29,9 @@ case "$1" in
 		;;
 
 	clamav)
+    [[ -e ${PREFIX}/clamav/freshclam.conf.sample ]] && {
+      mv ${PREFIX}/clamav/freshclam.conf.sample ${PREFIX}/clamav/freshclam.conf
+    }
 		freshclam
 		;;
 
