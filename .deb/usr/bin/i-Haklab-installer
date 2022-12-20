@@ -4,6 +4,7 @@ IFS=$'\n\t'
 # INVOKE VARIABLES AND FUNCTIONS
 source ${HOME}/.local/etc/i-Haklab/variables
 source $iHETC/functions
+fontsV="v2.3.0-RC"
 z=$(sleep 0.5)
 #
 # TOOLS STORAGE DIRECTORY (INTERNAL - EXTERNAL)
@@ -64,6 +65,16 @@ omf install will
 CONF
 fish $file
 rm $file
+## SETTING FONTS AS DejaVuSansMono
+[[ -d ${PREFIX}/share/fonts ]] && {
+  rm -rf ${PREFIX}/share/fonts/*
+} || {
+  mkdir -p ${PREFIX}/share/fonts
+}
+wget --tries=20 --quiet https://github.com/ryanoasis/nerd-fonts/releases/download/$fontsV/Hack.zip \
+  -O ${PREFIX}/share/fonts/Hack.zip
+unzip ${PREFIX}/share/fonts/Hack.zip -d ${PREFIX}/share/fonts/
+rm -rf ${PREFIX}/share/fonts/Hack.zip
 
 # SET ROOT USER IF DEVICE IS ROOTED
 if chk-root;then
