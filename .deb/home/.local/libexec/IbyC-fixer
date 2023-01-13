@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 #CREADED ON Dec/2018 BY @IVAM3
-#UPGRADED ON 2022/Mar/31
+#UPGRADED ON 2023/Jan/12
 trap ctrl_c 2
 ctrl_c(){ printf "$Y\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n";}
 StdErr(){ printf "$R(_➤)$W missing argument, type fixer -h for help\n";exit;}
