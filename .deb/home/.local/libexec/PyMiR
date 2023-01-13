@@ -102,9 +102,9 @@ for module in $(cat ${TMPDIR}/requirements.tmp);do
 			;;
     electrum|opencv|asciinema|matplotlib|scipy|apsw|bcrypt|numpy|tldp|apt|cryptography|numpy|pillow|tkinter|xcbgen)
       for i in apsw bcrypt numpy tldp apt cryptography numpy pillow tkinter xcbgen; do
-        modele=python-$i
+        module=python-$i
       done
-      [[ $module == opencv ]] && { modele=opencv-python;}
+      [[ $module == opencv ]] && { module=opencv-python;}
 			[[ $module == scipy ]] && {
         bash <(curl -fsSL "https://its-pointless.github.io/setup-pointless-repo.sh")
         [[ $py == "python2" ]] && { module=python2-scipy;};
