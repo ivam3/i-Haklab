@@ -169,7 +169,8 @@ for module in $(cat ${TMPDIR}/requirements.tmp);do
 					;;
 				R|RUST|Rust|rust)
 					yes|apt install rust >/dev/null 2>/dev/null
-					export CARGO_BUILD_TARGET=$(rustc --version --verbose|sed -n 's|host: ||p')
+					export RUSTFLAGS=" -C lto=no"
+          export CARGO_BUILD_TARGET=$(rustc --version --verbose|sed -n 's|host: ||p')
 					$py -m pip --no-color --quiet --no-cache-dir install $module 2>/dev/null
 					yes|apt remove rust >/dev/null 2>/dev/null
 					;;
