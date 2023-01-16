@@ -11,7 +11,8 @@ internal(){
 		printf $Y"USAGE:$W i-Haklab share <options>\n\n   OPTIONS\tDESCRIPTION\n-h\t\tShow this menu\n-u <file/dir>\tFile or directory to share\n-d <link>\tCloud's link to download file or directory\n-p <password>\tSet a pasword to share o download [optional]\n";exit 0
 	}
 
-	command -v ffsend >dev/null || yes|apt install ffsend
+	command -v ffsend >/dev/null || yes|apt install ffsend
+  command -v lt >/dev/null || yes|apt install nodejs-lts && npm install -g localtunnel
 
 	banner
 	[[ $# -eq 0 ]] && { usage;}
