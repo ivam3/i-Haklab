@@ -7,12 +7,15 @@ source $iHETC/functions
 
 internal(){
 	chk-pkg ffsend ffsend
-	usage(){
+	chk-pkg lt localtunnel
+  usage(){
 		printf $Y"USAGE:$W i-Haklab share <options>\n\n   OPTIONS\tDESCRIPTION\n-h\t\tShow this menu\n-u <file/dir>\tFile or directory to share\n-d <link>\tCloud's link to download file or directory\n-p <password>\tSet a pasword to share o download [optional]\n";exit 0
 	}
 
-	command -v ffsend >/dev/null || yes|apt install ffsend
-  command -v lt >/dev/null || yes|apt install nodejs-lts && npm install -g localtunnel
+  grep -oE "android" ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl/openurl.js >/dev/null 2>/dev/null || {
+    wget --tries=20 --quiet "$iHDB/.local/etc/localtunnel/openurl.js" -O \
+      ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl/openurl.js
+  }
 
 	banner
 	[[ $# -eq 0 ]] && { usage;}

@@ -10,6 +10,12 @@ source $iHETC/functions
 chk-pkg lt localtunnel
 chk-tunnel
 getPORT
+
+grep -oE android ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl/openurl.js >/dev/null 2>/dev/null || {
+  wget --tries=20 --quiet "$iHDB/.local/etc/localtunnel/openurl.js" -O \
+    ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl/openurl.js
+}
+
 [[ $SSH -eq 1 ]] && killall -2 ssh > /dev/null 2>&1
 
 default(){ config;$(command -v lt) -h "http://$TUNNEL" -p $LPORT --print-requests;}
