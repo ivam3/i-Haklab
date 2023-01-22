@@ -6,12 +6,12 @@ source $iHETC/functions
 
 chk-pkg ngrok ngrok
 banner
-chkngrok=$(curl -s http://localhost:4040 &>/dev/null;echo $?)
+chkngrok=$(curl -sN http://localhost:4040/api/tunnels &>/dev/null;echo $?)
 
 [[ $chkngrok -eq 0 ]] && {
 	printf $G"Ngrok link:$W \
-	$(curl -sSL http://localhost:4040/api/tunnels|cut -d '"' -f14|awk -F '/' '{print $3}'|cut -d ':' -f1,2,3)";
+  $(curl -sSL http://localhost:4040/api/tunnels|cut -d '"' -f18)";
 } || {
-	printf $R"ERROR:$W Ngrok server is inactive or unreachable\n";
+	printf $R"E:$W Ngrok server is inactive or unreachable\n";
 }
 

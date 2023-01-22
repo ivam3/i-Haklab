@@ -24,7 +24,7 @@ for v in python python2 ; do
 	$v -m pip --no-color --quiet --no-cache-dir install --upgrade pip 2>>$LOGFILE
 done
 for module in trufflehog wheel speedtest-cli frida shodan jedi pipenv pynvim;do
-	[[ $module = shodan ]] && { python -m pip --no-color --quiet --no-cache-dir install -U --user shodan;break;}
+	[[ $module = shodan ]] && { python -m pip --no-color --quiet --no-cache-dir install shodan;}
 	python -m pip --no-color --quiet --no-cache-dir install $module 2>>$LOGFILE
 done
 
@@ -108,7 +108,8 @@ cat <<- EOF > ${HOME}/.vim/coc-settings.json
   "python.jediPath": "$pyPATH"
 }
 EOF
-vim +PluginInstall +PlugUpdate +CocInstall coc-clangd coc-sh coc-jedi +x +x +x
+npm install -g neovim
+vim +PluginInstall +PlugUpdate +CocInstall +coc-clangd +coc-sh +coc-jedi +x +x +x
 cd;tput init
 exit 0
 ####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####

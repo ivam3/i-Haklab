@@ -1,7 +1,116 @@
 #!/data/data/com.termux/files/usr/bin/bash
+IFS=$'\n\t'
+# INVOKE VARIABLES AND FUNCTIONS
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+fontsV="v2.3.0-RC"
+z=$(sleep 0.5)
+#
+# TOOLS STORAGE DIRECTORY (INTERNAL - EXTERNAL)
+echo "Getting access to external storage.";$z
+s2=$(df|grep "fuse"|grep -iv emulated|awk -F " " '{print $6}')
+[[ -n $s2 ]] && [[ -w $s2 ]] && {
+	[[ -d $s2/Android/data/com.termux/files/tools ]] && [[ -s $s2/Android/data/com.termux/files/tools ]] && {
+		for tool in $(ls $s2/Android/data/com.termux/files/tools/)
+		do
+			mv $s2/Android/data/com.termux/files/tools/$tool ${HOME}/.local/share/;
+		done
+	}
+}
 
-bash ${PREFIX}/bin/i-Haklab-installer
-rm -rf ${PREFIX}/bin/i-Haklab-installer
+echo "Installing required python modules (It could take a while) ...";$z
+for v in python python2 ; do
+	$v -m pip --no-color --quiet --no-cache-dir install --upgrade pip 2>>$LOGFILE
+done
+for module in trufflehog wheel speedtest-cli frida shodan jedi pipenv pynvim;do
+	[[ $module = shodan ]] && { python -m pip --no-color --quiet --no-cache-dir install shodan;}
+	python -m pip --no-color --quiet --no-cache-dir install $module 2>>$LOGFILE
+done
+
+echo "Installing brute force wordlists (it could take a while) ...  "
+chmod 751 -R ${HOME}/.local/share
+[[ -e ${HOME}/.local/share/wordlist/rockyou.txt ]] || {
+	wget --tries=20 --quiet https://www.scrapmaker.com/data/wordlists/dictionaries/rockyou.txt \
+	-O ${HOME}/.local/share/wordlist/rockyou.txt;
+}
+wget --tries=20 --quiet $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20functional%20tests.bat -O ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run functional tests.bat'
+wget --tries=20 --quiet $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20unit%20tests.bat -O ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run unit tests.bat'
+chmod 777 -R ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests
+
+# SET OMF SHELL
+echo "Setting interactive shell Oh-my-fish.";$z
+#git config --global core.autocrlf
+[[ -e ${HOME}/.local/share/omf ]] && rm -rf ${HOME}/.local/share/omf
+[[ -e ${PREFIX}/etc/fish/config.fish ]] && rm ${PREFIX}/etc/fish/config.fish
+[[ -e ${HOME}/.config/fish/conf.d/omf.fish ]] && rm ${HOME}/.config/fish/conf.d/omf.fish
+[[ -e ${PREFIX}/bin/fish ]] && [[ ! -L ${HOME}/.termux/shell ]] && {
+	ln -s ${PREFIX}/bin/fish $HOME/.termux/shell;
+}
+ln -s ${HOME}/.local/etc/fish/config.fish ${PREFIX}/etc/fish/config.fish
+[[ $(grep 'fish' -oE ${PREFIX}/etc/bash.bashrc) ]] || {
+	sed -i '12a chsh -s fish' ${PREFIX}/etc/bash.bashrc;
+}
+[[ -e ${HOME}/.bashrc ]] || { touch ${HOME}/.bashrc;}
+cat <<- CONF > ${HOME}/.bashrc
+echo -en "\e[33mWARNING:\e[0m You are out of i-Haklab | Some commands and tools could not be running.\n"
+CONF
+#echo -en $Y"============================================================\nW:$W If you see a PROMPT as '$AQUA⋊>$W' or $lightgreen'$(whoami)@localhost$W'\n   hold on for one minute then type$Y exit$W to$W continue\n$Y============================================================$W\n"
+fish <(curl -fsSL "$iHDB/.local/etc/i-Haklab/get.oh-my.fish")
+file=$(mktemp)
+chmod 777 $file
+cat <<- CONF > $file
+#!/bin/env fish
+omf install will
+CONF
+fish $file
+rm $file
+## SETTING FONTS AS DejaVuSansMono
+[[ -d ${PREFIX}/share/fonts ]] && {
+  rm -rf ${PREFIX}/share/fonts/*
+} || {
+  mkdir -p ${PREFIX}/share/fonts
+}
+wget --tries=20 --quiet https://github.com/ryanoasis/nerd-fonts/releases/download/$fontsV/Hack.zip \
+  -O ${PREFIX}/share/fonts/Hack.zip
+unzip ${PREFIX}/share/fonts/Hack.zip -d ${PREFIX}/share/fonts/
+rm -rf ${PREFIX}/share/fonts/Hack.zip
+
+# SET ROOT USER IF DEVICE IS ROOTED
+if chk-root;then
+	echo "Rooted device detected, setting Root user ...";$z
+	rm -rf ${HOME}/.config/fish/functions/sudo.fish
+	ln -s ${PREFIX}/bin/applets/sudo ${PREFIX}/bin/sudo
+	if [[ -e ${HOME}/.suroot/.bashrc ]]
+	then
+		[[ -O ${HOME}/.suroot/.bashrc ]] || sudo chown $USER:$USER -R ${HOME}/.suroot/
+  else
+		[[ -d ${HOME}/.suroot ]] || mkdir ${HOME}/.suroot
+  fi
+  cat <<- CONF > ${HOME}/.suroot/.bashrc
+PS1=\"\[\e[33m\][!] \[\e[31m\]Press\[\e[32m\] Ctrl d\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\""
+export TERM=xterm-256color
+export LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib
+export PATH=$HOME/go/bin:/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:/system/xbin:/system/bin
+HOME=/data/data/com.termux/files/home/.suroot
+fish
+#          i-Haklab by @Ivam3
+CONF
+fi
+
+echo "Updating mlocate data base ..."
+updatedb
+
+echo "Setting vim text editor ..."
+pyPATH=$(python -m pip show jedi|grep "Location"|awk -F ":" '{print $NF}')
+cat <<- EOF > ${HOME}/.vim/coc-settings.json
+{
+  "python.jediPath": "$pyPATH"
+}
+EOF
+npm install -g neovim
+vim +PluginInstall +PlugUpdate +CocInstall +coc-clangd +coc-sh +coc-jedi +x +x +x
+cd;tput init
+# RESTORE PREVIOUS PASSWORD IF DEFAULT WAS CHANGED
 [[ -e ${HOME}/.local/etc/i-Haklab/.IbyC ]] && {
 	cat ${HOME}/.local/etc/i-Haklab/.IbyC > ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella;
 	rm -f ${HOME}/.local/etc/i-Haklab/.IbyC;
@@ -12,6 +121,7 @@ rm -rf ${PREFIX}/bin/i-Haklab-installer
 }
 echo "[*] i-Haklab installation finished."
 echo "[*] run 'i-Haklab help' for a guide."
+echo "[*] Run 'fixer' to fix any posible issue."
 echo "[!] For help going to https://t.me/Ivam3_Bot."
 echo "[*] @Ivam3: thank you for use my package."
 #echo -en "[!] Press\e[32m enter\e[0m to init"
