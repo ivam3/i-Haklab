@@ -135,7 +135,12 @@ for module in $(cat ${TMPDIR}/requirements.tmp);do
               install-option="--libzmq=/data/data/com.termux/files/usr/lib/libzmq.so" 2>/dev/null
           } || {
             $py -m pip --no-color --quiet --no-cache-dir install $module 2>/dev/null
-            [[ $(command -v rustc) ]] >/dev/null && { yes|apt remove rust >/dev/null 2>/dev/null;}
+            [[ $(command -v rustc) ]] >/dev/null && { 
+              yes|apt remove rust >/dev/null 2>/dev/null
+              if [[ -d ${HOME}/.cargo ]]; then
+                rm -rf ${HOME}/.cargo 2>/dev/null
+              fi
+            }
           }
 					;;
 				BL|BLAS|Blas|blas)
@@ -173,6 +178,9 @@ for module in $(cat ${TMPDIR}/requirements.tmp);do
           export CARGO_BUILD_TARGET=$(rustc --version --verbose|sed -n 's|host: ||p')
 					$py -m pip --no-color --quiet --no-cache-dir install $module 2>/dev/null
 					yes|apt remove rust >/dev/null 2>/dev/null
+          if [[ -d ${HOME}/.cargo ]]; then
+            rm -rf ${HOME}/.cargo 2>/dev/null
+          fi
 					;;
 			esac
 			;;
