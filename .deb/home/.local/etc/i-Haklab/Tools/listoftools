@@ -4,6 +4,7 @@ adminpanel
 amass
 androbugs
 apksigner
+apktool
 appshark
 aquatone
 bash-obfuscate
@@ -54,7 +55,7 @@ hunner-framework
 hydra-gtk
 infoga
 ipgeolocation
-openjdk-17
+jython
 johntheripper
 kerbrute
 kalilinux
@@ -69,6 +70,7 @@ nikto
 nmap
 objection
 octosuite
+openjdk-17
 orbitaldump
 osintgram
 phomber
