@@ -6,6 +6,12 @@ source $iHETC/functions
 chk-pkg curl curl
 chk-pkg jq jq
 
+cxc(){
+  for i in "Goodbye" "goodbye" "Exit" "exit" "Adios" "adios";do
+    [[ "${@:1}" == "$i" ]] && { break;return 0;}
+  done
+}
+
 request(){
   request=$(curl -s https://api.openai.com/v1/completions \
     -H "Content-Type: application/json" \
@@ -40,8 +46,7 @@ if [[ "$answer" != "null" ]]; then
 
   while true; do
     echo -en "\n\n$Y$USER:$gray " && read message
-    [[ "$message" == "exit" ]] || [[ "$message" == "Exit" ]] && { break;}
-    # Send the user's question to OpenAI's API and receive a response
+    if cxc "$message"; then break;fi
     request "$message"
     echo -en "${G}ChatGPT:$gray $answer"
   done
