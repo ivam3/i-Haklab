@@ -1,0 +1,55 @@
+#!/bin/bash
+trap ctrl_c 2
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+chk-pkg curl curl
+chk-pkg jq jq
+
+request(){
+  request=$(curl -s https://api.openai.com/v1/completions \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $OpenAIkey" \
+    -d '{
+    "model": "text-davinci-003",
+    "prompt": "'"${@:1}"'",
+    "temperature": 0.9,
+    "max_tokens": 150,
+    "top_p": 1,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.6,
+    "stop": [" Human:", " AI:"]
+  }')
+  answer=$(echo $request|jq -r '.choices[0].text')
+}
+
+banner
+key=$(grep "OpenAIkey" $iHETC/variables)
+[[ -z $OpenAIkey ]] && {
+  echo -en "$Y[!]$W OpenAI API key needed$Y |$W Get it on https://platform.openai.com/account/api-keys\n$Y ╰──➤$W "
+  while read apikey && [ -z $apikey ];do
+    echo -en "$Y ╰──➤$W "
+  done
+  sed -i "s|$key|OpenAIkey=\"$apikey\"|" $iHETC/variables
+  source $iHETC/variables
+}
+
+request "say hello"
+if [[ "$answer" != "null" ]]; then
+  echo -en "${B}Hello $Y$USER$B, I am$G ChatGPT$B, How can I help you today?"
+
+  while true; do
+    echo -en "\n\n$Y$USER:$gray " && read message
+    [[ "$message" == "exit" ]] || [[ "$message" == "Exit" ]] && { break;}
+    # Send the user's question to OpenAI's API and receive a response
+    request "$message"
+    echo -en "${G}ChatGPT:$gray $answer"
+  done
+
+  echo -en "$B\nGoodbye $Y$USER$B Have a great hacking day!!.$W"
+  exit 0
+else
+  echo -en "${R}E:$W Invalid API key."
+  sed -i "s|$key|OpenAIkey=\"\"|" $iHETC/variables
+  exit 1
+fi
