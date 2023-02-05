@@ -18,18 +18,18 @@ i-Haklab weechat
 ### INSTALLATION.
 - CLONING THIS REPOSITORY:
 ```bash
-git clone https://github.com/ivam3/i-Haklab
-cd i-Haklab
-chmod +x setup
+git clone https://github.com/ivam3/i-Haklab \
+cd i-Haklab \
+chmod +x setup \
 bash setup
 ```
 - ADDING AT APT SOURCES LIST
 ```bash
-apt install wget
-mkdir -p $PREFIX/etc/apt/sources.list.d
-wget https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/ivam3-termux-packages.list -O $PREFIX/etc/apt/sources.list.d/ivam3-termux-packages.list
-apt update
-apt upgrade
+apt install wget \
+mkdir -p $PREFIX/etc/apt/sources.list.d \
+wget https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/ivam3-termux-packages.list -O $PREFIX/etc/apt/sources.list.d/ivam3-termux-packages.list \
+apt update && yes|apt upgrade \
+apt install i-haklab
 ```
 
 
@@ -52,7 +52,7 @@ i-Haklab share
 ```
 - Provide you with deliberately vulnerable web site servers as [bWAPP](http://www.itsecgames.com/), [DVWA](https://dvwa.co.uk/) and [MUTILLIDAE](https://github.com/webpwnized/mutillidae) to practice your hacking skills searching, finding and exploting the most common vulnerabilities. Enable those running:
 ```bash
-i-Haklab server4test
+i-Haklab servers4test
 ```
 - Provide you more than [100 tools/frameworks](https://github.com/ivam3/termux-packages) with an easy install/remove over command `apt`. You can get the list of all availables running :
 ```bash
@@ -118,7 +118,7 @@ lock
 ### DESKTOP ENVIROMENT
 > [i-Haklab]() automates the installation and configuration of a graphical environment with the xfce4 windows manager, which opens up the possibility of running tools such as wireshark and burpsuite. For this, the installation of the [Termux:Wayland](https://github.com/termux/termux-x11) application is required. Once installed it to run this enviroment just execute:
 ```bash
-apt install termux-desktop-xfce
+apt install termux-desktop-xfce \
 i-Haklab Xwayland
 ```
 ![TermuxWayland](/.img/TermuxWayland.jpg)

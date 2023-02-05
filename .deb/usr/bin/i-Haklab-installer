@@ -59,6 +59,8 @@ CONF
 fish <(curl -fsSL "$iHDB/.local/etc/i-Haklab/get.oh-my.fish")
 file=$(mktemp)
 chmod 777 $file
+
+echo "Setting Fonts ...";$z
 cat <<- CONF > $file
 #!/bin/env fish
 omf install will
@@ -73,7 +75,7 @@ rm $file
 }
 wget --tries=20 --quiet https://github.com/ryanoasis/nerd-fonts/releases/download/$fontsV/Hack.zip \
   -O ${PREFIX}/share/fonts/Hack.zip
-unzip ${PREFIX}/share/fonts/Hack.zip -d ${PREFIX}/share/fonts/
+unzip -q ${PREFIX}/share/fonts/Hack.zip -d ${PREFIX}/share/fonts/
 rm -rf ${PREFIX}/share/fonts/Hack.zip
 
 # SET ROOT USER IF DEVICE IS ROOTED

@@ -19,6 +19,7 @@ export LPORT='3030'
 export RPORT='80'
 export MSFPATH='/data/data/com.termux/files/usr/opt/metasploit-framework'
 export phonescanKEY=""
+export OpenAIkey=""
 export WL='/data/data/com.termux/files/home/.local/share/wordlist'
 export R='\e[31m'
 export G='\e[32m'
