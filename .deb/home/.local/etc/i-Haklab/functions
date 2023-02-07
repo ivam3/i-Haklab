@@ -159,7 +159,8 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 |    ╰───example─for─ftp─────────{─i-Haklab bruteforce ftp
 |    ╰───example─for─mail────────{─i-Haklab bruteforce mail ivam3@live.com, gmail or live.com
 |
-╰──chatGPT──➤────────────────────➤ Connect with OpenAi API to interact with ChatGPT-3 via CLi.
+╰──chatGPT──➤────<setkey>────────➤ Connect with OpenAi API to interact with ChatGPT-3 via CLi.
+|    |               ╰──example──{─i-Haklab chatGPT setkey [for set or change the APIkey]
 |    ╰───example─────────────────{─i-Haklab chatGPT
 ╰──ESmsg────+──encode/decode─────➤ Encode|decode secret message into a ASCII file.
 |                    ╰──example──{─i-Haklab ESmsg <encode/decode-}

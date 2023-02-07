@@ -12,6 +12,7 @@
 		"usr/bin/i-Haklab-installer": "/data/data/com.termux/files/usr/bin/i-Haklab-installer",
 		"home/.nanorc": "/data/data/com.termux/files/home/.nanorc",
 		"home/.config/fish/functions/fish_greeting.fish": "/data/data/com.termux/files/home/.config/fish/functions/fish_greeting.fish",
+		"home/.config/fish/functions/rmcache.fish": "/data/data/com.termux/files/home/.config/fish/functions/rmcache.fish",
 		"home/.config/fish/functions/followps.fish": "/data/data/com.termux/files/home/.config/fish/functions/followps.fish",
 		"home/.config/fish/functions/LOCALHOST.fish": "/data/data/com.termux/files/home/.config/fish/functions/LOCALHOST.fish",
 		"home/.config/fish/functions/mypip.fish": "/data/data/com.termux/files/home/.config/fish/functions/mypip.fish",

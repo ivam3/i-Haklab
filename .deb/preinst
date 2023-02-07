@@ -14,7 +14,7 @@ else
 	  done
   }
   [[ -d ${HOME}/.local/lib ]] && {
-    cp -r ${HOME}/.local/lib ${PREFIX}/lib/
+    cp -r ${HOME}/.local/lib/* ${PREFIX}/lib/
     rm -rf ${HOME}/.local/lib
   }
 	echo "Deleting old version ..."

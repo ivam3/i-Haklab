@@ -31,7 +31,7 @@ request(){
 
 banner
 key=$(grep "OpenAIkey" $iHETC/variables)
-[[ -z $OpenAIkey ]] && {
+[[ -z $OpenAIkey ]] || [[ "$1" == "setkey" ]] && {
   echo -en "$Y[!]$W OpenAI API key needed$Y |$W Get it on https://platform.openai.com/account/api-keys\n$Y ╰──➤$W "
   while read apikey && [ -z $apikey ];do
     echo -en "$Y ╰──➤$W "
