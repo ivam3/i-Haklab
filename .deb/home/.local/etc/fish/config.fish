@@ -39,6 +39,7 @@ set GOROOT /data/data/com.termux/files/usr/lib/go
 set JAVA_HOME /data/data/com.termux/files/usr/opt/openjdk
 set LD_LIBRARY_PATH /data/data/com.termux/files/usr/lib
 set TOOLS /data/data/com.termux/files/home/.local/share
+alias du="du -hP"
 alias bat="bat -f --theme 'Visual Studio Dark+'"
 alias postgresql="pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql"
 

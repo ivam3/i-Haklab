@@ -208,7 +208,10 @@ $W  Those commands do not need the i-Haklab command
              Just type the command.
 _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰apt─────────────────────────────➤ Install/remove and configure packages/tools/frameworks
-╰followps────────────────────────➤ Output background process by identifier for follow subprocess
+╰bat─────────────────────────────➤ Use it instead of command 'cat' for text highlighting
+╰df──────────────────────────────➤ Provides information about the mounted memory
+╰du──────────────────────────────➤ Provides recursive information about the weight of directories and files
+╰followps────────────────────────➤ Provides the activity of a process running in the background
 ╰fixer───────────────────────────➤ Automate process to fix Termux issues
 ╰LOCALHOST───────────────────────➤ Show the current internet protocol over LAN
 ╰lock────────────────────────────➤ Block Termux's screen
@@ -217,6 +220,7 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰omf─theme───────────────────────➤ Change Oh-my-fish theme
 ╰postgresql──────────────────────➤ Star stop or restart postgres data base
 ╰proxy───────────────────────────➤ Execute cli commands over tor proxychains
+╰rmcache─────────────────────────➤ Remove current session cache, temporal files & residual APT packages.
 ╰serverapache────────────────────➤ Init apache server
 ╰serverphp───────────────────────➤ Init php server
 ╰sudo────────────────────────────➤ Execute commands or init an enviroment as fake root user
