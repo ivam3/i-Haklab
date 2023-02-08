@@ -9,11 +9,12 @@ chk-pkg Xwayland xwayland
 chk-pkg pulseaudio pulseaudio
 command -v termux-x11 >/dev/null || { echo -en "${R}E:$W You need to install the Termux-Wayland(apk) deb file's.";exit;}
 
+export DISPLAY=:0
 export XDG_RUNTIME_DIR=${TMPDIR}
 pulseaudio --start --exit-idle-time=-1 2>/dev/null
 pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1
 am start -n com.termux.x11/com.termux.x11.MainActivity;sleep 3
-#Xwayland
-termux-x11 :0 >/dev/null &
-sleep 3
-env DISPLAY=:0 xfce4-session
+[[ ! -z "$1" ]] && [[ "$1" == "Xwayland" ]] && { Xbin="$1";} || { Xbin="termux-x11";tip="Xwayland";}
+$(command -v $Xbin) :0 >/dev/null &
+env DISPLAY=:0 xfce4-session || echo -en "${R}E: Display unreachable $W|$Y Try it with: ${G}i-Haklab Xwayland $tip$W"
+####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####

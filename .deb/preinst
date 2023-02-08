@@ -43,9 +43,5 @@ else
 		echo "Keeping previous setting ..."
 		cp ${HOME}/.local/libexec/i-Haklab.login ${HOME}/.local/libexec/i-Haklab.login.backup;
 	}
-  echo "Setting Ivam3 repositories at Advance Package Tool(APT)."
-  wget --tries=20 --quiet "https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/ivam3-termux-packages.list" -O ${PREFIX}/etc/apt/sources.list.d/ivam3-termux-packages.list
-  echo "Setting Yisus7u7 repositories at Advance Package Tool(APT)."
-  wget --tries=20 --quiet "https://raw.githubusercontent.com/Yisus7u7/termux-desktop-xfce/gh-pages/termux-desktop-xfce.list" -O ${PREFIX}/etc/apt/sources.list.d/termux-desktop-xfce.list
 fi
 ####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####
