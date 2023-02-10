@@ -1,6 +1,10 @@
 function rmcache
-  rm -rf ~/.cache 2>/dev/null
-  rm -rf $TMPDIR/* 2>/dev/null
+  for dir in $TMPDIR ~/.BurpSuite/burpbrowser ~/.cache ~/go/pkg/mod/cache ~/.maltego/v4.3.1/var/cache
+    if ls -d $dir >/dev/null 2>/dev/null
+      rm -rf $dir 2>/dev/null
+      mkdir -p $dir 2>/dev/null
+    end
+  end
   dpkg -l|grep '^rc'|awk '{print $2}'|xargs dpkg --purge 2>/dev/null
   echo "Termux cache was removed."
 end
