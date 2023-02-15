@@ -43,7 +43,6 @@ case "$1" in
 		;;
 
 	gdb)
-		chk-pkg git git
 		git clone --quiet https://github.com/longld/peda.git $TOOLS/peda
 		[[ -e ${HOME}/.gdginit ]] && touch ${HOME}/.gdbinit
 		echo "source $TOOLS/peda/peda.py" >> ${HOME}/.gdbinit
@@ -68,6 +67,7 @@ set softwrap
 		;;
 
 	neovim)
+    npm install -g neovim
 		[[ -d ${HOME}/.config/nvim ]] && { mkdir -p ${HOME}/.config/nvim;}
     wget --tries=20 --quiet $iHDB/.config/nvim/init.vim -O ${HOME}/.config/nvim/init.vim
     python -m pip --no-color --quiet --no-cache-dir install neovim jedi
@@ -77,7 +77,7 @@ set softwrap
   "python.jediPath": "$pyPATH"
 }
     CONF
-    nvim +PlugInstall +PlugUpdate +x +x +x
+    vim +PluginInstall +PlugUpdate +CocInstall +coc-clangd +coc-sh +coc-jedi +x +x +x
     ;;
 
   privoxy)
@@ -89,7 +89,7 @@ set softwrap
 			rm -rf ${PREFIX}/etc/proxychains.conf;
 		}
 		[[ -e ${HOME}/.local/etc/proxychains.conf ]] || {
-			wget -q $iHDB/etc/proxychains.conf -O ${HOME}/.local/etc/proxychains.conf;
+			wget --tries=20 --quiet $iHDB/etc/proxychains.conf -O ${HOME}/.local/etc/proxychains.conf;
 		}
 		ln -s ${HOME}/.local/etc/proxychains.conf ${PREFIX}/etc/proxychains.conf
 		;;
@@ -121,7 +121,7 @@ startxfce4
 		[[ -d ${HOME}/.tmux ]] && {
 			rm -rf ${HOME}/.tmux;
 		}
-		cd;git clone https://github.com/gpakosz/.tmux ${HOME}/.tmux
+		cd;git clone --quiet https://github.com/gpakosz/.tmux ${HOME}/.tmux
 		ln -s -f ${HOME}/.tmux/.tmux.conf
 		cp ${HOME}/.tmux/.tmux.conf.local .
 		sed -i "11a set-option -g default-shell ${PREFIX}/bin/fish" ~/.tmux/.tmux.conf
@@ -135,13 +135,12 @@ startxfce4
 		}
 		[[ -e ${HOME}/.local/etc/tor/torrc ]] || {
 			mkdir -p ${HOME}/.local/etc/tor;
-			wget -q $iHDB/etc/tor/torrc -O ${HOME}/.local/etc/tor/torrc;
+			wget --tries=20 --quiet $iHDB/etc/tor/torrc -O ${HOME}/.local/etc/tor/torrc;
 		}
 		ln -s ${HOME}/.local/etc/tor/torrc ${PREFIX}/etc/tor/torrc
 		;;
 
 	vim)
-		chk-pkg wget wget
 		[[ -d ${HOME}/.vim ]] && {
 			rm -rf ${HOME}/.vim
 		}
@@ -152,9 +151,10 @@ startxfce4
 		[[ -e ${HOME}/setvim.zip ]] || {
 			STDERR
 		}
-		unzip ${HOME}/setvim.zip -d ${HOME}
+		unzip -qq ${HOME}/setvim.zip -d ${HOME}
 		rm -rf ${HOME}/setvim.zip
-		vim +PlugUpdate +x +x 2>>$LOGFILE
+    python -m pip --no-color --quiet --no-cache-dir install jedi
+    vim +PluginInstall +PlugUpdate +CocInstall +coc-clangd +coc-sh +coc-jedi +x +x +x 2>>$LOGFILE
 		;;
 
 	youtubedr)

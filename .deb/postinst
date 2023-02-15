@@ -3,7 +3,7 @@ IFS=$'\n\t'
 # INVOKE VARIABLES AND FUNCTIONS
 source ${HOME}/.local/etc/i-Haklab/variables
 source $iHETC/functions
-fontsV="v2.3.0-RC"
+fontsV="v2.3.3"
 z=$(sleep 0.5)
 #
 # TOOLS STORAGE DIRECTORY (INTERNAL - EXTERNAL)
@@ -19,10 +19,7 @@ s2=$(df|grep "fuse"|grep -iv emulated|awk -F " " '{print $6}')
 }
 
 echo "Installing required python modules (It could take a while) ...";$z
-for v in python python2 ; do
-	$v -m pip --no-color --quiet --no-cache-dir install --upgrade pip 2>>$LOGFILE
-done
-for module in trufflehog wheel speedtest-cli frida shodan jedi pipenv pynvim;do
+for module in trufflehog wheel speedtest-cli frida pipenv shodan;do
 	[[ $module = shodan ]] && { python -m pip --no-color --quiet --no-cache-dir install shodan;}
 	python -m pip --no-color --quiet --no-cache-dir install $module 2>>$LOGFILE
 done
@@ -54,7 +51,6 @@ ln -s ${HOME}/.local/etc/fish/config.fish ${PREFIX}/etc/fish/config.fish
 cat <<- CONF > ${HOME}/.bashrc
 echo -en "\e[33mWARNING:\e[0m You are out of i-Haklab | Some commands and tools could not be running.\n"
 CONF
-#echo -en $Y"============================================================\nW:$W If you see a PROMPT as '$AQUA⋊>$W' or $lightgreen'$(whoami)@localhost$W'\n   hold on for one minute then type$Y exit$W to$W continue\n$Y============================================================$W\n"
 fish <(curl -fsSL "$iHDB/.local/etc/i-Haklab/get.oh-my.fish")
 file=$(mktemp)
 chmod 777 $file
@@ -64,16 +60,16 @@ omf install will
 CONF
 fish $file
 rm $file
+
 ## SETTING FONTS AS DejaVuSansMono
-[[ -d ${PREFIX}/share/fonts ]] && {
-  rm -rf ${PREFIX}/share/fonts/*
-} || {
-  mkdir -p ${PREFIX}/share/fonts
-}
-wget --tries=20 --quiet https://github.com/ryanoasis/nerd-fonts/releases/download/$fontsV/Hack.zip \
+wget --tries=20 --quiet https://github.com/ryanoasis/nerd-fonts/releases/download/$fontV/Hack.zip \
   -O ${PREFIX}/share/fonts/Hack.zip
-unzip ${PREFIX}/share/fonts/Hack.zip -d ${PREFIX}/share/fonts/
-rm -rf ${PREFIX}/share/fonts/Hack.zip
+if [[ -d ${PREFIX}/share/fonts/Hack.zip ]]; then
+  unzip -q ${PREFIX}/share/fonts/Hack.zip -d ${PREFIX}/share/fonts/
+  rm -rf ${PREFIX}/share/fonts/Hack.zip
+else
+  echo -en "${R}E:$W Fonts zip file is missing or unreacheble."
+fi
 
 # SET ROOT USER IF DEVICE IS ROOTED
 if chk-root;then
@@ -100,16 +96,16 @@ fi
 echo "Updating mlocate data base ..."
 updatedb
 
-echo "Setting vim text editor ..."
-pyPATH=$(python -m pip show jedi|grep "Location"|awk -F ":" '{print $NF}')
-cat <<- EOF > ${HOME}/.vim/coc-settings.json
-{
-  "python.jediPath": "$pyPATH"
-}
-EOF
-npm install -g neovim
-vim +PluginInstall +PlugUpdate +CocInstall +coc-clangd +coc-sh +coc-jedi +x +x +x
-cd;tput init
+# UPDATE NUN I-HAKLAB PACKAGES 
+for i in $(grep ")" ${HOME}/.local/libexec/pkg2conf|grep -iv "("|tr "|" "\n"|tr -d ")"|sed "s|\t||"|tr -d " "); do
+  [[ $i == "neovim" ]] && { i="nvim";}
+  [[ $i == "tigervnc" ]] && { i="Xvnc";}
+  [[ $i == "clamav" ]] && { i="clamdscan";}
+  [[ $i == "proxychains-ng" ]] && { i="proxychains4";}
+  [[ $i == "apache2" ]] && { i="apachectl";}
+  ! command -v $i >/dev/null || { bash ${HOME}/.local/libexec/pkg2conf $i;}
+done
+
 # RESTORE PREVIOUS PASSWORD IF DEFAULT WAS CHANGED
 [[ -e ${HOME}/.local/etc/i-Haklab/.IbyC ]] && {
 	cat ${HOME}/.local/etc/i-Haklab/.IbyC > ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella;

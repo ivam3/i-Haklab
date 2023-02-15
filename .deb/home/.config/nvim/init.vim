@@ -133,6 +133,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+" Let AutoFix
+let mapleader = ','
 
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)

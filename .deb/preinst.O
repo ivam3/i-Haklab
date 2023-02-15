@@ -15,12 +15,12 @@ else
   [[ -e ${PREFIX}/etc/motd ]] && { rm -rf ${PREFIX}/etc/motd;}
   [[ -e ${PREFIX}/etc/motd.dpkg-old ]] && { rm -rf ${PREFIX}/etc/motd.dpkg-old;}
   mkdir -p ${HOME}/go/bin
-	[[ -e $HOME/.local/etc/i-Haklab/.Ivam3byCinderella ]] && {
-		echo "Keeping previous password ..."
-		[[ "Ivam3byCinderella" = $(cat $HOME/.local/etc/i-Haklab/.Ivam3byCinderella|openssl enc -aes-256-cbc -md sha512 -a -d -pbkdf2 -iter 100000 -salt -pass pass:Secret@123#) ]] || {
-			cp ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella ${HOME}/.local/etc/i-Haklab/.IbyC;
-		}
-	}
+#	[[ -e $HOME/.local/etc/i-Haklab/.Ivam3byCinderella ]] && {
+#		echo "Keeping previous password ..."
+#		[[ "Ivam3byCinderella" = $(cat $HOME/.local/etc/i-Haklab/.Ivam3byCinderella|openssl enc -aes-256-cbc -md sha512 -a -d -pbkdf2 -iter 100000 -salt -pass pass:Secret@123#) ]] || {
+#			cp ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella ${HOME}/.local/etc/i-Haklab/.IbyC;
+#		}
+#	}
 	[[ -e ${HOME}/.local/libexec/i-Haklab.login ]] && {
 		echo "Keeping previous setting ..."
 		cp ${HOME}/.local/libexec/i-Haklab.login ${HOME}/.local/libexec/i-Haklab.login.backup;

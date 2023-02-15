@@ -6,6 +6,7 @@ export version='v.3.6'
 export iHETC='/data/data/com.termux/files/home/.local/etc/i-Haklab'
 export iHLIBEXEC='/data/data/com.termux/files/home/.local/libexec/i-Haklab'
 export iHDB='https://raw.githubusercontent.com/ivam3/i-Haklab/master/.deb/home'
+export SDCARD=$(df|grep fuse|grep storage|grep -iv emulated|awk -F " " '{print $NF}')
 export PKGDB='https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/packages'
 export JAVADB='https://raw.githubusercontent.com/ivam3/java/master'
 export USER=$(grep -n 'set USER' '/data/data/com.termux/files/home/.local/etc/fish/config.fish'|awk -F " " '{print $3}')
