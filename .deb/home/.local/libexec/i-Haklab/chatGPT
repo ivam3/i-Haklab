@@ -1,60 +1,178 @@
-#!/bin/bash
+#!/usr/bin/bash
+IFS=$'\n\t'
 trap ctrl_c 2
 source ${HOME}/.local/etc/i-Haklab/variables
 source $iHETC/functions
 
 chk-pkg curl curl
 chk-pkg jq jq
-
-cxc(){
-  for i in "Goodbye" "goodbye" "Exit" "exit" "Adios" "adios";do
-    [[ "${@:1}" == "$i" ]] && { break;return 0;}
-  done
-}
-
-request(){
-  request=$(curl -s https://api.openai.com/v1/completions \
-    -H "Content-Type: application/json" \
-    -H "Authorization: Bearer $OpenAIkey" \
-    -d '{
-    "model": "text-davinci-003",
-    "prompt": "'"${@:1}"'",
-    "temperature": 0.9,
-    "max_tokens": 150,
-    "top_p": 1,
-    "frequency_penalty": 0.0,
-    "presence_penalty": 0.6,
-    "stop": [" Human:", " AI:"]
-  }')
-  answer=$(echo $request|jq -r '.choices[0].text')
-}
-
+chk-pkg termimage termimage
 banner
-key=$(grep "OpenAIkey" $iHETC/variables)
-[[ -z $OpenAIkey ]] || [[ "$1" == "setkey" ]] && {
+key=$(grep "OPENAI_KEY" $iHETC/variables)
+[[ -z $OPENAI_KEY ]] || [[ "$1" == "setkey" ]] && {
   echo -en "$Y[!]$W OpenAI API key needed$Y |$W Get it on https://platform.openai.com/account/api-keys\n$Y ╰──➤$W "
   while read apikey && [ -z $apikey ];do
     echo -en "$Y ╰──➤$W "
   done
-  sed -i "s|$key|OpenAIkey=\"$apikey\"|" $iHETC/variables
+  sed -i "s|$key|OPENAI_KEY=\"$apikey\"|" $iHETC/variables
   source $iHETC/variables
 }
 
-request "say hello"
-if [[ "$answer" != "null" ]]; then
-  echo -en "${B}Hello $Y$USER$B, I am$G ChatGPT$B, How can I help you today?"
+CHAT_INIT_PROMPT="You are ChatGPT, a Large Language Model trained by OpenAI. You will be answering questions from users. You answer as concisely as possible for each response (e.g. don’t be verbose). If you are generating a list, do not have too many items. Keep the number of items short. Before each user prompt you will be given the chat history in Q&A form. Output your answer directly, with no labels in front. Do not start your answers with A or Anwser. You were trained on data up until 2021"
 
-  while true; do
-    echo -en "\n\n$Y$USER:$gray " && read message
-    if cxc "$message"; then break;fi
-    request "$message"
-    echo -en "${G}ChatGPT:$gray $answer"
-  done
+# Error handling function
+# $1 should be the response body
+handleError() {
+	if echo "$1" | jq -e '.error' >/dev/null; then
+		echo -en "${R}E: Your request to Open AI API failed:$W $(echo $1 | jq -r '.error.type')"
+		echo $1 | jq -r '.error.message'
+		exit 1
+	fi
+}
 
-  echo -en "$B\nGoodbye $Y$USER$B Have a great hacking day!!.$W"
-  exit 0
-else
-  echo -en "${R}E:$W Invalid API key."
-  sed -i "s|$key|OpenAIkey=\"\"|" $iHETC/variables
-  exit 1
+# parse command line arguments
+while [[ "$#" -gt 0 ]]; do
+	case $1 in
+	-t | --temperature)
+		TEMPERATURE="$2"
+		shift
+		shift
+		;;
+	--max-tokens)
+		MAX_TOKENS="$2"
+		shift
+		shift
+		;;
+	-m | --model)
+		MODEL="$2"
+		shift
+		shift
+		;;
+	-s | --size)
+		SIZE="$2"
+		shift
+		shift
+		;;
+	-c | --chat-context)
+		CONTEXT=true
+		shift
+		shift
+		;;
+	*)
+		echo -e "${R}E:$W Unknown parameter: $1"
+		exit 1
+		;;
+	esac
+done
+
+# set defaults
+TEMPERATURE=${TEMPERATURE:-0.7}
+MAX_TOKENS=${MAX_TOKENS:-1024}
+MODEL=${MODEL:-text-davinci-003}
+SIZE=${SIZE:-512x512}
+CONTEXT=${CONTEXT:-false}
+
+echo -e "Welcome to ${C}chatgpt$W. You can quit with '${G}exit$W'."
+running=true
+
+# create history file
+if [ ! -f ~/.chatgpt_history ]; then
+	touch ~/.chatgpt_history
+	chmod a+rw ~/.chatgpt_history
 fi
+
+while $running; do
+	echo -en "$G\n$USER$W\n" && read prompt
+
+	if [ "$prompt" == "exit" ];then
+		running=false
+    echo -en "$B\nGoodbye $Y$USER$B Have a great hacking day!!.$W"
+	elif [[ "$prompt" =~ ^image: ]]; then
+		image_response=$(curl https://api.openai.com/v1/images/generations \
+			-sS \
+			-H 'Content-Type: application/json' \
+			-H "Authorization: Bearer $OPENAI_KEY" \
+			-d '{
+    		"prompt": "'"${prompt#*image:}"'",
+    		"n": 1,
+    		"size": "'"$SIZE"'"
+			}')
+		handleError "$image_response"
+		image_url=$(echo $image_response | jq -r '.data[0].url')
+		echo -en "${C}chatgpt$W Your image was created. \n$Y\nLink:$W ${image_url}\n$Y\nIt could be open in:$W\n"
+    select opc in termux browser skip; do
+      if [ "$opc" == "termux" ]; then
+        curl -sS $image_url -o ${TMPDIR}/temp_image.png
+			  termimage -f ${TMPDIR}/temp_image.png
+			  rm ${TMPDIR}/temp_image.png
+      elif [ "$opc" == "browser" ]; then
+        open "${image_url}"
+      else
+        break
+      fi
+    done
+
+  elif [[ "$prompt" == "history" ]]; then
+		echo -e "\n$(bat ~/.chatgpt_history)"
+	elif [[ "$prompt" == "models" ]]; then
+		models_response=$(curl https://api.openai.com/v1/models \
+			-sS \
+			-H "Authorization: Bearer $OPENAI_KEY")
+		handleError "$models_response"
+		models_data=$(echo $models_response | jq -r -C '.data[] | {id, owned_by, created}')
+		echo -e "\n${C}chatgpt$W This is a list of models currently available at OpenAI API:\n ${models_data}"
+	elif [[ "$prompt" =~ ^model: ]]; then
+		models_response=$(curl https://api.openai.com/v1/models \
+			-sS \
+			-H "Authorization: Bearer $OPENAI_KEY")
+		handleError "$models_response"
+		model_data=$(echo $models_response | jq -r -C '.data[] | select(.id=="'"${prompt#*model:}"'")')
+		echo -e "\n${C}chatgpt$W Complete data for model: ${prompt#*model:}\n ${model_data}"
+	else
+		# escape quotation marks
+		escaped_prompt=$(echo "$prompt" | sed 's/"/\\"/g')
+		# escape new lines
+		request_prompt=${escaped_prompt//$'\n'/' '}
+
+		if [ "$CONTEXT" = true ]; then
+			# build chat context
+			if [ -z "$chat_context" ]; then
+				chat_context="$CHAT_INIT_PROMPT\nQ: $escaped_prompt"
+			else
+				chat_context="$chat_context\nQ: $escaped_prompt"	
+			fi
+			request_prompt="${chat_context//$'\n'/\\n}"	
+		fi
+
+		# request to OpenAI API
+		response=$(curl https://api.openai.com/v1/completions \
+			-sS \
+			-H 'Content-Type: application/json' \
+			-H "Authorization: Bearer $OPENAI_KEY" \
+			-d '{
+  			"model": "'"$MODEL"'",
+  			"prompt": "'"${request_prompt}"'",
+  			"max_tokens": '$MAX_TOKENS',
+  			"temperature": '$TEMPERATURE'
+			}')
+		handleError "$response"
+		response_data=$(echo $response | jq -r '.choices[].text' | sed '1,2d; s/^A://g')
+		echo -e "\n${C}chatgpt$W\n${response_data}"
+
+		if [ "$CONTEXT" = true ]; then
+			# add response to chat context as answer
+			chat_context="$chat_context${chat_context:+\n}\nA: ${response_data//$'\n'/\\n}"
+			# check prompt length, 1 word =~ 1.3 tokens
+			# reserving 100 tokens for next user prompt
+			while (( $(echo "$chat_context" | wc -c)*1,3 > (MAX_TOKENS-100) )); do
+				# remove first/oldest QnA from prompt
+				chat_context=$(echo "$chat_context" | sed -n '/Q:/,$p' | tail -n +2)
+				# add init prompt so it is always on top
+				chat_context="$CHAT_INIT_PROMPT $chat_context"
+			done
+		fi
+
+		timestamp=$(date +"%d/%m/%Y %H:%M")
+		echo -e "$timestamp $prompt \n$response_data \n" >>~/.chatgpt_history
+	fi
+done
