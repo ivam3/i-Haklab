@@ -4,10 +4,14 @@ trap ctrl_c 2
 source ${HOME}/.local/etc/i-Haklab/variables
 source $iHETC/functions
 
-chk-pkg curl curl
 chk-pkg jq jq
+chk-pkg curl curl
+chk-pkg ffmpeg ffmpeg
 chk-pkg termimage termimage
+chk-pkg termux-api-start termux-api
+chk-pkg termux-gui-view termux-gui-package
 banner
+
 key=$(grep "OPENAI_KEY" $iHETC/variables)
 [[ -z $OPENAI_KEY ]] || [[ "$1" == "setkey" ]] && {
   echo -en "$Y[!]$W OpenAI API key needed$Y |$W Get it on https://platform.openai.com/account/api-keys\n$Y ╰──➤$W "
@@ -100,17 +104,31 @@ while $running; do
 		handleError "$image_response"
 		image_url=$(echo $image_response | jq -r '.data[0].url')
 		echo -en "${C}chatgpt$W Your image was created. \n$Y\nLink:$W ${image_url}\n$Y\nIt could be open in:$W\n"
-    select opc in termux browser skip; do
-      if [ "$opc" == "termux" ]; then
-        curl -sS $image_url -o ${TMPDIR}/temp_image.png
-			  termimage -f ${TMPDIR}/temp_image.png
-			  rm ${TMPDIR}/temp_image.png
+    select opc in termuxAPP termuxGUI androidAPP browser wayland skip; do
+      curl -sS $image_url -o ${TMPDIR}/temp_image.png
+      if [ "$opc" == "termuxAPP" ]; then
+        ffmpeg -i ${TMPDIR}/temp_image.png -vf scale=512:512 ${TMPDIR}/temp_image512.png &>/dev/null
+			  termimage ${TMPDIR}/temp_image512.png
+      elif [ "$opc" == "wayland" ]; then
+        [[ -e ${TMPDIR}/wayland-0 ]] || {
+          export DISPLAY=:0
+          export XDG_RUNTIME_DIR=${TMPDIR}
+          ! command -v termux-x11 &>/dev/null || { Xbin="termux-x11";} || { Xbin="Xwayland";}
+          $(command -v $Xbin) :0 >/dev/null &
+          sleep 5
+        }
+        ristretto --display=:0 ${TMPDIR}/temp_image.png
+      elif [ "$opc" == "termuxGUI" ]; then
+        termux-gui-view -n 15 ${TMPDIR}/temp_image.png 2>/dev/null
+      elif [ "$opc" == "androidAPP" ]; then
+        termux-share ${TMPDIR}/temp_image.png
       elif [ "$opc" == "browser" ]; then
-        open "${image_url}"
+        termux-open-url "${image_url}"
       else
         break
       fi
     done
+    rm ${TMPDIR}/*.png
 
   elif [[ "$prompt" == "history" ]]; then
 		echo -e "\n$(bat ~/.chatgpt_history)"
