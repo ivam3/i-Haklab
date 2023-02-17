@@ -4,12 +4,8 @@ trap ctrl_c 2
 source ${HOME}/.local/etc/i-Haklab/variables
 source $iHETC/functions
 
-chk-pkg jq jq
-chk-pkg curl curl
 chk-pkg ffmpeg ffmpeg
 chk-pkg termimage termimage
-chk-pkg termux-api-start termux-api
-chk-pkg termux-gui-view termux-gui-package
 banner
 
 key=$(grep "OPENAI_KEY" $iHETC/variables)
@@ -175,7 +171,8 @@ while $running; do
 			}')
 		handleError "$response"
 		response_data=$(echo $response | jq -r '.choices[].text' | sed '1,2d; s/^A://g')
-		echo -e "\n${C}chatgpt$W\n${response_data}"
+		echo -e "\n${C}chatgpt$W"
+    echo "${response_data}"|bat  -f --theme 'Visual Studio Dark+'
 
 		if [ "$CONTEXT" = true ]; then
 			# add response to chat context as answer
