@@ -19,7 +19,11 @@ key=$(grep "OPENAI_KEY" $iHETC/variables)
 }
 
 CHAT_INIT_PROMPT="You are ChatGPT, a Large Language Model trained by OpenAI. You will be answering questions from users. You answer as concisely as possible for each response (e.g. don’t be verbose). If you are generating a list, do not have too many items. Keep the number of items short. Before each user prompt you will be given the chat history in Q&A form. Output your answer directly, with no labels in front. Do not start your answers with A or Anwser. You were trained on data up until 2021"
-
+TIP[0]="To generate images, start a prompt with $Y'image:'$W"
+TIP[1]="To view your chat history, type $Y'history'$W"
+TIP[2]="To get a list of the models available at OpenAI API, type $Y'models'$W"
+TIP[3]="To view all the information on a specific model\n     start a prompt with $Y'model:'$W and the model $Y'id'$W."
+TIP[4]="For a full usage guide run in shell $G'i-Haklab about chatgpt'$W."
 # Error handling function
 # $1 should be the response body
 handleError() {
@@ -71,8 +75,9 @@ MAX_TOKENS=${MAX_TOKENS:-1024}
 MODEL=${MODEL:-text-davinci-003}
 SIZE=${SIZE:-512x512}
 CONTEXT=${CONTEXT:-false}
+rand=$[ $RANDOM % 5 ]
 
-echo -e "Welcome to ${C}chatgpt$W. You can quit with '${G}exit$W'."
+echo -e "Welcome to ${C}chatgpt$W. You can quit with '${G}exit$Y'.\nTip:$W ${TIP[$rand]}"
 running=true
 
 # create history file
