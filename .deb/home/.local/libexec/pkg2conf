@@ -125,6 +125,7 @@ startxfce4
 		ln -s -f ${HOME}/.tmux/.tmux.conf
 		cp ${HOME}/.tmux/.tmux.conf.local .
 		sed -i "11a set-option -g default-shell ${PREFIX}/bin/fish" ~/.tmux/.tmux.conf
+    tmux source ${HOME}/.tmux.conf.local
 		;;
 
 	tor)

@@ -16,5 +16,5 @@ pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymou
 am start -n com.termux.x11/com.termux.x11.MainActivity;sleep 3
 [[ ! -z "$1" ]] && [[ "$1" == "Xwayland" ]] && { Xbin="$1";} || { Xbin="termux-x11";tip="Xwayland";}
 $(command -v $Xbin) :0 >/dev/null &
-sleep 3;env DISPLAY=:0 xfce4-session || echo -en "${R}E: Display unreachable $W|$Y Try it with: ${G}i-Haklab Xwayland $tip$W"
+sleep 5;env DISPLAY=:0 xfce4-session || echo -en "${R}E: Display unreachable $W|$Y Try it with: ${G}i-Haklab Xwayland $tip$W"
 ####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####
