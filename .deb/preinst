@@ -1,29 +1,12 @@
 #!/data/data/com.termux/files/usr/bin/bash
-if [[ $(id -u) -eq 0 ]]
-then
-  echo -en "\e[31m(_➤)\e[0m You need to be a common user"
-  exit 1
-else
-  [[ -d ${HOME}/.local/share/i-Haklab ]] && { rm -rf ${HOME}/.local/share/i-Haklab;}
-  [[ -d ${PREFIX}/share/fonts ]] && {
-	  echo "Deleting old version ..."
-    rm -rf ${PREFIX}/share/fonts/*
-  } || {
-    mkdir -p ${PREFIX}/share/fonts
-  }
-  [[ -e ${PREFIX}/etc/bashito ]] && { rm -rf ${PREFIX}/etc/bashito;}
-  [[ -e ${PREFIX}/etc/motd ]] && { rm -rf ${PREFIX}/etc/motd;}
-  [[ -e ${PREFIX}/etc/motd.dpkg-old ]] && { rm -rf ${PREFIX}/etc/motd.dpkg-old;}
-  mkdir -p ${HOME}/go/bin
-	[[ -e $HOME/.local/etc/i-Haklab/.Ivam3byCinderella ]] && {
-		echo "Keeping previous password ..."
-		[[ "Ivam3byCinderella" = $(cat $HOME/.local/etc/i-Haklab/.Ivam3byCinderella|openssl enc -aes-256-cbc -md sha512 -a -d -pbkdf2 -iter 100000 -salt -pass pass:Secret@123#) ]] || {
-			cp ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella ${HOME}/.local/etc/i-Haklab/.IbyC;
-		}
-	}
-	[[ -e ${HOME}/.local/libexec/i-Haklab.login ]] && {
-		echo "Keeping previous setting ..."
-		cp ${HOME}/.local/libexec/i-Haklab.login ${HOME}/.local/libexec/i-Haklab.login.backup;
-	}
-fi
+[[ -d ${HOME}/.local/share/i-Haklab ]] && { rm -rf ${HOME}/.local/share/i-Haklab;}
+[[ -d ${PREFIX}/share/fonts ]] && {
+  echo "Deleting old version ..."
+  rm -rf ${PREFIX}/share/fonts/*
+} || {
+  mkdir -p ${PREFIX}/share/fonts
+}
+[[ -e ${PREFIX}/etc/bashito ]] && { rm -rf ${PREFIX}/etc/bashito;}
+[[ -e ${PREFIX}/etc/motd ]] && { rm -rf ${PREFIX}/etc/motd;}
+[[ -e ${PREFIX}/etc/motd.dpkg-old ]] && { rm -rf ${PREFIX}/etc/motd.dpkg-old;}
 ####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####

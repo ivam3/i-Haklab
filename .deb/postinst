@@ -6,8 +6,21 @@ source $iHETC/functions
 fontsV="v2.3.3"
 z=$(sleep 0.5)
 #
+# BACKUPING PREVIOUS SETTINGS
+[[ -e $HOME/.local/etc/i-Haklab/.Ivam3byCinderella ]] && {
+  echo "Keeping previous password ..."
+  [[ "Ivam3byCinderella" = $(cat $HOME/.local/etc/i-Haklab/.Ivam3byCinderella|openssl enc -aes-256-cbc -md sha512 -a -d -pbkdf2 -iter 100000 -salt -pass pass:Secret@123#) ]] || {
+    cp ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella ${HOME}/.local/etc/i-Haklab/.IbyC;
+  }
+}
+[[ -e ${HOME}/.local/libexec/i-Haklab.login ]] && {
+  echo "Keeping previous settings ..."
+  cp ${HOME}/.local/libexec/i-Haklab.login ${HOME}/.local/libexec/i-Haklab.login.backup;
+}
+
 # TOOLS STORAGE DIRECTORY (INTERNAL - EXTERNAL)
 echo "Getting access to external storage.";$z
+mkdir -p ${HOME}/go/bin
 s2=$(df|grep "fuse"|grep -iv emulated|awk -F " " '{print $6}')
 [[ -n $s2 ]] && [[ -w $s2 ]] && {
 	[[ -d $s2/Android/data/com.termux/files/tools ]] && [[ -s $s2/Android/data/com.termux/files/tools ]] && {
