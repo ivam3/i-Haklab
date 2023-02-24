@@ -5,18 +5,23 @@ source ${HOME}/.local/etc/i-Haklab/variables
 source $iHETC/functions
 fontsV="v2.3.3"
 z=$(sleep 0.5)
-#
+
+# PREINST
+[[ -e ${PREFIX}/etc/bashito ]] && { rm -rf ${PREFIX}/etc/bashito;}
+[[ -e ${PREFIX}/etc/motd ]] && { rm -rf ${PREFIX}/etc/motd;}
+[[ -e ${PREFIX}/etc/motd.dpkg-old ]] && { rm -rf ${PREFIX}/etc/motd.dpkg-old;}
+
 # BACKUPING PREVIOUS SETTINGS
-[[ -e $HOME/.local/etc/i-Haklab/.Ivam3byCinderella ]] && {
+if [[ -e $HOME/.local/etc/i-Haklab/.Ivam3byCinderella ]]; then
   echo "Keeping previous password ..."
   [[ "Ivam3byCinderella" = $(cat $HOME/.local/etc/i-Haklab/.Ivam3byCinderella|openssl enc -aes-256-cbc -md sha512 -a -d -pbkdf2 -iter 100000 -salt -pass pass:Secret@123#) ]] || {
     cp ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella ${HOME}/.local/etc/i-Haklab/.IbyC;
   }
-}
-[[ -e ${HOME}/.local/libexec/i-Haklab.login ]] && {
+fi
+if [[ -e ${HOME}/.local/libexec/i-Haklab.login ]]; then
   echo "Keeping previous settings ..."
-  cp ${HOME}/.local/libexec/i-Haklab.login ${HOME}/.local/libexec/i-Haklab.login.backup;
-}
+  cp ${HOME}/.local/libexec/i-Haklab.login ${HOME}/.local/libexec/i-Haklab.login.backup
+fi
 
 # TOOLS STORAGE DIRECTORY (INTERNAL - EXTERNAL)
 echo "Getting access to external storage.";$z
@@ -71,13 +76,18 @@ cat <<- CONF > $file
 #!/bin/env fish
 omf install will
 CONF
-fish $file
+fish $file >/dev/null 2>>$LOGFILE
 rm $file
 
 ## SETTING FONTS AS DejaVuSansMono
+[[ -d ${PREFIX}/share/fonts/ ]] && {
+  rm -rf ${PREFIX}/share/fonts/*
+} || {
+  mkdir -p ${PREFIX}/share/fonts
+}
 wget --tries=20 --quiet https://github.com/ryanoasis/nerd-fonts/releases/download/$fontV/Hack.zip \
   -O ${PREFIX}/share/fonts/Hack.zip
-if [[ -d ${PREFIX}/share/fonts/Hack.zip ]]; then
+if [[ -e ${PREFIX}/share/fonts/Hack.zip ]]; then
   unzip -q ${PREFIX}/share/fonts/Hack.zip -d ${PREFIX}/share/fonts/
   rm -rf ${PREFIX}/share/fonts/Hack.zip
 else
@@ -120,14 +130,14 @@ for i in $(grep ")" ${HOME}/.local/libexec/pkg2conf|grep -iv "("|tr "|" "\n"|tr 
 done
 
 # RESTORE PREVIOUS PASSWORD IF DEFAULT WAS CHANGED
-[[ -e ${HOME}/.local/etc/i-Haklab/.IbyC ]] && {
-	cat ${HOME}/.local/etc/i-Haklab/.IbyC > ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella;
-	rm -f ${HOME}/.local/etc/i-Haklab/.IbyC;
-}
-[[ -e ${HOME}/.local/libexec/i-Haklab.login.backup ]] && {
-	cat ${HOME}/.local/libexec/i-Haklab.login.backup > ${HOME}/.local/libexec/i-Haklab.login;
-	rm ${HOME}/.local/libexec/i-Haklab.login.backup;
-}
+if [[ -e ${HOME}/.local/etc/i-Haklab/.IbyC ]]; then
+	cat ${HOME}/.local/etc/i-Haklab/.IbyC > ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella
+	rm -f ${HOME}/.local/etc/i-Haklab/.IbyC
+fi
+if [[ -e ${HOME}/.local/libexec/i-Haklab.login.backup ]]; then
+	cat ${HOME}/.local/libexec/i-Haklab.login.backup > ${HOME}/.local/libexec/i-Haklab.login
+	rm ${HOME}/.local/libexec/i-Haklab.login.backup
+fi
 echo "[*] i-Haklab installation finished."
 echo "[*] run 'i-Haklab help' for a guide."
 echo "[*] Run 'fixer' to fix any posible issue."

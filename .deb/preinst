@@ -1,12 +1,2 @@
 #!/data/data/com.termux/files/usr/bin/bash
-[[ -d ${HOME}/.local/share/i-Haklab ]] && { rm -rf ${HOME}/.local/share/i-Haklab;}
-[[ -d ${PREFIX}/share/fonts ]] && {
-  echo "Deleting old version ..."
-  rm -rf ${PREFIX}/share/fonts/*
-} || {
-  mkdir -p ${PREFIX}/share/fonts
-}
-[[ -e ${PREFIX}/etc/bashito ]] && { rm -rf ${PREFIX}/etc/bashito;}
-[[ -e ${PREFIX}/etc/motd ]] && { rm -rf ${PREFIX}/etc/motd;}
-[[ -e ${PREFIX}/etc/motd.dpkg-old ]] && { rm -rf ${PREFIX}/etc/motd.dpkg-old;}
 ####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####
