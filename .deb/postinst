@@ -85,14 +85,16 @@ rm $file
 } || {
   mkdir -p ${PREFIX}/share/fonts
 }
-wget --tries=20 --quiet https://github.com/ryanoasis/nerd-fonts/releases/download/$fontV/Hack.zip \
-  -O ${PREFIX}/share/fonts/Hack.zip
-if [[ -e ${PREFIX}/share/fonts/Hack.zip ]]; then
-  unzip -q ${PREFIX}/share/fonts/Hack.zip -d ${PREFIX}/share/fonts/
-  rm -rf ${PREFIX}/share/fonts/Hack.zip
-else
-  echo -en "${R}E:$W Fonts zip file is missing or unreacheble."
-fi
+for i in ProFont Hack; do
+  wget --tries=20 --quiet https://github.com/ryanoasis/nerd-fonts/releases/download/$fontsV/$i.zip \
+    -O ${PREFIX}/share/fonts/$i.zip
+  if [[ -e ${PREFIX}/share/fonts/$i.zip ]]; then
+    unzip -qo ${PREFIX}/share/fonts/$i.zip -d ${PREFIX}/share/fonts/
+    rm -rf ${PREFIX}/share/fonts/$i.zip
+  else
+    echo -en "${R}E:$W Fonts ${i}.zip file is missing or unreacheble."
+  fi
+done
 
 # SET ROOT USER IF DEVICE IS ROOTED
 if chk-root;then
@@ -131,10 +133,12 @@ done
 
 # RESTORE PREVIOUS PASSWORD IF DEFAULT WAS CHANGED
 if [[ -e ${HOME}/.local/etc/i-Haklab/.IbyC ]]; then
+  echo "Restoring previous password."
 	cat ${HOME}/.local/etc/i-Haklab/.IbyC > ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella
 	rm -f ${HOME}/.local/etc/i-Haklab/.IbyC
 fi
 if [[ -e ${HOME}/.local/libexec/i-Haklab.login.backup ]]; then
+  echo "Restoring previous settings"
 	cat ${HOME}/.local/libexec/i-Haklab.login.backup > ${HOME}/.local/libexec/i-Haklab.login
 	rm ${HOME}/.local/libexec/i-Haklab.login.backup
 fi
