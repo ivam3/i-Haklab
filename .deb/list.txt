@@ -1,0 +1,15 @@
+Listing...
+dpkg
+gvfs
+libnotify
+libwayland-protocols
+libwayland
+parole
+thunar-static
+thunar
+vim-gtk
+webkit2gtk-4.1
+whois
+xfce4-notifyd-static
+xfce4-notifyd
+xwayland

@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.6.11",
+  "version": "3.6.12",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -3105,7 +3105,6 @@
 		"home/.local/var/service/www/servers4test/bWAPP/images/facebook.png": "/data/data/com.termux/files/home/.local/var/service/www/servers4test/bWAPP/images/facebook.png",
 		"home/.local/var/service/www/servers4test/bWAPP/images/sb_1.jpg": "/data/data/com.termux/files/home/.local/var/service/www/servers4test/bWAPP/images/sb_1.jpg",
 		"home/.local/var/service/www/servers4test/bWAPP/images/mk.png": "/data/data/com.termux/files/home/.local/var/service/www/servers4test/bWAPP/images/mk.png",
-		"home/.local/libexec/followps": "/data/data/com.termux/files/home/.local/libexec/followps",
     "home/.local/libexec/QG_aircrack-ng": "/data/data/com.termux/files/home/.local/libexec/QG_aircrack-ng",
 		"home/.local/libexec/QG_nmap": "/data/data/com.termux/files/home/.local/libexec/QG_nmap",
 		"home/.local/libexec/osrframework": "/data/data/com.termux/files/home/.local/libexec/osrframework",

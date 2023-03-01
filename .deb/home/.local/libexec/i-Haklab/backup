@@ -32,7 +32,7 @@ case "$1" in
       exit 0
     }
     cd ${PREFIX}/..
-    echo "tar -zcvf $SDCARD/termux-backup$date.tar.gz home usr"
+    tar -zcvf $SDCARD/termux-backup$date.tar.gz home usr
     [[ -e $SDCARD/termux-backup$date.tar.gz ]] && {
       echo -en "$G[+]$W DONE!!\n$G ╰──➤ Saved:$W $SDCARD/termux-backup$date.tar.gz"
     }
