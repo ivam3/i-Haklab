@@ -32,13 +32,19 @@ Plug 'maximbaz/lightline-ale' " Tema de la barra inferior
 Plug 'joshdick/onedark.vim' " Tema OneDark
 Plug 'nvim-lua/plenary.nvim' "Popup de buqueda de líneas
 Plug 'nvim-telescope/telescope.nvim' "Popup de búsqueda de archivos
+Plug 'nvim-treesitter/nvim-treesitter' " Resaltado de texto
 Plug 'ap/vim-buftabline' "Barra superior (pestañas de archivos)
 Plug 'preservim/nerdtree' "Arbol de directorios
 Plug 'camspiers/lens.vim' "Redimensiona el tamaño de la ventana de vim
 Plug 'neoclide/coc.nvim', {'branch': 'release'} "Conquer Of Completion
-Plug 'Yggdroot/indentLine' "Indent lines with shadow lines 
+Plug 'Yggdroot/indentLine' "Indent lines with shadow lines
+Plug 'godlygeek/tabular' "Identacion para markdown
+Plug 'plasticboy/vim-markdown' "Sintaxis para markdoen
 "Plug 'michaelb/sniprun' "Ejectua codigo sin salir de vim
 call plug#end()
+
+" Let AutoFix
+let mapleader = ','
 
 " A buftabline controler for vim
 " set hidden
@@ -47,7 +53,14 @@ nnoremap <C-p> :bprev<CR>
 
 " admin de archivos con git
 nmap <C-G> :Telescope git_files hidden=true <CR>
-nmap <C-L> :Telescope live_grep <CR>
+
+" Grepeo masivo de archivos y contenido de archivos
+nnoremap <leader>ff :Telescope find_files <CR>
+nmap <leader>fg :Telescope live_grep <CR>
+nmap <leader>fb :Telescope buffers <CR>
+nmap <leader>fh :Telescope help_tags <CR>
+nnoremap <leader>fc :Telescope colorscheme <CR>
+nnoremap <leader>f/ :Telescope current_buffer_fuzzy_find <CR>
 
 " Start Terminal using PowerShell 7 (Preview)
 " For default shell, remove '://pwsh.exe'
@@ -58,12 +71,12 @@ nmap <C-L> :Telescope live_grep <CR>
 nmap <C-t> :split term://fish<cr>
 
 "admin de archivos 
-:let g:NERDTreeWinSize=40
+:let g:NERDTreeWinSize=20
 ""Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 """Open NERDTreeToggle
 nmap <C-w> :NERDTreeToggle<cr>
-nmap <C-s> :NERDTreeFind<cr>
+nmap <C-W> :NERDTreeFind<cr>
 
 " COC configurations
 " Some servers have issues with backup files, see #649.
@@ -133,8 +146,6 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
-" Let AutoFix
-let mapleader = ','
 
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
@@ -219,5 +230,8 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+" ====================================
+" Colores de temas disponibles
+" ====================================
 colorscheme onedark  " Nombre del tema
 
