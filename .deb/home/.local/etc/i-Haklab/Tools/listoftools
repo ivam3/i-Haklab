@@ -3,6 +3,7 @@ adbfastboot
 adminpanel
 amass
 androbugs
+androidsdk-cli
 apksigner
 apktool
 appshark
@@ -88,6 +89,7 @@ routersploit
 saycheese
 sayhello
 scrapy
+scrcpy
 seeker
 shc
 shellsploit-framework

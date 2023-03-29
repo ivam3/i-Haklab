@@ -50,7 +50,7 @@ usage() {
 #::::: REQUERIMENTS :::::#
 Requirements(){
 	printf "$G\n(➤_)$W Installing requirements (It could take a while)...\n"
-	for req in build-essential python python2 curl tar wget ruby clang make nodejs pkg-config \
+	for req in build-essential python python-pip python2 curl tar wget ruby clang make nodejs pkg-config \
     openblas libgmp libmpc libmpc-static libmpfr libtool libxml2 libxml2-static libxml2-utils \
     libxslt libxslt-static libsodium libsodium-static libjpeg-turbo libpng libzmq
   do
@@ -59,7 +59,7 @@ Requirements(){
 		fi
 	done
 	printf "$G(➤_)$W Upgrading pip ...\n"
-	$py -m pip --no-color --quiet --no-cache-dir install --upgrade pip 2>/dev/null
+#	$py -m pip --no-color --quiet --no-cache-dir install --upgrade pip 2>/dev/null
 	$py -m pip --no-color --quiet --no-cache-dir install wheel 2>/dev/null
 }
 

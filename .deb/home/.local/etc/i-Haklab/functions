@@ -147,7 +147,7 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 ╰speedtest───➤───────────────────➤ Run a speed test of your network
 ╰─version────➤───────────────────➤ Show i-Haklab version installed
 ╰─weechat────➤───────────────────➤ Connect with irc Ivam3byCinderella chat
-╰─Xwayland───➤───────────────────➤ Run xserver over Termux:wayland app with xfce4 as window manager
+╰─Xwayland───➤───────────────────➤ Run xserver over TermuXwayland app with xfce4 as window manager
 |            |                   |
 |            |                   |
 $Y       [--] Automatitation Options [--]$W
@@ -216,7 +216,6 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰bat─────────────────────────────➤ Use it instead of command 'cat' for text highlighting
 ╰df──────────────────────────────➤ Provides information about the mounted memory
 ╰du──────────────────────────────➤ Provides recursive information about the weight of directories and files
-╰followps────────────────────────➤ Provides the activity of a process running in the background
 ╰fixer───────────────────────────➤ Automate process to fix Termux issues
 ╰LOCALHOST───────────────────────➤ Show the current internet protocol over LAN
 ╰lock────────────────────────────➤ Block Termux's screen
