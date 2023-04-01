@@ -70,6 +70,7 @@ set softwrap
 	neovim)
     npm install -g neovim
 		[[ -d ${HOME}/.config/nvim ]] && { mkdir -p ${HOME}/.config/nvim;}
+    touch ${HOME}/.config/nvim/coc-settings.json
     wget --tries=20 --quiet $iHDB/.config/nvim/init.vim -O ${HOME}/.config/nvim/init.vim
     python -m pip --no-color --quiet --no-cache-dir install neovim jedi
     pyPATH=$(python -m pip show jedi|grep "Location"|awk -F ":" '{print $NF}')
