@@ -20,7 +20,6 @@ internal(){
 	banner
 	[[ $# -eq 0 ]] && { usage;}
 	while getopts f:u:d:h opts; do
-		echo uno
 		case $opts in
 			h) usage
 				;;
@@ -39,7 +38,7 @@ internal(){
 			p) pass=$OPTARG
 				passwd="--password $pass"
 				;;
-			*) echo tres;usage
+			*) usage
 				;;
 		esac
 

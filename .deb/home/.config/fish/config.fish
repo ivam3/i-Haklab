@@ -1,7 +1,8 @@
-function rmcache
-	if test "~/.cache"
-    rm -rf ~/.cache
-  end
-  dpkg -l|grep '^rc'|awk '{print $2}'|xargs dpkg --purge 2>/dev/null
-  echo "Termux cache was removed."
+if status is-interactive
+  # Commands to run in interactive sessions can go here
+	# Example :
+  #  if CONDITION; COMMANDS_TRUE ...;
+	#  [else if CONDITION2; COMMANDS_TRUE2 ...;]
+	#  [else; COMMANDS_FALSE ...;]
+	#  end
 end

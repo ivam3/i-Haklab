@@ -14,10 +14,10 @@ ip(){ proxychains4 -q curl -s ifconfig.so 2>/dev/null;}
 case "$1" in
 	start)
 		[[ Tor -eq 0 ]] && {
-			echo "Proxy is activated";
+			echo "Proxy is activated"
 		} || {
 			tor >/dev/null 2>/dev/null &
-			sleep 3
+			sleep 6
 			echo -en "Proxy enable over:  \b";ip;
 		}
 		;;

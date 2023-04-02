@@ -79,8 +79,8 @@ case $opts in
 		fi
 		APIKEYFILE=$MSFPATH/documentation/api/apikey
 		if [[ ! $(cat $APIKEYFILE) ]];then
-			printf "$Y(_➤)$W Type your shodan APIKEY "
-			while read -p "(_➤) " ANSW && [ -z $ANSW ]; do
+			printf "$Y(_➤)$W Type your shodan APIKEY"
+			while read -p ": " ANSW && [ -z $ANSW ]; do
 				printf "$R(_➤)$W Go to www.shodan.io to get your APIKEY\n"
 				exit
 			done

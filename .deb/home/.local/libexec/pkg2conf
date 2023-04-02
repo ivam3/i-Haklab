@@ -69,7 +69,7 @@ set softwrap
 
 	neovim)
     npm install -g neovim
-		[[ -d ${HOME}/.config/nvim ]] && { mkdir -p ${HOME}/.config/nvim;}
+    [[ -d ${HOME}/.config/nvim ]] && { mkdir -p ${HOME}/.config/nvim;}
     touch ${HOME}/.config/nvim/coc-settings.json
     wget --tries=20 --quiet $iHDB/.config/nvim/init.vim -O ${HOME}/.config/nvim/init.vim
     python -m pip --no-color --quiet --no-cache-dir install neovim jedi
@@ -79,7 +79,7 @@ set softwrap
   "python.jediPath": "$pyPATH"
 }
     CONF
-    vim +PlugInstall +PlugUpdate +CocInstall +coc-clangd +coc-sh +coc-jedi +x +x +x
+    nvim +PlugInstall +PlugUpdate +CocInstall coc-clangd coc-sh coc-jedi +x +x +x
     ;;
 
   privoxy)

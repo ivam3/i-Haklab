@@ -222,7 +222,7 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰osrframework────────────────────➤ OSINT setoolkit
 ╰mypip───────────────────────────➤ Show your public internet protocol
 ╰omf─theme───────────────────────➤ Change Oh-my-fish theme
-╰postgresql──────────────────────➤ Star stop or restart postgres data base
+╰postgresql──────────────────────➤ Start, stop or restart postgres data base
 ╰proxy───────────────────────────➤ Execute cli commands over tor proxychains
 ╰rmcache─────────────────────────➤ Remove current session cache, temporal files & residual APT packages.
 ╰serverapache────────────────────➤ Init apache server
