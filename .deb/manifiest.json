@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.6.14",
+  "version": "3.6.15",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -26,6 +26,7 @@
 		"home/.config/fish/functions/proxy.fish": "/data/data/com.termux/files/home/.config/fish/functions/proxy.fish",
 		"home/.config/fish/functions/i-Haklab.fish": "/data/data/com.termux/files/home/.config/fish/functions/i-Haklab.fish",
 		"home/.config/fish/functions/df.fish": "/data/data/com.termux/files/home/.config/fish/functions/df.fish",
+		"home/.config/fish/functions/du.fish": "/data/data/com.termux/files/home/.config/fish/functions/du.fish",
 		"home/.config/fish/functions/apt.fish": "/data/data/com.termux/files/home/.config/fish/functions/apt.fish",
 		"home/.config/fish/functions/rmcache.fish": "/data/data/com.termux/files/home/.config/fish/functions/rmcache.fish",
 		"home/.config/fish/functions/adminfiles.fish": "/data/data/com.termux/files/home/.config/fish/functions/adminfiles.fish",
@@ -3187,6 +3188,7 @@
 		"home/.local/libexec/osrframework": "/data/data/com.termux/files/home/.local/libexec/osrframework",
 		"home/.local/libexec/serverphp": "/data/data/com.termux/files/home/.local/libexec/serverphp",
 		"home/.local/libexec/proxy": "/data/data/com.termux/files/home/.local/libexec/proxy",
+		"home/.local/libexec/usbtest": "/data/data/com.termux/files/home/.local/libexec/usbtest",
 		"home/.local/libexec/i-Haklab.login": "/data/data/com.termux/files/home/.local/libexec/i-Haklab.login",
 		"home/.local/libexec/i-Haklab/servers4test": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/servers4test",
 		"home/.local/libexec/i-Haklab/apkactivity": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/apkactivity",
