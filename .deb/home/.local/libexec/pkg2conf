@@ -68,10 +68,11 @@ set softwrap
 		;;
 
 	neovim)
-		yes|pkg i lua-language-server >/dev/null 2>/dev/null
-    npm install -g bash-language-server pyright >/dev/null 2>/dev/null #neovim
 		[[ -d ${HOME}/.config/nvim ]] && { mkdir -p ${HOME}/.config/nvim;}
     wget --tries=20 --quiet $iHDB/.config/nvim/init.lua -O ${HOME}/.config/nvim/init.lua
+    npm install -g neovim bash-language-server pyright >/dev/null 2>/dev/null #neovim
+    python -m pip --no-color --quiet --no-cache-dir install neovim
+		yes|pkg i lua-language-server >/dev/null 2>/dev/null
     #touch ${HOME}/.config/nvim/coc-settings.json
     #python -m pip --no-color --quiet --no-cache-dir install neovim jedi
     #pyPATH=$(python -m pip show jedi|grep "Location"|awk -F ":" '{print $NF}')
