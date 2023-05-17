@@ -51,6 +51,12 @@ let mapleader = ','
 nnoremap <C-n> :bnext<CR>
 nnoremap <C-p> :bprev<CR>
 
+" A bufresize windows in vim
+nnoremap <silent> <Leader>h+ :exe "resize " . (winheight(0) * 5/4)<CR>
+nnoremap <silent> <Leader>h- :exe "resize " . (winheight(0) * 4/5)<CR>
+nnoremap <silent> <Leader>w+ :exe "vertical resize " . (winwidth(0) * 5/4)<CR>
+nnoremap <silent> <Leader>w- :exe "vertical resize " . (winwidth(0) * 4/5)<CR>
+
 " admin de archivos con git
 nmap <C-G> :Telescope git_files hidden=true <CR>
 
@@ -69,14 +75,16 @@ nnoremap <leader>f/ :Telescope current_buffer_fuzzy_find <CR>
 "       :vsplit term://top
 " For more :help terminal
 nmap <C-t> :split term://fish<cr>
+nmap <C-c> :q!<cr>
+nmap <C-x> :x<cr>
 
 "admin de archivos 
 :let g:NERDTreeWinSize=20
 ""Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 """Open NERDTreeToggle
-nmap <C-w> :NERDTreeToggle<cr>
-nmap <C-W> :NERDTreeFind<cr>
+nmap <C-d> :NERDTreeToggle<cr>
+nmap <C-D> :NERDTreeFind<cr>
 
 " COC configurations
 " Some servers have issues with backup files, see #649.

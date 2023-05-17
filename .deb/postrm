@@ -1,1 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
+for i in pynvim jedi trufflehog wheel speedtest-cli frida pipenv shodan; do
+  [[ $(python -m pip list|grep $i 2>/dev/null) ]]  && { echo "python -m pip uninstall $i";}
+done
+npm uninstall -g neovim localtunnel bash-language-server
+[[ -d ${HOME}/.config/fish ]] && { rm -rf ${HOME}/.confg/fish }
+[[ -d ${PREFIX}/share/fonts ]] && { rm -rf ${PREFIX}/share/fonts }

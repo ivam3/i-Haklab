@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.6.15",
+  "version": "3.7.0",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -3188,7 +3188,6 @@
 		"home/.local/libexec/osrframework": "/data/data/com.termux/files/home/.local/libexec/osrframework",
 		"home/.local/libexec/serverphp": "/data/data/com.termux/files/home/.local/libexec/serverphp",
 		"home/.local/libexec/proxy": "/data/data/com.termux/files/home/.local/libexec/proxy",
-		"home/.local/libexec/usbtest": "/data/data/com.termux/files/home/.local/libexec/usbtest",
 		"home/.local/libexec/i-Haklab.login": "/data/data/com.termux/files/home/.local/libexec/i-Haklab.login",
 		"home/.local/libexec/i-Haklab/servers4test": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/servers4test",
 		"home/.local/libexec/i-Haklab/apkactivity": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/apkactivity",
