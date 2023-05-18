@@ -14,6 +14,9 @@ key=$(grep "OPENAI_KEY" $iHETC/variables)
     echo -en "$Y ╰──➤$W "
   done
   sed -i "s|$key|export OPENAI_KEY=\"$apikey\"|" $iHETC/variables
+  [[ -e ${HOME}/.config/nvim/init.lua ]] && {
+    sed -i "s|OPENAI_KEY|$apikey|" ${HOME}/.config/nvim/init.lua
+  }
   source $iHETC/variables
 }
 

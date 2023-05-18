@@ -57,8 +57,21 @@ function lazy.install(path)
       path,
     })
   end
-end
 
+  neural_path = vim.fn.stdpath('data') .. '/lazy/neural'
+  if vim.fn.empty(vim.fn.glob(neural_path)) > 0 then
+    vim.fn.system({
+      'git',
+      'clone',
+      '--depth',
+      '1',
+      'https://github.com/dense-analysis/neural.git',
+      neural_path,
+    })
+    -- Agregar la ruta al directorio de neural a la variable 'runtimepath'
+    vim.o.runtimepath = vim.o.runtimepath .. ',' .. neural_path
+  end
+end
 
 function lazy.setup(plugins)
 -- Pueden comentar la siguiente línea una vez que lazy.nvim esté instalado
@@ -115,18 +128,35 @@ lazy.setup({
     {'hrsh7th/cmp-nvim-lua'},
     {'hrsh7th/vim-vsnip'},
     {'rafamadriz/friendly-snippets'},
+  -- proporciona a Neural plugin para el uso de api de openAI|chatGPT 
+    {'dense-analysis/neural'},
+    {'muniftanjim/nui.nvim'},
+    {'elpiloto/significant.nvim'},
+  -- Lista de plugins para el uso de api de openAI|chatGPT 
+    {'dense-analysis/neural'},
+    {'muniftanjim/nui.nvim'},
+    {'elpiloto/significant.nvim'},
 ----------------------------------------------
 -- Pendiente 
 -- https://github.com/tpope/vim-surround
 -- https://github.com/editorconfig/editorconfig-vim
 -- https://github.com/folke/which-key.nvim
 })
+
+-- Configure Neural like so in Lua
+require('neural').setup({
+    source = {
+        openai = {
+            api_key = "OPENAI_KEY" 
+        },
+    }
+})
+
+
 -------------------------------------------------↴
 --          =====indicadores====
 -- help gitsigns-functions   help gitsigns-config
 -- -------------------------------------------------↴
-
-
 
 
 -------------------------------------------------
