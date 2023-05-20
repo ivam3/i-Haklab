@@ -15,12 +15,12 @@ key=$(grep "OPENAI_KEY" $iHETC/variables)
   done
   sed -i "s|$key|export OPENAI_KEY=\"$apikey\"|" $iHETC/variables
   [[ -e ${HOME}/.config/nvim/init.lua ]] && {
-    sed -i "s|OPENAI_KEY|$apikey|" ${HOME}/.config/nvim/init.lua
+    sed -i "s|OPENAI_KEY|$apikey|" ${HOME}/.config/nvim/lua/plugins/neural.lua
   }
   source $iHETC/variables
 }
 
-CHAT_INIT_PROMPT="You are ChatGPT, a Large Language Model trained by OpenAI. You will be answering questions from users. You answer as concisely as possible for each response (e.g. don’t be verbose). If you are generating a list, do not have too many items. Keep the number of items short. Before each user prompt you will be given the chat history in Q&A form. Output your answer directly, with no labels in front. Do not start your answers with A or Anwser. You were trained on data up until 2021"
+CHAT_INIT_PROMPT="You are ChatGPT, a Large Language Model trained by OpenAI. You will be answering questions from users. You answer as concisely as possible for each response (e.g. don’t be verbose). If you are generating a list, do not have too many items. Keep the number of items short. Before each user prompt you will be given the chat history in Q&A form. Output your answer directly, with no labels in front. Do not start your answers with A or Anwser. If your answer include programming code, output it with shebang. You were trained on data up until 2021"
 TIP[0]="To generate images, start a prompt with $Y'image:'$W"
 TIP[1]="To view your chat history, type $Y'history'$W"
 TIP[2]="To get a list of the models available at OpenAI API, type $Y'models'$W"
@@ -135,7 +135,7 @@ while $running; do
     rm ${TMPDIR}/*.png
 
   elif [[ "$prompt" == "history" ]]; then
-		echo -e "\n$(bat ~/.chatgpt_history)"
+		echo -e "\n$(bat --style snip --theme 'Dracula' ~/.chatgpt_history)"
 	elif [[ "$prompt" == "models" ]]; then
 		models_response=$(curl https://api.openai.com/v1/models \
 			-sS \
@@ -180,7 +180,7 @@ while $running; do
 		handleError "$response"
 		response_data=$(echo $response | jq -r '.choices[].text' | sed '1,2d; s/^A://g')
 		echo -e "\n${C}chatgpt$W"
-    echo "${response_data}"|bat  -f --theme 'Visual Studio Dark+'
+    echo "${response_data}"|bat --style snip -f --theme 'Visual Studio Dark+'
 
 		if [ "$CONTEXT" = true ]; then
 			# add response to chat context as answer
