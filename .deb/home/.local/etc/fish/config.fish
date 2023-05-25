@@ -22,7 +22,6 @@ bash /data/data/com.termux/files/home/.local/libexec/i-Haklab.login
 end
 
 function on_exit --on-event fish_exit
-rm -rf /data/data/com.termux/files/home/.cache
 echo 'Have a nice hacking day!!'
 sleep 1
 end
@@ -38,6 +37,10 @@ set GOPATH /data/data/com.termux/files/home/go
 set GOROOT /data/data/com.termux/files/usr/lib/go
 set JAVA_HOME /data/data/com.termux/files/usr/opt/openjdk
 set LD_LIBRARY_PATH /data/data/com.termux/files/usr/lib
+set LLVM_BUILD /data/data/com.termux/files/usr/lib
+set LLVM_HOME /data/data/com.termux/files/usr/lib/cmake/llvm
+set CFLAGS \ -Wno-incompatible-function-pointer-types
+set ANDROID_ALLOW_UNDEFINED_SYMBOLS On
 set TOOLS /data/data/com.termux/files/home/.local/share
 alias du="du -hP"
 alias bat="bat -f --theme 'Visual Studio Dark+'"
