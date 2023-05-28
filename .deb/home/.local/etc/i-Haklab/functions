@@ -137,6 +137,7 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 ╰─passwd─────+────set─|─pass─────➤ Set and change the login termux
 |                 ╰─────|───────{─i-Haklab passwd set──➤ password|fingerprint
 |                       ╰───────{─i-Haklab passwd pass─➤ get a new password
+╰─setapikey──➤───────────────────➤ Set API Keys to use in i-Haklab features
 ╰─setbanner──➤───────────────────➤ Enable, disable and custom the i-Haklab wall banner
 ╰─setuser────➤───────────────────➤ Set i-Haklab user name
 ╰─show───────+─────alltools──────➤ List all tools/frameworks available on i-Haklab
@@ -163,8 +164,8 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 |    ╰───example─for─ftp─────────{─i-Haklab bruteforce ftp
 |    ╰───example─for─mail────────{─i-Haklab bruteforce mail ivam3@live.com, gmail or live.com
 |
-╰──chatGPT──➤────<setkey>────────➤ Connect with OpenAi API to interact with ChatGPT-3 via CLi.
-|    |               ╰──example──{─i-Haklab chatGPT setkey [for set or change the APIkey]
+╰──chatGPT──➤───<--help/-h>──────➤ Connect with OpenAi API to interact with ChatGPT-3 via CLi.
+|    |               ╰──example──{─i-Haklab chatGPT -h [setting options]
 |    ╰───example─────────────────{─i-Haklab chatGPT
 ╰──ESmsg────+──encode/decode─────➤ Encode|decode secret message into a ASCII file.
 |                    ╰──example──{─i-Haklab ESmsg <encode/decode-}
@@ -219,6 +220,7 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰df──────────────────────────────➤ Provides information about the mounted memory
 ╰du──────────────────────────────➤ Provides recursive information about the weight of directories and files
 ╰fixer───────────────────────────➤ Automate process to fix Termux issues
+╰fzf─────────────────────────────➤ Easy and faster Fuzzy finder
 ╰LOCALHOST───────────────────────➤ Show the current internet protocol over LAN
 ╰lock────────────────────────────➤ Block Termux's screen
 ╰osrframework────────────────────➤ OSINT setoolkit

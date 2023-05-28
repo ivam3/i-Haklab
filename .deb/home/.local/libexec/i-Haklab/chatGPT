@@ -7,18 +7,7 @@ source $iHETC/functions
 chk-pkg ffmpeg ffmpeg
 chk-pkg termimage termimage
 
-key=$(grep "OPENAI_KEY" $iHETC/variables)
-[[ -z $OPENAI_KEY ]] || [[ "$1" == "setkey" ]] && {
-  echo -en "$Y[!]$W OpenAI API key needed$Y |$W Get it on https://platform.openai.com/account/api-keys\n$Y ╰──➤$W "
-  while read -s apikey && [ -z $apikey ];do
-    echo -en "$Y ╰──➤$W "
-  done
-  sed -i "s|$key|export OPENAI_KEY=\"$apikey\"|" $iHETC/variables
-  [[ -e ${HOME}/.config/nvim/init.lua ]] && {
-    sed -i "s|OPENAI_KEY|$apikey|" ${HOME}/.config/nvim/lua/plugins/neural.lua
-  }
-  source $iHETC/variables
-}
+[[ -z $APIKEY_chatGPT ]] && { echo "An openAI API Key is required, set it running 'i-Haklab setapikey'";exit 1;}
 
 CHAT_INIT_PROMPT="You are ChatGPT, a Large Language Model trained by OpenAI. You will be answering questions from users. You answer as concisely as possible for each response (e.g. don’t be verbose). If you are generating a list, do not have too many items. Keep the number of items short. Before each user prompt you will be given the chat history in Q&A form. Output your answer directly, with no labels in front. Do not start your answers with A or Anwser. If your answer include programming code, output it with shebang. You were trained on data up until 2021"
 TIP[0]="To generate images, start a prompt with $Y'image:'$W"
@@ -37,7 +26,7 @@ handleError() {
 }
 
 # parse command line arguments
-while [[ "$#" -gt 0 ]] && [[ "$1" != "setkey" ]]; do
+while [[ "$#" -gt 0 ]]; do
 	case $1 in
 	-t | --temperature)
 		TEMPERATURE="$2"
@@ -99,7 +88,7 @@ while $running; do
 		image_response=$(curl https://api.openai.com/v1/images/generations \
 			-sS \
 			-H 'Content-Type: application/json' \
-			-H "Authorization: Bearer $OPENAI_KEY" \
+			-H "Authorization: Bearer $APIKEY_chatGPT" \
 			-d '{
     		"prompt": "'"${prompt#*image:}"'",
     		"n": 1,
@@ -139,14 +128,14 @@ while $running; do
 	elif [[ "$prompt" == "models" ]]; then
 		models_response=$(curl https://api.openai.com/v1/models \
 			-sS \
-			-H "Authorization: Bearer $OPENAI_KEY")
+			-H "Authorization: Bearer $APIKEY_chatGPT")
 		handleError "$models_response"
 		models_data=$(echo $models_response | jq -r -C '.data[] | {id, owned_by, created}')
 		echo -e "\n${C}chatgpt$W This is a list of models currently available at OpenAI API:\n ${models_data}"
 	elif [[ "$prompt" =~ ^model: ]]; then
 		models_response=$(curl https://api.openai.com/v1/models \
 			-sS \
-			-H "Authorization: Bearer $OPENAI_KEY")
+			-H "Authorization: Bearer $APIKEY_chatGPT")
 		handleError "$models_response"
 		model_data=$(echo $models_response | jq -r -C '.data[] | select(.id=="'"${prompt#*model:}"'")')
 		echo -e "\n${C}chatgpt$W Complete data for model: ${prompt#*model:}\n ${model_data}"
@@ -170,7 +159,7 @@ while $running; do
 		response=$(curl https://api.openai.com/v1/completions \
 			-sS \
 			-H 'Content-Type: application/json' \
-			-H "Authorization: Bearer $OPENAI_KEY" \
+			-H "Authorization: Bearer $APIKEY_chatGPT" \
 			-d '{
   			"model": "'"$MODEL"'",
   			"prompt": "'"${request_prompt}"'",

@@ -1,5 +1,5 @@
 function rmcache
-  for dir in $TMPDIR ~/.BurpSuite/burpbrowser ~/.cache ~/go/pkg/mod/cache ~/.maltego/v4.3.1/var/cache
+  for dir in $TMPDIR ~/.BurpSuite/burpbrowser ~/go/pkg/mod/cache ~/.maltego/v4.3.1/var/cache
     if ls -d $dir >/dev/null 2>/dev/null
       rm -rf $dir 2>/dev/null
       mkdir -p $dir 2>/dev/null
