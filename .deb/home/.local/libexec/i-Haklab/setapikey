@@ -23,7 +23,13 @@ setApiKey(){
   varkey=$(grep "APIKEY_$platform" $iHETC/variables)
   if [[ $platform == "neovim" ]]; then
       neuralFile=$(find $HOME/.config -name neural.lua)
-      [[ -z $neuralFile ]] && { echo -en "${R}E:${W} Neovim do not include Neural";exit 1;}
+      [[ -z $neuralFile ]] && {
+        echo -en "${R}E:${W} Neovim do not include Neural"
+        exit 1
+      } || {
+        oldkey=$(grep "api_key" $neuralFile|awk '{print $NF}'|tr -d ","|tr -d "\"")
+        sed -i "s|$oldkey|$apikey|" $neuralFile
+      }
   fi
   sed -i "s|$varkey|export APIKEY_$platform=\"$apikey\"|" $iHETC/variables
   echo -en "${G}DONE!!$W New API key added sucessfully"
