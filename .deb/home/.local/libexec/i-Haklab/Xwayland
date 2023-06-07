@@ -17,4 +17,5 @@ am start -n com.termux.x11/com.termux.x11.MainActivity;sleep 3
 [[ ! -z "$1" ]] && [[ "$1" == "Xwayland" ]] && { Xbin="$1";} || { Xbin="termux-x11";tip="Xwayland";}
 $(command -v $Xbin) :0 >/dev/null &
 sleep 5;env DISPLAY=:0 xfce4-session || echo -en "${R}E: Display unreachable $W|$Y Try it with: ${G}i-Haklab Xwayland $tip$W"
+killall main pulseaudio 2>/dev/null
 ####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####

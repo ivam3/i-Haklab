@@ -162,10 +162,14 @@ for module in $(cat ${TMPDIR}/requirements.tmp);do
         SC|SOURCE-CODE|source-code)
           cd $TMPDIR
           $py -m pip --no-color --quiet --no-cache-dir download $module 2>/dev/null
-          unzip $module.zip 2>/dev/null
-          cd $module
-          find . -type f -not -path '*/\.*' -exec termux-fix-shebang "{}" \; 2>/dev/null
-          $py setup.py install >/dev/null 2>/dev/null
+          [[ -e $module.zip ]] && {
+            unzip $module.zip 2>/dev/null
+            [[ -d $module ]] && {
+              cd $module
+              find . -type f -not -path '*/\.*' -exec termux-fix-shebang "{}" \; 2>/dev/null
+              $py setup.py install >/dev/null 2>/dev/null
+            }
+          }
           rm -rf $TMPDIR/$module*;cd
           ;;
 				S|SODIOUM|Sodioum|sodioum)
