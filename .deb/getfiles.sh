@@ -18,6 +18,8 @@ find home -type f \
   -not \( -iname "supertab.txt" \) \
   -not \( -iname "snipMate.txt" \) \
   -not \( -iname ".netrwhist" \) \
+  -not \( -iname "init.lua" \) \
+  -not \( -iname "nvim.zip"\) \
   -not \( -iname "snipMate.vim" \) \
   -not \( -iname "plug.vim" \) \
   -not \( -iname "snipMate.vim" \) \
