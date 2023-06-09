@@ -11,6 +11,8 @@
 		"usr/bin/termux-url-opener": "/data/data/com.termux/files/usr/bin/termux-url-opener",
 		"home/.nanorc": "/data/data/com.termux/files/home/.nanorc",
 		"home/.config/fish/functions/mypip.fish": "/data/data/com.termux/files/home/.config/fish/functions/mypip.fish",
+		"home/.config/fish/functions/pm.fish": "/data/data/com.termux/files/home/.config/fish/functions/pm.fish",
+		"home/.config/fish/functions/cmd.fish": "/data/data/com.termux/files/home/.config/fish/functions/cmd.fish",
 		"home/.config/fish/functions/fish_greeting.fish": "/data/data/com.termux/files/home/.config/fish/functions/fish_greeting.fish",
 		"home/.config/fish/functions/ls.fish": "/data/data/com.termux/files/home/.config/fish/functions/ls.fish",
 		"home/.config/fish/functions/LOCALHOST.fish": "/data/data/com.termux/files/home/.config/fish/functions/LOCALHOST.fish",
