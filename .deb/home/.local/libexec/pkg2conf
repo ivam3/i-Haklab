@@ -103,9 +103,9 @@ set softwrap
 
   radare2)
     [[ -d $HOME/.local/share/radare2 ]] && {
-      r2pm update
+      r2pm -q update
     } || {
-      r2pm init
+      r2pm -q init
     }
     ;;
 
@@ -149,7 +149,7 @@ startxfce4
 			mkdir -p ${HOME}/.local/etc/tor;
 			wget --tries=20 --quiet $iHDB/etc/tor/torrc -O ${HOME}/.local/etc/tor/torrc;
 		}
-		ln -s ${HOME}/.local/etc/tor/torrc ${PREFIX}/etc/tor/torrc
+		ln -s ${HOME}/.local/etc/tor/torrc ${PREFIX}/etc/tor/torrc 2>/dev/null
 		;;
 
 	vim)
