@@ -1,0 +1,38 @@
+{
+    "name": "phpzip/phpzip",
+    "type": "library",
+    "description": "Package to create and stream archives of compressed files in ZIP format with PHP 5.3+",
+    "keywords": ["phpzip", "zip", "pkzip", "archive", "compressed", "compression", "stream"],
+    "homepage": "https://github.com/Grandt/PHPZip",
+    "license": "LGPL-2.1",
+    "version": "2.0.8",
+    "authors": [
+        {
+            "name": "A. Grandt",
+            "email": "php@grandt.com",
+            "homepage": "http://grandt.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Greg Kappatos",
+            "homepage": "http://websiteconnect.com.au",
+            "role": "Developer"
+        },
+        {
+            "name": "Adam Schmalhofer",
+            "email": "Adam.Schmalhofer@gmx.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "grandt/binstring": ">=1.0.0",
+        "grandt/relativepath": ">=1.0.2",
+        "grandt/phpzipmerge": ">=1.0.4",
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PHPZip\\Zip\\": "src/Zip"
+        }
+    }
+}

@@ -1,0 +1,17 @@
+#!/data/data/com.termux/files/usr/bin/bash
+IFS=$'\n\t'
+trap ctrl_c 2
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+[[ $# -eq 0 ]] && { STDERR;exit 0;}
+
+chk-pkg aapt aapt
+banner
+package=$(aapt dump badging "$*" | awk '/package/{gsub("name=|'"'"'","");  print $2}')
+activity=$(aapt dump badging "$*" | awk '/activity/{gsub("name=|'"'"'","");  print $2}')
+echo
+echo -en $G"   file :$W $1\n"
+echo -en $G"package :$W $package\n"
+echo -en $G"activity:$W $activity"
+

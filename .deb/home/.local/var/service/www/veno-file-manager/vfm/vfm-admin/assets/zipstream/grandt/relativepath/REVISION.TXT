@@ -1,0 +1,8 @@
+Rev. 1.01 - 2011-03-14
+* Fixed: Absolute paths were created if pathJoin were called with an empty $dir argument.
+
+* Fixed: getRelativePath returned absolute paths for relative paths and vice versa.
+---------------------------------------------------------------------
+Rev. 1.00 - 2011-03-13
+* Initial release
+---------------------------------------------------------------------

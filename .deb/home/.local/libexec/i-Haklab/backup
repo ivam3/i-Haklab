@@ -1,0 +1,49 @@
+#!/data/data/com.termux/files/usr/bin/bash
+IFS=$'\n\t'
+
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+date=$(date|awk -F " " '{print $2,$NF}'|tr -d " ")
+
+chk-pkg tar tar
+chk-pkg file file
+chk-pkg date coreutils
+[[ $# -eq 0 ]] && { STDERR;}
+
+banner
+case "$1" in
+  create)
+    case "$2" in
+      ex)
+        [[ ! -z $SDCARD ]] && {
+          SDCARD="/storage/emulated/0"
+          echo -en "${R}E:$W External sdcard do not exists or it is unreachable.$Y\n ╰──➤ The backup will be saved in:$W $SDCARD\n"
+        }
+        ;;
+      in)
+          echo -en "$Y!: The backup will be saved in:$W $SDCARD\n"
+        ;;
+      *) STDERR
+        ;;
+    esac
+    echo -en "\t\tPress$G ENTER$W to confirm.";read enter
+    [[ -e $SDCARD/termux-backup$date.tar.gz ]] && {
+      echo -en "$Y!:$W Backup file already exists.$Y\n ╰──➤$W $SDCARD/termux-backup$date.tar.gz"
+      exit 0
+    }
+    cd ${PREFIX}/..
+    tar -zcvf $SDCARD/termux-backup$date.tar.gz home usr
+    [[ -e $SDCARD/termux-backup$date.tar.gz ]] && {
+      echo -en "$G[+]$W DONE!!\n$G ╰──➤ Saved:$W $SDCARD/termux-backup$date.tar.gz"
+    }
+    ;;
+  restore)
+    [[ -z $2 ]] && { STDERR;} || [[ -e "$2" ]] && {
+      ! $(command -v file) "$2"|grep "gzip" &>/dev/null && { echo -en "${R}E:$W Invalid format file (expected gzip)";exit;}
+    } 
+    cd ${PREFIX}/..
+    tar -zxf "$2" --recursive-unlink --preserve-permissions
+    ;;
+  *) STDERR 
+    ;;
+esac

@@ -1,0 +1,105 @@
+#!/data/data/com.termux/files/usr/bin/bash
+IFS=$'\n\t'
+trap ctrl_c 2
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+PS3="(_>)_number:─➤ "
+
+banner
+if [[ $# -eq 0 ]]
+then
+	STDERR
+elif [[ $1 = tutorials ]]
+then
+  ERR() { printf "$R\n(_➤)$W Tutorial is not available on $PLATFORM\n";}
+  select ANSW in $(cat $iHETC/listoftutorials|awk '{print $4}') Exit;do
+		[[ $ANSW = Exit ]] && exit
+		printf "$G\n(_➤)$W Choose an options :$W\n"
+		select WAY in Watch Download Exit;do
+			case $WAY in
+				Watch)
+					printf "$G\n(_➤)$W Choose the platform :$W\n"
+					select PLATFORM in YouTube Telegram Exit;do
+						case $PLATFORM in
+							YouTube)
+								TUTO=$(cat $iHETC/listoftutorials|grep $ANSW|awk '{print $2}'|head -n 1)
+								if [ $TUTO = "false" ] || [ -z $TUTO ];then
+									ERR;exit
+								else
+									termux-open-url $TUTO
+								fi
+								;;
+							Telegram)
+								TUTO=$(cat $iHETC/listoftutorials|grep $ANSW|awk '{print $1}'|head -n 1)
+								if [ $TUTO = "false" ] || [ -z $TUTO ];then
+									ERR;exit
+								else
+									termux-open-url https://t.me/Ivam3byCinderella/$TUTO
+								fi
+								;;
+							Exit|*)
+								exit
+								;;
+						esac
+					done
+					;;
+				Download)
+					chk-pkg youtubedr youtubedr
+					TUTO=$(cat $iHETC/listoftutorials|grep $ANSW|awk '{print $2}'|head -n 1)
+					if [[ $TUTO = 'false' ]] || [[ -z $TUTO ]];then
+						printf "$R\n(_➤)$W Tutorial is not available to be download\n";exit
+					else
+						youtubedr download $TUTO
+					fi
+					;;
+				Exit|*)
+					exit
+					;;
+			esac
+		done
+	done
+elif [[ $1 = books ]]
+then
+	chk-pkg megadl megatools
+	select book in $(cat $iHETC/listofbooks|awk '{print $1}') Exit;do
+		link=$(cat -n $iHETC/listofbooks|head -n $REPLY|tail -n 1|awk '{print $NF}')
+		if [[ $REPLY -le $(cat -n $iHETC/listofbooks|tail -n 1|awk '{print $1}') ]]
+		then
+			megadl --path=${HOME}/storage/shared/Download/ https://mega.nz/$link;break
+		elif [[ $book = Exit ]]
+		then
+			break
+		else
+			STDERR
+		fi
+	done
+elif [[ $1 = QG ]]
+then
+	select QG in $(ls $iHLIBEXEC/../QG_*|awk -F "/" '{print $NF}') Exit;do
+		if [[ ! -z $QG ]] && [[ -e $iHLIBEXEC/../$QG ]]
+		then
+			bash $iHLIBEXEC/../$QG
+		elif [[ $QG = Exit ]]
+		then
+			exit
+		else
+			STDERR
+		fi
+	done
+elif [[ $1 = alltools ]]
+then
+	chk-pkg column util-linux
+	echo -en $Y$underline"TIP: You can install all of them with:$W apt install <tool>\n\n"
+	column $iHETC/Tools/listoftools
+	echo -en "$G\nTOTAL:$W $(wc $iHETC/Tools/listoftools|awk '{print $1}')"
+elif [[ $1 = instatools ]]
+then
+	chk-pkg column util-linux
+	echo -en $Y$underline"TIP: You can remove all of them with:$W apt remove <tool>\n\n"
+	pkg list-installed 2>>"$LOGFILE"|awk -F "/" '{print $1}' > $TMPDIR/instatools.tmp
+	column $TMPDIR/instatools.tmp
+	echo -en "$G\nTOTAL:$W $(wc $TMPDIR/instatools.tmp|awk '{print $1}')"
+	rm -rf $TMPDIR/instatools.tmp
+else
+	STDERR
+fi

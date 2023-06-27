@@ -1,0 +1,26 @@
+##-- Program Settings
+progname="$( basename "$0" )"
+
+
+##-- Exploits
+files_array+=("files_exploits.csv")
+path_array+=("/data/data/com.termux/files/home/.local/share/exploitdb")
+name_array+=("Exploit")
+git_array+=("https://gitlab.com/exploit-database/exploitdb.git")
+package_array+=("exploitdb")
+
+
+##-- Shellcodes
+files_array+=("files_shellcodes.csv")
+path_array+=("/data/data/com.termux/files/home/.local/share/exploitdb")
+name_array+=("Shellcode")
+git_array+=("https://gitlab.com/exploit-database/exploitdb.git")
+package_array+=("exploitdb")
+
+
+##-- Papers
+files_array+=("files_papers.csv")
+path_array+=("/data/data/com.termux/files/home/.local/share/exploitdb-papers")
+name_array+=("Paper")
+git_array+=("https://gitlab.com/exploit-database/exploitdb-papers.git")
+package_array+=("exploitdb-papers")

@@ -1,0 +1,324 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, sub, sup, tt, var, u, center,
+dl, dt, dd, ol,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+        margin: 0;
+        padding: 0px;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+        display: block;
+}
+
+body {
+        line-height: 1;
+        text-align: justify; 
+}
+
+blockquote, q {
+        quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+        content: "";
+        content: none;
+}
+
+table {
+        border-collapse: collapse;
+        border-spacing: 0;
+}
+
+/* Layout styles */
+body {
+        font-size: 15px;
+        line-height: 1.5;
+        background: #fafafa url("../images/bg_3.jpg") 0 0 repeat;
+        font-family: "Helvetica Neue", Helvetica, Arial, serif;
+        font-weight: 400;
+        color: #666;
+}
+
+a {
+        color: #ff4500; 
+}
+
+a:hover {
+        color: #ffa319;       
+}
+
+ul, ol, dl {
+        margin-top: 5px;
+        margin-bottom: 5px;
+}
+
+/* Common styles */
+hr {
+        height: 1px;
+        line-height: 1px;
+        margin-top: 1em;
+        padding-bottom: 1em;
+        border: none;
+}
+
+form {
+        padding: 0px;  
+}
+
+select {
+        font-family: Arial;
+        font-size: 14px;
+        padding: 2px;
+}
+
+header {
+        font-family: "Architects Daughter", "Helvetica Neue", Helvetica, Arial, serif; 
+        background: #ffb717 url("../images/bg_1.jpg") 0px 0px repeat-x;
+        border-bottom: solid 0px #191919;
+        padding-top: 44px;
+        padding-bottom: 38px;
+        padding-left: 100px;
+        min-width: 1160px;
+        /*min-width: 940px;*/
+}
+
+header h1 {
+        font-size: 72px;
+        color: #ffffff;
+        line-height: 1;
+        letter-spacing: -1px;
+        margin-bottom: 0.2em;
+}
+
+header h2 {
+        font-size: 32px;
+        color: #ff4500;
+        line-height: 0.8; /* Finetuning */
+}
+
+/* My styles */
+#menu {
+        font-family: "Architects Daughter";
+        font-size: 18px;
+        color: #ffffff;
+        background: url("../images/bg_2.jpg") 0px 0px repeat-x;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 10px;
+        min-width: 1250px;
+        /*min-width: 1030px;*/
+}
+
+#menu a { 
+        color: #ffffff;
+        text-decoration:none;
+}
+
+#menu a:hover {
+        color: #ffb717;
+        /*color: #ffa319;*/      
+}
+
+#menu table {
+        border: 0px solid #ebebeb;
+
+}
+
+#menu th {
+        font-weight: 500;
+}
+
+#menu td {
+        border: 0px solid #ebebeb;
+        padding-left: 40px;
+        vertical-align: middle;
+}
+
+#main {
+        padding-left: 100px;
+        padding-top: 25px;    
+        position: relative;
+        width: 760px;
+        margin-bottom: 50px;
+}
+
+#main p {
+        padding-bottom: 12px;
+}
+
+#main a { 
+        text-decoration:none; 
+        font-weight:bold;
+        color: #666;
+}
+
+#main h1 {
+        font-family: "Architects Daughter", "Helvetica Neue", Helvetica, Arial, serif; 
+        font-size: 40px;
+        letter-spacing: -1px;
+        color: #474747;
+        padding-bottom: 12px;
+} 
+
+#main h1:before {
+        content: "/";
+        color: #ff4500;
+        padding-right: 15px;
+}
+
+#main h1:after {
+        content: "/";
+        color: #ff4500;
+        padding-left: 15px;
+}
+
+#main h2 {
+        font-family: "Architects Daughter", "Helvetica Neue", Helvetica, Arial, serif; 
+        font-size: 30px;
+        letter-spacing: -1px;
+        color: #474747;
+        padding-bottom: 18px;
+} 
+
+#main h2:before {
+        content: "//";
+        color: #ff4500;
+        padding-right: 15px;
+}
+
+#main h2:after {
+        content: "//";
+        color: #ff4500;
+        padding-left: 15px;
+}
+
+#frame {
+        position: relative;
+        margin-bottom: 50px;
+}
+
+#frame p {
+        padding-bottom: 12px;
+}
+
+#side {
+        background: transparent url("../images/sb_1.jpg") 0 0 no-repeat;
+        padding-left: 40px;
+        min-height: 400px;
+        position: absolute;
+        top: 300px;
+        left: 980px;
+}
+
+#sponsor {
+        min-height: 100px;
+        min-width: 467px;
+        position: absolute;
+        top: 500px;
+        left: 470px;
+}
+
+#sponsor_2 {
+        min-height: 100px;
+        min-width: 467px;
+        position: absolute;
+        top: 300px;
+        left: 470px;
+}
+
+.button {
+        margin-bottom: 4px;
+        display: block;
+}
+
+#disclaimer {
+        font-family: "Architects Daughter";
+        font-size: 14px;
+        color: #ffffff;
+        background: url("../images/bg_2.jpg") 0px 0px repeat-x;
+        padding: 9px;
+        padding-left: 50px;
+        position: fixed;
+        bottom: 0px;
+        height: 20px;
+        /*min-width: 100%;*/
+        min-width: 2560px;
+        /*width: 100%;*/
+}
+
+#bug {
+        font-family: "Architects Daughter";
+        font-size: 20px;
+        font-weight: normal;
+        color: #000000;
+        position: absolute;
+        top: 15px;
+        /*left: 750px;*/
+        right: 30px;
+        min-width: 430px;
+}
+
+#security_level {
+        font-family: "Architects Daughter";
+        font-size: 20px;
+        font-weight: normal;
+        color: #000000;
+        position: absolute;
+        top: 88px;
+        /*left: 750px;*/
+        right: 30px;
+        min-width: 430px;
+}
+
+#bee {
+        position: absolute;
+        top: 18px;
+        left: 342px;
+        height: 35px;
+        width: 35px;
+        /*opacity:0.6; Makes the image transparant
+        filter:alpha(opacity=60); For IE8 and earlier */        
+}
+
+#table_yellow {
+        border: 0px
+}
+
+#table_yellow td {
+        border: 1px solid #ebebeb;
+        padding: 10px; 
+        vertical-align: middle;
+}
+
+#select_portal {
+        font-size: 14px;
+        font-family: Arial;
+        width: 350px;
+        padding: 1px;
+}
+
+@font-face {
+  font-family: 'Architects Daughter';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Architects Daughter'), local('ArchitectsDaughter'), url(../fonts/architectsdaughter.ttf) format('truetype');
+}

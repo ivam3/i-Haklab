@@ -1,0 +1,27 @@
+#!/usr/bin/bash
+
+msg="removed unnecesaries pkg"
+echo "[*] Deleting old files"
+rm ~/Ivam3/repositories/termux-packages/i-haklab_*_all.deb
+
+echo "[*] Merge the i-haklab commits"
+cd ~/Ivam3/repositories/i-Haklab/.deb/
+git add --all
+git commit -m "$msg"
+cat ~/Ivam3/repositories/.token|termux-clipboard-set
+git push
+
+echo "[*] Build the package"
+termux-create-package manifiest.json
+mv *.deb ~/Ivam3/repositories/termux-packages/
+
+echo "[*] Upload deb package"
+cd ~/Ivam3/repositories/termux-packages/
+bash updebs.sh
+
+echo "[*] Merge the termux-package commits"
+git add --all
+git commit -m "$msg"
+cat ~/Ivam3/repositories/.token|termux-clipboard-set
+git push
+

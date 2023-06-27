@@ -1,0 +1,11 @@
+User-agent: GoodBot
+Disallow:
+
+User-agent: BadBot
+Disallow: /
+
+User-agent: *
+Disallow: /admin/
+Disallow: /documents/
+Disallow: /images/
+Disallow: /passwords/

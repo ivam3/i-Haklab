@@ -1,0 +1,60 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#This file is part of i-Haklab command
+IFS=$'\n\t'
+trap ctrl_c 2
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+[[ $1 ]] || STDERR
+chk-pkg snow stegsnow
+
+banner
+if [ $1 = "encode" ]; then
+	printf "$Y(_>)_message_{\e[mtype it|file.txt$Y}\n ╰─────➤$W"
+	while [[ -z "$msg" ]]
+	do
+		read -ei "TIP: type it or bring a path/to/file.txt/with/message" -rp " " -a msg
+  done
+	
+	printf "$Y(_>)_file_to_encode_{\e[0mEx: \$HOME/my_ASCII_file.txt$Y}\n ╰─────➤$W"
+	while [[ -z $file2encode ]] || [[ -e $file2encode ]]
+	do
+		read -ei "TIP: type the path to the file where your message will be encode" -rp " " file2encode
+  done
+	
+	printf "$Y(_>)_output_file_{\e[0mEx: \$HOME/file_with_msg$Y}\n ╰─────➤$W"
+	while [[ -z $encodedfile ]]
+	do
+		read -ei "TIP: named the final file" -rp " " encodedfile
+	done
+	
+	printf "$Y(_>)_password_{\e[0mempty=none$Y}\n ╰─────➤$W"
+	read -rep " " passwd
+	if [ -e "$msg" ] && [ -z passwd ];then
+		$(command -v snow) -C -f $msg $file2encode $encodedfile
+  elif [ -e "$msg" ] && [ ! -z passwd ];then
+    $(command -v snow) -C -p "$passwd" -f $msg $file2encode $encodedfile
+  elif [ ! -z $passwd ];then
+    $(command -v snow) -C -p "$passwd" -m "$msg" $file2encode $encodedfile
+  else
+    $(command -v snow) -C -m "$msg" $file2encode $encodedfile
+  fi
+
+elif [ $1 = "decode" ]; then
+	printf "$Y(_>)_file_to_decode_{\e[0mEx: \$HOME/my_ASCII_file.txt$Y}\n ╰─────➤$W"
+	while [[ -z $file2decode ]] || [[ -e $file2decode ]]
+	do
+		read -ei "TIP: type the path to the file with hiden message" -rp " " file2decode
+  done
+	
+	printf "$Y(_>)_password_{\e[0mempty=none$Y}\n ╰─────➤$W"
+	read -rep " " passwd
+
+	if [ ! -z $passwd ]; then
+		$(command -v snow) -C -p "$passwd" $file2decode
+  else
+    $(command -v snow) -C $file2decode
+  fi
+else
+	STDERR
+fi

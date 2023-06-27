@@ -1,0 +1,96 @@
+#!/usr/bin/bash
+source ${HOME}/.local/etc/i-Haklab/variables
+source ${iHETC}/functions
+
+chk-pkg 'curl' 'curl'
+chk-pkg 'grep' 'grep'
+chk-pkg 'sed' 'sed'
+chk-pkg 'awk' 'gawk'
+chk-pkg 'tr' 'coreutils'
+chk-pkg 'html2text' 'html2text'
+
+inbox="http://www.fakemailgenerator.com/#"
+gen="random"
+n="us"
+c="us"
+
+declare -A name=(["American"]="us" ["Arabic"]="ar" ["Australian"]="au" ["Brazil"]="br" ["Chechen"]="celat" \
+  ["Chinese"]="ch" ["Croatian"]="hr" ["Czech"]="cs" ["Danish"]="dk" ["Dutch"]="nl" ["England"]="en" \
+  ["Eritrean"]="er" ["Finnish"]="fi" ["French"]="fr" ["German"]="gr" ["Greenland"]="gl" ["Hispanic"]="sp" \
+  ["Hobbit"]="hobbit" ["Hungarian"]="hu" ["Icelandic"]="is" ["Igbo"]="ig" ["Italian"]="it" ["Japanese"]="jp" \
+  ["Klingon"]="tlh" ["Ninja"]="ninja" ["Norwegian"]="no" ["Persian"]="fa" ["Polish"]="pl" ["Russia"]="ru" \
+  ["Scottish"]="gd" ["Slovenian"]="sl" ["Swedish"]="sw" ["Thai"]="th" ["Vietnamese"]="vn")
+
+declare -A country=(["Australia"]="au" ["Austria"]="as" ["Belgium"]="bg" ["Brazil"]="br" ["Canada"]="ca" ["Cyprus"]="cyen" \
+  ["Cyprus"]="cygk" ["Czech Republic"]="cz" ["Denmark"]="dk" ["Estonia"]="ee" ["Finland"]="fi" ["France"]="fr" \
+  ["Germany"]="gr" ["Greenland"]="gl" ["Hungary"]="hu" ["Iceland"]="is" ["Italy"]="it" ["Netherlands"]="nl" \
+  ["New Zealand"]="nz" ["Norway"]="no" ["Poland"]="pl" ["Portugal"]="pt" ["Slovenia"]="sl" ["South Africa"]="za" \
+  ["Spain"]="sp" ["Sweden"]="sw" ["Switzerland"]="sz" ["Tunisia"]="tn" ["United Kingdom"]="uk" ["United States"]="us" \
+  ["Uruguay"]="uy")
+
+declare -A phone=(["United States"]="13072205075" ["Canada"]="16463397459" ["France"]="33779279015" ["Greenland"]="85267408230" \
+  ["Tunisia"]="79366199806" ["Slovenia"]="380934611668" ["United Kingdom"]="447846037301" ["Germany"]="4915207829969" \
+  ["Iceland"]="972552992023" ["Czech Republic"]="420703654125" ["Netherlands"]="31633720560" ["Tunisia"]="917428730894" \
+  ["Sweden"]="66832248098" ["Switzerland"]="40720563461" ["Portugal"]="212770540034" ["Brazil"]="559551583801" \
+  ["Cyprus"]="353894060424" ["Spain"]="48727801893" ["South Africa"]="2348153353131")
+
+while getopts "g:n:c:h" opt; do
+  case $opt in
+    g) [[ $OPTARG == "male" ]] || [[ $OPTARG == "female" ]] && gen=$OPTARG;;
+    n) n=${name[$OPTARG]};;
+    c) c=${country[$OPTARG]};;
+    h) echo -en $Y"Usage:$W i-Haklab fakeID $Y<($W-g $Y[\e[0mmale$Y|\e[0mfemale$Y]$W -n $Y[\e[0mkind of name$Y]\e[0m -c RY[\e[0mcountry$Y])>$W\n\n$Y OPTIONS\t\tDESCRIPTIONS$W\n   -g\t\tSet the gender between female and male. The fault is random.\n   -n\t\tSet the kind of name. Availables types: ${!name[@]}\n   -c\t\tSet the nationality. Those could be: ${!country[@]}\n$Y\nexamples:$W\n\ti-Haklab fakeID -g male -n American -c \"United States\"\n\ti-Haklab fakeID [for random]" && exit 1;;
+    \?) echo -en $R"E:$W Invalid option: -$OPTARG" >&2 && exit 1 ;;
+    :) echo -en $R"E:$W Option -$OPTARG requires an argument." >&2 && exit 1 ;;
+    *) STDERR ;;
+  esac
+done
+
+file=$(mktemp)
+sed -n '66,132p' \
+  <(curl -fsSL https://www.fakenamegenerator.com/gen-$gen-$n-$c.php|html2text) \
+  |tr "\t" " " | tr -s " " > $file
+
+for i in "${!country[@]}";do
+  if [[ $c == ${country[$i]} ]]; then
+    p=${phone["$i"]}
+    smsLink="https://receive-smss.com/sms/$p/"
+    break
+  else
+    p=$(grep -A 1 "Phone" $file|tail -n1|tr -s " ")
+    smsLink="Not allowed."
+  fi
+done
+
+banner
+echo -en "\n$Y$(sed -n '1p' $file)$B\nMother's Name:$W $(grep -A 1 "Mother" $file|tail -n1|tr -s " ") \
+  $B\nBirthday:$W $(grep -A 1 "Birthday" $file|tail -n1|tr -s " ")$B\nAge:$W $(grep -A 1 "Age" $file|tail -n1|tr -s " ") \
+  $B\nSSN:$W $(grep -A 1 "SSN" $file|head -n2|tr -s " "|tail -n1)$B\nZodiac Sign:$W $(grep -A 1 "zodiac" $file|tail -n1|tr -s " ") \
+  $B\nHeight:$W $(grep -A 1 "Height" $file|tail -n1|tr -s " ")$B\nWeight:$W $(grep -A 1 "Weight" $file|tail -n1|tr -s " ") \
+  $B\nBlood Type:$W $(grep -A 1 "Blood" $file|tail -n1|tr -s " ")$B\nAddress:$W $(sed -n '2p' $file) $(sed -n '3p' $file) \
+  $B\nGeo coordinates:$W $(grep -A 1 "coordinates" $file|tail -n1|tr -s " ")$B\nPhone number:$W $p$B\nSMS inbox:$W $smsLink \
+  $B\nCountry code:$W $(grep -A 1 "Country" $file|tail -n1|tr -s " ")$B\nEmail:$W $(grep -A 1 "Email" $file|tail -n1|tr -s " ") \
+  $B\nEmail inbox:$W $inbox/$(grep -A 1 "Email" $file|tail -n1|tr -s " "|awk -F "@" '{print $2}')$(grep -A 1 "Email" $file|tail -n1|tr -s " " "/"|awk -F "@" '{print $1}') \
+  $B\nUsername:$W $(grep -A 1 "Username" $file|tail -n1|tr -s " ")$B\nPassword:$W $(grep -A 1 "Password" $file|tail -n1|tr -s " ") \
+  $B\nWebsite:$W $(grep -A 1 "Website" $file|tail -n1|tr -s " ") \
+  $B\nUseragent:$W $(grep -A 2 "agent" $file|tail -n2|tr -s " "|head -n1) $(grep -A 2 "agent" $file|tail -n1|tr -s " ") \
+  $B\nCredit card number:$W $(grep -A 1 "MasterCard" $file|tail -n1|tr -s " ")$B\nExpiration date:$W $(grep -A 1 "Expires" $file|tail -n1|tr -s " ") \
+  $B\nCVC:$W $(grep -A 1 "CVC2" $file|tail -n1|tr -s " ")$B\nWork:$W $(grep -A 1 "Company" $file|tail -n1|tr -s " ") \
+  $B\nOccupation:$W $(grep -A 1 "Occupation" $file|tail -n1|tr -s " ")$B\nVehicle:$W $(grep -A 1 "Vehicle" $file|tail -n1|tr -s " ") \
+  $B\nColor:$W $(grep -A 1 "color" $file|tail -n1|tr -s " ")$G\n\n$(grep -B 1 "UPS" $file|head -n1|tr -s " ") \
+  $B\nUPS:$W $(grep -A 1 "UPS" $file|tail -n1|tr -s " ")$B\nWestern Union:$W $(grep -A 1 "Western" $file|tail -n1|tr -s " ") \
+  $B\nMoneygram:$W $(grep -A 1 "MoneyGram" $file|tail -n1|tr -s " ")$G\n\n**** Last sms recived ****$W\n"
+
+[[ -e $file ]] && rm $file
+
+[[ ${#p} -gt 10 ]] || [[ ${#p} -lt 14 ]] && {
+  while true ;do
+      file2=$(mktemp)
+      sed -n '51,80p' <(curl -fsSL $smsLink|html2text -ascii -o $file2;cat $file2)
+      rm $file2
+      echo -en "$Y\nW:$W Press$G ENTER$W to load the newest sms$Y\nW:$W Press$Y CTRL+C$W to$R STOP$W it.\n"
+      read enter
+  done
+} || {
+  echo -en $R"E:$W Not allowed to load sms in this country.\n"
+}

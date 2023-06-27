@@ -1,0 +1,35 @@
+### What is neovim?
+Neovim is a text editor rewrite of vim in Lua with the goal of modularizing the code to make it 
+more maintainable and easier to contribute to. As the official website says :
+“Neovim is built for users who want the good parts of Vim, and more.”
+
+For more info join to : https://neovim.info
+
+i-Haklab pre-configue neovim with text predictible in bash, python, ruby, C++ and markdown but,
+you can reconfigigure it manually following the guide in :
+
+> https://victorh028.github.io/NVIM/#
+
+Neovim Cheat Sheet in i-Haklab
+
+
+esc               mode normal
+                    ╰──➤ d    delete the current line
+                    ╰──➤ r    replace one character
+                    ╰──➤ R    heplace all the line
+                    ╰──➤ .    repeat the last action
+                    ╰──➤ u    undo the last modification one by one 
+                    ╰──➤ U    restore all the modifications
+                    ╰──➤ p    paste
+a                 mode editor
+v or V            mode visual
+                    ╰──➤ c    cut the selected text
+                    ╰──➤ y    copy the selected text
+                    ╰──➤ p    paste the selected text
+:                 mode command (only in mode normal)
+                    ╰──➤ PlugUpdate   Update the plugins
+                    ╰──➤ PlugInstall  Install the plugins
+                    ╰──➤ PlugStatus   Get neovim status 
+
+
+

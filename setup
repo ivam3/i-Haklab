@@ -1,0 +1,33 @@
+#!/data/data/com.termux/files/usr/bin/bash
+IFS=$'\n\t'
+trap ctrl_c 2
+v="3.6.10"
+
+ctrl_c(){
+  [[ -e ${TMPDIR}/i-haklab_${v}_all.deb ]] && {
+    rm -rf ${TMPDIR}/i-haklab_${v}_all.deb
+    exit
+  }
+}
+
+command -v wget >/dev/null || {
+	echo -en "Installing dependencies ...  "
+	yes|apt install wget &>/dev/null &
+	echo -en "Done\b"
+}
+[[ -d ${PREFIX}/etc/apt/sources.list.d ]] || {
+	mkdir -p ${PREFIX}/etc/apt/sources.list.d;
+}
+wget --tries=20 --quiet \
+	https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/ivam3-termux-packages.list \
+	-O ${PREFIX}/etc/apt/sources.list.d/ivam3-termux-packages.list
+yes|apt update
+yes|apt upgrade
+#apt install i-haklab
+wget --tries=20 --quiet https://github.com/ivam3/i-Haklab/raw/master/.deb/i-haklab_${v}_all.deb \
+  -O ${TMPDIR}/i-haklab_${v}_all.deb
+dpkg -i ${TMPDIR}/i-haklab_${v}_all.deb
+
+d=$(dirname $0|awk -F "/" '{print $NF}') 
+[[ $d = "i-Haklab" ]] && { rm -rf $(dirname $0);}
+
