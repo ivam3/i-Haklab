@@ -5,7 +5,7 @@ trap ctrl_c 2
 source $HOME/.local/etc/i-Haklab/variables
 source $iHETC/functions
 
-[[ -z $phonescanKEY ]] && { echo -en "${R}E:${W} An API Key is required, set it running 'i-Haklab setapikey'";exit 1;}
+[[ -z $APIKEY_phonescan ]] && { echo -en "${R}E:${W} An API Key is required, set it running 'i-Haklab setapikey'";exit 1;}
 banner
 if [[ $1 ]] && [ "$1" -eq "$1" ] 2>/dev/null
 then

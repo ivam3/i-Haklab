@@ -38,8 +38,8 @@ s2=$(df|grep "fuse"|grep -iv emulated|awk -F " " '{print $6}')
 
 echo "Installing required python modules (It could take a while) ...";$z
 for module in pyyaml beautifulsoup4 betrufflehog wheel speedtest-cli frida pipenv shodan;do
-	[[ $module = shodan ]] && { python -m pip --no-color --quiet --no-cache-dir install shodan;}
-	python -m pip --no-color --quiet --no-cache-dir install $module 2>>$LOGFILE
+	[[ $module = shodan ]] && { pip --no-color --quiet --no-cache-dir install shodan;}
+	pip --no-color --quiet --no-cache-dir install $module 2>>$LOGFILE
 done
 
 echo "Installing brute force wordlists (it could take a while) ...  "

@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.7.0",
+  "version": "3.7.2",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -3215,6 +3215,7 @@
 		"home/.local/libexec/i-Haklab/chatGPT": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/chatGPT",
 		"home/.local/libexec/i-Haklab/backup": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/backup",
 		"home/.local/libexec/i-Haklab/setuser": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/setuser",
+		"home/.local/libexec/i-Haklab/setapikey": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/setapikey",
 		"home/.local/libexec/i-Haklab/aptup": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/aptup",
 		"home/.local/libexec/i-Haklab/ransomux": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/ransomux",
 		"home/.local/libexec/i-Haklab/help": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/help",

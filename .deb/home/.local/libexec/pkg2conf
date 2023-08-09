@@ -69,9 +69,10 @@ set softwrap
 
 	neovim)
 		[[ -d ${HOME}/.config/nvim ]] && { mkdir -p ${HOME}/.config/nvim;}
-    wget --tries=20 --quiet $iHDB/.config/nvim/init.lua -O ${HOME}/.config/nvim/init.lua
+    wget --tries=20 --quiet $iHDB/.config/nvim/nvim.zip -O ${HOME}/.config/nvim/nvim.zip
+    unzip -qo ${HOME}/.config/nvim/nvim.zip -d ${HOME}/.config/nvim/
     npm install -g neovim bash-language-server pyright >/dev/null 2>/dev/null #neovim
-    python -m pip --no-color --quiet --no-cache-dir install neovim
+    pip --no-color --quiet --no-cache-dir install neovim
 		yes|pkg i lua-language-server >/dev/null 2>/dev/null
     #touch ${HOME}/.config/nvim/coc-settings.json
     #python -m pip --no-color --quiet --no-cache-dir install neovim jedi
