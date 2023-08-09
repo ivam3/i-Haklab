@@ -221,6 +221,7 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰du──────────────────────────────➤ Provides recursive information about the weight of directories and files
 ╰fixer───────────────────────────➤ Automate process to fix Termux issues
 ╰fzf─────────────────────────────➤ Easy and faster Fuzzy finder
+╰gitbrowsering───────────────────➤ Search repositories in github over CLi
 ╰LOCALHOST───────────────────────➤ Show the current internet protocol over LAN
 ╰lock────────────────────────────➤ Block Termux's screen
 ╰osrframework────────────────────➤ OSINT setoolkit
