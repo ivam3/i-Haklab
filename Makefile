@@ -1,40 +1,35 @@
 # Variables 
-CC = clang++
-CFLAGS = -Wall -fPIC -shared
+V=_0.1
+CXX = clang++
+CXXFLAGS = -Wall -fPIC -shared
 LDFLAGS = -L. -Wl,-rpath=. -Wall
 LIBRARIES = -lbelow_zero_v$(V)
+OBJ = below_zero_v$(V).o
+SRC = src/below_zero_v$(V).cpp
+EXE = i-haklab
 
-all: i-haklab 
-
+all: i-haklab clean install
 
 # ejecutable dinamico Haaa 
-i-haklab: i-haklab.cpp  i-haklab.so
+$(EXE): i-haklab$(V).cpp  below_zero_v$(V).so
 	@echo [+] Creando ejecutable	
-	$(CC)  -o $@  $^ 
+	$(CXX)  -o $@  $^ -lcurl 
 
 
 # Bibloteca dinamica
-i-haklab.so: i-haklab.o i-haklab.so
+below_zero_v$(V).so: $(OBJ) below_zero_v$(V).so
 	@echo [+] Creando bibloteca dinamica	
-	$(CC)  $(CFLAGS) -o $@ $<
+	$(CXX)  $(CXXFLAGS) -o $@ $<
 
 
 # Crear objeto dinamico
-i-haklab.o: ./lib/optparse.h ./lib/i-haklab_cpp.h 
-
+$(OBJ): src/below_zero_v$(V).cpp 
 	@echo [+] Creando objeto
-	$(CC)  -c -fPIC  $<
-
-
-# Bprrar 
-.PHONY: clean
+	$(CXX)  -c -fPIC  $< -Iinclude
+		
+# Borrar
 clean:
+		rm -rf *.o
 
-
-#NOTA: Se hacen uso de las siguientes opciones:
-
-#-Wall          Para mostrar warnings (puede quitarse si se desea)
-#-Wl,rpath=.    Directorio donde el enlazador debe buscar la biblioteca
-#-L.            Directorio donde se hallan los archivos de cabecera
-#-l  Biblioteca a enlazar (libaritmetica.so: observa que se elimina el prefijo lib y el sufijo .so)
-
+install:
+		mv below_zero_v_0.1.so /data/data/com.termux/files/usr/lib/
