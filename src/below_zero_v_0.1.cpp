@@ -1,15 +1,12 @@
-#include "below_zero_v_0.1.h"
-#include <cstddef>
+#include "../include/below_zero_v_0.1.h"
 #include <cstdlib>
 #include <curl/curl.h>
-#include <curl/easy.h>
 #include <filesystem>
 #include <iostream>
-#include <linux/sched.h>
-#include <regex>
+#include <fstream> //ifstream 
 #include <string>
 #include <unistd.h>
-
+#include <regex>
 
 void hack::Haklab::ctrl_c()
 {
@@ -49,7 +46,6 @@ void hack::Haklab::progress_bar(int total, int progress)
     }
 }
 
-
 void  hack::Haklab::internet_speet()
 {
     // URL de la página a scrapear 
@@ -74,7 +70,6 @@ void  hack::Haklab::internet_speet()
        curl_easy_cleanup(curl);
     }
 }
-
 
 std::string hack::Haklab::showArchitecture() 
 {
@@ -127,11 +122,16 @@ bool hack::Haklab::downloadFile(std::string url, std::string outputFilename){
 };
         
     
-void hack::Haklab::install_zsh(){
-    for(std::string &pkg : shell_zsh)
-    {
-        std::cout << pkg << std::endl;
-        runScript(shell_zsh);
-        }
-};
+void hack::Haklab::about(const char *freanwor){
+    std::ifstream file;
+    file.open(freanwor);
+    // get char
+    char c = file.get();
+   // check 
+    while (file.good()) {
+       std::cout << c;
+       c = file.get();    
+    } 
+    file.close();   
+}
 

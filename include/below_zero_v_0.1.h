@@ -1,9 +1,14 @@
 #ifndef BELOW_ZERO
 #define BELOW_ZERO
 
-#include <iostream>
+#include <iostream> // cout 
 #include <string.h>
 #include <vector>
+#include <regex>
+#include <curl/curl.h>
+#include <fstream>  //istream 
+
+#define  iHETC "/data/data/com.termux/files/home/.local/etc/i-Haklab"
 
 
 //"2>&1" redirige los errores de salida de shell
@@ -13,9 +18,15 @@ using std::vector;
 
 
 namespace hack {
-    class Haklab {
-    public:
-      void ctrl_c();      
+ class Haklab{
+   private:   
+ 
+   public:
+  /*
+   * Muestra informacion de una heramaienta
+   */
+  void about(const char  *frenwor);   
+  void ctrl_c();      
       /*
        *
        */      
@@ -66,22 +77,6 @@ namespace hack {
 
 
        void install_zsh();    
-       
-      
-   private:
-       /*
-        * Variables 
-        */
-        string iHETC     ="/data/data/com.termux/files/home/.local/etc/i-Haklab";
-        string iHLIBEXEC ="/data/data/com.termux/files/home/.local/libexec/i-Haklab";  
-     /*
-      * Shell dependencias 
-      */
-       vector<string> shell_zsh{"zsh"};
-       /*
-        * Lista de pkg
-        */
-       vector<string> list_pkg{"helix","nvim"};
-   };
+      };
 };
 #endif // !DEBUG

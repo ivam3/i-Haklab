@@ -7,16 +7,13 @@
 
 
 int main(int argc, char **argv){
- // Variables de entorno 
-  std::string HOME{getenv("HOME")};
-  std::string PREFIX{getenv("PREFIX")};
-    
+   
   hack::Haklab user;
 
   const std::string usage = "usage: %prog command [OPTION]... ";
   const std::string version  = " %prog 3.7 " + user.showArchitecture();
   const std::string desc     = "i-Haklab v.3.7 (c) 2023 by @Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. If the law is violated with it's use, this would be the responsibility of the user who handled it.";
-  const std::string epilog   = "";
+  // const std::string epilog   = "";
   
   optparse::OptionParser parser =
         optparse::OptionParser()
@@ -68,11 +65,14 @@ int main(int argc, char **argv){
     const std::vector<std::string> args = parser.args();
 
     // Argumentos sobrantes 
+    std::string arg;
     for (std::vector<std::string>::const_iterator it = args.begin(); it != args.end(); ++it)
     {
-        std::cout << "arg: " << *it << std::endl;
+      arg =  *it;
     }
 
+    user.about(arg.c_str());
+  
   return 0;
 }
 
