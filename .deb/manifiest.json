@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.7.2",
+  "version": "3.7.3",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -88,6 +88,7 @@
 		"home/.local/etc/i-Haklab/Tools/Readme/localtunnel": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/localtunnel",
 		"home/.local/etc/i-Haklab/Tools/Readme/lockphish": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/lockphish",
 		"home/.local/etc/i-Haklab/Tools/Readme/metasploit": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/metasploit",
+		"home/.local/etc/i-Haklab/Tools/Readme/neovim": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/neovim",
 		"home/.local/etc/i-Haklab/Tools/Readme/ngrok": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/ngrok",
 		"home/.local/etc/i-Haklab/Tools/Readme/nikto": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/nikto",
 		"home/.local/etc/i-Haklab/Tools/Readme/nmap": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/nmap",

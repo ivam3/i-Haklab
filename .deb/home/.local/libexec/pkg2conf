@@ -93,7 +93,7 @@ set softwrap
 			rm -rf ${PREFIX}/etc/proxychains.conf;
 		}
 		[[ -e ${HOME}/.local/etc/proxychains.conf ]] || {
-			wget --tries=20 --quiet $iHDB/etc/proxychains.conf -O ${HOME}/.local/etc/proxychains.conf;
+			wget --tries=20 --quiet $iHDB/.local/etc/proxychains.conf -O ${HOME}/.local/etc/proxychains.conf;
 		}
 		ln -s ${HOME}/.local/etc/proxychains.conf ${PREFIX}/etc/proxychains.conf
 		;;
