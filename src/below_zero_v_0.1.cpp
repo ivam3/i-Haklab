@@ -86,16 +86,6 @@ std::string hack::Haklab::showArchitecture()
     #endif
 }
 
-void hack::Haklab::runScript(const std::vector<std::string> &args )
-{    
-    const char **argv = new const char* [args.size()+2];   // extra room for program name and sentinel
-    argv [0] = "bash";         // by convention, argv[0] is program name
-    for (int j = 0;  j < args.size()+1;  ++j)     // copy args
-            argv [j+1] = args[j] .c_str();
-
-    argv [args.size()+1] = NULL;  // end of arguments sentinel is NULL 
-    execv("/bin/bash", (char **) argv);
-}; 
 
 
 bool hack::Haklab::downloadFile(std::string url, std::string outputFilename){

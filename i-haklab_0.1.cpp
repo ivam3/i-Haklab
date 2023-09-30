@@ -1,8 +1,10 @@
 #include "include/below_zero_v_0.1.h"
 #include "include/optparse.h" 
+#include <chrono>
 #include <cstdlib>
 #include <filesystem>
-#include <utility>
+#include <vector>
+#include <unistd.h>
 
 
 
@@ -10,7 +12,7 @@ int main(int argc, char **argv){
    
   hack::Haklab user;
 
-  const std::string usage = "usage: %prog command [OPTION]... ";
+  const std::string usage = "usage: %prog [OPTION]... script";
   const std::string version  = " %prog 3.7 " + user.showArchitecture();
   const std::string desc     = "i-Haklab v.3.7 (c) 2023 by @Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. If the law is violated with it's use, this would be the responsibility of the user who handled it.";
   // const std::string epilog   = "";
@@ -39,7 +41,18 @@ int main(int argc, char **argv){
           .dest("check")
           .action("store_true")
           .help("Check all");
-// Group  (1) 
+    parser.add_option("-q", "--quiet")
+          .action("store_false")
+          .dest("verbose")
+          .set_default("1")
+          .help("don't print status messages to stdout");
+    parser.add_option("-t", "--time")
+          .action("store_false")
+          .dest("time")
+          .set_default("1")
+          .help("(defaul) time");
+          
+ // Group  (1) 
   optparse::OptionGroup group = optparse::OptionGroup(
     "Setting Options",
     ""  
@@ -69,11 +82,28 @@ int main(int argc, char **argv){
     for (std::vector<std::string>::const_iterator it = args.begin(); it != args.end(); ++it)
     {
       arg =  *it;
+    };
+   
+    // Establecer tiempo de inicio
+    std::chrono::time_point<std::chrono::system_clock> startime;
+    startime = std::chrono::system_clock::now();
+
+    //Run
+    execlp("ls","-l" , NULL);
+
+    // Establecer el timestamp de end
+    std::chrono::time_point<std::chrono::system_clock> endtime;
+    endtime = std::chrono::system_clock::now();
+
+   //Optener el tiempo de ejecucion en (millisegundo)
+    if (options.get("time")) {
+    long long elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>
+    (endtime - startime).count();
+
+    std::cout << "ms " <<  elapsedTime << std::endl;
     }
 
-    user.about(arg.c_str());
-  
-  return 0;
+  return EXIT_SUCCESS;
 }
 
 

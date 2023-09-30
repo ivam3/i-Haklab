@@ -33,4 +33,4 @@ clean:
 
 install:
 		mv below_zero_v_0.1.so /data/data/com.termux/files/usr/lib/
-		mv i-haklab ./bin/
+		cp i-haklab /data/data/com.termux/files/usr/bin/		
