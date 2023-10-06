@@ -215,8 +215,9 @@ $W  Those commands do not need the i-Haklab command
              Just type the command.
 _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰apt─────────────────────────────➤ Install/remove and configure packages/tools/frameworks
-╰adminfiles──────────────────────➤ Copy any file from internal/external storage at termux directory.
+╰adminfiles──────────────────────➤ Copy any file from internal/external storage at termux directory
 ╰bat─────────────────────────────➤ Use it instead of command 'cat' for text highlighting
+╰cinderella──────────────────────➤ Virtual assist exclusively for the use of termux
 ╰df──────────────────────────────➤ Provides information about the mounted memory
 ╰du──────────────────────────────➤ Provides recursive information about the weight of directories and files
 ╰fixer───────────────────────────➤ Automate process to fix Termux issues
