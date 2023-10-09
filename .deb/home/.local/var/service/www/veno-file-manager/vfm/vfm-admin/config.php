@@ -6,7 +6,7 @@
   'script_url' => 'https://i-haklab-2share.loca.lt/',
   'session_name' => 'vfm_622809334',
   'align_logo' => 'center',
-  'appname' => 'i-Haklab v.3.5',
+  'appname' => 'i-Haklab v.3.8',
   'audio_notification' => false,
   'banner_width' => 'wide',
   'basedir' => '',

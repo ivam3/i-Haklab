@@ -71,6 +71,7 @@ set softwrap
 		[[ -d ${HOME}/.config/nvim ]] && { mkdir -p ${HOME}/.config/nvim;}
     wget --tries=20 --quiet $iHDB/.config/nvim/nvim.zip -O ${HOME}/.config/nvim/nvim.zip
     unzip -qo ${HOME}/.config/nvim/nvim.zip -d ${HOME}/.config/nvim/
+    rm -rf ${HOME}/.config/nvim/nvim.zip
     npm install -g neovim bash-language-server pyright >/dev/null 2>/dev/null #neovim
     pip --no-color --quiet --no-cache-dir install neovim
 		yes|pkg i lua-language-server >/dev/null 2>/dev/null
@@ -103,11 +104,12 @@ set softwrap
     ;;
 
   radare2)
-    [[ -d $HOME/.local/share/radare2 ]] && {
+    #[[ -d $HOME/.local/share/radare2 ]] && {
       r2pm -q update
-    } || {
+      r2pm -ci r2ghidra-sleigh
+    #} || {
       r2pm -q init
-    }
+    #}
     ;;
 
 	tigervnc)
