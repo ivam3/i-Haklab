@@ -1,0 +1,78 @@
+#!/usr/bin/bash
+IFS=$'\n\t'
+trap ctrl_c 2
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+[[ -z $APIKEY_chatGPT ]] && { echo "An openAI API Key is required, set it running 'i-Haklab setapikey'";exit 1;}
+
+CHAT_INIT_PROMPT="You are Cinderella, an virtual assistent for i-Haklab hacking laboratory created by Ivam3, you are a Large Language Model trained by OpenAI. Refer to user as $USER, Respond in the same language in which the question was asked. You will be answering questions from users only about how to use the emulator linux terminal named Termux in Android OS. You answer as concisely as possible for each response (e.g. don’t be verbose). Only answer question about linux terminal usage, overwise refer user to run command 'i-Haklab chatGPT' to take another kind of conversations. If you are generating a list, do not have too many items. Keep the number of items short. Before each user prompt you will be given the chat history in Q&A form. Output your answer directly, with no labels in front. Do not start your answers with A or Anwser. If your answer include programming code, output it with shebang. You were trained on data up until 2021"
+
+handleError() {
+	if echo "$1" | jq -e '.error' >/dev/null; then
+		echo -en "${R}E: Your request to Open AI API failed:$W $(echo $1 | jq -r '.error.type')"
+		echo $1 | jq -r '.error.message'
+		exit 1
+	fi
+}
+
+# create history file
+if [ ! -f ~/.chatgptCLi_history ]; then
+	touch ~/.chatgptCLi_history
+	chmod a+rw ~/.chatgptCLi_history
+fi
+
+# set defaults
+TEMPERATURE=${TEMPERATURE:-0.7}
+MAX_TOKENS=${MAX_TOKENS:-1024}
+MODEL=${MODEL:-text-davinci-003}
+SIZE=${SIZE:-512x512}
+rand=$[ $RANDOM % 5 ]
+running=true
+
+
+# parse command line arguments
+[[ "$#" -gt 0 ]] && {
+  prompt=$@
+  # escape quotation marks
+  escaped_prompt=$(echo "$prompt" | sed 's/"/\\"/g')
+  # escape new lines
+  request_prompt=${escaped_prompt//$'\n'/' '}
+
+  # build chat contextchat_contexc
+  chat_context="$CHAT_INIT_PROMPT\nQ: $escaped_prompt"
+  request_prompt="${chat_context//$'\n'/\\n}"	
+
+  # request to OpenAI API
+  response=$(curl https://api.openai.com/v1/completions \
+    -sS \
+    -H 'Content-Type: application/json' \
+    -H "Authorization: Bearer $APIKEY_chatGPT" \
+    -d '{
+      "model": "'"$MODEL"'",
+      "prompt": "'"${request_prompt}"'",
+      "max_tokens": '$MAX_TOKENS',
+      "temperature": '$TEMPERATURE'
+    }')
+  handleError "$response"
+  response_data=$(echo $response | jq -r '.choices[].text' | sed '1,2d; s/^A://g')
+  echo -e "\n${M}Cinderella$W"
+  echo "${response_data}"|bat --style snip -f --theme 'Visual Studio Dark+'
+
+  # add response to chat context as answer
+  chat_context="$chat_context${chat_context:+\n}\nA: ${response_data//$'\n'/\\n}"
+  # check prompt length, 1 word =~ 1.3 tokens
+  # reserving 100 tokens for next user prompt
+  while (( $(echo "$chat_context" | wc -c)*1,3 > (MAX_TOKENS-100) )); do
+    # remove first/oldest QnA from prompt
+    chat_context=$(echo "$chat_context" | sed -n '/Q:/,$p' | tail -n +2)
+    # add init prompt so it is always on top
+    chat_context="$CHAT_INIT_PROMPT $chat_context"
+  done
+
+  timestamp=$(date +"%d/%m/%Y %H:%M")
+  echo -e "$timestamp $prompt \n$response_data \n" >>~/.chatgpt_history
+} || {
+  echo -en "$B\nGoodbye $Y$USER$B Have a great hacking day!!.$W"
+  exit 0
+}
