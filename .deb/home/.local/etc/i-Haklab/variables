@@ -20,6 +20,7 @@ export LPORT='3030'
 export RPORT='80'
 export MSFPATH='/data/data/com.termux/files/usr/opt/metasploit-framework'
 export APIKEY_phonescan=""
+export APIKEY_cinderella=""
 export APIKEY_chatGPT=""
 export APIKEY_neovim=""
 export WL='/data/data/com.termux/files/home/.local/share/wordlist'

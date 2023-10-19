@@ -13,6 +13,7 @@ beef
 bettercap
 bitb-framework
 binwalk
+bloodhound
 blackbox
 botgram
 burpsuite
@@ -32,6 +33,8 @@ dirb
 dns2tcp
 dnsenum
 embed
+enum4linux
+enum4linux-ng
 evilginx2
 evilurl
 exif
@@ -40,7 +43,9 @@ fake-sms
 fbi
 frida
 gdb
+getadusers
 getnpusers
+getuserspns
 geo-recon
 ghidra
 ghost

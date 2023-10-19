@@ -39,9 +39,9 @@ banner
 echo -en "$Y[!]$W Get an OpenAI API key on:$B https://platform.openai.com/account/api-keys\n"
 echo -en "$Y[!]$W Get a PhoneScan API key on:$B https://numverify.com/dashboard$W\n"
 echo "[?] Choose the api key to set:"
-select platform in chatGPT neovim phonescan cancel;do
+select platform in chatGPT cinderella neovim phonescan cancel;do
   case $platform in
-    chatGPT|neovim|phonescan)
+    chatGPT|cinderella|neovim|phonescan)
       [[ -z "$(eval "echo \$APIKEY_$platform")" ]] || { ask;}
       getApiKey
       setApiKey

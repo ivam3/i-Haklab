@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.8.0",
+  "version": "3.8.1",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -11,6 +11,7 @@
 		"usr/bin/termux-url-opener": "/data/data/com.termux/files/usr/bin/termux-url-opener",
 		"home/.nanorc": "/data/data/com.termux/files/home/.nanorc",
 		"home/.config/fish/functions/mypip.fish": "/data/data/com.termux/files/home/.config/fish/functions/mypip.fish",
+		"home/.config/fish/functions/cinderella.fish": "/data/data/com.termux/files/home/.config/fish/functions/cinderella.fish",
 		"home/.config/fish/functions/pm.fish": "/data/data/com.termux/files/home/.config/fish/functions/pm.fish",
 		"home/.config/fish/functions/cmd.fish": "/data/data/com.termux/files/home/.config/fish/functions/cmd.fish",
 		"home/.config/fish/functions/fish_greeting.fish": "/data/data/com.termux/files/home/.config/fish/functions/fish_greeting.fish",
@@ -3175,6 +3176,7 @@
 		"home/.local/var/service/www/servers4test/bWAPP/images/sb_1.jpg": "/data/data/com.termux/files/home/.local/var/service/www/servers4test/bWAPP/images/sb_1.jpg",
 		"home/.local/var/service/www/servers4test/bWAPP/images/mk.png": "/data/data/com.termux/files/home/.local/var/service/www/servers4test/bWAPP/images/mk.png",
 		"home/.local/libexec/pkg2conf": "/data/data/com.termux/files/home/.local/libexec/pkg2conf",
+		"home/.local/libexec/cinderella": "/data/data/com.termux/files/home/.local/libexec/cinderella",
 		"home/.local/libexec/QG_aircrack-ng": "/data/data/com.termux/files/home/.local/libexec/QG_aircrack-ng",
 		"home/.local/libexec/QG_nmap": "/data/data/com.termux/files/home/.local/libexec/QG_nmap",
 		"home/.local/libexec/osrframework": "/data/data/com.termux/files/home/.local/libexec/osrframework",
