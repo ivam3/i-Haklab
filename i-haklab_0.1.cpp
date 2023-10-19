@@ -22,7 +22,7 @@ int main(int argc, char **argv){
         .disable_interspersed_args() 
 #endif
   ;
-  
+//A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z.
 // Opciones y argumentos 
     parser.add_option("--screen-size")
           .action("store_true")
@@ -51,6 +51,8 @@ int main(int argc, char **argv){
           .help("host");
           
  // Group  (1) 
+
+//A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z.
   optparse::OptionGroup group = optparse::OptionGroup(
     "Setting Options",
     ""  
@@ -65,6 +67,7 @@ int main(int argc, char **argv){
         "Automatitation Options:",
         "Caution: use these options at your own risk. "
         "It is believed that some of them bite.");
+  // A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z.
    group1.add_option("--run")
       .action("append")
       .dest("run")
@@ -98,7 +101,7 @@ int main(int argc, char **argv){
     if (options.get("screen-size")) {
       user.ScreenSise();
     }
-
+    
     if (std::filesystem::exists(LIBEX + arg )) {
       std::string command = "bash  " LIBEX + arg;
       int result =  std::system(command.c_str());

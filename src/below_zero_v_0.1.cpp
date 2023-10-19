@@ -101,7 +101,21 @@ void syntax_highlight(const std::string &code){
 
 void hack::Haklab::k_boom(int signum)
 {    
-    std::cerr << " Hooooo\n";  
+    std::string k_boom = R"(
+                        _-^--^=-_
+                   _.-^^          -~_
+                _--                  --_
+              (<                        >)
+               |                         |
+                \._                   _./
+                   '..--. . , ; .--..'
+                         | |   |
+                      .-=||  | |=-.
+                      '-=k-boom!!='
+                         |;   :|
+                _____.,-#########~,._____⏎)"; 
+    //std::cout << k_boom << std::endl;
+    syntax_highlight(k_boom);
     exit(1); 
 }
 
