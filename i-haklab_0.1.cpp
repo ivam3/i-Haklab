@@ -1,17 +1,11 @@
 #include "include/below_zero_v_0.1.h"
 #include "include/optparse.h" 
-#include <chrono>
-#include <cstdlib>
-#include <filesystem>
-#include <vector>
-#include <unistd.h>
 
-
-
+ 
 int main(int argc, char **argv){
    
   hack::Haklab user;
-
+  Check check;
   const std::string usage = "usage: %prog [OPTION]... script";
   const std::string version  = " %prog 3.7 " + user.showArchitecture();
   const std::string desc     = "i-Haklab v.3.7 (c) 2023 by @Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. If the law is violated with it's use, this would be the responsibility of the user who handled it.";
@@ -29,18 +23,18 @@ int main(int argc, char **argv){
   ;
   
 // Opciones y argumentos 
-    parser.add_option("-i", "--install")
-          .dest("install_pkg")
-          .metavar("pkg")
-          .help("install packet");
+    parser.add_option("--screen-size")
+          .action("store_true")
+          .help("Show size screen");
     parser.add_option("-r", "--remove")
           .dest("remove_pgk")
           .metavar("pkg")
           .help("remove packet");
-    parser.add_option("--check")
-          .dest("check")
-          .action("store_true")
-          .help("Check all");
+    parser.add_option("--headth")
+          .action("store_false")
+          .action("callback")
+          .callback(check)
+          .help("Checks for potential errors");
     parser.add_option("-q", "--quiet")
           .action("store_false")
           .dest("verbose")
@@ -50,7 +44,10 @@ int main(int argc, char **argv){
           .action("store_false")
           .dest("time")
           .set_default("1")
-          .help("(defaul) time");
+          .help("(defaul) Shows the execution time");
+    parser.add_option("--host")
+          .type("string")
+          .help("host");
           
  // Group  (1) 
   optparse::OptionGroup group = optparse::OptionGroup(
@@ -67,16 +64,21 @@ int main(int argc, char **argv){
         "Automatitation Options:",
         "Caution: use these options at your own risk. "
         "It is believed that some of them bite.");
-    group1.add_option("--run")
+   group1.add_option("--run")
       .action("append")
       .dest("run")
       .help("Run script ");
-    parser.add_option_group(group1); 
+   group1.add_option("--bandit")
+      .action("store_true")
+      .help("conexcion por ssh a los servidores de bandit ");
+   parser.add_option_group(group1); 
+  
   
 
     const optparse::Values options = parser.parse_args(argc, argv);
     const std::vector<std::string> args = parser.args();
-
+ 
+    
     // Argumentos sobrantes 
     std::string arg;
     for (std::vector<std::string>::const_iterator it = args.begin(); it != args.end(); ++it)
@@ -88,8 +90,49 @@ int main(int argc, char **argv){
     std::chrono::time_point<std::chrono::system_clock> startime;
     startime = std::chrono::system_clock::now();
 
+    //Atrapar señal de (CTRL + C)
+    signal(SIGINT,hack::Haklab::k_boom);
+
     //Run
-    execlp("ls","-l" , NULL);
+    if (options.get("screen-size")) {
+      user.ScreenSise();
+    }
+
+    if (std::filesystem::exists(LIBEX + arg )) {
+      std::string command = LIBEX + arg;
+      std::system(command.c_str());
+     }
+
+    //run_end...............................
+  
+   //Reto conexion........................................
+    if (options.get("bandit")) {
+      ssh_key srv_pubkey = NULL;
+      size_t hlen;
+      //Crear sesion SSH
+      ssh_session session = ssh_new();
+      if (session == NULL) {
+         std::cerr << "Error al crear la sesion SSH" << std::endl;
+         return EXIT_FAILURE;
+      }
+    // Obciones de conexion 
+    ssh_options_set(session,SSH_OPTIONS_HOST , "bandit.labs.overthewire.org");
+    ssh_options_set(session,SSH_OPTIONS_USER , "bandit0");
+    ssh_options_set(session,SSH_OPTIONS_PORT,  "2220");
+    
+    //Conectar al servidor
+    int  rc = ssh_connect(session);
+    if (rc != SSH_OK) {
+      fprintf(stderr, "Error al conectar : %s\n" ,
+      ssh_get_error (session));
+      ssh_free (session);
+    return EXIT_FAILURE;
+    }
+  }
+  //End........................................
+    std::cout << options["run"] << std::endl;
+    user.about(options["about"]);
+      
 
     // Establecer el timestamp de end
     std::chrono::time_point<std::chrono::system_clock> endtime;
@@ -100,7 +143,8 @@ int main(int argc, char **argv){
     long long elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>
     (endtime - startime).count();
 
-    std::cout << "ms " <<  elapsedTime << std::endl;
+    user.syntax_highlight("#took");        
+    std::cout << "took " <<  elapsedTime << "ms" << std::endl;
     }
 
   return EXIT_SUCCESS;
