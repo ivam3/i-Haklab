@@ -41,7 +41,6 @@ class Check : public optparse::Callback {
 };
 
 
-namespace hack {
 
 enum class Color {
  Default,
@@ -55,6 +54,11 @@ enum class Color {
  White
 };
 
+std::string setColor(Color color);
+void syntax_highlight(const std::string &code);  
+
+
+namespace hack {
 // Cliente ssh
  class SSH_Clien {
      private:
@@ -76,11 +80,9 @@ enum class Color {
   
    public:
   
-  std::string setColor(Color color);
   /*
    * Resaltado de syntax
    */
-   void syntax_highlight(const std::string &code);  
    /*
     * 
     */

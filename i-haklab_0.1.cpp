@@ -9,13 +9,14 @@ int main(int argc, char **argv){
   const std::string usage = "usage: %prog [OPTION]... script";
   const std::string version  = " %prog 3.7 " + user.showArchitecture();
   const std::string desc     = "i-Haklab v.3.7 (c) 2023 by @Ivam3 - Is a hacking laboratory that contains open source tools recommended by Ivam3. If the law is violated with it's use, this would be the responsibility of the user who handled it.";
-  // const std::string epilog   = "";
+  const std::string epilog   = " [--] DIRECT COMMANDS [--] \n example";
   
   optparse::OptionParser parser =
         optparse::OptionParser()
         .usage(usage)
         .version(version)
         .description(desc)
+        .epilog(epilog)
 // los tratara prog -a -b arg1 arg2  
 #ifdef DISABLE_INTERSPERSED_ARGS
         .disable_interspersed_args() 
@@ -85,7 +86,7 @@ int main(int argc, char **argv){
     {
       arg =  *it;
     };
-   
+     
     // Establecer tiempo de inicio
     std::chrono::time_point<std::chrono::system_clock> startime;
     startime = std::chrono::system_clock::now();
@@ -99,8 +100,13 @@ int main(int argc, char **argv){
     }
 
     if (std::filesystem::exists(LIBEX + arg )) {
-      std::string command = LIBEX + arg;
-      std::system(command.c_str());
+      std::string command = "bash  " LIBEX + arg;
+      int result =  std::system(command.c_str());
+      if (result == -1) {
+        std::cerr << "Error al ejecutar el comando en Bash" << std::endl;
+    } else {
+        std::cout << "Comando ejecutado exitosamente" << std::endl;
+       }
      }
 
     //run_end...............................
@@ -143,8 +149,8 @@ int main(int argc, char **argv){
     long long elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>
     (endtime - startime).count();
 
-    user.syntax_highlight("#took");        
-    std::cout << "took " <<  elapsedTime << "ms" << std::endl;
+    syntax_highlight("took "); 
+    std::cout <<  elapsedTime << "ms" << std::endl;
     }
 
   return EXIT_SUCCESS;

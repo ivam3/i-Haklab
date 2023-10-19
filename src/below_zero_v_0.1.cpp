@@ -96,7 +96,7 @@ void syntax_highlight(const std::string &code){
         }
     }
 
-    std::cout << highlightedCode << std::endl;
+    std::cout << highlightedCode ;
 };
 
 void hack::Haklab::k_boom(int signum)
