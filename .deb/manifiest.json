@@ -3209,6 +3209,7 @@
 		"home/.local/libexec/i-Haklab/setuser": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/setuser",
 		"home/.local/libexec/i-Haklab/setapikey": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/setapikey",
 		"home/.local/libexec/i-Haklab/aptup": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/aptup",
+		"home/.local/libexec/i-Haklab/gitbrowsering": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/gitbrowsering",
 		"home/.local/libexec/i-Haklab/ransomux": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/ransomux",
 		"home/.local/libexec/i-Haklab/help": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/help",
 		"home/.netrc": "/data/data/com.termux/files/home/.netrc",
