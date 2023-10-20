@@ -1,4 +1,5 @@
 #include "../include/below_zero_v_0.1.h"
+#include <chrono>
 
 
 //?\e ⇒ 27 ; carácter de escape, ESC,C-[
@@ -9,6 +10,24 @@
 
 namespace  fs  = std::filesystem;
 
+
+hack::Haklab::Haklab()
+// Inalisacion de lista
+: startime{std::chrono::system_clock::now()}
+{
+    
+};
+
+hack::Haklab::~Haklab(){  
+  // Optener tiempo de end  
+  endtime = std::chrono::system_clock::now();
+  // Optener tiempo de ejecucion
+  elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>
+  (endtime - startime).count();
+
+  syntax_highlight("took "); 
+  std::cout <<  getTime() << "ms" << std::endl;
+}
 
 std::string setColor(Color color) {
  std::string code = "\033[";

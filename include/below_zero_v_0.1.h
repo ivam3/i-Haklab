@@ -12,6 +12,9 @@
 #include <unistd.h>
 #include <libssh/libssh.h>
 #include <curl/curl.h>
+#include <ncurses.h>
+
+
 
 #define  iHETC  "/data/data/com.termux/files/home/.local/etc/i-Haklab"
 #define  LIBEX  "/data/data/com.termux/files/home/.local/libexec/i-Haklab/"
@@ -68,7 +71,21 @@ namespace hack {
  
  class Haklab {
    private: 
-  void clearScreen();   
+  // ===== Variables =====
+  // Tiempo de star
+  std::chrono::time_point<std::chrono::system_clock> startime;
+  // Tiempo de end
+  std::chrono::time_point<std::chrono::system_clock> endtime;
+  // Tiempo de ejecucion en (millosegundo)
+  long long elapsedTime;
+
+  
+   // ===== Funciones privadas ====
+  // Tiempo que se demora el program 
+  long long getTime(){
+    return elapsedTime;
+   }  
+   void clearScreen();   
   /*
    *
    */
@@ -81,11 +98,13 @@ namespace hack {
    public:
   
   /*
-   * Resaltado de syntax
+   * Contructor
    */
+   Haklab();
    /*
-    * 
+    * Destructor 
     */
+   ~Haklab();
   /*
    * Muestra informacion de una heramaienta
    */
@@ -108,7 +127,7 @@ namespace hack {
       /*
        *
        */
-  bool checkInternetConnection();
+ 
       /*
        *
        */

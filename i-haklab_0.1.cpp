@@ -90,10 +90,6 @@ int main(int argc, char **argv){
       arg =  *it;
     };
      
-    // Establecer tiempo de inicio
-    std::chrono::time_point<std::chrono::system_clock> startime;
-    startime = std::chrono::system_clock::now();
-
     //Atrapar señal de (CTRL + C)
     signal(SIGINT,hack::Haklab::k_boom);
 
@@ -114,49 +110,8 @@ int main(int argc, char **argv){
 
     //run_end...............................
   
-   //Reto conexion........................................
-    if (options.get("bandit")) {
-      ssh_key srv_pubkey = NULL;
-      size_t hlen;
-      //Crear sesion SSH
-      ssh_session session = ssh_new();
-      if (session == NULL) {
-         std::cerr << "Error al crear la sesion SSH" << std::endl;
-         return EXIT_FAILURE;
-      }
-    // Obciones de conexion 
-    ssh_options_set(session,SSH_OPTIONS_HOST , "bandit.labs.overthewire.org");
-    ssh_options_set(session,SSH_OPTIONS_USER , "bandit0");
-    ssh_options_set(session,SSH_OPTIONS_PORT,  "2220");
-    
-    //Conectar al servidor
-    int  rc = ssh_connect(session);
-    if (rc != SSH_OK) {
-      fprintf(stderr, "Error al conectar : %s\n" ,
-      ssh_get_error (session));
-      ssh_free (session);
-    return EXIT_FAILURE;
-    }
-  }
-  //End........................................
-    std::cout << options["run"] << std::endl;
+    //End........................................
     user.about(options["about"]);
       
-
-    // Establecer el timestamp de end
-    std::chrono::time_point<std::chrono::system_clock> endtime;
-    endtime = std::chrono::system_clock::now();
-
-   //Optener el tiempo de ejecucion en (millisegundo)
-    if (options.get("time")) {
-    long long elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>
-    (endtime - startime).count();
-
-    syntax_highlight("took "); 
-    std::cout <<  elapsedTime << "ms" << std::endl;
-    }
-
-  return EXIT_SUCCESS;
 }
-
 
