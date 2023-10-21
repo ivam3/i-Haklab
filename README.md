@@ -50,7 +50,7 @@ i-Haklab passwd new
 ```bash
 i-Haklab share
 ```
-- Provide you with deliberately vulnerable web site servers as [bWAPP](http://www.itsecgames.com/), [DVWA](https://dvwa.co.uk/) and [MUTILLIDAE](https://github.com/webpwnized/mutillidae) to practice your hacking skills searching, finding and exploting the most common vulnerabilities. Enable those running:
+- Provide you with deliberately vulnerable web site servers as [bWAPP](http://www.itsecgames.com/), [DVWA](https://dvwa.co.uk/) and [MUTILLIDAE](https://github.com/webpwnized/mutillidae) to practice your hacking skills searching, finding and exploiting the most common vulnerabilities. Enable those running:
 ```bash
 i-Haklab servers4test
 ```
