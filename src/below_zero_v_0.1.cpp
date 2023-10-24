@@ -1,5 +1,7 @@
 #include "../include/below_zero_v_0.1.h"
 #include <chrono>
+#include <cstdlib>
+#include <filesystem>
 
 
 //?\e ⇒ 27 ; carácter de escape, ESC,C-[
@@ -132,25 +134,25 @@ void hack::Haklab::k_boom(int signum)
                       .-=||  | |=-.
                       '-=k-boom!!='
                          |;   :|
-                _____.,-#########~,._____⏎)"; 
+                _____.,-#########-,._____⏎)"; 
     //std::cout << k_boom << std::endl;
     syntax_highlight(k_boom);
     exit(1); 
 }
 
 
-void hack::Haklab::clearScreen(){
+void hack::Haklab::clear_screen(){
  //Se coloca en la pocicion (1 1) y borra la pantalla
   const char *CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
   write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
 }
 
-void hack::Haklab::hideCursor() {
+void hack::Haklab::hide_cursor() {
     const char *HIDE_CURSOR_ANSI = "\e[?25l";  // Send escape sequence to hide cursor
     write(STDOUT_FILENO,HIDE_CURSOR_ANSI,7);
 }
 
-void hack::Haklab::showCursor() {
+void hack::Haklab::show_cursor() {
     std::cout << "\033[?25h";  // Send escape sequence to show cursor
     std::cout.flush();
 }
@@ -218,7 +220,7 @@ void  hack::Haklab::internet_speet(){
     }
 }
 
-std::string hack::Haklab::showArchitecture() {
+std::string hack::Haklab::show_architecture() {
     #ifdef __x86_64__
         return "(x86_64)";
     #elif __i386__
@@ -234,7 +236,7 @@ std::string hack::Haklab::showArchitecture() {
 
 
 
-bool hack::Haklab::downloadFile(std::string url, std::string outputFilename){
+bool hack::Haklab::download_file(std::string url, std::string outputFilename){
         CURL *curl;
         FILE *fp;
         CURLcode result;

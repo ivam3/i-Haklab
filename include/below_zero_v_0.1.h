@@ -33,12 +33,7 @@ class Check : public optparse::Callback {
     void operator()(const optparse::Option &option, const std::string &opt, const std::string &val, const optparse::OptionParser &parser)
     {
         counter++;
-        std::cout << "--- MyCallback --- " << counter << ". time called" << std::endl;
-        std::cout << "--- MyCallback --- option.action(): " << option.action() << std::endl;
-        std::cout << "--- MyCallback --- opt: " << opt << std::endl;
-        std::cout << "--- MyCallback --- val: " << val << std::endl;
-        std::cout << "--- MyCallback --- parser.usage(): " << parser.usage() << std::endl;
-        std::cout << std::endl;
+
     }
     int counter;
 };
@@ -46,9 +41,11 @@ class Check : public optparse::Callback {
 
 
 enum class Color {
+ // Color predeterminado 
  Default,
  Black,
  Red,
+ // Verde
  Green,
  Yellow,
  Blue,
@@ -59,7 +56,6 @@ enum class Color {
 
 std::string setColor(Color color);
 void syntax_highlight(const std::string &code);  
-
 
 namespace hack {
 // Cliente ssh
@@ -85,15 +81,15 @@ namespace hack {
   long long getTime(){
     return elapsedTime;
    }  
-   void clearScreen();   
+   void clear_screen();   
   /*
    *
    */
-  void hideCursor();
+  void hide_cursor();
   /*
    *
    */
-  void showCursor();
+  void show_cursor();
   
    public:
   
@@ -119,15 +115,15 @@ namespace hack {
        /*
        * Arquitectura del sistema
        */
-  std::string showArchitecture();
+  std::string show_architecture();
       /*
        * Comprobar la velocidad del internet 
        */
   void internet_speet();
       /*
-       *
+       * Muestra todos los archivos de un directorio
        */
- 
+  string directory_iterator(std::filesystem::path); 
       /*
        *
        */
@@ -142,11 +138,11 @@ namespace hack {
        * url: URL del archivo que se desea descargar
        * filename: Nombre del archivo con el que se guardará 
        */
-  bool downloadFile(std::string url, std::string outputFilename); 
+  bool download_file(std::string url, std::string outputFilename); 
          /*
           *  Comprimir 
           */
-  bool compressFile(const string& inputFilePath, const string& outputFilePath);
+  bool compress_file(const string& inputFilePath, const string& outputFilePath);
        /*
           int total = 100
           for (int i = 0; i <= total; ++i)
@@ -164,7 +160,7 @@ namespace hack {
 // Función para mostrar un spinner mientras se ejecuta otra función en segundo plano
 template<typename Func>
 void running(Func func) {
-    hideCursor();
+    hide_cursor();
     std::thread::id main_thread_id = std::this_thread::get_id();
     std::vector<std::string> spinner = { "█■■■■", "■█■■■", "■■█■■", "■■■█■", "■■■■█" };
     int spinnerIndex = 0;
@@ -182,7 +178,7 @@ void running(Func func) {
     // Ejecuta la función proporcionada en segundo plano
     func();
    
-    showCursor();
+    show_cursor();
 }
        /*
         * Muestra el tamaño de la pantalla  
