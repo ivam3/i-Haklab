@@ -1,7 +1,7 @@
 # Variables 
 V=_0.1
 CXX = clang++
-CXXFLAGS = -Wall -fPIC -shared
+CXXFLAGS = -Wall -fPIC -shared 
 LDFLAGS = -L. -Wl,-rpath=. -Wall
 LIBRARIES = -lbelow_zero_v$(V) 
 OBJ = below_zero_v$(V).o
@@ -13,7 +13,7 @@ all: i-haklab clean install
 # ejecutable dinamico Haaa 
 $(EXE): i-haklab$(V).cpp  below_zero_v$(V).so
 	@echo [+] Creando ejecutable	
-	$(CXX)  -o $@  $^ -lcurl -lssh
+	$(CXX)  -o $@  $^ -lcurl -lssh -lncurses
 
 
 # Bibloteca dinamica
@@ -25,7 +25,7 @@ below_zero_v$(V).so: $(OBJ) below_zero_v$(V).so
 # Crear objeto dinamico
 $(OBJ): src/below_zero_v$(V).cpp 
 	@echo [+] Creando objeto
-	$(CXX)  -c -fPIC  $< -Iinclude
+	$(CXX)  -c -fPIC  $< -Iinclude -std=c++20
 		
 # Borrar
 clean:

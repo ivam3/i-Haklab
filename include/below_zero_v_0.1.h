@@ -1,8 +1,8 @@
 #ifndef BELOW_ZERO
 #define BELOW_ZERO
 
-#include "termio.h"
 #include "optparse.h"
+#include "bandit.h"
 #include <iostream> // cout 
 #include <string.h>
 #include <vector>
@@ -27,25 +27,33 @@ using std::vector;
 
 
 // optparce 
-class Check : public optparse::Callback {
+class Check : public optparse::Callback 
+{
  public:
     Check() : counter(0) {}
     void operator()(const optparse::Option &option, const std::string &opt, const std::string &val, const optparse::OptionParser &parser)
     {
         counter++;
-
+     char mesg[]="Solo una cadena";  
+     int row,col;
+     initscr();                       /* Inicia el modo curses          */
+     getmaxyx(stdscr,row,col);       /* obtiene el numero de filas y columnas */
+     mvprintw(row/2,(col-strlen(mesg))/2,"%s",mesg);
+     printw("Hello World !!!");      /* Imprime Hello World            */
+     refresh();                      /* Imprimirlo en la pantalla real */
+     getch();                        /* Esperar entrada de usuario     */
+     endwin();                       /* Termina el modo cusrses */
     }
     int counter;
 };
 
 
 
-enum class Color {
- // Color predeterminado 
+enum class Color 
+{
  Default,
  Black,
  Red,
- // Verde
  Green,
  Yellow,
  Blue,
@@ -58,14 +66,9 @@ std::string setColor(Color color);
 void syntax_highlight(const std::string &code);  
 
 namespace hack {
-// Cliente ssh
- class SSH_Clien {
-     private:
- };
-
-
  
- class Haklab {
+ class Haklab 
+ {
    private: 
   // ===== Variables =====
   // Tiempo de star
@@ -74,7 +77,8 @@ namespace hack {
   std::chrono::time_point<std::chrono::system_clock> endtime;
   // Tiempo de ejecucion en (millosegundo)
   long long elapsedTime;
-
+  // Passwd de bandit
+  std::vector<std::string> passwd_bandit{"NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL","rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi"};
   
    // ===== Funciones privadas ====
   // Tiempo que se demora el program 
@@ -104,7 +108,7 @@ namespace hack {
   /*
    * Muestra informacion de una heramaienta
    */
-  void about(std::string frenwor);   
+  void about(std::string frenwor, std::string arg);   
       /*
        * Muestra un baner de salida 
        */      

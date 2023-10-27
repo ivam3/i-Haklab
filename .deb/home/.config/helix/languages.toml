@@ -1,0 +1,8 @@
+# in <config_dir>/helix/languages.toml
+
+[[language]]
+name = "bash"
+auto-format = true
+
+
+

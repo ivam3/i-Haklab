@@ -1,0 +1,41 @@
+theme = "night_owl"
+
+[editor]
+mouse              = true
+cursorline         = true
+completion-replace = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.whitespace.characters]
+space   = "·"
+nbsp    = "⍽"
+tab     = "→"
+newline = "⏎"
+tabpad  = "·" # Tabs will look like "→···" (depending on tab width)
+
+[editor.indent-guides]
+render = true
+character = "┊" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
+
+# configurar la línea de estado 
+[editor.statusline]
+left        = ["mode", "spinner"]
+center      = ["file-modification-indicator","file-name"]
+right       = ["diagnostics",  "position", "file-encoding", "file-type"]
+separator   = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+# 
+[editor.lsp]
+display-inlay-hints = false
+

@@ -1,8 +1,4 @@
 #include "../include/below_zero_v_0.1.h"
-#include <chrono>
-#include <cstdlib>
-#include <filesystem>
-
 
 //?\e ⇒ 27 ; carácter de escape, ESC,C-[
 // Octal:\033
@@ -15,13 +11,11 @@ namespace  fs  = std::filesystem;
 
 hack::Haklab::Haklab()
 // Inalisacion de lista
-: startime{std::chrono::system_clock::now()}
-{
-    
-};
+: startime{std::chrono::system_clock::now()}{};
+
 
 hack::Haklab::~Haklab(){  
-  // Optener tiempo de end  
+  // Optener tiempo de end 
   endtime = std::chrono::system_clock::now();
   // Optener tiempo de ejecucion
   elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>
@@ -31,34 +25,35 @@ hack::Haklab::~Haklab(){
   std::cout <<  getTime() << "ms" << std::endl;
 }
 
+
 std::string setColor(Color color) {
  std::string code = "\033[";
  switch (color) {
         case Color::Default:
             code += "0";
             break;
-        case Color::Black:
+        case Color::Black: // Negro
             code += "30";
             break;
-        case Color::Red:
+        case Color::Red:   // Rojo
             code += "31";
             break;
-        case Color::Green:
+        case Color::Green: // Verde
             code += "32";
             break;
-        case Color::Yellow:
+        case Color::Yellow:// Amarillo
             code += "33";
             break;
-        case Color::Blue:
+        case Color::Blue:  // Azul
             code += "34";
             break;
-        case Color::Magenta:
+        case Color::Magenta:// Magenta
             code += "35";
             break;
-        case Color::Cyan:
+        case Color::Cyan:  // cian
             code += "36";
             break;
-        case Color::White:
+        case Color::White: // Blanco 
             code += "37";
             break;
         default:
@@ -70,22 +65,26 @@ std::string setColor(Color color) {
 };
 
 void syntax_highlight(const std::string &code){
+    // Importar todos los enumeradores 
+    using enum Color;
     std::string highlightedCode = "";
-        // Colores para cada parte del código
-    std::string colorKeywords = setColor(Color::Blue);
-    std::string colorStrings = setColor(Color::Green);
-    std::string colorComments = setColor(Color::Magenta);
-    std::string colorDefault = setColor(Color::Default);
+    // Colores para cada parte del código
+    std::string colorKeywords = setColor(Blue);
+    std::string colorStrings = setColor(Green);
+    std::string colorComments = setColor(Magenta);
+    std::string colorDefault = setColor(Default);
 
     std::size_t pos = 0;
     std::size_t start = 0;
     std::size_t end = 0;
 
     while (pos < code.size()) {
+        // Buscar en la cadena 
         if (code.find("#", pos) == pos) {
             // Comentario
             start = pos;
             end = code.find("\n", pos);
+            // Si no hay coincidencias
             if (end == std::string::npos) {
                 end = code.size();
             }
@@ -258,29 +257,16 @@ bool hack::Haklab::download_file(std::string url, std::string outputFilename){
             return EXIT_SUCCESS;
 };
         
-    
-void hack::Haklab::about(std::string freanwor){
-    std::string fren = iHETC + std::basic_string("/Tools/Readme/") + freanwor;
-    std::ifstream file;
-    file.open(fren);
-    // get char
-    char c = file.get();
-   // check 
+// ======= ABAUT =============    
+void hack::Haklab::about(std::string freanwor, std::string arg){
+    std::string fren = iHETC + std::basic_string("/Tools/Readme/") + arg + freanwor;
+    std::fstream file;   
+    file.open(fren);       // open file
+    char c = file.get();   //
     while (file.good()) {
        std::cout << c;
        c = file.get();    
     } 
     file.close();   
-}
-
-void hack::Haklab::ScreenSise(){    
-    struct winsize w;
-    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-
-    int rows{w.ws_row};
-    int columns{w.ws_col};
-
-    std::cout << "Las dimensiones de la pantalla son: " << rows << " filas por " << columns << " columnas." << std::endl;
-
 }
 

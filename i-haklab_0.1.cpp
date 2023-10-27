@@ -1,9 +1,13 @@
+#include "include/bandit.h"
 #include "include/below_zero_v_0.1.h"
 #include "include/optparse.h" 
- 
+
+using namespace hack;
+
 int main(int argc, char **argv){
-   
-  hack::Haklab user;
+
+  Bandit bandit;
+  Haklab user;
   Check check;
   const std::string usage = "usage: %prog [OPTION]... script";
   const std::string version  = " %prog 3.7 " + user.show_architecture();
@@ -23,7 +27,7 @@ int main(int argc, char **argv){
   ;
 //A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z.
 // Opciones y argumentos 
-    parser.add_option("-sc","--screen-size")
+    parser.add_option("-s","--screen-size")
           .action("store_true")
           .help("Show size screen");
     // parser.add_option("-r", "--remove")
@@ -45,13 +49,13 @@ int main(int argc, char **argv){
     //       .dest("time")
     //       .set_default("1")
     //       .help("(defaul) Shows the execution time");
-    parser.add_option("--host")
-          .type("string")
-          .help("host");
+    // parser.add_option("--host")
+    //       .type("string")
+    //       .help("host");
           
 // ==========  Group  (1)  ==========
   optparse::OptionGroup group = optparse::OptionGroup(
-  setColor(Color::Magenta) + "Setting Options" + setColor(Color::Default),
+  setColor(Color::Cyan) + "Setting Options" + setColor(Color::Default),
     ""  
     );
 //A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z.
@@ -83,7 +87,7 @@ int main(int argc, char **argv){
   parser.add_option_group(group);  
 // ==========  Group (2) ============
    optparse::OptionGroup group1 = optparse::OptionGroup(
-      setColor(Color::Magenta) + "Automatitation Options:" + setColor(Color::Default),
+      setColor(Color::Cyan) + "Automatitation Options" + setColor(Color::Default),
         "Caution: use these options at your own risk. "
         "It is believed that some of them bite.");
   // A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z.
@@ -113,8 +117,12 @@ int main(int argc, char **argv){
 
     // ============== RUN ===================
     if (options.get("screen-size")) {
-      user.ScreenSise();
+      
+    } else if (options.get("bandit")){
+      bandit.show_remote_processes();
     }
+    
+
 
     if (options.get("list")) {
         for (const auto& entry : std::filesystem::directory_iterator(LIBEX)) {
@@ -129,16 +137,18 @@ int main(int argc, char **argv){
       }
     }
     
-      std::string command = "bash  " LIBEX + options["run"] + "  2>/dev/null";
+      std::string command = "bash  " LIBEX +  options["run"] + "  2>/dev/null";
       int result =  std::system(command.c_str());
       if (result == -1) {
+       if (options.get("verbose")) {
         std::cerr << "Error al ejecutar el comando en Bash" << std::endl;
+      }
     } 
        
      
 
     
-    user.about(options["about"]);
+    user.about(options["about"],arg);
       
 }
 
