@@ -1,4 +1,6 @@
 #include "../include/below_zero_v_0.1.h"
+#include <cstdlib>
+#include <fstream>
 
 //?\e ⇒ 27 ; carácter de escape, ESC,C-[
 // Octal:\033
@@ -8,19 +10,19 @@
 
 namespace  fs  = std::filesystem;
 
-
+// Contructor 
 hack::Haklab::Haklab()
 // Inalisacion de lista
 : startime{std::chrono::system_clock::now()}{};
 
-
+// Detructor
 hack::Haklab::~Haklab(){  
   // Optener tiempo de end 
   endtime = std::chrono::system_clock::now();
   // Optener tiempo de ejecucion
   elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>
   (endtime - startime).count();
-
+  // Se muestra cadaves que se ejecyta el comando (i-haklab)
   syntax_highlight("took "); 
   std::cout <<  getTime() << "ms" << std::endl;
 }
@@ -269,4 +271,17 @@ void hack::Haklab::about(std::string freanwor, std::string arg){
     } 
     file.close();   
 }
-
+// =========== ZSH ==========
+void hack::Haklab::zsh_inst(){
+     vector<std::string> dependence{"apt", "zsh-completions", "zsh"};
+     // Cambiar de shell chsh -s zsh
+     fs::path zsh{"/data/data/com.termux/files/usr/bin/zsh"};
+     if(!fs::exists(zsh)) {
+     std::cout << "[*] Instalando zsh" << std::endl; 
+     const char *command = dependence[1].c_str();
+     if (!system(command)) {
+        std::cerr << "Error al ejecutar comando" << std::endl;
+     }     
+     }
+      std::cout << "Terminado" << std::endl;
+}

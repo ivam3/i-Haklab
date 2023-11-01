@@ -163,7 +163,7 @@ namespace hack {
 
 // Función para mostrar un spinner mientras se ejecuta otra función en segundo plano
 template<typename Func>
-void running(Func func) {
+void loading(Func func) {
     hide_cursor();
     std::thread::id main_thread_id = std::this_thread::get_id();
     std::vector<std::string> spinner = { "█■■■■", "■█■■■", "■■█■■", "■■■█■", "■■■■█" };
@@ -185,9 +185,9 @@ void running(Func func) {
     show_cursor();
 }
        /*
-        * Muestra el tamaño de la pantalla  
+        * Instalar shell de zsh
         */
-  void ScreenSise();
+  void zsh_inst();
 };
 
 };

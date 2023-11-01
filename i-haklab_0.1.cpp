@@ -1,12 +1,12 @@
 #include "include/bandit.h"
 #include "include/below_zero_v_0.1.h"
 #include "include/optparse.h" 
+#include <cstdlib>
 
 using namespace hack;
 
 int main(int argc, char **argv){
 
-  Bandit bandit;
   Haklab user;
   Check check;
   const std::string usage = "usage: %prog [OPTION]... script";
@@ -20,6 +20,7 @@ int main(int argc, char **argv){
         .version(version)
         .description(desc)
         .epilog(epilog)
+
 // los tratara prog -a -b arg1 arg2  
 #ifdef DISABLE_INTERSPERSED_ARGS
         .disable_interspersed_args() 
@@ -27,9 +28,9 @@ int main(int argc, char **argv){
   ;
 //A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z.
 // Opciones y argumentos 
-    parser.add_option("-s","--screen-size")
-          .action("store_true")
-          .help("Show size screen");
+    parser.add_option("--loading")
+          .metavar("process")
+          .help("Run a background process");
     // parser.add_option("-r", "--remove")
     //       .dest("remove_pgk")
     //       .metavar("pkg")
@@ -115,40 +116,11 @@ int main(int argc, char **argv){
     //Atrapar señal de (CTRL + C)
     signal(SIGINT,hack::Haklab::k_boom);
 
-    // ============== RUN ===================
-    if (options.get("screen-size")) {
-      
-    } else if (options.get("bandit")){
-      bandit.show_remote_processes();
-    }
+    // ============== STAR RUN ===================
+    // A
     
-
-
-    if (options.get("list")) {
-        for (const auto& entry : std::filesystem::directory_iterator(LIBEX)) {
-        // Obtener el nombre del archivo
-       std::filesystem::path filePath = entry.path();
-        std::string fileName = filePath.filename().string();
-
-        // Verificar si el archivo no es oculto
-        if (!fileName.empty() && fileName[0] != '.') {
-            std::cout <<  fileName << std::endl;
-        }
-      }
-    }
-    
-      std::string command = "bash  " LIBEX +  options["run"] + "  2>/dev/null";
-      int result =  std::system(command.c_str());
-      if (result == -1) {
-       if (options.get("verbose")) {
-        std::cerr << "Error al ejecutar el comando en Bash" << std::endl;
-      }
-    } 
-       
-     
-
-    
-    user.about(options["about"],arg);
-      
+  
+  
+   return  EXIT_SUCCESS;    
 }
 
