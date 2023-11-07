@@ -13,12 +13,6 @@ fi
 
 
 
-# agregar una ruta de función
-fpath=("$ZSH_CONF/.functions.zsh" $fpath)
-
-# Cargue todas las funciones estándar (de archivos $fpath) que se indican a continuación.
-autoload -U functions.zsh
-
 # verificar si un plugin está presente en un directorio
 is_plugin() {
   local base_dir=$1
@@ -90,11 +84,3 @@ done
 unset plugin
 
 # ###############
-print_icon() {
-  local var=$1
-  if (( $+parameters[$var] )); then
-    echo -n - ${(P)var}
-  else
-    echo -n - $icons[$1]
-  fi
-}

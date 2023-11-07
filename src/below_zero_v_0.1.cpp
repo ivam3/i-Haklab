@@ -1,6 +1,4 @@
 #include "../include/below_zero_v_0.1.h"
-#include <cstdlib>
-#include <fstream>
 
 //?\e ⇒ 27 ; carácter de escape, ESC,C-[
 // Octal:\033
@@ -27,7 +25,7 @@ hack::Haklab::~Haklab(){
   std::cout <<  getTime() << "ms" << std::endl;
 }
 
-
+// Selector de color 
 std::string setColor(Color color) {
  std::string code = "\033[";
  switch (color) {
@@ -261,16 +259,29 @@ bool hack::Haklab::download_file(std::string url, std::string outputFilename){
         
 // ======= ABAUT =============    
 void hack::Haklab::about(std::string freanwor, std::string arg){
-    std::string fren = iHETC + std::basic_string("/Tools/Readme/") + arg + freanwor;
-    std::fstream file;   
-    file.open(fren);       // open file
-    char c = file.get();   //
-    while (file.good()) {
-       std::cout << c;
-       c = file.get();    
-    } 
-    file.close();   
+    std::string fren = iHETC + std::basic_string("/Tools/Readme/") + arg + freanwor;   
+    std::ifstream file;
+    // Abrir archivo    
+    file.open(fren);      
+    // Comprobar si se abrio 
+    if(file.is_open()){
+    // obtener la longitud del archivo:
+    file.seekg(0,file.end);
+    int length = file.tellg();
+    file.seekg(0,file.beg);
+    // asigna memoria:
+    char *buffer = new char [length];
+    // leer datos como un bloque:
+    file.read(buffer,length);
+    // serar archivo 
+    file.close();
+    // Resaltado de sintax
+    syntax_highlight(buffer);
+    // borrar memoria
+    delete[] buffer;
+   }
 }
+
 // =========== ZSH ==========
 void hack::Haklab::zsh_inst(){
      vector<std::string> dependence{"apt", "zsh-completions", "zsh"};
@@ -284,4 +295,21 @@ void hack::Haklab::zsh_inst(){
      }     
      }
       std::cout << "Terminado" << std::endl;
+}
+
+void hack::Haklab::directory_iterator(const char *path){};
+
+namespace fs = std::filesystem;
+
+    fs::path directory = "./"; // Directorio actual, puedes cambiarlo por el directorio que desees
+
+    for (const auto& entry : fs::directory_iterator(directory)) {
+        // Obtener el nombre del archivo
+        fs::path filePath = entry.path();
+        std::string fileName = filePath.filename().string();
+
+        // Verificar si el archivo no es oculto
+        if (!fileName.empty() && fileName[0] != '.') {
+            std::cout << fileName << "\n";
+    }
 }

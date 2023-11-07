@@ -70,6 +70,9 @@ namespace hack {
  class Haklab 
  {
    private: 
+  // == Variables de entorno 
+  std::string PRFIX{getenv("PREFIX")};
+  std::string HOME{getenv("HOME")};
   // ===== Variables =====
   // Tiempo de star
   std::chrono::time_point<std::chrono::system_clock> startime;
@@ -127,7 +130,7 @@ namespace hack {
       /*
        * Muestra todos los archivos de un directorio
        */
-  string directory_iterator(std::filesystem::path); 
+  string directory_iterator(const char *path); 
       /*
        *
        */

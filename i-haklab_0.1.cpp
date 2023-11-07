@@ -118,7 +118,10 @@ int main(int argc, char **argv){
 
     // ============== STAR RUN ===================
     // A
-    
+    user.about(options["about"], arg);
+    if(options.get("list")){
+    user.directory_iterator(iHETC);
+    }
   
   
    return  EXIT_SUCCESS;    
