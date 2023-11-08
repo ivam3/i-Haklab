@@ -833,3 +833,147 @@ exit
 : 1699396394:0;cp .zshrc proyectos/i-Haklab/.deb/home
 : 1699396434:0;cp .zsh proyectos/i-Haklab/.deb/home -r
 : 1699396441:0;cp .zsh proyectos/i-Haklab/.deb/home -rf
+: 1699396451:0;cd proyectos/i-Haklab/
+: 1699396464:0;git add -all
+: 1699396469:0;git add --all
+: 1699396526:0;cd .deb/home/.tmux/plugins/tmux-power
+: 1699396527:0;ls
+: 1699396530:0;la
+: 1699396539:0;rm .*
+: 1699396544:0;rm .* -r
+: 1699396548:0;y
+: 1699396552:0;ls
+: 1699396565:0;rm LICENSE
+: 1699396568:0;ls
+: 1699396584:0;git add --all
+: 1699396607:0;git log
+: 1699396686:0;git commit -m "work 1.7(configuracion de zsh)"
+: 1699396703:0;git pushh
+: 1699396712:0;git push
+: 1699396739:0;cd
+: 1699396836:0;cd .tmux
+: 1699396837:0;ls
+: 1699396841:0;cd plugins
+: 1699396842:0;ls
+: 1699396881:0;cd tmux-power
+: 1699396884:0;ls
+: 1699396891:0;hx tmux-power.tmux
+: 1699397211:0;tmux
+: 1699397276:0;cd
+: 1699397281:0;cd .tmux
+: 1699397285:0;hx tmux-power.tmux
+: 1699397294:0;hx .tmux.conf
+: 1699397387:0;tmux
+: 1699397406:0;exit
+: 1699397970:0;fg
+: 1699397976:0;hx .tmux.conf
+: 1699397980:0;ls
+: 1699397986:0;hx tmux-power.tmux
+: 1699398382:0;ls
+: 1699398385:0;../
+: 1699398386:0;ls
+: 1699398390:0;cd ../
+: 1699398391:0;ls
+: 1699398401:0;cd ../
+: 1699398402:0;ls
+: 1699398406:0;hx tmux-power.tmux
+: 1699398414:0;hx .tmux.conf
+: 1699399193:0;ls
+: 1699399198:0;cd plugins
+: 1699399200:0;ls
+: 1699399219:0;cd tmux-power
+: 1699399221:0;ls
+: 1699399293:0;cat /sys/class/net
+: 1699399335:0;ls
+: 1699399341:0;cd
+: 1699399343:0;ls
+: 1699399349:0;cd .tmux
+: 1699399350:0;ls
+: 1699399354:0;cd plugins
+: 1699399355:0;ls
+: 1699399409:0;git clonehttps://github.com/wfxr/tmux-net-speed.git
+: 1699399416:0;git clone https://github.com/wfxr/tmux-net-speed.git
+: 1699399460:0;ls
+: 1699399474:0;tree tmux-resurrect
+: 1699399495:0;ls
+: 1699399534:0;gh repo clone wfxr/tmux-net-speed
+: 1699399553:0;git clone https://github.com/wfxr/tmux-net-speed.git
+: 1699399837:0;ls
+: 1699400203:0;cat /proc/net/dev
+: 1699400274:0;ls
+: 1699400285:0;rm -rf tmux-resurrect
+: 1699400286:0;ls
+: 1699400477:0;rm -rf tmux-sensible
+: 1699400479:0;ls
+: 1699400647:0;exi
+: 1699400653:0;exit
+: 1699401575:0;ls
+: 1699401611:0;cd .tmux/
+: 1699401616:0;hx .tmux.conf
+: 1699401623:0;ls
+: 1699401626:0;cd plugins
+: 1699401627:0;ls
+: 1699401649:0;hx tmux-power
+: 1699403249:0;fg
+: 1699403352:0;f
+: 1699403354:0;fg
+: 1699403361:0;cd
+: 1699403379:0;bash Hacking/script/data.sh
+: 1699403414:0;bat Hacking/script/data.sh
+: 1699403509:0;exit
+: 1699404093:0;ps -fax
+: 1699404205:0;cd .tmux/
+: 1699404208:0;ls
+: 1699404217:0;cd .tmux
+: 1699404226:0;hx tmux-power
+: 1699404230:0;ks
+: 1699404231:0;ls
+: 1699404235:0;cd plugins
+: 1699404236:0;ls
+: 1699404245:0;hx tmux-power
+: 1699404515:0;ls
+: 1699404531:0;cd ../
+: 1699404532:0;ls
+: 1699404541:0;hx .tmux.conf
+: 1699404701:0;fg
+: 1699405199:0;cd ../
+: 1699405201:0;ls
+: 1699405207:0;cd ../
+: 1699405208:0;lz
+: 1699405209:0;ls
+: 1699405217:0;hx .tmux.conf
+: 1699405565:0;ld
+: 1699405567:0;ls
+: 1699405571:0;cd plugins
+: 1699405573:0;os
+: 1699405575:0;ls
+: 1699405581:0;xd
+: 1699405590:0;cd tmux-cpu
+: 1699405592:0;ls
+: 1699405604:0;bat cpu.tmux
+: 1699405883:0;../
+: 1699405887:0;cd ../
+: 1699405888:0;ls
+: 1699405893:0;hx tmux-cpu
+: 1699405898:0;ls
+: 1699405904:0;hx tmux-power
+: 1699405917:0;ls
+: 1699405925:0;cd tmux-power
+: 1699405926:0;ls
+: 1699405931:0;hx tmux-power.tmux
+: 1699406315:0;exit
+: 1699406374:0;cd .tmux
+: 1699406378:0;hx .tmux.conf
+: 1699406388:0;cd plugins
+: 1699406390:0;hx
+: 1699407292:0;cd ../
+: 1699407297:0;hx .tmux.conf
+: 1699407596:0;f
+: 1699407599:0;fg
+: 1699408189:0;exit
+: 1699408385:0;bash Hacking/script/data.sh
+: 1699409050:0;ls
+: 1699409059:0;co
+: 1699409075:0;cp .zsh proyectos/i-Haklab/.deb/home -rf
+: 1699409108:0;cp .tmux proyectos/i-Haklab/.deb/home/ -rf
+: 1699409118:0;cp .zsh proyectos/i-Haklab/.deb/home -rf
