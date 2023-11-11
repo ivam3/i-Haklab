@@ -28,7 +28,8 @@ int main(int argc, char **argv){
   ;
 //A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z.
 // Opciones y argumentos 
-    parser.add_option("--loading")
+    parser.add_option("--search-process")
+          .dest("process")
           .metavar("process")
           .help("Run a background process");
     // parser.add_option("-r", "--remove")
@@ -119,8 +120,9 @@ int main(int argc, char **argv){
     // ============== STAR RUN ===================
     // A
     user.about(options["about"], arg);
+    user.searchProcess(options["process"]);
     if(options.get("list")){
-    user.directory_iterator(iHETC);
+   // user.directory_iterator(iHETC);
     }
   
   

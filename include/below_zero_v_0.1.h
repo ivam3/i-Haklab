@@ -13,7 +13,7 @@
 #include <libssh/libssh.h>
 #include <curl/curl.h>
 #include <ncurses.h>
-
+#include <dirent.h> // para explorar el directorio /proc/ 
 
 
 #define  iHETC  "/data/data/com.termux/files/home/.local/etc/i-Haklab"
@@ -73,6 +73,7 @@ namespace hack {
   // == Variables de entorno 
   std::string PRFIX{getenv("PREFIX")};
   std::string HOME{getenv("HOME")};
+  std::string PWD{getenv("PWD")};
   // ===== Variables =====
   // Tiempo de star
   std::chrono::time_point<std::chrono::system_clock> startime;
@@ -130,7 +131,7 @@ namespace hack {
       /*
        * Muestra todos los archivos de un directorio
        */
-  string directory_iterator(const char *path); 
+  string directoryIterator(const char *path); 
       /*
        *
        */
@@ -140,6 +141,11 @@ namespace hack {
        * 
        */
   void check_all();  
+       /*
+        * Busca un oroceso en el systema
+        * arg: nombre de proseso
+        */
+  void searchProcess(std::string process);
       /*
        * Descargar archivos 
        * url: URL del archivo que se desea descargar

@@ -1,0 +1,22 @@
+#!/bin/sh
+
+
+connection_status=$(systemctl --user status hotspot.service | grep Active | xargs | cut -d" " -f2)
+answer_status=active
+
+case "$1" in
+--toggle)
+    if [ "$connection_status" = "$answer_status" ]; then
+        systemctl --user stop hotspot.service;
+    else
+        systemctl --user start hotspot.service;
+    fi
+    ;;
+*)
+    if [ "$connection_status" = "$answer_status" ]; then
+        /home/bresilla/dots/.func/network/hotspot --list-clients $(/home/bresilla/dots/.func/network/hotspot --list-running | sed -n '3p' | awk '{print $1}') | tail -n+2 | wc -l;
+    else
+        echo "NO";
+    fi
+    ;;
+esac

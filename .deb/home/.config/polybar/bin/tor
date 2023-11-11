@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# connection_status=$(curl --socks5 localhost:9050 --socks5-hostname localhost:9050 -s https://check.torproject.org/ | cat | grep -m 1 Congratulations | xargs | cut -f1 -d" ")
+#answer_status="Congratulations."
+
+connection_status=$(systemctl status tor.service | grep Active | xargs | cut -d" " -f2)
+answer_status=active
+
+case "$1" in
+--toggle)
+    if [ "$connection_status" = "$answer_status" ]; then
+        doas systemctl stop tor.service
+    else
+        doas systemctl start tor.service
+    fi
+    ;;
+*)
+    if [ "$connection_status" = "$answer_status" ]; then
+        echo "ON"
+    else
+        echo "OFF"
+    fi
+    ;;
+esac

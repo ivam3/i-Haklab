@@ -170,8 +170,8 @@ if [[ -n "$ZSH_THEME" ]]; then
     source "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme"
   elif is_theme "$ZSH_CUSTOM/themes" "$ZSH_THEME"; then
     source "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme"
-  elif is_theme "$ZSH/themes" "$ZSH_THEME"; then
-    source "$ZSH/themes/$ZSH_THEME.zsh-theme"
+  elif is_theme "$ZSH/themes/$ZSH_THEME" "$ZSH_THEME"; then
+    source "$ZSH/themes/$ZSH_THEME/$ZSH_THEME.zsh-theme"
   else
     echo "[zsh] theme '$ZSH_THEME' no encontrado "
   fi

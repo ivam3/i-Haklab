@@ -297,19 +297,45 @@ void hack::Haklab::zsh_inst(){
       std::cout << "Terminado" << std::endl;
 }
 
-void hack::Haklab::directory_iterator(const char *path){};
+// void hack::Haklab::directory_iterator(const char *path){
 
-namespace fs = std::filesystem;
+// namespace fs = std::filesystem;
 
-    fs::path directory = "./"; // Directorio actual, puedes cambiarlo por el directorio que desees
+//     fs::path directory = "./"; // Directorio actual, puedes cambiarlo por el directorio que desees
 
-    for (const auto& entry : fs::directory_iterator(directory)) {
-        // Obtener el nombre del archivo
-        fs::path filePath = entry.path();
-        std::string fileName = filePath.filename().string();
+//     for (const auto& entry : fs::directory_iterator(directory)) {
+//         // Obtener el nombre del archivo
+//         fs::path filePath = entry.path();
+//         std::string fileName = filePath.filename().string();
 
-        // Verificar si el archivo no es oculto
-        if (!fileName.empty() && fileName[0] != '.') {
-            std::cout << fileName << "\n";
+//         // Verificar si el archivo no es oculto
+//         if (!fileName.empty() && fileName[0] != '.') {
+//             std::cout << fileName << "\n"
+//         }
+//     }
+// }
+
+void hack::Haklab::searchProcess(std::string process){
+    DIR* dir;
+    struct dirent* ent;
+    if ((dir = opendir("/proc")) != NULL) {
+        while ((ent = readdir(dir)) != NULL) {
+            std::string entryName = ent->d_name;
+            if (std::all_of(entryName.begin(), entryName.end(), ::isdigit)) {
+                std::string statusFilePath = "/proc/" + entryName + "/comm";
+                std::ifstream statusFile(statusFilePath);
+                if (statusFile.is_open()) {
+                    std::string processName;
+                    statusFile >> processName;
+                    if (processName == process) {
+                        std::cout << "El proceso " << process << " ha sido encontrado con PID: " << entryName << std::endl;
+                        // Aquí puedes realizar más acciones con el PID del proceso encontrado
+                    }
+                }
+            }
+        }
+        closedir(dir);
+    } else {
+        std::cerr << "No se pudo abrir el directorio /proc" << std::endl;
     }
-}
+}    

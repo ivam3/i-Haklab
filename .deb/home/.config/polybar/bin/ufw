@@ -1,0 +1,21 @@
+#!/bin/sh
+
+connection_status=$(systemctl status ufw.service | grep Active | xargs | cut -d" " -f2)
+answer_status=active
+
+case "$1" in
+--toggle)
+    if [ "$connection_status" = "$answer_status" ]; then
+        doas systemctl stop ufw.service
+    else
+        doas systemctl stop ufw.service
+    fi
+    ;;
+*)
+    if [ "$connection_status" = "$answer_status" ]; then
+        echo "ON"
+    else
+        echo "OFF"
+    fi
+    ;;
+esac

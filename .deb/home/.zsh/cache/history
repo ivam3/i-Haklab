@@ -1,133 +1,90 @@
 : 1699128929:0;cd .zsh
-: 1699128931:0;ls
 : 1699128938:0;rm histor
 : 1699128940:0;rm history
 : 1699128944:0;ls cache
-: 1699129744:0;ls
 : 1699131476:0;source .zshrc
-: 1699132451:0;ls
 : 1699132500:0;source .zshrc
 : 1699132647:0;source .zsrc
 : 1699132655:0;source .zshrc
-: 1699132661:0;ls
-: 1699132704:0;exit
 : 1699150589:0;hx .zshrc
 : 1699150652:0;cd .zsh
-: 1699150656:0;ls
 : 1699150666:0;bat functions/icons.zsh
 : 1699150688:0;hx functions/add_plugins.zsh
 : 1699150712:0;hx .zshrc
 : 1699150820:0;source .zshrc
-: 1699150822:0;ls
 : 1699150840:0;hx .zshrc
-: 1699150990:0;ls
 : 1699151002:0;cd proyectos/i-Haklab
 : 1699151113:0;termux-wifi-scaninfo
 : 1699151166:0;hx .zshrc
-: 1699151357:0;ls
 : 1699152218:0;cd proyectos/i-Haklab
-: 1699152223:0;ls
 : 1699152518:0;cd proyectos/i-Haklab
 : 1699152530:0;../
-: 1699152538:0;ls
 : 1699152542:0;lop
 : 1699152591:0;cd proyectos/i-Haklab
-: 1699152709:0;cd
-: 1699152799:0;ls
 : 1699152808:0;cd proyectos/i-Haklab
 : 1699152927:0;tl
-: 1699153567:0;ls
 : 1699153575:0;fg
-: 1699153584:0;exit
 : 1699183344:0;source .zshrc
 : 1699183348:0;cd .zsh
-: 1699183349:0;ls
 : 1699183357:0;hx powerlevel9k.zsh-theme
 : 1699183444:0;fg
-: 1699183454:0;ls
 : 1699183459:0;hx powerlevel9k.zsh-theme
 : 1699183582:0;source .zshrc
 : 1699183753:0;hx .zshrc
-: 1699183795:0;ls
 : 1699183802:0;source .zshrc
-: 1699183805:0;ls
 : 1699183814:0;hx .zshrc
-: 1699183885:0;exit
-: 1699206364:0;ls
 : 1699206374:0;cd Hacking
-: 1699206376:0;ls
 : 1699206405:0;rabin2 r2-zip.zip -I
 : 1699206428:0;rabin2 -I r2-zip.zip
 : 1699206446:0;rabin2 --help
 : 1699206453:0;man rabin2
 : 1699206576:0;file r2-zip.zip
-: 1699206594:0;ls
 : 1699206605:0;uzing r2-zip.zip
 : 1699206625:0;unzip r2-zip.zip
-: 1699206632:0;ls
 : 1699206674:0;file r2-zip.zip
 : 1699216125:0;echo -e '\textbf{...}'
 : 1699221373:0;source .zhsrc
 : 1699221398:0;source .zshrc
 : 1699221430:0;cd $PREFIX/ssh/
 : 1699221440:0;cd $PREFIX/etc/ssh
-: 1699221442:0;ls
 : 1699221456:0;hx ssh_config
 : 1699221505:0;td
 : 1699221526:0;termux-docker-qemu alpine
 : 1699221583:0;csms
-: 1699221586:0;cd
 : 1699221602:0;source .zshrc
 : 1699221617:0;serve
 : 1699221648:0;cd .local/libexec/i-Haklab/
-: 1699221649:0;ls
 : 1699221665:0;la
-: 1699221676:0;ls
 : 1699221693:0;rm command
 : 1699221701:0;rm command -rfd
 : 1699221711:0;ln -sb
 : 1699221729:0;ln -s ~/Hacking/comandos .
-: 1699221730:0;ls
 : 1699221748:0;rm helix
-: 1699221749:0;ls
-: 1699221769:0;cd
 : 1699221779:0;php --help
 : 1699221815:0;php -S 127.0.0.1:80
 : 1699221820:0;php -S 127.0.0.1:8080
 : 1699223801:0;source .zshrc
 : 1699223820:0;co
 : 1699223843:0;cp Hacking/r2-zip.zip .
-: 1699223845:0;ls
 : 1699223851:0;unzip r2-zip.zip
 : 1699223867:0;echo 123 | unzip r2-zip.zip
-: 1699223869:0;ls
 : 1699224053:0;echo "123" | unzip r2-zip.zip
-: 1699224057:0;ls
 : 1699224066:0;unzip r2-zip.zip -e
 : 1699224094:0;unzip r2-zip.zip | echo "123"
-: 1699224098:0;ls
 : 1699224129:0;echo |unzip r2-zip.zip
-: 1699224138:0;ls
 : 1699224208:0;echo 12345678 |unzip r2-zip.zip
 : 1699224224:0;unzip --help
 : 1699224285:0;unzip -l r2-zip.zip
-: 1699224311:0;exit
 : 1699224589:0;source .zshrc
 : 1699224599:0;cd .zsh/functions
-: 1699224600:0;ls
 : 1699224608:0;bat utilities.zsh
 : 1699224831:0;ifconfig -l
 : 1699224888:0;bat add_plugins.zsh
 : 1699224900:0;hx add_plugins.zsh
-: 1699224993:0;ls
 : 1699231160:0;ls /proc/
 : 1699231195:0;ls -al /proc/device-tree
 : 1699231229:0;cd /proc
-: 1699231231:0;ls
 : 1699231263:0;cd uid
-: 1699231265:0;ls
-: 1699231273:0;cd
-: 1699231276:0;ls
 : 1699231291:0;cd /proc/uid/0
 : 1699231366:0;cd /proc/
 : 1699231672:0;cat /proc/meminf
@@ -136,12 +93,9 @@
 : 1699231756:0;cat /proc/filesystems
 : 1699231836:0;lt --help
 : 1699267783:0;cd test-room
-: 1699267787:0;ls
 : 1699267803:0;rm setenv setenv
 : 1699267817:0;rm setenv setenv.cpp
-: 1699267823:0;ls
 : 1699267850:0;rm a.out bandit
-: 1699267853:0;ls
 : 1699267947:0;mkdir sintax
 : 1699267950:0;cd sintax
 : 1699267987:0;hxtext
@@ -157,34 +111,24 @@
 : 1699268740:0;hx text
 : 1699269699:0;hx Markdown
 : 1699269708:0;la
-: 1699269709:0;ls
 : 1699269725:0;source ~/.zshrc
 : 1699269766:0;clang++ -o Markdow Markdown
-: 1699269769:0;ls
 : 1699269787:0;mv Markdown Markdown.cpp
-: 1699269789:0;ls
 : 1699269804:0;clang++ -o Markdown Markdown.cpp
-: 1699270092:0;cd
 : 1699270098:0;cd proyectos/i-Haklab
 : 1699270136:0;cat src/below_zero_v_0.1.cpp
-: 1699270739:0;cd
 : 1699270744:0;cd test-room/sintax
-: 1699270745:0;ls
 : 1699270763:0;hx text
-: 1699270810:0;ls
 : 1699270815:0;hx Markdown.cpp
-: 1699271002:0;cd
 : 1699271010:0;cd proyectos/i-Haklab/include
 : 1699271017:0;cat below_zero_v_0.1.h
 : 1699271062:0;dc
-: 1699271076:0;cd
 : 1699271083:0;cd test-room/sintax
 : 1699271086:0;hx Markdown.cpp
 : 1699271606:0;echo -e "\033[1mTexto en negrita\033[0m"
 : 1699271720:0;source .zshrc
 : 1699271725:0;cd test-room/sintax
 : 1699271730:0;hx Markdown.cpp
-: 1699272078:0;cd
 : 1699272091:0;cd proyectos/i-Haklab/src
 : 1699272098:0;bat below_zero_v_0.1.cpp
 : 1699272188:0;fg
@@ -194,7 +138,6 @@
 : 1699272472:0;bat below_zero_v_0.1.cpp
 : 1699272488:0;fg
 : 1699272516:0;clang++ -o Markdown Markdown.cpp
-: 1699272534:0;cd
 : 1699272540:0;cd test-room/sintax
 : 1699272543:0;clang++ -o Markdown Markdown.cpp
 : 1699272555:0;./Markdown
@@ -224,7 +167,6 @@
 : 1699276184:0;fg
 : 1699276464:0;clang++ -o Markdown Markdown.cpp
 : 1699276471:0;./Markdown
-: 1699276493:0;exit
 : 1699276515:0;cd test-room/sintax
 : 1699276520:0;hx Markdown
 : 1699276528:0;hx Markdown.cpp
@@ -234,7 +176,6 @@
 : 1699279544:0;lop
 : 1699285746:0;source .zshrc
 : 1699285751:0;cd test-room/sintax
-: 1699285752:0;ls
 : 1699285756:0;hx Markdown.cpp
 : 1699285930:0;clang++ -o Markdown Markdown.cpp
 : 1699285940:0;hx Markdown.cpp
@@ -270,10 +211,8 @@
 : 1699287605:0;fg
 : 1699287640:0;bat -r 82:123 Markdown.cpp
 : 1699288604:0;source .zshrc
-: 1699288605:0;ls
 : 1699288609:0;cd test-room/sintax
 : 1699288609:0;s
-: 1699288611:0;ls
 : 1699288641:0;hx Markdown.cpp
 : 1699288673:0;bat -r 82:123 Markdown.cpp
 : 1699288738:0;hx Markdown.cpp
@@ -287,7 +226,6 @@
 : 1699305456:0;./Markdown
 : 1699305482:0;wl
 : 1699305491:0;loo
-: 1699305495:0;ls
 : 1699305522:0;hx Markdown.cpp
 : 1699305553:0;clang++ -o Markdown Markdown.cpp
 : 1699305560:0;./Markdown
@@ -301,26 +239,21 @@
 : 1699305792:0;hx Markdown.cpp
 : 1699305813:0;clang++ -o Markdown Markdown.cpp
 : 1699305821:0;./Markdown
-: 1699305870:0;exit
 : 1699357326:0;source .zshrc
 : 1699357333:0;hx .zshrc
-: 1699357690:0;exit
 : 1699357881:0;setopt
 : 1699357960:0;setopt localoptions
 : 1699358167:0;hx .zshrc
 : 1699358263:0;secret-tool
 : 1699358648:0;source .zshrc
 : 1699358655:0;cd .zsh/functions
-: 1699358656:0;ls
 : 1699358676:0;hx utilities.zsh
 : 1699358957:0;cd $PREFIX/etc/os-release
 : 1699358978:0;ls $PREFIX/etc/
 : 1699359000:0;fg
-: 1699359144:0;ls
 : 1699359152:0;../
 : 1699359160:0;..
 : 1699359166:0;cd ../
-: 1699359169:0;ls
 : 1699359177:0;hx powerlevel9k.zsh-theme
 : 1699359440:0;prompt_battery
 : 1699359448:0;fg
@@ -334,19 +267,14 @@
 : 1699359694:0;fg
 : 1699360225:0;hx .zshrc
 : 1699364787:0;source .zshrc
-: 1699364788:0;ls
 : 1699364793:0;cd .zshrc
 : 1699364796:0;cd .zsh
-: 1699364798:0;ls
 : 1699364836:0;hx powerlevel9k.zsh-theme
-: 1699364930:0;ls
 : 1699365048:0;cd .zsh/functions
 : 1699365054:0;l
 : 1699365059:0;cd functions
-: 1699365061:0;ls
 : 1699365069:0;hx add_plugins.zsh
 : 1699365583:0;hx ~/.zshrc
-: 1699365616:0;ls
 : 1699365627:0;if\
 \
 \
@@ -358,14 +286,11 @@ lop
 : 1699365671:0;fg
 : 1699365677:0;hx add_plugins.zsh
 : 1699365756:0;hx ~/.zshrc
-: 1699365766:0;ls
 : 1699365771:0;source .
 : 1699365797:0;source ~/.zshrc
-: 1699365799:0;ls
 : 1699365805:0;fg
 : 1699365851:0;hx add_plugins.zsh
 : 1699366051:0;hx ~/.zshrc
-: 1699366342:0;ls
 : 1699366350:0;hx utilities.zsh
 : 1699366458:0;echo $ZSH
 : 1699366467:0;fg
@@ -378,37 +303,23 @@ lop
 : 1699366966:0;hx ~/.zshrc
 : 1699366976:0;fg
 : 1699366987:0;source ~/.zshrc
-: 1699366991:0;ls
 : 1699367228:0;source ~/.zshrc
-: 1699367231:0;ls
 : 1699367567:0;cd ../
-: 1699367568:0;ls
 : 1699367573:0;hx powerlevel9k.zsh-theme
-: 1699367592:0;ls
 : 1699367662:0;mkdir start-zsh
 : 1699367666:0;cd functions
-: 1699367668:0;ls
 : 1699367684:0;mv add_plugins.zsh ../start-zsh
-: 1699367685:0;ls
-: 1699367687:0;cd
-: 1699367688:0;ls
 : 1699367697:0;cd .zsh/start-zsh
-: 1699367698:0;ls
 : 1699367756:0;mv add_plugins.zsh start-zsh.sh
-: 1699367767:0;cd
-: 1699367768:0;ls
 : 1699367775:0;hx .zshrc
 : 1699367899:0;cd .zsh/start-zsh
 : 1699367904:0;hx start-zsh.sh
-: 1699368126:0;ls
 : 1699368135:0;bash start-zsh.sh
 : 1699368540:0;hx start-zsh.sh
 : 1699368790:0;uname
 : 1699368796:0;fg
-: 1699368977:0;ls
 : 1699368983:0;bash start-zsh.sh
 : 1699369032:0;zsh start-zsh.sh
-: 1699369033:0;ls
 : 1699369230:0;zsh start-zsh.sh
 : 1699369354:0;echo $ZSH
 : 1699369584:0;zsh start-zsh.sh
@@ -422,115 +333,77 @@ lop
 : 1699370011:0;fg
 : 1699370270:0;zsh start-zsh.sh
 : 1699370317:0;l
-: 1699370318:0;ls
 : 1699370321:0;hx start-zsh.sh
 : 1699370982:0;zsh start-zsh.sh
 : 1699371373:0;echo $ZSH_CUSTOM
-: 1699371544:0;ls
 : 1699371546:0;../
 : 1699371551:0;cd ../
-: 1699371554:0;ls
 : 1699371563:0;fg
-: 1699371615:0;ls
 : 1699371622:0;cd start-zsh
 : 1699371630:0;hx ~/.zshrc
 : 1699371652:0;f
 : 1699371656:0;fg
 : 1699371670:0;zsh start-zsh.sh
-: 1699371673:0;ls
 : 1699371910:0;cd ../
-: 1699371911:0;ls
 : 1699371988:0;mkdir themes
-: 1699371990:0;ls
 : 1699372001:0;mv powerlevel9k.zsh-theme themes
-: 1699372003:0;ls
 : 1699372006:0;fg
 : 1699372080:0;hx ~/.zshrc
 : 1699372171:0;zsh start-zsh.sh
-: 1699372174:0;ls
 : 1699372178:0;cd start-zsh
 : 1699372182:0;zsh start-zsh.sh
 : 1699372244:0;f
 : 1699372246:0;fg
 : 1699372513:0;mkdir lib
-: 1699372521:0;ls
 : 1699372528:0;cd start-zsh
-: 1699372529:0;ls
 : 1699372534:0;zsh start-zsh.sh
 : 1699372571:0;fg
-: 1699372591:0;ls
 : 1699372597:0;zsh start-zsh.sh
 : 1699372601:0;cd start-zsh
 : 1699372609:0;zsh start-zsh.sh
-: 1699372687:0;ls
 : 1699372690:0;cd start-zsh
 : 1699372704:0;zsh start-zsh.sh
-: 1699372707:0;ls
 : 1699372791:0;cd start-zsh
 : 1699372794:0;zsh start-zsh.sh
 : 1699372804:0;echo $ZSH_THEME
 : 1699372813:0;echo $ZSH
-: 1699372891:0;ls
 : 1699372896:0;cd themes
 : 1699372897:0;l
-: 1699372899:0;ls
 : 1699372905:0;fg
-: 1699372947:0;ls
 : 1699372950:0;../
 : 1699372954:0;cd ../
-: 1699372956:0;ls
 : 1699372959:0;cd start-zsh
 : 1699372966:0;zsh start-zsh.sh
 : 1699372976:0;source start-zsh.sh
-: 1699373015:0;ls
 : 1699373020:0;cd ../
-: 1699373020:0;ls
 : 1699373035:0;cd start-zsh
 : 1699373040:0;source start-zsh.sh
-: 1699373043:0;ls
 : 1699373060:0;fg
-: 1699373099:0;ls
 : 1699373103:0;source start-zsh.sh
-: 1699374136:0;ls
 : 1699374141:0;source start-zsh.sh
-: 1699374145:0;ls
 : 1699374147:0;hx
-: 1699374154:0;ls
 : 1699374211:0;locat
 : 1699374219:0;locate
 : 1699374224:0;locate start-zsh.sh
-: 1699374424:0;ls
 : 1699374433:0;source .zshrc
 : 1699374437:0;source start-zsh.sh
-: 1699374444:0;ls
 : 1699374446:0;lop
-: 1699374947:0;ls
-: 1699375017:0;exit
-: 1699375021:0;ls
 : 1699375025:0;ps
 : 1699375030:0;ps -a
 : 1699375034:0;ps -afl
 : 1699375059:0;ps -aflh
-: 1699375077:0;ls
 : 1699375086:0;cleat
 : 1699375090:0;clear
-: 1699375091:0;ls
 : 1699375100:0;source .zshrc
-: 1699375102:0;ls
-: 1699375118:0;exit
 : 1699375489:0;omz update
 : 1699375875:0;hx .zshrc
-: 1699376240:0;ls
 : 1699376266:0;subl
 : 1699376556:0;thefuck
 : 1699376559:0;fg
 : 1699376679:0;pmset
 : 1699376693:0;fg
-: 1699376843:0;ls
 : 1699376888:0;hx
-: 1699376891:0;ls
 : 1699376895:0;fg
-: 1699376993:0;exit
 : 1699377000:0;colors
 : 1699377177:0;prompt_ram
 : 1699377185:0;prompt*
@@ -540,116 +413,71 @@ lop
 : 1699377278:0;echo -e$MULTILINE_FIRST_PROMPT_PREFIX
 : 1699377283:0;echo -e $MULTILINE_FIRST_PROMPT_PREFIX
 : 1699377460:0;hx .zshrc
-: 1699377605:0;exit
-: 1699377608:0;ls
 : 1699377650:0;command_execution_time
 : 1699377657:0;echo $command_execution_time
 : 1699377670:0;time
 : 1699377861:0;cd proyectos/i-Haklab/
-: 1699377868:0;ls
 : 1699377878:0;mkdir
 : 1699377883:0;make
 : 1699377921:0;clear
-: 1699377923:0;ls
-: 1699377930:0;cd
-: 1699378164:0;ls
 : 1699378166:0;la
 : 1699378178:0;cd .tmux
-: 1699378182:0;ls
 : 1699378192:0;bat README.md
-: 1699378299:0;ls
-: 1699378302:0;cd
 : 1699378447:0;tmux
-: 1699378476:0;exit
 : 1699378485:0;cd .local
-: 1699378486:0;ls
 : 1699378491:0;cd etc
-: 1699378492:0;ls
-: 1699378498:0;cd
 : 1699378526:0;find $PREFIX -iname *.tmux
 : 1699378536:0;find $PREFIX -iname *tmux
 : 1699378567:0;find $PREFIX -iname *tmux*
 : 1699378599:0;hx /data/data/com.termux/files/usr/etc/tmux.conf
-: 1699378623:0;ls
 : 1699378709:0;wget https://github.com/wfxr/tmux-power/blob/master/tmux-power.tmu
 : 1699378713:0;wget https://github.com/wfxr/tmux-power/blob/master/tmux-power.tmux
-: 1699378715:0;ls
 : 1699378722:0;bat tmux-power.tmux
 : 1699378742:0;rm tmux-power.tmux
 : 1699378798:0;git clone https://github.com/wfxr/tmux-power
-: 1699378803:0;ls
 : 1699378828:0;cd tmux-power
-: 1699378830:0;ls
 : 1699378836:0;./tmux-power.tmux
-: 1699378848:0;ls
 : 1699378872:0;bash tmux-power.tmux
 : 1699378875:0;la
-: 1699379050:0;cd
 : 1699379057:0;find $PREFIX -iname .tmux.conf
 : 1699379069:0;find $PREFIX -iname .tmux
 : 1699379085:0;find $PREFIX -iname *tmux.conf
 : 1699379103:0;hx /data/data/com.termux/files/usr/etc/tmux.conf
 : 1699379236:0;tmux new
-: 1699379267:0;exit
-: 1699379271:0;ls
 : 1699379287:0;hx /data/data/com.termux/files/home/.tmux/.tmux.conf
 : 1699379297:0;tmux
 : 1699379306:0;:q
-: 1699379309:0;exit
 : 1699379312:0;fg
 : 1699379338:0;tmux
-: 1699379342:0;ls
 : 1699379346:0;cd tmux-power
-: 1699379347:0;ls
 : 1699379351:0;./tmux-power.tmux
 : 1699379361:0;clear
-: 1699379372:0;ls
-: 1699379387:0;cd
 : 1699379390:0;clear
-: 1699379401:0;exit
-: 1699379476:0;ls
 : 1699379609:0;set -g @tmux_power_theme 'moon'
-: 1699379613:0;ls
-: 1699379617:0;exit
 : 1699379621:0;clear
 : 1699379623:0;set -g @tmux_power_theme 'moon'
 : 1699379633:0;tmux
-: 1699379640:0;exit
 : 1699379669:0;cd .tmux
-: 1699379671:0;ls
 : 1699379673:0;la
-: 1699379709:0;ls
-: 1699379717:0;cd
 : 1699379724:0;rm -rf .tmux
 : 1699379727:0;tmux
-: 1699379737:0;exit
 : 1699379750:0;mkdir .tmux
-: 1699379753:0;ls
 : 1699379787:0;cp tmux-power/tmux-power.tmux .tmux/.tmux.conf
 : 1699379790:0;tmux
-: 1699379800:0;exit
 : 1699379806:0;rm -rf .tmux
-: 1699379808:0;ls
 : 1699379823:0;set -g @tmux_power_theme 'moon'
-: 1699379825:0;ls
 : 1699379830:0;cd tmux-power
 : 1699379832:0;./tmux-power.tmux
 : 1699379839:0;tmux new
 : 1699379842:0;./tmux-power.tmux
 : 1699379875:0;set -g @plugin 'wfxr/tmux-power'
-: 1699379967:0;ls
-: 1699380004:0;cd
 : 1699380007:0;mkdir .tmux
 : 1699380015:0;cp tmux-power/tmux-power.tmux .tmux/
 : 1699380027:0;hx .zshrc
 : 1699380230:0;hx .config/helix/config.toml
 : 1699380267:0;hx .zshrc
-: 1699380303:0;exit
 : 1699380306:0;hx .zshrc
-: 1699380325:0;ls
-: 1699380330:0;exit
 : 1699380564:0;hx .zshrc
-: 1699380605:0;exit
 : 1699380712:0;ps -aflh
 : 1699380716:0;ps -af
 : 1699380728:0;ps -fl
@@ -657,147 +485,90 @@ lop
 : 1699380737:0;ps -fa
 : 1699380745:0;ps -fax
 : 1699381020:0;hx .zshrc
-: 1699381072:0;exit
 : 1699381081:0;ps -fax
-: 1699381091:0;exit
 : 1699381284:0;hx /data/data/com.termux/files/home/.tmux/.tmux.conf
-: 1699381344:0;exit
 : 1699381358:0;hx /data/data/com.termux/files/home/.tmux/.tmux.conf
-: 1699381492:0;exit
-: 1699388016:0;ls
 : 1699388021:0;cd tmux-power
-: 1699388023:0;ls
 : 1699388030:0;bat tmux-power.tmux
 : 1699388113:0;hx /data/data/com.termux/files/home/.tmux/.tmux.conf
 : 1699388287:0;tmux ne
 : 1699388291:0;tmux
-: 1699388298:0;exit
 : 1699388307:0;exut
-: 1699388309:0;exit
 : 1699388847:0;x
 : 1699388853:0;hx /data/data/com.termux/files/home/.tmux/.tmux.conf
-: 1699388919:0;exit
 : 1699388933:0;hx /data/data/com.termux/files/home/.tmux/.tmux.conf
 : 1699388963:0;ks
-: 1699388965:0;ls
 : 1699388968:0;cd tmux-power
-: 1699388969:0;ls
 : 1699388973:0;./tmux-power.tmux
 : 1699388996:0;hx tmux-power.tmux
-: 1699389087:0;ls
-: 1699389090:0;cd
 : 1699389094:0;hx .zshrc
-: 1699389344:0;exit
 : 1699389352:0;cd tmux-power
-: 1699389354:0;ls
 : 1699389357:0;./tmux-power.tmux
-: 1699389369:0;exit
 : 1699389374:0;cd tmux-power
 : 1699389378:0;./tmux-power.tmux
-: 1699389395:0;cd
-: 1699389397:0;ls
 : 1699389400:0;hx .zshrc
 : 1699389472:0;exut
-: 1699389475:0;exit
 : 1699389487:0;temux_set
 : 1699389491:0;cd tmux-power
-: 1699389492:0;ls
 : 1699389495:0;./tmux-power.tmux
 : 1699389516:0;tmux_set
 : 1699389524:0;./tmux-power.tmux
-: 1699389546:0;cd
 : 1699389549:0;hx .zshrc
-: 1699389566:0;ls
 : 1699389575:0;cd tmux-power
-: 1699389579:0;ls
 : 1699389584:0;hx tmux-power.tmux
-: 1699389681:0;exit
 : 1699389690:0;ld
-: 1699389694:0;ls
 : 1699389697:0;cd tmux-power
 : 1699389700:0;./tmux-power.tmux
-: 1699389712:0;ls
-: 1699390003:0;cd
-: 1699390004:0;ls
 : 1699390008:0;hx .zshrc
 : 1699390024:0;run
 : 1699390027:0;ba
 : 1699390052:0;fg
-: 1699390138:0;exit
-: 1699390502:0;ls
 : 1699390506:0;cd tmux-power
-: 1699390507:0;ls
 : 1699390522:0;bat tmux-power.tmux
 : 1699390580:0;./tmux-power.tmux
 : 1699390600:0;clear
-: 1699390628:0;cd
 : 1699390632:0;hx .zshrc
 : 1699390685:0;ps -fax
 : 1699390719:0;bat -r 19:23 .zshrc
-: 1699390755:0;exit
 : 1699391139:0;cd tmux-power
 : 1699391142:0;./tmux-power.tmux
 : 1699391148:0;clear
 : 1699391169:0;git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-: 1699391176:0;cd
 : 1699391179:0;cd .tmux
-: 1699391180:0;ls
 : 1699391190:0;rm tmux-power.tmux
-: 1699391192:0;ls
 : 1699391251:0;la
 : 1699391265:0;hx .tmux.conf
-: 1699391287:0;exit
 : 1699391289:0;exut
-: 1699391291:0;exit
 : 1699391342:0;cd .tmux/
 : 1699391345:0;hx .tmux.conf
-: 1699391548:0;ls
-: 1699391550:0;cd
 : 1699391552:0;ks
-: 1699391554:0;ls
 : 1699391621:0;set -g @plugin 'wfxr/tmux-power'
 : 1699391639:0;wget https://github.com/wfxr/tmux-power/blob/master/tmux-power.tmux
-: 1699391644:0;ls
 : 1699391649:0;cp tmux-power/tmux-power.tmux .tmux/
 : 1699391663:0;cd .tmux/
-: 1699391664:0;ls
 : 1699391672:0;hx .tmux.conf
 : 1699391745:0;exut
 : 1699391757:0;cd .tmux/
 : 1699391759:0;hx .tmux.conf
-: 1699391774:0;exit
 : 1699391775:0;exut
-: 1699391790:0;cd
 : 1699391796:0;hx .zshrc
-: 1699391823:0;exit
 : 1699392090:0;hx .zshrc
-: 1699392132:0;exit
 : 1699392162:0;./.tmux/tmux-power.tmux
-: 1699392213:0;exit
 : 1699392549:0;cd .tmux/
-: 1699392551:0;ls
 : 1699392568:0;hx ~/.zshrc
 : 1699392638:0;exut
-: 1699392640:0;exit
 : 1699392670:0;cd .tmux/
 : 1699392676:0;hx tmux-power.tmux
-: 1699392703:0;ls
 : 1699392708:0;hx .tmux.conf
-: 1699392745:0;exit
 : 1699392779:0;cd .tmux/
 : 1699392788:0;hx .
 : 1699392803:0;hx tmux-power.tmux
-: 1699392905:0;exit
 : 1699393244:0;hx .zshrc
-: 1699393268:0;ls
 : 1699393328:0;cd .tmux/
 : 1699393335:0;hx .tmux.conf
 : 1699393857:0;tmux
-: 1699393864:0;ls
 : 1699393871:0;hx .zshrc
-: 1699393883:0;exit
 : 1699393902:0;cd .tmux
-: 1699393934:0;exit
 : 1699393948:0;hx .tmux.conf
 : 1699394367:0;xclip
 : 1699394377:0;apt install xclip
@@ -808,7 +579,6 @@ lop
 : 1699395151:0;cd .tmu
 : 1699395154:0;cd .tmux
 : 1699395156:0;hx .tmux.conf
-: 1699395276:0;exit
 : 1699395289:0;cd .tmux
 : 1699395294:0;hx .tmux.conf
 : 1699395402:0;fg
@@ -819,15 +589,10 @@ lop\
 exit
 : 1699395587:0;clear
 : 1699395786:0;hx .tmux.conf
-: 1699395811:0;ls
 : 1699395817:0;rm tmux-power.tmux
-: 1699395821:0;cd
-: 1699395822:0;ls
 : 1699395835:0;rm -d tmux-power
 : 1699395841:0;rm -drf tmux-power
-: 1699395843:0;ls
 : 1699395850:0;fg
-: 1699396318:0;ls
 : 1699396362:0;cp .tmux proyectos/i-Haklab/.deb/home/
 : 1699396367:0;cp .tmux proyectos/i-Haklab/.deb/home/ -r
 : 1699396394:0;cp .zshrc proyectos/i-Haklab/.deb/home
@@ -837,131 +602,82 @@ exit
 : 1699396464:0;git add -all
 : 1699396469:0;git add --all
 : 1699396526:0;cd .deb/home/.tmux/plugins/tmux-power
-: 1699396527:0;ls
 : 1699396530:0;la
 : 1699396539:0;rm .*
 : 1699396544:0;rm .* -r
 : 1699396548:0;y
-: 1699396552:0;ls
 : 1699396565:0;rm LICENSE
-: 1699396568:0;ls
 : 1699396584:0;git add --all
 : 1699396607:0;git log
 : 1699396686:0;git commit -m "work 1.7(configuracion de zsh)"
 : 1699396703:0;git pushh
 : 1699396712:0;git push
-: 1699396739:0;cd
 : 1699396836:0;cd .tmux
-: 1699396837:0;ls
 : 1699396841:0;cd plugins
-: 1699396842:0;ls
 : 1699396881:0;cd tmux-power
-: 1699396884:0;ls
 : 1699396891:0;hx tmux-power.tmux
 : 1699397211:0;tmux
-: 1699397276:0;cd
 : 1699397281:0;cd .tmux
 : 1699397285:0;hx tmux-power.tmux
 : 1699397294:0;hx .tmux.conf
 : 1699397387:0;tmux
-: 1699397406:0;exit
 : 1699397970:0;fg
 : 1699397976:0;hx .tmux.conf
-: 1699397980:0;ls
 : 1699397986:0;hx tmux-power.tmux
-: 1699398382:0;ls
 : 1699398385:0;../
-: 1699398386:0;ls
 : 1699398390:0;cd ../
-: 1699398391:0;ls
 : 1699398401:0;cd ../
-: 1699398402:0;ls
 : 1699398406:0;hx tmux-power.tmux
 : 1699398414:0;hx .tmux.conf
-: 1699399193:0;ls
 : 1699399198:0;cd plugins
-: 1699399200:0;ls
 : 1699399219:0;cd tmux-power
-: 1699399221:0;ls
 : 1699399293:0;cat /sys/class/net
-: 1699399335:0;ls
-: 1699399341:0;cd
-: 1699399343:0;ls
 : 1699399349:0;cd .tmux
-: 1699399350:0;ls
 : 1699399354:0;cd plugins
-: 1699399355:0;ls
 : 1699399409:0;git clonehttps://github.com/wfxr/tmux-net-speed.git
 : 1699399416:0;git clone https://github.com/wfxr/tmux-net-speed.git
-: 1699399460:0;ls
 : 1699399474:0;tree tmux-resurrect
-: 1699399495:0;ls
 : 1699399534:0;gh repo clone wfxr/tmux-net-speed
 : 1699399553:0;git clone https://github.com/wfxr/tmux-net-speed.git
-: 1699399837:0;ls
 : 1699400203:0;cat /proc/net/dev
-: 1699400274:0;ls
 : 1699400285:0;rm -rf tmux-resurrect
-: 1699400286:0;ls
 : 1699400477:0;rm -rf tmux-sensible
-: 1699400479:0;ls
 : 1699400647:0;exi
-: 1699400653:0;exit
-: 1699401575:0;ls
 : 1699401611:0;cd .tmux/
 : 1699401616:0;hx .tmux.conf
-: 1699401623:0;ls
 : 1699401626:0;cd plugins
-: 1699401627:0;ls
 : 1699401649:0;hx tmux-power
 : 1699403249:0;fg
 : 1699403352:0;f
 : 1699403354:0;fg
-: 1699403361:0;cd
 : 1699403379:0;bash Hacking/script/data.sh
 : 1699403414:0;bat Hacking/script/data.sh
-: 1699403509:0;exit
 : 1699404093:0;ps -fax
 : 1699404205:0;cd .tmux/
-: 1699404208:0;ls
 : 1699404217:0;cd .tmux
 : 1699404226:0;hx tmux-power
 : 1699404230:0;ks
-: 1699404231:0;ls
 : 1699404235:0;cd plugins
-: 1699404236:0;ls
 : 1699404245:0;hx tmux-power
-: 1699404515:0;ls
 : 1699404531:0;cd ../
-: 1699404532:0;ls
 : 1699404541:0;hx .tmux.conf
 : 1699404701:0;fg
 : 1699405199:0;cd ../
-: 1699405201:0;ls
 : 1699405207:0;cd ../
 : 1699405208:0;lz
-: 1699405209:0;ls
 : 1699405217:0;hx .tmux.conf
 : 1699405565:0;ld
-: 1699405567:0;ls
 : 1699405571:0;cd plugins
 : 1699405573:0;os
-: 1699405575:0;ls
 : 1699405581:0;xd
 : 1699405590:0;cd tmux-cpu
-: 1699405592:0;ls
 : 1699405604:0;bat cpu.tmux
 : 1699405883:0;../
 : 1699405887:0;cd ../
-: 1699405888:0;ls
 : 1699405893:0;hx tmux-cpu
-: 1699405898:0;ls
 : 1699405904:0;hx tmux-power
-: 1699405917:0;ls
 : 1699405925:0;cd tmux-power
-: 1699405926:0;ls
 : 1699405931:0;hx tmux-power.tmux
-: 1699406315:0;exit
 : 1699406374:0;cd .tmux
 : 1699406378:0;hx .tmux.conf
 : 1699406388:0;cd plugins
@@ -970,10 +686,466 @@ exit
 : 1699407297:0;hx .tmux.conf
 : 1699407596:0;f
 : 1699407599:0;fg
-: 1699408189:0;exit
 : 1699408385:0;bash Hacking/script/data.sh
-: 1699409050:0;ls
 : 1699409059:0;co
 : 1699409075:0;cp .zsh proyectos/i-Haklab/.deb/home -rf
 : 1699409108:0;cp .tmux proyectos/i-Haklab/.deb/home/ -rf
 : 1699409118:0;cp .zsh proyectos/i-Haklab/.deb/home -rf
+: 1699409237:0;cd proyectos/i-Haklab/
+: 1699409250:0;git add --all
+: 1699409284:0;git commit -m "work 1.7(configuracion de zsh)"
+: 1699409310:0;rm Documen.md
+: 1699409322:0;hx README.md
+: 1699409378:0;cd ../
+: 1699409385:0;cd victorh028.github.io
+: 1699409402:0;cd _posts
+: 1699409441:0;../
+: 1699409447:0;hx .zshrc
+: 1699409498:0;exut
+: 1699409511:0;...
+: 1699409604:0;cd proyectos/victorh028.github.io/_posts
+: 1699409606:0;la
+: 1699411041:0;tmux
+: 1699411096:0;cd .tmux
+: 1699411101:0;hx .zshrc
+: 1699411114:0;hx .zshrc
+: 1699411273:0;echo $TMUC
+: 1699411276:0;echo $TMUX
+: 1699411583:0;cd proyectos/victorh028.github.io/_posts
+: 1699411607:0;hx 2023-04-28-i_Haklab.md
+: 1699412118:0;ps -fax
+: 1699412127:0;fg
+: 1699412138:0;hx .zshrc
+: 1699412218:0;pkill --all
+: 1699412229:0;pkill --ns
+: 1699412245:0;ps -fax
+: 1699412279:0;pkill 2908
+: 1699412284:0;ps -fax
+: 1699412343:0;pkill 25693
+: 1699412353:0;ps -fax
+: 1699412360:0;pkill
+: 1699412365:0;pkill --help
+: 1699412384:0;pkill --full
+: 1699412391:0;pkill -f
+: 1699412419:0;ps -fax
+: 1699412433:0;pkill -f 2569
+: 1699412436:0;ps -fax
+: 1699412458:0;pkill -ns 2569
+: 1699412462:0;ps -fax
+: 1699412482:0;pkill -uid 2569
+: 1699412488:0;pkill --uid 2569
+: 1699412493:0;ps -fax
+: 1699412547:0;kill --help
+: 1699412553:0;kill -l
+: 1699412570:0;kill 25693
+: 1699412573:0;ps -fax
+: 1699412586:0;ps -fax
+: 1699412646:0;hx .zshrc
+: 1699412693:0;ps -fax
+: 1699412740:0;cd .tmux
+: 1699412752:0;hx .tmux.conf
+: 1699413245:0;la
+: 1699413255:0;hx .kl
+: 1699413323:0;cd proyectos/i-Haklab/
+: 1699413332:0;git push
+: 1699413404:0;cd proyectos/victorh028.github.io
+: 1699413411:0;git add --all
+: 1699413441:0;git commit -m "i-Haklab"
+: 1699413446:0;git push
+: 1699413903:0;cd proyectos/victorh028.github.io
+: 1699413915:0;hx .kl
+: 1699414004:0;cd proyectos/victorh028.github.io
+: 1699414050:0;bundle
+: 1699414074:0;bundle install
+: 1699414091:0;bundle info [gemname]
+: 1699414221:0;bundle exec jekyll serve
+: 1699414251:0;bundle install
+: 1699414345:0;hx _config.yml
+: 1699414368:0;bundle exec jekyll serve
+: 1699414418:0;hx Gemfile
+: 1699414454:0;hx _config.yml
+: 1699414492:0;bundle exec jekyll serve
+: 1699414609:0;vd
+: 1699414616:0;cd _posts
+: 1699414633:0;hx 2023-10-10-menu-linux.md
+: 1699414832:0;fg
+: 1699414894:0;hx 2023-10-10-menu-linux.md
+: 1699414991:0;f
+: 1699414994:0;fg
+: 1699415047:0;hx 2023-10-10-menu-linux.md
+: 1699415055:0;cd _posts
+: 1699415058:0;hx 2023-10-10-menu-linux.md
+: 1699415172:0;hx 2023-10-10-menu-linux.md
+: 1699415500:0;mv 2023-10-10-menu-linux.md 2023-10-10-desktop-linux.md
+: 1699415595:0;hx 2023-07-5-aline-get_file.md
+: 1699415742:0;la
+: 1699415753:0;cp /data/data/com.termux/files/home/Hacking/Tutorial/I-Haklab.md ./
+: 1699415810:0;mv I-Haklab.md 2023-04-29-i_Haklab.md
+: 1699415872:0;hx 2023-04-29-i_Haklab.md
+: 1699416278:0;rm 2023-04-28-i_Haklab.md
+: 1699416323:0;hx 2023-04-29-i_Haklab.md
+: 1699417113:0;ps -fax
+: 1699417119:0;f
+: 1699417122:0;fg
+: 1699417143:0;ps -fax
+: 1699417207:0;cd proyectos/victorh028.github.io/_posts
+: 1699417233:0;cd Hacking/Tutorial
+: 1699417254:0;ls -s /data/data/com.termux/files/home/proyectos/victorh028.github.io/_posts ./
+: 1699417272:0;ln -s /data/data/com.termux/files/home/proyectos/victorh028.github.io/_posts ./
+: 1699417293:0;rm I-Haklab.md
+: 1699417314:0;cp /data/data/com.termux/files/home/proyectos/victorh028.github.io/_posts/2023-04-29-i_Haklab.md
+: 1699417328:0;cp /data/data/com.termux/files/home/proyectos/victorh028.github.io/_posts/2023-04-29-i_Haklab.md ./
+: 1699417416:0;cd proyectos/victorh028.github.io/
+: 1699417424:0;git add --al
+: 1699417430:0;git commit -m "i-Haklab"
+: 1699417436:0;git push
+: 1699438272:0;ls .tmux/plugins
+: 1699440193:0;cd proyectos/victorh028.github.io/_posts
+: 1699440204:0;cp /data/data/com.termux/files/home/proyectos/victorh028.github.io/_posts/2023-04-29-i_Haklab.md ./
+: 1699440216:0;cp /data/data/com.termux/files/home/proyectos/victorh028.github.io/_posts/2023-04-29-i_Haklab.md ./ -rf
+: 1699440225:0;cp /data/data/com.termux/files/home/proyectos/victorh028.github.io/_posts/2023-04-29-i_Haklab.md ./ -r
+: 1699440235:0;cp /data/data/com.termux/files/home/proyectos/victorh028.github.io/_posts/2023-04-29-i_Haklab.md ./ -f
+: 1699440257:0;cp --help
+: 1699440369:0;cp /data/data/com.termux/files/home/proyectos/victorh028.github.io/_posts/2023-04-29-i_Haklab.md ./ --remove-destination
+: 1699440377:0;cp /data/data/com.termux/files/home/proyectos/victorh028.github.io/_posts/2023-04-29-i_Haklab.md ./ --remove-destination 1
+: 1699440400:0;bat 2023-04-29-i_Haklab.md
+: 1699440458:0;rm 2023-04-29-i_Haklab.md
+: 1699440467:0;cp /data/data/com.termux/files/home/proyectos/victorh028.github.io/_posts/2023-04-29-i_Haklab.md ./ --remove-destination
+: 1699440477:0;cp /data/data/com.termux/files/home/proyectos/victorh028.github.io/_posts/2023-04-29-i_Haklab.md ./
+: 1699440524:0;cp ~/Hacking/Tutorial/2023-04-29-i_Haklab.md ./
+: 1699443428:0;cd proyectos/victorh028.github.io
+: 1699443433:0;hx _config.yml
+: 1699443482:0;git add --al
+: 1699443491:0;git commit -m "i-Haklab"
+: 1699443503:0;git push
+: 1699451618:0;cd proyectos/victorh028.github.io
+: 1699451622:0;bundle exec jekyll serve
+: 1699452184:0;cd proyectos/victorh028.github.io
+: 1699452191:0;git pull
+: 1699452221:0;cd .github
+: 1699452225:0;la
+: 1699452245:0;...
+: 1699452252:0;cd victorh028.github.io
+: 1699452304:0;rm .github -rf
+: 1699452316:0;git add --al
+: 1699452322:0;git add --all
+: 1699452340:0;git commit -m "i-Haklab.a"
+: 1699452360:0;git push
+: 1699455405:0;cd .tmux
+: 1699455414:0;hx .tmux.conf
+: 1699455617:0;cd .tmux
+: 1699455619:0;hx .tmux.conf
+: 1699455853:0;hx plugins/tmux-power
+: 1699462809:0;ps -fax
+: 1699462816:0;cd .tmux
+: 1699462821:0;hx .tmux.conf
+: 1699462876:0;hx plugins/tmux-power/tmux-power.tmux
+: 1699463182:0;cd .tmu
+: 1699463184:0;cd .tmux
+: 1699463190:0;hx .tmux.conf
+: 1699463296:0;cd plugins
+: 1699463306:0;hx tmux-power
+: 1699463478:0;..
+: 1699463480:0;...
+: 1699463486:0;cd .tmux
+: 1699463490:0;hx .tmux.conf
+: 1699463600:0;cd plugins
+: 1699463607:0;hx tmux-power
+: 1699463837:0;../
+: 1699463841:0;cd ../
+: 1699463850:0;hx .tmux.conf
+: 1699465825:0;cat /sys/class/thermal/thermal_zone0/temp
+: 1699475317:0;cd .tmux
+: 1699475334:0;ls notify
+: 1699475342:0;la notify
+: 1699475351:0;cd plugins
+: 1699475368:0;cd tmux-cpu
+: 1699475390:0;bat README.md
+: 1699475468:0;../
+: 1699475478:0;cd ../
+: 1699475486:0;cd tmux-power
+: 1699475508:0;hx tmux-power.tmux
+: 1699475599:0;cd .tmux
+: 1699475604:0;hx .tmux.conf
+: 1699482812:0;/system/bin/dumpsys
+: 1699482875:0;/system/bin/dumpsys thermalservice
+: 1699482964:0;hx .tmux
+: 1699483034:0;/system/bin/dumpsys thermalservice
+: 1699483261:0;cd .zsh/plugins
+: 1699483273:0;cd ../
+: 1699483284:0;cd themes
+: 1699483308:0;git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+: 1699483319:0;ms
+: 1699483437:0;mv powerlevel10k .zsh/themes
+: 1699483455:0;cd .zsh/themes
+: 1699483494:0;h
+: 1699483518:0;hx .zshrc
+: 1699483621:0;hx .zshrc
+: 1699483697:0;cd .zsh/
+: 1699483717:0;cd start-zsh
+: 1699483724:0;hx start-zsh.sh
+: 1699483903:0;cd ../
+: 1699484255:0;cd themes
+: 1699534020:0;hx .zshrc
+: 1699534047:0;hx /data/data/com.termux/files/home/.zsh/start-zsh/start-zsh.sh
+: 1699534585:0;clear
+: 1699534607:0;hx .zshrc
+: 1699534836:0;hx .zsh/start-zsh/start-zsh.sh
+: 1699534938:0;hx .tmux/.tmux.conf
+: 1699535087:0;hx .zshrc
+: 1699535123:0;cd .cache
+: 1699535157:0;ls.zsh/cache/
+: 1699535161:0;ls .zsh/cache/
+: 1699535186:0;source .zshrc
+: 1699535191:0;ls .zsh/cache/
+: 1699535208:0;cd .zsh/
+: 1699535217:0;ls functions
+: 1699535231:0;ls themes/powerlevel10k
+: 1699535271:0;mv functions ./functionsp
+: 1699535283:0;source .zshrc
+: 1699535323:0;ls functionsp
+: 1699535343:0;source .zshrc
+: 1699535367:0;mv ./functionsp ./functions
+: 1699535397:0;mv functions ./functionsp
+: 1699535410:0;cd .zsh/
+: 1699535419:0;rm functionsp -rf
+: 1699535433:0;cd .zsh
+: 1699535513:0;hx .zshrc
+: 1699535560:0;echo $XDG_CACHE_HOME
+: 1699535598:0;ls .cache
+: 1699535645:0;rm .cache/*.zsh.*
+: 1699535653:0;ls .cache
+: 1699535662:0;rm .cache/*.zsh.* -rf
+: 1699535664:0;ls .cache
+: 1699535677:0;rm .cache/*.zsh* -rf
+: 1699535682:0;ls .cache
+: 1699535687:0;source .zshrc
+: 1699537297:0;<<<`pm dump com.termux --user 0 2&>1 </dev/null | grep -m1 permission.DUMP`
+: 1699537434:0;hx Hacking/comandos/P/pm.md
+: 1699537539:0;<<<`pm dump com.termux --user 0 2&>1 </dev/null | grep -m1 permission.DUMP`
+: 1699537546:0;id
+: 1699537603:0;ezit
+: 1699537715:0;bat proyectos/i-Haklab/.deb/home/.zshrc
+: 1699537797:0;echo $P9K_OS_ICON
+: 1699537866:0;echo $POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS
+: 1699537944:0;fg
+: 1699537946:0;hx
+: 1699537956:0;fg
+: 1699539563:0;echo $POWERLEVEL9K_BACKGROUND
+: 1699539638:0;hx .zshrc
+: 1699539674:0;source .zshrc
+: 1699539680:0;echo $POWERLEVEL9K_BACKGROUND
+: 1699539695:0;hx .zshrc
+: 1699539724:0;echo $POWERLEVEL9K_BACKGROUND
+: 1699539746:0;hx .zshrc
+: 1699539860:0;source .zshrc
+: 1699539871:0;hx .zshrc
+: 1699539918:0;source .zshrc
+: 1699539935:0;hx .zshrc
+: 1699539959:0;source .zshrc
+: 1699539995:0;<<<`pm dump com.termux --user 0 2&>1 </dev/null | grep -m1 permission.DUMP`
+: 1699540845:0;hx .zshrc
+: 1699540856:0;source .zshrc
+: 1699540885:0;hx .zshrc
+: 1699540899:0;source .zshrc
+: 1699540916:0;hx .zshrc
+: 1699540938:0;source .zshrc
+: 1699540944:0;clear
+: 1699541195:0;$ cat /proc/devices
+: 1699541202:0;cat /proc/devices
+: 1699541306:0;cd .zsh
+: 1699541312:0;cd themes
+: 1699541320:0;rm powerlevel9k.zsh-theme
+: 1699541340:0;rm
+: 1699541347:0;rm 1
+: 1699541598:0;find $PREFIX -iname polybar
+: 1699541608:0;find $PREFIX -iname *polybar*
+: 1699541894:0;curl https://raw.githubusercontent.com/gh0stzk/dotfiles/master/RiceInstaller -o $HOME/RiceInstaller\
+\
+
+: 1699541916:0;cd RiceInstaller
+: 1699541923:0;hx RiceInstaller
+: 1699542008:0;xdg-user-dirs-update
+: 1699542119:0;cd .config
+: 1699542148:0;mkdir polybar
+: 1699542153:0;cd polybar
+: 1699542345:0;../
+: 1699542368:0;ls ~/.local
+: 1699542676:0;cd Hacking/termux
+: 1699542677:0;ks
+: 1699542700:0;hx add_termux.md
+: 1699544923:0;hx
+: 1699544936:0;mkdir polybar_termux
+: 1699544940:0;cd polybar_termux
+: 1699544950:0;wget https://github.com/gh0stzk/dotfiles
+: 1699545001:0;git clone --depth=1 https://github.com/romkatv/gh0stzk/dotfiles
+: 1699545012:0;bat dotfiles
+: 1699545037:0;git clone --depth=1 https://github.com/gh0stz/dotfiles
+: 1699545191:0;hx .zshrc
+: 1699545329:0;ks
+: 1699545339:0;mv RiceInstaller polybar_termux
+: 1699547029:0;cd polybar_termux
+: 1699547036:0;rm dotfiles
+: 1699547047:0;hx RiceInstaller
+: 1699547179:0;git clone --depth=1 https://github.com/gh0stzk/dotfiles
+: 1699547547:0;command -v paru
+: 1699547625:0;makepkg
+: 1699547643:0;apt install makepkg
+: 1699547657:0;apt install pacman
+: 1699547704:0;makepkg
+: 1699547837:0;e~
+: 1699548131:0;cd polybar_termux/dotfiles/misc
+: 1699548137:0;cd bin
+: 1699548186:0;cp ./* ~/.local/bin/
+: 1699548193:0;ls ~/.local/bin
+: 1699548255:0;hx .zshrc
+: 1699548311:0;bash .local/libexec/i-Haklab/Xwayland
+: 1699550210:0;aapt dump badging `pm path com.termux --user 0 2>&1 </dev/null | cut -d":" -f2` | \grep -o android.permission.DUMP
+: 1699550237:0;aapt dump badging `pm path com.termux --user 0 2>&1 </dev/null | cut -d":" -f2` | \grep -o android.permission.DUMP | bat
+: 1699550243:0;clear
+: 1699550254:0;aapt dump badging `pm path com.termux --user 0 2>&1 </dev/null | cut -d":" -f2` | \grep -o android.permission.DUMP | ba
+: 1699550277:0;cd Hacking/comandos/A/
+: 1699550296:0;hx aapt.md
+: 1699550400:0;aapt dump badging `pm path com.termux --user 0 2>&1 </dev/null | cut -d":" -f2` | \grep -o android.permission.DUMP | bat
+: 1699550519:0;cd polybar_termux
+: 1699550524:0;cd dotfiles
+: 1699550543:0;cd misc
+: 1699550590:0;cd .local
+: 1699550602:0;mkdir ~/.local/share/applications
+: 1699550619:0;mkdir ~/.local/share/fonts
+: 1699550638:0;cd share
+: 1699550653:0;ls fonts
+: 1699550676:0;mkdir ~/.local/share/asciiart
+: 1699550688:0;cd applications
+: 1699550724:0;cp ./* ~/.local/share/applications
+: 1699550729:0;../
+: 1699550751:0;cd asciiart
+: 1699550779:0;cp ./* ~/.local/share/asciiart
+: 1699550789:0;../
+: 1699550797:0;ls asciiart
+: 1699550806:0;ls fonts
+: 1699550823:0;../
+: 1699550825:0;ls fonts
+: 1699550840:0;cd fonts
+: 1699550852:0;cp ./* ~/.local/share/fonts
+: 1699550861:0;cp ./* ~/.local/share/fonts -r
+: 1699550866:0;ls fonts
+: 1699550882:0;bash .local/libexec/i-Haklab/Xwayland
+: 1699550891:0;bash .local/libexec/i-Haklab/Xwayland
+: 1699551257:0;pacman -S poybar
+: 1699551279:0;pacman -S polybar
+: 1699551867:0;rofi
+: 1699552262:0;polybar
+: 1699552287:0;apt install polybar
+: 1699552761:0;hx ~/.config/polybar/config.ini
+: 1699552871:0;apt install polybar
+: 1699552891:0;apt install polybar --fix-missing
+: 1699553023:0;hx ~/.config/polybar/config.ini
+: 1699553045:0;polybar
+: 1699554113:0;cd Hacking/comandos/C
+: 1699554136:0;touch cut.md
+: 1699562781:0;polybar --help
+: 1699562880:0;pkg i xcb-util-cursor
+: 1699562936:0;polybar --helpb
+: 1699562951:0;polybar
+: 1699563020:0;bash .local/libexec/i-Haklab/Xwayland
+: 1699563118:0;polybar
+: 1699570290:0;cd test-room/sintax
+: 1699570313:0;hx polybar_termux
+: 1699570322:0;cd polybar_termux
+: 1699570335:0;bat RiceInstaller
+: 1699570382:0;xdg-user-dirs-update
+: 1699570573:0;command -v paru
+: 1699570587:0;paru
+: 1699570695:0;cd dotfiles
+: 1699570708:0;ls config
+: 1699570718:0;cd config
+: 1699570731:0;cd paru
+: 1699570739:0;bat paru.conf
+: 1699570757:0;../
+: 1699570766:0;ls zsh
+: 1699570778:0;../
+: 1699570789:0;ls home
+: 1699572054:0;cd .config/polybar
+: 1699572063:0;rm config.ini
+: 1699572082:0;touch config.ini
+: 1699572087:0;hx $HOME/.config/polybar/launch.sh
+: 1699572323:0;ls $PREFIX/etc/
+: 1699572331:0;ls $PREFIX/
+: 1699573662:0;cd .config/polyba
+: 1699573666:0;cd .config/polybar
+: 1699573676:0;hx config.ini
+: 1699573748:0;chmod +x launch.sh
+: 1699573758:0;hx launch.sh
+: 1699574041:0;./launch.sh
+: 1699574076:0;bash .local/libexec/i-Haklab/Xwayland
+: 1699574084:0;bash .local/libexec/i-Haklab/Xwayland
+: 1699574201:0;ps -fax
+: 1699574236:0;ipc
+: 1699577565:0;exec_always
+: 1699577576:0;ps -fax
+: 1699577625:0;hx .zshrc
+: 1699577670:0;kill --help
+: 1699577676:0;kill -l
+: 1699577686:0;kill --all
+: 1699577691:0;man kill
+: 1699577715:0;kill -t
+: 1699577744:0;kill 26275
+: 1699577748:0;ps -fax
+: 1699577763:0;kill 26275
+: 1699577766:0;ps -fax
+: 1699577782:0;kill 26105
+: 1699577785:0;ps -fax
+: 1699577796:0;kill 26107
+: 1699577804:0;kill 26175
+: 1699578108:0;bat .config/polybar/config.ini
+: 1699578134:0;bash .local/libexec/i-Haklab/Xwayland
+: 1699578167:0;polybar
+: 1699578809:0;is_online() {\
+ for server in "${ping_servers[@]}"; do\
+ if ping -c 1 "$server" &>/dev/null; then\
+ return 0 # Online\
+ fi\
+ done\
+ return 1 # Offline\
+}
+: 1699578826:0;is_online
+: 1699578855:0;cd Hacking/script
+: 1699578870:0;hx online.sh
+: 1699578923:0;/bin/bash
+: 1699578940:0;/bin/bash online.sh
+: 1699578953:0;/bin/bash online.sh | echo
+: 1699578969:0;/bin/bash online.sh > l
+: 1699578976:0;bat l
+: 1699578985:0;rm l
+: 1699579069:0;cd Hacking/script
+: 1699579078:0;hx online.sh
+: 1699579120:0;bash online.sh
+: 1699581108:0;cd .config/polybar
+: 1699581117:0;hx launch.sh
+: 1699581285:0;mkdir hack
+: 1699581402:0;xrandr -q | grep " connected" | cut -d ' ' -f1
+: 1699581814:0;cd polybar_termux
+: 1699581816:0;lw
+: 1699581825:0;bash RiceInstaller
+: 1699582458:0;bat .zshrc
+: 1699582498:0;tmux
+: 1699582517:0;ps -fax
+: 1699582538:0;pkill tmux
+: 1699582542:0;ps -fax
+: 1699582562:0;exut
+: 1699583838:0;termux-docker-qemu alpine
+: 1699584711:0;cd .config/polybar
+: 1699584771:0;mv .RiceInstaller ./
+: 1699584777:0;la
+: 1699584812:0;mv .RiceBackup ./
+: 1699584824:0;mv .RiceBackup ./BB
+: 1699584827:0;cd BB
+: 1699584852:0;mv polybar_20231109-210345 ~/.config
+: 1699584862:0;cd .config
+: 1699584881:0;mv polybar_20231109-210345 ./polybar
+: 1699584886:0;cd polybar
+: 1699584901:0;polybar mybar
+: 1699584909:0;bat config.ini
+: 1699584924:0;hx config.ini
+: 1699585069:0;cp .zsh proyectos/i-Haklab/.deb/home -rf
