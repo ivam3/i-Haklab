@@ -20,7 +20,7 @@ int main(int argc, char **argv){
         .version(version)
         .description(desc)
         .epilog(epilog)
-
+        .add_help_option(false)  // Desabilita las opciones por defaul
 // los tratara prog -a -b arg1 arg2  
 #ifdef DISABLE_INTERSPERSED_ARGS
         .disable_interspersed_args() 

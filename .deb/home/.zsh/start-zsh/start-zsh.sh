@@ -1,16 +1,17 @@
+#!/bin/bash
 # Función de formato ANSI (\033[<código>m)
 # 0: restablecer, 1: negrita
-omz_f() {
+dm_f() {
   [ $# -gt 0 ] || return
   IFS=";" printf "\033[%sm" $*
 }
 
 # Si stdout no es una terminal, ignore todo el formato
-[ -t 1 ] || omz_f() { :; }
+[ -t 1 ] || dm_f() { :; }
 
 # Proteger contra la ejecución de start-zsh que no sea zsh (use la sintaxis POSIX aquí)
 [ -n "$ZSH_VERSION" ] || {
-  omz_ptree() {
+  dm_ptree() {
     # Obtener el árbol de procesos del proceso actual
     pid=$$; pids="$pid"
     while [ ${pid-0} -ne 1 ] && ppid=$(ps -e -o pid,ppid | awk "\$1 == $pid { print \$2 }"); do
@@ -29,22 +30,22 @@ omz_f() {
 
   {
     shell=$(ps -o pid,comm | awk "\$1 == $$ { print \$2 }")
-    printf "$(omz_f 1 31)Error:$(omz_f 22) start-zsh no puede ser cargado: $(omz_f 1)${shell}$(omz_f 22). "
-    printf "Nesesitas correr $(omz_f 1)zsh$(omz_f 22) instead.$(omz_f 0)\n"
-    printf "$(omz_f 33)Aquí está el árbol de proceso:$(omz_f 22)\n\n"
-    omz_ptree
-    printf "$(omz_f 0)\n"
+    printf "$(dm_f 1 31)Error:$(dm_f 22) start-zsh no puede ser cargado: $(dm_f 1)${shell}$(dm_f 22). "
+    printf "Nesesitas correr $(dm_f 1)zsh$(dm_f 22) instead.$(dm_f 0)\n"
+    printf "$(dm_f 33)Aquí está el árbol de proceso:$(dm_f 22)\n\n"
+    dm_ptree
+    printf "$(dm_f 0)\n"
   } >&2
 
   return 1
 }
 # Compruebe si en el modo de emulación, si es así, vuelva temprano
 [[ "$(emulate)" = zsh ]] || {
-  printf "$(omz_f 1 31)Error:$(omz_f 22) start-zsh no se puede cargar \`$(emulate)\` emulation mode.$(omz_f 0)\n" >&2
+  printf "$(dm_f 1 31)Error:$(dm_f 22) start-zsh no se puede cargar \`$(emulate)\` emulation mode.$(dm_f 0)\n" >&2
   returnn 1
 }
 
-unset -f omz_f
+unset -f dm_f
 
 
 # Si ZSH no está definido, ruta predeterminada 
@@ -69,7 +70,7 @@ mkdir -p "$ZSH_CACHE_DIR/completions"
 
 #-----------------Inicializa----------
 # agregar una ruta de función
-fpath=("$ZSH/functions" "$ZSH/completions" $fpath)
+fpath=("$ZSH/functions" "$ZSH/cache/completions" $fpath)
 
 # Cargue todas las funciones estándar (de archivos $fpath) que se indican a continuación.
 autoload -U compaudit compinit zrecompile 
@@ -91,7 +92,7 @@ is_plugin() {
 # antes de ejecutar compinit.
 for plugin ($plugins); do
   if is_plugin "$ZSH_CUSTOM" "$plugin"; then
-    fpath=("$ZSH_CUSTOM/plugins/$plugin" $fpath)
+    fpath=("$ZSH_CUSTOM   $plugin" $fpath)
   elif is_plugin "$ZSH" "$plugin"; then
     fpath=("$ZSH/plugins/$plugin" $fpath)
   else
@@ -99,7 +100,7 @@ for plugin ($plugins); do
   fi
 done
 
-_omz_source() {
+_dm_source() {
   local context filepath="$1"
 
   # Construct zstyle context based on path
@@ -109,7 +110,7 @@ _omz_source() {
   esac
 
   local disable_aliases=0
-  zstyle -T ":omz:${context}" aliases || disable_aliases=1
+  zstyle -T ":dm:${context}" aliases || disable_aliases=1
 
   # Back up alias names prior to sourcing
   local -A aliases_pre galiases_pre
@@ -142,13 +143,13 @@ _omz_source() {
 # Carga todos los archivos lib en ~/oh-my-zsh/lib que terminan en .zsh
 # consejo: Agrega archivos que no quieras en git a .gitignore
 # for lib_file ("$ZSH"/lib/*.zsh); do
-#   _omz_source "lib/${lib_file:t}"
+#   _dm_source "lib/${lib_file:t}"
 # done
 # unset lib_file
 
 # Cargue todos los complementos que se definieron en ~/.zshrc
 for plugin ($plugins); do
-  _omz_source "plugins/$plugin/$plugin.plugin.zsh"
+  _dm_source "plugins/$plugin/$plugin.plugin.zsh"
 done
 unset plugin
 
@@ -179,3 +180,105 @@ fi
 
 # set completion colors to be the same as `ls`, after theme has been loaded
 [[ -z "$LS_COLORS" ]] || zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# temux 
+# -n : la cadena no es null 
+if [[ -n "$TMUX" ]]; then 
+  tmux attach -t "$USER" &>/dev/null || tmux new-session -A  -s "$USER" >/dev/null 2>&1
+fi
+
+tmux new-session  -A -s "$USER"
+
+
+on_exit() {
+  echo "¡Hasta luego! Que tengas un gran día 🌟😊"
+  sleep 1
+}
+
+baner_pantalla() {
+  bash "/data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab"
+}
+
+
+function extract {  
+   
+   file=$1
+   dir=$2
+ 
+   if [[ -n $dir ]]; then
+      mkdir -p $dir; 
+      echo Extracting $1 into $2 ...
+   else 
+      echo Extracting $1 ...
+   fi
+ 
+   if [[ ! -f $1 ]] ; then
+      echo "'$1' is not a valid file"
+   else
+      case $1 in
+         *.tar.bz2)   
+             if [[ -n $dir ]]; then dc="-C $dir"; fi
+             cmd="tar xjvf $1 $dc" 
+             echo $cmd
+             eval ${cmd}
+             ;;   
+         *.tar.gz)    
+             if [[ -n $dir ]]; then dc="-C $dir"; fi
+             cmd="tar xzvf $1 $dc"; 
+             echo $cmd;
+             eval ${cmd}
+             ;;
+         *.tar)       
+             if [[ -n $dir ]]; then dc="-C $dir"; fi
+             cmd="tar vxf $1 $dc";
+             echo $cmd;
+             eval ${cmd}
+             ;;
+         *.tbz2)      
+             if [[ -n $dir ]]; then dc="-C $dir"; fi
+             cmd="tar xjvf $1 $dc";
+             echo $cmd; 
+             eval ${cmd}
+             ;;  
+         *.tgz) 
+             if [[ -n $dir ]]; then dc="-C $dir"; fi
+             cmd="tar xzf $1 $dc"; 
+             echo $cmd; 
+             eval ${cmd} 
+             ;;    
+         *.bz2)       
+             if [[ -n $dir ]]; then dc="-C $dir"; fi
+             cmd="tar jf $1 $dc"; 
+             echo $cmd; 
+             eval ${cmd} 
+             ;;     
+         *.zip)       
+             if [[ -n $dir ]]; then dc="-d $dir"; fi
+             cmd="unzip $1 $dc"; 
+             echo $cmd; 
+             eval ${cmd}
+             ;;
+         *.gz)
+             if [[ -n $dir ]]; then dc="-C $dir"; fi
+             cmd="tar zf $1 $dc"; 
+             echo $cmd; 
+             eval ${cmd}
+             ;;
+         *.7z)        
+             #TODO dir
+             cmd="7z x -o$dir $1"; 
+             echo $cmd; 
+             eval ${cmd} 
+             ;;
+         *.rar)       
+             #TODO Dir
+             cmd="unrar x $1 $dir";
+             echo $cmd;
+             eval ${cmd}
+             ;;
+         *)           
+            echo "'$1' cannot be extracted via extract()" 
+            ;;
+         esac
+   fi
+}

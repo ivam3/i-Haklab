@@ -1,9 +1,0 @@
-[Desktop Entry]
-Version=1.8
-Type=Application
-Name=i-Haklab
-Exec=i-haklab
-Icon=/data/data/com.termux/files/home/i-Haklab/icon/i-haklab_icon.jpg 
-Terminal=true
-Categories=Categories=Qt;Graphics;RasterGraphics;Viewer;
-

@@ -4,6 +4,7 @@ theme = "night_owl"
 mouse              = true
 cursorline         = true
 completion-replace = true
+rulers             = [80]
 
 [editor.cursor-shape]
 insert = "bar"
@@ -18,7 +19,7 @@ space   = "·"
 nbsp    = "⍽"
 tab     = "→"
 newline = "⏎"
-tabpad  = "·" # Tabs will look like "→···" (depending on tab width)
+tabpad  = "·"  # Tabs will look like "→···" (depending on tab width)
 
 [editor.indent-guides]
 render = true
@@ -37,5 +38,6 @@ mode.select = "SELECT"
 
 # 
 [editor.lsp]
-display-inlay-hints = false
+display-messages = true
+display-inlay-hints = true 
 

@@ -1,0 +1,6 @@
+/data/data/com.termux/files/home/i-Haklab/CMakeFiles/i-haklab.dir
+/data/data/com.termux/files/home/i-Haklab/CMakeFiles/edit_cache.dir
+/data/data/com.termux/files/home/i-Haklab/CMakeFiles/rebuild_cache.dir
+/data/data/com.termux/files/home/i-Haklab/include/CMakeFiles/below_zero.dir
+/data/data/com.termux/files/home/i-Haklab/include/CMakeFiles/edit_cache.dir
+/data/data/com.termux/files/home/i-Haklab/include/CMakeFiles/rebuild_cache.dir

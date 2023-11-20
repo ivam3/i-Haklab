@@ -1,3 +1,7 @@
+# Compilas
+`cmake --build .`
+
+
 ## Configurar el acceso directo del escritori
 
 Si su entorno de escritorio admite el menú de escritorio XDG, puede configurar i-haklab para que aparezca en el menú de la aplicación copiando los `.desktop` archivos de íconos y proporcionados en sus carpetas correctas:

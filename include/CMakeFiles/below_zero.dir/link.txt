@@ -1,0 +1,1 @@
+/data/data/com.termux/files/usr/bin/c++ -fPIC -O2 -g -DNDEBUG -shared -Wl,-soname,libbelow_zero.so -o libbelow_zero.so CMakeFiles/below_zero.dir/below_zero.cpp.o 

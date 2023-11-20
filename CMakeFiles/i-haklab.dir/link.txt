@@ -1,0 +1,1 @@
+/data/data/com.termux/files/usr/bin/c++ -lboost_program_options -lboost_system  -lboost_filesystem   -O2 -g -DNDEBUG "CMakeFiles/i-haklab.dir/boost-haklab.cpp.o" -o i-haklab  -Wl,-rpath,/data/data/com.termux/files/home/i-Haklab/include include/libbelow_zero.so 

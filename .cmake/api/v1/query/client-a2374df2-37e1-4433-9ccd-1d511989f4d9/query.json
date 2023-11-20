@@ -1,0 +1,7 @@
+{
+  "requests": [
+    {"kind": "codemodel", "version": 2},
+    {"kind": "cache", "version": 2},
+    {"kind": "cmakeFiles", "version": 1}
+  ]
+}
