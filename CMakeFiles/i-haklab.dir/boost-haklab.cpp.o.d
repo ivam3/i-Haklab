@@ -938,4 +938,10 @@ CMakeFiles/i-haklab.dir/boost-haklab.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/iostreams/detail/adapter/mode_adapter.hpp \
   /data/data/com.termux/files/usr/include/boost/iostreams/detail/adapter/output_iterator_adapter.hpp \
   /data/data/com.termux/files/usr/include/boost/iostreams/detail/is_dereferenceable.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/device/array.hpp
+  /data/data/com.termux/files/usr/include/boost/iostreams/device/array.hpp \
+  /data/data/com.termux/files/usr/include/boost/system.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/result.hpp \
+  /data/data/com.termux/files/usr/include/boost/variant2/variant.hpp \
+  /data/data/com.termux/files/usr/include/boost/mp11.hpp \
+  /data/data/com.termux/files/usr/include/boost/mp11/map.hpp \
+  /data/data/com.termux/files/usr/include/boost/mp11/tuple.hpp
