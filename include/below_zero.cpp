@@ -2,6 +2,7 @@
 
 
 using namespace boost::filesystem;
+using namespace boost::iostreams;
 
 
 // Selector de color 
@@ -42,6 +43,7 @@ std::string setColor(Color color) {
     code += "m";
     return code;
 };
+
 
 void print_markdown(const std::string &txt){
   std::string output_txt = "";
@@ -149,12 +151,12 @@ void hack::Haklab::k_boom(int signum)
 void hack::Haklab::clear_screen(){
  //Se coloca en la pocicion (1 1) y borra la pantalla
   const char *CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
-  write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
+  // write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
 }
 
 void hack::Haklab::hide_cursor() {
     const char *HIDE_CURSOR_ANSI = "\e[?25l";  // Send escape sequence to hide cursor
-    write(STDOUT_FILENO,HIDE_CURSOR_ANSI,7);
+    // write(STDOUT_FILENO,HIDE_CURSOR_ANSI,7);
 }
 
 void hack::Haklab::show_cursor() {
@@ -206,13 +208,12 @@ void about(std::string about){
     // Elegir donde buscar 
     if (!exists(fren)) {
         fren =  IHETC + std::basic_string("/Tools/Readme/command/") + about + ".md";       
-    } 
-    std::ifstream  file;
-    // Abrir archivo    
+    }
+    std::ifstream file;
     file.open(fren);      
     // Comprobar si se abrio 
     if(!file.is_open()){
-       // fmt::print(fmt::emphasis::bold | fg(fmt::color::red),"No found\n");
+       fmt::print(fmt::emphasis::bold | fg(fmt::color::red),"No found\n");
        exit(1);
     }
     // obtener la longitud del archivo:
@@ -263,8 +264,7 @@ void hack::Haklab::searchProcess(std::string process){
                     std::string processName;
                     statusFile >> processName;
                     if (processName == process) {
-    //                     fmt::print("El proceso {}  ha sido encontrado con PID: {1}\n ",process,entryName);
-                        std::cout << "El proceso " << process << " ha sido encontrado con PID: " << entryName << std::endl;
+                        fmt::print("El proceso {0}  ha sido encontrado con PID: {1}\n ",process,entryName);
                         // Aquí puedes realizar más acciones con el PID del proceso encontrado
                     }
                 }

@@ -49,7 +49,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-lboost_program_options -lboost_system  -lboost_filesystem   -O2 -g -DNDEBUG"
+					"fragment" : "-lboost_program_options -lboost_system  -lboost_filesystem   -ljsoncpp  -lfmt -O2 -g -DNDEBUG"
 				}
 			],
 			"includes" : 
@@ -83,7 +83,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-lboost_program_options -lboost_system  -lboost_filesystem   -O2 -g -DNDEBUG",
+				"fragment" : "-lboost_program_options -lboost_system  -lboost_filesystem   -ljsoncpp  -lfmt -O2 -g -DNDEBUG",
 				"role" : "flags"
 			},
 			{

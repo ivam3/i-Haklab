@@ -58,19 +58,27 @@ alias -g ......='../../../../..'
 alias -g .......='../../../../../..'
 alias -g ........='../../../../../../..'
 
+
+#--------------------------------
+alias traductor='trans'
+alias tds='traductor -b :es'
+alias tdn='traductor -b :en'
 #--------------------------------
 # Usar por default C++20
 
+
+#--------------------------------
 # polybar
 if [ -d "$HOME/.local/bin" ] ; then
   PATH="$HOME/.local/bin:$PATH"
 fi
-
+#--------------------------------
 # Asigna la función de limpieza al comando `clear` y al atajo `ctrl+l`
 alias clear='baner_pantalla'
 zle -N baner_pantalla
 bindkey "^L"  baner_pantalla
 
+#--------------------------------
 
 # Ejecutar on_exit al salir de la shell
 trap 'on_exit' EXIT

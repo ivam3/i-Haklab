@@ -185,10 +185,9 @@ fi
 # -n : la cadena no es null 
 if [[ -n "$TMUX" ]]; then 
   tmux attach -t "$USER" &>/dev/null || tmux new-session -A  -s "$USER" >/dev/null 2>&1
+else
+  tmux new-session  -A -s "$USER"
 fi
-
-tmux new-session  -A -s "$USER"
-
 
 on_exit() {
   echo "¡Hasta luego! Que tengas un gran día 🌟😊"

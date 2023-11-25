@@ -13,5 +13,5 @@ target_include_directories( i-haklab PUBLIC
   "${PROJECT_BINARY_DIR}"
   "${PROJECT_SOURCE_DIR}/include"
 )
-set(CMAKE_CXX_FLAGS "-lboost_program_options -lboost_system  -lboost_filesystem  ")
-
+set(CMAKE_CXX_FLAGS "-lboost_program_options -lboost_system  -lboost_filesystem \
+  -ljsoncpp  -lfmt")

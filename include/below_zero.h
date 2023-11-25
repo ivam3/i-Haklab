@@ -3,6 +3,8 @@
 
 
 #include <iostream>
+#include <nlohmann/json.hpp>
+#include <boost/array.hpp>
 // Color de terminal y estilo de texto
 #include <fmt/color.h>
 // Formateo 
@@ -12,7 +14,9 @@
 #include <boost/program_options.hpp> 
 //  Proporciona funciones para manipular archivos y directorios, y las rutas que los identifican.
 #include <boost/filesystem.hpp>
-#include <boost/filesystem/fstream.hpp>
+// Lectura y escritura de archivos 
+#include <boost/iostreams/device/file.hpp>
+#include <boost/iostreams/stream.hpp>
 
 #define  IHETC  "/data/data/com.termux/files/home/.local/etc/i-Haklab"
 #define  LIBEX  "/data/data/com.termux/files/home/.local/libexec/i-Haklab/"

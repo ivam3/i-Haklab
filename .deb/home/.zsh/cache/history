@@ -4452,3 +4452,1971 @@ env | grep CXX\
 : 1700439451:0;./i-haklab --help
 : 1700439496:0;bat notas.md
 : 1700439578:0;bash update.sh
+: 1700439614:0;rm Android -rmd
+: 1700439622:0;rm Android -rdf
+: 1700439628:0;clear
+: 1700439635:0;la
+: 1700439639:0;clear
+: 1700439657:0;hx .zshrc
+: 1700439827:0;cd .zsh/start-zsh/
+: 1700439840:0;hx start-zsh.sh
+: 1700440063:0;ps
+: 1700440074:0;ps af
+: 1700440115:0;fg
+: 1700440157:0;binutils
+: 1700440172:0;ps af
+: 1700440184:0;pkill zsh
+: 1700440187:0;ps af
+: 1700440204:0;pkill hx
+: 1700440206:0;lx
+: 1700440211:0;ps af
+: 1700440233:0;kill 32449
+: 1700440235:0;ps af
+: 1700440261:0;clear
+: 1700440288:0;rm spack -rfd
+: 1700440352:0;fg
+: 1700440498:0;cd format-benchmark
+: 1700440523:0;bat tinyformat_speed_test
+: 1700440922:0;cd i-Haklab
+: 1700440932:0;hx include/
+: 1700441253:0;cmake --build .
+: 1700441409:0;hx CMakeLists.txt
+: 1700441445:0;cmake --build .
+: 1700441614:0;fg
+: 1700443437:0;cd C
+: 1700443469:0;cd C++/
+: 1700443475:0;la
+: 1700443503:0;hx fmt_print.cpp
+: 1700443642:0;clang++ fmt_print.cpp -o fmt_print
+: 1700443660:0;clang++ fmt_print.cpp -o fmt_print -lfmt
+: 1700443673:0;fg
+: 1700443924:0;cd i-Haklab
+: 1700443932:0;cmake --build .
+: 1700444017:0;hx CMakeLists.txt
+: 1700444035:0;cmake --build .
+: 1700444111:0;fg
+: 1700444427:0;cmake --build .
+: 1700444473:0;./i-haklab --help
+: 1700444536:0;./i-haklab --include-path
+: 1700444545:0;./i-haklab --include-path l
+: 1700444551:0;./i-haklab --inc
+: 1700444556:0;fg
+: 1700444603:0;./i-haklab --version
+: 1700444611:0;fg
+: 1700444665:0;cmake --build .
+: 1700444719:0;./i-haklab --version
+: 1700444727:0;fg
+: 1700444797:0;cmake --build .
+: 1700444836:0;./i-haklab --version
+: 1700444847:0;./i-haklab --help
+: 1700445127:0;cdc
+: 1700445131:0;vd
+: 1700445146:0;cd boost_1_83_0
+: 1700445159:0;cd doc
+: 1700445171:0;ls pdf
+: 1700445191:0;cd boost_1_83_0
+: 1700445221:0;find $PREFIX -iname linbs -type d
+: 1700445240:0;find ./ -iname libs -type d
+: 1700445345:0;bat tools/build/example/hello/hello.cpp
+: 1700445359:0;..
+: 1700445382:0;cd boost_1_83_0
+: 1700445401:0;find ./ -iname program* -type d
+: 1700445447:0;cd ./doc/html/program_options
+: 1700445504:0;cd boost_1_83_0
+: 1700445508:0;./libs/program_options
+: 1700445514:0;cd example
+: 1700445571:0;jobs
+: 1700445596:0;fg
+: 1700445690:0;hx multiple_sources.cpp
+: 1700445841:0;cd i-Haklab
+: 1700445862:0;hx boost-haklab.cpp
+: 1700445913:0;fg
+: 1700446076:0;cp boost_1_83_0/libs/program_options/example/multiple_sources.cpp ~/i-Haklab
+: 1700446090:0;cd i-Haklab
+: 1700446126:0;cat CMakeLists.txt
+: 1700446188:0;clang++ multiple_sources.cpp -o multiple_sources -lboost_program_options
+: 1700446224:0;./multiple_sources
+: 1700446238:0;./multiple_sources --help
+: 1700446283:0;touch multiple_sources.cfg
+: 1700446288:0;./multiple_sources --help
+: 1700446337:0;./multiple_sources -c "Hola Mundo"
+: 1700446357:0;./multiple_sources -c multiple_sources.cfg
+: 1700446375:0;bat multiple_sources.cfg
+: 1700446390:0;hx multiple_sources.cfg
+: 1700446398:0;fg
+: 1700446407:0;./multiple_sources
+: 1700446415:0;./multiple_sources --help
+: 1700446446:0;fish
+: 1700446631:0;.zsh
+: 1700446632:0;l
+: 1700446691:0;mkdir functions && cd
+: 1700446709:0;cd .zsh/functions
+: 1700446761:0;hx traductor
+: 1700446813:0;../
+: 1700446825:0;cls
+: 1700446832:0;cd start-zsh
+: 1700446840:0;bat start-zsh.sh
+: 1700446858:0;../
+: 1700446865:0;cd functions
+: 1700446887:0;mv traductor traductor.sh
+: 1700446893:0;hx traductor.sh
+: 1700446936:0;export traductor.sh
+: 1700446948:0;bash traductor.sh
+: 1700446985:0;gawk -f (curl -Ls git.io/translate | psub) -- -shell
+: 1700447013:0;gawk -f curl -Ls git.io/translate | psub -- -shell
+: 1700447026:0;fish
+: 1700447099:0;cd i
+: 1700447107:0;cd i-Haklab
+: 1700447113:0;rm multiple_sources
+: 1700447121:0;rm multiple_sources.cfg
+: 1700447142:0;rm multiple_sources.cpp
+: 1700447143:0;la
+: 1700447165:0;cd boost_1_83_0/libs/exception/example
+: 1700447173:0;../
+: 1700447182:0;..
+: 1700447196:0;cd program_options
+: 1700447201:0;cd example
+: 1700447233:0;bat options_description.cpp
+: 1700447348:0;bat first.cpp
+: 1700447401:0;bat config_file_types.cpp
+: 1700447562:0;cd i-Haklab
+: 1700447573:0;./i-haklab --help
+: 1700447829:0;hx boost-haklab.cpp
+: 1700448341:0;cd C++
+: 1700448342:0;ks
+: 1700448363:0;clang++ fmt_print.cpp -o fmt_print
+: 1700448533:0;clang++ fmt_print.cpp -o fmt_print -lfmt
+: 1700448618:0;cd format-benchmark
+: 1700448625:0;cd fmt
+: 1700448656:0;cd C++
+: 1700448663:0;clang++ fmt_print.cpp -o fmt_print -llibfmt
+: 1700448706:0;clang++ fmt_print.cpp -o fmt_print -I ~/format-benchmark/fmt/include
+: 1700448951:0;cd boost_1_83_0/libs/program_options/example
+: 1700448959:0;bat config_file_types.cpp
+: 1700448981:0;cp multiple_sources.cpp
+: 1700448993:0;bat multiple_sources.cpp
+: 1700449064:0;bat option_groups.cpp
+: 1700449273:0;hx ~/i-Haklab/boost-haklab.cpp
+: 1700451552:0;cmake --build .
+: 1700451576:0;./i-haklab --help
+: 1700451688:0;./i-haklab --help-module
+: 1700451712:0;./i-haklab --help-module config
+: 1700451727:0;./i-haklab --help-module option
+: 1700451742:0;bat boost-haklab.cpp
+: 1700451806:0;./i-haklab --help-module desc
+: 1700451828:0;bat boost-haklab.cpp
+: 1700451907:0;./i-haklab --help-module backend
+: 1700451943:0;hx boost-haklab.cpp
+: 1700452025:0;hx .zsh/start-zsh/start-zsh.sh
+: 1700452091:0;fish
+: 1700452117:0;fg
+: 1700452533:0;hx boost-haklab.cpp
+: 1700452540:0;cd i-Haklab
+: 1700452542:0;hx boost-haklab.cpp
+: 1700452700:0;cmake --build .
+: 1700452724:0;./i-haklab --help
+: 1700452762:0;./i-haklab --help-module all
+: 1700452824:0;hx boost-haklab.cpp
+: 1700453158:0;git
+: 1700453179:0;cd boost_1_83_0/libs/program_options/example
+: 1700453203:0;bat options_description.cpp
+: 1700453349:0;cd i-Haklab
+: 1700453354:0;hx boost-haklab.cpp
+: 1700453708:0;cmake --build .
+: 1700453743:0;./i-haklab --help
+: 1700453779:0;./i-haklab --help-module
+: 1700453787:0;./i-haklab --help-module lop
+: 1700453812:0;./i-haklab --help-module deault
+: 1700453820:0;./i-haklab --help-module default
+: 1700453831:0;./i-haklab --help-module automa
+: 1700453881:0;hx boost-haklab.cpp
+: 1700454327:0;cd $PREFIX/lib
+: 1700454373:0;cd cd format-benchmark
+: 1700454379:0;cd format-benchmark
+: 1700454390:0;find ./ -iname lib -type d
+: 1700454404:0;cd fmt
+: 1700454496:0;ln -s libfmt.so.9.1.0 $PREFIX/lib/libfmt.so
+: 1700454505:0;cd C++
+: 1700454518:0;clang++ fmt_print.cpp -o fmt_print
+: 1700454534:0;clang++ fmt_print.cpp -o fmt_print -lfmt
+: 1700454560:0;cd format-benchmark/fmt
+: 1700454564:0;ls include/fmt
+: 1700454649:0;ldconfig
+: 1700454674:0;echo $LD_LIBRARY_PATH
+: 1700454725:0;cd i-Haklab
+: 1700454729:0;ldd i-haklab
+: 1700454825:0;ldd i-haklab -d
+: 1700454834:0;ldd i-haklab -u
+: 1700454844:0;ldd -u i-haklab
+: 1700455033:0;lynx
+: 1700455184:0;hx .lynxrc
+: 1700455204:0;lynx
+: 1700455742:0;lynx --help
+: 1700485637:0;cd i-Haklab
+: 1700485641:0;it
+: 1700485648:0;git add --all
+: 1700485678:0;git commit -m "update-boost"
+: 1700485685:0;git push
+: 1700486009:0;vcpkg --version
+: 1700486167:0;vcpkg install fmt
+: 1700486182:0;cat /data/data/com.termux/files/home/.local/share/vcpkg/buildtrees/detect_compiler/config-arm64-android-rel-err.log
+: 1700486219:0;ls /data/data/com.termux/files/home/.local/share/android-ndk/toolchains/llvm/prebuilt/
+: 1700486598:0;ln -s linux-x86_64 linux-aarch64
+: 1700486608:0;vcpkg install fmt
+: 1700486622:0;cat /data/data/com.termux/files/home/.local/share/vcpkg/buildtrees/detect_compiler/config-arm64-android-rel-err.log
+: 1700486671:0;l
+: 1700486683:0;rm linux-aarch64
+: 1700487150:0;vcpkg integrate install
+: 1700487530:0;cd format-benchmark/fmt
+: 1700487531:0;ks
+: 1700487545:0;mkdir build
+: 1700487551:0;cd build
+: 1700487564:0;cmake . .
+: 1700487601:0;../
+: 1700487606:0;rm build -dfr
+: 1700487611:0;make test
+: 1700487629:0;../
+: 1700487635:0;make test
+: 1700487689:0;cd fmt
+: 1700487690:0;ks
+: 1700487703:0;make testv
+: 1700487705:0;make test
+: 1700487743:0;../
+: 1700487754:0;ls bin
+: 1700487783:0;mkdir build
+: 1700487795:0;rm build -dfr
+: 1700487800:0;cmake . .
+: 1700487815:0;ls bin
+: 1700487844:0;ls fmt/bin
+: 1700487878:0;cd fmt
+: 1700487892:0;cmake . .
+: 1700487902:0;make test
+: 1700487939:0;make test --rerun-failed --output-on-failure
+: 1700487946:0;make test --rerun-failed
+: 1700488009:0;cat /data/data/com.termux/files/home/format-benchmark/fmt/Testing/Temporary/LastTest.log
+: 1700488482:0;ln -s libfmt.so.9.1.0 $PREFIX/lib/libfmt.so.9
+: 1700488503:0;cd C++
+: 1700488516:0;clang++ fmt_print.cpp -o fmt_print
+: 1700488618:0;cmake -DBUILD_SHARED_LIBS=TRUE
+: 1700488634:0;cd format-benchmark/fmt
+: 1700488641:0;cmake -DBUILD_SHARED_LIBS=TRUE
+: 1700488662:0;cmake . .
+: 1700488688:0;ls src
+: 1700488796:0;cd C++
+: 1700488800:0;clang++ fmt_print.cpp -o fmt_print
+: 1700488880:0;cd format-benchmark/fmt
+: 1700488896:0;mkdir build && cd build
+: 1700488904:0;cmake . .
+: 1700488915:0;make install
+: 1700488943:0;../
+: 1700488971:0;ls $PREFIX/usr/ | grep pkg
+: 1700488983:0;ls $PREFIX/local/ | grep pkg
+: 1700489053:0;cd $PREFIX/
+: 1700489054:0;ks
+: 1700489077:0;mkdir local
+: 1700489082:0;cd local
+: 1700489116:0;mkdir lib
+: 1700489128:0;cd format-benchmark/fmt
+: 1700489191:0;cp libfmt.a /data/data/com.termux/files/usr/local/lib
+: 1700489254:0;cp include /data/data/com.termux/files/usr/local
+: 1700489259:0;cp include /data/data/com.termux/files/usr/local -r
+: 1700489280:0;cd C++
+: 1700489288:0;clang++ fmt_print.cpp -o fmt_print -lfmt
+: 1700489320:0;cd format-benchmark/fmt
+: 1700489345:0;mkdir l$
+: 1700489409:0;mkdi $PREFIX/local/lib/cmake/fmt -p
+: 1700489428:0;mkdir $PREFIX/local/lib/cmake/fmt -p
+: 1700489462:0;mkdir $PREFIX/local/lib/pkgconfig/
+: 1700489484:0;cp fmt.pc $PREFIX/local/lib/pkgconfig/
+: 1700489565:0;cp fmt-config-version.cmake fmt-config.cmake fmt-targets.cmake $PREFIX/local/lib/cmake/fmt
+: 1700489598:0;cd C++
+: 1700489611:0;clang++ fmt_print.cpp -o fmt_print -lfmt
+: 1700489626:0;cd $PREFIX/
+: 1700489628:0;ks
+: 1700489641:0;rm local -rm
+: 1700489644:0;rm local -rf
+: 1700490051:0;clang -print-resource-dir
+: 1700490339:0;tmux new-session -s $USER
+: 1700490349:0;cd C++
+: 1700490360:0;bat fmt_print.cpp
+: 1700490385:0;clang++ fmt_print.cpp -o fmt_print
+: 1700490393:0;clang++ fmt_print.cpp -o fmt_print -lfmt
+: 1700492745:0;cd C++
+: 1700492750:0;hx fmt_print.cpp
+: 1700492797:0;clang++ fmt_print.cpp -o fmt_print
+: 1700493016:0;hx fmt_print.cp
+: 1700493023:0;cd C++b
+: 1700493025:0;cd C++
+: 1700493031:0;hx fmt_print.cpp
+: 1700494500:0;cd C++
+: 1700494530:0;clang++ fmt_print.cpp -o fmt_print -lfmt -L ~/format-benchmark/fmt/
+: 1700494560:0;clang++ fmt_print.cpp -o fmt_print -L ~/format-benchmark/fmt/
+: 1700494579:0;clang++ fmt_print.cpp -o fmt_print -L ~/format-benchmark/fmt/ -lfmt
+: 1700494619:0;bash fmt_print
+: 1700494634:0;/bin/bash fmt_print
+: 1700494656:0;rm fmt_print
+: 1700494730:0;manclang++
+: 1700494734:0;man clang++
+: 1700494756:0;clang++ --help
+: 1700494780:0;clang++ --help | grep -E "L"
+: 1700494784:0;clang++ --help | grep -E "-L"
+: 1700494790:0;clang++ --help | grep -E "/-L"
+: 1700494795:0;clang++ --help | grep "/-L"
+: 1700495097:0;cd $PREFIX/etc/apt/sources.list.d
+: 1700495120:0;hx debian.list
+: 1700495141:0;apt update
+: 1700495166:0;termux-change-repo
+: 1700495246:0;apt update
+: 1700495267:0;rm debian.list
+: 1700495280:0;cd downloads
+: 1700495297:0;dpkg -i libfmt-dev_9.1.0+ds1-2_arm64.deb.man
+: 1700496222:0;dkpg-deb
+: 1700496241:0;apt inatall dpkg
+: 1700496246:0;apt install dpkg
+: 1700496271:0;dkpg-deb
+: 1700496329:0;dpkg -R libfmt-dev_9.1.0+ds1-2_arm64.deb.man ./libfmt
+: 1700496388:0;dpkg-deb -R libfmt-dev_9.1.0+ds1-2_arm64.deb.man ./libfm
+: 1700496406:0;cd libfm
+: 1700496407:0;ks
+: 1700496427:0;tree -d usr
+: 1700496504:0;clang -print-resource-dir
+: 1700496517:0;cd /data/data/com.termux/files/usr/lib/clang/16
+: 1700496548:0;tree -d include
+: 1700496597:0;tree -d lib
+: 1700496673:0;cd li
+: 1700496678:0;cd lib
+: 1700496688:0;tree linux
+: 1700496711:0;ln -s /data/data/com.termux/files/home/format-benchmark/fmt/include/fmt
+: 1700496740:0;cd C++
+: 1700496773:0;clang++ fmt_print.cpp -o fmt_print -lfmt
+: 1700497238:0;cd downloads/libfm
+: 1700497245:0;tree DEBIAN
+: 1700497255:0;bat DEBIAN/control
+: 1700497331:0;cd ${HOME}/victorh028.github.io/demon-packages/packages/
+: 1700497345:0;mkdir libfmt-dev
+: 1700497350:0;cd libfmt-dev
+: 1700497361:0;hx manifiest.json
+: 1700497497:0;tmux new-session -s $USER
+: 1700497510:0;hx manifiest.json
+: 1700497524:0;cd downloads/libfm/DEBIAN
+: 1700497530:0;bat control
+: 1700497686:0;cat control
+: 1700497832:0;bat victorh028.github.io/demon-packages/packages/vcpkg/manifiest.json
+: 1700499774:0;cat downloads/libfm/DEBIAN/md5sums
+: 1700500441:0;termux-create-package manifiest.json
+: 1700500451:0;hx manifiest.json
+: 1700500491:0;termux-create-package manifiest.json
+: 1700500925:0;hx postinst
+: 1700500961:0;locate bash
+: 1700500974:0;type bash
+: 1700501011:0;cat downloads/libfm/DEBIAN/md5sums
+: 1700501745:0;cd $PREFIX
+: 1700501780:0;rm hola.asm
+: 1700501808:0;bat manifiest.json
+: 1700501831:0;rm manifiest.json postinst post
+: 1700501840:0;rm manifiest.json postinst postrm
+: 1700501884:0;ls include
+: 1700502134:0;cd lib
+: 1700502226:0;ls *.pc
+: 1700503634:0;cd C++
+: 1700503638:0;hx fmt_print.cpp
+: 1700503651:0;clang -print-resource-dir
+: 1700503660:0;cd /data/data/com.termux/files/usr/lib/clang/16n
+: 1700503662:0;cd /data/data/com.termux/files/usr/lib/clang/1
+: 1700503671:0;cd /data/data/com.termux/files/usr/lib/clang/16
+: 1700503678:0;cd include
+: 1700503689:0;rm fmt
+: 1700503713:0;../
+: 1700503719:0;cd lib
+: 1700503728:0;rm fmt
+: 1700503748:0;hx fmt_print.cpp
+: 1700503771:0;cd $PREFIX
+: 1700503778:0;cd include
+: 1700503791:0;ln -s /data/data/com.termux/files/home/format-benchmark/fmt/include/fmt
+: 1700503799:0;hx fmt_print.cpp
+: 1700503808:0;../
+: 1700503810:0;ks
+: 1700503815:0;cd lib
+: 1700503970:0;bat downloads/libfm/DEBIAN/md5sums
+: 1700504009:0;cd format-benchmark/fmt
+: 1700504045:0;ls -d
+: 1700504111:0;ln -s /data/data/com.termux/files/home/format-benchmark/fmt/libfmt.so.9.1.0
+: 1700504119:0;ln -s /data/data/com.termux/files/home/format-benchmark/fmt/libfmt.so.9
+: 1700504126:0;ln -s /data/data/com.termux/files/home/format-benchmark/fmt/libfmt.so
+: 1700504161:0;../
+: 1700504172:0;find ./ -iname cmake -type d
+: 1700504200:0;cd lib/cmake
+: 1700504348:0;ls boost_chrono-1.82.0
+: 1700504357:0;ks
+: 1700504374:0;mkdir fmt
+: 1700504378:0;cd fmt
+: 1700504425:0;ln -s /data/data/com.termux/files/home/format-benchmark/fmt/fmt-config-version.cmake
+: 1700504454:0;ln -s /data/data/com.termux/files/home/format-benchmark/fmt/fmt-config.cmake
+: 1700504502:0;ln -s /data/data/com.termux/files/home/format-benchmark/fmt/fmt-targets.cmake
+: 1700504519:0;cd C++
+: 1700504528:0;clang++ fmt_print.cpp -o fmt_print -lfmt
+: 1700504537:0;clang++ fmt_print.cpp -o fmt_print
+: 1700504571:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev
+: 1700504582:0;hx postinst
+: 1700504932:0;cd format-benchmark/fmt
+: 1700505314:0;hx postinst
+: 1700505465:0;..
+: 1700505468:0;cmake .
+: 1700505485:0;make speed-test
+: 1700505533:0;make bloat-test
+: 1700505548:0;./tinyformat_speed_test
+: 1700505717:0;pv
+: 1700505730:0;pv --help
+: 1700506384:0;pv -PEt | git clone --recursive https://github.com/fmtlib/format-benchmark.git
+: 1700506398:0;mkdir tmp
+: 1700506400:0;cd tmp
+: 1700506459:0;pv -PEt | git clone --recursivei -q https://github.com/fmtlib/format-benchmark.git
+: 1700506501:0;pv -PEt | git --quie clone --recursivei https://github.com/fmtlib/format-benchmark.git
+: 1700506514:0;pv -PEt | git --quiet clone --recursivei https://github.com/fmtlib/format-benchmark.git
+: 1700506644:0;pv -p history.log | wc
+: 1700506666:0;touch history.log
+: 1700506669:0;pv -p history.log | wc
+: 1700507269:0;touch --help
+: 1700507397:0;[[ -f ${HOME}/.local/share  && touch ${HOME}/.local/share/i-haklab.log ]]
+: 1700507442:0;bash
+: 1700515459:0;[[ -f ${HOME}/.local/share  && touch ${HOME}/.local/share/i-haklab.log ]]
+: 1700507587:0;bash postinst
+: 1700507628:0;ls ${HOME}/.local/share/
+: 1700507673:0;ls $PREFIX
+: 1700507734:0;fg
+: 1700507749:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev
+: 1700507810:0;bash postinst
+: 1700508375:0;pv -PEt ${PREFIX}/tmp/i-haklab.log | git clone --recursivei https://github.com/fmtlib/format-benchmark.git
+: 1700508432:0;pv -PEt ${PREFIX}/tmp/i-haklab.log | git clone --recursive https://github.com/fmtlib/format-benchmark.git
+: 1700508448:0;rm format-benchmark
+: 1700508453:0;rm format-benchmark -rd
+: 1700508460:0;rm format-benchmark -rdf
+: 1700508484:0;pv -PEt ${PREFIX}/tmp/i-haklab.log | git --quiet clone --recursive https://github.com/fmtlib/format-benchmark.git
+: 1700508495:0;git --help
+: 1700508524:0;man git
+: 1700508599:0;bat ~/i-Haklab/.deb/postinst
+: 1700508816:0;pv -PEt ${PREFIX}/tmp/i-haklab.log | git clone --recursive https://github.com/fmtlib/format-benchmark.git
+: 1700508840:0;git clone --help
+: 1700508899:0;pv -PEt ${PREFIX}/tmp/i-haklab.log | git clone --recursive --quiet https://github.com/fmtlib/format-benchmark.git
+: 1700508918:0;rm format-benchmark -rdf
+: 1700508994:0;pv -p history.log | wc
+: 1700509026:0;pv -p history.log | while \
+true
+: 1700509041:0;pv -p history.log | ps
+: 1700509051:0;pv -p history.log | wc
+: 1700509059:0;pv -p history.log | sleep
+: 1700509063:0;pv -p history.log | sleep 3
+: 1700509344:0;hx postinst
+: 1700509369:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev
+: 1700509508:0;bash postinst
+: 1700509557:0;ls format-benchmark
+: 1700509668:0;ls format-benchmark
+: 1700509695:0;rm format-benchmark -rdf
+: 1700509722:0;bash postinst
+: 1700509917:0;cd format-benchmark
+: 1700510120:0;bash postinst
+: 1700510454:0;true
+: 1700510460:0;echo $!
+: 1700510510:0;awk 'print $1' $?
+: 1700510544:0;awk '{print $1}' $?
+: 1700510553:0;true
+: 1700510559:0;awk '{print $1}' $?
+: 1700510857:0;status
+: 1700511019:0;cat postinst
+: 1700511055:0;function status{\
+ if $? ,\
+ then\
+ echo "true" fi\
+ echo "false"\
+} \
+
+: 1700511215:0;return_status="%(?. .ðƒ¿ƒ¸µ )"
+: 1700511223:0;true
+: 1700511236:0;echo $return_status
+: 1700511246:0;echo -e $return_status
+: 1700511635:0;export postinst
+: 1700511664:0;status
+: 1700511675:0;cat postinst
+: 1700511722:0;retorno=$?
+: 1700511843:0;if $retorno; then echo "+" fi\
+ \
+\
+,\
+"\
+"
+: 1700512002:0;echo $CMD
+: 1700512005:0;lop
+: 1700512008:0;echo $CMD
+: 1700512048:0;echo $CMD
+: 1700512174:0;cat postins
+: 1700512181:0;cat postinst
+: 1700512192:0;cmd=1
+: 1700512295:0;function status (){\
+ if [[ $cdm ]];\
+ then\
+ echo "+"\
+ else\
+ echo "*"\
+ fi\
+}
+: 1700512299:0;status
+: 1700512311:0;cmd=0
+: 1700512315:0;status
+: 1700512338:0;echo $CMD
+: 1700512346:0;echo $PREFIX
+: 1700512419:0;cmd=$?
+: 1700512422:0;status
+: 1700512425:0;lop
+: 1700512431:0;status
+: 1700512460:0;echo $?
+: 1700512466:0;loo
+: 1700512468:0;echo $?
+: 1700512669:0;function status (){\
+ if [[ $cdm == 0]];\
+ then\
+ echo "+"\
+ else\
+ echo "*"\
+ fi\
+}
+: 1700512773:0;function status (){\
+ if [[ $cdm -en  0]]\
+ then\
+ echo "+"\
+ else\
+ echo "*"\
+ fi\
+}
+: 1700512787:0;cmd=0
+: 1700512790:0;function status (){\
+ if [[ $cdm -en  0]]\
+ then\
+ echo "+"\
+ else\
+ echo "*"\
+ fi\
+}
+: 1700512891:0;function status (){\
+ if [[ $cdm -gt  0]];\
+ then\
+ echo "+"\
+ else\
+ echo "*"\
+ fi\
+}
+: 1700512926:0;function status (){\
+ if [[ $cdm -gt 0 ]];\
+ then\
+ echo "+"\
+ else\
+ echo "*"\
+ fi\
+}
+: 1700512934:0;lop
+: 1700512938:0;status
+: 1700512944:0;status
+: 1700512964:0;cdm=$?
+: 1700512968:0;lop
+: 1700512971:0;true
+: 1700512978:0;echo~
+: 1700512982:0;echo $?
+: 1700512993:0;status
+: 1700513029:0;function status (){\
+ if [[ $cdm -qn 0 ]];\
+ then\
+ echo "+"\
+ else\
+ echo "*"\
+ fi\
+}
+: 1700513041:0;echo $?
+: 1700513044:0;status
+: 1700513064:0;function status (){\
+ if [[ $cdm -qt 0 ]];\
+ then\
+ echo "+"\
+ else\
+ echo "*"\
+ fi\
+}
+: 1700513072:0;echo $?
+: 1700513075:0;statusv
+: 1700513077:0;status
+: 1700513212:0;function status (){\
+ if [[ $cdm = 0 ]];\
+ then\
+ echo "+"\
+ else\
+ echo "*"\
+ fi\
+}
+: 1700513216:0;status
+: 1700513223:0;lop
+: 1700513230:0;status
+: 1700513655:0;printf "Hola"
+: 1700513843:0;bash postinst
+: 1700514288:0;cd fmt
+: 1700514308:0;bash postinst
+: 1700514488:0;function status (){\
+ if [[ $cdm = 0 ]];\
+ then\
+ echo "+"\
+ else\
+ echo "*"\
+ fi\
+}
+: 1700514491:0;bash postinst
+: 1700514707:0;bat postinst
+: 1700514750:0;bat ~/i-Haklab/.deb/postinst
+: 1700515112:0;bat postinst
+: 1700515117:0;bash postinst
+: 1700515377:0;cat postinst
+: 1700518035:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev
+: 1700518043:0;hx postinst
+: 1700518051:0;ls format-benchmark
+: 1700518065:0;cd format-benchmark/fmt
+: 1700518162:0;ls format-benchmark/fmt
+: 1700518196:0;bat -r 4:9 victorh028.github.io/demon-packages/packages/libfmt-dev/postinst
+: 1700518480:0;cd $PREFIX/include
+: 1700518526:0;cd fmt
+: 1700518564:0;..
+: 1700518586:0;cd lib/cmake
+: 1700518788:0;cd fmt
+: 1700518955:0;printf "Hola %d" echo $?
+: 1700518992:0;printf "Hola %d" (echo $?)
+: 1700519002:0;printf "Hola %d" &(echo $?)
+: 1700519009:0;printf "Hola %d" $(echo $?)
+: 1700519019:0;lop
+: 1700519022:0;printf "Hola %d" $(echo $?)
+: 1700519203:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev
+: 1700519210:0;termux-create-package manifiest.json
+: 1700519215:0;../../
+: 1700519234:0;dpkg -i libfmt-vev_0.1.2_all.deb
+: 1700519342:0;cd victorh028.github.io/demon-packages/packages/libfmt-de
+: 1700519350:0;cd packages/libfmt-dev
+: 1700519366:0;bash postinst
+: 1700519533:0;ks
+: 1700519559:0;apt reinstall vcpkg
+: 1700519614:0;find ./ -iname cmake -type dpkg
+: 1700519639:0;find $PREFIX -iname -type dpkg
+: 1700519672:0;find $PREFIX -iname vpkg -type d
+: 1700519680:0;find $PREFIX -iname vpkg
+: 1700519704:0;apt autoremove
+: 1700519748:0;bash postinst
+: 1700519806:0;ks
+: 1700519813:0;cd tmp
+: 1700519832:0;pv -p history.log | mkdir lop
+: 1700519840:0;pv history.log | mkdir lop
+: 1700519848:0;bat history.log
+: 1700519860:0;pv --help
+: 1700519897:0;pv history.log -q | mkdir lop
+: 1700519915:0;pv history.log | cp lop ll
+: 1700519923:0;pv history.log | cp lop ll -r
+: 1700520157:0;cd i-Haklab/.deb
+: 1700520172:0;bat postrm
+: 1700520323:0;hx postrm
+: 1700520375:0;bat -r 4:9 postinst
+: 1700520551:0;termux-create-package manifiest.json
+: 1700520559:0;hx postrm
+: 1700520750:0;termux-create-package manifiest.json
+: 1700520770:0;....
+: 1700520791:0;cd demon-packages/
+: 1700520796:0;dpkg -i libfmt-vev_0.1.2_all.deb
+: 1700520868:0;rm /data/data/com.termux/files/usr/var/lib/dpkg/tmp.ci/postrm
+: 1700520876:0;rm /data/data/com.termux/files/usr/var/lib/dpkg
+: 1700520884:0;rm /data/data/com.termux/files/usr/var/lib/dpkg -rb
+: 1700520889:0;rm /data/data/com.termux/files/usr/var/lib/dpkg -rfd
+: 1700520893:0;dpkg -i libfmt-vev_0.1.2_all.deb
+: 1700521173:0;cd packages/libfmt-dev
+: 1700521206:0;mv postrm prerm
+: 1700521225:0;hx postrm
+: 1700521230:0;type bash
+: 1700521874:0;hx postrm
+: 1700521898:0;hx prerm
+: 1700522073:0;termux-create-package manifiest.json
+: 1700522080:0;...
+: 1700522096:0;dpkg -i libfmt-vev_0.1.2_all.deb
+: 1700522166:0;cd C++
+: 1700522232:0;clang++ fmt_print.cpp -o fmt_print -lfmt
+: 1700522256:0;cd packages/libfmt-dev
+: 1700522274:0;cat prerm
+: 1700522295:0;cd $PREFIX/include
+: 1700522302:0;..
+: 1700522310:0;cd lib/cmake
+: 1700522322:0;cd fmt
+: 1700522371:0;../
+: 1700522381:0;rm fmt -d
+: 1700522385:0;rm fmt -drf
+: 1700522387:0;..
+: 1700522392:0;cd include
+: 1700522396:0;..
+: 1700522404:0;cd include
+: 1700522413:0;rm fmt -drf
+: 1700522416:0;..
+: 1700522421:0;cd lib
+: 1700522451:0;ls postinst
+: 1700522460:0;cat postinst
+: 1700522505:0;rm libfmt.so*
+: 1700522512:0;rm libfmt
+: 1700522661:0;mv postinst preinst
+: 1700522671:0;bat preinst
+: 1700522741:0;termux-create-package manifiest.json
+: 1700522754:0;..
+: 1700522760:0;dpkg -i libfmt-vev_0.1.2_all.deb
+: 1700522768:0;.
+: 1700522770:0;..
+: 1700522777:0;dpkg -i libfmt-vev_0.1.2_all.deb
+: 1700523310:0;cd packages/libfmt-dev
+: 1700523317:0;hx postrm
+: 1700523351:0;..
+: 1700523359:0;rm L11705-2424TMP.txt
+: 1700526756:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev
+: 1700526769:0;hx manifiest.json
+: 1700526793:0;termux-create-package manifiest.json
+: 1700527146:0;hx manifiest.json
+: 1700527966:0;basename $1
+: 1700527974:0;basename $
+: 1700527978:0;basename $0
+: 1700529134:0;cd victorh028.github.io/demon-packages/packages/libfmt-de
+: 1700529136:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev
+: 1700529139:0;hx manifiest.json
+: 1700529213:0;termux-create-package manifiest.json
+: 1700529221:0;hx manifiest.json
+: 1700530531:0;mkdir control
+: 1700530534:0;cd control
+: 1700530607:0;hx postrm
+: 1700530674:0;hx postinst
+: 1700530769:0;hx conffiles
+: 1700530780:0;../
+: 1700530791:0;mkdir A
+: 1700530824:0;mv postrm prerm preinst
+: 1700530827:0;mv postrm prerm preinst A
+: 1700530855:0;mkdir config
+: 1700531072:0;hx manifiest.json
+: 1700531172:0;mkdir src
+: 1700531387:0;hx manifiest.json
+: 1700531468:0;termux-create-package manifiest.json
+: 1700531476:0;hx manifiest.json
+: 1700531512:0;termux-create-package manifiest.json
+: 1700531523:0;hx manifiest.json
+: 1700531539:0;termux-create-package manifiest.json
+: 1700531545:0;hx manifiest.json
+: 1700531587:0;termux-create-package manifiest.json
+: 1700531593:0;hx manifiest.json
+: 1700531654:0;termux-create-package manifiest.json
+: 1700531672:0;hx manifiest.json
+: 1700531711:0;termux-create-package manifiest.json
+: 1700531717:0;hx manifiest.json
+: 1700531726:0;termux-create-package manifiest.json
+: 1700531731:0;hx manifiest.json
+: 1700532111:0;cd control
+: 1700532134:0;hx postinst
+: 1700532150:0;bash postinst
+: 1700532175:0;.
+: 1700532180:0;rm conffiles
+: 1700532184:0;../
+: 1700532193:0;rm config
+: 1700532198:0;rm config -drf
+: 1700532204:0;termux-create-package manifiest.json
+: 1700532210:0;hx manifiest.json
+: 1700534488:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev
+: 1700534491:0;type bash
+: 1700534501:0;cd control
+: 1700534507:0;hx postinst
+: 1700534526:0;hx postrm
+: 1700534550:0;../
+: 1700534560:0;src
+: 1700534566:0;../
+: 1700534575:0;termux-create-package manifiest.jsonb
+: 1700534579:0;termux-create-package manifiest.json
+: 1700534585:0;hx manifiest.json
+: 1700534595:0;cat manifiest.json
+: 1700534772:0;hx manifiest.json
+: 1700534790:0;termux-create-package manifiest.json
+: 1700534795:0;hx manifiest.json
+: 1700534808:0;termux-create-package manifiest.json
+: 1700534811:0;hx manifiest.json
+: 1700534843:0;termux-create-package manifiest.json
+: 1700534850:0;fg
+: 1700535485:0;cd src
+: 1700535509:0;hx install-fmt
+: 1700535879:0;../
+: 1700535937:0;cd control
+: 1700535952:0;hx postinst
+: 1700536295:0;rm postrm
+: 1700536313:0;hx preinst
+: 1700536417:0;id -u
+: 1700536502:0;hx preinst
+: 1700536709:0;hx prerm
+: 1700537171:0;../
+: 1700537184:0;cd src
+: 1700537189:0;hx install-fmt
+: 1700537266:0;../
+: 1700537272:0;hx manifiest.json
+: 1700537660:0;termux-create-package manifiest.json
+: 1700537712:0;hx manifiest.json
+: 1700537750:0;termux-create-package manifiest.json
+: 1700537795:0;hx manifiest.json
+: 1700537806:0;termux-create-package manifiest.json
+: 1700537951:0;hx manifiest.json
+: 1700538050:0;termux-create-package manifiest.json
+: 1700538100:0;cd control
+: 1700538118:0;bat preinst
+: 1700538241:0;bat postinst
+: 1700538284:0;hx postinst
+: 1700538762:0;hx preinst
+: 1700538846:0;../
+: 1700538854:0;rm A -rf
+: 1700538859:0;termux-create-package manifiest.json
+: 1700538870:0;../../
+: 1700538880:0;dpkg -i libfmt-vev_0.1.2_all.deb
+: 1700538999:0;cd packages/libfmt-dev/control
+: 1700539005:0;hx preinst
+: 1700539144:0;../
+: 1700539148:0;termux-create-package manifiest.json
+: 1700539151:0;...
+: 1700539155:0;dpkg -i libfmt-vev_0.1.2_all.deb
+: 1700539181:0;tmux new-session -s $USER
+: 1700539210:0;dpkg -i libfmt-vev_0.1.2_all.deb
+: 1700539302:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev/
+: 1700539307:0;hx manifiest.json
+: 1700539338:0;install-fmt
+: 1700539369:0;hx src
+: 1700539406:0;hx control
+: 1700539439:0;termux-create-package manifiest.json
+: 1700539445:0;dpkg -i libfmt-vev_0.1.2_all.deb
+: 1700539454:0;hx manifiest.json
+: 1700539468:0;termux-create-package manifiest.json
+: 1700539472:0;dpkg -i libfmt-vev_0.1.2_all.deb
+: 1700539489:0;rm libfmt-vev_0.1.2_all.deb
+: 1700539510:0;dpkg -i libfmt-vev_0.1.3_all.deb
+: 1700539550:0;apt reinstall libfmt-vev
+: 1700539563:0;apt remove libfmt-vev
+: 1700539598:0;dpkg -i libfmt-vev_0.1.3_all.deb
+: 1700539658:0;install-fmt
+: 1700539687:0;hx src
+: 1700539725:0;rm format-benchmark -rdf
+: 1700539829:0;hx control
+: 1700539868:0;type install-fmt
+: 1700539916:0;termux-create-package manifiest.json
+: 1700539924:0;dpkg -i libfmt-vev_0.1.3_all.deb
+: 1700539940:0;git add --all
+: 1700539955:0;git commit -m "fmt"
+: 1700539961:0;git push
+: 1700539975:0;apt update
+: 1700540010:0;apt show libfmt-dev
+: 1700540018:0;apt show libfmt*
+: 1700540040:0;locate libfmt-vev_0.1.3_all.deb
+: 1700540050:0;locate libfmt-vev*
+: 1700540072:0;apt update
+: 1700540086:0;apt show libfmt*
+: 1700540124:0;apt remove libfmt-vev
+: 1700540186:0;apt install libfmt-vev
+: 1700540215:0;apt shearch vcpkg
+: 1700540229:0;apt share
+: 1700540235:0;apt -h
+: 1700540245:0;apt search vcpkg
+: 1700540251:0;apt search libfmt-vev
+: 1700540258:0;apt search libfmt-v*
+: 1700540263:0;apt search libfmt*
+: 1700540330:0;apt remove libfmt-vev
+: 1700540334:0;apt search libfmt-v*
+: 1700540339:0;apt search libfmt*
+: 1700540349:0;apt update
+: 1700540365:0;apt search libfmt*
+: 1700540373:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev/
+: 1700540378:0;hx manifiest.json
+: 1700540438:0;termux-create-package manifiest.json
+: 1700540459:0;dpkg -i ../../libfmt-vev_0.1.3_all.deb
+: 1700540552:0;hx manifiest.json
+: 1700540569:0;termux-create-package manifiest.json
+: 1700540573:0;dpkg -i ../../libfmt-vev_0.1.3_all.deb
+: 1700540676:0;hx control
+: 1700540718:0;cd format-benchmark
+: 1700540743:0;hx preinst
+: 1700540753:0;hx control
+: 1700540769:0;cd packages/libfmt-dev/control
+: 1700540786:0;cd downloads/libfm/DEBIAN
+: 1700540794:0;bat control
+: 1700540829:0;hx preinst
+: 1700540838:0;hx postinst
+: 1700540863:0;../
+: 1700540870:0;hx manifiest.json
+: 1700540959:0;cat control
+: 1700541118:0;termux-create-package manifiest.json
+: 1700541122:0;hx manifiest.json
+: 1700541158:0;termux-create-package manifiest.json
+: 1700541162:0;dpkg -i ../../libfmt-vev_0.1.3_all.deb
+: 1700541207:0;hx control
+: 1700541244:0;termux-create-package manifiest.json
+: 1700541248:0;dpkg -i ../../libfmt-vev_0.1.3_all.deb
+: 1700541263:0;hx control
+: 1700541304:0;cd format-benchmark/fmt
+: 1700541345:0;ls include
+: 1700541349:0;ls include/fmt
+: 1700541375:0;cmake --build .
+: 1700541508:0;cd C++
+: 1700541514:0;hx fmt_print.cpp
+: 1700564475:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev/
+: 1700564484:0;hx src/install-fmt
+: 1700564820:0;termux-create-package manifiest.json
+: 1700564823:0;../
+: 1700564830:0;git add --all
+: 1700564836:0;git commit -m "fmt"
+: 1700564842:0;git push
+: 1700565385:0;apt search libfmt*
+: 1700565417:0;apt show libfmt
+: 1700565430:0;apt show libfmt-dev
+: 1700565449:0;apt update
+: 1700565459:0;apt show libfmt-dev
+: 1700565478:0;apt search libfmt*
+: 1700565587:0;apt search libfmt
+: 1700565629:0;rm libfmt-vev_0.1.3_all.deb
+: 1700565649:0;git push
+: 1700565657:0;git add --all
+: 1700565663:0;git commit -m "fmt"
+: 1700565671:0;git push
+: 1700565780:0;apt update
+: 1700565839:0;apt search libfmt
+: 1700565859:0;apt remove libfmt-vev
+: 1700565914:0;apt search libfmt
+: 1700565918:0;apt search libfmt*
+: 1700570712:0;apt search libfmt
+: 1700570715:0;apt search libfmt*
+: 1700570721:0;apt update
+: 1700570746:0;apt search libfmt*
+: 1700570774:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev/
+: 1700570785:0;git add --all
+: 1700570790:0;git commit -m "fmt"
+: 1700570798:0;..
+: 1700570803:0;..
+: 1700570824:0;apt search libfmt-dev
+: 1700570833:0;apt search vcpkg
+: 1700570882:0;hx packages/libfmt-dev/manifiest.json
+: 1700570945:0;termux-create-package manifiest.json
+: 1700570956:0;cd packages/libfmt-dev
+: 1700570959:0;termux-create-package manifiest.json
+: 1700570964:0;dpkg -i ../../libfmt-vev_0.1.3_all.deb
+: 1700570978:0;dpkg -i ../../libfmt-vev_9.0.1_all.deb
+: 1700570988:0;dpkg -i ../../libfmt-dev_9.1.0_all.deb
+: 1700571047:0;tmux new-session -s $USER
+: 1700571074:0;cd format-benchmark/
+: 1700571076:0;ks
+: 1700571084:0;cd fmt
+: 1700571156:0;ls support
+: 1700571194:0;ls src
+: 1700571242:0;ls doc
+: 1700571259:0;cd C++
+: 1700571268:0;hx fmt_print.cpp
+: 1700571299:0;clang++ fmt_print.cpp -o fmt_print -lfmt
+: 1700571354:0;hx src/install-fmt
+: 1700571382:0;hx control/preinst
+: 1700571485:0;hx control/postinst
+: 1700571871:0;cd ${PREFIX}/lib/cmake/fmt
+: 1700571881:0;..
+: 1700571888:0;rm fmt -drf
+: 1700571900:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev/
+: 1700571907:0;cd control
+: 1700571923:0;hx postinst
+: 1700571947:0;hx preinst
+: 1700572033:0;hx postinst
+: 1700572169:0;hx preinst
+: 1700572199:0;ks
+: 1700572227:0;hx preinst
+: 1700572391:0;hx postinst
+: 1700572663:0;bat postinst
+: 1700572915:0;bat preinst
+: 1700573227:0;hx postrm
+: 1700573314:0;../
+: 1700573318:0;termux-create-package manifiest.json
+: 1700573331:0;apt search lib
+: 1700573353:0;apt search libfmt-dev
+: 1700573399:0;apt remove libfmt-vev
+: 1700573413:0;apt remove libfmt-dev
+: 1700573442:0;hx control/prerm
+: 1700573483:0;cd C++
+: 1700573494:0;hx fmt_print.cpp
+: 1700573551:0;dpkg -i ../../libfmt-dev_9.1.0_all.deb
+: 1700573638:0;rm '/data/data/com.termux/files/usr/lib/ruby/gems/3.2.0/gems/minitest-5.18.0/.autotest'
+: 1700573650:0;rm '/data/data/com.termux/files/usr/lib/ruby/gems/3.2.0/gems/minitest-5.18.0/.autotest' -rf
+: 1700573676:0;dpkg --help
+: 1700573805:0;hx
+: 1700573808:0;cat
+: 1700574097:0;git commit -m "fmt"
+: 1700577269:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev/
+: 1700577291:0;hx control
+: 1700577359:0;termux-create-package manifiest.json
+: 1700577371:0;dpkg --help
+: 1700577458:0;termux-create-package manifiest.json
+: 1700577465:0;dpkg -i ../../libfmt-dev_9.1.0_all.deb
+: 1700577517:0;hx control
+: 1700577581:0;rm control/postrm
+: 1700577651:0;cd control
+: 1700577659:0;bat postinst
+: 1700577678:0;hx postinst
+: 1700578042:0;bat postinst
+: 1700578054:0;bat preinst
+: 1700578067:0;bat prerm
+: 1700578139:0;bat ../src/install-fmt
+: 1700578174:0;../
+: 1700578180:0;termux-create-package manifiest.json
+: 1700578196:0;la
+: 1700578203:0;git add --all
+: 1700578209:0;..
+: 1700578212:0;../
+: 1700578222:0;git commit -m "fmt"
+: 1700578228:0;git pysh
+: 1700578235:0;git push
+: 1700578463:0;rm demon-packages/packages/libfmt-dev/control/preinst
+: 1700578467:0;git add --all
+: 1700578482:0;cd demon-packages/packages/libfmt-dev
+: 1700578487:0;termux-create-package manifiest.json
+: 1700578594:0;hx src/install-fmt
+: 1700578618:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev/
+: 1700578621:0;termux-create-package manifiest.json
+: 1700578626:0;git add --all
+: 1700578652:0;hx control
+: 1700578764:0;termux-create-package manifiest.json
+: 1700578771:0;git add --all
+: 1700578778:0;tmux new-session -s $USER
+: 1700578790:0;hx manifiest.json
+: 1700578807:0;cd downloads/libfm/DEBIAN
+: 1700578814:0;cat control
+: 1700579368:0;termux-create-package manifiest.json
+: 1700579371:0;fg
+: 1700579451:0;termux-create-package manifiest.json
+: 1700579477:0;git add --all
+: 1700579484:0;git commit -m "fmt"
+: 1700579488:0;git push
+: 1700579494:0;fg
+: 1700579508:0;apt update
+: 1700579664:0;cd C++
+: 1700579705:0;clang++ fmt_print.cpp -o fmt_print -lfmt
+: 1700579712:0;ks
+: 1700579751:0;cd i-Haklab/
+: 1700579810:0;hx boost-haklab.cpp
+: 1700579842:0;cd include
+: 1700579870:0;../
+: 1700579873:0;hx boost-haklab.cpp
+: 1700579925:0;hx include
+: 1700579990:0;cd boost_1_83_0
+: 1700580006:0;ls boost
+: 1700580127:0;ls $PREFIX
+: 1700580153:0;cd ${PREFIX}
+: 1700580161:0;rm hola.asm
+: 1700580213:0;cd include
+: 1700580224:0;cd boost_1_83_0
+: 1700580259:0;ls -s boost $PREFIX/include
+: 1700580269:0;ln -s boost $PREFIX/include
+: 1700580284:0;ls libs
+: 1700580304:0;cd i-Haklab/
+: 1700580314:0;hx boost-haklab.cpp
+: 1700580335:0;hx include
+: 1700580355:0;cd boost_1_83_0
+: 1700580364:0;./bootstrap.sh
+: 1700580513:0;./b2
+: 1700580585:0;cd i-Haklab/
+: 1700580590:0;hx include
+: 1700580802:0;cd ${PREFIX}/include
+: 1700580831:0;ls | grep "boost"
+: 1700580840:0;cd boost
+: 1700580860:0;ls boost -al
+: 1700580873:0;rm boost -rd
+: 1700580914:0;ln -s ~/boost_1_83_0/boost ./
+: 1700580920:0;ls boost -al
+: 1700580925:0;fg
+: 1700580967:0;../
+: 1700580973:0;cd i-Haklab/
+: 1700580990:0;hx CMakeFiles
+: 1700581000:0;hx CMakeLists.txt
+: 1700581079:0;hx boost-haklab.cpp
+: 1700581208:0;cmake --build .
+: 1700581236:0;./i-haklab --help-module automa
+: 1700581259:0;./i-haklab --help
+: 1700581574:0;hx boost-haklab.cpp
+: 1700582789:0;hx include/below_zero.cpp
+: 1700583158:0;cmake --build .
+: 1700583196:0;./i-haklab --help
+: 1700583203:0;./i-haklab --about /C/curl
+: 1700583209:0;./i-haklab --about loo
+: 1700583256:0;echo $?
+: 1700583282:0;hx include/below_zero.cpp
+: 1700583562:0;cmake --build .
+: 1700583607:0;./i-haklab --about loo
+: 1700583674:0;hx include/below_zero.cppv
+: 1700583684:0;hx include/below_zero.cpp
+: 1700584000:0;cmake --build .
+: 1700584088:0;./i-haklab --about loo
+: 1700586046:0;cd i-Haklab/
+: 1700586051:0;hx boost-haklab.cpp
+: 1700594242:0;cd i-Haklab/
+: 1700594245:0;hx boost-haklab.cpp
+: 1700595285:0;cmake --build .
+: 1700595312:0;./i-haklab --about lo
+: 1700595327:0;./i-haklab --help-module automal
+: 1700595339:0;hx boost-haklab.cpp
+: 1700595610:0;cd tmp
+: 1700595620:0;rm * -rf
+: 1700595662:0;hx variable_set.cpp
+: 1700597166:0;cd i-Haklab/
+: 1700597190:0;hx include/below_zero.cpp
+: 1700597215:0;hx include/below_zero.h
+: 1700597306:0;hx include/below_zero.cpp
+: 1700599990:0;cmake --build .
+: 1700600050:0;./i-haklab --help-module automal
+: 1700600059:0;./i-haklab --help-module default
+: 1700600064:0;./i-haklab --help-module defaul
+: 1700600111:0;cd tmp
+: 1700600129:0;hx traductor.cpp
+: 1700600338:0;fish
+: 1700600529:0;mkdir Python
+: 1700600534:0;cd Python
+: 1700600582:0;virtualenv --no-site-packages traductor
+: 1700600603:0;virtualenv traductor
+: 1700600656:0;pip install goslate
+: 1700600771:0;oy
+: 1700600776:0;python3
+: 1700600814:0;hx traductor.py
+: 1700600836:0;nvim traductor.py
+: 1700600851:0;hx traductor.py
+: 1700600918:0;python3 traductor.py
+: 1700600936:0;hx traductor.py
+: 1700600986:0;python3 traductor.py
+: 1700601191:0;cd Python
+: 1700601201:0;cd tmp/Python
+: 1700601217:0;translate(){ wget -qO- "http://ajax.googleapis.com/ajax/services/language/translate?v=1.0&q=$1&langpair=$2|${3:-en}" | sed 's/.*"translatedText":"\([^"]*\)".*}/\1\n/'; }\
+\
+
+: 1700601229:0;translate hola
+: 1700601238:0;translate hello
+: 1700601285:0;echo "hello" | translate-bin -f en -l\
+\
+
+: 1700601292:0;echo "hello" | translate -f en -l\
+\
+
+: 1700601344:0;trans\
+
+: 1700601363:0;trans "Hola mundo"
+: 1700601394:0;type trans
+: 1700601414:0;trans "Helle"
+: 1700601422:0;trans "Hello"
+: 1700601466:0;trans --help
+: 1700601512:0;trans -shell
+: 1700601545:0;type trans
+: 1700601552:0;bat /data/data/com.termux/files/usr/bin/trans
+: 1700601951:0;hx .zshrc
+: 1700602008:0;source .zshrc
+: 1700602023:0;traductor Hola
+: 1700602047:0;traductor Hello
+: 1700602073:0;Hola
+: 1700602123:0;traductor --help
+: 1700602148:0;traductor -T
+: 1700602217:0;traductor -q es -e en
+: 1700602242:0;traductor -q en Hola
+: 1700602255:0;traductor -q en
+: 1700602268:0;traductor -q es
+: 1700602281:0;traductor -q en
+: 1700602431:0;cd t
+: 1700602434:0;cd tmp
+: 1700602439:0;rm Python
+: 1700602444:0;rm Python -drf
+: 1700602450:0;hx
+: 1700602456:0;rm traductor.cpp
+: 1700602463:0;hx variable_set.cpp
+: 1700603621:0;traductor smatch
+: 1700603637:0;traductor toouch
+: 1700603652:0;traductor touch
+: 1700603675:0;traductor touch -q espaÃ±ol
+: 1700603692:0;traductor --help
+: 1700603916:0;fg
+: 1700615810:0;apt remove libfmt-dev
+: 1700615823:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev/
+: 1700615828:0;git add --all
+: 1700615833:0;git push
+: 1700615922:0;apt install libfmt-dev
+: 1700615951:0;apt list | grep ^libfmt*
+: 1700615976:0;apt install libfmt-dev
+: 1700615995:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev/
+: 1700616001:0;hx manifiest.json
+: 1700616075:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev/
+: 1700616080:0;termux-create-package manifiest.json
+: 1700616086:0;...
+: 1700616095:0;git add --all
+: 1700616101:0;git push
+: 1700616113:0;git commit -m "fmt"
+: 1700616118:0;git push
+: 1700616180:0;apt list | grep ^libfmt*
+: 1700616189:0;apt update
+: 1700616227:0;apt list | grep ^libfmt*
+: 1700616246:0;apt autoremovec
+: 1700616251:0;apt autoremove
+: 1700616282:0;apt list | grep ^libfmt*
+: 1700616415:0;traductor "Hola" :es
+: 1700616431:0;traductor "Hola" :en
+: 1700616453:0;traductor -b "Hola" :en
+: 1700616466:0;traductor -b "Hola" :es
+: 1700616504:0;traductor -b :es "Hola"
+: 1700616511:0;traductor -b :en "Hola"
+: 1700616584:0;trans :en word
+: 1700616670:0;traductor :en "word"
+: 1700616685:0;traductor -b :en "word"
+: 1700616720:0;traductor -b :es "word"
+: 1700616760:0;traductor :es "word"
+: 1700616822:0;traductor -b :es "word"
+: 1700616858:0;clear
+: 1700616863:0;traductor -b :es "word"
+: 1700616891:0;traductor -b :es "Connection timed out. Retrying IPv4 connection."
+: 1700616912:0;clear
+: 1700616918:0;clesr
+: 1700616938:0;cd i-Haklab/
+: 1700616945:0;traductor -b :es "Connection timed out. Retrying IPv4 connection."
+: 1700617489:0;sudo
+: 1700617495:0;fish
+: 1700617626:0;apt list | grep ^libfmt*
+: 1700617787:0;dpkg --help | traductor -b :es
+: 1700618088:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev/
+: 1700618090:0;..
+: 1700618094:0;../
+: 1700618102:0;rm android-sdk-linux_0.1.1_all.deb
+: 1700618114:0;dpkg -C libfmt-dev_9.1.0_all.deb
+: 1700618139:0;dpkg -S libfmt-dev_9.1.0_all.deb
+: 1700618171:0;dpkg -S ls
+: 1700618251:0;apt list | grep ^libfmt*
+: 1700618275:0;dpkg -i libfmt-dev_9.1.0_all.deb
+: 1700618385:0;dpkg -l
+: 1700618591:0;dpkg -P libfmt-dev
+: 1700618623:0;a
+: 1700618671:0;apt list | grep ^libfmt*
+: 1700618711:0;apt search libfmt-dev
+: 1700618820:0;bat config.txt
+: 1700618827:0;rm config.txt
+: 1700619026:0;traductor -b :es " fast type-safe C++ formatting library -- development files"
+: 1700619066:0;ks
+: 1700619081:0;cd victorh028.github.io/demon-packages/
+: 1700619096:0;hx README.md
+: 1700619722:0;cd downloads
+: 1700619736:0;bat libfmt-dev_9.1.0+ds1-2_arm64.deb.man
+: 1700619748:0;mv libfmt-dev_9.1.0+ds1-2_arm64.deb.man
+: 1700619755:0;mv libfmt-dev_9.1.0+ds1-2_arm64.deb.man loo.dwb
+: 1700619767:0;mv loo.dwb l.deb
+: 1700619788:0;dpkg -l l.deb
+: 1700619795:0;dpkg -C l.deb
+: 1700619811:0;dpkg -i l.deb
+: 1700619826:0;dpkg -S l.deb
+: 1700619852:0;rm l.deb libfm
+: 1700619860:0;rm * -rf
+: 1700619889:0;cd victorh028.github.io/demon-packages/packages/
+: 1700619919:0;mkdir libmd4c-dev
+: 1700619929:0;cd victorh028.github.io/demon-packages/packages/libmd4c-dev
+: 1700619935:0;mkdir src
+: 1700619942:0;mkdir control
+: 1700619967:0;hx manifiest.json
+: 1700619995:0;rm i-foto
+: 1700620004:0;bat update.sh
+: 1700620009:0;bash update.sh
+: 1700620021:0;ls tools
+: 1700620034:0;cd tools
+: 1700620042:0;./android update sdk --no-ui
+: 1700620053:0;../
+: 1700620058:0;rm tools -rf
+: 1700620069:0;rm helloworld -rf
+: 1700620138:0;cd tmp
+: 1700620144:0;hx variable_set.cpp
+: 1700620363:0;cs
+: 1700620383:0;cd i-Haklab/
+: 1700620387:0;hx boost-haklab.cpp
+: 1700620408:0;cd C++
+: 1700620413:0;clang++ fmt_print.cpp -o fmt_print -lfmt
+: 1700620445:0;apt reinstall libfmt-vev
+: 1700620451:0;apt reinstall libfmt-dev
+: 1700620461:0;apt install libfmt-dev
+: 1700620505:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev
+: 1700620519:0;hx control
+: 1700620528:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev
+: 1700620531:0;hx control
+: 1700620567:0;apt remove libfmt-dev
+: 1700620590:0;ks
+: 1700620592:0;s
+: 1700620600:0;hx control
+: 1700620738:0;termux-create-package manifiest.json
+: 1700620751:0;dpkg -i
+: 1700620756:0;dpkg -i ../../libfmt-dev_9.1.0_all.deb
+: 1700620773:0;install-fmt
+: 1700620795:0;hx control
+: 1700620828:0;termux-create-package manifiest.json
+: 1700620840:0;dpkg -i ../../libfmt-dev_9.1.0_all.deb
+: 1700620875:0;cd victorh028.github.io/demon-packages/packages/libfmt-de
+: 1700620877:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev
+: 1700620883:0;hx contro
+: 1700620927:0;hx control
+: 1700620963:0;hx control
+: 1700620991:0;apt list | grep ^libfmt*
+: 1700621004:0;termux-create-package manifiest.json
+: 1700621066:0;apt install libfmt-dev
+: 1700621115:0;apt install libfmt-dev
+: 1700621128:0;apt remove libfmt-dev
+: 1700621136:0;apt install libfmt-dev
+: 1700621161:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev
+: 1700621176:0;apt add --all
+: 1700621182:0;git add --all
+: 1700621186:0;git commit -m "fmt"
+: 1700621195:0;git push
+: 1700621208:0;apt list | grep ^libfmt*
+: 1700622817:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev
+: 1700622834:0;hx src/install-fmt
+: 1700622975:0;hx control
+: 1700623050:0;hx control
+: 1700623113:0;termux-create-package manifiest.json
+: 1700623121:0;dpkg -i ../../libfmt-dev_9.1.0_all.deb
+: 1700623356:0;ps af
+: 1700623413:0;hx control
+: 1700623461:0;hx src/
+: 1700623470:0;cd sec
+: 1700623474:0;cd src
+: 1700623499:0;mv install-fmt libfmt-dev
+: 1700623503:0;../
+: 1700623512:0;hx manifiest.json
+: 1700623572:0;cd control
+: 1700623576:0;hx postinst
+: 1700623617:0;../
+: 1700623621:0;cd src
+: 1700623629:0;hx libfmt-dev
+: 1700623680:0;git clone --help
+: 1700623709:0;traductor -b :es
+: 1700623738:0;traductor -b :es "Force the cloning process from a repository on a local\
+           filesystem to copy the files under the .git/objects directory\
+           instead of using hardlinks. This may be desirable if you are\
+           trying to make a back-up of your repository."
+: 1700623830:0;traductor -b :es "Progress status is reported on the standard error stream by\
+           default when it is attached to a terminal, unless --quiet is\
+           specified. This flag forces progress status even if the                    standard error stream is not directed to a terminal."
+: 1700623886:0;hx libfmt-dev
+: 1700623948:0;cd i-Haklab/
+: 1700623972:0;./i-haklab --about /D/dpkg.md
+: 1700624052:0;dpkg -i ../../libfmt-dev_9.1.0_all.deb
+: 1700624064:0;../
+: 1700624068:0;termux-create-package manifiest.json
+: 1700624075:0;dpkg -i ../../libfmt-dev_9.1.0_all.deb
+: 1700624119:0;hx control
+: 1700624358:0;hx control
+: 1700624373:0;termux-create-package manifiest.json
+: 1700624380:0;dpkg -i ../../libfmt-dev_9.1.0_all.deb
+: 1700624493:0;dpkg -S i-haklab
+: 1700624511:0;dpkg -S libfmt-dev
+: 1700624562:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev
+: 1700624568:0;hx sr
+: 1700624577:0;hx src
+: 1700624594:0;hx control
+: 1700624660:0;hx src
+: 1700624988:0;hx control
+: 1700625191:0;git add --all
+: 1700625196:0;git commit -m "fmt"
+: 1700625203:0;git push
+: 1700625213:0;apt update
+: 1700625320:0;cd boost_1_83_0
+: 1700625331:0;cd doc
+: 1700625342:0;ls pdf
+: 1700625347:0;ls test
+: 1700625361:0;cd boost_1_83_0
+: 1700625372:0;cd tools
+: 1700625398:0;ls boostbook
+: 1700625406:0;..
+: 1700625434:0;find ./ -iname eje* -type d
+: 1700625454:0;tree -d
+: 1700625488:0;cd tools/build/src/engine
+: 1700625495:0;..
+: 1700625505:0;ls tools
+: 1700625510:0;..
+: 1700625518:0;..
+: 1700625560:0;..
+: 1700625565:0;cd boost
+: 1700626238:0;ks
+: 1700626242:0;kslllll
+: 1700626244:0;ks
+: 1700626261:0;cd tmp
+: 1700626267:0;hx variable_set.cpp
+: 1700627736:0;cd C++
+: 1700627758:0;hx fmt_print.cpp
+: 1700627787:0;cd i-Haklab/
+: 1700627799:0;./i-haklab --about /D/dpkg.md
+: 1700627856:0;cd .local/etc/i-Haklab/
+: 1700627866:0;cd Tools/Readme
+: 1700627867:0;LS
+: 1700627878:0;cd command
+: 1700627887:0;cd D
+: 1700627936:0;./i-haklab --about /D/dpkg.md
+: 1700627943:0;cd i-Haklab/
+: 1700627946:0;./i-haklab --about /D/dpkg.md
+: 1700627950:0;./i-haklab --about D/dpkg.md
+: 1700627962:0;./i-haklab --about nmap
+: 1700627977:0;./i-haklab --about D/dpkg
+: 1700628308:0;git clone --process https://github.com/mity/md4c.git
+: 1700628325:0;git clone --help
+: 1700628364:0;git clone --progress https://github.com/mity/md4c.git
+: 1700628384:0;cd md4c
+: 1700628396:0;cmake --build .
+: 1700628411:0;cmake . build
+: 1700628429:0;cmake --build build
+: 1700628446:0;cmake --build .
+: 1700628502:0;cd md2html
+: 1700628572:0;./md2html
+: 1700628580:0;./md2html --help
+: 1700628608:0;cmake --build .
+: 1700628636:0;ls ./.
+: 1700628642:0;cd .
+: 1700628646:0;la
+: 1700628650:0;cd ./.
+: 1700628670:0;..
+: 1700628681:0;ls scripts
+: 1700628703:0;cd scripts
+: 1700628707:0;./run-tests.sh
+: 1700628723:0;bat coverity.sh
+: 1700628781:0;./coverity.sh
+: 1700628803:0;./i-haklab --about /D/dpkg.md
+: 1700656721:0;cd md4c
+: 1700656722:0;ks
+: 1700656735:0;cd md2html
+: 1700656935:0;hx cmdline.c
+: 1700657281:0;../
+: 1700657285:0;make
+: 1700657298:0;make install
+: 1700657374:0;traductor -b :es "CMake Error at src/cmake_install.cmake:57 (file):\
+  file cannot create directory: /usr/local/lib.  Maybe need administrative\
+  privileges.\
+Call Stack (most recent call first):\
+  cmake_install.cmake:47 (include)\
+"
+: 1700657408:0;cd src
+: 1700657427:0;hx cmake_install.cmake
+: 1700657582:0;../
+: 1700657586:0;make install
+: 1700657609:0;hx src/cmake_install.cmake
+: 1700657915:0;make install . --prefix $PREFIX
+: 1700657934:0;echo $PREFIX
+: 1700657945:0;make install . --prefix "/data/data/com.termux/files/usr"
+: 1700657956:0;make install --prefix "/data/data/com.termux/files/usr"
+: 1700657968:0;cmake install --prefix "/data/data/com.termux/files/usr"
+: 1700657981:0;cmake install . --prefix "/data/data/com.termux/files/usr"
+: 1700658007:0;traductor -b :es "CMake Warning:\
+  Ignoring extra path from command line:"
+: 1700658040:0;date
+: 1700658132:0;hx src/cmake_install.cmake
+: 1700658250:0;cmake install . --prefix "/data/data/com.termux/files/usr"
+: 1700658271:0;fg
+: 1700659083:0;cmake --help
+: 1700659197:0;traductor -b :es "Specify a build system generator."
+: 1700659298:0;cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX --install
+: 1700659307:0;cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX . .
+: 1700659354:0;make install
+: 1700659425:0;ks
+: 1700659428:0;fg
+: 1700659473:0;cd victorh028.github.io/demon-packages/packages/libmd4c-dev
+: 1700659477:0;ks
+: 1700659487:0;cd src
+: 1700659578:0;hx mdc4
+: 1700659882:0;tmux new-session -s $USER
+: 1700659911:0;rm md4c -dr
+: 1700659919:0;rm md4c -drf
+: 1700659930:0;bash mdc4
+: 1700661253:0;hx mdc4
+: 1700661302:0;cd md4c
+: 1700661307:0;make
+: 1700661889:0;echo "cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX . . " > nota_md4d
+: 1700661892:0;at
+: 1700661896:0;bat notas.md
+: 1700661909:0;bat nota_md4d
+: 1700661917:0;cd md4c
+: 1700661922:0;make
+: 1700662116:0;cmake --help
+: 1700662252:0;mkdir build
+: 1700662272:0;cmake --build build
+: 1700662282:0;cd md4c
+: 1700662299:0;cd md4c
+: 1700662305:0;rm build -dfr
+: 1700662412:0;cmake --install .
+: 1700662438:0;cmake --install src
+: 1700662445:0;cmake --install .
+: 1700662449:0;cd src
+: 1700662451:0;cmake --install .
+: 1700662461:0;../
+: 1700662476:0;md2html
+: 1700662614:0;cmake --build .
+: 1700662634:0;cmake . .
+: 1700662653:0;cd victorh028.github.io/demon-packages/packages/libmd4c-dev
+: 1700662662:0;cd victorh028.github.io/demon-packages/packages/libmd4c-dev
+: 1700662664:0;ks
+: 1700662672:0;hx src/mdc4
+: 1700662768:0;cmake --install .
+: 1700663086:0;cmake --help
+: 1700663471:0;cmake --install . --install-prefix=$PREFIX
+: 1700663509:0;cmake --install $PREFIX
+: 1700663543:0;cmake --install .
+: 1700663634:0;cmake --install . --install-prefix=$PREFIX
+: 1700663645:0;cmake --install . --install-prefix=$PREFIX .
+: 1700663657:0;cmake --install . --install-prefix=$PREFIX --strip
+: 1700663692:0;cmake --install . $PREFIX
+: 1700663740:0;cmake --install . --prefix=$PREFIX
+: 1700663844:0;ls src
+: 1700663875:0;cmake --build .
+: 1700663927:0;cmake --install . --prefix=$PREFIX
+: 1700664045:0;cd control
+: 1700664321:0;hx prerm
+: 1700667169:0;hx M.cpo
+: 1700667193:0;mv M.cpo M.cpp
+: 1700667200:0;hx M.cpp
+: 1700667774:0;clang++ M.cpp
+: 1700667789:0;clang++ M.cpp -fmt
+: 1700667795:0;clang++ M.cpp -lfmt
+: 1700667824:0;clang++ M.cpp -lfmt -lfilesystem
+: 1700667840:0;cd i-Haklab/
+: 1700667851:0;bat CMakeLists.txt
+: 1700667890:0;clang++ M.cpp -lfmt -lboost_filesystem
+: 1700667915:0;hx n.md
+: 1700667966:0;./a.out n.md
+: 1700667972:0;ks
+: 1700667984:0;./a.out ./n.md
+: 1700668005:0;echo $HOME
+: 1700668018:0;./a.out /data/data/com.termux/files/home/n.md
+: 1700668165:0;get_token.sh
+: 1700668190:0;hx .zshrc
+: 1700668252:0;get_token.sh
+: 1700668261:0;source .zshrc
+: 1700668270:0;get_token.sh
+: 1700668288:0;tds "get_token.sh: command not found"
+: 1700668482:0;hx .zshrc
+: 1700668541:0;cd victorh028.github.io/demon-packages/packages/libmd4c-dev
+: 1700668545:0;cd control
+: 1700668555:0;hx prerm
+: 1700669543:0;rm M.cpp
+: 1700669549:0;rm n.md
+: 1700669558:0;bat nota_md4d
+: 1700669564:0;rm nota_md4d
+: 1700669576:0;rm a.out
+: 1700669628:0;ls *.sh
+: 1700669830:0;cd tmp
+: 1700669843:0;hx create_dir.cpp
+: 1700670326:0;clang++ create_dir.cpp
+: 1700670343:0;./a.out HOLA
+: 1700670369:0;hx create_dir.cpp
+: 1700670433:0;./a.out HOLA
+: 1700670437:0;clang++ create_dir.cpp
+: 1700670443:0;./a.out HOLA
+: 1700670468:0;fg
+: 1700670490:0;hx create_dir.cpp
+: 1700670524:0;clang++ create_dir.cpp
+: 1700670530:0;./a.out
+: 1700670539:0;hx create_dir.cpp
+: 1700670557:0;clang++ create_dir.cpp
+: 1700670562:0;./a.out
+: 1700670572:0;hx create_dir.cpp
+: 1700670600:0;clang++ create_dir.cpp
+: 1700670605:0;./a.out
+: 1700670615:0;hx create_dir.cpp
+: 1700670768:0;clang++ create_dir.cpp
+: 1700670781:0;./a.out 1 2 3
+: 1700670795:0;./a.out 1
+: 1700670801:0;ls ../
+: 1700671540:0;ts
+: 1700671541:0;d
+: 1700671552:0;tds "sterm"
+: 1700671568:0;tds "stem"
+: 1700671584:0;traductor stem
+: 1700671611:0;traductor :es stem
+: 1700672439:0;cd boost_1_83_0
+: 1700672462:0;bat
+: 1700672467:0;hs
+: 1700672488:0;md2html --help
+: 1700672932:0;cd tmp
+: 1700672939:0;hx create_dir.cpp
+: 1700673443:0;clang++ create_dir.cpp -lboost_filesystem
+: 1700673454:0;./a.out hola
+: 1700673480:0;ls ../
+: 1700673485:0;hx create_dir.cpp
+: 1700673749:0;clang++ create_dir.cpp -lboost_filesystem
+: 1700673763:0;./a.out hola
+: 1700673791:0;ls "/data/data/com.termux/files/usr/tmp"
+: 1700673825:0;hllfg
+: 1700673826:0;fg
+: 1700673923:0;clang++ create_dir.cpp -lboost_filesystem
+: 1700673929:0;./a.out hola
+: 1700673955:0;fg
+: 1700673996:0;clang++ create_dir.cpp -lboost_filesystem
+: 1700674002:0;./a.out hola
+: 1700674024:0;hx
+: 1700674030:0;fg
+: 1700674154:0;clang++ create_dir.cpp -lboost_filesystem
+: 1700674161:0;./a.out hola hlp
+: 1700674177:0;tree hola
+: 1700674184:0;tree hola -d
+: 1700674239:0;cat create_dir.cpp
+: 1700686123:0;cmake --install . --prefix=$PREFIX
+: 1700686157:0;cd tmp
+: 1700686163:0;hx create_dir.cp
+: 1700686168:0;hx create_dir.cpp
+: 1700686284:0;tdn "Crear paquetes"
+: 1700686296:0;cd i-Haklab
+: 1700686305:0;hx boost-haklab.cpp
+: 1700686485:0;tdn "Crear arbol de directorios"
+: 1700686497:0;fg
+: 1700687625:0;cd victorh028.github.io/demon-packages/packages/libmd4c-dev
+: 1700688020:0;cd i-Haklab
+: 1700688028:0;cmake --build .
+: 1700688084:0;./i-haklab
+: 1700688088:0;./i-haklab --help
+: 1700688113:0;./i-haklab --help-module
+: 1700688118:0;./i-haklab --help-module l
+: 1700688134:0;./i-haklab --help-module packes
+: 1700688142:0;./i-haklab --help-module packages
+: 1700688161:0;hx boost-haklab.cpp
+: 1700688383:0;./i-haklab --help
+: 1700688390:0;cmake --build .
+: 1700688414:0;./i-haklab --help
+: 1700688425:0;hx boost-haklab.cpp
+: 1700688479:0;cmake --build .
+: 1700688501:0;./i-haklab --help
+: 1700688760:0;tdn "Cambiar de nombre de usuario  USER=i-Haklab "
+: 1700688790:0;hx boost-haklab.cpp
+: 1700690589:0;tmux new-session -s $USER
+: 1700690594:0;cd i-Haklab
+: 1700690597:0;hx boost-haklab.cpp
+: 1700691223:0;cmake --build .
+: 1700691445:0;./i-haklab --help
+: 1700692809:0;cd boost_1_83_0
+: 1700692816:0;cd boo
+: 1700692819:0;cd boost
+: 1700692824:0;cd lib
+: 1700692827:0;../
+: 1700692840:0;cd doc/
+: 1700692857:0;cd html
+: 1700692895:0;ls process
+: 1700693048:0;../
+: 1700693053:0;../
+: 1700693096:0;find ./ -iname first.cpp -type d
+: 1700693228:0;cd libs
+: 1700693237:0;cd program_options
+: 1700693245:0;cd example
+: 1700693274:0;clang++ first.cpp -lboost_options
+: 1700693312:0;clang++ first.cpp -lboost_option
+: 1700693343:0;cd i-Haklab
+: 1700693348:0;bat CMakeLists.txt
+: 1700693382:0;clang++ first.cpp -lboost_program_options
+: 1700693416:0;./a.out
+: 1700693432:0;./a.out | tdn
+: 1700693439:0;./a.out | tds
+: 1700693456:0;fg
+: 1700693489:0;hx first.cpp
+: 1700693565:0;./a.out
+: 1700693569:0;./a.out 33
+: 1700693573:0;./a.out 33.0
+: 1700693587:0;./a.out --help
+: 1700693602:0;./a.out --compression
+: 1700693605:0;./a.out --compression 9
+: 1700693625:0;./a.out --compression | tds
+: 1700693634:0;./a.out --compression | tdn
+: 1700693704:0;./a.out --compression 1>&0 | tds
+: 1700693713:0;./a.out --compression 1>&0 | tdn
+: 1700693727:0;./a.out --compression 9
+: 1700693733:0;./a.out --compression 9.0
+: 1700693738:0;./a.out --compression 9.7
+: 1700694249:0;bat Jamfile.v2
+: 1700694601:0;fg
+: 1700694912:0;tds " Specifies a function to be called when the final value is determined."
+: 1700694936:0;fg
+: 1700695140:0;cd i-Haklab
+: 1700695149:0;cmake --build .
+: 1700695257:0;fg
+: 1700695387:0;cd i-Haklab
+: 1700695404:0;cmake --install . --prefix=$PREFIX
+: 1700695411:0;bat cmake_install.cmake
+: 1700695437:0;i-haklab --about ps.md command/P/
+: 1700695442:0;i-haklab --about ps.md command/P/
+: 1700695464:0;i-haklab --help
+: 1700695486:0;cd i-Haklab
+: 1700695594:0;hx boost-haklab.cpp
+: 1700695753:0;cmake --build .
+: 1700696045:0;hx boost-haklab.cpp
+: 1700696191:0;cmake --build .
+: 1700696276:0;fg
+: 1700696410:0;cmake --build .
+: 1700696686:0;./i-haklab --help
+: 1700696699:0;./i-haklab --help-module packages
+: 1700696734:0;./i-haklab --name lop
+: 1700696737:0;./i-haklab --name lop lop
+: 1700696757:0;cmake --help
+: 1700696767:0;fg
+: 1700697561:0;cd boost_1_83_0/libs/program_options/example
+: 1700697570:0;bast
+: 1700697584:0;bat options_description.cpp
+: 1700697651:0;fg
+: 1700697776:0;cd i-Haklab
+: 1700697780:0;cmake --help
+: 1700697787:0;cmake --build .
+: 1700698092:0;ks
+: 1700698106:0;./i-haklab --name-pkg
+: 1700698123:0;./i-haklab --name-pkg ejemplo
+: 1700698162:0;tree ejemplocontrol
+: 1700698184:0;rm ejemplocontrol
+: 1700698187:0;rm ejemplocontrol -d
+: 1700698199:0;rm ejemplocontrol -dr
+: 1700698201:0;fg
+: 1700698224:0;cmake --build .
+: 1700698428:0;./i-haklab --name-pkg ejemplo
+: 1700698437:0;tree ejemplo
+: 1700698452:0;rm ejemplo -dr
+: 1700698483:0;fg
+: 1700698566:0;cmake --build .
+: 1700698837:0;./i-haklab --name-pkg ejemplo
+: 1700698841:0;tree ejemplo
+: 1700698863:0;./i-haklab --name-pkg ejemplo
+: 1700698869:0;tree ejemplo
+: 1700698876:0;rm ejemplo -dr
+: 1700698969:0;ks
+: 1700698974:0;cd tmp
+: 1700698980:0;rm create_dir.cpp
+: 1700698988:0;rm hola
+: 1700698997:0;rm hola -rd
+: 1700699009:0;hx json.cpp
+: 1700699173:0;clang++ json.cpp -ljson
+: 1700699197:0;cd i-Haklab
+: 1700699202:0;bat notas.md
+: 1700699226:0;xd
+: 1700699231:0;cd tmp
+: 1700699236:0;fg
+: 1700699245:0;hx json.cpp
+: 1700700952:0;fg
+: 1700701579:0;clang++ json.cpp -ljson
+: 1700701650:0;clang++ json.cpp
+: 1700701853:0;clang++ json.cpp -ljsoncpp
+: 1700701879:0;./a.out
+: 1700701906:0;ls ../
+: 1700701914:0;hx json.cpp
+: 1700702098:0;clang++ json.cpp -ljsoncpp
+: 1700702201:0;./a.out
+: 1700702218:0;bat datos.json
+: 1700702267:0;cd victorh028.github.io/demon-packages/packages/libmd4c-dev
+: 1700702274:0;bat manifiest.json
+: 1700702278:0;../
+: 1700702315:0;rm android-studio
+: 1700702319:0;rm android-studio -d
+: 1700702321:0;rm android-studio -df
+: 1700702335:0;rm android-studio -dfr
+: 1700702376:0;bat libfmt-dev/manifiest.json
+: 1700702405:0;fg
+: 1700702799:0;clang++ json.cpp -ljsoncpp
+: 1700702820:0;bat datos.json
+: 1700702834:0;./a.out
+: 1700702843:0;bat datos.json
+: 1700702898:0;fg
+: 1700703154:0;clang++ json.cpp -ljsoncpp
+: 1700703177:0;./a.out
+: 1700703196:0;bat datos.json
+: 1700703248:0;fg
+: 1700705493:0;clang++ json.cpp -ljsoncpp
+: 1700705520:0;./a.out
+: 1700705526:0;bat datos.json
+: 1700742914:0;cd victorh028.github.io/_posts/
+: 1700742917:0;hx
+: 1700742989:0;ld
+: 1700743000:0;git add --all
+: 1700743012:0;git commit -m "alpine"
+: 1700743024:0;git push
+: 1700743289:0;cd victorh028.github.io/_posts
+: 1700743294:0;hx
+: 1700743335:0;../
+: 1700743343:0;cd assets
+: 1700743344:0;ms
+: 1700743353:0;cd images/alpine
+: 1700743363:0;rm alpine-logo.png
+: 1700743500:0;mv ~/victorh028.github.io/assets/images/alpine/alpine-logo.webp
+: 1700743525:0;mv alpine-logo.jpg.webp ~/victorh028.github.io/assets/images/alpine/alpine-logo.webp
+: 1700743561:0;locate alpine-logo.webp
+: 1700743574:0;fg
+: 1700743711:0;../
+: 1700743727:0;...
+: 1700743730:0;cd victorh028.github.io/_posts
+: 1700743733:0;hx
+: 1700743806:0;git add --all
+: 1700743811:0;git push
+: 1700743819:0;git commit -m "alpine"
+: 1700743823:0;git push
+: 1700743982:0;cd .local/share/vcpkg
+: 1700743986:0;vcpkg integrate install
+: 1700744008:0;vcpkg install jsoncpp
+: 1700750782:0;cd tmp
+: 1700750788:0;hx json.cpp
+: 1700750847:0;clang++ json.cpp -ljsoncpp
+: 1700750855:0;./a.out
+: 1700750878:0;bat datos.json
+: 1700750945:0;hx json.cpp
+: 1700752668:0;cd victorh028.github.io
+: 1700752699:0;cd assets
+: 1700752709:0;../
+: 1700752719:0;ls _layouts
+: 1700752731:0;ls _data
+: 1700752737:0;ls _includes
+: 1700752758:0;ls _sass
+: 1700752768:0;ls _site
+: 1700752781:0;cd _site
+: 1700752787:0;bat robots.txt
+: 1700752820:0;../
+: 1700752827:0;ls assets
+: 1700752831:0;ls assets/images
+: 1700752940:0;mv avatar.jpg ~/victorh028.github.io/assets/images/
+: 1700752955:0;cd assets
+: 1700752958:0;cd u
+: 1700752961:0;cd images
+: 1700752990:0;mv avatar.jpg avatar.png
+: 1700752998:0;cd alpine
+: 1700753015:0;mv alpine-logo.webp alpine-logo.png
+: 1700753021:0;../
+: 1700753026:0;../
+: 1700753039:0;hx _posts
+: 1700753061:0;git add --all
+: 1700753065:0;git commit -m "alpine"
+: 1700753068:0;git push
+: 1700753083:0;apt list | grep ^libfmt*
+: 1700753098:0;apt list | grep ^vc*
+: 1700753103:0;apt list | grep ^vcp*
+: 1700753138:0;cd victorh028.github.io/demon-packages
+: 1700753161:0;bat update.sh
+: 1700753645:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev
+: 1700753652:0;cat manifiest.json
+: 1700754068:0;cd tmp
+: 1700754074:0;hx json.cpp
+: 1700754181:0;clang++ json.cpp -ljsoncpp
+: 1700754195:0;./a.out
+: 1700754204:0;bat datos.json
+: 1700754235:0;bat json.cpp
+: 1700754380:0;hx json.cpp
+: 1700754395:0;clang++ json.cpp -ljsoncpp
+: 1700754402:0;./a.out
+: 1700754407:0;bat json.cpp
+: 1700754413:0;bat datos.json
+: 1700754473:0;hx json.cpp
+: 1700754510:0;clang++ json.cpp -ljsoncpp
+: 1700754518:0;./a.out
+: 1700754549:0;bat datos.json
+: 1700754573:0;hx json.cpp
+: 1700755232:0;clang++ json.cpp -ljsoncpp
+: 1700755243:0;./a.out
+: 1700755245:0;bat datos.json
+: 1700755273:0;cd i-Haklab
+: 1700755283:0;hx boost-haklab.cpp
+: 1700756506:0;cd victorh028.github.io/demon-packages/packages/libfmt-dev
+: 1700756515:0;cd i-Haklab
+: 1700756517:0;fg
+: 1700757073:0;hx CMakeLists.txt
+: 1700757110:0;cmake --build .
+: 1700757237:0;./i-haklab --name-pkg ejemplo
+: 1700757249:0;rm ejemplo -dr
+: 1700757260:0;./i-haklab --help-module packages
+: 1700757300:0;./i-haklab --manifies lop
+: 1700757317:0;bat manifiest.json
+: 1700757345:0;rm manifiest.json
+: 1700757350:0;hx boost-haklab.cpp
+: 1700758160:0;tmux new-session -s $USER
+: 1700758168:0;bat .zshenv
+: 1700758205:0;bat .zshenv -r 65:94
+: 1700758214:0;bat .zshenv
+: 1700758240:0;bat .zshenv -r 55:64
+: 1700758253:0;clear
+: 1700758258:0;bat .zshenv -r 55:64
+: 1700758885:0;cd boost_1_83_0/libs/program_options/example
+: 1700758896:0;bat custom_syntax.cpp
+: 1700759029:0;clang++ custom_syntax.cpp -lboost_program_options
+: 1700759167:0;./a.out
+: 1700759172:0;./a.out --help
+: 1700759185:0;./a.out --foo lop
+: 1700759197:0;./a.out --foo lop --foo lll
+: 1700759211:0;./a.out --foo lop lop
+: 1700761958:0;cd tmp
+: 1700761964:0;hx json.cpp
+: 1700762071:0;clang++ json.cpp -ljsoncpp
+: 1700762090:0;./a.out
+: 1700762106:0;bat datos.json
+: 1700762139:0;hx json.cpp
+: 1700762918:0;cd Hacking
+: 1700762934:0;cd Hacking
+: 1700762950:0;ln -s ../ .
+: 1700762969:0;type trans
+: 1700762997:0;ln -s /data/data/com.termux/files ./
+: 1700763023:0;ln -s /data/data/com.termux/files/home ./
+: 1700763031:0;cd IA
+: 1700763035:0;ln -s /data/data/com.termux/files/home ./
+: 1700763291:0;cd tmp
+: 1700763294:0;hx json.cpp
+: 1700764011:0;clang++ json.cpp -ljsoncpp
+: 1700764028:0;./a.out
+: 1700764041:0;fg
+: 1700764126:0;clang++ json.cpp -ljsoncpp
+: 1700764141:0;./a.out
+: 1700764184:0;fg
+: 1700765560:0;./a.out
+: 1700765565:0;clang++ json.cpp -ljsoncpp
+: 1700765581:0;fg
+: 1700765598:0;clang++ json.cpp -ljsoncpp
+: 1700765679:0;./a.out
+: 1700765689:0;fg
+: 1700769902:0;cd tmp
+: 1700769916:0;hx json.cpp
+: 1700770142:0;cd i-Haklab
+: 1700770152:0;hx boost-haklab.cpp
+: 1700770774:0;cmake --build .
+: 1700770812:0;cd i-Haklab
+: 1700770825:0;./i-haklab --help-module packages
+: 1700770850:0;./i-haklab --what-file prerm
+: 1700770894:0;ps
+: 1700770905:0;kill $PID
+: 1700770911:0;env
+: 1700770958:0;echo $PID
+: 1700771008:0;cd i-Haklab
+: 1700771010:0;hx boost-haklab.cpp
+: 1700771302:0;cmake --build .
+: 1700771416:0;./i-haklab --what-file prerm
+: 1700771443:0;./i-haklab --what-file prerm loo
+: 1700772158:0;tdn "sort"
+: 1700772180:0;tds "sort"
+: 1700772202:0;cd i-Haklab
+: 1700772208:0;hx include/below_zero.cpp
+: 1700772221:0;hx include/below_zero.h
+: 1700772254:0;hx boost-haklab.cpp
+: 1700772890:0;tmux new-session -s $USER
+: 1700772943:0;cd i-Haklab
+: 1700772945:0;hx boost-haklab.cpp
+: 1700773231:0;cd i-Haklab
+: 1700773234:0;hx boost-haklab.cpp
+: 1700773379:0;ld kd
+: 1700773412:0;cd i-Haklab
+: 1700773419:0;hx boost-haklab.cpp
+: 1700775661:0;cd i-Haklab
+: 1700775663:0;ks
+: 1700775673:0;hx boost-haklab.cpp
+: 1700775959:0;cmake --build .
+: 1700776042:0;./i-haklab --what-file prerm
+: 1700776046:0;./i-haklab --what-file prerml
+: 1700776052:0;./i-haklab --what-file p
+: 1700776055:0;./i-haklab --what-file m
+: 1700776057:0;./i-haklab --what-file
+: 1700776060:0;./i-haklab --what-file n
+: 1700780100:0;tds "sort"
+: 1700780160:0;/inet
+: 1700780172:0;/prov
+: 1700780192:0;/proc/self/
+: 1700780214:0;ls -al root
+: 1700780236:0;cd root
+: 1700780264:0;../
+: 1700780273:0;bat cpuset
+: 1700780297:0;bat wchan
+: 1700780308:0;bat unexpected_die_catch
+: 1700782418:0;cd i-Haklab
+: 1700782424:0;hx boost-haklab.cpp
+: 1700782560:0;cmake --build .
+: 1700782584:0;./i-haklab --what-file n
+: 1700782604:0;cmake --build .
+: 1700782608:0;hx boost-haklab.cpp
+: 1700782687:0;cmake --build .
+: 1700782711:0;./i-haklab --what-file n
+: 1700784475:0;tds "// 'num' is statically typed as an integer"
+: 1700784493:0;tds " 'num' is statically typed as an integer"
+: 1700785140:0;bash update.sh

@@ -1,0 +1,18 @@
+{
+  "control": {
+    "Package": "1",
+    "Version": "2",
+    "Architerture": "3",
+    "Maintainer": "4",
+    "Installed-Size": "5",
+    "Homepage": "",
+    "Description": ""
+  },
+  "control_files_dir": "control",
+  "deb_dir": "../../",
+  "data_files": {
+    "bin/*": {
+      "source": "src/*"
+    }
+  }
+}
