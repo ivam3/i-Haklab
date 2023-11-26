@@ -1,7 +1,8 @@
 #ifndef BELOW_ZERO
 #define BELOW_ZERO
 
-
+//------------------------------------------
+//------------------------------------------
 #include <iostream>
 #include <nlohmann/json.hpp>
 #include <boost/array.hpp>
@@ -18,9 +19,14 @@
 #include <boost/iostreams/device/file.hpp>
 #include <boost/iostreams/stream.hpp>
 
+//------------------------------------------
+//------------------------------------------
 #define  IHETC  "/data/data/com.termux/files/home/.local/etc/i-Haklab"
 #define  LIBEX  "/data/data/com.termux/files/home/.local/libexec/i-Haklab/"
 
+
+//------------------------------------------
+//------------------------------------------
 //"2>&1" redirige los errores de salida de shell
 using std::fstream;
 using std::string ;

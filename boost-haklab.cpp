@@ -2,10 +2,13 @@
 //         Inportaciones 
 //-------------------------------------------------
 #include "include/below_zero.h"
+#include <cstdio>
+#include <fmt/color.h>
+#include <fstream>
 
 
 //-------------------------------------------------
-//
+//       Nombre de espacio
 //-------------------------------------------------
 using namespace boost::program_options;
 using namespace boost::filesystem;
@@ -23,13 +26,13 @@ void about(std::string about);
 //-------------------------------------------------
 int main(int argc, const char *argv[])
 {
-  // CLI
   try
   {
   //-------------------------------------------------
   //      Variables de algunos parametros  
   //-------------------------------------------------
     string dir;
+    
   //-------------------------------------------------
   //-------------------------------------------------
     options_description options{"Options"};
@@ -56,8 +59,8 @@ int main(int argc, const char *argv[])
     dpkg.add_options()
       ("name-pkg", value<string>(&dir), "Create directory tree\n control: Where do the package maintainer scripts go?\n src: Your executable")
       ("what-file", value<string>(), "What does the file do?")
-      ("manifies", value<vector<string>>(), "Para crear el archivo de 'manifiesto' se requieren 7 \n argumentos \
-      Package | Version | Architerture | Maintainer | Installed-Size | Homepage | Description");
+      ("manifies", value<vector<string>>(), "Para crear el archivo de 'manifiesto' se requieren 8 \n argumentos \
+      Package | Version | Architerture | Maintainer | Installed-Size | Homepage |  | Description");
             
    //-------------------------------------------------
    //-------------------------------------------------
@@ -67,8 +70,6 @@ int main(int argc, const char *argv[])
         
    //-------------------------------------------------
    //-------------------------------------------------
-   // Instancia de descripción de opciones que incluirá
-   // todas las opciones
     options_description all("All");
     all.add(options).add(config).add(dpkg).add(automatitation);
 
@@ -81,7 +82,7 @@ int main(int argc, const char *argv[])
    //-------------------------------------------------
    //-------------------------------------------------
     positional_options_description positionalOptions;
-    positionalOptions.add("manifies", 7);
+    positionalOptions.add("manifies", 8);
 
    //-------------------------------------------------
    //-------------------------------------------------
@@ -104,7 +105,19 @@ int main(int argc, const char *argv[])
        fmt::print("Beta\n");
        return 0;        
     }
-
+  
+   //-------------------------------------------------
+   //               Configuracion
+   //-------------------------------------------------
+    if (vm.count("name-user")){
+      std::string home = string(getenv("HOME")) + "/.zshenv";
+      // open file
+      std::fstream zshenv;
+      zshenv.open(home);
+      if (!zshenv.is_open()){
+          fmt::print(stderr,"Error al conf");
+      }
+    }
    //-------------------------------------------------
    //          Automatitation Options
    //------------------------------------------------
@@ -130,7 +143,7 @@ int main(int argc, const char *argv[])
    //-------------------------------------------------
     if (vm.count("manifies")){
     const auto &inputValues = vm["manifies"].as<vector<string>>(); 
-    if (inputValues.size() != 7) {
+    if (inputValues.size() != 8) {
         throw validation_error(validation_error::invalid_option_value,
         "input",std::to_string(inputValues.size()));
             }
@@ -139,13 +152,14 @@ int main(int argc, const char *argv[])
    //-------------------------------------------------
     // Crear un objeto JSON
     json root;  
-    root["control"]["Package"]= inputValues[0];
-    root["control"]["Version"]= inputValues[1];
-    root["control"]["Architerture"]= inputValues[2];
-    root["control"]["Maintainer"]= inputValues[3];
+    root["control"]["Package"]       = inputValues[0];
+    root["control"]["Version"]       = inputValues[1];
+    root["control"]["Architerture"]  = inputValues[2];
+    root["control"]["Maintainer"]    = inputValues[3];
     root["control"]["Installed-Size"]= inputValues[4];
-    root["control"]["Homepage"]= inputValues[5];
-    root["control"]["Description"]= {inputValues[6]};
+    root["control"]["Homepage"]      = inputValues[5];
+    root["control"]["Suggests"]      = inputValues[6];
+    root["control"]["Description"]   = {inputValues[7]};
 
     
     root["control_files_dir"] = "control";
