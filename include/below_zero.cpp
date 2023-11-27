@@ -1,6 +1,7 @@
 #include "below_zero.h"
 
 
+// Nombres de espacio de Boost
 using namespace boost::filesystem;
 using namespace boost::iostreams;
 
@@ -44,35 +45,6 @@ std::string setColor(Color color) {
     return code;
 };
 
-
-void print_markdown(const std::string &txt){
-  std::string output_txt = "";
-  // Color para cada texto    
-  std::string Keywords = setColor(Color::Blue);
-  std::string Strings = setColor(Color::Green);
-  std::string Title = setColor(Color::Magenta);
-  std::string colorDefault = setColor(Color::Default);
-
-
-  std::size_t pos = 0;
-  std::size_t start = 0;
-  std::size_t end = 0;
-
-  while (pos < txt.size()){ 
-    // Buscar cadena
-    if (txt.find("#",pos) == pos) {
-     start = pos;
-     end = txt.find("\n",pos);
-    // Si no hay coincidencias
-    if(end == std::string::npos){
-      end = txt.size();            
-    }
-      pos = end;
-            
-    }
-  }
-
-}
 
 
 void syntax_highlight(const std::string &code){
@@ -275,3 +247,44 @@ void hack::Haklab::searchProcess(std::string process){
     //     fmt::print( "No se pudo abrir el directorio /proc\n" );
     }
 }    
+
+void hack::Haklab::ChangeEnvironmentVariable(std::string name, std::string new_valor ){
+    // Ruta del archivo
+    std::string filePath = std::string(getenv("HOME")) + "/.zshenv";
+
+    // Abrir el archivo
+    std::ifstream inputFile(filePath);
+
+    if (!inputFile.is_open()) {
+        fmt::print(stderr,fg(fmt::color::red),"Error al abrir el archivo.\n");
+    }
+
+    // Leer el contenido del archivo en una cadena
+    std::string fileContent((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
+    inputFile.close();
+
+    // Expresión regular para buscar la variable de entorno
+    boost::regex expr("(" + name +"=)([^\n]+)");
+
+    // Buscar la coincidencia en el contenido del archivo
+    boost::smatch match;
+    if (boost::regex_search(fileContent, match, expr)) {
+        // Imprimir el valor actual
+        std::cout << "Valor actual de USER: " << match[2] << "\n";
+
+        // Modificar el valor (puedes establecer el nuevo valor según tus necesidades)
+        std::string nuevoValor = new_valor ;
+        std::string nuevoContenido = boost::regex_replace(fileContent, expr, "$1" + nuevoValor);
+
+        // Escribir el nuevo contenido en el archivo
+        std::ofstream outputFile(filePath);
+        if (!outputFile.is_open()) {
+            fmt::print(stderr, fg(fmt::color::red),"Error al abrir el archivo para escritura.\n");
+        }
+        outputFile << nuevoContenido;
+        fmt::print(fg(fmt::color::blue), "Valor de USER cambiado a: {} \n", nuevoValor);
+    } else {
+        fmt::print(stderr, fg(fmt::color::red), "Variable de entorno USER no encontrada en el archivo.\n");
+
+    }
+}

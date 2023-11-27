@@ -1,0 +1,16 @@
+#!/data/data/com.termux/files/usr/bin/bash
+IFS=$'\n\t'
+trap ctrl_c 2
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+chk-pkg python python
+chk-pkg speedtest speedtest-cli 
+
+[[ -z $ps ]] && {
+	running time 1;
+} || {
+	running ps $ps;
+}
+banner
+speedtest-cli

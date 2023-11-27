@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "Content-type: text/html"
+echo ""
+echo "<html>"
+echo "<head>"
+echo "<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" />"
+echo "<title>bWAPP - Shellshock Vulnerability (CGI)</title>"
+echo "</head>"
+echo "<body>"
+echo "<div id="frame">"
+echo "<p>HINT: attack the referer header, and pwn this box...</p>"
+echo "</div>"
+echo "</body>"
+echo "</html>"

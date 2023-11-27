@@ -1,0 +1,35 @@
+#!/data/data/com.termux/files/usr/bin/bash
+IFS=$'\n\t'
+trap ctrl_c 2
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+chk-pkg ssh openssh
+[[ $# -gt '3' ]] || STDERR
+
+while getopts "f:p:t:" opt; do
+  case $opt in
+    p) p=$OPTARG
+      [ $p -eq $p 2>/dev/null ] || { STDERR;}
+      ;;
+    t) t=$OPTARG
+      [ $t -eq $t 2>/dev/null ] && { STDERR;}
+      ;;
+    f) f=$OPTARG
+      [[ -e $f ]] || { echo -en "\e[31mE:$W Not such file : $f$Y\n!:$W run i-Haklab tutorials for a guide\n";exit 0;}
+      ;;
+    \?) echo -en $R"E:$W Invalid option: -$OPTARG" >&2 && exit 1 ;;
+    :) echo -en $R"E:$W Option -$OPTARG requires an argument." >&2 && exit 1 ;;
+    *) STDERR ;;
+  esac
+done
+
+banner
+printf $G"(_➤)$W Running Ngrok server by SSH connection.\n"
+if [[ -z $f ]]; then
+  ssh -R 443:localhost:$p -oHostKeyAlgorithms=+ssh-rsa \
+  -oPubkeyAcceptedKeyTypes=+ssh-rsa tunnel.us.ngrok.com $t
+else
+  ssh -R 443:localhost:$p -oHostKeyAlgorithms=+ssh-rsa \
+  -oPubkeyAcceptedKeyTypes=+ssh-rsa -i $f tunnel.us.ngrok.com $t
+fi

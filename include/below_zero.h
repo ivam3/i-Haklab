@@ -18,6 +18,7 @@
 // Lectura y escritura de archivos 
 #include <boost/iostreams/device/file.hpp>
 #include <boost/iostreams/stream.hpp>
+#include <boost/regex.hpp>
 
 //------------------------------------------
 //------------------------------------------
@@ -79,18 +80,26 @@ namespace hack {
    /*
     *
     */    
-   void clear_screen();   
+  void 
+  clear_screen();   
   /*
    *
    */
-  void hide_cursor();
+  void 
+  hide_cursor();
   /*
    *
    */
-  void show_cursor();
-  
+  void 
+  show_cursor();
+  //----------------------------------------------
    public:
-  
+  /*
+   * Cambia el valos de una variable de entornl 
+   * name: Deve ser en mayuscula
+   */
+  void 
+  ChangeEnvironmentVariable(std::string name,  std::string new_valor);  
   /*
    * Contructor
    */

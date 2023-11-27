@@ -1,0 +1,12 @@
+#!/data/data/com.termux/files/usr/bin/bash
+IFS=$'\n\t'
+trap ctrl_c 2
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+[[ $# -eq 0 ]] && { STDERR;}
+[[ -e $iHETC/Tools/Readme/$1 ]] && {
+	bat $iHETC/Tools/Readme/$1;
+} || {
+	STDERR;
+}

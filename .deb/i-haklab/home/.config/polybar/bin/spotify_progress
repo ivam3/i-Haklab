@@ -1,0 +1,43 @@
+#!/bin/bash
+SLEEP_DURATION=${SLEEP_DURATION:=1}
+
+total=$(playerctl -p spotifyd metadata mpris:length)
+position=$(playerctl -p spotifyd position | tr -d '.')
+artist=$(playerctl -p spotifyd metadata xesam:artist)
+title=$(playerctl -p spotifyd metadata xesam:title)
+
+total=${total::-6}
+position=${position::-6}
+# left="$(($total-$position))"
+percet="$(($position*100/$total))"
+
+already_done() {
+    for ((done=0; done<(percet/2) ; done=done+1 ));
+        do printf "─";
+    done
+}
+remaining() {
+    for (( remain=(percet/2) ; remain<(100/2); remain=remain+1 ));
+        do printf "─";
+    done
+}
+minutes() {
+    total_sec=$(printf '%02d:%02d\n' $(($total%3600/60)) $(($total%60)))
+    position_sec=$(printf '%02d:%02d\n' $((elapsed%3600/60)) $((elapsed%60)))
+    printf " $position_sec/$total_sec "
+}
+percentage() {
+    percet=$(( ((elapsed)*100)/(total)*100/100 ));
+    printf " %s%% " $percet;
+}
+
+playing() {
+    printf " $artist - $title "
+}
+
+for (( elapsed=position; elapsed<=total; elapsed=elapsed+1 )); do
+    percentage; already_done; printf "|"; remaining; minutes; playing
+    sleep "$SLEEP_DURATION"
+    printf "\r";
+done
+printf "\r";

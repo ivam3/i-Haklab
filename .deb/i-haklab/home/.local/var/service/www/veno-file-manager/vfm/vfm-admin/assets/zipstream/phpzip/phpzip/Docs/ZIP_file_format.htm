@@ -1,0 +1,1069 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en">
+<head>
+<title>ZIP (file format) - Wikipedia, the free encyclopedia</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="generator" content="MediaWiki 1.17wmf1" />
+<link rel="alternate" type="application/x-wiki" title="Edit this page" href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit" />
+<link rel="edit" title="Edit this page" href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit" />
+<link rel="apple-touch-icon" href="http://en.wikipedia.org/apple-touch-icon.png" />
+<link rel="shortcut icon" href="http://en.wikipedia.org/favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://en.wikipedia.org/w/opensearch_desc.php" title="Wikipedia (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="http://en.wikipedia.org/w/api.php?action=rsd" />
+<link rel="copyright" href="http://creativecommons.org/licenses/by-sa/3.0/" />
+<link rel="alternate" type="application/atom+xml" title="Wikipedia Atom feed" href="http://en.wikipedia.org/w/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="ZIP_%28file_format%29_files/load_002.css" type="text/css" media="all" />
+<style type="text/css" media="all">
+	.suggestions{overflow:hidden;position:absolute;top:0px;left:0px;width:0px;border:none;z-index:99;padding:0;margin:-1px -1px 0 0} 
+	html > body .suggestions{margin:-1px 0 0 0}
+	.suggestions-special{position:relative;background-color:Window;font-size:0.8em;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0;margin-top:-2px;display:none;padding:0.25em 0.25em;line-height:1.25em}
+	.suggestions-results{background-color:white;background-color:Window;font-size:0.8em;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0}
+	.suggestions-result{color:black;color:WindowText;margin:0;line-height:1.5em;padding:0.01em 0.25em;text-align:left}
+	.suggestions-result-current{background-color:#4C59A6;background-color:Highlight;color:white;color:HighlightText}
+	.suggestions-special .special-label{font-size:0.8em;color:gray;text-align:left}
+	.suggestions-special .special-query{color:black;font-style:italic;text-align:left}
+	.suggestions-special .special-hover{background-color:silver}
+	.suggestions-result-current .special-label,.suggestions-result-current .special-query{color:white;color:HighlightText}
+	.autoellipsis-matched,.highlight{font-weight:bold}
+	/* cache key: enwiki:resourceloader:filter:minify-css:3:8d395f27880b6ffcab73b1c74b0217ea */
+</style>
+<style type="text/css" media="all">
+	#mw-panel.collapsible-nav div.portal{
+		background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIwAAAABCAMAAAA7MLYKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEtQTFRF29vb2tra4ODg6urq5OTk4uLi6+vr7e3t7Ozs8PDw5+fn4+Pj4eHh3d3d39/f6Ojo5eXl6enp8fHx8/Pz8vLy7+/v3Nzc2dnZ2NjYnErj7QAAAD1JREFUeNq0wQUBACAMALDj7hf6JyUFGxzEnYhC9GaNPG1xVffGDErk/iCigLl1XV2xM49lfAxEaSM+AQYA9HMKuv4liFQAAAAASUVORK5CYII=);
+		background-image:url(http://bits.wikimedia.org/w/extensions-1.17/Vector/modules/./images/portal-break.png?2011-02-12T21:25:00Z);
+		background-position:left top;
+		background-repeat:no-repeat;
+		padding:0.25em 0 !important;
+		margin:-11px 9px 10px 11px;
+	}
+	#mw-panel.collapsible-nav div.portal h5{
+		color:#4D4D4D;
+		font-weight:normal;
+		background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA9QTFRFeXl53d3dmpqasbGx////GU0iEgAAAAV0Uk5T/////wD7tg5TAAAAK0lEQVQI12NwgQIG0hhCDAwMTCJAhqMCA4MiWEoIJABiOCooQhULi5BqMgB2bh4svs8t+QAAAABJRU5ErkJggg==) left center no-repeat;
+		background:url(http://bits.wikimedia.org/w/extensions-1.17/Vector/modules/./images/open.png?2011-02-12T21:25:00Z) left center no-repeat;
+		padding:4px 0 3px 1.5em;
+		margin-bottom:0px;
+	}
+	#mw-panel.collapsible-nav div.collapsed h5{
+		color:#0645AD;
+		background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAxQTFRF3d3deXl5////nZ2dQA6SoAAAAAN0Uk5T//8A18oNQQAAADNJREFUeNpiYEIDDMQKMKALMDOgCTDCRWACcBG4AEwEIcDITEAFuhnotmC4g4EEzwEEGAADqgHmQSPJKgAAAABJRU5ErkJggg==) left center no-repeat;
+		background:url(http://bits.wikimedia.org/w/extensions-1.17/Vector/modules/./images/closed-ltr.png?2011-02-12T21:25:00Z) left center no-repeat;
+		margin-bottom:0px;
+	}
+	#mw-panel.collapsible-nav div h5:hover{cursor:pointer;text-decoration:none}
+	#mw-panel.collapsible-nav div.collapsed h5:hover{text-decoration:underline}
+	#mw-panel.collapsible-nav div.portal div.body{background:none !important;padding-top:0px;display:none}
+	#mw-panel.collapsible-nav div.persistent div.body{display:block}
+	#mw-panel.collapsible-nav div.first h5{display:none}
+	#mw-panel.collapsible-nav div.persistent h5{background:none !important;padding-left:0.7em;cursor:default}
+	#mw-panel.collapsible-nav div.portal div.body ul li{padding:0.25em 0}
+	#mw-panel.collapsible-nav div.first{background-image:none;margin-top:0px}
+	#mw-panel.collapsible-nav div.persistent div.body{margin-left:0.5em}
+	/* cache key: enwiki:resourceloader:filter:minify-css:3:c5cca4c308b0b64d12b1147b6871e86e */
+</style>
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="ZIP_%28file_format%29_files/load.css" type="text/css" media="all" />
+<style type="text/css" media="all">
+	a.new,#quickbar a.new{color:#ba0000}
+	/* cache key: enwiki:resourceloader:filter:minify-css:3:f2a9127573a22335c2a9102b208c73e7 */
+</style>
+<link rel="stylesheet" href="ZIP_%28file_format%29_files/load_003.css" type="text/css" media="all" />
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/w/skins-1.17/vector/csshover.min.htc")}</style><![endif]-->
+<link href="ZIP_%28file_format%29_files/index.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="mediawiki ltr ns-0 ns-subject page-ZIP_file_format skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content"><div style="visibility: hidden; display: none; width: 602px; height: 402px; margin: 0px; padding: 0px; background-color: white; position: absolute; right: 2em; top: 1em; border: 1px solid gray; z-index: 13;"><iframe style="z-index: 14; position: absolute; right: 1px; top: 1px; width: 600px; height: 400px; margin: 0px; padding: 0px;" scrolling="no" frameborder="0"></iframe><img style="z-index: 15; position: absolute; right: 11px; top: 9px; width: 18px; cursor: pointer;" src="ZIP_%28file_format%29_files/Button_hide.png" title="close"/></div>
+			<a id="top"></a>
+			<div id="mw-js-message" style="display: none;"></div>
+						<!-- sitenotice -->
+			<div id="siteNotice"><!-- centralNotice loads here --><script type="text/javascript">
+/* <![CDATA[ */
+document.writeln("\x3cdiv id=\"localNotice\"\x3e\x3cp\x3e\x3c/p\x3e\n\x3c/div\x3e");
+/* ]]> */
+</script><div id="localNotice"><p></p>
+</div>
+</div>
+			<!-- /sitenotice -->
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">ZIP (file format)</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+				<!-- tagline -->
+				<div id="siteSub">From Wikipedia, the free encyclopedia</div>
+				<!-- /tagline -->
+				<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="#mw-head">navigation</a>,
+					<a href="#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodytext -->
+				<div class="dablink">"unzip" redirects here. For the program called 'unzip', see <a href="http://en.wikipedia.org/wiki/Info-ZIP">Info-ZIP</a>.</div>
+<table class="metadata plainlinks ambox ambox-style" style="">
+<tbody><tr>
+<td class="mbox-image">
+<div style="width: 52px;"><img alt="" src="ZIP_%28file_format%29_files/40px-Edit-clear.png" height="40" width="40"/></div>
+</td>
+<td class="mbox-text" style="">This article <b>may require <a href="http://en.wikipedia.org/wiki/Wikipedia:Cleanup" title="Wikipedia:Cleanup">cleanup</a> to meet Wikipedia's <a href="http://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style" title="Wikipedia:Manual of Style">quality standards</a>.</b> Please <a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit" class="external text" rel="nofollow">improve this article</a> if you can. The <a href="http://en.wikipedia.org/wiki/Talk:ZIP_%28file_format%29" title="Talk:ZIP (file format)">talk page</a> may contain suggestions. <small><i>(September 2010)</i></small></td>
+</tr>
+</tbody></table>
+<table class="infobox" style="width: 22em; text-align: left; font-size: 88%; line-height: 1.5em;" cellspacing="5">
+<caption class="" style="font-size: 125%; font-weight: bold;">ZIP</caption>
+<tbody><tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.wikipedia.org/wiki/Filename_extension">Filename extension</a></th>
+<td class="" style=""><code><tt>.zip</tt><br />
+<tt>.zipx</tt> <small>(newer compression algorithms)</small></code></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.wikipedia.org/wiki/Internet_media_type">Internet media type</a></th>
+<td class="" style=""><code><code>application/zip</code></code></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.wikipedia.org/wiki/Uniform_Type_Identifier">Uniform Type Identifier</a></th>
+<td class="" style="">com.pkware.zip-archive</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.wikipedia.org/wiki/File_format#Magic_number" title="File format">Magic number</a></th>
+<td class="" style="">none, though <code>PK\003\004</code> , <code>PK\005\006</code> (empty archive), or <code>PK\007\008</code> (spanned archive) are common.</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;">Developed by</th>
+<td class="" style=""><a href="http://en.wikipedia.org/wiki/Phil_Katz">Phil Katz</a>, <a href="http://en.wikipedia.org/wiki/PKWARE" class="mw-redirect" title="PKWARE">PKWARE</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;">Type of format</th>
+<td class="" style=""><a href="http://en.wikipedia.org/wiki/Data_compression">Data compression</a></td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;">Extended to</th>
+<td class="" style=""><a href="http://en.wikipedia.org/wiki/JAR_%28file_format%29" title="JAR (file format)" class="mw-redirect">JAR</a> <small>(<a href="http://en.wikipedia.org/wiki/EAR_%28file_format%29" title="EAR (file format)">EAR</a>, <a href="http://en.wikipedia.org/wiki/Resource_Adapter" title="Resource Adapter">RAR (Java)</a>, <a href="http://en.wikipedia.org/wiki/WAR_%28Sun_file_format%29" title="WAR (Sun file format)" class="mw-redirect">WAR</a>)</small><br />
+<a href="http://en.wikipedia.org/wiki/Office_Open_XML">Office Open XML</a> (Microsoft)<br />
+<a href="http://en.wikipedia.org/wiki/OpenDocument">OpenDocument</a> (ODF)<br />
+<a href="http://en.wikipedia.org/wiki/XPI" class="mw-redirect" title="XPI">XPI</a> (Mozilla extensions)</td>
+</tr>
+<tr class="">
+<th scope="row" style="text-align: left;"><a href="http://en.wikipedia.org/wiki/International_standard" title="International standard">Standard(s)</a></th>
+<td class="" style=""><a href="http://www.pkware.com/documents/casestudies/APPNOTE.TXT" class="external text" rel="nofollow">APPNOTE</a> from PKWARE</td>
+</tr>
+</tbody></table>
+<p>The <b>ZIP</b> <a href="http://en.wikipedia.org/wiki/File_format">file format</a> is a <a href="http://en.wikipedia.org/wiki/Data_compression">data compression</a> and <a href="http://en.wikipedia.org/wiki/File_archiver" title="File archiver">archive</a> <a href="http://en.wikipedia.org/wiki/File_format" title="File format">format</a>.
+ A ZIP file contains one or more files that have been compressed to 
+reduce file size, or stored as-is. The ZIP file format permits a number 
+of compression algorithms.</p>
+<p>The format was originally created in 1989 by <a href="http://en.wikipedia.org/wiki/Phil_Katz">Phil Katz</a>, and was first implemented in <a href="http://en.wikipedia.org/wiki/PKWARE" class="mw-redirect" title="PKWARE">PKWARE</a>'s <a href="http://en.wikipedia.org/wiki/PKZIP">PKZIP</a> utility,<sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup> as a replacement for the previous <a href="http://en.wikipedia.org/wiki/ARC_%28file_format%29" title="ARC (file format)">ARC</a> compression format by <a href="http://en.wikipedia.org/wiki/Thom_Henderson" class="mw-redirect" title="Thom Henderson">Thom Henderson</a>. The ZIP format is now supported by many software utilities other than PKZIP (see <a href="http://en.wikipedia.org/wiki/List_of_file_archivers#Archive_format_support" class="mw-redirect" title="List of file archivers">List of file archivers</a>). Microsoft has included built-in ZIP support (under the name "compressed folders") in versions of its <a href="http://en.wikipedia.org/wiki/Microsoft_Windows" title="Microsoft Windows">Windows</a> <a href="http://en.wikipedia.org/wiki/Operating_system">operating system</a> since 1998. Apple has included built-in ZIP support in <a href="http://en.wikipedia.org/wiki/Mac_OS_X">Mac OS X</a> 10.3 and later, along with other compression formats.</p>
+<p>ZIP files generally use the <a href="http://en.wikipedia.org/wiki/File_extension" title="File extension" class="mw-redirect">file extensions</a> ".zip" or ".ZIP" and the <a href="http://en.wikipedia.org/wiki/MIME">MIME</a> media type <code>application/zip</code>, although the ZIP file format has also been used by many programs, usually under a different name.</p>
+<table id="toc" class="toc">
+<tbody><tr>
+<td>
+<div id="toctitle">
+<h2>Contents</h2>
+ <span class="toctoggle">[<a href="#" class="internal" id="togglelink">hide</a>]</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#History"><span class="tocnumber">1</span> <span class="toctext">History</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Origins"><span class="tocnumber">2</span> <span class="toctext">Origins</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Similarly_named_formats"><span class="tocnumber">3</span> <span class="toctext">Similarly named formats</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Version_history"><span class="tocnumber">4</span> <span class="toctext">Version history</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#Standardization"><span class="tocnumber">5</span> <span class="toctext">Standardization</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#Technical_information"><span class="tocnumber">6</span> <span class="toctext">Technical information</span></a>
+<ul>
+<li class="toclevel-2 tocsection-7"><a href="#Structure"><span class="tocnumber">6.1</span> <span class="toctext">Structure</span></a>
+<ul>
+<li class="toclevel-3 tocsection-8"><a href="#File_headers"><span class="tocnumber">6.1.1</span> <span class="toctext">File headers</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-9"><a href="#Compression_methods"><span class="tocnumber">6.2</span> <span class="toctext">Compression methods</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="#Encryption"><span class="tocnumber">6.3</span> <span class="toctext">Encryption</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="#ZIP64"><span class="tocnumber">6.4</span> <span class="toctext">ZIP64</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="#Advantages_and_disadvantages"><span class="tocnumber">6.5</span> <span class="toctext">Advantages and disadvantages</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="#Combining_ZIP_with_other_file_formats"><span class="tocnumber">6.6</span> <span class="toctext">Combining ZIP with other file formats</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="#Implementation"><span class="tocnumber">6.7</span> <span class="toctext">Implementation</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="#ZIP_file_limitations"><span class="tocnumber">6.8</span> <span class="toctext">ZIP file limitations</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-16"><a href="#Windows_compressed_folders"><span class="tocnumber">7</span> <span class="toctext">Windows compressed folders</span></a></li>
+<li class="toclevel-1 tocsection-17"><a href="#Strong_encryption_controversy"><span class="tocnumber">8</span> <span class="toctext">Strong encryption controversy</span></a></li>
+<li class="toclevel-1 tocsection-18"><a href="#See_also"><span class="tocnumber">9</span> <span class="toctext">See also</span></a></li>
+<li class="toclevel-1 tocsection-19"><a href="#References"><span class="tocnumber">10</span> <span class="toctext">References</span></a></li>
+<li class="toclevel-1 tocsection-20"><a href="#External_links"><span class="tocnumber">11</span> <span class="toctext">External links</span></a></li>
+</ul>
+</td>
+</tr>
+</tbody></table>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=1" title="Edit section: History">edit</a>]</span> <span class="mw-headline" id="History">History</span></h2>
+<p>The name "zip" (meaning "speed") was suggested by Katz's friend, 
+Robert Mahoney. They wanted to imply that their product would be faster 
+than <a href="http://en.wikipedia.org/wiki/ARC_%28file_format%29" title="ARC (file format)">ARC</a> and other compression formats of the time.</p>
+<p>The earliest known version of <i>.ZIP File Format Specification</i> was first published as part of <a href="http://en.wikipedia.org/wiki/PKZIP">PKZIP</a> 0.9 package under the file APPNOTE.TXT.</p>
+<p>The ZIP file format was released into the public domain making it an <a href="http://en.wikipedia.org/wiki/Open_format">open format</a>: <i>The
+ ZIP file format is given freely into the public domain and can be 
+claimed neither legally nor morally by any individual, entity or 
+company.</i><a href="http://brianlivingston.com/eweek/article2/0,4149,1257562,00.html" class="external autonumber" rel="nofollow">[1]</a> The PKWARE company has also stated the base format is in the public domain: <i>Because
+ the format has been dedicated to the public domain, it is possible for 
+other people to write programs which can read .ZIP files. This was a 
+direct result of lawsuits in 1988.</i> <a href="http://web.archive.org/web/19970129111148/www.pkware.com/faq.html" class="external autonumber" rel="nofollow">[2]</a><a href="http://brianlivingston.com/eweek/article2/0,4149,1257562,00.html" class="external autonumber" rel="nofollow">[3]</a> The same understanding is present in the UNIX/LINUX documentation for the FOSS Info-ZIP version which acknowledges: <i>to
+ Phil Katz for placing in the public domain the zip file format, 
+compression format, and .ZIP filename extension, and for accepting minor
+ changes to the file format.</i></p>
+<p>Even so, more recent versions of APPNOTE.TXT at the PKWARE site note <i>...
+ However, the use or implementation in a product of certain 
+technological aspects set forth in the current APPNOTE, including those 
+with regard to strong encryption, patching, or extended tape operations 
+requires a license from PKWARE. Please contact PKWARE with regard to 
+acquiring a license.</i></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=2" title="Edit section: Origins">edit</a>]</span> <span class="mw-headline" id="Origins">Origins</span></h2>
+<p>The ZIP file format was created by Phil Katz of <a href="http://en.wikipedia.org/wiki/PKWARE,_Inc" title="PKWARE, Inc">PKWARE</a>. He created the format after his company had <a href="http://en.wikipedia.org/wiki/ARC_%28file_format%29#Lawsuits" title="ARC (file format)">lawsuits</a> filed against him by Systems Enhancement Associates (SEA) claiming that his archiving products were derivatives of SEA's <a href="http://en.wikipedia.org/wiki/ARC_%28file_format%29" title="ARC (file format)">ARC</a> archiving system.</p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=3" title="Edit section: Similarly named formats">edit</a>]</span> <span class="mw-headline" id="Similarly_named_formats">Similarly named formats</span></h2>
+<p>There are numerous other standards and formats using "zip" as part of
+ their name. Phil Katz stated that he wanted to allow the "zip" name for
+ any archive type.<sup class="Template-Fact" title="This claim needs references to reliable sources from May 2009" style="white-space: nowrap;">[<i><a href="http://en.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed">citation needed</a></i>]</sup> For example, ZIP is distinct from <a href="http://en.wikipedia.org/wiki/Gzip">gzip</a>, and the latter is defined in an <a href="http://en.wikipedia.org/wiki/IETF" class="mw-redirect" title="IETF">IETF</a> <a href="http://en.wikipedia.org/wiki/Request_for_Comments" title="Request for Comments">RFC</a> (1952). Both ZIP and gzip primarily use the <a href="http://en.wikipedia.org/wiki/DEFLATE">DEFLATE</a> algorithm for compression. Likewise, the <a href="http://en.wikipedia.org/wiki/ZLIB" class="mw-redirect" title="ZLIB">ZLIB</a> format (IETF <a href="http://tools.ietf.org/html/rfc1950" class="external mw-magiclink-rfc">RFC 1950</a>)
+ also uses the DEFLATE compression algorithm, but specifies different 
+headers for error and consistency checking. Other common, 
+similarly-named formats and programs with different native formats 
+include <a href="http://en.wikipedia.org/wiki/7-Zip">7-Zip</a>, <a href="http://en.wikipedia.org/wiki/Bzip2">bzip2</a>, and <a href="http://en.wikipedia.org/wiki/Rzip">rzip</a>.</p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=4" title="Edit section: Version history">edit</a>]</span> <span class="mw-headline" id="Version_history">Version history</span></h2>
+<p>The .ZIP File Format Specification has its own version number, which 
+does not necessarily correspond to the version numbers for the PKZIP 
+tool, especially with PKZIP 6 or later. At various times, PKWARE has 
+added preliminary features that allow PKZIP products to extract archives
+ using advanced features, but PKZIP products that create such archives 
+are not made available until the next major release. Other companies or 
+organizations support the PKWARE specifications at their own pace.</p>
+<p>A summary of key advances in various versions of the PKWARE specification:</p>
+<ul>
+<li>2.0: File entries can be compressed with DEFLATE.</li>
+<li>4.5: Documented 64-bit ZIP format.</li>
+<li>5.0: DES, Triple DES, RC2, RC4 supported for encryption</li>
+<li>5.2: RC2-64 supported for Encryption.</li>
+<li>6.1: Documented certificate storage.</li>
+<li>6.2.0: Documented Central Directory Encryption.</li>
+<li>6.3.0: Documented Unicode (UTF-8) filename storage. Expanded list of supported hash, compression, encryption algorithms.</li>
+<li>6.3.1: Corrected standard hash values for SHA-256/384/512.</li>
+<li>6.3.2: Documented compression method 97 (<a href="http://en.wikipedia.org/wiki/WavPack">WavPack</a>).</li>
+</ul>
+<p><a href="http://en.wikipedia.org/wiki/WinZip">WinZip</a>, starting with version 12.1, uses the extension <b><tt>.zipx</tt></b>
+ for ZIP files that use compression methods newer than DEFLATE; 
+specifically, methods BZip, LZMA, PPMd, Jpeg and Wavpack – the last 2 
+are applied to appropriate file types when "Best method" compression is 
+selected.<sup id="cite_ref-1" class="reference"><a href="#cite_note-1"><span>[</span>2<span>]</span></a></sup><sup id="cite_ref-2" class="reference"><a href="#cite_note-2"><span>[</span>3<span>]</span></a></sup></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=5" title="Edit section: Standardization">edit</a>]</span> <span class="mw-headline" id="Standardization">Standardization</span></h2>
+<p>In April 2010 <a href="http://en.wikipedia.org/wiki/JTC_1" title="JTC 1" class="mw-redirect">ISO/IEC JTC 1</a>
+ initiated a ballot to determine whether a project should be initiated 
+to create an ISO/IEC International Standard format compatible with ZIP.<sup id="cite_ref-3" class="reference"><a href="#cite_note-3"><span>[</span>4<span>]</span></a></sup> The proposed project, entitled <i>Document Packaging</i> envisages a ZIP-compatible 'minimal compressed archive format' suitable for use with a number of existing standards including <a href="http://en.wikipedia.org/wiki/OpenDocument">OpenDocument</a>, <a href="http://en.wikipedia.org/wiki/Office_Open_XML">Office Open XML</a> and <a href="http://en.wikipedia.org/wiki/EPUB">EPUB</a>.</p>
+<p>The current ZIP format may not meet the requirements for <a href="http://en.wikipedia.org/wiki/Open_format">open format</a>: it is not developed through a <i>publicly visible, community driven process</i>, nor by an <i>open industry organization</i> and <i>affirmed and maintained by a standards body</i>. Parts of the current ZIP format do not meet the requirements for a <a href="http://en.wikipedia.org/wiki/Free_software" title="Free software">free</a> file format: <i>not
+ encumbered by any copyrights, patents, trademarks or other restrictions
+ so that anyone may use it at no monetary cost for any desired purpose.</i> <a href="http://www.linfo.org/free_file_format.html" class="external autonumber" rel="nofollow">[4]</a> Recent material on the PKWARE site identify that only the extension and <i>format specification</i> are public domain <a href="http://www.pkware.com/security-software-company/philkatz" class="external autonumber" rel="nofollow">[5]</a>, though the format specification has a copyright notice.</p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=6" title="Edit section: Technical information">edit</a>]</span> <span class="mw-headline" id="Technical_information">Technical information</span></h2>
+<p>ZIP is a simple archive format that stores multiple files. 
+Compression is optional in a zip archive, and if it is used, it is 
+applied on a per-file basis.</p>
+<p>The ZIP format uses a 32-bit CRC algorithm and includes two copies of
+ the directory structure of the archive to provide greater protection 
+against data loss.</p>
+<h3><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=7" title="Edit section: Structure">edit</a>]</span> <span class="mw-headline" id="Structure">Structure</span></h3>
+<p>A ZIP file is identified by the presence of a <i>central directory</i>
+ located at the end of the file, this allows appending of new files. The
+ directory stores a list of the names of the entries (files or 
+directories) stored in the ZIP file, along with other metadata about the
+ entry, and an offset into the ZIP file, pointing to the actual entry 
+data. This allows a file listing of the archive to be performed 
+relatively quickly, as the entire archive does not have to be read to 
+see the list of files. The entries in the ZIP file also include this 
+information for redundancy.</p>
+<p>The order of the file entries in the directory need not coincide with the order of file entries in the archive.</p>
+<p>Each entry is introduced by a local header with information about the
+ file such as the comment, file size and file name, followed by optional
+ <b>"Extra"</b> data fields, and then the possibly compressed, possibly 
+encrypted file data. The "Extra" data fields are the key to the 
+extensibility of the ZIP format. "Extra" fields are exploited to support
+ the ZIP64 format, WinZip-compatible AES encryption, file attributes, 
+and higher-resolution NTFS or Unix file timestamps. Other extensions are
+ possible via the "Extra" field. ZIP tools are required by the 
+specification to ignore Extra fields they do not recognize.</p>
+<p><a href="http://en.wikipedia.org/wiki/File:ZIPformat.jpg" class="image"><img alt="ZIPformat.jpg" src="ZIP_%28file_format%29_files/ZIPformat.jpg" height="282" width="624"/></a></p>
+<p>The ZIP format uses specific 4-byte "signatures" to denote the 
+various structures in the file. Each file entry is marked by a specific 
+signature. The beginning of the central directory is indicated with a 
+different signature, and each entry in the central directory is marked 
+with yet another particular 4-byte signature.</p>
+<p>There is no BOF or EOF marker in the ZIP specification. Often the 
+first thing in a ZIP file is a ZIP entry, which can be identified easily
+ by its signature. But it is not necessarily the case that a ZIP file 
+begins with a ZIP entry, and is not required by the ZIP specification.</p>
+<p>Tools that correctly read ZIP archives must scan for the signatures 
+of the various fields, the ZIP central directory. They must NOT scan for
+ entries because only the directory specifies where a file chunk starts.
+ Scanning could lead to false positives, as the format allows for other 
+data to be between chunks.<sup class="Template-Fact" title="This claim needs references to reliable sources from July 2010" style="white-space: nowrap;">[<i><a href="http://en.wikipedia.org/wiki/Wikipedia:Citation_needed" title="Wikipedia:Citation needed">citation needed</a></i>]</sup></p>
+<p>The ZIP specification also supports spreading archives across 
+multiple filesystem files. Originally intended for storage of large zip 
+files across multiple 1.44 MB <a href="http://en.wikipedia.org/wiki/Floppy_disk" title="Floppy disk">floppy disks</a>, this feature is now used for sending zip archives in parts over email, or over other transports or removable media.</p>
+<p>The <a href="http://en.wikipedia.org/wiki/File_Allocation_Table" title="File Allocation Table">FAT filesystem</a>
+ of DOS has a timestamp resolution of only two seconds; ZIP file records
+ mimic this. As a result, the built-in timestamp resolution of files in a
+ ZIP archive is only two seconds, though extra fields can be used to 
+store more accurate timestamps.</p>
+<p>In September 2007, PKZIP released a revision of the ZIP specification that contains a provision to store file names using <a href="http://en.wikipedia.org/wiki/UTF-8">UTF-8</a>, finally adding Unicode compatibility to ZIP.<sup id="cite_ref-appnote_4-0" class="reference"><a href="#cite_note-appnote-4"><span>[</span>5<span>]</span></a></sup></p>
+<h4><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=8" title="Edit section: File headers">edit</a>]</span> <span class="mw-headline" id="File_headers">File headers</span></h4>
+<p>All multi-byte values are little-endian.</p>
+<table class="wikitable">
+<caption>ZIP local file header</caption>
+<tbody><tr>
+<th>Offset</th>
+<th>Bytes</th>
+<th>Description<sup id="cite_ref-appnote_4-1" class="reference"><a href="#cite_note-appnote-4"><span>[</span>5<span>]</span></a></sup></th>
+</tr>
+<tr>
+<td> 0</td>
+<td>4</td>
+<td>Local file header signature = 0x04034b50</td>
+</tr>
+<tr>
+<td> 4</td>
+<td>2</td>
+<td>Version needed to extract (minimum)</td>
+</tr>
+<tr>
+<td> 6</td>
+<td>2</td>
+<td>General purpose bit flag</td>
+</tr>
+<tr>
+<td> 8</td>
+<td>2</td>
+<td>Compression method</td>
+</tr>
+<tr>
+<td>10</td>
+<td>2</td>
+<td>File last modification time</td>
+</tr>
+<tr>
+<td>12</td>
+<td>2</td>
+<td>File last modification date</td>
+</tr>
+<tr>
+<td>14</td>
+<td>4</td>
+<td>CRC-32</td>
+</tr>
+<tr>
+<td>18</td>
+<td>4</td>
+<td>Compressed size</td>
+</tr>
+<tr>
+<td>22</td>
+<td>4</td>
+<td>Uncompressed size</td>
+</tr>
+<tr>
+<td>26</td>
+<td>2</td>
+<td>File name length (<i>n</i>)</td>
+</tr>
+<tr>
+<td>28</td>
+<td>2</td>
+<td>Extra field length (<i>m</i>)</td>
+</tr>
+<tr>
+<td>30</td>
+<td><i>n</i></td>
+<td>File name</td>
+</tr>
+<tr>
+<td>30+<i>n</i></td>
+<td><i>m</i></td>
+<td>Extra field</td>
+</tr>
+</tbody></table>
+<p>The extra field contains a variety of optional data such as 
+OS-specific attributes. It is divided into chunks, each with a 16-bit ID
+ code and a 16-bit length.</p>
+<p>This is immediately followed by the compressed data.</p>
+<p>If bit 3 (0x08) of the general-purpose flags field is set, then the 
+CRC-32 and file sizes are not known when the header is written. The 
+fields in the local header are filled with zero, and the CRC-32 and size
+ are appended in a 12-byte structure immediately after the compressed 
+data:</p>
+<table class="wikitable">
+<caption>ZIP data descriptor</caption>
+<tbody><tr>
+<th>Offset</th>
+<th>Bytes</th>
+<th>Description<sup id="cite_ref-appnote_4-2" class="reference"><a href="#cite_note-appnote-4"><span>[</span>5<span>]</span></a></sup></th>
+</tr>
+<tr>
+<td> 0</td>
+<td>4</td>
+<td>Local file header signature = 0x08074b50</td>
+</tr>
+<tr>
+<td> 4</td>
+<td>4</td>
+<td>CRC-32</td>
+</tr>
+<tr>
+<td> 8</td>
+<td>4</td>
+<td>Compressed size</td>
+</tr>
+<tr>
+<td> 12</td>
+<td>4</td>
+<td>Uncompressed size</td>
+</tr>
+</tbody></table>
+<p>The central directory entry is an expanded form of the local header:</p>
+<table class="wikitable">
+<caption>ZIP central directory file header</caption>
+<tbody><tr>
+<th>Offset</th>
+<th>Bytes</th>
+<th>Description<sup id="cite_ref-appnote_4-3" class="reference"><a href="#cite_note-appnote-4"><span>[</span>5<span>]</span></a></sup></th>
+</tr>
+<tr>
+<td> 0</td>
+<td>4</td>
+<td>Central directory file header signature = 0x02014b50</td>
+</tr>
+<tr>
+<td> 4</td>
+<td>2</td>
+<td>Version made by</td>
+</tr>
+<tr>
+<td> 6</td>
+<td>2</td>
+<td>Version needed to extract (minimum)</td>
+</tr>
+<tr>
+<td> 8</td>
+<td>2</td>
+<td>General purpose bit flag</td>
+</tr>
+<tr>
+<td>10</td>
+<td>2</td>
+<td>Compression method</td>
+</tr>
+<tr>
+<td>12</td>
+<td>2</td>
+<td>File last modification time</td>
+</tr>
+<tr>
+<td>14</td>
+<td>2</td>
+<td>File last modification date</td>
+</tr>
+<tr>
+<td>16</td>
+<td>4</td>
+<td>CRC-32</td>
+</tr>
+<tr>
+<td>20</td>
+<td>4</td>
+<td>Compressed size</td>
+</tr>
+<tr>
+<td>24</td>
+<td>4</td>
+<td>Uncompressed size</td>
+</tr>
+<tr>
+<td>28</td>
+<td>2</td>
+<td>File name length (<i>n</i>)</td>
+</tr>
+<tr>
+<td>30</td>
+<td>2</td>
+<td>Extra field length (<i>m</i>)</td>
+</tr>
+<tr>
+<td>32</td>
+<td>2</td>
+<td>File comment length (<i>k</i>)</td>
+</tr>
+<tr>
+<td>34</td>
+<td>2</td>
+<td>Disk number where file starts</td>
+</tr>
+<tr>
+<td>36</td>
+<td>2</td>
+<td>Internal file attributes</td>
+</tr>
+<tr>
+<td>38</td>
+<td>4</td>
+<td>External file attributes</td>
+</tr>
+<tr>
+<td>42</td>
+<td>4</td>
+<td>Relative offset of local file header</td>
+</tr>
+<tr>
+<td>46</td>
+<td><i>n</i></td>
+<td>File name</td>
+</tr>
+<tr>
+<td>46+<i>n</i></td>
+<td><i>m</i></td>
+<td>Extra field</td>
+</tr>
+<tr>
+<td>46+<i>n</i>+<i>m</i></td>
+<td><i>k</i></td>
+<td>File comment</td>
+</tr>
+</tbody></table>
+<p>After all the local directory entries comes the end of central directory record, which marks the end of the ZIP file:</p>
+<table class="wikitable">
+<caption>ZIP end of central directory record</caption>
+<tbody><tr>
+<th>Offset</th>
+<th>Bytes</th>
+<th>Description<sup id="cite_ref-appnote_4-4" class="reference"><a href="#cite_note-appnote-4"><span>[</span>5<span>]</span></a></sup></th>
+</tr>
+<tr>
+<td> 0</td>
+<td>4</td>
+<td>End of central directory signature = 0x06054b50</td>
+</tr>
+<tr>
+<td> 4</td>
+<td>2</td>
+<td>Number of this disk</td>
+</tr>
+<tr>
+<td> 6</td>
+<td>2</td>
+<td>Disk where central directory starts</td>
+</tr>
+<tr>
+<td> 8</td>
+<td>2</td>
+<td>Number of central directory records on this disk</td>
+</tr>
+<tr>
+<td>10</td>
+<td>2</td>
+<td>Total number of central directory records</td>
+</tr>
+<tr>
+<td>12</td>
+<td>4</td>
+<td>Size of central directory (bytes)</td>
+</tr>
+<tr>
+<td>16</td>
+<td>4</td>
+<td>Offset of start of central directory, relative to start of archive</td>
+</tr>
+<tr>
+<td>20</td>
+<td>2</td>
+<td>ZIP file comment length (<i>n</i>)</td>
+</tr>
+<tr>
+<td>22</td>
+<td><i>n</i></td>
+<td>ZIP file comment</td>
+</tr>
+</tbody></table>
+<p>This ordering allows a ZIP file to be created in one pass, but it is 
+usually decompressed by first reading the central directory at the end.</p>
+<h3><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=9" title="Edit section: Compression methods">edit</a>]</span> <span class="mw-headline" id="Compression_methods">Compression methods</span></h3>
+<p>Current .ZIP File Format Specification documented the details of 
+following methods: stored (no compression), Shrunk, Reduced (methods 
+1-4), Imploded, Tokenizing, Deflated, Deflate64, <a href="http://en.wikipedia.org/wiki/BZIP2" class="mw-redirect" title="BZIP2">BZIP2</a>, <a href="http://en.wikipedia.org/wiki/LZMA" class="mw-redirect" title="LZMA">LZMA</a> (EFS), <a href="http://en.wikipedia.org/wiki/WavPack">WavPack</a>, <a href="http://en.wikipedia.org/wiki/Prediction_by_Partial_Matching" title="Prediction by Partial Matching" class="mw-redirect">PPMd</a>. The most commonly used compression method is <a href="http://en.wikipedia.org/wiki/DEFLATE">DEFLATE</a>, which is described in IETF <a href="http://tools.ietf.org/html/rfc1951" class="external mw-magiclink-rfc">RFC 1951</a>.</p>
+<p>Compression methods mentioned, but not documented in detail in the 
+specification include: PKWARE Data Compression Library (DCL) Imploding 
+(old IBM TERSE), IBM TERSE (new), IBM LZ77 z Architecture (PFS).</p>
+<h3><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=10" title="Edit section: Encryption">edit</a>]</span> <span class="mw-headline" id="Encryption">Encryption</span></h3>
+<div class="rellink boilerplate seealso">See also: <a href="#Strong_encryption_controversy">#Strong encryption controversy</a></div>
+<p>ZIP supports a simple <a href="http://en.wikipedia.org/wiki/Password">password</a>-based <a href="http://en.wikipedia.org/wiki/Symmetric-key_algorithm" title="Symmetric-key algorithm">symmetric encryption</a> system which is documented in the ZIP specification, and known to be seriously flawed. In particular it is vulnerable to <a href="http://en.wikipedia.org/wiki/Known-plaintext_attack" title="Known-plaintext attack">known-plaintext attacks</a> which are in some cases made worse by poor implementations of <a href="http://en.wikipedia.org/wiki/Random_number_generator" title="Random number generator" class="mw-redirect">random number generators</a>.<sup id="cite_ref-5" class="reference"><a href="#cite_note-5"><span>[</span>6<span>]</span></a></sup></p>
+<p>New features including new <a href="http://en.wikipedia.org/wiki/Data_compression" title="Data compression">compression</a> and <a href="http://en.wikipedia.org/wiki/Encryption">encryption</a> (e.g. <a href="http://en.wikipedia.org/wiki/Advanced_Encryption_Standard" title="Advanced Encryption Standard">AES</a>)
+ methods have been documented in the .ZIP File Format Specification 
+since version 5.2. A WinZip-developed AES-based standard is used also by
+ <a href="http://en.wikipedia.org/wiki/7-Zip">7-Zip</a>, XCeed, and DotNetZip, but some vendors use other formats.<sup id="cite_ref-6" class="reference"><a href="#cite_note-6"><span>[</span>7<span>]</span></a></sup>
+ PKWARE SecureZIP also supports RC2, RC4, DES, Triple DES encryption 
+methods, Digital Certificate-based encryption and authentication (<a href="http://en.wikipedia.org/wiki/X.509">X.509</a>), and archive header encryption.<sup id="cite_ref-pkware_7-0" class="reference"><a href="#cite_note-pkware-7"><span>[</span>8<span>]</span></a></sup></p>
+<h3><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=11" title="Edit section: ZIP64">edit</a>]</span> <span class="mw-headline" id="ZIP64">ZIP64</span></h3>
+<p>The original ZIP format had a 4&nbsp;GiB limit on various things 
+(uncompressed size of a file, compressed size of a file and total size 
+of the archive), as well as a limit of 65535 entries in a ZIP archive. 
+In version 4.5 of the specification (which is not the same as v4.5 of 
+any particular tool), PKWARE introduced the "ZIP64" format extensions to
+ get around these limitations increasing the limitation to 16&nbsp;EiB 
+(2<sup>64</sup> bytes). ZIP64 support is emerging. For example, the File
+ Explorer in Windows XP does not support ZIP64, but the Explorer in 
+Windows Vista does. Likewise, some libraries, such as DotNetZip and 
+IO::Compress::Zip in Perl, support ZIP64. Java's built-in java.util.zip 
+does not support it as of September 2010<sup class="plainlinks noprint asof-tag update" style="display: none;"><a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit" class="external text" rel="nofollow">[update]</a></sup>, but it has been added to OpenJDK and is planned for inclusion in <a href="http://en.wikipedia.org/wiki/Java_version_history#Java_SE_7.0" title="Java version history">Java 7</a>.<sup id="cite_ref-8" class="reference"><a href="#cite_note-8"><span>[</span>9<span>]</span></a></sup></p>
+<h3><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=12" title="Edit section: Advantages and disadvantages">edit</a>]</span> <span class="mw-headline" id="Advantages_and_disadvantages">Advantages and disadvantages</span></h3>
+<p>Compressing files separately, as is done in ZIP files, allows for 
+random access: individual files can be retrieved without reading through
+ other data. It may allow better overall compression by using different 
+algorithms for different files. Even when confining the possibility to 
+DEFLATE compression, the use of different compression dictionaries for 
+each file may result in a smaller archive overall.</p>
+<p>This approach is less well-suited, in general, to archival of a large
+ number of small files. In the ZIP archive format, the metadata for each
+ entry—the information about each individual entry—is not compressed. 
+This limits the maximum achievable compression ratio, especially as the 
+size of the individual entries diminishes and approaches the size of the
+ metadata for the entry.</p>
+<p>An alternate approach is used in a <a href="http://en.wikipedia.org/wiki/Tar_%28file_format%29" title="Tar (file format)">compressed tar archive (<code>.tar.gz</code>, or <code>.tgz</code>)</a>, in which the file data and metadata is compressed as a unit using <a href="http://en.wikipedia.org/wiki/Gzip">gzip</a>. The downside of this approach is the loss of random-access efficiency.</p>
+<h3><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=13" title="Edit section: Combining ZIP with other file formats">edit</a>]</span> <span class="mw-headline" id="Combining_ZIP_with_other_file_formats">Combining ZIP with other file formats</span></h3>
+<p>The ZIP file format allows for a comment containing any data to occur at the end of the file after the central directory.<sup id="cite_ref-appnote_4-5" class="reference"><a href="#cite_note-appnote-4"><span>[</span>5<span>]</span></a></sup>
+ Also, because the central directory specifies the offset of each file 
+in the archive with respect to the start, it is possible in practice for
+ the first file entry to start at an offset other than zero.</p>
+<p>This allows arbitrary data to occur in the file both before and after
+ the ZIP archive data, and for the archive to still be read by a ZIP 
+application. A side-effect of this is that it is possible to author a 
+file that is both a working ZIP archive and another format, provided 
+that the other format tolerates arbitrary data at its end, beginning, or
+ middle. <a href="http://en.wikipedia.org/wiki/Self-extracting_archives" class="mw-redirect" title="Self-extracting archives">Self-extracting archives</a>
+ (SFX), of the form supported by WinZip and DotNetZip, take advantage of
+ this—they are .exe files that conform to the PKZIP AppNote.txt 
+specification and can be read by compliant zip tools or libraries.</p>
+<p>This property of the ZIP format, and of the JAR format which is a 
+variant of ZIP, can be exploited to hide harmful Java classes inside a 
+seemingly harmless file, such as a GIF image uploaded to the web. This 
+so-called <a href="http://en.wikipedia.org/w/index.php?title=GIFAR&amp;action=edit&amp;redlink=1" class="new" title="GIFAR (page does not exist)">GIFAR</a> exploit has been demonstrated as an effective attack against web applications such as Facebook.<sup id="cite_ref-9" class="reference"><a href="#cite_note-9"><span>[</span>10<span>]</span></a></sup></p>
+<h3><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=14" title="Edit section: Implementation">edit</a>]</span> <span class="mw-headline" id="Implementation">Implementation</span></h3>
+<p>There are numerous ZIP tools available, and numerous ZIP libraries 
+for various programming environments; licenses used include commercial 
+and <a href="http://en.wikipedia.org/wiki/Open_source">open source</a>. For instance, WinZip is one well-known ZIP tool running on Windows and <a href="http://en.wikipedia.org/wiki/WinRAR">WinRAR</a>, <a href="http://en.wikipedia.org/wiki/IZarc" class="mw-redirect" title="IZarc">IZarc</a>, Info-zip, <a href="http://en.wikipedia.org/wiki/7-Zip">7-Zip</a>, <a href="http://en.wikipedia.org/wiki/PeaZip">PeaZip</a> and DotNetZip are other tools, available on various platforms. Some of those tools have library or programmatic interfaces.</p>
+<p>An example of a development library licensed under an open source agreement is the <a href="http://en.wikipedia.org/wiki/GNU">GNU</a> <a href="http://en.wikipedia.org/wiki/Gzip">gzip</a> project and <a href="http://en.wikipedia.org/wiki/Info-ZIP">Info-ZIP</a>. For Java: <a href="http://en.wikipedia.org/wiki/Java_Platform,_Standard_Edition">Java Platform, Standard Edition</a>
+ contains the package "java.util.zip" to handle standard zip files; the 
+Zip64File library specifically supports large files (larger than 
+4&nbsp;GB) and treats ZIP files using random access; and the <a href="http://en.wikipedia.org/wiki/Apache_Ant">Apache Ant</a> tool contains a more complete implementation released under the <a href="http://en.wikipedia.org/wiki/Apache_Software_License" class="mw-redirect" title="Apache Software License">Apache Software License</a>.</p>
+<p>For .NET applications, there is a no-cost open-source library called DotNetZip<sup id="cite_ref-10" class="reference"><a href="#cite_note-10"><span>[</span>11<span>]</span></a></sup> available in source and binary form under the Microsoft Public License.<sup id="cite_ref-11" class="reference"><a href="#cite_note-11"><span>[</span>12<span>]</span></a></sup>
+ It supports many ZIP features, including passwords for traditional ZIP 
+encryption or WinZip-compatible AES encryption, Unicode, ZIP64, zip 
+comments, spanned archives, and self-extracting archives. The <a href="http://en.wikipedia.org/wiki/.NET_Framework" title=".NET Framework">Microsoft .NET 3.5</a> runtime library includes a class System.IO.Packaging.Package<sup id="cite_ref-12" class="reference"><a href="#cite_note-12"><span>[</span>13<span>]</span></a></sup> that supports the ZIP format. It is primarily designed for document formats using the <a href="http://en.wikipedia.org/wiki/International_Organization_for_Standardization" title="International Organization for Standardization">ISO</a>/<a href="http://en.wikipedia.org/wiki/International_Electrotechnical_Commission" title="International Electrotechnical Commission">IEC</a> international standard <a href="http://en.wikipedia.org/wiki/Open_Packaging_Conventions">Open Packaging Conventions</a>.</p>
+<p>The <a href="http://en.wikipedia.org/wiki/Info-ZIP">Info-ZIP</a> 
+implementations of the ZIP format adds support for Unix filesystem 
+features, such as user and group IDs, file permissions, and support for 
+symbolic links. The <a href="http://en.wikipedia.org/wiki/Apache_Ant">Apache Ant</a>
+ implementation is aware of these to the extent that it can create files
+ with predefined Unix permissions. The Info-ZIP implementations also 
+know how to use the error correction capabilities built into the ZIP 
+compression format. Some programs (such as <a href="http://en.wikipedia.org/wiki/IZArc">IZArc</a>) do not and will choke on a file that has errors.</p>
+<p>The Info-ZIP Windows tools also support <a href="http://en.wikipedia.org/wiki/NTFS">NTFS</a> <a href="http://en.wikipedia.org/wiki/Filesystem" class="mw-redirect" title="Filesystem">filesystem</a>
+ permissions, and will make an attempt to translate from NTFS 
+permissions to Unix permissions or vice-versa when extracting files. 
+This can result in potentially unintended combinations, e.g. <a href="http://en.wikipedia.org/wiki/.exe" class="mw-redirect" title=".exe">.exe</a> files being created on NTFS volumes with executable permission denied.</p>
+<h3><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=15" title="Edit section: ZIP file limitations">edit</a>]</span> <span class="mw-headline" id="ZIP_file_limitations">ZIP file limitations</span></h3>
+<p>The minimum size of a ZIP file is 22 bytes.</p>
+<p>The maximum size for both the archive file and the individual files inside it is 4,294,967,295 (2<sup>32</sup>-1, 4 Gigabyte) bytes for standard ZIP, and 18,446,744,073,709,551,615 (2<sup>64</sup>-1, 16 Exabyte) for ZIP64.<sup id="cite_ref-ziplimit_13-0" class="reference"><a href="#cite_note-ziplimit-13"><span>[</span>14<span>]</span></a></sup></p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=16" title="Edit section: Windows compressed folders">edit</a>]</span> <span class="mw-headline" id="Windows_compressed_folders">Windows compressed folders</span></h2>
+<p>Versions of Microsoft Windows have included support for ZIP 
+compression in Explorer since the Plus! pack was released for Windows 
+98.<sup id="cite_ref-14" class="reference"><a href="#cite_note-14"><span>[</span>15<span>]</span></a></sup>
+ Microsoft calls this feature "Compressed Folders". Not all ZIP features
+ are supported by the Windows Compressed Folders capability. For 
+example, ZIP64, AES Encryption, split or spanned archives, and Unicode 
+entry encoding are not known to be readable or writable by the 
+Compressed Folders feature in Windows XP or Windows Vista.</p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=17" title="Edit section: Strong encryption controversy">edit</a>]</span> <span class="mw-headline" id="Strong_encryption_controversy">Strong encryption controversy</span></h2>
+<p>When <a href="http://en.wikipedia.org/wiki/WinZip">WinZip</a> 9.0 public beta was released in 2003, WinZip introduced its own <a href="http://en.wikipedia.org/wiki/AES-256" class="mw-redirect" title="AES-256">AES-256</a> encryption, using a different file format, along with the documentation for the new specification.<sup id="cite_ref-15" class="reference"><a href="#cite_note-15"><span>[</span>16<span>]</span></a></sup> The encryption standards themselves were not <a href="http://en.wikipedia.org/wiki/Proprietary_software" title="Proprietary software">proprietary</a>,
+ but PKWARE had not updated APPNOTE.TXT to include Strong Encryption 
+Specification (SES) since 2001, which had been used by PKZIP versions 
+5.0 and 6.0. WinZip technical consultant Kevin Kearney and <a href="http://en.wikipedia.org/wiki/StuffIt">StuffIt</a>
+ product manager Mathew Covington accused PKWARE of withholding SES, but
+ PKZIP chief technology officer Jim Peterson claimed that 
+Certificate-based encryption was still incomplete. However, the latest 
+publicly available APPNOTE.TXT at the time was version 4.5 (available on
+ PKWARE's FTP site), which not only omitted SES, but also omitted 
+Deflate64, DCL Implode, BZip2 compression methods used by .ZIP files 
+created by contemporary PKZIP products.</p>
+<p>To overcome this shortcoming, contemporary products such as <a href="http://en.wikipedia.org/w/index.php?title=PentaZip&amp;action=edit&amp;redlink=1" class="new" title="PentaZip (page does not exist)">PentaZip</a> 'implemented' strong ZIP encryption by encrypting ZIP archives into a different file format.<sup id="cite_ref-16" class="reference"><a href="#cite_note-16"><span>[</span>17<span>]</span></a></sup></p>
+<p>In another controversial move, PKWare applied for a patent on 
+2003-07-16 describing a method for combining .ZIP and strong encryption 
+to create a secure .ZIP file.<sup id="cite_ref-17" class="reference"><a href="#cite_note-17"><span>[</span>18<span>]</span></a></sup></p>
+<p>In the end, PKWARE and WinZip agreed to support each other's 
+products. On 2004-01-21, PKWARE announced the support of WinZip-based 
+AES compression format.<sup id="cite_ref-18" class="reference"><a href="#cite_note-18"><span>[</span>19<span>]</span></a></sup> In a later version of WinZip beta, it was able to support SES-based ZIP files.<sup id="cite_ref-19" class="reference"><a href="#cite_note-19"><span>[</span>20<span>]</span></a></sup> PKWARE eventually released version 5.2 of .ZIP File Format Specification to public, which documented SES. The <a href="http://en.wikipedia.org/wiki/Free_Software" class="mw-redirect" title="Free Software">Free Software</a> project <a href="http://en.wikipedia.org/wiki/7-Zip">7-Zip</a> also supports AES in ZIP files (as does its <a href="http://en.wikipedia.org/wiki/POSIX">POSIX</a> <a href="http://en.wikipedia.org/wiki/Porting" title="Porting">port</a> <a href="http://en.wikipedia.org/wiki/P7zip">p7zip</a>).</p>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=18" title="Edit section: See also">edit</a>]</span> <span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/PKZIP">PKZIP</a></li>
+<li><a href="http://en.wikipedia.org/wiki/List_of_archive_formats">List of archive formats</a></li>
+<li><a href="http://en.wikipedia.org/wiki/LZW" title="LZW" class="mw-redirect">LZW compression method</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Comparison_of_file_archivers">Comparison of file archivers</a></li>
+</ul>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=19" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References">References</span></h2>
+<div class="reflist references-column-count references-column-count-2" style="-moz-column-count: 2;">
+<div class="references">
+<ol>
+<li id="cite_note-0"><b><a href="#cite_ref-0">^</a></b> <span class="citation news"><a href="http://www.nytimes.com/2000/05/01/us/phillip-katz-computer-software-pioneer-37.html" class="external text" rel="nofollow">"Phillip Katz, Computer Software Pioneer, 37"</a>. The New York Times. Monday, May 1, 2000<span class="printonly">. <a href="http://www.nytimes.com/2000/05/01/us/phillip-katz-computer-software-pioneer-37.html" class="external free" rel="nofollow">http://www.nytimes.com/2000/05/01/us/phillip-katz-computer-software-pioneer-37.html</a></span><span class="reference-accessdate">. Retrieved 2009-06-14</span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Phillip+Katz%2C+Computer+Software+Pioneer%2C+37&amp;rft.atitle=&amp;rft.date=Monday%2C+May+1%2C+2000&amp;rft.pub=The+New+York+Times&amp;rft_id=http%3A%2F%2Fwww.nytimes.com%2F2000%2F05%2F01%2Fus%2Fphillip-katz-computer-software-pioneer-37.html&amp;rfr_id=info:sid/en.wikipedia.org:ZIP_(file_format)"><span style="display: none;">&nbsp;</span></span></li>
+<li id="cite_note-1"><b><a href="#cite_ref-1">^</a></b> <span class="citation web"><a href="http://www.winzip.com/comp_info.htm" class="external text" rel="nofollow">"Additional Compression Methods Specification"</a>. <i>WinZip</i>. <a href="http://en.wikipedia.org/wiki/Mansfield,_CT" class="mw-redirect" title="Mansfield, CT">Mansfield, CT</a>: <a href="http://en.wikipedia.org/wiki/WinZip">WinZip</a> Computing, S.L. 2009-05-19<span class="printonly">. <a href="http://www.winzip.com/comp_info.htm" class="external free" rel="nofollow">http://www.winzip.com/comp_info.htm</a></span><span class="reference-accessdate">. Retrieved 2009-05-24</span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=Additional+Compression+Methods+Specification&amp;rft.atitle=WinZip&amp;rft.date=2009-05-19&amp;rft.place=%5B%5BMansfield%2C+CT%5D%5D&amp;rft.pub=%5B%5BWinZip%5D%5D+Computing%2C+S.L&amp;rft_id=http%3A%2F%2Fwww.winzip.com%2Fcomp_info.htm&amp;rfr_id=info:sid/en.wikipedia.org:ZIP_(file_format)"><span style="display: none;">&nbsp;</span></span></li>
+<li id="cite_note-2"><b><a href="#cite_ref-2">^</a></b> <span class="citation web"><a href="http://kb.winzip.com/kb/entry/7/" class="external text" rel="nofollow">"What is a Zipx File?"</a>. <i>Winzip: Knowledgebase</i>. <a href="http://en.wikipedia.org/wiki/Mansfield,_CT" class="mw-redirect" title="Mansfield, CT">Mansfield, CT</a>: <a href="http://en.wikipedia.org/wiki/WinZip">WinZip</a> Computing, S.L. August 13, 2010<span class="printonly">. <a href="http://kb.winzip.com/kb/entry/7/" class="external free" rel="nofollow">http://kb.winzip.com/kb/entry/7/</a></span><span class="reference-accessdate">. Retrieved August 17, 2010</span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=What+is+a+Zipx+File%3F&amp;rft.atitle=Winzip%3A+Knowledgebase&amp;rft.date=August+13%2C+2010&amp;rft.place=%5B%5BMansfield%2C+CT%5D%5D&amp;rft.pub=%5B%5BWinZip%5D%5D+Computing%2C+S.L&amp;rft_id=http%3A%2F%2Fkb.winzip.com%2Fkb%2Fentry%2F7%2F&amp;rfr_id=info:sid/en.wikipedia.org:ZIP_(file_format)"><span style="display: none;">&nbsp;</span></span></li>
+<li id="cite_note-3"><b><a href="#cite_ref-3">^</a></b> <a href="http://www.itscj.ipsj.or.jp/sc34/open/1414.pdf" class="external free" rel="nofollow">http://www.itscj.ipsj.or.jp/sc34/open/1414.pdf</a></li>
+<li id="cite_note-appnote-4">^ <a href="#cite_ref-appnote_4-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-appnote_4-1"><sup><i><b>b</b></i></sup></a> <a href="#cite_ref-appnote_4-2"><sup><i><b>c</b></i></sup></a> <a href="#cite_ref-appnote_4-3"><sup><i><b>d</b></i></sup></a> <a href="#cite_ref-appnote_4-4"><sup><i><b>e</b></i></sup></a> <a href="#cite_ref-appnote_4-5"><sup><i><b>f</b></i></sup></a> <a href="http://www.pkware.com/documents/casestudies/APPNOTE.TXT" class="external free" rel="nofollow">http://www.pkware.com/documents/casestudies/APPNOTE.TXT</a></li>
+<li id="cite_note-5"><b><a href="#cite_ref-5">^</a></b> Stay, Michael. "ZIP Attacks with Reduced Known Plaintext". <a href="http://math.ucr.edu/%7Emike/zipattacks.pdf" class="external free" rel="nofollow">http://math.ucr.edu/~mike/zipattacks.pdf</a></li>
+<li id="cite_note-6"><b><a href="#cite_ref-6">^</a></b> <a href="http://www.winzip.com/aes_info.htm" class="external text" rel="nofollow">AES Encryption Information: Encryption Specification AE-1 and AE-2</a></li>
+<li id="cite_note-pkware-7"><b><a href="#cite_ref-pkware_7-0">^</a></b> <a href="http://www.pkware.com/index.php?option=com_content&amp;task=view&amp;id=64&amp;Itemid=107" class="external text" rel="nofollow">Application Note on the .ZIP file format</a></li>
+<li id="cite_note-8"><b><a href="#cite_ref-8">^</a></b> <span class="citation web">Shen, Xueming (2009-04-17). <a href="http://blogs.sun.com/xuemingshen/entry/zip64_support_for_4g_zipfile" class="external text" rel="nofollow">"ZIP64, The Format for &gt; 4G Zipfile, Is Now Supported"</a>. <i>Xueming Shen's Blog</i>. <a href="http://en.wikipedia.org/wiki/Sun_Microsystems">Sun Microsystems</a><span class="printonly">. <a href="http://blogs.sun.com/xuemingshen/entry/zip64_support_for_4g_zipfile" class="external free" rel="nofollow">http://blogs.sun.com/xuemingshen/entry/zip64_support_for_4g_zipfile</a></span><span class="reference-accessdate">. Retrieved 2010-09-27</span>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=ZIP64%2C+The+Format+for+%3E+4G+Zipfile%2C+Is+Now+Supported&amp;rft.atitle=Xueming+Shen%27s+Blog&amp;rft.aulast=Shen&amp;rft.aufirst=Xueming&amp;rft.au=Shen%2C%26%2332%3BXueming&amp;rft.date=2009-04-17&amp;rft.pub=%5B%5BSun+Microsystems%5D%5D&amp;rft_id=http%3A%2F%2Fblogs.sun.com%2Fxuemingshen%2Fentry%2Fzip64_support_for_4g_zipfile&amp;rfr_id=info:sid/en.wikipedia.org:ZIP_(file_format)"><span style="display: none;">&nbsp;</span></span></li>
+<li id="cite_note-9"><b><a href="#cite_ref-9">^</a></b> <a href="http://www.infoworld.com/article/08/08/01/A_photo_that_can_steal_your_online_credentials_1.html" class="external text" rel="nofollow">A photo that can steal your online credentials</a></li>
+<li id="cite_note-10"><b><a href="#cite_ref-10">^</a></b> <a href="http://www.codeplex.com/DotNetZip" class="external free" rel="nofollow">http://www.codeplex.com/DotNetZip</a></li>
+<li id="cite_note-11"><b><a href="#cite_ref-11">^</a></b> <a href="http://www.codeplex.com/DotNetZip/license" class="external free" rel="nofollow">http://www.codeplex.com/DotNetZip/license</a></li>
+<li id="cite_note-12"><b><a href="#cite_ref-12">^</a></b> <a href="http://msdn.microsoft.com/en-us/library/system.io.packaging.package.aspx" class="external free" rel="nofollow">http://msdn.microsoft.com/en-us/library/system.io.packaging.package.aspx</a></li>
+<li id="cite_note-ziplimit-13"><b><a href="#cite_ref-ziplimit_13-0">^</a></b> <a href="http://www.artpol-software.com/ZipArchive/KB/0610051629.aspx" class="external text" rel="nofollow">Limits of ZIP file: Standard versus ZIP64.</a></li>
+<li id="cite_note-14"><b><a href="#cite_ref-14">^</a></b> <a href="http://en.wikipedia.org/wiki/Windows_Millennium" class="external free" rel="nofollow">http://en.wikipedia.org/wiki/Windows_Millennium</a></li>
+<li id="cite_note-15"><b><a href="#cite_ref-15">^</a></b> <a href="http://www.winzip.com/aes_info.htm" class="external text" rel="nofollow">WinZip - AES Encryption Information</a></li>
+<li id="cite_note-16"><b><a href="#cite_ref-16">^</a></b> <a href="http://www.infoworld.com/article/03/06/10/HNzipsplinters_1.html" class="external text" rel="nofollow">The .zip standard splinters | InfoWorld | News | 2003-06-10 | By Lincoln Spector, PC World.com</a></li>
+<li id="cite_note-17"><b><a href="#cite_ref-17">^</a></b> <a href="http://www.infoworld.com/article/03/07/25/HNpkware_1.html" class="external text" rel="nofollow">PKWare seeks patent for .zip file format | InfoWorld | News | 2003-07-25 | By Robert McMillan, IDG News Service</a></li>
+<li id="cite_note-18"><b><a href="#cite_ref-18">^</a></b> <a href="http://www.news.com/2100-1012_3-5145491.html?tag=fd_nbs_ent" class="external text" rel="nofollow">Software makers patch Zip tiff - CNET News.com</a></li>
+<li id="cite_note-19"><b><a href="#cite_ref-19">^</a></b> <a href="http://www.theregister.co.uk/2004/01/21/zip_file_encryption_compromise_thrashed/" class="external free" rel="nofollow">http://www.theregister.co.uk/2004/01/21/zip_file_encryption_compromise_thrashed/</a></li>
+</ol>
+</div>
+</div>
+<h2><span class="editsection">[<a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit&amp;section=20" title="Edit section: External links">edit</a>]</span> <span class="mw-headline" id="External_links">External links</span></h2>
+<ul>
+<li><a href="http://www.bbsdocumentary.com/library/CONTROVERSY/LAWSUITS/SEA/judgment.txt" class="external text" rel="nofollow">Judgment in favor of SEA in <i>SEA v. PKWARE and Phil Katz</i></a></li>
+<li><a href="http://www.info-zip.org/pub/infozip/doc/" class="external text" rel="nofollow">Technical specifications of the PKZIP file formats from info-ZIP</a></li>
+<li><a href="http://www.pkware.com/documents/casestudies/APPNOTE.TXT" class="external text" rel="nofollow">Current file format specification from PKWARE (including many recent features that are not widely supported)</a></li>
+<li><a href="http://www.c10n.info/archives/430" class="external text" rel="nofollow">18 Years of ZIP format: Happy Birthday</a> at The Data Compression News Blog</li>
+<li><a href="http://rlwpx.free.fr/WPFF/comploc.htm" class="external text" rel="nofollow">Comparison of the performances of various methods of data compression (french)</a></li>
+<li><a href="http://www.codeplex.com/DotNetZip" class="external text" rel="nofollow">.NET Zip library</a> - reads and writes ZIP archives.</li>
+<li><a href="http://www.dlugosz.com/ZIP2/index.html" class="external text" rel="nofollow">ZIP2 file format specification</a></li>
+<li><a href="http://research.swtch.com/2010/03/zip-files-all-way-down.html" class="external text" rel="nofollow">Zip Files All The Way Down</a></li>
+<li><a href="http://www.steike.com/code/useless/zip-file-quine/" class="external text" rel="nofollow">ZIP File Quine</a></li>
+<li><a href="http://mindprod.com/jgloss/zip.html#GOTCHAS" class="external text" rel="nofollow">Limitations of <tt>java.util.zip</tt></a></li>
+<li><a href="http://www.at4j.org/" class="external text" rel="nofollow">At4J</a> - Java implementation of ZIP.</li>
+<li><a href="http://zipstorer.codeplex.com/" class="external text" rel="nofollow">ZipStorer</a>: A pure <a href="http://en.wikipedia.org/wiki/C_Sharp_%28programming_language%29" title="C Sharp (programming language)">C#</a> class to compress and store files in ZIP archives</li>
+</ul>
+<table class="navbox" style="" cellspacing="0">
+<tbody><tr>
+<td style="padding: 2px;">
+<table id="collapsibleTable0" class="nowraplinks collapsible autocollapse" style="width: 100%; background: none repeat scroll 0% 0% transparent; color: inherit;" cellspacing="0">
+<tbody><tr>
+<th style="" colspan="2" class="navbox-title"><span class="collapseButton">[<a href="#" id="collapseButton0">hide</a>]</span><span style="float: left; width: 6em; text-align: left;"><span class="noprint plainlinks navbar" style=""><span style="white-space: nowrap; word-spacing: -0.12em;"><a href="http://en.wikipedia.org/wiki/Template:Archive_formats" title="Template:Archive formats"><span style="background: none repeat scroll 0% 0% transparent; border: medium none; font-size: 100%;" title="View this template">v</span></a> <span style="background: none repeat scroll 0% 0% transparent; border: medium none; font-size: 100%;"><b>·</b></span> <a href="http://en.wikipedia.org/wiki/Template_talk:Archive_formats" title="Template talk:Archive formats"><span style="background: none repeat scroll 0% 0% transparent; border: medium none; font-size: 100%;" title="Discuss this template">d</span></a> <span style="background: none repeat scroll 0% 0% transparent; border: medium none; font-size: 100%;"><b>·</b></span> <a href="http://en.wikipedia.org/w/index.php?title=Template:Archive_formats&amp;action=edit" class="external text" rel="nofollow"><span style="background: none repeat scroll 0% 0% transparent; border: medium none; font-size: 100%;" title="Edit this template">e</span></a></span></span></span><span class="" style="font-size: 110%;"><a href="http://en.wikipedia.org/wiki/Archive_format" title="Archive format">Archive formats</a> <small>(<a href="http://en.wikipedia.org/wiki/List_of_archive_formats" title="List of archive formats">list</a>, <a href="http://en.wikipedia.org/wiki/Comparison_of_archive_formats" title="Comparison of archive formats">comparison</a> by <a href="http://en.wikipedia.org/wiki/File_format#Identifying_the_type_of_a_file" title="File format">type</a>)</small></span></th>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td class="navbox-group" style="">Archiving only</td>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding: 0em 0.25em;"><a href="http://en.wikipedia.org/wiki/Ar_%28Unix%29" title="Ar (Unix)">ar</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Cpio">cpio</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Shar">shar</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Tar_%28file_format%29" title="Tar (file format)">tar</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/LBR_%28file_format%29" title="LBR (file format)">LBR</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/BagIt">BagIt</a></div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td class="navbox-group" style="">Compression only</td>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding: 0em 0.25em;"><a href="http://en.wikipedia.org/wiki/Bzip2">bzip2</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Gzip">gzip</a>&nbsp;<span style="font-weight: bold;">·</span> <a href="http://en.wikipedia.org/wiki/Lzip">lzip</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Lzop">lzop</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Xz">xz</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/SQ_%28program%29" title="SQ (program)">SQ</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Compress">compress</a></div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td class="navbox-group" style="">Archiving and compression</td>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding: 0em 0.25em;"><a href="http://en.wikipedia.org/wiki/7z">7z</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/ACE_%28file_format%29" title="ACE (file format)">ACE</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/ARC_%28file_format%29" title="ARC (file format)">ARC</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/.arj" title=".arj" class="mw-redirect">ARJ</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Cabinet_%28file_format%29" title="Cabinet (file format)">Cabinet</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/CFS_%28Compact_File_Set_file_format%29" title="CFS (Compact File Set file format)">cfs</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Compact_Pro" title="Compact Pro">cpt</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/DGCA">DGCA</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Apple_Disk_Image" title="Apple Disk Image">.dmg</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/GCA_%28file_format%29" title="GCA (file format)">GCA</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/KGB_Archiver" title="KGB Archiver">kgb</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/LHA_%28file_format%29" title="LHA (file format)">LHA</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/LZX_%28algorithm%29" title="LZX (algorithm)">LZX</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/PEA_%28file_format%29" title="PEA (file format)" class="mw-redirect">PEA</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Quadruple_D" title="Quadruple D">qda</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/RAR">RAR</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Rzip">rzip</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/StuffIt" title="StuffIt">sit</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/SQX">SQX</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/PAQ" title="PAQ">UDA</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Xar_%28archiver%29" title="Xar (archiver)">Xar</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Zoo_%28file_format%29" title="Zoo (file format)">zoo</a>&nbsp;<span style="font-weight: bold;">·</span>  <strong class="selflink">ZIP</strong></div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td class="navbox-group" style="">Software packaging and distribution</td>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-even">
+<div style="padding: 0em 0.25em;"><a href="http://en.wikipedia.org/w/index.php?title=Unix_SVR4_package&amp;action=edit&amp;redlink=1" class="new" title="Unix SVR4 package (page does not exist)">pkg (SVR4)</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Deb_%28file_format%29" title="Deb (file format)">deb</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Installer_%28Mac_OS_X%29" title="Installer (Mac OS X)">pkg (Mac OS X)</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/RPM_Package_Manager" title="RPM Package Manager">RPM</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Super_OS#Software_repository" title="Super OS">RUNZ</a> &nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Windows_Installer" title="Windows Installer">MSI</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/JAR_%28file_format%29" title="JAR (file format)" class="mw-redirect">JAR</a> <small>(<a href="http://en.wikipedia.org/wiki/WAR_%28Sun_file_format%29" title="WAR (Sun file format)" class="mw-redirect">WAR</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Resource_Adapter" title="Resource Adapter">RAR (Java)</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/EAR_%28file_format%29" title="EAR (file format)">EAR</a>)</small></div>
+</td>
+</tr>
+<tr style="height: 2px;">
+<td></td>
+</tr>
+<tr>
+<td class="navbox-group" style="">Document packaging and distribution</td>
+<td style="text-align: left; border-left-width: 2px; border-left-style: solid; width: 100%; padding: 0px;" class="navbox-list navbox-odd">
+<div style="padding: 0em 0.25em;"><a href="http://en.wikipedia.org/wiki/Open_eBook" title="Open eBook">OEB Package Format</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/EPUB" title="EPUB">OEBPS Container Format</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/Open_Packaging_Conventions">Open Packaging Conventions</a>&nbsp;<span style="font-weight: bold;">·</span>  <a href="http://en.wikipedia.org/wiki/PAQ">PAQ</a></div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 6061/1000000
+Post-expand include size: 62819/2048000 bytes
+Template argument size: 23041/2048000 bytes
+Expensive parser function count: 4/500
+-->
+
+<!-- Saved in parser cache with key enwiki:pcache:idhash:188488-0!*!0!!en!4 and timestamp 20110221115549 -->
+<div class="printfooter">
+Retrieved from "<a href="http://en.wikipedia.org/wiki/ZIP_%28file_format%29">http://en.wikipedia.org/wiki/ZIP_(file_format)</a>"</div>
+				<!-- /bodytext -->
+								<!-- catlinks -->
+				<div id="catlinks" class="catlinks"><div id="mw-normal-catlinks"><a href="http://en.wikipedia.org/wiki/Special:Categories" title="Special:Categories">Categories</a>: <span dir="ltr"><a href="http://en.wikipedia.org/wiki/Category:Archive_formats" title="Category:Archive formats">Archive formats</a></span> | <span dir="ltr"><a href="http://en.wikipedia.org/wiki/Category:American_inventions" title="Category:American inventions">American inventions</a></span></div><div id="mw-hidden-catlinks" class="mw-hidden-cats-hidden">Hidden categories: <span dir="ltr"><a href="http://en.wikipedia.org/wiki/Category:Wikipedia_articles_needing_cleanup_from_September_2010" title="Category:Wikipedia articles needing cleanup from September 2010">Wikipedia articles needing cleanup from September 2010</a></span> | <span dir="ltr"><a href="http://en.wikipedia.org/wiki/Category:All_articles_needing_cleanup" title="Category:All articles needing cleanup">All articles needing cleanup</a></span> | <span dir="ltr"><a href="http://en.wikipedia.org/wiki/Category:All_articles_with_unsourced_statements" title="Category:All articles with unsourced statements">All articles with unsourced statements</a></span> | <span dir="ltr"><a href="http://en.wikipedia.org/wiki/Category:Articles_with_unsourced_statements_from_May_2009" title="Category:Articles with unsourced statements from May 2009">Articles with unsourced statements from May 2009</a></span> | <span dir="ltr"><a href="http://en.wikipedia.org/wiki/Category:Articles_with_unsourced_statements_from_July_2010" title="Category:Articles with unsourced statements from July 2010">Articles with unsourced statements from July 2010</a></span> | <span dir="ltr"><a href="http://en.wikipedia.org/wiki/Category:Articles_containing_potentially_dated_statements_from_September_2010" title="Category:Articles containing potentially dated statements from September 2010">Articles containing potentially dated statements from September 2010</a></span> | <span dir="ltr"><a href="http://en.wikipedia.org/wiki/Category:All_articles_containing_potentially_dated_statements" title="Category:All articles containing potentially dated statements">All articles containing potentially dated statements</a></span></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+					<li id="pt-login"><a href="http://en.wikipedia.org/w/index.php?title=Special:UserLogin&amp;returnto=ZIP_%28file_format%29" title="You are encouraged to log in; however, it is not mandatory. [alt-shift-o]" accesskey="o">Log in / create account</a></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li id="ca-nstab-main" class="selected"><span><a href="http://en.wikipedia.org/wiki/ZIP_%28file_format%29" title="View the content page [alt-shift-c]" accesskey="c">Article</a></span></li>
+					<li id="ca-talk"><span><a href="http://en.wikipedia.org/wiki/Talk:ZIP_%28file_format%29" title="Discussion about the content page [alt-shift-t]" accesskey="t">Discussion</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="#"></a></h5>
+	<div class="menu">
+		<ul><li></li>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="http://en.wikipedia.org/wiki/ZIP_%28file_format%29">Read</a></span></li>
+					<li id="ca-edit"><span><a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=edit" title="You can edit this page. 
+Please use the preview button before saving. [alt-shift-e]" accesskey="e">Edit</a></span></li>
+					<li id="ca-history" class="collapsible "><span><a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;action=history" title="Past versions of this page [alt-shift-h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="#"></a></h5>
+	<div class="menu">
+		<ul><li></li>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="/w/index.php" id="searchform">
+		<input name="title" value="Special:Search" type="hidden"/>
+				<div id="simpleSearch">
+						<input autocomplete="off" class="placeholder" placeholder="Search" tabindex="1" id="searchInput" name="search" title="Search Wikipedia [alt-shift-f]" accesskey="f" value="Search" type="text"/>
+						<button id="searchButton" type="submit" name="button" title="Search Wikipedia for this text"><img src="ZIP_%28file_format%29_files/search-ltr.png" alt="Search"/></button>
+					</div>
+			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint collapsible-nav">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(&quot;http://upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png&quot;);" href="http://en.wikipedia.org/wiki/Main_Page" title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal first persistent" id="p-navigation">
+	<h5>Navigation</h5>
+	<div class="body">
+				<ul>
+					<li id="n-mainpage-description"><a href="http://en.wikipedia.org/wiki/Main_Page" title="Visit the main page [alt-shift-z]" accesskey="z">Main page</a></li>
+					<li id="n-contents"><a href="http://en.wikipedia.org/wiki/Portal:Contents" title="Guides to browsing Wikipedia">Contents</a></li>
+					<li id="n-featuredcontent"><a href="http://en.wikipedia.org/wiki/Portal:Featured_content" title="Featured content – the best of Wikipedia">Featured content</a></li>
+					<li id="n-currentevents"><a href="http://en.wikipedia.org/wiki/Portal:Current_events" title="Find background information on current events">Current events</a></li>
+					<li id="n-randompage"><a href="http://en.wikipedia.org/wiki/Special:Random" title="Load a random article [alt-shift-x]" accesskey="x">Random article</a></li>
+					<li id="n-sitesupport"><a href="http://wikimediafoundation.org/wiki/Special:Landingcheck?landing_page=WMFJA085&amp;language=en&amp;utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=20101204SB002" title="Support us">Donate to Wikipedia</a></li>
+				</ul>
+			</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- interaction -->
+<div class="portal expanded" id="p-interaction">
+	<h5 tabindex="2">Interaction</h5>
+	<div style="display: block;" class="body">
+				<ul>
+					<li id="n-help"><a href="http://en.wikipedia.org/wiki/Help:Contents" title="Guidance on how to use and edit Wikipedia">Help</a></li>
+					<li id="n-aboutsite"><a href="http://en.wikipedia.org/wiki/Wikipedia:About" title="Find out about Wikipedia">About Wikipedia</a></li>
+					<li id="n-portal"><a href="http://en.wikipedia.org/wiki/Wikipedia:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li>
+					<li id="n-recentchanges"><a href="http://en.wikipedia.org/wiki/Special:RecentChanges" title="The list of recent changes in the wiki [alt-shift-r]" accesskey="r">Recent changes</a></li>
+					<li id="n-contact"><a href="http://en.wikipedia.org/wiki/Wikipedia:Contact_us" title="How to contact Wikipedia">Contact Wikipedia</a></li>
+				</ul>
+			</div>
+</div>
+
+<!-- /interaction -->
+
+<!-- TOOLBOX -->
+<div class="portal collapsed" id="p-tb">
+	<h5 tabindex="3">Toolbox</h5>
+	<div class="body">
+		<ul>
+					<li id="t-whatlinkshere"><a href="http://en.wikipedia.org/wiki/Special:WhatLinksHere/ZIP_%28file_format%29" title="List of all English Wikipedia pages containing links to this page [alt-shift-j]" accesskey="j">What links here</a></li>
+						<li id="t-recentchangeslinked"><a href="http://en.wikipedia.org/wiki/Special:RecentChangesLinked/ZIP_%28file_format%29" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k">Related changes</a></li>
+																																					<li id="t-upload"><a href="http://en.wikipedia.org/wiki/Wikipedia:Upload" title="Upload files [alt-shift-u]" accesskey="u">Upload file</a></li>
+											<li id="t-specialpages"><a href="http://en.wikipedia.org/wiki/Special:SpecialPages" title="List of all special pages [alt-shift-q]" accesskey="q">Special pages</a></li>
+											<li id="t-permalink"><a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;oldid=414449364" title="Permanent link to this revision of the page">Permanent link</a></li>
+				<li id="t-cite"><a href="http://en.wikipedia.org/w/index.php?title=Special:Cite&amp;page=ZIP_%28file_format%29&amp;id=414449364" title="Information on how to cite this page">Cite this page</a></li>		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- coll-print_export -->
+<div class="portal collapsed" id="p-coll-print_export">
+	<h5 tabindex="4">Print/export</h5>
+	<div class="body">
+				<ul id="collectionPortletList"><li id="coll-create_a_book"><a href="http://en.wikipedia.org/w/index.php?title=Special:Book&amp;bookcmd=book_creator&amp;referer=ZIP+%28file+format%29" title="Create a book or page collection" rel="nofollow">Create a book</a></li><li id="coll-download-as-rl"><a href="http://en.wikipedia.org/w/index.php?title=Special:Book&amp;bookcmd=render_article&amp;arttitle=ZIP+%28file+format%29&amp;oldid=414449364&amp;writer=rl" title="Download a PDF version of this wiki page" rel="nofollow">Download as PDF</a></li><li id="t-print"><a href="http://en.wikipedia.org/w/index.php?title=ZIP_%28file_format%29&amp;printable=yes" title="Printable version of this page [alt-shift-p]" accesskey="p">Printable version</a></li></ul>			</div>
+</div>
+
+<!-- /coll-print_export -->
+
+<!-- LANGUAGES -->
+<div class="portal expanded" id="p-lang">
+	<h5 tabindex="5">Languages</h5>
+	<div style="display: block;" class="body">
+		<ul>
+					<li class="interwiki-bg"><a href="http://bg.wikipedia.org/wiki/ZIP" title="ZIP">Български</a></li>
+					<li class="interwiki-ca"><a href="http://ca.wikipedia.org/wiki/ZIP" title="ZIP">Català</a></li>
+					<li class="interwiki-cs"><a href="http://cs.wikipedia.org/wiki/ZIP_%28souborov%C3%BD_form%C3%A1t%29" title="ZIP (souborový formát)">Česky</a></li>
+					<li class="interwiki-cy"><a href="http://cy.wikipedia.org/wiki/ZIP_%28fformat_ffeil%29" title="ZIP (fformat ffeil)">Cymraeg</a></li>
+					<li class="interwiki-de"><a href="http://de.wikipedia.org/wiki/ZIP_%28Dateiformat%29" title="ZIP (Dateiformat)">Deutsch</a></li>
+					<li class="interwiki-es"><a href="http://es.wikipedia.org/wiki/Formato_de_compresi%C3%B3n_ZIP" title="Formato de compresión ZIP">Español</a></li>
+					<li class="interwiki-fr"><a href="http://fr.wikipedia.org/wiki/ZIP_%28format_de_fichier%29" title="ZIP (format de fichier)">Français</a></li>
+					<li class="interwiki-ko"><a href="http://ko.wikipedia.org/wiki/ZIP_%28%ED%8C%8C%EC%9D%BC_%ED%8F%AC%EB%A7%B7%29" title="ZIP (파일 포맷)">한국어</a></li>
+					<li class="interwiki-id"><a href="http://id.wikipedia.org/wiki/ZIP_%28format_berkas%29" title="ZIP (format berkas)">Bahasa Indonesia</a></li>
+					<li class="interwiki-it"><a href="http://it.wikipedia.org/wiki/ZIP_%28formato_di_file%29" title="ZIP (formato di file)">Italiano</a></li>
+					<li class="interwiki-lb"><a href="http://lb.wikipedia.org/wiki/.zip" title=".zip">Lëtzebuergesch</a></li>
+					<li class="interwiki-mr"><a href="http://mr.wikipedia.org/wiki/%E0%A4%9D%E0%A4%BF%E0%A4%AA" title="झिप">मराठी</a></li>
+					<li class="interwiki-nl"><a href="http://nl.wikipedia.org/wiki/ZIP_%28bestandstype%29" title="ZIP (bestandstype)">Nederlands</a></li>
+					<li class="interwiki-ja"><a href="http://ja.wikipedia.org/wiki/ZIP_%28%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88%29" title="ZIP (ファイルフォーマット)">日本語</a></li>
+					<li class="interwiki-no"><a href="http://no.wikipedia.org/wiki/ZIP" title="ZIP">‪Norsk (bokmål)‬</a></li>
+					<li class="interwiki-uz"><a href="http://uz.wikipedia.org/wiki/ZIP" title="ZIP">O'zbek</a></li>
+					<li class="interwiki-pl"><a href="http://pl.wikipedia.org/wiki/ZIP" title="ZIP">Polski</a></li>
+					<li class="interwiki-pt"><a href="http://pt.wikipedia.org/wiki/ZIP" title="ZIP">Português</a></li>
+					<li class="interwiki-ru"><a href="http://ru.wikipedia.org/wiki/ZIP" title="ZIP">Русский</a></li>
+					<li class="interwiki-simple"><a href="http://simple.wikipedia.org/wiki/ZIP_%28file_format%29" title="ZIP (file format)">Simple English</a></li>
+					<li class="interwiki-sl"><a href="http://sl.wikipedia.org/wiki/Datote%C4%8Dni_format_ZIP" title="Datotečni format ZIP">Slovenščina</a></li>
+					<li class="interwiki-sr"><a href="http://sr.wikipedia.org/wiki/ZIP" title="ZIP">Српски / Srpski</a></li>
+					<li class="interwiki-sh"><a href="http://sh.wikipedia.org/wiki/ZIP" title="ZIP">Srpskohrvatski / Српскохрватски</a></li>
+					<li class="interwiki-fi"><a href="http://fi.wikipedia.org/wiki/ZIP" title="ZIP">Suomi</a></li>
+					<li class="interwiki-sv"><a href="http://sv.wikipedia.org/wiki/Zip" title="Zip">Svenska</a></li>
+					<li class="interwiki-tr"><a href="http://tr.wikipedia.org/wiki/Zip" title="Zip">Türkçe</a></li>
+					<li class="interwiki-uk"><a href="http://uk.wikipedia.org/wiki/Zip" title="Zip">Українська</a></li>
+					<li class="interwiki-wuu"><a href="http://wuu.wikipedia.org/wiki/Zip" title="Zip">吴语</a></li>
+					<li class="interwiki-zh"><a href="http://zh.wikipedia.org/wiki/ZIP_%28%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%29" title="ZIP (文件格式)">中文</a></li>
+				</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+											<ul id="footer-info">
+																	<li id="footer-info-lastmod"> This page was last modified on 17 February 2011 at 15:54.<br /></li>
+																							<li id="footer-info-copyright">Text is available under the <a rel="license" href="http://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License">Creative Commons Attribution-ShareAlike License</a><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" style="display: none;"></a>;
+additional terms may apply.
+See <a href="http://wikimediafoundation.org/wiki/Terms_of_Use">Terms of Use</a> for details.<br />
+Wikipedia® is a registered trademark of the <a href="http://www.wikimediafoundation.org/">Wikimedia Foundation, Inc.</a>, a non-profit organization.<br /></li><li class="noprint"><a class="internal" href="http://en.wikipedia.org/wiki/Wikipedia:Contact_us">Contact us</a></li>
+															</ul>
+															<ul id="footer-places">
+																	<li id="footer-places-privacy"><a href="http://wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy policy</a></li>
+																							<li id="footer-places-about"><a href="http://en.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About Wikipedia</a></li>
+																							<li id="footer-places-disclaimer"><a href="http://en.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+															</ul>
+											<ul id="footer-icons" class="noprint">
+					<li id="footer-copyrightico">
+						<a href="http://wikimediafoundation.org/"><img src="ZIP_%28file_format%29_files/wikimedia-button.png" alt="Wikimedia Foundation" height="31" width="88"></a>
+					</li>
+					<li id="footer-poweredbyico">
+						<a href="http://www.mediawiki.org/"><img src="ZIP_%28file_format%29_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" height="31" width="88"></a>
+					</li>
+				</ul>
+						<div style="clear: both;"></div>
+		</div>
+		<!-- /footer -->
+		
+<script src="ZIP_%28file_format%29_files/load.php" type="text/javascript"></script><script src="ZIP_%28file_format%29_files/load_002.php" type="text/javascript"></script>
+<script type="text/javascript">if ( window.mediaWiki ) {
+	mediaWiki.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "ZIP_(file_format)", "wgTitle": "ZIP (file format)", "wgAction": "view", "wgArticleId": 188488, "wgIsArticle": true, "wgUserName": null, "wgUserGroups": ["*"], "wgCurRevisionId": 414449364, "wgCategories": ["Wikipedia articles needing cleanup from September 2010", "All articles needing cleanup", "All articles with unsourced statements", "Articles with unsourced statements from May 2009", "Articles with unsourced statements from July 2010", "Articles containing potentially dated statements from September 2010", "All articles containing potentially dated statements", "Archive formats", "American inventions"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": [], "wgSearchNamespaces": [0], "wgFlaggedRevsParams": {"tags": {"status": {"levels": 1, "quality": 2, "pristine": 3}}}, "wgStableRevisionId": null, "wgRevContents": {"error": "Unable to get content.", "waiting": "Waiting for content"}, "wgWikimediaMobileUrl": "http://en.m.wikipedia.org/wiki", "wgCollapsibleNavBucketTest": false, "wgCollapsibleNavForceNewVersion": false, "wgArticleAssessmentJUIPath": "http://bits.wikimedia.org/w/extensions-1.17/UsabilityInitiative/js/js2stopgap/jui.combined.min.js", "Geo": {"city": "", "country": ""}, "wgNoticeProject": "wikipedia"});
+}
+</script>
+<script type="text/javascript">if ( window.mediaWiki ) {
+	mediaWiki.loader.load(["mediawiki.legacy.wikibits", "mediawiki.util", "mediawiki.legacy.ajax", "mediawiki.legacy.mwsuggest", "ext.vector.collapsibleNav", "ext.vector.collapsibleTabs", "ext.vector.editWarning", "ext.vector.simpleSearch"]);
+	mediaWiki.loader.go();
+}
+</script><script type="text/javascript" src="ZIP_%28file_format%29_files/load_005.php"></script><script type="text/javascript" src="ZIP_%28file_format%29_files/load_004.php"></script>
+
+<script src="ZIP_%28file_format%29_files/MobileRedirect.js" type="text/javascript"></script>
+<script src="ZIP_%28file_format%29_files/index.php" type="text/javascript"></script>
+<script src="ZIP_%28file_format%29_files/load_003.php" type="text/javascript"></script><script type="text/javascript" src="ZIP_%28file_format%29_files/index_002.php"></script>
+<script type="text/javascript">if ( window.mediaWiki ) {
+	mediaWiki.user.options.set({"ccmeonemails":0,"cols":80,"contextchars":50,"contextlines":5,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":1,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":4,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":1,"watchdefault":0,"watchdeletion":0,"watchlistdays":"3","watchlisthideanons":0,"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"flaggedrevssimpleui":1,"flaggedrevsstable":false,"flaggedrevseditdiffs":true,"flaggedrevsviewdiffs":false,"vector-simplesearch":1,"useeditwarning":1,"vector-collapsiblenav":1,"usebetatoolbar":1,"usebetatoolbar-cgd":1,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false,"searchNs100":false,"searchNs101":false,"searchNs108":false,"searchNs109":false});
+	mediaWiki.loader.state({"user.options":"ready"});
+	
+	
+	/* cache key: enwiki:resourceloader:filter:minify-js:3:ae2156c08a06314b12473d37e57711e2 */
+}
+</script><script type="text/javascript" src="ZIP_%28file_format%29_files/a"></script>		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<!-- Served by srv177 in 0.081 secs. -->			<div class="suggestions" style="top: 72px; width: 204px; display: none; left: auto; right: 29px;"><div class="suggestions-results"></div><div class="suggestions-special"></div></div></body></html>

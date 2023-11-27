@@ -1,0 +1,58 @@
+#!/data/data/com.termux/files/usr/bin/bash
+IFS=$'\n\t'
+trap ctrl_c 2
+
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+chk-pkg php php
+chk-pkg mariadb mariadb
+
+[[ -e ${PREFIX}/var/run/*.pid ]] && {
+	rm -rf ${PREFIX}/var/run/*.pid;
+}
+mysqld >/dev/null 2>/dev/null &
+pid=$(echo $!)
+sleep 3
+while [ "$(ps a|awk '{print $1}'|grep $pid)" ]
+do
+  dbuser=$(mysql -u $(whoami) -e "use mysql;SELECT user FROM user;"|grep "root")
+  [[ $dbuser == root ]] || { 
+    mysql -u $(whoami) -e "use mysql;set password for 'root'@'localhost' = password('root');flush privileges;" >/dev/null 2>/dev/null;
+    mysqld_safe >/dev/null 2>/dev/null &
+    safepid=$(echo $!)
+    running ps $safepid
+	}
+
+	select answ in bWAPP DVWA mutillidae Exit
+	do
+		[[ $answ = Exit ]] && {
+      kill -TERM $pid
+			exit 0;
+		}
+		[[ $answ = DVWA ]] && {
+			db=dvwa;
+		} || {
+			db=$answ;
+		}
+		[[ -d ${HOME}/.local/var/service/www/servers4test/$answ ]] && {
+			if [[ $(mysql -u root -proot -e "show DATABASES;"|grep $db) != $db ]] >/dev/null 2>/dev/null
+			then
+				mysql -u root -proot -e "create DATABASE $db >/dev/null 2>/dev/null;"
+			fi
+			getPORT;
+			banner
+			echo -en $B"(➤_)$W Web server $B$answ$W activated over:$Y http://$LOOPBACK:$LPORT$B\n  ╰──➤$W press enter to$R stop$W it.\n"
+			php -S $LOOPBACK:$LPORT -t ${HOME}/.local/var/service/www/servers4test/$answ 2>>$LOGFILE &
+			PHPpid=$(echo $!)
+      termux-open-url http://$LOOPBACK:$LPORT;
+			read enter;
+      kill -TERM $PHPpid;
+      break;
+		} || {
+			STDERR broken;
+		}
+  done
+  break
+done
+kill -TERM $pid >/dev/null 2>>$LOGFILE

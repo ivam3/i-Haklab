@@ -1,0 +1,17 @@
+#!/data/data/com.termux/files/usr/bin/bash
+IFS=$'\n\t'
+trap ctrl_c 2
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+chk-pkg ngrok ngrok
+banner
+chkngrok=$(curl -sN http://localhost:4040/api/tunnels &>/dev/null;echo $?)
+
+[[ $chkngrok -eq 0 ]] && {
+	printf $G"Ngrok link:$W \
+  $(curl -sSL http://localhost:4040/api/tunnels|cut -d '"' -f18)";
+} || {
+	printf $R"E:$W Ngrok server is inactive or unreachable\n";
+}
+

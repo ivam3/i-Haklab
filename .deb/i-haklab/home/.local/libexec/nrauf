@@ -1,0 +1,43 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Coded on july 2020 by @Ivam3
+#An script utility for remapping unicode filenames to ascii when produced by apktool
+IFS=$'\n\t'
+R='\033[1;31m'
+G='\033[1;32m'
+Goke='\033[92m'
+Glig=='\e[1;32m'
+Y='\033[1;33m'
+B='\033[1;34m'
+M='\033[1;35m'
+C='\033[1;36m'
+W='\033[0m'
+
+if [ -z $1 ]
+then
+	printf "$R\n(_>)_ERR-dir:─➤$W please specify a directory\n"
+	exit
+else
+	DIR=$1
+fi
+
+printf "$C\n(_➤) Verifying and installing dependencies.$W\n";sleep 0.5
+command -v git > /dev/null || pkg install git -y > /dev/null 2>&1
+command -v npm > /dev/null || pkg install nodejs -y > /dev/null 2>&1
+
+printf "$C(_➤) Downloading nrauf.$W\n"
+git clone https://github.com/warren-bank/node-remap-apktool-unicode-filenames $PREFIX/tmp/nrauf > /dev/null 2>&1
+if [ -d $PREFIX/tmp/nrauf ]
+then
+	pushd $PREFIX/tmp/nrauf >/dev/null 2>&1
+	chmod +x *
+	npm install --global @warren-bank/node-remap-apktool-unicode-filenames >/dev/null 2>&1
+	exec rauf $DIR
+	rm -rf $PREFIX/tmp/nrauf >/dev/null 2>&1
+	popd >/dev/null 2>&1
+	printf "$G(_➤) Done!!!$W\n"
+else
+	printf "$R(_>)_ERR-clone:─➤ Going to https://t.me/Ivam3_Bot$W\n"
+	exit
+fi
+
+#		i-Haklab by @IVAM3

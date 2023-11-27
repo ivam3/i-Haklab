@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+#Spotify
+spotify_status(){
+	current_track=$(playerctl -p spotifyd metadata xesam:title)
+	album=$(playerctl -p spotifyd metadata xesam:artist)
+	echo " " $album" - " $current_track " "
+}
+
+spotify_control(){
+	current_status=$(playerctl -p spotifyd status)
+    echo "%{A:playerctl -p spotifyd previous:}  %{A}%{A:playerctl -p spotifyd play-pause:} $(spotify_status) %{A}%{A:playerctl -p spotifyd next:}  %{A}"
+}
+
+spotify_control

@@ -1,0 +1,8 @@
+#!/data/data/com.termux/files/usr/bin/bash
+source ${HOME}/.local/etc/i-Haklab/functions
+while read -ei "$USER" -rp "New user: " -a user && [[ -z $user ]]; do
+	continue
+done
+sed -i "s|set USER $USER|set USER ${user[0]}|" ${HOME}/.local/etc/fish/config.fish
+echo -en "\e[32mNew user was successfully set at:\e[0m ${user[0]}"
+

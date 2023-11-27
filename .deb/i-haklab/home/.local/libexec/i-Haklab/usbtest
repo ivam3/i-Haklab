@@ -1,0 +1,27 @@
+#!/usr/bin/bash
+IFS=$'\n\t'
+trap ctrl_c 2
+
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+ctrl_c(){ rm -rf $TMPDIR/*;exit;}
+
+[[ -d /data/data/com.termux.api/ ]] || { echo -en "${R}E:$W You need to install the Termux-api APK.";exit;}
+chk-pkg termux-usb termux-api
+
+[[ -e ${HOME}/.local/libexec/usbtest ]] || {
+  chk-pkg gcc clang
+  echo -en "Compiling executable file for architecture :$G $(uname -m)$W\n"
+  wget --tries=20 --quiet \
+    https://gist.githubusercontent.com/bndeff/8c391bc3fd8d9f1dbd133ac6ead7f45e/raw/6d7174a129301eeb670fe808cd9d25ec261f7f9e/usbtest.c -O ${TMPDIR}/usbtest.c
+  #$iHDB/.local/etc/i-Haklab/usbtest.c 
+  [[ -e ${TMPDIR}/usbtest.c ]] || { echo -en "${R}E:$W Library 'usbtest' unreachable ... Aborting.";ctrl_c;}
+  gcc ${TMPDIR}/usbtest.c -lusb-1.0 -o ${HOME}/.local/libexec/usbtest
+}
+
+[[ "$#" -gt "0" ]] && {
+  termux-usb -e ${HOME}/.local/libexec/usbtest ${@:1}
+} || {
+  echo -en "${Y}Usage:$W i-Haklab usbtest <device path>"
+  ctrl_c
+}

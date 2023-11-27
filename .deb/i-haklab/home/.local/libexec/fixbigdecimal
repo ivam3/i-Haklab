@@ -1,0 +1,29 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#Coded on june 2019 by @Ivam3
+#This file will fix issues with ruby gem bigdecimal
+set -euo pipefail
+trap ctrl_c 2
+ctrl_c() { printf "$Y\n\n   [¿] Need a help [?]$B\nTelegram : t.me/Ivam3_Bot$W\n\n";}
+IFS=$'\n\t'
+GEMS=$(ls $PREFIX/lib/ruby |grep -m 1 '[0-9].[0-9].[0-9]')
+LINUXANDROID=$(find $PREFIX/lib/ruby/$GEMS -iname "bigdecimal.so" |awk -F "/" '{print $10}')
+#COLORS
+R='\e[31m'
+G='\e[32m'
+Y='\e[33m'
+B='\e[34m'
+M='\e[35m'
+C='\e[36m'
+W='\e[0m'
+echo -en "\e[33mW:\e[0m Fixing posible issues on bigdecimal gem ...  "
+yes|apt install -yq patchelf >/dev/null 2>&1
+if [ -e "$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal.so" ]; then
+	if [ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal/util.so" | grep bigdecimal.so)" ]; then
+		exit 0
+	fi
+	patchelf --add-needed \
+		"$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal.so" \
+		"$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal/util.so"
+fi
+echo -en "$G\bDONE!!!\n$W"
+#			i-Haklab by @Ivam3

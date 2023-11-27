@@ -1,4 +1,0 @@
-<?php
-
- $_TOKENS = array (
-);

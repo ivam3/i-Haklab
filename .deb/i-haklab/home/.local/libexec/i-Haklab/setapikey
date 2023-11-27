@@ -1,0 +1,54 @@
+#!/usr/bin/bash
+IFS=$'\n\t'
+trap ctrl_c 2
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+ask(){
+  echo -en "${Y}[!]${W} An API key exists. Overwrite it? "
+  while read -p "[y/n]: " yesornot && [ -z $yesornot ]; do
+    continue
+  done
+  [[ "$yesornot" == "n" ]] || [[ "$yesornot" == "N" ]] && { echo -en "$Y[!]$W Aborting ...";sleep 1;exit;}
+}
+
+getApiKey(){
+  echo -en "$G[+]$W API Key for $platform\n"
+  while read -p " ╰──➤ " apikey && [ -z $apikey ];do
+    continue
+  done
+}
+
+setApiKey(){
+  varkey=$(grep "APIKEY_$platform" $iHETC/variables)
+  if [[ $platform == "neovim" ]]; then
+      neuralFile=$(find $HOME/.config -name neural.lua)
+      [[ -z $neuralFile ]] && {
+        echo -en "${R}E:${W} Neovim do not include Neural"
+        exit 1
+      } || {
+        oldkey=$(grep "api_key" $neuralFile|awk '{print $NF}'|tr -d ","|tr -d "\"")
+        sed -i "s|$oldkey|$apikey|" $neuralFile
+      }
+  fi
+  sed -i "s|$varkey|export APIKEY_$platform=\"$apikey\"|" $iHETC/variables
+  echo -en "${G}DONE!!$W New API key added sucessfully"
+}
+
+banner
+echo -en "$Y[!]$W Get an OpenAI API key on:$B https://platform.openai.com/account/api-keys\n"
+echo -en "$Y[!]$W Get a PhoneScan API key on:$B https://numverify.com/dashboard$W\n"
+echo "[?] Choose the api key to set:"
+select platform in chatGPT neovim phonescan cancel;do
+  case $platform in
+    chatGPT|neovim|phonescan)
+      [[ -z "$(eval "echo \$APIKEY_$platform")" ]] || { ask;}
+      getApiKey
+      setApiKey
+      break
+      ;;
+    cancel)
+      exit 0
+      ;;
+  esac
+done

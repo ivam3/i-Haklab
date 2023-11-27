@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/data/data/com.termux/files/usr/var/service/php/rango-master/styles'
+let g:netrw_dirhist_2='/data/data/com.termux/files/usr/var/service/php/free-access/stream'
+let g:netrw_dirhist_1='/data/data/com.termux/files/home/john-1.8.0-android/libs/mips'
+let g:netrw_dirhist_0='/data/data/com.termux/files/usr/tmp/tmp.epniwbi5yM'
+let g:netrw_dirhist_9='/storage/0095-4180/Android/data/com.termux/files/roothome/i-Haklab/.set/share'
+let g:netrw_dirhist_8='/storage/emulated/0/Download'
+let g:netrw_dirhist_7='/storage/0095-4180/Android/data/com.termux/files/Ivam3/repositories/ivam3.github.io/master/installer/tools'
+let g:netrw_dirhist_6='/data/data/com.termux/files/usr/var/service/php/curso-gratis'
+let g:netrw_dirhist_5='/data/data/com.termux/files/usr/var/service/php/material-design-login-form/dist'
+let g:netrw_dirhist_4='/storage/0095-4180/Android/data/com.termux/files/Ivam3/repositories/i-Haklab/.set/functions'

@@ -2,9 +2,6 @@
 //         Inportaciones 
 //-------------------------------------------------
 #include "include/below_zero.h"
-#include <cstdio>
-#include <fmt/color.h>
-#include <fstream>
 
 
 //-------------------------------------------------
@@ -26,6 +23,7 @@ void about(std::string about);
 //-------------------------------------------------
 int main(int argc, const char *argv[])
 {
+  hack::Haklab user;
   try
   {
   //-------------------------------------------------
@@ -49,7 +47,7 @@ int main(int argc, const char *argv[])
     config.add_options()
         ("include-path,I",value<vector<string>>(),"include path")
         ("input-file", value<vector<string>>(),"input file")
-        ("name-user", value<string>(), "Change username USER=i-Haklab");
+        ("name-user", value<vector<string>>(), "Change username default(USER=i-Haklab)");
      
 
    //-------------------------------------------------
@@ -74,7 +72,6 @@ int main(int argc, const char *argv[])
     all.add(options).add(config).add(dpkg).add(automatitation);
 
     
-    // Menu extructura 
    //-------------------------------------------------
    //-------------------------------------------------
     options.add(config).add(automatitation);
@@ -82,7 +79,7 @@ int main(int argc, const char *argv[])
    //-------------------------------------------------
    //-------------------------------------------------
     positional_options_description positionalOptions;
-    positionalOptions.add("manifies", 8);
+    positionalOptions.add("manifies", 8).add("name-user",2);
 
    //-------------------------------------------------
    //-------------------------------------------------
@@ -110,13 +107,12 @@ int main(int argc, const char *argv[])
    //               Configuracion
    //-------------------------------------------------
     if (vm.count("name-user")){
-      std::string home = string(getenv("HOME")) + "/.zshenv";
-      // open file
-      std::fstream zshenv;
-      zshenv.open(home);
-      if (!zshenv.is_open()){
-          fmt::print(stderr,"Error al conf");
+      const auto &Value = vm["name-user"].as<std::string>();
+      if(Value.size() != 2){
+        throw validation_error(validation_error::invalid_option_value,
+        "input",std::to_string(Value.size()));
       }
+      user.ChangeEnvironmentVariable( std::to_string(Value[0]), std::to_string(Value[1]));
     }
    //-------------------------------------------------
    //          Automatitation Options
@@ -154,14 +150,22 @@ int main(int argc, const char *argv[])
     json root;  
     root["control"]["Package"]       = inputValues[0];
     root["control"]["Version"]       = inputValues[1];
-    root["control"]["Architerture"]  = inputValues[2];
+    root["control"]["Architecture"]  = inputValues[2];
     root["control"]["Maintainer"]    = inputValues[3];
     root["control"]["Installed-Size"]= inputValues[4];
-    root["control"]["Homepage"]      = inputValues[5];
+    root["control"]["Depends"]       = {inputValues[43]};
     root["control"]["Suggests"]      = inputValues[6];
+    root["control"]["Homepage"]      = inputValues[5];
     root["control"]["Description"]   = {inputValues[7]};
 
-    
+    /*
+    "Description": [
+    "Single line short description",
+    " extended description over several lines",
+    " .",
+    " some more description"
+    ]
+    */
     root["control_files_dir"] = "control";
     root["deb_dir"] = "../../";
 

@@ -1,5 +1,0 @@
-#!/data/data/com.termux/files/usr/bin/bash
-source ${HOME}/.local/etc/i-Haklab/variables
-source $iHETC/functions
-banner
-helpper
