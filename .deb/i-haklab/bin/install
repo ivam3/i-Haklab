@@ -1,0 +1,18 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+# Si hay error saldra inmediata mente 
+set -e 
+
+# Paquete
+echo "Installing required python modules (It could take a while) ...";$z
+for module in pyyaml beautifulsoup4 betrufflehog wheel speedtest-cli frida pipenv shodan;do
+	[[ $module = shodan ]] && { python -m pip --no-color --quiet --no-cache-dir install shodan;}
+	python -m pip --no-color --quiet --no-cache-dir install $module 2>>$LOGFILE
+done
+
+# TEME (default)
+# git clone --depth=1 https://github.com/romkatv/powerlevel10k.git 
+
+# Plugins de la shell
+# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+# git clone https://github.com/zsh-users/zsh-autosuggestions.git   

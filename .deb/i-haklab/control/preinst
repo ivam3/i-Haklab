@@ -1,0 +1,21 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+#
+# Antes que el paquete se instale en el sistema 
+#
+
+# Salir si hay error 
+set -e 
+
+[[ -e ${PREFIX}/etc/bashito ]] && { rm -rf ${PREFIX}/etc/bashito;}
+[[ -e ${PREFIX}/etc/motd ]] && { rm -rf ${PREFIX}/etc/motd;}
+[[ -e ${PREFIX}/etc/motd.dpkg-old ]] && { rm -rf ${PREFIX}/etc/motd.dpkg-old;}
+
+# TMU
+# -d Es un directorio 
+[[  !-d ${HOME}/.temux ]] && { mkdir -p ${HOME}/.tmux/plugins;}
+[[  !-d ${HOME}/.zsh ]] && { mkdir -p ${HOME}/.zsh/{cache,functions,plugins,start-zsh,themes};}
+
+# ZSH
+[[ !-d ${HOME}/.zsh ]] && { mkdir -p ${HOME}/.zsh/{start-zsh, themes, plugins, functions, cache};}
+

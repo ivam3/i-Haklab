@@ -1,17 +1,33 @@
 # Vercion minima requerida
 cmake_minimum_required(VERSION 3.10)
+
 # Nombre del proyecto
 project(i-haklab)
-# Para hacer uso de la biblotecas
-add_subdirectory(include)
+
+# Variables 
+set(SRC "src/boost-haklab.cpp")
+set(LIB_SRC "lib/below_zero.cpp")
+  
+# Bibloteca dinamica 
+add_library(below_zero SHARED ${LIB_SRC})
+
 # codigo fuente
-add_executable(i-haklab boost-haklab.cpp)
-# Vincular bibloteca
-target_link_libraries(i-haklab PUBLIC below_zero )
-# Ubicasion del archivo de encabesado
-target_include_directories( i-haklab PUBLIC
-  "${PROJECT_BINARY_DIR}"
-  "${PROJECT_SOURCE_DIR}/include"
-)
-set(CMAKE_CXX_FLAGS "-lboost_program_options -lboost_system  -lboost_filesystem \
-  -ljsoncpp  -lfmt")
+add_executable(i-haklab ${SRC})
+
+
+# En lazar bibloteca
+target_link_libraries(i-haklab below_zero   
+ -lboost_program_options
+ -lfmt 
+ -ljsoncpp 
+ -lboost_system 
+ -lboost_filesystem)
+
+
+# Intalcion 
+# Ejecutables
+install(TARGETS i-haklab DESTINATION bin/)
+
+# Bibliotecas
+install(TARGETS below_zero LIBRARY DESTINATION lib/)
+

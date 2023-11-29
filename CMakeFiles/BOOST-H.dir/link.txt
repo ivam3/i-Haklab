@@ -1,1 +1,0 @@
-/data/data/com.termux/files/usr/bin/c++ -lboost_program_options -O2 -g -DNDEBUG "CMakeFiles/BOOST-H.dir/boost-haklab.cpp.o" -o BOOST-H 
