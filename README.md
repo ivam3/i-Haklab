@@ -101,7 +101,7 @@ serverapache start/stop/restart
 ```bash
 postgresql start/stop/restart
 ```
-- Init a shell to traslate any text:
+- Init a shell to translate any text:
 ```bash
 traductor
 ```
