@@ -17,16 +17,14 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update && sudo apt install -y tar
-    
-
-steps:
-- uses: actions/checkout@v3 # Permite compartir datos 
+# Permite compartir datos 
+    - uses: actions/checkout@v3 
   
-- name: Filling in home...
-- run: tar -czfv  i-haklab-homa.tar.gz .deb/i-haklab/home 
+    - name: Filling in home...
+    - run: tar -czfv  i-haklab-homa.tar.gz .deb/i-haklab/home 
 
 
-- uses: actions/upload-artifact@v3 # .......
-  with:
-    name: Home comoilado
-    path: i-haklab-homa.tar.gz
+    - uses: actions/upload-artifact@v3 
+    with:
+       name: Home comoilado
+       path: i-haklab-homa.tar.gz
