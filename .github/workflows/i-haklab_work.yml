@@ -14,17 +14,16 @@ jobs:
     name: "Build"
     runs-on: ubuntu-latest 
     steps:
-    - name: Install dependencies
+    - name: Install dependencies...
       run: |
         sudo apt update && sudo apt install -y tar
 # Permite compartir datos 
     - uses: actions/checkout@v3 
   
     - name: Filling in home...
-      run: mkdir hola
-      run: tar -czfv  i-haklab-homa.tar.gz ../.deb/i-haklab/home 
+      run: tar -czfv  i-haklab-homa.tar.gz  ../../.deb/i-haklab/home 
 
-    uses: actions/upload-artifact@v3 
+    uses: actions/upload-artifact@v3
     with:
        name: Home comoilado...
-       path: ../.deb/i-haklab/i-haklab-homa.tar.gz
+       path: ../../.deb/i-haklab/i-haklab-homa.tar.gz
