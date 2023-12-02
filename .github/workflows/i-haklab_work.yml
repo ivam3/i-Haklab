@@ -1,1 +1,29 @@
-name: i-haklab 
+name: i-haklab
+
+# Se ejecutara en cada push a la rama principal y en cada pull request.
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+# Prueba en una maquina de ubunto
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up CMake
+      run: cmake -Bbuild -H.
+
+    - name: Build
+      run: cmake --build build
+
+    - name: Install
+      run: cmake --install build
+
+    - name: Run Binary
+      run: ./build/i-haklab
