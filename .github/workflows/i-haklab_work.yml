@@ -1,3 +1,4 @@
+# Nombre del flujo de trabajo 
 name: i-haklab
 
 # Se ejecutara en cada push a la rama principal y en cada pull request.
@@ -11,11 +12,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+# Pasos a ejecuar 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
     - name: Set up CMake
       run: cmake -Bbuild -H.
 
@@ -26,4 +24,4 @@ jobs:
       run: cmake --install build
 
     - name: Run Binary
-      run: ./build/i-haklab
+      run: ./build/i-haklab --help
