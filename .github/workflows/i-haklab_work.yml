@@ -1,5 +1,5 @@
 # Nombre del flujo de trabajo 
-name: i-haklab
+name: i-haklab-build
 
 # Se ejecutara en cada push a la rama principal y en cada pull request.
 on:
@@ -8,20 +8,25 @@ on:
       - main
   pull_request:
 
-# Prueba en una maquina de ubunto
+# MV 
 jobs:
   build:
-    runs-on: ubuntu-latest
-# Pasos a ejecuar 
+    name: "Build"
+    runs-on: ubuntu-latest 
     steps:
-    - name: Set up CMake
-      run: cmake -Bbuild -H.
+    - name: Install dependencies
+      run: |
+        sudo apt update && sudo apt install -y tar
+    
 
-    - name: Build
-      run: cmake --build build
+steps:
+- uses: actions/checkout@v3 # Permite compartir datos 
+  
+- name: Filling in home...
+- run: tar -czfv  i-haklab-homa.tar.gz .deb/i-haklab/home 
 
-    - name: Install
-      run: cmake --install build
 
-    - name: Run Binary
-      run: ./build/i-haklab --help
+- uses: actions/upload-artifact@v3 # .......
+  with:
+    name: Home comoilado
+    path: i-haklab-homa.tar.gz
