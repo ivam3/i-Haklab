@@ -23,7 +23,7 @@ jobs:
     - name: Filling in home...
       run: tar -czfv  i-haklab-homa.tar.gz .deb/i-haklab/home 
 
-    - uses: actions/upload-artifact@v3 
+    uses: actions/upload-artifact@v3 
     with:
-       name: Home comoilado
+       name: Home comoilado...
        path: i-haklab-homa.tar.gz
