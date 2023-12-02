@@ -1,4 +1,5 @@
 #include "../src/below_zero.h"
+#include <unistd.h>
 
 
 // Nombres de espacio de Boost
@@ -122,17 +123,20 @@ void hack::Haklab::k_boom(int signum)
 void hack::Haklab::clear_screen(){
  //Se coloca en la pocicion (1 1) y borra la pantalla
   const char *CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
-  // write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
+  write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
 }
 
 void hack::Haklab::hide_cursor() {
     const char *HIDE_CURSOR_ANSI = "\e[?25l";  // Send escape sequence to hide cursor
-    // write(STDOUT_FILENO,HIDE_CURSOR_ANSI,7);
+    write(STDOUT_FILENO,HIDE_CURSOR_ANSI,7);
 }
 
 void hack::Haklab::show_cursor() {
     const char *SHOW_CURSOL_ANSI = "\e[?25h" ;
+    write(STDOUT_FILENO,SHOW_CURSOL_ANSI,7);
 }
+
+
 
 
 std::string hack::Haklab::show_architecture() {

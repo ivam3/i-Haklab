@@ -2,6 +2,11 @@
 //         Inportaciones 
 //-------------------------------------------------
 #include "below_zero.h"
+#include <cstdio>
+#include <cstdlib>
+#include <fmt/color.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 //-------------------------------------------------
 //       Nombre de espacio
@@ -30,7 +35,8 @@ int main(int argc, const char *argv[])
   //-------------------------------------------------
     string dir;
     
-  //-------------------------------------------------
+  //------------------------------------------------
+  //             OPCIONES
   //-------------------------------------------------
     op::options_description options{"Options"};
     options.add_options()
@@ -41,6 +47,7 @@ int main(int argc, const char *argv[])
       ("about", op::value<std::string>()->notifier(about ),"Show informations about tool/framework");
 
    //-------------------------------------------------
+   //               Configutacion 
    //-------------------------------------------------
     op::options_description config("Configuration");
     config.add_options()
@@ -50,19 +57,20 @@ int main(int argc, const char *argv[])
      
 
    //-------------------------------------------------
+   //                   dpkg
    //-------------------------------------------------
     op::options_description dpkg("Create packages\n \
       \tList of options to automate creating deb binary packages");
     dpkg.add_options()
       ("name-pkg", op::value<string>(&dir), "Create directory tree\n control: Where do the package maintainer scripts go?\n src: Your executable")
       ("what-file", op::value<string>(), "What does the file do?")
-      ("manifies", op::value<vector<string>>(), "Para crear el archivo de 'manifiesto' se requieren 8 \n argumentos \
-      Package | Version | Architerture | Maintainer | Installed-Size | Homepage |  | Description");
+      ("manifies", op::value<vector<string>>(), "Package | Version | Architerture | Maintainer | Installed-Size | Homepage |  | Description");
             
    //-------------------------------------------------
    //-------------------------------------------------
     op::options_description automatitation("Automatitation Options");
     automatitation.add_options()
+      ("chek-error,r","Manipulacion de errores")
       ("file-manager,m","Open the file manager in the termux directory");
         
    //-------------------------------------------------
@@ -87,16 +95,16 @@ int main(int argc, const char *argv[])
     notify(vm);
 
    //-------------------------------------------------
+   //          HELP
    //-------------------------------------------------
-    // Los menu visibles 
     if (vm.count("help")){
        fmt::print("Usage: i-haklab [options]\n");
        std::cout << options;
       return 0;
     }
    //-------------------------------------------------
+   //         VERCION
    //-------------------------------------------------
-    // Vercion 
     if (vm.count("version")) {
        fmt::print("Beta\n");
        return 0;        
@@ -118,8 +126,38 @@ int main(int argc, const char *argv[])
    //------------------------------------------------
     if(vm.count("file-manager")){
       system("am start -a android.intent.action.VIEW -d 'content://com.android.externalstorage.documents/root/primary'");
+     }
+
+   if(vm.count("chek-error")){
+      // Nuevo proceso
+      pid_t pid = fork();
+
+      // Verificar creacion
+      if(pid < 0){
+        fmt::print(stderr,fg(fmt::color::dark_red),"Error al creaer el proceso");
+        exit(1);
+      }
+
+      // Si el padre termina
+      if(pid > 0){
+        exit(0);
+      }
+
+      // Establecer un nuevo grupo de procesos y desvincularse del terminal
+      setsid();
+
+    // 
+    fs::path p{std::string(getenv("PREFIX")) + "/tmp/i-haklab-error.or"};
+    FILE *errorFile = freopen(p.c_str(), "a", stderr);
+    if (!errorFile) {
+        fmt::print(stderr, fg(fmt::color::dark_red), "Error al abrir el archivo de errores");
+        exit(1);
     }
 
+
+   // Cerrar file 
+    fclose(errorFile);
+    }
    //-------------------------------------------------
    //-------------------------------------------------
     if (vm.count("name-pkg")){
