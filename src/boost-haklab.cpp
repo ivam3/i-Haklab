@@ -34,6 +34,9 @@ int main(int argc, const char *argv[])
   //      Variables de algunos parametros  
   //-------------------------------------------------
     string dir;
+    string port;
+    string host;
+    
     
   //------------------------------------------------
   //             OPCIONES
