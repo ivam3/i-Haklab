@@ -1,0 +1,147 @@
+Rev. 2.0.8 - 2015-11-16
+* Updated Dependencies.
+* Added buffer flush monitoring to ZipStream following error #38
+---------------------------------------------------------------------
+Rev. 2.0.7 - 2015-04-30
+* Updated Dependencies.
+
+---------------------------------------------------------------------
+Rev. 2.0.3 - 2014-08-03
+* Added: added function appendZip to the Zip classes. This allows the ser to add pre-compressed static data to the final Zip file, without having to re-compress this data.
+*****************************************************************************************************************
+WARNING: THE CURRENT VERSION OF PHPZip *MAY* FAIL IF THE SERVER HAS mbstring.func_overload INSTALLED AND ACTIVE!
+OLDER VERSIONS OF PHPZip *WILL* FAIL IF THE SERVER HAS mbstring.func_overload INSTALLED AND ACTIVE!
+EXPERIMENTAL FEATURES HAVE BEEN ADDED TO ALLEVIATE THE LOBOTOMIZATION OF PHP, CAUSED BY mbstring.func_overload
+*****************************************************************************************************************
+---------------------------------------------------------------------
+Rev. 2.0.2 - 2014-07-30
+* Added: Added ZipMerge utility. Allows preexisting zip files to be merged into one on the fly, streamed to the client. TODO: Add appendZip function to AbstractZipArchive.
+---------------------------------------------------------------------
+Rev. 2.0.1 - 2014-07-21
+* Fixed: Large files could fail to be added due to a problem in how the PHP ZipArchive would handle open temp files.
+---------------------------------------------------------------------
+Rev. 2.0.0 - 2014-07-11
+* Added: Namespace support.
+* Added: custom Exceptions.
+* Added: composer and packagist support. This is ready to be uploaded as a package at packagist. Then it can be required by any composer project as a fully self-contained library.
+* Added: events (observer pattern). These may come in handy for automated operations.
+* Updated: Code structure to better suit psr standard. Also took a more scalable OO approach.
+
+* See issues #19 and #26 for more information.
+---------------------------------------------------------------------
+Rev. 1.63 - 2014-07-14 (Never released)
+* Major clean up.
+* Fixed: Failure on systems running with mbstring.func_overload enabled. The morale is, don't use mbstring.func_overload, it'll kill any app working with binary data.. 
+
+Note.
+This will be the last release in the 1.x version range. 2.00 will include name spaces, and a major remodeling, courtesy of a pull request on GitHub.
+2.00 will likely not remain backwards compatible with 1.x, but should provide a far more stable platform to move forward on.
+---------------------------------------------------------------------
+Rev. 1.62 - 2014-03-25
+* Added: Support for the user to set their own temp file.
+- From Michele Locati, the submitter of this patch:
+  "Let's allow users to customize temporary files, either by setting Zip::$temp to a custom temporary folder or by setting Zip::$temp to a callable that returns a custom temporary file name."
+---------------------------------------------------------------------
+Rev. 1.61 - 2014-01-18
+* Added: UTF-8 path and comment extra fields, if the file name and/or comment is a UTF-8 string.
+- Note: Not all Zip implementations can handle UTF-8, even with these fields added. Windows Explorer's build in tool seems to be one.
+---------------------------------------------------------------------
+Rev. 1.60 - 2014-01-11
+* Fixed: File attribures parameter added in 1.50 ($extFileAttr) were not used in Zip->addFile.
+* Added: The ability to send the zip with a UTF-8 encoded filename, and the ability to choose to send the file as "inline"
+- Note, thanks to Mikael Ylikoski for these corrections and additions.
+---------------------------------------------------------------------
+Rev. 1.50 - 2013-12-01
+* Added: Support for defining file permissions, using the unix format, ie. 644 for files and 755 for dirs
+* Changed: The default permission on files and dirs from 777 to 644 and 755 respectively.
+* Changed: addDicextoryContent now reads permissions from the filesystem, but the user can override.
+---------------------------------------------------------------------
+Rev. 1.40 - 2013-09-16
+* Fixed: Trailing semicolon in the Content-Disposition file header caused trouble in some browsers
+---------------------------------------------------------------------
+Rev. 1.39 - 2013-07-26
+* Fixed: "HTML Headers have already been sent from in line 0" when using addDirectoryContent
+---------------------------------------------------------------------
+Rev. 1.38 - 2013-03-09
+* Added: Parameter $compress to addFile. A boolean which when set to FALSE will store the added data, rather than attempt to compress it. Good for already compressed files such as images and other multimedia types.
+---------------------------------------------------------------------
+Rev. 1.37 - 2013-01-21
+* Added: Support for UTF-8 characters in file paths. The class will detect Multibyte paths strings and assume they are UTF-8, it is up to the user to ensure this is the case.
+---------------------------------------------------------------------
+Rev. 1.36 - 2012-06-11
+* Updated: processFile have been updated for performance.
+* Updated: README with a warning to not use, or at least disable PHP output buffering.
+
+NOTE: Please ensure that output buffering is disabled when using especially ZipStream. It defeats the purpose of the class, and large zip files may cause a memory exceeded exception.
+---------------------------------------------------------------------
+Rev. 1.35 - 2012-06-05
+* Fixed: new bug that caused addDirectory to create invalid Zip entries
+---------------------------------------------------------------------
+Rev. 1.34 - 2012-06-05
+* Fixed: Regression error, where addDirectoryContent would no longer add the given directory.
+---------------------------------------------------------------------
+Rev. 1.33 - 2012-06-03
+* Fixed: Issue where addDirectory with trailing slashes would create empty, zero length names as subdirectories.
+
+* Misc: Code cleanup
+---------------------------------------------------------------------
+Rev. 1.32 - 2012-03-08
+* Fixed: Empty directories work as well now.
+
+* Note: The large file handling were practically entirely rewritten. This adds an additional dependency to the class, that the PHP Zip package must be available.
+---------------------------------------------------------------------
+Rev. 1.31 - 2012-03-01
+* Fixed: Mac OSX default Archive Utility should now be able to load the files produced by this utility.
+---------------------------------------------------------------------
+Rev. 1.30 - 2012-01-21
+* Fixed: Issue #3, Error in TimeZone handling.
+
+Additionally. If you are experiencing problems with the MacOS X default Archive Utility, try to uncomment line 124, if that works, let me know.
+
+---------------------------------------------------------------------
+Rev. 1.29 - 2011-10-07
+* Added: Parameters $followSymlinks and $addedFiles to the addDirectoryContent function.
+
+* Fixed: A problem in addDirectoryContent where unreadable symlinks could cause the function to go into an infinite loop.
+
+* Fixed: A problem in addDirectoryContent where directories weren't added if they were empty.
+---------------------------------------------------------------------
+Rev. 1.28 - 2011-09-03
+* Added: Parameter $addExtraFields and the setter setExtraFields(bool), defaulting to TRUE. These Extra fields are needed for Mac's default Zip tool.
+
+* Added: Parameter $compress to addFile, it defaults to TRUE (same behaviour as previous versions) and allows the user to "store" files uncompressed in the archive.
+---------------------------------------------------------------------
+Rev. 1.27 - 2011-07-05
+* Fixed: (I hope) Problem with opening Zip files on Mac. Relevant discussion at http://www.phpclasses.org/discuss/package/6616/thread/4/
+---------------------------------------------------------------------
+Rev. 1.26 - 2011-07-03
+* Fixed: Silent failure when using ZipStream in PHP versions prior to 5.2.1 due to the lack of support for the sys_get_temp_dir function needed for large files. ZipStream now tests and dies properly if this is the case.
+
+* Fixed: Problem with opening Zip files on Mac. http://www.phpclasses.org/discuss/package/6616/thread/4/
+---------------------------------------------------------------------
+Rev. 1.25 - 2011-03-14
+* Fixed: Directory duplication in some circumstances caused by addDirectoryContent being called with an empty $zipPath argument.
+
+* Fixed: getRelativePath returned absolute paths for relative paths and vice versa.
+---------------------------------------------------------------------
+Rev. 1.24 - 2011-03-13
+* Fixed: Parsing Windows absolute paths would result in relative paths where the Windows drive designation would be treated as just another path element.
+---------------------------------------------------------------------
+Rev. 1.23 - 2011-03-13
+* Added: static function getRelativePath, which cleans up paths, removing any unnecessary elements such as /./, // or redundant ../ segments.
+---------------------------------------------------------------------
+Rev. 1.22 - 2011-03-12
+* Added: method addDirectoryContent to add an entire directory, the functions defaults to recursive operation.
+---------------------------------------------------------------------
+Rev. 1.21 - 2011-02-20
+* Fixed: Sending failed when the Output buffer had been initialized with ob_start, but was empty.
+---------------------------------------------------------------------
+Rev. 1.20 - 2011-02-19
+(for Zip.php)
+* Changed: sendFile now have the optional parameter $contentType, defaulting to "application/zip". This is the mimetype of the archive to be sent, useful for file types using Zip as a container, like ePub, CBZ and ODF.
+
+(for ZipStream.php)
+* Changed: The constructor now have the optional parameter $contentType, defaulting to "application/zip". This is the mimetype of the archive to be sent, useful for file types using Zip as a container, like ePub, CBZ and ODF.
+---------------------------------------------------------------------
+Rev. 1.00
+Initial release

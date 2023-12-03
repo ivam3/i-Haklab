@@ -1,0 +1,82 @@
+.tagin {
+  display: none;
+}
+
+.tagin-wrapper {
+  cursor: text;
+  height: auto;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  flex-wrap: wrap;
+  padding: calc(0.375rem - 2px) calc(0.75rem - 2px);
+}
+.tagin-wrapper.focus {
+  color: #212529;
+  outline: 0;
+  border-color: #86b7fe;
+  background-color: #fff;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+.tagin.is-valid + .tagin-wrapper, .was-validated .tagin:valid + .tagin-wrapper {
+  border-color: #198754;
+}
+.tagin.is-valid + .tagin-wrapper.focus, .was-validated .tagin:valid + .tagin-wrapper.focus {
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+.tagin.is-invalid + .tagin-wrapper, .was-validated .tagin:invalid + .tagin-wrapper {
+  border-color: #dc3545;
+}
+.tagin.is-invalid + .tagin-wrapper.focus, .was-validated .tagin:invalid + .tagin-wrapper.focus {
+  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+.tagin-tag {
+  border-radius: 0.25rem;
+  color: #fff;
+  height: 24px;
+  margin: 2px;
+  border: 0;
+  padding: 0 4px;
+  display: inline-flex;
+  transition: transform 0.1s;
+  align-items: center;
+  font-weight: 300;
+  background-color: #6c757d;
+}
+
+.tagin-tag-remove {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  margin-left: 2px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a0aec0' width='18px' height='18px'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z'/%3E%3C/svg%3E");
+}
+.tagin-tag-remove:hover {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' width='18px' height='18px'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z'/%3E%3C/svg%3E");
+}
+
+.tagin-input {
+  color: #212529;
+  height: 28px;
+  outline: 0;
+  padding: 0 2px 0 0;
+  margin-left: 2px;
+  border-color: transparent;
+  border-width: 1px 0;
+}
+.tagin-input:not(.tagin-input-hidden) {
+  width: 4px;
+  min-width: 4px;
+}
+
+.tagin-input-hidden {
+  top: 0;
+  left: -9999px;
+  position: absolute;
+  overflow: hidden;
+  visibility: hidden;
+  white-space: nowrap;
+}
+
+/*# sourceMappingURL=tagin.css.map */

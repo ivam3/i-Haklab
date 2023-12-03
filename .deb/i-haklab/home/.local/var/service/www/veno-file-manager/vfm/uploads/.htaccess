@@ -1,0 +1,13 @@
+# begin VFM rules
+<Files "*.php">
+ SetHandler none
+ SetHandler default-handler
+ Options -ExecCGI
+ RemoveHandler .php
+</Files>
+<IfModule mod_php5.c>
+ php_flag engine off
+</IfModule>
+Order Deny,Allow
+Deny from all
+# end VFM rules
