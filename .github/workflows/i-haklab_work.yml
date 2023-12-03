@@ -21,9 +21,9 @@ jobs:
     - uses: actions/checkout@v3 
   
     - name: Filling in home...
-      run: tar -czfv  i-haklab-homa.tar.gz  ../../.deb/i-haklab/home 
+      run: tar -czfv  i-haklab-home.tar.gz  .deb/i-haklab/home 
 
-    uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v3
     with:
        name: Home comoilado...
-       path: ../../.deb/i-haklab/i-haklab-homa.tar.gz
+       path: i-haklab-home.tar.gz
