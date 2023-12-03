@@ -25,8 +25,8 @@ jobs:
       run: tar -zcf  i-haklab-home.tar.gz   ./.deb/i-haklab/home 
 
     
-    - name: ...
+    - name: Uploading... 
       uses: actions/upload-artifact@v3  
       with:
-         name: Home comoilado...
+         name: i-haklab-home.tar.gz 
          path: i-haklab-home.tar.gz
