@@ -140,7 +140,7 @@ if [[ -e ${HOME}/.local/libexec/i-Haklab.login.backup ]]; then
 	cat ${HOME}/.local/libexec/i-Haklab.login.backup > ${HOME}/.local/libexec/i-Haklab.login
 	rm ${HOME}/.local/libexec/i-Haklab.login.backup
 fi
-echo -en "[updates]\n    ╰──➤ New commands added:\n    |\t\t• cmd\n    |\t\t• gitbrowsering\n    |\t\t• i-Haklab chatGPT\n    |\t\t• cinderella\n    ╰──➤ New features:\n\t\t• type into neovim 'alter', 'comma', 'n' \n\t\t  (alt + , + n) to use AI"
+echo -en "[updates]\n    ╰──➤ New commands added:\n    |\t\t• cmd\n    |\t\t• gitbrowsering\n    |\t\t• i-Haklab chatGPT\n    |\t\t• cinderella\n    ╰──➤ New features:\n\t\t• type into neovim 'alter', 'comma', 'n' \n\t\t  (alt + , + n) to use AI\n"
 echo "[*] i-Haklab installation finished."
 echo "[*] run 'i-Haklab help' for a guide."
 echo "[*] Run 'fixer' to fix any posible issue."
