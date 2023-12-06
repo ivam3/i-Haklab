@@ -20,11 +20,8 @@ jobs:
 # Permite compartir datos 
     - name: Clone repository
       uses: actions/checkout@v3 
-  
     - name: Filling in home...
-      run: tar -zcf  i-haklab-home.tar.gz   ./.deb/i-haklab/home 
-
-    
+      run: tar -zcf  i-haklab-home.tar.gz  -C  ./.deb/i-haklab  ./home  
     - name: Uploading... 
       uses: actions/upload-artifact@v3  
       with:

@@ -1,0 +1,15 @@
+Package: i-haklab
+Version: 4.3.13
+Architecture: all
+Maintainer: Ivam3 y Demon
+Installed-Size: 700
+Depends: zsh, helix, git , wget
+Homepage: https://victorh028.github.io/i-Haklab/#
+Description: lll
+Filename: dists/stable/extras/binary-all/i-haklab_4.3.13_all.deb
+Size: 6620
+MD5Sum: 38e48a2a4a8ad71b3f6ffe2dc16dcdd9
+SHA1: 9cdf1889d6687d345c51315256a46b4bbee86de5
+SHA256: fed7327824fed9d72edee8fceb9117130fbda263c90d7b6af50b160ffccfc5c9
+SHA512: 0c5540a022306a8f6af352eecde57fc06fd49061b420b121e051a06ae414bef18cc4ac045892febf779f0161c1b36e4f6183ab2a81b673955cb349e9e77bc4b4
+

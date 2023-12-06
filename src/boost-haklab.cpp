@@ -2,11 +2,9 @@
 //         Inportaciones 
 //-------------------------------------------------
 #include "below_zero.h"
-#include <cstdio>
-#include <cstdlib>
-#include <fmt/color.h>
-#include <sys/types.h>
-#include <unistd.h>
+#include <fmt/core.h>
+#include <fmt/format.h>
+
 
 //-------------------------------------------------
 //       Nombre de espacio
@@ -15,13 +13,21 @@
  namespace fs = boost::filesystem;
  // namespace io = boost::iostreams;
  using json = nlohmann::ordered_json;
-
+ using hk = hack::Haklab;
 //-------------------------------------------------
 //      Declaraciones de algunas funciones 
 //-------------------------------------------------
-void about(std::string about);
 
+// Especialización de fmt para la clase op::option_descriptiom
+template <>
+struct fmt::formatter<op::option_description> {
+  constexpr auto parse(format_parse_context& ctx) { return ctx.begin(); }
 
+  template <typename FormatContext>
+  auto format(const op::option_description& value, FormatContext& ctx) {
+    return format_to(ctx.out(), "{}", value);
+  }
+};
 //-------------------------------------------------
 //         Funcion principal main
 //-------------------------------------------------
@@ -45,9 +51,8 @@ int main(int argc, const char *argv[])
     options.add_options()
       ("help,h", "Print this menu and leave")
       ("help-module", op::value<string>(),"produce a help for a given module")
-      ("version,v","print version string")
+      ("version,v","print version string");
       // nombre , typo , decripcion
-      ("about", op::value<std::string>()->notifier(about ),"Show informations about tool/framework");
 
    //-------------------------------------------------
    //               Configutacion 
@@ -74,8 +79,9 @@ int main(int argc, const char *argv[])
     op::options_description automatitation("Automatitation Options");
     automatitation.add_options()
       ("chek-error,r","Manipulacion de errores")
-      ("file-manager,m","Open the file manager in the termux directory");
-        
+      ("file-manager,m","Open the file manager in the termux directory")
+      ("list-frenwor,l", op::value<string>(), "Lista de herramientas dispomibles")
+      ("about", op::value<std::string>()->notifier(hk::about),"Show informations about tool/framework");
    //-------------------------------------------------
    //-------------------------------------------------
     op::options_description all("All");
@@ -100,21 +106,16 @@ int main(int argc, const char *argv[])
    //-------------------------------------------------
    //          HELP
    //-------------------------------------------------
-    if (vm.count("help")){
-       fmt::print("Usage: i-haklab [options]\n");
-       std::cout << options;
-      return 0;
-    }
+   //fmt::print(( vm.count("help") ? "Usage: i-haklab [options]\n{}" : ""), options );
    //-------------------------------------------------
    //         VERCION
    //-------------------------------------------------
-    if (vm.count("version")) {
-       fmt::print("Beta\n");
-       return 0;        
-    }
-  
+    /* Operador termario
+     * condicion ? exprecion1 : exprecion2 
+     */
+    fmt::print((vm.count("version") ?  "%s\n" : "" ), "Beta");
    //-------------------------------------------------
-   //               Configuracion
+   //                name-user
    //-------------------------------------------------
     if (vm.count("name-user")){
       const auto &Value = vm["name-user"].as<std::string>();
@@ -125,7 +126,7 @@ int main(int argc, const char *argv[])
       user.ChangeEnvironmentVariable( std::to_string(Value[0]), std::to_string(Value[1]));
     }
    //-------------------------------------------------
-   //          Automatitation Options
+   //          file-mamager
    //------------------------------------------------
     if(vm.count("file-manager")){
       system("am start -a android.intent.action.VIEW -d 'content://com.android.externalstorage.documents/root/primary'");
@@ -161,7 +162,8 @@ int main(int argc, const char *argv[])
    // Cerrar file 
     fclose(errorFile);
     }
-   //-------------------------------------------------
+   //------------------------------------------------
+  //           name-pkg
    //-------------------------------------------------
     if (vm.count("name-pkg")){
       fs::current_path();
@@ -175,6 +177,7 @@ int main(int argc, const char *argv[])
     }
         
    //-------------------------------------------------
+  //             manifies 
    //-------------------------------------------------
     if (vm.count("manifies")){
     const auto &inputValues = vm["manifies"].as<vector<string>>(); 
@@ -187,10 +190,7 @@ int main(int argc, const char *argv[])
     if (inputValues.size() != 8) {
         throw op::validation_error(op::validation_error::invalid_option_value,
         "namifies",std::to_string(inputValues.size()));
-       }
-      
-   //-------------------------------------------------
-    
+       }   
 
       
    //-------------------------------------------------
@@ -199,13 +199,10 @@ int main(int argc, const char *argv[])
     root["control"]["Package"]       = inputValues[0];
     root["control"]["Version"]       = inputValues[1];
     root["control"]["Architecture"]  = inputValues[2];
-    // Nombre, corro
     root["control"]["Maintainer"]    = inputValues[3];
     root["control"]["Installed-Size"]= inputValues[4];
-    // Lista  de  paquetes  necesarios  para  que  el  paquete  ofrezca  una funcionalidad aceptable. 
     root["control"]["Depends"]       = {inputValues[5]};
     root["control"]["Suggests"]      = inputValues[6];
-    // Url 
     root["control"]["Homepage"]      = inputValues[7];
     root["control"]["Description"]   = {inputValues[8]};
         
@@ -237,10 +234,20 @@ int main(int argc, const char *argv[])
       }
       return 0;
     }
-    if (vm.count("num-threads")) {
-            std::cout << "The 'num-threads' options was set to "
-                 << vm["num-threads"].as<int>() << "\n";            
-    }   
+
+     
+   //-------------------------------------------------
+   //                what-file
+   //-------------------------------------------------
+   if (vm.count("what-file")) {
+      fs::path path(fs::current_path() /= dir);
+      if(!fs::exists(path)){
+          fmt::print(stderr,fg(fmt::color::indian_red), "Error file no existe ");
+      }
+    if (dir == "prerm") {
+      }
+    }  
+   //-------------------------------------------------
   }
   catch (const op::error &ex){
   fmt::print(stderr,"{}\n", ex.what());

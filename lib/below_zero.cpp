@@ -1,9 +1,25 @@
 #include "../src/below_zero.h"
-#include <unistd.h>
 
 
 // Nombres de espacio de Boost
 namespace fs = boost::filesystem;
+using namespace hack;
+
+
+string Haklab::get_IHETC(){return IHETC;};
+
+
+Haklab::Haklab(){
+    // comprobar key 
+    bool auto_key = static_cast<bool>(getenv("HAKLAB_AUTO_APT"));
+   if(!fs::exists(string(getenv("PREFIX")) + 
+    "/etc/apt/sources.list.d/ivam3-termux-packages.list") and auto_key )
+    {
+        std::cout << "Hola" << std::endl;
+    }
+}
+
+
 
 
 // Selector de color 
@@ -120,18 +136,18 @@ void hack::Haklab::k_boom(int signum)
 }
 
 
-void hack::Haklab::clear_screen(){
+void Haklab::clear_screen(){
  //Se coloca en la pocicion (1 1) y borra la pantalla
   const char *CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
   write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
 }
 
-void hack::Haklab::hide_cursor() {
+void Haklab::hide_cursor() {
     const char *HIDE_CURSOR_ANSI = "\e[?25l";  // Send escape sequence to hide cursor
     write(STDOUT_FILENO,HIDE_CURSOR_ANSI,7);
 }
 
-void hack::Haklab::show_cursor() {
+void Haklab::show_cursor() {
     const char *SHOW_CURSOL_ANSI = "\e[?25h" ;
     write(STDOUT_FILENO,SHOW_CURSOL_ANSI,7);
 }
@@ -139,7 +155,7 @@ void hack::Haklab::show_cursor() {
 
 
 
-std::string hack::Haklab::show_architecture() {
+std::string Haklab::show_architecture() {
     #ifdef __x86_64__
         return "(x86_64)";
     #elif __i386__
@@ -147,7 +163,7 @@ std::string hack::Haklab::show_architecture() {
     #elif __arm__
         return "(ARM)";
     #elif __aarch64__
-        return  "🐧 aarch64 ";
+        return  "aarch64 ";
     #elif 
         return "(Desconocida)";
     #endif
@@ -178,8 +194,9 @@ std::string hack::Haklab::show_architecture() {
 // };
         
 // ======= ABAUT =============    
-void about(std::string about){
+void Haklab::about(std::string about){
     std::string fren = IHETC + std::basic_string("/Tools/Readme/") + about;   
+    
     // Elegir donde buscar 
     if (!fs::exists(fren)) {
         fren =  IHETC + std::basic_string("/Tools/Readme/command/") + about + ".md";       

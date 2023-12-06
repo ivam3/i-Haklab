@@ -5,25 +5,23 @@
 //------------------------------------------
 #include <fmt/core.h>
 #include <fmt/color.h>
-#include <iostream>
+#include <fmt/format.h>
 #include <nlohmann/json.hpp>
 #include <boost/array.hpp>
-// Color de terminal y estilo de texto
 #include <dirent.h> // para explorar el directorio /proc/ 
-// Para obciones de linea de comando
 #include <boost/program_options.hpp> 
-//  Proporciona funciones para manipular archivos y directorios, y las rutas que los identifican.
 #include <boost/filesystem.hpp>
-// Lectura y escritura de archivos 
 #include <boost/iostreams/device/file.hpp>
 #include <boost/iostreams/stream.hpp>
 #include <boost/regex.hpp>
+#include <string>
+#include <string_view>
+#include <thread>
+#include <iostream>
+
 
 //------------------------------------------
 //------------------------------------------
-#define  IHETC  "/data/data/com.termux/files/home/.local/etc/i-Haklab"
-#define  LIBEX  "/data/data/com.termux/files/home/.local/libexec/i-Haklab/"
-
 
 //------------------------------------------
 //------------------------------------------
@@ -31,6 +29,8 @@
 using std::fstream;
 using std::string ;
 using std::vector;
+
+
 
 
 
@@ -46,7 +46,6 @@ enum class Color
  Cyan,
  White
 };
-
 std::string setColor(Color color);
 void syntax_highlight(const std::string &code);  
 
@@ -54,7 +53,11 @@ namespace hack {
  
  class Haklab 
  {
-   private: 
+   private: // ....... 
+ static inline string  // una variable estática inlínea se puede definir e inicializar directamente
+  IHETC{ string(getenv("HOME")) + "/.local/etc/i-Haklab"};
+ static inline  string  
+  LIBEX{ string(getenv("HOME")) + "/.local/libexec/i-Haklab"};
    /*
     *
     */    
@@ -70,8 +73,18 @@ namespace hack {
    */
   void 
   show_cursor();
-  //----------------------------------------------
-   public:
+   public: // ..............
+  string
+  get_IHETC();
+   /*
+    *
+    */
+   static  void 
+   about(std::string about);
+   /*
+    * Contructor 
+    */
+   Haklab();
   /*
    * Cambia el valos de una variable de entorno 
    * name: Deve ser en mayuscula
@@ -81,7 +94,8 @@ namespace hack {
       /*
        * Muestra un baner de salida 
        */      
-  static void k_boom(int signum);
+  static 
+  void k_boom(int signum);
        /*
         */   
   void baner();
@@ -102,28 +116,29 @@ namespace hack {
   bool download_file(std::string url, std::string outputFilename); 
 
 // Función para mostrar un spinner mientras se ejecuta otra función en segundo plano
-// template<typename Func>
-// void loading(Func func) {
-//     hide_cursor();
-//     // std::thread::id main_thread_id = std::this_thread::get_id();
-//     std::vector<std::string> spinner = { "█■■■■", "■█■■■", "■■█■■", "■■■█■", "■■■■█" };
-//     int spinnerIndex = 0;
+template<typename Func>
+void loading(Func func) {
+    hide_cursor();
+    // std::thread::id main_thread_id = std::this_thread::get_id();
+    
+    std::vector<std::string> spinner = { "█■■■■", "■█■■■", "■■█■■", "■■■█■", "■■■■█" };
+    int spinnerIndex = 0;
 
-//     std::thread t([&]() {
-//         while (true) {
-//         /*std::cout << "\rSearching\t" */std::cout << spinner[spinnerIndex] << "\b\b\b\b\b\b\b\b" << std::flush;
-//         spinnerIndex = (spinnerIndex + 1) % spinner.size();
-//         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-//         }     
-//     });
+    std::thread t([&]() {
+        while (true) {
+        /*std::cout << "\rSearching\t" */std::cout << spinner[spinnerIndex] << "\b\b\b\b\b\b\b\b" << std::flush;
+        spinnerIndex = (spinnerIndex + 1) % spinner.size();
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }     
+    });
 
-//     t.detach();
+    t.detach();
 
-//     // Ejecuta la función proporcionada en segundo plano
-//     func();
+    // Ejecuta la función proporcionada en segundo plano
+    func();
    
-//     show_cursor();
-// }
+    show_cursor();
+}
 };
 
 };
