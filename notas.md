@@ -4,12 +4,13 @@
 cd i-haklab
 cmake -H. -Bbuild 
 cmake --build build
+cmake --install build --prefix=$PREFIX
 ```
 
-- Falta la intalacion automatica (cmake) de las dependencias 
 - Usar evitar usar rutas relativas para compativilidad con linux  (getenv)
 - `~/.local/share/apli...` La imagen para el escritorio 
 - descargar key en automatico 
+- error - convertir una clase a string
 
 
 # Regisito

@@ -1,0 +1,2 @@
+/data/data/com.termux/files/usr/bin/i-haklab
+/data/data/com.termux/files/usr/lib/libbelow_zero.so

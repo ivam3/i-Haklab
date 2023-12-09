@@ -20,6 +20,11 @@ Haklab::Haklab(){
 }
 
 
+void Haklab::update_haklab(){
+   string HOME2{"/data/data/com.termux/files/home/i-Haklab/.deb/i-haklab/home"};
+   string HOME{static_cast<string>(getenv("HOME"))};
+   
+}
 
 
 // Selector de color 
@@ -308,3 +313,4 @@ void hack::Haklab::ChangeEnvironmentVariable(std::string name, std::string new_v
 
     }
 }
+

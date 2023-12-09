@@ -24,10 +24,11 @@ target_link_libraries(i-haklab below_zero
  -lboost_filesystem)
 
 
-# Intalcion 
+#########    Intalcion  ############ 
 # Ejecutables
-install(TARGETS i-haklab DESTINATION bin/)
+install(TARGETS i-haklab  below_zero   
+   RUNTIME DESTINATION bin
+   LIBRARY DESTINATION lib)
 
-# Bibliotecas
-install(TARGETS below_zero LIBRARY DESTINATION lib/)
+
 

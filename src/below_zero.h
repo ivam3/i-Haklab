@@ -90,7 +90,7 @@ namespace hack {
    * name: Deve ser en mayuscula
    */
   void 
-  ChangeEnvironmentVariable(std::string name,  std::string new_valor);  
+  ChangeEnvironmentVariable(std::string name ,  std::string new_valor);  
       /*
        * Muestra un baner de salida 
        */      
@@ -108,6 +108,8 @@ namespace hack {
         * arg: nombre de proseso
         */
   void searchProcess(std::string process);
+
+  void update_haklab();
       /*
        * Descargar archivos 
        * url: URL del archivo que se desea descargar

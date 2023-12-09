@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
     op::store(op::command_line_parser(argc, argv).options(b).run(), vm);
     op::notify(vm);
 
-    fmt::print(vm.count("help") ? "{}\n" : "no\n", b);
+    fmt::print(vm.count("help") ? "{}\n" : "no\n", &b);
   }
   catch (const op::error &ex) {
     fmt::print(stderr, "{}\n", ex.what());
