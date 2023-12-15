@@ -2,111 +2,97 @@
 //         Inportaciones 
 //-------------------------------------------------
 #include "below_zero.h"
-
-
-
-
 //-------------------------------------------------
 //       Nombre de espacio
 //-------------------------------------------------
- namespace op = boost::program_options;
- namespace fs = boost::filesystem;
- // namespace io = boost::iostreams;
- using json = nlohmann::ordered_json;
- using hk = hack::Haklab;
-//-------------------------------------------------
-//      Declaraciones de algunas funciones 
-//-------------------------------------------------
-
-// Especialización de fmt para la clase op::option_descriptiom
-template <>
-struct fmt::formatter<op::option_description> {
-  constexpr auto parse(format_parse_context& ctx) { return ctx.begin(); }
-
-  template <typename FormatContext>
-  auto format(const op::option_description& value, FormatContext& ctx) {
-    return format_to(ctx.out(), "{}", value);
-  }
-};
+namespace po = boost::program_options;
+namespace fs = boost::filesystem;
+using json = nlohmann::ordered_json;
+using namespace hack::hak_help;
 //-------------------------------------------------
 //         Funcion principal main
 //-------------------------------------------------
 int main(int argc, const char *argv[])
-{
-  hack::Haklab user;
+{ 
   try
-  {
-  //-------------------------------------------------
-  //      Variables de algunos parametros  
-  //-------------------------------------------------
-    string dir;
-    string port;
-    string host;
-    
-    
+  { 
   //------------------------------------------------
   //             OPCIONES
   //-------------------------------------------------
-    op::options_description options{"Options"};
-    options.add_options()
+    Haklab_Menu_Help  cli_options{"Options"};
+    cli_options.add_options()
       ("help,h", "Print this menu and leave")
-      ("help-module", op::value<string>(),"produce a help for a given module")
-      ("version,v","print version string");
+      ("help-module", po::value<string>(),"produce a help for a given module")
+      ("version,v","print version string")
       // nombre , typo , decripcion
+      ("include-path,P",po::value<vector<string>>(),"include path")
+      ("input-file,I", po::value<vector<string>>(),"input file")
+      ("host", "Name the hos")
+      ("port","Name the port");
 
    //-------------------------------------------------
    //               Configutacion 
    //-------------------------------------------------
-    op::options_description config("Configuration");
-    config.add_options()
-        ("include-path,I",op::value<vector<string>>(),"include path")
-        ("input-file", op::value<vector<string>>(),"input file")
-        ("name-user", op::value<vector<string>>(), "Change username default(USER=i-Haklab)");
+    Haklab_Menu_Help  cli_config{"Configutacion"};
+    cli_config.add_options()
+        ("name-user", po::value<vector<string>>(), "Change username default(USER=i-Haklab_Menu_Help )");
      
-
+    
    //-------------------------------------------------
    //                   dpkg
    //-------------------------------------------------
-    op::options_description dpkg("Create packages\n \
-      \tList of options to automate creating deb binary packages");
-    dpkg.add_options()
-      ("name-pkg", op::value<string>(&dir), "Create directory tree\n control: Where do the package maintainer scripts go?\n src: Your executable")
-      ("what-file", op::value<string>(), "What does the file do?")
-      ("manifies", op::value<vector<string>>(), "Package | Version | Architerture | Maintainer | Installed-Size | Homepage |  | Description");
+   Haklab_Menu_Help  cli_dpkg{"Create packages\n\tList of options to automate creating deb binary packages"};
+   cli_dpkg.add_options()
+   ("update_file,u","Actualizar los archivos del .deb con los locales")
+   ("name-pkg", po::value<string>(&cli_config.m_dir), "Create directory tree\n control: Where do the package maintainer scripts go?\n src: Your executable")
+   ("what-file", po::value<string>(), "What does the file do?")
+   ("manifies", po::value<vector<string>>(), "Package | Version | Architerture | Maintainer | Installed-Size | Homepage |  | Description");
             
    //-------------------------------------------------
+   //              Automatitation
    //-------------------------------------------------
-    op::options_description automatitation("Automatitation Options");
-    automatitation.add_options()
+   Haklab_Menu_Help  cli_automatitation{"Automatitation Options"};
+   cli_automatitation.add_options()
       ("chek-error,r","Manipulacion de errores")
       ("file-manager,m","Open the file manager in the termux directory")
-      ("list-frenwor,l", op::value<string>(), "Lista de herramientas dispomibles")
-      ("about", op::value<std::string>()->notifier(hk::about),"Show informations about tool/framework");
-   //-------------------------------------------------
-   //-------------------------------------------------
-    op::options_description all("All");
-    all.add(options).add(config).add(dpkg).add(automatitation);
+      ("list-frenwor,l", po::value<string>(), "Lista de herramientas dispomibles")
+     ("about", po::value<string>(), "Show informations about tool/framework");
 
-    
-   //-------------------------------------------------
-   //-------------------------------------------------
-    options.add(config).add(automatitation);
-    
-   //-------------------------------------------------
-   //-------------------------------------------------
-    op::positional_options_description positionalOptions;
-    positionalOptions.add("manifies", 8).add("name-user",2);
+  Haklab_Menu_Help  cli_cryptography{"Cryptography"};
+  cli_cryptography.add_options()
+  ("rsa","prueva");
 
+  Haklab_Menu_Help  cli_all{"All"}; 
    //-------------------------------------------------
    //-------------------------------------------------
-    op::variables_map vm;
-    store(op::command_line_parser(argc, argv).options(all).positional(positionalOptions).run(), vm);
+   cli_all.add(cli_options).add(cli_config).add(cli_dpkg).add(cli_automatitation);
+ 
+   //-------------------------------------------------
+   //-------------------------------------------------
+  cli_options.add(cli_config).add(cli_automatitation).add(cli_cryptography);
+    
+  //-------------------------------------------------
+  //-------------------------------------------------
+    po::positional_options_description positionalOptions;
+    positionalOptions.add("manifies", 8).add("name-user",2);  
+  
+  //-------------------------------------------------
+  //
+  //
+ //-------------------------------------------------
+    po::variables_map vm;
+    store(po::command_line_parser(argc, argv).options(cli_all).positional(positionalOptions).run(), vm);
     notify(vm);
 
+    
    //-------------------------------------------------
    //          HELP
    //-------------------------------------------------
-   //fmt::print(( vm.count("help") ? "Usage: i-haklab [options]\n{}" : ""), options );
+   Files file{"/"};
+   hack::Haklab  funtion;
+   
+   funtion.Help(vm,cli_options);
+    
    //-------------------------------------------------
    //         VERCION
    //-------------------------------------------------
@@ -120,10 +106,10 @@ int main(int argc, const char *argv[])
     if (vm.count("name-user")){
       const auto &Value = vm["name-user"].as<std::string>();
       if(Value.size() != 2){
-        throw op::validation_error(op::validation_error::invalid_option_value,
+        throw po::validation_error(po::validation_error::invalid_option_value,
         "name-user",std::to_string(Value.size()));
       }
-      user.ChangeEnvironmentVariable( std::to_string(Value[0]), std::to_string(Value[1]));
+     // user.ChangeEnvironmentVariable( std::to_string(Value[0]), std::to_string(Value[1]));
     }
    //-------------------------------------------------
    //          file-mamager
@@ -165,9 +151,9 @@ int main(int argc, const char *argv[])
    //------------------------------------------------
   //           name-pkg
    //-------------------------------------------------
-    if (vm.count("name-pkg")){
+    /*if (vm.count("name-pkg")){
       fs::current_path();
-      fs::create_directories(dir + "/control" );
+      fs::create_directories( dir + "/control" );
       fs::create_directories( dir + "/bin" );
       fmt::print(R"(
          // '{}
@@ -175,7 +161,7 @@ int main(int argc, const char *argv[])
          //  └── bin')",dir);
       return 0;
     }
-        
+   */     
    //-------------------------------------------------
   //             manifies 
    //-------------------------------------------------
@@ -188,7 +174,7 @@ int main(int argc, const char *argv[])
       }
       
     if (inputValues.size() != 8) {
-        throw op::validation_error(op::validation_error::invalid_option_value,
+        throw po::validation_error(po::validation_error::invalid_option_value,
         "namifies",std::to_string(inputValues.size()));
        }   
 
@@ -228,28 +214,28 @@ int main(int argc, const char *argv[])
       if (s == "defaul"){
         // std::cout << visible
       } else if (s == "packages"){
-        std::cout << dpkg;
+        std::cout << cli_dpkg;
       } else {
         fmt::print(stderr,fmt::fg(fmt::color::red),"Unknown module {}  in the --help-module options\n", s);
       }
       return 0;
     }
-
+   
      
    //-------------------------------------------------
    //                what-file
    //-------------------------------------------------
-   if (vm.count("what-file")) {
+   /*if (vm.count("what-file")) {
       fs::path path(fs::current_path() /= dir);
       if(!fs::exists(path)){
           fmt::print(stderr,fg(fmt::color::indian_red), "Error file no existe ");
       }
     if (dir == "prerm") {
       }
-    }  
+    } */ 
    //-------------------------------------------------
   }
-  catch (const op::error &ex){
+  catch (const po::error &ex){
   fmt::print(stderr,"{}\n", ex.what());
   }
 } 

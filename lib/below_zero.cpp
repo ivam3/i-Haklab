@@ -1,26 +1,40 @@
 #include "../src/below_zero.h"
 
-
 // Nombres de espacio de Boost
 namespace fs = boost::filesystem;
-using namespace hack;
+namespace po = boost::program_options;
+using hc =  hack::Haklab;
+using hf = hack::FileComparator;
 
-
-string Haklab::get_IHETC(){return IHETC;};
-
-
-Haklab::Haklab(){
-    // comprobar key 
-    bool auto_key = static_cast<bool>(getenv("HAKLAB_AUTO_APT"));
-   if(!fs::exists(string(getenv("PREFIX")) + 
-    "/etc/apt/sources.list.d/ivam3-termux-packages.list") and auto_key )
-    {
-        std::cout << "Hola" << std::endl;
-    }
+// Class FileComparator
+void 
+hf::compareDirectories(const string &givenDir)
+{
+for (auto &file : fs::directory_iterator{givenDir}) 
+{
+  if (fs::is_regular_file(file))
+  {
+   string fileName = file.path().filename().string(); 
+   std::cout << "Archivo en la ruta dada: " << fileName << std::endl;
+  };
+}
 }
 
 
-void Haklab::update_haklab(){
+
+hack::hak_help::Haklab_Menu_Help::Haklab_Menu_Help(string description)
+: options_description{description}
+{}
+
+void 
+hc::Help(po::variables_map vm, po::options_description desc)
+{if(vm.count("help")){std::cout << "Usage: i-haklab [options]\n" << desc << std::endl;}}
+
+
+
+
+void 
+hc::update_haklab(){
    string HOME2{"/data/data/com.termux/files/home/i-Haklab/.deb/i-haklab/home"};
    string HOME{static_cast<string>(getenv("HOME"))};
    
@@ -141,18 +155,18 @@ void hack::Haklab::k_boom(int signum)
 }
 
 
-void Haklab::clear_screen(){
+void hc::clear_screen(){
  //Se coloca en la pocicion (1 1) y borra la pantalla
   const char *CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
   write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
 }
 
-void Haklab::hide_cursor() {
+void hc::hide_cursor() {
     const char *HIDE_CURSOR_ANSI = "\e[?25l";  // Send escape sequence to hide cursor
     write(STDOUT_FILENO,HIDE_CURSOR_ANSI,7);
 }
 
-void Haklab::show_cursor() {
+void hc::show_cursor() {
     const char *SHOW_CURSOL_ANSI = "\e[?25h" ;
     write(STDOUT_FILENO,SHOW_CURSOL_ANSI,7);
 }
@@ -160,7 +174,7 @@ void Haklab::show_cursor() {
 
 
 
-std::string Haklab::show_architecture() {
+std::string hc::show_architecture() {
     #ifdef __x86_64__
         return "(x86_64)";
     #elif __i386__
@@ -199,7 +213,7 @@ std::string Haklab::show_architecture() {
 // };
         
 // ======= ABAUT =============    
-void Haklab::about(std::string about){
+void hc::about(std::string about){
     std::string fren = IHETC + std::basic_string("/Tools/Readme/") + about;   
     
     // Elegir donde buscar 

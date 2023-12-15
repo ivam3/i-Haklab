@@ -1,0 +1,29 @@
+# Nombre del flujo de trabajo 
+name: i-haklab-build
+
+# Se ejecutara en cada push a la rama principal y en cada pull request.
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+# MV 
+jobs:
+  build:
+    name: "Build"
+    runs-on: ubuntu-latest 
+    steps:
+    - name: Install dependencies...
+      run: |
+        sudo apt update && sudo apt install -y tar
+# Permite compartir datos 
+    - name: Clone repository
+      uses: actions/checkout@v3 
+    - name: Filling in home...
+      run: tar -zcf  i-haklab-home.tar.gz  -C  ./.deb/i-haklab  ./home  
+    - name: Uploading... 
+      uses: actions/upload-artifact@v3  
+      with:
+         name: i-haklab-home.tar.gz 
+         path: i-haklab-home.tar.gz

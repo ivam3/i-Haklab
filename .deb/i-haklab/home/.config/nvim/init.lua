@@ -11,6 +11,7 @@ function lazy.install(path)
       '--branch=stable', -- latest stable release
       path,
     })
+    print('Listo.')
   end
 end
 
@@ -28,6 +29,7 @@ lazy.opts = {}
 lazy.setup({
   ---
   -- Lista de plugins
+  --
   --- Partomar  notas de texto sin formato
   {
   "mickael-menu/zk-nvim",
@@ -36,9 +38,10 @@ lazy.setup({
       -- See Setup section below
     })
   end
-},
+  },
+  -- Corector de optografia 
   {'rhysd/vim-grammarous'},
-  -- Tema 
+  -- Temas 
   {'folke/tokyonight.nvim'},
   -- Linea inferiol
   {'nvim-lualine/lualine.nvim'},
@@ -62,9 +65,14 @@ lazy.setup({
     require("nvim-tree").setup {}
   end,
 },
-   -- Linea en blanco de sangría 
-   { "lukas-reineke/indent-blankline.nvim" },
-   -- Tarminal 
+
+-- Linea en blanco de sangría
+   { 
+     "lukas-reineke/indent-blankline.nvim",
+     main = "ibl", 
+     opts = {}, 
+   },
+    -- Tarminal 
      {'akinsho/toggleterm.nvim', version = "*", config = true},
    -- IA 
    {'dense-analysis/neural'},

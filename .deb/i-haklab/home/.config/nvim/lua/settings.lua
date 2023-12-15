@@ -4,10 +4,14 @@ local exec = vim.api.nvim_exec
 local fn = vim.fn
 local g = vim.g
 local opt  = vim.opt
+local map = vim.api.nvim_set_keymap
+local default_ops =  {noremap = true , silent = true}
+local cmd = vim.cmd
+
 
 -- General
 --
-g.mapleader = ','
+vim.g.mapleader = ','
 --
 ----------------------------------------
 --            =UI=
@@ -26,9 +30,20 @@ opt.number = true  -- numero
 opt.termguicolors = true --  "mejor versión" del tema de color
 
 -- Maus
-vim.opt.mouse = 'a'
+opt.mouse = 'a'
 -- Texto largo
-vim.opt.wrap = true
+opt.wrap = true
 -- Lee o modifica valores específicos para una ventana.
 --vim.wo.colorcolumn = '80'
-vim.opt.cursorline = true
+opt.cursorline = true
+
+----------------------------------------------
+-- Blakline
+--
+vim.opt.termguicolors = true
+
+-- Autocompletado
+--
+opt.completeopt = {'menu', 'menuone', 'noselect'}
+
+
