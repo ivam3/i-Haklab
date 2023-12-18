@@ -7,7 +7,7 @@ project(i-haklab)
 # Variables 
 set(SRC "src/boost-haklab.cpp")
 set(LIB_SRC "lib/below_zero.cpp")
-set(LIB_SRC "lib/filesmanipulation.cpp")
+
   
 # Bibloteca dinamica 
 add_library(below_zero SHARED ${LIB_SRC})

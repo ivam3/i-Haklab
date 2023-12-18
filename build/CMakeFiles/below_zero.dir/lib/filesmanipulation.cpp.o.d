@@ -1,8 +1,7 @@
 CMakeFiles/below_zero.dir/lib/filesmanipulation.cpp.o: \
   /data/data/com.termux/files/home/i-Haklab/lib/filesmanipulation.cpp \
   /data/data/com.termux/files/home/i-Haklab/lib/../src/below_zero.h \
-  /data/data/com.termux/files/usr/include/fmt/core.h \
-  /data/data/com.termux/files/usr/include/c++/v1/cstddef \
+  /data/data/com.termux/files/usr/include/c++/v1/cwchar \
   /data/data/com.termux/files/usr/include/c++/v1/__config \
   /data/data/com.termux/files/usr/include/features.h \
   /data/data/com.termux/files/usr/include/sys/cdefs.h \
@@ -11,15 +10,24 @@ CMakeFiles/below_zero.dir/lib/filesmanipulation.cpp.o: \
   /data/data/com.termux/files/usr/include/bits/get_device_api_level_inlines.h \
   /data/data/com.termux/files/usr/include/android/ndk-version.h \
   /data/data/com.termux/files/usr/include/pthread.h \
-  /data/data/com.termux/files/usr/include/c++/v1/version \
-  /data/data/com.termux/files/usr/lib/clang/16/include/stddef.h \
-  /data/data/com.termux/files/usr/lib/clang/16/include/__stddef_max_align_t.h \
-  /data/data/com.termux/files/usr/include/c++/v1/__nullptr \
-  /data/data/com.termux/files/usr/include/c++/v1/cstdio \
+  /data/data/com.termux/files/usr/include/c++/v1/cwctype \
+  /data/data/com.termux/files/usr/include/c++/v1/cctype \
+  /data/data/com.termux/files/usr/include/c++/v1/ctype.h \
+  /data/data/com.termux/files/usr/include/ctype.h \
+  /data/data/com.termux/files/usr/include/bits/ctype_inlines.h \
+  /data/data/com.termux/files/usr/include/xlocale.h \
+  /data/data/com.termux/files/usr/include/c++/v1/wctype.h \
+  /data/data/com.termux/files/usr/include/wctype.h \
+  /data/data/com.termux/files/usr/include/bits/wctype.h \
+  /data/data/com.termux/files/usr/include/c++/v1/wchar.h \
+  /data/data/com.termux/files/usr/include/wchar.h \
   /data/data/com.termux/files/usr/include/c++/v1/stdio.h \
   /data/data/com.termux/files/usr/include/stdio.h \
   /data/data/com.termux/files/usr/include/sys/types.h \
   /data/data/com.termux/files/usr/include/c++/v1/stddef.h \
+  /data/data/com.termux/files/usr/lib/clang/16/include/stddef.h \
+  /data/data/com.termux/files/usr/lib/clang/16/include/__stddef_max_align_t.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__nullptr \
   /data/data/com.termux/files/usr/include/c++/v1/stdint.h \
   /data/data/com.termux/files/usr/lib/clang/16/include/stdint.h \
   /data/data/com.termux/files/usr/include/stdint.h \
@@ -40,7 +48,6 @@ CMakeFiles/below_zero.dir/lib/filesmanipulation.cpp.o: \
   /data/data/com.termux/files/usr/lib/clang/16/include/stdarg.h \
   /data/data/com.termux/files/usr/include/c++/v1/string.h \
   /data/data/com.termux/files/usr/include/string.h \
-  /data/data/com.termux/files/usr/include/xlocale.h \
   /data/data/com.termux/files/usr/include/bits/strcasecmp.h \
   /data/data/com.termux/files/usr/include/strings.h \
   /data/data/com.termux/files/usr/include/aarch64-linux-android/asm/fcntl.h \
@@ -48,11 +55,6 @@ CMakeFiles/below_zero.dir/lib/filesmanipulation.cpp.o: \
   /data/data/com.termux/files/usr/include/bits/flock64.h \
   /data/data/com.termux/files/usr/include/bits/flock.h \
   /data/data/com.termux/files/usr/include/bits/seek_constants.h \
-  /data/data/com.termux/files/usr/include/c++/v1/cstring \
-  /data/data/com.termux/files/usr/include/c++/v1/iterator \
-  /data/data/com.termux/files/usr/include/c++/v1/iosfwd \
-  /data/data/com.termux/files/usr/include/c++/v1/wchar.h \
-  /data/data/com.termux/files/usr/include/wchar.h \
   /data/data/com.termux/files/usr/include/time.h \
   /data/data/com.termux/files/usr/include/sys/time.h \
   /data/data/com.termux/files/usr/include/linux/time.h \
@@ -80,7 +82,13 @@ CMakeFiles/below_zero.dir/lib/filesmanipulation.cpp.o: \
   /data/data/com.termux/files/usr/include/sys/user.h \
   /data/data/com.termux/files/usr/include/android/legacy_signal_inlines.h \
   /data/data/com.termux/files/usr/include/bits/mbstate_t.h \
-  /data/data/com.termux/files/usr/include/bits/wctype.h \
+  /data/data/com.termux/files/usr/include/fmt/core.h \
+  /data/data/com.termux/files/usr/include/c++/v1/cstddef \
+  /data/data/com.termux/files/usr/include/c++/v1/version \
+  /data/data/com.termux/files/usr/include/c++/v1/cstdio \
+  /data/data/com.termux/files/usr/include/c++/v1/cstring \
+  /data/data/com.termux/files/usr/include/c++/v1/iterator \
+  /data/data/com.termux/files/usr/include/c++/v1/iosfwd \
   /data/data/com.termux/files/usr/include/c++/v1/__functional_base \
   /data/data/com.termux/files/usr/include/c++/v1/type_traits \
   /data/data/com.termux/files/usr/include/c++/v1/typeinfo \
@@ -128,14 +136,6 @@ CMakeFiles/below_zero.dir/lib/filesmanipulation.cpp.o: \
   /data/data/com.termux/files/usr/include/semaphore.h \
   /data/data/com.termux/files/usr/include/c++/v1/functional \
   /data/data/com.termux/files/usr/include/c++/v1/bit \
-  /data/data/com.termux/files/usr/include/c++/v1/cwchar \
-  /data/data/com.termux/files/usr/include/c++/v1/cwctype \
-  /data/data/com.termux/files/usr/include/c++/v1/cctype \
-  /data/data/com.termux/files/usr/include/c++/v1/ctype.h \
-  /data/data/com.termux/files/usr/include/ctype.h \
-  /data/data/com.termux/files/usr/include/bits/ctype_inlines.h \
-  /data/data/com.termux/files/usr/include/c++/v1/wctype.h \
-  /data/data/com.termux/files/usr/include/wctype.h \
   /data/data/com.termux/files/usr/include/fmt/color.h \
   /data/data/com.termux/files/usr/include/fmt/format.h \
   /data/data/com.termux/files/usr/include/c++/v1/cmath \

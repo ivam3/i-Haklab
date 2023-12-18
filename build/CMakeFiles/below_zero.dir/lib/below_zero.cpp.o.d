@@ -1,8 +1,17 @@
 CMakeFiles/below_zero.dir/lib/below_zero.cpp.o: \
   /data/data/com.termux/files/home/i-Haklab/lib/below_zero.cpp \
   /data/data/com.termux/files/home/i-Haklab/lib/../src/below_zero.h \
-  /data/data/com.termux/files/usr/include/fmt/core.h \
-  /data/data/com.termux/files/usr/include/c++/v1/cstddef \
+  /data/data/com.termux/files/usr/include/boost/array.hpp \
+  /data/data/com.termux/files/usr/include/boost/detail/workaround.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/workaround.hpp \
+  /data/data/com.termux/files/usr/include/boost/config.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/user.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/detail/select_compiler_config.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/compiler/clang.hpp \
+  /data/data/com.termux/files/usr/include/c++/v1/stdint.h \
+  /data/data/com.termux/files/usr/include/boost/config/compiler/clang_version.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/detail/select_stdlib_config.hpp \
+  /data/data/com.termux/files/usr/include/c++/v1/version \
   /data/data/com.termux/files/usr/include/c++/v1/__config \
   /data/data/com.termux/files/usr/include/features.h \
   /data/data/com.termux/files/usr/include/sys/cdefs.h \
@@ -11,16 +20,24 @@ CMakeFiles/below_zero.dir/lib/below_zero.cpp.o: \
   /data/data/com.termux/files/usr/include/bits/get_device_api_level_inlines.h \
   /data/data/com.termux/files/usr/include/android/ndk-version.h \
   /data/data/com.termux/files/usr/include/pthread.h \
-  /data/data/com.termux/files/usr/include/c++/v1/version \
+  /data/data/com.termux/files/usr/include/boost/config/stdlib/libcpp.hpp \
+  /data/data/com.termux/files/usr/include/c++/v1/shared_mutex \
+  /data/data/com.termux/files/usr/include/boost/config/detail/select_platform_config.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/platform/linux.hpp \
+  /data/data/com.termux/files/usr/include/c++/v1/cstdlib \
+  /data/data/com.termux/files/usr/include/c++/v1/stdlib.h \
+  /data/data/com.termux/files/usr/include/stdlib.h \
+  /data/data/com.termux/files/usr/include/alloca.h \
+  /data/data/com.termux/files/usr/include/bits/wait.h \
+  /data/data/com.termux/files/usr/include/linux/wait.h \
+  /data/data/com.termux/files/usr/include/malloc.h \
+  /data/data/com.termux/files/usr/include/c++/v1/stddef.h \
   /data/data/com.termux/files/usr/lib/clang/16/include/stddef.h \
   /data/data/com.termux/files/usr/lib/clang/16/include/__stddef_max_align_t.h \
   /data/data/com.termux/files/usr/include/c++/v1/__nullptr \
-  /data/data/com.termux/files/usr/include/c++/v1/cstdio \
   /data/data/com.termux/files/usr/include/c++/v1/stdio.h \
   /data/data/com.termux/files/usr/include/stdio.h \
   /data/data/com.termux/files/usr/include/sys/types.h \
-  /data/data/com.termux/files/usr/include/c++/v1/stddef.h \
-  /data/data/com.termux/files/usr/include/c++/v1/stdint.h \
   /data/data/com.termux/files/usr/lib/clang/16/include/stdint.h \
   /data/data/com.termux/files/usr/include/stdint.h \
   /data/data/com.termux/files/usr/include/bits/wchar_limits.h \
@@ -48,20 +65,9 @@ CMakeFiles/below_zero.dir/lib/below_zero.cpp.o: \
   /data/data/com.termux/files/usr/include/bits/flock64.h \
   /data/data/com.termux/files/usr/include/bits/flock.h \
   /data/data/com.termux/files/usr/include/bits/seek_constants.h \
-  /data/data/com.termux/files/usr/include/c++/v1/cstring \
-  /data/data/com.termux/files/usr/include/c++/v1/iterator \
-  /data/data/com.termux/files/usr/include/c++/v1/iosfwd \
-  /data/data/com.termux/files/usr/include/c++/v1/wchar.h \
-  /data/data/com.termux/files/usr/include/wchar.h \
-  /data/data/com.termux/files/usr/include/time.h \
-  /data/data/com.termux/files/usr/include/sys/time.h \
-  /data/data/com.termux/files/usr/include/linux/time.h \
-  /data/data/com.termux/files/usr/include/linux/time_types.h \
-  /data/data/com.termux/files/usr/include/sys/select.h \
-  /data/data/com.termux/files/usr/include/signal.h \
-  /data/data/com.termux/files/usr/include/aarch64-linux-android/asm/sigcontext.h \
-  /data/data/com.termux/files/usr/include/aarch64-linux-android/asm/sve_context.h \
-  /data/data/com.termux/files/usr/include/bits/signal_types.h \
+  /data/data/com.termux/files/usr/include/android/legacy_stdlib_inlines.h \
+  /data/data/com.termux/files/usr/include/c++/v1/math.h \
+  /data/data/com.termux/files/usr/include/c++/v1/../../math.h \
   /data/data/com.termux/files/usr/include/c++/v1/limits.h \
   /data/data/com.termux/files/usr/lib/clang/16/include/limits.h \
   /data/data/com.termux/files/usr/include/limits.h \
@@ -69,6 +75,19 @@ CMakeFiles/below_zero.dir/lib/below_zero.cpp.o: \
   /data/data/com.termux/files/usr/lib/clang/16/include/float.h \
   /data/data/com.termux/files/usr/include/linux/limits.h \
   /data/data/com.termux/files/usr/include/bits/posix_limits.h \
+  /data/data/com.termux/files/usr/include/c++/v1/type_traits \
+  /data/data/com.termux/files/usr/include/c++/v1/cstddef \
+  /data/data/com.termux/files/usr/include/c++/v1/limits \
+  /data/data/com.termux/files/usr/include/c++/v1/__undef_macros \
+  /data/data/com.termux/files/usr/include/boost/config/detail/posix_features.hpp \
+  /data/data/com.termux/files/usr/include/unistd.h \
+  /data/data/com.termux/files/usr/include/sys/select.h \
+  /data/data/com.termux/files/usr/include/linux/time.h \
+  /data/data/com.termux/files/usr/include/linux/time_types.h \
+  /data/data/com.termux/files/usr/include/signal.h \
+  /data/data/com.termux/files/usr/include/aarch64-linux-android/asm/sigcontext.h \
+  /data/data/com.termux/files/usr/include/aarch64-linux-android/asm/sve_context.h \
+  /data/data/com.termux/files/usr/include/bits/signal_types.h \
   /data/data/com.termux/files/usr/include/linux/signal.h \
   /data/data/com.termux/files/usr/include/aarch64-linux-android/asm/signal.h \
   /data/data/com.termux/files/usr/include/asm-generic/signal.h \
@@ -79,37 +98,57 @@ CMakeFiles/below_zero.dir/lib/below_zero.cpp.o: \
   /data/data/com.termux/files/usr/include/sys/ucontext.h \
   /data/data/com.termux/files/usr/include/sys/user.h \
   /data/data/com.termux/files/usr/include/android/legacy_signal_inlines.h \
+  /data/data/com.termux/files/usr/include/bits/fcntl.h \
+  /data/data/com.termux/files/usr/include/bits/getopt.h \
+  /data/data/com.termux/files/usr/include/bits/ioctl.h \
+  /data/data/com.termux/files/usr/include/bits/lockf.h \
+  /data/data/com.termux/files/usr/include/bits/sysconf.h \
+  /data/data/com.termux/files/usr/include/android/legacy_unistd_inlines.h \
+  /data/data/com.termux/files/usr/include/bits/swab.h \
+  /data/data/com.termux/files/usr/include/boost/config/detail/suffix.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/helper_macros.hpp \
+  /data/data/com.termux/files/usr/include/c++/v1/optional \
+  /data/data/com.termux/files/usr/include/c++/v1/string_view \
+  /data/data/com.termux/files/usr/include/c++/v1/variant \
+  /data/data/com.termux/files/usr/include/c++/v1/any \
+  /data/data/com.termux/files/usr/include/c++/v1/charconv \
+  /data/data/com.termux/files/usr/include/c++/v1/execution \
+  /data/data/com.termux/files/usr/include/c++/v1/filesystem \
+  /data/data/com.termux/files/usr/include/boost/config/detail/cxx_composite.hpp \
+  /data/data/com.termux/files/usr/include/c++/v1/iterator \
+  /data/data/com.termux/files/usr/include/c++/v1/iosfwd \
+  /data/data/com.termux/files/usr/include/c++/v1/wchar.h \
+  /data/data/com.termux/files/usr/include/wchar.h \
+  /data/data/com.termux/files/usr/include/time.h \
+  /data/data/com.termux/files/usr/include/sys/time.h \
   /data/data/com.termux/files/usr/include/bits/mbstate_t.h \
   /data/data/com.termux/files/usr/include/bits/wctype.h \
   /data/data/com.termux/files/usr/include/c++/v1/__functional_base \
-  /data/data/com.termux/files/usr/include/c++/v1/type_traits \
   /data/data/com.termux/files/usr/include/c++/v1/typeinfo \
   /data/data/com.termux/files/usr/include/c++/v1/exception \
-  /data/data/com.termux/files/usr/include/c++/v1/cstdlib \
-  /data/data/com.termux/files/usr/include/c++/v1/stdlib.h \
-  /data/data/com.termux/files/usr/include/stdlib.h \
-  /data/data/com.termux/files/usr/include/alloca.h \
-  /data/data/com.termux/files/usr/include/bits/wait.h \
-  /data/data/com.termux/files/usr/include/linux/wait.h \
-  /data/data/com.termux/files/usr/include/malloc.h \
-  /data/data/com.termux/files/usr/include/android/legacy_stdlib_inlines.h \
-  /data/data/com.termux/files/usr/include/c++/v1/math.h \
-  /data/data/com.termux/files/usr/include/c++/v1/../../math.h \
-  /data/data/com.termux/files/usr/include/c++/v1/limits \
-  /data/data/com.termux/files/usr/include/c++/v1/__undef_macros \
   /data/data/com.termux/files/usr/include/c++/v1/cstdint \
   /data/data/com.termux/files/usr/include/c++/v1/new \
   /data/data/com.termux/files/usr/include/c++/v1/utility \
   /data/data/com.termux/files/usr/include/c++/v1/__tuple \
   /data/data/com.termux/files/usr/include/c++/v1/initializer_list \
+  /data/data/com.termux/files/usr/include/c++/v1/cstring \
   /data/data/com.termux/files/usr/include/c++/v1/__debug \
+  /data/data/com.termux/files/usr/include/c++/v1/stdexcept \
+  /data/data/com.termux/files/usr/include/boost/assert.hpp \
+  /data/data/com.termux/files/usr/include/assert.h \
+  /data/data/com.termux/files/usr/include/boost/core/swap.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/enable_if.hpp \
+  /data/data/com.termux/files/usr/include/boost/static_assert.hpp \
+  /data/data/com.termux/files/usr/include/boost/throw_exception.hpp \
+  /data/data/com.termux/files/usr/include/boost/exception/exception.hpp \
+  /data/data/com.termux/files/usr/include/boost/assert/source_location.hpp \
+  /data/data/com.termux/files/usr/include/boost/current_function.hpp \
+  /data/data/com.termux/files/usr/include/boost/cstdint.hpp \
   /data/data/com.termux/files/usr/include/c++/v1/string \
-  /data/data/com.termux/files/usr/include/c++/v1/string_view \
   /data/data/com.termux/files/usr/include/c++/v1/__string \
   /data/data/com.termux/files/usr/include/c++/v1/algorithm \
   /data/data/com.termux/files/usr/include/c++/v1/memory \
   /data/data/com.termux/files/usr/include/c++/v1/tuple \
-  /data/data/com.termux/files/usr/include/c++/v1/stdexcept \
   /data/data/com.termux/files/usr/include/c++/v1/atomic \
   /data/data/com.termux/files/usr/include/c++/v1/__threading_support \
   /data/data/com.termux/files/usr/include/c++/v1/chrono \
@@ -128,6 +167,7 @@ CMakeFiles/below_zero.dir/lib/below_zero.cpp.o: \
   /data/data/com.termux/files/usr/include/semaphore.h \
   /data/data/com.termux/files/usr/include/c++/v1/functional \
   /data/data/com.termux/files/usr/include/c++/v1/bit \
+  /data/data/com.termux/files/usr/include/c++/v1/cstdio \
   /data/data/com.termux/files/usr/include/c++/v1/cwchar \
   /data/data/com.termux/files/usr/include/c++/v1/cwctype \
   /data/data/com.termux/files/usr/include/c++/v1/cctype \
@@ -136,53 +176,19 @@ CMakeFiles/below_zero.dir/lib/below_zero.cpp.o: \
   /data/data/com.termux/files/usr/include/bits/ctype_inlines.h \
   /data/data/com.termux/files/usr/include/c++/v1/wctype.h \
   /data/data/com.termux/files/usr/include/wctype.h \
-  /data/data/com.termux/files/usr/include/fmt/color.h \
-  /data/data/com.termux/files/usr/include/fmt/format.h \
-  /data/data/com.termux/files/usr/include/c++/v1/cmath \
-  /data/data/com.termux/files/usr/include/c++/v1/system_error \
-  /data/data/com.termux/files/usr/include/c++/v1/__errc \
-  /data/data/com.termux/files/usr/include/c++/v1/cerrno \
-  /data/data/com.termux/files/usr/include/nlohmann/json.hpp \
-  /data/data/com.termux/files/usr/include/c++/v1/numeric \
-  /data/data/com.termux/files/usr/include/c++/v1/vector \
-  /data/data/com.termux/files/usr/include/c++/v1/__bit_reference \
-  /data/data/com.termux/files/usr/include/c++/v1/__split_buffer \
-  /data/data/com.termux/files/usr/include/nlohmann/adl_serializer.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/abi_macros.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/conversions/from_json.hpp \
-  /data/data/com.termux/files/usr/include/c++/v1/array \
-  /data/data/com.termux/files/usr/include/c++/v1/forward_list \
-  /data/data/com.termux/files/usr/include/c++/v1/map \
-  /data/data/com.termux/files/usr/include/c++/v1/__tree \
-  /data/data/com.termux/files/usr/include/c++/v1/__node_handle \
-  /data/data/com.termux/files/usr/include/c++/v1/optional \
-  /data/data/com.termux/files/usr/include/c++/v1/unordered_map \
-  /data/data/com.termux/files/usr/include/c++/v1/__hash_table \
-  /data/data/com.termux/files/usr/include/c++/v1/valarray \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/exceptions.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/value_t.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/macro_scope.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/meta/detected.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/meta/void_t.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/thirdparty/hedley/hedley.hpp \
-  /data/data/com.termux/files/usr/include/c++/v1/cassert \
-  /data/data/com.termux/files/usr/include/assert.h \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/string_escape.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/input/position_t.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/meta/cpp_future.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/meta/type_traits.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/iterators/iterator_traits.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/meta/call_std/begin.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/meta/call_std/end.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/json_fwd.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/string_concat.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/meta/identity_tag.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/meta/std_fs.hpp \
-  /data/data/com.termux/files/usr/include/c++/v1/filesystem \
+  /data/data/com.termux/files/usr/include/boost/filesystem.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/config.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/api_config.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/auto_link.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/path.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/detail/path_traits.hpp \
   /data/data/com.termux/files/usr/include/c++/v1/locale \
   /data/data/com.termux/files/usr/include/c++/v1/__locale \
   /data/data/com.termux/files/usr/include/c++/v1/mutex \
   /data/data/com.termux/files/usr/include/c++/v1/__mutex_base \
+  /data/data/com.termux/files/usr/include/c++/v1/system_error \
+  /data/data/com.termux/files/usr/include/c++/v1/__errc \
+  /data/data/com.termux/files/usr/include/c++/v1/cerrno \
   /data/data/com.termux/files/usr/include/c++/v1/locale.h \
   /data/data/com.termux/files/usr/include/locale.h \
   /data/data/com.termux/files/usr/include/c++/v1/support/android/locale_bionic.h \
@@ -190,115 +196,525 @@ CMakeFiles/below_zero.dir/lib/below_zero.cpp.o: \
   /data/data/com.termux/files/usr/include/c++/v1/streambuf \
   /data/data/com.termux/files/usr/include/c++/v1/cstdarg \
   /data/data/com.termux/files/usr/include/c++/v1/__bsd_locale_fallbacks.h \
+  /data/data/com.termux/files/usr/include/boost/system/error_category.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/error_category.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/config.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/requires_cxx11.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/pragma_message.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/error_category_impl.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/error_condition.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/generic_category.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/generic_category_message.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/enable_if.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/is_same.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/errc.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/is_error_condition_enum.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/cerrno.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/append_int.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/snprintf.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/error_code.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/is_error_code_enum.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/system_category.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/system_category_impl.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/system_category_message.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/interop_category.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/std_category.hpp \
+  /data/data/com.termux/files/usr/include/c++/v1/ostream \
+  /data/data/com.termux/files/usr/include/c++/v1/bitset \
+  /data/data/com.termux/files/usr/include/c++/v1/__bit_reference \
+  /data/data/com.termux/files/usr/include/boost/system/detail/std_category_impl.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/mutex.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/is_iterator.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/integral_constant.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/negation.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/conjunction.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/conditional.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_complete.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/declval.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/add_rvalue_reference.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_void.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_reference.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_lvalue_reference.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_rvalue_reference.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/remove_reference.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_function.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/detail/config.hpp \
+  /data/data/com.termux/files/usr/include/boost/version.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/detail/is_function_cxx_11.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/detail/yes_no_type.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/remove_cv.hpp \
+  /data/data/com.termux/files/usr/include/c++/v1/vector \
+  /data/data/com.termux/files/usr/include/c++/v1/__split_buffer \
+  /data/data/com.termux/files/usr/include/c++/v1/list \
+  /data/data/com.termux/files/usr/include/boost/filesystem/detail/header.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/abi_prefix.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/detail/footer.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/abi_suffix.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/iterator_facade.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/interoperable.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/bool.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/bool_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/adl_barrier.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/adl.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/msvc.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/intel.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/gcc.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/workaround.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/integral_c_tag.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/static_constant.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/or.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/use_preprocessed.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/nested_type_wknd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/na_spec.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/lambda_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/void_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/na.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/na_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/ctps.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/lambda.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/ttp.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/int.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/int_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/nttp_decl.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/nttp.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/integral_wrapper.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/static_cast.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/cat.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/config/config.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/lambda_arity_param.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/template_arity_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/arity.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/dtp.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessor/params.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/preprocessor.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/comma_if.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/punctuation/comma_if.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/control/if.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/control/iif.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/logical/bool.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/config/limits.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/logical/limits/bool_256.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/facilities/empty.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/punctuation/comma.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/repeat.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/repeat.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/debug/error.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/detail/auto_rec.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/detail/limits/auto_rec_256.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/tuple/eat.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/limits/repeat_256.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/inc.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/inc.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/limits/inc_256.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessor/enum.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/limits/arity.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/logical/and.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/logical/bitand.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/identity.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/facilities/identity.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/empty.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/add.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/dec.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/limits/dec_256.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/control/while.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/list/fold_left.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/list/detail/fold_left.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/control/expr_iif.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/list/adt.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/detail/is_binary.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/detail/check.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/logical/compl.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/list/detail/limits/fold_left_256.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/list/limits/fold_left_256.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/list/fold_right.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/list/detail/fold_right.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/list/reverse.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/list/detail/limits/fold_right_256.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/control/detail/while.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/control/detail/limits/while_256.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/control/limits/while_256.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/logical/bitor.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/tuple/elem.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/facilities/expand.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/facilities/overload.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/variadic/size.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/facilities/check_empty.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/variadic/has_opt.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/variadic/limits/size_64.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/tuple/rem.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/tuple/detail/is_single_return.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/variadic/elem.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/variadic/limits/elem_64.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/detail/is_maximum_number.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/comparison/equal.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/comparison/not_equal.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/comparison/limits/not_equal_256.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/detail/maximum_number.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/detail/is_minimum_number.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/logical/not.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/sub.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/eti.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/overload_resolution.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/lambda_support.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/include_preprocessed.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/compiler.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/stringize.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/or.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_convertible.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/intrinsics.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_array.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/detail/config_def.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/detail/config_undef.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/iterator_traits.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/iterator_categories.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/eval_if.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/if.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/value_wknd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/integral.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/identity.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/placeholders.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/arg.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/arg_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/na_assert.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/assert.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/not.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/yes_no.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/arrays.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/gpu.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/pp_counter.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/arity_spec.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/arg_typedef.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/detail/facade_iterator_category.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/use_default.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/and.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/and.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_same.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_const.hpp \
+  /data/data/com.termux/files/usr/include/boost/detail/indirect_traits.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_pointer.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_class.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_volatile.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_member_function_pointer.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/detail/is_member_function_pointer_cxx_11.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_member_pointer.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/remove_pointer.hpp \
+  /data/data/com.termux/files/usr/include/boost/detail/select_type.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/detail/enable_if.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/addressof.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/add_const.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/add_pointer.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/add_lvalue_reference.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/add_reference.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/remove_const.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_pod.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_scalar.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_arithmetic.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_integral.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_floating_point.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_enum.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/always.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessor/default_params.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/apply.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/apply_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/apply_wrap.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/has_apply.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/has_xxx.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/type_wrapper.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/has_xxx.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/msvc_typename.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/array/elem.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/array/data.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/array/size.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/enum_params.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/enum_trailing_params.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/has_apply.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/msvc_never_true.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/lambda.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/bind.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/bind_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/bind.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/next.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/next_prior.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/common_name_wknd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/protect.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/full_lambda.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/quote.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/void.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/has_type.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/bcc.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/template_arity.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
+  /data/data/com.termux/files/usr/include/boost/io/quoted.hpp \
+  /data/data/com.termux/files/usr/include/boost/io/detail/buffer_fill.hpp \
+  /data/data/com.termux/files/usr/include/boost/io/detail/ostream_guard.hpp \
+  /data/data/com.termux/files/usr/include/boost/io/ios_state.hpp \
+  /data/data/com.termux/files/usr/include/boost/io_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/functional/hash_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/container_hash/hash_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/disjunction.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/exception.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/error_code.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/error_condition.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/errc.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/generic_category.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/system_category.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/detail/throws.hpp \
+  /data/data/com.termux/files/usr/include/boost/system/system_error.hpp \
+  /data/data/com.termux/files/usr/include/c++/v1/cassert \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/intrusive_ptr.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/requires_cxx11.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_convertible.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_nullptr_t.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_noexcept.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/no_tr1/functional.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/operator_bool.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/intrusive_ref_counter.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/atomic_count.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_has_gcc_intrinsics.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_has_sync_intrinsics.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/atomic_count_gcc_atomic.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/directory.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/file_status.hpp \
+  /data/data/com.termux/files/usr/include/boost/detail/bitmask.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/scoped_enum.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/operations.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/convenience.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/device/file.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/config/wide_streams.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/categories.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/ios.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/fstream.hpp \
+  /data/data/com.termux/files/usr/include/c++/v1/fstream \
+  /data/data/com.termux/files/usr/include/c++/v1/istream \
   /data/data/com.termux/files/usr/include/c++/v1/stack \
   /data/data/com.termux/files/usr/include/c++/v1/deque \
   /data/data/com.termux/files/usr/include/c++/v1/iomanip \
-  /data/data/com.termux/files/usr/include/c++/v1/istream \
-  /data/data/com.termux/files/usr/include/c++/v1/ostream \
-  /data/data/com.termux/files/usr/include/c++/v1/bitset \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/conversions/to_json.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/iterators/iteration_proxy.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/byte_container_with_subtype.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/hash.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/input/binary_reader.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/input/input_adapters.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/input/json_sax.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/input/lexer.hpp \
-  /data/data/com.termux/files/usr/include/c++/v1/clocale \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/meta/is_sax.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/input/parser.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/iterators/internal_iterator.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/iterators/primitive_iterator.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/iterators/iter_impl.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/iterators/json_reverse_iterator.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/json_pointer.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/json_ref.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/output/binary_writer.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/output/output_adapters.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/output/serializer.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/conversions/to_chars.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/ordered_map.hpp \
-  /data/data/com.termux/files/usr/include/c++/v1/any \
-  /data/data/com.termux/files/usr/include/c++/v1/experimental/__config \
-  /data/data/com.termux/files/usr/include/nlohmann/detail/macro_unscope.hpp \
-  /data/data/com.termux/files/usr/include/nlohmann/thirdparty/hedley/hedley_undef.hpp \
-  /data/data/com.termux/files/usr/include/boost/array.hpp \
-  /data/data/com.termux/files/usr/include/boost/detail/workaround.hpp \
-  /data/data/com.termux/files/usr/include/boost/config/workaround.hpp \
-  /data/data/com.termux/files/usr/include/boost/config.hpp \
-  /data/data/com.termux/files/usr/include/boost/config/user.hpp \
-  /data/data/com.termux/files/usr/include/boost/config/detail/select_compiler_config.hpp \
-  /data/data/com.termux/files/usr/include/boost/config/compiler/clang.hpp \
-  /data/data/com.termux/files/usr/include/boost/config/compiler/clang_version.hpp \
-  /data/data/com.termux/files/usr/include/boost/config/detail/select_stdlib_config.hpp \
-  /data/data/com.termux/files/usr/include/boost/config/stdlib/libcpp.hpp \
-  /data/data/com.termux/files/usr/include/c++/v1/shared_mutex \
-  /data/data/com.termux/files/usr/include/boost/config/detail/select_platform_config.hpp \
-  /data/data/com.termux/files/usr/include/boost/config/platform/linux.hpp \
-  /data/data/com.termux/files/usr/include/boost/config/detail/posix_features.hpp \
-  /data/data/com.termux/files/usr/include/unistd.h \
-  /data/data/com.termux/files/usr/include/bits/fcntl.h \
-  /data/data/com.termux/files/usr/include/bits/getopt.h \
-  /data/data/com.termux/files/usr/include/bits/ioctl.h \
-  /data/data/com.termux/files/usr/include/bits/lockf.h \
-  /data/data/com.termux/files/usr/include/bits/sysconf.h \
-  /data/data/com.termux/files/usr/include/android/legacy_unistd_inlines.h \
-  /data/data/com.termux/files/usr/include/bits/swab.h \
-  /data/data/com.termux/files/usr/include/boost/config/detail/suffix.hpp \
-  /data/data/com.termux/files/usr/include/boost/config/helper_macros.hpp \
-  /data/data/com.termux/files/usr/include/c++/v1/variant \
-  /data/data/com.termux/files/usr/include/c++/v1/charconv \
-  /data/data/com.termux/files/usr/include/c++/v1/execution \
-  /data/data/com.termux/files/usr/include/boost/config/detail/cxx_composite.hpp \
-  /data/data/com.termux/files/usr/include/boost/assert.hpp \
-  /data/data/com.termux/files/usr/include/boost/core/swap.hpp \
-  /data/data/com.termux/files/usr/include/boost/core/enable_if.hpp \
-  /data/data/com.termux/files/usr/include/boost/static_assert.hpp \
-  /data/data/com.termux/files/usr/include/boost/throw_exception.hpp \
-  /data/data/com.termux/files/usr/include/boost/exception/exception.hpp \
-  /data/data/com.termux/files/usr/include/boost/assert/source_location.hpp \
-  /data/data/com.termux/files/usr/include/boost/current_function.hpp \
-  /data/data/com.termux/files/usr/include/boost/cstdint.hpp \
-  /data/data/com.termux/files/usr/include/dirent.h \
+  /data/data/com.termux/files/usr/include/boost/iostreams/operations.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/operations_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_base_and_derived.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/close.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/flush.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/dispatch.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/select.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/traits.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/bool_trait_def.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/template_params.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/control/expr_if.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/is_iterator_range.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/config/disable_warnings.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/config/enable_warnings.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/select_by_size.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/iteration/local.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/slot/slot.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/slot/detail/def.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/iteration/detail/local.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/iteration/detail/limits/local_256.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/wrap_unwrap.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/enable_if_stream.hpp \
+  /data/data/com.termux/files/usr/include/boost/utility/enable_if.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/traits_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/ref.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/ref.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/iterator_range.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/iterator_range_core.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_abstract.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/functions.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/begin.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/config.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/iterator.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/range_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/mutable_iterator.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/detail/extract_optional_type.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/detail/msvc_has_iterator_workaround.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/const_iterator.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/end.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/detail/implementation_help.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/detail/common.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/detail/sfinae.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/size.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/size_type.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/difference_type.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/has_range_iterator.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/concepts.hpp \
+  /data/data/com.termux/files/usr/include/boost/concept_check.hpp \
+  /data/data/com.termux/files/usr/include/boost/concept/assert.hpp \
+  /data/data/com.termux/files/usr/include/boost/concept/detail/general.hpp \
+  /data/data/com.termux/files/usr/include/boost/concept/detail/backward_compatibility.hpp \
+  /data/data/com.termux/files/usr/include/boost/concept/detail/has_constraints.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/conversion_traits.hpp \
+  /data/data/com.termux/files/usr/include/boost/concept/usage.hpp \
+  /data/data/com.termux/files/usr/include/boost/concept/detail/concept_def.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/for_each_i.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/for.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/detail/for.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/detail/limits/for_256.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/limits/for_256.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/seq.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/elem.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/limits/elem_256.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/size.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/limits/size_256.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/detail/is_empty.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/enum.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/limits/enum_256.hpp \
+  /data/data/com.termux/files/usr/include/boost/concept/detail/concept_undef.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/iterator_concepts.hpp \
+  /data/data/com.termux/files/usr/include/boost/limits.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/value_type.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/detail/misc_concept.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/make_unsigned.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_signed.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/is_unsigned.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/add_volatile.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/detail/has_member_size.hpp \
+  /data/data/com.termux/files/usr/include/boost/utility.hpp \
+  /data/data/com.termux/files/usr/include/boost/utility/base_from_member.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/enum_binary_params.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/repeat_from_to.hpp \
+  /data/data/com.termux/files/usr/include/boost/utility/binary.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/control/deduce_d.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/cat.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/fold_left.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/limits/fold_left_256.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/transform.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/mod.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/detail/div_base.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/comparison/less_equal.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/detail/is_1_number.hpp \
+  /data/data/com.termux/files/usr/include/boost/utility/identity_type.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/function_traits.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/checked_delete.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/noncopyable.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/distance.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/distance.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/empty.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/rbegin.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/reverse_iterator.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/reverse_iterator.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/iterator_adaptor.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/rend.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/algorithm/equal.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/detail/safe_bool.hpp \
+  /data/data/com.termux/files/usr/include/boost/next_prior.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/has_plus.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/detail/has_binary_operator.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/make_void.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/has_plus_assign.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/has_minus.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/has_minus_assign.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/advance.hpp \
+  /data/data/com.termux/files/usr/include/boost/range/iterator_range_io.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/streambuf.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/adapter/non_blocking_adapter.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/read.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/char_traits.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/char_traits.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/seek.hpp \
+  /data/data/com.termux/files/usr/include/boost/integer_traits.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/positioning.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/config/codecvt.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/config/fpos.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/write.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/imbue.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/input_sequence.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/optimal_buffer_size.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/constants.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/output_sequence.hpp \
+  /data/data/com.termux/files/usr/include/boost/shared_ptr.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/shared_ptr.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/shared_count.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/bad_weak_ptr.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_counted_base.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_counted_base_gcc_atomic.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_typeinfo_.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_counted_impl.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_disable_deprecated.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/spinlock_pool.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/spinlock.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/spinlock_gcc_atomic.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/yield_k.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/yield_primitives.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/detail/sp_thread_pause.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/detail/sp_thread_yield.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/detail/sp_thread_sleep.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/local_sp_deleter.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/local_counted_base.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/stream.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/config/overload_resolution.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/config/gcc.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/forward.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/config/limits.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/push_params.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/iostream.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/stream_buffer.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/streambuf/direct_streambuf.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/typeinfo.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/demangle.hpp \
+  /data/data/com.termux/files/usr/include/c++/v1/cxxabi.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__cxxabi_config.h \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/error.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/execute.hpp \
+  /data/data/com.termux/files/usr/include/boost/utility/result_of.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/type_identity.hpp \
+  /data/data/com.termux/files/usr/include/boost/utility/detail/result_of_variadic.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/functional.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/optional.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/aligned_storage.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/alignment_of.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/type_with_alignment.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/streambuf/linked_streambuf.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/streambuf/indirect_streambuf.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/adapter/concept_adapter.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/concepts.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/default_arg.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/call_traits.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/config/unreachable_return.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/device/null.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/buffer.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/checked_operations.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/get.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/put.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/double_object.hpp \
+  /data/data/com.termux/files/usr/include/boost/call_traits.hpp \
+  /data/data/com.termux/files/usr/include/boost/detail/call_traits.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/push.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/adapter/range_adapter.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/pipeline.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/resolve.hpp \
+  /data/data/com.termux/files/usr/include/boost/detail/is_incrementable.hpp \
+  /data/data/com.termux/files/usr/include/boost/type_traits/detail/bool_trait_undef.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/adapter/mode_adapter.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/adapter/output_iterator_adapter.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/detail/is_dereferenceable.hpp \
+  /data/data/com.termux/files/usr/include/boost/iostreams/device/array.hpp \
   /data/data/com.termux/files/usr/include/boost/program_options.hpp \
   /data/data/com.termux/files/usr/include/boost/program_options/options_description.hpp \
   /data/data/com.termux/files/usr/include/boost/program_options/config.hpp \
-  /data/data/com.termux/files/usr/include/boost/version.hpp \
-  /data/data/com.termux/files/usr/include/boost/config/auto_link.hpp \
   /data/data/com.termux/files/usr/include/boost/program_options/errors.hpp \
+  /data/data/com.termux/files/usr/include/c++/v1/map \
+  /data/data/com.termux/files/usr/include/c++/v1/__tree \
+  /data/data/com.termux/files/usr/include/c++/v1/__node_handle \
   /data/data/com.termux/files/usr/include/boost/program_options/value_semantic.hpp \
   /data/data/com.termux/files/usr/include/boost/any.hpp \
   /data/data/com.termux/files/usr/include/boost/any/bad_any_cast.hpp \
   /data/data/com.termux/files/usr/include/boost/any/fwd.hpp \
-  /data/data/com.termux/files/usr/include/boost/config/pragma_message.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/alignment_of.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/intrinsics.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/detail/config.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/integral_constant.hpp \
   /data/data/com.termux/files/usr/include/boost/any/detail/placeholder.hpp \
   /data/data/com.termux/files/usr/include/boost/type_index.hpp \
   /data/data/com.termux/files/usr/include/boost/type_index/stl_type_index.hpp \
   /data/data/com.termux/files/usr/include/boost/type_index/type_index_facade.hpp \
-  /data/data/com.termux/files/usr/include/boost/container_hash/hash_fwd.hpp \
-  /data/data/com.termux/files/usr/include/boost/core/demangle.hpp \
-  /data/data/com.termux/files/usr/include/c++/v1/cxxabi.h \
-  /data/data/com.termux/files/usr/include/c++/v1/__cxxabi_config.h \
-  /data/data/com.termux/files/usr/include/boost/type_traits/conditional.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_const.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_reference.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_lvalue_reference.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_rvalue_reference.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_volatile.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/remove_cv.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/remove_reference.hpp \
   /data/data/com.termux/files/usr/include/boost/container_hash/hash.hpp \
   /data/data/com.termux/files/usr/include/boost/container_hash/detail/requires_cxx11.hpp \
   /data/data/com.termux/files/usr/include/boost/container_hash/is_range.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_integral.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/declval.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/add_rvalue_reference.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_void.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_same.hpp \
   /data/data/com.termux/files/usr/include/boost/container_hash/is_contiguous_range.hpp \
   /data/data/com.termux/files/usr/include/boost/container_hash/is_unordered_range.hpp \
   /data/data/com.termux/files/usr/include/boost/container_hash/is_described_class.hpp \
@@ -343,50 +759,26 @@ CMakeFiles/below_zero.dir/lib/below_zero.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/container_hash/detail/hash_mix.hpp \
   /data/data/com.termux/files/usr/include/boost/container_hash/detail/hash_range.hpp \
   /data/data/com.termux/files/usr/include/boost/container_hash/detail/mulx.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_enum.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_floating_point.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_signed.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_unsigned.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/make_unsigned.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/add_const.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/add_volatile.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/conjunction.hpp \
   /data/data/com.termux/files/usr/include/c++/v1/complex \
+  /data/data/com.termux/files/usr/include/c++/v1/cmath \
   /data/data/com.termux/files/usr/include/c++/v1/sstream \
   /data/data/com.termux/files/usr/include/c++/v1/typeindex \
+  /data/data/com.termux/files/usr/include/c++/v1/array \
   /data/data/com.termux/files/usr/include/boost/type_traits/decay.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_array.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_function.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/detail/is_function_cxx_11.hpp \
   /data/data/com.termux/files/usr/include/boost/type_traits/remove_bounds.hpp \
   /data/data/com.termux/files/usr/include/boost/type_traits/remove_extent.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/add_pointer.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/add_reference.hpp \
-  /data/data/com.termux/files/usr/include/boost/core/addressof.hpp \
   /data/data/com.termux/files/usr/include/boost/function/function1.hpp \
   /data/data/com.termux/files/usr/include/boost/function/detail/maybe_include.hpp \
   /data/data/com.termux/files/usr/include/boost/function/function_template.hpp \
   /data/data/com.termux/files/usr/include/boost/function/detail/prologue.hpp \
   /data/data/com.termux/files/usr/include/boost/function/detail/requires_cxx11.hpp \
-  /data/data/com.termux/files/usr/include/boost/config/no_tr1/functional.hpp \
   /data/data/com.termux/files/usr/include/boost/function/function_base.hpp \
   /data/data/com.termux/files/usr/include/boost/function/function_fwd.hpp \
   /data/data/com.termux/files/usr/include/boost/function_equal.hpp \
-  /data/data/com.termux/files/usr/include/boost/core/typeinfo.hpp \
-  /data/data/com.termux/files/usr/include/boost/core/ref.hpp \
   /data/data/com.termux/files/usr/include/boost/type_traits/has_trivial_copy.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_pod.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_scalar.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_arithmetic.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_pointer.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_member_pointer.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_member_function_pointer.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/detail/is_member_function_pointer_cxx_11.hpp \
   /data/data/com.termux/files/usr/include/boost/type_traits/is_copy_constructible.hpp \
   /data/data/com.termux/files/usr/include/boost/type_traits/is_constructible.hpp \
   /data/data/com.termux/files/usr/include/boost/type_traits/is_destructible.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_complete.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/detail/yes_no_type.hpp \
   /data/data/com.termux/files/usr/include/boost/type_traits/is_default_constructible.hpp \
   /data/data/com.termux/files/usr/include/boost/type_traits/has_trivial_destructor.hpp \
   /data/data/com.termux/files/usr/include/boost/type_traits/composite_traits.hpp \
@@ -399,284 +791,11 @@ CMakeFiles/below_zero.dir/lib/below_zero.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/bind/mem_fn_cc.hpp \
   /data/data/com.termux/files/usr/include/boost/preprocessor/enum.hpp \
   /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/enum.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/cat.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/config/config.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/debug/error.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/detail/auto_rec.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/control/iif.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/config/limits.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/detail/limits/auto_rec_256.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/punctuation/comma_if.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/control/if.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/logical/bool.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/logical/limits/bool_256.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/facilities/empty.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/punctuation/comma.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/repeat.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/tuple/eat.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/limits/repeat_256.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/tuple/elem.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/facilities/expand.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/facilities/overload.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/variadic/size.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/facilities/check_empty.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/variadic/has_opt.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/variadic/limits/size_64.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/tuple/rem.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/tuple/detail/is_single_return.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/variadic/elem.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/variadic/limits/elem_64.hpp \
   /data/data/com.termux/files/usr/include/boost/preprocessor/enum_params.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/enum_params.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/repeat.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/inc.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/inc.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/limits/inc_256.hpp \
   /data/data/com.termux/files/usr/include/boost/core/no_exceptions_support.hpp \
   /data/data/com.termux/files/usr/include/boost/lexical_cast.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/iterator_range_core.hpp \
-  /data/data/com.termux/files/usr/include/boost/iterator/iterator_traits.hpp \
-  /data/data/com.termux/files/usr/include/boost/iterator/iterator_facade.hpp \
-  /data/data/com.termux/files/usr/include/boost/iterator/interoperable.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/bool.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/bool_fwd.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/adl_barrier.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/adl.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/msvc.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/intel.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/gcc.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/workaround.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/integral_c_tag.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/static_constant.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/or.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/use_preprocessed.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/nested_type_wknd.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/na_spec.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/lambda_fwd.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/void_fwd.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/na.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/na_fwd.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/ctps.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/lambda.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/ttp.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/int.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/int_fwd.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/nttp_decl.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/nttp.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/integral_wrapper.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/static_cast.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/lambda_arity_param.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/template_arity_fwd.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/arity.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/dtp.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessor/params.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/preprocessor.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/comma_if.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessor/enum.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/limits/arity.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/logical/and.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/logical/bitand.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/identity.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/facilities/identity.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/empty.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/add.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/dec.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/limits/dec_256.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/control/while.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/list/fold_left.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/list/detail/fold_left.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/control/expr_iif.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/list/adt.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/detail/is_binary.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/detail/check.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/logical/compl.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/list/detail/limits/fold_left_256.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/list/limits/fold_left_256.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/list/fold_right.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/list/detail/fold_right.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/list/reverse.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/list/detail/limits/fold_right_256.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/control/detail/while.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/control/detail/limits/while_256.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/control/limits/while_256.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/logical/bitor.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/detail/is_maximum_number.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/comparison/equal.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/comparison/not_equal.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/comparison/limits/not_equal_256.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/detail/maximum_number.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/detail/is_minimum_number.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/logical/not.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/sub.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/eti.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/overload_resolution.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/lambda_support.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/include_preprocessed.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/compiler.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/stringize.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/or.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_convertible.hpp \
-  /data/data/com.termux/files/usr/include/boost/iterator/detail/config_def.hpp \
-  /data/data/com.termux/files/usr/include/boost/iterator/detail/config_undef.hpp \
-  /data/data/com.termux/files/usr/include/boost/iterator/iterator_categories.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/eval_if.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/if.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/value_wknd.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/integral.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/identity.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/placeholders.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/arg.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/arg_fwd.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/na_assert.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/assert.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/not.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/yes_no.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/arrays.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/gpu.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/pp_counter.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/arity_spec.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/arg_typedef.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
-  /data/data/com.termux/files/usr/include/boost/iterator/detail/facade_iterator_category.hpp \
-  /data/data/com.termux/files/usr/include/boost/core/use_default.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/and.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/and.hpp \
-  /data/data/com.termux/files/usr/include/boost/detail/indirect_traits.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_class.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/remove_pointer.hpp \
-  /data/data/com.termux/files/usr/include/boost/detail/select_type.hpp \
-  /data/data/com.termux/files/usr/include/boost/iterator/detail/enable_if.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/add_lvalue_reference.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/remove_const.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/always.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessor/default_params.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/apply.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/apply_fwd.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/apply_wrap.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/has_apply.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/has_xxx.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/type_wrapper.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/has_xxx.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/msvc_typename.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/array/elem.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/array/data.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/array/size.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/enum_trailing_params.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/has_apply.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/msvc_never_true.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/lambda.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/bind.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/bind_fwd.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/bind.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/next.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/next_prior.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/common_name_wknd.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/protect.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/full_lambda.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/quote.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/void.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/has_type.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/bcc.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/template_arity.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
-  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_abstract.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/is_base_and_derived.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/functions.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/begin.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/config.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/iterator.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/range_fwd.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/mutable_iterator.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/detail/extract_optional_type.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/detail/msvc_has_iterator_workaround.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/const_iterator.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/end.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/detail/implementation_help.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/detail/common.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/detail/sfinae.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/size.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/size_type.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/difference_type.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/has_range_iterator.hpp \
-  /data/data/com.termux/files/usr/include/boost/utility/enable_if.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/concepts.hpp \
-  /data/data/com.termux/files/usr/include/boost/concept_check.hpp \
-  /data/data/com.termux/files/usr/include/boost/concept/assert.hpp \
-  /data/data/com.termux/files/usr/include/boost/concept/detail/general.hpp \
-  /data/data/com.termux/files/usr/include/boost/concept/detail/backward_compatibility.hpp \
-  /data/data/com.termux/files/usr/include/boost/concept/detail/has_constraints.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/conversion_traits.hpp \
-  /data/data/com.termux/files/usr/include/boost/concept/usage.hpp \
-  /data/data/com.termux/files/usr/include/boost/concept/detail/concept_def.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/for_each_i.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/for.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/detail/for.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/detail/limits/for_256.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/limits/for_256.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/seq.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/elem.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/limits/elem_256.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/size.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/limits/size_256.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/detail/is_empty.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/enum.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/limits/enum_256.hpp \
-  /data/data/com.termux/files/usr/include/boost/concept/detail/concept_undef.hpp \
-  /data/data/com.termux/files/usr/include/boost/iterator/iterator_concepts.hpp \
-  /data/data/com.termux/files/usr/include/boost/limits.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/value_type.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/detail/misc_concept.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/detail/has_member_size.hpp \
-  /data/data/com.termux/files/usr/include/boost/utility.hpp \
-  /data/data/com.termux/files/usr/include/boost/utility/base_from_member.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/enum_binary_params.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/repeat_from_to.hpp \
-  /data/data/com.termux/files/usr/include/boost/utility/binary.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/control/deduce_d.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/cat.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/fold_left.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/limits/fold_left_256.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/seq/transform.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/mod.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/detail/div_base.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/comparison/less_equal.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/arithmetic/detail/is_1_number.hpp \
-  /data/data/com.termux/files/usr/include/boost/utility/identity_type.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/function_traits.hpp \
-  /data/data/com.termux/files/usr/include/boost/core/checked_delete.hpp \
-  /data/data/com.termux/files/usr/include/boost/core/noncopyable.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/distance.hpp \
-  /data/data/com.termux/files/usr/include/boost/iterator/distance.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/empty.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/rbegin.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/reverse_iterator.hpp \
-  /data/data/com.termux/files/usr/include/boost/iterator/reverse_iterator.hpp \
-  /data/data/com.termux/files/usr/include/boost/iterator/iterator_adaptor.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/rend.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/algorithm/equal.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/detail/safe_bool.hpp \
-  /data/data/com.termux/files/usr/include/boost/next_prior.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/has_plus.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/detail/has_binary_operator.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/make_void.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/has_plus_assign.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/has_minus.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/has_minus_assign.hpp \
-  /data/data/com.termux/files/usr/include/boost/iterator/is_iterator.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/negation.hpp \
-  /data/data/com.termux/files/usr/include/boost/iterator/advance.hpp \
   /data/data/com.termux/files/usr/include/boost/lexical_cast/bad_lexical_cast.hpp \
   /data/data/com.termux/files/usr/include/boost/lexical_cast/try_lexical_convert.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/type_identity.hpp \
   /data/data/com.termux/files/usr/include/boost/lexical_cast/detail/is_character.hpp \
   /data/data/com.termux/files/usr/include/boost/lexical_cast/detail/converter_numeric.hpp \
   /data/data/com.termux/files/usr/include/boost/type_traits/is_base_of.hpp \
@@ -728,7 +847,6 @@ CMakeFiles/below_zero.dir/lib/below_zero.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/type_traits/has_left_shift.hpp \
   /data/data/com.termux/files/usr/include/boost/type_traits/has_right_shift.hpp \
   /data/data/com.termux/files/usr/include/boost/detail/lcast_precision.hpp \
-  /data/data/com.termux/files/usr/include/boost/integer_traits.hpp \
   /data/data/com.termux/files/usr/include/boost/lexical_cast/detail/widest_char.hpp \
   /data/data/com.termux/files/usr/include/boost/container/container_fwd.hpp \
   /data/data/com.termux/files/usr/include/boost/container/detail/std_fwd.hpp \
@@ -747,8 +865,6 @@ CMakeFiles/below_zero.dir/lib/below_zero.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/function.hpp \
   /data/data/com.termux/files/usr/include/boost/preprocessor/iterate.hpp \
   /data/data/com.termux/files/usr/include/boost/preprocessor/iteration/iterate.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/slot/slot.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/slot/detail/def.hpp \
   /data/data/com.termux/files/usr/include/boost/preprocessor/iteration/detail/iter/forward1.hpp \
   /data/data/com.termux/files/usr/include/boost/preprocessor/iteration/detail/bounds/lower1.hpp \
   /data/data/com.termux/files/usr/include/boost/preprocessor/slot/detail/shared.hpp \
@@ -756,32 +872,6 @@ CMakeFiles/below_zero.dir/lib/below_zero.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/preprocessor/iteration/detail/iter/limits/forward1_256.hpp \
   /data/data/com.termux/files/usr/include/boost/function/detail/function_iterate.hpp \
   /data/data/com.termux/files/usr/include/boost/function/detail/epilogue.hpp \
-  /data/data/com.termux/files/usr/include/boost/shared_ptr.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/shared_ptr.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/requires_cxx11.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/shared_count.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/bad_weak_ptr.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_counted_base.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_has_gcc_intrinsics.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_has_sync_intrinsics.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_counted_base_gcc_atomic.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_typeinfo_.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_counted_impl.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_noexcept.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_disable_deprecated.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_convertible.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/sp_nullptr_t.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/spinlock_pool.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/spinlock.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/spinlock_gcc_atomic.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/yield_k.hpp \
-  /data/data/com.termux/files/usr/include/boost/core/yield_primitives.hpp \
-  /data/data/com.termux/files/usr/include/boost/core/detail/sp_thread_pause.hpp \
-  /data/data/com.termux/files/usr/include/boost/core/detail/sp_thread_yield.hpp \
-  /data/data/com.termux/files/usr/include/boost/core/detail/sp_thread_sleep.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/operator_bool.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/local_sp_deleter.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/local_counted_base.hpp \
   /data/data/com.termux/files/usr/include/c++/v1/set \
   /data/data/com.termux/files/usr/include/boost/program_options/positional_options.hpp \
   /data/data/com.termux/files/usr/include/boost/program_options/parsers.hpp \
@@ -792,151 +882,6 @@ CMakeFiles/below_zero.dir/lib/below_zero.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/program_options/detail/convert.hpp \
   /data/data/com.termux/files/usr/include/boost/program_options/variables_map.hpp \
   /data/data/com.termux/files/usr/include/boost/program_options/version.hpp \
-  /data/data/com.termux/files/usr/include/boost/filesystem.hpp \
-  /data/data/com.termux/files/usr/include/boost/filesystem/config.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/api_config.hpp \
-  /data/data/com.termux/files/usr/include/boost/filesystem/path.hpp \
-  /data/data/com.termux/files/usr/include/boost/filesystem/detail/path_traits.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/error_category.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/error_category.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/config.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/requires_cxx11.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/error_category_impl.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/error_condition.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/generic_category.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/generic_category_message.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/enable_if.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/is_same.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/errc.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/is_error_condition_enum.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/cerrno.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/append_int.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/snprintf.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/error_code.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/is_error_code_enum.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/system_category.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/system_category_impl.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/system_category_message.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/interop_category.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/std_category.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/std_category_impl.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/mutex.hpp \
-  /data/data/com.termux/files/usr/include/c++/v1/list \
-  /data/data/com.termux/files/usr/include/boost/filesystem/detail/header.hpp \
-  /data/data/com.termux/files/usr/include/boost/config/abi_prefix.hpp \
-  /data/data/com.termux/files/usr/include/boost/filesystem/detail/footer.hpp \
-  /data/data/com.termux/files/usr/include/boost/config/abi_suffix.hpp \
-  /data/data/com.termux/files/usr/include/boost/io/quoted.hpp \
-  /data/data/com.termux/files/usr/include/boost/io/detail/buffer_fill.hpp \
-  /data/data/com.termux/files/usr/include/boost/io/detail/ostream_guard.hpp \
-  /data/data/com.termux/files/usr/include/boost/io/ios_state.hpp \
-  /data/data/com.termux/files/usr/include/boost/io_fwd.hpp \
-  /data/data/com.termux/files/usr/include/boost/functional/hash_fwd.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/disjunction.hpp \
-  /data/data/com.termux/files/usr/include/boost/filesystem/exception.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/error_code.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/error_condition.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/errc.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/generic_category.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/system_category.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/detail/throws.hpp \
-  /data/data/com.termux/files/usr/include/boost/system/system_error.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/intrusive_ptr.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/intrusive_ref_counter.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/atomic_count.hpp \
-  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/atomic_count_gcc_atomic.hpp \
-  /data/data/com.termux/files/usr/include/boost/filesystem/directory.hpp \
-  /data/data/com.termux/files/usr/include/boost/filesystem/file_status.hpp \
-  /data/data/com.termux/files/usr/include/boost/detail/bitmask.hpp \
-  /data/data/com.termux/files/usr/include/boost/core/scoped_enum.hpp \
-  /data/data/com.termux/files/usr/include/boost/filesystem/operations.hpp \
-  /data/data/com.termux/files/usr/include/boost/filesystem/convenience.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/device/file.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/config/wide_streams.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/categories.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/ios.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/fstream.hpp \
-  /data/data/com.termux/files/usr/include/c++/v1/fstream \
-  /data/data/com.termux/files/usr/include/boost/iostreams/operations.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/operations_fwd.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/close.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/flush.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/dispatch.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/select.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/traits.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/bool_trait_def.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/template_params.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/control/expr_if.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/is_iterator_range.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/config/disable_warnings.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/config/enable_warnings.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/select_by_size.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/iteration/local.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/iteration/detail/local.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/iteration/detail/limits/local_256.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/wrap_unwrap.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/enable_if_stream.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/traits_fwd.hpp \
-  /data/data/com.termux/files/usr/include/boost/ref.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/iterator_range.hpp \
-  /data/data/com.termux/files/usr/include/boost/range/iterator_range_io.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/streambuf.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/adapter/non_blocking_adapter.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/read.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/char_traits.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/char_traits.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/seek.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/positioning.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/config/codecvt.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/config/fpos.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/write.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/imbue.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/input_sequence.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/optimal_buffer_size.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/constants.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/output_sequence.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/stream.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/config/overload_resolution.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/config/gcc.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/forward.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/config/limits.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/push_params.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/iostream.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/stream_buffer.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/streambuf/direct_streambuf.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/error.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/execute.hpp \
-  /data/data/com.termux/files/usr/include/boost/utility/result_of.hpp \
-  /data/data/com.termux/files/usr/include/boost/utility/detail/result_of_variadic.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/functional.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/optional.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/aligned_storage.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/type_with_alignment.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/streambuf/linked_streambuf.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/streambuf/indirect_streambuf.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/adapter/concept_adapter.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/concepts.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/default_arg.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/call_traits.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/config/unreachable_return.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/device/null.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/buffer.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/checked_operations.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/get.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/put.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/double_object.hpp \
-  /data/data/com.termux/files/usr/include/boost/call_traits.hpp \
-  /data/data/com.termux/files/usr/include/boost/detail/call_traits.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/push.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/adapter/range_adapter.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/pipeline.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/resolve.hpp \
-  /data/data/com.termux/files/usr/include/boost/detail/is_incrementable.hpp \
-  /data/data/com.termux/files/usr/include/boost/type_traits/detail/bool_trait_undef.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/adapter/mode_adapter.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/adapter/output_iterator_adapter.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/detail/is_dereferenceable.hpp \
-  /data/data/com.termux/files/usr/include/boost/iostreams/device/array.hpp \
   /data/data/com.termux/files/usr/include/boost/regex.hpp \
   /data/data/com.termux/files/usr/include/boost/regex/config.hpp \
   /data/data/com.termux/files/usr/include/boost/regex/user.hpp \
@@ -1122,5 +1067,61 @@ CMakeFiles/below_zero.dir/lib/below_zero.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/regex/v5/regex_replace.hpp \
   /data/data/com.termux/files/usr/include/boost/regex/v5/regex_merge.hpp \
   /data/data/com.termux/files/usr/include/boost/regex/v5/regex_split.hpp \
-  /data/data/com.termux/files/usr/include/c++/v1/thread \
-  /data/data/com.termux/files/usr/include/c++/v1/iostream
+  /data/data/com.termux/files/usr/include/dirent.h \
+  /data/data/com.termux/files/usr/include/fmt/color.h \
+  /data/data/com.termux/files/usr/include/fmt/format.h \
+  /data/data/com.termux/files/usr/include/fmt/core.h \
+  /data/data/com.termux/files/usr/include/fmt/printf.h \
+  /data/data/com.termux/files/usr/include/c++/v1/iostream \
+  /data/data/com.termux/files/usr/include/nlohmann/json.hpp \
+  /data/data/com.termux/files/usr/include/c++/v1/numeric \
+  /data/data/com.termux/files/usr/include/nlohmann/adl_serializer.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/abi_macros.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/conversions/from_json.hpp \
+  /data/data/com.termux/files/usr/include/c++/v1/forward_list \
+  /data/data/com.termux/files/usr/include/c++/v1/unordered_map \
+  /data/data/com.termux/files/usr/include/c++/v1/__hash_table \
+  /data/data/com.termux/files/usr/include/c++/v1/valarray \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/exceptions.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/value_t.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/macro_scope.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/meta/detected.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/meta/void_t.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/thirdparty/hedley/hedley.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/string_escape.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/input/position_t.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/meta/cpp_future.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/meta/type_traits.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/iterators/iterator_traits.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/meta/call_std/begin.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/meta/call_std/end.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/json_fwd.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/string_concat.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/meta/identity_tag.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/meta/std_fs.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/conversions/to_json.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/iterators/iteration_proxy.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/byte_container_with_subtype.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/hash.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/input/binary_reader.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/input/input_adapters.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/input/json_sax.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/input/lexer.hpp \
+  /data/data/com.termux/files/usr/include/c++/v1/clocale \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/meta/is_sax.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/input/parser.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/iterators/internal_iterator.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/iterators/primitive_iterator.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/iterators/iter_impl.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/iterators/json_reverse_iterator.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/json_pointer.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/json_ref.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/output/binary_writer.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/output/output_adapters.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/output/serializer.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/conversions/to_chars.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/ordered_map.hpp \
+  /data/data/com.termux/files/usr/include/c++/v1/experimental/__config \
+  /data/data/com.termux/files/usr/include/nlohmann/detail/macro_unscope.hpp \
+  /data/data/com.termux/files/usr/include/nlohmann/thirdparty/hedley/hedley_undef.hpp \
+  /data/data/com.termux/files/usr/include/c++/v1/thread

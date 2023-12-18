@@ -7,13 +7,6 @@ using hc =  hak::Haklab;
 
 
 
-// Class Haklab
-//
-void 
-hc::getHelp(po::options_description desc)
-{if(m_vm.count("help")){std::cout << "Usage: i-haklab [options]\n" << desc << std::endl;}}
-
-
 
 
 // Selector de color 

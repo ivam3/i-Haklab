@@ -7,6 +7,10 @@ cmake --build build
 cmake --install build --prefix=$PREFIX
 ```
 
+# boost
+- `https://www.boost.org/doc/libs/1_84_0/doc/html/program_options/howto.html` 
+- Dar valores por defecto a opciones que no son abligatorias 
+
 - el archivo de man no se esta poniendo en su ruta esta dando error 
 - Usar evitar usar rutas relativas para compativilidad con linux  (getenv)
 - `~/.local/share/apli...` La imagen para el escritorio 
