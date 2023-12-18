@@ -3,42 +3,17 @@
 // Nombres de espacio de Boost
 namespace fs = boost::filesystem;
 namespace po = boost::program_options;
-using hc =  hack::Haklab;
-using hf = hack::FileComparator;
+using hc =  hak::Haklab;
 
-// Class FileComparator
+
+
+// Class Haklab
+//
 void 
-hf::compareDirectories(const string &givenDir)
-{
-for (auto &file : fs::directory_iterator{givenDir}) 
-{
-  if (fs::is_regular_file(file))
-  {
-   string fileName = file.path().filename().string(); 
-   std::cout << "Archivo en la ruta dada: " << fileName << std::endl;
-  };
-}
-}
+hc::getHelp(po::options_description desc)
+{if(m_vm.count("help")){std::cout << "Usage: i-haklab [options]\n" << desc << std::endl;}}
 
 
-
-hack::hak_help::Haklab_Menu_Help::Haklab_Menu_Help(string description)
-: options_description{description}
-{}
-
-void 
-hc::Help(po::variables_map vm, po::options_description desc)
-{if(vm.count("help")){std::cout << "Usage: i-haklab [options]\n" << desc << std::endl;}}
-
-
-
-
-void 
-hc::update_haklab(){
-   string HOME2{"/data/data/com.termux/files/home/i-Haklab/.deb/i-haklab/home"};
-   string HOME{static_cast<string>(getenv("HOME"))};
-   
-}
 
 
 // Selector de color 
@@ -135,7 +110,7 @@ void syntax_highlight(const std::string &code){
     std::cout << highlightedCode << std::endl;
 };
 
-void hack::Haklab::k_boom(int signum)
+void hak::Haklab::k_boom(int signum)
 {    
     std::string k_boom = R"(
                         _-^--^=-_
@@ -262,7 +237,7 @@ void hc::about(std::string about){
 //     }
 // }
 
-void hack::Haklab::searchProcess(std::string process){
+void hak::Haklab::searchProcess(std::string process){
     DIR* dir;
     struct dirent* ent;
     if ((dir = opendir("/proc")) != NULL) {
@@ -287,7 +262,7 @@ void hack::Haklab::searchProcess(std::string process){
     }
 }    
 
-void hack::Haklab::ChangeEnvironmentVariable(std::string name, std::string new_valor ){
+void hak::Haklab::ChangeEnvironmentVariable(std::string name, std::string new_valor ){
     // Ruta del archivo
     std::string filePath = std::string(getenv("HOME")) + "/.zshenv";
 

@@ -8,7 +8,7 @@
 namespace po = boost::program_options;
 namespace fs = boost::filesystem;
 using json = nlohmann::ordered_json;
-using namespace hack::hak_help;
+
 //-------------------------------------------------
 //         Funcion principal main
 //-------------------------------------------------
@@ -19,50 +19,50 @@ int main(int argc, const char *argv[])
   //------------------------------------------------
   //             OPCIONES
   //-------------------------------------------------
-    Haklab_Menu_Help  cli_options{"Options"};
+  
+    po::options_description  cli_options{"Options"};
     cli_options.add_options()
       ("help,h", "Print this menu and leave")
       ("help-module", po::value<string>(),"produce a help for a given module")
       ("version,v","print version string")
       // nombre , typo , decripcion
-      ("include-path,P",po::value<vector<string>>(),"include path")
-      ("input-file,I", po::value<vector<string>>(),"input file")
+      ("include,I",po::value<vector<string>>(),"include path")
       ("host", "Name the hos")
       ("port","Name the port");
 
    //-------------------------------------------------
    //               Configutacion 
    //-------------------------------------------------
-    Haklab_Menu_Help  cli_config{"Configutacion"};
+    po::options_description  cli_config{"Configutacion"};
     cli_config.add_options()
-        ("name-user", po::value<vector<string>>(), "Change username default(USER=i-Haklab_Menu_Help )");
+        ("name-user", po::value<vector<string>>(), "Change username default(USER=i-po::options_description )");
      
     
    //-------------------------------------------------
    //                   dpkg
    //-------------------------------------------------
-   Haklab_Menu_Help  cli_dpkg{"Create packages\n\tList of options to automate creating deb binary packages"};
+   po::options_description  cli_dpkg{"Create packages\n\tList of options to automate creating deb binary packages"};
    cli_dpkg.add_options()
-   ("update_file,u","Actualizar los archivos del .deb con los locales")
-   ("name-pkg", po::value<string>(&cli_config.m_dir), "Create directory tree\n control: Where do the package maintainer scripts go?\n src: Your executable")
+   ("update_files,u",po::value<string>(),"En contruccion")
+   ("name-pkg", po::value<string>(), "Create directory tree\n control: Where do the package maintainer scripts go?\n src: Your executable")
    ("what-file", po::value<string>(), "What does the file do?")
    ("manifies", po::value<vector<string>>(), "Package | Version | Architerture | Maintainer | Installed-Size | Homepage |  | Description");
             
    //-------------------------------------------------
    //              Automatitation
    //-------------------------------------------------
-   Haklab_Menu_Help  cli_automatitation{"Automatitation Options"};
+   po::options_description  cli_automatitation{"Automatitation Options"};
    cli_automatitation.add_options()
       ("chek-error,r","Manipulacion de errores")
       ("file-manager,m","Open the file manager in the termux directory")
       ("list-frenwor,l", po::value<string>(), "Lista de herramientas dispomibles")
      ("about", po::value<string>(), "Show informations about tool/framework");
 
-  Haklab_Menu_Help  cli_cryptography{"Cryptography"};
+  po::options_description  cli_cryptography{"Cryptography"};
   cli_cryptography.add_options()
   ("rsa","prueva");
 
-  Haklab_Menu_Help  cli_all{"All"}; 
+  po::options_description  cli_all{"All"}; 
    //-------------------------------------------------
    //-------------------------------------------------
    cli_all.add(cli_options).add(cli_config).add(cli_dpkg).add(cli_automatitation);
@@ -83,16 +83,16 @@ int main(int argc, const char *argv[])
     po::variables_map vm;
     store(po::command_line_parser(argc, argv).options(cli_all).positional(positionalOptions).run(), vm);
     notify(vm);
+  
 
+    hak::Haklab haklab{"/","/",vm}; 
+  
     
    //-------------------------------------------------
    //          HELP
    //-------------------------------------------------
-   Files file{"/"};
-   hack::Haklab  funtion;
-   
-   funtion.Help(vm,cli_options);
     
+  
    //-------------------------------------------------
    //         VERCION
    //-------------------------------------------------

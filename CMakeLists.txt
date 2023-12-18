@@ -7,6 +7,7 @@ project(i-haklab)
 # Variables 
 set(SRC "src/boost-haklab.cpp")
 set(LIB_SRC "lib/below_zero.cpp")
+set(LIB_SRC "lib/filesmanipulation.cpp")
   
 # Bibloteca dinamica 
 add_library(below_zero SHARED ${LIB_SRC})
@@ -25,10 +26,10 @@ target_link_libraries(i-haklab below_zero
 
 
 #########    Intalcion  ############ 
-# Ejecutables
-install(TARGETS i-haklab  below_zero   
-   RUNTIME DESTINATION bin
-   LIBRARY DESTINATION lib)
+install(TARGETS i-haklab  below_zero  
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
+# install(FILES "man/i-haklab.1" DESTINATION "${CMAKE_INSTALL_MANDIR}/man1")
 
 

@@ -3,7 +3,6 @@
 
 //------------------------------------------
 //------------------------------------------
-#include "files_haklab.h"
 #include <fmt/core.h>
 #include <fmt/color.h>
 #include <fmt/format.h>
@@ -29,6 +28,16 @@ using std::fstream;
 using std::string ;
 using std::vector;
 
+namespace fs = boost::filesystem;
+namespace po = boost::program_options;
+
+
+// Shell que se pueden configurar
+namespace shell {
+enum Shell {
+  zsh,
+  fish,};};
+
 
 enum class Color 
 {
@@ -43,42 +52,63 @@ enum class Color
  White
 };
 
+
+
 std::string setColor(Color color);
 void syntax_highlight(const std::string &code);  
 
-namespace hack {
-namespace hak_help {
-/*
- *
- */
-class Haklab_Menu_Help : public boost::program_options::options_description
-{
-  public: 
-    string m_dir;
-    Haklab_Menu_Help(string description);
-  private:
-
-};}
-/*
- *
- */
-class FileComparator {
-  public:
-    void compareDirectories(const string &givenDir);
-    string showMatchingFile();
-    string showNonMatchingFile();
-  private:
-    std::vector<string> matchingFile;
-    std::vector<string> nonMatchingFile();
+namespace filema {
+// Nombre de espacio general 
+  class FilesManipulation {
+      public:   // Especificador de acceso
+      /* Parameters
+       *
+       * arg1   from - ruta al archivo fuente 
+       * arg2   to  - ruta al archivo de destino
+       */
+        FilesManipulation(const fs::path &from, const fs::path &to);
+      /*
+       *
+       */
+      void  
+      updateFiles(const std::vector<std::string> &filesNonUpdate); 
+      private: // Especificador de acceso
+      /*
+       * Variables mienbros 
+       */
+      fs::path m_from , m_to;
+      std::set<std::string>filesFrom, filesTo; 
+  };
 };
+
+
+namespace hak { 
   /*
    *
    */
- class Haklab : public  FileComparator 
+ class Haklab : public filema::FilesManipulation 
  {
+   public:
+     /* Parameters 
+      *  @arg1 from - ruta al archivo fuente
+      *  @arg2 to   - ruta al archivo de destino
+      *  @arg3 vm   -  ...? 
+      *  @arg4 desc -  ...?
+      */
+     Haklab(const fs::path &from, const fs::path &to, po::variables_map vm)
+     : filema::FilesManipulation{from, to},
+     m_vm(vm)
+     {};
+     /*
+      * 
+      */
+     void getHelp(po::options_description desc);
    private: // Specificador de acceso (pribado)
+    po::variables_map m_vm;
+   //  po::options_description m_desc;
     int m_port;
     string m_host;
+    string m_shell;
     /*
      *
      */
@@ -107,11 +137,7 @@ class FileComparator {
     * ufff
     */
   
-  /*
-   * Show menu help
-   */
-  void
-  Help(boost::program_options::variables_map vm, boost::program_options::options_description desc); 
+   
   /*
    * "/.local/etc/i-Haklab"
    */

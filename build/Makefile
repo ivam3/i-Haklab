@@ -187,29 +187,29 @@ i-haklab/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/i-haklab.dir/build.make CMakeFiles/i-haklab.dir/build
 .PHONY : i-haklab/fast
 
-lib/below_zero.o: lib/below_zero.cpp.o
-.PHONY : lib/below_zero.o
+lib/filesmanipulation.o: lib/filesmanipulation.cpp.o
+.PHONY : lib/filesmanipulation.o
 
 # target to build an object file
-lib/below_zero.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/below_zero.dir/build.make CMakeFiles/below_zero.dir/lib/below_zero.cpp.o
-.PHONY : lib/below_zero.cpp.o
+lib/filesmanipulation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/below_zero.dir/build.make CMakeFiles/below_zero.dir/lib/filesmanipulation.cpp.o
+.PHONY : lib/filesmanipulation.cpp.o
 
-lib/below_zero.i: lib/below_zero.cpp.i
-.PHONY : lib/below_zero.i
+lib/filesmanipulation.i: lib/filesmanipulation.cpp.i
+.PHONY : lib/filesmanipulation.i
 
 # target to preprocess a source file
-lib/below_zero.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/below_zero.dir/build.make CMakeFiles/below_zero.dir/lib/below_zero.cpp.i
-.PHONY : lib/below_zero.cpp.i
+lib/filesmanipulation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/below_zero.dir/build.make CMakeFiles/below_zero.dir/lib/filesmanipulation.cpp.i
+.PHONY : lib/filesmanipulation.cpp.i
 
-lib/below_zero.s: lib/below_zero.cpp.s
-.PHONY : lib/below_zero.s
+lib/filesmanipulation.s: lib/filesmanipulation.cpp.s
+.PHONY : lib/filesmanipulation.s
 
 # target to generate assembly for a file
-lib/below_zero.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/below_zero.dir/build.make CMakeFiles/below_zero.dir/lib/below_zero.cpp.s
-.PHONY : lib/below_zero.cpp.s
+lib/filesmanipulation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/below_zero.dir/build.make CMakeFiles/below_zero.dir/lib/filesmanipulation.cpp.s
+.PHONY : lib/filesmanipulation.cpp.s
 
 src/boost-haklab.o: src/boost-haklab.cpp.o
 .PHONY : src/boost-haklab.o
@@ -249,9 +249,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... below_zero"
 	@echo "... i-haklab"
-	@echo "... lib/below_zero.o"
-	@echo "... lib/below_zero.i"
-	@echo "... lib/below_zero.s"
+	@echo "... lib/filesmanipulation.o"
+	@echo "... lib/filesmanipulation.i"
+	@echo "... lib/filesmanipulation.s"
 	@echo "... src/boost-haklab.o"
 	@echo "... src/boost-haklab.i"
 	@echo "... src/boost-haklab.s"
