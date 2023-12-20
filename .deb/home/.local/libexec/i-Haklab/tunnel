@@ -12,6 +12,7 @@ chk-tunnel
 getPORT
 
 grep -oE android ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl/openurl.js >/dev/null 2>/dev/null || {
+  yes|apt install nodejs-lts >/dev/null 2>/dev/null
   wget --tries=20 --quiet "$iHDB/.local/etc/localtunnel/openurl.js" -O \
     ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl/openurl.js
 }

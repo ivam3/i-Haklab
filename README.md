@@ -12,7 +12,7 @@ i-Haklab weechat
 
 
 ### What is i-Haklab?
-> [i-Haklab]() is a hacking laboratory for [Termux](https://github.com/termux/termux-app) that contains [open source tools](https://github.com/ivam3/termux-packages) for osint, pentesting, scan/find vulnerabilities, explotation and post-explotation recommended for me [Ivam3](https://wlo.link/@Ivam3) with automation commands, a many guides, books and tutorials to learn how to use tools. [i-Haklab]() use oh my fish insteractive shell to provide core infrastructure to allow you to install packages which extend or modify the look of your termux. To get help about shell and its use going to [OMF official site](https://fishshell.com/docs/current/tutorial.html).
+> [i-Haklab]() is a hacking laboratory for [Termux](https://github.com/termux/termux-app) that contains [open source tools](https://github.com/ivam3/termux-packages) for osint, pentesting, scan/find vulnerabilities, exploitation and post-exploitation recommended for me [Ivam3](https://wlo.link/@Ivam3) with automation commands, a many guides, books and tutorials to learn how to use tools. [i-Haklab]() use oh my fish insteractive shell to provide core infrastructure to allow you to install packages which extend or modify the look of your termux. To get help about shell and its use going to [OMF official site](https://fishshell.com/docs/current/tutorial.html).
 
 
 ### INSTALLATION.
@@ -25,10 +25,10 @@ bash setup
 ```
 - ADDING AT APT SOURCES LIST
 ```bash
-apt install wget \
-mkdir -p $PREFIX/etc/apt/sources.list.d \
-wget https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/ivam3-termux-packages.list -O $PREFIX/etc/apt/sources.list.d/ivam3-termux-packages.list \
-apt update && yes|apt upgrade \
+apt install wget && \
+mkdir -p $PREFIX/etc/apt/sources.list.d && \
+wget https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/ivam3-termux-packages.list -O $PREFIX/etc/apt/sources.list.d/ivam3-termux-packages.list && \
+apt update && yes|apt upgrade && \
 apt install i-haklab
 ```
 
@@ -46,11 +46,83 @@ Or change it running:
 ```bash
 i-Haklab passwd new
 ```
+- Let you change the banner running:
+```bash
+i-Haklab setbanner
+```
+- Let you change the username running:
+```bash
+i-Haklab setuser
+```
+- Let you update Termux system package by package running:
+```bash
+i-Haklab aptup
+```
+- Provide you test your bandwidth network running:
+```bash
+i-Haklab speedtest
+```
+- Bring you a main activity from apk file running:
+```bash
+i-Haklab apkactivity
+```
+- Create a Termux backup and/or restore it running:
+```bash
+i-Haklab backup
+```
+- Automate brute force attacks running:
+```bash
+i-Haklab bruteforce
+```
+- Let you interact with all OpenAI modules running:
+```bash
+i-Haklab chatGPT
+```
+- Add your API key running:
+```bash
+i-Haklab setapikey
+```
+- Encode|decode secret message into a ASCII file running:
+```bash
+i-Haklab ESmsg
+```
+- Bring you a fake indentity card with real email and phone number running:
+```bash
+i-Haklab fakeID
+```
+- Provide you a port forwarding tunnel with a custom subdomain running:
+```bash
+i-Haklab tunnel
+```
+- Automate metasploit common process running:
+```bash
+i-Haklab msf
+```
+- Provide you the ngrok link running:
+```bash
+i-Haklab ngroklink
+```
+- Provide you a ngrok ssh connection running:
+```bash
+i-Haklab ngrokssh
+```
+- Hide a Reverse Shell with a Video File by Exploiting Linux OS running:
+```bash
+i-Haklab payvid
+```
+- Let you get information about telephone number running:
+```bash
+i-Haklab phonescan
+```
 - Provide you with a web site server running over your device with [Termux](https://github.com/termux/termux-app), wich will you can share several files over all internet. Enable it running:
 ```bash
 i-Haklab share
 ```
-- Provide you with deliberately vulnerable web site servers as [bWAPP](http://www.itsecgames.com/), [DVWA](https://dvwa.co.uk/) and [MUTILLIDAE](https://github.com/webpwnized/mutillidae) to practice your hacking skills searching, finding and exploting the most common vulnerabilities. Enable those running:
+- Test usb device connected via OTG running:
+```bash
+i-Haklab usbtest
+```
+- Provide you with deliberately vulnerable web site servers as [bWAPP](http://www.itsecgames.com/), [DVWA](https://dvwa.co.uk/) and [MUTILLIDAE](https://github.com/webpwnized/mutillidae) to practice your hacking skills searching, finding and exploiting the most common vulnerabilities. Enable those running:
 ```bash
 i-Haklab servers4test
 ```
@@ -69,17 +141,49 @@ i-Haklab show alltools
 ```bash
 i-Haklab help
 ```
+- Ask to Cinderella. A virtual assist exclusively about Termux themes:
+```bash
+cinderella
+```
+- Mannage android main settings over Termux:
+```bash
+cmd
+```
+- Search repositories in github over CLi:
+```bash
+gitbrowswering
+```
 - Returns the private ip of your local network:
 ```bash
 LOCALHOST
+```
+- Manage internal/external storage with graphical interface:
+```bash
+adminfiles
 ```
 - Run OSINT setoolkit:
 ```bash
 osrframework
 ```
-- Enable tor connection by proxychains4:
+- Enable proxy connection by proxychains4:
 ```bash
-torvpn
+proxy
+```
+- Provides information about the mounted memory:
+```bash
+df
+```
+- Provides recursive information about the weight of directories and files:
+```bash
+du
+```
+- Use the easy and faster Fuzzy finder:
+```bash
+fzf
+```
+- Get your public internet protocol(IP):
+```bash
+mypip
 ```
 - Privide you with a root enviroment as root user(on rooted device) or fake root user(on NOT rooted device):
 ```bash
@@ -101,7 +205,11 @@ serverapache start/stop/restart
 ```bash
 postgresql start/stop/restart
 ```
-- Init a shell to traslate any text:
+- Remove current session cache, temporal files & residual APT packages:
+```bash
+rmcache
+```
+- Init a shell to translate any text:
 ```bash
 traductor
 ```
