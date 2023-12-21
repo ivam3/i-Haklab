@@ -5,10 +5,10 @@ cmake_minimum_required(VERSION 3.10)
 project(i-haklab)
 
 # Variables 
-set(SRC "src/boost-haklab.cpp")
+set(SRC "main/main-haklab.cpp")
 set(LIB_SRC "lib/below_zero.cpp")
 
-  
+
 # Bibloteca dinamica 
 add_library(below_zero SHARED ${LIB_SRC})
 
@@ -30,6 +30,6 @@ install(TARGETS i-haklab  below_zero
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
-# install(FILES "man/i-haklab.1" DESTINATION "${CMAKE_INSTALL_MANDIR}/man1")
+install(FILES "man/i-haklab.1" DESTINATION "${CMAKE_INSTALL_MANDIR}/man1")
 
 

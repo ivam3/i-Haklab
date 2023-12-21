@@ -1,1 +1,1 @@
-/data/data/com.termux/files/usr/bin/c++ -fPIE -fPIC -O2 -g -DNDEBUG -pie "CMakeFiles/i-haklab.dir/src/boost-haklab.cpp.o" -o i-haklab  -Wl,-rpath,/data/data/com.termux/files/home/i-Haklab/build: libbelow_zero.so -lboost_program_options -lfmt -ljsoncpp -lboost_system -lboost_filesystem 
+/data/data/com.termux/files/usr/bin/c++ -fPIE -fPIC -O2 -g -DNDEBUG -pie "CMakeFiles/i-haklab.dir/main/main-haklab.cpp.o" -o i-haklab  -Wl,-rpath,/data/data/com.termux/files/home/i-Haklab/build: libbelow_zero.so -lboost_program_options -lfmt -ljsoncpp -lboost_system -lboost_filesystem 

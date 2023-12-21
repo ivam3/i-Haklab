@@ -1,29 +1,20 @@
+// Autor : @demon_rip  
 //-------------------------------------------------
 //         Inportaciones
 //-------------------------------------------------
-#include "below_zero.h"
-#include <iostream>
-//-------------------------------------------------
-//       Nombre de espacio
-//-------------------------------------------------
-// namespace po = boost::program_options;
-// namespace fs = boost::filesystem;
-using json = nlohmann::ordered_json;
+#include "../src/application.h"
+
+
+
 
 //-------------------------------------------------
 //         Funcion principal main
 //-------------------------------------------------
-int main(int argc, char *argv[]) {
+int main(int argc, const char *argv[]) {
 
-  hak::Haklab option;
+  application app;
+  app.run(argc,argv);
 
-  if (!option.parse(argc, argv)) {
-    return 1;
-  }
-
-  if (option.updateFile) {
-    option.updateFiles(option.input_path);
-  }
   /*
    //-------------------------------------------------
    //         VERCION

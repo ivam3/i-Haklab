@@ -4,6 +4,7 @@
 cd i-haklab
 cmake -H. -Bbuild 
 cmake --build build
+cmake -DCMAKE_INSTALL_MANDIR="${PREFIX}/share/man/" build  
 cmake --install build --prefix=$PREFIX
 ```
 
