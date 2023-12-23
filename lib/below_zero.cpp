@@ -1,13 +1,62 @@
 #include "../src/below_zero.h"
+//#include <fstream>
 
 // Nombres de espacio de Boost
 namespace fs = boost::filesystem;
-namespace po = boost::program_options;
+//namespace of = boost::iostreams;
+
 using hc =  hak::Haklab;
 
+/*
+ * Actualizar los archivos que cuisidan en el dir que este 
+ */
+bool  hc::updateFiles(vector<string> path_file){
+  std::set<string>filesHere;  // -->  
+  if(path_file.size() == 0 ){
+    //  return false;
+    };
+      // Opciones de copy
+      const auto copyOptions = fs::copy_options::update_existing 
+          | fs::copy_options::recursive 
+          | fs::copy_options::overwrite_existing;
+   
+  for (const auto &hereFile : fs::directory_iterator(fs::current_path())) {
+      filesHere.insert(hereFile.path().filename().string().c_str());
+  }   
+  return true;
+};
 
+void hc::directRedTeam(std::string objName){ 
+  fs::create_directory(objName);
+  std::ofstream file;
+  file.open(objName + "/README.txt");
+  if (!file.is_open()) {
+    std::cerr << "Error al crear 'README.txt' " << std::endl;
+  }
+  file << R"("
+   Reconocimiento  ->  Obtener información sobre el objetivo
+   Armamento       ->  Combina el objetivo con un exploit. Comúnmente resulta en una carga útil entregable
+   Entrega         ->   ¿Cómo se entregará la función armada al objetivo
+   Explotación     ->   Explotar el sistema del objetivo para ejecutar códig
+   Intalacion      ->    Instalar malware u otras herramienta
+   C2              ->     Controle el activo comprometido desde un controlador central remoto
+   )" << std::endl;
 
-
+  // Reconocimiento 
+  fs::create_directory(objName + "/Recon");
+  // Armamento
+  fs::create_directory(objName + "/Weaponization");
+  //  Entrega
+  fs::create_directory(objName + "/Delivery");
+  //  Explotación
+  fs::create_directory(objName + "/Exploitation");
+  //  Instalación
+  fs::create_directory(objName + "/Installation");
+  //  Comando y control
+  fs::create_directory(objName + "/C2");
+  // Acciones sobre objetivos
+  // fs::create_directory(objName + "/");
+};
 
 // Selector de color 
 std::string setColor(Color color) {

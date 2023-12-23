@@ -5,7 +5,10 @@
 #define BELOW_ZERO
 
 //------------------------------------------
+//    Redes 
 //------------------------------------------
+#include <boost/asio.hpp>
+//----------------------------------------
 #include <boost/array.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/iostreams/device/file.hpp>
@@ -19,6 +22,7 @@
 #include <set>
 #include <thread>
 #include <unistd.h>
+#include <vector>
 //------------------------------------------
 //------------------------------------------
 #define PORT_SHH 8022
@@ -58,127 +62,6 @@ enum class Color {
 std::string setColor(Color color);
 void syntax_highlight(const std::string &code);
 
-namespace cli {
-class comanLineOpcion {
-public:
-  string m_input_path;
-  string m_input_file;
-  bool m_update_files;
-  int error_level;
-
-  bool parse(int argc, char *argv[]) {
-    // clang-format off
-    po::options_description cli_options;
-    cli_options.add_options()
-    
-            // nombre , typo , decripcion
-      ("input-path,I", po::value(&m_input_path), "input path")
-      ("input-file", po::value< string >(&m_input_file), "input file")
-      ("output,o", po::value<std::string>(), "output path")
-      ("language", po::value<std::string>()->default_value("es"),"UI language")
-      ("error-level", po::value<int>(&error_level)->default_value(true),"error level")
-      ("verbose", po::bool_switch()->default_value(false),"show verbose log");
-
-    //-------------------------------------------------
-    //               Configutacion
-    //-------------------------------------------------
-    po::options_description cli_config{"Configutacion"};
-    cli_config.add_options()
-      ("name-user", po::value<vector<string>>(),"Change username default(USER=i-Haklab");
-
-    //-------------------------------------------------
-    //                   dpkg
-    //-------------------------------------------------
-    po::options_description cli_dpkg{"Create packages\n\tList of options to "
-                                     "automate creating deb binary packages"};
-    cli_dpkg.add_options()
-      ("update-files,u", po::bool_switch(&m_update_files)->default_value(false),"En contruccion")      
-      ("name-pkg", po::value<string>(),"Create directory tree\n control: Where do the package maintainer scripts go?\n src: Your executable")
-      ("what-file", po::value<string>(),"What does the file do?")
-      ("manifies", po::value<vector<string>>(),
-       "| Package \n"
-       "| Version \n"
-       "| Architerture \n"
-       "| Maintainer \n"
-       "| Installed-Size \n"
-       "| Homepage \n"
-       "| Description ");
-
-    //-------------------------------------------------
-    //              Automatitation
-    //-------------------------------------------------
-    po::options_description cli_automatitation{"Automatitation Options"};
-    cli_automatitation.add_options()
-      ("chek-error,r", "Manipulacion de errores")
-      ("file-manager,m", "Open the file manager in the termux directory")
-      ("list-frenwor,l", po::value<string>(),"Lista de herramientas dispomibles")
-      ( "about", po::value<string>(), "Show informations about tool/framework");
-    
-    po::options_description cli_cryptography{"Cryptography"};
-    cli_cryptography.add_options()
-      ("rsa", "prueva");
-
-
-    // clang-format on 
-    po::options_description cli_all{"All"};
-    cli_all.add(cli_options)
-        .add(cli_config)
-        .add(cli_dpkg)
-        .add(cli_automatitation);
-
-    //-------------------------------------------------
-    //-------------------------------------------------
-    cli_options.add(cli_config).add(cli_automatitation).add(cli_cryptography);
-
-    //-------------------------------------------------
-    //  Argumento pocicionales
-    //-------------------------------------------------
-    po::positional_options_description positionalOptions;
-    positionalOptions
-      .add("manifies", 8)
-      .add("name-user", 1)
-      .add("input-path", 1);
-    
-    po::variables_map vm;
-    try {
-      po::store(po::command_line_parser(argc, argv)
-          .options(cli_all)
-          .positional(positionalOptions)
-          .run(),
-          vm);
-      po::notify(vm);
-    } catch (po::error &e) {
-      std::cout << e.what() << '\n';
-      std::cout << cli_options << '\n';
-      return false;
-    } catch (...) {
-      std::cout << "Unknown error\n";
-      std::cout << cli_options << '\n';
-      return false;
-    }
-
-    if (vm.count("help")) {
-      std::cout << "Usage: i-haklab [options] [arg]" << std::endl;
-      std::cout << cli_options << '\n';
-      return false;
-    } else if (vm.count("help-module")) {
-      const std::string  &s = vm["help-module"].as<string>();
-      if (s == "dpkg") {
-       std::cout << cli_dpkg;
-    } else {
-     std::cout  << "Unknown module" <<s<<" in the --help-module options" << std::endl;
-      return false;
-      }
-    }
-    // --------
-  
-    return true;
-  }
-};  // class 
-}; // namespace cli
-
-
-
 
 namespace hak {
 /*
@@ -188,53 +71,17 @@ class Haklab  {
 public:
   Haklab(){
    if(getgid() == 0){
-    //fmt::print(stderr,fg(fmt::color::indian_red),"[Error] Please run as unprivileged user");
+     std::cerr << "[Error] Please run as unprivileged user" << std::endl;
   }
 };    
   /*
-   * 
+   *  to -
    */
- // Haklab getUser();
+  bool updateFiles(vector<string> filespath);
   /*
-   *  from -
-   *  to   - (ddfault)  direcorio actual 
-   */
-  void updateFiles(std::string from, std::string to = fs::current_path().string()){
-      if(from == to){exit(1);};
-      std::set<string>filesFrom, filesTo;
-      std::vector<string> con , no_con;
-      const auto copyOptions = fs::copy_options::update_existing 
-          | fs::copy_options::recursive 
-          | fs::copy_options::overwrite_existing;
-
-      try{
-            for (const fs::directory_entry &inFile : fs::directory_iterator(from)) {
-                filesFrom.insert(inFile.path().filename().string());
-            }
-            for (const auto &hereFile : fs::directory_iterator(to)) {
-                filesTo.insert(hereFile.path().filename().string());
-            }
-        } catch (fs::filesystem_error const &ex) {
-           std::cout << " Ha ocurrido un error al acceder al directorio: \n" << ex.what();
-        }
-
-        for (const auto &n : filesTo) {
-            if (filesFrom.count(n) == 0) {
-              
-              std::cout << "No coinsiden :" << n << std::endl;
-            } else {
-              
-              std::cout << "Coinciden :" << n << std::endl;
-              try {
-                fs::copy(n,to,copyOptions);    
-              }
-              catch (const  fs::filesystem_error &ex) {
-                 
-              }  
-            }
-        }
-  };
-
+   *  Crear dir  equipo rojo y azul 
+   */ 
+  void directRedTeam(std::string opjName);
 private: // Specificador de acceso (pribado)
   /*
    *
