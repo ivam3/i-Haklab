@@ -7,6 +7,7 @@
 //------------------------------------------
 //    Redes 
 //------------------------------------------
+#include "command_line_argument_parser.h"
 #include <boost/asio.hpp>
 //----------------------------------------
 #include <boost/array.hpp>
@@ -15,6 +16,7 @@
 #include <boost/iostreams/stream.hpp>
 #include <boost/program_options.hpp>
 #include <boost/regex.hpp>
+#include <complex>
 #include <cstdlib>
 #include <dirent.h> // para explorar el directorio /proc/
 #include <iostream>
@@ -34,9 +36,8 @@
 using std::fstream;
 using std::string;
 using std::vector;
-
-namespace fs = boost::filesystem;
-namespace po = boost::program_options;
+//------------------------------------------
+//------------------------------------------
 
 // Shell que se pueden configurar
 namespace shell {
@@ -67,9 +68,11 @@ namespace hak {
 /*
  *  Contructor 
  */
-class Haklab  {
+class Haklab : public command_line_argument_parser  {
 public:
-  Haklab(){
+  Haklab()
+  : command_line_argument_parser()
+  {
    if(getgid() == 0){
      std::cerr << "[Error] Please run as unprivileged user" << std::endl;
   }
@@ -82,6 +85,14 @@ public:
    *  Crear dir  equipo rojo y azul 
    */ 
   void directRedTeam(std::string opjName);
+   /*
+    * Crear dir 
+    */
+  void mkt(string machineName);
+  /*
+   *
+   */
+  void extractPorts();
 private: // Specificador de acceso (pribado)
   /*
    *

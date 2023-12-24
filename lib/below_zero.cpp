@@ -1,4 +1,7 @@
 #include "../src/below_zero.h"
+#include <bits/sysconf.h>
+#include <cstdlib>
+#include <functional>
 //#include <fstream>
 
 // Nombres de espacio de Boost
@@ -6,6 +9,26 @@ namespace fs = boost::filesystem;
 //namespace of = boost::iostreams;
 
 using hc =  hak::Haklab;
+
+/*
+ *
+ */
+void hc::mkt(std::string machineName){
+  std::list<string>list{"nmap","content","exploits","scripts"};
+  fs::create_directory(machineName);
+  for(auto file : list){
+    fs::create_directory( machineName + "/" + file);
+  }
+  string command = "tree " + machineName;
+  static_cast<void>(std::system(command.c_str()));
+};
+
+/*
+ *
+ */
+void hc::extractPorts(){
+  std::string porst;
+}
 
 /*
  * Actualizar los archivos que cuisidan en el dir que este 
@@ -56,6 +79,8 @@ void hc::directRedTeam(std::string objName){
   fs::create_directory(objName + "/C2");
   // Acciones sobre objetivos
   // fs::create_directory(objName + "/");
+  string command = "tree " + objName;
+  static_cast<void>(std::system(command.c_str()));
 };
 
 // Selector de color 

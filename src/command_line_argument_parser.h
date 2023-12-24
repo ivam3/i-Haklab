@@ -1,9 +1,12 @@
 #pragma once
 
+#include <boost/program_options.hpp>
+#include <string>
+#include <vector>
+#include <iostream>
 
-//
-#include "below_zero.h"
-#include <functional>
+
+namespace po = boost::program_options;
 
 // clang-format off 
 // Argumentos
@@ -25,7 +28,11 @@ class arguments {
   constexpr static auto server_php            = "server-php";
   constexpr static auto wifi_interface        = "interface";
   constexpr static auto ctf_red_tram          = "dir-red-team";
+  constexpr static auto ctf_mkt               = "mkt";
+  constexpr static auto info_about            = "about";
+
   boost::program_options::variables_map variables;
+  //   (feiend) Otorga acceso a los mienbros pribados y protegidos 
   friend class command_line_argument_parser;
 
 public:
@@ -36,22 +43,23 @@ public:
     return variables.size() == 0;
   }
 
-  string username() {
+
+  std::string username() {
     return (variables.count(username_option) > 0)
-               ? variables[username_option].as<string>()
+               ? variables[username_option].as<std::string>()
                : "";
   }
 
-  const vector<string> filenames() {
+  const std::vector<std::string> filenames() {
     return (variables.count(files_option_name) > 0)
-               ? variables[files_option_name].as<vector<string>>()
-               : vector<string>();
+               ? variables[files_option_name].as<std::vector<std::string>>()
+               : std::vector<std::string>();
   }
 
-  const vector<string> filepath() {
+  const std::vector<std::string> filepath() {
     return (variables.count(files_options_path) > 0)
-              ? variables[files_options_path].as<vector<string>>()
-              : vector<string>();
+              ? variables[files_options_path].as<std::vector<std::string>>()
+              : std::vector<std::string>();
   }
 
   bool file_update(){
@@ -63,7 +71,7 @@ public:
     }
     return false;
   }
-
+  
 
 
   bool server(){
@@ -72,13 +80,20 @@ public:
            : false ;
   }
 
-  string redTeam(){
+  std::string redTeam(){
     return (variables.count(ctf_red_tram) > 0)
-      ? variables[ctf_red_tram].as<string>() 
+      ? variables[ctf_red_tram].as<std::string>() 
       : "";
   }
   bool  redTeam(bool){
-    return (variables.count(ctf_red_tram) > 0);
+    return (variables.count(ctf_red_tram));
+  }
+
+  bool  mkt(bool){
+    return (variables.count(ctf_mkt));
+  }
+  const  std::string mkt(){
+    return variables[ctf_mkt].as<std::string>();
   }
 }; // end  arguments
 
@@ -95,34 +110,43 @@ class command_line_argument_parser {
   po::options_description automatitation{"Automatitation Options"};
   po::options_description server{"Servers"};
   po::options_description ctf{"CTF"};
+  po::options_description info{"Info"};
 public:
   command_line_argument_parser() {
     desc.add_options()
       (arguments::help_option, "Print this menu and leave")
       //(arguments::help_module_option, po::value<std::string>(),
       //   "produce a help for a given module")
-      (arguments::version_option,"print version string")
+      (arguments::version_option,"print version std::string")
       (arguments::username_option, po::value<std::string>(),
           "username to use")
       (arguments::wifi_interface,po::value<std::string>(),//("wlan0"),
           "Name of the interface to use")
-      (arguments::files_options_path,po::value<vector<string>>(),
+      (arguments::files_options_path,po::value<std::vector<std::string>>(),
           "input patn")
-      (arguments::files_option_name,po::value<vector<string>>(), 
+      (arguments::files_option_name,po::value<std::vector<std::string>>(), 
           "input file")
-      ("output,o", po::value<std::string>(), "output path");
+      ("output,o", po::value<std::string>(), 
+          "output path");
       //  Start Config
       //  Start dpkg
+      //  Info 
+      info.add_options()
+        (arguments::info_about,po::value<std::string>(),"Show informations about tool/framework");
       //  =============
       //  Servers
       //  =============
       server.add_options()
-        (arguments::server_php,"Create PHP server");
+        (arguments::server_php,
+            "Create PHP server");
       // --------------------
       //    CTF  
       //---------------------
        ctf.add_options()
-         (arguments::ctf_red_tram,po::value<std::string>(),"Red team create live");
+         (arguments::ctf_red_tram,po::value<std::string>(),
+            "Red team create directories");
+       ctf.add_options()
+         (arguments::ctf_mkt,po::value<std::string>(),"Create working directories ");
       //  -----------------------
       //  Start automatitation
       //  ----------------------
@@ -138,13 +162,14 @@ public:
     positionalOptions
       .add(arguments::files_option_name, -1);
   
-
+  
     po::options_description All;
      All.add(desc)
         .add(config)
         .add(dpkg)
         .add(server)
         .add(ctf)
+        .add(info)
         .add(automatitation);
  
 

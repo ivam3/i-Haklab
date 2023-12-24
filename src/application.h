@@ -9,7 +9,8 @@ using namespace std;
 class application {
 public:
   int run(int argc, const char* argv[]) {
-    command_line_argument_parser parser;
+   // command_line_argument_parser parser;
+    hak::Haklab parser;
     hak::Haklab haklab;
     try {
       auto args = parser.parse(argc, argv);
@@ -19,10 +20,11 @@ public:
         cout << "No arguments supplied on the command line" << endl;
       }
       if (args.redTeam(true)) {
-        std::cout << "It: " << args.redTeam() << std::endl;
         haklab.directRedTeam(args.redTeam());
       }
-
+      if (args.mkt(true)) {
+        haklab.mkt(args.mkt());
+      }
       if (args.file_update()) {
        haklab.updateFiles(args.filepath());
       }
