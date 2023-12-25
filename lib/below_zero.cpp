@@ -1,19 +1,15 @@
 #include "../src/below_zero.h"
-#include <bits/sysconf.h>
-#include <cstdlib>
-#include <functional>
-//#include <fstream>
 
 // Nombres de espacio de Boost
 namespace fs = boost::filesystem;
 //namespace of = boost::iostreams;
 
-using hc =  hak::Haklab;
-
+using  hak::Haklab;
+using  std::endl;
 /*
- *
+ *  Para las maquinas de hakthebox y tryhakmy  
  */
-void hc::mkt(std::string machineName){
+void mkt(std::string machineName){
   std::list<string>list{"nmap","content","exploits","scripts"};
   fs::create_directory(machineName);
   for(auto file : list){
@@ -26,14 +22,14 @@ void hc::mkt(std::string machineName){
 /*
  *
  */
-void hc::extractPorts(){
+void extractPorts(){
   std::string porst;
 }
 
 /*
  * Actualizar los archivos que cuisidan en el dir que este 
  */
-bool  hc::updateFiles(vector<string> path_file){
+bool  updateFiles(vector<string> path_file){
   std::set<string>filesHere;  // -->  
   if(path_file.size() == 0 ){
     //  return false;
@@ -49,8 +45,7 @@ bool  hc::updateFiles(vector<string> path_file){
   return true;
 };
 
-void hc::directRedTeam(std::string objName){ 
-  fs::create_directory(objName);
+void directRedTeam(std::string objName){ 
   std::ofstream file;
   file.open(objName + "/README.txt");
   if (!file.is_open()) {
@@ -65,20 +60,12 @@ void hc::directRedTeam(std::string objName){
    C2              ->     Controle el activo comprometido desde un controlador central remoto
    )" << std::endl;
 
-  // Reconocimiento 
-  fs::create_directory(objName + "/Recon");
-  // Armamento
-  fs::create_directory(objName + "/Weaponization");
-  //  Entrega
-  fs::create_directory(objName + "/Delivery");
-  //  Explotación
-  fs::create_directory(objName + "/Exploitation");
-  //  Instalación
-  fs::create_directory(objName + "/Installation");
-  //  Comando y control
-  fs::create_directory(objName + "/C2");
-  // Acciones sobre objetivos
-  // fs::create_directory(objName + "/");
+  std::list<std::string>dirList{"Recon","Weaponization","Delivery","Exploitation", "Intalacion","C2"};
+  // Reconocimiento Armament  Entrega Explotación  Instalación  Comando y control Acciones sobre objetivos
+  for(const auto &it : dirList){
+    fs::create_directory(objName + "/" + it);
+  }
+
   string command = "tree " + objName;
   static_cast<void>(std::system(command.c_str()));
 };
@@ -197,18 +184,18 @@ void hak::Haklab::k_boom(int signum)
 }
 
 
-void hc::clear_screen(){
+void clear_screen(){
  //Se coloca en la pocicion (1 1) y borra la pantalla
   const char *CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
   write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
 }
 
-void hc::hide_cursor() {
+void hide_cursor() {
     const char *HIDE_CURSOR_ANSI = "\e[?25l";  // Send escape sequence to hide cursor
     write(STDOUT_FILENO,HIDE_CURSOR_ANSI,7);
 }
 
-void hc::show_cursor() {
+void show_cursor() {
     const char *SHOW_CURSOL_ANSI = "\e[?25h" ;
     write(STDOUT_FILENO,SHOW_CURSOL_ANSI,7);
 }
@@ -216,7 +203,7 @@ void hc::show_cursor() {
 
 
 
-std::string hc::show_architecture() {
+std::string show_architecture() {
     #ifdef __x86_64__
         return "(x86_64)";
     #elif __i386__
@@ -255,18 +242,18 @@ std::string hc::show_architecture() {
 // };
         
 // ======= ABAUT =============    
-void hc::about(std::string about){
-    std::string fren = IHETC + std::basic_string("/Tools/Readme/") + about;   
+void about(std::string about){
+    std::string fren =   std::basic_string("/Tools/Readme/") + about;   
     
     // Elegir donde buscar 
     if (!fs::exists(fren)) {
-        fren =  IHETC + std::basic_string("/Tools/Readme/command/") + about + ".md";       
+      fren =  std::basic_string("/Tools/Readme/command/") + about + ".md";       
     }
     std::ifstream file;
     file.open(fren);      
     // Comprobar si se abrio 
     if(!file.is_open()){
-    //    fmt::print(fmt::emphasis::bold | fg(fmt::color::red),"No found\n");
+      //fmt::print(fmt::emphasis::bold | fg(fmt::color::red),"No found\n");
        exit(1);
     }
     // obtener la longitud del archivo:

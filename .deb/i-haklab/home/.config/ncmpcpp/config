@@ -1,0 +1,72 @@
+# Directories & Port Connection
+mpd_host                                            = "~/.config/mpd/mpd.socket"
+mpd_port                                            = "8000"
+mpd_crossfade_time                                  = "2"
+mpd_music_dir                                       = "~/storage/Music"
+lyrics_directory                                    = "~/.config/ncmpcpp/lyrics"
+allow_for_physical_item_deletion                    = "yes"
+execute_on_song_change                              = "bash ~/.scripts/notify/ncmpcpp"
+
+# Text Editor lyrics
+external_editor                                     = "nvim"
+
+# Visualizer
+#visualizer_in_stereo                                = "yes"
+#visualizer_fifo_path                                = "~/.config/mpd/mpd.fifo"
+#visualizer_output_name                              = "Visualizer"
+#visualizer_type                                     = "spectrum"
+#visualizer_type                                    = "ellipse"
+#visualizer_look                                     = "●●"
+#visualizer_color                                    = "red,magenta,cyan,green,yellow"
+
+cyclic_scrolling                                    = "yes"
+mouse_support                                       = "yes"
+mouse_list_scroll_whole_page                        = "yes"
+lines_scrolled                                      = "1"
+message_delay_time                                  = "1"
+playlist_shorten_total_times                        = "yes"
+playlist_display_mode                               = "columns"
+browser_display_mode                                = "columns"
+search_engine_display_mode                          = "columns"
+playlist_editor_display_mode                        = "columns"
+autocenter_mode                                     = "yes"
+centered_cursor                                     = "yes"
+#user_interface                                      = "classic"
+user_interface                                      = "alternative"
+follow_now_playing_lyrics                           = "yes"
+locked_screen_width_part                            = "50"
+ask_for_locked_screen_width_part                    = "yes"
+display_bitrate                                     = "no"
+main_window_color                                   = "default"
+startup_screen                                      = "playlist"
+startup_slave_screen                                = "visualizer"
+
+progressbar_look                                    = "━━"
+#progressbar_look                                   = "▃▃▃"
+progressbar_elapsed_color                           = "5"
+progressbar_color                                   = "black"
+
+header_visibility                                   = "no"
+statusbar_visibility                                = "yes"
+titles_visibility                                   = "no"
+enable_window_title                                 = "yes"
+
+statusbar_color                                     = "white"
+color1                                              = "white"
+color2                                              = "blue"
+
+now_playing_prefix                                  = "$b$2$7 "
+now_playing_suffix                                  = "  $/b$8"
+current_item_prefix                                 = "$b$7$/b$3 "
+current_item_suffix                                 = "  $8"
+
+# Classic UI
+song_columns_list_format                            = "(50)[]{t|fr:Title} (0)[magenta]{a}"
+song_list_format                                    = " {%t $R   $8%a$8}|{%f $R   $8%l$8} $8"
+song_status_format                                  = "$b$7[ $4 $8   $4 $7] $7{$8 %b }|{$8 %a - %t }|{$8 %f }$2 $7 $8"
+song_window_title_format                            = "Ncmpcpp > { %b }|{ %a - %t }|{ %f }"
+
+# Alternative UI
+alternative_ui_separator_color 		            = "black"
+alternative_header_first_line_format                = "$b$5$/b $b$8{%t}|{%f}$/b $/b"
+alternative_header_second_line_format               = "{$b{$2 %a$9}{ - $7  %b$9}{ ($2%y$9)}}|{%D}"

@@ -9,7 +9,8 @@
 namespace po = boost::program_options;
 
 // clang-format off 
-// Argumentos
+
+// Nuestro   almacenamiento de argumentos 
 class arguments {
   /*
    * Conoser valor en tiempo de
@@ -105,8 +106,7 @@ class command_line_argument_parser {
   // Opciobes  
   po::options_description desc{"Options"};
   po::options_description config{"Configutacion"};
-  po::options_description dpkg{"Create packages\n\tList of options to "
-                                  "automate creating deb binary packages"};
+  po::options_description red{"Red"};
   po::options_description automatitation{"Automatitation Options"};
   po::options_description server{"Servers"};
   po::options_description ctf{"CTF"};
@@ -120,16 +120,19 @@ public:
       (arguments::version_option,"print version std::string")
       (arguments::username_option, po::value<std::string>(),
           "username to use")
-      (arguments::wifi_interface,po::value<std::string>(),//("wlan0"),
-          "Name of the interface to use")
-      (arguments::files_options_path,po::value<std::vector<std::string>>(),
+            (arguments::files_options_path,po::value<std::vector<std::string>>(),
           "input patn")
       (arguments::files_option_name,po::value<std::vector<std::string>>(), 
           "input file")
       ("output,o", po::value<std::string>(), 
           "output path");
       //  Start Config
-      //  Start dpkg
+      //  red 
+      red.add_options()
+        (arguments::wifi_interface,po::value<std::string>(),//("wlan0"),
+          "Name of the interface to use");
+        
+
       //  Info 
       info.add_options()
         (arguments::info_about,po::value<std::string>(),"Show informations about tool/framework");
@@ -166,7 +169,7 @@ public:
     po::options_description All;
      All.add(desc)
         .add(config)
-        .add(dpkg)
+        .add(red)
         .add(server)
         .add(ctf)
         .add(info)

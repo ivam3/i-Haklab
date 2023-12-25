@@ -1,11 +1,9 @@
 // Fichero : below_zero
 // Autor: @demon_rip
 
-#ifndef BELOW_ZERO
-#define BELOW_ZERO
-
+#pragma once
 //------------------------------------------
-//    Redes 
+//     
 //------------------------------------------
 #include "command_line_argument_parser.h"
 #include <boost/asio.hpp>
@@ -16,15 +14,12 @@
 #include <boost/iostreams/stream.hpp>
 #include <boost/program_options.hpp>
 #include <boost/regex.hpp>
-#include <complex>
-#include <cstdlib>
 #include <dirent.h> // para explorar el directorio /proc/
 #include <iostream>
 #include <nlohmann/json.hpp>
 #include <set>
 #include <thread>
 #include <unistd.h>
-#include <vector>
 //------------------------------------------
 //------------------------------------------
 #define PORT_SHH 8022
@@ -117,18 +112,6 @@ private: // Specificador de acceso (pribado)
   void show_cursor();
 
 public: // Specificador de acceso (publico)
-        /*
-         * ufff
-         */
-
-  /*
-   * "/.local/etc/i-Haklab"
-   */
-  string get_IHETC();
-  /*
-   * "/.local/libexec/i-Haklab"
-   */
-  string get_LIBEX();
   /*
    * Muestra informacion sobre herramientas
    */
@@ -142,9 +125,6 @@ public: // Specificador de acceso (publico)
    */
   static void k_boom(int signum);
   /*
-   */
-  void baner();
-  /*
    * Arquitectura del sistema
    */
   std::string show_architecture();
@@ -153,10 +133,7 @@ public: // Specificador de acceso (publico)
    * arg: nombre de proseso
    */
   void searchProcess(std::string process);
-  /*
-   *
-   */
-  void update_haklab();
+
   /*
    * Descargar archivos
    * url: URL del archivo que se desea descargar
@@ -166,7 +143,8 @@ public: // Specificador de acceso (publico)
 
   // Función para mostrar un spinner mientras se ejecuta otra función en segundo
   // plano
-  template <typename Func> void loading(Func func) {
+  template <typename Func> 
+  void loading(Func func) {
     hide_cursor();
     std::vector<std::string> spinner = {"█■■■■", "■█■■■", "■■█■■", "■■■█■", "■■■■█"};
     int spinnerIndex = 0;
@@ -191,4 +169,3 @@ public: // Specificador de acceso (publico)
 
 }; // namespace hak
 
-#endif // !DEBUG

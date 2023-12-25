@@ -1,7 +1,6 @@
 // Autor: @demon_rip 
 #pragma once
 
-#include "command_line_argument_parser.h"
 #include "below_zero.h"
 
 using namespace std;
@@ -11,7 +10,6 @@ public:
   int run(int argc, const char* argv[]) {
    // command_line_argument_parser parser;
     hak::Haklab parser;
-    hak::Haklab haklab;
     try {
       auto args = parser.parse(argc, argv);
     
@@ -20,13 +18,13 @@ public:
         cout << "No arguments supplied on the command line" << endl;
       }
       if (args.redTeam(true)) {
-        haklab.directRedTeam(args.redTeam());
+      //  hak::directRedTeam(args.redTeam());
       }
       if (args.mkt(true)) {
-        haklab.mkt(args.mkt());
+     //    haklab.mkt(args.mkt());
       }
       if (args.file_update()) {
-       haklab.updateFiles(args.filepath());
+    //   haklab.updateFiles(args.filepath());
       }
   
       if (args.server()) {
