@@ -11,6 +11,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.28.1/CMakeCCompiler.cmake"
   "CMakeFiles/3.28.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.28.1/CMakeSystem.cmake"
+  "/data/data/com.termux/files/home/i-Haklab/src/CMakeLists.txt"
   "/data/data/com.termux/files/usr/share/cmake-3.28/Modules/CMakeCInformation.cmake"
   "/data/data/com.termux/files/usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake"
   "/data/data/com.termux/files/usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake"
@@ -43,10 +44,11 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/below_zero.dir/DependInfo.cmake"
   "CMakeFiles/i-haklab.dir/DependInfo.cmake"
+  "src/CMakeFiles/below_sero.dir/DependInfo.cmake"
   )

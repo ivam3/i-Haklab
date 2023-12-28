@@ -1,0 +1,1 @@
+-Wall esta bandera habilita los mensajes de advertencias en el código. Si escribimos todo como en los códigos anteriores, esta bandera no mostrar ningún mensaje para este ejemplo. 

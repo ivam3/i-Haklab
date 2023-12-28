@@ -1,0 +1,1 @@
+https://www.soimort.org/translate-shell/

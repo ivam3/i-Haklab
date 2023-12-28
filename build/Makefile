@@ -162,19 +162,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named below_zero
-
-# Build rule for target.
-below_zero: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 below_zero
-.PHONY : below_zero
-
-# fast build rule for target.
-below_zero/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/below_zero.dir/build.make CMakeFiles/below_zero.dir/build
-.PHONY : below_zero/fast
-
-#=============================================================================
 # Target rules for targets named i-haklab
 
 # Build rule for target.
@@ -187,53 +174,42 @@ i-haklab/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/i-haklab.dir/build.make CMakeFiles/i-haklab.dir/build
 .PHONY : i-haklab/fast
 
-lib/below_zero.o: lib/below_zero.cpp.o
-.PHONY : lib/below_zero.o
+#=============================================================================
+# Target rules for targets named below_sero
+
+# Build rule for target.
+below_sero: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 below_sero
+.PHONY : below_sero
+
+# fast build rule for target.
+below_sero/fast:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_sero.dir/build.make src/CMakeFiles/below_sero.dir/build
+.PHONY : below_sero/fast
+
+main-haklab.o: main-haklab.cpp.o
+.PHONY : main-haklab.o
 
 # target to build an object file
-lib/below_zero.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/below_zero.dir/build.make CMakeFiles/below_zero.dir/lib/below_zero.cpp.o
-.PHONY : lib/below_zero.cpp.o
+main-haklab.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/i-haklab.dir/build.make CMakeFiles/i-haklab.dir/main-haklab.cpp.o
+.PHONY : main-haklab.cpp.o
 
-lib/below_zero.i: lib/below_zero.cpp.i
-.PHONY : lib/below_zero.i
-
-# target to preprocess a source file
-lib/below_zero.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/below_zero.dir/build.make CMakeFiles/below_zero.dir/lib/below_zero.cpp.i
-.PHONY : lib/below_zero.cpp.i
-
-lib/below_zero.s: lib/below_zero.cpp.s
-.PHONY : lib/below_zero.s
-
-# target to generate assembly for a file
-lib/below_zero.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/below_zero.dir/build.make CMakeFiles/below_zero.dir/lib/below_zero.cpp.s
-.PHONY : lib/below_zero.cpp.s
-
-main/main-haklab.o: main/main-haklab.cpp.o
-.PHONY : main/main-haklab.o
-
-# target to build an object file
-main/main-haklab.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/i-haklab.dir/build.make CMakeFiles/i-haklab.dir/main/main-haklab.cpp.o
-.PHONY : main/main-haklab.cpp.o
-
-main/main-haklab.i: main/main-haklab.cpp.i
-.PHONY : main/main-haklab.i
+main-haklab.i: main-haklab.cpp.i
+.PHONY : main-haklab.i
 
 # target to preprocess a source file
-main/main-haklab.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/i-haklab.dir/build.make CMakeFiles/i-haklab.dir/main/main-haklab.cpp.i
-.PHONY : main/main-haklab.cpp.i
+main-haklab.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/i-haklab.dir/build.make CMakeFiles/i-haklab.dir/main-haklab.cpp.i
+.PHONY : main-haklab.cpp.i
 
-main/main-haklab.s: main/main-haklab.cpp.s
-.PHONY : main/main-haklab.s
+main-haklab.s: main-haklab.cpp.s
+.PHONY : main-haklab.s
 
 # target to generate assembly for a file
-main/main-haklab.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/i-haklab.dir/build.make CMakeFiles/i-haklab.dir/main/main-haklab.cpp.s
-.PHONY : main/main-haklab.cpp.s
+main-haklab.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/i-haklab.dir/build.make CMakeFiles/i-haklab.dir/main-haklab.cpp.s
+.PHONY : main-haklab.cpp.s
 
 # Help Target
 help:
@@ -247,14 +223,11 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... below_zero"
+	@echo "... below_sero"
 	@echo "... i-haklab"
-	@echo "... lib/below_zero.o"
-	@echo "... lib/below_zero.i"
-	@echo "... lib/below_zero.s"
-	@echo "... main/main-haklab.o"
-	@echo "... main/main-haklab.i"
-	@echo "... main/main-haklab.s"
+	@echo "... main-haklab.o"
+	@echo "... main-haklab.i"
+	@echo "... main-haklab.s"
 .PHONY : help
 
 

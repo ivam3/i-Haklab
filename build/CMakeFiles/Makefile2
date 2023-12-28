@@ -63,50 +63,39 @@ CMAKE_BINARY_DIR = /data/data/com.termux/files/home/i-Haklab/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/below_zero.dir/all
 all: CMakeFiles/i-haklab.dir/all
+all: src/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall:
+preinstall: src/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/below_zero.dir/clean
 clean: CMakeFiles/i-haklab.dir/clean
+clean: src/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/below_zero.dir
+# Directory level rules for directory src
 
-# All Build rule for target.
-CMakeFiles/below_zero.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/below_zero.dir/build.make CMakeFiles/below_zero.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/below_zero.dir/build.make CMakeFiles/below_zero.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/data/data/com.termux/files/home/i-Haklab/build/CMakeFiles --progress-num=1,2 "Built target below_zero"
-.PHONY : CMakeFiles/below_zero.dir/all
+# Recursive "all" directory target.
+src/all: src/CMakeFiles/below_sero.dir/all
+.PHONY : src/all
 
-# Build rule for subdir invocation for target.
-CMakeFiles/below_zero.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /data/data/com.termux/files/home/i-Haklab/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/below_zero.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /data/data/com.termux/files/home/i-Haklab/build/CMakeFiles 0
-.PHONY : CMakeFiles/below_zero.dir/rule
+# Recursive "preinstall" directory target.
+src/preinstall:
+.PHONY : src/preinstall
 
-# Convenience name for target.
-below_zero: CMakeFiles/below_zero.dir/rule
-.PHONY : below_zero
-
-# clean rule for target.
-CMakeFiles/below_zero.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/below_zero.dir/build.make CMakeFiles/below_zero.dir/clean
-.PHONY : CMakeFiles/below_zero.dir/clean
+# Recursive "clean" directory target.
+src/clean: src/CMakeFiles/below_sero.dir/clean
+.PHONY : src/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/i-haklab.dir
 
 # All Build rule for target.
-CMakeFiles/i-haklab.dir/all: CMakeFiles/below_zero.dir/all
+CMakeFiles/i-haklab.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/i-haklab.dir/build.make CMakeFiles/i-haklab.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/i-haklab.dir/build.make CMakeFiles/i-haklab.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/data/data/com.termux/files/home/i-Haklab/build/CMakeFiles --progress-num=3,4 "Built target i-haklab"
@@ -114,7 +103,7 @@ CMakeFiles/i-haklab.dir/all: CMakeFiles/below_zero.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/i-haklab.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /data/data/com.termux/files/home/i-Haklab/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /data/data/com.termux/files/home/i-Haklab/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/i-haklab.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /data/data/com.termux/files/home/i-Haklab/build/CMakeFiles 0
 .PHONY : CMakeFiles/i-haklab.dir/rule
@@ -127,6 +116,32 @@ i-haklab: CMakeFiles/i-haklab.dir/rule
 CMakeFiles/i-haklab.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/i-haklab.dir/build.make CMakeFiles/i-haklab.dir/clean
 .PHONY : CMakeFiles/i-haklab.dir/clean
+
+#=============================================================================
+# Target rules for target src/CMakeFiles/below_sero.dir
+
+# All Build rule for target.
+src/CMakeFiles/below_sero.dir/all:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_sero.dir/build.make src/CMakeFiles/below_sero.dir/depend
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_sero.dir/build.make src/CMakeFiles/below_sero.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/data/data/com.termux/files/home/i-Haklab/build/CMakeFiles --progress-num=1,2 "Built target below_sero"
+.PHONY : src/CMakeFiles/below_sero.dir/all
+
+# Build rule for subdir invocation for target.
+src/CMakeFiles/below_sero.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /data/data/com.termux/files/home/i-Haklab/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/below_sero.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /data/data/com.termux/files/home/i-Haklab/build/CMakeFiles 0
+.PHONY : src/CMakeFiles/below_sero.dir/rule
+
+# Convenience name for target.
+below_sero: src/CMakeFiles/below_sero.dir/rule
+.PHONY : below_sero
+
+# clean rule for target.
+src/CMakeFiles/below_sero.dir/clean:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_sero.dir/build.make src/CMakeFiles/below_sero.dir/clean
+.PHONY : src/CMakeFiles/below_sero.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

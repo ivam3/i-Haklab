@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/data/data/com.termux/files/home/i-Haklab/main/main-haklab.cpp" "CMakeFiles/i-haklab.dir/main/main-haklab.cpp.o" "gcc" "CMakeFiles/i-haklab.dir/main/main-haklab.cpp.o.d"
+  "/data/data/com.termux/files/home/i-Haklab/main-haklab.cpp" "CMakeFiles/i-haklab.dir/main-haklab.cpp.o" "gcc" "CMakeFiles/i-haklab.dir/main-haklab.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

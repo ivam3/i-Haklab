@@ -1,0 +1,3 @@
+# Archivo de configuración 
+`~/lynxrc`
+

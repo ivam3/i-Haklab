@@ -1,0 +1,1 @@
+Cantidad máxima de memoria virtual disponible para cada proceso 

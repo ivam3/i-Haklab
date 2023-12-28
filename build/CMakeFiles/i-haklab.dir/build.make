@@ -69,30 +69,29 @@ include CMakeFiles/i-haklab.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/i-haklab.dir/flags.make
 
-CMakeFiles/i-haklab.dir/main/main-haklab.cpp.o: CMakeFiles/i-haklab.dir/flags.make
-CMakeFiles/i-haklab.dir/main/main-haklab.cpp.o: /data/data/com.termux/files/home/i-Haklab/main/main-haklab.cpp
-CMakeFiles/i-haklab.dir/main/main-haklab.cpp.o: CMakeFiles/i-haklab.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/data/data/com.termux/files/home/i-Haklab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/i-haklab.dir/main/main-haklab.cpp.o"
-	/data/data/com.termux/files/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/i-haklab.dir/main/main-haklab.cpp.o -MF CMakeFiles/i-haklab.dir/main/main-haklab.cpp.o.d -o CMakeFiles/i-haklab.dir/main/main-haklab.cpp.o -c /data/data/com.termux/files/home/i-Haklab/main/main-haklab.cpp
+CMakeFiles/i-haklab.dir/main-haklab.cpp.o: CMakeFiles/i-haklab.dir/flags.make
+CMakeFiles/i-haklab.dir/main-haklab.cpp.o: /data/data/com.termux/files/home/i-Haklab/main-haklab.cpp
+CMakeFiles/i-haklab.dir/main-haklab.cpp.o: CMakeFiles/i-haklab.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/data/data/com.termux/files/home/i-Haklab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/i-haklab.dir/main-haklab.cpp.o"
+	/data/data/com.termux/files/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/i-haklab.dir/main-haklab.cpp.o -MF CMakeFiles/i-haklab.dir/main-haklab.cpp.o.d -o CMakeFiles/i-haklab.dir/main-haklab.cpp.o -c /data/data/com.termux/files/home/i-Haklab/main-haklab.cpp
 
-CMakeFiles/i-haklab.dir/main/main-haklab.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/i-haklab.dir/main/main-haklab.cpp.i"
-	/data/data/com.termux/files/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /data/data/com.termux/files/home/i-Haklab/main/main-haklab.cpp > CMakeFiles/i-haklab.dir/main/main-haklab.cpp.i
+CMakeFiles/i-haklab.dir/main-haklab.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/i-haklab.dir/main-haklab.cpp.i"
+	/data/data/com.termux/files/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /data/data/com.termux/files/home/i-Haklab/main-haklab.cpp > CMakeFiles/i-haklab.dir/main-haklab.cpp.i
 
-CMakeFiles/i-haklab.dir/main/main-haklab.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/i-haklab.dir/main/main-haklab.cpp.s"
-	/data/data/com.termux/files/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /data/data/com.termux/files/home/i-Haklab/main/main-haklab.cpp -o CMakeFiles/i-haklab.dir/main/main-haklab.cpp.s
+CMakeFiles/i-haklab.dir/main-haklab.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/i-haklab.dir/main-haklab.cpp.s"
+	/data/data/com.termux/files/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /data/data/com.termux/files/home/i-Haklab/main-haklab.cpp -o CMakeFiles/i-haklab.dir/main-haklab.cpp.s
 
 # Object files for target i-haklab
 i__haklab_OBJECTS = \
-"CMakeFiles/i-haklab.dir/main/main-haklab.cpp.o"
+"CMakeFiles/i-haklab.dir/main-haklab.cpp.o"
 
 # External object files for target i-haklab
 i__haklab_EXTERNAL_OBJECTS =
 
-i-haklab: CMakeFiles/i-haklab.dir/main/main-haklab.cpp.o
+i-haklab: CMakeFiles/i-haklab.dir/main-haklab.cpp.o
 i-haklab: CMakeFiles/i-haklab.dir/build.make
-i-haklab: libbelow_zero.so
 i-haklab: CMakeFiles/i-haklab.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/data/data/com.termux/files/home/i-Haklab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable i-haklab"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/i-haklab.dir/link.txt --verbose=$(VERBOSE)

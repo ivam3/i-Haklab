@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/i-haklab.dir/main/main-haklab.cpp.o"
-  "CMakeFiles/i-haklab.dir/main/main-haklab.cpp.o.d"
+  "CMakeFiles/i-haklab.dir/main-haklab.cpp.o"
+  "CMakeFiles/i-haklab.dir/main-haklab.cpp.o.d"
   "i-haklab"
   "i-haklab.pdb"
 )

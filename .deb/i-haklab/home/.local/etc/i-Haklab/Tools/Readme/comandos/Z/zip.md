@@ -1,0 +1,1 @@
+-   `zip -F input.zip --out output.zip`e `zip -FF input.zip --out output.zip`intente reparar un archivo zip dañado.

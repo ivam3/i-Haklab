@@ -1,0 +1,1 @@
+Chisel es un túnel TCP/UDP rápido, transportado a través de HTTP, protegido a través de SSH.  Ejecutable único que incluye tanto al cliente como al servidor.  Escrito en Go (golang).  Chisel es principalmente útil para pasar a través de firewalls, aunque también se puede usar para proporcionar un punto final seguro en su red.

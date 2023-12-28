@@ -1,4 +1,3 @@
-/data/data/com.termux/files/home/i-Haklab/build/CMakeFiles/below_zero.dir
 /data/data/com.termux/files/home/i-Haklab/build/CMakeFiles/i-haklab.dir
 /data/data/com.termux/files/home/i-Haklab/build/CMakeFiles/edit_cache.dir
 /data/data/com.termux/files/home/i-Haklab/build/CMakeFiles/rebuild_cache.dir
@@ -6,3 +5,10 @@
 /data/data/com.termux/files/home/i-Haklab/build/CMakeFiles/install.dir
 /data/data/com.termux/files/home/i-Haklab/build/CMakeFiles/install/local.dir
 /data/data/com.termux/files/home/i-Haklab/build/CMakeFiles/install/strip.dir
+/data/data/com.termux/files/home/i-Haklab/build/src/CMakeFiles/below_sero.dir
+/data/data/com.termux/files/home/i-Haklab/build/src/CMakeFiles/edit_cache.dir
+/data/data/com.termux/files/home/i-Haklab/build/src/CMakeFiles/rebuild_cache.dir
+/data/data/com.termux/files/home/i-Haklab/build/src/CMakeFiles/list_install_components.dir
+/data/data/com.termux/files/home/i-Haklab/build/src/CMakeFiles/install.dir
+/data/data/com.termux/files/home/i-Haklab/build/src/CMakeFiles/install/local.dir
+/data/data/com.termux/files/home/i-Haklab/build/src/CMakeFiles/install/strip.dir

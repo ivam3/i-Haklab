@@ -1,0 +1,1 @@
+`apktool d ETK.apk`

@@ -1,0 +1,1 @@
+1. `readelf --syms` Simbolos del binario

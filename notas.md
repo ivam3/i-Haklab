@@ -12,12 +12,13 @@ cmake --install build --prefix=$PREFIX
 - `https://www.boost.org/doc/libs/1_84_0/doc/html/program_options/howto.html` 
 - Dar valores por defecto a opciones que no son abligatorias 
 
-- el archivo de man no se esta poniendo en su ruta esta dando error 
 - Usar evitar usar rutas relativas para compativilidad con linux  (getenv)
 - `~/.local/share/apli...` La imagen para el escritorio 
 - descargar key en automatico 
 - error - convertir una clase a string
 - pendiente agreagar a nvim `https://github.com/dinhhuy258/git.nvim` 
+- `no` usae **new** ni **delete**  -> Smart point 
+
 
 # Regisito
 https://hackingcpp.com/cpp/libs/fmt.html#terminal-styles
