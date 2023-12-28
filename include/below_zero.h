@@ -14,10 +14,11 @@
 #include <iostream>
 #include <nlohmann/json.hpp>
 #include <set>
-#include <thread>
+#include <thread>  // hilo  
 #include <unistd.h>
 //------------------------------------------
 //------------------------------------------
+#define PORT_DEF 4444
 #define PORT_SHH 8022
 #define PORT_WEP 808O
 #define PORT_FTP 8021
@@ -59,9 +60,10 @@ namespace hak {
 /*
  *  Contructor 
  */
-class Haklab  {
+class Haklab : public command_line_argument_parser {
 public:
   Haklab()
+
   {
    if(getgid() == 0){
      std::cerr << "[Error] Please run as unprivileged user" << std::endl;
