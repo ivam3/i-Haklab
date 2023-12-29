@@ -60,7 +60,7 @@ namespace hak {
 /*
  *  Contructor 
  */
-class Haklab : public command_line_argument_parser {
+class Haklab  {
 public:
   Haklab()
 

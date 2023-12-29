@@ -10,6 +10,10 @@ cmake --install build --prefix=$PREFIX
 
 # boost
 - `https://www.boost.org/doc/libs/1_84_0/doc/html/program_options/howto.html` 
+
+- hay funciones declarsdas a un no definidas que los tipos de datos no pueden cambiar 
+
+
 - Dar valores por defecto a opciones que no son abligatorias 
 
 - Usar evitar usar rutas relativas para compativilidad con linux  (getenv)

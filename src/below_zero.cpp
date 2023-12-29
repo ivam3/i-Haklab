@@ -1,13 +1,13 @@
 #include "../include/below_zero.h"
+
 // Nombres de espacio de Boost
 namespace fs = boost::filesystem;
 //namespace of = boost::iostreams;
 
-using  hak::Haklab;
+//using  hak::Haklab;
 using  std::endl;
 using  std::cout;
 using  std::cerr;
-
 
 
 void mkt(std::string machineName){
@@ -29,21 +29,14 @@ int run(int argc, const char *argv[]){
       if (args.no_arguments()) {
         cout << "No arguments supplied on the command line" << endl;
       }
-      if (args.redTeam(true)){
-          cout << "i"<<std::endl;
-         //directRedTeam("");
-      }
-      if (args.mkt(true)) {
-        mkt("hola");
-      }
       if (args.file_update()) {
       //  updateFiles(args.filepath());
       }  
-      if (args.server()) {
-        std::cout << "A" << std::endl;
-      }     
+      
+        std::cout << args.redTeam() << std::endl;
+      
     } catch (po::error &ex) {
-      cerr << "Usage: i-haklab [ options ]" << std::endl;
+      cerr << std::endl <<  "Usage: i-haklab [ options ] [ arg ]" << std::endl;
       cerr << ex.what() << endl;
       return false;
     } catch (...) {
@@ -53,14 +46,6 @@ int run(int argc, const char *argv[]){
     return true;
   }
 
-
-
-/*
- *
- */
-void extractPorts(){
-  std::string porst;
-}
 
 /*
  * Actualizar los archivos que cuisidan en el dir que este 
