@@ -1,6 +1,8 @@
-#include "../include/below_zero.h"
-#include "../include/command_line_argument_parser.h"
-#include <boost/filesystem.hpp>
+#include  "../include/below_zero.h"
+#include  "../include/command_line_argument_parser.h"
+#include  "../include/network/NetworHaklab.h"
+#include  "../include/redteam/RedTeamHaklab.h"
+#include  <boost/filesystem.hpp>
 
 // Nombres de espacio de Boost
 namespace fs = boost::filesystem;
@@ -12,33 +14,32 @@ using  std::cout;
 using  std::cerr;
 
 
-void mkt(std::string machineName){
-  // Lista de directorios 
-  std::list<string>list{"nmap","content","exploits","scripts"};
-  fs::create_directory(machineName);
-  for(auto file : list){
-    fs::create_directory( machineName + "/" + file);
-  }
-  string command = "tree " + machineName;
-  static_cast<void>(std::system(command.c_str()));
-};
-
-
 int hak::Haklab::run(int argc, const char *argv[]){
   command_line_argument_parser parser;
+  network::NetworHakaklab network;
    try {
       auto args = parser.parse(argc, argv);
 
       if (args.no_arguments()) {
         cout << "No arguments supplied on the command line" << endl;
       }
+     
+      if (args.CreateMkt().size() != 0){
+       redteam::ResTeamHakalb::mkt(args.CreateMkt());
+      }
       
-      cout << args.WepStatusCode() <<  endl;
-    
-     // args.CreateMkt();
-      
-    } catch (po::error &ex) {
-      cerr << std::endl <<  "Usage: i-haklab [ options ] [ arg ]" << std::endl;
+      if (args.WepStatusCode().size() != 0 ) {
+        if (args.port().size() == 0 ){
+          cerr << "requeris '--port ' " << endl;
+          return false;
+        };
+      const string port = args.port();
+      cout << port;
+      cout <<   network.GetStatusCode(args.WepStatusCode(), port) << endl;
+       }
+
+   } catch (po::error &ex) {
+      cerr <<   "Usage: i-haklab [ options ] [ arg ]" << std::endl;
       cerr << ex.what() << endl;
       return false;
     } catch (...) {

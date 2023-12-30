@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/below_zero.dir/NetworHaklab.cpp.o"
   "CMakeFiles/below_zero.dir/NetworHaklab.cpp.o.d"
+  "CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.o"
+  "CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.o.d"
   "CMakeFiles/below_zero.dir/below_zero.cpp.o"
   "CMakeFiles/below_zero.dir/below_zero.cpp.o.d"
   "CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o"

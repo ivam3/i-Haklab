@@ -11,7 +11,7 @@ namespace network {
       // Download a file from url 
       bool DownloadFile(string URL);
       // Get status code of url 
-      static int GetStatusCode(const string &URL);
+      int GetStatusCode(const string &host, string port);
       // Send http post request with data 
       // date en formato json
       // Usr ejemplo : http://example.com/index.php  

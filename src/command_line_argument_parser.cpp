@@ -10,19 +10,24 @@ std::string arguments::username() {
              : "";
 }
 
-int arguments::WepStatusCode() {
-  const string &URL = variables[WepStatus].as<string>();
-  return (variables.count(WepStatus) > 0)
-             ? network::NetworHakaklab::GetStatusCode(URL)
-             : 0;
+std::string arguments::port(){ 
+  return (variables.count(port_option) > 0 )
+      ? variables[port_option].as<string>()
+      : "";
+} 
+
+std::string arguments::WepStatusCode() {
+  return (variables.count(WepStatus) > 0 ) 
+      ? variables[WepStatus].as<std::string>()
+      : "" ;        
 }
 
-void arguments::CreateMkt() {
-  string name = variables[ctf_mkt].as<string>();
-  if (variables.count(ctf_mkt)) {
-    cout << variables[ctf_mkt].as<string>() << endl;
-  }
+string  arguments::CreateMkt() {
+  return (variables.count(ctf_mkt) > 0)
+    ? variables[ctf_mkt].as<string>()
+    : "";
 }
+  
 
 const std::vector<std::string> arguments::filenames() {
   return (variables.count(files_option_name) > 0)

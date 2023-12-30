@@ -1,7 +1,11 @@
+/* Autor: @demon_rip
+ * File : command_line_arg 
+ */
 #pragma once
 
 #include <iostream>
 #include <boost/program_options.hpp>
+#include <string>
 
 namespace po = boost::program_options;
 
@@ -10,13 +14,13 @@ using std::endl;
 using std::cerr;
 using std::cout;
 
-// clang-format off 
+// clang-format off
 //a, b, c, d, e, f, g, h, i, j, k, l, m, n, ñ, o, p, q, r, s, t, u, v, w, x, y, z.
 //
 
 
 
-// Nuestro   almacenamiento de argumentos 
+// Almacenamiento de argumentos 
 class arguments {
   /*
    * Conoser valor en tiempo de
@@ -51,9 +55,11 @@ public:
 
   std::string username();
 
-  int  WepStatusCode();
+  string port();
 
-  void CreateMkt();
+  string  WepStatusCode();
+
+  string  CreateMkt();
 
   const std::vector<std::string> filenames();
 
@@ -105,7 +111,7 @@ public:
       //  Servers
       //  =============
       server.add_options()
-        (arguments::WepStatus, po::value<std::string>(), "Estatus Code ")
+        (arguments::WepStatus, po::value<string>(), "Estatus Code ")
         (arguments::port_option, po::value<int>(),
          "Create specified port")
         (arguments::host_options, po::value<int>(),

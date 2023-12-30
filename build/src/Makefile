@@ -199,6 +199,30 @@ NetworHaklab.cpp.s:
 	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.s
 .PHONY : NetworHaklab.cpp.s
 
+RedTeamHaklab.o: RedTeamHaklab.cpp.o
+.PHONY : RedTeamHaklab.o
+
+# target to build an object file
+RedTeamHaklab.cpp.o:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.o
+.PHONY : RedTeamHaklab.cpp.o
+
+RedTeamHaklab.i: RedTeamHaklab.cpp.i
+.PHONY : RedTeamHaklab.i
+
+# target to preprocess a source file
+RedTeamHaklab.cpp.i:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.i
+.PHONY : RedTeamHaklab.cpp.i
+
+RedTeamHaklab.s: RedTeamHaklab.cpp.s
+.PHONY : RedTeamHaklab.s
+
+# target to generate assembly for a file
+RedTeamHaklab.cpp.s:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.s
+.PHONY : RedTeamHaklab.cpp.s
+
 below_zero.o: below_zero.cpp.o
 .PHONY : below_zero.o
 
@@ -263,6 +287,9 @@ help:
 	@echo "... NetworHaklab.o"
 	@echo "... NetworHaklab.i"
 	@echo "... NetworHaklab.s"
+	@echo "... RedTeamHaklab.o"
+	@echo "... RedTeamHaklab.i"
+	@echo "... RedTeamHaklab.s"
 	@echo "... below_zero.o"
 	@echo "... below_zero.i"
 	@echo "... below_zero.s"
