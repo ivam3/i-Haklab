@@ -1,9 +1,14 @@
 #pragma once
 
-#include <boost/program_options.hpp>
+#include "network/NetworHaklab.h"
+#include "../include/below_zero.h"
+#include <charconv>
+#include <complex>
 #include <iostream>
-
+#include <string> 
 namespace po = boost::program_options;
+
+using std::string;
 
 // clang-format off 
 //a, b, c, d, e, f, g, h, i, j, k, l, m, n, ñ, o, p, q, r, s, t, u, v, w, x, y, z.
@@ -32,6 +37,8 @@ class arguments {
   constexpr static auto ctf_red_tram          = "dir-red-team";
   constexpr static auto ctf_mkt               = "mkt";
   constexpr static auto info_about            = "about";
+  constexpr static auto WepStatus             = "wep-status";
+
 
   po::variables_map variables;
   //   (feiend) Otorga acceso a los mienbros pribados y protegidos
@@ -51,6 +58,22 @@ public:
                ? variables[username_option].as<std::string>()
                : "";
   }
+
+
+  int  WepStatusCode(){
+    const string  &URL = variables[WepStatus].as<string>();
+    return (variables.count(WepStatus) > 0 )
+      ? network::NetworHakaklab::GetStatusCode(URL)
+      : 0 ;
+  }
+
+  void CreateMkt(){
+     string name = variables[ctf_mkt].as<string>();
+     if (variables.count(ctf_mkt)){
+         hak::Haklab::Haklab::mkt(name);
+    }   
+  }
+
 
   const std::vector<std::string> filenames() {
     return (variables.count(files_option_name) > 0)
@@ -73,24 +96,7 @@ public:
     }
     return false;
   }
-  
-
-
-  bool server(){
-    return (variables.count(server_php) > 0 ) 
-           ? true
-           : false ;
-  }
-
-  std::string redTeam(){
-    return (variables.count(ctf_red_tram) > 0)
-      ? variables[ctf_red_tram].as<std::string>() 
-      : "";
-  }
-  bool  redTeam(bool){
-    return (variables.count(ctf_red_tram));
-  }
-
+ 
 }; // end arguments
 
 
@@ -99,7 +105,6 @@ public:
 class command_line_argument_parser {
   // Opciobes  
   po::options_description desc{"Options"};
-  po::options_description config{"Configutacion"};
   po::options_description red{"Red"};
   po::options_description automatitation{"Automatitation Options"};
   po::options_description server{"Servers"};
@@ -135,6 +140,7 @@ public:
       //  Servers
       //  =============
       server.add_options()
+        (arguments::WepStatus, po::value<std::string>())
         (arguments::port_option, po::value<int>(),
          "Create specified port")
         (arguments::host_options, po::value<int>(),
@@ -167,7 +173,6 @@ public:
   
     po::options_description All;
      All.add(desc)
-        .add(config)
         .add(red)
         .add(server)
         .add(ctf)

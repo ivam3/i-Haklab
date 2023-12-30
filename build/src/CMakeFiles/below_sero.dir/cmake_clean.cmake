@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/below_sero.dir/NetworHaklab.cpp.o"
+  "CMakeFiles/below_sero.dir/NetworHaklab.cpp.o.d"
   "CMakeFiles/below_sero.dir/below_zero.cpp.o"
   "CMakeFiles/below_sero.dir/below_zero.cpp.o.d"
   "libbelow_sero.pdb"

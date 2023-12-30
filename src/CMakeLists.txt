@@ -1,2 +1,3 @@
 add_library(below_sero SHARED 
-  "./*.cpp")
+  "./below_zero.cpp"
+  "./NetworHaklab.cpp")

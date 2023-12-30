@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/data/data/com.termux/files/home/i-Haklab/build -I/data/data/com.termux/files/home/i-Haklab/include
 
-CXX_FLAGS = -fPIE -fPIC -O2 -g -DNDEBUG
+CXX_FLAGS = -O2 -g -DNDEBUG
 

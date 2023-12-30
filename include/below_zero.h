@@ -1,11 +1,10 @@
-// Fichero : below_zero
+// Fichero : below_zero.h  
 // Autor: @demon_rip
 
 #pragma once
 //------------------------------------------
 //     
 //------------------------------------------
-#include "command_line_argument_parser.h"
 #include <boost/asio.hpp>
 //----------------------------------------
 #include <boost/filesystem.hpp>
@@ -84,7 +83,7 @@ public:
    /*
     * Crear dir 
     */
-  void mkt(string machineName);
+  static void mkt(string machineName);
   /*
    *
    */

@@ -175,6 +175,30 @@ below_sero/fast:
 	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_sero.dir/build.make src/CMakeFiles/below_sero.dir/build
 .PHONY : below_sero/fast
 
+NetworHaklab.o: NetworHaklab.cpp.o
+.PHONY : NetworHaklab.o
+
+# target to build an object file
+NetworHaklab.cpp.o:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_sero.dir/build.make src/CMakeFiles/below_sero.dir/NetworHaklab.cpp.o
+.PHONY : NetworHaklab.cpp.o
+
+NetworHaklab.i: NetworHaklab.cpp.i
+.PHONY : NetworHaklab.i
+
+# target to preprocess a source file
+NetworHaklab.cpp.i:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_sero.dir/build.make src/CMakeFiles/below_sero.dir/NetworHaklab.cpp.i
+.PHONY : NetworHaklab.cpp.i
+
+NetworHaklab.s: NetworHaklab.cpp.s
+.PHONY : NetworHaklab.s
+
+# target to generate assembly for a file
+NetworHaklab.cpp.s:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_sero.dir/build.make src/CMakeFiles/below_sero.dir/NetworHaklab.cpp.s
+.PHONY : NetworHaklab.cpp.s
+
 below_zero.o: below_zero.cpp.o
 .PHONY : below_zero.o
 
@@ -212,6 +236,9 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... below_sero"
+	@echo "... NetworHaklab.o"
+	@echo "... NetworHaklab.i"
+	@echo "... NetworHaklab.s"
 	@echo "... below_zero.o"
 	@echo "... below_zero.i"
 	@echo "... below_zero.s"

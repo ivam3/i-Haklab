@@ -1,4 +1,5 @@
 #include "../include/below_zero.h"
+#include "../include/command_line_argument_parser.h"
 
 // Nombres de espacio de Boost
 namespace fs = boost::filesystem;
@@ -26,14 +27,14 @@ int run(int argc, const char *argv[]){
   command_line_argument_parser parser;
    try {
       auto args = parser.parse(argc, argv);
+
       if (args.no_arguments()) {
         cout << "No arguments supplied on the command line" << endl;
       }
-      if (args.file_update()) {
-      //  updateFiles(args.filepath());
-      }  
       
-        std::cout << args.redTeam() << std::endl;
+      cout << args.WepStatusCode() <<  endl;
+    
+      args.CreateMkt();
       
     } catch (po::error &ex) {
       cerr << std::endl <<  "Usage: i-haklab [ options ] [ arg ]" << std::endl;

@@ -1,1 +1,1 @@
-/data/data/com.termux/files/usr/bin/c++ -fPIC -fPIE -fPIC -O2 -g -DNDEBUG -pie -shared -Wl,-soname,libbelow_sero.so -o libbelow_sero.so CMakeFiles/below_sero.dir/below_zero.cpp.o 
+/data/data/com.termux/files/usr/bin/c++ -fPIC -O2 -g -DNDEBUG -shared -Wl,-soname,libbelow_sero.so -o libbelow_sero.so CMakeFiles/below_sero.dir/below_zero.cpp.o CMakeFiles/below_sero.dir/NetworHaklab.cpp.o 

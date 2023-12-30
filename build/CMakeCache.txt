@@ -28,7 +28,7 @@ CMAKE_BUILD_TYPE:STRING=RelWithDebInfo
 CMAKE_COLOR_MAKEFILE:BOOL=ON
 
 //CXX compiler
-CMAKE_CXX_COMPILER:STRING=/data/data/com.termux/files/usr/bin/c++
+CMAKE_CXX_COMPILER:FILEPATH=/data/data/com.termux/files/usr/bin/c++
 
 //LLVM archiver
 CMAKE_CXX_COMPILER_AR:FILEPATH=/data/data/com.termux/files/usr/bin/llvm-ar
@@ -40,7 +40,7 @@ CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS:FILEPATH=/data/data/com.termux/files/usr/bin/
 CMAKE_CXX_COMPILER_RANLIB:FILEPATH=/data/data/com.termux/files/usr/bin/llvm-ranlib
 
 //Flags used by the CXX compiler during all build types.
-CMAKE_CXX_FLAGS:STRING=-fPIE -fPIC
+CMAKE_CXX_FLAGS:STRING=
 
 //Flags used by the CXX compiler during DEBUG builds.
 CMAKE_CXX_FLAGS_DEBUG:STRING=-g
@@ -55,7 +55,7 @@ CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
 CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 
 //C compiler
-CMAKE_C_COMPILER:STRING=/data/data/com.termux/files/usr/bin/cc
+CMAKE_C_COMPILER:FILEPATH=/data/data/com.termux/files/usr/bin/cc
 
 //LLVM archiver
 CMAKE_C_COMPILER_AR:FILEPATH=/data/data/com.termux/files/usr/bin/llvm-ar
@@ -67,7 +67,7 @@ CMAKE_C_COMPILER_CLANG_SCAN_DEPS:FILEPATH=/data/data/com.termux/files/usr/bin/cl
 CMAKE_C_COMPILER_RANLIB:FILEPATH=/data/data/com.termux/files/usr/bin/llvm-ranlib
 
 //Flags used by the C compiler during all build types.
-CMAKE_C_FLAGS:STRING=-fPIE -fPIC
+CMAKE_C_FLAGS:STRING=
 
 //Flags used by the C compiler during DEBUG builds.
 CMAKE_C_FLAGS_DEBUG:STRING=-g
@@ -85,7 +85,7 @@ CMAKE_C_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 CMAKE_DLLTOOL:FILEPATH=/data/data/com.termux/files/usr/bin/llvm-dlltool
 
 //Flags used by the linker during all build types.
-CMAKE_EXE_LINKER_FLAGS:STRING=-pie
+CMAKE_EXE_LINKER_FLAGS:STRING=
 
 //Flags used by the linker during DEBUG builds.
 CMAKE_EXE_LINKER_FLAGS_DEBUG:STRING=
@@ -109,7 +109,7 @@ CMAKE_FIND_PACKAGE_REDIRECTS_DIR:STATIC=/data/data/com.termux/files/home/i-Hakla
 CMAKE_INSTALL_MANDIR:UNINITIALIZED=/data/data/com.termux/files/usr/share/man/
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=/data/data/com.termux/files/usr
+CMAKE_INSTALL_PREFIX:PATH=/usr/local
 
 //Path to a program.
 CMAKE_LINKER:FILEPATH=/data/data/com.termux/files/usr/bin/ld.lld
@@ -119,7 +119,7 @@ CMAKE_MAKE_PROGRAM:FILEPATH=/data/data/com.termux/files/usr/bin/make
 
 //Flags used by the linker during the creation of modules during
 // all build types.
-CMAKE_MODULE_LINKER_FLAGS:STRING=-pie
+CMAKE_MODULE_LINKER_FLAGS:STRING=
 
 //Flags used by the linker during the creation of modules during
 // DEBUG builds.
@@ -163,7 +163,7 @@ CMAKE_READELF:FILEPATH=/data/data/com.termux/files/usr/bin/llvm-readelf
 
 //Flags used by the linker during the creation of shared libraries
 // during all build types.
-CMAKE_SHARED_LINKER_FLAGS:STRING=-pie
+CMAKE_SHARED_LINKER_FLAGS:STRING=
 
 //Flags used by the linker during the creation of shared libraries
 // during DEBUG builds.
