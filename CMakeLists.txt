@@ -4,38 +4,33 @@ cmake_minimum_required(VERSION 3.10)
 # Nombre del proyecto
 project(i-haklab)
 
+# Agrega el directorio de encabezados
+include_directories(${CMAKE_SOURCE_DIR}/include)
 
-# Variables 
-set(SRC "main-haklab.cpp")
-
-
-# Cargar bibloecas  
+# Carga bibliotecas
 add_subdirectory(src)
 
-# codigo fuente
+
+# Código fuente
+set(SRC "main-haklab.cpp")
+
+# Crea el ejecutable
 add_executable(${PROJECT_NAME} ${SRC})
 
+# Enlazar biblioteca
+target_link_libraries(${PROJECT_NAME} PUBLIC below_zero
+    -lboost_program_options
+    -lfmt
+    -ljsoncpp
+    -lboost_system
+    -lboost_filesystem
+)
 
-# En lazar bibloteca
-target_link_libraries(${PROJECT_NAME} PUBLIC  below_zero   
- -lboost_program_options
- -lfmt 
- -ljsoncpp 
- -lboost_system 
- -lboost_filesystem)
-
-# incluir archivos de encabezados 
-target_include_directories( ${PROJECT_NAME} PUBLIC 
-  "${PROJECT_BINARY_DIR}"
-  "${PROJECT_SOURCE_DIR}/include"
-      )
-
-
-#########    Intalcion  ############ 
-install(TARGETS i-haklab below_zero 
-  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+#########    Instalación  ############
+install(TARGETS i-haklab below_zero
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+)
 
 install(FILES "man/i-haklab.1" DESTINATION "${CMAKE_INSTALL_MANDIR}/man1")
-
 

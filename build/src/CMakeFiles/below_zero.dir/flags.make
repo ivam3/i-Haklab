@@ -4,7 +4,7 @@
 # compile CXX with /data/data/com.termux/files/usr/bin/c++
 CXX_DEFINES = -Dbelow_zero_EXPORTS
 
-CXX_INCLUDES = 
+CXX_INCLUDES = -I/data/data/com.termux/files/home/i-Haklab/include
 
 CXX_FLAGS = -O2 -g -DNDEBUG -fPIC
 

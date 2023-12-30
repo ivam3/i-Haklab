@@ -83,14 +83,14 @@ endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/man1/i-haklab.1")
+   "/data/data/com.termux/files/usr/share/man/man1/i-haklab.1")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/man1" TYPE FILE FILES "/data/data/com.termux/files/home/i-Haklab/man/i-haklab.1")
+  file(INSTALL DESTINATION "/data/data/com.termux/files/usr/share/man/man1" TYPE FILE FILES "/data/data/com.termux/files/home/i-Haklab/man/i-haklab.1")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)

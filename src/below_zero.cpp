@@ -24,7 +24,7 @@ void mkt(std::string machineName){
 };
 
 
-int run(int argc, const char *argv[]){
+int hak::Haklab::run(int argc, const char *argv[]){
   command_line_argument_parser parser;
    try {
       auto args = parser.parse(argc, argv);
