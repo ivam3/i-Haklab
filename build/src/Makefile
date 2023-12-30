@@ -162,25 +162,25 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-src/CMakeFiles/below_sero.dir/rule:
-	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/below_sero.dir/rule
-.PHONY : src/CMakeFiles/below_sero.dir/rule
+src/CMakeFiles/below_zero.dir/rule:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/below_zero.dir/rule
+.PHONY : src/CMakeFiles/below_zero.dir/rule
 
 # Convenience name for target.
-below_sero: src/CMakeFiles/below_sero.dir/rule
-.PHONY : below_sero
+below_zero: src/CMakeFiles/below_zero.dir/rule
+.PHONY : below_zero
 
 # fast build rule for target.
-below_sero/fast:
-	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_sero.dir/build.make src/CMakeFiles/below_sero.dir/build
-.PHONY : below_sero/fast
+below_zero/fast:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/build
+.PHONY : below_zero/fast
 
 NetworHaklab.o: NetworHaklab.cpp.o
 .PHONY : NetworHaklab.o
 
 # target to build an object file
 NetworHaklab.cpp.o:
-	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_sero.dir/build.make src/CMakeFiles/below_sero.dir/NetworHaklab.cpp.o
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o
 .PHONY : NetworHaklab.cpp.o
 
 NetworHaklab.i: NetworHaklab.cpp.i
@@ -188,7 +188,7 @@ NetworHaklab.i: NetworHaklab.cpp.i
 
 # target to preprocess a source file
 NetworHaklab.cpp.i:
-	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_sero.dir/build.make src/CMakeFiles/below_sero.dir/NetworHaklab.cpp.i
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.i
 .PHONY : NetworHaklab.cpp.i
 
 NetworHaklab.s: NetworHaklab.cpp.s
@@ -196,7 +196,7 @@ NetworHaklab.s: NetworHaklab.cpp.s
 
 # target to generate assembly for a file
 NetworHaklab.cpp.s:
-	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_sero.dir/build.make src/CMakeFiles/below_sero.dir/NetworHaklab.cpp.s
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.s
 .PHONY : NetworHaklab.cpp.s
 
 below_zero.o: below_zero.cpp.o
@@ -204,7 +204,7 @@ below_zero.o: below_zero.cpp.o
 
 # target to build an object file
 below_zero.cpp.o:
-	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_sero.dir/build.make src/CMakeFiles/below_sero.dir/below_zero.cpp.o
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/below_zero.cpp.o
 .PHONY : below_zero.cpp.o
 
 below_zero.i: below_zero.cpp.i
@@ -212,7 +212,7 @@ below_zero.i: below_zero.cpp.i
 
 # target to preprocess a source file
 below_zero.cpp.i:
-	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_sero.dir/build.make src/CMakeFiles/below_sero.dir/below_zero.cpp.i
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/below_zero.cpp.i
 .PHONY : below_zero.cpp.i
 
 below_zero.s: below_zero.cpp.s
@@ -220,8 +220,32 @@ below_zero.s: below_zero.cpp.s
 
 # target to generate assembly for a file
 below_zero.cpp.s:
-	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_sero.dir/build.make src/CMakeFiles/below_sero.dir/below_zero.cpp.s
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/below_zero.cpp.s
 .PHONY : below_zero.cpp.s
+
+command_line_argument_parser.o: command_line_argument_parser.cpp.o
+.PHONY : command_line_argument_parser.o
+
+# target to build an object file
+command_line_argument_parser.cpp.o:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o
+.PHONY : command_line_argument_parser.cpp.o
+
+command_line_argument_parser.i: command_line_argument_parser.cpp.i
+.PHONY : command_line_argument_parser.i
+
+# target to preprocess a source file
+command_line_argument_parser.cpp.i:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.i
+.PHONY : command_line_argument_parser.cpp.i
+
+command_line_argument_parser.s: command_line_argument_parser.cpp.s
+.PHONY : command_line_argument_parser.s
+
+# target to generate assembly for a file
+command_line_argument_parser.cpp.s:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.s
+.PHONY : command_line_argument_parser.cpp.s
 
 # Help Target
 help:
@@ -235,13 +259,16 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... below_sero"
+	@echo "... below_zero"
 	@echo "... NetworHaklab.o"
 	@echo "... NetworHaklab.i"
 	@echo "... NetworHaklab.s"
 	@echo "... below_zero.o"
 	@echo "... below_zero.i"
 	@echo "... below_zero.s"
+	@echo "... command_line_argument_parser.o"
+	@echo "... command_line_argument_parser.i"
+	@echo "... command_line_argument_parser.s"
 .PHONY : help
 
 

@@ -1,3 +1,3 @@
-add_library(below_sero SHARED 
-  "./below_zero.cpp"
-  "./NetworHaklab.cpp")
+add_library(below_zero SHARED  below_zero.cpp  NetworHaklab.cpp
+     command_line_argument_parser.cpp  
+  )

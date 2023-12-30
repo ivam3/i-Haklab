@@ -9,7 +9,7 @@ project(i-haklab)
 set(SRC "main-haklab.cpp")
 
 
-# Bibloteca dinamica 
+# Cargar bibloecas  
 add_subdirectory(src)
 
 # codigo fuente
@@ -17,7 +17,7 @@ add_executable(${PROJECT_NAME} ${SRC})
 
 
 # En lazar bibloteca
-target_link_libraries(${PROJECT_NAME} below_zero   
+target_link_libraries(${PROJECT_NAME} PUBLIC  below_zero   
  -lboost_program_options
  -lfmt 
  -ljsoncpp 
@@ -32,7 +32,7 @@ target_include_directories( ${PROJECT_NAME} PUBLIC
 
 
 #########    Intalcion  ############ 
-install(TARGETS i-haklab   
+install(TARGETS i-haklab below_zero 
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 

@@ -175,17 +175,17 @@ i-haklab/fast:
 .PHONY : i-haklab/fast
 
 #=============================================================================
-# Target rules for targets named below_sero
+# Target rules for targets named below_zero
 
 # Build rule for target.
-below_sero: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 below_sero
-.PHONY : below_sero
+below_zero: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 below_zero
+.PHONY : below_zero
 
 # fast build rule for target.
-below_sero/fast:
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_sero.dir/build.make src/CMakeFiles/below_sero.dir/build
-.PHONY : below_sero/fast
+below_zero/fast:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/build
+.PHONY : below_zero/fast
 
 main-haklab.o: main-haklab.cpp.o
 .PHONY : main-haklab.o
@@ -223,7 +223,7 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... below_sero"
+	@echo "... below_zero"
 	@echo "... i-haklab"
 	@echo "... main-haklab.o"
 	@echo "... main-haklab.i"

@@ -1,14 +1,14 @@
 #pragma once
 
-#include "network/NetworHaklab.h"
-#include "../include/below_zero.h"
-#include <charconv>
-#include <complex>
 #include <iostream>
-#include <string> 
+#include <boost/program_options.hpp>
+
 namespace po = boost::program_options;
 
 using std::string;
+using std::endl;
+using std::cerr;
+using std::cout;
 
 // clang-format off 
 //a, b, c, d, e, f, g, h, i, j, k, l, m, n, ñ, o, p, q, r, s, t, u, v, w, x, y, z.
@@ -42,61 +42,26 @@ class arguments {
 
   po::variables_map variables;
   //   (feiend) Otorga acceso a los mienbros pribados y protegidos
-  //   Declaracion 
   friend class command_line_argument_parser;
 public:
   arguments(po::variables_map variables)
       : variables(variables) {}
 
-  bool no_arguments() {
-    return variables.size() == 0;
-  }
+  bool no_arguments();
+
+  std::string username();
+
+  int  WepStatusCode();
+
+  void CreateMkt();
+
+  const std::vector<std::string> filenames();
 
 
-  std::string username() {
-    return (variables.count(username_option) > 0)
-               ? variables[username_option].as<std::string>()
-               : "";
-  }
+  const std::vector<std::string> filepath(); 
+    
+  bool file_update();
 
-
-  int  WepStatusCode(){
-    const string  &URL = variables[WepStatus].as<string>();
-    return (variables.count(WepStatus) > 0 )
-      ? network::NetworHakaklab::GetStatusCode(URL)
-      : 0 ;
-  }
-
-  void CreateMkt(){
-     string name = variables[ctf_mkt].as<string>();
-     if (variables.count(ctf_mkt)){
-         hak::Haklab::Haklab::mkt(name);
-    }   
-  }
-
-
-  const std::vector<std::string> filenames() {
-    return (variables.count(files_option_name) > 0)
-               ? variables[files_option_name].as<std::vector<std::string>>()
-               : std::vector<std::string>();
-  }
-
-  const std::vector<std::string> filepath() {
-    return (variables.count(files_options_path) > 0)
-              ? variables[files_options_path].as<std::vector<std::string>>()
-              : std::vector<std::string>();
-  }
-
-  bool file_update(){
-    if (variables.count("update-file")  && !variables.count(files_options_path)) {
-       std::cerr << "Error: 'update-file' option requires 'input-path' option to be specified." << std::endl;
-        return false;
-    } else if (variables.count("update-file")  && variables.count(files_options_path)) {
-       return true; 
-    }
-    return false;
-  }
- 
 }; // end arguments
 
 
@@ -140,7 +105,7 @@ public:
       //  Servers
       //  =============
       server.add_options()
-        (arguments::WepStatus, po::value<std::string>())
+        (arguments::WepStatus, po::value<std::string>(), "Estatus Code ")
         (arguments::port_option, po::value<int>(),
          "Create specified port")
         (arguments::host_options, po::value<int>(),
@@ -168,7 +133,7 @@ public:
     // -1   todo lo que sobra jj
     po::positional_options_description positionalOptions;
     positionalOptions
-      .add(arguments::files_option_name, -1);
+        .add(arguments::files_option_name, -1);
   
   
     po::options_description All;

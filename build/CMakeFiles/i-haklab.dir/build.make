@@ -92,6 +92,7 @@ i__haklab_EXTERNAL_OBJECTS =
 
 i-haklab: CMakeFiles/i-haklab.dir/main-haklab.cpp.o
 i-haklab: CMakeFiles/i-haklab.dir/build.make
+i-haklab: src/libbelow_zero.so
 i-haklab: CMakeFiles/i-haklab.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/data/data/com.termux/files/home/i-Haklab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable i-haklab"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/i-haklab.dir/link.txt --verbose=$(VERBOSE)

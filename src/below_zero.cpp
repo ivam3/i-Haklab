@@ -1,9 +1,10 @@
 #include "../include/below_zero.h"
 #include "../include/command_line_argument_parser.h"
+#include <boost/filesystem.hpp>
 
 // Nombres de espacio de Boost
 namespace fs = boost::filesystem;
-//namespace of = boost::iostreams;
+namespace po = boost::program_options;
 
 //using  hak::Haklab;
 using  std::endl;
@@ -34,7 +35,7 @@ int run(int argc, const char *argv[]){
       
       cout << args.WepStatusCode() <<  endl;
     
-      args.CreateMkt();
+     // args.CreateMkt();
       
     } catch (po::error &ex) {
       cerr << std::endl <<  "Usage: i-haklab [ options ] [ arg ]" << std::endl;
@@ -189,6 +190,7 @@ void syntax_highlight(const std::string &code){
     std::cout << highlightedCode << std::endl;
 };
 
+/*
 void hak::Haklab::k_boom(int signum)
 {    
     std::string k_boom = R"(
@@ -207,7 +209,7 @@ void hak::Haklab::k_boom(int signum)
     syntax_highlight(k_boom);
     exit(1); 
 }
-
+*/
 
 void clear_screen(){
  //Se coloca en la pocicion (1 1) y borra la pantalla
