@@ -8,6 +8,8 @@ cmake -DCMAKE_INSTALL_MANDIR="${PREFIX}/share/man/" build
 cmake --install build --prefix=$PREFIX
 ```
 
+apt install boost boost-headers  boost-static
+
 # boost
 - `https://www.boost.org/doc/libs/1_84_0/doc/html/program_options/howto.html` 
 

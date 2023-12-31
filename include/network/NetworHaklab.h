@@ -2,16 +2,21 @@
 
 
 #include <string>
+#include <boost/beast/http.hpp>
+
+namespace http = boost::beast::http;
 
 using std::string;
 
 namespace network {
   class NetworHakaklab {
     public:
-      // Download a file from url 
+      // Función que asigna el verbo HTTP basado en el argumento de la CLI
+      boost::beast::http::verb getHttpVerb(const std::string& Request);
+     // Download a file from url 
       bool DownloadFile(string URL);
       // Get status code of url 
-      int GetStatusCode(const string &host, string port);
+      int GetStatusCode(const string &host, string port, http::verb request);
       // Send http post request with data 
       // date en formato json
       // Usr ejemplo : http://example.com/index.php  

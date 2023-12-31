@@ -4,16 +4,16 @@
 #include  "../include/redteam/RedTeamHaklab.h"
 #include  <boost/filesystem.hpp>
 
+
 // Nombres de espacio de Boost
 namespace fs = boost::filesystem;
 namespace po = boost::program_options;
 
-//using  hak::Haklab;
 using  std::endl;
 using  std::cout;
 using  std::cerr;
 
-
+// main   
 int hak::Haklab::run(int argc, const char *argv[]){
   command_line_argument_parser parser;
   network::NetworHakaklab network;
@@ -27,15 +27,16 @@ int hak::Haklab::run(int argc, const char *argv[]){
       if (args.CreateMkt().size() != 0){
        redteam::ResTeamHakalb::mkt(args.CreateMkt());
       }
-      
+
       if (args.WepStatusCode().size() != 0 ) {
-        if (args.port().size() == 0 ){
-          cerr << "requeris '--port ' " << endl;
+        if (args.port() == 4 ){
+          cerr << "requeris '--port' " << endl;
           return false;
         };
-      const string port = args.port();
-      cout << port;
-      cout <<   network.GetStatusCode(args.WepStatusCode(), port) << endl;
+      string  port = std::to_string(args.port()); 
+      string  host = args.WepStatusCode();
+      string  request = args.FRequest();
+      cout <<   network.GetStatusCode(host, port, network.getHttpVerb(request)) << endl;
        }
 
    } catch (po::error &ex) {
@@ -69,32 +70,6 @@ bool  updateFiles(vector<string> path_file){
   return true;
 };
 
-/*
-void directRedTeam(std::string objName){ 
-  std::ofstream file;
-  file.open(objName + "/README.txt");
-  if (!file.is_open()) {
-    std::cerr << "Error al crear 'README.txt' " << std::endl;
-  }
-  file << R"("
-   Reconocimiento  ->  Obtener información sobre el objetivo
-   Armamento       ->  Combina el objetivo con un exploit. Comúnmente resulta en una carga útil entregable
-   Entrega         ->   ¿Cómo se entregará la función armada al objetivo
-   Explotación     ->   Explotar el sistema del objetivo para ejecutar códig
-   Intalacion      ->    Instalar malware u otras herramienta
-   C2              ->     Controle el activo comprometido desde un controlador central remoto
-   )" << std::endl;
-
-  std::list<std::string>dirList{"Recon","Weaponization","Delivery","Exploitation", "Intalacion","C2"};
-  // Reconocimiento Armament  Entrega Explotación  Instalación  Comando y control Acciones sobre objetivos
-  for(const auto &it : dirList){
-    fs::create_directory(objName + "/" + it);
-  }
-
-  string command = "tree " + objName;
-  static_cast<void>(std::system(command.c_str()));
-};
-*/
 
 
 // Selector de color 
@@ -191,8 +166,8 @@ void syntax_highlight(const std::string &code){
     std::cout << highlightedCode << std::endl;
 };
 
-/*
-void hak::Haklab::k_boom(int signum)
+
+void hak::Haklab::Haklab::k_boom(int signum)
 {    
     std::string k_boom = R"(
                         _-^--^=-_
@@ -210,7 +185,6 @@ void hak::Haklab::k_boom(int signum)
     syntax_highlight(k_boom);
     exit(1); 
 }
-*/
 
 void clear_screen(){
  //Se coloca en la pocicion (1 1) y borra la pantalla

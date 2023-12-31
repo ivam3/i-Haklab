@@ -10,12 +10,17 @@ std::string arguments::username() {
              : "";
 }
 
-std::string arguments::port(){ 
+int  arguments::port(){ 
   return (variables.count(port_option) > 0 )
-      ? variables[port_option].as<string>()
-      : "";
-} 
+      ? variables[port_option].as<int>()
+      : 4 ;
+}
 
+string arguments::FRequest(){
+  return (variables.count(Request) > 0)
+    ? variables[Request].as<string>()
+    : "";
+}
 std::string arguments::WepStatusCode() {
   return (variables.count(WepStatus) > 0 ) 
       ? variables[WepStatus].as<std::string>()

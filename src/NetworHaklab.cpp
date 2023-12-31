@@ -5,9 +5,7 @@
 #include <boost/beast/version.hpp>
 #include <boost/asio/connect.hpp>
 #include <boost/asio/ip/tcp.hpp>
-// #include <cstdlib>
 #include <iostream>
-// #include <string>
 
 
 
@@ -18,8 +16,33 @@ namespace http = beast::http;   //  from <boost/beast/http.hpp>
 namespace net = boost::asio;    // from <boost/asio.hpp>
 using tcp = net::ip::tcp;       // from <boost/asio/ip/tcp.hpp>
 
-// URL :
-int network::NetworHakaklab::GetStatusCode(const string &host, string port) {
+
+
+// Función que asigna el verbo HTTP basado en el argumento de la CLI
+boost::beast::http::verb network::NetworHakaklab::getHttpVerb(const std::string& Request) {
+    if (Request == "GET") {
+        return boost::beast::http::verb::get;
+    } else if (Request == "POST") {
+        return boost::beast::http::verb::post;
+    } else if (Request == "PUT") {
+        return boost::beast::http::verb::put;
+    } else if (Request == "DELETE") {
+        return boost::beast::http::verb::delete_;
+    } else {
+        // Manejar cualquier otro caso o devolver un valor predeterminado
+        std::cerr << "[ Warning ]: Invalide HTTP method using GET default.;." << std::endl;
+        return boost::beast::http::verb::get;
+    }
+}
+
+
+
+
+
+// host :
+// port :
+// request : GET , POST, PUT , (class enum)
+int network::NetworHakaklab::GetStatusCode(const string &host, string port , beast::http::verb request) {
   try {
     //  El io_context es necesario para todas las E/S
     net::io_context io_context;
@@ -36,7 +59,7 @@ int network::NetworHakaklab::GetStatusCode(const string &host, string port) {
     net::connect(socket, endpoints);
 
     // Configurar un mensaje de solicitud HTTP GET
-    http::request<http::string_body> req{http::verb::get, host, 11};
+    http::request<http::string_body> req{request, host, 11};
     req.set(beast::http::field::host, host);
     req.set(beast::http::field::user_agent,
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "

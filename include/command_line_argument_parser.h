@@ -3,8 +3,10 @@
  */
 #pragma once
 
+#include <complex>
 #include <iostream>
 #include <boost/program_options.hpp>
+#include <boost/beast/http/verb.hpp>
 #include <string>
 
 namespace po = boost::program_options;
@@ -40,9 +42,9 @@ class arguments {
   constexpr static auto wifi_interface        = "interface";
   constexpr static auto ctf_red_tram          = "dir-red-team";
   constexpr static auto ctf_mkt               = "mkt";
-  constexpr static auto info_about            = "about";
+  constexpr static auto About                 = "about";
   constexpr static auto WepStatus             = "wep-status";
-
+  constexpr static auto Request               = "request";
 
   po::variables_map variables;
   //   (feiend) Otorga acceso a los mienbros pribados y protegidos
@@ -55,8 +57,10 @@ public:
 
   std::string username();
 
-  string port();
+  int port();
 
+  string FRequest();
+ 
   string  WepStatusCode();
 
   string  CreateMkt();
@@ -105,12 +109,13 @@ public:
 
       //  Info 
       info.add_options()
-        (arguments::info_about,po::value<std::string>(),
+        (arguments::About,po::value<std::string>(),
          "Show informations about tool/framework");
       //  =============
       //  Servers
       //  =============
       server.add_options()
+        (arguments::Request, po::value<string>(), "....")
         (arguments::WepStatus, po::value<string>(), "Estatus Code ")
         (arguments::port_option, po::value<int>(),
          "Create specified port")

@@ -75,7 +75,11 @@ public:
   /*
    * inisializar linea Cli
    */
-  int run(int argc , const char *argv[]);
+  int run(int argc , const char *argv[]); 
+  /*
+   *  Salir con estilo jjj
+   */
+  static void k_boom(int signum);
   /*
   template <typename Func> 
   void loading(Func func) {
