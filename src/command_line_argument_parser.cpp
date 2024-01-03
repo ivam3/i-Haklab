@@ -16,6 +16,10 @@ int  arguments::port(){
       : 4 ;
 }
 
+bool arguments::FInterface(){
+  return variables.count(Interface);
+}
+
 string arguments::FRequest(){
   return (variables.count(Request) > 0)
     ? variables[Request].as<string>()
@@ -33,6 +37,11 @@ string  arguments::CreateMkt() {
     : "";
 }
   
+string arguments::FAbout(){
+     return (variables.count(About) > 0)
+           ? variables[About].as<string>()
+           : "";
+};
 
 const std::vector<std::string> arguments::filenames() {
   return (variables.count(files_option_name) > 0)

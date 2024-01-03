@@ -3,7 +3,8 @@
 #include  "../include/network/NetworHaklab.h"
 #include  "../include/redteam/RedTeamHaklab.h"
 #include  <boost/filesystem.hpp>
-
+#include  <fstream>
+#include <boost/memory_order.hpp>
 
 // Nombres de espacio de Boost
 namespace fs = boost::filesystem;
@@ -12,6 +13,38 @@ namespace po = boost::program_options;
 using  std::endl;
 using  std::cout;
 using  std::cerr;
+
+
+// ======= ABAUT =============    
+void hak::about(std::string about){
+    // Donde esta todo 
+    std::string fren = hak::Haklab::IHETC + std::basic_string("/Tools/Readme/") + about; 
+    // Buscar en 
+    if (!fs::exists(fren)) {
+     fren = hak::Haklab::IHETC + std::basic_string("command/") + about + ".md";
+    }
+    std::ifstream file;
+    file.open(fren);      
+    // Comprobar si se abrio 
+    if(!file.is_open()){
+       std::cout << "No found  " << about << std::endl;
+       exit(1);
+    }
+    // obtener la longitud del archivo:
+    file.seekg(0,file.end);
+    int length = file.tellg();
+    file.seekg(0,file.beg);
+    // asigna memoria
+    std::unique_ptr<char[]> buffer(new char[length]);
+    // leer datos como un bloque:
+    file.read(buffer.get(),length);
+    // serar archivo 
+    file.close();
+    // Resaltado de sintax
+    syntax_highlight(buffer.get());
+}
+
+
 
 // main   
 int hak::Haklab::run(int argc, const char *argv[]){
@@ -27,6 +60,16 @@ int hak::Haklab::run(int argc, const char *argv[]){
       if (args.CreateMkt().size() != 0){
        redteam::ResTeamHakalb::mkt(args.CreateMkt());
       }
+    
+      if (args.FAbout().size() != 0 ){
+      hak::about(args.FAbout());
+      }
+    
+     if (args.FInterface()) {
+       for( const auto interface : network.ListAllInterfaces()){
+          cout << interface << endl;
+       };
+     }
 
       if (args.WepStatusCode().size() != 0 ) {
         if (args.port() == 4 ){
@@ -35,8 +78,7 @@ int hak::Haklab::run(int argc, const char *argv[]){
         };
       string  port = std::to_string(args.port()); 
       string  host = args.WepStatusCode();
-      string  request = args.FRequest();
-      cout <<   network.GetStatusCode(host, port, network.getHttpVerb(request)) << endl;
+      cout <<   network.GetStatusCode(host, port) << endl;
        }
 
    } catch (po::error &ex) {
@@ -243,39 +285,6 @@ std::string show_architecture() {
 //             return EXIT_SUCCESS;
 // };
        
-/*
-// ======= ABAUT =============    
-void about(std::string about){
-    std::string fren =   std::basic_string("/Tools/Readme/") + about;   
-    
-    // Elegir donde buscar 
-    if (!fs::exists(fren)) {
-      fren =  std::basic_string("/Tools/Readme/command/") + about + ".md";       
-    }
-    std::ifstream file;
-    file.open(fren);      
-    // Comprobar si se abrio 
-    if(!file.is_open()){
-      //fmt::print(fmt::emphasis::bold | fg(fmt::color::red),"No found\n");
-       exit(1);
-    }
-    // obtener la longitud del archivo:
-    file.seekg(0,file.end);
-    int length = file.tellg();
-    file.seekg(0,file.beg);
-    // asigna memoria:
-    char *buffer = new char [length];
-    // leer datos como un bloque:
-    file.read(buffer,length);
-    // serar archivo 
-    file.close();
-    // Resaltado de sintax
-    syntax_highlight(buffer);
-    // borrar memoria
-    delete[] buffer;
-}
-*/
-
 // void hack::Haklab::directory_iterator(const char *path){
 
 // namespace fs = std::filesystem;

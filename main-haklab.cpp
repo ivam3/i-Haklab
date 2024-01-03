@@ -13,5 +13,6 @@ using hak::Haklab;
 int main(int argc, const char *argv[]){ 
    signal(SIGINT, hak::Haklab::Haklab::k_boom);  
    Haklab app;
-   app.run(argc,argv);
+   // captura "app"  por referencia y ejecuta "app.run"  
+   app.loading([&]() { app.run(argc, argv); });
 }

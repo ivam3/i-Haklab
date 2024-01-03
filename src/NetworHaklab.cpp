@@ -6,15 +6,41 @@
 #include <boost/asio/connect.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include <iostream>
+#include <ifaddrs.h>   // 
+#include <netinet/in.h> //  
 
 
-
+// sing std::cout;
+using std::endl;
 using std::cerr;
 
 namespace beast = boost::beast; // from <boost/beast.hpp>
 namespace http = beast::http;   //  from <boost/beast/http.hpp>
 namespace net = boost::asio;    // from <boost/asio.hpp>
 using tcp = net::ip::tcp;       // from <boost/asio/ip/tcp.hpp>
+
+
+
+std::set<std::string> network::NetworHakaklab::ListAllInterfaces(){ 
+    std::set<std::string> interfaces;  // Conjunto para almacenar nombres únicos
+    struct ifaddrs *ifaddr, *ifa;
+    if (getifaddrs(&ifaddr) == -1) {
+        perror("getifaddrs");
+        //return 1;
+    }
+
+  for (ifa = ifaddr; ifa != nullptr; ifa = ifa->ifa_next) {
+        if (ifa->ifa_addr == nullptr)
+            continue;
+
+        int family = ifa->ifa_addr->sa_family;
+        if (family == AF_INET || family == AF_INET6) {
+            interfaces.insert(ifa->ifa_name);  // Inserta el nombre en el conjunto
+        }
+    }
+  freeifaddrs(ifaddr);
+  return interfaces;
+}
 
 
 
@@ -30,7 +56,7 @@ boost::beast::http::verb network::NetworHakaklab::getHttpVerb(const std::string&
         return boost::beast::http::verb::delete_;
     } else {
         // Manejar cualquier otro caso o devolver un valor predeterminado
-        std::cerr << "[ Warning ]: Invalide HTTP method using GET default.;." << std::endl;
+        cerr << "[ Warning ]: Invalide HTTP method using GET default..." << endl;
         return boost::beast::http::verb::get;
     }
 }
@@ -41,8 +67,7 @@ boost::beast::http::verb network::NetworHakaklab::getHttpVerb(const std::string&
 
 // host :
 // port :
-// request : GET , POST, PUT , (class enum)
-int network::NetworHakaklab::GetStatusCode(const string &host, string port , beast::http::verb request) {
+int network::NetworHakaklab::GetStatusCode(const string &host, string port ) {
   try {
     //  El io_context es necesario para todas las E/S
     net::io_context io_context;
@@ -59,7 +84,7 @@ int network::NetworHakaklab::GetStatusCode(const string &host, string port , bea
     net::connect(socket, endpoints);
 
     // Configurar un mensaje de solicitud HTTP GET
-    http::request<http::string_body> req{request, host, 11};
+    http::request<http::string_body> req{http::verb::get, host, 11};
     req.set(beast::http::field::host, host);
     req.set(beast::http::field::user_agent,
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "

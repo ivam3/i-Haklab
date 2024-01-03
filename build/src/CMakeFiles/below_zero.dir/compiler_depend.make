@@ -3569,6 +3569,7 @@ src/CMakeFiles/below_zero.dir/below_zero.cpp.o: /data/data/com.termux/files/home
   /data/data/com.termux/files/usr/include/boost/limits.hpp \
   /data/data/com.termux/files/usr/include/boost/make_unique.hpp \
   /data/data/com.termux/files/usr/include/boost/mem_fn.hpp \
+  /data/data/com.termux/files/usr/include/boost/memory_order.hpp \
   /data/data/com.termux/files/usr/include/boost/move/adl_move_swap.hpp \
   /data/data/com.termux/files/usr/include/boost/move/core.hpp \
   /data/data/com.termux/files/usr/include/boost/move/detail/addressof.hpp \
@@ -4428,6 +4429,22 @@ src/CMakeFiles/below_zero.dir/below_zero.cpp.o: /data/data/com.termux/files/home
   /data/data/com.termux/files/usr/include/c++/v1/__debug \
   /data/data/com.termux/files/usr/include/c++/v1/__debug_utils/randomize_range.h \
   /data/data/com.termux/files/usr/include/c++/v1/__errc \
+  /data/data/com.termux/files/usr/include/c++/v1/__filesystem/copy_options.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__filesystem/directory_entry.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__filesystem/directory_iterator.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__filesystem/directory_options.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__filesystem/file_status.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__filesystem/file_time_type.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__filesystem/file_type.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__filesystem/filesystem_error.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__filesystem/operations.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__filesystem/path.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__filesystem/path_iterator.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__filesystem/perm_options.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__filesystem/perms.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__filesystem/recursive_directory_iterator.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__filesystem/space_info.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__filesystem/u8path.h \
   /data/data/com.termux/files/usr/include/c++/v1/__format/concepts.h \
   /data/data/com.termux/files/usr/include/c++/v1/__format/enable_insertable.h \
   /data/data/com.termux/files/usr/include/c++/v1/__format/format_error.h \
@@ -4762,8 +4779,10 @@ src/CMakeFiles/below_zero.dir/below_zero.cpp.o: /data/data/com.termux/files/home
   /data/data/com.termux/files/usr/include/c++/v1/execution \
   /data/data/com.termux/files/usr/include/c++/v1/filesystem \
   /data/data/com.termux/files/usr/include/c++/v1/float.h \
+  /data/data/com.termux/files/usr/include/c++/v1/fstream \
   /data/data/com.termux/files/usr/include/c++/v1/functional \
   /data/data/com.termux/files/usr/include/c++/v1/initializer_list \
+  /data/data/com.termux/files/usr/include/c++/v1/iomanip \
   /data/data/com.termux/files/usr/include/c++/v1/ios \
   /data/data/com.termux/files/usr/include/c++/v1/iosfwd \
   /data/data/com.termux/files/usr/include/c++/v1/iostream \
@@ -4796,6 +4815,7 @@ src/CMakeFiles/below_zero.dir/below_zero.cpp.o: /data/data/com.termux/files/home
   /data/data/com.termux/files/usr/include/c++/v1/string.h \
   /data/data/com.termux/files/usr/include/c++/v1/string_view \
   /data/data/com.termux/files/usr/include/c++/v1/system_error \
+  /data/data/com.termux/files/usr/include/c++/v1/thread \
   /data/data/com.termux/files/usr/include/c++/v1/tuple \
   /data/data/com.termux/files/usr/include/c++/v1/type_traits \
   /data/data/com.termux/files/usr/include/c++/v1/typeindex \
@@ -6830,11 +6850,29 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: /data/data/com
   /data/data/com.termux/files/usr/lib/clang/17/include/stdint.h
 
 
+/data/data/com.termux/files/usr/include/c++/v1/thread:
+
 /data/data/com.termux/files/usr/include/c++/v1/map:
+
+/data/data/com.termux/files/usr/include/c++/v1/iomanip:
+
+/data/data/com.termux/files/usr/include/c++/v1/fstream:
 
 /data/data/com.termux/files/usr/include/c++/v1/cxxabi.h:
 
 /data/data/com.termux/files/usr/include/c++/v1/__tree:
+
+/data/data/com.termux/files/usr/include/c++/v1/__filesystem/space_info.h:
+
+/data/data/com.termux/files/usr/include/c++/v1/__filesystem/filesystem_error.h:
+
+/data/data/com.termux/files/usr/include/c++/v1/__filesystem/file_time_type.h:
+
+/data/data/com.termux/files/usr/include/c++/v1/__filesystem/directory_iterator.h:
+
+/data/data/com.termux/files/usr/include/c++/v1/__filesystem/directory_entry.h:
+
+/data/data/com.termux/files/usr/include/c++/v1/__filesystem/copy_options.h:
 
 /data/data/com.termux/files/usr/include/c++/v1/__cxxabi_config.h:
 
@@ -6857,6 +6895,8 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: /data/data/com
 /data/data/com.termux/files/usr/include/boost/range/iterator.hpp:
 
 /data/data/com.termux/files/usr/include/boost/range/functions.hpp:
+
+/data/data/com.termux/files/usr/include/c++/v1/__filesystem/path.h:
 
 /data/data/com.termux/files/usr/include/boost/range/empty.hpp:
 
@@ -6929,6 +6969,8 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: /data/data/com
 /data/data/com.termux/files/usr/include/boost/preprocessor/comparison/less_equal.hpp:
 
 /data/data/com.termux/files/usr/include/boost/mem_fn.hpp:
+
+/data/data/com.termux/files/usr/include/c++/v1/__filesystem/recursive_directory_iterator.h:
 
 /data/data/com.termux/files/usr/include/boost/lexical_cast/detail/widest_char.hpp:
 
@@ -7231,6 +7273,8 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: /data/data/com
 /data/data/com.termux/files/usr/include/c++/v1/stddef.h:
 
 /data/data/com.termux/files/usr/include/c++/v1/shared_mutex:
+
+/data/data/com.termux/files/usr/include/c++/v1/__filesystem/directory_options.h:
 
 /data/data/com.termux/files/usr/include/c++/v1/ratio:
 
@@ -8562,6 +8606,8 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: /data/data/com
 
 /data/data/com.termux/files/usr/include/boost/system/detail/mutex.hpp:
 
+/data/data/com.termux/files/usr/include/c++/v1/__filesystem/perms.h:
+
 /data/data/com.termux/files/usr/include/c++/v1/__functional/bind_back.h:
 
 /data/data/com.termux/files/usr/include/boost/intrusive/detail/bstree_algorithms_base.hpp:
@@ -8694,11 +8740,15 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: /data/data/com
 
 /data/data/com.termux/files/usr/include/c++/v1/__functional/binder1st.h:
 
+/data/data/com.termux/files/usr/include/c++/v1/__filesystem/file_status.h:
+
 /data/data/com.termux/files/usr/include/c++/v1/__utility/exchange.h:
 
 /data/data/com.termux/files/usr/include/boost/date_time/time_resolution_traits.hpp:
 
 /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/enum_params.hpp:
+
+/data/data/com.termux/files/usr/include/c++/v1/__filesystem/operations.h:
 
 /data/data/com.termux/files/usr/include/boost/config/pragma_message.hpp:
 
@@ -8717,6 +8767,8 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: /data/data/com
 /data/data/com.termux/files/usr/include/boost/mpl/or.hpp:
 
 /data/data/com.termux/files/usr/include/boost/preprocessor/logical/compl.hpp:
+
+/data/data/com.termux/files/usr/include/c++/v1/__filesystem/perm_options.h:
 
 /data/data/com.termux/files/usr/include/boost/range/detail/sfinae.hpp:
 
@@ -8811,6 +8863,8 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: /data/data/com
 /data/data/com.termux/files/usr/include/boost/numeric/conversion/detail/udt_builtin_mixture.hpp:
 
 /data/data/com.termux/files/usr/include/boost/preprocessor/array/elem.hpp:
+
+/data/data/com.termux/files/usr/include/c++/v1/__filesystem/u8path.h:
 
 /data/data/com.termux/files/usr/include/boost/preprocessor/array/data.hpp:
 
@@ -10272,6 +10326,8 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: /data/data/com
 
 /data/data/com.termux/files/usr/include/boost/intrusive/rbtree_algorithms.hpp:
 
+/data/data/com.termux/files/usr/include/c++/v1/__filesystem/file_type.h:
+
 /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp:
 
 /data/data/com.termux/files/usr/include/boost/type_traits/rank.hpp:
@@ -10543,6 +10599,8 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: /data/data/com
 /data/data/com.termux/files/usr/include/boost/intrusive/detail/node_cloner_disposer.hpp:
 
 /data/data/com.termux/files/usr/include/boost/move/detail/std_ns_begin.hpp:
+
+/data/data/com.termux/files/usr/include/c++/v1/__filesystem/path_iterator.h:
 
 /data/data/com.termux/files/usr/include/boost/asio/detail/signal_blocker.hpp:
 
@@ -10945,6 +11003,8 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: /data/data/com
 /data/data/com.termux/files/usr/include/bits/in_addr.h:
 
 /data/data/com.termux/files/usr/include/boost/asio/execution/blocking.hpp:
+
+/data/data/com.termux/files/usr/include/boost/memory_order.hpp:
 
 /data/data/com.termux/files/usr/include/bits/fcntl.h:
 

@@ -1,11 +1,12 @@
-// Fichero : below_zero.h  
+// Fichero : below_zero.h
 // Autor: @demon_rip
 
 #pragma once
 //------------------------------------------
-//     
+//
 //------------------------------------------
 #include <iostream>
+#include <thread>
 //------------------------------------------
 //------------------------------------------
 #define PORT_DEF 4444
@@ -15,14 +16,13 @@
 #define LOCALHOST 127.0.0.1
 //------------------------------------------
 //------------------------------------------
+using std::cout;
+using std::endl;
 using std::fstream;
 using std::string;
 using std::vector;
-using std::cout;
-using std::endl;
 //------------------------------------------
 //------------------------------------------
-
 
 // Shell que se pueden configurar
 namespace shell {
@@ -31,7 +31,6 @@ enum Shell {
   fish,
 };
 };
-
 
 enum class Color {
   Default,
@@ -48,62 +47,59 @@ enum class Color {
 std::string setColor(Color color);
 void syntax_highlight(const std::string &code);
 
-  /*
-   * borra la pantalla
-   */
+/*
+ * borra la pantalla
+ */
 void clear_screen();
-  /*
-   * Ocultar el cursor
-   */
+/*
+ * Ocultar el cursor
+ */
 void hide_cursor();
-  /*
-   * Muestra el cursor
-   */
+/*
+ * Muestra el cursor
+ */
 void show_cursor();
-
-
 
 namespace hak {
 /*
- *  Contructor 
+ *  Contructor
  */
-class Haklab  {
- private:
-  static inline string  IHETC{string(getenv("HOME")) + "/.local/etc/i-Haklab"};
-  static inline string LIBEX = string(getenv("HOME"))+ "/.local/libexec/i-Haklab";
+class Haklab {
+private:
+  static inline string IHETC{string(getenv("HOME")) + "/.local/etc/i-Haklab"};
+  static inline string LIBEX{string(getenv("HOME")) + "/.local/libexec/i-Haklab"};
+
 public:
   /*
    * inisializar linea Cli
    */
-  int run(int argc , const char *argv[]); 
+  int run(int argc, const char *argv[]);
   /*
    *  Salir con estilo jjj
    */
   static void k_boom(int signum);
   /*
-  template <typename Func> 
-  void loading(Func func) {
+   * Algo para ver mientra se espera
+   */
+  template <typename Func> void loading(Func func) {
     hide_cursor();
-    std::vector<std::string> spinner = {"█■■■■", "■█■■■", "■■█■■", "■■■█■", "■■■■█"};
+    std::vector<std::string> spinner{"█■■■■", "■█■■■", "■■█■■", "■■■█■", "■■■■█"};
     int spinnerIndex = 0;
 
     std::thread t([&]() {
       while (true) {
-             std::cout
-            << spinner[spinnerIndex] << "\b\b\b\b\b\b\b\b" << std::flush;
+        std::cout << spinner[spinnerIndex] << "\b\b\b\b\b\b\b\b" << std::flush;
         spinnerIndex = (spinnerIndex + 1) % spinner.size();
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
       }
     });
-
     t.detach();
-
     // Ejecuta la función proporcionada en segundo plano
     func();
-
     show_cursor();
-  } // loading 
-    // */
-};
+    std::cout << std::endl;
+  } // loading
+  friend void about(string about);
+}; // end  class
+void about(string about);
 }; // namespace hak
-

@@ -8,6 +8,11 @@ cmake -DCMAKE_INSTALL_MANDIR="${PREFIX}/share/man/" build
 cmake --install build --prefix=$PREFIX
 ```
 
+# Flujo de trabajo
+`https://docs.github.com/en/actions/using-workflows/about-workflows#about-workflows`
+- Sintaxi
+`https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#about-yaml-syntax-for-workflows`
+
 apt install boost boost-headers  boost-static
 
 # boost
