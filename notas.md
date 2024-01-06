@@ -30,6 +30,18 @@ apt install boost boost-headers  boost-static
 - pendiente agreagar a nvim `https://github.com/dinhhuy258/git.nvim` 
 - `no` usae **new** ni **delete**  -> Smart point 
 
+# Nvim
+
+## Linux / Macos (unix)
+rm -rf ~/.config/nvim
+rm -rf ~/.local/share/nvim
+
+## Windows
+rd -r ~\AppData\Local\nvim
+rd -r ~\AppData\Local\nvim-data
+
+
+
 
 # Regisito
 https://hackingcpp.com/cpp/libs/fmt.html#terminal-styles
@@ -38,3 +50,5 @@ https://github.com/mmdjiji/makefile-learning
 https://curl.se/docs/manpage.html
 https://www.google.com/amp/s/www.geeksforgeeks.org/regex-regular-expression-in-c/amp/
 https://cplusplus.com/reference/thread/thread/
+pendiente para nvim 
+https://nvchad.com/docs/features#nvcheatsheet

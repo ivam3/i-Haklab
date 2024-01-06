@@ -1,4 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/below_zero.dir/AdminHaklab.cpp.o"
+  "CMakeFiles/below_zero.dir/AdminHaklab.cpp.o.d"
+  "CMakeFiles/below_zero.dir/ExecHaklab.cpp.o"
+  "CMakeFiles/below_zero.dir/ExecHaklab.cpp.o.d"
   "CMakeFiles/below_zero.dir/NetworHaklab.cpp.o"
   "CMakeFiles/below_zero.dir/NetworHaklab.cpp.o.d"
   "CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.o"

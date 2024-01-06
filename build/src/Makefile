@@ -175,6 +175,54 @@ below_zero/fast:
 	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/build
 .PHONY : below_zero/fast
 
+AdminHaklab.o: AdminHaklab.cpp.o
+.PHONY : AdminHaklab.o
+
+# target to build an object file
+AdminHaklab.cpp.o:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/AdminHaklab.cpp.o
+.PHONY : AdminHaklab.cpp.o
+
+AdminHaklab.i: AdminHaklab.cpp.i
+.PHONY : AdminHaklab.i
+
+# target to preprocess a source file
+AdminHaklab.cpp.i:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/AdminHaklab.cpp.i
+.PHONY : AdminHaklab.cpp.i
+
+AdminHaklab.s: AdminHaklab.cpp.s
+.PHONY : AdminHaklab.s
+
+# target to generate assembly for a file
+AdminHaklab.cpp.s:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/AdminHaklab.cpp.s
+.PHONY : AdminHaklab.cpp.s
+
+ExecHaklab.o: ExecHaklab.cpp.o
+.PHONY : ExecHaklab.o
+
+# target to build an object file
+ExecHaklab.cpp.o:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/ExecHaklab.cpp.o
+.PHONY : ExecHaklab.cpp.o
+
+ExecHaklab.i: ExecHaklab.cpp.i
+.PHONY : ExecHaklab.i
+
+# target to preprocess a source file
+ExecHaklab.cpp.i:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/ExecHaklab.cpp.i
+.PHONY : ExecHaklab.cpp.i
+
+ExecHaklab.s: ExecHaklab.cpp.s
+.PHONY : ExecHaklab.s
+
+# target to generate assembly for a file
+ExecHaklab.cpp.s:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/ExecHaklab.cpp.s
+.PHONY : ExecHaklab.cpp.s
+
 NetworHaklab.o: NetworHaklab.cpp.o
 .PHONY : NetworHaklab.o
 
@@ -284,6 +332,12 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... below_zero"
+	@echo "... AdminHaklab.o"
+	@echo "... AdminHaklab.i"
+	@echo "... AdminHaklab.s"
+	@echo "... ExecHaklab.o"
+	@echo "... ExecHaklab.i"
+	@echo "... ExecHaklab.s"
 	@echo "... NetworHaklab.o"
 	@echo "... NetworHaklab.i"
 	@echo "... NetworHaklab.s"

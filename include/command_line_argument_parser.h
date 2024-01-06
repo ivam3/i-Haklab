@@ -1,20 +1,20 @@
 /* Autor: @demon_rip
- * File : command_line_arg 
+ * File : command_line_arg
  */
 #pragma once
 
+#include <boost/beast/http/verb.hpp>
+#include <boost/program_options.hpp>
 #include <complex>
 #include <iostream>
-#include <boost/program_options.hpp>
-#include <boost/beast/http/verb.hpp>
 #include <string>
 
 namespace po = boost::program_options;
 
-using std::string;
-using std::endl;
 using std::cerr;
 using std::cout;
+using std::endl;
+using std::string;
 
 // clang-format off
 //a, b, c, d, e, f, g, h, i, j, k, l, m, n, ñ, o, p, q, r, s, t, u, v, w, x, y, z.
@@ -45,7 +45,7 @@ class arguments {
   constexpr static auto About                 = "about";
   constexpr static auto WepStatus             = "wep-status";
   constexpr static auto Request               = "request";
-  //constexpr static auto Bypass                = "403bypass";
+  constexpr static auto Ip                    = "get-ip";
   po::variables_map variables;
   //   (feiend) Otorga acceso a los mienbros pribados y protegidos
   friend class command_line_argument_parser;
@@ -74,6 +74,8 @@ public:
   bool FInterface();
   // --about
   string FAbout();
+  // Get ip address
+  string FGet_ip();
 }; // end arguments 
 
 
@@ -111,6 +113,8 @@ public:
 
       //  Info 
       info.add_options()
+        (arguments::Ip,po::value<string>(),
+         "Get ip address")
         (arguments::About,po::value<std::string>(),
          "Show informations about tool/framework");
       //  =============

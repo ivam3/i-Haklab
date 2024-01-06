@@ -1,81 +1,107 @@
 
 #include "../include/network/NetworHaklab.h"
+#include <boost/asio/connect.hpp>
+#include <boost/asio/ip/tcp.hpp>
 #include <boost/beast/core.hpp>
 #include <boost/beast/http.hpp>
 #include <boost/beast/version.hpp>
-#include <boost/asio/connect.hpp>
-#include <boost/asio/ip/tcp.hpp>
+#include <ifaddrs.h> //
 #include <iostream>
-#include <ifaddrs.h>   // 
-#include <netinet/in.h> //  
-
+#include <netinet/in.h> //
 
 // sing std::cout;
-using std::endl;
 using std::cerr;
+using std::endl;
 
 namespace beast = boost::beast; // from <boost/beast.hpp>
 namespace http = beast::http;   //  from <boost/beast/http.hpp>
 namespace net = boost::asio;    // from <boost/asio.hpp>
 using tcp = net::ip::tcp;       // from <boost/asio/ip/tcp.hpp>
 
-
-
-std::set<std::string> network::NetworHakaklab::ListAllInterfaces(){ 
-    std::set<std::string> interfaces;  // Conjunto para almacenar nombres únicos
-    struct ifaddrs *ifaddr, *ifa;
-    if (getifaddrs(&ifaddr) == -1) {
-        perror("getifaddrs");
-        //return 1;
-    }
+std::set<std::string> // type
+network::NetworHakaklab::ListAllInterfaces() {
+  std::set<std::string> interfaces; // Conjunto para almacenar nombres únicos
+  struct ifaddrs *ifaddr, *ifa;
+  if (getifaddrs(&ifaddr) == -1) {
+    perror("getifaddrs");
+    exit(1);
+  }
 
   for (ifa = ifaddr; ifa != nullptr; ifa = ifa->ifa_next) {
-        if (ifa->ifa_addr == nullptr)
-            continue;
+    if (ifa->ifa_addr == nullptr)
+      continue;
 
-        int family = ifa->ifa_addr->sa_family;
-        if (family == AF_INET || family == AF_INET6) {
-            interfaces.insert(ifa->ifa_name);  // Inserta el nombre en el conjunto
-        }
+    int family = ifa->ifa_addr->sa_family;
+    if (family == AF_INET || family == AF_INET6) {
+      interfaces.insert(ifa->ifa_name); // Inserta el nombre en el conjunto
     }
+  }
   freeifaddrs(ifaddr);
   return interfaces;
 }
 
+std::string
+network::NetworHakaklab::GetIPaddress(const string &nombreInterfaz) {
+  struct ifaddrs *ifaddr, *ifa;
 
+  if (getifaddrs(&ifaddr) == -1) {
+    perror("getifaddrs");
+    return "";
+  }
 
-// Función que asigna el verbo HTTP basado en el argumento de la CLI
-boost::beast::http::verb network::NetworHakaklab::getHttpVerb(const std::string& Request) {
-    if (Request == "GET") {
-        return boost::beast::http::verb::get;
-    } else if (Request == "POST") {
-        return boost::beast::http::verb::post;
-    } else if (Request == "PUT") {
-        return boost::beast::http::verb::put;
-    } else if (Request == "DELETE") {
-        return boost::beast::http::verb::delete_;
-    } else {
-        // Manejar cualquier otro caso o devolver un valor predeterminado
-        cerr << "[ Warning ]: Invalide HTTP method using GET default..." << endl;
-        return boost::beast::http::verb::get;
+  for (ifa = ifaddr; ifa != nullptr; ifa = ifa->ifa_next) {
+    if (ifa->ifa_addr == nullptr)
+      continue;
+
+    int family = ifa->ifa_addr->sa_family;
+    if (family == AF_INET || family == AF_INET6) {
+      if (nombreInterfaz == ifa->ifa_name) {
+        char host[NI_MAXHOST];
+        int s = getnameinfo(ifa->ifa_addr,
+                            (family == AF_INET) ? sizeof(struct sockaddr_in)
+                                                : sizeof(struct sockaddr_in6),
+                            host, NI_MAXHOST, nullptr, 0, NI_NUMERICHOST);
+        if (s == 0) {
+          freeifaddrs(ifaddr);
+          return host;
+        }
+      }
     }
+  }
+
+  freeifaddrs(ifaddr);
+  return "";
 }
 
-
-
-
+// Función que asigna el verbo HTTP basado en el argumento de la CLI
+boost::beast::http::verb
+network::NetworHakaklab::getHttpVerb(const std::string &Request) {
+  if (Request == "GET") {
+    return boost::beast::http::verb::get;
+  } else if (Request == "POST") {
+    return boost::beast::http::verb::post;
+  } else if (Request == "PUT") {
+    return boost::beast::http::verb::put;
+  } else if (Request == "DELETE") {
+    return boost::beast::http::verb::delete_;
+  } else {
+    // Manejar cualquier otro caso o devolver un valor predeterminado
+    cerr << "[ Warning ]: Invalide HTTP method using GET default..." << endl;
+    return boost::beast::http::verb::get;
+  }
+}
 
 // host :
 // port :
-int network::NetworHakaklab::GetStatusCode(const string &host, string port ) {
+int network::NetworHakaklab::GetStatusCode(const string &host,
+                                           const string &port) {
   try {
     //  El io_context es necesario para todas las E/S
     net::io_context io_context;
     // Realizar la resolución directa de una consulta, a una lista de entradas
     net::ip::tcp::resolver resolver(io_context);
     // Busca el nombre del dominio
-    tcp::resolver::results_type endpoints =
-        resolver.resolve(host, port);
+    tcp::resolver::results_type endpoints = resolver.resolve(host, port);
 
     // Para realizar operaciones de E/S
     net::ip::tcp::socket socket(io_context);

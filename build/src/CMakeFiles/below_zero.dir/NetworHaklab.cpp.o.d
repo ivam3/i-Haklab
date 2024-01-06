@@ -1532,9 +1532,12 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/beast/http/write.hpp \
   /data/data/com.termux/files/usr/include/boost/beast/http/impl/write.hpp \
   /data/data/com.termux/files/usr/include/boost/beast/core/make_printable.hpp \
-  /data/data/com.termux/files/usr/include/boost/beast/core.hpp \
-  /data/data/com.termux/files/usr/include/boost/beast/core/basic_stream.hpp \
-  /data/data/com.termux/files/usr/include/boost/beast/core/detail/stream_base.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/connect.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/impl/connect.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/tcp.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/basic_socket_acceptor.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/basic_socket_iostream.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/basic_socket_streambuf.hpp \
   /data/data/com.termux/files/usr/include/boost/asio/steady_timer.hpp \
   /data/data/com.termux/files/usr/include/boost/asio/basic_waitable_timer.hpp \
   /data/data/com.termux/files/usr/include/boost/asio/detail/chrono_time_traits.hpp \
@@ -1794,10 +1797,40 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/asio/detail/timer_scheduler_fwd.hpp \
   /data/data/com.termux/files/usr/include/boost/asio/detail/wait_handler.hpp \
   /data/data/com.termux/files/usr/include/boost/asio/wait_traits.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/basic_endpoint.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/address.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/address_v4.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/detail/array.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/detail/winsock_init.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/impl/address_v4.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/impl/address_v4.ipp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/address_v6.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/impl/address_v6.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/impl/address_v6.ipp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/bad_address_cast.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/impl/address.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/impl/address.ipp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/detail/endpoint.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/detail/impl/endpoint.ipp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/impl/basic_endpoint.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/basic_resolver.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/basic_resolver_iterator.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/basic_resolver_entry.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/basic_resolver_query.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/resolver_query_base.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/resolver_base.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/ip/basic_resolver_results.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/detail/resolver_service.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/detail/resolve_endpoint_op.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/detail/resolve_op.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/detail/resolve_query_op.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/detail/resolver_service_base.hpp \
+  /data/data/com.termux/files/usr/include/boost/asio/detail/impl/resolver_service_base.ipp \
+  /data/data/com.termux/files/usr/include/boost/beast/core.hpp \
+  /data/data/com.termux/files/usr/include/boost/beast/core/basic_stream.hpp \
+  /data/data/com.termux/files/usr/include/boost/beast/core/detail/stream_base.hpp \
   /data/data/com.termux/files/usr/include/boost/beast/core/rate_policy.hpp \
   /data/data/com.termux/files/usr/include/boost/beast/core/role.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/connect.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/impl/connect.hpp \
   /data/data/com.termux/files/usr/include/boost/asio/executor.hpp \
   /data/data/com.termux/files/usr/include/boost/asio/impl/executor.hpp \
   /data/data/com.termux/files/usr/include/boost/asio/impl/executor.ipp \
@@ -1847,39 +1880,6 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/beast/core/impl/saved_handler.hpp \
   /data/data/com.termux/files/usr/include/boost/beast/core/impl/saved_handler.ipp \
   /data/data/com.termux/files/usr/include/boost/beast/core/tcp_stream.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/tcp.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/basic_socket_acceptor.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/basic_socket_iostream.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/basic_socket_streambuf.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/basic_endpoint.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/address.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/address_v4.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/detail/array.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/detail/winsock_init.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/impl/address_v4.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/impl/address_v4.ipp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/address_v6.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/impl/address_v6.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/impl/address_v6.ipp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/bad_address_cast.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/impl/address.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/impl/address.ipp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/detail/endpoint.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/detail/impl/endpoint.ipp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/impl/basic_endpoint.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/basic_resolver.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/basic_resolver_iterator.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/basic_resolver_entry.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/basic_resolver_query.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/resolver_query_base.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/resolver_base.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/ip/basic_resolver_results.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/detail/resolver_service.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/detail/resolve_endpoint_op.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/detail/resolve_op.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/detail/resolve_query_op.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/detail/resolver_service_base.hpp \
-  /data/data/com.termux/files/usr/include/boost/asio/detail/impl/resolver_service_base.ipp \
   /data/data/com.termux/files/usr/include/boost/beast/version.hpp \
-  /data/data/com.termux/files/usr/include/c++/v1/iostream \
-  /data/data/com.termux/files/usr/include/ifaddrs.h
+  /data/data/com.termux/files/usr/include/ifaddrs.h \
+  /data/data/com.termux/files/usr/include/c++/v1/iostream

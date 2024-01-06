@@ -10,37 +10,32 @@ std::string arguments::username() {
              : "";
 }
 
-int  arguments::port(){ 
-  return (variables.count(port_option) > 0 )
-      ? variables[port_option].as<int>()
-      : 4 ;
+int arguments::port() {
+  return (variables.count(port_option) > 0) ? variables[port_option].as<int>()
+                                            : 4;
 }
 
-bool arguments::FInterface(){
-  return variables.count(Interface);
+bool arguments::FInterface() { return variables.count(Interface); }
+
+string arguments::FGet_ip() {
+  return (variables.count(Ip) > 0 ) ? variables[Ip].as<string>() : "";
 }
 
-string arguments::FRequest(){
-  return (variables.count(Request) > 0)
-    ? variables[Request].as<string>()
-    : "";
+string arguments::FRequest() {
+  return (variables.count(Request) > 0) ? variables[Request].as<string>() : "";
 }
 std::string arguments::WepStatusCode() {
-  return (variables.count(WepStatus) > 0 ) 
-      ? variables[WepStatus].as<std::string>()
-      : "" ;        
+  return (variables.count(WepStatus) > 0)
+             ? variables[WepStatus].as<std::string>()
+             : "";
 }
 
-string  arguments::CreateMkt() {
-  return (variables.count(ctf_mkt) > 0)
-    ? variables[ctf_mkt].as<string>()
-    : "";
+string arguments::CreateMkt() {
+  return (variables.count(ctf_mkt) > 0) ? variables[ctf_mkt].as<string>() : "";
 }
-  
-string arguments::FAbout(){
-     return (variables.count(About) > 0)
-           ? variables[About].as<string>()
-           : "";
+
+string arguments::FAbout() {
+  return (variables.count(About) > 0) ? variables[About].as<string>() : "";
 };
 
 const std::vector<std::string> arguments::filenames() {

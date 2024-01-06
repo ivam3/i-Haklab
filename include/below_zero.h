@@ -83,7 +83,8 @@ public:
    */
   template <typename Func> void loading(Func func) {
     hide_cursor();
-    std::vector<std::string> spinner{"█■■■■", "■█■■■", "■■█■■", "■■■█■", "■■■■█"};
+    std::vector<std::string> spinner{"█■■■■", "■█■■■", "■■█■■", "■■■█■",
+                                     "■■■■█"};
     int spinnerIndex = 0;
 
     std::thread t([&]() {
@@ -92,12 +93,13 @@ public:
         spinnerIndex = (spinnerIndex + 1) % spinner.size();
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
       }
+      std::cout << std::endl;
     });
+    // Hilo de spinner
     t.detach();
     // Ejecuta la función proporcionada en segundo plano
     func();
     show_cursor();
-    std::cout << std::endl;
   } // loading
   friend void about(string about);
 }; // end  class
