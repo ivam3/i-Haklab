@@ -1,7 +1,7 @@
 
 Se utilisaran algunas llamadas al sistema para ejecutar comando pero no es el opjetivo de este proyecto 
 
-# Errores del momento 
+# Error en el modulo 
 
 El uso de `fmt::print()` esta dando error a la hora de ejecuatar el binario 
 
