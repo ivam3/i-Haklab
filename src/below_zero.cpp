@@ -1,58 +1,18 @@
 #include "../include/below_zero.h"
-#include "../include/command_line_argument_parser.h"
-#include "../include/network/NetworHaklab.h"
 #include "../include/redteam/RedTeamHaklab.h"
-#include <boost/filesystem.hpp>
-#include <boost/memory_order.hpp>
-#include <fstream>
 
-// Nombres de espacio de Boost
 namespace fs = boost::filesystem;
 namespace po = boost::program_options;
 
-using std::cerr;
-using std::cout;
-using std::endl;
 
-// ======= ABAUT =============
-void hak::about(std::string about) {
-  // Donde esta todo
-  std::string fren =
-      hak::Haklab::IHETC + std::basic_string("/Tools/Readme/") + about;
-  // Buscar en
-  if (!fs::exists(fren)) {
-    fren = hak::Haklab::IHETC + std::basic_string("command/") + about + ".md";
-  }
-  std::ifstream file;
-  file.open(fren);
-  // Comprobar si se abrio
-  if (!file.is_open()) {
-    std::cout << "No found  " << about << std::endl;
-    exit(1);
-  }
-  // obtener la longitud del archivo:
-  file.seekg(0, file.end);
-  int length = file.tellg();
-  file.seekg(0, file.beg);
-  // asigna memoria
-  std::unique_ptr<char[]> buffer(new char[length]);
-  // leer datos como un bloque:
-  file.read(buffer.get(), length);
-  // serar archivo
-  file.close();
-  // Resaltado de sintax
-  syntax_highlight(buffer.get());
-}
-
-// main
-int hak::Haklab::run(int argc, const char *argv[]) {
-  command_line_argument_parser parser;
-  network::NetworHakaklab network;
+// main  
+int haklab::Haklab::run(int argc, const char *argv[]) {
   try {
     auto args = parser.parse(argc, argv);
 
     if (args.no_arguments()) {
-      cout << "No arguments supplied on the command line" << endl;
+     /* fmt::print(fg(fmt::color::orange),*/
+      cout << "No argument provided on the command line" << endl;
     }
 
     if (args.CreateMkt().size() != 0) {
@@ -60,7 +20,7 @@ int hak::Haklab::run(int argc, const char *argv[]) {
     }
 
     if (args.FAbout().size() != 0) {
-      hak::about(args.FAbout());
+       about(args.FAbout());
     }
 
     if (args.FInterface()) {
@@ -90,7 +50,7 @@ int hak::Haklab::run(int argc, const char *argv[]) {
     }
 
   } catch (po::error &ex) {
-    cerr << "Usage: i-haklab [ options ] [ arg ]" << std::endl;
+    cerr << "Usage: i-haklablab [ options ] [ arg ]" << std::endl;
     cerr << ex.what() << endl;
     return false;
   } catch (...) {
@@ -120,7 +80,7 @@ bool updateFiles(vector<string> path_file) {
 };
 
 // Selector de color
-std::string setColor(Color color) {
+std::string haklab::setColor(Color color) {
   std::string code = "\033[";
   switch (color) {
   case Color::Default:
@@ -158,13 +118,13 @@ std::string setColor(Color color) {
   return code;
 };
 
-void syntax_highlight(const std::string &code) {
+void haklab::syntax_highlight(const std::string &code) {
   std::string highlightedCode = "";
   // Colores para cada parte del código
-  std::string colorKeywords = setColor(Color::Blue);
-  std::string colorStrings = setColor(Color::Green);
-  std::string colorComments = setColor(Color::Magenta);
-  std::string colorDefault = setColor(Color::Default);
+  std::string colorKeywords = haklab::setColor(Color::Blue);
+  std::string colorStrings = haklab::setColor(Color::Green);
+  std::string colorComments = haklab::setColor(Color::Magenta);
+  std::string colorDefault = haklab::setColor(Color::Default);
 
   std::size_t pos = 0;
   std::size_t start = 0;
@@ -212,7 +172,7 @@ void syntax_highlight(const std::string &code) {
   std::cout << highlightedCode << std::endl;
 };
 
-void hak::Haklab::Haklab::k_boom(int signum) {
+void haklab::k_boom(int signum) {
   std::string k_boom = R"(
                         _-^--^=-_
                    _.-^^          -~_
@@ -226,25 +186,21 @@ void hak::Haklab::Haklab::k_boom(int signum) {
                       '-=k-boom!!='
                          |;   :|
                 _____.,-#########-,._____⏎)";
-  syntax_highlight(k_boom);
+  haklab::syntax_highlight(k_boom);
   exit(1);
 }
 
-void clear_screen() {
+void haklab::clear_screen() {
   // Se coloca en la pocicion (1 1) y borra la pantalla
-  const char *CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
-  write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
+  cout << CLEAR_SCREEN_ANSI ;
 }
 
-void hide_cursor() {
-  const char *HIDE_CURSOR_ANSI =
-      "\e[?25l"; // Send escape sequence to hide cursor
-  write(STDOUT_FILENO, HIDE_CURSOR_ANSI, 7);
+void haklab::hide_cursor() {
+  cout <<  HIDE_CURSOR_ANSI;
 }
 
-void show_cursor() {
-  const char *SHOW_CURSOL_ANSI = "\033[?25h";
-  write(STDOUT_FILENO, SHOW_CURSOL_ANSI, 7);
+void haklab::show_cursor() {
+  cout <<  SHOW_CURSOL_ANSI;
 }
 
 std::string show_architecture() {
@@ -303,7 +259,7 @@ std::string show_architecture() {
 //     }
 // }
 /*
-void hak::Haklab::searchProcess(std::string process){
+void haklab::Haklab::searchProcess(std::string process){
     DIR* dir;
     struct dirent* ent;
     if ((dir = opendir("/proc")) != NULL) {
@@ -331,7 +287,7 @@ proceso encontrado
 }
 */
 /*
-void hak::Haklab::ChangeEnvironmentVariable(std::string name, std::string
+void haklab::Haklab::ChangeEnvironmentVariable(std::string name, std::string
 new_valor ){
     // Ruta del archivo
     std::string filePath = std::string(getenv("HOME")) + "/.zshenv";

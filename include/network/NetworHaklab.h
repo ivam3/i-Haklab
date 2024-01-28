@@ -5,15 +5,12 @@
 #include <set>
 #include <boost/beast/http.hpp>
 
-namespace http = boost::beast::http;
 
 using std::string;
 
 namespace network {
   class NetworHakaklab {
     public:
-      // Función que asigna el verbo HTTP  
-      http::verb getHttpVerb(const std::string& Request);
      // Download a file from url 
       bool DownloadFile(string URL);
       // Get status code of url 

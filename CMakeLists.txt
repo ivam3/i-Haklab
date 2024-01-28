@@ -19,12 +19,15 @@ add_executable(${PROJECT_NAME} ${SRC})
 
 # Enlazar biblioteca
 target_link_libraries(${PROJECT_NAME} PUBLIC below_zero
-    -lboost_program_options
-    -lfmt
+    -lboost_program_options 
     -ljsoncpp
     -lboost_system
     -lboost_filesystem
-)
+    -lboost_thread
+    -lboost_chrono
+    -lfmt
+    -Wall
+    )
 
 #########    Instalación  ############
 install(TARGETS i-haklab below_zero

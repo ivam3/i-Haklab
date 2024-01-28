@@ -1,15 +1,21 @@
-
+/* Autor:  @demon_rip 
+ */
 #include "../include/command_line_argument_parser.h"
 #include "../include/network/NetworHaklab.h"
-
+ 
+/* type --> bool  
+ */
 bool arguments::no_arguments() { return variables.size() == 0; }
-
+ 
+/* type --> string   [arg]  
+ */
 std::string arguments::username() {
-  return (variables.count(username_option) > 0)
-             ? variables[username_option].as<std::string>()
+  return (variables.count(username_check) > 0)
+             ? variables[username_check].as<std::string>()
              : "";
-}
-
+} 
+/* 
+ */
 int arguments::port() {
   return (variables.count(port_option) > 0) ? variables[port_option].as<int>()
                                             : 4;

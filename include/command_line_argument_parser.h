@@ -1,5 +1,5 @@
 /* Autor: @demon_rip
- * File : command_line_arg
+ * File : command_line_argument_parser
  */
 #pragma once
 
@@ -25,13 +25,13 @@ using std::string;
 // Almacenamiento de argumentos 
 class arguments {
   /*
-   * Conoser valor en tiempo de
+   * Conoser valor en tiempo de  
    * compilacion 
    */
   constexpr static auto help_option           = "help,h";
-  //constexpr static auto help_module_option  = "help-module-root";
+  constexpr static auto help_module_red       = "help-module-red";   
   constexpr static auto version_option        = "version,v";
-  constexpr static auto username_option       = "username";
+  constexpr static auto username_check        = "username-check";
   constexpr static auto files_option_name     = "input-files";
   constexpr static auto files_options_path    = "input-path";
   constexpr static auto port_option           = "port";
@@ -52,9 +52,9 @@ class arguments {
 public:
   arguments(po::variables_map variables)
       : variables(variables) {}
-  //  (bool)
+  //  Por si no se  proporciona   argumento  type   --->   bool    
   bool no_arguments();
-  //
+  // 
   std::string username();
   // --port 
   int port();
@@ -62,26 +62,26 @@ public:
   string FRequest();
   // --wep-status
   string  WepStatusCode();
-  // --mkt
+  // Crea directorios de utilidad   
   string  CreateMkt();
-  // --
+  // Al macena los names files pasados desde la   CLI   
   const std::vector<std::string> filenames();
-  // --
+  // Al macena los names  files  pasados  desde la   CLI  
   const std::vector<std::string> filepath(); 
-  // --    
+  //  Compara los archivos  de dos directorios     
   bool file_update();
-  // -- interface-list 
+  //  Lista de interface del   sistema   
   bool FInterface();
-  // --about
+  //  Informacion de   una  heramienta   ---> type (string )   
   string FAbout();
-  // Get ip address
+  // Get ip address   -->  type  (string )  
   string FGet_ip();
 }; // end arguments 
 
 
-
-
-
+/*
+ *
+ */
 class command_line_argument_parser {
   // Opciobes  
   po::options_description desc{"Options"};
@@ -94,11 +94,10 @@ public:
   command_line_argument_parser() {
     desc.add_options()
       (arguments::help_option, "Print this menu and leave")
-      //(arguments::help_module_option, po::value<std::string>(),
-      //   "produce a help for a given module")
+      (arguments::help_module_red, "produce a help for a given module")
       (arguments::version_option,"print version std::string")
-      (arguments::username_option, po::value<std::string>(),
-          "username to use")
+      (arguments::username_check, po::value<std::string>(),
+          "Combiar nombre de usuario ")
             (arguments::files_options_path,po::value<std::vector<std::string>>(),
           "input patn")
       (arguments::files_option_name,po::value<std::vector<std::string>>(), 
@@ -118,17 +117,14 @@ public:
         (arguments::About,po::value<std::string>(),
          "Show informations about tool/framework");
       //  =============
-      //  Servers
+      //  Servers  
       //  =============
       server.add_options()
         (arguments::Request, po::value<string>(), "....")
         (arguments::WepStatus, po::value<string>(), "Estatus Code ")
-        (arguments::port_option, po::value<int>(),
-         "Specified port")
-        (arguments::host_options, po::value<int>(),
-         "Specified host")
-        (arguments::server_php,
-            "Create PHP server");
+        (arguments::port_option, po::value<int>(), "Specified port")
+        (arguments::host_options, po::value<int>(), "Specified host")
+        (arguments::server_php, "Create PHP server");
       // --------------------
       //    CTF  
       //---------------------
@@ -160,7 +156,9 @@ public:
         .add(ctf)
         .add(info)
         .add(automatitation);
- 
+    // Menu de   help_module_red  
+    po::options_description Red;
+      Red.add(red);
 
     po::store(po::command_line_parser(argc, argv)
                   .options(All)
@@ -172,6 +170,9 @@ public:
    
     if (variables.count("help")) {
       std::cout << All << std::endl;
+    } 
+    if  (variables.count(arguments::help_module_red)) {
+      std::cout << "Hola esto es una prueba " << std::endl;
     }
 
     return arguments(variables);

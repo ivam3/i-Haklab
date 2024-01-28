@@ -1,12 +1,15 @@
 
 #include "../include/network/NetworHaklab.h"
+#include <__iterator/access.h>
 #include <boost/asio/connect.hpp>
+#include <boost/asio/io_context.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/beast/core.hpp>
 #include <boost/beast/http.hpp>
 #include <boost/beast/version.hpp>
 #include <ifaddrs.h> //
 #include <iostream>
+#include <iterator>
 #include <netinet/in.h> //
 
 // sing std::cout;
@@ -17,9 +20,10 @@ namespace beast = boost::beast; // from <boost/beast.hpp>
 namespace http = beast::http;   //  from <boost/beast/http.hpp>
 namespace net = boost::asio;    // from <boost/asio.hpp>
 using tcp = net::ip::tcp;       // from <boost/asio/ip/tcp.hpp>
+using nethak = network::NetworHakaklab;
 
 std::set<std::string> // type
-network::NetworHakaklab::ListAllInterfaces() {
+nethak::ListAllInterfaces() {
   std::set<std::string> interfaces; // Conjunto para almacenar nombres únicos
   struct ifaddrs *ifaddr, *ifa;
   if (getifaddrs(&ifaddr) == -1) {
@@ -41,7 +45,7 @@ network::NetworHakaklab::ListAllInterfaces() {
 }
 
 std::string
-network::NetworHakaklab::GetIPaddress(const string &nombreInterfaz) {
+nethak::GetIPaddress(const string &nombreInterfaz) {
   struct ifaddrs *ifaddr, *ifa;
 
   if (getifaddrs(&ifaddr) == -1) {
@@ -72,7 +76,7 @@ network::NetworHakaklab::GetIPaddress(const string &nombreInterfaz) {
   freeifaddrs(ifaddr);
   return "";
 }
-
+/*
 // Función que asigna el verbo HTTP basado en el argumento de la CLI
 boost::beast::http::verb
 network::NetworHakaklab::getHttpVerb(const std::string &Request) {
@@ -90,21 +94,22 @@ network::NetworHakaklab::getHttpVerb(const std::string &Request) {
     return boost::beast::http::verb::get;
   }
 }
-
-// host :
-// port :
-int network::NetworHakaklab::GetStatusCode(const string &host,
-                                           const string &port) {
+*/
+/*
+   host :
+   port :
+*/
+int nethak::GetStatusCode(const string &host, const string &port) {
   try {
-    //  El io_context es necesario para todas las E/S
+    //  El io_context es necesario para todas las E/S   
     net::io_context io_context;
     // Realizar la resolución directa de una consulta, a una lista de entradas
-    net::ip::tcp::resolver resolver(io_context);
+    tcp::resolver resolver(io_context);
     // Busca el nombre del dominio
     tcp::resolver::results_type endpoints = resolver.resolve(host, port);
 
     // Para realizar operaciones de E/S
-    net::ip::tcp::socket socket(io_context);
+    tcp::socket socket(io_context);
 
     //  inicia la operación de conexión llamando al objeto de E/S
     net::connect(socket, endpoints);
@@ -128,4 +133,23 @@ int network::NetworHakaklab::GetStatusCode(const string &host,
     cerr << "Exception: " << ex.what() << std::endl;
     return 0;
   }
+}
+// Comprobar si tenemos internet  
+bool nethak::CheckInternet(){
+ try {
+  // Conector E.S   
+   net::io_context io;
+   tcp::resolver resolver(io);
+   tcp::resolver::results_type endpoints = 
+     resolver.resolve("http://www.google.com","80");
+
+   // Para trabajar co E/S  
+   tcp::socket socket(io);
+   net::connect(socket,endpoints);
+ }
+ catch (const std::exception& ex) {
+   cerr << "Error: "<< ex.what() << endl;
+  return false;
+ }
+ return true;
 }

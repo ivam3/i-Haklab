@@ -1,3 +1,10 @@
+
+Se utilisaran algunas llamadas al sistema para ejecutar comando pero no es el opjetivo de este proyecto 
+
+# Errores del momento 
+
+El uso de `fmt::print()` esta dando error a la hora de ejecuatar el binario 
+
 # Compilas
 
 ```sh
@@ -10,10 +17,30 @@ cmake --install build --prefix=$PREFIX
 
 # Flujo de trabajo
 `https://docs.github.com/en/actions/using-workflows/about-workflows#about-workflows`
+
 - Sintaxi
 `https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#about-yaml-syntax-for-workflows`
 
-apt install boost boost-headers  boost-static
+
+# Instalar boost y fmt en termux 
+apt install boost boost-headers  boost-static fmt 
+
+# boost.asio 
+
+- Para gestionar la comunicasion de red 
+
+# libpcap 
+
+-  permite capturar paquetes directamente desde la red 
+
+## wep
+
+`https://www.tcpdump.org/`
+
+```
+git clone https://github.com/the-tcpdump-group/tcpdump
+git clone https://github.com/the-tcpdump-group/libpcap
+```
 
 # boost
 - `https://www.boost.org/doc/libs/1_84_0/doc/html/program_options/howto.html` 
@@ -21,16 +48,14 @@ apt install boost boost-headers  boost-static
 - hay funciones declarsdas a un no definidas que los tipos de datos no pueden cambiar 
 
 
-- Dar valores por defecto a opciones que no son abligatorias 
 
 - Usar evitar usar rutas relativas para compativilidad con linux  (getenv)
 - `~/.local/share/apli...` La imagen para el escritorio 
 - descargar key en automatico 
-- error - convertir una clase a string
 - pendiente agreagar a nvim `https://github.com/dinhhuy258/git.nvim` 
 - `no` usae **new** ni **delete**  -> Smart point 
 
-# Nvim
+# Nvim tener en cuenta 
 
 ## Linux / Macos (unix)
 rm -rf ~/.config/nvim
@@ -42,8 +67,8 @@ rd -r ~\AppData\Local\nvim-data
 
 
 
-
 # Regisito
+https://shields.io/
 https://hackingcpp.com/cpp/libs/fmt.html#terminal-styles
 https://theboostcpplibraries.com/boost.program_options
 https://github.com/mmdjiji/makefile-learning 
