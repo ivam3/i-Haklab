@@ -1,4 +1,8 @@
-<img src="I-haklab.png" /> 
+<div aling="center">
+<img 
+  src="I-haklab.png" 
+  alt="Logo de I-haklab"/> 
+</div>
 
 <div align="center">
         <a href="https://victorh028.github.io/i-Haklab/#">Inisio</a>
