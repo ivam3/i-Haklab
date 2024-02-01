@@ -1,6 +1,6 @@
 <div aling="center">
 <img 
-  src="I-haklab.png" 
+  src="/.imagenes/I-haklab.png" 
   alt="Logo de I-haklab"/> 
 </div>
 
