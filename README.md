@@ -1,4 +1,4 @@
-<div aling="center">
+<div align="center">
 <img 
   src="/.imagenes/I-haklab.png" 
   alt="Logo de I-haklab"/> 
