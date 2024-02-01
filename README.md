@@ -1,4 +1,4 @@
-<h1 align="center">i-haklab</h1>
+<img src="I-haklab.png" /> 
 
 <div align="center">
         <a href="https://victorh028.github.io/i-Haklab/#">Inisio</a>
@@ -9,7 +9,7 @@
   <span> • </span>
         <a href="">Apoyo</a>
   <span> • </span>
-        <a href="https://nvchad.com/docs/features">Características</a>
+        <a href="">Características</a>
   <p></p>
 </div> 
 
