@@ -7,17 +7,18 @@
 //------------------------------------------
 #include "../include/command_line_argument_parser.h"
 #include "../include/network/NetworHaklab.h"
+#include <boost/beast/http/status.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/thread.hpp>
+#include <csignal>
+#include <cstdlib>
 #include <fmt/color.h> // Un  mundo sin colores es  feo  .....
 #include <fmt/core.h>
 #include <fstream>
 #include <iostream>
-#include <signal.h>
 //------------------------------------------
 //------------------------------------------
 namespace fs = boost::filesystem;
-
 
 //------------------------------------------
 //------------------------------------------
@@ -27,9 +28,9 @@ namespace fs = boost::filesystem;
 #define LOCALHOST 127.0.0.1
 #define ROOT_DIR getenv("PREFIX")
 
-#define SHOW_CURSOL_ANSI   "\e[?25h\n";
-#define HIDE_CURSOR_ANSI   "\e[?25l"; 
-#define CLEAR_SCREEN_ANSI  "\e[1;1H\e[2J";
+#define SHOW_CURSOL_ANSI "\e[?25h\n";
+#define HIDE_CURSOR_ANSI "\e[?25l";
+#define CLEAR_SCREEN_ANSI "\e[1;1H\e[2J";
 //------------------------------------------
 //------------------------------------------
 using std::cout;
@@ -39,14 +40,6 @@ using std::string;
 using std::vector;
 //------------------------------------------
 //------------------------------------------
-
-// Shell que se pueden configurar
-namespace shell {
-enum Shell {
-  zsh,
-  fish,
-};
-};
 
 enum class Color {
   Default,
@@ -60,9 +53,13 @@ enum class Color {
   White
 };
 
-
 namespace haklab {
-  class OptionParser;    
+// Shell que se pueden configurar
+enum class Shell {
+  zsh,
+  fish,
+};
+
 /*
  * borra la pantalla
  */
@@ -100,13 +97,19 @@ public:
   // contructor
   Haklab() {}
   /*
+   * Atrapa el control c
+   */
+  void ctrl_c() { signal(SIGINT, k_boom); }
+  /*
    *
    */
-  Haklab &Shell(shell::Shell &sh) {
-      
-    _shell = sh;
+/*  Haklab &Shell(shell::Shell &sh) {
+    switch (sh) {
+    default:
+      break;
+    }
     return *this;
-  }
+  }*/
   /*
    * inisializar
    */
@@ -132,8 +135,22 @@ public:
     // Ejecuta la función proporcionada en segundo plano
     func();
     show_cursor();
-  } // loading
-private:
+  }      // loading
+private: // ---> Funciones pribada
+  /*  Comprueba la existencia de la key
+   *  - advierte en auto si no existe   (HAKLAB-APT-OFF )   para    quitar
+   *  - descarga en auto matico ( HAKLAB-APT-AUTO >> .zshrc)
+   */
+  void apt_source() {
+    string source = std::string(getenv("PREFIX")) + "/etc/apt/sources.list.d";
+    if (!fs::exists(source)) {
+      if (true) {
+        cout << "[ WARNING ] No found" << source << endl;
+      }
+      exit(1);
+    }
+    cout << "Se creo" << source << endl;
+  };
   /*
    * arg (name)
    */
@@ -146,7 +163,7 @@ private:
     // Buscar en
     if (!fs::exists(fren)) {
       fren = IHETC + std::basic_string("command/") + about + ".md";
-    } 
+    }
     std::ifstream file(fren);
     // Comprobar si se abrio el arcivo
     if (file.is_open()) {

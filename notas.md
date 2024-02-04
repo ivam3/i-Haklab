@@ -1,6 +1,10 @@
 
 Se utilisaran algunas llamadas al sistema para ejecutar comando pero no es el opjetivo de este proyecto 
 
+# En creacion 
+
+Fuincion "apt_source"  
+
 # Error en el modulo 
 
 El uso de `fmt::print()` esta dando error a la hora de ejecuatar el binario 

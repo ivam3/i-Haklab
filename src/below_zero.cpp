@@ -9,6 +9,7 @@ namespace po = boost::program_options;
 int haklab::Haklab::run(int argc, const char *argv[]) {
   try {
     auto args = parser.parse(argc, argv);
+  
 
     if (args.no_arguments()) {
      /* fmt::print(fg(fmt::color::orange),*/

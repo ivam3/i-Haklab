@@ -2,18 +2,27 @@
  */
 #include "../include/command_line_argument_parser.h"
 #include "../include/network/NetworHaklab.h"
- 
+
+
+
+
+/*
+ */
+bool arguments::Fcheck(){
+  
+  return true;
+}
 /* type --> bool  
  */
 bool arguments::no_arguments() { return variables.size() == 0; }
  
 /* type --> string   [arg]  
  */
-std::string arguments::username() {
-  return (variables.count(username_check) > 0)
-             ? variables[username_check].as<std::string>()
-             : "";
-} 
+//std::string arguments::username() {
+//  return (variables.count(username_check) > 0)
+//             ? variables[username_check].as<std::string>()
+//             : "";
+//} 
 /* 
  */
 int arguments::port() {

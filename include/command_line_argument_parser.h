@@ -31,7 +31,7 @@ class arguments {
   constexpr static auto help_option           = "help,h";
   constexpr static auto help_module_red       = "help-module-red";   
   constexpr static auto version_option        = "version,v";
-  constexpr static auto username_check        = "username-check";
+  constexpr static auto check                 = "check";
   constexpr static auto files_option_name     = "input-files";
   constexpr static auto files_options_path    = "input-path";
   constexpr static auto port_option           = "port";
@@ -52,7 +52,7 @@ class arguments {
 public:
   arguments(po::variables_map variables)
       : variables(variables) {}
-  //  Por si no se  proporciona   argumento  type   --->   bool    
+  //  Por si no se  proporciona   ar 
   bool no_arguments();
   // 
   std::string username();
@@ -76,6 +76,8 @@ public:
   string FAbout();
   // Get ip address   -->  type  (string )  
   string FGet_ip();
+  // check  
+  bool Fcheck();
 }; // end arguments 
 
 
@@ -95,9 +97,8 @@ public:
     desc.add_options()
       (arguments::help_option, "Print this menu and leave")
       (arguments::help_module_red, "produce a help for a given module")
-      (arguments::version_option,"print version std::string")
-      (arguments::username_check, po::value<std::string>(),
-          "Combiar nombre de usuario ")
+      (arguments::version_option, "print version ")
+      (arguments::check, "Comprobar el que todo este bien  ")
             (arguments::files_options_path,po::value<std::vector<std::string>>(),
           "input patn")
       (arguments::files_option_name,po::value<std::vector<std::string>>(), 
@@ -151,7 +152,7 @@ public:
   
     po::options_description All;
      All.add(desc)
-        .add(red)
+       // .add(red)
         .add(server)
         .add(ctf)
         .add(info)
@@ -172,7 +173,7 @@ public:
       std::cout << All << std::endl;
     } 
     if  (variables.count(arguments::help_module_red)) {
-      std::cout << "Hola esto es una prueba " << std::endl;
+      cout << red << endl;
     }
 
     return arguments(variables);
