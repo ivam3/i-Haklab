@@ -23,11 +23,9 @@
 
   </div>
 
-# Que es ?
+# Que es i-Haklab ?
 
-
-# Muestra temática
-
+> *i-Haklab* es un laboratorio de hacking para [Termux](https://github.com/termux/termux-app)  que contiene [herramientas de código abierto](https://github.com/ivam3/termux-packages) para osint, pentesting, escanear/encontrar vulnerabilidades, explotación y post-explotación.
 
 
 # Créditos 
