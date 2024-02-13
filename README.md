@@ -5,9 +5,9 @@
 </div>
 
 <div align="center">
-        <a href="https://victorh028.github.io/i-Haklab/#">Inisio</a>
+        <a href="https://github.com/ivam3/i-Haklab">Inisio</a>
   <span> • </span>
-            <a href="https://victorh028.github.io/i-Haklab/install">Intalacion</a>
+            <a href="https://github.com/ivam3/i-Haklab/blob/main/doc/intalacion.md">Intalacion</a>
   <span> • </span>
                <a href="">Contribuir</a>
   <span> • </span>
