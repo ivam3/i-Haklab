@@ -5,7 +5,7 @@
 </div>
 
 <div align="center">
-        <a href="https://github.com/ivam3/i-Haklab">Inisio</a>
+        <a href="https://github.com/ivam3/i-Haklab/tree/main">Inisio</a>
   <span> • </span>
             <a href="https://github.com/ivam3/i-Haklab/blob/main/doc/intalacion.md">Intalacion</a>
   <span> • </span>
