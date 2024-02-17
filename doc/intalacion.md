@@ -11,7 +11,7 @@
 
 5. `yes|apt upgrade`: El comando `apt upgrade` actualiza todos los paquetes instalados en el sistema. El `yes` que precede al comando `apt upgrade` simplemente envía la entrada "yes" (sí) automáticamente cuando se le solicita la confirmación de actualización.
 
-6. `apt install i-haklab`: Por último, este comando instala un paquete llamado `i-haklab`
+6. `apt install i-haklab`: Por último, este comando instala nustro laboratorio `i-haklab`
 
 # Todo junto (Recomendado)
 
