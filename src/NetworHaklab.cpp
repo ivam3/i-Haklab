@@ -1,6 +1,5 @@
 
 #include "../include/network/NetworHaklab.h"
-#include <__iterator/access.h>
 #include <boost/asio/connect.hpp>
 #include <boost/asio/io_context.hpp>
 #include <boost/asio/ip/tcp.hpp>
@@ -9,9 +8,8 @@
 #include <boost/beast/version.hpp>
 #include <ifaddrs.h> //
 #include <iostream>
-#include <iterator>
-#include <netinet/in.h> //
-
+#include <curl/curl.h>
+#include <boost/filesystem.hpp>
 // sing std::cout;
 using std::cerr;
 using std::endl;
@@ -19,8 +17,39 @@ using std::endl;
 namespace beast = boost::beast; // from <boost/beast.hpp>
 namespace http = beast::http;   //  from <boost/beast/http.hpp>
 namespace net = boost::asio;    // from <boost/asio.hpp>
+namespace fs = boost::filesystem; // from 
 using tcp = net::ip::tcp;       // from <boost/asio/ip/tcp.hpp>
 using nethak = network::NetworHakaklab;
+
+
+
+// Descargar  arcivos   
+bool network::NetworHakaklab::DownloadFile(string URL) {
+    CURL *curl;
+    FILE *fp;
+    CURLcode result;
+    curl = curl_easy_init();
+    if (curl) {
+      fs::path outputFilename;
+      // Optener  el  nombre    del  archivo   
+      fp = fopen(outputFilename.filename().c_str(), "wb");
+      curl_easy_setopt(curl, CURLOPT_URL, URL.c_str());
+      curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, NULL);
+      curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+      result = curl_easy_perform(curl);
+      // Verifica si la descarga se realizó correctamente
+      if (result != CURLE_OK) {
+        std::cerr << "Error a descargar archivo " << endl;
+        curl_easy_cleanup(curl);
+        fclose(fp);
+        return EXIT_FAILURE;
+      }
+      curl_easy_cleanup(curl);
+      fclose(fp);
+    }
+    return EXIT_SUCCESS;
+};
+
 
 std::set<std::string> // type
 nethak::ListAllInterfaces() {
@@ -136,20 +165,26 @@ int nethak::GetStatusCode(const string &host, const string &port) {
 }
 // Comprobar si tenemos internet  
 bool nethak::CheckInternet(){
- try {
-  // Conector E.S   
-   net::io_context io;
-   tcp::resolver resolver(io);
-   tcp::resolver::results_type endpoints = 
-     resolver.resolve("http://www.google.com","80");
-
-   // Para trabajar co E/S  
-   tcp::socket socket(io);
-   net::connect(socket,endpoints);
- }
- catch (const std::exception& ex) {
-   cerr << "Error: "<< ex.what() << endl;
+  CURL *curl;
+  CURLcode res;
+  curl = curl_easy_init();
+  if (curl) {
+     curl_easy_setopt(curl, CURLOPT_URL, "https://google.com");
+     // Solicitar descsrga sin cuerpo  
+     curl_easy_setopt(curl, CURLOPT_NOBODY, 1);
+      res = curl_easy_perform(curl);
+        if(res == CURLE_OK) {
+            long response_code;
+            curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
+            if(response_code == 200) { 
+            // Si la respuesta es 200, hay conexión a internet
+                std::cout << "¡Hay conexión a internet!\n";
+                curl_easy_cleanup(curl);
+                return true;
+            }
+        }
+        curl_easy_cleanup(curl);
+    }
+    std::cout << "No hay conexión a internet.\n";
   return false;
- }
- return true;
 }
