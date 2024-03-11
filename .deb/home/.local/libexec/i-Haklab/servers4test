@@ -11,23 +11,35 @@ chk-pkg mariadb mariadb
 [[ -e ${PREFIX}/var/run/*.pid ]] && {
 	rm -rf ${PREFIX}/var/run/*.pid;
 }
-mysqld >/dev/null 2>/dev/null &
-pid=$(echo $!)
+declare pid
+
+until [ ! -z $pid ]; do
+  killall mariadbd >/dev/null 2>/dev/null
+  tput civis
+  echo -en $G"\r(➤_)$W Running daemon ..."
+  mariadbd >/dev/null 2>/dev/null &
+  pid=$(echo $!)
+  sleep 3
+  echo -en "\tDONE!!\n"
+  tput cnorm 
+done
+
 sleep 3
 while [ "$(ps a|awk '{print $1}'|grep $pid)" ]
 do
-  dbuser=$(mysql -u $(whoami) -e "use mysql;SELECT user FROM user;"|grep "root")
+  dbuser=$(mariadb -u $(whoami) -e "use mysql;SELECT user FROM user;"|grep "root")
   [[ $dbuser == root ]] || { 
-    mysql -u $(whoami) -e "use mysql;set password for 'root'@'localhost' = password('root');flush privileges;" >/dev/null 2>/dev/null;
-    mysqld_safe >/dev/null 2>/dev/null &
+    mariadb -u $(whoami) -e "use mysql;set password for 'root'@'localhost' = password('root');flush privileges;" >/dev/null 2>/dev/null;
+    mariadbd-safe >/dev/null 2>/dev/null &
     safepid=$(echo $!)
     running ps $safepid
 	}
 
+  echo -en $Y"\r(➤_)$W Choose a platform\n"
 	select answ in bWAPP DVWA mutillidae Exit
 	do
 		[[ $answ = Exit ]] && {
-      kill -TERM $pid
+      kill -TERM $pid >/dev/null 2>/dev/null
 			exit 0;
 		}
 		[[ $answ = DVWA ]] && {
@@ -36,9 +48,9 @@ do
 			db=$answ;
 		}
 		[[ -d ${HOME}/.local/var/service/www/servers4test/$answ ]] && {
-			if [[ $(mysql -u root -proot -e "show DATABASES;"|grep $db) != $db ]] >/dev/null 2>/dev/null
+			if [[ $(mariadb -u root -proot -e "show DATABASES;"|grep $db) != $db ]] >/dev/null 2>/dev/null
 			then
-				mysql -u root -proot -e "create DATABASE $db >/dev/null 2>/dev/null;"
+				mariadb -u root -proot -e "create DATABASE $db >/dev/null 2>/dev/null;"
 			fi
 			getPORT;
 			banner

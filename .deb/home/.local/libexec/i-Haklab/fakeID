@@ -47,7 +47,7 @@ while getopts "g:n:c:h" opt; do
 done
 
 file=$(mktemp)
-sed -n '66,132p' \
+sed -n '32,132p' \
   <(curl -fsSL https://www.fakenamegenerator.com/gen-$gen-$n-$c.php|html2text) \
   |tr "\t" " " | tr -s " " > $file
 

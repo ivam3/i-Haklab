@@ -1,0 +1,5 @@
+#!/data/data/com.termux/files/usr/bin/bash
+IFS=$'\n\t'
+trap ctrl_c 2
+source ${HOME}/.local/etc/i-Haklab/variables
+printf "$G(_➤)$W i-Haklab $version (c) 2024 by @Ivam3"
