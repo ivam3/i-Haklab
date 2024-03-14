@@ -81,3 +81,5 @@ https://www.google.com/amp/s/www.geeksforgeeks.org/regex-regular-expression-in-c
 https://cplusplus.com/reference/thread/thread/
 pendiente para nvim 
 https://nvchad.com/docs/features#nvcheatsheet
+# you
+https://gleev.xyz/ypp?referrerId=47429

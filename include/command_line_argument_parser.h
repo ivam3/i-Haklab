@@ -3,9 +3,7 @@
  */
 #pragma once
 
-#include <boost/beast/http/verb.hpp>
 #include <boost/program_options.hpp>
-#include <complex>
 #include <iostream>
 #include <string>
 
@@ -20,13 +18,10 @@ using std::string;
 //a, b, c, d, e, f, g, h, i, j, k, l, m, n, ñ, o, p, q, r, s, t, u, v, w, x, y, z.
 //
 
-
-
 // Almacenamiento de argumentos 
 class arguments {
   /*
-   * Conoser valor en tiempo de  
-   * compilacion 
+   * Conoser valor en tiempo de  compilacion 
    */
   constexpr static auto help_option           = "help,h";
   constexpr static auto help_module_red       = "help-module-red";   
@@ -34,30 +29,29 @@ class arguments {
   constexpr static auto check                 = "check";
   constexpr static auto files_option_name     = "input-files";
   constexpr static auto files_options_path    = "input-path";
-  constexpr static auto port_option           = "port";
-  constexpr static auto host_options          = "host"; 
+  constexpr static auto port                  = "port";
+  constexpr static auto host                  = "host"; 
   constexpr static auto files_update_file     = "update-file,U"; 
   constexpr static auto files_output          = "output,o"; 
   constexpr static auto server_php            = "server-php";
-  constexpr static auto Interface             = "interface-list";
+  constexpr static auto Interface             = "interface-list,I";
   constexpr static auto ctf_red_tram          = "dir-red-team";
   constexpr static auto ctf_mkt               = "mkt";
   constexpr static auto About                 = "about";
   constexpr static auto WepStatus             = "wep-status";
   constexpr static auto Request               = "request";
   constexpr static auto Ip                    = "get-ip";
+  constexpr static auto CheckInternet        = "check-internet";
   po::variables_map variables;
   //   (feiend) Otorga acceso a los mienbros pribados y protegidos
   friend class command_line_argument_parser;
 public:
   arguments(po::variables_map variables)
       : variables(variables) {}
-  //  Por si no se  proporciona   ar 
+  //  Por si no se  proporciona  argumento    
   bool no_arguments();
-  // 
-  std::string username();
   // --port 
-  int port();
+  int Fport();
   // --request
   string FRequest();
   // --wep-status
@@ -78,6 +72,8 @@ public:
   string FGet_ip();
   // check  
   bool Fcheck();
+  // Comprobar internet 
+  bool FCheckInternet();
 }; // end arguments 
 
 
@@ -98,7 +94,8 @@ public:
       (arguments::help_option, "Print this menu and leave")
       (arguments::help_module_red, "produce a help for a given module")
       (arguments::version_option, "print version ")
-      (arguments::check, "Comprobar el que todo este bien  ")
+      (arguments::port, "Puerto")
+      (arguments::host, "Host")
             (arguments::files_options_path,po::value<std::vector<std::string>>(),
           "input patn")
       (arguments::files_option_name,po::value<std::vector<std::string>>(), 
@@ -106,15 +103,15 @@ public:
       ("output,o", po::value<std::string>(), 
           "output path");
       //  Start Config
-      //  red 
+      //  help-module-red   
       red.add_options()
-        (arguments::Interface, "List all interface to user");
-        
+        (arguments::Ip,po::value<string>(), "Get ip address")
+        (arguments::Interface, "List all interface to user")
+        (arguments::CheckInternet, "Comprueva el internet"); 
 
       //  Info 
       info.add_options()
-        (arguments::Ip,po::value<string>(),
-         "Get ip address")
+        (arguments::check, "Comprobar el que todo este bien  ")
         (arguments::About,po::value<std::string>(),
          "Show informations about tool/framework");
       //  =============
@@ -123,16 +120,13 @@ public:
       server.add_options()
         (arguments::Request, po::value<string>(), "....")
         (arguments::WepStatus, po::value<string>(), "Estatus Code ")
-        (arguments::port_option, po::value<int>(), "Specified port")
-        (arguments::host_options, po::value<int>(), "Specified host")
         (arguments::server_php, "Create PHP server");
       // --------------------
       //    CTF  
       //---------------------
        ctf.add_options()
          (arguments::ctf_red_tram,po::value<std::string>(),
-            "Red team create directories");
-       ctf.add_options()
+            "Red team create directories")
          (arguments::ctf_mkt,po::value<std::string>(),"Create working directories ");
       //  -----------------------
       //  Start automatitation
@@ -149,8 +143,8 @@ public:
     positionalOptions
         .add(arguments::files_option_name, -1);
   
-  
-    po::options_description All;
+ 
+   po::options_description All;
      All.add(desc)
        // .add(red)
         .add(server)

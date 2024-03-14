@@ -1,8 +1,9 @@
 src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: \
   /data/data/com.termux/files/home/i-Haklab/src/command_line_argument_parser.cpp \
   /data/data/com.termux/files/home/i-Haklab/src/../include/command_line_argument_parser.h \
-  /data/data/com.termux/files/usr/include/boost/beast/http/verb.hpp \
-  /data/data/com.termux/files/usr/include/boost/beast/core/detail/config.hpp \
+  /data/data/com.termux/files/usr/include/boost/program_options.hpp \
+  /data/data/com.termux/files/usr/include/boost/program_options/options_description.hpp \
+  /data/data/com.termux/files/usr/include/boost/program_options/config.hpp \
   /data/data/com.termux/files/usr/include/boost/config.hpp \
   /data/data/com.termux/files/usr/include/boost/config/user.hpp \
   /data/data/com.termux/files/usr/include/boost/config/detail/select_compiler_config.hpp \
@@ -108,10 +109,14 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: \
   /data/data/com.termux/files/usr/include/c++/v1/filesystem \
   /data/data/com.termux/files/usr/include/boost/config/detail/cxx_composite.hpp \
   /data/data/com.termux/files/usr/include/boost/version.hpp \
-  /data/data/com.termux/files/usr/include/boost/core/ignore_unused.hpp \
-  /data/data/com.termux/files/usr/include/boost/static_assert.hpp \
-  /data/data/com.termux/files/usr/include/boost/detail/workaround.hpp \
-  /data/data/com.termux/files/usr/include/boost/config/workaround.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/auto_link.hpp \
+  /data/data/com.termux/files/usr/include/boost/program_options/errors.hpp \
+  /data/data/com.termux/files/usr/include/c++/v1/string \
+  /data/data/com.termux/files/usr/include/c++/v1/__algorithm/max.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__algorithm/comp.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__algorithm/comp_ref_type.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__debug \
+  /data/data/com.termux/files/usr/include/c++/v1/__type_traits/is_constant_evaluated.h \
   /data/data/com.termux/files/usr/include/c++/v1/cstddef \
   /data/data/com.termux/files/usr/include/c++/v1/__type_traits/enable_if.h \
   /data/data/com.termux/files/usr/include/c++/v1/__type_traits/integral_constant.h \
@@ -119,34 +124,6 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: \
   /data/data/com.termux/files/usr/include/c++/v1/__type_traits/remove_cv.h \
   /data/data/com.termux/files/usr/include/c++/v1/__type_traits/remove_const.h \
   /data/data/com.termux/files/usr/include/c++/v1/__type_traits/remove_volatile.h \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/cat.hpp \
-  /data/data/com.termux/files/usr/include/boost/preprocessor/config/config.hpp \
-  /data/data/com.termux/files/usr/include/boost/beast/core/string.hpp \
-  /data/data/com.termux/files/usr/include/boost/beast/core/string_type.hpp \
-  /data/data/com.termux/files/usr/include/boost/core/detail/string_view.hpp \
-  /data/data/com.termux/files/usr/include/boost/core/enable_if.hpp \
-  /data/data/com.termux/files/usr/include/boost/core/detail/is_same.hpp \
-  /data/data/com.termux/files/usr/include/boost/assert.hpp \
-  /data/data/com.termux/files/usr/include/assert.h \
-  /data/data/com.termux/files/usr/include/boost/assert/source_location.hpp \
-  /data/data/com.termux/files/usr/include/boost/current_function.hpp \
-  /data/data/com.termux/files/usr/include/boost/cstdint.hpp \
-  /data/data/com.termux/files/usr/include/c++/v1/iosfwd \
-  /data/data/com.termux/files/usr/include/c++/v1/__fwd/string.h \
-  /data/data/com.termux/files/usr/include/c++/v1/__fwd/memory_resource.h \
-  /data/data/com.termux/files/usr/include/c++/v1/__mbstate_t.h \
-  /data/data/com.termux/files/usr/include/c++/v1/wchar.h \
-  /data/data/com.termux/files/usr/include/wchar.h \
-  /data/data/com.termux/files/usr/include/time.h \
-  /data/data/com.termux/files/usr/include/sys/time.h \
-  /data/data/com.termux/files/usr/include/bits/mbstate_t.h \
-  /data/data/com.termux/files/usr/include/bits/wctype.h \
-  /data/data/com.termux/files/usr/include/c++/v1/string \
-  /data/data/com.termux/files/usr/include/c++/v1/__algorithm/max.h \
-  /data/data/com.termux/files/usr/include/c++/v1/__algorithm/comp.h \
-  /data/data/com.termux/files/usr/include/c++/v1/__algorithm/comp_ref_type.h \
-  /data/data/com.termux/files/usr/include/c++/v1/__debug \
-  /data/data/com.termux/files/usr/include/c++/v1/__type_traits/is_constant_evaluated.h \
   /data/data/com.termux/files/usr/include/c++/v1/__utility/declval.h \
   /data/data/com.termux/files/usr/include/c++/v1/__algorithm/max_element.h \
   /data/data/com.termux/files/usr/include/c++/v1/__iterator/iterator_traits.h \
@@ -326,7 +303,17 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: \
   /data/data/com.termux/files/usr/include/c++/v1/__type_traits/remove_pointer.h \
   /data/data/com.termux/files/usr/include/c++/v1/__type_traits/result_of.h \
   /data/data/com.termux/files/usr/include/c++/v1/__type_traits/type_identity.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__fwd/string.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__fwd/memory_resource.h \
   /data/data/com.termux/files/usr/include/c++/v1/__ios/fpos.h \
+  /data/data/com.termux/files/usr/include/c++/v1/iosfwd \
+  /data/data/com.termux/files/usr/include/c++/v1/__mbstate_t.h \
+  /data/data/com.termux/files/usr/include/c++/v1/wchar.h \
+  /data/data/com.termux/files/usr/include/wchar.h \
+  /data/data/com.termux/files/usr/include/time.h \
+  /data/data/com.termux/files/usr/include/sys/time.h \
+  /data/data/com.termux/files/usr/include/bits/mbstate_t.h \
+  /data/data/com.termux/files/usr/include/bits/wctype.h \
   /data/data/com.termux/files/usr/include/c++/v1/__iterator/distance.h \
   /data/data/com.termux/files/usr/include/c++/v1/__iterator/concepts.h \
   /data/data/com.termux/files/usr/include/c++/v1/__concepts/derived_from.h \
@@ -739,26 +726,6 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: \
   /data/data/com.termux/files/usr/include/c++/v1/__functional/pointer_to_binary_function.h \
   /data/data/com.termux/files/usr/include/c++/v1/__functional/pointer_to_unary_function.h \
   /data/data/com.termux/files/usr/include/c++/v1/__functional/unary_negate.h \
-  /data/data/com.termux/files/usr/include/boost/throw_exception.hpp \
-  /data/data/com.termux/files/usr/include/boost/exception/exception.hpp \
-  /data/data/com.termux/files/usr/include/c++/v1/ios \
-  /data/data/com.termux/files/usr/include/c++/v1/__locale \
-  /data/data/com.termux/files/usr/include/c++/v1/locale.h \
-  /data/data/com.termux/files/usr/include/locale.h \
-  /data/data/com.termux/files/usr/include/c++/v1/mutex \
-  /data/data/com.termux/files/usr/include/c++/v1/__mutex_base \
-  /data/data/com.termux/files/usr/include/c++/v1/system_error \
-  /data/data/com.termux/files/usr/include/c++/v1/__errc \
-  /data/data/com.termux/files/usr/include/c++/v1/cerrno \
-  /data/data/com.termux/files/usr/include/c++/v1/__support/android/locale_bionic.h \
-  /data/data/com.termux/files/usr/include/boost/beast/core/impl/string.ipp \
-  /data/data/com.termux/files/usr/include/boost/beast/core/detail/string.hpp \
-  /data/data/com.termux/files/usr/include/boost/beast/http/impl/verb.ipp \
-  /data/data/com.termux/files/usr/include/boost/program_options.hpp \
-  /data/data/com.termux/files/usr/include/boost/program_options/options_description.hpp \
-  /data/data/com.termux/files/usr/include/boost/program_options/config.hpp \
-  /data/data/com.termux/files/usr/include/boost/config/auto_link.hpp \
-  /data/data/com.termux/files/usr/include/boost/program_options/errors.hpp \
   /data/data/com.termux/files/usr/include/c++/v1/map \
   /data/data/com.termux/files/usr/include/c++/v1/__tree \
   /data/data/com.termux/files/usr/include/boost/program_options/value_semantic.hpp \
@@ -769,12 +736,20 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/type_traits/alignment_of.hpp \
   /data/data/com.termux/files/usr/include/boost/type_traits/intrinsics.hpp \
   /data/data/com.termux/files/usr/include/boost/type_traits/detail/config.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/workaround.hpp \
   /data/data/com.termux/files/usr/include/boost/type_traits/integral_constant.hpp \
+  /data/data/com.termux/files/usr/include/boost/detail/workaround.hpp \
   /data/data/com.termux/files/usr/include/boost/any/detail/placeholder.hpp \
   /data/data/com.termux/files/usr/include/boost/type_index.hpp \
   /data/data/com.termux/files/usr/include/boost/type_index/stl_type_index.hpp \
   /data/data/com.termux/files/usr/include/boost/type_index/type_index_facade.hpp \
   /data/data/com.termux/files/usr/include/boost/container_hash/hash_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/static_assert.hpp \
+  /data/data/com.termux/files/usr/include/boost/throw_exception.hpp \
+  /data/data/com.termux/files/usr/include/boost/exception/exception.hpp \
+  /data/data/com.termux/files/usr/include/boost/assert/source_location.hpp \
+  /data/data/com.termux/files/usr/include/boost/current_function.hpp \
+  /data/data/com.termux/files/usr/include/boost/cstdint.hpp \
   /data/data/com.termux/files/usr/include/boost/core/demangle.hpp \
   /data/data/com.termux/files/usr/include/c++/v1/cxxabi.h \
   /data/data/com.termux/files/usr/include/c++/v1/__cxxabi_config.h \
@@ -829,6 +804,7 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/mp11/detail/mp_map_find.hpp \
   /data/data/com.termux/files/usr/include/boost/mp11/detail/mp_with_index.hpp \
   /data/data/com.termux/files/usr/include/c++/v1/cassert \
+  /data/data/com.termux/files/usr/include/assert.h \
   /data/data/com.termux/files/usr/include/boost/mp11/integer_sequence.hpp \
   /data/data/com.termux/files/usr/include/boost/describe/members.hpp \
   /data/data/com.termux/files/usr/include/boost/describe/detail/cx_streq.hpp \
@@ -852,6 +828,16 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: \
   /data/data/com.termux/files/usr/include/c++/v1/istream \
   /data/data/com.termux/files/usr/include/c++/v1/ostream \
   /data/data/com.termux/files/usr/include/c++/v1/bitset \
+  /data/data/com.termux/files/usr/include/c++/v1/ios \
+  /data/data/com.termux/files/usr/include/c++/v1/__locale \
+  /data/data/com.termux/files/usr/include/c++/v1/locale.h \
+  /data/data/com.termux/files/usr/include/locale.h \
+  /data/data/com.termux/files/usr/include/c++/v1/mutex \
+  /data/data/com.termux/files/usr/include/c++/v1/__mutex_base \
+  /data/data/com.termux/files/usr/include/c++/v1/system_error \
+  /data/data/com.termux/files/usr/include/c++/v1/__errc \
+  /data/data/com.termux/files/usr/include/c++/v1/cerrno \
+  /data/data/com.termux/files/usr/include/c++/v1/__support/android/locale_bionic.h \
   /data/data/com.termux/files/usr/include/c++/v1/locale \
   /data/data/com.termux/files/usr/include/c++/v1/streambuf \
   /data/data/com.termux/files/usr/include/c++/v1/__bsd_locale_fallbacks.h \
@@ -865,6 +851,7 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/type_traits/remove_extent.hpp \
   /data/data/com.termux/files/usr/include/boost/type_traits/add_pointer.hpp \
   /data/data/com.termux/files/usr/include/boost/type_traits/add_reference.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/enable_if.hpp \
   /data/data/com.termux/files/usr/include/boost/core/addressof.hpp \
   /data/data/com.termux/files/usr/include/boost/function/function1.hpp \
   /data/data/com.termux/files/usr/include/boost/function/detail/maybe_include.hpp \
@@ -893,6 +880,7 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/type_traits/is_default_constructible.hpp \
   /data/data/com.termux/files/usr/include/boost/type_traits/has_trivial_destructor.hpp \
   /data/data/com.termux/files/usr/include/boost/type_traits/composite_traits.hpp \
+  /data/data/com.termux/files/usr/include/boost/assert.hpp \
   /data/data/com.termux/files/usr/include/boost/mem_fn.hpp \
   /data/data/com.termux/files/usr/include/boost/bind/mem_fn.hpp \
   /data/data/com.termux/files/usr/include/boost/bind/detail/requires_cxx11.hpp \
@@ -902,6 +890,8 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/bind/mem_fn_cc.hpp \
   /data/data/com.termux/files/usr/include/boost/preprocessor/enum.hpp \
   /data/data/com.termux/files/usr/include/boost/preprocessor/repetition/enum.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/cat.hpp \
+  /data/data/com.termux/files/usr/include/boost/preprocessor/config/config.hpp \
   /data/data/com.termux/files/usr/include/boost/preprocessor/debug/error.hpp \
   /data/data/com.termux/files/usr/include/boost/preprocessor/detail/auto_rec.hpp \
   /data/data/com.termux/files/usr/include/boost/preprocessor/control/iif.hpp \
@@ -1297,7 +1287,27 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/program_options/version.hpp \
   /data/data/com.termux/files/usr/include/c++/v1/iostream \
   /data/data/com.termux/files/home/i-Haklab/src/../include/network/NetworHaklab.h \
+  /data/data/com.termux/files/usr/include/curl/curl.h \
+  /data/data/com.termux/files/usr/include/curl/curlver.h \
+  /data/data/com.termux/files/usr/include/curl/system.h \
+  /data/data/com.termux/files/usr/include/sys/socket.h \
+  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/socket.h \
+  /data/data/com.termux/files/usr/include/asm-generic/socket.h \
+  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/sockios.h \
+  /data/data/com.termux/files/usr/include/asm-generic/sockios.h \
+  /data/data/com.termux/files/usr/include/linux/sockios.h \
+  /data/data/com.termux/files/usr/include/linux/uio.h \
+  /data/data/com.termux/files/usr/include/bits/sa_family_t.h \
+  /data/data/com.termux/files/usr/include/curl/easy.h \
+  /data/data/com.termux/files/usr/include/curl/multi.h \
+  /data/data/com.termux/files/usr/include/curl/urlapi.h \
+  /data/data/com.termux/files/usr/include/curl/options.h \
+  /data/data/com.termux/files/usr/include/curl/header.h \
+  /data/data/com.termux/files/usr/include/curl/websockets.h \
+  /data/data/com.termux/files/usr/include/curl/mprintf.h \
   /data/data/com.termux/files/usr/include/boost/beast/http.hpp \
+  /data/data/com.termux/files/usr/include/boost/beast/core/detail/config.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/ignore_unused.hpp \
   /data/data/com.termux/files/usr/include/boost/beast/http/basic_dynamic_body.hpp \
   /data/data/com.termux/files/usr/include/boost/beast/core/buffer_traits.hpp \
   /data/data/com.termux/files/usr/include/boost/beast/core/detail/buffer_traits.hpp \
@@ -1397,6 +1407,12 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/beast/http/impl/error.ipp \
   /data/data/com.termux/files/usr/include/boost/beast/http/message.hpp \
   /data/data/com.termux/files/usr/include/boost/beast/http/fields.hpp \
+  /data/data/com.termux/files/usr/include/boost/beast/core/string.hpp \
+  /data/data/com.termux/files/usr/include/boost/beast/core/string_type.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/detail/string_view.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/detail/is_same.hpp \
+  /data/data/com.termux/files/usr/include/boost/beast/core/impl/string.ipp \
+  /data/data/com.termux/files/usr/include/boost/beast/core/detail/string.hpp \
   /data/data/com.termux/files/usr/include/boost/beast/core/detail/allocator.hpp \
   /data/data/com.termux/files/usr/include/boost/beast/http/field.hpp \
   /data/data/com.termux/files/usr/include/boost/beast/http/impl/field.ipp \
@@ -1486,6 +1502,8 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/io/detail/buffer_fill.hpp \
   /data/data/com.termux/files/usr/include/boost/io/detail/ostream_guard.hpp \
   /data/data/com.termux/files/usr/include/boost/utility/string_view_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/beast/http/verb.hpp \
+  /data/data/com.termux/files/usr/include/boost/beast/http/impl/verb.ipp \
   /data/data/com.termux/files/usr/include/boost/beast/http/rfc7230.hpp \
   /data/data/com.termux/files/usr/include/boost/beast/http/detail/rfc7230.hpp \
   /data/data/com.termux/files/usr/include/boost/beast/http/detail/rfc7230.ipp \
@@ -1528,7 +1546,6 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: \
   /data/data/com.termux/files/usr/include/linux/fcntl.h \
   /data/data/com.termux/files/usr/include/linux/openat2.h \
   /data/data/com.termux/files/usr/include/linux/stat.h \
-  /data/data/com.termux/files/usr/include/linux/uio.h \
   /data/data/com.termux/files/usr/include/sys/uio.h \
   /data/data/com.termux/files/usr/include/sys/stat.h \
   /data/data/com.termux/files/usr/include/boost/beast/core/file_stdio.hpp \
@@ -1714,13 +1731,6 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/asio/error.hpp \
   /data/data/com.termux/files/usr/include/boost/cerrno.hpp \
   /data/data/com.termux/files/usr/include/netdb.h \
-  /data/data/com.termux/files/usr/include/sys/socket.h \
-  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/socket.h \
-  /data/data/com.termux/files/usr/include/asm-generic/socket.h \
-  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/sockios.h \
-  /data/data/com.termux/files/usr/include/asm-generic/sockios.h \
-  /data/data/com.termux/files/usr/include/linux/sockios.h \
-  /data/data/com.termux/files/usr/include/bits/sa_family_t.h \
   /data/data/com.termux/files/usr/include/boost/asio/impl/error.ipp \
   /data/data/com.termux/files/usr/include/boost/asio/detail/mutex.hpp \
   /data/data/com.termux/files/usr/include/boost/asio/detail/posix_mutex.hpp \

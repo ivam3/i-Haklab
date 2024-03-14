@@ -1617,6 +1617,9 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: /data/data/com.termux/files/ho
   /data/data/com.termux/files/usr/include/boost/bind/std_placeholders.hpp \
   /data/data/com.termux/files/usr/include/boost/cerrno.hpp \
   /data/data/com.termux/files/usr/include/boost/config.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/abi_prefix.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/abi_suffix.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/auto_link.hpp \
   /data/data/com.termux/files/usr/include/boost/config/compiler/clang.hpp \
   /data/data/com.termux/files/usr/include/boost/config/compiler/clang_version.hpp \
   /data/data/com.termux/files/usr/include/boost/config/detail/cxx_composite.hpp \
@@ -1627,6 +1630,7 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: /data/data/com.termux/files/ho
   /data/data/com.termux/files/usr/include/boost/config/detail/suffix.hpp \
   /data/data/com.termux/files/usr/include/boost/config/helper_macros.hpp \
   /data/data/com.termux/files/usr/include/boost/config/no_tr1/cmath.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/no_tr1/functional.hpp \
   /data/data/com.termux/files/usr/include/boost/config/platform/linux.hpp \
   /data/data/com.termux/files/usr/include/boost/config/pragma_message.hpp \
   /data/data/com.termux/files/usr/include/boost/config/stdlib/libcpp.hpp \
@@ -1663,8 +1667,10 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: /data/data/com.termux/files/ho
   /data/data/com.termux/files/usr/include/boost/core/ignore_unused.hpp \
   /data/data/com.termux/files/usr/include/boost/core/noinit_adaptor.hpp \
   /data/data/com.termux/files/usr/include/boost/core/pointer_traits.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/scoped_enum.hpp \
   /data/data/com.termux/files/usr/include/boost/core/span.hpp \
   /data/data/com.termux/files/usr/include/boost/core/swap.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/use_default.hpp \
   /data/data/com.termux/files/usr/include/boost/core/yield_primitives.hpp \
   /data/data/com.termux/files/usr/include/boost/cstdint.hpp \
   /data/data/com.termux/files/usr/include/boost/current_function.hpp \
@@ -1721,9 +1727,24 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: /data/data/com.termux/files/ho
   /data/data/com.termux/files/usr/include/boost/describe/detail/void_t.hpp \
   /data/data/com.termux/files/usr/include/boost/describe/members.hpp \
   /data/data/com.termux/files/usr/include/boost/describe/modifiers.hpp \
+  /data/data/com.termux/files/usr/include/boost/detail/bitmask.hpp \
+  /data/data/com.termux/files/usr/include/boost/detail/indirect_traits.hpp \
+  /data/data/com.termux/files/usr/include/boost/detail/select_type.hpp \
   /data/data/com.termux/files/usr/include/boost/detail/workaround.hpp \
   /data/data/com.termux/files/usr/include/boost/enable_shared_from_this.hpp \
   /data/data/com.termux/files/usr/include/boost/exception/exception.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/config.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/convenience.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/detail/footer.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/detail/header.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/detail/path_traits.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/directory.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/exception.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/file_status.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/operations.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/path.hpp \
+  /data/data/com.termux/files/usr/include/boost/functional/hash_fwd.hpp \
   /data/data/com.termux/files/usr/include/boost/intrusive/bs_set_hook.hpp \
   /data/data/com.termux/files/usr/include/boost/intrusive/bstree.hpp \
   /data/data/com.termux/files/usr/include/boost/intrusive/bstree_algorithms.hpp \
@@ -1784,8 +1805,20 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: /data/data/com.termux/files/ho
   /data/data/com.termux/files/usr/include/boost/intrusive/set_hook.hpp \
   /data/data/com.termux/files/usr/include/boost/io/detail/buffer_fill.hpp \
   /data/data/com.termux/files/usr/include/boost/io/detail/ostream_guard.hpp \
+  /data/data/com.termux/files/usr/include/boost/io/ios_state.hpp \
   /data/data/com.termux/files/usr/include/boost/io/ostream_put.hpp \
+  /data/data/com.termux/files/usr/include/boost/io/quoted.hpp \
+  /data/data/com.termux/files/usr/include/boost/io_fwd.hpp \
   /data/data/com.termux/files/usr/include/boost/is_placeholder.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/detail/config_def.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/detail/config_undef.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/detail/enable_if.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/detail/facade_iterator_category.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/interoperable.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/is_iterator.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/iterator_categories.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/iterator_facade.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/iterator_traits.hpp \
   /data/data/com.termux/files/usr/include/boost/limits.hpp \
   /data/data/com.termux/files/usr/include/boost/logic/tribool.hpp \
   /data/data/com.termux/files/usr/include/boost/logic/tribool_fwd.hpp \
@@ -1839,20 +1872,32 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: /data/data/com.termux/files/ho
   /data/data/com.termux/files/usr/include/boost/mp11/set.hpp \
   /data/data/com.termux/files/usr/include/boost/mp11/utility.hpp \
   /data/data/com.termux/files/usr/include/boost/mp11/version.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/always.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/and.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/apply.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/apply_fwd.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/apply_wrap.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/arg.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/arg_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/assert.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/adl_barrier.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/arg_typedef.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/arithmetic_op.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/arity.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/arity_spec.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/common_name_wknd.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/comparison_op.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/adl.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/arrays.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/bcc.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/bind.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/compiler.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/ctps.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/dtp.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/eti.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/forwarding.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/gcc.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/gpu.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/has_apply.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/has_xxx.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/integral.hpp \
@@ -1862,13 +1907,16 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: /data/data/com.termux/files/ho
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/msvc_typename.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/nttp.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/overload_resolution.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/pp_counter.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/preprocessor.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/static_constant.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/ttp.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/use_preprocessed.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/workaround.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/full_lambda.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/has_apply.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/has_tag.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/has_type.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/include_preprocessed.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/integral_wrapper.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/is_msvc_eti_arg.hpp \
@@ -1878,6 +1926,7 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: /data/data/com.termux/files/ho
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/msvc_eti_base.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/msvc_never_true.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/na.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/na_assert.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/na_fwd.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/na_spec.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/nested_type_wknd.hpp \
@@ -1885,19 +1934,32 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: /data/data/com.termux/files/ho
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/numeric_cast_utils.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/numeric_op.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/and.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/equal_to.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/less.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/or.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/times.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessor/default_params.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessor/enum.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessor/params.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/static_cast.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/template_arity.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/template_arity_fwd.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/type_wrapper.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/value_wknd.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/aux_/yes_no.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/bind.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/bind_fwd.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/bool.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/bool_fwd.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/equal_to.hpp \
@@ -1910,12 +1972,19 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: /data/data/com.termux/files/ho
   /data/data/com.termux/files/usr/include/boost/mpl/integral_c.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/integral_c_fwd.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/integral_c_tag.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/lambda.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/lambda_fwd.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/less.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/limits/arity.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/multiplies.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/next.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/next_prior.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/not.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/numeric_cast.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/or.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/placeholders.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/protect.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/quote.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/tag.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/times.hpp \
   /data/data/com.termux/files/usr/include/boost/mpl/void.hpp \
@@ -2030,6 +2099,8 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: /data/data/com.termux/files/ho
   /data/data/com.termux/files/usr/include/boost/shared_ptr.hpp \
   /data/data/com.termux/files/usr/include/boost/smart_ptr/allocate_shared_array.hpp \
   /data/data/com.termux/files/usr/include/boost/smart_ptr/bad_weak_ptr.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/atomic_count.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/atomic_count_gcc_atomic.hpp \
   /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/local_counted_base.hpp \
   /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/local_sp_deleter.hpp \
   /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/operator_bool.hpp \
@@ -2051,6 +2122,8 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: /data/data/com.termux/files/ho
   /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/spinlock_pool.hpp \
   /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/yield_k.hpp \
   /data/data/com.termux/files/usr/include/boost/smart_ptr/enable_shared_from_this.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/intrusive_ptr.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/intrusive_ref_counter.hpp \
   /data/data/com.termux/files/usr/include/boost/smart_ptr/make_shared.hpp \
   /data/data/com.termux/files/usr/include/boost/smart_ptr/make_shared_array.hpp \
   /data/data/com.termux/files/usr/include/boost/smart_ptr/make_shared_object.hpp \
@@ -2868,6 +2941,7 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: /data/data/com.termux/files/ho
   /data/data/com.termux/files/usr/include/c++/v1/iterator \
   /data/data/com.termux/files/usr/include/c++/v1/limits \
   /data/data/com.termux/files/usr/include/c++/v1/limits.h \
+  /data/data/com.termux/files/usr/include/c++/v1/list \
   /data/data/com.termux/files/usr/include/c++/v1/locale \
   /data/data/com.termux/files/usr/include/c++/v1/locale.h \
   /data/data/com.termux/files/usr/include/c++/v1/math.h \
@@ -2903,6 +2977,16 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: /data/data/com.termux/files/ho
   /data/data/com.termux/files/usr/include/c++/v1/wchar.h \
   /data/data/com.termux/files/usr/include/c++/v1/wctype.h \
   /data/data/com.termux/files/usr/include/ctype.h \
+  /data/data/com.termux/files/usr/include/curl/curl.h \
+  /data/data/com.termux/files/usr/include/curl/curlver.h \
+  /data/data/com.termux/files/usr/include/curl/easy.h \
+  /data/data/com.termux/files/usr/include/curl/header.h \
+  /data/data/com.termux/files/usr/include/curl/mprintf.h \
+  /data/data/com.termux/files/usr/include/curl/multi.h \
+  /data/data/com.termux/files/usr/include/curl/options.h \
+  /data/data/com.termux/files/usr/include/curl/system.h \
+  /data/data/com.termux/files/usr/include/curl/urlapi.h \
+  /data/data/com.termux/files/usr/include/curl/websockets.h \
   /data/data/com.termux/files/usr/include/endian.h \
   /data/data/com.termux/files/usr/include/errno.h \
   /data/data/com.termux/files/usr/include/fcntl.h \
@@ -4034,6 +4118,7 @@ src/CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.o: /data/data/com.termux/files/h
   /data/data/com.termux/files/usr/lib/clang/17/include/stdint.h
 
 src/CMakeFiles/below_zero.dir/below_zero.cpp.o: /data/data/com.termux/files/home/i-Haklab/src/below_zero.cpp \
+  /data/data/com.termux/files/home/i-Haklab/include/admin/AdminHaklab.h \
   /data/data/com.termux/files/home/i-Haklab/include/command_line_argument_parser.h \
   /data/data/com.termux/files/home/i-Haklab/include/network/NetworHaklab.h \
   /data/data/com.termux/files/home/i-Haklab/include/below_zero.h \
@@ -6359,6 +6444,16 @@ src/CMakeFiles/below_zero.dir/below_zero.cpp.o: /data/data/com.termux/files/home
   /data/data/com.termux/files/usr/include/c++/v1/wchar.h \
   /data/data/com.termux/files/usr/include/c++/v1/wctype.h \
   /data/data/com.termux/files/usr/include/ctype.h \
+  /data/data/com.termux/files/usr/include/curl/curl.h \
+  /data/data/com.termux/files/usr/include/curl/curlver.h \
+  /data/data/com.termux/files/usr/include/curl/easy.h \
+  /data/data/com.termux/files/usr/include/curl/header.h \
+  /data/data/com.termux/files/usr/include/curl/mprintf.h \
+  /data/data/com.termux/files/usr/include/curl/multi.h \
+  /data/data/com.termux/files/usr/include/curl/options.h \
+  /data/data/com.termux/files/usr/include/curl/system.h \
+  /data/data/com.termux/files/usr/include/curl/urlapi.h \
+  /data/data/com.termux/files/usr/include/curl/websockets.h \
   /data/data/com.termux/files/usr/include/endian.h \
   /data/data/com.termux/files/usr/include/errno.h \
   /data/data/com.termux/files/usr/include/fcntl.h \
@@ -8298,6 +8393,16 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: /data/data/com
   /data/data/com.termux/files/usr/include/c++/v1/wchar.h \
   /data/data/com.termux/files/usr/include/c++/v1/wctype.h \
   /data/data/com.termux/files/usr/include/ctype.h \
+  /data/data/com.termux/files/usr/include/curl/curl.h \
+  /data/data/com.termux/files/usr/include/curl/curlver.h \
+  /data/data/com.termux/files/usr/include/curl/easy.h \
+  /data/data/com.termux/files/usr/include/curl/header.h \
+  /data/data/com.termux/files/usr/include/curl/mprintf.h \
+  /data/data/com.termux/files/usr/include/curl/multi.h \
+  /data/data/com.termux/files/usr/include/curl/options.h \
+  /data/data/com.termux/files/usr/include/curl/system.h \
+  /data/data/com.termux/files/usr/include/curl/urlapi.h \
+  /data/data/com.termux/files/usr/include/curl/websockets.h \
   /data/data/com.termux/files/usr/include/endian.h \
   /data/data/com.termux/files/usr/include/errno.h \
   /data/data/com.termux/files/usr/include/fcntl.h \
@@ -9040,6 +9145,14 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: /data/data/com
 /data/data/com.termux/files/usr/include/ifaddrs.h:
 
 /data/data/com.termux/files/usr/include/fcntl.h:
+
+/data/data/com.termux/files/usr/include/curl/system.h:
+
+/data/data/com.termux/files/usr/include/curl/options.h:
+
+/data/data/com.termux/files/usr/include/curl/header.h:
+
+/data/data/com.termux/files/usr/include/curl/curl.h:
 
 /data/data/com.termux/files/usr/include/boost/atomic/detail/link.hpp:
 
@@ -10851,9 +10964,13 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: /data/data/com
 
 /data/data/com.termux/files/usr/include/boost/utility/base_from_member.hpp:
 
+/data/data/com.termux/files/usr/include/curl/urlapi.h:
+
 /data/data/com.termux/files/usr/include/boost/asio/detail/throw_exception.hpp:
 
 /data/data/com.termux/files/usr/include/c++/v1/__type_traits/is_standard_layout.h:
+
+/data/data/com.termux/files/usr/include/curl/curlver.h:
 
 /data/data/com.termux/files/usr/include/c++/v1/__type_traits/is_signed_integer.h:
 
@@ -11187,6 +11304,8 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: /data/data/com
 
 /data/data/com.termux/files/usr/include/c++/v1/__concepts/regular.h:
 
+/data/data/com.termux/files/usr/include/curl/easy.h:
+
 /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/workaround.hpp:
 
 /data/data/com.termux/files/usr/include/c++/v1/__node_handle:
@@ -11276,6 +11395,8 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: /data/data/com
 /data/data/com.termux/files/usr/include/c++/v1/__iterator/permutable.h:
 
 /data/data/com.termux/files/usr/include/c++/v1/__iterator/move_iterator.h:
+
+/data/data/com.termux/files/usr/include/curl/websockets.h:
 
 /data/data/com.termux/files/usr/include/c++/v1/__memory/concepts.h:
 
@@ -12791,6 +12912,8 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: /data/data/com
 
 /data/data/com.termux/files/usr/include/c++/v1/__functional/mem_fun_ref.h:
 
+/data/data/com.termux/files/usr/include/curl/mprintf.h:
+
 /data/data/com.termux/files/usr/include/asm-generic/errno-base.h:
 
 /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp:
@@ -12846,6 +12969,8 @@ src/CMakeFiles/below_zero.dir/command_line_argument_parser.cpp.o: /data/data/com
 /data/data/com.termux/files/usr/include/boost/thread/shared_lock_guard.hpp:
 
 /data/data/com.termux/files/usr/include/boost/mpl/aux_/value_wknd.hpp:
+
+/data/data/com.termux/files/usr/include/curl/multi.h:
 
 /data/data/com.termux/files/usr/include/c++/v1/__type_traits/is_default_constructible.h:
 

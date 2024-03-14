@@ -1,27 +1,29 @@
 // Fichero : below_zero.h
 // Autor: @demon_rip
 
-#pragma once
+#ifndef BELOW_ZERO_
+#define BELOW_ZERO_
+
 //------------------------------------------
 //
 //------------------------------------------
+#include "../include/admin/AdminHaklab.h"
 #include "../include/command_line_argument_parser.h"
 #include "../include/network/NetworHaklab.h"
-#include "../include/admin/AdminHaklab.h"
 #include <boost/beast/http/status.hpp>
 #include <boost/filesystem.hpp>
+#include <boost/filesystem/path.hpp>
 #include <boost/thread.hpp>
 #include <csignal>
 #include <cstdlib>
 #include <curl/curl.h>
 #include <fmt/color.h> // Un  mundo sin colores es  feo  .....
-#include <fmt/core.h>
 #include <fstream>
 #include <iostream>
 //------------------------------------------
 //------------------------------------------
 namespace fs = boost::filesystem;
-
+namespace po = boost::program_options;
 //------------------------------------------
 //------------------------------------------
 #define PORT_SHH 8022
@@ -58,11 +60,13 @@ enum class Color {
 };
 
 namespace haklab {
+
 // Shell que se pueden configurar
-enum class Shell {
-  zsh,
-  fish,
-};
+typedef enum {
+  ZSH, // Default
+  FISH,
+} shell;
+
 
 /*
  * borra la pantalla
@@ -95,54 +99,39 @@ void syntax_highlight(const std::string &code);
  */
 class Haklab {
 private: // ---> Variables privadas
-  std::string _shell;
-  command_line_argument_parser parser;
+  const char *m_file_name;
+  string m_user_name;
+  int m_argc;
+  const char **m_argv;
+  std::string m_shell;
   network::NetworHakaklab network;
   admin::AdminHaklab admin;
-  string IHETC{string(getenv("HOME")) + "/.local/etc/i-Haklab"};
-  string LIBEX{string(getenv("HOME")) + "/.local/libexec/i-Haklab"};
-
+  fs::path IHETC{string(getenv("HOME")) + "/.local/etc/i-Haklab"};
+  fs::path LIBEX{string(getenv("HOME")) + "/.local/libexec/i-Haklab"};
 public:
-  // contructor
-  Haklab(Shell sh)
-  {
-  switch (sh) {
-    case Shell::zsh:
-      _shell = "zsh";
-      break;  
-    case Shell::fish:
-      _shell = "fish";
+  // (nombre de shell, shell a usar)
+  Haklab(string user_name, shell sh) : m_user_name(std::move(user_name)) {
+    switch (sh) {
+    case FISH:
+      m_shell = "fish";
       break;
+    case ZSH:
+      m_shell = "zsh";
+      break;
+       }
   }
-  // Install shell 
-  if(!admin.command(_shell)){
-    cout << "Instalamdo  "  << _shell;
-    std::string command {"apt install " + _shell };
-    std::system(command.c_str());
-  };
-  }
+  // Obtener shell 
+  string getShell() { return m_shell; };
   /*
-   *
-   */
-  string apt_install(const string *pkg){
-    
-    return " ";
-  }
-  /*
-   * Atrapa el control c  
+   * Atrapa el CONTROL+c
    */
   void ctrl_c() { signal(SIGINT, k_boom); }
-   /*
-   * inisializar
-   */
-  int run(int argc, const char *argv[]);
   /*
    * Algo para ver mientra se espera
    */
   template <typename Func> void Loading(Func func) {
     hide_cursor();
-    std::vector<std::string> spinner{"█■■■■", "■█■■■", "■■█■■", "■■■█■",
-                                     "■■■■█"};
+    std::vector<std::string> spinner{"█■■■■", "■█■■■", "■■█■■", "■■■█■", "■■■■█"};
     int spinnerIndex = 0;
     boost::thread t([&]() {
       while (true) {
@@ -157,73 +146,28 @@ public:
     // Ejecuta la función proporcionada en segundo plano
     func();
     show_cursor();
-  }      // loading
-private: // ---> Funciones pribada
-  // Descargar  arcivos   
-  //
-  bool download_file(std::string url, std::string outputFilename) {
-    CURL *curl;
-    FILE *fp;
-    CURLcode result;
-    curl = curl_easy_init();
-    if (curl) {
-      fp = fopen(outputFilename.c_str(), "wb");
-      curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-      curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, NULL);
-      curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
-      result = curl_easy_perform(curl);
-      // Verifica si la descarga se realizó correctamente
-      if (result != CURLE_OK) {
-        std::cerr << "Error a descargar archivo " << endl;
-        return EXIT_FAILURE;
-      }
-      curl_easy_cleanup(curl);
-      fclose(fp);
-    }
-    return EXIT_SUCCESS;
-  };
-
-  /*  Comprueba la existencia de la key
-   *  - advierte en auto si no existe   (HAKLAB-APT-OFF )   para    quitar
-   *  - descarga en auto matico ( HAKLAB-APT-AUTO >> .zshrc)
-   */
-  void apt_source() {
-    string source = std::string(getenv("PREFIX")) + "/etc/apt/sources.list.d";
-    if (!fs::exists(source)) {
-      if (true) {
-        cout << "[ WARNING ] No found" << source << endl;
-      }
-      exit(1);
-    }
-    cout << "Se creo" << source << endl;
-  };
-  /*
-   * arg (name)
-   */
+  } // loading
+  
   void about(std::string about) {
-    if (fs::is_directory(IHETC)) {
-      std::cerr << "[Warning] " + IHETC + "No found" << std::endl;
-    }
-    // Donde esta todo
-    std::string fren = IHETC + std::basic_string("/Tools/Readme/") + about;
-    // Buscar en
-    if (!fs::exists(fren)) {
-      fren = IHETC + std::basic_string("command/") + about + ".md";
-    }
-    std::ifstream file(fren);
-    // Comprobar si se abrio el arcivo
-    if (file.is_open()) {
-      std::stringstream buffer;
-      buffer << file.rdbuf();
-      file.close();
-      // Resaltado de sintax
-      syntax_highlight(buffer.str());
-    } else {
-      // algo de color
-      // fmt::print(fmt::fg(fmt::color::dark_red),"Error\n");
-      std::cerr << "No found " + about << std::endl;
-    }
-  }
+     fs::path fren = IHETC /= std::basic_string("/Tools/Readme/") + about;
+     cout << fren << endl;
+     // Buscar en
+     if (!fs::exists(fren)) {
+      fren = IHETC /= std::basic_string("/Tools/Readme/command/") + about + ".md";
+     } else {
+       std::cerr << fren << endl;
+     }
+     std::ifstream file(fren.c_str());
+     // Comprobar si se abrio el arcivo
+     if (file.is_open()) {
+       std::stringstream buffer;
+       buffer << file.rdbuf();
+       file.close();
+       // Lo muetro 
+       syntax_highlight(buffer.str());
+     }
+   }
+};  // end  class
+};  // namespace haklab
 
-}; // end  class
-}; // namespace haklab
+#endif //  BELOW_ZERO_

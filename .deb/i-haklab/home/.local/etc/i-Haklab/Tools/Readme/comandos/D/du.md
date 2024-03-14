@@ -11,3 +11,8 @@ BanderaDescripción
 -d <número>Indicador para especificar la profundidad de un directorio para el que desea ver los resultados (por ejemplo, -d 2)
 
 --time Para obtener los resultados con la marca de tiempo de la última modificación.
+
+
+-  Buscar archivo que pesan mas de 30m  
+
+`du -h --threshold=30M ~/ | sort -n`

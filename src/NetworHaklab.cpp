@@ -24,7 +24,7 @@ using nethak = network::NetworHakaklab;
 
 
 // Descargar  arcivos   
-bool network::NetworHakaklab::DownloadFile(string URL) {
+bool nethak::DownloadFile(string URL) {
     CURL *curl;
     FILE *fp;
     CURLcode result;
@@ -178,13 +178,13 @@ bool nethak::CheckInternet(){
             curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
             if(response_code == 200) { 
             // Si la respuesta es 200, hay conexión a internet
-                std::cout << "¡Hay conexión a internet!\n";
+            // "¡Hay conexión a internet!\n";
                 curl_easy_cleanup(curl);
                 return true;
             }
         }
         curl_easy_cleanup(curl);
     }
-    std::cout << "No hay conexión a internet.\n";
+  // "No hay conexión a internet.\n";
   return false;
 }

@@ -1,22 +1,27 @@
 #pragma once
 
-#include <cstdlib>
-#include <iostream>
 #include <set>
-#include <filesystem>
+#include <boost/filesystem.hpp>
+
+
+namespace fs = boost::filesystem;
+using std::string;
 
 namespace admin {
 class AdminHaklab {
 public:
-  std::set<std::string> matchingFile(const std::string &from);
-  // Verifica si  un comando   existe   
-  bool command(const char &cm){
-    if (std::filesystem::exists("/bin/" + std::to_string(cm))) {
+  std::set<std::string> matchingFile(const string &from);
+  // Verifica si  un comando   existe  
+  bool command(string C){
+    if (fs::exists("/bin/" +  C )) {
      return true;
-    } else if (std::filesystem::exists(std::string(getenv("PREFIX")) + "/bin/" + cm)) {
+    } else if (fs::exists(string(getenv("PREFIX")) + "/bin/" + C)) {
      return true; 
     } 
      return false;
   };
+
+
 };
+
 } // namespace admin

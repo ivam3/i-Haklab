@@ -3,6 +3,7 @@
 
 CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/home/i-Haklab/main-haklab.cpp
+ /data/data/com.termux/files/home/i-Haklab/include/admin/AdminHaklab.h
  /data/data/com.termux/files/home/i-Haklab/include/command_line_argument_parser.h
  /data/data/com.termux/files/home/i-Haklab/include/network/NetworHaklab.h
  /data/data/com.termux/files/home/i-Haklab/include/below_zero.h
@@ -2327,6 +2328,16 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/c++/v1/wchar.h
  /data/data/com.termux/files/usr/include/c++/v1/wctype.h
  /data/data/com.termux/files/usr/include/ctype.h
+ /data/data/com.termux/files/usr/include/curl/curl.h
+ /data/data/com.termux/files/usr/include/curl/curlver.h
+ /data/data/com.termux/files/usr/include/curl/easy.h
+ /data/data/com.termux/files/usr/include/curl/header.h
+ /data/data/com.termux/files/usr/include/curl/mprintf.h
+ /data/data/com.termux/files/usr/include/curl/multi.h
+ /data/data/com.termux/files/usr/include/curl/options.h
+ /data/data/com.termux/files/usr/include/curl/system.h
+ /data/data/com.termux/files/usr/include/curl/urlapi.h
+ /data/data/com.termux/files/usr/include/curl/websockets.h
  /data/data/com.termux/files/usr/include/endian.h
  /data/data/com.termux/files/usr/include/errno.h
  /data/data/com.termux/files/usr/include/fcntl.h

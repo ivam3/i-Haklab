@@ -1,25 +1,27 @@
 #include "../include/below_zero.h"
 #include "../include/redteam/RedTeamHaklab.h"
 
-namespace fs = boost::filesystem;
 namespace po = boost::program_options;
+using namespace haklab;
 
 
-// main  
-int haklab::Haklab::run(int argc, const char *argv[]) {
+/* main    
+int haklab::Haklab::run() {
   try {
-    auto args = parser.parse(argc, argv);
-  
-
+    auto args = parser.parse(m_argc, m_argv);
     if (args.no_arguments()) {
-     /* fmt::print(fg(fmt::color::orange),*/
-      cout << "No argument provided on the command line" << endl;
+      fmt::print(fg(fmt::color::orange),
+      cerr << "No argument provided on the command line" << endl;
     }
 
     if (args.CreateMkt().size() != 0) {
       redteam::ResTeamHakalb::mkt(args.CreateMkt());
     }
 
+    if (args.FCheckInternet()) {
+      cout << network.CheckInternet() << endl;
+    }
+    
     if (args.FAbout().size() != 0) {
        about(args.FAbout());
     }
@@ -32,11 +34,11 @@ int haklab::Haklab::run(int argc, const char *argv[]) {
     }
 
     if (args.WepStatusCode().size() != 0) {
-      if (args.port() == 4) {
+      if (args.Fport() == 4) {
         cerr << "requeris '--port' " << endl;
         return false;
       };
-      string port = std::to_string(args.port());
+      string port = std::to_string(args.Fport());
       string host = args.WepStatusCode();
       cout << network.GetStatusCode(host, port) << endl;
     }
@@ -49,17 +51,18 @@ int haklab::Haklab::run(int argc, const char *argv[]) {
         std::cerr << "No se pudo obtener la dirección IP para la interfaz '" << address << "'" << std::endl;
       }
     }
-
+  
   } catch (po::error &ex) {
-    cerr << "Usage: i-haklablab [ options ] [ arg ]" << std::endl;
+    cerr << "Usage: i-haklab [ options ] [ arg ]" << std::endl;
     cerr << ex.what() << endl;
     return false;
   } catch (...) {
-    cout << "Unknown error\n";
+    cerr << "Unknown error\n";
     return false;
   }
   return true;
 }
+*/
 
 /*
  * Actualizar los archivos que cuisidan en el dir que este
@@ -217,29 +220,6 @@ std::string show_architecture() {
   return "(Desconocida)";
 #endif
 }
-
-// bool hack::Haklab::download_file(std::string url, std::string
-// outputFilename){
-//         CURL *curl;
-//         FILE *fp;
-//         CURLcode result;
-//         curl = curl_easy_init();
-//         if (curl) {
-//           fp = fopen(outputFilename.c_str(),"wb");
-//           curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-//           curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, NULL);
-//           curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
-//           result = curl_easy_perform(curl);
-//           curl_easy_cleanup(curl);
-//           fclose(fp);
-//           // Verifica si la descarga se realizó correctamente
-//         if (result != CURLE_OK)
-//         {
-//             return EXIT_FAILURE;
-//         }
-//     }
-//             return EXIT_SUCCESS;
-// };
 
 // void hack::Haklab::directory_iterator(const char *path){
 

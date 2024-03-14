@@ -1,9 +1,11 @@
 src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: \
   /data/data/com.termux/files/home/i-Haklab/src/NetworHaklab.cpp \
   /data/data/com.termux/files/home/i-Haklab/src/../include/network/NetworHaklab.h \
-  /data/data/com.termux/files/usr/include/c++/v1/string \
-  /data/data/com.termux/files/usr/include/c++/v1/__algorithm/max.h \
-  /data/data/com.termux/files/usr/include/c++/v1/__algorithm/comp.h \
+  /data/data/com.termux/files/usr/include/curl/curl.h \
+  /data/data/com.termux/files/usr/include/curl/curlver.h \
+  /data/data/com.termux/files/usr/include/curl/system.h \
+  /data/data/com.termux/files/usr/include/sys/types.h \
+  /data/data/com.termux/files/usr/include/c++/v1/stddef.h \
   /data/data/com.termux/files/usr/include/c++/v1/__config \
   /data/data/com.termux/files/usr/include/c++/v1/__config_site \
   /data/data/com.termux/files/usr/include/features.h \
@@ -12,6 +14,78 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: \
   /data/data/com.termux/files/usr/include/android/api-level.h \
   /data/data/com.termux/files/usr/include/bits/get_device_api_level_inlines.h \
   /data/data/com.termux/files/usr/include/android/ndk-version.h \
+  /data/data/com.termux/files/usr/lib/clang/17/include/stddef.h \
+  /data/data/com.termux/files/usr/lib/clang/17/include/__stddef_max_align_t.h \
+  /data/data/com.termux/files/usr/include/c++/v1/stdint.h \
+  /data/data/com.termux/files/usr/lib/clang/17/include/stdint.h \
+  /data/data/com.termux/files/usr/include/stdint.h \
+  /data/data/com.termux/files/usr/include/bits/wchar_limits.h \
+  /data/data/com.termux/files/usr/include/linux/types.h \
+  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/types.h \
+  /data/data/com.termux/files/usr/include/asm-generic/int-ll64.h \
+  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/bitsperlong.h \
+  /data/data/com.termux/files/usr/include/asm-generic/bitsperlong.h \
+  /data/data/com.termux/files/usr/include/linux/posix_types.h \
+  /data/data/com.termux/files/usr/include/linux/stddef.h \
+  /data/data/com.termux/files/usr/include/linux/compiler_types.h \
+  /data/data/com.termux/files/usr/include/linux/compiler.h \
+  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/posix_types.h \
+  /data/data/com.termux/files/usr/include/asm-generic/posix_types.h \
+  /data/data/com.termux/files/usr/include/bits/pthread_types.h \
+  /data/data/com.termux/files/usr/include/sys/socket.h \
+  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/fcntl.h \
+  /data/data/com.termux/files/usr/include/asm-generic/fcntl.h \
+  /data/data/com.termux/files/usr/include/bits/flock64.h \
+  /data/data/com.termux/files/usr/include/bits/flock.h \
+  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/socket.h \
+  /data/data/com.termux/files/usr/include/asm-generic/socket.h \
+  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/sockios.h \
+  /data/data/com.termux/files/usr/include/asm-generic/sockios.h \
+  /data/data/com.termux/files/usr/include/linux/sockios.h \
+  /data/data/com.termux/files/usr/include/linux/uio.h \
+  /data/data/com.termux/files/usr/include/bits/sa_family_t.h \
+  /data/data/com.termux/files/usr/include/c++/v1/stdio.h \
+  /data/data/com.termux/files/usr/include/stdio.h \
+  /data/data/com.termux/files/usr/lib/clang/17/include/stdarg.h \
+  /data/data/com.termux/files/usr/include/c++/v1/string.h \
+  /data/data/com.termux/files/usr/include/string.h \
+  /data/data/com.termux/files/usr/include/xlocale.h \
+  /data/data/com.termux/files/usr/include/bits/strcasecmp.h \
+  /data/data/com.termux/files/usr/include/strings.h \
+  /data/data/com.termux/files/usr/include/bits/seek_constants.h \
+  /data/data/com.termux/files/usr/include/c++/v1/limits.h \
+  /data/data/com.termux/files/usr/lib/clang/17/include/limits.h \
+  /data/data/com.termux/files/usr/include/limits.h \
+  /data/data/com.termux/files/usr/include/c++/v1/float.h \
+  /data/data/com.termux/files/usr/lib/clang/17/include/float.h \
+  /data/data/com.termux/files/usr/include/linux/limits.h \
+  /data/data/com.termux/files/usr/include/bits/posix_limits.h \
+  /data/data/com.termux/files/usr/include/time.h \
+  /data/data/com.termux/files/usr/include/sys/time.h \
+  /data/data/com.termux/files/usr/include/linux/time.h \
+  /data/data/com.termux/files/usr/include/bits/timespec.h \
+  /data/data/com.termux/files/usr/include/linux/time_types.h \
+  /data/data/com.termux/files/usr/include/sys/select.h \
+  /data/data/com.termux/files/usr/include/signal.h \
+  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/sigcontext.h \
+  /data/data/com.termux/files/usr/include/bits/signal_types.h \
+  /data/data/com.termux/files/usr/include/linux/signal.h \
+  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/signal.h \
+  /data/data/com.termux/files/usr/include/asm-generic/signal-defs.h \
+  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/siginfo.h \
+  /data/data/com.termux/files/usr/include/asm-generic/siginfo.h \
+  /data/data/com.termux/files/usr/include/sys/ucontext.h \
+  /data/data/com.termux/files/usr/include/sys/user.h \
+  /data/data/com.termux/files/usr/include/curl/easy.h \
+  /data/data/com.termux/files/usr/include/curl/multi.h \
+  /data/data/com.termux/files/usr/include/curl/urlapi.h \
+  /data/data/com.termux/files/usr/include/curl/options.h \
+  /data/data/com.termux/files/usr/include/curl/header.h \
+  /data/data/com.termux/files/usr/include/curl/websockets.h \
+  /data/data/com.termux/files/usr/include/curl/mprintf.h \
+  /data/data/com.termux/files/usr/include/c++/v1/string \
+  /data/data/com.termux/files/usr/include/c++/v1/__algorithm/max.h \
+  /data/data/com.termux/files/usr/include/c++/v1/__algorithm/comp.h \
   /data/data/com.termux/files/usr/include/c++/v1/__algorithm/comp_ref_type.h \
   /data/data/com.termux/files/usr/include/c++/v1/__debug \
   /data/data/com.termux/files/usr/include/c++/v1/__assert \
@@ -26,9 +100,6 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: \
   /data/data/com.termux/files/usr/include/c++/v1/__type_traits/remove_const.h \
   /data/data/com.termux/files/usr/include/c++/v1/__type_traits/remove_volatile.h \
   /data/data/com.termux/files/usr/include/c++/v1/version \
-  /data/data/com.termux/files/usr/include/c++/v1/stddef.h \
-  /data/data/com.termux/files/usr/lib/clang/17/include/stddef.h \
-  /data/data/com.termux/files/usr/lib/clang/17/include/__stddef_max_align_t.h \
   /data/data/com.termux/files/usr/include/c++/v1/__utility/declval.h \
   /data/data/com.termux/files/usr/include/c++/v1/__algorithm/max_element.h \
   /data/data/com.termux/files/usr/include/c++/v1/__iterator/iterator_traits.h \
@@ -161,29 +232,7 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: \
   /data/data/com.termux/files/usr/include/c++/v1/__type_traits/is_nothrow_default_constructible.h \
   /data/data/com.termux/files/usr/include/c++/v1/__utility/piecewise_construct.h \
   /data/data/com.termux/files/usr/include/c++/v1/cstdint \
-  /data/data/com.termux/files/usr/include/c++/v1/stdint.h \
-  /data/data/com.termux/files/usr/lib/clang/17/include/stdint.h \
-  /data/data/com.termux/files/usr/include/stdint.h \
-  /data/data/com.termux/files/usr/include/bits/wchar_limits.h \
   /data/data/com.termux/files/usr/include/c++/v1/cstring \
-  /data/data/com.termux/files/usr/include/c++/v1/string.h \
-  /data/data/com.termux/files/usr/include/string.h \
-  /data/data/com.termux/files/usr/include/xlocale.h \
-  /data/data/com.termux/files/usr/include/bits/strcasecmp.h \
-  /data/data/com.termux/files/usr/include/sys/types.h \
-  /data/data/com.termux/files/usr/include/linux/types.h \
-  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/types.h \
-  /data/data/com.termux/files/usr/include/asm-generic/int-ll64.h \
-  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/bitsperlong.h \
-  /data/data/com.termux/files/usr/include/asm-generic/bitsperlong.h \
-  /data/data/com.termux/files/usr/include/linux/posix_types.h \
-  /data/data/com.termux/files/usr/include/linux/stddef.h \
-  /data/data/com.termux/files/usr/include/linux/compiler_types.h \
-  /data/data/com.termux/files/usr/include/linux/compiler.h \
-  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/posix_types.h \
-  /data/data/com.termux/files/usr/include/asm-generic/posix_types.h \
-  /data/data/com.termux/files/usr/include/bits/pthread_types.h \
-  /data/data/com.termux/files/usr/include/strings.h \
   /data/data/com.termux/files/usr/include/c++/v1/limits \
   /data/data/com.termux/files/usr/include/c++/v1/type_traits \
   /data/data/com.termux/files/usr/include/c++/v1/__type_traits/aligned_storage.h \
@@ -237,37 +286,6 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: \
   /data/data/com.termux/files/usr/include/c++/v1/__mbstate_t.h \
   /data/data/com.termux/files/usr/include/c++/v1/wchar.h \
   /data/data/com.termux/files/usr/include/wchar.h \
-  /data/data/com.termux/files/usr/include/c++/v1/stdio.h \
-  /data/data/com.termux/files/usr/include/stdio.h \
-  /data/data/com.termux/files/usr/lib/clang/17/include/stdarg.h \
-  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/fcntl.h \
-  /data/data/com.termux/files/usr/include/asm-generic/fcntl.h \
-  /data/data/com.termux/files/usr/include/bits/flock64.h \
-  /data/data/com.termux/files/usr/include/bits/flock.h \
-  /data/data/com.termux/files/usr/include/bits/seek_constants.h \
-  /data/data/com.termux/files/usr/include/time.h \
-  /data/data/com.termux/files/usr/include/sys/time.h \
-  /data/data/com.termux/files/usr/include/linux/time.h \
-  /data/data/com.termux/files/usr/include/bits/timespec.h \
-  /data/data/com.termux/files/usr/include/linux/time_types.h \
-  /data/data/com.termux/files/usr/include/sys/select.h \
-  /data/data/com.termux/files/usr/include/signal.h \
-  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/sigcontext.h \
-  /data/data/com.termux/files/usr/include/bits/signal_types.h \
-  /data/data/com.termux/files/usr/include/c++/v1/limits.h \
-  /data/data/com.termux/files/usr/lib/clang/17/include/limits.h \
-  /data/data/com.termux/files/usr/include/limits.h \
-  /data/data/com.termux/files/usr/include/c++/v1/float.h \
-  /data/data/com.termux/files/usr/lib/clang/17/include/float.h \
-  /data/data/com.termux/files/usr/include/linux/limits.h \
-  /data/data/com.termux/files/usr/include/bits/posix_limits.h \
-  /data/data/com.termux/files/usr/include/linux/signal.h \
-  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/signal.h \
-  /data/data/com.termux/files/usr/include/asm-generic/signal-defs.h \
-  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/siginfo.h \
-  /data/data/com.termux/files/usr/include/asm-generic/siginfo.h \
-  /data/data/com.termux/files/usr/include/sys/ucontext.h \
-  /data/data/com.termux/files/usr/include/sys/user.h \
   /data/data/com.termux/files/usr/include/bits/mbstate_t.h \
   /data/data/com.termux/files/usr/include/bits/wctype.h \
   /data/data/com.termux/files/usr/include/c++/v1/__iterator/distance.h \
@@ -1104,7 +1122,6 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: \
   /data/data/com.termux/files/usr/include/linux/fcntl.h \
   /data/data/com.termux/files/usr/include/linux/openat2.h \
   /data/data/com.termux/files/usr/include/linux/stat.h \
-  /data/data/com.termux/files/usr/include/linux/uio.h \
   /data/data/com.termux/files/usr/include/sys/uio.h \
   /data/data/com.termux/files/usr/include/sys/stat.h \
   /data/data/com.termux/files/usr/include/boost/beast/core/file_stdio.hpp \
@@ -1308,13 +1325,6 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/asio/error.hpp \
   /data/data/com.termux/files/usr/include/boost/cerrno.hpp \
   /data/data/com.termux/files/usr/include/netdb.h \
-  /data/data/com.termux/files/usr/include/sys/socket.h \
-  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/socket.h \
-  /data/data/com.termux/files/usr/include/asm-generic/socket.h \
-  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/sockios.h \
-  /data/data/com.termux/files/usr/include/asm-generic/sockios.h \
-  /data/data/com.termux/files/usr/include/linux/sockios.h \
-  /data/data/com.termux/files/usr/include/bits/sa_family_t.h \
   /data/data/com.termux/files/usr/include/boost/asio/impl/error.ipp \
   /data/data/com.termux/files/usr/include/boost/asio/detail/mutex.hpp \
   /data/data/com.termux/files/usr/include/boost/asio/detail/posix_mutex.hpp \
@@ -1878,4 +1888,78 @@ src/CMakeFiles/below_zero.dir/NetworHaklab.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/beast/core/tcp_stream.hpp \
   /data/data/com.termux/files/usr/include/boost/beast/version.hpp \
   /data/data/com.termux/files/usr/include/ifaddrs.h \
-  /data/data/com.termux/files/usr/include/c++/v1/iostream
+  /data/data/com.termux/files/usr/include/c++/v1/iostream \
+  /data/data/com.termux/files/usr/include/boost/filesystem.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/config.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/auto_link.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/path.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/detail/path_traits.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/is_iterator.hpp \
+  /data/data/com.termux/files/usr/include/c++/v1/list \
+  /data/data/com.termux/files/usr/include/boost/filesystem/detail/header.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/abi_prefix.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/detail/footer.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/abi_suffix.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/iterator_facade.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/interoperable.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/or.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/or.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/detail/config_def.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/detail/config_undef.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/iterator_traits.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/iterator_categories.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/placeholders.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/arg.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/arg_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/na_assert.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/assert.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/gpu.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/pp_counter.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/arity_spec.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/arg_typedef.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/detail/facade_iterator_category.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/use_default.hpp \
+  /data/data/com.termux/files/usr/include/boost/detail/indirect_traits.hpp \
+  /data/data/com.termux/files/usr/include/boost/detail/select_type.hpp \
+  /data/data/com.termux/files/usr/include/boost/iterator/detail/enable_if.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/always.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/apply.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/apply_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/lambda.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/bind.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/bind_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/bind.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/next.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/next_prior.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/common_name_wknd.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/protect.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/full_lambda.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/quote.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/has_type.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/bcc.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/template_arity.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
+  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
+  /data/data/com.termux/files/usr/include/boost/io/quoted.hpp \
+  /data/data/com.termux/files/usr/include/boost/io/ios_state.hpp \
+  /data/data/com.termux/files/usr/include/boost/io_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/functional/hash_fwd.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/exception.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/intrusive_ptr.hpp \
+  /data/data/com.termux/files/usr/include/boost/config/no_tr1/functional.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/intrusive_ref_counter.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/atomic_count.hpp \
+  /data/data/com.termux/files/usr/include/boost/smart_ptr/detail/atomic_count_gcc_atomic.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/directory.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/file_status.hpp \
+  /data/data/com.termux/files/usr/include/boost/detail/bitmask.hpp \
+  /data/data/com.termux/files/usr/include/boost/core/scoped_enum.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/operations.hpp \
+  /data/data/com.termux/files/usr/include/boost/filesystem/convenience.hpp

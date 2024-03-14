@@ -9,7 +9,7 @@
   <span> • </span>
             <a href="https://github.com/ivam3/i-Haklab/blob/main/doc/intalacion.md">Intalacion</a>
   <span> • </span>
-               <a href="">Contribuir</a>
+               <a href="https://github.com/ivam3/i-Haklab/blob/main/doc/contribuyendo.md">Contribuir</a>
   <span> • </span>
         <a href="">Apoyo</a>
   <span> • </span>

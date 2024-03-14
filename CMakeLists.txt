@@ -26,7 +26,9 @@ target_link_libraries(${PROJECT_NAME} PUBLIC below_zero
     -lboost_thread
     -lboost_chrono
     -lfmt
+    -lcurl
     -Wall
+    -std=c++20
     )
 
 #########    Instalación  ############

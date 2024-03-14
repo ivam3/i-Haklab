@@ -1,6 +1,6 @@
 #pragma once
 
-
+#include <curl/curl.h>
 #include <string>
 #include <set>
 #include <boost/beast/http.hpp>
@@ -11,8 +11,8 @@ using std::string;
 namespace network {
   class NetworHakaklab {
     public:
-     // Download a file from url 
-      bool DownloadFile(string URL);
+     // Download a file from url  
+      bool DownloadFile( string URL);
       // Get status code of url 
       int GetStatusCode(const string &host,const string &port);
       // Send http post request with data 
