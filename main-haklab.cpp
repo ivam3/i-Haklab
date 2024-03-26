@@ -4,6 +4,7 @@
 //-------------------------------------------------
 #include "include/below_zero.h"   
 #include <boost/program_options/parsers.hpp>
+#include <boost/program_options/value_semantic.hpp>
 #include <boost/program_options/variables_map.hpp>
 
 using namespace haklab;
@@ -26,14 +27,24 @@ int main(int argc, const char *argv[]){
    *
    */
   desc.add_options()
+    ("port", po::value<int>()
+     ->default_value(4444)
+     ->value_name("num"), 
+     "Port to connect ")
+    ("host", po::value<string>()
+     ->default_value(LOCALHOST)
+     ->value_name("string"),
+     "Host to connect ")
+    ("out-dir", po::value<string>()->value_name("path"), "...")
     ("help", "Produce help message");
  /*
   *
   */
   info.add_options()
-    ("about", po::value<string>(),"Show informations about tool/framework");
+    ("about", po::value<string>()
+     ->value_name("name"),"Show informations about tool/framework");
   
-   po::variables_map variable;
+   po::variables_map vm;
    // -1 todo lo que sobra 
    po::positional_options_description positionalOPtions;
    //positionalOPtions.add();
@@ -45,23 +56,23 @@ int main(int argc, const char *argv[]){
       .options(All)
       .positional(positionalOPtions)
       .run(),
-      variable);
+      vm);
   
-  po::notify(variable); 
+  po::notify(vm); 
   
   // Logica de menu 
   //
   //  
-  if (variable.count("help")) {
+  if (vm.count("help")) {
      cout << All << endl; 
   }
 
-  if (variable.count("about")) {
-    haklab.about(variable["about"].as<string>()); 
+  if (vm.count("about")) {
+    haklab.about(vm["about"].as<string>()); 
   }
 
   } catch (po::error &ex) {
-    cerr << "Usage: i-haklab [ options ] [ arg ]" << endl;
+    cerr << "\nUsage:" << argv[0] << " [ options ] [ arg ]" << endl;
     cerr << ex.what() << endl;
     return EXIT_FAILURE;
   } catch (...) {

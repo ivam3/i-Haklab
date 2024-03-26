@@ -10,16 +10,22 @@
 #include "../include/admin/AdminHaklab.h"
 #include "../include/command_line_argument_parser.h"
 #include "../include/network/NetworHaklab.h"
+#include <boost/beast/core/file.hpp>
 #include <boost/beast/http/status.hpp>
 #include <boost/filesystem.hpp>
+#include <boost/filesystem/directory.hpp>
+#include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/thread.hpp>
+#include <cctype>
 #include <csignal>
 #include <cstdlib>
 #include <curl/curl.h>
 #include <fmt/color.h> // Un  mundo sin colores es  feo  .....
 #include <fstream>
 #include <iostream>
+#include <sstream>
+#include <string>
 //------------------------------------------
 //------------------------------------------
 namespace fs = boost::filesystem;
@@ -29,7 +35,7 @@ namespace po = boost::program_options;
 #define PORT_SHH 8022
 #define PORT_WEP 808O
 #define PORT_FTP 8021
-#define LOCALHOST 127.0.0.1
+#define LOCALHOST "127.0.0.1"
 #define ROOT_DIR getenv("PREFIX")
 
 #define SHOW_CURSOL_ANSI "\e[?25h\n";
@@ -101,8 +107,6 @@ class Haklab {
 private: // ---> Variables privadas
   const char *m_file_name;
   string m_user_name;
-  int m_argc;
-  const char **m_argv;
   std::string m_shell;
   network::NetworHakaklab network;
   admin::AdminHaklab admin;
@@ -111,6 +115,9 @@ private: // ---> Variables privadas
 public:
   // (nombre de shell, shell a usar)
   Haklab(string user_name, shell sh) : m_user_name(std::move(user_name)) {
+    if(!fs::is_directory(IHETC) && !fs::is_directory(LIBEX)){
+      cerr << "No emcuentro mis archivos " << endl;
+    }
     switch (sh) {
     case FISH:
       m_shell = "fish";
@@ -149,24 +156,46 @@ public:
   } // loading
   
   void about(std::string about) {
-     fs::path fren = IHETC /= std::basic_string("/Tools/Readme/") + about;
-     cout << fren << endl;
-     // Buscar en
-     if (!fs::exists(fren)) {
-      fren = IHETC /= std::basic_string("/Tools/Readme/command/") + about + ".md";
-     } else {
-       std::cerr << fren << endl;
-     }
-     std::ifstream file(fren.c_str());
-     // Comprobar si se abrio el arcivo
-     if (file.is_open()) {
-       std::stringstream buffer;
-       buffer << file.rdbuf();
-       file.close();
-       // Lo muetro 
-       syntax_highlight(buffer.str());
-     }
-   }
+     fs::path fren = IHETC /= std::basic_string("/Tools/Readme/");
+     // Directorio base 
+     if (!fs::is_directory(IHETC)) {
+        cerr << "[ERROR] " << IHETC << endl; 
+     };
+     // Archivos 
+     if (fs::exists(fren /= std::to_string(std::toupper(about[0])))) {
+       vector<string> files;
+       for(const auto &entry : fs::directory_iterator(fren /= std::to_string(std::toupper(about[0])))){
+        if(entry.is_regular_file() && entry.path().filename().extension() == ".md"){
+          files.push_back(entry.path().filename().stem().string());
+        }
+       };
+
+       bool encontrado{false};
+       for(const auto& file : files){
+          if (file == about) {
+            encontrado = true;
+            break;
+          }
+       }
+
+       if(encontrado){
+       std::fstream fd(fren.string() + std::to_string(std::toupper(about[0])) + about.c_str());
+       if (fd.is_open()) {
+         std::stringstream buffer;
+         buffer << fd.rdbuf();
+         fd.close();
+         syntax_highlight(buffer.str());
+       }  
+       } else {
+         cout << "No se encontró '" << about << "', archivos disponibles con inicial '" << about[0] << "':" << endl;
+            for (const auto &file : files) {
+                cout << " - " << file << endl;
+            } 
+       }
+    } else {
+        cout << "No se encontró la carpeta para la letra '" << std::toupper(about[0]) << "'" << endl;
+    }
+  }
 };  // end  class
 };  // namespace haklab
 
