@@ -35,7 +35,9 @@ int main(int argc, const char *argv[]){
      ->default_value(LOCALHOST)
      ->value_name("string"),
      "Host to connect ")
-    ("out-dir", po::value<string>()->value_name("path"), "...")
+    ("out-dir", po::value<string>()
+     ->value_name("path"), "...")
+    ("interface", po::value<string>()->default_value("wlan0"), "..")
     ("help", "Produce help message");
  /*
   *

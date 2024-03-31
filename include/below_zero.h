@@ -157,44 +157,27 @@ public:
   
   void about(std::string about) {
      fs::path fren = IHETC /= std::basic_string("/Tools/Readme/");
+     char ab = std::toupper(about[0]);
+     string s(1,ab);
      // Directorio base 
      if (!fs::is_directory(IHETC)) {
-        cerr << "[ERROR] " << IHETC << endl; 
+        cerr << "[ERROR] No found " << IHETC << endl; 
      };
      // Archivos 
-     if (fs::exists(fren /= std::to_string(std::toupper(about[0])))) {
-       vector<string> files;
-       for(const auto &entry : fs::directory_iterator(fren /= std::to_string(std::toupper(about[0])))){
-        if(entry.is_regular_file() && entry.path().filename().extension() == ".md"){
-          files.push_back(entry.path().filename().stem().string());
-        }
-       };
+     if (!fs::exists(fren /= s)) {
+        cerr << "No tengo esta inicial  " << s << endl;      
+     };
 
-       bool encontrado{false};
-       for(const auto& file : files){
-          if (file == about) {
-            encontrado = true;
-            break;
-          }
-       }
 
-       if(encontrado){
-       std::fstream fd(fren.string() + std::to_string(std::toupper(about[0])) + about.c_str());
+       std::fstream fd(fren.c_str() +  string( "/")  + about.c_str() + ".md");
        if (fd.is_open()) {
          std::stringstream buffer;
          buffer << fd.rdbuf();
          fd.close();
-         syntax_highlight(buffer.str());
-       }  
+         syntax_highlight(buffer.str()); 
        } else {
-         cout << "No se encontró '" << about << "', archivos disponibles con inicial '" << about[0] << "':" << endl;
-            for (const auto &file : files) {
-                cout << " - " << file << endl;
-            } 
+          cout << "Ufff no pude abrir el archivo " << endl;
        }
-    } else {
-        cout << "No se encontró la carpeta para la letra '" << std::toupper(about[0]) << "'" << endl;
-    }
   }
 };  // end  class
 };  // namespace haklab
