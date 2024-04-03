@@ -29,3 +29,10 @@ adb connect localhost:5555
 ```bash
 adb devices
 ```
+# Instalar apk 
+
+
+
+```bash
+$ adb -s $DEVICE_ID instalar -r  name.apk
+```
