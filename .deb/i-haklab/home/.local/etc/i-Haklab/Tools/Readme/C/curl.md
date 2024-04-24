@@ -6,9 +6,9 @@ Opciones comunes
 
 -c, --cookie-jar <file name> Archivo para guardar las cookies de respuesta.
 
--d, --data <data> Envía los datos especificados en la solicitud POST. Detalles proporcionados a continuación.
+- `-d`, `--data <data>` Envía los datos especificados en la solicitud POST. Detalles proporcionados a continuación.
 
--f, --fail Falla silenciosamente (no muestre el formulario de error HTML si se devuelve).
+- `-f`, `--fail` Falla silenciosamente (no muestre el formulario de error HTML si se devuelve).
 
 -F, --form <name=content> Enviar datos del formulario.
 
@@ -16,11 +16,11 @@ Opciones comunes
 
 -i, --include Incluya encabezados HTTP en la salida.
 
--I, --head Obtener encabezados solamente.
+- `-I`, --head Obtener encabezados solamente.
 
--k, --insecure Permita que las conexiones inseguras tengan éxito.
+- `-k`, --insecure Permita que las conexiones inseguras tengan éxito.
 
--L, --location Seguir redireccionamientos.
+- `-L`, --location Seguir redireccionamientos.
 
 -o, --output <file> Escribir salida en . Se puede usar --create-dirsjunto con esto para crear cualquier directorio especificado en la -oruta.
 

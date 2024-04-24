@@ -45,10 +45,10 @@ setopt HIST_REDUCE_BLANKS       # Elimina espacios en blanco adicionales de cada
 setopt NO_CASE_GLOB             # No distinge entre mayuscula y minuscula
 
 # ---------------(Alias)-------------------
-alias ls="lsd -h --color='auto'"
-alias lsa='lsd -a'
-alias ll='lsd -l'
-alias la='lsd -la'
+# alias ls="lsd -h --color='auto'"
+# alias lsa='lsd -a'
+# alias ll='lsd -l'
+# alias la='lsd -la'
 
 
 alias -g ...='../..'
@@ -59,11 +59,6 @@ alias -g .......='../../../../../..'
 alias -g ........='../../../../../../..'
 
 
-#--------------------------------
-alias traductor='trans'
-alias tds='traductor -b :es'
-alias tdn='traductor -b :en'
-#--------------------------------
 # Usar por default C++20
 
 

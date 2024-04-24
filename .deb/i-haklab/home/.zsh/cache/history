@@ -6420,3 +6420,921 @@ Call Stack (most recent call first):\
 : 1700784475:0;tds "// 'num' is statically typed as an integer"
 : 1700784493:0;tds " 'num' is statically typed as an integer"
 : 1700785140:0;bash update.sh
+: 1712508663:0;clea
+: 1712508666:0;clear
+: 1712508682:0;nvim .zhrc
+: 1712508694:0;nvim .zshrc
+: 1712508853:0;ex
+: 1712508899:0;bat dns
+: 1712508908:0;rm dns
+: 1712508916:0;bat lsh.c
+: 1712508941:0;rm lsh.c
+: 1712508949:0;clear
+: 1712508979:0;tds "// 'num' is statically typed as an integer"
+: 1712509013:0;ls i-Haklab/.deb/i-haklab/home
+: 1712509023:0;ls i-Haklab/.deb/i-haklab/home -a
+: 1712509036:0;ls i-Haklab/.deb/i-haklab/home .local
+: 1712509058:0;ls i-Haklab/.deb/i-haklab/home/.local
+: 1712509103:0;ls -a
+: 1712509108:0;ls .config
+: 1712509122:0;ls i-Haklab/.deb/i-haklab/home/.config
+: 1712509177:0;bat
+: 1712509215:0;bat .zshrc
+: 1712509282:0;cd .zsh
+: 1712509289:0;cd start-zsh
+: 1712509310:0;bash start-zsh.sh
+: 1712509365:0;zsh start-zsh.sh
+: 1712509422:0;cd i-Haklab
+: 1712509460:0;nvim notas.md
+: 1712513126:0;cd i-Haklab
+: 1712513139:0;cd downloads
+: 1712513145:0;cd building-c2-implants-in-cpp-master
+: 1712513160:0;cd chapter_2-2
+: 1712513164:0;cd Skytree
+: 1712513175:0;bat requirements.txt
+: 1712513194:0;../
+: 1712513197:0;../
+: 1712513210:0;cd fireworks_client_final
+: 1712513214:0;cf Fireworks
+: 1712513217:0;cd Fireworks
+: 1712513224:0;bat fireworks.py
+: 1712513312:0;../
+: 1712513315:0;../
+: 1712513344:0;clear
+: 1712513355:0;rm index.html
+: 1712513366:0;clear
+: 1712522029:0;cd i-Haklab
+: 1712522033:0;cd include
+: 1712522041:0;mkdir C2
+: 1712522120:0;nvim C2/implant.h
+: 1712522383:0;nvim C2/tasks.h
+: 1712522447:0;nvim C2/results.h
+: 1712522556:0;nvim C2/main.cpp
+: 1712522601:0;cd C2
+: 1712522609:0;clang++ main.cpp
+: 1712522628:0;clang++ main.cpp -I ./
+: 1712522640:0;clang++ main.cpp -L ./
+: 1712523941:0;../
+: 1712523949:0;rm C2 -rd
+: 1712523954:0;cd downloads
+: 1712523967:0;cd building-c2-implants-in-cpp-master
+: 1712523981:0;cd chapter_2-1
+: 1712523985:0;cd Skytree
+: 1712524002:0;pip install wheel
+: 1712524036:0;pip install -r requirements.txt
+: 1712524200:0;python listening_post.py
+: 1712524472:0;python resources.py
+: 1712524481:0;ps
+: 1712524485:0;ps -a
+: 1712524493:0;ps -alx
+: 1712524515:0;python listening_post.py
+: 1712524531:0;python resources.py
+: 1712525990:0;../
+: 1712525992:0;../
+: 1712526005:0;tree skytree_listening_post_final
+: 1712526015:0;tree raindoll_implant_final
+: 1712526031:0;cd raindoll_implant_final
+: 1712526035:0;cd RainDoll
+: 1712526048:0;bat RainDoll
+: 1712526051:0;bat RainDoll.sln
+: 1712526059:0;cd RainDoll
+: 1712526082:0;gcc main.cpp
+: 1712526141:0;gcc main.cpp tasks.cpp results.cpp implant.cpp -L ./
+: 1712526192:0;gcc main.cpp results.cpp implant.cpp -L ./
+: 1712528834:0;apt install tmux
+: 1712528865:0;cd .zsh
+: 1712528870:0;cd start-zsh
+: 1712528874:0;zsh start-zsh.sh
+: 1712528881:0;clear
+: 1712528897:0;ls -a
+: 1712528921:0;ln -s i-Haklab/.deb/i-haklab/home/.tmux
+: 1712528938:0;cd i-Haklab
+: 1712528949:0;xs i-Haklab
+: 1712528952:0;cd i-Haklab
+: 1712528956:0;nvim notas.md
+: 1712531885:0;cd i-Haklab
+: 1712531940:0;cd downloads/building-c2-implants-in-cpp-master
+: 1712531958:0;cd chapter_4-1
+: 1712531969:0;tree RainDoll
+: 1712531979:0;cd Fireworks
+: 1712531989:0;cat fr
+: 1712531995:0;cat fireworks.py
+: 1712532041:0;cd downloads/building-c2-implants-in-cpp-master/chapter_4-1/Fireworks
+: 1712532051:0;cat fireworks.py
+: 1712532798:0;nvim cli.cpp
+: 1712532816:0;clang++ cli.cpp
+: 1712533046:0;nvim cli.cpp
+: 1712533077:0;clang++ cli.cpp
+: 1712533091:0;nvim cli.cpp
+: 1712533107:0;clang++ cli.cpp
+: 1712533408:0;nvim cli.cpp
+: 1712533431:0;clang++ cli.cpp
+: 1712534308:0;clang++ cli.cpp -lboost_system -lboost_json
+: 1712534421:0;clang++ cli.cpp -lboost_system -lboost_json -lprogram_options
+: 1712534436:0;clang++ cli.cpp -lboost_system -lboost_json -lboost_program_options
+: 1712534481:0;bat i-Haklab/CMakeLists.txt
+: 1712534500:0;clang++ cli.cpp -lboost_system -lboost_json -lboost_program_options
+: 1712534661:0;clang++ cli.cpp -lboost_system -lboost_json -lboost_program_options -lssl -lcrypto
+: 1712534701:0;./a.out
+: 1712534710:0;./a.out --help
+: 1712534884:0;./a.out --list-tasks
+: 1712540895:0;Ã±exit
+: 1712540916:0;nvim i-Haklab/main-haklab.cpp
+: 1712541099:0;trans -b :es "Helper function to make API GET requests"
+: 1712543523:0;cd i-Haklab
+: 1712543544:0;nvim CMakeLists.txt
+: 1712543593:0;cmake --build build
+: 1712543670:0;nvim include/below_zero.h
+: 1712543759:0;cmake --build build
+: 1712543912:0;nvim include/below_zero.h
+: 1712543917:0;fg
+: 1712543940:0;cmake --build build
+: 1712544090:0;./build/i-haklab
+: 1712544094:0;./build/i-haklab --help
+: 1712544114:0;nvim main-haklab.cpp
+: 1712544467:0;cmake --build build
+: 1712544545:0;./build/i-haklab --help
+: 1712544562:0;./build/i-haklab --help-module-net
+: 1712544582:0;./build/i-haklab --list-tasks
+: 1712544596:0;./build/i-haklab --list-tasks lop
+: 1712544646:0;nvim main-haklab.cpp
+: 1712545016:0;clang-format -i ./main-haklab.cpp
+: 1712545029:0;i-haklab --about clan
+: 1712545043:0;i-haklab --about clang-format
+: 1712545085:0;nvim main-haklab.cpp
+: 1712545166:0;./build/i-haklab --list-tasks --host "127.0.0.1" --port "5000"
+: 1712545171:0;tmux
+: 1712545176:0;./build/i-haklab --list-tasks --host "127.0.0.1" --port "5000"
+: 1712545187:0;cd downloads
+: 1712545190:0;cd building-c2-implants-in-cpp-master
+: 1712545202:0;cd chapter_4-1
+: 1712545208:0;cd RainDoll
+: 1712545213:0;../
+: 1712545220:0;cd Skytree/
+: 1712545227:0;../
+: 1712545230:0;../
+: 1712545236:0;tree -d ./
+: 1712545298:0;cd chapter_2-1
+: 1712545301:0;cd Skytree
+: 1712545314:0;python resources.py
+: 1712545322:0;python listening_post.py
+: 1712545333:0;./build/i-haklab --list-tasks --host "127.0.0.1" --port "5000"
+: 1712545372:0;nvim include/below_zero.h
+: 1712545396:0;nvim main-haklab.cpp
+: 1712545488:0;nvim include/network/NetworHaklab.h
+: 1712545579:0;cmake --build build
+: 1712545740:0;./build/i-haklab --h
+: 1712545760:0;./build/i-haklab --help-module-c2
+: 1712545771:0;./build/i-haklab --list-t
+: 1712545783:0;./build/i-haklab --list-tasks
+: 1712545791:0;./build/i-haklab --list-tasks lop
+: 1712545799:0;./build/i-haklab --list-tasks lop 7
+: 1712545806:0;./build/i-haklab --list-tasks "lop"
+: 1712545840:0;./a.out --list-tasks
+: 1712546125:0;ls -a
+: 1712546135:0;../
+: 1712546138:0;../
+: 1712546151:0;cd skytree_listening_post_final
+: 1712546155:0;cd Skytree
+: 1712546182:0;ln -s ../../chapter_2-1
+: 1712546194:0;ln -s ../../chapter_2-1/Skytree/__pycache__
+: 1712546212:0;python listening_post.py
+: 1712546222:0;./build/i-haklab --list-tasks
+: 1712546228:0;./build/i-haklab --list-tasks lop
+: 1712546238:0;cs
+: 1712546250:0;./build/i-haklab --list-tasks
+: 1712546269:0;./a.out --list-tasks
+: 1712546366:0;./a.out --list-tasks
+: 1712546451:0;cd i-Haklab
+: 1712546457:0;./build/i-haklab --list-tasks
+: 1712546476:0;nvim main-haklab.cpp
+: 1712546615:0;./build/i-haklab --list-results
+: 1712546632:0;./a.out --list-results
+: 1712546706:0;nvim i-Haklab/main-haklab.cpp
+: 1712547232:0;cmake --build build
+: 1712547241:0;cd i-Haklab
+: 1712547244:0;cmake --build build
+: 1712547318:0;./build/i-haklab --list-results
+: 1712547324:0;./build/i-haklab --list-results lop
+: 1712547359:0;cmake --install build --perfix=$PREFIX
+: 1712547382:0;cmake --install build --prefix=$PREFIX
+: 1712547385:0;./build/i-haklab --list-results lop
+: 1712547389:0;./build/i-haklab --list-results
+: 1712547409:0;nvim main-haklab.cpp
+: 1712547588:0;bat cli.cpp
+: 1712547830:0;cd downloads/building-c2-implants-in-cpp-master
+: 1712547854:0;cd fireworks_client_final
+: 1712547860:0;cd Fireworks
+: 1712547861:0;lw
+: 1712547873:0;bat fireworks.py
+: 1712548021:0;cd downloads/building-c2-implants-in-cpp-master/raindoll_implant_final
+: 1712548026:0;cd RainDoll
+: 1712548032:0;cd RainDoll
+: 1712548049:0;bat tasks.h
+: 1712548061:0;bat tasks.cpp
+: 1712548251:0;cd downloads/building-c2-implants-in-cpp-master/fireworks_client_final/Fireworks
+: 1712548282:0;ln -s ../../chapter_2-1/Skytree/__pycache__
+: 1712548295:0;python fireworks.py
+: 1712548306:0;bat fireworks.py
+: 1712548323:0;../../
+: 1712548331:0;cd natsumi_framework_final
+: 1712548335:0;cd Natsumi
+: 1712548341:0;bat Fireworks
+: 1712548345:0;ls Fireworks
+: 1712548358:0;cd RainDoll
+: 1712548363:0;cd RainDoll
+: 1712548367:0;../../
+: 1712548372:0;cd Skytree
+: 1712548384:0;ls samples
+: 1712548404:0;bat resources.py
+: 1712548462:0;ln -s ../../../chapter_2-1/Skytree/__pycache__
+: 1712548472:0;python listening_post.py
+: 1712548520:0;i-haklab --help-module-c2
+: 1712548538:0;./a.out --list-history
+: 1712548585:0;bat i-Haklab/include/network/NetworHaklab.h
+: 1712548887:0;nvim i-Haklab/main-haklab.cpp
+: 1712548947:0;cmake --build build
+: 1712548957:0;cd i-Haklab
+: 1712548959:0;cmake --build build
+: 1712549023:0;./build/i-haklab
+: 1712549028:0;./build/i-haklab --help
+: 1712549038:0;./build/i-haklab --help-module-c2
+: 1712549048:0;./build/i-haklab --list-tasks
+: 1712549059:0;nvim main-haklab.cpp
+: 1712549119:0;cat main-haklab.cpp
+: 1712549273:0;nvim main-haklab.cpp
+: 1712549417:0;cmake --build build
+: 1712549503:0;./build/i-haklab --list-tasks
+: 1712549516:0;./build/i-haklab --bo
+: 1712549522:0;./build/i-haklab --ba
+: 1712549531:0;./build/i-haklab --ab
+: 1712549540:0;./build/i-haklab --about
+: 1712549546:0;./build/i-haklab --about nm
+: 1712549552:0;./build/i-haklab --about nmap
+: 1712549560:0;clear
+: 1712593710:0;cd i-Haklab
+: 1712593716:0;cd include
+: 1712593736:0;mkdir client
+: 1712594255:0;cd downloads/building-c2-implants-in-cpp-master/chapter_2-1/Skytree
+: 1712594279:0;python listening_post.py
+: 1712594440:0;cd downloads/building-c2-implants-in-cpp-master/chapter_2-1/Skytree
+: 1712594449:0;python requirements.txt
+: 1712594566:0;exiy
+: 1712611788:0;trans :es "semilla"
+: 1712611836:0;trans :en "semilla"
+: 1712622039:0;trand :es Channel
+: 1712622046:0;trand :es "Channel"
+: 1712622051:0;trans :es "Channel"
+: 1712622539:0;trans :es "gracias"
+: 1712622551:0;trans :en "gracias"
+: 1712626695:0;ls .tmux -a
+: 1712626715:0;ln -s .tmux/.tmux.conf
+: 1712626720:0;ls -a
+: 1712626751:0;exit;exit
+: 1712628738:0;cd i-Haklab
+: 1712628741:0;nvim main-haklab.cpp
+: 1712629169:0;ps
+: 1712629174:0;ps ax f
+: 1712629194:0;tmux
+: 1712629205:0;kill tmux
+: 1712629213:0;pkill tmux
+: 1712629220:0;ps ax f
+: 1712629232:0;cd i-Haklab
+: 1712629237:0;nvim main-haklab.cpp
+: 1712629394:0;nvim include/network/NetworHaklab.h
+: 1712629439:0;cd include
+: 1712629450:0;rm client -d
+: 1712629540:0;netstat -tulpn | grep LISTEN\
+\
+tcp 0 0 0.0.0.0:445 0.0.0.0:* LISTEN -\
+tcp 0 0 0.0.0.0:3333 0.0.0.0:* LISTEN 6866/./bin/server <===============\
+tcp 0 0 0.0.0.0:139 0.0.0.0:* LISTEN -\
+tcp 0 0 127.0.0.53:53 0.0.0.0:* LISTEN -\
+tcp 0 0 0.0.0.0:22 0.0.0.0:* LISTEN -\
+tcp 0 0 127.0.0.1:631 0.0.0.0:* LISTEN -\
+tcp 0 0 127.0.0.1:5433 0.0.0.0:* LISTEN -\
+tcp6 0 0 :::445 :::* LISTEN -\
+tcp6 0 0 :::5000 :::* LISTEN -\
+tcp6 0 0 :::5001 :::* LISTEN -\
+tcp6 0 0 :::139 :::* LISTEN -\
+tcp6 0 0 :::22
+: 1712629549:0;netstat -tulpn | grep LISTEN
+: 1712629882:0;cd c1
+: 1712629886:0;cd c++
+: 1712629898:0;nvim NET
+: 1712629905:0;mkdir Net
+: 1712629908:0;cd Net
+: 1712629915:0;mkdir client
+: 1712629918:0;cd client
+: 1712629925:0;nvim client.cpp
+: 1712631999:0;trans :es send
+: 1712632563:0;mv client.cpp sercer.cpp
+: 1712632567:0;nvim sercer.cpp
+: 1712633804:0;clang++ sercer.cpp -o server -lboost_system
+: 1712633823:0;./server
+: 1712633886:0;mv sercer.cpp server.cpp
+: 1712633895:0;nvim client.cpp
+: 1712634662:0;clang++ client.cpp -o client -lboost_system
+: 1712634684:0;./server
+: 1712634690:0;./client
+: 1712635526:0;clear
+: 1712635536:0;apt install tmux
+: 1712635547:0;clesr
+: 1712635549:0;clear
+: 1712635566:0;tmux
+: 1712635577:0;clear
+: 1712635584:0;./server
+: 1712635591:0;./client
+: 1712635868:0;clear
+: 1712635881:0;cat server.cpp
+: 1712635936:0;cat client.cpp
+: 1712636902:0;nvim server
+: 1712636913:0;nvim client.cpp
+: 1712637440:0;unzip cryptopp890.zip
+: 1712637521:0;rm *.p
+: 1712637527:0;rm *.p -rfd
+: 1712637534:0;rm ./*.p -rfd
+: 1712638150:0;clear
+: 1712638172:0;nvim server2.cpp
+: 1712638792:0;cd c++/Net/client
+: 1712638799:0;bat server
+: 1712638802:0;bat server.cpp
+: 1712640144:0;cd c++/Net/client
+: 1712640150:0;nvim server2.cpp
+: 1712640165:0;nvim server3.cpp
+: 1712640483:0;bat client
+: 1712640486:0;bat client.cpp
+: 1712640861:0;nvim client.cpp
+: 1712671260:0;cd i-Haklab
+: 1712671267:0;nvim main-haklab.cpp
+: 1712672481:0;cd c++/Net/client
+: 1712672500:0;nvim asincrone_server.cpp
+: 1712672546:0;clang++ asincrone_server.cpp -o asincrone_server -lboost_system
+: 1712672627:0;nvim asincrone_server.cpp
+: 1712676824:0;cd c++/Net
+: 1712676829:0;cd client
+: 1712676854:0;nvim client.cpp
+: 1712703900:0;bat cli.cpp
+: 1712703978:0;clewr
+: 1712716692:0;rm cr*.h
+: 1712716700:0;rm "cr*.h"
+: 1712716707:0;rm "cr*.h" -rd
+: 1712716722:0;cd downloads
+: 1712716724:0;rm "cr*.h" -rd
+: 1712716742:0;rm "*.h" -rd
+: 1712716747:0;rm "./*.h" -rd
+: 1712716763:0;cd downloads
+: 1712716766:0;rm "./*.h" -rd
+: 1712716788:0;cd building-c2-implants-in-cpp-master
+: 1712716804:0;cd skytree_listening_post_final/Skytree
+: 1712716805:0;s
+: 1712716806:0;l
+: 1712791165:0;exir
+: 1712791171:0;cd i-Haklab
+: 1712791208:0;bat notas.md
+: 1712791234:0;cat notas.md
+: 1712791286:0;echo "cmake --build build" > build_sh.sh
+: 1712791312:0;nvim build
+: 1712791355:0;nvim build_sh.sh
+: 1712791482:0;chmut +x build_sh.sh
+: 1712791489:0;bash build_sh.sh
+: 1712791616:0;i-haklab --help
+: 1712791705:0;cd include
+: 1712791710:0;bat command_line_argument_parser.h
+: 1712791762:0;rm command_line_argument_parser.h
+: 1712791779:0;bat admin/AdminHaklab.h
+: 1712791803:0;rm admin
+: 1712791807:0;rm admin -rd
+: 1712791810:0;clear
+: 1712791822:0;bat .zshrc
+: 1712791829:0;bat .zshrc
+: 1712791858:0;cd i-Haklab
+: 1712791861:0;cleqr
+: 1712791863:0;clear
+: 1712791874:0;nvim notas.md
+: 1712791982:0;nvim include/below_zero.h
+: 1712793426:0;cd i-Haklab
+: 1712793434:0;nvim include/below_zero.h
+: 1712794632:0;cd cd src
+: 1712794636:0;cd src/
+: 1712794645:0;bat AdminHaklab.cpp
+: 1712794651:0;rm AdminHaklab.cpp
+: 1712794667:0;bat CMakeLists.txt
+: 1712794682:0;bat command_line_argument_parser.cpp
+: 1712794709:0;la
+: 1712794713:0;rm command_line_argument_parser.cpp
+: 1712794726:0;nvim CMakeLists.txt
+: 1712794754:0;../
+: 1712794766:0;bash build_sh.sh
+: 1712794829:0;nvim main-haklab.cpp
+: 1712794879:0;nvim include/below_zero.h
+: 1712797286:0;trans :es "Must remain in pool. Max +240 per day"
+: 1712797374:0;ls /inet/
+: 1712798129:0;cd i-Haklab
+: 1712798134:0;nvim include/below_zero.h
+: 1712798429:0;exut
+: 1712810619:0;trans :es "Must remain in pool. Max +240 per day"
+: 1712867115:0;cd i-Haklab
+: 1712867129:0;cd c++/Net/client
+: 1712867137:0;cat server.cpp
+: 1712867237:0;cat client.cpp
+: 1712867631:0;nvim 1.cpp
+: 1712867721:0;clang++ 1.cpp -o 1 -lboost_system
+: 1712867742:0;./1
+: 1712867762:0;./client
+: 1712867843:0;bat 1.cpp
+: 1712869007:0;ezit
+: 1712869016:0;nvim 1.cpp
+: 1712869277:0;trans :es "steady"
+: 1712869314:0;trans :es "steady time"
+: 1712869329:0;nvim 1.cpp
+: 1712869567:0;clang++ 1.cpp -o 1 -lboost_system
+: 1712869584:0;./1
+: 1712869842:0;nvim 1.cpp
+: 1712870084:0;clang++ 1.cpp -o 1 -lboost_system
+: 1712870111:0;bat 1.cpp
+: 1712870193:0;trans :es "steady time" -b
+: 1712870440:0;clang++ 1.cpp -o 1 -lboost_system -L/data/data/com.termux/files/usr/include/boost
+: 1712870706:0;clang++ 1.cpp -o 1 -lboost_system -lboost_asio
+: 1712870750:0;nvim 1.cpp
+: 1712870800:0;clang++ 1.cpp -o 1 -lboost_system
+: 1712870825:0;nvim 1.cpp
+: 1712870836:0;clang++ 1.cpp -o 1 -lboost_system
+: 1712870863:0;./1
+: 1712870881:0;bat 1.cpp
+: 1712871402:0;nvim 1.cpp
+: 1712871421:0;clang++ 1.cpp -o 1 -lboost_system
+: 1712871449:0;./1
+: 1712871791:0;bat c++/Net/client/server.cpp
+: 1712871975:0;bat c++/Net/client/client.cpp
+: 1712872725:0;cd i-Haklab
+: 1712872738:0;nvim main-haklab.cpp
+: 1712873081:0;bash build_sh.sh
+: 1712881799:0;trans :es "join"
+: 1712887176:0;cd i-Haklab
+: 1712887184:0;nvim include/below_zero.h
+: 1712887377:0;bash build_sh.sh
+: 1712887417:0;i-haklab
+: 1712887437:0;i-haklab --about nm
+: 1712887443:0;i-haklab --about nmap
+: 1712887456:0;nvim main-haklab.cpp
+: 1712887936:0;bash build_sh.sh
+: 1712887977:0;i-haklab --about nmap
+: 1712887983:0;i-haklab --about nm
+: 1712887992:0;i-haklab --client
+: 1712888002:0;i-haklab --client c
+: 1712888021:0;i-haklab --help
+: 1712888038:0;i-haklab --help-module-c2
+: 1712888052:0;nvim include
+: 1712888068:0;nvim main-haklab.cpp
+: 1712888754:0;nvim include/below_zero.h
+: 1712888786:0;nvim main-haklab.cpp
+: 1712888953:0;bash build_sh.sh
+: 1712889002:0;i-haklab --help-module-c2
+: 1712889012:0;i-haklab --help-module-c
+: 1712889017:0;i-haklab --help-module-c9
+: 1712889024:0;i-haklab --help-module-c2
+: 1712889029:0;i-haklab --help
+: 1712889072:0;nvim main-haklab.cpp
+: 1712889153:0;bash build_sh.sh
+: 1712889187:0;i-haklab --help
+: 1712889217:0;i-haklab --client
+: 1712889228:0;i-haklab --client 127.0.0.1
+: 1712889242:0;i-haklab --client "127.0.0.1"
+: 1712889276:0;i-haklab --client '127.0.0.1'
+: 1712889299:0;i-haklab --port 89
+: 1712889311:0;nvim main-haklab.cpp
+: 1712889632:0;nvim include/below_zero.h
+: 1712889667:0;nvim main-haklab.cpp
+: 1712889699:0;bash build_sh.sh
+: 1712889746:0;i-haklab --helo
+: 1712889749:0;i-haklab --help
+: 1712889758:0;i-haklab --client
+: 1712889776:0;i-haklab --client "127.0.0.1"
+: 1712889789:0;nvim main-haklab.cpp
+: 1712889840:0;bash build_sh.sh
+: 1712889884:0;i-haklab --client "127.0.0.1"
+: 1712889893:0;i-haklab --client 127.0.0.1
+: 1712889916:0;nvim include/network/NetworHaklab.h
+: 1712906419:0;cd i-Haklab
+: 1712906428:0;nvim include/network/NetworHaklab.h
+: 1712906712:0;nvim main-haklab.cpp
+: 1712906724:0;nvim include/below_zero.h
+: 1712906741:0;nvim main-haklab.cpp
+: 1712906927:0;nvim include/below_zero.h
+: 1712906986:0;nvim main-haklab.cpp
+: 1712907008:0;bash build_sh.sh
+: 1712907141:0;nvim src/CMakeLists.txt
+: 1712907158:0;bash build_sh.sh
+: 1712907209:0;nvim main-haklab.cpp
+: 1712907225:0;bash build_sh.sh
+: 1712907287:0;i-haklab --client
+: 1712907298:0;i-haklab --client 127.0.0.1
+: 1712907346:0;cd c++/Net/client/
+: 1712907349:0;./server
+: 1712907355:0;i-haklab --client 127.0.0.1
+: 1712907369:0;bat client.cpp
+: 1712907426:0;nvim main-haklab.cpp
+: 1712907443:0;nvim include/network/NetworHaklab.h
+: 1712907714:0;bash build_sh.sh
+: 1712907725:0;./server
+: 1712907758:0;i-haklab --client 127.0.0.1
+: 1712907819:0;pkill i-haklab
+: 1712907828:0;ps afx
+: 1712907858:0;kill 31046
+: 1712907861:0;ps afx
+: 1712907871:0;fg
+: 1712907888:0;nvim main-haklab.cpp
+: 1712907913:0;nvim include/below_zero.h
+: 1712907961:0;nvim include/network/NetworHaklab.h
+: 1712908791:0;trans :es -b "Hello from Client"
+: 1712909082:0;bash build_sh.sh
+: 1712909090:0;./server
+: 1712909124:0;i-haklab --client 127.0.0.1
+: 1712909179:0;nvim main-haklab.cpp
+: 1712909309:0;nvim include/network/NetworHaklab.h
+: 1712909536:0;nvim main-haklab.cpp
+: 1712909978:0;bash build_sh.sh
+: 1712910021:0;i-haklab --client
+: 1712910030:0;i-haklab --client 127.0.0.1
+: 1712910055:0;i-haklab --client 127.0.0.1 --command hola
+: 1712910075:0;i-haklab --client 127.0.0.1 --port 4444 --command hola
+: 1712910086:0;nvim main-haklab.cpp
+: 1712910412:0;bash build_sh.sh
+: 1712910618:0;i-haklab --client 127.0.0.1 --port 4444 --command hola
+: 1712910630:0;exiy
+: 1712910653:0;cd c++/Net/client
+: 1712910658:0;./server
+: 1712910665:0;i-haklab --client 127.0.0.1 --port 4444 --command hola
+: 1712910718:0;i-haklab --client 127.0.0.1 --port 4444 --command "Holaa\n"
+: 1712910724:0;./server
+: 1712910729:0;i-haklab --client 127.0.0.1 --port 4444 --command "Holaa\n"
+: 1712910769:0;bat client.cpp
+: 1712910856:0;nvim include/network/NetworHaklab.h
+: 1712911192:0;bash build_sh.sh
+: 1712911198:0;./server
+: 1712911233:0;i-haklab --client 127.0.0.1 --port 4444 --command "Holaa\n"
+: 1712911307:0;nvim include/network/NetworHaklab.h
+: 1712911498:0;bash build_sh.sh
+: 1712911540:0;./server
+: 1712911544:0;i-haklab --client 127.0.0.1 --port 4444 --command "Holaa\n"
+: 1712911594:0;./server
+: 1712911607:0;nvim include/network/NetworHaklab.h
+: 1712911688:0;bash build_sh.sh
+: 1712911727:0;i-haklab --client 127.0.0.1 --port 4444 --command "Holaa\n"
+: 1712911742:0;./server
+: 1712911779:0;nvim include/network/NetworHaklab.h
+: 1712911868:0;bat server.cpp
+: 1712911912:0;bash build_sh.sh
+: 1712911921:0;./server
+: 1712911953:0;i-haklab --client 127.0.0.1 --port 4444 --command "Holaa\n"
+: 1712912019:0;nvim include/network/NetworHaklab.h
+: 1712912167:0;bat client.cpp
+: 1712912298:0;bash build_sh.sh
+: 1712912306:0;./server
+: 1712912336:0;i-haklab --client 127.0.0.1 --port 4444 --command "Holaa\n"
+: 1712912368:0;./server
+: 1712912379:0;nvim include/network/NetworHaklab.h
+: 1712912441:0;bash build_sh.sh
+: 1712912478:0;i-haklab --client 127.0.0.1 --port 4444 --command "Holaa\n"
+: 1712912521:0;./server
+: 1712912532:0;i-haklab --client 127.0.0.1 --port 4444 --command "Holaa"
+: 1712912575:0;nvim server.cpp
+: 1712912679:0;nvim include/network/NetworHaklab.h
+: 1712923584:0;cp c++/Net/client/server.cpp ~/i-Haklab
+: 1712923590:0;cd i-Haklab
+: 1712923598:0;nvim server.cpp
+: 1712923782:0;cat server.cpp
+: 1712924147:0;nvim server.cpp
+: 1712924507:0;clang++ server.cpp -o server -lboost_system
+: 1712924525:0;./server
+: 1712924578:0;i-haklab --clinet 127.0.0.1 --port 4444 --command Hola Demon
+: 1712924597:0;i-haklab --client 127.0.0.1 --port 4444 --command Hola Demon
+: 1712924611:0;i-haklab --client 127.0.0.1 --port 4444 --command "Hola Demon"
+: 1712924640:0;./c++/Net/client/client
+: 1712924671:0;nvim server.cpp
+: 1712924803:0;clang++ server.cpp -o server -lboost_system
+: 1712924820:0;./server
+: 1712924826:0;i-haklab --client 127.0.0.1 --port 4444 --command "Hola Demon"
+: 1712924846:0;nvim server.cpp
+: 1712925042:0;clang++ server.cpp -o server -lboost_system
+: 1712925059:0;nvim server.cpp
+: 1712925079:0;clang++ server.cpp -o server -lboost_system
+: 1712925093:0;nvim server.cpp
+: 1712925306:0;clang++ server.cpp -o server -lboost_system
+: 1712925330:0;./server
+: 1712925336:0;i-haklab --client 127.0.0.1 --port 4444 --command "Hola Demon"
+: 1712925392:0;nvim server
+: 1712925399:0;nvim server.cpp
+: 1712925465:0;clang++ server.cpp -o server -lboost_system
+: 1712925481:0;./server
+: 1712925485:0;i-haklab --client 127.0.0.1 --port 4444 --command "Hola Demon"
+: 1712971393:0;getprop
+: 1712971439:0;getprop ri.build.version
+: 1712971564:0;clear
+: 1712971584:0;getprop ro.build.version.security_patch
+: 1712971607:0;getprop --help
+: 1713023936:0;trans shep
+: 1713023951:0;trans :es shep
+: 1713031249:0;trans :es "ya se puede usar la extencion en el navegador kiwi brouser"
+: 1713031544:0;trans :en "ya se puede usar la extencion en el navegador kiwi brouser"
+: 1713038629:0;echo "tunnel" | base64
+: 1713111034:0;ls -al
+: 1713111061:0;bat 1.cpp
+: 1713111089:0;./1
+: 1713111105:0;rm 1 1.cpp
+: 1713111113:0;bat cli.cpp
+: 1713111179:0;exir
+: 1713111181:0;ezit
+: 1713117245:0;trans :es "### ðƒ¿ƒº€  We're proudly present a brand new ðƒ¿ƒº€ \
+# ðƒ¿ƒ²° PixelsToCoin.com ðƒ¿ƒ²° \
+$PIXELS converted to coins seamlessly. Buy and sell effortlessly\
+\
+**Coins for Sale:**\
+\
+ðƒ¿ƒ³ƒ© **WTS** (Want to Sell): 25,000 coins per $PIXEL\
+*You buy coins from us with $PIXEL*\
+\
+ðƒ¿ƒ³ƒ¨ **WTB** (Want to Buy): 30,000 coins per $PIXEL\
+*You sell coins to us with $PIXEL*\
+\
+*Rates fluctuate over time depending on supply and demand dynamics, you could check rates in our website or discord for live.\
+\
+ðƒ¿ƒ³© DM for more info or check profiles
+: 1713117279:0;trans :es "\
+ðƒ¿ƒ³ƒ© **WTS** (Want to Sell): 25,000 coins per $PIXEL\
+*You buy coins from us with $PIXEL*\
+"
+: 1713117367:0;trans :es "Sell"
+: 1713126756:0;cd downloads
+: 1713126771:0;rm *
+: 1713126783:0;rm * -rf
+: 1713126787:0;rm * -rfd
+: 1713126940:0;cd storage
+: 1713126945:0;cd Download
+: 1713126949:0;../
+: 1713126954:0;cd downloads
+: 1713126964:0;cd Telegram
+: 1713126978:0;cm receta-original.7z ~/
+: 1713126985:0;vm receta-original.7z ~/
+: 1713126994:0;mv receta-original.7z ~/
+: 1713127006:0;mkdir cifrado
+: 1713127017:0;mv receta-original.7z cifrado
+: 1713127020:0;cd cifrado
+: 1713127032:0;unzip receta-original.7z
+: 1713127358:0;cleae
+: 1713127360:0;clear
+: 1713127371:0;curl http://147.182.242.222:3578/login
+: 1713127409:0;trans :es " Ensures padding doesn't increase the size of the inputs"
+: 1713127840:0;i-haklab --about curl
+: 1713142762:0;clear
+: 1713142779:0;mkdir CTF
+: 1713142791:0;mv cifrado CTF
+: 1713142794:0;clear
+: 1713142803:0;rm a.out
+: 1713142806:0;clwar
+: 1713142821:0;cd CTF
+: 1713142830:0;mkdir WEP
+: 1713142833:0;cd WEP
+: 1713142887:0;touch Portal_en_desarollo.md
+: 1713142890:0;nvim Portal_en_desarollo.md
+: 1713142953:0;curl http://147.182.242.222:3578/login
+: 1713142972:0;clear
+: 1713142981:0;curl http://147.182.242.222:3578/login
+: 1713142998:0;trans :es /* Ensures padding doesn't increase the size of the inputs */
+: 1713143008:0;trans :es " Ensures padding doesn't increase the size of the inputs "
+: 1713143025:0;nvin Portal_en_desarollo.md
+: 1713143031:0;nvim Portal_en_desarollo.md
+: 1713143072:0;clear
+: 1713143082:0;curl http://147.182.242.222:3578/login
+: 1713143786:0;nvim Portal_en_desarollo.md
+: 1713144536:0;i-haklab --about curl
+: 1713144607:0;nvim Portal_en_desarollo.md
+: 1713144710:0;clear
+: 1713144718:0;curl - X http://147.182.242.222:3578/login -d 'username=admin&password=1234'
+: 1713144736:0;curl -X POST http://147.182.242.222:3578/login -d 'username=admin&password=1234'
+: 1713144770:0;curl -X POST http://147.182.242.222:3578 -d 'username=admin&password=1234'
+: 1713144791:0;curl -X POST http://147.182.242.222:3578/login -d 'username=admin&password=1234'
+: 1713144827:0;curl http://147.182.242.222:3578/login
+: 1713145022:0;nvim Portal_en_desarollo.md
+: 1713145052:0;curl -X POST http://147.182.242.222:3578/login -d 'username=admin&password=1234'
+: 1713145073:0;curl -L -X POST http://147.182.242.222:3578/login -d 'username=admin&password=1234'
+: 1713145089:0;curl -L -X POST http://147.182.242.222:3578/login -d 'username=admin&password=0'
+: 1713145096:0;curl -L -X POST http://147.182.242.222:3578/login -d 'username=admin&password=1'
+: 1713145101:0;curl -L -X POST http://147.182.242.222:3578/login -d 'username=admin&password=2'
+: 1713145106:0;curl -L -X POST http://147.182.242.222:3578/login -d 'username=admin&password=3'
+: 1713145675:0;nvim ~/.local/etc/i-Haklab/Tools/Readme/C/curl.md
+: 1713146555:0;clear
+: 1713146558:0;bat Portal_en_desarollo.md
+: 1713147407:0;curl -L -X POST http://147.182.242.222:3578/login -d 'username=Clave&password=2'
+: 1713147604:0;nvim ~/.local/etc/i-Haklab/Tools/Readme/C/curl.md
+: 1713187282:0;echo coinex | base64
+: 1713237421:0;trans :es ship
+: 1713305560:0;trans :es "What do you mian "
+: 1713305716:0;trans :es tell
+: 1713305722:0;trans :es tall
+: 1713401375:0;trans :en "Mira esto "
+: 1713401431:0;trans :en "at"
+: 1713401455:0;trans :ea "at"
+: 1713401460:0;trans :es "at"
+: 1713409339:0;cd i-Haklab
+: 1713409350:0;rm ./\;
+: 1713409355:0;la
+: 1713409359:0;ls -q
+: 1713409364:0;ls -a
+: 1713409383:0;tree .git
+: 1713409399:0;tree -d .github
+: 1713409410:0;cd .github/workflows
+: 1713409418:0;bat i-haklab_build.yml
+: 1713409477:0;i-haklab --about tar
+: 1713410333:0;nvim i-Haklab/main-haklab.cpp
+: 1713410407:0;nvin sceencho.cpp
+: 1713410414:0;nvim scee.cpp
+: 1713410634:0;bay CTF
+: 1713410642:0;bat CTF
+: 1713410650:0;os
+: 1713410664:0;cd victorh028.github.io
+: 1713410675:0;ls _posts
+: 1713410697:0;cd _posts
+: 1713410719:0;bat 2023-10-10-desktop-linux.md
+: 1713410974:0;cd i-Haklab
+: 1713410982:0;nvim main-haklab.cpp
+: 1713411644:0;bash build_sh.sh
+: 1713411693:0;i-haklab --install-theme
+: 1713411759:0;cd include
+: 1713411788:0;nvim theme.h
+: 1713411998:0;mkdir theme
+: 1713412010:0;mv theme theme
+: 1713412021:0;mv theme.h theme
+: 1713418763:0;trans :es dend
+: 1713418772:0;trans :es send
+: 1713418952:0;trans :es send to
+: 1713418969:0;trans :es "send to"
+: 1713419002:0;trans :es "preveiw"
+: 1713419018:0;trans :es "preview"
+: 1713467363:0;trans :es "heart of a fool \
+"
+: 1713473632:0;echo "reignoftitans" | base64
+: 1713474678:0;echo "phantom" | base64
+: 1713477829:0;echo "coinbase" | base64
+: 1713642807:0;nvim b.txt
+: 1713643497:0;bat b.txt
+: 1713664258:0;i-haklab --about tar
+: 1713664263:0;i-haklab --about t
+: 1713664300:0;i-haklab --about "termux-create-package"
+: 1713664341:0;i-haklab --help
+: 1713664376:0;i-haklab --install-theme
+: 1713696763:0;trasn :es tall
+: 1713696771:0;trabs :es tall
+: 1713696782:0;trans :es tall
+: 1713696822:0;trans :es tell
+: 1713698226:0;curl https://sweepwidget.com/c/79131-xj84hc25
+: 1713715803:0;i-haklab --about nvim
+: 1713715915:0;nvil
+: 1713715920:0;nvim
+: 1713716192:0;clear
+: 1713716199:0;rm b.txt
+: 1713716213:0;bat CTF/WEP/Portal_en_desarollo.md
+: 1713716328:0;nvim CTF/WEP/Portal_en_desarollo.md
+: 1713716396:0;i-haklab --about nvim
+: 1713716410:0;fg
+: 1713716475:0;gh
+: 1713716477:0;fg
+: 1713716580:0;cd .local/etc/i-Haklab/Tools/Readme/N
+: 1713716581:0;s
+: 1713716594:0;nvim nvim.md
+: 1713718642:0;exirÃ±t
+: 1713718644:0;exut
+: 1713719088:0;nvim i-Haklab/main-haklab.cpp
+: 1713751761:0;cd storage/documents
+: 1713751768:0;cd storage/Download
+: 1713751777:0;cd TermuxD/
+: 1713751781:0;cd Edicion
+: 1713751783:0;coear
+: 1713751789:0;ls texto
+: 1713751796:0;bat texto/pdf-traduc.md
+: 1713752636:0;ls audio
+: 1713752661:0;i-haklab --about p
+: 1713752674:0;i-haklab --about pdftotest
+: 1713752710:0;pdftotext --help
+: 1713752729:0;trans :es "first page to convert"
+: 1713752819:0;nvim .local/etc/i-Haklab/Tools/Readme/P/pdftotest.md
+: 1713752938:0;trans :es "last page to convert"
+: 1713752961:0;nvim .local/etc/i-Haklab/Tools/Readme/P/pdftotest.md
+: 1713753060:0;cd storage/Download
+: 1713753072:0;cd storage/downloads
+: 1713753090:0;psdtotext
+: 1713753112:0;pdftotext CPAD-TEMARIO.pdf
+: 1713753124:0;pdftotext CPAD-TEMARIO.pdf | less
+: 1713753146:0;pdftotext CPAD-TEMARIO.pdf | echo
+: 1713753169:0;echo | pdftotext CPAD-TEMARIO.pdf
+: 1713753562:0;pdftotext CPAD-TEMARIO.pdf - | less
+: 1713753659:0;pdftotexti -f 3 -l 3 CPAD-TEMARIO.pdf - | less
+: 1713753684:0;rm CPAD-TEMARIO.txt
+: 1713753692:0;pdftotexti -f 3 -l 3 CPAD-TEMARIO.pdf - | less
+: 1713753706:0;pdftotext -f 3 -l 3 CPAD-TEMARIO.pdf - | less
+: 1713753737:0;pdftotext -f 3 -l 3 CPAD-TEMARIO.pdf - | trans :es -b | less
+: 1713754419:0;bat manifest.yml
+: 1713754439:0;q
+: 1713754808:0;cd i-Haklab
+: 1713754821:0;cd .deb
+: 1713754823:0;clear
+: 1713754835:0;tree -d dists
+: 1713754841:0;tree dists
+: 1713754851:0;cd i-haklab
+: 1713754855:0;clear
+: 1713754862:0;bat manifiest.json
+: 1713755861:0;clear
+: 1713755899:0;tree -d i-Haklab/include
+: 1713756118:0;cd i-Haklab
+: 1713756132:0;bat .github/workflows/i-haklab_build.yml
+: 1713756372:0;wxir
+: 1713756380:0;pdftotext -f 3 -l 3 CPAD-TEMARIO.pdf - | trans :es -b | less
+: 1713756395:0;cd Telegram
+: 1713756417:0;pdftotext -f 3 -l 3 Pro\ Git.pdf - | trans :es -b | less
+: 1713756520:0;pdftotext -f 8 -l 8 Pro\ Git.pdf - | trans :es -b | less
+: 1713760236:0;cd c++
+: 1713760250:0;nvim cin.cpp
+: 1713760359:0;clang++ cin.cpp -o cin
+: 1713760368:0;./cin
+: 1713761147:0;cd i-Haklab
+: 1713761151:0;git push
+: 1713761199:0;cd victorh028.github.io
+: 1713761208:0;cd _posts
+: 1713761218:0;rm i-haklab -drf
+: 1713761253:0;rm 2023-04-29-i-Haklab.md 2023-07-5-C++_sintaxis.md 2023-05-24-RSA.md
+: 1713761274:0;git add all
+: 1713761283:0;git add --all
+: 1713761295:0;git commit -m "..."
+: 1713761301:0;git push
+: 1713761310:0;cs
+: 1713762375:0;clangformat --help | trans :es -b > clang.txt
+: 1713762406:0;clang
+: 1713762411:0;clangformat
+: 1713762423:0;apt install clang
+: 1713762461:0;clang-format
+: 1713762472:0;clang-format --help
+: 1713762500:0;clangformat --help
+: 1713762516:0;man clang-format
+: 1713832864:0;cd i-Haklab/include/below_zero.h
+: 1713832869:0;cd i-Haklab/include/
+: 1713832873:0;nvim below_zero.h
+: 1713833836:0;i-haklab --about nasm
+: 1713834918:0;bat Actyvi-directory.md
+: 1713834958:0;cd victorh028.github.io/_posts
+: 1713834968:0;dateb
+: 1713834970:0;date
+: 1713835052:0;nvim 2024-04-22-ShellCodes.md
+: 1713835224:0;rm clang.txt
+: 1713835237:0;cd c++
+: 1713835258:0;nvim print.cpp
+: 1713835325:0;clang++ -o print print.cpp
+: 1713835342:0;./print
+: 1713835358:0;strace ./print
+: 1713835377:0;i-haklab --about strace
+: 1713836165:0;nsam
+: 1713836172:0;nasm
+: 1713836185:0;i-haklab --about nasm
+: 1713836386:0;wpd
+: 1713836396:0;cd i-Haklab
+: 1713836405:0;nvim include/below_zero.h
+: 1713836736:0;nvim src/below_zero.cpp
+: 1713836823:0;nvim include/below_zero.h
+: 1713836943:0;cd i-Haklab
+: 1713836949:0;nvim include/below_zero.h
+: 1713836983:0;nvim src/CMakeLists.txt
+: 1713837014:0;nvim src/below_zero.cpp
+: 1713839111:0;nvim teledono.md
+: 1713848200:0;man 2 write
+: 1713848209:0;man
+: 1713851238:0;cd i-Haklab
+: 1713851246:0;nvim src/below_zero.cpp
+: 1713851339:0;ezut
+: 1713869706:0;trans :es watetever
+: 1713869726:0;trans :es whatever
+: 1713871873:0;trans :es neet
+: 1713871897:0;trans :es need
+: 1713871952:0;nvim Ma.md
+: 1713902057:0;bat i-Haklab/src/below_zero.cpp
+: 1713902090:0;bash i-Haklab/build_sh.sh
+: 1713902102:0;bash ./i-Haklab/build_sh.sh
+: 1713902122:0;cd i-Haklab
+: 1713902136:0;bash build_sh.sh
+: 1713902189:0;bat src/below_zero.cpp
+: 1713902297:0;i-haklab --about nvim
+: 1713902348:0;nvim src/below_zero.cpp
+: 1713902475:0;bash build_sh.sh
+: 1713902520:0;nvim main-haklab.cpp
+: 1713902798:0;bash build_sh.sh
+: 1713902837:0;i-haklab
+: 1713902846:0;i-haklab --ab
+: 1713902857:0;i-haklab --he
+: 1713903006:0;rm --help
+: 1713903112:0;bat teledono.md
+: 1713933771:0;nvim i-Haklab/main-haklab.cpp
+: 1713933923:0;nvim i-Haklab/include/below_zero.h
+: 1713934045:0;nvim .local/etc/i-Haklab/Tools/Readme/N/nvim.md
+: 1713958648:0;fish
+: 1713958667:0;cd i-Haklab
+: 1713958673:0;git status
+: 1713958741:0;git add .deb

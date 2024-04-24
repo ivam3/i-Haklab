@@ -4,12 +4,14 @@ Modo normal: permite navegar por el  archivo
 
 Modo insert: permite editar el texto del archivo, añadir nuevo contenido o eliminarlo
 ---
+
 - Se accede a este modo presionando la tecla `i` desde el modo *NORMAL*.
 
 - Si queremos salir de este modo basta con presionar `ESC` .
 
 Modo visual: es utilizado para seleccionar texto.
 ---
+
 - Se accede a este modo con la tecla `v`  desde el modo *NORMAL*.
 
 - Si queremos salir de este modo basta con presionar `ESC` .
@@ -24,12 +26,21 @@ Modo visual: es utilizado para seleccionar texto.
 
 Por ejemplo: `d5j`  borra las siguientes cinco lineas hacia abajo desde la posición del cursor.
 
-# Combinaciones 
-
 ## Modo normal 
 - `da'` para borrar algo entre comillas dobles.
 - `ci"`  para cambiar algo entre comillas dobles.
 - `0` desplaza el cursor al primer carácter de una línea.
 - `$` desplaza el cursor al final de la línea
 - `^` desplaza el cursor al primer caracter que no sea vacío de una línea.
-- `g_` desplaza el cursos al último caracter que no sea vacío de una línea.
+- `g_` desplaza el cursos al último caracter que no sea vacío de una línea. 
+
+## Comentario 
+
+`gcc` - Toggles the current line using linewise comment
+`gbc` - Toggles the current line using blockwise comment
+`[count]gcc` - Toggles the number of line given as a prefix-count using linewise
+`[count]gbc` - Toggles the number of line given as a prefix-count using blockwise
+`gc[count]{motion}` - (Op-pending) Toggles the region using linewise comment
+`gb[count]{motion}` - (Op-pending) Toggles the region using blockwise comment
+
+
