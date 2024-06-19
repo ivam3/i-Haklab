@@ -7338,3 +7338,1171 @@ $PIXELS converted to coins seamlessly. Buy and sell effortlessly\
 : 1713958667:0;cd i-Haklab
 : 1713958673:0;git status
 : 1713958741:0;git add .deb
+: 1713958753:0;git commit -m ".."
+: 1713958758:0;git push
+: 1713990313:0;tracer
+: 1713990324:0;i-haklab --about t
+: 1713990341:0;i-haklab --about strace
+: 1713990436:0;mv .local/etc/i-Haklab/Tools/Readme/T/strace.md .local/etc/i-Haklab/Tools/Readme/S/
+: 1713990471:0;i-haklab --about strace
+: 1713990492:0;cd .local/etc/i-Haklab/Tools/Readme/S
+: 1713990502:0;bat strace.md
+: 1713990528:0;nvim strace.md
+: 1713990546:0;clear
+: 1713990553:0;i-haklab --about strace
+: 1713990563:0;apt install strace
+: 1713990583:0;apt-get update
+: 1713991095:0;clear
+: 1713991113:0;mv cli.cpp c++
+: 1713991138:0;mkdir shell_termux
+: 1713991141:0;cd shell_termux
+: 1713991143:0;clear
+: 1713991362:0;nvim print.c
+: 1713991488:0;clang++ print.c -o print
+: 1713991502:0;gcc print.c -o print
+: 1713991513:0;ckeqr
+: 1713991516:0;cleqr
+: 1713991518:0;clear
+: 1713991526:0;ks
+: 1713991533:0;./print
+: 1713991542:0;rm print
+: 1713991553:0;clang++ print.c -o print
+: 1713991570:0;mv print.c print.cpp
+: 1713991575:0;nvim print.cpp
+: 1713991608:0;clang++ print.cpp -o print.cpp
+: 1713991622:0;mv print.cpp print
+: 1713991632:0;strace print
+: 1713991650:0;apt install strace
+: 1713991667:0;strace print
+: 1713991692:0;strace ./print
+: 1713992343:0;man write
+: 1713992357:0;apt install man
+: 1713992593:0;i-haklab -about clang
+: 1713992603:0;i-haklab --about clang
+: 1713992607:0;i-haklab --about clang++
+: 1713992672:0;rm print
+: 1713992683:0;nvim print.cpp
+: 1713992750:0;clang++ print.cpp -s print.s
+: 1713992772:0;clang++ -S print.cpp -o print.s
+: 1713992777:0;bat print.s
+: 1713992812:0;clang++ print.cpp -o print
+: 1713992816:0;./print
+: 1713992830:0;strace print
+: 1713992835:0;strace ./print
+: 1713992930:0;bat print.s
+: 1713993472:0;uname -s
+: 1713993474:0;uname -m
+: 1713993481:0;uname
+: 1713993487:0;uname -a
+: 1713993560:0;strace ./print
+: 1713993704:0;cd shell_termux
+: 1713993743:0;nvim print_asm.asm
+: 1713993824:0;i-haklab --about nasm
+: 1713993909:0;nvim ~/.local/etc/i-Haklab/Tools/Readme/N/nasm.md
+: 1713994100:0;bat print_asm.asm
+: 1713994237:0;i-haklab --about as
+: 1713994253:0;nvim ~/.local/etc/i-Haklab/Tools/Readme/A/as.md
+: 1713994279:0;i-haklab --about as
+: 1713994290:0;as
+: 1713994342:0;as print_asm.asm -o print_asm
+: 1713994366:0;bat print_asm.asm
+: 1713994371:0;q
+: 1713994394:0;file print
+: 1713994402:0;apt install file
+: 1713994419:0;file print
+: 1713994458:0;nasm -f 32-bit print_asm.asm
+: 1713994482:0;apt install nasm
+: 1713994495:0;nasm -f 32-bit print_asm.asm
+: 1713994514:0;file print
+: 1713994530:0;nasm -f ARM print_asm.asm
+: 1713994594:0;nasm -nf
+: 1713994602:0;nasm -fm
+: 1713994605:0;nasm -fn
+: 1713994611:0;nasm -hf
+: 1713994706:0;nasm -f elf64 print_asm.asm
+: 1713994849:0;nvim n.asm
+: 1713994884:0;nasm -f elf64 n.asm
+: 1713994944:0;i-haklab --about ld
+: 1713994978:0;nvim ~/.local/etc/i-Haklab/Tools/Readme/L/ld.md
+: 1713998380:0;ls -m elf_i386 n.o -o n
+: 1713998418:0;file print
+: 1713998451:0;bat print.s
+: 1713998517:0;bat print_asm.asm
+: 1713998557:0;nasm -f elf64 print_asm.asm
+: 1713998580:0;bat n.asm
+: 1713998656:0;ld -hm
+: 1713998660:0;ld
+: 1713998715:0;ld --help
+: 1713998773:0;trans :es "Set target emulation"
+: 1713998805:0;nvim ~/.local/etc/i-Haklab/Tools/Readme/L/ld.md
+: 1713998890:0;i-haklab --about ld
+: 1713999093:0;i-haklab --about ob
+: 1713999100:0;i-haklab --about objdump
+: 1713999110:0;cd shell_termux
+: 1713999155:0;objdum -D print -M intel | bat
+: 1713999173:0;objdum -D print -M intel | less
+: 1713999188:0;objdump -D print -M intel | less
+: 1713999195:0;objdump -D print -M intel | bat
+: 1713999236:0;ld -m elf32-littlearm n.o
+: 1713999262:0;file print
+: 1713999302:0;ld -m elf32-littlearm n.o -o n
+: 1713999397:0;bat print_asm.asm
+: 1713999516:0;mv .n.asm print_asm.asm
+: 1713999548:0;mv n.asm print_asm.asm
+: 1713999555:0;bat print_asm.asm
+: 1713999612:0;nimv print_asm.asm
+: 1713999624:0;nvim print_asm.asm
+: 1713999650:0;i-haklab --about nimv
+: 1713999656:0;i-haklab --about nvim
+: 1713999810:0;clear
+: 1713999831:0;nvim print_asm.asm
+: 1713999885:0;clea
+: 1713999886:0;rclear
+: 1713999888:0;celar
+: 1713999893:0;clear
+: 1713999917:0;rm n.o
+: 1713999989:0;nasm -m elf64 print_asm.asm
+: 1713999995:0;nasm -M elf64 print_asm.asm
+: 1714000012:0;i-haklab --about nasm
+: 1714000023:0;nasm -f elf64 print_asm.asm
+: 1714000040:0;bat print_asm.o
+: 1714000042:0;clear
+: 1714000059:0;file print
+: 1714000097:0;objdump -D print_asm.o -M inter
+: 1714000113:0;i-haklab --about objdum
+: 1714000117:0;i-haklab --about objdump
+: 1714000126:0;objdump -D print_asm.o -M intel
+: 1714000166:0;objdump -D print -M intel
+: 1714000215:0;objdump -D print -M intel | bat
+: 1714000237:0;bat --help
+: 1714000276:0;objdump -D print -M intel | bat --line-range 2
+: 1714000279:0;celar
+: 1714000282:0;lcear
+: 1714000287:0;clear
+: 1714000294:0;objdump -D print -M intel | bat --line-range 2
+: 1714000326:0;mr print_asm.o
+: 1714000336:0;rm print_asm.o
+: 1714000338:0;clear
+: 1714000343:0;objdump -D print -M intel | bat --line-range 2
+: 1714000353:0;bat a.out
+: 1714000358:0;rm a.out
+: 1714000360:0;celar
+: 1714000365:0;objdump -D print -M intel | bat --line-range 2
+: 1714000371:0;clear
+: 1714000374:0;objdump -D print -M intel | bat --line-range 2
+: 1714000380:0;objdump -D print -M intel | bat --line-range 2
+: 1714000404:0;rm print.s
+: 1714000414:0;bat print_asm.asm
+: 1714000424:0;./print
+: 1714000433:0;celar
+: 1714000435:0;clear
+: 1714000443:0;objdump -D print -M intel | bat --line-range 2
+: 1714000480:0;nasm -f elf32-littlearm print_asm.asm
+: 1714000494:0;nasm -f elf64 print_asm.asm
+: 1714000505:0;bat print_asm.o
+: 1714000523:0;rm print_asm.o
+: 1714000530:0;nasm -f elf64 print_asm.asm
+: 1714000536:0;ld
+: 1714000593:0;ld -m elf_i386 print_asm.asm -o print_asm
+: 1714000629:0;nvim print_asm.asm
+: 1714000641:0;ld -m elf_i386 print_asm.asm -o print_asm
+: 1714000651:0;nvim print_asm.asm
+: 1714000664:0;ld -m elf_i386 print_asm.asm -o print_asm
+: 1714000700:0;nvim print_asm.asm
+: 1714000725:0;ld -m elf_i386 print_asm.asm -o print_asm
+: 1714000905:0;bat print_asm.asm
+: 1714001019:0;file print
+: 1714001036:0;./print
+: 1714005853:0;bat shell_termux/print_asm.asm
+: 1714005868:0;cd shell_termux
+: 1714005898:0;file print_asm.o | bat -r 2
+: 1714005925:0;objdump -D print_asm.o -M intel | bat -r 2
+: 1714006094:0;ld -m elf_i386 print_asm.o -o print_asm
+: 1714006120:0;rm print_asm.o
+: 1714006151:0;nasm -f elf32 print_asm.asm
+: 1714006162:0;ld -m elf_i386 print_asm.o -o print_asm
+: 1714006176:0;./print_asm
+: 1714006195:0;file print
+: 1714006202:0;file print_asm
+: 1714006304:0;nasm -f ARM print_asm.asm
+: 1714006327:0;i-haklab --about file
+: 1714006350:0;file -i print
+: 1714006359:0;file -i print_asm
+: 1714006514:0;nasm -f PIE print_asm.asm
+: 1714006525:0;nasm -hf
+: 1714006636:0;nasm -f bin print_asm.asm
+: 1714006649:0;file -i print_asm
+: 1714006659:0;file -i print
+: 1714006677:0;nasm -f auto print_asm.asm
+: 1714006684:0;nasm -hf
+: 1714006699:0;nasm -f auot print_asm.asm
+: 1714006711:0;nasm -f oaut print_asm.asm
+: 1714006735:0;nasm -f aout print_asm.asm
+: 1714006743:0;file -i print
+: 1714006758:0;file -i print_asm
+: 1714006807:0;cat print_asm.asm
+: 1714006884:0;clang++ -S print.cpp -o p
+: 1714006892:0;rm p
+: 1714006905:0;clang++ -S print.cpp -o p.asm
+: 1714006918:0;bat p.asm
+: 1714006985:0;nasm -f elf32 p.asm
+: 1714007024:0;bat p.asm
+: 1714007124:0;rm p.asm
+: 1714007146:0;file print
+: 1714007151:0;file print -i
+: 1714009998:0;bat shell_termux/print_asm.asm
+: 1714010685:0;cd shell_termux
+: 1714010686:0;ks
+: 1714010699:0;./print_asm
+: 1714010724:0;file print_asm
+: 1714010748:0;bat print_asm.asm
+: 1714010903:0;as -o p.o print_asm.asm
+: 1714010947:0;i-haklab --about as
+: 1714011051:0;nvim p.s
+: 1714011068:0;as -o p.o p.s
+: 1714011097:0;as -o p.o print_asm.asm
+: 1714011216:0;bat shell_termux/print_asm.asm
+: 1714012501:0;cd i-Haklab
+: 1714012512:0;nvim main-haklab.cpp
+: 1714013205:0;nvim Ma.md
+: 1714018960:0;curl https://www.pixels.tips/energy
+: 1714094613:0;cd i-Haklab
+: 1714094620:0;nvim include/below_zero.h
+: 1714095138:0;mv loading.cpp ~/
+: 1714095154:0;clang++ loading.cpp -o loading
+: 1714095164:0;./loading
+: 1714096094:0;nvim loading
+: 1714096113:0;nvim loading.cpp
+: 1714096159:0;clang++ loading.cpp -o loading
+: 1714096183:0;./loading
+: 1714096211:0;nvim loading.cpp
+: 1714096316:0;clang++ loading.cpp -o loading
+: 1714096322:0;./loading
+: 1714096703:0;nvim loading.cpp
+: 1714096737:0;clang++ loading.cpp -o loading
+: 1714096743:0;./loading
+: 1714097488:0;clang++ loading.cpp -o loading
+: 1714097496:0;./loading
+: 1714097974:0;clang++ loading.cpp -o loading && ./loading
+: 1714192024:0;nvim buffer.cpp
+: 1714193688:0;rm loading
+: 1714193698:0;cd notas
+: 1714193710:0;nvim C2.md
+: 1714219489:0;mkdir -p PoC-maldev && cd $_
+: 1714219507:0;nvim xor.py
+: 1714219534:0;nvim xor.cpp
+: 1714244964:0;rm -d PoC-maldev
+: 1714244976:0;bat loading.cpp
+: 1714245009:0;nvim loading.cpp
+: 1714246628:0;clang++ loading.cpp -o loading
+: 1714246635:0;./loading
+: 1714246652:0;nvim loading.cpp
+: 1714248716:0;clang++ loading.cpp -o loading -Lboost_system
+: 1714248749:0;clang++ loading.cpp -o loading -Lboost_thread
+: 1714248779:0;clang++ loading.cpp -o loading -lboost_thread
+: 1714248814:0;clang++ loading.cpp -o loading -lboost_thread -lboost_chrono
+: 1714248829:0;./loading
+: 1714248872:0;clang++ loading.cpp -o loading -lboost_thread -lboost_chrono
+: 1714248895:0;./loading
+: 1714248983:0;clang++ loading.cpp -o loading -lboost_thread -lboost_chrono
+: 1714248995:0;./loading
+: 1714249908:0;clang++ loading.cpp -o loading -lboost_thread -lboost_chrono
+: 1714249922:0;./loading
+: 1714250025:0;clang++ loading.cpp -o loading -lboost_thread -lboost_chrono
+: 1714250036:0;./loading
+: 1714250056:0;clang++ loading.cpp -o loading -lboost_thread -lboost_chrono
+: 1714250070:0;./loading
+: 1714250092:0;clang++ loading.cpp -o loading -lboost_thread -lboost_chrono
+: 1714250102:0;./loading
+: 1714250119:0;clang++ loading.cpp -o loading -lboost_thread -lboost_chrono
+: 1714250129:0;./loading
+: 1714250163:0;clang++ loading.cpp -o loading -lboost_thread -lboost_chrono
+: 1714250178:0;./loading
+: 1714250785:0;cat loading.cpp
+: 1714256888:0;los.cpp
+: 1714256895:0;nvim los.cpp
+: 1714257062:0;clang++ los.cpp -o loading -lboost_thread -lboost_chrono
+: 1714257091:0;i-haklab --about
+: 1714257094:0;i-haklab --about r
+: 1714257097:0;i-haklab --about t
+: 1714257111:0;./loading
+: 1714257136:0;nvim los.cpp
+: 1714257182:0;clang++ los.cpp -o loading -lboost_thread -lboost_chrono
+: 1714257194:0;./loading
+: 1714257252:0;nvim los.cpp
+: 1714257269:0;clang++ los.cpp -o loading -lboost_thread -lboost_chrono
+: 1714257284:0;./loading
+: 1714257354:0;clear
+: 1714257389:0;mkdir Loading
+: 1714257399:0;cd Loading
+: 1714257401:0;ld
+: 1714257424:0;mv ~/los.cpp
+: 1714257428:0;mv ~/los.cpp ./
+: 1714257433:0;celar
+: 1714257437:0;clear
+: 1714257463:0;mv ~/loading.cpp ./
+: 1714257474:0;nvim loading.cpp
+: 1714257809:0;clang-format -i loading.cpp
+: 1714257816:0;eixt
+: 1714258224:0;ld
+: 1714258238:0;mkdir include
+: 1714258244:0;mkdir src
+: 1714258255:0;rm src
+: 1714258262:0;rm -d src
+: 1714258286:0;mv loading.cpp include/loading.h
+: 1714258288:0;clear
+: 1714258314:0;mkadir main.cpp
+: 1714258322:0;touch main.cpp
+: 1714258324:0;clear
+: 1714258331:0;bat los.cpp
+: 1714258346:0;clear
+: 1714258353:0;rm los.cpp
+: 1714258356:0;cclear
+: 1714258357:0;clear
+: 1714258364:0;ps -afx
+: 1714258368:0;celar
+: 1714258369:0;clear
+: 1714258376:0;nvim main.cpp
+: 1714259931:0;ls include
+: 1714259939:0;nvim main.cpp
+: 1714260330:0;clear
+: 1714260387:0;clang++ main.cpp -lboost_thread -lboost_chrone -o main
+: 1714260407:0;nvim include/loading.h
+: 1714260440:0;clang++ main.cpp -lboost_thread -lboost_chrone -o main
+: 1714260455:0;clang++ main.cpp -lboost_thread -lboost_chrono -o main
+: 1714260471:0;./main
+: 1714260492:0;nvim main
+: 1714260499:0;nvim main.cpp
+: 1714260511:0;clang++ main.cpp -lboost_thread -lboost_chrono -o main
+: 1714260529:0;./main
+: 1714260559:0;nvim include/loading.h
+: 1714261393:0;clang++ main.cpp -lboost_thread -lboost_chrono -o main
+: 1714261406:0;./main
+: 1714261646:0;clang++ main.cpp -lboost_thread -lboost_chrono -o main
+: 1714261699:0;./main
+: 1714261916:0;rm main
+: 1714261920:0;git int
+: 1714261924:0;git init
+: 1714261927:0;celar
+: 1714261929:0;clear
+: 1714261943:0;git add --all
+: 1714262003:0;git commit -m "Update"
+: 1714262010:0;git push
+: 1714262225:0;touch README.md
+: 1714262234:0;git add README.md
+: 1714262241:0;git status
+: 1714262469:0;git status --short
+: 1714264496:0;cd Loading
+: 1714264504:0;git status
+: 1714264525:0;git -a -m "Update"
+: 1714264531:0;git add README.md
+: 1714264545:0;git commit -m "Update"
+: 1714264548:0;clear
+: 1714264551:0;git push
+: 1714264560:0;git push Loading
+: 1714264581:0;git push main
+: 1714264588:0;git push --set-upstream main main
+: 1714264746:0;git push
+: 1714264780:0;git remote add Loading https://github.com/VictorH028/Loading
+: 1714264786:0;git push
+: 1714264795:0;git push --set-upstream Loading main
+: 1714264819:0;git remote add Loading https://github.com/VictorH028
+: 1714264836:0;git push
+: 1714264853:0;git push --set-upstream Loading main
+: 1714264874:0;git remote add main https://github.com/VictorH028
+: 1714264882:0;git push --set-upstream main main
+: 1714264936:0;cd K
+: 1714264941:0;cd Loading
+: 1714264945:0;git push --set-upstream main main
+: 1714264992:0;git remote add Loading https://github.com/VictorH028/Loading
+: 1714265003:0;git push --set-upstream Loading main
+: 1714265013:0;git push
+: 1714265046:0;git clone https://github.com/VictorH028/Loading.git
+: 1714265083:0;mv include main.cpp Loading
+: 1714265102:0;mv Loading ~/l
+: 1714265109:0;rm Loading -d
+: 1714265114:0;rm Loading -drf
+: 1714265126:0;mv l Loading
+: 1714265129:0;cd Loading
+: 1714265132:0;clear
+: 1714265144:0;bat README.md
+: 1714265169:0;bat main.cpp
+: 1714265213:0;git push
+: 1714265253:0;git add --all
+: 1714265276:0;git commit -m "Ubdate"
+: 1714265279:0;git push
+: 1714273542:0;cd Loading
+: 1714273600:0;nvim README.md
+: 1714273829:0;nvim include/loading.h
+: 1714273998:0;nvim README.md
+: 1714274233:0;nvim include/loading.h
+: 1714274746:0;clang++ main.cpp -lboost_thread -lboost_chrono -o main
+: 1714274755:0;./main
+: 1714274786:0;cd Loading
+: 1714274796:0;nvim include/loading.h
+: 1714274861:0;clang++ main.cpp -lboost_thread -lboost_chrono -o main
+: 1714274872:0;./main
+: 1714274957:0;nvim main.cpp
+: 1714275092:0;clang++ main.cpp -lboost_thread -lboost_chrono -o main
+: 1714275141:0;./main
+: 1714275168:0;nvim include/loading.h
+: 1714275208:0;clang++ main.cpp -lboost_thread -lboost_chrono -o main
+: 1714275215:0;./main
+: 1714275239:0;nvim include/loading.h
+: 1714275351:0;clang++ main.cpp -lboost_thread -lboost_chrono -o main
+: 1714275357:0;./main
+: 1714275378:0;nvim include/loading.h
+: 1714275467:0;clang++ main.cpp -lboost_thread -lboost_chrono -o main
+: 1714275474:0;./main
+: 1714275520:0;clang++ main.cpp -lboost_thread -lboost_chrono -o main
+: 1714275530:0;./main
+: 1714275542:0;bat main.cpp
+: 1714275594:0;clang++ main.cpp -lboost_thread -lboost_chrono -o main
+: 1714275603:0;./main
+: 1714275848:0;rm main
+: 1714275914:0;git branch
+: 1714275943:0;git status
+: 1714276008:0;git -b checkout master
+: 1714276018:0;git checkout master
+: 1714276029:0;git basnch
+: 1714276036:0;git branch
+: 1714276048:0;git checkout master
+: 1714276065:0;git checkout loa
+: 1714276078:0;git -b checkout
+: 1714276099:0;git checkout master
+: 1714276165:0;trabs -b "  error: pathspec 'master' did not match any file(s) known to git" :es
+: 1714276173:0;trans -b "  error: pathspec 'master' did not match any file(s) known to git" :es
+: 1714276226:0;git checkout -b emergency-fix
+: 1714276246:0;trans -b :es 'emergency-fix'
+: 1714276266:0;git branch
+: 1714276375:0;mkdir .img
+: 1714276404:0;nvim README.md
+: 1714276521:0;bat README.md
+: 1714276576:0;git straus
+: 1714276586:0;git status
+: 1714276590:0;ks
+: 1714276597:0;la
+: 1714276599:0;ls -al
+: 1714276619:0;git branch
+: 1714276642:0;nvim include/loading.h
+: 1714276819:0;clang++ main.cpp -lboost_thread -lboost_chrono -o main
+: 1714276839:0;./main
+: 1714276869:0;clang++ main.cpp -lboost_thread -lboost_chrono -o main
+: 1714277017:0;./main
+: 1714277542:0;clang++ main.cpp -lboost_thread -lboost_chrono -o main
+: 1714277549:0;./main
+: 1714278089:0;mv tenor-3319818903.gif ~/Loading/.img/img_loading.gif
+: 1714278090:0;lw
+: 1714278096:0;clear
+: 1714278105:0;bat i-Haklab/README.md
+: 1714278130:0;cat i-Haklab/README.md
+: 1714278164:0;nvim Loading/README.md
+: 1714278270:0;cd Loading
+: 1714278276:0;nvim README.md
+: 1714278332:0;tree .img
+: 1714278377:0;git add .img
+: 1714278382:0;git add README.md
+: 1714278404:0;git commit -m "Update 0.1"
+: 1714278550:0;git branch
+: 1714278559:0;git status
+: 1714278593:0;git checkout msin
+: 1714278597:0;git checkout main
+: 1714278638:0;git merge emergency-fix
+: 1714278652:0;git add --all
+: 1714278659:0;git commit -m "Update 0.1"
+: 1714278717:0;git push
+: 1714278750:0;git branch
+: 1714278783:0;git checkout emergency-fix
+: 1714278787:0;git branch
+: 1714278902:0;git checkout main
+: 1714278905:0;ex8t
+: 1714278941:0;git branch
+: 1714278954:0;ls .img
+: 1714278960:0;bat README.md
+: 1714279012:0;nvim README.md
+: 1714279097:0;git add README.md
+: 1714279113:0;git commit -m "Update 0.2"
+: 1714279118:0;git push
+: 1714279154:0;ls .img
+: 1714279158:0;bat README.md
+: 1714279181:0;nvim README.md
+: 1714279226:0;git add README.md
+: 1714279231:0;git commit -m "Update 0.2"
+: 1714279235:0;git push
+: 1714279260:0;bat README.md
+: 1714279275:0;ls .img
+: 1714279396:0;mv loading-bar-progress-icon-with-transparent-background-free-png-3408127399.png ~/Loading/.img/loadin.png
+: 1714279408:0;cd include
+: 1714279414:0;../
+: 1714279419:0;cd .img
+: 1714279425:0;rm img_loading.gif
+: 1714279431:0;../
+: 1714279435:0;nvim README.md
+: 1714279512:0;git add README.md
+: 1714279521:0;git commit -m "Update 0.2"
+: 1714279532:0;git push
+: 1714279575:0;bat ../i-Haklab/README.md
+: 1714279598:0;bat README.md
+: 1714279657:0;ls .img
+: 1714279737:0;git add .img
+: 1714279762:0;git commut -m "Nueva imagen"
+: 1714279769:0;git commit -m "Nueva imagen"
+: 1714279773:0;git push
+: 1714279897:0;nvim README.md
+: 1714279961:0;git add README.md
+: 1714279969:0;git commit -m "Update 0.2"
+: 1714279973:0;git push
+: 1714280155:0;git checkout e
+: 1714280165:0;git branch
+: 1714280185:0;git checkout emergency-fix
+: 1714280195:0;git status
+: 1714280232:0;git merge main
+: 1714280266:0;bat README.md
+: 1714280787:0;rm RSA -rd
+: 1714280806:0;rm RSA -rdf
+: 1714280830:0;rm downloads -rf
+: 1714280839:0;rm loading
+: 1714280849:0;cd Loading
+: 1714280871:0;bat include/loading.h
+: 1714280912:0;nvim include/loading.h
+: 1714281081:0;clang++ main.cpp -o main
+: 1714281089:0;./main
+: 1714281123:0;clang++ main.cpp -o main
+: 1714281130:0;./main
+: 1714281202:0;bat main.cpp
+: 1714281360:0;bat include/loading.h
+: 1714308319:0;nmap --help | bat
+: 1714308369:0;man nmap | bat
+: 1714308553:0;trans :es " ⃴�        -O (Enable OS detection)\
+1447   ⃴�            Enables OS detection, as discussed above. Alternatively, you can\
+1448   ⃴�            use -A to enable OS detection along with other things."
+: 1714310506:0;cd Loading
+: 1714310518:0;nvim README.md
+: 1714310831:0;git add README.md
+: 1714310852:0;git branch
+: 1714310863:0;git checkout main
+: 1714310867:0;git branch
+: 1714310874:0;git me
+: 1714310886:0;git merge emergency-fix
+: 1714310903:0;git checkout emergency-fix
+: 1714310917:0;git add --akl
+: 1714310921:0;git add --all
+: 1714310936:0;git stratus
+: 1714310942:0;git status
+: 1714310974:0;git commit -m "modified"
+: 1714310986:0;git branch
+: 1714311013:0;git checkout main
+: 1714311021:0;git merge emergency-fix
+: 1714311033:0;git push
+: 1714311088:0;nvim README.md
+: 1714311172:0;git add README.md
+: 1714311193:0;git commit -m "modified"
+: 1714311198:0;git push
+: 1714311342:0;bat README.md
+: 1714311983:0;nvim README.md
+: 1714312427:0;git add README.md
+: 1714312486:0;trans :en "Documentacion"
+: 1714312515:0;mkdir .doc
+: 1714312521:0;cd .doc
+: 1714312554:0;touch Intalacion.md
+: 1714312576:0;touch Contribuir.md
+: 1714312607:0;touch Caracteristicas.md
+: 1714312625:0;ls i-Haklab
+: 1714312630:0;cd Loading
+: 1714312640:0;touch CMakeLists.txt
+: 1714312652:0;bat ../i-Haklab/CMakeLists.txt
+: 1714312696:0;clear
+: 1714312713:0;git add .doc
+: 1714312744:0;git commit -m "Archivos de ducumentacion"
+: 1714312802:0;cd Loading
+: 1714312818:0;nvim .doc/Contribuir.md
+: 1714313069:0;cd Loading
+: 1714313074:0;cd .doc
+: 1714313200:0;mv Contribuir.md CONTRIBUTE.md
+: 1714313215:0;nvim CONTRIBUTE.md
+: 1714313736:0;..
+: 1714313758:0;mkdir src
+: 1714313769:0;cd src
+: 1714313795:0;touch loading.cpp
+: 1714320306:0;cd Loading/.
+: 1714320331:0;nvim main.cpp
+: 1714321270:0;cd Loading
+: 1714321287:0;bat include/loading.h
+: 1714321343:0;cat include/loading.h
+: 1714321651:0;nvin include/loading.h
+: 1714321663:0;nvim include/loading.h
+: 1714322607:0;bat include/loading.h
+: 1714323062:0;nvim include/loading.h
+: 1714323435:0;clang++ main.cpp -o main
+: 1714323442:0;./main
+: 1714323643:0;clang++ main.cpp -o main
+: 1714323653:0;./main
+: 1714323702:0;clang++ main.cpp -o main
+: 1714323708:0;./main
+: 1714323737:0;clang++ main.cpp -o main
+: 1714323743:0;./main
+: 1714323773:0;clang++ main.cpp -o main
+: 1714323779:0;./main
+: 1714324182:0;nvin l.cpp
+: 1714324186:0;nvim l.cpp
+: 1714324205:0;clang++ l.cpp -o main
+: 1714324220:0;nvin l.cpp
+: 1714324224:0;nvim l.cpp
+: 1714324334:0;clang++ l.cpp -o main
+: 1714324350:0;nvin l.cpp
+: 1714324356:0;nvim l.cpp
+: 1714324403:0;clang++ l.cpp -o main
+: 1714324429:0;clang++ l.cpp -o main -lboost_thread
+: 1714324467:0;clang++ l.cpp -o main -lboost_threadb -lboost_chrono
+: 1714324484:0;clang++ l.cpp -o main -lboost_thread -lboost_chrono
+: 1714324498:0;./main
+: 1714324530:0;clang++ l.cpp -o main -lboost_thread -lboost_chrono
+: 1714324541:0;./main
+: 1714324701:0;mvi l.cpp ./include/Loading.h
+: 1714324707:0;mv l.cpp ./include/Loading.h
+: 1714324710:0;cd include
+: 1714324711:0;l
+: 1714324719:0;nvim Loading.h
+: 1714325142:0;..
+: 1714325148:0;nvim main.cpp
+: 1714325191:0;clang++ l.cpp -o main -lboost_thread -lboost_chrono
+: 1714325218:0;clang++ main.cpp -o main
+: 1714325233:0;./main
+: 1714325531:0;rm include/loading.h
+: 1714325537:0;git add --all
+: 1714325549:0;git commit -m "Update"
+: 1714325562:0;git push
+: 1714326113:0;clear
+: 1714326130:0;ls ssrc
+: 1714326133:0;ls src
+: 1714326140:0;nvim src/loading.cpp
+: 1714326544:0;cd src
+: 1714326558:0;mv loading.cpp Loading.cpp
+: 1714326562:0;nvim Loading.cpp
+: 1714326584:0;../
+: 1714326586:0;clear
+: 1714326593:0;nvim include/Loading.h
+: 1714327426:0;clear
+: 1714327450:0;bat i-Haklab/doc/contribuyendo.md
+: 1714327602:0;lsc
+: 1714327608:0;cd Loading
+: 1714327614:0;nvim include/Loading.h
+: 1714327643:0;nvim src/Loading.cpp
+: 1714327777:0;nvim src/Loading.cpp
+: 1714328819:0;clang++ main.cpp src/Loading.cpp -o main -L ./include
+: 1714328832:0;clang++ main.cpp src/Loading.cpp -o main -l ./include
+: 1714328842:0;clang++ main.cpp src/Loading.cpp -o main -I ./include
+: 1714328872:0;clang++ main.cpp src/Loading.cpp -o main -I ./include | bat
+: 1714328882:0;clear
+: 1714328885:0;clang++ main.cpp src/Loading.cpp -o main -I ./include | bat
+: 1714328894:0;clang++ main.cpp src/Loading.cpp -o main -I ./include
+: 1714328922:0;i-haklab --about clang++
+: 1714328966:0;clang++ main.cpp src/Loading.cpp -o main -I ./include/Loading.h
+: 1714329020:0;clang++ main.cpp src/Loading.cpp -o main
+: 1714329053:0;clang++ main.cpp src/Loading.cpp -o main -L ./include/Loading.h
+: 1714329064:0;clang++ main.cpp src/Loading.cpp -o main -I ./include/Loading.h
+: 1714329073:0;clang++ main.cpp src/Loading.cpp -o main -i ./include/Loading.h
+: 1714329079:0;clang++ main.cpp src/Loading.cpp -o main -l ./include/Loading.h
+: 1714329101:0;clang++ main.cpp src/Loading.cpp -o main -l ./include
+: 1714329114:0;clang++ main.cpp src/Loading.cpp -o main -I ./include
+: 1714329219:0;clear
+: 1714329238:0;gcc main src/Loading.cpp
+: 1714329248:0;gcc main.cpp src/Loading.cpp
+: 1714329265:0;gcc main.cpp src/Loading.cpp -I include
+: 1714329291:0;clear
+: 1714329302:0;cd i-Haklab
+: 1714329307:0;bat CMakeLists.txt
+: 1714329337:0;cd L
+: 1714329343:0;clear
+: 1714329347:0;cd Loading
+: 1714329371:0;i-haklab --about cmake
+: 1714329413:0;l
+: 1714329446:0;bat ~/i-Haklab/notas.md
+: 1714329476:0;cmake -H. -Bbuild
+: 1714329482:0;clear
+: 1714329505:0;mv main.cpp test.cpp
+: 1714329506:0;clear
+: 1714329520:0;bat ~/i-Haklab/notas.md
+: 1714329533:0;clea
+: 1714329535:0;clear
+: 1714329542:0;nivm CMakeLists.txt
+: 1714329553:0;nivm C
+: 1714329573:0;nivm CMakeLists.txt
+: 1714329579:0;nvim CMakeLists.txt
+: 1714329946:0;cmake --build build
+: 1714329971:0;nvim CMakeLists.txt
+: 1714330002:0;cmake --build build
+: 1714330014:0;cd src
+: 1714330016:0;celar
+: 1714330017:0;clear
+: 1714330038:0;nvim CMakeLists.txt
+: 1714330105:0;../
+: 1714330110:0;cmake --build build
+: 1714330122:0;nvim CMakeLists.txt
+: 1714330217:0;bat CMakeLists.txt
+: 1714330270:0;nvim CMakeLists.txt
+: 1714330288:0;nvim src/CMakeLists.txt
+: 1714330310:0;cmake --buil build
+: 1714330318:0;clae
+: 1714330318:0;r
+: 1714330318:0;clae
+: 1714330320:0;clear
+: 1714330331:0;cmake --build build
+: 1714330359:0;clear
+: 1714330378:0;clear
+: 1714352370:0;ks
+: 1714352375:0;bat teledono.md
+: 1714352818:0;cd Loading
+: 1714352830:0;rm CMakeLists.txt
+: 1714352834:0;cd src
+: 1714352841:0;rm CMakeLists.txt
+: 1714352844:0;../
+: 1714352850:0;nvin include/Loading.h
+: 1714352857:0;nvim include/Loading.h
+: 1714353001:0;trans :es -b keep
+: 1714353056:0;rm src
+: 1714353067:0;rm src -drf
+: 1714353090:0;bat test.cpp
+: 1714353158:0;clang++ test.cpp
+: 1714353165:0;./a.out
+: 1714353218:0;nvim include/Loading.h
+: 1714353313:0;nvim README.md
+: 1714353635:0;rm build -rfd
+: 1714353640:0;rm a.out
+: 1714353644:0;clear
+: 1714353651:0;nvim include/Loading.h
+: 1714354845:0;ncim .zshrc
+: 1714354857:0;nvim .zshrc
+: 1714354966:0;cd Loading
+: 1714354981:0;clang++ test.cpp -o test
+: 1714355101:0;nvim .zshrc
+: 1714355128:0;clang++ test.cpp -o test
+: 1714355133:0;cd Loading
+: 1714355135:0;clang++ test.cpp -o test
+: 1714355165:0;nvin include/Loading.h
+: 1714355173:0;nvim include/Loading.h
+: 1714364069:0;cd i-Haklab
+: 1714364072:0;nvim main-haklab.cpp
+: 1714520453:0;cd Loading
+: 1714520468:0;git branch
+: 1714520473:0;nvim README.md
+: 1714529748:0;cd Loading
+: 1714529752:0;nvim README.md
+: 1714529970:0;git add README.md
+: 1714529995:0;git commit -m "Update"
+: 1714530000:0;git push
+: 1714531828:0;bat README.md
+: 1714531850:0;nvim .doc/CONTRIBUTE.md
+: 1714533789:0;nvim README.md
+: 1714534221:0;nvim include/Loading.h
+: 1714535631:0;nvim src
+: 1714535641:0;mkdir src
+: 1714535664:0;touch src/loadin.h
+: 1714535858:0;mv src/loadin.h src/loadin.cpp
+: 1714535875:0;mv include/Loading.h include/loading.h
+: 1714535888:0;nvim src/loadin.cpp
+: 1714536139:0;cat include/loading.h
+: 1714536365:0;nvim src/loadin.cpp
+: 1714536455:0;nvim test.cpp
+: 1714536526:0;clang++ test.cpp
+: 1714536554:0;clang++ src/loadin.cpp test.cpp
+: 1714536568:0;clang++ src/loadin.cpp test.cpp -I include
+: 1714536579:0;clang++ src/loadin.cpp test.cpp -I ./include
+: 1714536603:0;clang++ test.cpp src/loadin.cpp -I ./include
+: 1714536613:0;clang++ test.cpp src/loadin.cpp -L ./include
+: 1714536627:0;clang++ test.cpp src/loadin.cpp -l ./include
+: 1714536644:0;clang++ test.cpp src/loadin.cpp -L ./include/loading.h
+: 1714536746:0;nvim src/loadin.cpp
+: 1714536796:0;clang++ test.cpp src/loadin.cpp -L ./include/loading.h
+: 1714536812:0;nvim src/loadin.cpp
+: 1714537012:0;../
+: 1714537032:0;tree -d Loading
+: 1714537130:0;clang++ -c src/loading.cpp -o loading.o\
+
+: 1714537136:0;cd Loading
+: 1714537138:0;clang++ -c src/loading.cpp -o loading.o\
+
+: 1714537163:0;clang++ -c src/loadin.cpp -o loading.o\
+
+: 1714537227:0;clang++ -I include -c test.cpp -o main.o\
+
+: 1714537238:0;clang++ loading.o main.o -o programa\
+
+: 1714537280:0;rm main.o
+: 1714537301:0;rm include/loading.ob
+: 1714537304:0;rm include/loading.o
+: 1714537308:0;ls src
+: 1714537313:0;ls include
+: 1714537325:0;rm loading.o
+: 1714537362:0;clang++ -I include test.cpp src/loadin.cpp -o test
+: 1714537398:0;nvim test.cpp
+: 1714537424:0;clang++ -I include test.cpp src/loadin.cpp -o test
+: 1714537462:0;cat test.cpp
+: 1714537533:0;nvim include/loading.h
+: 1714537753:0;mv src/loadin.cpp src/loading.cpp
+: 1714537760:0;clang++ -I include test.cpp src/loading.cpp -o test
+: 1714537792:0;bat src/loading.cpp
+: 1714537922:0;nvim src/loading.cpp
+: 1714537934:0;clang++ -I include test.cpp src/loading.cpp -o test
+: 1714538304:0;cd L
+: 1714538310:0;cd Loading
+: 1714538318:0;nvim include/loading.h
+: 1714538418:0;clang++ -I include test.cpp src/loading.cpp -o test
+: 1714538482:0;ncim src/loading.cpp
+: 1714538490:0;nvim src/loading.cpp
+: 1714538531:0;clang++ -I include test.cpp src/loading.cpp -o test
+: 1714538540:0;nvim src/loading.cpp
+: 1714538582:0;clang++ -I include test.cpp src/loading.cpp -o test
+: 1714538605:0;nvim test.cpp
+: 1714538619:0;clang++ -I include test.cpp src/loading.cpp -o test
+: 1714538631:0;./test
+: 1714538636:0;nvim test.cpp
+: 1714538753:0;clang++ -I include test.cpp src/loading.cpp -o test
+: 1714538769:0;./test
+: 1714538777:0;nvim test.cpp
+: 1714538806:0;bat src/loading.cpp
+: 1714538831:0;./test
+: 1714538838:0;./test
+: 1714538847:0;nvim test.cpp
+: 1714539014:0;clang++ -I include test.cpp src/loading.cpp -o test
+: 1714539039:0;bat test.cpp
+: 1714539235:0;nvim src/loading.cpp
+: 1714539256:0;cat src/loading.cpp
+: 1714539346:0;nvim include/loading.h
+: 1714539462:0;clang++ -I include test.cpp src/loading.cpp -o test
+: 1714539479:0;nvim src/loading.cpp
+: 1714539489:0;nvim include/loading.h
+: 1714588571:0;cd shell_termux
+: 1714588575:0;clear
+: 1714588583:0;./print
+: 1714588596:0;./print_asm
+: 1714588654:0;file print
+: 1714588663:0;file print_asm
+: 1714588696:0;rm print_asm
+: 1714588747:0;./print
+: 1714588755:0;file ./print
+: 1714588773:0;nasm -f elf32 print_asm.asm
+: 1714588792:0;ld -m elf_i386 print_asm.o -o print_asm
+: 1714588807:0;./print_asm
+: 1714588816:0;file ./print_asm
+: 1714605003:0;i-haklab --about am
+: 1714605198:0;adb logcat | grep --line-buffered ActivityManager | grep --line-buffered
+: 1714605351:0;aapt dump badging $1|awk -F" " '/package/ {print $2}'|awk -F"'" '/name=/ {print $2}'
+: 1714619280:0;bat Loading/include/loading.h
+: 1714619377:0;lsusb
+: 1714619442:0;clear
+: 1714619451:0;i-haklab --about pm
+: 1714619476:0;i-haklab --about aap
+: 1714619480:0;i-haklab --about aapt
+: 1714619489:0;aapt
+: 1714619518:0;pm
+: 1714619764:0;bat Loading/include/loading.h
+: 1714619877:0;trans :es -b throw
+: 1714620375:0;cd i-Haklab/include
+: 1714620380:0;nvin below_zero.h
+: 1714620384:0;nvim below_zero.h
+: 1714620886:0;../
+: 1714620892:0;nvim include/below_zero.h
+: 1714621863:0;ls include
+: 1714621890:0;mkdir include/shell
+: 1714621916:0;touch ./include/shell/shell.h
+: 1714621924:0;nvim ./include/shell/shell.h
+: 1714698908:0;cd Loading
+: 1714698943:0;nvim include/loading.h
+: 1714698975:0;clang-format -i include/loading.h
+: 1714698979:0;nvim include/loading.h
+: 1714699003:0;nvim test.cpp
+: 1714699038:0;clang++ src/loading.cpp test.cpp -I include -o test
+: 1714699069:0;nvim src/loading.cpp
+: 1714699097:0;clang++ src/loading.cpp test.cpp -I include -o test
+: 1714699132:0;bat include/loading.h
+: 1714699194:0;nvim include/loading.h
+: 1714699297:0;nvim src/loading.cpp
+: 1714699569:0;clang++ src/loading.cpp test.cpp -I include -o test
+: 1714699606:0;nvim src/loading.cpp
+: 1714699627:0;nvim test.cpp
+: 1714699662:0;clang++ src/loading.cpp test.cpp -I include -o test
+: 1714699710:0;nvim include/loading.h
+: 1714699746:0;nvim src/loading.cpp
+: 1714700497:0;clang++ src/loading.cpp test.cpp -I include -o test
+: 1714700512:0;nvim test.cpp
+: 1714700537:0;clang++ src/loading.cpp test.cpp -I include -o test
+: 1714700627:0;nvim test.cpp
+: 1714700644:0;clang++ src/loading.cpp test.cpp -I include -o test
+: 1714700728:0;bat test.cpp
+: 1714700805:0;clang++ src/loading.cpp test.cpp -I include -o test
+: 1714788037:0;bat teledono.md
+: 1714923507:0;echo victor | base64
+: 1715036653:0;bat Ma.md
+: 1715036693:0;rm teledono.md
+: 1715036708:0;ls notas
+: 1715111946:0;trans -b :es "Hey bro.\
+What type of device do you have? What SoC?\
+\
+As I've mentioned above, if it's an older mediatek you can use the temp root by diplomatic."
+: 1715112022:0;cleqr
+: 1715112024:0;clear
+: 1715112035:0;bat i-Haklab/main-haklab.cpp
+: 1715112096:0;exir
+: 1715113368:0;trans -b :es "Hey bro.\
+What type of device do you have? What SoC?\
+\
+As I've mentioned above, if it's an older mediatek you can use the temp root by diplomatic."
+: 1715114442:0;trans -b :es "Hey bro.\
+What type of device do you have? What SoC?\
+\
+As I've mentioned above, if it's an older mediatek you can use the temp root by diplomatic."
+: 1715121573:0;cd c++
+: 1715121581:0;nvim file_anime.cpp
+: 1715121717:0;bat i-Haklab/main-haklab.cpp
+: 1715121742:0;nvim c++/file_anime.cpp
+: 1715121941:0;clang++ c++/file_anime.cpp
+: 1715121948:0;./a.out
+: 1715121964:0;exir
+: 1715123270:0;echo TunnelBear | base64
+: 1715123298:0;echo Tunnel | base64
+: 1715123329:0;echo tunnel | base64
+: 1715139129:0;aapt
+: 1715203329:0;ps -el
+: 1715203787:0;cat /proc/pid
+: 1715203800:0;cd /
+: 1715203811:0;cd /proc
+: 1715203827:0;bat consoles
+: 1715203875:0;echo "1395" > /proc/pid
+: 1715203883:0;mkdir pid
+: 1715440170:0;cd i-Haklab
+: 1715440178:0;nvim notas.md
+: 1715440807:0;cd i-Haklab
+: 1715440810:0;nvim main-haklab.cpp
+: 1715440910:0;nvim include/below_zero.h
+: 1715440982:0;nvim main-haklab.cpp
+: 1715440989:0;nvim include/below_zero.h
+: 1715441277:0;./server
+: 1715441283:0;rm server
+: 1715441287:0;clear
+: 1715441293:0;bash build_sh.sh
+: 1715441338:0;i-haklab
+: 1715441344:0;i-haklab --help
+: 1715441632:0;cd in
+: 1715441635:0;cd i-Haklab
+: 1715441637:0;cd include
+: 1715441649:0;cd shell
+: 1715441655:0;nvim shell.h
+: 1715441736:0;1exit
+: 1715441739:0;exut
+: 1715441854:0;cd $PREFIX/var
+: 1715441859:0;cd log
+: 1715441869:0;bat i-Haklab.log
+: 1715441903:0;mv i-Haklab.log haklab.log
+: 1715444183:0;ls prefix
+: 1715444199:0;ls $PREFIX
+: 1715444209:0;echo $PREFIX
+: 1715473026:0;echo tunnel | base64
+: 1715641912:0;ssh
+: 1715641920:0;sshd -h
+: 1715641926:0;sshd --help
+: 1715641931:0;man sshd
+: 1715642133:0;ping -c 8 8.8.8.8
+: 1715643036:0;trans :es away
+: 1715643145:0;trans :es "thes send me away \
+"
+: 1715643207:0;trans :es "thes"
+: 1715643254:0;trans :es "me"
+: 1715643316:0;clear
+: 1715643350:0;trans :es "to find then a fortune"
+: 1715726713:0;echo tunnel | base64
+: 1715871565:0;echo 'Ѓ�ривет, мир!' | piper --model en_US-lessac-medium --output_file welcome.wav
+: 1715871582:0;pip install piper-tts
+: 1715871647:0;pip install piper-tts 1.2.0
+: 1715871671:0;piper
+: 1715871685:0;apt install libpaper
+: 1715871702:0;piper
+: 1715871984:0;apt uninstall libpaper
+: 1715871992:0;apt unstall libpaper
+: 1715871999:0;apt uninstall libpaper
+: 1715872015:0;apt --help
+: 1715872037:0;apt remove libpaper
+: 1715872061:0;apt autoremov
+: 1715872067:0;apt autoremove
+: 1715872660:0;l
+: 1715872670:0;bat 080238\ code.zip
+: 1715872683:0;unzip -l 080238\ code.zip
+: 1716063621:0;./a.out
+: 1716063629:0;rm a.out
+: 1716063642:0;i-haklab
+: 1716063647:0;i-haklab --help
+: 1716063736:0;cd i-Haklab
+: 1716063744:0;bat server.cpp
+: 1716063753:0;rm server.cpp
+: 1716063755:0;ceqr
+: 1716063759:0;clear
+: 1716063760:0;s
+: 1716063778:0;bat build
+: 1716063797:0;tree -d include
+: 1716063848:0;bat main-haklab.cpp
+: 1716063973:0;cd i-Haklab
+: 1716063983:0;tree include
+: 1716064003:0;ls include
+: 1716065601:0;cd c++
+: 1716065604:0;clea
+: 1716065606:0;celar
+: 1716065608:0;clear
+: 1716065648:0;rm cpp^
+: 1716065651:0;celar
+: 1716065652:0;clea
+: 1716065654:0;rclear
+: 1716065656:0;clear
+: 1716065664:0;nvim anime.cpp
+: 1716066215:0;celar
+: 1716066216:0;clear
+: 1716066266:0;nvim anime.cpp
+: 1716066308:0;clang++ anime.cpp -o anime
+: 1716066315:0;./anime
+: 1716066328:0;celar
+: 1716067427:0;clang++ anime.cpp -o anime
+: 1716067437:0;./anime
+: 1716067451:0;clear
+: 1716067557:0;clang++ anime.cpp -o anime && ./anime
+: 1716068125:0;clear
+: 1716068324:0;clang++ anime.cpp -o anime && ./anime
+: 1716068338:0;clear
+: 1716068493:0;clang++ anime.cpp -o anime && ./anime
+: 1716068507:0;./anime
+: 1716068805:0;clear
+: 1716068808:0;clear
+: 1716068813:0;bat Actyvi-directory.md
+: 1716068824:0;clear
+: 1716068829:0;clear
+: 1716068833:0;bat Loading
+: 1716068837:0;ls Loading
+: 1716068839:0;cleqa
+: 1716068841:0;clear
+: 1716068850:0;bat M
+: 1716068853:0;bat Ma.md
+: 1716068885:0;bat shell_termux
+: 1716068890:0;ls shell_termux
+: 1716068896:0;rm shell_termux
+: 1716068900:0;rm shell_termux -drf
+: 1716068904:0;clear
+: 1716068913:0;ls notas
+: 1716068915:0;clear
+: 1716068923:0;rm downloads -df
+: 1716068925:0;rm downloads -dfr
+: 1716068929:0;clear
+: 1716068938:0;ls CTF
+: 1716068948:0;ls CTF/WEP
+: 1716068958:0;ls CTF/WEP/Portal_en_desarollo.md
+: 1716068965:0;bat CTF/WEP/Portal_en_desarollo.md
+: 1716069048:0;celar
+: 1716069049:0;clear
+: 1716069071:0;cd Loading
+: 1716069077:0;bat README.md
+: 1716069120:0;bat test.cpp
+: 1716069147:0;lce
+: 1716069150:0;celar
+: 1716069156:0;git stauts
+: 1716069160:0;git status
+: 1716069174:0;clear
+: 1716069212:0;cela
+: 1716069225:0;bat src/loading.cpp
+: 1716069239:0;bat include/loading.h
+: 1716069293:0;lsc
+: 1716069295:0;clea
+: 1716069297:0;celar
+: 1716069299:0;clear
+: 1716069341:0;clang++ src/loading.cpp test.cpp -o test -I include
+: 1716069362:0;nvim include/loading.h
+: 1716069375:0;clang++ src/loading.cpp test.cpp -o test -I include
+: 1716069405:0;bat test.cpp
+: 1716154702:0;tuoch sexpac
+: 1716154737:0;echo sexpac > serie
+: 1716154745:0;bat serie
+: 1716154754:0;bat serie -color
+: 1716154769:0;bat serie -c
+: 1716154782:0;bat serie -- -c
+: 1716154791:0;bat serie -c black
+: 1716253729:0;echo tunnel | base64
+: 1716256766:0;echo victor | base64
+: 1716257668:0;echo facebook | base64
+: 1716297009:0;Try\
+dumpsys package $PKG | grep signature
+: 1716297019:0;dumpsys package $PKG | grep signature
+: 1716297041:0;dumpsys
+: 1717045261:0;0x7a3791c9d9b84bb09e4c2b495326dd4c35c98255
+: 1717972753:0;cd i-Haklab
+: 1717972756:0;clear
+: 1717972765:0;bat test
+: 1717972768:0;ls test
+: 1717972774:0;la
+: 1717972792:0;cd include
+: 1717972814:0;nvim below_zero.h
+: 1717972864:0;l
+: 1717972877:0;clang-format -i below_zero.h
+: 1717972881:0;nvim below_zero.h
+: 1717972978:0;../
+: 1717972983:0;bat src/below_zero.cpp
+: 1717973044:0;nvim include/below_zero.h
+: 1717973129:0;bat src/below_zero.cpp
+: 1717973141:0;nvim src/below_zero.cpp
+: 1717973310:0;bash build_sh.sh
+: 1717973343:0;nvim include/below_zero.h
+: 1717973429:0;bash build_sh.sh
+: 1717973475:0;nvim main-haklab.cpp
+: 1717973504:0;bash build_sh.sh
+: 1717973539:0;i-haklab
+: 1717973543:0;i-haklab --help
+: 1717973573:0;nvim main-haklab.cpp
+: 1717973897:0;bash build_sh.sh
+: 1717973926:0;i-haklab
+: 1717973930:0;i-haklab --help
+: 1717973946:0;i-haklab --about
+: 1717973949:0;i-haklab --about nma
+: 1717973958:0;i-haklab --about nm
+: 1717973963:0;i-haklab --about nvim
+: 1718110127:0;i
+: 1718110133:0;python
+: 1718110168:0;python -m server.http
+: 1718110182:0;python -m http.server
+: 1718110267:0;ifconfig
+: 1718110492:0;i-haklab --about curl
+: 1718110606:0;python -m http.server
+: 1718111115:0;i-haklab --about wget
+: 1718111151:0;python -m http.server
+: 1718111184:0;wget --help
+: 1718111239:0;python -m http.server
+: 1718247337:0;unzip -h
+: 1718247343:0;unzip i-Haklab
+: 1718247353:0;unzip i-Haklab i-Haklab.zip
+: 1718247395:0;unzip -ZC i-Haklab i-Haklab.zip
+: 1718247408:0;i-haklab --about unzip
+: 1718247412:0;i-haklab --about unzi
+: 1718247419:0;i-haklab --about uname
+: 1718247464:0;i-haklab --about tar
+: 1718247508:0;tar -czfv i-Haklab.tar i-Haklab
+: 1718247756:0;rm v serie Ma.md
+: 1718247791:0;tar -czfv i-Haklab.tar.gz i-Haklab
+: 1718298787:0;uname
+: 1718298788:0;id
+: 1718298793:0;id --help
+: 1718298802:0;id -u
+: 1718298994:0;trans :en -b "Cómo obtengo el navegador"
+: 1718299154:0;trans :en -b "Lee el menaje anclado del grupo que acabo de enciar "
+: 1718560233:0;nvim p.cpp
+: 1718560434:0;clang++ p.cpp -o p && ./p
+: 1718762978:0;cd i-Haklab
+: 1718763018:0;nvim include/below_zero.h
+: 1718763769:0;nvim src/below_zero.cpp
+: 1718824505:0;cd i-Haklab
+: 1718824548:0;cd include/
+: 1718824549:0;is
+: 1718824560:0;rm curses
+: 1718824565:0;rm curses -rd
+: 1718824629:0;rm process scanning theme -rd
+: 1718824660:0;rm crypto -rd
+: 1718824691:0;rm network -rd
+: 1718824707:0;rm exec redteam shell
+: 1718824710:0;rm exec redteam shell -rd
+: 1718824730:0;nvim below_zero.h
+: 1718824860:0;cd i-Haklab
+: 1718824921:0;nvim include/below_zero.h
+: 1718826513:0;git add --all

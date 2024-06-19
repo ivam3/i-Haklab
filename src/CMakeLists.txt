@@ -1,8 +1,6 @@
 #Crea la biblioteca compartida
 add_library(below_zero SHARED
-                below_zero.cpp 
-                NetworHaklab.cpp 
-                command_line_argument_parser.cpp 
+  #                NetworHaklab.cpp 
                 RedTeamHaklab.cpp 
-                AdminHaklab.cpp
-                ExecHaklab.cpp)
+                ExecHaklab.cpp
+                below_zero.cpp)

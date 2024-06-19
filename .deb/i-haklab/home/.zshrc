@@ -59,8 +59,8 @@ alias -g .......='../../../../../..'
 alias -g ........='../../../../../../..'
 
 
-# Usar por default C++20
-
+# Usar por default C++  
+alias -g cg="clang++ -Wall -Weverything -Werror "
 
 #--------------------------------
 # polybar

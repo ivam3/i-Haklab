@@ -1,9 +1,35 @@
 #include "../include/below_zero.h"
-#include "../include/redteam/RedTeamHaklab.h"
+#include <boost/process/io.hpp>
 
-namespace po = boost::program_options;
-using namespace haklab;
+void Haklab::os_check(){
+  #ifdef _WIN32 
+    cerr << "Error " << endl;
+  #elif _WIN64 
+    cerr << "Erro " << endl;
+  #endif // DEBUG 
+}
 
+void haklab::k_boom(int signum){
+   std::string k_boom = R"(
+                        _-^--^=-_
+                   _.-^^          -~_
+                _--                  --_
+              (<                        >)
+               |                         |
+                \._                   _./
+                   '..--. . , ; .--..'
+                         | |   |
+                      .-=||  | |=-.
+                      '-=k-boom!!='
+                         |;   :|
+                _____.,-#########-,._____⏎)";
+    syntax_highlight(k_boom);
+    exit(1);
+} 
+
+void haklab::runCommand(const string &command){
+  boost::process::child c = boost::process::launch(command, boost::process::std_out > "log.txt");
+}
 
 /* main    
 int haklab::Haklab::run() {
@@ -66,8 +92,8 @@ int haklab::Haklab::run() {
 
 /*
  * Actualizar los archivos que cuisidan en el dir que este
- */
-bool updateFiles(vector<string> path_file) {
+ // */
+/* bool updateFiles(vector<string> path_file) {
   std::set<string> filesHere; // -->
   if (path_file.size() == 0) {
     //  return false;
@@ -81,146 +107,7 @@ bool updateFiles(vector<string> path_file) {
     filesHere.insert(hereFile.path().filename().string().c_str());
   }
   return true;
-};
-
-// Selector de color
-std::string haklab::setColor(Color color) {
-  std::string code = "\033[";
-  switch (color) {
-  case Color::Default:
-    code += "0";
-    break;
-  case Color::Black: // Negro
-    code += "30";
-    break;
-  case Color::Red: // Rojo
-    code += "31";
-    break;
-  case Color::Green: // Verde
-    code += "32";
-    break;
-  case Color::Yellow: // Amarillo
-    code += "33";
-    break;
-  case Color::Blue: // Azul
-    code += "34";
-    break;
-  case Color::Magenta: // Magenta
-    code += "35";
-    break;
-  case Color::Cyan: // cian
-    code += "36";
-    break;
-  case Color::White: // Blanco
-    code += "37";
-    break;
-  default:
-    code += "0";
-  }
-
-  code += "m";
-  return code;
-};
-
-void haklab::syntax_highlight(const std::string &code) {
-  std::string highlightedCode = "";
-  // Colores para cada parte del código
-  std::string colorKeywords = haklab::setColor(Color::Blue);
-  std::string colorStrings = haklab::setColor(Color::Green);
-  std::string colorComments = haklab::setColor(Color::Magenta);
-  std::string colorDefault = haklab::setColor(Color::Default);
-
-  std::size_t pos = 0;
-  std::size_t start = 0;
-  std::size_t end = 0;
-
-  while (pos < code.size()) {
-    // Buscar en la cadena
-    if (code.find("#", pos) == pos) {
-      // Comentario
-      start = pos;
-      end = code.find("\n", pos);
-      // Si no hay coincidencias
-      if (end == std::string::npos) {
-        end = code.size();
-      }
-      pos = end;
-      highlightedCode +=
-          colorComments + code.substr(start, end - start) + colorDefault;
-    } else if (std::isalpha(code[pos])) {
-      // Palabra clave
-      start = pos;
-      while (std::isalnum(code[pos]) || code[pos] == '_') {
-        pos++;
-      }
-      std::string keyword = code.substr(start, pos - start);
-      highlightedCode += colorKeywords + keyword + colorDefault;
-    } else if (code[pos] == '"' || code[pos] == '\'') {
-      // Cadena de caracteres
-      char delimiter = code[pos++];
-      start = pos;
-      while (pos < code.size() && code[pos] != delimiter) {
-        pos++;
-      }
-      if (pos < code.size()) {
-        pos++;
-      }
-      std::string str = code.substr(start, pos - start);
-      highlightedCode += colorStrings + str + colorDefault;
-    } else {
-      // Otros caracteres
-      highlightedCode += code[pos++];
-    }
-  }
-  // // fmt::print(highlightedCode);
-  std::cout << highlightedCode << std::endl;
-};
-
-void haklab::k_boom(int signum) {
-  std::string k_boom = R"(
-                        _-^--^=-_
-                   _.-^^          -~_
-                _--                  --_
-              (<                        >)
-               |                         |
-                \._                   _./
-                   '..--. . , ; .--..'
-                         | |   |
-                      .-=||  | |=-.
-                      '-=k-boom!!='
-                         |;   :|
-                _____.,-#########-,._____⏎)";
-  haklab::syntax_highlight(k_boom);
-  exit(1);
-}
-
-void haklab::clear_screen() {
-  // Se coloca en la pocicion (1 1) y borra la pantalla
-  cout << CLEAR_SCREEN_ANSI ;
-}
-
-void haklab::hide_cursor() {
-  cout <<  HIDE_CURSOR_ANSI;
-}
-
-void haklab::show_cursor() {
-  cout <<  SHOW_CURSOL_ANSI;
-}
-
-std::string show_architecture() {
-#ifdef __x86_64__
-  return "(x86_64)";
-#elif __i386__
-  return "x86 (32-bit)";
-#elif __arm__
-  return "(ARM)";
-#elif __aarch64__
-  return "aarch64 ";
-#elif
-  return "(Desconocida)";
-#endif
-}
-
+};*/
 // void hack::Haklab::directory_iterator(const char *path){
 
 // namespace fs = std::filesystem;

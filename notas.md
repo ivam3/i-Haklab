@@ -1,9 +1,6 @@
 
 Se utilisaran algunas llamadas al sistema para ejecutar comando pero no es el opjetivo de este proyecto 
 
-# En creacion 
-
-Fuincion "apt_source"  
 
 # Error en el modulo 
 
@@ -46,7 +43,7 @@ git clone https://github.com/the-tcpdump-group/tcpdump
 git clone https://github.com/the-tcpdump-group/libpcap
 ```
 
-# boost
+# boost_program_options 
 - `https://www.boost.org/doc/libs/1_84_0/doc/html/program_options/howto.html` 
 
 - hay funciones declarsdas a un no definidas que los tipos de datos no pueden cambiar 
@@ -69,10 +66,14 @@ rm -rf ~/.local/share/nvim
 rd -r ~\AppData\Local\nvim
 rd -r ~\AppData\Local\nvim-data
 
+## Instalar a la primera 
+
+tmux , zsh 
 
 
 # Regisito
 https://shields.io/
+https://docs.libcpr.org/ 
 https://hackingcpp.com/cpp/libs/fmt.html#terminal-styles
 https://theboostcpplibraries.com/boost.program_options
 https://github.com/mmdjiji/makefile-learning 
@@ -81,5 +82,7 @@ https://www.google.com/amp/s/www.geeksforgeeks.org/regex-regular-expression-in-c
 https://cplusplus.com/reference/thread/thread/
 pendiente para nvim 
 https://nvchad.com/docs/features#nvcheatsheet
+# CLI 
+https://github.com/ArthurSonzogni/FTXUI
 # you
 https://gleev.xyz/ypp?referrerId=47429

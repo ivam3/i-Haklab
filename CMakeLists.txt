@@ -29,6 +29,9 @@ target_link_libraries(${PROJECT_NAME} PUBLIC below_zero
     -lcurl
     -Wall
     -std=c++20
+    -lboost_json 
+    -lssl 
+    -lcrypto
     )
 
 #########    Instalación  ############

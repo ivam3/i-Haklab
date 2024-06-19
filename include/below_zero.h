@@ -7,40 +7,32 @@
 //------------------------------------------
 //
 //-----------------------------------------
-#include "../include/admin/AdminHaklab.h"
-#include "../include/command_line_argument_parser.h"
-#include "../include/network/NetworHaklab.h"
-#include <boost/beast/core/file.hpp>
-#include <boost/beast/http/status.hpp>
+#include <boost/asio.hpp>
+#include <boost/process.hpp>
 #include <boost/filesystem.hpp>
-#include <boost/filesystem/directory.hpp>
-#include <boost/filesystem/operations.hpp>
-#include <boost/filesystem/path.hpp>
+#include <boost/iostreams/stream.hpp>
+#include <boost/json.hpp>
+#include <boost/program_options.hpp>
 #include <boost/thread.hpp>
-#include <cctype>
-#include <csignal>
-#include <cstdlib>
-#include <curl/curl.h>
 #include <fmt/color.h> // Un  mundo sin colores es  feo  .....
+//------------------------------------------
 #include <fstream>
 #include <iostream>
-#include <sstream>
-#include <string>
 //------------------------------------------
 //------------------------------------------
-namespace fs = boost::filesystem;
 namespace po = boost::program_options;
-//------------------------------------------
-//------------------------------------------
-#define PORT_SHH 8022
-#define PORT_WEP 808O
-#define PORT_FTP 8021
-#define LOCALHOST "127.0.0.1"
-#define ROOT_DIR getenv("PREFIX")
+namespace fs = boost::filesystem;
 
-#define SHOW_CURSOL_ANSI "\e[?25h\n";
-#define HIDE_CURSOR_ANSI "\e[?25l";
-#define CLEAR_SCREEN_ANSI "\e[1;1H\e[2J";
+//------------------------------------------
+//------------------------------------------
+#define PORT_SHH "8022"
+#define PORT_WEP "808O"
+#define PORT_FTP "8021"
+#define LOCALHOST "127.0.0.1"
+
+#define SHOW_CURSOL_ANSI "\e[?25h"
+#define HIDE_CURSOR_ANSI "\e[?25l"
+#define CLEAR_SCREEN_ANSI "\e[1;1H\e[2J"
 //------------------------------------------
 //------------------------------------------
 using std::cerr;
@@ -48,7 +40,6 @@ using std::cout;
 using std::endl;
 using std::fstream;
 using std::string;
-using std::vector;
 //------------------------------------------
 //------------------------------------------
 
@@ -65,70 +56,152 @@ enum class Color {
   White
 };
 
-namespace haklab {
-
 // Shell que se pueden configurar
 typedef enum {
-  ZSH, // Default
-  FISH,
+  ZSH,
 } shell;
 
 
-/*
- * borra la pantalla
- */
-void clear_screen();
-/*
- * Ocultar el cursor
- */
-void hide_cursor();
-/*
- * Muestra el cursor
- */
-void show_cursor();
+string setColor(Color color) {
+  string code = "\033[";
+  switch (color) {
+  case Color::Default:
+    code += "0";
+    break;
+  case Color::Black: // Negro
+    code += "30";
+    break;
+  case Color::Red: // Rojo
+    code += "31";
+    break;
+  case Color::Green: // Verde
+    code += "32";
+    break;
+  case Color::Yellow: // Amarillo
+    code += "33";
+    break;
+  case Color::Blue: // Azul
+    code += "34";
+    break;
+  case Color::Magenta: // Magenta
+    code += "35";
+    break;
+  case Color::Cyan: // cian
+    code += "36";
+    break;
+  case Color::White: // Blanco
+    code += "37";
+    break;
+  default:
+    code += "0";
+  }
+  code += "m";
+  return code;
+};
 
 /*
- *  Salir con estilo jjj
+ *
  */
-void k_boom(int signum);
+void syntax_highlight(const string &code) {
+  string highlightedCode = "";
+  // Colores para cada parte del código
+  string colorKeywords = setColor(Color::Blue);
+  string colorStrings = setColor(Color::Green);
+  string colorComments = setColor(Color::Magenta);
+  string colorDefault = setColor(Color::Default);
+
+  std::size_t pos = 0;
+  std::size_t start = 0;
+  std::size_t end = 0;
+
+  while (pos < code.size()) {
+    // Buscar en la cadena
+    if (code.find("#", pos) == pos) {
+      // Comentario
+      start = pos;
+      end = code.find("\n", pos);
+      // Si no hay coincidencias
+      if (end == std::string::npos) {
+        end = code.size();
+      }
+      pos = end;
+      highlightedCode +=
+          colorComments + code.substr(start, end - start) + colorDefault;
+    } else if (std::isalpha(code[pos])) {
+      // Palabra clave
+      start = pos;
+      while (std::isalnum(code[pos]) || code[pos] == '_') {
+        pos++;
+      }
+      std::string keyword = code.substr(start, pos - start);
+      highlightedCode += colorKeywords + keyword + colorDefault;
+    } else if (code[pos] == '"' || code[pos] == '\'') {
+      // Cadena de caracteres
+      char delimiter = code[pos++];
+      start = pos;
+      while (pos < code.size() && code[pos] != delimiter) {
+        pos++;
+      }
+      if (pos < code.size()) {
+        pos++;
+      }
+      std::string str = code.substr(start, pos - start);
+      highlightedCode += colorStrings + str + colorDefault;
+    } else {
+      // Otros caracteres
+      highlightedCode += code[pos++];
+    }
+  }
+  // // fmt::print(highlightedCode);
+  std::cout << highlightedCode << std::endl;
+};
+
+
 /*
  *
  */
-std::string setColor(Color color);
-/*
- *
- */
-void syntax_highlight(const std::string &code);
+namespace haklab { 
+  /*
+   *  Salir con estilo jjj
+   */
+  static void k_boom(int signum);
+  /*
+   *
+   */
+  void runCommand(const string &command);
+}
+
+
+
 
 /*
  * Clase principal
  */
 class Haklab {
 private: // ---> Variables privadas
-  const char *m_file_name;
-  string m_user_name;
-  std::string m_shell;
-  network::NetworHakaklab network;
-  admin::AdminHaklab admin;
+  // Ususario de  sistema  
+  string _userName;
+  // Shell  a urilizar  
+  const char _shellName;
   fs::path IHETC{string(getenv("HOME")) + "/.local/etc/i-Haklab"};
   fs::path LIBEX{string(getenv("HOME")) + "/.local/libexec/i-Haklab"};
+  /*
+   *  Comprobar systema 
+   */
+  void os_check();
+  /*
+   *  
+   */
+  void setUserName();
+  /*
+   *
+   */
+  void setShell(shell sh);
 public:
-  // (nombre de shell, shell a usar)
-  Haklab(string user_name, shell sh) : m_user_name(std::move(user_name)) {
-    if(!fs::is_directory(IHETC) && !fs::is_directory(LIBEX)){
-      cerr << "No emcuentro mis archivos " << endl;
-    }
-    switch (sh) {
-    case FISH:
-      m_shell = "fish";
-      break;
-    case ZSH:
-      m_shell = "zsh";
-      break;
-       }
-  }
-  // Obtener shell 
-  string getShell() { return m_shell; };
+  /*
+   *  
+   */
+
   /*
    * Atrapa el CONTROL+c
    */
@@ -137,8 +210,9 @@ public:
    * Algo para ver mientra se espera
    */
   template <typename Func> void Loading(Func func) {
-    hide_cursor();
-    std::vector<std::string> spinner{"█■■■■", "■█■■■", "■■█■■", "■■■█■", "■■■■█"};
+    //    hide_cursor();
+    std::vector<std::string> spinner{"█■■■■", "■█■■■", "■■█■■", "■■■█■",
+                                     "■■■■█"};
     int spinnerIndex = 0;
     boost::thread t([&]() {
       while (true) {
@@ -152,34 +226,30 @@ public:
     t.detach();
     // Ejecuta la función proporcionada en segundo plano
     func();
-    show_cursor();
+    //   show_cursor();
   } // loading
-  
-  void about(std::string about) {
-     fs::path fren = IHETC /= std::basic_string("/Tools/Readme/");
-     char ab = std::toupper(about[0]);
-     string s(1,ab);
-     // Directorio base 
-     if (!fs::is_directory(IHETC)) {
-        cerr << "[ERROR] No found " << IHETC << endl; 
-     };
-     // Archivos 
-     if (!fs::exists(fren /= s)) {
-        cerr << "No tengo esta inicial  " << s << endl;      
-     };
 
+  void about(string about) {
+    fs::path fren = IHETC /= std::basic_string("/Tools/Readme/") +
+                             std::string(1, std::toupper(about[0]));
+    // Directorio base
+    if (!fs::is_directory(fren)) {
+      cerr << "[ERROR] No found " << IHETC << endl;
+    };
 
-       std::fstream fd(fren.c_str() +  string( "/")  + about.c_str() + ".md");
-       if (fd.is_open()) {
-         std::stringstream buffer;
-         buffer << fd.rdbuf();
-         fd.close();
-         syntax_highlight(buffer.str()); 
-       } else {
-          cout << "Ufff no pude abrir el archivo " << endl;
-       }
-  }
+    std::fstream fd(fren.c_str() + string("/") + about.c_str() + ".md");
+    if (fd.is_open()) {
+      std::stringstream buffer;
+      buffer << fd.rdbuf();
+      fd.close();
+      syntax_highlight(buffer.str());
+    } else {
+      cout << "Con la inicial " << about[0] << " tengo :" << endl;
+      for (fs::directory_entry &entry : fs::directory_iterator(fren)) {
+        cout << entry.path().stem() << endl;
+      }
+    }
+  } // about
 };  // end  class
-};  // namespace haklab
 
 #endif //  BELOW_ZERO_
