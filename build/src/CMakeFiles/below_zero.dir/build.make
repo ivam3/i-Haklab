@@ -69,38 +69,10 @@ include src/CMakeFiles/below_zero.dir/progress.make
 # Include the compile flags for this target's objects.
 include src/CMakeFiles/below_zero.dir/flags.make
 
-src/CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.o: src/CMakeFiles/below_zero.dir/flags.make
-src/CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.o: /data/data/com.termux/files/home/i-Haklab/src/RedTeamHaklab.cpp
-src/CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.o: src/CMakeFiles/below_zero.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/data/data/com.termux/files/home/i-Haklab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.o"
-	cd /data/data/com.termux/files/home/i-Haklab/build/src && /data/data/com.termux/files/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.o -MF CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.o.d -o CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.o -c /data/data/com.termux/files/home/i-Haklab/src/RedTeamHaklab.cpp
-
-src/CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.i"
-	cd /data/data/com.termux/files/home/i-Haklab/build/src && /data/data/com.termux/files/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /data/data/com.termux/files/home/i-Haklab/src/RedTeamHaklab.cpp > CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.i
-
-src/CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.s"
-	cd /data/data/com.termux/files/home/i-Haklab/build/src && /data/data/com.termux/files/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /data/data/com.termux/files/home/i-Haklab/src/RedTeamHaklab.cpp -o CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.s
-
-src/CMakeFiles/below_zero.dir/ExecHaklab.cpp.o: src/CMakeFiles/below_zero.dir/flags.make
-src/CMakeFiles/below_zero.dir/ExecHaklab.cpp.o: /data/data/com.termux/files/home/i-Haklab/src/ExecHaklab.cpp
-src/CMakeFiles/below_zero.dir/ExecHaklab.cpp.o: src/CMakeFiles/below_zero.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/data/data/com.termux/files/home/i-Haklab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/below_zero.dir/ExecHaklab.cpp.o"
-	cd /data/data/com.termux/files/home/i-Haklab/build/src && /data/data/com.termux/files/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/below_zero.dir/ExecHaklab.cpp.o -MF CMakeFiles/below_zero.dir/ExecHaklab.cpp.o.d -o CMakeFiles/below_zero.dir/ExecHaklab.cpp.o -c /data/data/com.termux/files/home/i-Haklab/src/ExecHaklab.cpp
-
-src/CMakeFiles/below_zero.dir/ExecHaklab.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/below_zero.dir/ExecHaklab.cpp.i"
-	cd /data/data/com.termux/files/home/i-Haklab/build/src && /data/data/com.termux/files/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /data/data/com.termux/files/home/i-Haklab/src/ExecHaklab.cpp > CMakeFiles/below_zero.dir/ExecHaklab.cpp.i
-
-src/CMakeFiles/below_zero.dir/ExecHaklab.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/below_zero.dir/ExecHaklab.cpp.s"
-	cd /data/data/com.termux/files/home/i-Haklab/build/src && /data/data/com.termux/files/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /data/data/com.termux/files/home/i-Haklab/src/ExecHaklab.cpp -o CMakeFiles/below_zero.dir/ExecHaklab.cpp.s
-
 src/CMakeFiles/below_zero.dir/below_zero.cpp.o: src/CMakeFiles/below_zero.dir/flags.make
 src/CMakeFiles/below_zero.dir/below_zero.cpp.o: /data/data/com.termux/files/home/i-Haklab/src/below_zero.cpp
 src/CMakeFiles/below_zero.dir/below_zero.cpp.o: src/CMakeFiles/below_zero.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/data/data/com.termux/files/home/i-Haklab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/CMakeFiles/below_zero.dir/below_zero.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/data/data/com.termux/files/home/i-Haklab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/below_zero.dir/below_zero.cpp.o"
 	cd /data/data/com.termux/files/home/i-Haklab/build/src && /data/data/com.termux/files/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/below_zero.dir/below_zero.cpp.o -MF CMakeFiles/below_zero.dir/below_zero.cpp.o.d -o CMakeFiles/below_zero.dir/below_zero.cpp.o -c /data/data/com.termux/files/home/i-Haklab/src/below_zero.cpp
 
 src/CMakeFiles/below_zero.dir/below_zero.cpp.i: cmake_force
@@ -113,19 +85,15 @@ src/CMakeFiles/below_zero.dir/below_zero.cpp.s: cmake_force
 
 # Object files for target below_zero
 below_zero_OBJECTS = \
-"CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.o" \
-"CMakeFiles/below_zero.dir/ExecHaklab.cpp.o" \
 "CMakeFiles/below_zero.dir/below_zero.cpp.o"
 
 # External object files for target below_zero
 below_zero_EXTERNAL_OBJECTS =
 
-src/libbelow_zero.so: src/CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.o
-src/libbelow_zero.so: src/CMakeFiles/below_zero.dir/ExecHaklab.cpp.o
 src/libbelow_zero.so: src/CMakeFiles/below_zero.dir/below_zero.cpp.o
 src/libbelow_zero.so: src/CMakeFiles/below_zero.dir/build.make
 src/libbelow_zero.so: src/CMakeFiles/below_zero.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/data/data/com.termux/files/home/i-Haklab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX shared library libbelow_zero.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/data/data/com.termux/files/home/i-Haklab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared library libbelow_zero.so"
 	cd /data/data/com.termux/files/home/i-Haklab/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/below_zero.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

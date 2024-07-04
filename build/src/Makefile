@@ -175,54 +175,6 @@ below_zero/fast:
 	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/build
 .PHONY : below_zero/fast
 
-ExecHaklab.o: ExecHaklab.cpp.o
-.PHONY : ExecHaklab.o
-
-# target to build an object file
-ExecHaklab.cpp.o:
-	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/ExecHaklab.cpp.o
-.PHONY : ExecHaklab.cpp.o
-
-ExecHaklab.i: ExecHaklab.cpp.i
-.PHONY : ExecHaklab.i
-
-# target to preprocess a source file
-ExecHaklab.cpp.i:
-	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/ExecHaklab.cpp.i
-.PHONY : ExecHaklab.cpp.i
-
-ExecHaklab.s: ExecHaklab.cpp.s
-.PHONY : ExecHaklab.s
-
-# target to generate assembly for a file
-ExecHaklab.cpp.s:
-	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/ExecHaklab.cpp.s
-.PHONY : ExecHaklab.cpp.s
-
-RedTeamHaklab.o: RedTeamHaklab.cpp.o
-.PHONY : RedTeamHaklab.o
-
-# target to build an object file
-RedTeamHaklab.cpp.o:
-	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.o
-.PHONY : RedTeamHaklab.cpp.o
-
-RedTeamHaklab.i: RedTeamHaklab.cpp.i
-.PHONY : RedTeamHaklab.i
-
-# target to preprocess a source file
-RedTeamHaklab.cpp.i:
-	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.i
-.PHONY : RedTeamHaklab.cpp.i
-
-RedTeamHaklab.s: RedTeamHaklab.cpp.s
-.PHONY : RedTeamHaklab.s
-
-# target to generate assembly for a file
-RedTeamHaklab.cpp.s:
-	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/RedTeamHaklab.cpp.s
-.PHONY : RedTeamHaklab.cpp.s
-
 below_zero.o: below_zero.cpp.o
 .PHONY : below_zero.o
 
@@ -260,12 +212,6 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... below_zero"
-	@echo "... ExecHaklab.o"
-	@echo "... ExecHaklab.i"
-	@echo "... ExecHaklab.s"
-	@echo "... RedTeamHaklab.o"
-	@echo "... RedTeamHaklab.i"
-	@echo "... RedTeamHaklab.s"
 	@echo "... below_zero.o"
 	@echo "... below_zero.i"
 	@echo "... below_zero.s"

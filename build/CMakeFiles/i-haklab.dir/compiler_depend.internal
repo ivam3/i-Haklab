@@ -3,7 +3,6 @@
 
 CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/home/i-Haklab/main-haklab.cpp
- /data/data/com.termux/files/home/i-Haklab/include/network/NetworHaklab.h
  /data/data/com.termux/files/home/i-Haklab/include/below_zero.h
  /data/data/com.termux/files/usr/include/alloca.h
  /data/data/com.termux/files/usr/include/android/api-level.h
@@ -20,6 +19,7 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/ioctls.h
  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/poll.h
  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/posix_types.h
+ /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/resource.h
  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/sigcontext.h
  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/siginfo.h
  /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/signal.h
@@ -41,6 +41,7 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/asm-generic/ioctls.h
  /data/data/com.termux/files/usr/include/asm-generic/poll.h
  /data/data/com.termux/files/usr/include/asm-generic/posix_types.h
+ /data/data/com.termux/files/usr/include/asm-generic/resource.h
  /data/data/com.termux/files/usr/include/asm-generic/siginfo.h
  /data/data/com.termux/files/usr/include/asm-generic/signal-defs.h
  /data/data/com.termux/files/usr/include/asm-generic/socket.h
@@ -76,6 +77,39 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/bits/wait.h
  /data/data/com.termux/files/usr/include/bits/wchar_limits.h
  /data/data/com.termux/files/usr/include/bits/wctype.h
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/case_conv.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/classification.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/compare.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/concept.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/config.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/constants.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/detail/case_conv.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/detail/classification.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/detail/find_format.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/detail/find_format_all.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/detail/find_format_store.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/detail/find_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/detail/finder.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/detail/formatter.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/detail/predicate.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/detail/replace_storage.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/detail/sequence.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/detail/trim.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/detail/util.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/find.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/find_format.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/find_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/finder.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/formatter.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/iter_find.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/join.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/predicate.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/predicate_facade.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/replace.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/sequence_traits.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/split.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/trim.hpp
+ /data/data/com.termux/files/usr/include/boost/algorithm/string/yes_no_type.hpp
  /data/data/com.termux/files/usr/include/boost/align/aligned_alloc.hpp
  /data/data/com.termux/files/usr/include/boost/align/detail/aligned_alloc_android.hpp
  /data/data/com.termux/files/usr/include/boost/align/detail/is_alignment.hpp
@@ -522,6 +556,7 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/boost/asio/traits/static_require_concept.hpp
  /data/data/com.termux/files/usr/include/boost/asio/traits/submit_free.hpp
  /data/data/com.termux/files/usr/include/boost/asio/traits/submit_member.hpp
+ /data/data/com.termux/files/usr/include/boost/asio/ts/netfwd.hpp
  /data/data/com.termux/files/usr/include/boost/asio/use_awaitable.hpp
  /data/data/com.termux/files/usr/include/boost/asio/use_future.hpp
  /data/data/com.termux/files/usr/include/boost/asio/uses_executor.hpp
@@ -677,6 +712,7 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/boost/config/no_tr1/cmath.hpp
  /data/data/com.termux/files/usr/include/boost/config/no_tr1/functional.hpp
  /data/data/com.termux/files/usr/include/boost/config/no_tr1/memory.hpp
+ /data/data/com.termux/files/usr/include/boost/config/no_tr1/utility.hpp
  /data/data/com.termux/files/usr/include/boost/config/platform/linux.hpp
  /data/data/com.termux/files/usr/include/boost/config/pragma_message.hpp
  /data/data/com.termux/files/usr/include/boost/config/requires_threads.hpp
@@ -729,8 +765,10 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/boost/core/detail/sp_thread_yield.hpp
  /data/data/com.termux/files/usr/include/boost/core/detail/string_view.hpp
  /data/data/com.termux/files/usr/include/boost/core/enable_if.hpp
+ /data/data/com.termux/files/usr/include/boost/core/exchange.hpp
  /data/data/com.termux/files/usr/include/boost/core/explicit_operator_bool.hpp
  /data/data/com.termux/files/usr/include/boost/core/first_scalar.hpp
+ /data/data/com.termux/files/usr/include/boost/core/identity.hpp
  /data/data/com.termux/files/usr/include/boost/core/ignore_unused.hpp
  /data/data/com.termux/files/usr/include/boost/core/no_exceptions_support.hpp
  /data/data/com.termux/files/usr/include/boost/core/noinit_adaptor.hpp
@@ -852,6 +890,395 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/boost/function_equal.hpp
  /data/data/com.termux/files/usr/include/boost/functional/hash.hpp
  /data/data/com.termux/files/usr/include/boost/functional/hash_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/functional/identity.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/mpl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/mpl/detail/at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/mpl/detail/begin_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/mpl/detail/category_of_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/mpl/detail/empty_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/mpl/detail/end_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/mpl/detail/has_key_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/mpl/detail/is_sequence_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/mpl/detail/is_view_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/mpl/detail/size_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/mpl/detail/value_at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/mpl/mpl_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/std_tuple.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/std_tuple/detail/at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/std_tuple/detail/begin_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/std_tuple/detail/build_std_tuple.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/std_tuple/detail/category_of_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/std_tuple/detail/convert_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/std_tuple/detail/end_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/std_tuple/detail/is_sequence_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/std_tuple/detail/is_view_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/std_tuple/detail/size_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/std_tuple/detail/value_at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/std_tuple/mpl/clear.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/std_tuple/std_tuple_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/adapted/std_tuple/tag_of.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/iteration/detail/for_each.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/iteration/detail/preprocessed/fold.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/iteration/detail/segmented_fold.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/iteration/detail/segmented_for_each.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/iteration/fold.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/iteration/fold_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/iteration/for_each.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/iteration/for_each_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/query/detail/find_if.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/query/detail/segmented_find.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/query/detail/segmented_find_if.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/query/find.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/query/find_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/query/find_if.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/query/find_if_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/transformation/erase.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/transformation/erase_key.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/transformation/filter_if.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/transformation/insert.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/transformation/insert_range.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/transformation/pop_back.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/transformation/pop_front.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/transformation/push_back.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/transformation/push_front.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/transformation/remove.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/algorithm/transformation/transform.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/deque.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/deque/convert.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/deque/deque.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/deque/deque_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/deque/deque_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/deque/detail/at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/deque/detail/begin_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/deque/detail/build_deque.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/deque/detail/convert_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/deque/detail/deque_keyed_values.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/deque/detail/end_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/deque/detail/is_sequence_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/deque/detail/keyed_element.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/deque/detail/value_at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/deque/front_extended_deque.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/generation.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/generation/cons_tie.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/generation/deque_tie.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/generation/ignore.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/generation/list_tie.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/generation/make_cons.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/generation/make_deque.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/generation/make_list.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/generation/make_map.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/generation/make_set.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/generation/make_vector.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/generation/map_tie.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/generation/vector_tie.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/cons.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/cons_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/cons_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/convert.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/detail/at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/detail/begin_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/detail/build_cons.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/detail/convert_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/detail/deref_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/detail/empty_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/detail/end_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/detail/equal_to_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/detail/list_to_cons.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/detail/next_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/detail/reverse_cons.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/detail/value_at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/detail/value_of_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/list.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/list_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/list/nil.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/map.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/map/convert.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/map/detail/at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/map/detail/at_key_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/map/detail/begin_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/map/detail/build_map.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/map/detail/end_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/map/detail/map_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/map/detail/value_at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/map/detail/value_at_key_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/map/map.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/map/map_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/map/map_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/set.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/set/convert.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/set/detail/as_set.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/set/detail/begin_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/set/detail/convert_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/set/detail/deref_data_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/set/detail/deref_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/set/detail/end_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/set/detail/key_of_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/set/detail/value_of_data_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/set/detail/value_of_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/set/set.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/set/set_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector/convert.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector/detail/advance_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector/detail/as_vector.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector/detail/at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector/detail/begin_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector/detail/config.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector/detail/convert_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector/detail/deref_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector/detail/distance_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector/detail/end_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector/detail/equal_to_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector/detail/next_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector/detail/prior_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector/detail/value_at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector/detail/value_of_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector/vector.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector/vector10.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector/vector_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/container/vector/vector_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/include/equal_to.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/include/filter_if.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/include/for_each.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/advance.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/basic_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/deref.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/deref_data.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/detail/adapt_deref_traits.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/detail/adapt_value_traits.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/detail/advance.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/detail/distance.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/detail/segment_sequence.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/detail/segmented_equal_to.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/detail/segmented_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/detail/segmented_next_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/distance.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/equal_to.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/iterator_adapter.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/iterator_facade.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/key_of.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/mpl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/mpl/convert_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/mpl/fusion_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/next.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/prior.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/segmented_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/value_of.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/iterator/value_of_data.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/mpl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/mpl/at.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/mpl/back.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/mpl/begin.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/mpl/clear.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/mpl/detail/clear.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/mpl/empty.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/mpl/end.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/mpl/erase.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/mpl/erase_key.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/mpl/front.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/mpl/has_key.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/mpl/insert.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/mpl/insert_range.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/mpl/pop_back.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/mpl/pop_front.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/mpl/push_back.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/mpl/push_front.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/mpl/size.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/comparison.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/comparison/detail/equal_to.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/comparison/detail/less.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/comparison/enable_comparison.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/comparison/equal_to.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/comparison/greater.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/comparison/greater_equal.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/comparison/less.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/comparison/less_equal.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/comparison/not_equal_to.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/convert.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic/at.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic/at_c.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic/at_key.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic/back.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic/begin.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic/detail/segmented_begin.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic/detail/segmented_begin_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic/detail/segmented_end.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic/detail/segmented_end_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic/detail/segmented_size.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic/empty.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic/end.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic/front.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic/has_key.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic/segments.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic/size.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic/swap.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic/value_at.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic/value_at_key.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/intrinsic_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/io.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/io/detail/in.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/io/detail/manip.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/io/detail/out.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/io/in.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/io/out.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/sequence/sequence_facade.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/as_const.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/category_of.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/config.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/detail/access.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/detail/and.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/detail/as_fusion_element.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/detail/enabler.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/detail/index_sequence.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/detail/is_mpl_sequence.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/detail/is_native_fusion_sequence.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/detail/is_same_size.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/detail/mpl_iterator_category.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/detail/segmented_fold_until_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/is_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/is_segmented.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/is_sequence.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/is_view.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/iterator_base.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/pair.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/segmented_fold_until.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/sequence_base.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/tag_of.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/tag_of_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/unused.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/support/void.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/tuple.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/tuple/make_tuple.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/tuple/tuple.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/tuple/tuple_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/tuple/tuple_tie.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/detail/strictest_traversal.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/filter_view.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/filter_view/detail/begin_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/filter_view/detail/deref_data_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/filter_view/detail/deref_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/filter_view/detail/end_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/filter_view/detail/equal_to_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/filter_view/detail/key_of_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/filter_view/detail/next_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/filter_view/detail/size_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/filter_view/detail/value_of_data_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/filter_view/detail/value_of_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/filter_view/filter_view.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/filter_view/filter_view_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/flatten_view.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/flatten_view/flatten_view.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/flatten_view/flatten_view_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/identity_view.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/identity_view/identity_view.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/iterator_range.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/iterator_range/detail/at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/iterator_range/detail/begin_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/iterator_range/detail/end_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/iterator_range/detail/is_segmented_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/iterator_range/detail/segmented_iterator_range.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/iterator_range/detail/segments_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/iterator_range/detail/size_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/iterator_range/detail/value_at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/iterator_range/iterator_range.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/joint_view.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/joint_view/detail/begin_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/joint_view/detail/deref_data_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/joint_view/detail/deref_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/joint_view/detail/end_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/joint_view/detail/key_of_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/joint_view/detail/next_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/joint_view/detail/value_of_data_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/joint_view/detail/value_of_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/joint_view/joint_view.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/joint_view/joint_view_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/joint_view/joint_view_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/nview.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/nview/detail/advance_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/nview/detail/at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/nview/detail/begin_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/nview/detail/deref_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/nview/detail/distance_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/nview/detail/end_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/nview/detail/equal_to_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/nview/detail/next_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/nview/detail/nview_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/nview/detail/prior_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/nview/detail/size_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/nview/detail/value_at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/nview/detail/value_of_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/nview/nview.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/nview/nview_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/reverse_view.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/reverse_view/detail/advance_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/reverse_view/detail/at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/reverse_view/detail/begin_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/reverse_view/detail/deref_data_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/reverse_view/detail/deref_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/reverse_view/detail/distance_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/reverse_view/detail/end_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/reverse_view/detail/key_of_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/reverse_view/detail/next_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/reverse_view/detail/prior_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/reverse_view/detail/value_at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/reverse_view/detail/value_of_data_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/reverse_view/detail/value_of_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/reverse_view/reverse_view.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/reverse_view/reverse_view_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/single_view.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/single_view/detail/advance_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/single_view/detail/at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/single_view/detail/begin_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/single_view/detail/deref_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/single_view/detail/distance_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/single_view/detail/end_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/single_view/detail/equal_to_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/single_view/detail/next_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/single_view/detail/prior_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/single_view/detail/size_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/single_view/detail/value_at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/single_view/detail/value_of_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/single_view/single_view.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/single_view/single_view_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/transform_view.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/transform_view/detail/advance_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/transform_view/detail/at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/transform_view/detail/begin_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/transform_view/detail/deref_data_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/transform_view/detail/deref_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/transform_view/detail/distance_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/transform_view/detail/end_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/transform_view/detail/equal_to_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/transform_view/detail/key_of_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/transform_view/detail/next_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/transform_view/detail/prior_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/transform_view/detail/value_at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/transform_view/detail/value_of_data_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/transform_view/detail/value_of_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/transform_view/transform_view.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/transform_view/transform_view_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/transform_view/transform_view_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/zip_view.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/zip_view/detail/advance_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/zip_view/detail/at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/zip_view/detail/begin_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/zip_view/detail/deref_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/zip_view/detail/distance_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/zip_view/detail/end_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/zip_view/detail/equal_to_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/zip_view/detail/next_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/zip_view/detail/prior_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/zip_view/detail/size_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/zip_view/detail/value_at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/zip_view/detail/value_of_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/zip_view/zip_view.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/zip_view/zip_view_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/fusion/view/zip_view/zip_view_iterator_fwd.hpp
  /data/data/com.termux/files/usr/include/boost/get_pointer.hpp
  /data/data/com.termux/files/usr/include/boost/integer.hpp
  /data/data/com.termux/files/usr/include/boost/integer_fwd.hpp
@@ -950,7 +1377,9 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/boost/iterator/iterator_concepts.hpp
  /data/data/com.termux/files/usr/include/boost/iterator/iterator_facade.hpp
  /data/data/com.termux/files/usr/include/boost/iterator/iterator_traits.hpp
+ /data/data/com.termux/files/usr/include/boost/iterator/minimum_category.hpp
  /data/data/com.termux/files/usr/include/boost/iterator/reverse_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/iterator/transform_iterator.hpp
  /data/data/com.termux/files/usr/include/boost/json.hpp
  /data/data/com.termux/files/usr/include/boost/json/array.hpp
  /data/data/com.termux/files/usr/include/boost/json/basic_parser.hpp
@@ -1074,6 +1503,10 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/boost/mp11/tuple.hpp
  /data/data/com.termux/files/usr/include/boost/mp11/utility.hpp
  /data/data/com.termux/files/usr/include/boost/mp11/version.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/O1_size.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/O1_size_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/advance.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/advance_fwd.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/always.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/and.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/apply.hpp
@@ -1082,11 +1515,20 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/boost/mpl/arg.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/arg_fwd.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/assert.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/at.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/at_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/O1_size_impl.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/adl_barrier.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/advance_backward.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/advance_forward.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/arg_typedef.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/arithmetic_op.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/arity.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/arity_spec.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/at_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/back_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/begin_end_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/clear_impl.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/common_name_wknd.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/comparison_op.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/adl.hpp
@@ -1114,20 +1556,40 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/preprocessor.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/static_constant.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/ttp.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/typeof.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/use_preprocessed.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/config/workaround.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/empty_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/erase_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/erase_key_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/find_if_pred.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/fold_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/front_impl.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/full_lambda.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/has_apply.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/has_begin.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/has_key_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/has_size.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/has_tag.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/has_type.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/include_preprocessed.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/insert_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/insert_range_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/inserter_algorithm.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/integral_wrapper.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/is_msvc_eti_arg.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/iter_apply.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/iter_fold_if_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/iter_fold_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/iter_push_front.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/joint_iter.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/lambda_arity_param.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/lambda_spec.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/lambda_support.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/largest_int.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/msvc_eti_base.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/msvc_never_true.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/msvc_type.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/na.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/na_assert.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/na_fwd.hpp
@@ -1136,6 +1598,10 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/nttp_decl.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/numeric_cast_utils.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/numeric_op.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/pop_back_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/pop_front_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/advance_backward.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/advance_forward.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/and.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp
@@ -1144,55 +1610,164 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/bind.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/equal_to.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/fold_impl.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/inherit.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/iter_fold_if_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/iter_fold_impl.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/less.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/minus.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/or.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/plus.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/reverse_fold_impl.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/times.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/unpack_args.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessed/gcc/vector.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessor/default_params.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessor/enum.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/preprocessor/params.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/push_back_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/push_front_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/reverse_fold_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/single_element_iter.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/size_impl.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/static_cast.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/template_arity.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/template_arity_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/traits_lambda_spec.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/aux_/transform_iter.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/type_wrapper.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/value_wknd.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/aux_/yes_no.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/back.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/back_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/back_inserter.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/begin.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/begin_end.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/begin_end_fwd.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/bind.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/bind_fwd.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/bool.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/bool_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/clear.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/clear_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/deref.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/distance.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/distance_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/empty.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/empty_base.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/empty_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/end.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/equal_to.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/erase.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/erase_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/erase_key.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/erase_key_fwd.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/eval_if.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/find_if.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/fold.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/front.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/front_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/front_inserter.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/has_key.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/has_key_fwd.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/has_xxx.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/identity.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/if.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/inherit.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/insert.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/insert_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/insert_range.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/insert_range_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/inserter.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/int.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/int_fwd.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/integral_c.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/integral_c_fwd.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/integral_c_tag.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/is_sequence.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/iter_fold.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/iter_fold_if.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/iterator_category.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/iterator_range.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/iterator_tags.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/joint_view.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/lambda.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/lambda_fwd.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/less.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/limits/arity.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/limits/vector.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/logical.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/long.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/long_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/min.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/min_max.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/minus.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/multiplies.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/negate.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/next.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/next_prior.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/not.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/numeric_cast.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/or.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/pair.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/pair_view.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/placeholders.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/plus.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/pop_back.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/pop_back_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/pop_front.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/pop_front_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/prior.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/protect.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/push_back.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/push_back_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/push_front.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/push_front_fwd.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/quote.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/reverse_fold.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/sequence_tag.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/sequence_tag_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/single_view.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/size.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/size_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/size_t.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/size_t_fwd.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/tag.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/times.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/transform.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/transform_view.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/unpack_args.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/aux_/O1_size.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/aux_/at.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/aux_/back.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/aux_/begin_end.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/aux_/clear.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/aux_/empty.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/aux_/front.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/aux_/include_preprocessed.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/aux_/item.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/aux_/iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/aux_/pop_back.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/aux_/pop_front.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/aux_/preprocessed/typeof_based/vector10.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/aux_/preprocessed/typeof_based/vector20.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/aux_/push_back.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/aux_/push_front.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/aux_/size.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/aux_/tag.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/aux_/vector0.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/vector0.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/vector10.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/vector/vector20.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/void.hpp
  /data/data/com.termux/files/usr/include/boost/mpl/void_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/mpl/zip_view.hpp
  /data/data/com.termux/files/usr/include/boost/next_prior.hpp
  /data/data/com.termux/files/usr/include/boost/none.hpp
  /data/data/com.termux/files/usr/include/boost/none_t.hpp
@@ -1484,6 +2059,85 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/boost/preprocessor/variadic/limits/elem_64.hpp
  /data/data/com.termux/files/usr/include/boost/preprocessor/variadic/limits/size_64.hpp
  /data/data/com.termux/files/usr/include/boost/preprocessor/variadic/size.hpp
+ /data/data/com.termux/files/usr/include/boost/process.hpp
+ /data/data/com.termux/files/usr/include/boost/process/args.hpp
+ /data/data/com.termux/files/usr/include/boost/process/async.hpp
+ /data/data/com.termux/files/usr/include/boost/process/async_pipe.hpp
+ /data/data/com.termux/files/usr/include/boost/process/async_system.hpp
+ /data/data/com.termux/files/usr/include/boost/process/child.hpp
+ /data/data/com.termux/files/usr/include/boost/process/cmd.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/async_handler.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/basic_cmd.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/child_decl.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/config.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/execute_impl.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/handler.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/handler_base.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/on_exit.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/asio_fwd.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/async_handler.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/async_in.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/async_out.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/async_pipe.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/basic_cmd.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/basic_pipe.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/child_handle.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/close_in.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/close_out.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/cmd.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/compare_handles.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/env_init.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/environment.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/executor.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/fd.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/file_descriptor.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/file_in.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/file_out.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/group_handle.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/group_ref.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/handler.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/handles.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/io_context_ref.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/is_running.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/null_in.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/null_out.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/on_exit.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/pipe_in.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/pipe_out.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/search_path.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/shell_path.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/sigchld_service.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/signal.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/start_dir.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/terminate.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/use_vfork.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/wait_for_exit.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/posix/wait_group.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/traits.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/traits/async.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/traits/cmd_or_exe.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/traits/decl.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/traits/env.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/traits/error.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/traits/wchar_t.hpp
+ /data/data/com.termux/files/usr/include/boost/process/detail/used_handles.hpp
+ /data/data/com.termux/files/usr/include/boost/process/env.hpp
+ /data/data/com.termux/files/usr/include/boost/process/environment.hpp
+ /data/data/com.termux/files/usr/include/boost/process/error.hpp
+ /data/data/com.termux/files/usr/include/boost/process/exception.hpp
+ /data/data/com.termux/files/usr/include/boost/process/exe.hpp
+ /data/data/com.termux/files/usr/include/boost/process/filesystem.hpp
+ /data/data/com.termux/files/usr/include/boost/process/group.hpp
+ /data/data/com.termux/files/usr/include/boost/process/handles.hpp
+ /data/data/com.termux/files/usr/include/boost/process/io.hpp
+ /data/data/com.termux/files/usr/include/boost/process/locale.hpp
+ /data/data/com.termux/files/usr/include/boost/process/pipe.hpp
+ /data/data/com.termux/files/usr/include/boost/process/posix.hpp
+ /data/data/com.termux/files/usr/include/boost/process/search_path.hpp
+ /data/data/com.termux/files/usr/include/boost/process/shell.hpp
+ /data/data/com.termux/files/usr/include/boost/process/spawn.hpp
+ /data/data/com.termux/files/usr/include/boost/process/start_dir.hpp
+ /data/data/com.termux/files/usr/include/boost/process/system.hpp
  /data/data/com.termux/files/usr/include/boost/program_options.hpp
  /data/data/com.termux/files/usr/include/boost/program_options/cmdline.hpp
  /data/data/com.termux/files/usr/include/boost/program_options/config.hpp
@@ -1500,6 +2154,7 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/boost/program_options/variables_map.hpp
  /data/data/com.termux/files/usr/include/boost/program_options/version.hpp
  /data/data/com.termux/files/usr/include/boost/range/algorithm/equal.hpp
+ /data/data/com.termux/files/usr/include/boost/range/as_literal.hpp
  /data/data/com.termux/files/usr/include/boost/range/begin.hpp
  /data/data/com.termux/files/usr/include/boost/range/concepts.hpp
  /data/data/com.termux/files/usr/include/boost/range/config.hpp
@@ -1512,6 +2167,7 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/boost/range/detail/msvc_has_iterator_workaround.hpp
  /data/data/com.termux/files/usr/include/boost/range/detail/safe_bool.hpp
  /data/data/com.termux/files/usr/include/boost/range/detail/sfinae.hpp
+ /data/data/com.termux/files/usr/include/boost/range/detail/str_types.hpp
  /data/data/com.termux/files/usr/include/boost/range/difference_type.hpp
  /data/data/com.termux/files/usr/include/boost/range/distance.hpp
  /data/data/com.termux/files/usr/include/boost/range/empty.hpp
@@ -1689,6 +2345,9 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/boost/thread/tss.hpp
  /data/data/com.termux/files/usr/include/boost/thread/xtime.hpp
  /data/data/com.termux/files/usr/include/boost/throw_exception.hpp
+ /data/data/com.termux/files/usr/include/boost/token_functions.hpp
+ /data/data/com.termux/files/usr/include/boost/token_iterator.hpp
+ /data/data/com.termux/files/usr/include/boost/tokenizer.hpp
  /data/data/com.termux/files/usr/include/boost/tuple/detail/tuple_basic.hpp
  /data/data/com.termux/files/usr/include/boost/tuple/tuple.hpp
  /data/data/com.termux/files/usr/include/boost/type.hpp
@@ -1751,6 +2410,7 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/boost/type_traits/is_copy_constructible.hpp
  /data/data/com.termux/files/usr/include/boost/type_traits/is_default_constructible.hpp
  /data/data/com.termux/files/usr/include/boost/type_traits/is_destructible.hpp
+ /data/data/com.termux/files/usr/include/boost/type_traits/is_empty.hpp
  /data/data/com.termux/files/usr/include/boost/type_traits/is_enum.hpp
  /data/data/com.termux/files/usr/include/boost/type_traits/is_float.hpp
  /data/data/com.termux/files/usr/include/boost/type_traits/is_floating_point.hpp
@@ -1784,12 +2444,14 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/boost/type_traits/remove_pointer.hpp
  /data/data/com.termux/files/usr/include/boost/type_traits/remove_reference.hpp
  /data/data/com.termux/files/usr/include/boost/type_traits/remove_volatile.hpp
+ /data/data/com.termux/files/usr/include/boost/type_traits/same_traits.hpp
  /data/data/com.termux/files/usr/include/boost/type_traits/type_identity.hpp
  /data/data/com.termux/files/usr/include/boost/type_traits/type_with_alignment.hpp
  /data/data/com.termux/files/usr/include/boost/utility.hpp
  /data/data/com.termux/files/usr/include/boost/utility/base_from_member.hpp
  /data/data/com.termux/files/usr/include/boost/utility/binary.hpp
  /data/data/com.termux/files/usr/include/boost/utility/compare_pointees.hpp
+ /data/data/com.termux/files/usr/include/boost/utility/declval.hpp
  /data/data/com.termux/files/usr/include/boost/utility/detail/result_of_variadic.hpp
  /data/data/com.termux/files/usr/include/boost/utility/enable_if.hpp
  /data/data/com.termux/files/usr/include/boost/utility/identity_type.hpp
@@ -1798,6 +2460,7 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/boost/variant2/variant.hpp
  /data/data/com.termux/files/usr/include/boost/version.hpp
  /data/data/com.termux/files/usr/include/boost/visit_each.hpp
+ /data/data/com.termux/files/usr/include/boost/winapi/config.hpp
  /data/data/com.termux/files/usr/include/c++/v1/__algorithm/adjacent_find.h
  /data/data/com.termux/files/usr/include/c++/v1/__algorithm/all_of.h
  /data/data/com.termux/files/usr/include/c++/v1/__algorithm/any_of.h
@@ -2401,6 +3064,7 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/c++/v1/compare
  /data/data/com.termux/files/usr/include/c++/v1/complex
  /data/data/com.termux/files/usr/include/c++/v1/concepts
+ /data/data/com.termux/files/usr/include/c++/v1/condition_variable
  /data/data/com.termux/files/usr/include/c++/v1/csignal
  /data/data/com.termux/files/usr/include/c++/v1/cstdarg
  /data/data/com.termux/files/usr/include/c++/v1/cstddef
@@ -2413,6 +3077,7 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/c++/v1/cwchar
  /data/data/com.termux/files/usr/include/c++/v1/cwctype
  /data/data/com.termux/files/usr/include/c++/v1/cxxabi.h
+ /data/data/com.termux/files/usr/include/c++/v1/deque
  /data/data/com.termux/files/usr/include/c++/v1/errno.h
  /data/data/com.termux/files/usr/include/c++/v1/exception
  /data/data/com.termux/files/usr/include/c++/v1/execution
@@ -2468,6 +3133,7 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/c++/v1/wchar.h
  /data/data/com.termux/files/usr/include/c++/v1/wctype.h
  /data/data/com.termux/files/usr/include/ctype.h
+ /data/data/com.termux/files/usr/include/dirent.h
  /data/data/com.termux/files/usr/include/endian.h
  /data/data/com.termux/files/usr/include/errno.h
  /data/data/com.termux/files/usr/include/fcntl.h
@@ -2496,6 +3162,7 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/linux/openat2.h
  /data/data/com.termux/files/usr/include/linux/poll.h
  /data/data/com.termux/files/usr/include/linux/posix_types.h
+ /data/data/com.termux/files/usr/include/linux/resource.h
  /data/data/com.termux/files/usr/include/linux/sched.h
  /data/data/com.termux/files/usr/include/linux/signal.h
  /data/data/com.termux/files/usr/include/linux/socket.h
@@ -2535,6 +3202,7 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/sys/epoll.h
  /data/data/com.termux/files/usr/include/sys/eventfd.h
  /data/data/com.termux/files/usr/include/sys/ioctl.h
+ /data/data/com.termux/files/usr/include/sys/resource.h
  /data/data/com.termux/files/usr/include/sys/select.h
  /data/data/com.termux/files/usr/include/sys/socket.h
  /data/data/com.termux/files/usr/include/sys/stat.h
@@ -2545,16 +3213,28 @@ CMakeFiles/i-haklab.dir/main-haklab.cpp.o
  /data/data/com.termux/files/usr/include/sys/uio.h
  /data/data/com.termux/files/usr/include/sys/un.h
  /data/data/com.termux/files/usr/include/sys/user.h
+ /data/data/com.termux/files/usr/include/sys/wait.h
  /data/data/com.termux/files/usr/include/termios.h
  /data/data/com.termux/files/usr/include/time.h
  /data/data/com.termux/files/usr/include/unistd.h
  /data/data/com.termux/files/usr/include/wchar.h
  /data/data/com.termux/files/usr/include/wctype.h
  /data/data/com.termux/files/usr/include/xlocale.h
- /data/data/com.termux/files/usr/lib/clang/17/include/__stddef_max_align_t.h
- /data/data/com.termux/files/usr/lib/clang/17/include/float.h
- /data/data/com.termux/files/usr/lib/clang/17/include/limits.h
- /data/data/com.termux/files/usr/lib/clang/17/include/stdarg.h
- /data/data/com.termux/files/usr/lib/clang/17/include/stddef.h
- /data/data/com.termux/files/usr/lib/clang/17/include/stdint.h
+ /data/data/com.termux/files/usr/lib/clang/18/include/__stdarg___gnuc_va_list.h
+ /data/data/com.termux/files/usr/lib/clang/18/include/__stdarg___va_copy.h
+ /data/data/com.termux/files/usr/lib/clang/18/include/__stdarg_va_arg.h
+ /data/data/com.termux/files/usr/lib/clang/18/include/__stdarg_va_copy.h
+ /data/data/com.termux/files/usr/lib/clang/18/include/__stdarg_va_list.h
+ /data/data/com.termux/files/usr/lib/clang/18/include/__stddef_max_align_t.h
+ /data/data/com.termux/files/usr/lib/clang/18/include/__stddef_null.h
+ /data/data/com.termux/files/usr/lib/clang/18/include/__stddef_nullptr_t.h
+ /data/data/com.termux/files/usr/lib/clang/18/include/__stddef_offsetof.h
+ /data/data/com.termux/files/usr/lib/clang/18/include/__stddef_ptrdiff_t.h
+ /data/data/com.termux/files/usr/lib/clang/18/include/__stddef_size_t.h
+ /data/data/com.termux/files/usr/lib/clang/18/include/__stddef_wchar_t.h
+ /data/data/com.termux/files/usr/lib/clang/18/include/float.h
+ /data/data/com.termux/files/usr/lib/clang/18/include/limits.h
+ /data/data/com.termux/files/usr/lib/clang/18/include/stdarg.h
+ /data/data/com.termux/files/usr/lib/clang/18/include/stddef.h
+ /data/data/com.termux/files/usr/lib/clang/18/include/stdint.h
 

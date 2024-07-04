@@ -1,5 +1,13 @@
 #include "../include/below_zero.h"
 #include <boost/process/io.hpp>
+#include <cstring>
+
+Haklab::Haklab(){
+  //  
+
+};
+
+
 
 void Haklab::os_check(){
   #ifdef _WIN32 
@@ -9,7 +17,7 @@ void Haklab::os_check(){
   #endif // DEBUG 
 }
 
-void haklab::k_boom(int signum){
+void k_boom(int signum){
    std::string k_boom = R"(
                         _-^--^=-_
                    _.-^^          -~_
@@ -25,11 +33,34 @@ void haklab::k_boom(int signum){
                 _____.,-#########-,._____⏎)";
     syntax_highlight(k_boom);
     exit(1);
-} 
-
-void haklab::runCommand(const string &command){
-  boost::process::child c = boost::process::launch(command, boost::process::std_out > "log.txt");
 }
+
+void runCommand(const string &command){
+  bp::child c(command, bp::std_out > "log.txt");
+}
+
+
+void Haklab::about(fs::path db, string command){
+    if (!fs::is_directory(db)) {
+      cerr << "[ERROR] No found " << db << endl;
+    };
+    db /= "/" +  std::string(1, std::toupper(command[0]));
+    std::fstream fd(db.c_str() + string("/") + command.c_str() + ".md");
+    if (fd.is_open()) {
+      std::stringstream buffer;
+      buffer << fd.rdbuf();
+      fd.close();
+      syntax_highlight(buffer.str());
+    } else {
+      cout << "Con la inicial " << command[0] << " tengo :" << endl;
+      for (fs::directory_entry &entry : fs::directory_iterator(db)) {
+        cout << entry.path().stem() << endl;
+      }
+   }
+} // about
+
+
+
 
 /* main    
 int haklab::Haklab::run() {

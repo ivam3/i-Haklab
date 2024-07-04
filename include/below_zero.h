@@ -1,5 +1,5 @@
-// Fichero : below_zero.h
-// Autor: @demon_rip
+// Fichero : below_zero   
+// Autor: @demonr_rip  
 
 #ifndef BELOW_ZERO_
 #define BELOW_ZERO_
@@ -22,6 +22,7 @@
 //------------------------------------------
 namespace po = boost::program_options;
 namespace fs = boost::filesystem;
+namespace bp  = boost::process;
 
 //------------------------------------------
 //------------------------------------------
@@ -152,7 +153,6 @@ void syntax_highlight(const string &code) {
       highlightedCode += code[pos++];
     }
   }
-  // // fmt::print(highlightedCode);
   std::cout << highlightedCode << std::endl;
 };
 
@@ -160,17 +160,15 @@ void syntax_highlight(const string &code) {
 /*
  *
  */
-namespace haklab { 
+
   /*
    *  Salir con estilo jjj
    */
-  static void k_boom(int signum);
+static  void k_boom(int signum);
   /*
    *
    */
-  void runCommand(const string &command);
-}
-
+void runCommand(const string &command);
 
 
 
@@ -178,34 +176,31 @@ namespace haklab {
  * Clase principal
  */
 class Haklab {
-private: // ---> Variables privadas
-  // Ususario de  sistema  
-  string _userName;
-  // Shell  a urilizar  
-  const char _shellName;
-  fs::path IHETC{string(getenv("HOME")) + "/.local/etc/i-Haklab"};
-  fs::path LIBEX{string(getenv("HOME")) + "/.local/libexec/i-Haklab"};
+private: 
+  string m_userName{};
+  string m_shellUsage{};
   /*
    *  Comprobar systema 
    */
   void os_check();
   /*
-   *  
-   */
-  void setUserName();
-  /*
    *
    */
-  void setShell(shell sh);
 public:
+  Haklab();  
+  /*
+   *  
+   */ 
+  void setShell(shell sh);
   /*
    *  
    */
-
+  void setUserName(std::string_view &name);
+ 
   /*
    * Atrapa el CONTROL+c
    */
-  void ctrl_c() { signal(SIGINT, k_boom); }
+  // void ctrl_c() { signal(SIGINT, k_boom); }
   /*
    * Algo para ver mientra se espera
    */
@@ -229,27 +224,8 @@ public:
     //   show_cursor();
   } // loading
 
-  void about(string about) {
-    fs::path fren = IHETC /= std::basic_string("/Tools/Readme/") +
-                             std::string(1, std::toupper(about[0]));
-    // Directorio base
-    if (!fs::is_directory(fren)) {
-      cerr << "[ERROR] No found " << IHETC << endl;
-    };
+  void about(fs::path db, string commad);
 
-    std::fstream fd(fren.c_str() + string("/") + about.c_str() + ".md");
-    if (fd.is_open()) {
-      std::stringstream buffer;
-      buffer << fd.rdbuf();
-      fd.close();
-      syntax_highlight(buffer.str());
-    } else {
-      cout << "Con la inicial " << about[0] << " tengo :" << endl;
-      for (fs::directory_entry &entry : fs::directory_iterator(fren)) {
-        cout << entry.path().stem() << endl;
-      }
-    }
-  } // about
 };  // end  class
 
 #endif //  BELOW_ZERO_

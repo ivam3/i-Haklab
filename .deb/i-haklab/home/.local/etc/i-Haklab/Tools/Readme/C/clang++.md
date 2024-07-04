@@ -15,6 +15,8 @@ https://wiki.archlinux.org/title/Clang
 
 `clang++ -Wno-error <tu_archivo.cpp> -o <nombre_ejecutable>`
 
+`-lws2_32` : 
+
 ```bash
 clang++ -fno-stack-protector -z execstack archivo.cpp -o archivo
 ```
