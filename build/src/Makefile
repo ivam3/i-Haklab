@@ -199,6 +199,30 @@ below_zero.cpp.s:
 	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/below_zero.cpp.s
 .PHONY : below_zero.cpp.s
 
+syntax.o: syntax.cpp.o
+.PHONY : syntax.o
+
+# target to build an object file
+syntax.cpp.o:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/syntax.cpp.o
+.PHONY : syntax.cpp.o
+
+syntax.i: syntax.cpp.i
+.PHONY : syntax.i
+
+# target to preprocess a source file
+syntax.cpp.i:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/syntax.cpp.i
+.PHONY : syntax.cpp.i
+
+syntax.s: syntax.cpp.s
+.PHONY : syntax.s
+
+# target to generate assembly for a file
+syntax.cpp.s:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/syntax.cpp.s
+.PHONY : syntax.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -215,6 +239,9 @@ help:
 	@echo "... below_zero.o"
 	@echo "... below_zero.i"
 	@echo "... below_zero.s"
+	@echo "... syntax.o"
+	@echo "... syntax.i"
+	@echo "... syntax.s"
 .PHONY : help
 
 

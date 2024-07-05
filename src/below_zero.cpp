@@ -1,9 +1,5 @@
 #include "../include/below_zero.h"
 
-Haklab::Haklab(){
-  //  
-
-};
 
 void Haklab::os_check(){
   #ifdef _WIN32 
@@ -27,7 +23,7 @@ void k_boom(int signum){
                       '-=k-boom!!='
                          |;   :|
                 _____.,-#########-,._____⏎)";
-    syntax_highlight(k_boom);
+ startSyntax(k_boom);
     exit(1);
 }
 
@@ -59,12 +55,11 @@ void Haklab::about(fs::path db, string command){
     };
     db /= "/" +  std::string(1, std::toupper(command[0]));
     std::fstream fd(db.c_str() + string("/") + command.c_str() + ".md");
-    cout << db ;
     if (fd.is_open()) {
       std::stringstream buffer;
       buffer << fd.rdbuf();
       fd.close();
-      syntax_highlight(buffer.str());
+      startSyntax(buffer.str());
     } else {
       cout << "Con la inicial " << command[0] << " tengo :" << endl;
       for (fs::directory_entry &entry : fs::directory_iterator(db)) {

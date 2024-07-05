@@ -9165,3 +9165,37 @@ pkg install mingw-w64\
 : 1720151393:0;bash build_sh.sh
 : 1720151460:0;i-haklab --help
 : 1720151507:0;git add --all
+: 1720151537:0;git commit -m "Se movio la funcion Loading()"
+: 1720151557:0;nvim include/below_zero.h
+: 1720151773:0;cat include/below_zero.h
+: 1720152069:0;cd include
+: 1720152097:0;cd i-Haklab/include
+: 1720152152:0;cd i-Haklab/include
+: 1720152168:0;nvim syntax.h
+: 1720152204:0;.../
+: 1720152209:0;cd ../
+: 1720152217:0;cd src
+: 1720152218:0;la
+: 1720152235:0;nvim syntax.cpp
+: 1720152310:0;nvim CMakeLists.txt
+: 1720152359:0;cd ../
+: 1720152363:0;cd include
+: 1720152368:0;../
+: 1720152375:0;bat CMakeLists.txt
+: 1720152418:0;nvim include/below_zero.h
+: 1720152560:0;bash build_sh.sh
+: 1720152598:0;nvim include/below_zero.h
+: 1720153564:0;nvim include/syntax.h
+: 1720153715:0;nvim src/syntax.cpp
+: 1720153863:0;nvim include/below_zero.h
+: 1720153898:0;nvim src/below_zero.cpp
+: 1720153979:0;bash build_sh.sh
+: 1720154024:0;nvim src/below_zero.cpp
+: 1720154054:0;bash build_sh.sh
+: 1720154130:0;i-haklab --help
+: 1720154146:0;i-haklab --about r2
+: 1720154154:0;i-haklab --about radare2
+: 1720154165:0;i-haklab --about rax2
+: 1720154198:0;../
+: 1720154207:0;nvim src/below_zero.cpp
+: 1720154230:0;git add --all

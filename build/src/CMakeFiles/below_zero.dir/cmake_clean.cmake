@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/below_zero.dir/below_zero.cpp.o"
   "CMakeFiles/below_zero.dir/below_zero.cpp.o.d"
+  "CMakeFiles/below_zero.dir/syntax.cpp.o"
+  "CMakeFiles/below_zero.dir/syntax.cpp.o.d"
   "libbelow_zero.pdb"
   "libbelow_zero.so"
 )

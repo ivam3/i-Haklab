@@ -11,10 +11,9 @@
 #include <boost/process.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/iostreams/stream.hpp>
-#include <boost/json.hpp>
 #include <boost/program_options.hpp>
 #include <boost/thread.hpp>
-#include <fmt/color.h> // Un  mundo sin colores es  feo  .....
+#include "syntax.h"
 //------------------------------------------
 #include <fstream>
 #include <iostream>
@@ -44,6 +43,16 @@ using std::string;
 //------------------------------------------
 //------------------------------------------
 
+
+// Shell que se pueden configurar
+typedef enum {
+  ZSH,
+} shell;
+
+
+
+
+/*
 // Enumeracion con alcanse
 enum class Color {
   Default,
@@ -56,12 +65,6 @@ enum class Color {
   Cyan,
   White
 };
-
-// Shell que se pueden configurar
-typedef enum {
-  ZSH,
-} shell;
-
 
 string setColor(Color color) {
   string code = "\033[";
@@ -100,9 +103,6 @@ string setColor(Color color) {
   return code;
 };
 
-/*
- *
- */
 void syntax_highlight(const string &code) {
   string highlightedCode = "";
   // Colores para cada parte del código
@@ -156,11 +156,7 @@ void syntax_highlight(const string &code) {
   std::cout << highlightedCode << std::endl;
 };
 
-
-/*
- *
- */
-
+*/
   /*
    *  Salir con estilo jjj
    */
@@ -171,29 +167,19 @@ static  void k_boom(int signum);
 void runCommand(const string &command);
 
 
-
-/*
- * Clase principal
- */
-class Haklab {
-private: 
+class Haklab  {
+private:
   string m_userName{};
   string m_shellUsage{};
-  /*
-   *  Comprobar systema 
-   */
   void os_check();
-  /*
-   *
-   */
 public:
-  Haklab();  
+  Haklab() = default;  
   void setShell(shell sh);
   void setUserName(std::string_view &name);
   // void ctrl_c() { signal(SIGINT, k_boom); }
   void about(fs::path db, string commad);
   template<typename Func> void Loading(Func func);
+};  // end  class  
 
-};  // end  class
 
 #endif //  BELOW_ZERO_
