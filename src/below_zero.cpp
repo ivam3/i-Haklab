@@ -1,13 +1,9 @@
 #include "../include/below_zero.h"
-#include <boost/process/io.hpp>
-#include <cstring>
 
 Haklab::Haklab(){
   //  
 
 };
-
-
 
 void Haklab::os_check(){
   #ifdef _WIN32 
@@ -35,6 +31,23 @@ void k_boom(int signum){
     exit(1);
 }
 
+template <typename Func>
+void Haklab::Loading(Func func) {
+    std::vector<std::string> spinner{"█■■■■", "■█■■■", "■■█■■", "■■■█■", "■■■■█"};
+    int spinnerIndex = 0;
+    boost::thread t([&]() {
+        while (true) {
+            std::cout << spinner[spinnerIndex] << "\r" << std::flush;
+            spinnerIndex = (spinnerIndex + 1) % spinner.size();
+            boost::this_thread::sleep_for(boost::chrono::milliseconds(100));
+        }
+        std::cout << std::endl;
+    });
+    t.detach();
+    func();
+}
+
+
 void runCommand(const string &command){
   bp::child c(command, bp::std_out > "log.txt");
 }
@@ -46,6 +59,7 @@ void Haklab::about(fs::path db, string command){
     };
     db /= "/" +  std::string(1, std::toupper(command[0]));
     std::fstream fd(db.c_str() + string("/") + command.c_str() + ".md");
+    cout << db ;
     if (fd.is_open()) {
       std::stringstream buffer;
       buffer << fd.rdbuf();

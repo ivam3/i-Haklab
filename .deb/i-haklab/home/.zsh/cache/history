@@ -9140,3 +9140,28 @@ pkg install mingw-w64\
 : 1720068365:0;git staus
 : 1720068372:0;git status
 : 1720068391:0;git add --all
+: 1720068419:0;git commit -m "Actualisacion"
+: 1720068423:0;git push
+: 1720068551:0;mv *.c maw
+: 1720068558:0;rm *.so
+: 1720068566:0;bat download.cpp
+: 1720068597:0;nvim download.cpp
+: 1720069085:0;cat download.cpp
+: 1720069220:0;nvim dow.cpp
+: 1720069320:0;clang++ dow.cpp -lboost_asio
+: 1720069335:0;clang++ dow.cpp -lboost_system
+: 1720069363:0;nvim dow
+: 1720069373:0;nvim dow.cpp
+: 1720069453:0;clear
+: 1720069467:0;ls .a
+: 1720069471:0;ls -a
+: 1720069524:0;ls -al .zshrc
+: 1720069541:0;bat i-Haklab/.deb/i-haklab/home/.zshrc
+: 1720150035:0;i-haklab --about git
+: 1720150067:0;cd i-Haklab
+: 1720150080:0;bat include/below_zero.h
+: 1720150385:0;cat include/below_zero.h
+: 1720150958:0;nvim include/below_zero.h
+: 1720151393:0;bash build_sh.sh
+: 1720151460:0;i-haklab --help
+: 1720151507:0;git add --all

@@ -26,9 +26,9 @@ namespace bp  = boost::process;
 
 //------------------------------------------
 //------------------------------------------
-#define PORT_SHH "8022"
-#define PORT_WEP "808O"
-#define PORT_FTP "8021"
+#define PORT_SHH  "8022"
+#define PORT_WEP  "808O"
+#define PORT_FTP  "8021"
 #define LOCALHOST "127.0.0.1"
 
 #define SHOW_CURSOL_ANSI "\e[?25h"
@@ -188,43 +188,11 @@ private:
    */
 public:
   Haklab();  
-  /*
-   *  
-   */ 
   void setShell(shell sh);
-  /*
-   *  
-   */
   void setUserName(std::string_view &name);
- 
-  /*
-   * Atrapa el CONTROL+c
-   */
   // void ctrl_c() { signal(SIGINT, k_boom); }
-  /*
-   * Algo para ver mientra se espera
-   */
-  template <typename Func> void Loading(Func func) {
-    //    hide_cursor();
-    std::vector<std::string> spinner{"█■■■■", "■█■■■", "■■█■■", "■■■█■",
-                                     "■■■■█"};
-    int spinnerIndex = 0;
-    boost::thread t([&]() {
-      while (true) {
-        std::cout << spinner[spinnerIndex] << "\r" << std::flush;
-        spinnerIndex = (spinnerIndex + 1) % spinner.size();
-        boost::this_thread::sleep_for(boost::chrono::milliseconds(100));
-      }
-      std::cout << std::endl;
-    });
-    // Hilo de spinner
-    t.detach();
-    // Ejecuta la función proporcionada en segundo plano
-    func();
-    //   show_cursor();
-  } // loading
-
   void about(fs::path db, string commad);
+  template<typename Func> void Loading(Func func);
 
 };  // end  class
 
