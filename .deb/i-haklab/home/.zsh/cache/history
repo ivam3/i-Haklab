@@ -9233,3 +9233,13 @@ pkg install mingw-w64\
 : 1720238804:0;trans -b :en "Mostrar mensaje y salir"
 : 1720238900:0;nvim src/below_zero.cpp
 : 1720239663:0;git add --all
+: 1720239711:0;git commit -m "Se desgloso el codigo nueva mente para un mejor entendimiento"
+: 1720239768:0;i-haklab
+: 1720239787:0;i-haklab --about lop
+: 1720239811:0;bash build_sh.sh
+: 1720239870:0;i-haklab --about lop
+: 1720239885:0;i-haklab --about
+: 1720239912:0;nvim include/below_zero.h
+: 1720239922:0;nvim include/command_line_argument_parser.h
+: 1720240142:0;cat include/command_line_argument_parser.h
+: 1720240496:0;git add --all
