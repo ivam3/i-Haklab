@@ -58,14 +58,14 @@ static void k_boom(int signum);
  */
 void runCommand(const string &command);
 
-class Haklab {
+class Haklab : public command_line_argument_parser {
 private:
   void os_check();
 public:
   Haklab() = default;
   int run(int argc, const char *argv[]);
   // void ctrl_c() { signal(SIGINT, k_boom); }
-  void about(fs::path db, string commad);
+  string about(fs::path db, string commad);
   template <typename Func> void Loading(Func func);
 }; // end  class
 

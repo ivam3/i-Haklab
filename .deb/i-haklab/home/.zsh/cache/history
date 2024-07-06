@@ -9243,3 +9243,58 @@ pkg install mingw-w64\
 : 1720239922:0;nvim include/command_line_argument_parser.h
 : 1720240142:0;cat include/command_line_argument_parser.h
 : 1720240496:0;git add --all
+: 1720240602:0;git commit -m "Se separa el codigo en mas clases para un mejor entendimiento"
+: 1720240610:0;git push
+: 1720240672:0;bat include/below_zero.h
+: 1720240694:0;nvim include/below_zero.h
+: 1720240797:0;nvim src/below_zero.cpp
+: 1720241084:0;nvim include/below_zero.h
+: 1720241137:0;nvi. src/below_zero.cpp
+: 1720241144:0;nvim src/below_zero.cpp
+: 1720241315:0;i-haklab --help
+: 1720241329:0;i-haklab --about
+: 1720241334:0;i-haklab --about "holl"
+: 1720241355:0;nvim include/command_line_argument_parser.h
+: 1720241505:0;nvim src/below_zero.cpp
+: 1720241589:0;bash build_sh.sh
+: 1720241657:0;i-haklab
+: 1720241666:0;i-haklab --help
+: 1720241699:0;i-haklab --about lop
+: 1720241761:0;nvim include/command_line_argument_parser.h
+: 1720241777:0;nvim src/below_zero.cpp
+: 1720241902:0;nvim include/below_zero.h
+: 1720241940:0;nvin include/command_line_argument_parser.h
+: 1720241952:0;nvim include/command_line_argument_parser.h
+: 1720242162:0;i-haklab --about lop
+: 1720242167:0;i-haklab --about "lop"
+: 1720242352:0;nvim include/command_line_argument_parser.h
+: 1720242396:0;bash build_sh.sh
+: 1720242463:0;i-haklab --help
+: 1720242487:0;i-haklab --about lop
+: 1720242491:0;i-haklab --about jajaja
+: 1720242503:0;i-haklab --about soy un jenio
+: 1720242565:0;nvim include/command_line_argument_parser.h
+: 1720242904:0;nvim src/below_zero.cpp
+: 1720243273:0;bash build_sh.sh
+: 1720243332:0;i-haklab
+: 1720243338:0;i-haklab --help
+: 1720243353:0;nvim include/command_line_argument_parser.h
+: 1720243490:0;bash build_sh.sh
+: 1720243525:0;nvim include/command_line_argument_parser.h
+: 1720243548:0;nvim src/below_zero.cpp
+: 1720243600:0;bat include/syntax.h
+: 1720243758:0;bash build_sh.sh
+: 1720243836:0;i-haklab --help
+: 1720243852:0;i-haklab --about
+: 1720243857:0;fg
+: 1720243882:0;nvim include/command_line_argument_parser.h
+: 1720244051:0;nvim src/below_zero.cpp
+: 1720244079:0;nvim include/command_line_argument_parser.h
+: 1720244145:0;bash build_sh.sh
+: 1720244210:0;i-haklab --about
+: 1720244218:0;i-haklab --help
+: 1720244239:0;i-haklab --about rax2
+: 1720244245:0;i-haklab --about ra
+: 1720244262:0;rax2
+: 1720244287:0;nvim include/below_zero.h
+: 1720244298:0;git add --all

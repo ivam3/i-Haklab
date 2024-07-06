@@ -12,11 +12,13 @@ int Haklab::run(int argc,const char  *argv[]){
    }
 
    if (args.help()){
-     //  command_line_argument_parser::
+        cout << getDesc() << endl;
    }
 
-   cout << "Username set to '" << args.about() << "'" << endl;
-      
+   if (std::strlen(args.about().c_str()) > 0){
+     fs::path db = string(getenv("HOME")) + "/.local/etc/i-Haklab/Tools/Readme";  
+     startSyntax(about(db , args.about().c_str()));
+   } 
   
 
    } catch (po::error &ex) {
@@ -54,8 +56,8 @@ void k_boom(int signum){
                       '-=k-boom!!='
                          |;   :|
                 _____.,-#########-,._____⏎)";
- startSyntax(k_boom);
-    exit(1);
+   // startSyntax(k_boom);
+   exit(1);
 }
 
 template <typename Func>
@@ -80,23 +82,25 @@ void runCommand(const string &command){
 }
 
 
-void Haklab::about(fs::path db, string command){
+string Haklab::about(fs::path db, string command){
     if (!fs::is_directory(db)) {
       cerr << "[ERROR] No found " << db << endl;
     };
+    string txtCommand{}; 
     db /= "/" +  std::string(1, std::toupper(command[0]));
     std::fstream fd(db.c_str() + string("/") + command.c_str() + ".md");
     if (fd.is_open()) {
       std::stringstream buffer;
       buffer << fd.rdbuf();
       fd.close();
-      startSyntax(buffer.str());
+      txtCommand = buffer.str();
     } else {
       cout << "Con la inicial " << command[0] << " tengo :" << endl;
       for (fs::directory_entry &entry : fs::directory_iterator(db)) {
         cout << entry.path().stem() << endl;
       }
    }
+    return txtCommand;
 } // about
 
 
