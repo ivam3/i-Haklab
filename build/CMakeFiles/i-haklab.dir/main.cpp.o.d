@@ -1,7 +1,7 @@
-src/CMakeFiles/below_zero.dir/below_zero.cpp.o: \
-  /data/data/com.termux/files/home/i-Haklab/src/below_zero.cpp \
-  /data/data/com.termux/files/home/i-Haklab/src/../include/below_zero.h \
-  /data/data/com.termux/files/home/i-Haklab/src/../include/command_line_argument_parser.h \
+CMakeFiles/i-haklab.dir/main.cpp.o: \
+  /data/data/com.termux/files/home/i-Haklab/main.cpp \
+  /data/data/com.termux/files/home/i-Haklab/include/below_zero.h \
+  /data/data/com.termux/files/home/i-Haklab/include/command_line_argument_parser.h \
   /data/data/com.termux/files/usr/include/boost/program_options.hpp \
   /data/data/com.termux/files/usr/include/boost/program_options/options_description.hpp \
   /data/data/com.termux/files/usr/include/boost/program_options/config.hpp \
@@ -1297,7 +1297,7 @@ src/CMakeFiles/below_zero.dir/below_zero.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/program_options/detail/convert.hpp \
   /data/data/com.termux/files/usr/include/boost/program_options/variables_map.hpp \
   /data/data/com.termux/files/usr/include/boost/program_options/version.hpp \
-  /data/data/com.termux/files/home/i-Haklab/src/../include/syntax.h \
+  /data/data/com.termux/files/home/i-Haklab/include/syntax.h \
   /data/data/com.termux/files/usr/include/c++/v1/iostream \
   /data/data/com.termux/files/usr/include/boost/asio.hpp \
   /data/data/com.termux/files/usr/include/boost/asio/any_completion_executor.hpp \

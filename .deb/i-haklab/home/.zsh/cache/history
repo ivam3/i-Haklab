@@ -9199,3 +9199,37 @@ pkg install mingw-w64\
 : 1720154198:0;../
 : 1720154207:0;nvim src/below_zero.cpp
 : 1720154230:0;git add --all
+: 1720154302:0;git commit -m "Se movio parte del codio a un archivo de encabesado para una mejor lectura"
+: 1720154314:0;git push
+: 1720179612:0;cd i-Haklab
+: 1720179635:0;mv main-haklab.cpp main.cpp
+: 1720179640:0;nvim CMakeLists.txt
+: 1720235864:0;cd i-Haklab
+: 1720235867:0;cd include
+: 1720235943:0;nvim command_line_argument_parser.h
+: 1720236023:0;bat syntax.h
+: 1720236278:0;nvim below_zero.h
+: 1720236553:0;cd ../
+: 1720236559:0;nvim src/below_zero.cpp
+: 1720237058:0;nvim main.cpp
+: 1720237135:0;bash build_sh.sh
+: 1720237194:0;i-haklab
+: 1720237206:0;nvim include/below_zero.h
+: 1720237241:0;clang-format -i include/*
+: 1720237252:0;nvim include/command_line_argument_parser.h
+: 1720237445:0;nvim src/below_zero.cpp
+: 1720237550:0;i-haklab
+: 1720237555:0;i-haklab --help
+: 1720237562:0;i-haklab -h
+: 1720237616:0;bash build_sh.sh
+: 1720237686:0;i-haklab --about
+: 1720237691:0;i-haklab --about lop
+: 1720237707:0;bat src/below_zero.cpp
+: 1720237743:0;nvim include/below_zero.h
+: 1720237828:0;nvim include/command_line_argument_parser.h
+: 1720238374:0;bat include/command_line_argument_parser.h
+: 1720238407:0;nvim include/command_line_argument_parser.h
+: 1720238795:0;trans -b :es "Mostrar mensaje y salir"
+: 1720238804:0;trans -b :en "Mostrar mensaje y salir"
+: 1720238900:0;nvim src/below_zero.cpp
+: 1720239663:0;git add --all

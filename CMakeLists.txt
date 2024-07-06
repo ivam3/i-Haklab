@@ -12,7 +12,7 @@ add_subdirectory(src)
 
 
 # Código fuente
-set(SRC "main-haklab.cpp")
+set(SRC "main.cpp")
 
 # Crea el ejecutable
 add_executable(${PROJECT_NAME} ${SRC})

@@ -187,29 +187,29 @@ below_zero/fast:
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/build
 .PHONY : below_zero/fast
 
-main-haklab.o: main-haklab.cpp.o
-.PHONY : main-haklab.o
+main.o: main.cpp.o
+.PHONY : main.o
 
 # target to build an object file
-main-haklab.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/i-haklab.dir/build.make CMakeFiles/i-haklab.dir/main-haklab.cpp.o
-.PHONY : main-haklab.cpp.o
+main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/i-haklab.dir/build.make CMakeFiles/i-haklab.dir/main.cpp.o
+.PHONY : main.cpp.o
 
-main-haklab.i: main-haklab.cpp.i
-.PHONY : main-haklab.i
+main.i: main.cpp.i
+.PHONY : main.i
 
 # target to preprocess a source file
-main-haklab.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/i-haklab.dir/build.make CMakeFiles/i-haklab.dir/main-haklab.cpp.i
-.PHONY : main-haklab.cpp.i
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/i-haklab.dir/build.make CMakeFiles/i-haklab.dir/main.cpp.i
+.PHONY : main.cpp.i
 
-main-haklab.s: main-haklab.cpp.s
-.PHONY : main-haklab.s
+main.s: main.cpp.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-main-haklab.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/i-haklab.dir/build.make CMakeFiles/i-haklab.dir/main-haklab.cpp.s
-.PHONY : main-haklab.cpp.s
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/i-haklab.dir/build.make CMakeFiles/i-haklab.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -225,9 +225,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... below_zero"
 	@echo "... i-haklab"
-	@echo "... main-haklab.o"
-	@echo "... main-haklab.i"
-	@echo "... main-haklab.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 

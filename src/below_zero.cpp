@@ -1,6 +1,37 @@
 #include "../include/below_zero.h"
 
 
+
+int Haklab::run(int argc,const char  *argv[]){
+   command_line_argument_parser parser;
+   try {
+   auto args = parser.parse(argc, argv);
+  
+   if (args.no_arguments()) {
+      	cout << "No arguments supplied on the command line" << endl;
+   }
+
+   if (args.help()){
+     //  command_line_argument_parser::
+   }
+
+   cout << "Username set to '" << args.about() << "'" << endl;
+      
+  
+
+   } catch (po::error &ex) {
+       cerr << ex.what() << endl;
+       return EXIT_FAILURE;
+     } catch (std::exception &e){
+       cerr << e.what() << endl;
+     } catch (...) {
+        cerr << "Unknown error" << endl;
+        return EXIT_FAILURE;
+     }
+   return 0;
+}
+
+
 void Haklab::os_check(){
   #ifdef _WIN32 
     cerr << "Error " << endl;

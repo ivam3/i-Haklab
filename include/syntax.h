@@ -5,25 +5,23 @@
 #include <string>
 
 enum class Color {
-    Default,
-    Black,
-    Red,
-    Green,
-    Yellow,
-    Blue,
-    Magenta,
-    Cyan,
-    White
+  Default,
+  Black,
+  Red,
+  Green,
+  Yellow,
+  Blue,
+  Magenta,
+  Cyan,
+  White
 };
-
 
 class SyntaxHighlighter {
 public:
-    std::string setColor(Color color);
-    void highlight(const std::string &code);
+  std::string setColor(Color color);
+  void highlight(const std::string &code);
 };
-// no miembro  
+// no miembro
 void startSyntax(const std::string &code);
 
 #endif // SYNTAX_HIGHLIGHTER_HPP
-
