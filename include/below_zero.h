@@ -4,43 +4,27 @@
 #ifndef BELOW_ZERO_
 #define BELOW_ZERO_
 
-//------------------------------------------
-//
 //-----------------------------------------
 #include "command_line_argument_parser.h"
 #include "syntax.h"
-#include <boost/asio.hpp>
 #include <boost/filesystem.hpp>
-#include <boost/iostreams/stream.hpp>
-#include <boost/process.hpp>
-#include <boost/thread.hpp>
-
-//------------------------------------------
-#include <fstream>
-#include <iostream>
+#include "command_executor.h"
 //------------------------------------------
 //------------------------------------------
-namespace po = boost::program_options;
 namespace fs = boost::filesystem;
-namespace bp = boost::process;
 
 //------------------------------------------
 //------------------------------------------
 #define PORT_SHH "8022"
 #define PORT_WEP "808O"
 #define PORT_FTP "8021"
-#define LOCALHOST "127.0.0.1"
 
 #define SHOW_CURSOL_ANSI "\e[?25h"
 #define HIDE_CURSOR_ANSI "\e[?25l"
 #define CLEAR_SCREEN_ANSI "\e[1;1H\e[2J"
 //------------------------------------------
 //------------------------------------------
-using std::cerr;
-using std::cout;
-using std::endl;
-using std::fstream;
-using std::string;
+using namespace std;
 //------------------------------------------
 //------------------------------------------
 
@@ -61,6 +45,9 @@ void runCommand(const string &command);
 class Haklab : public command_line_argument_parser {
 private:
   void os_check();
+  bool check_command(std::string command);
+  void intall_nvim();
+  CommandExecutor executor{string(getenv("PREFIX")) + "/var/log/i-haklb.log"};
 public:
   Haklab() = default;
   int run(int argc, const char *argv[]);

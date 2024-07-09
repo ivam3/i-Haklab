@@ -71,6 +71,10 @@ rd -r ~\AppData\Local\nvim-data
 tmux , zsh 
 
 
+std::vector<std::string> args = {"-l", "/non_existent_directory"};
+executor.executeCommand("ls", args);
+
+
 # Regisito
 https://shields.io/
 https://docs.libcpr.org/ 

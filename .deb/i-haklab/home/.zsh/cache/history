@@ -9298,3 +9298,101 @@ pkg install mingw-w64\
 : 1720244262:0;rax2
 : 1720244287:0;nvim include/below_zero.h
 : 1720244298:0;git add --all
+: 1720244328:0;git commit -m "Modificasiones leves"
+: 1720244333:0;git push
+: 1720491280:0;bat dow.cpp
+: 1720491291:0;rm dow.cpp
+: 1720491298:0;rm download.cpp
+: 1720491305:0;clear
+: 1720491326:0;bat Notas
+: 1720491330:0;ls Notas
+: 1720491350:0;ls downloads
+: 1720491355:0;rm downloads
+: 1720491358:0;rm downloads -rd
+: 1720491362:0;ld
+: 1720491407:0;cd victorh028.github.io/_posts
+: 1720491425:0;df
+: 1720491443:0;df /storage/9016-4EF8/0
+: 1720491455:0;cd /storage/9016-4EF8/0
+: 1720491458:0;cd /storage/9016-4EF8/
+: 1720491468:0;cd Download
+: 1720491476:0;cd TermuxD
+: 1720491485:0;cd Hak
+: 1720491499:0;cp bibloteca_dinamica.md ./
+: 1720491515:0;cp ./bibloteca_dinamica.md ./
+: 1720491557:0;cp ./bibloteca_dinamica.md $HOME/victorh028.github.io/_posts
+: 1720491570:0;cd victorh028.github.io/_posts
+: 1720491585:0;ls -al bibloteca_dinamica.md
+: 1720491603:0;chmod -x bibloteca_dinamica.md
+: 1720491613:0;date
+: 1720491699:0;mv bibloteca_dinamica.md 2024-6-8-rootky-linux.md
+: 1720491711:0;bat 2023-04-21-Alpine.md
+: 1720491733:0;cat 2023-04-21-Alpine.md
+: 1720491764:0;nvim 2024-6-8-rootky-linux.md
+: 1720491794:0;git add --all
+: 1720491815:0;git commit -m "rootky"
+: 1720491830:0;git push
+: 1720491924:0;mv 2024-6-8-rootky-linux.md 2024-6-8-rootkit-linux.md
+: 1720492076:0;cd victorh028.github.io/_posts
+: 1720492088:0;nvim 2024-6-8-rootkit-linux.md
+: 1720492230:0;git add --all
+: 1720492249:0;git commit -m "rootkit"
+: 1720492254:0;git push
+: 1720493427:0;cd c++
+: 1720493461:0;mkdir boost_process.cpp
+: 1720493468:0;nvim boost_process.cpp
+: 1720493559:0;rm boost_process.cpp -rf
+: 1720493563:0;nvim boost_process.cpp
+: 1720493661:0;clang++ boost_process.cpp -o boost_process
+: 1720493678:0;./boost_process
+: 1720493723:0;clear
+: 1720493726:0;cd i-Haklab
+: 1720493739:0;i-haklab --help
+: 1720493750:0;nvim include/below_zero.h
+: 1720493762:0;nvim include/command_line_argument_parser.h
+: 1720493923:0;bash build_sh.sh
+: 1720494013:0;i-haklab --help
+: 1720494032:0;nvim include/command_line_argument_parser.h
+: 1720494214:0;car include/command_line_argument_parser.h
+: 1720494220:0;cat include/command_line_argument_parser.h
+: 1720494661:0;car include/command_line_argument_parser.h
+: 1720494664:0;nvim include/command_line_argument_parser.h
+: 1720494761:0;bash build_sh.sh
+: 1720494823:0;i-haklab --help
+: 1720495149:0;cd include
+: 1720495177:0;nvim command_executor.h
+: 1720495200:0;../
+: 1720495231:0;nvim src/command_executor.cpp
+: 1720495323:0;nvim ej.cpp
+: 1720495412:0;g++ -std=c++17 -o command_executor ej.cpp ./src/command_executor.cpp -lboost_system -lboost_filesystem -lboost_date_time -lboost_process\
+
+: 1720495455:0;g++ -std=c++17 -o command_executor ej.cpp ./src/command_executor.cpp -lboost_system -lboost_filesystem -lboost_date_time
+: 1720495490:0;./command_executor
+: 1720495508:0;bat command.log
+: 1720495530:0;./command_executor
+: 1720495532:0;bat command.log
+: 1720495562:0;bat ej.cpp
+: 1720495598:0;ls -l ./lop
+: 1720495638:0;rm command.log
+: 1720495723:0;nvim include/below_zero.h
+: 1720496094:0;ls $PREFIX/
+: 1720496111:0;ls $PREFIX/var/log
+: 1720496835:0;exi
+: 1720496909:0;bat include/command_executor.h
+: 1720496998:0;i-haklab
+: 1720497018:0;i-haklab --help
+: 1720497185:0;cd $PREFIX/var/log
+: 1720497205:0;bat alternatives.log
+: 1720497232:0;rm haklab.log i-Haklab.log
+: 1720497264:0;clear
+: 1720497275:0;nvim
+: 1720497293:0;cd i-Haklab
+: 1720497407:0;cat ej.cpp
+: 1720497417:0;rm ej.cpp
+: 1720497423:0;nvim notas.md
+: 1720497495:0;rm command_executor
+: 1720497538:0;bat build_sh.sh
+: 1720497572:0;nvim build_sh.sh
+: 1720497630:0;nvim include/below_zero.h
+: 1720497901:0;nvim src/below_zero.cpp
+: 1720499486:0;git add --all

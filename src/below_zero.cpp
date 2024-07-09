@@ -1,5 +1,18 @@
 #include "../include/below_zero.h"
+#include <boost/filesystem/file_status.hpp>
+#include <boost/filesystem/operations.hpp>
+#include <string>
 
+namespace po = boost::program_options;
+namespace fs = boost::filesystem;
+
+bool Haklab::check_command(std::string command){ // Pr 
+  fs::path cm{std::string(getenv("PREFIX")) += "/bib/" + command};
+  if (fs::exists(cm)) {
+     return true; 
+  } 
+    return false;
+}
 
 
 int Haklab::run(int argc,const char  *argv[]){

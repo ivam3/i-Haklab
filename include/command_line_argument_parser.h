@@ -37,11 +37,15 @@ private:
   boost::program_options::options_description All;
 public:
   command_line_argument_parser() {
+    // Options   
     desc.add_options()
       (arguments::help_option, "Show message and exit" );
+    // Info   
     info.add_options()
       (arguments::about_option_name, boost::program_options::value<string>()->value_name("commd"),
        "Show informations about tool/framework");
+    
+    All.add(desc).add(info);
   }
 
   arguments parse(int argc, const char *argv[]) {
@@ -50,7 +54,6 @@ public:
     boost::program_options::positional_options_description p;
     // p.add(arguments::files_option_name, -1);
 
-    All.add(desc).add(info);
 
     boost::program_options::store(
         boost::program_options::command_line_parser(argc, argv)
@@ -64,8 +67,8 @@ public:
     return arguments(variables);
   } 
 
-  boost::program_options::options_description getDesc() const {
-    return desc;
+ const  boost::program_options::options_description getDesc() const {
+    return All;
   }
 };
 
