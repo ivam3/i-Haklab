@@ -1,14 +1,14 @@
-// Fichero : below_zero
-// Autor: @demonr_rip
+//  autor :  @demonr_rip
+// @demonr_rip
 
 #ifndef BELOW_ZERO_
 #define BELOW_ZERO_
 
 //-----------------------------------------
-#include "command_line_argument_parser.h"
-#include "syntax.h"
 #include <boost/filesystem.hpp>
-#include "command_executor.h"
+#include <boost/filesystem/path.hpp>
+#include "command_executor.hpp"
+#include "command_line_argument_parser.hpp"
 //------------------------------------------
 //------------------------------------------
 namespace fs = boost::filesystem;
@@ -34,26 +34,26 @@ typedef enum {
 } shell;
 
 /*
- *  Salir con estilo jjj
- */
-static void k_boom(int signum);
-/*
  *
  */
-void runCommand(const string &command);
+void runCommand(const string& command);
 
 class Haklab : public command_line_argument_parser {
-private:
+ private:
   void os_check();
   bool check_command(std::string command);
+  bool creat_dir(fs::path& dir);
   void intall_nvim();
   CommandExecutor executor{string(getenv("PREFIX")) + "/var/log/i-haklb.log"};
-public:
+
+ public:
   Haklab() = default;
-  int run(int argc, const char *argv[]);
+  static void k_boom(int signum);
+  int run(int argc, const char* argv[]);
   // void ctrl_c() { signal(SIGINT, k_boom); }
   string about(fs::path db, string commad);
-  template <typename Func> void Loading(Func func);
-}; // end  class
+  template <typename Func>
+  void Loading(Func func);
+};  // end  class
 
-#endif //  BELOW_ZERO_
+#endif  //  BELOW_ZERO_

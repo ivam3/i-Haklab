@@ -1,0 +1,4 @@
+# Define el estilo Chromium para el reformateo automático.
+# http://clang.llvm.org/docs/ClangFormatStyleOptions.html
+BasedOnStyle: Chromium
+Standard: Cpp11

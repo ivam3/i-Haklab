@@ -1,3 +1,5 @@
+//  autor :  @demonr_rip
+// @demonr_rip
 #ifndef SYNTAX_HIGHLIGHTER_HPP
 #define SYNTAX_HIGHLIGHTER_HPP
 
@@ -17,11 +19,11 @@ enum class Color {
 };
 
 class SyntaxHighlighter {
-public:
+ public:
   std::string setColor(Color color);
-  void highlight(const std::string &code);
+  void highlight(const std::string& code);
 };
 // no miembro
-void startSyntax(const std::string &code);
+void startSyntax(const std::string& code);
 
-#endif // SYNTAX_HIGHLIGHTER_HPP
+#endif  // SYNTAX_HIGHLIGHTER_HPP
