@@ -52,7 +52,7 @@ Banner(){
 }
 
 usage() {
-	printf "$B\n(USAGE)─➤$G IbyC-fixer <[apt|nrauf|localtunnel|metasploit|downgradeRepo|RuGiR]> <option>$W\n\napt\t\t\t\tSearch and fix some errores on APT/PKG with dpkg\nnrauf         dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nlocaltunnel\t\t\tfix error 'Unsupported platform: android'\nmetasploit\t\t\tAlternative metasploit installation\ndowngradeRepo repo=version\tDowngrade apt|pkg reporitory tospecific version\nRuGiR\t\t\t\tFix ruby gems issues\nPyMiR\t\t\t\tFix python module issues\nngrok\t\t\t\tInstall ngrok-server from Abhacker repositories\nneovim\t\t\t\tFix Neovim error: E5108\n\nExamples:\n\tIbyC-fixer RuGiR\n\tIbyC-fixer downgradeRepo ruby=2.7.2\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n\n"
+	printf "$B\n(USAGE)─➤$G IbyC-fixer <[apt|nrauf|localtunnel|metasploit|downgradeRepo|RuGiR]> <option>$W\n\napt\t\t\t\tSearch and fix some errores on APT/PKG with dpkg\nnrauf         dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nlocaltunnel\t\t\tfix error 'Unsupported platform: android'\nburpsuite\t\t\tDepends: openjdk-21 but it is not installable\nmetasploit\t\t\tAlternative metasploit installation\ndowngradeRepo repo=version\tDowngrade apt|pkg reporitory tospecific version\nRuGiR\t\t\t\tFix ruby gems issues\nPyMiR\t\t\t\tFix python module issues\nngrok\t\t\t\tInstall ngrok-server from Abhacker repositories\nneovim\t\t\t\tFix Neovim error: E5108\n\nExamples:\n\tIbyC-fixer RuGiR\n\tIbyC-fixer downgradeRepo ruby=2.7.2\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n\n"
 	exit
 }
 
@@ -75,6 +75,9 @@ case ${arg[0]} in
 		[[ $(grep -oE "is not signed" $file) ]] || [[ $(grep -oE "NO_PUBKEY" $file) ]] && echo "deb https://packages-cf.termux.org/apt/termux-main/ stable main" > $PREFIX/etc/apt/sources.list;rm -rf $PREFIX/etc/apt/sources.list.d/*;dpkg --configure -a
 		rm $file
 		;;
+  burpsuite)
+    yes|pkg i openjdk-21-preinst && openjdk-21-preinst && yes|pkg i burpsuite
+    ;;
 	localtunnel)
 		[[ $(command -v wget) ]] >/dev/null || {
 			echo -en "$G(➤_)$W Installing dependencies ...\n"
