@@ -105,8 +105,7 @@ set softwrap
 
   radare2)
     #[[ -d $HOME/.local/share/radare2 ]] && {
-      r2pm -q update
-      r2pm -ci r2ghidra-sleigh
+      r2pm -qU && r2pm -ci r2ghidra-sleigh
     #} || {
       r2pm -q init
     #}

@@ -81,7 +81,7 @@ getPORT
 	banner;
 	php -S $LOOPBACK:$LPORT -t ${HOME}/.local/var/service/www/veno-file-manager/vfm 2>>$LOGFILE &
 	sleep 3;
-	echo -en $B"(➤_)$W Web server$B 2Share$W activated \n$B  ╰──➤$W SUBDOMAIN: Set it with 'i-Haklab setuser'\n$B  ╰──➤$W LAN your url is: http://$LOOPBACK:$LPORT$B\n  ╰──➤$W TUN "
-	lt -h "http://localtunnel.me" -p $LPORT -s $USER-2share --open --print-requests;
+  echo -en $B"(➤_)$W Web server$B 4Share$W activated \n$B  ╰──➤$W SUBDOMAIN: Set it with 'i-Haklab setuser'\n$B  ╰──➤$W PASSWORD: $(curl https://loca.lt/mytunnelpassword)\n$B  ╰──➤$W LAN your url is: http://$LOOPBACK:$LPORT$B\n  ╰──➤$W TUN "
+	lt -h "http://localtunnel.me" -p $LPORT -s $USER-4share --open --print-requests;
 } || STDERR
 

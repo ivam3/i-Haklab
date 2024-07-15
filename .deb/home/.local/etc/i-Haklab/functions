@@ -204,7 +204,7 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 |
 ╰servers4test────────────────────➤ Init deliberately insecure web application for pentesting.
 |
-╰──share────➤────────────────────➤ Init web server for share files remotely and securely
+╰──4share────➤────────────────────➤ Init web server for share files remotely and securely
 |    ╰───────────────────────────{─Default credentials = Admin:password─}
 ╰─usbtest───➤─<path-to-device>───➤ Test usb device connected via OTG 
 |                   ╰─example────{─i-Haklab usbtest /dev/bus/usb/001─}
