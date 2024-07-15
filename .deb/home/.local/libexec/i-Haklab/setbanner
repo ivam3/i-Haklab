@@ -16,7 +16,7 @@ select opt in Enable Disable Custom Exit; do
       sed -i 's|custom||g' ${HOME}/.local/libexec/i-Haklab.login
       ;;
     Disable)
-      echo -en "#!/usr/bin/bash\necho \"Welcome \$(grep USER \$HOME/.local/etc/fish/config.fish|awk '{print \$NF}') to i-Haklab v3.6.\"" > \
+      echo -en "#!/usr/bin/bash\necho \"Welcome \$(grep USER \$HOME/.local/etc/fish/config.fish|awk '{print \$NF}') to i-Haklab $version.\"" > \
       ${HOME}/.local/etc/i-Haklab/banner/custom
       [[ $(grep 'custom' $HOME/.local/libexec/i-Haklab.login) ]] || {
         sed -i 's|banner|banner custom|g' ${HOME}/.local/libexec/i-Haklab.login
