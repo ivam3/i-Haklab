@@ -1,3 +1,16 @@
+#box 
+[WEP](https://www.matematicas18.com/es/tutoriales/geometria/figuras-geometricas/cuadrilatero/rectangulo/)
+
+- Geometria basica. 
+
+> El código utiliza conceptos básicos de geometría como coordenadas, intersección de figuras y la determinación de si un punto está dentro de una figura.
+
+$PREFIX/usr/lib/clang/16/include
+
+1. struct
+2. operator
+3. referencia
+
 
 Se utilisaran algunas llamadas al sistema para ejecutar comando pero no es el opjetivo de este proyecto 
 
@@ -76,6 +89,7 @@ executor.executeCommand("ls", args);
 
 
 # Regisito
+https://www.doxygen.nl/manual/grouping.html  
 https://shields.io/
 https://docs.libcpr.org/ 
 https://hackingcpp.com/cpp/libs/fmt.html#terminal-styles
@@ -86,7 +100,4 @@ https://www.google.com/amp/s/www.geeksforgeeks.org/regex-regular-expression-in-c
 https://cplusplus.com/reference/thread/thread/
 pendiente para nvim 
 https://nvchad.com/docs/features#nvcheatsheet
-# CLI 
-https://github.com/ArthurSonzogni/FTXUI
-# you
-https://gleev.xyz/ypp?referrerId=47429
+

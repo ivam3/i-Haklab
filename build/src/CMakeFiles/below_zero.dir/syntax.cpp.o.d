@@ -1,6 +1,6 @@
 src/CMakeFiles/below_zero.dir/syntax.cpp.o: \
   /data/data/com.termux/files/home/i-Haklab/src/syntax.cpp \
-  /data/data/com.termux/files/home/i-Haklab/src/../include/syntax.h \
+  /data/data/com.termux/files/home/i-Haklab/src/../include/syntax.hpp \
   /data/data/com.termux/files/usr/include/c++/v1/iostream \
   /data/data/com.termux/files/usr/include/c++/v1/__assert \
   /data/data/com.termux/files/usr/include/c++/v1/__config \

@@ -63,10 +63,12 @@ alias -g ........='../../../../../../..'
 alias -g cg="clang++ -Wall -Weverything -Werror "
 
 #--------------------------------
-# polybar
+#          polybar
+#---------------------------------
 if [ -d "$HOME/.local/bin" ] ; then
   PATH="$HOME/.local/bin:$PATH"
 fi
+
 #--------------------------------
 # Asigna la función de limpieza al comando `clear` y al atajo `ctrl+l`
 alias clear='baner_pantalla'
@@ -80,6 +82,7 @@ trap 'on_exit' EXIT
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 

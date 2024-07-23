@@ -11,7 +11,6 @@ function lazy.install(path)
       '--branch=stable', -- latest stable release
       path,
     })
-    print('Listo.')
   end
 end
 
@@ -29,7 +28,6 @@ lazy.opts = {}
 lazy.setup({
   ---
   -- Lista de plugins
-  --
   --- Partomar  notas de texto sin formato
   {
   "mickael-menu/zk-nvim",
@@ -38,10 +36,9 @@ lazy.setup({
       -- See Setup section below
     })
   end
-  },
-  -- Corector de optografia 
+},
   {'rhysd/vim-grammarous'},
-  -- Temas 
+  -- Tema 
   {'folke/tokyonight.nvim'},
   -- Linea inferiol
   {'nvim-lualine/lualine.nvim'},
@@ -65,14 +62,9 @@ lazy.setup({
     require("nvim-tree").setup {}
   end,
 },
-
--- Linea en blanco de sangría
-   { 
-     "lukas-reineke/indent-blankline.nvim",
-     main = "ibl", 
-     opts = {}, 
-   },
-    -- Tarminal 
+   -- Linea en blanco de sangría 
+   { "lukas-reineke/indent-blankline.nvim" },
+   -- Tarminal 
      {'akinsho/toggleterm.nvim', version = "*", config = true},
    -- IA 
    {'dense-analysis/neural'},
@@ -102,6 +94,7 @@ lazy.setup({
     {'rafamadriz/friendly-snippets'},
     -- transparent background
     {'xiyaowong/transparent.nvim'},
+    {'nvim-treesitter/nvim-treesitter'},
   }
 }
 ----------------------------------------------------
@@ -111,14 +104,14 @@ lazy.setup({
 ------------------------------------
 require('settings')
 require('keymaps')
-require('plugins.tokyonight') -- Tema 
-require('plugins.lualine')    -- Lina inferiol 
-require('plugins.bufferline') --- Line superiol   
-require('plugins.lsp-zero') -- Soporte para LSP 
-require('plugins.blankline') -- guías de sangría a todas las líneas (incluidas las líneas vacías).
-require("plugins.telescope")  -- filtrar de forma interactiva
+require('plugins.tokyonight')  -- Tema 
+require('plugins.lualine')     -- Lina inferiol 
+require('plugins.bufferline')  -- Line superiol   
+require('plugins.lsp-zero')    -- Soporte para LSP 
+require('plugins.blankline')   -- guías de sangría a todas las líneas (incluidas las líneas vacías).
+require("plugins.telescope")   -- filtrar de forma interactiva
 require("plugins.toggleterm")  -- Terminal 
-require("plugins.neural")  -- IA  -- IA  
-require("plugins.tree")     -- Albor de directoria 
-require("plugins.git")      -- Cosas de git 
-require("zk")              -- Para texto sin formato 
+require("plugins.neural")      -- IA  -- IA  
+require("plugins.tree")        -- Albor de directoria 
+require("plugins.git")         -- Cosas de git 
+require("zk")                  -- Para texto sin formato 

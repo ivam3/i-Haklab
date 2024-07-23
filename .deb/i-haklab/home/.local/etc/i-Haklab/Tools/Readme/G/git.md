@@ -1,9 +1,13 @@
 
+
+
 - `git init`: crear un repositorio.
 - `git add`: agregar un archivo a staging.
 - `git commit -m “mensaje”`: guardar el archivo en git con un mensaje.
 - `git branch`: crear una nueva rama.
+- `git branch -D <name>` borra rama
 - `git checkout`: moverse entre ramas.
+- `git switch -c your-new-branch-name8`: Crea una nueva rama 
 - `git push`: mandar cambios a un servidor remoto.
 - `git fetch`: traer actualizaciones del servidor remoto y guardarlas en nuestro repositorio local.
 - `git merge`: tiene dos usos. Uno es la fusión de ramas, funcionando como un _commit_ en la rama actual, trayendo la rama indicada. Su otro uso es guardar los cambios de un servidor remoto en nuestro directorio.
