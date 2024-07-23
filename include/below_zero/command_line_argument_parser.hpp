@@ -4,6 +4,7 @@
 #define COMMAN_LINE
 
 #include <boost/program_options.hpp>
+#include <boost/program_options/value_semantic.hpp>
 
 namespace po = boost::program_options;
 using namespace std;
@@ -12,6 +13,7 @@ class arguments {
   constexpr static auto help_option = "help";
   constexpr static auto about_option_name = "about";
   constexpr static auto language_option_name = "language";
+  constexpr static auto install_option_name = "install";
 
   po::variables_map variables;
   friend class command_line_argument_parser;
@@ -40,6 +42,7 @@ class command_line_argument_parser {
  private:
   po::options_description desc{"Options"};
   po::options_description info{"Info"};
+  po::options_description conf{"Config"};
   po::options_description All;
 
  public:
@@ -53,6 +56,10 @@ class command_line_argument_parser {
     info.add_options()(arguments::about_option_name,
                        po::value<string>()->value_name("<command>"),
                        "Show informations about tool/framework");
+    // Config 
+    conf.add_options()(arguments::install_option_name,
+                       po::value<string>()->value_name("<...?>"),
+                       "Instalar i-haklab completo");
 
     All.add(desc).add(info);
   }

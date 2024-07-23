@@ -7,7 +7,6 @@
 //-----------------------------------------
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/path.hpp>
-#include "command_line_argument_parser.hpp"
 //------------------------------------------
 //------------------------------------------
 namespace fs = boost::filesystem;
@@ -31,7 +30,7 @@ typedef enum {
 } shell;
 
 
-class Haklab : public command_line_argument_parser {
+class Haklab  {
  private:
   void os_check();
   bool check_command(std::string command);
@@ -42,7 +41,7 @@ class Haklab : public command_line_argument_parser {
   static void k_boom(int signum);
   int run(int argc, const char* argv[]);
   // void ctrl_c() { signal(SIGINT, k_boom); }
-  string about(fs::path &db, string &commad);
+  std::string about(fs::path &db, std::string &commad);
   template <typename Func>
   void Loading(Func func);
 };  // end  class

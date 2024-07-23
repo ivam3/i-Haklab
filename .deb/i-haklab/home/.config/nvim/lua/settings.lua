@@ -26,13 +26,13 @@ opt.shiftwidth = 2
 opt.softtabstop = 2
 opt.expandtab = true
 
-opt.number = true  -- numero
-opt.termguicolors = true --  "mejor versión" del tema de color
+opt.number = true        --  numero 
+opt.termguicolors = true --  mejor versión  del tema de color
 
--- Maus
-opt.mouse = 'a'
--- Texto largo
-opt.wrap = true
+
+opt.mouse = 'a'          --  maus  
+opt.wrap = true          -- texto largo  
+
 -- Lee o modifica valores específicos para una ventana.
 --vim.wo.colorcolumn = '80'
 opt.cursorline = true

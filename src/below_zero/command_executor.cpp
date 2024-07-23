@@ -1,10 +1,13 @@
 //  autor :  @demonr_rip
 // @demonr_rip
-#include "../include/command_executor.hpp"
-#include <boost/date_time/posix_time/posix_time.hpp>
+#include "below_zero/command_executor.hpp"
+#include <boost/date_time/posix_time/posix_time_types.hpp>
+#include <boost/date_time/posix_time/time_formatters.hpp>
 #include <boost/process.hpp>
 #include <fstream>
 #include <iostream>
+
+using namespace belowzero;
 
 CommandExecutor::CommandExecutor(const std::string& logFilePath)
     : logFilePath(logFilePath) {}

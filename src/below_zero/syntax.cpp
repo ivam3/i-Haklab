@@ -1,6 +1,5 @@
 //  autor :  @demonr_rip
-// @demonr_rip
-#include "../include/syntax.hpp"
+#include "below_zero/syntax.hpp"
 
 std::string SyntaxHighlighter::setColor(Color color) {
   std::string code = "\033[";

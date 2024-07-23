@@ -12,8 +12,7 @@ namespace belowzero {
     "autorandr", "bat", "bundle", "cmus", "delta", "fontconfig", "gitignore.global",
     "htop", "kitty", "lazygit", "libinput-gestures.conf", "ranger", "shell", "tmux", "zsh",
     "sysinfo.conkyrc", "topgrade.toml", "bluetuith", "alacritty"
-     }; 
-     
+     };      
      void backup_configs();
      void install_oh_my_zsh();  
   } // config  

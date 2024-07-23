@@ -1,7 +1,10 @@
+#include "below_zero/below_zero.hpp"
 #include <boost/filesystem.hpp>  // exists   
 #include <boost/thread.hpp>
 #include <string> // string  
+#include <iostream>
 
+using namespace std;
 namespace fs = boost::filesystem;
 
 // false : no creo el dir
@@ -14,43 +17,11 @@ bool creat_dir(fs::path& dir) {
 }
   
 bool Haklab::check_command(std::string command) {  // Pr
-  fs::path cm{std::string(getenv("PREFIX")) += "/bib/" + command};
+  fs::path cm{std::string(getenv("PREFIX")) += "/bin/" + command};
   if (fs::exists(cm)) {
     return true;
   }
   return false;
-}
-
-int Haklab::run(int argc, const char* argv[]) {
-  command_line_argument_parser parser;
-  try {
-    auto args = parser.parse(argc, argv);
-
-    if (args.no_arguments()) {
-      cerr << "Usage: i-haklab [ options ] [ arg ]" << std::endl; 
-      // cout << "No arguments supplied on the command line" << endl;
-    }
-
-    if (args.f_help()) {
-      cout << getDesc() << endl;
-    }
-
-    if (std::strlen(args.f_about().c_str()) > 0) {
-      fs::path db =
-          string(getenv("HOME")) + "/.local/etc/i-Haklab/Tools/Readme";
-      startSyntax(about(db, args.f_about().c_str()));
-    }
-
-  } catch (po::error& ex) {
-    cerr << ex.what() << endl;
-    return EXIT_FAILURE;
-  } catch (std::exception& e) {
-    cerr << e.what() << endl;
-  } catch (...) {
-    cerr << "Unknown error" << endl;
-    return EXIT_FAILURE;
-  }
-  return 0;
 }
 
 void Haklab::os_check() {
@@ -60,6 +31,7 @@ void Haklab::os_check() {
   cerr << "Erro " << endl;
 #endif  // DEBUG
 }
+
 
 void k_boom(int signum) {
   std::string k_boom = R"(
@@ -95,7 +67,8 @@ void Haklab::Loading(Func func) {
   func();
 }
 
-string Haklab::about(fs::path &db, string &command) {
+/*
+std::string Haklab::about(fs::path &db, std::string &command) {
   if (!fs::is_directory(db)) {
     cerr << "[ERROR] No found " << db << endl;
   };
@@ -115,6 +88,7 @@ string Haklab::about(fs::path &db, string &command) {
   }
   return txtCommand;
 }  // about
+*/
 
 /* main
 int haklab::Haklab::run() {

@@ -8,6 +8,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 -- establecer termguicolors para habilitar grupos destacados
 vim.opt.termguicolors = true
+
 -----------------------------------------------------
 --        😼 
 -----------------------------------------------------
@@ -29,6 +30,7 @@ vim.keymap.set('n', '<C-b>p', '<cmd>:bprevious<cr>')
 -- Cerrar el buffer actual 
 vim.keymap.set('n', '<C-b>q', '<cmd>:bdelete<cr>')
 ------------------------------------------------------
+
 -----------------------------------------------------
 --      Telescope 
 ------------------------------------------------------
