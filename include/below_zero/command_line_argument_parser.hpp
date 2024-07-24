@@ -1,5 +1,3 @@
-//  autor :  @demonr_rip
-// @demonr_rip
 #ifndef COMMAN_LINE
 #define COMMAN_LINE
 
@@ -14,6 +12,7 @@ class arguments {
   constexpr static auto about_option_name = "about";
   constexpr static auto language_option_name = "language";
   constexpr static auto install_option_name = "install";
+  constexpr static auto server_option_name = "server";
 
   po::variables_map variables;
   friend class command_line_argument_parser;
@@ -30,6 +29,14 @@ class arguments {
                ? variables[about_option_name].as<string>()
                : "";
   }
+  
+  /** @return   server  name   
+   */
+  string f_server() {
+    return (variables.count(server_option_name) > 0) 
+              ? variables[server_option_name].as<string>()
+              : "";
+  }
 
   string f_language() {
     return (variables.count(language_option_name) > 0)
@@ -43,6 +50,7 @@ class command_line_argument_parser {
   po::options_description desc{"Options"};
   po::options_description info{"Info"};
   po::options_description conf{"Config"};
+  po::options_description gui{"Desktop"};
   po::options_description All;
 
  public:
@@ -60,8 +68,10 @@ class command_line_argument_parser {
     conf.add_options()(arguments::install_option_name,
                        po::value<string>()->value_name("<...?>"),
                        "Instalar i-haklab completo");
-
-    All.add(desc).add(info);
+    // GUI  
+  gui.add_options()(arguments::server_option_name, po::value<string>()->value_name("<server>"), "Run server  ");
+    
+  All.add(desc).add(info).add(conf).add(gui);
   }
 
   arguments parse(int argc, const char* argv[]) {
@@ -79,7 +89,7 @@ class command_line_argument_parser {
     return arguments(variables);
   }
 
-  const po::options_description getDesc() const { return All; }
+   po::options_description getDesc() const { return All; }
 };
 
 #endif  // !COMMAN_LINE

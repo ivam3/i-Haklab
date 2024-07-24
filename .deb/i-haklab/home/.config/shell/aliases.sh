@@ -1,6 +1,6 @@
 
 # apt 
-alias apt='apt install'
+# alias apt='apt install'
 
 
 # ls 

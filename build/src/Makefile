@@ -223,6 +223,30 @@ below_zero/command_executor.cpp.s:
 	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/below_zero/command_executor.cpp.s
 .PHONY : below_zero/command_executor.cpp.s
 
+below_zero/config/config.o: below_zero/config/config.cpp.o
+.PHONY : below_zero/config/config.o
+
+# target to build an object file
+below_zero/config/config.cpp.o:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/below_zero/config/config.cpp.o
+.PHONY : below_zero/config/config.cpp.o
+
+below_zero/config/config.i: below_zero/config/config.cpp.i
+.PHONY : below_zero/config/config.i
+
+# target to preprocess a source file
+below_zero/config/config.cpp.i:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/below_zero/config/config.cpp.i
+.PHONY : below_zero/config/config.cpp.i
+
+below_zero/config/config.s: below_zero/config/config.cpp.s
+.PHONY : below_zero/config/config.s
+
+# target to generate assembly for a file
+below_zero/config/config.cpp.s:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/below_zero/config/config.cpp.s
+.PHONY : below_zero/config/config.cpp.s
+
 below_zero/syntax.o: below_zero/syntax.cpp.o
 .PHONY : below_zero/syntax.o
 
@@ -266,6 +290,9 @@ help:
 	@echo "... below_zero/command_executor.o"
 	@echo "... below_zero/command_executor.i"
 	@echo "... below_zero/command_executor.s"
+	@echo "... below_zero/config/config.o"
+	@echo "... below_zero/config/config.i"
+	@echo "... below_zero/config/config.s"
 	@echo "... below_zero/syntax.o"
 	@echo "... below_zero/syntax.i"
 	@echo "... below_zero/syntax.s"

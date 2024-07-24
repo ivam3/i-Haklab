@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "/data/data/com.termux/files/home/i-Haklab/CMakeLists.txt"
-  "CMakeFiles/3.30.0/CMakeCCompiler.cmake"
-  "CMakeFiles/3.30.0/CMakeCXXCompiler.cmake"
-  "CMakeFiles/3.30.0/CMakeSystem.cmake"
+  "CMakeFiles/3.30.1/CMakeCCompiler.cmake"
+  "CMakeFiles/3.30.1/CMakeCXXCompiler.cmake"
+  "CMakeFiles/3.30.1/CMakeSystem.cmake"
   "/data/data/com.termux/files/home/i-Haklab/src/CMakeLists.txt"
   "/data/data/com.termux/files/usr/share/cmake-3.30/Modules/CMakeCInformation.cmake"
   "/data/data/com.termux/files/usr/share/cmake-3.30/Modules/CMakeCXXInformation.cmake"

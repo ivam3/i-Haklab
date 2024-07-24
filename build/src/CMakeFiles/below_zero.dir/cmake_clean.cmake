@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/below_zero.dir/below_zero/below_zero.cpp.o.d"
   "CMakeFiles/below_zero.dir/below_zero/command_executor.cpp.o"
   "CMakeFiles/below_zero.dir/below_zero/command_executor.cpp.o.d"
+  "CMakeFiles/below_zero.dir/below_zero/config/config.cpp.o"
+  "CMakeFiles/below_zero.dir/below_zero/config/config.cpp.o.d"
   "CMakeFiles/below_zero.dir/below_zero/syntax.cpp.o"
   "CMakeFiles/below_zero.dir/below_zero/syntax.cpp.o.d"
   "libbelow_zero.pdb"

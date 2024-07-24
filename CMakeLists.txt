@@ -24,14 +24,10 @@ target_link_libraries(${PROJECT_NAME} PUBLIC below_zero
     -lboost_system
     -lboost_filesystem
     -lboost_thread
-    -lboost_chrono
     -lfmt
-    -lcurl
     -Wall
     -std=c++20
     -lboost_json 
-    -lssl 
-    -lcrypto
     )
 
 #########    Instalación  ############

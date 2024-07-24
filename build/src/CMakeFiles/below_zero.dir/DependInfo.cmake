@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/data/data/com.termux/files/home/i-Haklab/src/below_zero/below_zero.cpp" "src/CMakeFiles/below_zero.dir/below_zero/below_zero.cpp.o" "gcc" "src/CMakeFiles/below_zero.dir/below_zero/below_zero.cpp.o.d"
   "/data/data/com.termux/files/home/i-Haklab/src/below_zero/command_executor.cpp" "src/CMakeFiles/below_zero.dir/below_zero/command_executor.cpp.o" "gcc" "src/CMakeFiles/below_zero.dir/below_zero/command_executor.cpp.o.d"
+  "/data/data/com.termux/files/home/i-Haklab/src/below_zero/config/config.cpp" "src/CMakeFiles/below_zero.dir/below_zero/config/config.cpp.o" "gcc" "src/CMakeFiles/below_zero.dir/below_zero/config/config.cpp.o.d"
   "/data/data/com.termux/files/home/i-Haklab/src/below_zero/syntax.cpp" "src/CMakeFiles/below_zero.dir/below_zero/syntax.cpp.o" "gcc" "src/CMakeFiles/below_zero.dir/below_zero/syntax.cpp.o.d"
   )
 

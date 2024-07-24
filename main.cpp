@@ -2,11 +2,14 @@
 //-------------------------------------------------
 //         Importaciones
 //-------------------------------------------------
+#include <cstring>
+#include <iostream>
 #include <boost/filesystem.hpp>
 #include "below_zero/command_line_argument_parser.hpp"
-#include <iostream>
+#include "below_zero/config/config.hpp"
 
-namespace  fs = boost::filesystem;
+namespace bz = belowzero;
+namespace fs = boost::filesystem;
 using namespace std;
 
 //-------------------------------------------------
@@ -18,21 +21,23 @@ int main(int argc, const char *argv[]) {
     auto args = parser.parse(argc, argv);
     if (args.no_arguments()) {
       cerr << "Usage: " << "i-Haklab" << "[ options ] [ arg ]" << std::endl; 
-      // cout << "No arguments supplied on the command line" << endl;
     }
 
     if (args.f_help()) {
-      // cout << getDesc() << endl;
+       cout << parser.getDesc() << endl;
     }
 
-    if (args.f_about().empty() > 0) {
+    if (args.f_about().empty()) {
       fs::path db =
           string(getenv("HOME")) + "/.local/etc/i-Haklab/Tools/Readme";
      // startSyntax(about(db, args.f_about().c_str()));
     }
-
-
-  }
+    if (!args.f_server().empty()){
+      string a (args.f_server()); 
+      if(a == "vnc"){
+        bz::funcion::gui_vnc();
+      }
+  }}
   catch (po::error& ex) {
     cerr << ex.what() << endl;
     return EXIT_FAILURE;

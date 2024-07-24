@@ -1,6 +1,14 @@
 #!/bin/bash
 # Functions
 
+# 
+background() {
+  for ((i=2;i<=$#;i++)); do 
+    ${@[1]} ${@[$i]} &> /dev/null &
+  done
+}
+
+
 # copy authy token
 auth() {
     mambembe-cli get-token -s "$@" | fzf --reverse -0 -1 | rg -oP 'Token: "\K\d+' | $CLIPCOPY
