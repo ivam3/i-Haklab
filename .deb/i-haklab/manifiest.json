@@ -3,9 +3,9 @@
     "Package": "i-haklab",
     "Version": "4.3.13",
     "Architecture": "all",
-    "Maintainer": "Ivam3 y Demon",
+    "Maintainer": "Ivam3 y DemonHunter",
     "Depends": [
-      "zsh, helix, git , wget, fmt "
+      "zsh, helix, git , wget, boost, boost-headers,  boost-static"
     ],
     "Installed-Size": "700",
     "Homepage": "https://victorh028.github.io/i-Haklab/#",
@@ -22,10 +22,6 @@
       "source": "home/.zshrc"},
     "/data/data/com.termux/files/home/.zshenv": {
       "source": "home/.zshenv"},
-    "/data/data/com.termux/files/home/.tmux/.tmux.conf": {
-      "source": "home/.tmux/.tmux.conf"},
-    "/data/data/com.termux/files/home/.zsh/start-zsh/start-zsh.sh": {
-      "source": "home/.zsh/start-zsh/start-zsh.sh"}
-    
-  }
+    "/data/data/com.termux/files/home/.config": {
+      "source": "./home/.config"}
 }

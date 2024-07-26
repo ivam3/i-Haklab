@@ -21,9 +21,10 @@ jobs:
     - name: Clone repository
       uses: actions/checkout@v3 
     - name: Filling in home...
-      run: tar -zcf  i-haklab-home.tar.gz  -C  ./.deb/i-haklab  ./home  
+      run: pwd
+      run: tar -zcf  Home.tar.gz  -C   ./home  
     - name: Uploading... 
       uses: actions/upload-artifact@v3  
       with:
-         name: i-haklab-home.tar.gz 
-         path: i-haklab-home.tar.gz
+         name: Home.tar.gz 
+         path: Home.tar.gz

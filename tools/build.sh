@@ -1,4 +1,4 @@
 echo "[*] Compilando ..."
-cmake --build  ../build  
+cmake --build  ~/i-Haklab/build/ 
 echo "[*] Moviendo todo ..."
-cmake --install ../build --prefix=$PREFIX    
+cmake --install ~/i-Haklab/build/  --prefix=$PREFIX    

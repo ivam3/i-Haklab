@@ -7,6 +7,7 @@
 #include <boost/filesystem.hpp>
 #include "below_zero/command_line_argument_parser.hpp"
 #include "below_zero/config/config.hpp"
+#include "below_zero/syntax.hpp"
 
 namespace bz = belowzero;
 namespace fs = boost::filesystem;
@@ -20,24 +21,32 @@ int main(int argc, const char *argv[]) {
   try {
     auto args = parser.parse(argc, argv);
     if (args.no_arguments()) {
-      cerr << "Usage: " << "i-Haklab" << "[ options ] [ arg ]" << std::endl; 
+      cerr << "Usage: " << "i-Haklab " << "[ options ] [ arg ]" << std::endl; 
     }
 
     if (args.f_help()) {
        cout << parser.getDesc() << endl;
+       return 0;
     }
 
-    if (args.f_about().empty()) {
-      fs::path db =
-          string(getenv("HOME")) + "/.local/etc/i-Haklab/Tools/Readme";
-     // startSyntax(about(db, args.f_about().c_str()));
+    if (!args.f_about().empty()) {
+      fs::path db = fs::path(string(getenv("HOME"))) / "/.local/etc/i-Haklab/Tools/Readme";
+      string   name = args.f_about().c_str();
+      startSyntax(bz::funcion::about(name, db));
     }
-    if (!args.f_server().empty()){
-      string a (args.f_server()); 
-      if(a == "vnc"){
-        bz::funcion::gui_vnc();
+
+    if (args.f_vnc_start()){
+        bz::funcion::vnc_start();
+        return 0;
       }
-  }}
+    if (args.f_vnc_stop()) {
+       bz::funcion::vnc_stop();
+       return 0;
+    }
+    if (args.f_xwayland()) {
+      bz::funcion::xwayland();
+    }
+  }
   catch (po::error& ex) {
     cerr << ex.what() << endl;
     return EXIT_FAILURE;

@@ -1,8 +1,10 @@
 -----------------------------------------------------
 --  Explorador de archivos.
 ------------------------------------------------------
--- Abre file 
+-- Creo que es soble valorado teniendo a Telescope 
+-- Abre file  
 vim.keymap.set('n', '<leader>f', '<cmd>NvimTreeOpen<cr>')
+
 -- deshabilite netrw al comienzo de su init.lua (muy recomendable)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1

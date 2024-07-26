@@ -9,16 +9,12 @@ local luasnip = require('luasnip')
 local cmp_action = lsp_zero.cmp_action()
 local select_opts = {behavior = cmp.SelectBehavior.Select}
 
-
 -- Configuración LSP 
 local lspconfig = require('lspconfig')
 local lsp_defaults = lspconfig.util.default_config
 
-
 -- Snippets
 require('luasnip.loaders.from_vscode').lazy_load() 
-
-
 
 -- Configuracion de "lsp-zero"
 lsp_zero.on_attach(function(client, bufnr)
@@ -27,9 +23,9 @@ end)
 -- 
 lsp_zero.set_sign_icons({
   error = '✘',
-  warn = '▲',
-  hint = '⚑',
-  info = ''
+  warn  = '▲',
+  hint  = '⚑',
+  info  = ''
 })
 -- Aca es donde va a estar nuestra Configuracion de lsp-zero
 lsp_zero.setup()

@@ -17,17 +17,23 @@ setopt NO_CASE_GLOB             # No distinge entre mayuscula y minuscula
 
 setopt extended_glob
 setopt glob_dots
-setopt hist_expire_dups_first
-setopt hist_find_no_dups
-setopt hist_ignore_all_dups
-setopt hist_ignore_dups
-setopt hist_ignore_space
-setopt hist_save_no_dups
 setopt interactive_comments
 setopt menu_complete
 setopt nomatch
 setopt sharehistory
 unsetopt beep
+
+#  ┬ ┬┬┌─┐┌┬┐┌─┐┬─┐┬ ┬
+#  ├─┤│└─┐ │ │ │├┬┘└┬┘
+#  ┴ ┴┴└─┘ ┴ └─┘┴└─ ┴ 
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_expire_dups_first
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
 # Rename module
 autoload -U zmv

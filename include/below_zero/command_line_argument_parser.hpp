@@ -12,9 +12,12 @@ class arguments {
   constexpr static auto about_option_name = "about";
   constexpr static auto language_option_name = "language";
   constexpr static auto install_option_name = "install";
-  constexpr static auto server_option_name = "server";
+  constexpr static auto vncstart_option = "vncstar";
+  constexpr static auto vncstop_option = "vncstop";
+  constexpr static auto xwaylan_option = "xwaylan";
 
   po::variables_map variables;
+  
   friend class command_line_argument_parser;
 
  public:
@@ -30,14 +33,12 @@ class arguments {
                : "";
   }
   
-  /** @return   server  name   
-   */
-  string f_server() {
-    return (variables.count(server_option_name) > 0) 
-              ? variables[server_option_name].as<string>()
-              : "";
-  }
 
+  bool f_vnc_start(){return variables.count(vncstart_option) > 0;};
+  bool f_vnc_stop(){return variables.count(vncstop_option) > 0;};
+  
+  bool f_xwayland(){return variables.count(xwaylan_option) > 0;};
+  
   string f_language() {
     return (variables.count(language_option_name) > 0)
                ? variables[about_option_name].as<string>()
@@ -69,8 +70,9 @@ class command_line_argument_parser {
                        po::value<string>()->value_name("<...?>"),
                        "Instalar i-haklab completo");
     // GUI  
-  gui.add_options()(arguments::server_option_name, po::value<string>()->value_name("<server>"), "Run server  ");
-    
+  gui.add_options()(arguments::vncstart_option, "Start vnc  ");
+  gui.add_options()(arguments::vncstop_option, "Stop vnc  ");
+  gui.add_options()(arguments::xwaylan_option,  "Start Xwaylan");
   All.add(desc).add(info).add(conf).add(gui);
   }
 

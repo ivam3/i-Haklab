@@ -4,6 +4,9 @@
 #
 # orden Gloval : zshenv, zprofile, zshrc, zlogin    
 
+
+
+
 # Load configs in specific order
 source "$ZDOTDIR/prompt/init.zsh"
 source "$ZDOTDIR/omz.zsh"

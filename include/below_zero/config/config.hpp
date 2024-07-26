@@ -1,8 +1,9 @@
 #ifndef BELOW_ZERO_CONFIG
 #define BELOW_ZERO_CONFIG
 
-BELOW_ZERO_CONFIG
-#define BELOW_ZERO_CONFIG
+#include <string>
+#include <boost/filesystem/path.hpp>
+
 
 namespace belowzero {
    namespace funcion {  
@@ -16,9 +17,12 @@ namespace belowzero {
     "sysinfo.conkyrc", "topgrade.toml", "bluetuith", "alacritty"
      }; */
      
-     void gui_vnc();
+     void vnc_start();
+     void vnc_stop();
+     void xwayland();
      void backup_configs();
      void install_oh_my_zsh();
+     std::string about(std::string &name, boost::filesystem::path &db);
   }  // belowzero::funcion  
 }   // belowzero
 #endif // !BELOW_ZERO_CONFIG

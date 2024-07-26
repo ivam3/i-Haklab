@@ -1356,4 +1356,5 @@ CMakeFiles/i-haklab.dir/main.cpp.o: \
   /data/data/com.termux/files/usr/include/boost/program_options/detail/convert.hpp \
   /data/data/com.termux/files/usr/include/boost/program_options/variables_map.hpp \
   /data/data/com.termux/files/usr/include/boost/program_options/version.hpp \
-  /data/data/com.termux/files/home/i-Haklab/include/below_zero/config/config.hpp
+  /data/data/com.termux/files/home/i-Haklab/include/below_zero/config/config.hpp \
+  /data/data/com.termux/files/home/i-Haklab/include/below_zero/syntax.hpp

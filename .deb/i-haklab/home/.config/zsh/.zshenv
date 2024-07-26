@@ -1,10 +1,23 @@
 # linking ~/.zshenv to $ZDOTDIR/.zshenv
 
-export XDG_RUNTIME_DIR=$HOME/.config
-# export DISPLAY=:0
-# export WAYLAND_DISPLAY=:0
+if [ -d "$HOME/.local/bin" ] ;
+  then PATH="$HOME/.local/bin:$PATH"
+fi 
 
-export USER=Demon
+
+#  ┬ ┬┬┌─┐┌┬┐┌─┐┬─┐┬ ┬
+#  ├─┤│└─┐ │ │ │├┬┘└┬┘
+#  ┴ ┴┴└─┘ ┴ └─┘┴└─ ┴
+export HISTFILE=~/.config/zsh/zhistory
+export HISTSIZE=5000
+export SAVEHIST=5000
+export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
+
+export DISPLAY=:0
+export XDG_RUNTIME_DIR=${TMPDIR}
+
+
+export USER="𝕯𝖊𝖒𝖔𝖓"
 
 export EDITOR=nvim
 export CLIPCOPY=wl-copy
