@@ -28,9 +28,5 @@ jobs:
       uses: actions/upload-artifact@v3  
       with:
          name: Configuraciones  
-         path: Home.tar.gz
-         name: Ejecutable de i-haklab
-         path: build/i-haklab 
-         name: Bibloteca 
-         path: build/src/libbelow_zero.so  
+         path: Home.tar.gz  build/i-haklab   build/src/libbelow_zero.so  
 
