@@ -21,7 +21,6 @@ jobs:
     - name: Clone repository
       uses: actions/checkout@v3 
     - name: Filling in home...
-      run: pwd
       run: tar -zcf  Home.tar.gz  -C  ./.deb/i-haklab  ./home  
     - name: Compilando... 
       run: pwd
