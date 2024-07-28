@@ -358,7 +358,7 @@ pass(){
 				pass Get
 			done
 #			termux-toast -b green Welcome Back $user;
-				banner;
+#				banner;
 			}
 
 		[[ $1 = Fingerprint ]] && { touch $TMPDIR/lock.tmp;
