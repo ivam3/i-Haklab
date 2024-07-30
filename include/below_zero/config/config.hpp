@@ -6,7 +6,15 @@
 
 
 namespace belowzero {
-   namespace funcion {  
+  
+class Desktop {   
+  public:
+    Desktop() = default;
+    std::string IteratorPkg(std::vector<std::string> &v);
+};
+
+ 
+  namespace funcion {  
   /* std::vector<std::string> home_file { 
        "zsh/.zshenv", ".bashrc", ".dircolors", ".dmenurc", ".gitconfig",
         ".inputrc", ".luarc.json", ".prettierrc", ".pryrc", ".pystartup", ".reek.yml", 
@@ -16,7 +24,7 @@ namespace belowzero {
     "htop", "kitty", "lazygit", "libinput-gestures.conf", "ranger", "shell", "tmux", "zsh",
     "sysinfo.conkyrc", "topgrade.toml", "bluetuith", "alacritty"
      }; */
-     
+     void InstallDesktop(); 
      void vnc_start();
      void vnc_stop();
      void xwayland();

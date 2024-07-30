@@ -22,8 +22,6 @@ jobs:
       uses: actions/checkout@v3 
     - name: Filling in home...
       run: tar -zcf  Home.tar.gz  -C  ./.deb/i-haklab  ./home  
-    - name: Compilando... 
-      run: pwd
     - name: Uploading... 
       uses: actions/upload-artifact@v4 
       with:
@@ -32,7 +30,7 @@ jobs:
 
     - uses: actions/upload-artifact@v4
       with:
-         name: my-artifact
+         name: Ejecutable 
          path: |
             build/i-haklab   
             build/src/libbelow_zero.so 

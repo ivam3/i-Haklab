@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Fantasma
+Comment=Transparent theme
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+Name=Fantasma
+GtkTheme=Fantasma
+MetacityTheme=Fantasma
+IconTheme=Breeze_Dark_RC
+CursorTheme=DMZ-Black
+ButtonLayout=menu:minimize,maximize,close

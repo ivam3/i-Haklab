@@ -14,7 +14,7 @@ class arguments {
   constexpr static auto install_option_name = "install";
   constexpr static auto vncstart_option = "vncstar";
   constexpr static auto vncstop_option = "vncstop";
-  constexpr static auto xwaylan_option = "xwaylan";
+  constexpr static auto xwaylan_option = "xwayland";
 
   po::variables_map variables;
   
@@ -52,6 +52,7 @@ class command_line_argument_parser {
   po::options_description info{"Info"};
   po::options_description conf{"Config"};
   po::options_description gui{"Desktop"};
+  po::options_description pkg{"CreatePkg"};
   po::options_description All;
 
  public:
@@ -73,7 +74,10 @@ class command_line_argument_parser {
   gui.add_options()(arguments::vncstart_option, "Start vnc  ");
   gui.add_options()(arguments::vncstop_option, "Stop vnc  ");
   gui.add_options()(arguments::xwaylan_option,  "Start Xwaylan");
-  All.add(desc).add(info).add(conf).add(gui);
+
+  //
+  //pkg.add_options()()
+  All.add(desc).add(info).add(conf).add(gui).add(pkg);
   }
 
   arguments parse(int argc, const char* argv[]) {

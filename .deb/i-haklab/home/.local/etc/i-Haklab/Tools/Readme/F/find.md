@@ -15,3 +15,6 @@
 
 `find / -perm -4000 -ls`
 
+# Buscar archivos creado hace 5min 
+
+`find . -type f -mmin -5`
