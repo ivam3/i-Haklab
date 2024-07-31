@@ -98,9 +98,9 @@ window = {
   documentation = cmp.config.window.bordered()
 },
 -- Lista que controla el orden en el que aparecen los elementos de un item.
-formatting = {
-  fields = {'menu', 'abbr', 'kind'}
-},
+-- formatting = {
+--  fields = {'menu', 'abbr', 'kind'}
+-- },
 -- icon basado en el nombre de la fuente
 formatting = {
   fields = {'menu', 'abbr', 'kind'},
