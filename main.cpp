@@ -44,7 +44,7 @@ int main(int argc, const char *argv[]) {
        return 0;
     }
     if (args.f_xwayland()) {
-      bz::funcion::xwayland();
+      bz::Desktop::start_xwayland();
     }
   }
   catch (po::error& ex) {

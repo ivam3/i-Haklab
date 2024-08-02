@@ -10,7 +10,7 @@ namespace belowzero {
 class Desktop {   
   public:
     Desktop() = default;
-    std::string IteratorPkg(std::vector<std::string> &v);
+    static void start_xwayland();
 };
 
  
@@ -24,6 +24,7 @@ class Desktop {
     "htop", "kitty", "lazygit", "libinput-gestures.conf", "ranger", "shell", "tmux", "zsh",
     "sysinfo.conkyrc", "topgrade.toml", "bluetuith", "alacritty"
      }; */
+     bool command_exists(const std::string& cmd); 
      void InstallDesktop(); 
      void vnc_start();
      void vnc_stop();

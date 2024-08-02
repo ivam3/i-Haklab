@@ -86,6 +86,7 @@ rd -r ~\AppData\Local\nvim-data
 
 tmux , zsh 
 
+mpd --verbose .mpd/mpd.conf
 
 std::vector<std::string> args = {"-l", "/non_existent_directory"};
 executor.executeCommand("ls", args);

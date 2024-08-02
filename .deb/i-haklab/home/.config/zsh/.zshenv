@@ -36,6 +36,4 @@ export GOBIN=$GOPATH/bin
 export PATH=$GOBIN:$PATH
 export PATH=$HOME/.config/npm/bin:$PATH
 
-export JAVA_HOME=/data/data/com.termux/files/usr/opt/openjdk
-export LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib
 

@@ -1,0 +1,609 @@
+Aug 02 19:42 : update: spawned thread for update job id 1
+Aug 02 19:42 : update: starting
+Aug 02 19:42 : state_file: Loading state file /data/data/com.termux/files/home/.mpd/mpdstate
+Aug 02 19:42 : exception: Failed to access /data/data/com.termux/files/home/Music: No such file or directory
+Aug 02 19:42 : event: RTIOThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Aug 02 19:42 : simple_db: removing empty directories from DB
+Aug 02 19:42 : simple_db: sorting DB
+Aug 02 19:42 : simple_db: writing DB
+Aug 02 19:42 : update: finished
+Aug 02 19:42 : client: [0] opened from 127.0.0.1:36252
+Aug 02 19:42 : client: [0] process command list
+Aug 02 19:42 : client: process command "status"
+Aug 02 19:42 : client: command returned 0
+Aug 02 19:42 : client: process command "currentsong"
+Aug 02 19:42 : client: command returned 0
+Aug 02 19:42 : client: [0] process command list returned 0
+Aug 02 19:42 : client: [0] closed
+Aug 02 19:45 : client: [1] opened from 127.0.0.1:36288
+Aug 02 19:45 : client: [1] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [1] process command list returned 0
+Aug 02 19:45 : client: [1] closed
+Aug 02 19:45 : client: [2] opened from 127.0.0.1:36290
+Aug 02 19:45 : client: [2] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [2] process command list returned 0
+Aug 02 19:45 : client: [2] closed
+Aug 02 19:45 : client: [3] opened from 127.0.0.1:36294
+Aug 02 19:45 : client: [3] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [3] process command list returned 0
+Aug 02 19:45 : client: [3] closed
+Aug 02 19:45 : client: [4] opened from 127.0.0.1:36296
+Aug 02 19:45 : client: [4] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [4] process command list returned 0
+Aug 02 19:45 : client: [4] closed
+Aug 02 19:45 : client: [5] opened from 127.0.0.1:36298
+Aug 02 19:45 : client: [5] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [5] process command list returned 0
+Aug 02 19:45 : client: [5] closed
+Aug 02 19:45 : client: [6] opened from 127.0.0.1:36300
+Aug 02 19:45 : client: [6] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [6] process command list returned 0
+Aug 02 19:45 : client: [6] closed
+Aug 02 19:45 : client: [7] opened from 127.0.0.1:36302
+Aug 02 19:45 : client: [7] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [7] process command list returned 0
+Aug 02 19:45 : client: [7] closed
+Aug 02 19:45 : client: [8] opened from 127.0.0.1:36304
+Aug 02 19:45 : client: [8] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [8] process command list returned 0
+Aug 02 19:45 : client: [8] closed
+Aug 02 19:45 : client: [9] opened from 127.0.0.1:36308
+Aug 02 19:45 : client: [9] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [9] process command list returned 0
+Aug 02 19:45 : client: [9] closed
+Aug 02 19:45 : client: [10] opened from 127.0.0.1:36310
+Aug 02 19:45 : client: [10] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [10] process command list returned 0
+Aug 02 19:45 : client: [10] closed
+Aug 02 19:45 : client: [11] opened from 127.0.0.1:36314
+Aug 02 19:45 : client: [11] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [11] process command list returned 0
+Aug 02 19:45 : client: [11] closed
+Aug 02 19:45 : client: [12] opened from 127.0.0.1:36316
+Aug 02 19:45 : client: [12] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [12] process command list returned 0
+Aug 02 19:45 : client: [12] closed
+Aug 02 19:45 : client: [13] opened from 127.0.0.1:36318
+Aug 02 19:45 : client: [13] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [13] process command list returned 0
+Aug 02 19:45 : client: [13] closed
+Aug 02 19:45 : client: [14] opened from 127.0.0.1:36320
+Aug 02 19:45 : client: [14] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [14] process command list returned 0
+Aug 02 19:45 : client: [14] closed
+Aug 02 19:45 : client: [15] opened from 127.0.0.1:36322
+Aug 02 19:45 : client: [15] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [15] process command list returned 0
+Aug 02 19:45 : client: [15] closed
+Aug 02 19:45 : client: [16] opened from 127.0.0.1:36324
+Aug 02 19:45 : client: [16] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [16] process command list returned 0
+Aug 02 19:45 : client: [16] closed
+Aug 02 19:45 : client: [17] opened from 127.0.0.1:36326
+Aug 02 19:45 : client: [17] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [17] process command list returned 0
+Aug 02 19:45 : client: [17] closed
+Aug 02 19:45 : client: [18] opened from 127.0.0.1:36328
+Aug 02 19:45 : client: [18] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [18] process command list returned 0
+Aug 02 19:45 : client: [18] closed
+Aug 02 19:45 : client: [19] opened from 127.0.0.1:36332
+Aug 02 19:45 : client: [19] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [19] process command list returned 0
+Aug 02 19:45 : client: [19] closed
+Aug 02 19:45 : client: [20] opened from 127.0.0.1:36334
+Aug 02 19:45 : client: [20] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [20] process command list returned 0
+Aug 02 19:45 : client: [20] closed
+Aug 02 19:45 : client: [21] opened from 127.0.0.1:36340
+Aug 02 19:45 : client: [21] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [21] process command list returned 0
+Aug 02 19:45 : client: [21] closed
+Aug 02 19:45 : client: [22] opened from 127.0.0.1:36342
+Aug 02 19:45 : client: [22] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [22] process command list returned 0
+Aug 02 19:45 : client: [22] closed
+Aug 02 19:45 : client: [23] opened from 127.0.0.1:36344
+Aug 02 19:45 : client: [23] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [23] process command list returned 0
+Aug 02 19:45 : client: [23] closed
+Aug 02 19:45 : client: [24] opened from 127.0.0.1:36346
+Aug 02 19:45 : client: [24] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [24] process command list returned 0
+Aug 02 19:45 : client: [24] closed
+Aug 02 19:45 : client: [25] opened from 127.0.0.1:36348
+Aug 02 19:45 : client: [25] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [25] process command list returned 0
+Aug 02 19:45 : client: [25] closed
+Aug 02 19:45 : client: [26] opened from 127.0.0.1:36350
+Aug 02 19:45 : client: [26] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [26] process command list returned 0
+Aug 02 19:45 : client: [26] closed
+Aug 02 19:45 : client: [27] opened from 127.0.0.1:36352
+Aug 02 19:45 : client: [27] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [27] process command list returned 0
+Aug 02 19:45 : client: [27] closed
+Aug 02 19:45 : client: [28] opened from 127.0.0.1:36354
+Aug 02 19:45 : client: [28] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [28] process command list returned 0
+Aug 02 19:45 : client: [28] closed
+Aug 02 19:45 : client: [29] opened from 127.0.0.1:36360
+Aug 02 19:45 : client: [29] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [29] process command list returned 0
+Aug 02 19:45 : client: [29] closed
+Aug 02 19:45 : client: [30] opened from 127.0.0.1:36362
+Aug 02 19:45 : client: [30] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [30] process command list returned 0
+Aug 02 19:45 : client: [30] closed
+Aug 02 19:45 : client: [31] opened from 127.0.0.1:36366
+Aug 02 19:45 : client: [31] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [31] process command list returned 0
+Aug 02 19:45 : client: [31] closed
+Aug 02 19:45 : client: [32] opened from 127.0.0.1:36368
+Aug 02 19:45 : client: [32] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [32] process command list returned 0
+Aug 02 19:45 : client: [32] closed
+Aug 02 19:45 : client: [33] opened from 127.0.0.1:36370
+Aug 02 19:45 : client: [33] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [33] process command list returned 0
+Aug 02 19:45 : client: [33] closed
+Aug 02 19:45 : client: [34] opened from 127.0.0.1:36372
+Aug 02 19:45 : client: [34] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [34] process command list returned 0
+Aug 02 19:45 : client: [34] closed
+Aug 02 19:45 : client: [35] opened from 127.0.0.1:36374
+Aug 02 19:45 : client: [35] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [35] process command list returned 0
+Aug 02 19:45 : client: [35] closed
+Aug 02 19:45 : client: [36] opened from 127.0.0.1:36376
+Aug 02 19:45 : client: [36] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [36] process command list returned 0
+Aug 02 19:45 : client: [36] closed
+Aug 02 19:45 : client: [37] opened from 127.0.0.1:36378
+Aug 02 19:45 : client: [37] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [37] process command list returned 0
+Aug 02 19:45 : client: [37] closed
+Aug 02 19:45 : client: [38] opened from 127.0.0.1:36380
+Aug 02 19:45 : client: [38] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [38] process command list returned 0
+Aug 02 19:45 : client: [38] closed
+Aug 02 19:45 : client: [39] opened from 127.0.0.1:36382
+Aug 02 19:45 : client: [39] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [39] process command list returned 0
+Aug 02 19:45 : client: [39] closed
+Aug 02 19:45 : client: [40] opened from 127.0.0.1:36384
+Aug 02 19:45 : client: [40] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [40] process command list returned 0
+Aug 02 19:45 : client: [40] closed
+Aug 02 19:45 : client: [41] opened from 127.0.0.1:36388
+Aug 02 19:45 : client: [41] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [41] process command list returned 0
+Aug 02 19:45 : client: [41] closed
+Aug 02 19:45 : client: [42] opened from 127.0.0.1:36390
+Aug 02 19:45 : client: [42] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [42] process command list returned 0
+Aug 02 19:45 : client: [42] closed
+Aug 02 19:45 : client: [43] opened from 127.0.0.1:36392
+Aug 02 19:45 : client: [43] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [43] process command list returned 0
+Aug 02 19:45 : client: [43] closed
+Aug 02 19:45 : client: [44] opened from 127.0.0.1:36394
+Aug 02 19:45 : client: [44] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [44] process command list returned 0
+Aug 02 19:45 : client: [44] closed
+Aug 02 19:45 : client: [45] opened from 127.0.0.1:36396
+Aug 02 19:45 : client: [45] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [45] process command list returned 0
+Aug 02 19:45 : client: [45] closed
+Aug 02 19:45 : client: [46] opened from 127.0.0.1:36398
+Aug 02 19:45 : client: [46] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [46] process command list returned 0
+Aug 02 19:45 : client: [46] closed
+Aug 02 19:45 : client: [47] opened from 127.0.0.1:36400
+Aug 02 19:45 : client: [47] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [47] process command list returned 0
+Aug 02 19:45 : client: [47] closed
+Aug 02 19:45 : client: [48] opened from 127.0.0.1:36402
+Aug 02 19:45 : client: [48] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [48] process command list returned 0
+Aug 02 19:45 : client: [48] closed
+Aug 02 19:45 : client: [49] opened from 127.0.0.1:36406
+Aug 02 19:45 : client: [49] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [49] process command list returned 0
+Aug 02 19:45 : client: [49] closed
+Aug 02 19:45 : client: [50] opened from 127.0.0.1:36408
+Aug 02 19:45 : client: [50] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [50] process command list returned 0
+Aug 02 19:45 : client: [50] closed
+Aug 02 19:45 : client: [51] opened from 127.0.0.1:36414
+Aug 02 19:45 : client: [51] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [51] process command list returned 0
+Aug 02 19:45 : client: [51] closed
+Aug 02 19:45 : client: [52] opened from 127.0.0.1:36416
+Aug 02 19:45 : client: [52] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [52] process command list returned 0
+Aug 02 19:45 : client: [52] closed
+Aug 02 19:45 : client: [53] opened from 127.0.0.1:36420
+Aug 02 19:45 : client: [53] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [53] process command list returned 0
+Aug 02 19:45 : client: [53] closed
+Aug 02 19:45 : client: [54] opened from 127.0.0.1:36422
+Aug 02 19:45 : client: [54] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [54] process command list returned 0
+Aug 02 19:45 : client: [54] closed
+Aug 02 19:45 : client: [55] opened from 127.0.0.1:36426
+Aug 02 19:45 : client: [55] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [55] process command list returned 0
+Aug 02 19:45 : client: [55] closed
+Aug 02 19:45 : client: [56] opened from 127.0.0.1:36428
+Aug 02 19:45 : client: [56] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [56] process command list returned 0
+Aug 02 19:45 : client: [56] closed
+Aug 02 19:45 : client: [57] opened from 127.0.0.1:36432
+Aug 02 19:45 : client: [57] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [57] process command list returned 0
+Aug 02 19:45 : client: [57] closed
+Aug 02 19:45 : client: [58] opened from 127.0.0.1:36434
+Aug 02 19:45 : client: [58] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [58] process command list returned 0
+Aug 02 19:45 : client: [58] closed
+Aug 02 19:45 : client: [59] opened from 127.0.0.1:36438
+Aug 02 19:45 : client: [59] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [59] process command list returned 0
+Aug 02 19:45 : client: [59] closed
+Aug 02 19:45 : client: [60] opened from 127.0.0.1:36440
+Aug 02 19:45 : client: [60] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [60] process command list returned 0
+Aug 02 19:45 : client: [60] closed
+Aug 02 19:45 : client: [61] opened from 127.0.0.1:36444
+Aug 02 19:45 : client: [61] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [61] process command list returned 0
+Aug 02 19:45 : client: [61] closed
+Aug 02 19:45 : client: [62] opened from 127.0.0.1:36446
+Aug 02 19:45 : client: [62] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [62] process command list returned 0
+Aug 02 19:45 : client: [62] closed
+Aug 02 19:45 : client: [63] opened from 127.0.0.1:36450
+Aug 02 19:45 : client: [63] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [63] process command list returned 0
+Aug 02 19:45 : client: [63] closed
+Aug 02 19:45 : client: [64] opened from 127.0.0.1:36452
+Aug 02 19:45 : client: [64] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [64] process command list returned 0
+Aug 02 19:45 : client: [64] closed
+Aug 02 19:45 : client: [65] opened from 127.0.0.1:36456
+Aug 02 19:45 : client: [65] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [65] process command list returned 0
+Aug 02 19:45 : client: [65] closed
+Aug 02 19:45 : client: [66] opened from 127.0.0.1:36458
+Aug 02 19:45 : client: [66] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [66] process command list returned 0
+Aug 02 19:45 : client: [66] closed
+Aug 02 19:45 : client: [67] opened from 127.0.0.1:36460
+Aug 02 19:45 : client: [67] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [67] process command list returned 0
+Aug 02 19:45 : client: [67] closed
+Aug 02 19:45 : client: [68] opened from 127.0.0.1:36462
+Aug 02 19:45 : client: [68] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [68] process command list returned 0
+Aug 02 19:45 : client: [68] closed
+Aug 02 19:45 : client: [69] opened from 127.0.0.1:36464
+Aug 02 19:45 : client: [69] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [69] process command list returned 0
+Aug 02 19:45 : client: [69] closed
+Aug 02 19:45 : client: [70] opened from 127.0.0.1:36466
+Aug 02 19:45 : client: [70] process command list
+Aug 02 19:45 : client: process command "status"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: process command "currentsong"
+Aug 02 19:45 : client: command returned 0
+Aug 02 19:45 : client: [70] process command list returned 0
+Aug 02 19:45 : client: [70] closed
+Aug 02 19:50 : client: [71] opened from 127.0.0.1:36506
+Aug 02 19:50 : client: [71] process command list
+Aug 02 19:50 : client: process command "status"
+Aug 02 19:50 : client: command returned 0
+Aug 02 19:50 : client: process command "currentsong"
+Aug 02 19:50 : client: command returned 0
+Aug 02 19:50 : client: [71] process command list returned 0
+Aug 02 19:50 : client: [71] closed
+Aug 02 19:50 : client: [72] opened from 127.0.0.1:36508
+Aug 02 19:50 : client: [72] process command list
+Aug 02 19:50 : client: process command "status"
+Aug 02 19:50 : client: command returned 0
+Aug 02 19:50 : client: process command "currentsong"
+Aug 02 19:50 : client: command returned 0
+Aug 02 19:50 : client: [72] process command list returned 0
+Aug 02 19:50 : client: [72] closed
+Aug 02 19:50 : client: [73] opened from 127.0.0.1:36510
+Aug 02 19:50 : client: [73] process command list
+Aug 02 19:50 : client: process command "status"
+Aug 02 19:50 : client: command returned 0
+Aug 02 19:50 : client: process command "currentsong"
+Aug 02 19:50 : client: command returned 0
+Aug 02 19:50 : client: [73] process command list returned 0
+Aug 02 19:50 : client: [73] closed
+Aug 02 19:50 : client: [74] opened from 127.0.0.1:36512
+Aug 02 19:50 : client: [74] process command list
+Aug 02 19:50 : client: process command "status"
+Aug 02 19:50 : client: command returned 0
+Aug 02 19:50 : client: process command "currentsong"
+Aug 02 19:50 : client: command returned 0
+Aug 02 19:50 : client: [74] process command list returned 0
+Aug 02 19:50 : client: [74] closed
