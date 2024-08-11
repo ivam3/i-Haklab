@@ -1,0 +1,138 @@
+#!/usr/bin/bash
+IFS=$'\n\t'
+trap ctrl_c 2
+source $HOME/.local/etc/i-Haklab/variables
+source $iHETC/functions
+distro=$1
+x11=$2
+
+[[ $distro = "alpine" ]] && { filerc="profile.d/ashrc.sh"; } || { filerc="bashrc"; }
+
+chk-pkg proot-distro proot-distro
+chk-pkg Xwayland x11-repo
+chk-pkg termux-x11 termux-x11-nightly
+chk-pkg pulseaudio pulseaudio
+
+
+usage(){
+  echo -en """Usage: i-Haklab pd <distro name|list> <X11 - [for graphical Environment]>
+
+distro name\tThe name of linux distribution to be run.\n\t\tex: i-Haklab XPD alpine 
+list\t\tShow the list of linux distribution availables.\n\t\tex: i-Haklab XPD list
+X11\t\tRun linux distribution with termux-x11 app for graphical Environment.
+"""
+exit 0
+}
+
+
+chk-dist(){
+  proot-distro list 2>${TMPDIR}/dist.txt;
+  if grep $distro ${TMPDIR}/dist.txt
+  then
+    return 0
+  else
+    return 1
+  fi
+  rm ${TMPDIR}/dist.txt;
+}
+
+
+instaDistro(){
+  proot-distro install $distro
+}
+
+
+runXenv(){
+  if [[ $distro = "alpine" ]]; then
+    if ! grep "testing" $PREFIX/var/lib/proot-distro/installed-rootfs/$distro/etc/apk/repositories >/dev/null;
+      then 
+        echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> \
+      $PREFIX/var/lib/proot-distro/installed-rootfs/$distro/etc/apk/repositories
+    fi
+    # Kill open X11 processes
+    kill -9 $(pgrep -f "termux.x11") 2>/dev/null
+
+    # Enable PulseAudio over Network
+    pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1
+
+    # Prepare termux-x11 session
+    export XDG_RUNTIME_DIR=${TMPDIR}
+    export DISPLAY=:0
+    termux-x11 :0 >/dev/null &
+
+    # Wait a bit until termux-x11 gets started.
+    sleep 3
+
+    # Launch Termux X11 main activity
+    am start --user 0 -n com.termux.x11/com.termux.x11.MainActivity > /dev/null 2>&1
+    sleep 1
+
+    # Login in PRoot Environment. Do some initialization for PulseAudio, /tmp directory
+    # and run XFCE4 as custom user.
+    echo -en "#!/data/data/com.termux/files/usr/bin/bash\nproot-distro login alpine --shared-tmp -- /bin/ash -c 'export PULSE_SERVER=127.0.0.1 && export XDG_RUNTIME_DIR=\${TMPDIR} && su - $USER -c \"env DISPLAY=:0 startxfce4\"'" > ${TMPDIR}/xpd.sh
+    chmod +x ${TMPDIR}/xpd.sh 
+    bash ${TMPDIR}/xpd.sh
+    rm ${TMPDIR}/xpd.sh
+    exit 0
+  else
+    echo "There is not graphical Environment available"
+    exit 0
+  fi
+}
+
+
+runEnv(){
+  running time 2
+  if grep $USER $PREFIX/var/lib/proot-distro/installed-rootfs/$distro/etc/passwd >/dev/null;
+  then
+    cat <<- CONF > $PREFIX/var/lib/proot-distro/installed-rootfs/$distro/etc/$filerc
+#!/bin/bash
+#! command -v tmux >/dev/null && { apk add tmux; }
+#tmux new -s i-Haklab -n $distro 2>/dev/null
+CONF
+    banner
+    if [[ $x11 = "X11" ]]; then
+      runXenv
+    else
+      proot-distro login $distro --user $USER
+    fi
+
+  else
+    cat <<- CONF > $PREFIX/var/lib/proot-distro/installed-rootfs/$distro/etc/$filerc
+#!/bin/bash
+
+apk add sudo nano dbus-x11 xfce4 mesa-dri-gallium
+adduser $USER
+#echo "$USER:x:1000:1000:Linux User,,,:/home/$USER:/bin/ash" >> /etc/passwd
+sed '105a $USER ALL=(ALL:ALL) NOPASSWD: ALL' -i /etc/sudoers
+su - $USER
+
+echo "DONE!! :: shuting down ..."
+sleep 3;exit
+CONF
+    banner
+    proot-distro login $distro
+  fi
+}
+
+[[ -z $distro ]] && { usage;}
+
+[[ $distro = "list" ]] && {
+  proot-distro list 2>${TMPDIR}/dist.txt;
+  cat ${TMPDIR}/dist.txt | head -n -3;
+  rm ${TMPDIR}/dist.txt;
+  exit 1
+}
+
+chk-dist 
+if [[ $? -gt 0 ]]
+then
+  usage
+elif [[ -d $PREFIX/var/lib/proot-distro/installed-rootfs/$distro ]]; then
+  runEnv 
+else
+  instaDistro
+  runEnv
+fi
+
+#     @Ivam3
