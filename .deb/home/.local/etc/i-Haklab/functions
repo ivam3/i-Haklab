@@ -134,9 +134,13 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 |   ╰────example─────────────────{─i-Haklab about crunch─}
 ╰─aptup──────➤───────────────────➤ Update termux manually, packages by packages
 ╰─help───────➤───────────────────➤ Show this help menu
-╰─passwd─────+────set─|─new─────➤ Set and change the login termux
-|                 ╰─────|───────{─i-Haklab passwd set──➤ password|fingerprint
-|                       ╰───────{─i-Haklab passwd new─➤ get a new password
+╰─passwd─────+────set─|─new──────➤ Set and change the login termux
+|                 ╰─────|────ex──{─i-Haklab passwd set──➤ password|fingerprint
+|                       ╰────ex──{─i-Haklab passwd new─➤ get a new password
+╰─pd─────────➤─<distro─X11─list>─➤ Run linux distribution in proot enviroment.
+|                  ╰─────|──|─ex─{─i-Haklab pd alpine──➤ for only CLi
+|                        ╰──|─ex─{─i-Haklab pd alpine X11──➤ for graphical enviroment
+|                           ╰─ex─{─i-Haklab pd list──➤ show all linux distribution available
 ╰─setapikey──➤───────────────────➤ Set API Keys to use in i-Haklab features
 ╰─setbanner──➤───────────────────➤ Enable, disable and custom the i-Haklab wall banner
 ╰─setuser────➤───────────────────➤ Set i-Haklab user name

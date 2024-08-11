@@ -2,7 +2,7 @@
 # This file contain all i-Haklab enviroment variables
 OP1=${2:-crunch}
 
-export version='v.3.8'
+export version='v.3.9'
 export iHETC='/data/data/com.termux/files/home/.local/etc/i-Haklab'
 export iHLIBEXEC='/data/data/com.termux/files/home/.local/libexec/i-Haklab'
 export iHDB='https://raw.githubusercontent.com/ivam3/i-Haklab/master/.deb/home'

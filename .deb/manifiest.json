@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.8.6",
+  "version": "3.9.0",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -3192,6 +3192,7 @@
 		"home/.local/libexec/i-Haklab/payvid": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/payvid",
 		"home/.local/libexec/i-Haklab/setbanner": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/setbanner",
 		"home/.local/libexec/i-Haklab/passwd": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/passwd",
+		"home/.local/libexec/i-Haklab/pd": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/pd",
 		"home/.local/libexec/i-Haklab/ngroklink": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/ngroklink",
 		"home/.local/libexec/i-Haklab/phonescan": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/phonescan",
 		"home/.local/libexec/i-Haklab/4share": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/4share",
