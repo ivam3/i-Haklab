@@ -25,11 +25,12 @@ bash setup
 ```
 - ADDING AT APT SOURCES LIST
 ```bash
-apt install wget && \
+yes|apt install wget gnupg && \
 mkdir -p $PREFIX/etc/apt/sources.list.d && \
-wget https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/ivam3-termux-packages.list -O $PREFIX/etc/apt/sources.list.d/ivam3-termux-packages.list && \
-apt update && yes|apt upgrade && \
-apt install i-haklab
+wget https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/ivam3-termux-packages.list -O \
+$PREFIX/etc/apt/sources.list.d/ivam3-termux-packages.list && \
+curl -fsSL "https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/dists/stable/public_key.gpg" \
+|gpg --dearmor|tee "$PREFIX/etc/apt/trusted.gpg.d/ivam3.gpg" >/dev/null
 ```
 
 
