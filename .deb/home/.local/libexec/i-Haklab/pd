@@ -6,7 +6,7 @@ source $iHETC/functions
 distro=$1
 x11=$2
 
-[[ $distro = "alpine" ]] && { filerc="profile.d/ashrc.sh"; } || { filerc="bashrc"; }
+[[ $distro = "alpine" ]] && { filerc="etc/profile.d/ashrc.sh"; } || { filerc="root/.bashrc"; }
 
 chk-pkg proot-distro proot-distro
 chk-pkg Xwayland x11-repo
@@ -49,35 +49,39 @@ runXenv(){
         echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> \
       $PREFIX/var/lib/proot-distro/installed-rootfs/$distro/etc/apk/repositories
     fi
-    # Kill open X11 processes
-    kill -9 $(pgrep -f "termux.x11") 2>/dev/null
-
-    # Enable PulseAudio over Network
-    pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1
-
-    # Prepare termux-x11 session
-    export XDG_RUNTIME_DIR=${TMPDIR}
-    export DISPLAY=:0
-    termux-x11 :0 >/dev/null &
-
-    # Wait a bit until termux-x11 gets started.
-    sleep 3
-
-    # Launch Termux X11 main activity
-    am start --user 0 -n com.termux.x11/com.termux.x11.MainActivity > /dev/null 2>&1
-    sleep 1
-
-    # Login in PRoot Environment. Do some initialization for PulseAudio, /tmp directory
-    # and run XFCE4 as custom user.
     echo -en "#!/data/data/com.termux/files/usr/bin/bash\nproot-distro login alpine --shared-tmp -- /bin/ash -c 'export PULSE_SERVER=127.0.0.1 && export XDG_RUNTIME_DIR=\${TMPDIR} && su - $USER -c \"env DISPLAY=:0 startxfce4\"'" > ${TMPDIR}/xpd.sh
-    chmod +x ${TMPDIR}/xpd.sh 
-    bash ${TMPDIR}/xpd.sh
-    rm ${TMPDIR}/xpd.sh
-    exit 0
+  
+  elif [[ $distro = "ubuntu" ]]; then
+    echo -en "#!/data/data/com.termux/files/usr/bin/bash\nproot-distro login $distro --shared-tmp -- /bin/$shell -c 'export PULSE_SERVER=127.0.0.1 && export XDG_RUNTIME_DIR=\${TMPDIR} && sudo service dbus start && su - $USER -c \"env DISPLAY=:0 gnome-shell --x11\"'" > ${TMPDIR}/xpd.sh
+  
   else
     echo "There is not graphical Environment available"
     exit 0
   fi
+  # Kill open X11 processes
+  kill -9 $(pgrep -f "termux.x11") 2>/dev/null
+
+  # Enable PulseAudio over Network
+  pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1
+
+  # Prepare termux-x11 session
+  export XDG_RUNTIME_DIR=${TMPDIR}
+  export DISPLAY=:0
+  termux-x11 :0 >/dev/null &
+
+  # Wait a bit until termux-x11 gets started.
+  sleep 3
+
+  # Launch Termux X11 main activity
+  am start --user 0 -n com.termux.x11/com.termux.x11.MainActivity > /dev/null 2>&1
+  sleep 1
+
+  # Login in PRoot Environment. Do some initialization for PulseAudio, /tmp directory
+  # and run XFCE4 as custom user.
+  chmod +x ${TMPDIR}/xpd.sh 
+  bash ${TMPDIR}/xpd.sh
+  rm ${TMPDIR}/xpd.sh
+  exit 0   
 }
 
 
@@ -85,7 +89,7 @@ runEnv(){
   running time 2
   if grep $USER $PREFIX/var/lib/proot-distro/installed-rootfs/$distro/etc/passwd >/dev/null;
   then
-    cat <<- CONF > $PREFIX/var/lib/proot-distro/installed-rootfs/$distro/etc/$filerc
+    cat <<- CONF > $PREFIX/var/lib/proot-distro/installed-rootfs/$distro/$filerc
 #!/bin/bash
 #! command -v tmux >/dev/null && { apk add tmux; }
 #tmux new -s i-Haklab -n $distro 2>/dev/null
@@ -98,17 +102,125 @@ CONF
     fi
 
   else
-    cat <<- CONF > $PREFIX/var/lib/proot-distro/installed-rootfs/$distro/etc/$filerc
-#!/bin/bash
+    if [[ $distro = "alpine" ]]; then 
+      export pkgs="apk add sudo nano dbus-x11 xfce4 mesa-dri-gallium"
+      export shell="ash"
+    else
+      export pkgs="apt update && apt upgrade -y && apt install sudo nano adduser dbus-x11 ubuntu-desktop -y"
+      export shell="bash"
+      export step1="for file in \$(find /usr -type f -iname \"*login1*\");do rm -rf \$file; done"
+      echo -en "Package: snapd\nPinP release a=*\nPin-Priority: -10" > \
+        $PREFIX/var/lib/proot-distro/installed-rootfs/$distro/etc/apt/preferences.d/nosnap.pref
+    fi
+      cat <<- CONF > $PREFIX/var/lib/proot-distro/installed-rootfs/$distro/$filerc
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
 
-apk add sudo nano dbus-x11 xfce4 mesa-dri-gallium
+# If not running interactively, don't do anything
+[ -z "\$PS1" ] && return
+
+# don't put duplicate lines in the history. See bash(1) for more options
+# ... or force ignoredups and ignorespace
+HISTCONTROL=ignoredups:ignorespace
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "\$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "\$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=\$(cat /etc/debian_chroot)
+fi
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "\$TERM" in
+    xterm-color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
+
+if [ -n "\$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
+
+if [ "\$color_prompt" = yes ]; then
+    PS1='\${debian_chroot:+(\$debian_chroot)}\\[\\033[01;32m\\]\\u@\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$ '
+else
+    PS1='\${debian_chroot:+(\$debian_chroot)}\\u@\\h:\\w\\$ '
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "\$TERM" in
+xterm*|rxvt*)
+    PS1="\\[\\e]0;\${debian_chroot:+(\$debian_chroot)}\\u@\\h: \\w\\a\\]\$PS1"
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "\$(dircolors -b ~/.dircolors)" || eval "\$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+#    . /etc/bash_completion
+#fi
+#i-Haklab configurations
+$pkgs
 adduser $USER
-#echo "$USER:x:1000:1000:Linux User,,,:/home/$USER:/bin/ash" >> /etc/passwd
+#echo "$USER:x:1000:1000:Linux User,,,:/home/$USER:/bin/$shell" >> /etc/passwd
 sed '105a $USER ALL=(ALL:ALL) NOPASSWD: ALL' -i /etc/sudoers
 su - $USER
-
+$step1
 echo "DONE!! :: shuting down ..."
-sleep 3;exit
+sleep 3;exit;exit
 CONF
     banner
     proot-distro login $distro

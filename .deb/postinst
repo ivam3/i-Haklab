@@ -42,10 +42,11 @@ for module in pyyaml beautifulsoup4 betrufflehog wheel speedtest-cli frida pipen
 	pip --no-color --quiet --no-cache-dir install $module 2>>$LOGFILE
 done
 
-echo "Setting website '4share'."
+#echo "Downloading default wordlists (It could take a long time)..."
 [[ -d ${HOME}/.local/share/wordlist ]] || { mkdir -p ${HOME}/.local/share/wordlist;}
-wget --tries=20 --quiet https://www.scrapmaker.com/data/wordlists/dictionaries/rockyou.txt \
-  -O ${HOME}/.local/share/wordlist/rockyou.txt
+#wget --tries=20 --quiet https://www.scrapmaker.com/data/wordlists/dictionaries/rockyou.txt \
+#  -O ${HOME}/.local/share/wordlist/rockyou.txt
+echo "Setting website '4share'."
 wget --tries=20 --quiet $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20functional%20tests.bat -O ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run functional tests.bat'
 wget --tries=20 --quiet $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20unit%20tests.bat -O ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run unit tests.bat'
 chmod 777 -R ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests

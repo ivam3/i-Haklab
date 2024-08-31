@@ -160,7 +160,7 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 ╰apkactivity─+─<path─to─apk─file>➤ Get the main activity from .apk file
 |
 ╰──backup────+──create|restore───➤ Create a backup of Termux or restore it
-|                  |    ╰example─{─i-Haklab restore paath/to/file.tar.gz
+|                  |    ╰example─{─i-Haklab restore path/to/file.tar.gz
 |                  ╰─example─────{─i-Haklab create <in/ex> [in=internal ex=external sdcard]
 ╰─binchecker─➤───────────────────➤ Get informacion about BINs (CC,DC)
 |
