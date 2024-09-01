@@ -4,6 +4,7 @@
 CMakeFiles/i-haklab.dir/main.cpp.o: /data/data/com.termux/files/home/i-Haklab/main.cpp \
   /data/data/com.termux/files/home/i-Haklab/include/below_zero/command_line_argument_parser.hpp \
   /data/data/com.termux/files/home/i-Haklab/include/below_zero/config/config.hpp \
+  /data/data/com.termux/files/home/i-Haklab/include/below_zero/desktop/desktop.hpp \
   /data/data/com.termux/files/home/i-Haklab/include/below_zero/syntax.hpp \
   /data/data/com.termux/files/usr/include/alloca.h \
   /data/data/com.termux/files/usr/include/android/api-level.h \
@@ -3328,10 +3329,6 @@ CMakeFiles/i-haklab.dir/main.cpp.o: /data/data/com.termux/files/home/i-Haklab/ma
 
 /data/data/com.termux/files/usr/include/boost/mp11/detail/mp_value.hpp:
 
-/data/data/com.termux/files/usr/include/boost/type_traits/is_unsigned.hpp:
-
-/data/data/com.termux/files/usr/include/boost/mp11/detail/mp_plus.hpp:
-
 /data/data/com.termux/files/usr/include/boost/type_traits/remove_bounds.hpp:
 
 /data/data/com.termux/files/usr/include/boost/mp11/detail/mp_min_element.hpp:
@@ -3386,6 +3383,12 @@ CMakeFiles/i-haklab.dir/main.cpp.o: /data/data/com.termux/files/home/i-Haklab/ma
 
 /data/data/com.termux/files/usr/include/boost/mp11/detail/mp_append.hpp:
 
+/data/data/com.termux/files/usr/include/c++/v1/__algorithm/all_of.h:
+
+/data/data/com.termux/files/usr/include/boost/preprocessor/debug/error.hpp:
+
+/data/data/com.termux/files/usr/include/boost/mp11/detail/config.hpp:
+
 /data/data/com.termux/files/usr/include/boost/describe/detail/config.hpp:
 
 /data/data/com.termux/files/usr/include/bits/mbstate_t.h:
@@ -3419,6 +3422,8 @@ CMakeFiles/i-haklab.dir/main.cpp.o: /data/data/com.termux/files/home/i-Haklab/ma
 /data/data/com.termux/files/usr/include/boost/filesystem/config.hpp:
 
 /data/data/com.termux/files/usr/include/boost/lexical_cast/detail/converter_lexical.hpp:
+
+/data/data/com.termux/files/home/i-Haklab/include/below_zero/desktop/desktop.hpp:
 
 /data/data/com.termux/files/home/i-Haklab/include/below_zero/syntax.hpp:
 
@@ -3814,8 +3819,6 @@ CMakeFiles/i-haklab.dir/main.cpp.o: /data/data/com.termux/files/home/i-Haklab/ma
 
 /data/data/com.termux/files/usr/include/boost/config/detail/select_stdlib_config.hpp:
 
-/data/data/com.termux/files/usr/include/boost/get_pointer.hpp:
-
 /data/data/com.termux/files/usr/include/c++/v1/__iterator/iter_move.h:
 
 /data/data/com.termux/files/usr/include/boost/program_options.hpp:
@@ -3881,12 +3884,6 @@ CMakeFiles/i-haklab.dir/main.cpp.o: /data/data/com.termux/files/home/i-Haklab/ma
 /data/data/com.termux/files/usr/include/c++/v1/__chrono/month.h:
 
 /data/data/com.termux/files/usr/include/boost/container_hash/detail/hash_range.hpp:
-
-/data/data/com.termux/files/usr/include/c++/v1/__algorithm/all_of.h:
-
-/data/data/com.termux/files/usr/include/boost/preprocessor/debug/error.hpp:
-
-/data/data/com.termux/files/usr/include/boost/mp11/detail/config.hpp:
 
 /data/data/com.termux/files/usr/include/c++/v1/__algorithm/transform.h:
 
@@ -4066,8 +4063,6 @@ CMakeFiles/i-haklab.dir/main.cpp.o: /data/data/com.termux/files/home/i-Haklab/ma
 
 /data/data/com.termux/files/usr/include/boost/lexical_cast/detail/converter_lexical_streams.hpp:
 
-/data/data/com.termux/files/usr/include/boost/core/use_default.hpp:
-
 /data/data/com.termux/files/usr/include/boost/bind/mem_fn.hpp:
 
 /data/data/com.termux/files/usr/include/c++/v1/errno.h:
@@ -4079,3 +4074,11 @@ CMakeFiles/i-haklab.dir/main.cpp.o: /data/data/com.termux/files/home/i-Haklab/ma
 /data/data/com.termux/files/usr/include/boost/mem_fn.hpp:
 
 /data/data/com.termux/files/usr/include/bits/get_device_api_level_inlines.h:
+
+/data/data/com.termux/files/usr/include/boost/core/use_default.hpp:
+
+/data/data/com.termux/files/usr/include/boost/get_pointer.hpp:
+
+/data/data/com.termux/files/usr/include/boost/type_traits/is_unsigned.hpp:
+
+/data/data/com.termux/files/usr/include/boost/mp11/detail/mp_plus.hpp:

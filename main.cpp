@@ -2,15 +2,14 @@
 //-------------------------------------------------
 //         Importaciones
 //-------------------------------------------------
-#include <cstring>
-#include <iostream>
-#include <boost/filesystem.hpp>
 #include "below_zero/command_line_argument_parser.hpp"
 #include "below_zero/config/config.hpp"
+#include "below_zero/desktop/desktop.hpp"
 #include "below_zero/syntax.hpp"
 
 namespace bz = belowzero;
 namespace fs = boost::filesystem;
+
 using namespace std;
 
 //-------------------------------------------------
@@ -23,7 +22,7 @@ int main(int argc, const char *argv[]) {
     if (args.no_arguments()) {
       cerr << "Usage: " << "i-Haklab " << "[ options ] [ arg ]" << std::endl; 
     }
-
+    //  Menu  de  ayuda  
     if (args.f_help()) {
        cout << parser.getDesc() << endl;
        return 0;
@@ -33,18 +32,17 @@ int main(int argc, const char *argv[]) {
       fs::path db = fs::path(string(getenv("HOME"))) / "/.local/etc/i-Haklab/Tools/Readme";
       string   name = args.f_about().c_str();
       startSyntax(bz::funcion::about(name, db));
+      return 0;
     }
 
     if (args.f_vnc_start()){
-        bz::funcion::vnc_start();
+        bz::DesktopVNC::start();
         return 0;
       }
-    if (args.f_vnc_stop()) {
-       bz::funcion::vnc_stop();
-       return 0;
-    }
+    
     if (args.f_xwayland()) {
-      bz::Desktop::start_xwayland();
+      bz::DesktopXwayland::start();
+      return 0;
     }
   }
   catch (po::error& ex) {

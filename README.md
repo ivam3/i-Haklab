@@ -1,6 +1,6 @@
 <div align="center">
 <img 
-  src="/.imagenes/I-haklab.png" 
+  src="/.img/I-haklab.png" 
   alt="Logo de I-haklab"/> 
 </div>
 
@@ -11,9 +11,9 @@
   <span> • </span>
                <a href="https://github.com/ivam3/i-Haklab/blob/main/doc/contribuyendo.md">Contribuir</a>
   <span> • </span>
-        <a href="">Apoyo</a>
+        <a href="">Wep</a>
   <span> • </span>
-        <a href="">Características</a>
+        <a href="">Apoyo</a>
   <p></p>
 </div> 
 
@@ -23,36 +23,35 @@
 
   </div>
 
-# Que es i-Haklab ?
+
+# 😎 Que es i-Haklab ?
 
 > *i-Haklab* es un laboratorio de hacking para [Termux](https://github.com/termux/termux-app)  que contiene [herramientas de código abierto](https://github.com/ivam3/termux-packages) para osint, pentesting, escanear/encontrar vulnerabilidades, explotación y post-explotación.
 
-# Interfas Grafica 
+> [!WARNING]
+> No se hace copia de seguridad de su configuraciones previas.  
 
-Tambien brinda una configuracion amigable a diversas  herramientas.
+
+# 🖼️Interfas Grafica 
+
+Brinda una configuracion amigable a diversas  herramientas.
 
 <div align="center">
 <img 
-  src="/.imagenes/termux-desktop.png" 
+  src="/.img/termux-desktop.png" 
   alt="Imagen de wayland"/> 
 </div>
 
-<div align="center">
-<img 
-  src="/.imagenes/" 
-  alt="Imagen de nvim"/> 
-</div>
-
-<div align="center">
-<img 
-  src="/.imagenes/" 
-  alt="Imagen de tmux"/> 
-</div>
 
 
+# Intalacion
 
 
+# Configuracion 
+
+Si deseas agregar o personalizar cualgier tema.  
+- [promt](url)
+- [tmux](url) 
+- [nvim](url) 
 
 
-
-# Créditos 

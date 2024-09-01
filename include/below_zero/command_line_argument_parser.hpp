@@ -13,9 +13,9 @@ class arguments {
   constexpr static auto language_option_name = "language";
   constexpr static auto install_option_name = "install";
   constexpr static auto vncstart_option = "vncstar";
-  constexpr static auto vncstop_option = "vncstop";
   constexpr static auto xwaylan_option = "xwayland";
-
+  constexpr static auto conf_option_name = "config";
+  
   po::variables_map variables;
   
   friend class command_line_argument_parser;
@@ -35,8 +35,8 @@ class arguments {
   
 
   bool f_vnc_start(){return variables.count(vncstart_option) > 0;};
-  bool f_vnc_stop(){return variables.count(vncstop_option) > 0;};
-  
+ 
+
   bool f_xwayland(){return variables.count(xwaylan_option) > 0;};
   
   string f_language() {
@@ -58,22 +58,22 @@ class command_line_argument_parser {
  public:
   command_line_argument_parser() {
     // Options
-    desc.add_options()(arguments::help_option, "Show message and exit")(
+    desc.add_options()(arguments::help_option, "Muestra este mensage y sale")(
         arguments::language_option_name,
         po::value<string>()->value_name("<language>"),
-        "Explicitly set the language");
+        "Explicitly set the language")
+      (arguments::conf_option_name, po::value<string>()->value_name("<file>"), "Archivo de configuracion");
     // Info
     info.add_options()(arguments::about_option_name,
-                       po::value<string>()->value_name("<command>"),
-                       "Show informations about tool/framework");
+                       po::value<string>()->value_name("<tool>"),
+                       "Muestra informacion sobre una herramienta ");
     // Config 
     conf.add_options()(arguments::install_option_name,
-                       po::value<string>()->value_name("<...?>"),
-                       "Instalar i-haklab completo");
+                       po::value<string>(),
+                       "Instalar i-haklab (Full, medium, light)");
     // GUI  
-  gui.add_options()(arguments::vncstart_option, "Start vnc  ");
-  gui.add_options()(arguments::vncstop_option, "Stop vnc  ");
-  gui.add_options()(arguments::xwaylan_option,  "Start Xwaylan");
+  gui.add_options()(arguments::vncstart_option, "Inicia vnc  ");
+  gui.add_options()(arguments::xwaylan_option,  "Inicia Xwaylan");
 
   //
   //pkg.add_options()()

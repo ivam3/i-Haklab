@@ -1,19 +1,9 @@
 #ifndef BELOW_ZERO_CONFIG
 #define BELOW_ZERO_CONFIG
 
-#include <string>
 #include <boost/filesystem/path.hpp>
 
-
 namespace belowzero {
-  
-class Desktop {   
-  public:
-    Desktop() = default;
-    static void start_xwayland();
-};
-
- 
   namespace funcion {  
   /* std::vector<std::string> home_file { 
        "zsh/.zshenv", ".bashrc", ".dircolors", ".dmenurc", ".gitconfig",
@@ -26,12 +16,10 @@ class Desktop {
      }; */
      bool command_exists(const std::string& cmd); 
      void InstallDesktop(); 
-     void vnc_start();
      void vnc_stop();
      void xwayland();
-     void backup_configs();
      void install_oh_my_zsh();
      std::string about(std::string &name, boost::filesystem::path &db);
   }  // belowzero::funcion  
-}   // belowzero
+}  // belowzero
 #endif // !BELOW_ZERO_CONFIG

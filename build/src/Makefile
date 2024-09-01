@@ -247,6 +247,30 @@ below_zero/config/config.cpp.s:
 	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/below_zero/config/config.cpp.s
 .PHONY : below_zero/config/config.cpp.s
 
+below_zero/desktop/desktop.o: below_zero/desktop/desktop.cpp.o
+.PHONY : below_zero/desktop/desktop.o
+
+# target to build an object file
+below_zero/desktop/desktop.cpp.o:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/below_zero/desktop/desktop.cpp.o
+.PHONY : below_zero/desktop/desktop.cpp.o
+
+below_zero/desktop/desktop.i: below_zero/desktop/desktop.cpp.i
+.PHONY : below_zero/desktop/desktop.i
+
+# target to preprocess a source file
+below_zero/desktop/desktop.cpp.i:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/below_zero/desktop/desktop.cpp.i
+.PHONY : below_zero/desktop/desktop.cpp.i
+
+below_zero/desktop/desktop.s: below_zero/desktop/desktop.cpp.s
+.PHONY : below_zero/desktop/desktop.s
+
+# target to generate assembly for a file
+below_zero/desktop/desktop.cpp.s:
+	cd /data/data/com.termux/files/home/i-Haklab/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/below_zero.dir/build.make src/CMakeFiles/below_zero.dir/below_zero/desktop/desktop.cpp.s
+.PHONY : below_zero/desktop/desktop.cpp.s
+
 below_zero/syntax.o: below_zero/syntax.cpp.o
 .PHONY : below_zero/syntax.o
 
@@ -293,6 +317,9 @@ help:
 	@echo "... below_zero/config/config.o"
 	@echo "... below_zero/config/config.i"
 	@echo "... below_zero/config/config.s"
+	@echo "... below_zero/desktop/desktop.o"
+	@echo "... below_zero/desktop/desktop.i"
+	@echo "... below_zero/desktop/desktop.s"
 	@echo "... below_zero/syntax.o"
 	@echo "... below_zero/syntax.i"
 	@echo "... below_zero/syntax.s"
