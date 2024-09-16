@@ -5,6 +5,10 @@ source ${HOME}/.local/etc/i-Haklab/variables
 source $iHETC/functions
 PS3="(_>)_number:─➤ "
 
+#UPDATE TUTORIALS LIST
+chk-pkg curl curl
+curl -sSL "$iHDB/.local/etc/i-Haklab/listoftutorials" -o $iHETC/listoftutorials
+
 banner
 if [[ $# -eq 0 ]]
 then
