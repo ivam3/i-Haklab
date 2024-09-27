@@ -15,7 +15,7 @@ B='\e[34m'
 M='\e[35m'
 C='\e[36m'
 W='\e[0m'
-echo -en "\e[33mW:\e[0m Fixing posible issues on bigdecimal gem ...  "
+echo "Fixing posible issues on bigdecimal gem."
 yes|apt install -yq patchelf >/dev/null 2>&1
 if [ -e "$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal.so" ]; then
 	if [ -n "$(patchelf --print-needed "$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal/util.so" | grep bigdecimal.so)" ]; then
@@ -25,5 +25,4 @@ if [ -e "$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal.so" ]; then
 		"$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal.so" \
 		"$PREFIX/lib/ruby/$GEMS/$LINUXANDROID/bigdecimal/util.so"
 fi
-echo -en "$G\bDONE!!!\n$W"
 #			i-Haklab by @Ivam3
