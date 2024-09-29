@@ -22,8 +22,8 @@ bash /data/data/com.termux/files/home/.local/libexec/i-Haklab.login
 end
 
 function on_exit --on-event fish_exit
-echo 'Have a nice hacking day!!'
-sleep 1
+  #echo 'Have a nice hacking day!!'
+  sleep 0.5
 end
 
 set USER i-Haklab
