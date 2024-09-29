@@ -68,10 +68,10 @@ set softwrap
 		;;
 
 	neovim)
-		[[ -d ${HOME}/.config ]] || { mkdir -p ${HOME}/.config;}
-    wget --tries=20 --quiet $iHDB/.config/nvim.zip -O ${HOME}/.config/nvim.zip
-    unzip -qo ${HOME}/.config/nvim.zip -d ${HOME}/.config/
-    rm -rf ${HOME}/.config/nvim.zip
+		[[ -d ${HOME}/.config/nvim ]] || { mkdir -p ${HOME}/.config/nvim;}
+    wget --tries=20 --quiet $iHDB/.config/nvim.zip -O ${HOME}/.config/nvim/nvim.zip
+    unzip -qo ${HOME}/.config/nvim/nvim.zip -d ${HOME}/.config/nvim/
+    rm -rf ${HOME}/.config/nvim/nvim.zip
     npm install -g neovim bash-language-server pyright >/dev/null 2>/dev/null #neovim
     pip3 --no-color --quiet --no-cache-dir install neovim
 		yes|pkg i luarocks lua-language-server >/dev/null 2>/dev/null
