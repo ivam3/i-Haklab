@@ -27,13 +27,14 @@ done
 sleep 3
 while [ "$(ps a|awk '{print $1}'|grep $pid)" ]
 do
-  dbuser=$(mariadb -u $(whoami) -e "use mysql;SELECT user FROM user;"|grep "root")
+  dbuser=$(mariadb -u $(whoami) -e "use mysql;SELECT user FROM user;"|grep "root" 2>/dev/null)
+  [[ -z $dbuser ]] && { user=root; } || { user=$(whoami);}
   [[ $dbuser == root ]] || { 
-    mariadb -u $(whoami) -e "use mysql;set password for 'root'@'localhost' = password('root');flush privileges;" >/dev/null 2>/dev/null;
+    mariadb -u $user -e "use mysql;set password for 'root'@'localhost' = password('root');flush privileges;" >/dev/null 2>/dev/null;
     mariadbd-safe >/dev/null 2>/dev/null &
     safepid=$(echo $!)
     running ps $safepid
-	}
+  }
 
   echo -en $Y"\r(➤_)$W Choose a platform\n"
 	select answ in bWAPP DVWA mutillidae Exit
