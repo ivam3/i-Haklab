@@ -63,7 +63,7 @@ done
 # set defaults
 TEMPERATURE=${TEMPERATURE:-0.7}
 MAX_TOKENS=${MAX_TOKENS:-1024}
-MODEL=${MODEL:-text-davinci-003}
+MODEL=${MODEL:-gpt-3.5-turbo-instruct}
 SIZE=${SIZE:-512x512}
 CONTEXT=${CONTEXT:-false}
 rand=$[ $RANDOM % 5 ]
