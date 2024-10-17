@@ -93,12 +93,14 @@ runEnv(){
 #!/bin/bash
 #! command -v tmux >/dev/null && { apk add tmux; }
 #tmux new -s i-Haklab -n $distro 2>/dev/null
+export DISPLAY=:0
+export XDG_RUNTIME_DIR=/tmp
 CONF
     banner
     if [[ $x11 = "X11" ]]; then
       runXenv
     else
-      proot-distro login $distro --user $USER
+      proot-distro login $distro --user $USER --shared-tmp
     fi
 
   else
