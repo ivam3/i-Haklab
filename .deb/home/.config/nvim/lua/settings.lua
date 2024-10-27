@@ -32,3 +32,7 @@ vim.opt.wrap = true
 -- Lee o modifica valores específicos para una ventana.
 --vim.wo.colorcolumn = '80'
 vim.opt.cursorline = true
+-- Blakline
+vim.opt.termguicolors = true
+-- Autocompletado
+opt.completeopt = {'menu', 'menuone', 'noselect'}
