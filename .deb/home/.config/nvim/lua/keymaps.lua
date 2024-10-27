@@ -4,6 +4,12 @@ local default_ops =  {noremap = true , silent = true}
 local cmd = vim.cmd
 --local vim = vim.opt
 
+-- deshabilite netrw al comienzo de su init.lua (muy recomendable)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+-- establecer termguicolors para habilitar grupos destacados
+vim.opt.termguicolors = true
+
 --[[  
 
 <S-l> shef+l
