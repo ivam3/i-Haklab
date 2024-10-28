@@ -5,7 +5,7 @@
 </div>
 
 ![linea](.img/linea.gif)
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Rubik+Wet+Paint&pause=1000&color=F77432&background=13520F00&center=FALSO&vCenter=FALSO&repeat=verdadero&random=FALSO&width=435&lines=I-Haklab+v.3+2022+by+%40Ivam3)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Rubik+Wet+Paint&pause=1000&color=F77432&background=13520F00&center=FALSO&vCenter=verdadero&repeat=verdadero&random=FALSO&width=435&height=100&lines=I-Haklab+v.3+2022+by+%40Ivam3)](https://git.io/typing-svg)
 ![linea](.img/linea.gif)
 
 ##### DISCLAIMER
