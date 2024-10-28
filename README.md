@@ -1,11 +1,15 @@
-<div align="center">
+yo<div align="center">
 <img
   src="/.img/I-haklab.png"
   alt="Logo de I-haklab"/>
 </div>
 
 ![linea](.img/linea.gif)
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Rubik+Wet+Paint&pause=1000&color=F77432&background=13520F00&center=FALSO&vCenter=verdadero&repeat=verdadero&random=FALSO&width=435&height=100&lines=I-Haklab+v.3+2022+by+%40Ivam3)](https://git.io/typing-svg)
+<div aling=center>
+  <a href="https://git.io/typing-svg">
+    <img src="https://readme-typing-svg.demolab.com?font=Rubik+Wet+Paint&pause=1000&color=F77432&background=13520F00&center=FALSO&vCenter=verdadero&repeat=verdadero&random=FALSO&width=435&height=100&lines=I-Haklab+v.3+2022+by+%40Ivam3" 
+      alt="Typing SVG" /></a>
+<\div>
 ![linea](.img/linea.gif)
 
 ##### DISCLAIMER
