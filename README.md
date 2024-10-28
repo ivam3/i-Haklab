@@ -7,9 +7,8 @@ yo<div align="center">
 ![linea](.img/linea.gif)
 
 <div align="center">
-  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Rubik+Wet+Paint&pause=1000&color=F77432&background=13520F00&center=FALSO&vCenter=verdadero&repeat=verdadero&random=FALSO&width=435&height=150&lines=I-Haklab+v.3+2022+by+%40Ivam3" 
-      alt="Typing SVG" /></a>
-</div>
+  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Rubik+Wet+Paint&pause=1000&color=F77432&background=13520F00&center=verdadero&vCenter=FALSO&repeat=&random=&width=500&lines=I-Haklab+v.3+2022+by+%40Ivam3" alt="Typing SVG" /></a>
+</div> 
 
 ![linea](.img/linea.gif)
 
