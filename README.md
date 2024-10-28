@@ -27,7 +27,7 @@ i-Haklab weechat
 
 ### INSTALLATION.
 - CLONING THIS REPOSITORY:
-```bash
+```zsh
 git clone https://github.com/ivam3/i-Haklab \
 cd i-Haklab \
 chmod +x setup \
