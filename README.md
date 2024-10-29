@@ -6,7 +6,7 @@
 
 ![linea](.img/linea.gif)
 <div align="center">
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Rubik+Wet+Paint&size=35&pause=1000&color=F77432&background=13520F00&center=verdadero&vCenter=FALSO&repeat=&random=&width=500&lines=I-Haklab+v.3+2022+by+%40Ivam3" alt="Typing SVG" /></a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Rubik+Wet+Paint&size=35&pause=1000&color=F77432&background=13520F00&center=verdadero&vCenter=FALSO&repeat=&random=&width=500&lines=I-Haklab+v.3+2024+by+%40Ivam3" alt="Typing SVG" /></a>
 </div>
 
 ##### DISCLAIMER
