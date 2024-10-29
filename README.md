@@ -26,14 +26,7 @@ i-Haklab weechat
 
 
 ### 📦 INSTALLATION.
-- CLONING THIS REPOSITORY:
-```bash
-git clone https://github.com/ivam3/i-Haklab \
-cd i-Haklab \
-chmod +x setup \
-bash setup
-```
-- ADDING AT APT SOURCES LIST
+- OPTION 1 (RECOMMEND): ADDING AT APT SOURCES LIST
 ```bash
 yes|apt install wget gnupg && \
 mkdir -p $PREFIX/etc/apt/sources.list.d && \
@@ -44,6 +37,13 @@ curl -fsSL "https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/dis
 apt update && apt install i-haklab
 ```
 
+- OPTION 2: CLONING THIS REPOSITORY:
+```bash
+git clone https://github.com/ivam3/i-Haklab \
+cd i-Haklab \
+chmod +x setup \
+bash setup
+```
 
 ### 🧠 i-Haklab will ...
 - Provides a diferent types of prompt with command:
