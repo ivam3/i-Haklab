@@ -5,6 +5,7 @@ trap ctrl_c 2
 source ${HOME}/.local/etc/i-Haklab/variables
 source $iHETC/functions
 
+chk-pkg xfce4-session xfce4
 chk-pkg Xwayland xwayland
 chk-pkg pulseaudio pulseaudio
 
