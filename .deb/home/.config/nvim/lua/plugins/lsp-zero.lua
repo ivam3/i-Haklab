@@ -1,11 +1,13 @@
 local lsp = require('lsp-zero')
 lsp.preset('recommended',{
-set_lsp_keymaps = true, -- Para habilitar todas las combinaciones de teclas predeterminadas,
+-- set_lsp_keymaps = true, -- P habilitar todas las combinaciones de teclas predeterminadas,
 manage_nvim_cmp = true,
 })
 
-lsp.setup()
--- diagnósticos
+lsp.setup() 
+
+-- INFO:   :help  vim.diagnostic    
+-- diagnósticos 
 vim.diagnostic.config({
   virtual_text = true,
   signs = true,
@@ -78,9 +80,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
   end
 })
-----
---             +=====Auto compleado=====
------
+---------------------------------------------------
+--             =====Auto compleado=====
+--------------------------------------------------
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 -- Para configurar nvim-cmp necesitamos dos módulos
 local cmp = require('cmp')
@@ -97,13 +99,9 @@ cmp.setup({
 window = {
   documentation = cmp.config.window.bordered()
 },
--- Lista que controla el orden en el que aparecen los elementos de un item.
--- formatting = {
---  fields = {'menu', 'abbr', 'kind'}
--- },
 -- icon basado en el nombre de la fuente
 formatting = {
-  fields = {'menu', 'abbr', 'kind'},
+  fields = {'menu', 'abbr', 'kind'}, -- Controla  el orden en el que aparecen  los elementos   
   format = function(entry, item)
     local menu_icon = {
       nvim_lsp = 'λ',
