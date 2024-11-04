@@ -4,6 +4,17 @@ lsp.preset('recommended',{
 manage_nvim_cmp = true,
 })
 
+lsp.set_sign_icons({
+  error = "✘",
+  warn = "▲",
+  hint = "⚑",
+  info = "»",
+})
+
+lsp.ensure_installed({
+  "lua_ls",
+})
+    
 lsp.setup() 
 
 -- INFO:   :help  vim.diagnostic    
@@ -16,6 +27,7 @@ vim.diagnostic.config({
   severity_sort = false,
   float = true,
 })
+
 
 -- declarar las "capacidades" que tiene el editor
 local lspconfig = require('lspconfig')
@@ -88,8 +100,17 @@ vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 local select_opts = {behavior = cmp.SelectBehavior.Select}
+local cmp_action = require('lsp-zero')
 
 cmp.setup({
+    mapping = cmp.mapping.preset.insert({
+    -- confirm completion
+    -- ['<C-y>'] = cmp.mapping.confirm({select = true}),
+    -- ['<C-ee>'] = cmp.mapping.close(),
+    -- scroll up and down the documentation window
+    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(4),   
+  }),
    snippet = {
    expand = function(args)
    luasnip.lsp_expand(args.body)
@@ -108,28 +129,11 @@ formatting = {
       luasnip = '⋗',
       buffer = 'Ω',
       path = '🖫',
+      nvim_lua = "Π",
     }
 
     item.menu = menu_icon[entry.source.name]
     return item
   end,
-},
--- Salta al próximo placeholder de un snippet.
-['<C-f>'] = cmp.mapping(function(fallback)
-  if luasnip.jumpable(1) then
-    luasnip.jump(1)
-  else
-    fallback()
-  end
-end, {'i', 's'}),
--- Salta al placeholder anterior de un snippet.
-['<C-0>'] = cmp.mapping(function(fallback)
-  if luasnip.jumpable(-1) then
-    luasnip.jump(-1)
-  else
-    fallback()
-  end
-end, {'i', 's'}),
-})
-
+},})
 
