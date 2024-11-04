@@ -120,6 +120,5 @@ require('plugins.blankline')          -- guías de sangría a todas las líneas
 require("plugins.telescope")          -- filtrar de forma interactiva
 require("plugins.toggleterm")         -- Terminal 
 require("plugins.neural")             -- IA  
-require("plugins.tree")               -- Albor de directoria 
 require("plugins.git")                -- Cosas de git 
 require("zk")                         -- Para texto sin formato 
