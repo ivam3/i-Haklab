@@ -53,7 +53,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       local opts = {buffer = true}
       vim.keymap.set(mode, lhs, rhs, opts)
     end
-
+  
     -- Muestra información sobre símbolo debajo del cursor
     bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
 
@@ -100,13 +100,18 @@ vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 local select_opts = {behavior = cmp.SelectBehavior.Select}
-local cmp_action = require('lsp-zero')
 
 cmp.setup({
+    sources = {
+    {name = 'nvim_lsp'},
+  },
     mapping = cmp.mapping.preset.insert({
     -- confirm completion
     -- ['<C-y>'] = cmp.mapping.confirm({select = true}),
     -- ['<C-ee>'] = cmp.mapping.close(),
+    -- Navigate between completion items
+    ['<C-p>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
+    ['<C-n>'] = cmp.mapping.select_next_item({behavior = 'select'}),
     -- scroll up and down the documentation window
     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
     ['<C-d>'] = cmp.mapping.scroll_docs(4),   
