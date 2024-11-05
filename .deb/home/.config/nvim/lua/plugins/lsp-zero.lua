@@ -1,11 +1,24 @@
 local lsp = require('lsp-zero')
 lsp.preset('recommended',{
-set_lsp_keymaps = true, -- Para habilitar todas las combinaciones de teclas predeterminadas,
+-- set_lsp_keymaps = true, -- P habilitar todas las combinaciones de teclas predeterminadas,
 manage_nvim_cmp = true,
 })
 
-lsp.setup()
--- diagnósticos
+lsp.set_sign_icons({
+  error = "✘",
+  warn = "▲",
+  hint = "⚑",
+  info = "»",
+})
+
+lsp.ensure_installed({
+  "lua_ls",
+})
+    
+lsp.setup() 
+
+-- INFO:   :help  vim.diagnostic    
+-- diagnósticos 
 vim.diagnostic.config({
   virtual_text = true,
   signs = true,
@@ -14,6 +27,7 @@ vim.diagnostic.config({
   severity_sort = false,
   float = true,
 })
+
 
 -- declarar las "capacidades" que tiene el editor
 local lspconfig = require('lspconfig')
@@ -39,7 +53,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       local opts = {buffer = true}
       vim.keymap.set(mode, lhs, rhs, opts)
     end
-
+  
     -- Muestra información sobre símbolo debajo del cursor
     bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
 
@@ -78,9 +92,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
   end
 })
-----
---             +=====Auto compleado=====
------
+---------------------------------------------------
+--             =====Auto compleado=====
+--------------------------------------------------
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 -- Para configurar nvim-cmp necesitamos dos módulos
 local cmp = require('cmp')
@@ -88,6 +102,20 @@ local luasnip = require('luasnip')
 local select_opts = {behavior = cmp.SelectBehavior.Select}
 
 cmp.setup({
+    sources = {
+    {name = 'nvim_lsp'},
+  },
+    mapping = cmp.mapping.preset.insert({
+    -- confirm completion
+    -- ['<C-y>'] = cmp.mapping.confirm({select = true}),
+    -- ['<C-ee>'] = cmp.mapping.close(),
+    -- Navigate between completion items
+    ['<C-p>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
+    ['<C-n>'] = cmp.mapping.select_next_item({behavior = 'select'}),
+    -- scroll up and down the documentation window
+    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(4),   
+  }),
    snippet = {
    expand = function(args)
    luasnip.lsp_expand(args.body)
@@ -97,41 +125,20 @@ cmp.setup({
 window = {
   documentation = cmp.config.window.bordered()
 },
--- Lista que controla el orden en el que aparecen los elementos de un item.
--- formatting = {
---  fields = {'menu', 'abbr', 'kind'}
--- },
 -- icon basado en el nombre de la fuente
 formatting = {
-  fields = {'menu', 'abbr', 'kind'},
+  fields = {'menu', 'abbr', 'kind'}, -- Controla  el orden en el que aparecen  los elementos   
   format = function(entry, item)
     local menu_icon = {
       nvim_lsp = 'λ',
       luasnip = '⋗',
       buffer = 'Ω',
       path = '🖫',
+      nvim_lua = "Π",
     }
 
     item.menu = menu_icon[entry.source.name]
     return item
   end,
-},
--- Salta al próximo placeholder de un snippet.
-['<C-f>'] = cmp.mapping(function(fallback)
-  if luasnip.jumpable(1) then
-    luasnip.jump(1)
-  else
-    fallback()
-  end
-end, {'i', 's'}),
--- Salta al placeholder anterior de un snippet.
-['<C-0>'] = cmp.mapping(function(fallback)
-  if luasnip.jumpable(-1) then
-    luasnip.jump(-1)
-  else
-    fallback()
-  end
-end, {'i', 's'}),
-})
-
+},})
 

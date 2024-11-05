@@ -1,38 +1,46 @@
--- Neovim API alias 
-local cmd = vim.cmd
-local exec = vim.api.nvim_exec
+-- Variables   locales   
 local fn = vim.fn
 local g = vim.g
 local opt  = vim.opt
+----------------------------------------
+--            Notas   
+------------------------------------------
+-- Sugerencia: use `:h <opción>` para averiguar el significado si es necesario
+------------------------------------------
 
 -- General
---
 g.mapleader = ','
---
-----------------------------------------
---            =UI=
-------------------------------------------
---  Desactivar en el modo q estamos 
+
+opt.shell = "/bin/sh"               -- Para  evitar   conflicto con   fish    
+opt.completeopt = {'menu', 'menuone', 'noselect'} -- Auto completado  
+opt.clipboard=unnamedplus           -- Usar la clipboard del sistema   
+opt.mouse = 'a'                     -- Usar  el  maus  
+
+
+-- Tab  
+opt.tabstop = 4                 -- number of visual spaces per TAB    
+opt.softtabstop = 4             -- number of spacesin tab when editing
+opt.shiftwidth = 4              -- insert 4 spaces on a tab
+opt.expandtab = true            -- tabs are spaces, mainly because of python
+
+-- Searching
+vim.opt.incsearch = true            -- search as characters are entered
+vim.opt.hlsearch = false            -- do not highlight matches
+vim.opt.ignorecase = true           -- ignore case in searches by default
+vim.opt.smartcase = true            -- but make it case sensitive if an uppercase is entered
+
+-- UI config
+opt.number = true               -- show absolute number
+opt.relativenumber = true       -- add numbers to each line on the left side
+opt.cursorline = true           -- highlight cursor line underneath the cursor horizontally
+opt.splitbelow = true           -- open new vertical split bottom
+opt.splitright = true           -- open new horizontal splits right
+vim.opt.termguicolors = true    -- enabl 24-bit RGB color in the TUI
 opt.showmode = false
--- Dame espacio ...? 
-opt.signcolumn = 'yes'
--- Expande tab a dos espacios
-opt.tabstop = 2
-opt.shiftwidth = 2
-opt.softtabstop = 2
-opt.expandtab = true
+opt.signcolumn = 'yes'           -- Espacio  
+opt.termguicolors = true         -- "mejor versión" del tema de color
+opt.wrap = true
 
-opt.number = true  -- numero
-opt.termguicolors = true --  "mejor versión" del tema de color
+-- LSP                    
+vim.opt.signcolumn = 'yes'      --   Reserva un espacio en la cuneta    
 
--- Maus
-vim.opt.mouse = 'a'
--- Texto largo
-vim.opt.wrap = true
--- Lee o modifica valores específicos para una ventana.
---vim.wo.colorcolumn = '80'
-vim.opt.cursorline = true
--- Blakline
-vim.opt.termguicolors = true
--- Autocompletado
-opt.completeopt = {'menu', 'menuone', 'noselect'}

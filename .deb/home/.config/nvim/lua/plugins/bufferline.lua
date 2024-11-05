@@ -1,7 +1,9 @@
--- https://github.com/akinsho/bufferline.nvim
--- Documentaciom 
+-----------------------------------------------
+--           Documentaciom 
+-----------------------------------------------
 -- :help bufferline-configuration
-vim.opt.termguicolors = true
+-- https://github.com/akinsho/bufferline.nvim   
+-----------------------------------------------
 local bufferline = require('bufferline')
 bufferline.setup ({
    options = {
@@ -42,17 +44,12 @@ offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
                 bufferline.style_preset.minimal,
                 bufferline.style_preset.minima,
               }
- ------------------------------------------------
-
 }, 
-------------------------------------------------
 })
-------------------------------------------------
-
-------------------------------------------------
 
 -------------------------------------------------
--- Experimemtal 
+--          Experimemtal 
+------------------------------------------------
 groups = {
   options = {
     toggle_hidden_on_enter = true -- cuando vuelve a ingresar a un grupo oculto, esta opción vuelve a abrir ese grupo para que el búfer sea visible 

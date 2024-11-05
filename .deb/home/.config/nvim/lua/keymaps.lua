@@ -1,113 +1,108 @@
--- Alias 
-local map = vim.api.nvim_set_keymap
-local default_ops =  {noremap = true , silent = true}
-local cmd = vim.cmd
---local vim = vim.opt
+--[[ 
+-- sintaxis 
+-- vim.keymap.set(<mode>, <key>, <action>, <opts>)      
+-- Help 
+-- :h vim.keymap.set   
+--]]
 
--- deshabilite netrw al comienzo de su init.lua (muy recomendable)
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
--- establecer termguicolors para habilitar grupos destacados
-vim.opt.termguicolors = true
+-- Variable  
+local map = vim.keymap.set
 
---[[  
+  
+------------------------------------------------------
+--           Window      
+------------------------------------------------------
+map("n", "<C-h>", "<C-w>h", { desc = "switch window left" })
+map("n", "<C-l>", "<C-w>l", { desc = "switch window right" })
+map("n", "<C-j>", "<C-w>j", { desc = "switch window down" })
+map("n", "<C-k>", "<C-w>k", { desc = "switch window up" })
 
-<S-l> shef+l
-<C-l> control + l 
-----]]
 
 ------------------------------------------------------
---  Explorador de archivos.
+--        Formateador 
 ------------------------------------------------------
---  Si quieren personalizarlo primero revisen las opciones disponibles.
---  :help nvim-tree-setup
-vim.keymap.set('n', '<F2>', '<cmd>NvimTreeOpen<cr>')
--- deshabilite netrw al comienzo de su init.lua (muy recomendable)
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
--- establecer termguicolors para habilitar grupos destacados
-vim.opt.termguicolors = true
---👇👇👇👇👇👇👇👇👇👇👇👇👇👇
---Mostrar las asignaciones: g?
+map("n", "<leader>fm", function()
+  require("conform").format { lsp_fallback = true }
+end, { desc = "general format file" })
+
 ------------------------------------------------------
---
+---           Telescope
+------------------------------------------------------
+map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
+map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "telescope find buffers" })
+map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "telescope help page" })
+map("n", "<leader>ma", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })
+map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "telescope find oldfiles" })
+map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "telescope find in current buffer" })
+map("n", "<leader>cm", "<cmd>Telescope git_commits<CR>", { desc = "telescope git commits" })
+map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "telescope git status" })
+map("n", "<leader>pt", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidden term" })
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "telescope find files" })
+map(
+  "n",
+  "<leader>fa",
+  "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
+  { desc = "telescope find all files" }
+)
+
+------------------------------------------------------
+--            Mios  xD   
+------------------------------------------------------
+-- map leader+w to save current file in normal mode
+map("n", "<Leader>w", ":write<CR>", { noremap = true, silent = true })
 -- Abrir el init.lua
-vim.keymap.set('n', '<leader>ei', '<cmd>:e $MYVIMRC<cr>')
---
+map('n', '<leader>ei', '<cmd>:e $MYVIMRC<cr>')
+-- Guardar cambios y Cerrar neovim 
+map('n', '<leader>x', '<cmd>:x<cr>')
+
 ------------------------------------------------------
---   Buffer 
+--           Buffer 
 ------------------------------------------------------
 -- Moverse entre buffer 
-vim.keymap.set('n', '<C-b>n', '<cmd>:bnext<cr>') 
-vim.keymap.set('n', '<C-b>p', '<cmd>:bprevious<cr>')
+map('n', '<C-b>n', '<cmd>:bnext<cr>') 
+map('n', '<C-b>p', '<cmd>:bprevious<cr>')
 -- Cerrar el buffer actual 
-vim.keymap.set('n', '<C-b>q', '<cmd>:bdelete<cr>')
+map('n', '<C-b>q', '<cmd>:bdelete<cr>')
 -- Cerrar neovim sin guardar
-vim.keymap.set('n', '<C-c>', '<cmd>:q!<cr>')
+map('n', '<C-c>', '<cmd>:q!<cr>')
 -- Guardar cambios
-vim.keymap.set('n', '<C-w>', '<cmd>:w<cr>')
+map('n', '<C-w>', '<cmd>:w<cr>')
 -- Guardar cambios y Cerrar neovim 
-vim.keymap.set('n', '<C-x>', '<cmd>:x<cr>')
+map('n', '<C-x>', '<cmd>:x<cr>')
 ---==========================
 --
-------------------------------------------------------
+ 
+-----------------------------------------------------
 --  Cambiar tamaño de wentana   Pendiente 
 ------------------------------------------------------
 --[[
-vim.keymap.set('n', '<C-i>l', '<cmd>:exe "resize" . (winheight(0) * 5/4)<cr>')
-vim.keymap.set('n', '<C-i>h', '<cmd>:exe "resize" . (winheight(0) * 4/5)<cr>')
-vim.keymap.set('n', '<C-i>j', '<cmd>:exe "vertical resize" . (winheight(0) * 5/4)<cr>')
-vim.keymap.set('n', '<C-i>k', '<cmd>:exe "horizontal resize" . (winheight(0) * 4/5)<cr>')
+map('n', '<C-i>l', '<cmd>:exe "resize" . (winheight(0) * 5/4)<cr>')
+map('n', '<C-i>h', '<cmd>:exe "resize" . (winheight(0) * 4/5)<cr>')
+map('n', '<C-i>j', '<cmd>:exe "vertical resize" . (winheight(0) * 5/4)<cr>')
+map('n', '<C-i>k', '<cmd>:exe "horizontal resize" . (winheight(0) * 4/5)<cr>')
 --]]
 ---========================
---
---
--- No estos seguro del uso 
+
 ------------------------------------------------------
 --     Asignaciones de ventanas de terminal
 ------------------------------------------------------
 function _G.set_terminal_keymaps()
   local opts = {buffer = 0}
-  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
-  vim.keymap.set('t', '<S-h>', [[<Cmd>wincmd h<CR>]], opts)
-  vim.keymap.set('t', '<S-j>', [[<Cmd>wincmd j<CR>]], opts)
-  vim.keymap.set('t', '<S-k>', [[<Cmd>wincmd k<CR>]], opts)
-  vim.keymap.set('t', '<S-l>', [[<Cmd>wincmd l<CR>]], opts)
-  vim.keymap.set('t', '<S-w>', [[<C-\><C-n><C-w>]], opts)
+  map('t', '<esc>', [[<C-\><C-n>]], opts)
+  map('t', 'jk', [[<C-\><C-n>]], opts)
+  map('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+  map('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+  map('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+  map('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+  map('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
 end
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-------------------------------------------------------
---      Telescope 
-------------------------------------------------------
--- ~/.config/nvim/lua/plugins/telescope.lua
-----------------------
--- Muestra la lista de archivos abiertos.
-vim.keymap.set('n', '<leader><space>', '<cmd>Telescope buffers<cr>')
--- Muestra el historial de archivos.
-vim.keymap.set('n', '<leader>?', '<cmd>Telescope oldfiles<cr>')
--- Muestra los archivos del directorio de trabajo actual.
-vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
--- Ejecuta una búsqueda interactiva en cada línea código de cada archivo en el directorio actual.
-vim.keymap.set('n', '<leader>fg', '<cmd>Telescope live_grep<cr>')
--- Muestra la lista de "diagnósticos" del archivo actual. Un diagnóstico puede ser un error de sintaxis, una advertencia o una sugerencia.
-vim.keymap.set('n', '<leader>fd', '<cmd>Telescope diagnostics<cr>')
--- Ejecuta una búsqueda interactiva en el archivo actual
-vim.keymap.set('n', '<leader>fs', '<cmd>Telescope current_buffer_fuzzy_find<cr>')
--- Activa interaccion con chatGPT de openAI con neura
-vim.keymap.set('n', '<leader>n', '<cmd>Neural<cr>')
--- Activar / desactivar fondo transparente
-vim.keymap.set('n', '<leader>be', '<cmd>TransparentEnable<cr>')
-vim.keymap.set('n', '<leader>bd', '<cmd>TransparentDisable<cr>')
-vim.keymap.set('n', '<leader>bt', '<cmd>TransparentToggle<cr>')
 
---
-------------------------
---   lsp-zero predeterminado
--------------------------
--- ~/.config/nvim/lua/plugins/lsp-zero.lua
---
--- Copia al portapapeles. No es para termux
---vim.keymap.set({'n', 'x'}, 'cp', '"+y')
--- Pegar desde el portapapeles.
---vim.keymap.set({'n', 'x'}, 'cv', '"+p')
+-- Activa interaccion con chatGPT de openAI con neura
+map('n', '<leader>n', '<cmd>Neural<cr>')
+
+-- Activar / desactivar fondo transparente
+map('n', '<leader>te', '<cmd>TransparentEnable<cr>')
+map('n', '<leader>td', '<cmd>TransparentDisable<cr>')
+map('n', '<leader>tt', '<cmd>TransparentToggle<cr>')
