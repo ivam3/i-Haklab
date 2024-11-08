@@ -26,28 +26,28 @@ case "$1" in
     wget --tries=20 --quiet $iHDB/etc/phpmyadmin/config.inc.php -O ${HOME}/.local/etc/phpmyadmin/config.inc.php;
 		ln -s ${HOME}/.local/etc/apache2/httpd.conf ${PREFIX}/etc/apache2/httpd.conf
 		ln -s ${HOME}/.local/etc/phpmyadmin/config.inc.php ${PREFIX}/etc/phpmyadmin/config.inc.php
-    ;;
+    ;; # --->  Nuevo comando 
 
   clamav)
     [[ -e ${PREFIX}/clamav/freshclam.conf.sample ]] && {
       mv ${PREFIX}/clamav/freshclam.conf.sample ${PREFIX}/clamav/freshclam.conf
     }
 		freshclam
-		;;
+		;; # --->  Nuevo comando 
 
 	fish)
 		[[ -e ${PREFIX}/etc/fish/config.fish ]] && {
 			rm -f ${PREFIX}/etc/fish/config.fish 2>>$LOGFILE
 		}
 		ln -s ${HOME}/.local/etc/fish/config.fish ${PREFIX}/etc/fish/config.fish 2>>$LOGFILE
-		;;
+		;; # --->  Nuevo comando 
 
 	gdb)
     [[ -d $TOOLS/peda ]] && { rm -rf $TOOLS/peda;}
 		git clone --quiet https://github.com/longld/peda.git $TOOLS/peda
 		[[ -e ${HOME}/.gdginit ]] || touch ${HOME}/.gdbinit
 		echo "source $TOOLS/peda/peda.py" >> ${HOME}/.gdbinit
-		;;
+		;; # --->  Nuevo comando 
 
 	nano)
 		cat <<- CONF > $HOME/.nanorc
@@ -65,12 +65,12 @@ set softwrap
 set softwrap
 #set nohelp
 		CONF
-		;;
+		;; # --->  Nuevo comando 
 
 	neovim)
 		[[ -d ${HOME}/.config/nvim ]] || { mkdir -p ${HOME}/.config/nvim;}
     wget --tries=20 --quiet $iHDB/.config/nvim.zip -O ${HOME}/.config/nvim/nvim.zip
-    unzip -qo ${HOME}/.config/nvim/nvim.zip -d ${HOME}/.config/nvim/
+    unzip -qo ${HOME}/.config/nvim/nvim.zip -d ${HOME}/.config/nvim
     rm -rf ${HOME}/.config/nvim/nvim.zip
     npm install -g neovim bash-language-server pyright >/dev/null 2>/dev/null #neovim
     pip3 --no-color --quiet --no-cache-dir install neovim
@@ -84,10 +84,10 @@ set softwrap
 #}
 #    CONF
     nvim +x +x #+PlugInstall +PlugUpdate +CocInstall coc-clangd coc-sh coc-jedi +x +x +x
-    		;;
+    		;; # --->  Nuevo comando 
 	privoxy)
 		echo "forward-socks5 / 127.0.0.1:9050 ." >> $PREFIX/etc/privoxy/config 
-		;;
+		;; # --->  Nuevo comando 
 
 	proxychains-ng)
 		[[ -e ${PREFIX}/etc/proxychains.conf ]] && {
@@ -97,19 +97,19 @@ set softwrap
 			wget --tries=20 --quiet $iHDB/.local/etc/proxychains.conf -O ${HOME}/.local/etc/proxychains.conf;
 		}
 		ln -s ${HOME}/.local/etc/proxychains.conf ${PREFIX}/etc/proxychains.conf
-		;;
+		;; # --->  Nuevo comando 
 
   python)
     python -m pip --no-color --quiet --no-cache-dir install bpython
-    ;;
+    ;; # --->  Nuevo comando 
 
   radare2)
     #[[ -d $HOME/.local/share/radare2 ]] && {
       r2pm -qU && r2pm -ci r2ghidra-sleigh
     #} || {
-     # r2pm -q init
+      r2pm -q init
     #}
-    ;;
+    ;; # --->  Nuevo comando 
 
 	tigervnc)
 		[[ -d ${HOME}/.vnc ]] || {
@@ -128,18 +128,28 @@ aterm -geometry 160x48+20+20 -ls &
 # Requires package 'xorg-twm'.
 startxfce4
 		CONF
-		;;
+		;; # --->  Nuevo comando 
 
 	tmux)
-		[[ -d ${HOME}/.tmux ]] && {
-			rm -rf ${HOME}/.tmux;
-		}
-		cd;git clone --quiet https://github.com/gpakosz/.tmux ${HOME}/.tmux
-		ln -s -f ${HOME}/.tmux/.tmux.conf
-		cp ${HOME}/.tmux/.tmux.conf.local .
-		sed -i "11a set-option -g default-shell ${PREFIX}/bin/fish" ~/.tmux/.tmux.conf
-    tmux source ${HOME}/.tmux.conf.local 2>/dev/null
-		;;
+if [ ! -d "${HOME}/.config/tmux" ]; then
+    tmux 
+    mkdir -p "${HOME}/.config/tmux"
+    cd "${HOME}/.config/tmux"
+    # Descarga el archivo con una barra de progreso
+    wget --tries=20 --progress=bar --quiet https://raw.githubusercontent.com/ivam3/i-Haklab/refs/heads/master/.deb/home/.config/tmux/tmux.conf.zip
+    echo -e "\n"
+    unzip -o tmux.conf.zip -d "${HOME}/.config/tmux"
+  #  rm -rf "${HOME}/.config/tmux/tmux.conf.zip"
+    echo -e "\n"
+    ln -s -f "${HOME}/.config/tmux/.tmux.conf"   
+    # Modifica el archivo .tmux.conf
+    sed -i "11a set-option -g default-shell ${PREFIX}/bin/fish" "${HOME}/.config/tmux/.tmux.conf"
+else
+   ln -s -f "${HOME}/.config/tmux/.tmux.conf"   
+    # Si el directorio .config/tmux ya existe, no hace nada
+    echo -e "\nEl directorio .config/tmux ya existe. No se descargará el archivo."
+fi
+	    ;; # --->  Nuevo comando 
 
 	tor)
 		[[ -e ${PREFIX}/etc/tor/torrc ]] && {
@@ -152,7 +162,7 @@ startxfce4
 			wget --tries=20 --quiet $iHDB/etc/tor/torrc -O ${HOME}/.local/etc/tor/torrc;
 		}
 		ln -s ${HOME}/.local/etc/tor/torrc ${PREFIX}/etc/tor/torrc 2>/dev/null
-		;;
+		;; # --->  Nuevo comando 
 
 	vim)
 		[[ -d ${HOME}/.vim ]] && {
@@ -169,7 +179,7 @@ startxfce4
 		rm -rf ${HOME}/setvim.zip
     python -m pip --no-color --quiet --no-cache-dir install jedi
     vim +PluginInstall +PlugUpdate +CocInstall +coc-clangd +coc-sh +coc-jedi +x +x +x 2>>$LOGFILE
-		;;
+		;; # --->  Nuevo comando 
 
 	youtubedr)
 		executable="youtubedr download"
@@ -214,6 +224,6 @@ fi
 CONF
 	 dos2unix ${PREFIX}/bin/termux-url-opener &>/dev/null
 	 chmod 711 ${PREFIX}/bin/termux-url-opener
-		;;
+		;; # --->  Nuevo comando 
 esac
 echo "Done"
