@@ -11,12 +11,7 @@ lsp.set_sign_icons({
   info = "»",
 })
 
-lsp.ensure_installed({
-  "lua_ls",
-})
-    
-lsp.setup() 
-
+   
 -- INFO:   :help  vim.diagnostic    
 -- diagnósticos 
 vim.diagnostic.config({
@@ -142,3 +137,4 @@ formatting = {
   end,
 },})
 
+lsp.setup() 
