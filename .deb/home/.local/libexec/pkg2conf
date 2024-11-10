@@ -131,24 +131,14 @@ startxfce4
 		;; # --->  Nuevo comando 
 
 	tmux)
-if [ ! -d "${HOME}/.config/tmux" ]; then
-    tmux 
-    mkdir -p "${HOME}/.config/tmux"
-    cd "${HOME}/.config/tmux"
-    # Descarga el archivo con una barra de progreso
-    wget --tries=20 --progress=bar --quiet https://raw.githubusercontent.com/ivam3/i-Haklab/refs/heads/master/.deb/home/.config/tmux/tmux.conf.zip
-    echo -e "\n"
-    unzip -o tmux.conf.zip -d "${HOME}/.config/tmux"
-  #  rm -rf "${HOME}/.config/tmux/tmux.conf.zip"
-    echo -e "\n"
-    ln -s -f "${HOME}/.config/tmux/.tmux.conf"   
-    # Modifica el archivo .tmux.conf
-    sed -i "11a set-option -g default-shell ${PREFIX}/bin/fish" "${HOME}/.config/tmux/.tmux.conf"
-else
-   ln -s -f "${HOME}/.config/tmux/.tmux.conf"   
-    # Si el directorio .config/tmux ya existe, no hace nada
-    echo -e "\nEl directorio .config/tmux ya existe. No se descargará el archivo."
-fi
+        [[ ! -d "${HOME}/.config/tmux" ]] && { mkdir -p "${HOME}/.config/tmux";}
+        [[ -d ${HOME}/.tmux ]] && { rm -rf ${HOME}/.tmux;}
+
+        wget --tries=20 --progress=bar --quiet $iHDB/.config/tmux/tmux.conf.zip -O ${TMPDIR}/tmux.conf.zip
+        unzip -qq -o ${TMPDIR}/tmux.conf.zip -d "${HOME}/.config/tmux" && rm "${TMPDIR}/tmux.conf.zip"
+        
+        ln -s -f "${HOME}/.config/tmux/.tmux.conf"   
+        sed -i "11a set-option -g default-shell ${PREFIX}/bin/fish" "${HOME}/.config/tmux/.tmux.conf"
 	    ;; # --->  Nuevo comando 
 
 	tor)
