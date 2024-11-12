@@ -173,6 +173,10 @@ i-Haklab show alltools
 > There are several commands in [i-Haklab]() that facilitate the use of [Termux](https://github.com/termux/termux-app):
 
 - [i-Haklab](): it is the main command that helps with automations of various processes such as visualization of user guides for the tools, download of hacking books, access to the community tutorials, payload creation automation, metaploit handler activation, brute force attacks among others. See all features running:
+
+ <details>
+<summary> List </summary>
+
 ```bash
 i-Haklab help
 ```
@@ -256,6 +260,7 @@ fixer
 ```bash
 lock
 ```
+</details>
 
 
 ### 🎴 DESKTOP ENVIROMENT
