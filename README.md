@@ -175,7 +175,7 @@ i-Haklab show alltools
 - [i-Haklab](): it is the main command that helps with automations of various processes such as visualization of user guides for the tools, download of hacking books, access to the community tutorials, payload creation automation, metaploit handler activation, brute force attacks among others. See all features running:
 
  <details>
-<summary> List </summary>
+<summary>**List** ↩️   </summary>
 
 ```bash
 i-Haklab help
