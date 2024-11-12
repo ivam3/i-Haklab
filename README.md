@@ -281,7 +281,9 @@ i-Haklab Xwayland
 ##### If you want to suggest some book do it in the section of suggestions of our [Telegram BOT](https://t.me/Ivam3_Bot).
 
 <div align="center">
-![alt text](./.img/png.png)  
+
+![alt text](/.img/png.png)  
+
 </div>
 
 
