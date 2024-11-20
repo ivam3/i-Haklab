@@ -20,17 +20,29 @@
 </div>
 
 <div align="center">
-  <a href="Agui" target="_blank">
+  <a href="https://www.youtube.com/c/Ivam3byCinderella" target="_blank">
     <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/youtube/default.svg" width="52" height="40" alt="youtube logo"  />
   </a>
-  <a href="Agui" target="_blank">
+  <a href="http://github.com/ivam3" target="_blank">
     <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/tryhackme/default.svg" width="52" height="40" alt="tryhackme logo"  />
   </a>
-  <a href="Agui" target="_blank">
+  <a href="https://whatsapp.com/channel/0029VaM2Qbd9MF8wiloJx510" target="_blank">
     <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/whatsapp/default.svg" width="52" height="40" alt="whatsapp logo"  />
   </a>
-  <a href="Agui" target="_blank">
+  <a href="https://t.me/Ivam3bCinderella" target="_blank">
     <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/telegram/default.svg" width="52" height="40" alt="telegram logo"  />
+  </a>
+  <!--<a href="https://t.me/ivam3_Bot" target="_blank">-->
+  <!--  <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/telegram/default.svg" width="52" height="40" alt="telegram logo"  />-->
+  <!--</a>-->
+  <!--<a href="https://www.facebook.com/ivam3" target="_blank">-->
+  <!--  <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/telegram/default.svg" width="52" height="40" alt="telegram logo"  />-->
+  <!--<a href="https://www.instagram.com/_ivam3" target="_blank">-->
+  <!--  <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/telegram/default.svg" width="52" height="40" alt="telegram logo"  />-->
+  <!--<a href="https://x.com/_ivam3" target="_blank">-->
+  <!--  <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/telegram/default.svg" width="52" height="40" alt="telegram logo"  />-->
+  <!--</a>-->
+  </a>
   </a>
 </div>
 
