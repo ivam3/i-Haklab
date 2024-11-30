@@ -232,13 +232,17 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰lock────────────────────────────➤ Block Termux's screen
 ╰osrframework────────────────────➤ OSINT setoolkit
 ╰mypip───────────────────────────➤ Show your public internet protocol
+╰openvpn─────────────────────────➤ Open openvpn application
 ╰omf─────────────────────────────➤ Change Oh-my-fish theme
+╰phantom─────────────────────────➤ Change the limit of phantom process at 2147483647 (manually pair adb connection needed)
+╰pm──────────────────────────────➤ For android packages mannager 
 ╰postgresql──────────────────────➤ Start, stop or restart postgres data base
 ╰proxy───────────────────────────➤ Execute cli commands over tor proxychains
 ╰rmcache─────────────────────────➤ Remove current session cache, temporal files & residual APT packages.
 ╰serverapache────────────────────➤ Init apache server
 ╰serverphp───────────────────────➤ Init php server
 ╰sudo────────────────────────────➤ Execute commands or init an enviroment as fake root user
+╰telegram────────────────────────➤ Open telegram application
 ╰traductor───────────────────────➤ Init a command line traductor
 ╰──────────────────────────────────────────────────────────────────────────────────────────|\n\n"
 }
