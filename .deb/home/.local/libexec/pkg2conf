@@ -134,7 +134,7 @@ startxfce4
         [[ ! -d "${HOME}/.config/tmux" ]] && { mkdir -p "${HOME}/.config/tmux";}
         [[ -d ${HOME}/.tmux ]] && { rm -rf ${HOME}/.tmux;}
 
-        wget --tries=20 --progress=bar --quiet $iHDB/.config/tmux/tmux.conf.zip -O ${TMPDIR}/tmux.conf.zip
+       wget --tries=20 --progress=bar --quiet $iHDB/.config/tmux/tmux.conf.zip -O ${TMPDIR}/tmux.conf.zip
         unzip -qq -o ${TMPDIR}/tmux.conf.zip -d "${HOME}/.config/tmux" && rm "${TMPDIR}/tmux.conf.zip"
         
         ln -s -f "${HOME}/.config/tmux/.tmux.conf"   
