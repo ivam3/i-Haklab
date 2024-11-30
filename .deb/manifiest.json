@@ -19,6 +19,7 @@
 		"home/.config/fish/functions/ls.fish": "/data/data/com.termux/files/home/.config/fish/functions/ls.fish",
 		"home/.config/fish/functions/LOCALHOST.fish": "/data/data/com.termux/files/home/.config/fish/functions/LOCALHOST.fish",
 		"home/.config/fish/functions/osrframework.fish": "/data/data/com.termux/files/home/.config/fish/functions/osrframework.fish",
+		"home/.config/fish/functions/phantom.fish": "/data/data/com.termux/files/home/.config/fish/functions/phantom.fish",
 		"home/.config/fish/functions/postgresql.fish": "/data/data/com.termux/files/home/.config/fish/functions/postgresql.fish",
 		"home/.config/fish/functions/serverapache.fish": "/data/data/com.termux/files/home/.config/fish/functions/serverapache.fish",
 		"home/.config/fish/functions/telegram.fish": "/data/data/com.termux/files/home/.config/fish/functions/telegram.fish",
