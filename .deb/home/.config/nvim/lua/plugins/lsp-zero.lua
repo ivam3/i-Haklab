@@ -1,17 +1,9 @@
 local lsp = require('lsp-zero')
 lsp.preset('recommended',{
--- set_lsp_keymaps = true, -- P habilitar todas las combinaciones de teclas predeterminadas,
+set_lsp_keymaps = true, -- P habilitar todas las combinaciones de teclas predeterminadas,
 manage_nvim_cmp = true,
 })
 
-lsp.set_sign_icons({
-  error = "✘",
-  warn = "▲",
-  hint = "⚑",
-  info = "»",
-})
-
-   
 -- INFO:   :help  vim.diagnostic    
 -- diagnósticos 
 vim.diagnostic.config({
@@ -23,23 +15,15 @@ vim.diagnostic.config({
   float = true,
 })
 
-
--- declarar las "capacidades" que tiene el editor
-local lspconfig = require('lspconfig')
-local lsp_defaults = lspconfig.util.default_config
--- Aquí utilizamos vim.tbl_deep_extend para mezclar de manera segura las capacidades que ofrece lspconfig
-lsp_defaults.capabilities = vim.tbl_deep_extend(
+-- Esto debe ejecutarse antes de configurar cualquier servidor de idiomas.
+local lspconfig_defaults = require('lspconfig').util.default_config
+lspconfig_defaults.capabilities = vim.tbl_deep_extend(
   'force',
-  lsp_defaults.capabilities,
+  lspconfig_defaults.capabilities,
   require('cmp_nvim_lsp').default_capabilities()
 ),
-----------------------------------------------------------------
--- servidores de idioma
-lspconfig.clangd.setup {}  -- C++
-lspconfig.zk.setup{} -- markdown  
-lspconfig.bashls.setup{} -- bash 
-lspconfig.pyright.setup{} -- Python 
------------------------Solo para servidores LSP-----------creo------------------------------
+
+----------------------Solo para servidores LSP----------------
 -- Info:  :help lspconfig-keybindings.
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'Acciones LSP',
@@ -87,6 +71,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
     bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
   end
 })
+
+----------------------------------------------------------------
+-- servidores de idioma
+require('lspconfig').lua_ls.setup({})
+require('lspconfig').zk.setup({})
+require('lspconfig').bashls.setup({})
+require('lspconfig').clangd.setup({})
 ---------------------------------------------------
 --             =====Auto compleado=====
 --------------------------------------------------
