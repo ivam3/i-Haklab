@@ -1,3 +1,4 @@
+--  https://lsp-zero.netlify.app/docs/language-server-configuration.html 
 local lsp = require('lsp-zero')
 lsp.preset('recommended',{
 set_lsp_keymaps = true, -- P habilitar todas las combinaciones de teclas predeterminadas,
