@@ -121,7 +121,6 @@ for module in $(cat ${TMPDIR}/requirements.tmp);do
 			;; 
 
         jupyter)
-            echo "AQUI" ;read enter
             sysconf="$(find $LIBPY -name "_sysconfigdata*.py")"
             yes|pkg install clang binutils maturin pyzmq patchelf
             rm -rf $LIBPY/__pycache__ 
