@@ -1,12 +1,36 @@
-#!/data/data/com.termux/files/usr/bin/bash
-IFS=$'\n\t'
-trap ctrl_c 2
-source ${HOME}/.local/etc/i-Haklab/variables
-source $iHETC/functions
+#!/bin/bash
 
-[[ $# -eq 0 ]] && { STDERR;}
-[[ -e $iHETC/Tools/Readme/$1 ]] && {
-	bat $iHETC/Tools/Readme/$1;
-} || {
-	STDERR;
-}
+# Configuración del entorno
+IFS=$'\n\t'
+trap ctrl_c INT
+source "${HOME}/.local/etc/i-Haklab/variables"
+source "$iHETC/functions"
+
+# Definición de la base de datos
+db="$iHETC/Tools/Readme"
+
+# Verificar si el directorio existe
+if [ ! -d "$db" ]; then
+    echo "[ERROR] El directorio '$db' no se encontró."
+    exit 1
+fi
+
+# Comprobar si se ha pasado un argumento
+if [ -z "$1" ]; then
+    echo "[ERROR] Se debe proporcionar un nombre de archivo como argumento."
+    exit 1
+fi
+
+# Convertir la primera letra a mayúscula
+first_upper=$(echo "$1" | cut -c1 | tr '[:lower:]' '[:upper:]')
+file_path="$db/$first_upper/$1.md"
+
+# Verificar y leer el archivo
+if [ -f "$file_path" ]; then
+    bat "$file_path"
+else
+    echo "Con la inicial '${first_upper}' tengo:"
+    find "$db/$first_upper" -maxdepth 1 -type f -print0 | while IFS= read -r -d '' entry; do
+        echo "${entry##*/}"  # Extrae solo el nombre del archivo sin la ruta
+    done
+fi
