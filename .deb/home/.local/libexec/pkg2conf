@@ -107,7 +107,7 @@ set softwrap
     #[[ -d $HOME/.local/share/radare2 ]] && {
       r2pm -qU && r2pm -ci r2ghidra-sleigh
     #} || {
-      r2pm -q init
+      r2pm -qUU
     #}
     ;; # --->  Nuevo comando 
 

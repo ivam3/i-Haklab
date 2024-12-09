@@ -50,22 +50,24 @@ usage() {
 #::::: REQUERIMENTS :::::#
 Requirements(){
 	printf "$G\n(➤_)$W Installing requirements (It could take a while)...\n"
-	for req in build-essential python python-pip python2 curl tar wget ruby clang make cmake nodejs pkg-config \
-    openblas libgmp libmpc libmpc-static libmpfr libtool libxml2 libxml2-static libxml2-utils \
-    libxslt libxslt-static libsodium libsodium-static libjpeg-turbo libpng libzmq
-  do
+	
+    for req in build-essential python python-pip python2 curl tar wget ruby clang make cmake nodejs pkg-config openblas libgmp libmpc libmpc-static libmpfr libtool libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static libjpeg-turbo libpng libzmq; do
+
 		if [[ ! $(pkg list-installed 2>/dev/null|grep $req|awk -F "/" '{print $1}') ]]; then
 			yes|apt install $req >/dev/null 2>/dev/null
 		fi
-	done
-	printf "$G(➤_)$W Upgrading pip ...\n"
+	
+    done
+	
+    printf "$G(➤_)$W Upgrading pip ...\n"
 #	$py -m pip --no-color --quiet --no-cache-dir install --upgrade pip 2>/dev/null
-  yes|apt reinstall python-pip >/dev/null 2>/dev/null
+    yes|apt reinstall python-pip >/dev/null 2>/dev/null
 	$py -m pip --no-color --quiet --no-cache-dir install wheel 2>/dev/null
 }
 
 clear;Banner|lolcat 2>/dev/null
 [[ $# -eq 0 ]] && usage
+
 while getopts ":p:t:m:h" arg; do
 	case ${arg} in
 		p) [[ $OPTARG -eq 2 ]] && { py=python2;} || [[ $OPTARG -eq 3 ]] && { py=python;} || { StdErr;} ;;
@@ -78,6 +80,7 @@ done
 
 [[ $# -lt 6 ]] && { StdErr;}
 Requirements
+
 for module in $(cat ${TMPDIR}/requirements.tmp);do
   printf "$G(➤_)$W Installing module $module (It could take a while)...\n"
   case ${module} in
@@ -93,69 +96,82 @@ for module in $(cat ${TMPDIR}/requirements.tmp);do
 					tar -xvf turtle-0.0.2.tar
 					if [[ -d $dir/turtle-0.0.2 ]]
 					then
-						sed 's|except ValueError, ve:|except (ValueError, ve):|g' -i $dir/turtle-0.0.2/setup.py
+						sed 's|except ValueError, ve:|except (ValueError, ve):|g' -i \
+                            $dir/turtle-0.0.2/setup.py
 						$py -m pip install -e turtle-0.0.2
 					fi
 				fi
 				popd
 			fi
-			rm -rf $dir
-			;;
-    electrum|opencv|asciinema|matplotlib|scipy|apsw|bcrypt|numpy|tldp|apt|cryptography|numpy|pillow|tkinter|xcbgen)
-      for i in apsw bcrypt numpy tldp apt cryptography numpy pillow tkinter xcbgen; do
-        module=python-$i
-      done
-      [[ $module == opencv ]] && { module=opencv-python;}
-			[[ $module == scipy ]] && {
-        bash <(curl -fsSL "https://its-pointless.github.io/setup-pointless-repo.sh")
-        [[ $py == "python2" ]] && { module=python2-scipy;};
-      }
-			pkg install $module >/dev/null 2>/dev/null
-			;;
-    jupyter)
-      echo "AQUI" ;read enter
-      sysconf="$(find $LIBPY -name "_sysconfigdata*.py")"
-      yes|pkg install clang binutils maturin pyzmq patchelf
-      rm -rf $LIBPY/__pycache__ 
-      cp "$sysconf" "$sysconf".O
-      sed -i 's|-fno-openmp-implicit-rpath||g' "$sysconf"
-      $py -m pip --no-color --quiet --no-cache-dir install jupyter 2>/dev/null
-      patchelf --add-needed libpython3.11.so $LIBPY/site-packages/zmq/backend/cython/_zmq.cpython-311.so
-      pkg install -y matplotlib >/dev/null 2>/dev/null
-      yes|apt purge rust >/dev/null 2>/dev/null
-      ;;
-		*)
-			case ${instaType} in
-				B|BASIC|Basic|basic)
-#          [[ $module == cryptography ]] && {
-#            yes|apt install rust >/dev/null 2>/dev/null
-#            export CARGO_BUILD_TARGET=$(rustc --version --verbose|sed -n 's|host: ||p')
-#          }
-#          [[ $module == numpy ]] && { MATHLIB="m";yes|apt install python-numpy >/dev/null 2>/dev/null;}
-          [[ $module == pandas ]] && {
-            export CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
-            export MATHLIB="m"
-            $py -m pip --no-color --quiet --no-cache-dir install Cython 2>/dev/null
-            yes|apt install python-numpy >/dev/null 2>/dev/null
-          }
-#					[[ $module == pillow ]] && {
-#            if $(uname -m|grep -q 64); then
-#              export LDFLAGS="-L/system/lib64"
-#            fi
-#          }
-          [[ $module == pyzmq ]] && {
-            $py -m pip --no-color --quiet --no-cache-dir install pyzmq \
-              install-option="--libzmq=/data/data/com.termux/files/usr/lib/libzmq.so" 2>/dev/null
-          } || {
-            $py -m pip --no-color --quiet --no-cache-dir install $module 2>/dev/null
-            [[ $(command -v rustc) ]] >/dev/null && { 
-              yes|apt remove rust >/dev/null 2>/dev/null
-              if [[ -d ${HOME}/.cargo ]]; then
-                rm -rf ${HOME}/.cargo 2>/dev/null
-              fi
+			rm -rf $dir 
+            ;; 
+
+        electrum|opencv|asciinema|matplotlib|scipy|apsw|bcrypt|numpy|pandas|tldp|apt|cryptography|numpy|pillow|tkinter|xcbgen)
+
+            for i in apsw bcrypt numpy tldp apt cryptography numpy pillow tkinter xcbgen; do 
+                module=python-$i 
+            done 
+
+            [[ $module == opencv ]] && { module=opencv-python;}
+			[[ $module == scipy ]] && { 
+                bash <(curl -fsSL "https://its-pointless.github.io/setup-pointless-repo.sh") 
+                [[ $py == "python2" ]] && { module=python2-scipy;};
             }
-          }
-					;;
+			pkg install $module >/dev/null 2>/dev/null
+			;; 
+
+        jupyter)
+            sysconf="$(find $LIBPY -name "_sysconfigdata*.py")"
+            yes|pkg install clang binutils maturin pyzmq patchelf
+            rm -rf $LIBPY/__pycache__ 
+            cp "$sysconf" "$sysconf".O
+            sed -i 's|-fno-openmp-implicit-rpath||g' "$sysconf"
+            $py -m pip --no-color --quiet --no-cache-dir install jupyter 2>/dev/null
+            patchelf --add-needed libpython3.11.so \
+                $LIBPY/site-packages/zmq/backend/cython/_zmq.cpython-311.so
+            pkg install -y matplotlib >/dev/null 2>/dev/null
+            yes|apt purge rust >/dev/null 2>/dev/null 
+            ;;
+
+        *)
+			case ${instaType} in 
+                B|BASIC|Basic|basic)
+#                    [[ $module == cryptography ]] && {
+#                       yes|apt install rust >/dev/null 2>/dev/null
+#                       export CARGO_BUILD_TARGET=$(rustc --version --verbose|sed -n 's|host: ||p')
+#                    }
+
+#                    [[ $module == numpy ]] && { 
+#                       MATHLIB="m";yes|apt install python-numpy >/dev/null 2>/dev/null;
+#                    }
+                    
+                    [[ $module == pandas ]] && { 
+                        export CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
+                        export MATHLIB="m"
+                        $py -m pip --no-color --quiet --no-cache-dir install Cython 2>/dev/null
+                        yes|apt install python-numpy python-pandas >/dev/null 2>/dev/null
+                    }
+
+#		             [[ $module == pillow ]] && {
+#                       if $(uname -m|grep -q 64); then
+#                           export LDFLAGS="-L/system/lib64"
+#                       fi
+#                    }
+                    
+                    [[ $module == pyzmq ]] && {
+                        $py -m pip --no-color --quiet --no-cache-dir install pyzmq \
+                        install-option="--libzmq=/data/data/com.termux/files/usr/lib/libzmq.so" 2>/dev/null
+                    } || {
+                        $py -m pip --no-color --quiet --no-cache-dir install $module 2>/dev/null
+                        [[ $(command -v rustc) ]] >/dev/null && { 
+                            yes|apt remove rust >/dev/null 2>/dev/null
+                            if [[ -d ${HOME}/.cargo ]]; then
+                                rm -rf ${HOME}/.cargo 2>/dev/null
+                            fi
+                        }
+                    }
+                    ;;
+
 				BL|BLAS|Blas|blas)
 					export BLAS=$PREFIX/lib/libblas.so
 					export LAPACK=$PREFIX/lib/liblapack.so
@@ -163,47 +179,55 @@ for module in $(cat ${TMPDIR}/requirements.tmp);do
 					export CPP=clang++
 					$py -m pip --no-color --quiet --no-cache-dir install $module 2>/dev/null
 					;;
-        Cy|cy|Cython|cython)
-          $py -m pip --no-color --quiet --no-cache-dir install Cython 2>/dev/null
-          export MATHLIB="m"
-          $py -m pip --no-color --quiet --no-cache-dir install $module 2>/dev/null
-          ;;
+
+                Cy|cy|Cython|cython)
+                    $py -m pip --no-color --quiet --no-cache-dir install Cython 2>/dev/null
+                    export MATHLIB="m"
+                    $py -m pip --no-color --quiet --no-cache-dir install $module 2>/dev/null
+                    ;;
+
 				L|LDFLAGS|ldflags)
 					export LDFLAGS="-L/system/lib/ -lm -lcompiler_rt"
-					$py -m pip --no-color --quiet --no-cache-dir install $module --global-option="build_ext" --global-option="--disable-jpeg" 2>/dev/null
-					;;
-        SC|SOURCE-CODE|source-code)
-          cd $TMPDIR
-          $py -m pip --no-color --quiet --no-cache-dir download $module 2>/dev/null
-          [[ -e $module.zip ]] && {
-            unzip $module.zip 2>/dev/null
-            [[ -d $module ]] && {
-              cd $module
-              find . -type f -not -path '*/\.*' -exec termux-fix-shebang "{}" \; 2>/dev/null
-              $py setup.py install >/dev/null 2>/dev/null
-            }
-          }
-          rm -rf $TMPDIR/$module*;cd
-          ;;
-				S|SODIOUM|Sodioum|sodioum)
+					$py -m pip --no-color --quiet --no-cache-dir install $module \
+                        --global-option="build_ext" --global-option="--disable-jpeg" 2>/dev/null
+				    ;;
+
+                SC|SOURCE-CODE|source-code)
+                    cd $TMPDIR
+                    $py -m pip --no-color --quiet --no-cache-dir download $module 2>/dev/null
+                    [[ -e $module.zip ]] && {
+                        unzip $module.zip 2>/dev/null
+                        [[ -d $module ]] && {
+                            cd $module
+                            find . -type f -not -path '*/\.*' -exec termux-fix-shebang "{}" \; 2>/dev/null
+                            $py setup.py install >/dev/null 2>/dev/null
+                        }
+                    }
+                    rm -rf $TMPDIR/$module*;cd
+                    ;;
+
+                S|SODIOUM|Sodioum|sodioum)
 					export SODIUM_INSTALL=system
-					$py -m pip --no-color --quiet --no-cache-dir install --no-binary :all: $module 2>/dev/null
+					$py -m pip --no-color --quiet --no-cache-dir install --no-binary :all: \
+                        $module 2>/dev/null
 					;;
+
 				R|RUST|Rust|rust)
 					yes|apt install rust >/dev/null 2>/dev/null
 					export RUSTFLAGS=" -C lto=no"
-          export CARGO_BUILD_TARGET=$(rustc --version --verbose|sed -n 's|host: ||p')
+                    export CARGO_BUILD_TARGET=$(rustc --version --verbose|sed -n 's|host: ||p')
 					$py -m pip --no-color --quiet --no-cache-dir install $module 2>/dev/null
 					yes|apt remove rust >/dev/null 2>/dev/null
-          if [[ -d ${HOME}/.cargo ]]; then
-            rm -rf ${HOME}/.cargo 2>/dev/null
-          fi
+                    if [[ -d ${HOME}/.cargo ]]; then
+                        rm -rf ${HOME}/.cargo 2>/dev/null
+                    fi
 					;;
-			esac
-			;;
-	esac
-  [[ -e ${TMPDIR}/requirements.tmp ]] && { rm -rf ${TMPDIR}/requirements.tmp;}
-  Chao-chao
+            esac
+            ;;
+    esac
+
+    [[ -e ${TMPDIR}/requirements.tmp ]] && { rm -rf ${TMPDIR}/requirements.tmp;}
+    Chao-chao
 done
 
 #@Ivam3 Ivam3byCinderella.t.me
