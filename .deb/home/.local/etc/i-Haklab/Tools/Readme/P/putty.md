@@ -1,0 +1,40 @@
+This is the README for PuTTY, a free Windows and Unix Telnet and SSH
+client.
+
+PuTTY is built using CMake <https://cmake.org/>. To compile in the
+simplest way (on any of Linux, Windows or Mac), run these commands in
+the source directory:
+
+  cmake .
+  cmake --build .
+
+Then, to install in the simplest way on Linux or Mac:
+
+  cmake --build . --target install
+
+On Unix, pterm would like to be setuid or setgid, as appropriate, to
+permit it to write records of user logins to /var/run/utmp and
+/var/log/wtmp. (Of course it will not use this privilege for
+anything else, and in particular it will drop all privileges before
+starting up complex subsystems like GTK.) The cmake install step
+doesn't attempt to add these privileges, so if you want user login
+recording to work, you should manually ch{own,grp} and chmod the
+pterm binary yourself after installation. If you don't do this,
+pterm will still work, but not update the user login databases.
+
+Documentation (in various formats including Windows Help and Unix
+`man' pages) is built from the Halibut (`.but') files in the `doc'
+subdirectory using `doc/Makefile'. If you aren't using one of our
+source snapshots, you'll need to do this yourself. Halibut can be
+found at <https://www.chiark.greenend.org.uk/~sgtatham/halibut/>.
+
+The PuTTY home web site is
+
+    https://www.chiark.greenend.org.uk/~sgtatham/putty/
+
+If you want to send bug reports or feature requests, please read the
+Feedback section of the web site before doing so. Sending one-line
+reports saying `it doesn't work' will waste your time as much as
+ours.
+
+See the file LICENCE for the licence conditions.
