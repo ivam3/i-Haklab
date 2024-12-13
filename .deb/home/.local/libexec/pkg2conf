@@ -15,7 +15,7 @@ case "$1" in
 			}
 		done
 		[[ -e ${HOME}/.local/etc/apache2/httpd.conf ]] || {
-			wget --tries=20 --quiet $iHDB/etc/apache2/httpd.conf -O ${HOME}/.local/etc/apache2/httpd.conf;
+			wget --tries=20 --quiet $iHDB/.local/etc/apache2/httpd.conf -O ${HOME}/.local/etc/apache2/httpd.conf;
 		}
 		[[ -e ${PREFIX}/etc/apache2/httpd.conf ]] && {
 			rm -rf ${PREFIX}/etc/apache2/httpd.conf;
@@ -23,7 +23,7 @@ case "$1" in
 		[[ -e ${PREFIX}/etc/phpmyadmin/config.inc.php ]] && {
 			rm -rf ${PREFIX}/etc/phpmyadmin/config.inc.php;
 		}
-    wget --tries=20 --quiet $iHDB/etc/phpmyadmin/config.inc.php -O ${HOME}/.local/etc/phpmyadmin/config.inc.php;
+    wget --tries=20 --quiet $iHDB/.local/etc/phpmyadmin/config.inc.php -O ${HOME}/.local/etc/phpmyadmin/config.inc.php;
 		ln -s ${HOME}/.local/etc/apache2/httpd.conf ${PREFIX}/etc/apache2/httpd.conf
 		ln -s ${HOME}/.local/etc/phpmyadmin/config.inc.php ${PREFIX}/etc/phpmyadmin/config.inc.php
     ;; # --->  Nuevo comando 
@@ -149,7 +149,7 @@ startxfce4
 		}
 		[[ -e ${HOME}/.local/etc/tor/torrc ]] || {
 			mkdir -p ${HOME}/.local/etc/tor;
-			wget --tries=20 --quiet $iHDB/etc/tor/torrc -O ${HOME}/.local/etc/tor/torrc;
+			wget --tries=20 --quiet $iHDB/.local/etc/tor/torrc -O ${HOME}/.local/etc/tor/torrc;
 		}
 		ln -s ${HOME}/.local/etc/tor/torrc ${PREFIX}/etc/tor/torrc 2>/dev/null
 		;; # --->  Nuevo comando 
