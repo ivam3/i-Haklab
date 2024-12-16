@@ -43,10 +43,10 @@ case "$1" in
 		;; # --->  Nuevo comando 
 
 	gdb)
-    [[ -d $TOOLS/peda ]] && { rm -rf $TOOLS/peda;}
+        [[ -d $TOOLS/peda ]] && { rm -rf $TOOLS/peda;}
 		git clone --quiet https://github.com/longld/peda.git $TOOLS/peda
 		[[ -e ${HOME}/.gdginit ]] || touch ${HOME}/.gdbinit
-		echo "source $TOOLS/peda/peda.py" >> ${HOME}/.gdbinit
+		echo "source $TOOLS/peda/peda.py" > ${HOME}/.gdbinit
 		;; # --->  Nuevo comando 
 
 	nano)
