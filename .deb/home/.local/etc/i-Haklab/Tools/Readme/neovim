@@ -14,12 +14,13 @@ Neovim Cheat Sheet in i-Haklab
 
 
 esc               **mode normal**
- |                   ╰──➤  
- |                   ╰──➤  
+ |                   ╰──➤ gl   Muestra diagnostico de la linea actual
+ |                   ╰──➤ K    Muestra informacion sobre el simbolo donde esta posisionado el cursor
  |                   ╰──➤ b    Realiza un salto palabra en sentido contr 
  |                   ╰──➤ e    Realiza un salto palabra por palabra   
  |                   ╰──➤ 0    Resliza un salto al comienso de la linea
  |                   ╰──➤ $    Realiza un salto al final de la linea   
+ |                   ╰──➤ gd   Da un salto a la definicion de 
  |                   ╰──➤ gg   Da un salto al inicio del archivo 
  |                   ╰──➤ G    Da un salto al final de la linea 
  |                   ╰──➤ d    Delete the current line

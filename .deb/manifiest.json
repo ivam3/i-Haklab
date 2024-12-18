@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.9.1",
+  "version": "3.9.2",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -9,6 +9,7 @@
   "description": "Hacking lab containing an extensive suite of open source tools ported to Termux focused on programming, develop, pentesting, scan/find/explotation/post-explotation of vulnerabilities",
   "files" :{
 		"usr/bin/termux-url-opener": "/data/data/com.termux/files/usr/bin/termux-url-opener",
+		"usr/share/man/man1/i-Haklab.1": "/data/data/com.termux/files/usr/share/man/man1/i-Haklab.1",
 		"home/.nanorc": "/data/data/com.termux/files/home/.nanorc",
 		"home/.config/fish/functions/mypip.fish": "/data/data/com.termux/files/home/.config/fish/functions/mypip.fish",
 		"home/.config/fish/functions/cinderella.fish": "/data/data/com.termux/files/home/.config/fish/functions/cinderella.fish",

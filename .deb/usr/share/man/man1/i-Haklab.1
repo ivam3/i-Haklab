@@ -1,0 +1,185 @@
+.TH I-HAKLAB 1 "2024" "" "General Commands Manual"
+.nh
+.ad l
+.
+.SH NAME
+i-Haklab \- Hacking laboratory containing open-source tools
+.
+.SH SYNOPSIS
+.B i-Haklab
+.RI [ OPTION ]...
+.RI [ ARG ]
+.
+.SH DESCRIPTION
+i-Haklab v.3.9 (c) 2024 by @Ivam3 is a hacking laboratory containing open-source tools recommended by Ivam3. If the law is violated with its use, the user handling it will be responsible for any consequences.
+
+The syntax for i-Haklab is:
+.PP
+.B i-Haklab [-option-] [-args-]
+.
+.SH OPTIONS
+.
+.SS [--] Setting Options [--]
+.TP
+.B about <name-of-tool>
+Show information about a specific tool or framework (e.g., i-Haklab about crunch).
+.TP
+.B aptup
+Update Termux manually, packages by packages.
+.TP
+.B help
+Show the help menu.
+.TP
+.B passwd set|new
+Set or change the Termux login (e.g., i-Haklab passwd set password).
+.TP
+.B pd <distro-X11-list>
+Run a Linux distribution in a proot environment (e.g., i-Haklab pd alpine for CLI or i-Haklab pd alpine X11 for graphical environment).
+.TP
+.B setapikey
+Set API keys to use in i-Haklab features.
+.TP
+.B setbanner
+Enable, disable, and customize the i-Haklab wall banner.
+.TP
+.B setuser
+Set the i-Haklab username.
+.TP
+.B show alltools
+List all tools/frameworks available on i-Haklab.
+.TP
+.B version
+Show the current version of i-Haklab installed.
+.TP
+.B weechat
+Connect to IRC Ivam3byCinderella chat.
+.TP
+.B Xwayland
+Run X server over Termux Wayland app with XFCE4 as the window manager.
+
+.SS Automatization Options [--]
+.TP
+.B apkactivity <path-to-apk-file>
+Get the main activity from an APK file.
+.TP
+.B backup create|restore
+Create or restore a backup of Termux (e.g., i-Haklab restore /path/to/file.tar.gz).
+.TP
+.B binchecker
+Get information about binary files (CC, DC).
+.TP
+.B bruteforce ftp|mail|ssh|telnet
+Perform a brute force attack on various servers (e.g., i-Haklab bruteforce ftp).
+.TP
+.B chatGPT <--help|-h>
+Connect with the OpenAI API to interact with ChatGPT-3 via CLI (e.g., i-Haklab chatGPT).
+.TP
+.B ESmsg encode|decode
+Encode or decode secret messages into an ASCII file (e.g., i-Haklab ESmsg encode).
+.TP
+.B fakeID <options+args>
+Create a fake identity card with a real email and phone number (e.g., i-Haklab fakeID -g male -n America -c "United States").
+.TP
+.B tunnel <port+subdomain>
+Start an SSH client to request TCP port forwarding (e.g., i-Haklab tunnel -p 4444 -s my-subdomain).
+.TP
+.B handler <name-of-file.rc>
+Start handler on msfconsole with previous settings.
+.TP
+.B msf dirscan <IP-target>
+Enumerate directories or subdirectories from a server (e.g., i-Haklab msf dirscan 10.10.10.242).
+.TP
+.B msf embed <host> <port> <path-to-file.apk>
+Embed a metasploit payload into a legitimate APK file.
+.TP
+.B msf payapk <host> <port>
+Create a coded APK payload (e.g., i-Haklab msf payapk 6.tcp.ngrok.io 23453).
+.TP
+.B ngroklink
+Show the current ngrok link.
+.TP
+.B ngrokssh <port+protocol+file>
+Connect to ngrok servers via SSH protocol (e.g., i-Haklab ngrokssh -p 4546 -t http -f /path/to/id_rsa).
+.TP
+.B payvid
+Hide a reverse shell with a video file by exploiting the Linux OS.
+.TP
+.B phonescan <phonenumber>
+Scan information about a phone number (e.g., i-Haklab phonescan 525584923476).
+.TP
+.B usbtest <path-to-device>
+Test a USB device connected via OTG (e.g., i-Haklab usbtest /dev/bus/usb/001).
+
+.SS Direct Commands [--]
+.PP
+These commands do not require the `i-Haklab` prefix, simply type the command.
+.TP
+.B apt
+Install/remove and configure packages/tools/frameworks.
+.TP
+.B adminfiles
+Copy any file from internal/external storage to the Termux directory.
+.TP
+.B bat
+Highlight text output instead of using the 'cat' command.
+.TP
+.B cinderella
+Virtual assistant exclusively for the use of Termux.
+.TP
+.B cmd
+Manage Android main settings over Termux.
+.TP
+.B df
+Provide information about mounted memory.
+.TP
+.B du
+Provide recursive information about the weight of directories and files.
+.TP
+.B fixer
+Automate the process to fix Termux issues.
+.TP
+.B fzf
+Fuzzy finder for easier and faster file selection.
+.TP
+.B gitbrowsering
+Search GitHub repositories over CLI.
+.TP
+.B LOCALHOST
+Show the current internet protocol over LAN.
+.TP
+.B lock
+Block Termux's screen.
+.TP
+.B osrframework
+OSINT toolkit.
+.TP
+.B mypip
+Show your public internet protocol.
+.TP
+.B omf
+Change the Oh-My-Fish theme.
+.TP
+.B postgresql
+Start, stop, or restart PostgreSQL database.
+.TP
+.B proxy
+Execute CLI commands over Tor with proxychains.
+.TP
+.B rmcache
+Remove current session cache, temporary files, and residual APT packages.
+.TP
+.B serverapache
+Initialize an Apache server.
+.TP
+.B serverphp
+Initialize a PHP server.
+.TP
+.B sudo
+Execute commands or initialize an environment as a fake root user.
+.TP
+.B traductor
+Initialize a command-line translator.
+
+.SH SEE ALSO
+For more information and documentation, visit:
+
