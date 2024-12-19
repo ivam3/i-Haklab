@@ -1,5 +1,7 @@
 local lazy = {}
 
+vim.env.PATH = vim.env.PATH .. ':/data/data/com.termux/files/usr/bin'
+
 function lazy.install(path)
   if not vim.loop.fs_stat(path) then
     print('Installing lazy.nvim....')
@@ -43,6 +45,8 @@ lazy.setup({
     opts = {},
   },
   {'rhysd/vim-grammarous'},
+  -- Github Copilot
+  {'github/copilot.vim'}, -- CONFIGURATION NEEDED RUNNING ':Copilot setup .''
   -- Tema 
   {'folke/tokyonight.nvim'},
   -- Linea inferiol
@@ -77,7 +81,7 @@ lazy.setup({
    {'dense-analysis/neural'},
    {'muniftanjim/nui.nvim'},
    {'elpiloto/significant.nvim'},
-   {'williamboman/nvim-lsp-installer'},
+   -- {'williamboman/nvim-lsp-installer'},
    -- Gir ---> Pendiente a cambiar 
    {'dinhhuy258/git.nvim'},
 ----------------------------------------------------

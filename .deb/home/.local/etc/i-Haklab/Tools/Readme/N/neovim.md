@@ -28,12 +28,22 @@ esc               **mode normal**
  |                   ╰──➤ .    Repeat the last action
  |                   ╰──➤ u    Undo the last modification one by one 
  |                   ╰──➤ U    Restore all the modifications
- |                   ╰──➤ gcc  Commentingi line 
+ |                   ╰──➤ gc   Comment/uncomment line 
+ |
+ ╰──➤        +  <ctrl>
+ |                   ╰──➤ t    Open a terminal in neovim
+ |                   ╰──➤ d    Go to the next page
  |
  ╰──➤        +  <leader>   
-                     ╰──➤ w    Save file     
+                     ╰──➤ w    Save file
+                     ╰──➤ x    Save file and exit
+                     ╰──➤ -    Split the window horizontally
+                     ╰──➤ |    Split the window vertically
+                     ╰──➤ n    Open prompt to interact with chatGPT (openAI) # Requires API key
 
-a                 **mode editor**
+a                 **mode editor** 
+                    ╰──➤  
+                    ╰──➤ esc  Return to mode normal 
 
 v or V            **mode visual**
                     ╰──➤  
