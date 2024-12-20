@@ -18,15 +18,7 @@ else
     echo "Tools available with '${first_upper}':"
     find "$db/$first_upper" -maxdepth 1 -type f -print0 | \
         while IFS= read -r -d '' entry; do
-            echo "${entry##*/}" | sed 's/\.md$//'  # Ocultar extensión .md
+            echo "${entry##*/}" | sed 's/\.md$//'
         done
 fi
 
-#
-# [[ -f "$file_path" ]] && { bat  --style=plain -r 1: --number $file_path";} || {
-#     echo "Tools available with '${first_upper}':"
-#     find "$db/$first_upper" -maxdepth 1 -type f -print0 | \
-#         while IFS= read -r -d '' entry; do
-#             echo "${entry##*/}" 
-#         done
-#     }
