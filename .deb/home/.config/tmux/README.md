@@ -19,18 +19,19 @@ Ventana sigiente
 -
 Ventana anterior 
 -
--
+- Crl + b 
+
 Cambiar de ventana numero 
 -
--
+- Crl + b 
 
 # Paneles 
 Panel vertical
 -
--
+- Crl + b / 
 Panel horisontal
 -
--
+- Crl + b - 
 # Modo de copia 
 
 # Varios 
