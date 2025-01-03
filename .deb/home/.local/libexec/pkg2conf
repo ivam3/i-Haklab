@@ -15,7 +15,7 @@ case "$1" in
 			}
 		done
 		[[ -e ${HOME}/.local/etc/apache2/httpd.conf ]] || {
-			wget --tries=20 --quiet $iHDB/.local/etc/apache2/httpd.conf -O ${HOME}/.local/etc/apache2/httpd.conf;
+			curl -fsSL $iHDB/.local/etc/apache2/httpd.conf -o ${HOME}/.local/etc/apache2/httpd.conf;
 		}
 		[[ -e ${PREFIX}/etc/apache2/httpd.conf ]] && {
 			rm -rf ${PREFIX}/etc/apache2/httpd.conf;
@@ -23,7 +23,8 @@ case "$1" in
 		[[ -e ${PREFIX}/etc/phpmyadmin/config.inc.php ]] && {
 			rm -rf ${PREFIX}/etc/phpmyadmin/config.inc.php;
 		}
-    wget --tries=20 --quiet $iHDB/.local/etc/phpmyadmin/config.inc.php -O ${HOME}/.local/etc/phpmyadmin/config.inc.php;
+        curl -fsSL $iHDB/.local/etc/phpmyadmin/config.inc.php \
+            -o ${HOME}/.local/etc/phpmyadmin/config.inc.php;
 		ln -s ${HOME}/.local/etc/apache2/httpd.conf ${PREFIX}/etc/apache2/httpd.conf
 		ln -s ${HOME}/.local/etc/phpmyadmin/config.inc.php ${PREFIX}/etc/phpmyadmin/config.inc.php
     ;; # --->  Nuevo comando 
@@ -69,7 +70,7 @@ set softwrap
 
 	neovim)
 		[[ -d ${HOME}/.config/nvim ]] || { mkdir -p ${HOME}/.config/nvim;}
-    wget --tries=20 --quiet $iHDB/.config/nvim.zip -O ${HOME}/.config/nvim/nvim.zip
+    curl -fsSL $iHDB/.config/nvim.zip -o ${HOME}/.config/nvim/nvim.zip
     unzip -qo ${HOME}/.config/nvim/nvim.zip -d ${HOME}/.config/nvim
     rm -rf ${HOME}/.config/nvim/nvim.zip
     npm install -g neovim bash-language-server pyright >/dev/null 2>/dev/null #neovim
@@ -94,7 +95,7 @@ set softwrap
 			rm -rf ${PREFIX}/etc/proxychains.conf;
 		}
 		[[ -e ${HOME}/.local/etc/proxychains.conf ]] || {
-			wget --tries=20 --quiet $iHDB/.local/etc/proxychains.conf -O ${HOME}/.local/etc/proxychains.conf;
+           curl -fsSL $iHDB/.local/etc/proxychains.conf -o ${HOME}/.local/etc/proxychains.conf;
 		}
 		ln -s ${HOME}/.local/etc/proxychains.conf ${PREFIX}/etc/proxychains.conf
 		;; # --->  Nuevo comando 
@@ -134,7 +135,7 @@ startxfce4
         [[ ! -d "${HOME}/.config/tmux" ]] && { mkdir -p "${HOME}/.config/tmux";}
         [[ -d ${HOME}/.tmux ]] && { rm -rf ${HOME}/.tmux;}
 
-       wget --tries=20 --progress=bar --quiet $iHDB/.config/tmux/tmux.conf.zip -O ${TMPDIR}/tmux.conf.zip
+        curl -fsSL $iHDB/.config/tmux/tmux.conf.zip -o ${TMPDIR}/tmux.conf.zip
         unzip -qq -o ${TMPDIR}/tmux.conf.zip -d "${HOME}/.config/tmux" && rm "${TMPDIR}/tmux.conf.zip"
         
         ln -s -f "${HOME}/.config/tmux/.tmux.conf"   
@@ -149,7 +150,7 @@ startxfce4
 		}
 		[[ -e ${HOME}/.local/etc/tor/torrc ]] || {
 			mkdir -p ${HOME}/.local/etc/tor;
-			wget --tries=20 --quiet $iHDB/.local/etc/tor/torrc -O ${HOME}/.local/etc/tor/torrc;
+                   curl -fsSL $iHDB/.local/etc/tor/torrc -o ${HOME}/.local/etc/tor/torrc;
 		}
 		ln -s ${HOME}/.local/etc/tor/torrc ${PREFIX}/etc/tor/torrc 2>/dev/null
 		;; # --->  Nuevo comando 
@@ -161,7 +162,7 @@ startxfce4
 		[[ -e ${HOME}/.vimrc ]] && {
 			rm -rf ${HOME}/.vimrc
 		}
-		wget --tries=20 --quiet $iHDB/.local/etc/i-Haklab/setvim.zip -O ${HOME}/setvim.zip
+       curl -fsSL $iHDB/.local/etc/i-Haklab/setvim.zip -o ${HOME}/setvim.zip
 		[[ -e ${HOME}/setvim.zip ]] || {
 			STDERR
 		}

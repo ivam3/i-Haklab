@@ -47,8 +47,8 @@ done
 #wget --tries=20 --quiet https://www.scrapmaker.com/data/wordlists/dictionaries/rockyou.txt \
 #  -O ${HOME}/.local/share/wordlist/rockyou.txt
 echo "Setting website '4share'."
-wget --tries=20 --quiet $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20functional%20tests.bat -O ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run functional tests.bat'
-wget --tries=20 --quiet $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20unit%20tests.bat -O ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run unit tests.bat'
+curl -fsSL $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20functional%20tests.bat -o ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run functional tests.bat'
+curl -fsSL $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20unit%20tests.bat -o ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run unit tests.bat'
 chmod 777 -R ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests
 
 # SET OMF SHELL
@@ -85,8 +85,8 @@ rm $file
   mkdir -p ${PREFIX}/share/fonts
 }
 for i in ProFont Hack; do
-  wget --tries=20 --quiet https://github.com/ryanoasis/nerd-fonts/releases/download/$fontsV/$i.zip \
-    -O ${PREFIX}/share/fonts/$i.zip
+   curl -fsSL https://github.com/ryanoasis/nerd-fonts/releases/download/$fontsV/$i.zip \
+    -o ${PREFIX}/share/fonts/$i.zip
   if [[ -e ${PREFIX}/share/fonts/$i.zip ]]; then
     unzip -qo ${PREFIX}/share/fonts/$i.zip -d ${PREFIX}/share/fonts/
     rm -rf ${PREFIX}/share/fonts/$i.zip
