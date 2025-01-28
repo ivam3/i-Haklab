@@ -6,11 +6,11 @@ Configuración `~/.config/tmux/tmux.conf`
 **Combinaciones de Teclado en tmux**
 
 ### **General**
-- ``C-a``: Enviar el prefijo (compatible con GNU-Screen).
+- ``a``: Enviar el prefijo (compatible con GNU-Screen).
 - ``r``: Recargar el archivo de configuración ~/.tmux.conf.
 ### **Navegación de Sesiones**
-- ``C-c``: Crear una nueva sesión.
-- ``C-f``: Buscar sesión (abre un prompt para cambiar de sesión).
+- ``c``: Crear una nueva sesión.
+- ``f``: Buscar sesión (abre un prompt para cambiar de sesión).
 - ``n``:   Cambiar de sesión 
 `,`: Cambiar el nombre de la ventana actual
 - ``&``: Cerrar ventana actual
