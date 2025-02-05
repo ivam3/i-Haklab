@@ -1,33 +1,24 @@
-local lazy = {}
-
 vim.env.PATH = vim.env.PATH .. ':/data/data/com.termux/files/usr/bin'
-
-function lazy.install(path)
-  if not vim.loop.fs_stat(path) then
-    print('Installing lazy.nvim....')
-    vim.fn.system({
-      'git',
-      'clone',
-      '--filter=blob:none',
-      'https://github.com/folke/lazy.nvim.git',
-      '--branch=stable', -- latest stable release
-      path,
-    })
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  print('Installing lazy.nvim....')
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
   end
 end
+vim.opt.rtp:prepend(lazypath)
 
-function lazy.setup(plugins)
-  -- Pueden comentar la siguiente línea una vez que lazy.nvim esté instalado
-  lazy.install(lazy.path)
 
-  vim.opt.rtp:prepend(lazy.path)
-  require('lazy').setup(plugins, lazy.opts)
-end
-
-lazy.path = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-lazy.opts = {}
-
-lazy.setup({
+require("lazy").setup({
   ---
   -- Lista de plugins
   --- Partomar  notas de texto sin formato
