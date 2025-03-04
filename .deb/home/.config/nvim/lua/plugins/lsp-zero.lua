@@ -17,7 +17,7 @@ vim.diagnostic.config({
 })
 
 -- 
-local lspconfig = lspconfig
+local lspconfig = require('lspconfig')
 
 -- Esto debe ejecutarse antes de configurar cualquier servidor de idiomas.
 local lspconfig_defaults = lspconfig.util.default_config
@@ -78,15 +78,15 @@ lspconfig_defaults.capabilities = vim.tbl_deep_extend(
     })
 
 ----------------------------------------------------------------
+
 -- servidores de idioma
 lspconfig.zk.setup({})
-lspconfig.bashls.setup({})
 lspconfig.pyright.setup{}
+lspconfig.bashls.setup({})
 lspconfig.lua_ls.setup({})
 lspconfig.clangd.setup {
     cmd = { "clangd", "--background-index", "--clang-tidy" }
 }
-
 ---------------------------------------------------
 --             =====Auto compleado=====
 --------------------------------------------------
