@@ -55,6 +55,8 @@ v or V            **mode visual**
                     ╰──➤ PlugUpdate   Update the plugins
                     ╰──➤ PlugInstall  Install the plugins
                     ╰──➤ PlugStatus   Get neovim status 
+                    ╰──➤ [range]s/pattern/substitution/[option] Replacing chains 
+
 
 
 # Config 
