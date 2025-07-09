@@ -132,6 +132,7 @@ startxfce4
         
         ln -s -f "${HOME}/.config/tmux/.tmux.conf"   
         sed -i "11a set-option -g default-shell ${PREFIX}/bin/fish" "${HOME}/.config/tmux/.tmux.conf"
+        printf "[!] Press Ctrl+b+shift+I to load the tmux settings\n"
 	    ;; # --->  Nuevo comando 
 
 	tor)
