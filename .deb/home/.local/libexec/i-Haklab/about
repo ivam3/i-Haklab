@@ -5,17 +5,18 @@ source "${HOME}/.local/etc/i-Haklab/variables"
 source "$iHETC/functions"
 db="$iHETC/Tools/Readme"
 
-[[ ! -d "$db" ]] && { echo "[ERROR] El directorio '$db' no se encontró." && exit 1;}
-
-[[ -z "$1" ]] && { echo "[ERROR] Se debe proporcionar un nombre de archivo como argumento." && exit 1;}
-
-first_upper=$(echo "$1" | cut -c1 | tr '[:lower:]' '[:upper:]')
-file_path="$db/$first_upper/$1.md"
-
-[[ -f "$file_path" ]] && { bat "$file_path" ;} || {
-    echo "Tools available with '${first_upper}' :";
-    find "$db/$first_upper" -maxdepth 1 -type f -print0 | \
-        while IFS= read -r -d '' entry; do
-            echo "${entry##*/}"  # Take out just the file name without path
-        done
-    }
+[[ ! -z "$1"  ]] && [[ -e $db/$1  ]] && {
+        bat $db/$1;} || { STDERR;}
+#
+# [[ -z "$1" ]] && { echo "[ERROR] Se debe proporcionar un nombre de archivo como argumento." && exit 1;}
+#
+# first_upper=$(echo "$1" | cut -c1 | tr '[:lower:]' '[:upper:]')
+# file_path="$db/$first_upper/$1.md"
+#
+# [[ -f "$file_path" ]] && { bat "$file_path" ;} || {
+#     echo "Tools available with '${first_upper}' :";
+#     find "$db/$first_upper" -maxdepth 1 -type f -print0 | \
+#         while IFS= read -r -d '' entry; do
+#             echo "${entry##*/}"  # Take out just the file name without path
+#         done
+#     }

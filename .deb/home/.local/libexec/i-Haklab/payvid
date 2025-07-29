@@ -25,7 +25,7 @@ cp $realVID $TMPDIR
 fakeVID=$(ls $realVID|awk -F '/' '{print $NF}')_vid
 
 printf "$G(_➤)$W running ngrok server"
-exec ngrok -tcp 4546 >/dev/null >2/dev/null &
+exec ngrok -tcp 4546 >/dev/null 2>/dev/null &
 sleep 15
 revHOST=$(curl -sSL http://localhost:4040/api/tunnels|cut -d '"' -f14|awk -F "/" '{print $3}'|cut -d ":" -f1)
 revPORT=$(curl -sSL http://localhost:4040/api/tunnels|cut -d '"' -f14|awk -F "/" '{print $3}'|cut -d ":" -f2)

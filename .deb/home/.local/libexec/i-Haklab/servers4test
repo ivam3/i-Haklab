@@ -8,64 +8,95 @@ source $iHETC/functions
 chk-pkg php php
 chk-pkg mariadb mariadb
 
+declare chk_dbuser_exist
+declare pid
+user="root"
+
 [[ -e ${PREFIX}/var/run/*.pid ]] && {
 	rm -rf ${PREFIX}/var/run/*.pid;
 }
-declare pid
 
 until [ ! -z $pid ]; do
   killall mariadbd >/dev/null 2>/dev/null
   tput civis
   echo -en $G"\r(➤_)$W Running daemon ..."
-  mariadbd >/dev/null 2>/dev/null &
-  pid=$(echo $!)
+  mariadbd-safe >/dev/null 2>/dev/null &
   sleep 3
+  export pid=$(echo $!)
   echo -en "\tDONE!!\n"
   tput cnorm 
 done
 
-sleep 3
 while [ "$(ps a|awk '{print $1}'|grep $pid)" ]
 do
-  dbuser=$(mariadb -u $(whoami) -e "use mysql;SELECT user FROM user;"|grep "root" 2>/dev/null)
-  [[ -z $dbuser ]] && { user=root; } || { user=$(whoami);}
-  [[ $dbuser == root ]] || { 
-    mariadb -u $user -e "use mysql;set password for 'root'@'localhost' = password('root');flush privileges;" >/dev/null 2>/dev/null;
-    mariadbd-safe >/dev/null 2>/dev/null &
-    safepid=$(echo $!)
-    running ps $safepid
-  }
+    while read -sp "(>_) Enter data base password: " pass && printf "\n" && [[ -z $pass ]]; do
+        continue
+    done
 
-  echo -en $Y"\r(➤_)$W Choose a platform\n"
+    until [ ! -z $chk_dbuser_exist ]; do 
+        chk_dbuser_exist=$(echo $pass|mariadb -u $user -p -e "use mysql;SELECT user FROM user;"|\
+            grep $user|head -n1) 
+        [[ $chk_dbuser_exist != $user ]] && {
+            echo -en $G"(>_)$W Set data base ..."
+            mariadb-secure-installation 
+        }
+    done 
+
+    [[ ! -d ${PREFIX}/var/lib/mysql  ]] && { 
+        mariadb-install-db >/dev/null 2>/dev/null;
+    } || {
+        echo -en $G"\r(>_)$W Upgrading data base ..."
+        mariadb-upgrade >/dev/null 2>/dev/null;
+        echo -en "\tDONE!!\n"
+    }
+
+#    mariadb -u $user -e "use mysql;set password for '$user'@'localhost' = password('$user');flush privileges;" >/dev/null 2>/dev/null;
+
+    echo -en $Y"\r(➤_)$W Choose a platform\n"
 	select answ in bWAPP DVWA mutillidae Exit
 	do
-		[[ $answ = Exit ]] && {
-      kill -TERM $pid >/dev/null 2>/dev/null
+    	[[ $answ = Exit ]] && { 
+            kill -TERM $pid >/dev/null 2>/dev/null
 			exit 0;
 		}
 		[[ $answ = DVWA ]] && {
 			db=dvwa;
 		} || {
-			db=$answ;
-		}
-		[[ -d ${HOME}/.local/var/service/www/servers4test/$answ ]] && {
-			if [[ $(mariadb -u root -proot -e "show DATABASES;"|grep $db) != $db ]] >/dev/null 2>/dev/null
+            db=$answ
+        }
+
+		[[ ! -d ${HOME}/.local/var/service/www/servers4test/$answ ]] && {
+            if [[ $answ = mutillidae ]]; then 
+                echo -en $G"\r(➤_)$W Installing mutillidae server ... "
+                git clone --quiet --depth 1 https://github.com/webpwnized/mutillidae \
+                    ${HOME}/.local/var/service/www/servers4test/mutillidae 2>$LOGFILE
+                sed -i '53 {s/^/#/}' \
+                    ${HOME}/.local/var/service/www/servers4test/mutillidae/classes/MySQLHandler.php 2>$LOGFILE
+                sed -i "53a static public $mMySQLDatabasePassword = \"root\";" \
+                    ${HOME}/.local/var/service/www/servers4test/mutillidae/classes/MySQLHandler.php 2>$LOGFILE
+                echo -en "\tDONE!!\n"
+            else
+                STERR broken
+            fi
+        } || {
+			if [[ $(echo $pass|mariadb -u root -p -e "show DATABASES;"\
+                |grep $db) != $db ]] >/dev/null 2>/dev/null
 			then
-				mariadb -u root -proot -e "create DATABASE $db >/dev/null 2>/dev/null;"
+				echo $pass|mariadb -u $user -p -e "create DATABASE $db;" >/dev/null 2>/dev/null
 			fi
 			getPORT;
-			banner
+			# banner
 			echo -en $B"(➤_)$W Web server $B$answ$W activated over:$Y http://$LOOPBACK:$LPORT$B\n  ╰──➤$W press enter to$R stop$W it.\n"
 			php -S $LOOPBACK:$LPORT -t ${HOME}/.local/var/service/www/servers4test/$answ 2>>$LOGFILE &
 			PHPpid=$(echo $!)
-      termux-open-url http://$LOOPBACK:$LPORT;
-			read enter;
-      kill -TERM $PHPpid;
-      break;
+            termux-open-url http://$LOOPBACK:$LPORT
+			read enter
+            kill -TERM $PHPpid
+            break
 		} || {
 			STDERR broken;
 		}
-  done
-  break
+    done
+    break
 done
 kill -TERM $pid >/dev/null 2>>$LOGFILE

@@ -82,7 +82,11 @@ then
 	select QG in $(ls $iHLIBEXEC/../QG_*|awk -F "/" '{print $NF}') Exit;do
 		if [[ ! -z $QG ]] && [[ -e $iHLIBEXEC/../$QG ]]
 		then
-			bash $iHLIBEXEC/../$QG
+            [[ $QG = "QG_bWAPP.pdf" ]] && {
+                termux-open $iHLIBEXEC/../$QG
+            } || {
+                bash $iHLIBEXEC/../$QG
+            }
 		elif [[ $QG = Exit ]]
 		then
 			exit
