@@ -3,7 +3,7 @@
  $_CONFIG = array (
   'firstrun' => false,
   'salt' => 'a99b9e32a5cd2b540fc3480e1099d8ad',
-  'script_url' => 'https://i-haklab-4share.loca.lt/',
+  'script_url' => '',
   'session_name' => 'vfm_622809334',
   'align_logo' => 'center',
   'appname' => 'i-Haklab v.3.9',
