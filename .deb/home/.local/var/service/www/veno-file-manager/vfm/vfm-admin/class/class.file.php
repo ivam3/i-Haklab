@@ -25,6 +25,7 @@ if (!class_exists('File', false)) {
         public $size;
         public $type;
         public $modTime;
+        public $relative;
         /**
          * Constructor
          *

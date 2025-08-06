@@ -5,73 +5,77 @@ trap ctrl_c 2
 source $HOME/.local/etc/i-Haklab/variables
 source $iHETC/functions
 
-internal(){
-	chk-pkg ffsend ffsend
-	chk-pkg lt localtunnel
-  usage(){
-		printf $Y"USAGE:$W i-Haklab share <options>\n\n   OPTIONS\tDESCRIPTION\n-h\t\tShow this menu\n-t <localtunnel|localhost|cloudflared>\tTunnel to forwarding\n-u <file/dir>\tFile or directory to share\n-d <link>\tCloud's link to download file or directory\n-p <password>\tSet a pasword to share o download [optional]\n";exit 0
-	}
+# internal(){
+# 	chk-pkg ffsend ffsend
+# 	chk-pkg lt localtunnel
+#   usage(){
+# 		printf $Y"USAGE:$W i-Haklab share <options>\n\n   OPTIONS\tDESCRIPTION\n-h\t\tShow this menu\n-t <localtunnel|localhost|cloudflared>\tTunnel to forwarding\n-u <file/dir>\tFile or directory to share\n-d <link>\tCloud's link to download file or directory\n-p <password>\tSet a pasword to share o download [optional]\n";exit 0
+# 	}
+#
+#   grep -oE "android" ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl/openurl.js >/dev/null 2>/dev/null || {
+#     curl -fsSL "$iHDB/.local/etc/localtunnel/openurl.js" -o \
+#       ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl/openurl.js
+#   }
+#
+# 	banner
+# 	[[ $# -eq 0 ]] && { usage;}
+# 	while getopts t:p:u:d:h opts; do
+# 		case $opts in
+# 			h) usage
+# 				;;
+# 			d) link=$OPTARG
+# 				until ping -q -c1 -W 1 $link >/dev/null 2>/dev/null
+# 				do
+# 					printf "$R(_➤)$W ERROR 404 : Not found$W\n"
+# 					exit
+# 				done
+# 				;;
+# 			u) toshare=$OPTARG
+# 				[[ -e $toshare ]] || [[ -d $toshare ]] || {
+# 					printf "$R\t\t 《FILE DOESN'T EXISTS》\n"
+# 								exit;} 
+# 				;;
+# 			p) pass=$OPTARG
+# 				passwd="--password $pass"
+# 				;;
+# 			*) usage
+# 				;;
+# 		esac
+#
+# 		file=$(mktemp)
+# 		if [[ -n $toshare ]]
+# 		then
+# 			printf "$Y\t\t  《 UPLOADING ... 》\r";
+# 			ffsend u $toshare $passwd -y -q > $file.link
+# 			link=$(cat $file.link)
+# 			printf "$Y\t\t  《UPLOAD COMPLETED》\n"
+# 			if [ ! -z $link ]; then
+# 				printf "$G\n(_>)_Link_to_share─➤$W $link\n"
+# 				rm $file.link
+# 			else
+# 				printf "$R\n\t      《ERR LINK》\n"
+# 				exit
+# 			fi
+# 		else
+# 			file=$(mktemp)
+# 			ffsend exists $link -I -y -q > $file.exists
+# 			exists=$(cat $file.exists|head -n 1|awk -F " " '{print $2}')
+# 			rm $file.exists
+# 			if [ "$exists" = "true" ]; then
+# 				printf "$Y\t\t 《 DOWNLOADING ... 》\n"
+# 				ffsend d $link -q
+# 				printf "$G\r\t\t 《DOWNLOAD COMPLETED》\n"
+# 			else
+# 				printf "$R\t\t 《FILE DOESN'T EXISTS》\n"
+# 				exit
+# 			fi
+# 		fi
+# 		rm $file
+# 	done
+# }
 
-  grep -oE "android" ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl/openurl.js >/dev/null 2>/dev/null || {
-    curl -fsSL "$iHDB/.local/etc/localtunnel/openurl.js" -o \
-      ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl/openurl.js
-  }
-
-	banner
-	[[ $# -eq 0 ]] && { usage;}
-	while getopts t:p:u:d:h opts; do
-		case $opts in
-			h) usage
-				;;
-			d) link=$OPTARG
-				until ping -q -c1 -W 1 $link >/dev/null 2>/dev/null
-				do
-					printf "$R(_➤)$W ERROR 404 : Not found$W\n"
-					exit
-				done
-				;;
-			u) toshare=$OPTARG
-				[[ -e $toshare ]] || [[ -d $toshare ]] || {
-					printf "$R\t\t 《FILE DOESN'T EXISTS》\n"
-								exit;} 
-				;;
-			p) pass=$OPTARG
-				passwd="--password $pass"
-				;;
-			*) usage
-				;;
-		esac
-
-		file=$(mktemp)
-		if [[ -n $toshare ]]
-		then
-			printf "$Y\t\t  《 UPLOADING ... 》\r";
-			ffsend u $toshare $passwd -y -q > $file.link
-			link=$(cat $file.link)
-			printf "$Y\t\t  《UPLOAD COMPLETED》\n"
-			if [ ! -z $link ]; then
-				printf "$G\n(_>)_Link_to_share─➤$W $link\n"
-				rm $file.link
-			else
-				printf "$R\n\t      《ERR LINK》\n"
-				exit
-			fi
-		else
-			file=$(mktemp)
-			ffsend exists $link -I -y -q > $file.exists
-			exists=$(cat $file.exists|head -n 1|awk -F " " '{print $2}')
-			rm $file.exists
-			if [ "$exists" = "true" ]; then
-				printf "$Y\t\t 《 DOWNLOADING ... 》\n"
-				ffsend d $link -q
-				printf "$G\r\t\t 《DOWNLOAD COMPLETED》\n"
-			else
-				printf "$R\t\t 《FILE DOESN'T EXISTS》\n"
-				exit
-			fi
-		fi
-		rm $file
-	done
+[[ $# -eq 0 ]] && {
+    STDERR 
 }
 
 chk-pkg php php
@@ -80,14 +84,18 @@ chk-pkg lt localtunnel
 chk-pkg cloudflared cloudflared
 getPORT
 
-[[ $# -eq 0 ]] && {
-    STDERR 
-}
+httpdfile="${PREFIX}/etc/apache2/httpd.conf"
+rootServer="${HOME}/.local/var/service/www/veno-file-manager/vfm/"
 
-[[ -d ${HOME}/.local/var/service/www/veno-file-manager ]] && {
+[[ -d $rootServer ]] && {
 	banner;
-	php -S $LOOPBACK:$LPORT -t ${HOME}/.local/var/service/www/veno-file-manager/vfm 2>>$LOGFILE &
-	sleep 3;
+    # Set the port for the web server
+    sed -i "52s/^Listen .*/Listen $LPORT/" $httpdfile
+    sed -i "250s|^DocumentRoot .*|DocumentRoot \"$rootServer\"|" $httpdfile
+    sed -i "251s|^<Directory .*|<Directory \"$rootServer\">|" $httpdfile
+    # Start Apache server
+	apachectl -k start 2>>$LOGFILE &
+	sleep 1;
     echo -en $B"(➤_)$W Web server$B 4Share$W activated \n$B  ╰──➤$W SUBDOMAIN: Set it with 'i-Haklab setuser'\n$B  ╰──➤$W PASSWORD: $(curl -s https://loca.lt/mytunnelpassword)\n$B  ╰──➤$W LAN your url is: http://$LOOPBACK:$LPORT$B\n  ╰──➤$W TUN "
 
     case $1 in 
@@ -102,6 +110,6 @@ getPORT
             ;;
         *) STDERR ;;
     esac
-
+    killall -9 apache2 php ssh cloudflared lt 2>/dev/null
 } || STDERR
 

@@ -49,7 +49,7 @@ $location = new Location('../../'.$getdir);
 
 if ($gateKeeper->isAccessAllowed() && $location->editAllowed('../../') && $gateKeeper->isAllowed('view_enable')) {
     $fullpath = $location->getFullPath();
-    $searchvalue = filter_var($request['search']['value'], FILTER_UNSAFE_RAW);
+    $searchvalue = isset($request['search']['value']) ? filter_var($request['search']['value'], FILTER_UNSAFE_RAW) : false;
 
     include_once '../class/class.imageserver.php';
     include_once '../icons/vfm-icons.php';

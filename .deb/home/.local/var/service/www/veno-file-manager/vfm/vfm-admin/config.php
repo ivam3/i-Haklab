@@ -15,7 +15,7 @@
   'copy_enable' => false,
   'credits' => '',
   'credits_link' => '',
-  'debug_mode' => false,
+  'debug_mode' => true,
   'debug_smtp' => false,
   'default_timezone' => 'UTC',
   'delete_dir_enable' => true,
