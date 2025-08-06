@@ -208,8 +208,10 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 |
 ╰servers4test────────────────────➤ Init deliberately insecure web application for pentesting.
 |
-╰──4share────➤────────────────────➤ Init web server for share files remotely and securely
-|    ╰───────────────────────────{─Default credentials = Admin:password─}
+╰──4share───➤───(server─name)────➤ Init web server for share files remotely and securely
+|    ╰─────────────────|─────────{─Default credentials = Admin:password─}
+|                      ╰─────────{─servers names: localtunnel, localhost.run and cloudflared─}
+|                      ╰─example─{─i─Haklab 4share localtunnel─}
 ╰─usbtest───➤─<path-to-device>───➤ Test usb device connected via OTG 
 |                   ╰─example────{─i-Haklab usbtest /dev/bus/usb/001─}
 |           |                    |

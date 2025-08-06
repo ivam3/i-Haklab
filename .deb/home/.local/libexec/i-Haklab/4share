@@ -9,17 +9,17 @@ internal(){
 	chk-pkg ffsend ffsend
 	chk-pkg lt localtunnel
   usage(){
-		printf $Y"USAGE:$W i-Haklab share <options>\n\n   OPTIONS\tDESCRIPTION\n-h\t\tShow this menu\n-u <file/dir>\tFile or directory to share\n-d <link>\tCloud's link to download file or directory\n-p <password>\tSet a pasword to share o download [optional]\n";exit 0
+		printf $Y"USAGE:$W i-Haklab share <options>\n\n   OPTIONS\tDESCRIPTION\n-h\t\tShow this menu\n-t <localtunnel|localhost|cloudflared>\tTunnel to forwarding\n-u <file/dir>\tFile or directory to share\n-d <link>\tCloud's link to download file or directory\n-p <password>\tSet a pasword to share o download [optional]\n";exit 0
 	}
 
   grep -oE "android" ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl/openurl.js >/dev/null 2>/dev/null || {
-    wget --tries=20 --quiet "$iHDB/.local/etc/localtunnel/openurl.js" -O \
+    curl -fsSL "$iHDB/.local/etc/localtunnel/openurl.js" -o \
       ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl/openurl.js
   }
 
 	banner
 	[[ $# -eq 0 ]] && { usage;}
-	while getopts f:u:d:h opts; do
+	while getopts t:p:u:d:h opts; do
 		case $opts in
 			h) usage
 				;;
@@ -75,13 +75,33 @@ internal(){
 }
 
 chk-pkg php php
+chk-pkg ssh openssh
 chk-pkg lt localtunnel
+chk-pkg cloudflared cloudflared
 getPORT
+
+[[ $# -eq 0 ]] && {
+    STDERR 
+}
+
 [[ -d ${HOME}/.local/var/service/www/veno-file-manager ]] && {
 	banner;
 	php -S $LOOPBACK:$LPORT -t ${HOME}/.local/var/service/www/veno-file-manager/vfm 2>>$LOGFILE &
 	sleep 3;
-  echo -en $B"(➤_)$W Web server$B 4Share$W activated \n$B  ╰──➤$W SUBDOMAIN: Set it with 'i-Haklab setuser'\n$B  ╰──➤$W PASSWORD: $(curl -s https://loca.lt/mytunnelpassword)\n$B  ╰──➤$W LAN your url is: http://$LOOPBACK:$LPORT$B\n  ╰──➤$W TUN "
-	lt -h "http://localtunnel.me" -p $LPORT -s $USER-4share --open --print-requests;
+    echo -en $B"(➤_)$W Web server$B 4Share$W activated \n$B  ╰──➤$W SUBDOMAIN: Set it with 'i-Haklab setuser'\n$B  ╰──➤$W PASSWORD: $(curl -s https://loca.lt/mytunnelpassword)\n$B  ╰──➤$W LAN your url is: http://$LOOPBACK:$LPORT$B\n  ╰──➤$W TUN "
+
+    case $1 in 
+        localtunnel) 
+            lt -h "http://localtunnel.me" -p $LPORT -s $USER-4share --open --print-requests
+            ;;
+        localhost.run)
+            ssh -R 80:localhost:$LPORT nokey@localhost.run
+            ;; 
+        cloudflared) 
+            cloudflared tunnel --url "http://127.0.0.1:$LPORT"
+            ;;
+        *) STDERR ;;
+    esac
+
 } || STDERR
 
