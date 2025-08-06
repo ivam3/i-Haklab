@@ -7,25 +7,33 @@ source $iHETC/functions
 echo -en "Setting $1 following i-Haklab instructions ...  \b"
 
 case "$1" in
-	apache2|phpmyadmin)
-		for i in apache2 phpmyadmin
-		do
+
+	apache2|phpmyadmin)    
+        USRapache="${PREFIX}/etc/apache2"
+        HOMEapache="${HOME}/.local/etc/apache2"
+		
+        for i in apache2 phpmyadmin; do
 			[[ -d ${HOME}/.local/etc/$i ]] || {
 				mkdir -p ${HOME}/.local/etc/$i;
 			}
 		done
-		[[ -e ${HOME}/.local/etc/apache2/httpd.conf ]] || {
-			curl -fsSL $iHDB/.local/etc/apache2/httpd.conf -o ${HOME}/.local/etc/apache2/httpd.conf;
+
+		[[ -e $HOMEapache/httpd.conf ]] || {
+			curl -fsSL $iHDB/.local/etc/apache2/httpd.conf -o $HOMEapache/httpd.conf;
 		}
-		[[ -e ${PREFIX}/etc/apache2/httpd.conf ]] && {
-			rm -rf ${PREFIX}/etc/apache2/httpd.conf;
+		[[ -e $HOMEapache/php_module.conf ]] || {
+			curl -fsSL $iHDB/.local/etc/apache2/php_module.conf -o $HOMEapacheE/php_module.conf;
+		}
+		[[ -e $USRapache/httpd.conf ]] && {
+			rm -rf $USRapache/httpd.conf;
 		}
 		[[ -e ${PREFIX}/etc/phpmyadmin/config.inc.php ]] && {
 			rm -rf ${PREFIX}/etc/phpmyadmin/config.inc.php;
 		}
         curl -fsSL $iHDB/.local/etc/phpmyadmin/config.inc.php \
             -o ${HOME}/.local/etc/phpmyadmin/config.inc.php;
-		ln -s ${HOME}/.local/etc/apache2/httpd.conf ${PREFIX}/etc/apache2/httpd.conf
+		ln -s $HOMEapache/httpd.conf $USRapache/httpd.conf
+        ln -s $HOMEapache/php_module $USRapache/conf.d/php_module.conf
 		ln -s ${HOME}/.local/etc/phpmyadmin/config.inc.php ${PREFIX}/etc/phpmyadmin/config.inc.php
     ;; # --->  Nuevo comando 
 
