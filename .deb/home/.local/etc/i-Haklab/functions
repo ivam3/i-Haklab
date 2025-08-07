@@ -174,10 +174,6 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 ╰──ESmsg────+──encode/decode─────➤ Encode|decode secret message into a ASCII file.
 |                    ╰──example──{─i-Haklab ESmsg <encode/decode-}
 |
-╰──fakeID───+──<option─+─args>───➤ Create a fake indentity card with real email and phone number
-|    ╰───example─────────────────{─i-Haklab fakeID [for random settings]
-|    ╰───example─────────────────{─i-Haklab fakeID -h [for help]
-|    ╰───example─────────────────{─i-Haklab fakeID -g male -n America -c \"United States\"
 ╰──tunnel───+─<port─+─subdomain>─➤ Start a SSH client to request TCP port forwarding
 |    ╰───example─────────────────{─i-Haklab tunnel -p 4444 -s my-subdomain-}
 |
