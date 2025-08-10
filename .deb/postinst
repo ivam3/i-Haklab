@@ -5,6 +5,7 @@ source ${HOME}/.local/etc/i-Haklab/variables
 source $iHETC/functions
 fontsV="v2.3.3"
 z=$(sleep 0.5)
+prevpaee=$(cat ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella|openssl enc -aes-256-cbc -md sha512 -a -d -pbkdf2 -iter 100000 -salt -pass pass:Secret@123#) 
 
 # PREINST
 [[ -e ${PREFIX}/etc/bashito ]] && { rm -rf ${PREFIX}/etc/bashito;}
@@ -14,10 +15,11 @@ z=$(sleep 0.5)
 # BACKUPING PREVIOUS SETTINGS
 if [[ -e $HOME/.local/etc/i-Haklab/.Ivam3byCinderella ]]; then
   echo "Keeping previous password ..."
-  [[ "Ivam3byCinderella" = $(cat $HOME/.local/etc/i-Haklab/.Ivam3byCinderella|openssl enc -aes-256-cbc -md sha512 -a -d -pbkdf2 -iter 100000 -salt -pass pass:Secret@123#) ]] || {
-    cp ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella ${HOME}/.local/etc/i-Haklab/.IbyC;
+  [[ $prevpass != "Ivam3byCinderella" ]] && {
+    cp ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella ${HOME}/.local/etc/i-Haklab/.IbyC
   }
 fi
+
 if [[ -e ${HOME}/.local/libexec/i-Haklab.login ]]; then
   echo "Keeping previous settings ..."
   cp ${HOME}/.local/libexec/i-Haklab.login ${HOME}/.local/libexec/i-Haklab.login.backup
@@ -38,14 +40,13 @@ s2=$(df|grep "fuse"|grep -iv emulated|awk -F " " '{print $6}')
 
 echo "Installing required python modules (It could take a while) ...";$z
 for module in pyyaml beautifulsoup4 betrufflehog wheel speedtest-cli frida pipenv shodan;do
-	[[ $module = shodan ]] && { pip --no-color --quiet --no-cache-dir install shodan;}
-	pip --no-color --quiet --no-cache-dir install $module 2>>$LOGFILE
+	python -m pip --no-color --quiet --no-cache-dir install $module 2>>$LOGFILE
 done
 
-#echo "Downloading default wordlists (It could take a long time)..."
-[[ -d ${HOME}/.local/share/wordlist ]] || { mkdir -p ${HOME}/.local/share/wordlist;}
-#wget --tries=20 --quiet https://www.scrapmaker.com/data/wordlists/dictionaries/rockyou.txt \
-#  -O ${HOME}/.local/share/wordlist/rockyou.txt
+[[ -d ${HOME}/.local/share/wordlist ]] || { 
+    mkdir -p ${HOME}/.local/share/wordlist
+}
+
 echo "Setting website '4share'."
 curl -fsSL $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20functional%20tests.bat -o ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run functional tests.bat'
 curl -fsSL $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20unit%20tests.bat -o ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run unit tests.bat'
@@ -68,7 +69,9 @@ ln -s ${HOME}/.local/etc/fish/config.fish ${PREFIX}/etc/fish/config.fish
 cat <<- CONF > ${HOME}/.bashrc
 echo -en "\e[33mWARNING:\e[0m You are out of i-Haklab | Some commands and tools could not be running.\n"
 CONF
+
 fish <(curl -fsSL "$iHDB/.local/etc/i-Haklab/get.oh-my.fish")
+
 file=$(mktemp)
 chmod 777 $file
 cat <<- CONF > $file
@@ -131,21 +134,20 @@ for i in $(grep ")" ${HOME}/.local/libexec/pkg2conf|grep -iv "("|tr "|" "\n"|tr 
 done
 
 # RESTORE PREVIOUS PASSWORD IF DEFAULT WAS CHANGED
-if [[ -e ${HOME}/.local/etc/i-Haklab/.IbyC ]]; then
-  echo "Restoring previous password."
+if [[ -e ${HOME}/.local/etc/i-Haklab/.IbyC ]]; then 
+    echo "Restoring previous password."
 	cat ${HOME}/.local/etc/i-Haklab/.IbyC > ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella
 	rm -f ${HOME}/.local/etc/i-Haklab/.IbyC
 fi
-if [[ -e ${HOME}/.local/libexec/i-Haklab.login.backup ]]; then
-  echo "Restoring previous settings"
+if [[ -e ${HOME}/.local/libexec/i-Haklab.login.backup ]]; then 
+    echo "Restoring previous settings"
 	cat ${HOME}/.local/libexec/i-Haklab.login.backup > ${HOME}/.local/libexec/i-Haklab.login
 	rm ${HOME}/.local/libexec/i-Haklab.login.backup
 fi
-echo -en "[updates]\n    ╰──➤ New commands added:\n    |\t\t• cmd\n    |\t\t• gitbrowsering\n    |\t\t• i-Haklab chatGPT\n    |\t\t• cinderella\n    ╰──➤ New features:\n\t\t• type into neovim 'alter', 'comma', 'n' \n\t\t  (alt + , + n) to use AI\n"
+echo -en "[updates]\n    ╰──➤ New commands added:\n    |\t\t• cmd\n    |\t\t• gitbrowsering\n    |\t\t• i-Haklab chatGPT\n    ╰──➤ New features:\n\t\t• type into neovim 'alter', 'comma', 'n' \n\t\t  (alt + , + n) to use AI\n"
 echo "[*] i-Haklab installation finished."
 echo "[*] run 'i-Haklab help' for a guide."
 echo "[*] Run 'fixer' to fix any posible issue."
 echo "[!] For help going to https://t.me/Ivam3_Bot."
 echo "[*] @Ivam3: thank you for use my package."
-#echo -en "[!] Press\e[32m enter\e[0m to init"
 ####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####
