@@ -91,8 +91,15 @@ INSERT INTO movies (title, release_year, genre, main_character, imdb, tickets_st
 CREATE TABLE IF NOT EXISTS heroes (id int(10) NOT NULL AUTO_INCREMENT,login varchar(100) DEFAULT NULL,password varchar(100) DEFAULT NULL,secret varchar(100) DEFAULT NULL,PRIMARY KEY (id)) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 INSERT INTO heroes (login, password, secret) VALUES ('neo', 'trinity', 'Oh why didn''t I took that BLACK pill?'),('alice', 'loveZombies', 'There''s a cure!'),('thor', 'Asgard', 'Oh, no... this is Earth... isn''t it?'),('wolverine', 'Log@N', 'What''s a Magneto?'),('johnny', 'm3ph1st0ph3l3s', 'I''m the Ghost Rider!'),('seline', 'm00n', 'It wasn''t the Lycans. It was you.');
 "
+                    wget --quiet "https://downloads.sourceforge.net/project/bwapp/bWAPP/bWAPPv2.2/bWAPPv2.2.zip?ts=gAAAAABomLffllceHOtpSb5A2EHmL7RYanaLpENJ4oYBIAadgUpSUsqc6Q-z3LIHYmndFkhP1EQZoiEq-nnzCZsr7CiiGFkq6A%3D%3D&use_mirror=versaweb&r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fbwapp%2Ffiles%2FbWAPP%2FbWAPPv2.2%2F" -O $rootdir/$answ.zip 2>$LOGFILE
+                    [[ -e $rootdir/$answ.zip ]] && { 
+                        unzip -qq $rootdir/$answ.zip -d $rootdir/ 2>$LOGFILE
+                        find $rootdir -type f | xargs rm 2>/dev/null
+                    }
+                    sed -i "20s/\"localhost\"/\"127.0.0.1\"/" $rootdir/$answ/admin/settings.php 2>$LOGFILE
+                    sed -i "22s/\"\"/\"root\"/" $rootdir/$answ/admin/settings.php 2>$LOGFILE
                     createDB $db
-                    mariadb -u "$user" -p"$pass" "$db" -e "$SQL_COMMAND"
+                    mariadb -u "$user" -p"$pass" "$db" -e "$SQL_COMMAND" 2>$LOGFILE
                 }
                 break
                 ;;
