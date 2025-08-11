@@ -1,107 +1,127 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 IFS=$'\n\t'
 trap ctrl_c 2
-source ${HOME}/.local/etc/i-Haklab/variables
+source ${HOME}/.local/etc/i-Haklab/variables 
 source $iHETC/functions
 
-chk-pkg ffmpeg ffmpeg
-chk-pkg termimage termimage
+# === Configuración inicial ===
+API_KEY="$APIKEY_chatGPT"
+MODEL="gpt-4o-mini"
+SIZE="512x512"
+TEMP=0.7
+MAXTOKENS=1024
+CHAT_DIR="${HOME}/.chatgpt_chats"
 
-[[ -z $APIKEY_chatGPT ]] && { echo "An openAI API Key is required, set it running 'i-Haklab setapikey'";exit 1;}
-
-CHAT_INIT_PROMPT="You are ChatGPT, a Large Language Model trained by OpenAI. You will be answering questions from users. You answer as concisely as possible for each response (e.g. don’t be verbose). If you are generating a list, do not have too many items. Keep the number of items short. Before each user prompt you will be given the chat history in Q&A form. Output your answer directly, with no labels in front. Do not start your answers with A or Anwser. If your answer include programming code, output it with shebang. You were trained on data up until 2021"
-TIP[0]="To generate images, start a prompt with $Y'image:'$W"
-TIP[1]="To view your chat history, type $Y'history'$W"
-TIP[2]="To get a list of the models available at OpenAI API, type $Y'models'$W"
-TIP[3]="To view all the information on a specific model\n     start a prompt with $Y'model:'$W and the model $Y'id'$W."
-TIP[4]="For a full usage guide run in shell $G'i-Haklab about chatgpt'$W."
-# Error handling function
-# $1 should be the response body
-handleError() {
-	if echo "$1" | jq -e '.error' >/dev/null; then
-		echo -en "${R}E: Your request to Open AI API failed:$W $(echo $1 | jq -r '.error.type')"
-		echo $1 | jq -r '.error.message'
-		exit 1
-	fi
+# === Validar API Key ===
+[[ -z "$API_KEY" ]] && {
+    echo -en "$R(>_)$W An openAI API Key is required, set it running 'i-Haklab setapikey"
+    exit 1
 }
 
-# parse command line arguments
-while [[ "$#" -gt 0 ]]; do
-	case $1 in
-	-t | --temperature)
-		TEMPERATURE="$2"
-		shift
-		shift
-		;;
-	--max-tokens)
-		MAX_TOKENS="$2"
-		shift
-		shift
-		;;
-	-m | --model)
-		MODEL="$2"
-		shift
-		shift
-		;;
-	-s | --size)
-		SIZE="$2"
-		shift
-		shift
-		;;
-	-c | --chat-context)
-		CONTEXT=true
-		shift
-		shift
-		;;
-	*)
-		echo -e "${R}E:$W Unknown parameter: $1"
-		exit 1
-		;;
-	esac
-done
+mkdir -p "$CHAT_DIR"
 
-# set defaults
-TEMPERATURE=${TEMPERATURE:-0.7}
-MAX_TOKENS=${MAX_TOKENS:-1024}
-MODEL=${MODEL:-gpt-3.5-turbo-instruct}
-SIZE=${SIZE:-512x512}
-CONTEXT=${CONTEXT:-false}
-rand=$[ $RANDOM % 5 ]
+# === Funciones auxiliares ===
+handle_error() {
+    if echo "$1" | jq -e '.error' >/dev/null; then
+        echo -en "\n$R(>_)$W $(echo "$1" | jq -r '.error.message')"
+        exit 1
+    fi
+}
 
-banner
-echo -e "Welcome to ${C}chatgpt$W. You can quit with '${G}exit$Y'.\nTip:$W ${TIP[$rand]}"
-running=true
+list_chats() {
+    echo -en "\n📂 Saved Chats:\n"
+    if [ -z "$(ls -A "$CHAT_DIR"/*.json 2>/dev/null)" ]; then
+        echo "(There's not saved chats)"
+        return 1
+    fi
+    printf "%-3s %-25s %-20s %s\n" "#" "File" "Date" "Size"
+    i=1
+    for file in "$CHAT_DIR"/*.json; do
+        date=$(date -r "$file" "+%Y-%m-%d %H:%M")
+        size=$(du -h "$file" | awk '{print $1}')
+        name=$(basename "$file")
+        printf "%-3s %-25s %-20s %s\n" "$i" "$name" "$date" "$size"
+        ((i++))
+    done
+}
 
-# create history file
-if [ ! -f ~/.chatgpt_history ]; then
-	touch ~/.chatgpt_history
-	chmod a+rw ~/.chatgpt_history
-fi
+mannage_chats() {
+    while true; do
+        list_chats
+        echo -e "\n1) Delete chat\n2) Rename chat\n3) Back"
+        read -rp "Choose an option: " opc
+        case $opc in
+            1)
+                read -rp "Number of chat to delete: " num
+                file=$(ls "$CHAT_DIR"/*.json | sed -n "${num}p")
+                [[ -f "$file" ]] && rm "$file" && echo "🗑 Successfully."
+                ;;
+            2)
+                read -rp "Number of chat to rename: " num
+                file=$(ls "$CHAT_DIR"/*.json | sed -n "${num}p")
+                if [[ -f "$file" ]]; then
+                    read -rp "New name: " new
+                    mv "$file" "$CHAT_DIR/${new// /_}.json"
+                    echo "✏ Successfully ."
+                fi
+                ;;
+            3) break ;;
+            *) echo -en "$R(>_)$W Invalid option.\n" ;;
+        esac
+    done
+}
 
-while $running; do
-	echo -en "$G\n$USER$W\n" && read prompt
+select_chat() {
+    list_chats
+    echo "N) New chat"
+    echo "G) Mannage chats"
+    read -rp "Choose an option: " choice
 
-	if [ "$prompt" == "exit" ];then
-		running=false
-    echo -en "$B\nGoodbye $Y$USER$B Have a great hacking day!!.$W"
-	elif [[ "$prompt" =~ ^image: ]]; then
-		image_response=$(curl https://api.openai.com/v1/images/generations \
-			-sS \
-			-H 'Content-Type: application/json' \
-			-H "Authorization: Bearer $APIKEY_chatGPT" \
-			-d '{
-    		"prompt": "'"${prompt#*image:}"'",
-    		"n": 1,
-    		"size": "'"$SIZE"'"
-			}')
-		handleError "$image_response"
-		image_url=$(echo $image_response | jq -r '.data[0].url')
-		echo -en "${C}chatgpt$W Your image was created. \n$Y\nLink:$W ${image_url}\n$Y\nIt could be open in:$W\n"
+    if [[ "$choice" =~ ^[0-9]+$ ]]; then
+        CHAT_FILE=$(ls "$CHAT_DIR"/*.json | sed -n "${choice}p")
+        messages=$(cat "$CHAT_FILE")
+        echo "✅ Chat loaded: $(basename "$CHAT_FILE")"
+    elif [[ "$choice" =~ ^[Nn]$ ]]; then
+        read -rp "Name of new chat: " name
+        CHAT_FILE="$CHAT_DIR/${name// /_}.json"
+        messages='[{"role":"system","content":"You are ChatGPT, a helpful assistant. Responde en español por defecto."}]'
+        echo "$messages" > "$CHAT_FILE"
+        echo "🆕 New chat created."
+    elif [[ "$choice" =~ ^[Gg]$ ]]; then
+        mannage_chats
+        select_chat
+    else
+        echo -en "$R(>_)$W Invald option.\n"
+        select_chat
+    fi
+}
+
+get_prompt() {
+    echo -e "\n📥 Write your message (CTRL+D to send it):"
+    prompt=$(</dev/stdin)
+}
+
+send_request() {
+    response=$(curl -sS https://api.openai.com/v1/chat/completions \
+        -H "Authorization: Bearer $API_KEY" \
+        -H "Content-Type: application/json" \
+        -d "{
+            \"model\": \"$MODEL\",
+            \"messages\": $messages,
+            \"temperature\": $TEMP,
+            \"max_tokens\": $MAXTOKENS
+        }")
+    handle_error "$response"
+    reply=$(echo "$response" | jq -r '.choices[0].message.content')
+}
+
+view_image() {
+    echo -e "\n🖼 Image was created: $1"
     select opc in termuxAPP termuxGUI androidAPP browser wayland skip; do
-      curl -sS $image_url -o ${TMPDIR}/temp_image.png
+      curl -sS "$1" -o ${TMPDIR}/temp_image.png
       if [ "$opc" == "termuxAPP" ]; then
         ffmpeg -i ${TMPDIR}/temp_image.png -vf scale=512:512 ${TMPDIR}/temp_image512.png &>/dev/null
-			  termimage ${TMPDIR}/temp_image512.png
+        termimage ${TMPDIR}/temp_image512.png
       elif [ "$opc" == "wayland" ]; then
         [[ -e ${TMPDIR}/wayland-0 ]] || {
           export DISPLAY=:0
@@ -116,75 +136,52 @@ while $running; do
       elif [ "$opc" == "androidAPP" ]; then
         termux-share ${TMPDIR}/temp_image.png
       elif [ "$opc" == "browser" ]; then
-        termux-open-url "${image_url}"
+        termux-open-url "$1"
       else
         break
       fi
     done
     rm ${TMPDIR}/*.png
+}
 
-  elif [[ "$prompt" == "history" ]]; then
-		echo -e "\n$(bat --style snip --theme 'Dracula' ~/.chatgpt_history)"
-	elif [[ "$prompt" == "models" ]]; then
-		models_response=$(curl https://api.openai.com/v1/models \
-			-sS \
-			-H "Authorization: Bearer $APIKEY_chatGPT")
-		handleError "$models_response"
-		models_data=$(echo $models_response | jq -r -C '.data[] | {id, owned_by, created}')
-		echo -e "\n${C}chatgpt$W This is a list of models currently available at OpenAI API:\n ${models_data}"
-	elif [[ "$prompt" =~ ^model: ]]; then
-		models_response=$(curl https://api.openai.com/v1/models \
-			-sS \
-			-H "Authorization: Bearer $APIKEY_chatGPT")
-		handleError "$models_response"
-		model_data=$(echo $models_response | jq -r -C '.data[] | select(.id=="'"${prompt#*model:}"'")')
-		echo -e "\n${C}chatgpt$W Complete data for model: ${prompt#*model:}\n ${model_data}"
-	else
-		# escape quotation marks
-		escaped_prompt=$(echo "$prompt" | sed 's/"/\\"/g')
-		# escape new lines
-		request_prompt=${escaped_prompt//$'\n'/' '}
+# === Inicio ===
+banner 
+echo "💬 ChatGPT CLI - Model: $MODEL"
+echo "💡 commands: 'exit', 'image: descripction', 'save' to be saved"
 
-		if [ "$CONTEXT" = true ]; then
-			# build chat context
-			if [ -z "$chat_context" ]; then
-				chat_context="$CHAT_INIT_PROMPT\nQ: $escaped_prompt"
-			else
-				chat_context="$chat_context\nQ: $escaped_prompt"	
-			fi
-			request_prompt="${chat_context//$'\n'/\\n}"	
-		fi
+select_chat
 
-		# request to OpenAI API
-		response=$(curl https://api.openai.com/v1/completions \
-			-sS \
-			-H 'Content-Type: application/json' \
-			-H "Authorization: Bearer $APIKEY_chatGPT" \
-			-d '{
-  			"model": "'"$MODEL"'",
-  			"prompt": "'"${request_prompt}"'",
-  			"max_tokens": '$MAX_TOKENS',
-  			"temperature": '$TEMPERATURE'
-			}')
-		handleError "$response"
-		response_data=$(echo $response | jq -r '.choices[].text' | sed '1,2d; s/^A://g')
-		echo -e "\n${C}chatgpt$W"
-    echo "${response_data}"|bat --style snip -f --theme 'Visual Studio Dark+'
+while true; do
+    get_prompt
+    [[ "$prompt" == "exit" ]] && break
+    [[ "$prompt" == "save" ]] && { echo "$messages" > "$CHAT_FILE"; echo "💾 Chat was saved."; continue; }
 
-		if [ "$CONTEXT" = true ]; then
-			# add response to chat context as answer
-			chat_context="$chat_context${chat_context:+\n}\nA: ${response_data//$'\n'/\\n}"
-			# check prompt length, 1 word =~ 1.3 tokens
-			# reserving 100 tokens for next user prompt
-			while (( $(echo "$chat_context" | wc -c)*1,3 > (MAX_TOKENS-100) )); do
-				# remove first/oldest QnA from prompt
-				chat_context=$(echo "$chat_context" | sed -n '/Q:/,$p' | tail -n +2)
-				# add init prompt so it is always on top
-				chat_context="$CHAT_INIT_PROMPT $chat_context"
-			done
-		fi
+    if [[ "$prompt" =~ ^image: ]]; then
+        img=$(curl -sS https://api.openai.com/v1/images/generations \
+            -H "Authorization: Bearer $API_KEY" \
+            -H "Content-Type: application/json" \
+            -d "{\"prompt\": \"${prompt#image:}\", \"n\": 1, \"size\": \"$SIZE\"}")
+        handle_error "$img"
+        url=$(echo "$img" | jq -r '.data[0].url')
+        view_image "$url"
+        continue
+    fi
 
-		timestamp=$(date +"%d/%m/%Y %H:%M")
-		echo -e "$timestamp $prompt \n$response_data \n" >>~/.chatgpt_history
-	fi
+    messages=$(jq --arg role "user" --arg content "$prompt" \
+        '. + [{"role":$role,"content":$content}]' <<< "$messages")
+
+    send_request
+
+    messages=$(jq --arg role "assistant" --arg content "$reply" \
+        '. + [{"role":$role,"content":$content}]' <<< "$messages")
+
+    if command -v bat &>/dev/null; then
+        echo "$reply" | bat --style plain --theme='Visual Studio Dark+'
+    else
+        echo -e "\n🤖 ChatGPT:\n$reply"
+    fi
+
+    echo "$messages" > "$CHAT_FILE"
 done
+
+k-boom
