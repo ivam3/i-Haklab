@@ -2,12 +2,14 @@ apache2
 clamav
 fish
 gdb
+mariadb
 nano
 neovim
 phpmyadmin
 privoxy
 proxychains-ng
 python
+radare2
 tigervnc
 tmux
 tor
