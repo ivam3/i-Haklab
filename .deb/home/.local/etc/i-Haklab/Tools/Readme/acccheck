@@ -1,0 +1,97 @@
+****** Acccheck: Ataque por Diccionario a Windows ******
+
+Hola muy buenas a todos  y todas los amantes de la seguridad informática en
+esta mi primera colaboración con fwhibbit  (la primera de muchas o eso espero),
+en esta ocasión os voy a presentar una  sencillísima pero a la vez muy
+interesante herramienta que nos permite realizar un ataque de diccionario sobre
+equipos que utilizan el protocolo SMB.
+
+El programa en cuestión es Acccheck  el cual fue creado por Faisal Dean, está
+escrito en Perl, se distribuye bajo una licencia GPLv2 , actualmente es
+mantenida por los desarrolladores de Ubuntu, su versión actual es la 0.2.1 y
+viene instalado de forma nativa en KALI Linux listo para usar.
+
+¿Qué_nos_permite_hacer_Acccheck?
+
+Bien, supongamos que estamos auditando una red y que por algún motivo
+necesitamos la contraseña de un equipo para continuar con nuestra auditoría.
+Pues en ese caso Acccheck nos viene como anillo al dedo. Pero: ¿y si no
+conocemos ni el nombre de usurario ni su dirección ip?, ¿y si necesitamos los
+usuarios y sus contraseñas de muchos equipos e incluso de todos los equipos de
+la red?, ¿podríamos escanear más de un host con una simple orden desde la
+terminal o estamos limitados a ir uno a uno?
+
+Acccheck es una herramienta muy sencilla pero potente y debido a que utiliza
+ataques por diccionario realmente solo necesitamos conocer cuál es la red que
+vamos a atacar  (192.168.1.0/24, 192.168.10.0/24) y tener listos los tres
+diccionarios que vamos a utilizar para atacar todos los equipos que necesitemos
+(el diccionario de posibles contraseñas, el de posibles usuarios, y uno de
+direcciones ip). Si conocéis la dirección ip de un equipo no os haria falta el
+diccionario correspondiente, lo mismo sucede con las el nombre de usuario y la
+contraseña.
+
+Ahora que ya sabéis todo lo que puede dar de si esta herramienta vamos a ver todos sus parámetros de forma detallada:
+    * -t: Permite atacar una única dirección IP
+    * -T: Permite atacar a múltiples direcciones IP
+    * -p: Permite probar una única contraseña
+    * -P: Permite probar múltiples contraseñas
+    * -u: Permite probar con un solo nombre de usuario
+    * -U: Permite probar con múltiples usuarios
+    * -v: Activa el modo verbose
+
+Una opción muy interesante que viene por defecto en Acccheck es la de encontrar
+el usuario administrador cuya contraseña está en blanco.
+Para ello basta con escribir en la terminal  lo siguiente: acccheck -t 
+192.168.1.0
+
+Nota: cómo podemos observar debemos de prestar especial atención a las
+mayúsculas y minúsculas siendo las primeras para indicar un la dirección de un
+diccionario o lista y la última para indicar un solo parámetro.
+Además nos podemos ahorrar el trabajo de escribir la dirección de un
+diccionario, basta con arrastrarlo y soltarlo en la terminal.
+
+Algunos_ejemplos_de_uso:
+    * Averiguar la contraseña del usuario Administrador del equipo cuya ip es la 192.168.1.3:
+acccheck  –t 192.168.1.3 –u Administrador –P ‘/root/Escritorio/diccionario_contraseñas’
+    * Averiguar el nombre de todos los usuarios sus respectivas contraseñas   y
+      cuáles son sus direcciones ip:
+
+acccheck –T ‘/root/Escritorio/listado_ips’ –U ‘/root/Escritorio/diccionario_usuarios’ –P ‘/root/Escritorio/diccionario_contraseñas’
+
+Si en el futuro tenéis alguna duda siempre podéis consultar el manual escribiendo acccheck en la terminal.
+ 
+¿Acccheck se puede utilizar para auditorias?
+->
+Como hemos visto un poco más arriba Acccheck nos permite listar todos los
+equipos cuyos usuario Administrador no tiene una contraseña algo que nos pone
+los pelos de punta a todos los administradores de sistemas pero ¿se podría usar
+para auditorias? sí, Para comprobar la robustez de las contraseñas en pequeñas
+redes o empresa sin un servidor de Active Directory o políticas de grupo que
+administren las de las contraseñas (mínimo de caracteres, mayúsculas,
+caracteres especiales,… etc).
+
+¿Qué_utilidad_tienen_esos_datos?
+    * Si tenemos acceso físico nos podríamos simplemente logear con la
+      información que hemos obtenido al realizar nuestro ataque.
+    * Para escalar privilegios siempre y cuando consigamos una cuenta con
+      permisos de administrador.
+    * Podríamos unirnos al dominio y tener acceso a todos los recursos que
+      tenga el usuario suplantado como por ejemplo ver el contenido de carpetas
+      compartidas, impresoras en red.
+
+Incluso si la cuenta del usuario al que estamos suplantando es un perfil móvil
+seria como si fuéramos uno empleado más de la empresa.
+
+Ejemplo_práctico
+
+Un ejemplo de un caso real de uso sobre win10 con todas las actualizaciones
+hasta la fecha y el antivirus AVG activo junto con el firewall de Windows 10.
+Ventajas _y_desventajas_de_usar_esta_herramienta
+Ventajas                                     Desventajas
+Fácil de usar
+Instalada de Kali Linux                      No son posbiles ataques en redes
+Sirve contra la más reciente versión de      IPv6
+Windows
+
+Es configurable el número de víctimas
+Y para finalizar recordad: con paciencia y un buen diccionerio todo es posible

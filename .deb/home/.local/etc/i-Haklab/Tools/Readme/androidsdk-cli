@@ -1,0 +1,38 @@
+Android SDK para line a de comandos (CLI)
+
+Command Line Tools (CLI) describe cómo instalar y utilizar las herramientas de línea de comandos para desarrollar aplicaciones Android sin necesidad de Android Studio. Estas herramientas son esenciales para tareas como la compilación, empaquetado y despliegue de aplicaciones, así como para la gestión de dispositivos y emuladores.
+
+Instalación:
+```
+apt install androidsdk-cli
+```
+
+- Herramientas principales:
+
+sdkmanager: Utilízalo para instalar, actualizar y desinstalar paquetes del SDK, incluyendo plataformas Android, herramientas de compilación, y otros componentes. 
+
+avdmanager: Crea, elimina y administra emuladores Android Virtual Devices (AVDs). 
+
+adb: Android Debug Bridge. Permite la comunicación con dispositivos y emuladores para depuración, instalación de aplicaciones y otras operaciones. 
+
+emulator: Herramienta para ejecutar y gestionar emuladores Android. 
+
+- Uso básico:
+
+Para instalar un paquete, ejecuta sdkmanager "nombre_del_paquete". Por ejemplo, sdkmanager "platform-tools" instalará las herramientas de la plataforma. 
+
+Para crear un AVD, usa avdmanager create avd -n nombre_del_avd -k "nombre_del_paquete_de_la_plataforma". Por ejemplo, avdmanager create avd -n my_avd -k "system-images;android-30;google_apis;x86_64". 
+
+Para iniciar un emulador, usa emulator -avd nombre_del_avd. Por ejemplo, emulator -avd my_avd. 
+Ejemplos de comandos:
+
+    sdkmanager --list: Muestra la lista de paquetes disponibles.
+    adb devices: Lista los dispositivos y emuladores conectados.
+    adb install mi_app.apk: Instala la aplicación mi_app.apk en un dispositivo conectado.
+    adb shell: Accede a la consola del dispositivo/emulador. 
+
+- Consideraciones adicionales:
+
+Es recomendable usar una versión específica de las herramientas de línea de comandos para la automatización de compilaciones y garantizar la estabilidad. La instalación de las herramientas de línea de comandos también se puede realizar a través de Android Studio.
+
+Las herramientas de línea de comandos se actualizan junto con Android Studio. 

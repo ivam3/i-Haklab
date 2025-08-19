@@ -1,0 +1,257 @@
+apksigner
+
+==========================================================================================================
+
+La herramienta `apksigner`, disponible en la revisión 24.0.3 y versiones posteriores de las herramientas de compilación del SDK de Android, te permite firmar APKs y confirmar que la firma del APK se verificará correctamente en todas las versiones de la plataforma de Android compatibles con ese APK.
+
+En esta página, se presenta una breve guía sobre cómo usar la herramienta y se brinda referencia para las diferentes opciones de línea de comandos que admite la herramienta. Si quieres obtener una descripción más completa de cómo se usa la herramienta `apksigner` para firmar tus APKs, consulta [Cómo firmar tu app](https://developer.android.com/studio/publish/app-signing?hl=es-419).
+
+**Precaución:** Si firmas tu APK con `apksigner` y haces cambios adicionales en él, se invalidará la firma. Si usas [`zipalign`](https://developer.android.com/studio/command-line/zipalign?hl=es-419) para alinear el APK, úsalo antes de firmarlo.
+
+Uso
+---
+
+### Cómo firmar un APK
+
+La sintaxis para firmar un APK con la herramienta `apksigner` es la siguiente:
+
+apksigner sign --ks keystore.jks |
+  --key key.pk8 --cert cert.x509.pem
+  \[signer\_options\] app-name.apk
+
+Cuando firmes un APK con la herramienta `apksigner`, deberás proporcionar la clave privada y el certificado del firmante. Puedes incluir esta información de dos maneras diferentes:
+
+*   Especifica un archivo de almacén de claves mediante la opción `--ks`.
+*   Especifica el archivo de clave privada y el archivo de certificado por separado mediante las opciones `--key` y `--cert`, respectivamente. El archivo de clave privada debe usar el formato PKCS #8, y el de certificado, el formato X.509.
+
+Por lo general, firmas un APK con un solo firmante. Si necesitas firmar un APK con varios firmantes, usa la opción `--next-signer` para separar el conjunto de [opciones generales](#options-sign-general) que se aplicarán a cada firmante:
+
+apksigner sign \[signer\_1\_options\] --next-signer \[signer\_2\_options\] app-name.apk
+
+### Cómo verificar la firma de un APK
+
+La sintaxis para confirmar la verificación correcta de la firma del APK en las plataformas compatibles es la siguiente:
+
+apksigner verify \[options\] app-name.apk
+
+### Cómo rotar claves de firma
+
+La sintaxis para rotar un _lineage de certificado de firma_ (o una nueva secuencia de firmas) es la siguiente:
+
+$ apksigner rotate --in /path/to/existing/lineage \\
+  --out /path/to/new/file \\
+  --old-signer --ks old-signer-jks \\
+  --new-signer --ks new-signer-jks
+
+Opciones
+--------
+
+En las siguientes listas, se incluye el conjunto de opciones para cada comando que admite la herramienta `apksigner`.
+
+### Comando de firma
+
+El comando de firma `apksigner` tiene las siguientes opciones.
+
+#### Opciones generales
+
+Las siguientes opciones especifican configuraciones básicas que pueden aplicarse a un firmante:
+
+`--out <apk-filename>`
+
+Corresponde a la ubicación donde quieras guardar el APK firmado. Si esta opción no se proporciona explícitamente, el paquete de APK se firma en el lugar y se reemplaza el archivo APK de entrada.
+
+`--min-sdk-version <integer>`
+
+Corresponde al nivel de API de framework de Android más bajo que usa `apksigner` para confirmar que se verificará la firma del APK. Los valores más altos permiten que la herramienta use parámetros de seguridad más fuertes cuando firma la app, pero limitan la disponibilidad del APK a dispositivos que ejecutan versiones más recientes de Android. De forma predeterminada, `apksigner` usa el valor del atributo `minSdkVersion` del archivo de manifiesto de la app.
+
+`--max-sdk-version <integer>`
+
+Corresponde al nivel de API de marco de trabajo de Android más alto que usa `apksigner` para confirmar que se verificará la firma del APK. De forma predeterminada, la herramienta usa el nivel de API más alto posible.
+
+`--rotation-min-sdk-version <integer>`
+
+Corresponde al nivel de API más bajo que debe usar la clave de firma rotada del APK para producir la firma del APK. La clave de firma original (sin rotar) del APK se usará en todas las versiones anteriores de la plataforma. De forma predeterminada, las claves de firma rotadas, que son compatibles con dispositivos que ejecutan Android 13 (nivel de API 33) o versiones posteriores, se usan con el bloque de firma v3.1.
+
+**Nota:** Si tu app recibió la firma de una clave de firma rotada en un dispositivo que ejecuta Android 12L (nivel de API 32) o versiones anteriores, debes usar `--rotation-min-sdk-version 28` para seguir firmando tu app con la clave de firma rotada para Android 9 (nivel de API 28).
+
+`--v1-signing-enabled <true | false>`
+
+Determina si `apksigner` firma el paquete de APK mediante el esquema de firma tradicional basado en JAR. De forma predeterminada, la herramienta utiliza los valores de `--min-sdk-version` y `--max-sdk-version` para decidir cuándo aplicar este esquema de firma.
+
+`--v2-signing-enabled <true | false>`
+
+Determina si `apksigner` firma el paquete de APK mediante el [Esquema de firma de APK v2](https://developer.android.com/about/versions/nougat/android-7.0?hl=es-419#apk_signature_v2). De forma predeterminada, la herramienta utiliza los valores de `--min-sdk-version` y `--max-sdk-version` para decidir cuándo aplicar este esquema de firma.
+
+`--v3-signing-enabled <true | false>`
+
+Determina si `apksigner` firma el paquete de APK mediante el [Esquema de firma de APK v3](https://source.android.com/security/apksigning/v3?hl=es-419). De forma predeterminada, la herramienta utiliza los valores de `--min-sdk-version` y `--max-sdk-version` para decidir cuándo aplicar este esquema de firma.
+
+`--v4-signing-enabled <true | false | only>`
+
+Determina si `apksigner` firma el paquete de APK mediante el [Esquema de firma de APK v4](https://developer.android.com/about/versions/11/features?hl=es-419#signature-scheme-v4). Este esquema produce una firma en un archivo separado (`apk-name.apk.idsig`). Si `true` y el APK no están firmados, se genera una firma v2 o v3 en función de los valores de `--min-sdk-version` y `--max-sdk-version`. Luego, el comando produce el archivo `.idsig` en función del contenido del APK firmado.
+
+Usa `only` para generar solo la firma v4 sin modificar el APK ni las firmas que tenía antes de la invocación. `only` falla si el APK ya no tiene una firma v2 o v3, o si la firma usó una clave diferente de la que se proporcionó para la invocación actual.
+
+De forma predeterminada, la herramienta utiliza los valores de `--min-sdk-version` y `--max-sdk-version` para decidir cuándo aplicar este esquema de firma.
+
+`-v`, `--verbose`
+
+Usa el modo de salida detallado.
+
+#### Opciones por firmante
+
+Las siguientes opciones especifican la configuración de un firmante en particular. No son necesarias si firmas tu app con un solo firmante.
+
+`--next-signer <signer-options>`
+
+Se usa para especificar diferentes opciones generales para cada firmante.
+
+`--v1-signer-name <basename>`
+
+Corresponde al nombre base de los archivos que componen la firma basada en JAR para el firmante actual. De forma predeterminada, `apksigner` usa el alias de clave del almacén de claves o el nombre base del archivo de clave para este firmante.
+
+#### Opciones de clave y certificado
+
+Las siguientes opciones especifican la clave privada y el certificado del firmante:
+
+`--ks <filename>`
+
+La clave privada y la cadena de certificados del firmante residen en el archivo de almacén de claves específico basado en Java. Si el nombre de archivo se configura en `"NONE"`, el almacén de claves que contiene la clave y el certificado no necesita un archivo especificado, como es el caso de algunos almacenes de claves PKCS #11.
+
+`--ks-key-alias <alias>`
+
+Corresponde al nombre del alias que representa la clave privada del firmante y los datos del certificado dentro del almacén de claves. Si el almacén de claves asociado con el firmante contiene varias claves, debes especificar esta opción.
+
+`--ks-pass <input-format>`
+
+Corresponde a la contraseña para el almacén de claves que contiene la clave privada y el certificado del firmante. Debes proporcionar una contraseña para abrir un almacén de claves. La herramienta `apksigner` admite los siguientes formatos:
+
+*   `pass:<password>`: La contraseña se proporciona intercalada con el resto del comando `apksigner sign`.
+*   `env:<name>`: La contraseña se almacena en la variable de entorno determinada.
+*   `file:<filename>`: La contraseña se almacena como una sola línea en el archivo determinado.
+*   `stdin`: La contraseña se proporciona como una sola línea en el flujo de entrada estándar. Este es el comportamiento predeterminado de `--ks-pass`.
+
+**Nota:** Si incluyes varias contraseñas en el mismo archivo, especifícalas en líneas separadas. La herramienta `apksigner` asocia las contraseñas con los firmantes de un APK en función del orden en que especificas los firmantes. Si proporcionaste dos contraseñas para un firmante, `apksigner` interpretará que la primera es la contraseña del almacén de claves, y la segunda, la de la clave.
+
+`--pass-encoding <charset>`
+
+Incluye las codificaciones de caracteres especificadas (como `ibm437` o `utf-8`) cuando se intenta administrar contraseñas que contienen caracteres que no son ASCII.
+
+Keytool a menudo convierte la contraseña con el charset predeterminado de la consola a fin de encriptar los almacenes de claves. De forma predeterminada, `apksigner` intenta desencriptarlos mediante varios formularios de la contraseña:
+
+*   El formulario Unicode
+*   El formulario codificado con el charset predeterminado de JVM
+*   En Java 8 y versiones anteriores, el formulario codificado con el charset predeterminado de la consola
+
+En Java 9, `apksigner` no puede detectar el charset de la consola. Es posible que debas especificar `--pass-encoding` cuando se use una contraseña que no sea ASCII. Además, puede que debas especificar esta opción con los almacenes de claves que creó Keytool en un SO o configuración regional diferente.
+
+`--key-pass <input-format>`
+
+Corresponde a la contraseña para la clave privada del firmante, que es necesaria si la clave privada está protegida por contraseña. La herramienta `apksigner` admite los siguientes formatos:
+
+*   `pass:<password>`: La contraseña se proporciona intercalada con el resto del comando `apksigner sign`.
+*   `env:<name>`: La contraseña se almacena en la variable de entorno determinada.
+*   `file:<filename>`: La contraseña se almacena como una sola línea en el archivo determinado.
+*   `stdin`: La contraseña se proporciona como una sola línea en el flujo de entrada estándar. Este es el comportamiento predeterminado de `--key-pass`.
+
+`--ks-type <algorithm>`
+
+Corresponde al tipo o algoritmo asociado con el almacén de claves que contiene la clave privada y el certificado del firmante. De forma predeterminada, `apksigner` usa el tipo definido como la constante `keystore.type` en el archivo de propiedades de seguridad.
+
+`--ks-provider-name <name>`
+
+Corresponde al nombre del proveedor de JCA que se usará al solicitar la implementación del almacén de claves del firmante. De forma predeterminada, `apksigner` usa el proveedor de mayor prioridad.
+
+`--ks-provider-class <class-name>`
+
+Corresponde al nombre de clase completamente calificado del proveedor de JCA que se usará al solicitar la implementación del almacén de claves del firmante. Esta opción sirve como alternativa para `--ks-provider-name`. De forma predeterminada, `apksigner` usa el proveedor especificado con la opción `--ks-provider-name`.
+
+`--ks-provider-arg <value>`
+
+Corresponde a un valor de string para pasar como argumento al constructor de la clase de proveedor de JCA; la clase en sí se define con la opción `--ks-provider-class`. De forma predeterminada, `apksigner` usa el constructor de 0 argumentos de la clase.
+
+`--key <filename>`
+
+Corresponde al nombre del archivo que contiene la clave privada del firmante. Este archivo debe usar el formato DER PKCS #8. Si la clave está protegida con contraseña, `apksigner` solicita la contraseña con la entrada estándar, a menos que especifiques un tipo diferente de formato de entrada con la opción `--key-pass`.
+
+`--cert <filename>`
+
+Corresponde al nombre del archivo que contiene la cadena de certificados del firmante. Este archivo debe usar el formato DER o PEM X.509.
+
+### Comando de verificación
+
+El comando de verificación de `apksigner` tiene las siguientes opciones.
+
+`--print-certs`
+
+Muestra información sobre los certificados de firma del APK.
+
+`--min-sdk-version <integer>`
+
+Corresponde al nivel de API de framework de Android más bajo que usa `apksigner` para confirmar que se verificará la firma del APK. Los valores más altos permiten que la herramienta use parámetros de seguridad más fuertes cuando firma la app, pero limitan la disponibilidad del APK a dispositivos que ejecutan versiones más recientes de Android. De forma predeterminada, `apksigner` usa el valor del atributo `minSdkVersion` del archivo de manifiesto de la app.
+
+`--max-sdk-version <integer>`
+
+Corresponde al nivel de API de marco de trabajo de Android más alto que usa `apksigner` para confirmar que se verificará la firma del APK. De forma predeterminada, la herramienta usa el nivel de API más alto posible.
+
+`-v`, `--verbose`
+
+Usa el modo de salida detallado.
+
+`-Werr`
+
+Trata las alertas como errores.
+
+Ejemplos
+--------
+
+Los siguientes son ejemplos que usan `apksigner`.
+
+### Cómo firmar un APK
+
+Firma un APK con `release.jks`, que es la única clave en el almacén de claves:
+
+$ apksigner sign --ks release.jks app.apk
+
+Firma un APK con una clave privada y un certificado, que se almacenan como archivos separados:
+
+$ apksigner sign --key release.pk8 --cert release.x509.pem app.apk
+
+Firma un APK con dos claves:
+
+$ apksigner sign --ks first-release-key.jks --next-signer --ks second-release-key.jks app.apk
+
+Firma un APK con una clave de firma rotada y el SDK de orientación de rotación versión 28 o superior:
+
+$ apksigner sign --ks release.jks --next-signer --ks release2.jks \\
+  --lineage /path/to/signing/history/lineage app.apk \\
+  --rotation-min-sdk-version 28
+
+Firma un APK con una clave de firma rotada y el SDK de orientación de rotación versión 33 o superior:
+
+$ apksigner sign --ks release.jks --next-signer --ks release2.jks \\
+  --lineage /path/to/signing/history/lineage app.apk
+
+### Cómo verificar la firma de un APK
+
+Comprueba si se espera que las firmas del APK se confirmen como válidas en todas las plataformas de Android que admite el APK:
+
+$ apksigner verify app.apk
+
+Comprueba si se espera que las firmas del APK se confirmen como válidas en Android 4.0.3 (nivel de API 15) y versiones posteriores:
+
+$ apksigner verify --min-sdk-version 15 app.apk
+
+### Cómo rotar claves de firma
+
+Habilita un lineage de certificado de firma que admita la rotación de claves:
+
+$ apksigner rotate --out /path/to/new/file --old-signer \\
+    --ks release.jks --new-signer --ks release2.jks
+
+Vuelve a girar tus claves de firma:
+
+$ apksigner rotate --in /path/to/existing/lineage \\
+  --out /path/to/new/file --old-signer --ks release2.jks \\
+  --new-signer --ks release3.jks
+
