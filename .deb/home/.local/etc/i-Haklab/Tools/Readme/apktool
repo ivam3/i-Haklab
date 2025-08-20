@@ -1,0 +1,108 @@
+APKTOOL
+
+Decompile
+
+We can download the APK of any app from ApkMirror.com or other sites. Here, I am using the signed apk of my sample app “**experiment\_app.apk**” First, we need to decompile this APK. We can use the following command to decompile the APK using **apktool**.
+
+apktool d  \[apk location\]  -o \[output folder location where the decompiled files need to be stored\]
+
+Press enter or click to view image in full size
+
+Demo : command to decompile the apk
+
+After executing the above command, apktool created a new folder named “**experimentapp\_decompiled”** in my documents directory.
+
+Press enter or click to view image in full size
+
+newly created decompiled folder by apktool
+
+> **Note**: When specifying the folder location to store the decompiled files, avoid providing an existing folder name. Instead, provide a new folder name. Apktool will automatically create the folder and copy the files into it.
+
+If you don’t want to decompile the resource files from the apk, use this command instead
+
+apktool d -r -s \[apk location\]  -o \[output folder location where the decompiled files need to be stored\]
+
+**_Stage 2 : Modifying files_**
+
+I found the **strings.xml** and **colours.xml** in our decompiled files folder
+
+Press enter or click to view image in full size
+
+**/Users/matrix/Documents/experimentapp\_decompiled/res/values**
+
+We can open these resource files in Android Studio by dragging them into the window or by using any XML editor.  
+I changed the background color and text color to **Red** and **Yellow**, respectively. Then, I changed the text to **“Recompiled app”**.
+
+**_Stage 3 : Recompile the decompiled resource to APK_**
+
+After making the changes I am going to recompile the decompiled files to APK using the command:
+
+apktool b  \[decompiled files root folder location\]
+
+Press enter or click to view image in full size
+
+Demo : command to recompile the decompiled files to apk
+
+Apktool will now compile the files and generate an APK. It will be stored under a new folder named **“dist”** in the same root folder where we stored the decompiled files.
+
+Ah.. Ok I can see that..
+
+Press enter or click to view image in full size
+
+Apk location
+
+**_Stage 4 : Zipalign the apk for the optimal loading_**
+
+Zipalign is a zip archive alignment tool that helps ensure that all uncompressed files in the archive are aligned relative to the start of the file. Zipalign tool can be found in the **“Build Tools”** folder within the Android SDK path.
+
+Press enter or click to view image in full size
+
+zipalign tool location inside buildtools folder
+
+To zip align the **APK** , run the following command:
+
+zipalign  -v  4  \[your recompiled apk \]   \[location to store zip aligned apk with apk name and extension\]
+
+Press enter or click to view image in full size
+
+Demo : command to zipalign the apk
+
+**_Stage 5 : Create a new keystore file for signing the zip aligned APK_**
+
+I used the following command to create a keystore file using keytool,this will prompt you to enter the password and details for the keystore
+
+keytool -genkey -v -keystore \[your keystore name\] -alias alias\_name -keyalg RSA -keysize 2048 -validity 10000
+
+Command to generate keystore file using keytool utility
+
+Sign the app using apksigner_**
+
+Apksigner tool, available in revision 24.0.3 and higher of the Android SDK Build Tools, lets you sign APKs and confirm that an APK’s signature will be verified successfully on all versions of the Android platform supported by that APK.  
+Apk signer can be found inside the “build tools” folder in the Android SDK path, along with ZipAlign.
+
+Apksigner in build tools folder
+
+Use the following command to sign the APK using apksigner
+
+apksigner  sign --ks \[your keystore name\] --v1-signing-enabled true --v2-signing-enabled true \[your zip aligned apk location\]
+
+Demo : command to sign the apk
+
+> Note: We have to use apksigner instead of traditional jarsigner ,to make the app work on newer versions of android
+
+Verify the signed APK_**
+
+The zip-aligned — signed APK can be verified using the same apksigner.
+
+apksigner verify \[signed apk location\]
+
+Command to verify the signed apk
+
+Install the app_**
+
+Install the verified apk using the adb command or manual install
+
+adb install /Users/matrix/Documents/APK/experimentapp\_zipaligned.apk
+
+Command to install the apk
+

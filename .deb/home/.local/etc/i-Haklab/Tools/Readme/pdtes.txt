@@ -1,5 +1,3 @@
-apktool
-appshark
 bash-obfuscate
 bitb-framework
 bloodhound
