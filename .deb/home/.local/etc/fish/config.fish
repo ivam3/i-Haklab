@@ -27,6 +27,7 @@ function on_exit --on-event fish_exit
 end
 
 set USER i-Haklab
+set GPG_TTY $(tty)
 set fish_theme will
 set -g theme_nerd_fonts yes
 set DISPLAY :0
