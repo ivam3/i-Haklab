@@ -1,0 +1,74 @@
+📘 Manual simple: AXMLPrinter2.jar
+
+🔹 ¿Qué es?
+
+AXMLPrinter2.jar es una herramienta en Java que sirve para convertir el archivo AndroidManifest.xml de formato binario (AXML) a un formato legible (texto XML) y viceversa.
+
+Esto es útil porque:
+
+Los APKs traen el AndroidManifest.xml en binario AXML.
+
+Para leer, modificar o analizar permisos y configuraciones, necesitamos verlo en texto plano XML.
+
+
+
+---
+
+🔹 ¿Cómo se usa?
+
+1. Necesitas Java instalado (java -version para comprobar).
+
+
+2. Descarga AXMLPrinter2.jar y guárdalo en una ruta accesible.
+
+
+3. Ejecuta el JAR con java -jar pasando como argumento el AndroidManifest.xml que quieras analizar.
+
+
+
+
+---
+
+🔹 Comandos básicos
+
+1️⃣ Extraer el AndroidManifest.xml de un APK
+
+unzip app.apk AndroidManifest.xml
+
+2️⃣ Convertir de binario a legible (texto)
+
+java -jar AXMLPrinter2.jar AndroidManifest.xml > AndroidManifest_text.xml
+
+👉 Ahora puedes abrir AndroidManifest_text.xml con cualquier editor y leer los permisos, activities, services, etc.
+
+3️⃣ Ver permisos rápidamente
+
+grep "uses-permission" AndroidManifest_text.xml
+
+
+---
+
+🔹 Ejemplo práctico
+
+Supongamos que tenemos myapp.apk y queremos revisar qué permisos usa:
+
+unzip myapp.apk AndroidManifest.xml
+java -jar AXMLPrinter2.jar AndroidManifest.xml > manifest_legible.xml
+cat manifest_legible.xml | grep permission
+
+📌 Salida de ejemplo:
+
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+<uses-permission android:name="android.permission.CAMERA"/>
+
+
+---
+
+🔹 Nota importante
+
+AXMLPrinter2.jar solo convierte de binario a texto legible.
+👉 Si haces cambios al XML de salida, no se puede volver a convertir directamente a binario con esta herramienta. Para reempaquetar el manifiesto necesitas usar apktool o librerías como androguard.
+
+
+---

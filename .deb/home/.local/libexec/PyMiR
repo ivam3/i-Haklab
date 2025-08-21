@@ -51,7 +51,7 @@ usage() {
 Requirements(){
 	printf "$G\n(➤_)$W Installing requirements (It could take a while)...\n"
 	
-    for req in build-essential python python-pip python2 curl tar wget ruby clang make cmake nodejs pkg-config openblas libgmp libmpc libmpc-static libmpfr libtool libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static libjpeg-turbo libpng libzmq; do
+    for req in tur-repo build-essential python python-pip python2 curl tar wget ruby clang make cmake nodejs pkg-config openblas libgmp libmpc libmpc-static libmpfr libtool libxml2 libxml2-static libxml2-utils libxslt libxslt-static libsodium libsodium-static libjpeg-turbo libpng libzmq valac; do
 
 		if [[ ! $(pkg list-installed 2>/dev/null|grep $req|awk -F "/" '{print $1}') ]]; then
 			yes|apt install $req >/dev/null 2>/dev/null
@@ -106,19 +106,26 @@ for module in $(cat ${TMPDIR}/requirements.tmp);do
 			rm -rf $dir 
             ;; 
 
-        electrum|opencv|asciinema|matplotlib|scipy|apsw|bcrypt|numpy|pandas|tldp|apt|cryptography|numpy|pillow|tkinter|xcbgen)
+        electrum|opencv|asciinema|matplotlib|scipy|apsw|bcrypt|numpy|pandas|tldp|apt|contourpy|cryptography|numpy|pillow|tkinter|xcbgen) # PKGs to install over APT
 
-            for i in apsw bcrypt numpy tldp apt cryptography numpy pillow tkinter xcbgen; do 
-                module=python-$i 
-            done 
-
-            [[ $module == opencv ]] && { module=opencv-python;}
-			[[ $module == scipy ]] && { 
-                bash <(curl -fsSL "https://its-pointless.github.io/setup-pointless-repo.sh") 
-                [[ $py == "python2" ]] && { module=python2-scipy;};
-            }
-			pkg install $module >/dev/null 2>/dev/null
-			;; 
+            case $module in 
+                apsw|apt|bcrypt|contourpy|cryptography|numpy|pillow|tkinter|tldp|xcbgen)
+                    module=python-$i
+                    ;;
+                opencv)
+                    module=opencv-python
+                    ;;
+                scipy) 
+                    bash <(curl -fsSL "https://its-pointless.github.io/setup-pointless-repo.sh") 
+                    [[ $py == "python2" ]] && { 
+                        module=python2-scipy;
+                    } || {
+                        module=python-scipy;
+                    } 
+                ;; 
+            esac
+            pkg install $module >/dev/null 2>/dev/null 
+            ;; 
 
         jupyter)
             sysconf="$(find $LIBPY -name "_sysconfigdata*.py")"
