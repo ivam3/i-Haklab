@@ -14,8 +14,12 @@ function apt
                 case bettercap aquatone
 					echo -en "\e[31mE:\e[0m $i is a ruby gem, you should try it with \e[33m'gem install $i'\e[0m\n"
 				
-				case bash-obfuscate localtunnel twifo-cli
-					echo -en "\e[31mE:\e[0m $i is a nodejs module, you should try it with \e[33m'npm install -g $i'\e[0m\n"
+				case bash-obfuscate localtunnel n8n twifo-cli
+                    if [ "$i" = "n8n" ]
+                        set arg2 "--sqlite=\$PREFIX/bin/sqlite3"
+                    end
+
+					echo -en "\e[31mE:\e[0m $i is a nodejs module, you should try it with \e[33m'npm install -g $i $arg2'\e[0m\n"
 
 				case omf
 					if command -v fish >/dev/null

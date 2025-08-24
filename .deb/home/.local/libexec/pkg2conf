@@ -69,6 +69,18 @@ case "$1" in
         mariadb-upgrade
         ;;
 
+    n8n)
+        for i in "nodejs-lts python binutils make clang pkg-config libsqlite ndk-sysroot" ; do 
+            yes|apt install $i >/dev/null 2>/dev/null
+        done 
+        npm install -g pm2 
+        mkdir -p ${HOME}/.n8n 
+        echo "[📢] Credits to @Maka {https://github.com/kuromi04}"
+### ADD THIS INSTRUCCION IN I-HAKLAB ABOUT N8N FILE ########################################
+#        grep -q "pm2 resurrect" "$HOME/.bashrc" || echo "pm2 resurrect" >> "$HOME/.bashrc"#
+############################################################################################
+        ;;
+
     nano)
 		cat <<- CONF > $HOME/.nanorc
 set linenumbers
@@ -229,4 +241,6 @@ CONF
 	 chmod 711 ${PREFIX}/bin/termux-url-opener
 		;; # --->  Nuevo comando 
 esac
-echo "Done"
+
+echo "[💡] Run 'i-Haklab about $1' to get more information about this tool\n"
+echo "[✔] DONE."

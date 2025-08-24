@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.10.0",
+  "version": "3.10.1",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -34,6 +34,7 @@
 		"home/.config/fish/functions/df.fish": "/data/data/com.termux/files/home/.config/fish/functions/df.fish",
 		"home/.config/fish/functions/du.fish": "/data/data/com.termux/files/home/.config/fish/functions/du.fish",
 		"home/.config/fish/functions/apt.fish": "/data/data/com.termux/files/home/.config/fish/functions/apt.fish",
+		"home/.config/fish/functions/npm.fish": "/data/data/com.termux/files/home/.config/fish/functions/npm.fish",
 		"home/.config/fish/functions/rmcache.fish": "/data/data/com.termux/files/home/.config/fish/functions/rmcache.fish",
 		"home/.config/fish/functions/adminfiles.fish": "/data/data/com.termux/files/home/.config/fish/functions/adminfiles.fish",
 		"home/.config/fish/fish_variables": "/data/data/com.termux/files/home/.config/fish/fish_variables",
