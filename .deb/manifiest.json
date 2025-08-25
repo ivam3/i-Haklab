@@ -897,6 +897,7 @@
 		"home/.local/libexec/i-Haklab/show": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/show",
 		"home/.local/libexec/i-Haklab/payvid": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/payvid",
 		"home/.local/libexec/i-Haklab/setbanner": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/setbanner",
+		"home/.local/libexec/i-Haklab/handler": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/sethandler",
 		"home/.local/libexec/i-Haklab/passwd": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/passwd",
 		"home/.local/libexec/i-Haklab/pd": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/pd",
 		"home/.local/libexec/i-Haklab/ngroklink": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/ngroklink",
