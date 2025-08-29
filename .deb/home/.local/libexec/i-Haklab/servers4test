@@ -94,7 +94,7 @@ INSERT INTO heroes (login, password, secret) VALUES ('neo', 'trinity', 'Oh why d
                     wget --quiet "https://downloads.sourceforge.net/project/bwapp/bWAPP/bWAPPv2.2/bWAPPv2.2.zip?ts=gAAAAABomLffllceHOtpSb5A2EHmL7RYanaLpENJ4oYBIAadgUpSUsqc6Q-z3LIHYmndFkhP1EQZoiEq-nnzCZsr7CiiGFkq6A%3D%3D&use_mirror=versaweb&r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fbwapp%2Ffiles%2FbWAPP%2FbWAPPv2.2%2F" -O $rootdir/$answ.zip 2>$LOGFILE
                     [[ -e $rootdir/$answ.zip ]] && { 
                         unzip -qq $rootdir/$answ.zip -d $rootdir/ 2>$LOGFILE
-                        find $rootdir -type f | xargs rm 2>/dev/null
+                        ls $rootdir | xargs rm 2>/dev/null
                     }
                     sed -i "20s/\"localhost\"/\"127.0.0.1\"/" $rootdir/$answ/admin/settings.php 2>$LOGFILE
                     sed -i "22s/\"\"/\"root\"/" $rootdir/$answ/admin/settings.php 2>$LOGFILE
