@@ -296,9 +296,9 @@ pass(){
 			do
 				termux-fingerprint -t "i-Haklab on Termux" -s "@Ivam3byCinderella" > $TMPDIR/lock.tmp
 #				termux-toast -b red Access denied
-			done;	rm $TMPDIR/lock.tmp;
+			done
+            rm $TMPDIR/lock.tmp;
 #			termux-toast -b green Welcome Back $user;
-			banner;
 		}
 
 		[[ $1 = Disable ]] && {
