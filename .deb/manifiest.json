@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.10.1",
+  "version": "3.10.2",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -20,7 +20,7 @@
 		"home/.config/fish/functions/LOCALHOST.fish": "/data/data/com.termux/files/home/.config/fish/functions/LOCALHOST.fish",
 		"home/.config/fish/functions/openvpn.fish": "/data/data/com.termux/files/home/.config/fish/functions/openvpn.fish",
 		"home/.config/fish/functions/osrframework.fish": "/data/data/com.termux/files/home/.config/fish/functions/osrframework.fish",
-		"home/.config/fish/functions/phantom.fish": "/data/data/com.termux/files/home/.config/fish/functions/phantom.fish",
+		"home/.config/fish/functions/phantom-ps.fish": "/data/data/com.termux/files/home/.config/fish/functions/phantom-ps.fish",
 		"home/.config/fish/functions/postgresql.fish": "/data/data/com.termux/files/home/.config/fish/functions/postgresql.fish",
 		"home/.config/fish/functions/serverapache.fish": "/data/data/com.termux/files/home/.config/fish/functions/serverapache.fish",
 		"home/.config/fish/functions/telegram.fish": "/data/data/com.termux/files/home/.config/fish/functions/telegram.fish",
