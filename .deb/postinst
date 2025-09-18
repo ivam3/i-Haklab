@@ -152,6 +152,7 @@ echo -en "[deleted]
     ╰──➤ Commands recently added:
     |\t\t• cmd 
     |\t\t• usbtest
+    |\t\t• phantom-ps
     |\t\t• gitbrowsering
     |\t\t• i-Haklab chatGPT
     ╰──➤ New features:
