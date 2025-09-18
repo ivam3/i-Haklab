@@ -231,8 +231,8 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰mypip───────────────────────────➤ Show your public internet protocol
 ╰openvpn─────────────────────────➤ Open openvpn application
 ╰omf─────────────────────────────➤ Change Oh-my-fish theme
-╰phantom─────────────────────────➤ Change the limit of phantom process at 2147483647 
-|  ╰─────────────────────────────{ A manual connection to wireless debug with ADB needed}
+╰phantom─ps──────────────────────➤ Change the limit of phantom process at 2147483647 
+|  ╰─────────────────────────────{ Screen division with android developer options is required}
 ╰pm──────────────────────────────➤ For android packages mannager 
 ╰postgresql──────────────────────➤ Start, stop or restart postgres data base
 ╰proxy───────────────────────────➤ Execute cli commands over tor proxychains
