@@ -1,10 +1,10 @@
 {
   "name": "i-haklab",
-  "version": "3.10.2",
+  "version": "3.10.3",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
-  "depends": ["x11-repo, termux-api, termux-elf-cleaner, termux-tools, termux-gui-package, tur-repo, util-linux, lsd, apr, which, apr-util, autoconf, axel, bat, bc, fontconfig-utils, bison, clang, coreutils, curl, debianutils, dnsutils, dos2unix, fd, file, findutils, fish, fzf, gawk, git, gpgme, irssi, jq, libassuan, libcaca, libffi, libgcrypt, libgmp, libgpg-error, libgrpc, libiconv, libmpc, libmpc-static, libmpfr, libmpfr-static, libpcap, libsodium, libsodium-static, libsqlite, libtool, libxml2, libxml2-static, libxml2-utils, gnupg, man, megatools, mlocate, ncurses, ncurses-utils, neofetch, ninja, openssh, openssl, openssl-tool, php, php-apache, pkg-config, procps, pv, python, python-pip, readline, ripgrep, sqlite, strace, tar, tor, torsocks, translate-shell, unzip, weechat, wget, zip, zlib"],
+  "depends": ["x11-repo, termux-api, termux-elf-cleaner, termux-tools, termux-gui-package, tur-repo, util-linux, lsd, apr, which, apr-util, autoconf, axel, bat, bc, fontconfig-utils, bison, clang, coreutils, curl, debianutils, dnsutils, dos2unix, fd, file, findutils, fish, fzf, gawk, git, gpgme, irssi, jq, libassuan, libcaca, libffi, libgcrypt, libgmp, libgpg-error, libgrpc, libiconv, libmpc, libmpc-static, libmpfr, libmpfr-static, libpcap, libsodium, libsodium-static, libsqlite, libtool, libxml2, libxml2-utils, gnupg, man, megatools, mlocate, ncurses, ncurses-utils, neofetch, ninja, openssh, openssl, openssl-tool, php, php-apache, pkg-config, procps, pv, python, python-pip, readline, ripgrep, sqlite, strace, tar, tor, torsocks, translate-shell, unzip, weechat, wget, zip, zlib"],
   "suggests": ["openjdk-17, perl, ruby"],
   "description": "Hacking lab containing an extensive suite of open source tools ported to Termux focused on programming, develop, pentesting, scan/find/explotation/post-explotation of vulnerabilities",
   "files" :{

@@ -4,7 +4,7 @@ trap ctrl_c 2
 
 source ${HOME}/.local/etc/i-Haklab/variables
 source $iHETC/functions
-echo -en "Setting $1 following i-Haklab instructions ...  \b"
+echo -en "Setting $1 following i-Haklab instructions ...  \n"
 
 case "$1" in 
     apache2|phpmyadmin)    
@@ -31,9 +31,9 @@ case "$1" in
 		}
         curl -fsSL $iHDB/.local/etc/phpmyadmin/config.inc.php \
             -o ${HOME}/.local/etc/phpmyadmin/config.inc.php;
-		ln -s $HOMEapache/httpd.conf $USRapache/httpd.conf
-        ln -s $HOMEapache/php_module $USRapache/conf.d/php_module.conf
-		ln -s ${HOME}/.local/etc/phpmyadmin/config.inc.php ${PREFIX}/etc/phpmyadmin/config.inc.php 
+		ln -s $HOMEapache/httpd.conf $USRapache/httpd.conf 2>>$LOGFILE
+        ln -s $HOMEapache/php_module $USRapache/conf.d/php_module.conf 2>>$LOGFILE
+		ln -s ${HOME}/.local/etc/phpmyadmin/config.inc.php ${PREFIX}/etc/phpmyadmin/config.inc.php 2>>$LOGFILE
         ;; # --->  Nuevo comando 
 
     clamav)
@@ -120,7 +120,7 @@ set softwrap
 		[[ -e ${HOME}/.local/etc/proxychains.conf ]] || {
            curl -fsSL $iHDB/.local/etc/proxychains.conf -o ${HOME}/.local/etc/proxychains.conf;
 		}
-		ln -s ${HOME}/.local/etc/proxychains.conf ${PREFIX}/etc/proxychains.conf
+		ln -s ${HOME}/.local/etc/proxychains.conf ${PREFIX}/etc/proxychains.conf 2>>$LOGFILE
 		;; # --->  Nuevo comando 
 
   python)
@@ -161,7 +161,7 @@ startxfce4
         curl -fsSL $iHDB/.config/tmux/tmux.conf.zip -o ${TMPDIR}/tmux.conf.zip
         unzip -qq -o ${TMPDIR}/tmux.conf.zip -d "${HOME}/.config/tmux" && rm "${TMPDIR}/tmux.conf.zip"
         
-        ln -s -f "${HOME}/.config/tmux/.tmux.conf"   
+        ln -s -f "${HOME}/.config/tmux/.tmux.conf" 2>>$LOGFILE
         sed -i "11a set-option -g default-shell ${PREFIX}/bin/fish" "${HOME}/.config/tmux/.tmux.conf"
         printf "[!] Press Ctrl+b+shift+I to load the tmux settings\n"
 	    ;; # --->  Nuevo comando 
@@ -176,7 +176,7 @@ startxfce4
 			mkdir -p ${HOME}/.local/etc/tor;
                    curl -fsSL $iHDB/.local/etc/tor/torrc -o ${HOME}/.local/etc/tor/torrc;
 		}
-		ln -s ${HOME}/.local/etc/tor/torrc ${PREFIX}/etc/tor/torrc 2>/dev/null
+		ln -s ${HOME}/.local/etc/tor/torrc ${PREFIX}/etc/tor/torrc 2>>$LOGFILE
 		;; # --->  Nuevo comando 
 
 	vim)
