@@ -41,6 +41,8 @@ set LD_LIBRARY_PATH /data/data/com.termux/files/usr/lib
 set LLVM_BUILD /data/data/com.termux/files/usr/lib
 set LLVM_HOME /data/data/com.termux/files/usr/lib/cmake/llvm
 set CFLAGS \ -Wno-incompatible-function-pointer-types
+set CC clang
+set CXX clang++
 set ANDROID_ALLOW_UNDEFINED_SYMBOLS On
 set TOOLS /data/data/com.termux/files/home/.local/share
 alias du="du -hP"
