@@ -57,11 +57,13 @@ function phantom-ps
             end
 
             sleep 1
+            return $IP $p
         end
 
         adb shell pm grant com.termux android.permission.PACKAGE_USAGE_STATS 2>&1
         adb shell pm grant com.termux android.permission.DUMP 2>&1
-        adb shell "/system/bin/device_config put activity_manager max_phantom_processes 2147483647" 2>&1
+        adb -s $IP:$p shell "/system/bin/device_config put activity_manager max_phantom_processes 2147483647" 2>&1
+
         
         set phantom_limit (/system/bin/dumpsys activity settings |\
             grep max_phantom_processes | awk -F "=" '{print $NF}')
