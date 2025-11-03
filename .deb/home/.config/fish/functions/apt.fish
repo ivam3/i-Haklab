@@ -5,12 +5,7 @@ function apt
 				
 				case bloodhound frida h8mail hashid holehe objection octosuite orbitaldump osrframework phoneintel scrapy shodan snscrape speedtest-cli sqlmap wfuzz
 					echo -en "\e[31mE:\e[0m $i is a python module, you should try it with \e[33m'python -m pip install $i'\e[0m\n"
-
-					    #        case sherlock
-					    #            if ! test $PREFIX/etc/apt/sources.list.d/tur.list
-					    # echo -en "\e[31mE:\e[0m $i require tur-repo package \e[33m|\e[0m please install it with \e[33m'apt install tur-repo'\e[0m\n"
-					    #            end
-					    #
+				
                 case bettercap aquatone
 					echo -en "\e[31mE:\e[0m $i is a ruby gem, you should try it with \e[33m'gem install $i'\e[0m\n"
 				
