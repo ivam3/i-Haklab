@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.10.3",
+  "version": "3.10.4",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -79,6 +79,7 @@
 		"home/.local/etc/i-Haklab/Tools/Readme/gdb": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/gdb",
 		"home/.local/etc/i-Haklab/Tools/Readme/geoip": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/geoip",
 		"home/.local/etc/i-Haklab/Tools/Readme/ghost": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/ghost",
+		"home/.local/etc/i-Haklab/Tools/Readme/ghunt": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/ghunt",
 		"home/.local/etc/i-Haklab/Tools/Readme/gobuster": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/gobuster",
 		"home/.local/etc/i-Haklab/Tools/Readme/gophish": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/gophish",
 		"home/.local/etc/i-Haklab/Tools/Readme/h8mail": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/h8mail",
@@ -131,7 +132,6 @@
 		"home/.local/etc/i-Haklab/Tools/Readme/translate": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/translate",
 		"home/.local/etc/i-Haklab/Tools/Readme/trape": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/trape",
 		"home/.local/etc/i-Haklab/Tools/Readme/twifo-cli": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/twifo-cli",
-		"home/.local/etc/i-Haklab/Tools/Readme/userrecon": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/userrecon",
 		"home/.local/etc/i-Haklab/Tools/Readme/virustotal": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/virustotal",
 		"home/.local/etc/i-Haklab/Tools/Readme/vulns": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/vulns",
 		"home/.local/etc/i-Haklab/Tools/Readme/webhackshl": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/webhackshl",
