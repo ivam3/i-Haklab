@@ -41,7 +41,8 @@ setVM() {
             done
             break
         else
-            echo -e "$R[E] Invalid format.$W Please use the format: ${Y}host_port:guest_port,host_port:guest_port,$W..."
+            echo -en "$R[E] Invalid format.\n"
+            echo -en "$Y[!]$W Please use the format: ${Y}host_port:guest_port,host_port:guest_port,$W..."
         fi
     done
 
@@ -79,7 +80,7 @@ initVM() {
 
 
 # EXTRACT THE TAR FILES
-creatImgFile() {
+createImgFile() {
     local zipfile=$1 
     echo -en "$G[+]$W Extracting files from $G${zipfile##*/}$W ...\n"
     unzip -qq -o $zipfile -d $tmpdir
@@ -114,11 +115,7 @@ creatImgFile() {
     }
 }
 
-# MAIN
-banner
-[[ $1 ]] && [[ -e $1 ]] && [[ $1 == *.zip ]] && {
-    creatImgFile $1
-} || { 
+choiceImgFile() {
     echo -en "$Y[!] Tip:$W bring a ZIP file to create a new one '${Y}i-Haklab qemufy <zipfile>$W'\n"
     echo -en "$G[+]$W Available extracted VM images:\n"
     select img in $(ls $rootDir | grep ".qcow2") Exit; do
@@ -128,7 +125,7 @@ banner
                 ;; 
             *)
                 [[ -e $rootDir/$img ]] && {
-                    imgFile=$rootDir/$img
+                    img_File=$rootDir/$img
                     break
                 } || {
                     echo -en "$R[E]$W Invalid selection.\n"
@@ -136,5 +133,21 @@ banner
                 ;;
         esac
     done
-    setVM $imgFile
+    export imgFile=$img_File
 }
+
+# MAIN
+banner
+[[ $1 ]] && [[ -e $1 ]] && [[ $1 == *.zip ]] && {
+    createImgFile $1
+} || [[ $1 = "rm" ]] && {
+    choiceImgFile
+    rm -f $imgFile >$LOGFILE && {
+        echo -en "$G[+]$W Image file $G${imgFile##*/}$W removed successfully.\n"
+    } || {
+        echo -en "$R[E]$W Failed to remove image file $G${imgFile##*/}$W.\n"
+    }
+} || {
+    choiceImgFile
+    setVM $imgFile
+} 

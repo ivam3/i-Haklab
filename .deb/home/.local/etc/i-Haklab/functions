@@ -158,27 +158,27 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 $Y       [--] Automatitation Options [--]$W
 _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 ╰apkactivity─+─<path─to─apk─file>➤ Get the main activity from .apk file
-|
+|                                |
 ╰──backup────+──create|restore───➤ Create a backup of Termux or restore it
 |                  |    ╰example─{─i-Haklab restore path/to/file.tar.gz
 |                  ╰─example─────{─i-Haklab create <in/ex> [in=internal ex=external sdcard]
 ╰─binchecker─➤───────────────────➤ Get informacion about BINs (CC,DC)
-|
+|                                |
 ╰bruteforce─+─ftp|mail|ssh|telnet➤ Brute force attack at several servers.
 |    ╰───example─for─ftp─────────{─i-Haklab bruteforce ftp
 |    ╰───example─for─mail────────{─i-Haklab bruteforce mail ivam3@live.com, gmail or live.com
-|
+|                                |
 ╰──chatGPT──➤───<--help/-h>──────➤ Connect with OpenAi API to interact with ChatGPT-3 via CLi.
 |    |               ╰──example──{─i-Haklab chatGPT -h [setting options]
 |    ╰───example─────────────────{─i-Haklab chatGPT
 ╰──ESmsg────+──encode/decode─────➤ Encode|decode secret message into a ASCII file.
 |                    ╰──example──{─i-Haklab ESmsg <encode/decode-}
-|
+|                                |
 ╰──tunnel───+─<port─+─subdomain>─➤ Start a SSH client to request TCP port forwarding
 |    ╰───example─────────────────{─i-Haklab tunnel -p 4444 -s my-subdomain-}
-|
+|                                |
 ╰─handler───+─<name─of─file.rc>──➤ Start handler on msfconsole with previous setting
-|
+|                                |
 ╰───msf─────+─dirscan─+─IPtarget─➤ Enumerate directories/subdirecotires from a server.
 |    |          ╰──example───────{─i-Haklab msf dirscan 10.10.10.242-}
 |    ╰──────+─embed──────────────➤ Embed a metasploit payload into legitim apk file.
@@ -190,24 +190,25 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 |    ╰──────+─paypdf─+─tun0:port─➤ Create a coded payload .pdf
 |    |          ╰─ex─default─set─{─i-Haklab msf paypdf─}
 |    ╰──────+──────shodan────────➤ Search vulnerable webcam servers using metasploit
-|
+|                                |
 ╰─ngroklink─➤────────────────────➤ Show the current ngrok link
-|
+|                                |
 ╰─ngrokssh──➤─port+protocol+file─➤ Connect with ngrok servers via SSH protocol
 |                   ╰──example─1─{─i-Haklab ngrokssh -p 4546 -t http -f path/to/specific/id_rsa-file
 |                   ╰──example─2─{─i-Haklab ngrokssh -p 8080 -t tcp (default file:\$HOME/.ssh/id_rsa)
-|
+|                                |
 ╰─payvid────➤────────────────────➤ Hide a Reverse Shell with a Video File by Exploiting Linux OS.
-|
+|                                |
 ╰─phonescan─+─<phonenumber>──────➤ A phone number information scaner
 |                   ╰──example───{─i-Haklab phonescan 525584923476─}
-|
-╰─qemufy────+────<file.zip>──────➤ Convert ova files and run a QEMU virtual machine over Termux(no root).
-|    ╰──────────────|────────────{─i-Haklab qemufy─}
-|                   ╰──example───{─i-Haklab qemufy VM_image.zip─}
-|
+|                                |
+╰─qemufy────+─<file.zip/rm>──────➤ Convert ova files and run a QEMU virtual machine over Termux(no root).
+|    ╰──────────────|───|────────{─i-Haklab qemufy─}
+|                   |   ╰example─{─i-Haklab qemufy rm [remove image file]─}
+|                   ╰──example───{─i-Haklab qemufy VM_image.zip [create a new image file]─}
+|                                |
 ╰servers4test────────────────────➤ Init deliberately insecure web application for pentesting.
-|
+|                                |
 ╰──4share───➤───<server─name>────➤ Init web server for share files remotely and securely
 |    ╰─────────────────|─────────{─Default credentials = Admin:password─}
 |                      ╰─────────{─servers names: localtunnel, localhost.run and cloudflared─}
