@@ -146,14 +146,11 @@ if [[ -e ${HOME}/.local/libexec/i-Haklab.login.backup ]]; then
 fi
 echo -en "[deleted]
     ╰──➤ Commands:
-    |\t\t• cinderella 
     |\t\t• fakeID
 [updates]
     ╰──➤ Commands recently added:
-    |\t\t• cmd 
-    |\t\t• usbtest
+    |\t\t• qemufy
     |\t\t• phantom-ps
-    |\t\t• gitbrowsering
     |\t\t• i-Haklab chatGPT
     ╰──➤ New features:
 \t\t• chatGPT: now you can mannage 2+ chats \n\t\t\t   create image | remember conversation

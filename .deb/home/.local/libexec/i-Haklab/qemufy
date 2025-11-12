@@ -27,12 +27,12 @@ findfile() {
 
 setVM() {
     local imgFile=$1
-
-    while read -p "Ports to forward (e.g., 2222:22,8080:80) or press Enter to use defaults: " ports; do
+    echo -en "$G[+]$W Ports to forward or press ${G}Enter$W to use defaults\n"
+    while read -p " ╰──(e.g., 2222:22,8080:80): " ports; do
         if [[ -z $ports ]]; then
             break
         elif [[ $ports =~ ^([0-9]+:[0-9]+)(,[0-9]+:[0-9]+)*$ ]]; then
-            portForwardArgs=""
+            local portForwardArgs=""
             IFS=',' read -ra portMappings <<< "$ports"
             for mapping in "${portMappings[@]}"; do
                 host_port=${mapping%%:*}
@@ -41,28 +41,38 @@ setVM() {
             done
             break
         else
-            echo "[!] Invalid format. Please use the format host_port:guest_port[,host_port:guest_port,...]"
+            echo -e "$R[E] Invalid format.$W Please use the format: ${Y}host_port:guest_port,host_port:guest_port,$W..."
         fi
     done
 
     [[ ! -z $portForwardArgs ]] && {
-        echo "[+] Starting the VM with custom port forwarding ..."
+        echo -en "$G[+]$W Starting the VM with custom port forwarding ...\n"
     }
-    initVM "$imgFile" $portForwardArgs
+    initVM "$imgFile" "$portForwardArgs"
 }
 
 initVM() {
-    local imgFile=$1
+    local imgFile="$1"
+    local customPortForward="$2"
     local defaultPortForward=",hostfwd=tcp::2222-:22,hostfwd=tcp::8080-:80,hostfwd=tcp::2323-:23"
-    portForwardArgs="${2:-$defaultPortForward}"
+    local portForwardArgs="${customPortForward:-$defaultPortForward}"
+    local ports="${portForwardArgs#,}"
+    local rules=""
 
-    echo -en "[+] Starting the VM ...\n[+] "
+    IFS=',' read -ra rules <<< "$ports"
+
+    for rule in "${rules[@]}"; do
+        host_port=$(echo "$rule" | sed -n 's|.*::\([0-9]*\)-:.*|\1|p')
+        guest_port=$(echo "$rule" | sed -n 's|.*-:\([0-9]*\).*|\1|p')
+        
+        echo -en "$Y[i]$W Forwarding port $G$host_port$W to guest port $Y$guest_port$W\n"
+    done
+    echo -en "$G[+]$W Starting the VM ...\n"
+    echo -en "$G[+]$W "
     qemu-system-x86_64 -m 2048 -smp 2 \
-        -cpu qemu64,+avx,+avx2 -vga virtio -full-screen \
         -drive file=$imgFile,format=qcow2 \
-        -netdev user,id=n1$portForwardArgs \
-        -display default,show-cursor=on \
-        -device e1000,netdev=n1 \
+        -netdev user,id=net0,restrict=off$portForwardArgs \
+        -device e1000,netdev=net0 \
         -boot c
     exit 0
 }
@@ -71,46 +81,47 @@ initVM() {
 # EXTRACT THE TAR FILES
 creatImgFile() {
     local zipfile=$1 
-    echo "[+] Extracting files from ${zipfile##*/} ..."
+    echo -en "$G[+]$W Extracting files from $G${zipfile##*/}$W ...\n"
     unzip -qq -o $zipfile -d $tmpdir
     ovaFile=$(findfile "*.ova")
 
     [[ ! -z $ovaFile ]] && {
-        echo "[+] Extracting files from ${ovaFile##*/} ..."
+        echo -en "$G[+]$W Extracting files from $G${ovaFile##*/}$W ...\n"
         tar -xf $ovaFile -C $tmpdir 
         vmdkFile=$(findfile "*.vmdk") 
 
         [[ ! -z $vmdkFile ]] && {
-            echo "[+] Converting file ${vmdkFile##*/} ..."
+            echo -en "$G[+]$W Converting file $G${vmdkFile##*/}$W ...\n"
             qemu-img convert -f vmdk -O qcow2 $vmdkFile ${vmdkFile%.*}.qcow2
             qcow2File=$(findfile "*.qcow2")
             
             [[ ! -z $qcow2File ]] && { 
                 mv $qcow2File $rootDir/${qcow2File##*/}
-                echo "[+] Image file saved as: ${qcow2File##*/}"
+                echo -en "$G[+]$W Image file saved as: $G${qcow2File##*/}$W\n"
                 rm -rf $tmpdir 
                 imgFile=$rootDir/${qcow2File##*/}
                 setVM $imgFile
             }
         } || { 
-            echo -e "[!] No VMDK file found inside the OVA archive."
+            echo -en "$R[E]$W No VMDK file found inside the OVA archive.\n"
             rm -rf $tmpdir
             exit 3
         }
     } || {
-        echo -e "[!] No OVA file found inside the ZIP archive."
+        echo -en "$R[E]$W No OVA file found inside the ZIP archive.\n"
         rm -rf $tmpdir
         exit 2
     }
 }
 
 # MAIN
+banner
 [[ $1 ]] && [[ -e $1 ]] && [[ $1 == *.zip ]] && {
     creatImgFile $1
 } || { 
-    echo "[!] Tip: bring a ZIP file to create a new one '$0 <zipfile>'"
-    echo "[+] Available extracted VM images:"
-    select img in $(ls $rootDir) Exit; do
+    echo -en "$Y[!] Tip:$W bring a ZIP file to create a new one '${Y}i-Haklab $0 <zipfile>$W'\n"
+    echo -en "$G[+]$W Available extracted VM images:\n"
+    select img in $(ls $rootDir | grep ".qcow2") Exit; do
         case $img in
             Exit)
                 ctrl_c
@@ -120,7 +131,7 @@ creatImgFile() {
                     imgFile=$rootDir/$img
                     break
                 } || {
-                    echo -e "[!] Invalid selection."
+                    echo -en "$R[E]$W Invalid selection.\n"
                 }
                 ;;
         esac

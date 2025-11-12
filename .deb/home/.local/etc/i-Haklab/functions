@@ -200,18 +200,22 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 ╰─payvid────➤────────────────────➤ Hide a Reverse Shell with a Video File by Exploiting Linux OS.
 |
 ╰─phonescan─+─<phonenumber>──────➤ A phone number information scaner
-|                  ╰──example────{─i-Haklab phonescan 525584923476─}
+|                   ╰──example───{─i-Haklab phonescan 525584923476─}
+|
+╰─qemufy────+────<file.zip>──────➤ Convert ova files and run a QEMU virtual machine over Termux(no root).
+|    ╰──────────────|────────────{─i-Haklab qemufy─}
+|                   ╰──example───{─i-Haklab qemufy VM_image.zip─}
 |
 ╰servers4test────────────────────➤ Init deliberately insecure web application for pentesting.
 |
-╰──4share───➤───(server─name)────➤ Init web server for share files remotely and securely
+╰──4share───➤───<server─name>────➤ Init web server for share files remotely and securely
 |    ╰─────────────────|─────────{─Default credentials = Admin:password─}
 |                      ╰─────────{─servers names: localtunnel, localhost.run and cloudflared─}
 |                      ╰─example─{─i─Haklab 4share localtunnel─}
 ╰─usbtest───➤─<path-to-device>───➤ Test usb device connected via OTG 
 |                   ╰─example────{─i-Haklab usbtest /dev/bus/usb/001─}
-|           |                    |
-|           |                    |
+|───────────|────────────────────|
+|───────────|────────────────────|
 $Y          [--] DIRECT COMMANDS [--]
 $W  Those commands do not need the i-Haklab command
              Just type the command.
