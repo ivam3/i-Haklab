@@ -119,7 +119,7 @@ banner
 [[ $1 ]] && [[ -e $1 ]] && [[ $1 == *.zip ]] && {
     creatImgFile $1
 } || { 
-    echo -en "$Y[!] Tip:$W bring a ZIP file to create a new one '${Y}i-Haklab $0 <zipfile>$W'\n"
+    echo -en "$Y[!] Tip:$W bring a ZIP file to create a new one '${Y}i-Haklab qemufy <zipfile>$W'\n"
     echo -en "$G[+]$W Available extracted VM images:\n"
     select img in $(ls $rootDir | grep ".qcow2") Exit; do
         case $img in
