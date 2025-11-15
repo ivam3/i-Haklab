@@ -4,9 +4,14 @@ trap ctrl_c 2
 
 source ${HOME}/.local/etc/i-Haklab/variables
 source $iHETC/functions
-echo -en "Setting $1 following i-Haklab instructions ...  \n"
+
+tput civis
+echo -en "\rSetting $1 following i-Haklab instructions ...  \b"
 
 case "$1" in 
+    test)
+        touch $TMPDIR/testfile
+        ;;
     apache2|phpmyadmin)    
         USRapache="${PREFIX}/etc/apache2"
         HOMEapache="${HOME}/.local/etc/apache2"
@@ -242,5 +247,6 @@ CONF
 		;; # --->  Nuevo comando 
 esac
 
-echo "[💡] Run 'i-Haklab about $1' to get more information about this tool\n"
-echo "[✔] DONE."
+echo -en "[$G✔$W] DONE.\n"
+echo "[💡] Run 'i-Haklab about $1' to get more information about this tool"
+tput cnorm
