@@ -120,6 +120,9 @@ fish
 CONF
 fi
 
+echo "Getting permissions ..."
+chmod u+x -R ${HOME}/.local/* ${HOME}/.config/fish/functions/* ${PREFIX}/bin/* 
+
 echo "Updating mlocate data base ..."
 updatedb
 
