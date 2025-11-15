@@ -9,9 +9,6 @@ tput civis
 echo -en "\rSetting $1 following i-Haklab instructions ...  \b"
 
 case "$1" in 
-    test)
-        touch $TMPDIR/testfile
-        ;;
     apache2|phpmyadmin)    
         USRapache="${PREFIX}/etc/apache2"
         HOMEapache="${HOME}/.local/etc/apache2"
