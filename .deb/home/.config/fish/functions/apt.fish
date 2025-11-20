@@ -1,5 +1,6 @@
 function apt
-	if test "$argv[1]" = "install" -o "$argv[1]" = "reinstall"
+	if test "$argv[1]" = "install" -o "$argv[1]" = "reinstall" -o "$argv[1]" = "search"
+
 		for i in $argv[2..-1]
 			switch $i
 				
