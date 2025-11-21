@@ -292,8 +292,7 @@ pass(){
 #				termux-toast -b red Wrong password
 				pass Get
 			done
-#			termux-toast -b green Welcome Back $user;
-#				banner;
+            echo -en "\n"
 			}
 
 		[[ $1 = Fingerprint ]] && { touch $TMPDIR/lock.tmp;
