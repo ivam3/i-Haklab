@@ -3,5 +3,5 @@ function lock
 		yes|apt install libcaca
 	end
 	cacafire
-	reset 2>/dev/null
+	bash $HOME/.local/libexec/i-Haklab.login
 end
