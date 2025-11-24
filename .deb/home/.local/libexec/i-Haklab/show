@@ -97,6 +97,7 @@ then
 elif [[ $1 = alltools ]]
 then
 	chk-pkg column util-linux
+    curl -sSL "$iHDB/.local/etc/i-Haklab/Tools/listoftools" -o $iHETC/Tools/listoftools
 	echo -en $Y$underline"TIP: You can install all of them with:$W apt install <tool>\n\n"
 	column $iHETC/Tools/listoftools
 	echo -en "$G\nTOTAL:$W $(wc $iHETC/Tools/listoftools|awk '{print $1}')"
