@@ -6,8 +6,10 @@
 
 ![linea](.img/linea.gif)
 <div align="center">
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Rubik+Wet+Paint&size=35&pause=1000&color=F77432&background=13520F00&center=verdadero&vCenter=FALSO&repeat=&random=&width=500&lines=I-Haklab+v.3+2024+by+%40Ivam3" alt="Typing SVG" /></a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Rubik+Wet+Paint&size=35&pause=1000&color=F77432&background=13520F00&center=verdadero&vCenter=FALSO&repeat=&random=&width=500&lines=I-Haklab+v.3+2025+by+%40Ivam3" alt="Typing SVG" /></a>
 </div>
+
+[![Ver video](./assets/iH_thumb.png)](./assets/iH.gif)
 
 
 > [!NOTE]
@@ -47,7 +49,7 @@
 </div>
 
 
-##### To get help join to our support groups over [Telegram group](https://t.me/iHaklab) or over our IRC group running in [i-Haklab]() the command :
+##### To get help join to our support groups over [Telegram group](https://t.me/Ivam3by_Cinderella) or over our IRC group running in [i-Haklab]() the command :
 ```bash
 i-Haklab weechat
 ```
@@ -133,9 +135,9 @@ i-Haklab setapikey
 ```bash
 i-Haklab ESmsg
 ```
-- Bring you a fake indentity card with real email and phone number running:
+- Convert ova files and run a QEMU virtual machine over Termux(no root).
 ```bash
-i-Haklab fakeID
+i-Haklab qemufy
 ```
 - Provide you a port forwarding tunnel with a custom subdomain running:
 ```bash
@@ -173,6 +175,11 @@ i-Haklab usbtest
 ```bash
 i-Haklab servers4test
 ```
+
+- Bring you several automations to setup tools installed with apt, npm, pip, gem, etc. For example once execute 'apt install neovim', i-Haklab will setup it with predictable text editor settings, github copilot and AI assistant to vibecode experience over Termux.
+
+[![Ver video](./assets/vibe_coding.jpg)](./assets/ia_nvim.gif)
+
 - Provide you more than [100 tools/frameworks](https://github.com/ivam3/termux-packages) with an easy install/remove over command `apt`. You can get the list of all availables running :
 ```bash
 i-Haklab show alltools
@@ -191,10 +198,6 @@ i-Haklab show alltools
 
 ```bash
 i-Haklab help
-```
-- Ask to Cinderella. A virtual assist exclusively about Termux themes:
-```bash
-cinderella
 ```
 - Mannage android main settings over Termux:
 ```bash
