@@ -52,18 +52,13 @@ Banner(){
 }
 
 usage() {
-	printf "$B\n(USAGE)─➤$G IbyC-fixer <[apt|nrauf|localtunnel|metasploit|downgradeRepo|RuGiR]> <option>$W\n\napt\t\t\t\tSearch and fix some errores on APT/PKG with dpkg\nnrauf         dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nlocaltunnel\t\t\tfix error 'Unsupported platform: android'\nburpsuite\t\t\tDepends: openjdk-21 but it is not installable\nmetasploit\t\t\tAlternative metasploit installation\ndowngradeRepo repo=version\tDowngrade apt|pkg reporitory tospecific version\nRuGiR\t\t\t\tFix ruby gems issues\nPyMiR\t\t\t\tFix python module issues\nngrok\t\t\t\tInstall ngrok-server from Abhacker repositories\nneovim\t\t\t\tFix Neovim error: E5108\n\nExamples:\n\tIbyC-fixer RuGiR\n\tIbyC-fixer downgradeRepo ruby=2.7.2\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n\n"
+	printf "$B\n(USAGE)─➤$G IbyC-fixer <[apt|burpsuite|downgradeRepo|gemini-cli|localtunnel|metasploit|ngrok|nrauf|neovim|RuGiR|PyMiR]> <option>$W\n\napt\t\t\t\tSearch and fix some errores on APT/PKG with dpkg\nburpsuite\t\t\tDepends: openjdk-21 but it is not installable\ndowngradeRepo repo=version\tDowngrade apt|pkg reporitory tospecific version\ngemini-cli\t\t\tFix error with pty.node in gemini-cli installation issues\nlocaltunnel\t\t\tfix error 'Unsupported platform: android'\nmetasploit\t\t\tAlternative metasploit installation\nngrok\t\t\t\tInstall ngrok-server from Abhacker repositories\nnrauf         dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nneovim\t\t\t\tFix Neovim error: E5108\n\nRuGiR\t\t\t\tFix ruby gems issues\nPyMiR\t\t\t\tFix python module issues\nExamples:\n\tIbyC-fixer RuGiR\n\tIbyC-fixer downgradeRepo ruby=2.7.2\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n\n"
 	exit
 }
 
 clear;Banner|lolcat
 [[ $# -eq 0 ]] && StdErr || arg=($@)
 case ${arg[0]} in
-	nrauf)
-		[[ -z ${arg[1]} ]] && StdErr
-		bash <(curl -fsSL "$iHDB/.local/libexec/nrauf") ${arg[2]}
-		;;
-
 	apt)
 		file=$(mktemp)
 		yes|apt update > $file
@@ -75,10 +70,35 @@ case ${arg[0]} in
 		[[ $(grep -oE "is not signed" $file) ]] || [[ $(grep -oE "NO_PUBKEY" $file) ]] && echo "deb https://packages-cf.termux.org/apt/termux-main/ stable main" > $PREFIX/etc/apt/sources.list;rm -rf $PREFIX/etc/apt/sources.list.d/*;dpkg --configure -a
 		rm $file
 		;;
-  burpsuite)
-    yes|pkg i openjdk-21-preinst && openjdk-21-preinst && yes|pkg i burpsuite
-    ;;
-	localtunnel)
+
+    burpsuite)
+        yes|pkg i openjdk-21-preinst && openjdk-21-preinst && yes|pkg i burpsuite
+        ;;
+	
+    downgradeRepo)
+		[[ -z ${arg[1]} ]] && StdErr
+		bash <(curl -fsSL "http://git.io/abhacker-repo") --install ${@:2}
+		;;
+
+    gemini-cli)
+        export CC=clang 
+        export CXX=clang++ 
+        export GYP_DEFINES="OS=linux android_ndk_path=." 
+        mainDir="${PREFIX}/lib/node_modules/@google/gemini-cli/node_modules/node-pty"
+        [[ -d $mainDir ]] || {
+            echo -en "$R(_➤)$W gemini-cli is not installed, installing ...\n"
+            cd;yes|npm install -g @google/gemini-cli --ignore-scripts --force >/dev/null 2>/dev/null &
+            ps=$(echo $!);
+            running ps $ps
+        }
+        pushd $mainDir >/dev/null 2>/dev/null
+        npm rebuild --build-from-source >/dev/null 2>/dev/null &
+        ps=$(echo $!);
+        running ps $ps
+        popd >/dev/null 2>/dev/null
+        ;;
+
+    localtunnel)
 		[[ $(command -v wget) ]] >/dev/null || {
 			echo -en "$G(➤_)$W Installing dependencies ...\n"
 			yes|apt install wget >/dev/null 2>/dev/null &
@@ -96,41 +116,47 @@ case ${arg[0]} in
 		bash <(curl -fsSL "http://git.io/abhacker-repo") --install ruby=2.7.2 -r apt install metasploit -y
 		yes|apt autoremove
 		;;
-	PyMiR) bash <(curl -fsSL "${iHDB}/.local/libexec/PyMiR") ${@:2};;
-	RuGiR) bash <(curl -fsSL "${iHDB}/.local/libexec/RuGiR") ${@:2};;
-	downgradeRepo)
-		[[ -z ${arg[1]} ]] && StdErr
-		bash <(curl -fsSL "http://git.io/abhacker-repo") --install ${@:2}
+
+    neovim)
+        [[ -d ~/.local/share/nvim/lazy/bufferline.nvim/lua/bufferline/utils ]] || {
+          mkdir -p ~/.local/share/nvim/lazy/bufferline.nvim/lua/bufferline/utils
+        }
+        wget --tries=20 --quiet $iHDB/.local/share/nvim/lazy/bufferline.nvim/lua/bufferline/utils/init.lua \
+          -O ~/.local/share/nvim/lazy/bufferline.nvim/lua/bufferline/utils/init.lua 
+        echo -en "$G[DONE!!]$W\n"
 		;;
-	ngrok)
+
+    ngrok)
 		printf "$G(_➤)$W Installing Ngrok from Abhacker repositories ...\n"
 		bash <(curl -fsSL "http://git.io/abhacker-repo") --install ngrok-server
 		printf "$G(_➤)$W Installing official Ngrok executable...\n"
 		[[ $(command -v ngrok) ]] && rm -rf $(command -v ngrok)
-		arch1=$(uname -a|grep -o 'arm'|head -n1)
-    arch2=$(uname -a|grep -o 'Android'|head -n1)
-    [[ $arch1 = 'arm' ]] || [[ $arch2 = 'Android' ]] && arch=arm || arch=386
-    wget -q https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-$arch.zip -O $TMPDIR/ngrok-stable-linux-$arch.zip
-    if [[ -e $TMPDIR/ngrok-stable-linux-$arch.zip ]]; then
-			[[ -d $HOME/.ngrok2 ]] || mkdir -p $HOME/.ngrok2
-      unzip -q $TMPDIR/ngrok-stable-linux-$arch.zip -d $HOME/.ngrok2/
-      rm -rf $TMPDIR/ngrok-stable-linux-$arch.zip
-      printf "#!/bin/bash\n#THIS SCRIPT EXECUTE NGROK TO AVOID 'bad address' ERROR\nexec termux-chroot $HOME/.ngrok2/ngrok \${@:1}\n#     i-Haklab by Ivam3" > $binPATH/ngrok.io
-      chmod +x $HOME/.ngrok2/ngrok $binPATH/ngrok.io
+        arch1=$(uname -a|grep -o 'arm'|head -n1)
+        arch2=$(uname -a|grep -o 'Android'|head -n1) 
+        [[ $arch1 = 'arm' ]] || [[ $arch2 = 'Android' ]] && arch=arm || arch=386 
+        wget -q https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-$arch.zip \
+            -O $TMPDIR/ngrok-stable-linux-$arch.zip 
+        if [[ -e $TMPDIR/ngrok-stable-linux-$arch.zip ]]; then 
+            [[ -d $HOME/.ngrok2 ]] || mkdir -p $HOME/.ngrok2 
+            unzip -q $TMPDIR/ngrok-stable-linux-$arch.zip -d $HOME/.ngrok2/ 
+            rm -rf $TMPDIR/ngrok-stable-linux-$arch.zip 
+            printf "#!/bin/bash\n#THIS SCRIPT EXECUTE NGROK TO AVOID 'bad address' ERROR\nexec termux-chroot $HOME/.ngrok2/ngrok \${@:1}\n#     i-Haklab by Ivam3" > $binPATH/ngrok.io 
+            chmod +x $HOME/.ngrok2/ngrok $binPATH/ngrok.io
 			echo -en $Y"WARNING:$W Now you have 2 ngrok executables 'ngrok' and 'ngrok.io'\n"
 			echo -en "$G[DONE!!]$W\n"
 		else
 			StdErr
-		fi
-    ;;
-  neovim)
-    [[ -d ~/.local/share/nvim/lazy/bufferline.nvim/lua/bufferline/utils ]] || {
-      mkdir -p ~/.local/share/nvim/lazy/bufferline.nvim/lua/bufferline/utils
-    }
-    wget --tries=20 --quiet $iHDB/.local/share/nvim/lazy/bufferline.nvim/lua/bufferline/utils/init.lua \
-      -O ~/.local/share/nvim/lazy/bufferline.nvim/lua/bufferline/utils/init.lua
-		echo -en "$G[DONE!!]$W\n"
+		fi 
+        ;; 
+
+    nrauf)
+		[[ -z ${arg[1]} ]] && StdErr
+		bash <(curl -fsSL "$iHDB/.local/libexec/nrauf") ${arg[2]}
 		;;
+
+	PyMiR) bash <(curl -fsSL "${iHDB}/.local/libexec/PyMiR") ${@:2};;
+	RuGiR) bash <(curl -fsSL "${iHDB}/.local/libexec/RuGiR") ${@:2};;
+
 	-h|--help) usage;;
 	*) StdErr;;
 esac
