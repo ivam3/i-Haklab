@@ -7,7 +7,7 @@ PS3="(_>)_number:─➤ "
 
 #UPDATE TUTORIALS LIST
 chk-pkg curl curl
-curl -sSL "$iHDB/.local/etc/i-Haklab/listoftutorials" -o $iHETC/listoftutorials
+curl -sSL "$iHDB/.local/etc/i-Haklab/listoftutorials" -o $iHETC/listoftutorials 2>>"$LOGFILE"
 
 banner
 if [[ $# -eq 0 ]]

@@ -7,7 +7,7 @@ localdb="$iHETC/Tools/Readme"
 
 [[ ! -z "$1"  ]] && {
     if [[ ! -e $localdb/$1.md  ]]; then
-        curl -sSLf "$iHDB/.local/etc/Tools/Readme/$1.md" -o $localdb/$1.md 2>$LOGFILE || {
+        curl -sSLf "$iHDB/.local/etc/Tools/Readme/$1.md" -o $localdb/$1.md 2>>"$LOGFILE" || {
             STDERR; exit 1;
         }
     fi
