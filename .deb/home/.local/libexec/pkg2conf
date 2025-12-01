@@ -80,14 +80,16 @@ case "$1" in
     n8n)
         echo """function n8n
     export DB_TYPE=sqlite 
-    export DB_SQLITE_DATABASE=/data/data/com.termux/files/home/.n8n/n8n.sqlite
+    export DB_SQLITE_DATABASE=\$HOME/.n8n/n8n.sqlite
 
     if ls \$HOME/.pm2/dump.pm2 &> /dev/null 
-        pm2 resurrect
-    else 
-        pm2 start n8n \$argv[1..-1]
+        echo -e \"\\e[32m[TIP]\\e[0m Run \\e[32m'pm2 resurrect'\\e[0m to restore previous n8n processes.\" 
     end
-    echo -e \"\\e[32m[PM2]\\e[0m Editor is now accessible via: http://127.0.0.1:5678\"
+
+    echo -e \"\\e[33m[TIP]\\e[0m Run \\e[33m'pm2 --help'\\e[0m to set up pm2 to start on boot.\" 
+    echo -e \"\\e[33m[TIP]\\e[0m Run \\e[33m'n8n --help'\\e[0m to see all n8n options.\"
+    echo -e \"\\e[33m[TIP]\\e[0m Run \\e[33m'i-Haklab about n8n'\\e[0m for more details.\" 
+    \$PREFIX/bin/n8n \$argv
 end""" > ${HOME}/.config/fish/functions/n8n.fish
         chmod +x ${HOME}/.config/fish/functions/n8n.fish
         ;;
