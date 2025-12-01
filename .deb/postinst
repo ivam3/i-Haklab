@@ -157,10 +157,15 @@ echo -en "[deleted]
     |\t\t• i-Haklab chatGPT
     ╰──➤ New features:
 \t\t• chatGPT: now you can mannage 2+ chats \n\t\t\t   create image | remember conversation
-\t\t• Into neovim: type 'alter', 'comma', 'ca' \n\t\t\t   (alt + , + n) to use AI\n"
+\t\t• Into neovim: type 'alter', 'comma', 'ca' \n\t\t\t   (alt + , + n) to use AI
+\t\t• n8n: installation and configuration automated\n"
 echo "[*] i-Haklab installation finished."
 echo "[*] run 'i-Haklab help' for a guide."
-echo "[*] Run 'fixer' to fix any posible issue."
-echo "[!] For help going to https://t.me/Ivam3_Bot."
-echo "[*] @Ivam3: thank you for use my package."
+echo "[-] Run 'fixer' to fix any posible issue."
+# ==============================
+# FINALS MESSAGES
+# ==============================
+echo "[📢] Help: going to https://t.me/Ivam3_Bot."
+echo "[💡] @Ivam3: thank you for use my package."
+####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####
 ####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####

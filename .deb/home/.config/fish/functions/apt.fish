@@ -5,17 +5,62 @@ function apt
 			switch $i
 				
 				case bloodhound frida h8mail hashid holehe objection octosuite orbitaldump osrframework phoneintel scrapy shodan snscrape speedtest-cli sqlmap wfuzz
-					echo -en "\e[31mE:\e[0m $i is a python module, you should try it with \e[33m'python -m pip install $i'\e[0m\n"
+                    set method "python3 -m pip install"
+					echo -en "\e[31mE:\e[0m $i is a python module, you should try it with \e[33m'$method $i'\e[0m\n"
+                    echo "(_>) you want me to run it for you? "
+                    while true
+                        read -p "(y/n): " yesornot
+                        switch $yesornot
+                            case y Y yes YES
+                                eval $method $i
+                                break
+                            case n N no NO
+                                echo "Aborting ..."
+                                break
+                            case '*'
+                                echo "Please answer y or n."
+                        end
+                    end
+                    continue # Continue to the next package in the for loop
+
 				
                 case bettercap aquatone
-					echo -en "\e[31mE:\e[0m $i is a ruby gem, you should try it with \e[33m'gem install $i'\e[0m\n"
+                    set method "gem install"
+					echo -en "\e[31mE:\e[0m $i is a ruby gem, you should try it with \e[33m'$method $i'\e[0m\n"
+                    echo "(_>) you want me to run it for you? "
+                    while true
+                        read -p "(y/n): " yesornot
+                        switch $yesornot
+                            case y Y yes YES
+                                eval $method $i
+                                break
+                            case n N no NO
+                                break
+                            case '*'
+                                echo "Please answer y or n."
+                        end
+                    end
+                    continue # Continue to the next package in the for loop
+
 				
 				case bash-obfuscate localtunnel n8n twifo-cli
-                    if [ "$i" = "n8n" ]
-                        set arg2 "--sqlite=\$PREFIX/bin/sqlite3"
+                    set method "npm install -g"
+					echo -en "\e[31mE:\e[0m $i is a nodejs module, you should try it with \e[33m'$method $i'\e[0m\n"
+                    echo "(_>) you want me to run it for you? "
+                    while true
+                        set yesornot (read -P "(y/n): ")
+                        switch $yesornot
+                            case y Y yes YES
+                                eval $method $i
+                                break
+                            case n N no NO
+                                break
+                            case '*'
+                                echo "Please answer y or n."
+                        end
                     end
+                    continue # Continue to the next package in the for loop
 
-					echo -en "\e[31mE:\e[0m $i is a nodejs module, you should try it with \e[33m'npm install -g $i $arg2'\e[0m\n"
 
 				case omf
 					if command -v fish >/dev/null
@@ -34,6 +79,7 @@ function apt
 						break
 					end
 			end
+
 		end
 	else
 		$PREFIX/bin/apt $argv

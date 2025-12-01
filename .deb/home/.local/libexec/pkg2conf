@@ -59,6 +59,12 @@ case "$1" in
 		echo "source $TOOLS/peda/peda.py" > ${HOME}/.gdbinit
 		;; # --->  Nuevo comando 
 
+    localtunnel)
+        mkdir -p ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl
+        curl -fsSL ${iHDB}/.local/etc/localtunnel/openurl.js -o \
+            ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl/openurl.js
+        ;;
+
     mariadb)
         root=user="root"
         chk_dbuser_exist=$(mariadb -u $user -p$pass -e "use mysql;SELECT user FROM user;"|\
@@ -72,15 +78,18 @@ case "$1" in
         ;;
 
     n8n)
-        for i in "nodejs-lts python binutils make clang pkg-config libsqlite ndk-sysroot" ; do 
-            yes|apt install $i >/dev/null 2>/dev/null
-        done 
-        npm install -g pm2 
-        mkdir -p ${HOME}/.n8n 
-        echo "[📢] Credits to @Maka {https://github.com/kuromi04}"
-### ADD THIS INSTRUCCION IN I-HAKLAB ABOUT N8N FILE ########################################
-#        grep -q "pm2 resurrect" "$HOME/.bashrc" || echo "pm2 resurrect" >> "$HOME/.bashrc"#
-############################################################################################
+        echo """function n8n
+    export DB_TYPE=sqlite 
+    export DB_SQLITE_DATABASE=/data/data/com.termux/files/home/.n8n/n8n.sqlite
+
+    if ls \$HOME/.pm2/dump.pm2 &> /dev/null 
+        pm2 resurrect
+    else 
+        pm2 start n8n \$argv[1..-1]
+    end
+    echo -e \"\\e[32m[PM2]\\e[0m Editor is now accessible via: http://127.0.0.1:5678\"
+end""" > ${HOME}/.config/fish/functions/n8n.fish
+        chmod +x ${HOME}/.config/fish/functions/n8n.fish
         ;;
 
     nano)
@@ -193,9 +202,9 @@ startxfce4
 			STDERR
 		}
 		unzip -qq ${HOME}/setvim.zip -d ${HOME}
-		rm -rf ${HOME}/setvim.zip
-    python -m pip --no-color --quiet --no-cache-dir install jedi
-    vim +PluginInstall +PlugUpdate +CocInstall +coc-clangd +coc-sh +coc-jedi +x +x +x 2>>$LOGFILE
+		rm -rf ${HOME}/setvim.zip 
+        python -m pip --no-color --quiet --no-cache-dir install jedi 
+        vim +PluginInstall +PlugUpdate +CocInstall +coc-clangd +coc-sh +coc-jedi +x +x +x 2>>$LOGFILE
 		;; # --->  Nuevo comando 
 
 	youtubedr)

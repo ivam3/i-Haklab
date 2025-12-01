@@ -2,6 +2,7 @@ apache2
 clamav
 fish
 gdb
+localtunnel
 mariadb
 n8n
 nano
