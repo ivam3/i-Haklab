@@ -15,6 +15,10 @@ The primary motivation for its creation arose from the need for a native and fun
 *   **Termux Integration:** Optimized for smooth performance within the Termux ecosystem.
 *   **Developed in Python/Flet:** Utilizes a modern technology stack that allows for rapid development and an attractive user interface.
 
+## Markdown path files 
+
+To specify the path of the Markdown file you want to view, you can modify the `file_path` variable in the `main.py` script located in the `markdown_viewer/src/` directory. Or move all your Markdown files to the default directory set in the script `markdown_viewer/src/storage/mds/`.
+
 ## Installation
 
 ### Requirements
