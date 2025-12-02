@@ -159,6 +159,13 @@ $Y       [--] Automatitation Options [--]$W
 _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 ╰apkactivity─+─<path─to─apk─file>➤ Get the main activity from .apk file
 |                                |
+╰androforensic─<option>─<target>─➤ Extract several information from android devices via ADB.
+|     ╰─────────secretCodes──────➤ Scan installed Android packages and extract any secret dialer codes
+|     ╰────────────airscope──────➤ Wi-Fi radar for Android devices via ADB
+|     ╰─────────────dumpsys──────➤ Dump several system information from target android device via ADB
+|     ╰─────────────extract──────➤ ADB Data Extraction & System Snapshot Script
+|                      ╰─example─{─i-Haklab androforensic dumpsys 192.168.1.58:41771
+|                                |
 ╰──backup────+──create|restore───➤ Create a backup of Termux or restore it
 |                  |    ╰example─{─i-Haklab restore path/to/file.tar.gz
 |                  ╰─example─────{─i-Haklab create <in/ex> [in=internal ex=external sdcard]
