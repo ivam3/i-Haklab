@@ -4,6 +4,7 @@ adminpanel
 aircrack-ng
 amass
 androbugs
+androforensic
 androidsdk-cli
 apksigner
 apktool
@@ -77,6 +78,7 @@ localtunnel
 lockphish
 maltego
 mariadb
+markdown-viewer
 metasploit-framework
 mimikatz
 nexphisher
