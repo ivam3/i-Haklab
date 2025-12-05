@@ -3,7 +3,7 @@ function phantom-ps
     set phantom_limit (/system/bin/dumpsys activity settings |\
         grep max_phantom_processes | awk -F "=" '{print $NF}')
 
-    if test $phantom_limit = "32"
+    if test $phantom_limit != "32"
         # GETTING THE IP OF THE DEVICE
         set IP (ifconfig 2>/dev/null \
             | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' \
@@ -57,12 +57,13 @@ function phantom-ps
             end
 
             sleep 1
-            return $IP $p
         end
 
-        adb shell pm grant com.termux android.permission.PACKAGE_USAGE_STATS 2>&1
-        adb shell pm grant com.termux android.permission.DUMP 2>&1
+        adb -s $IP:$p shell pm grant com.termux android.permission.PACKAGE_USAGE_STATS >/dev/null 2>/dev/null
+        adb -s $IP:$p shell pm grant com.termux android.permission.DUMP >/dev/null 2>/dev/null
+        echo """
         adb -s $IP:$p shell "/system/bin/device_config put activity_manager max_phantom_processes 2147483647" 2>&1
+        """
 
         
         set phantom_limit (/system/bin/dumpsys activity settings |\
