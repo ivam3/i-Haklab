@@ -59,6 +59,11 @@ case "$1" in
 		echo "source $TOOLS/peda/peda.py" > ${HOME}/.gdbinit
 		;; # --->  Nuevo comando 
 
+    @google/gemini-cli)
+        indexFile="${PREFIX}/lib/node_modules/@google/gemini-cli/node_modules/clipboardy/index.js"
+        let ln="$(grep -n "case 'android'" $indexFile | cut -d: -f1)+1"
+        sed -i "${ln}s|===|!==|" $indexFile
+        ;;
     localtunnel)
         mkdir -p ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl
         curl -fsSL ${iHDB}/.local/etc/localtunnel/openurl.js -o \
