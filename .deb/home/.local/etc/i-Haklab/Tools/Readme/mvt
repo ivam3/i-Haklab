@@ -1,0 +1,140 @@
+# 🛡️ Mobile Verification Toolkit (MVT)
+
+**Mobile Verification Toolkit (MVT)** es un conjunto de herramientas forenses creado por *Amnesty International Security Lab* para ayudar a analizar dispositivos Android e iOS en busca de posibles indicadores de compromiso, especialmente relacionados con spyware avanzado como **Pegasus** y otras amenazas dirigidas.
+
+MVT facilita la recolección, el análisis y la detección de evidencias usando métodos automatizados.  
+El toolkit está orientado a investigadores de seguridad, analistas forenses y organizaciones que necesitan revisar dispositivos móviles de manera segura.
+
+---
+
+## 📱 Características principales
+
+### 🔍 Para Android
+- Extracción de datos usando **ADB**.
+- Análisis de aplicaciones instaladas.
+- Revisión de permisos sensibles.
+- Verificación de *packages* sospechosos.
+- Extracción y análisis de historiales:
+  - Chrome
+  - SMS
+  - Llamadas
+  - Registros del sistema
+- Comparación con indicadores de compromiso (IOC) conocidos.
+
+### 🍎 Para iOS
+- Análisis de respaldos de iTunes.
+- Verificación de metadatos y registros.
+- Revisión de historiales de Safari.
+- Análisis de logs del sistema.
+- Comparación con IOC específicos de ataques dirigidos.
+
+---
+
+## 📦 Instalación
+
+Puedes instalar MVT con **apt** (recomendado):
+
+```bash
+apt install mvt
+```
+
+O con pipx:
+
+```bash
+pipx install mvt
+```
+
+O usando pip normal:
+
+```bash
+pip install mvt
+```
+
+---
+
+## 🧪 Uso básico
+
+### 📱 Analizar un dispositivo Android conectado
+
+1. Habilitar *Depuración USB* o ADB por Wi-Fi.
+2. Ejecutar:
+
+```bash
+mvt-android check-adb
+```
+
+Para realizar una extracción completa:
+
+```bash
+mvt-android download --output carpeta_destino
+```
+
+Después, analizar el contenido descargado:
+
+```bash
+mvt-android analyze carpeta_destino/
+```
+
+---
+
+## 🔒 Indicadores de compromiso (IOC)
+
+MVT puede usar listas de IOC públicas o propias.  
+Para cargar IOCs:
+
+```bash
+mvt-ios check-backup --iocs carpeta_iocs backup/
+```
+
+o en Android:
+
+```bash
+mvt-android analyze carpeta --iocs carpeta_iocs
+```
+
+---
+
+## ⚠️ Limitaciones importantes
+
+- MVT **no rootea ni desbloquea** dispositivos.
+- No puede acceder a datos cifrados sin las claves del usuario.
+- Su objetivo es **detectar huellas**, no limpiar un dispositivo.
+- En Android sin root, la extracción depende totalmente de ADB.
+- En Android (como Termux), el backend USB puede fallar porque **libusb no funciona en Android**.
+
+---
+
+## 🧰 Requisitos
+
+- Python 3.8 o superior.
+- Para Android:
+  - ADB configurado.
+- Para iOS:
+  - Respaldo local de iTunes (sin cifrar o con clave conocida).
+
+---
+
+## 📚 Documentación oficial
+
+Documentación completa:  
+https://docs.mvt.re/
+
+Repositorio oficial:  
+https://github.com/mvt-project/mvt
+
+---
+
+## 🛑 Advertencia
+
+MVT es una herramienta técnica.  
+No garantiza que un dispositivo esté libre de intrusiones; solo ayuda a identificar **posibles evidencias**.
+
+Para incidentes reales, se recomienda contactar a especialistas en análisis forense.
+
+---
+
+## 🧑‍💻 Licencia
+
+MVT está disponible bajo la licencia **GNU GPLv3**.
+
+---
