@@ -1,10 +1,16 @@
 function apt
 	if test "$argv[1]" = "install" -o "$argv[1]" = "reinstall" -o "$argv[1]" = "search"
+        function pkg2conf
+            set pkgName $argv
+            if grep $pkgName /data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/listofpkg2conf &>/dev/null 
+                bash /data/data/com.termux/files/home/.local/libexec/pkg2conf $pkgName
+            end
+        end
 
 		for i in $argv[2..-1]
 			switch $i
 				
-				case bloodhound frida h8mail hashid holehe objection octosuite orbitaldump osrframework phoneintel scrapy shodan snscrape speedtest-cli sqlmap wfuzz
+				case bloodhound frida h8mail hashid holehe mvt objection octosuite orbitaldump osrframework phoneintel scrapy shodan snscrape speedtest-cli sqlmap wfuzz
                     set method "python3 -m pip install"
 					echo -en "\e[31mE:\e[0m $i is a python module, you should try it with \e[33m'$method $i'\e[0m\n"
                     echo "(_>) you want me to run it for you? "
@@ -13,6 +19,7 @@ function apt
                         switch $yesornot
                             case y Y yes YES
                                 eval $method $i
+                                pkg2conf $i
                                 break
                             case n N no NO
                                 echo "Aborting ..."
@@ -73,11 +80,9 @@ function apt
 					end
 
 				case '*'
-					$PREFIX/bin/apt "$argv[1]" $i
-					if grep $i /data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/listofpkg2conf &>/dev/null
-						bash /data/data/com.termux/files/home/.local/libexec/pkg2conf $i
-						break
-					end
+                    $PREFIX/bin/apt "$argv[1]" $i
+                    pkg2conf $i
+					break
 			end
 
 		end

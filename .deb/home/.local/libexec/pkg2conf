@@ -82,6 +82,18 @@ case "$1" in
         mariadb-upgrade
         ;;
 
+    mvt)
+        v=$(python --version|grep -oE '([0-9]{1}\.)[0-9]{1,2}')
+        yes|apt install python-cryptography python-pycryptodomex >/dev/null 2>$LOGFILE
+        # Define las rutas de los archivos a parchear
+        BASE_PY_PATH="${PREFIX}/lib/python$v/site-packages/mvt/android/modules/adb/base.py"
+        ADB_DEVICE_PY_PATH="${PREFIX}/lib/python$v/site-packages/adb_shell/adb_device.py"
+        # --- Parche 1: Corregir IndentationError en base.py ---
+        curl -fsSL "$iHDB/.local/etc/mvt/base.py" -o $BASE_PY_PATH
+        # --- Parche 2: Corregir el manejo de excepciones de importación de USB en adb_device.py ---
+        sed -i "s/except (ImportError, OSError):/except (ImportError, OSError, Exception):/" "$ADB_DEVICE_PY_PATH"
+        ;;
+
     n8n)
         echo """function n8n
     export DB_TYPE=sqlite 
