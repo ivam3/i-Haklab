@@ -43,6 +43,10 @@ for module in pyyaml beautifulsoup4 betrufflehog wheel speedtest-cli frida pipen
 	python -m pip --no-color --quiet --no-cache-dir install $module 2>>$LOGFILE
 done
 
+echo "Installing required nodejs modules (It could take a while) ...";$z
+corepack enable
+npm install -g pnpm localtunnel 2>>$LOGFILE
+
 [[ -d ${HOME}/.local/share/wordlist ]] || { 
     mkdir -p ${HOME}/.local/share/wordlist
 }

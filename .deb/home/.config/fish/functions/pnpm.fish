@@ -1,4 +1,4 @@
-function npm
+function pnpm
     pushd $HOME
 	if test "$argv[1]" = "install" -o "$argv[1]" = "update"
 		for i in $argv[2..-1]
@@ -15,21 +15,18 @@ function npm
                     # INSTALL NPM GLOBAL PACKAGES 
                     for m in pm2 gyp node-gyp
                         echo "(_>) Installing $m ..."
-                        npm install -g $m
+                        pnpm install -g $m
                     end 
                     # PREPARE ENVIRONMENT 
                     echo "(_>) Preparing n8n environment ..."
                     mkdir -p $HOME/{.n8n,.gyp} 
                     echo "{'variables':{'android_ndk_path':''}}" > $HOME/.gyp/include.gypi 
-
-                case pnpm
-                    corepack enable
                     
                 case -g --global
                     continue
 
                 case '*'
-                    $PREFIX/bin/npm "$argv[1]" -g $i
+                    $PREFIX/bin/pnpm "$argv[1]" -g $i
                     if grep $i /data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/listofpkg2conf &>/dev/null  
                         bash /data/data/com.termux/files/home/.local/libexec/pkg2conf $i
                         break 
@@ -37,10 +34,9 @@ function npm
                         $PREFIX/bin/npm $argv 
                     end 
             end
-            $PREFIX/bin/npm $argv[1] $i 
         end
 	else
-		$PREFIX/bin/npm $argv
+		$PREFIX/bin/pnpm $argv
 	end
     popd 2>/dev/null
 end
