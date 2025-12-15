@@ -27,17 +27,23 @@ function npm
                     
                 case -g --global
                     continue
-
-                case '*'
-                    $PREFIX/bin/npm "$argv[1]" -g $i
-                    if grep $i /data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/listofpkg2conf &>/dev/null  
-                        bash /data/data/com.termux/files/home/.local/libexec/pkg2conf $i
-                        break 
-                    else
-                        $PREFIX/bin/npm $argv 
-                    end 
             end
-            $PREFIX/bin/npm $argv[1] $i 
+            $PREFIX/bin/npm $argv[1] -g $i 
+            if grep $i /data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/listofpkg2conf &>/dev/null  
+                bash /data/data/com.termux/files/home/.local/libexec/pkg2conf $i
+            end 
+        end
+
+    else if test "$argv[1]" = "uninstall"
+		for i in $argv[2..-1]
+            switch $i 
+                case 'n8n'
+                    rm /data/data/com.termux/files/home/.config/fish/functions/n8n.fish 
+                
+                case -g --global
+                    continue
+            end
+            $PREFIX/bin/npm $argv[1] -g $i 
         end
 	else
 		$PREFIX/bin/npm $argv
