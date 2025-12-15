@@ -139,6 +139,30 @@ set softwrap
 		yes|pkg i luarocks lua-language-server >/dev/null 2>/dev/null 
         nvim +x +x
         ;; # --->  Nuevo comando 
+    open-lovable)
+        jsonFile="${HOME}/.local/share/open-lovable/package.json"
+        BACKUP="${HOME}/.local/share/open-lovable/package.json.bak"
+        DEV_CMD="NEXT_DISABLE_TURBOPACK=1 next dev"
+
+        if [ ! -f "$jsonFile" ]; then
+            echo """scripts\": {
+   \"dev\": \"NEXT_DISABLE_TURBOPACK=1 next dev\",
+   \"build\": \"next build\",
+   \"start\": \"next start\"
+}""" > $jsonFile
+        else
+            chk-pkg jq jq
+            tmp=$(mktemp)
+            cp "$jsonFile" "$BACKUP"
+            
+            jq --arg devcmd "$DEV_CMD" '
+              .scripts = (.scripts // {}) |
+              .scripts.dev = $devcmd
+            ' "$jsonFile" > "$tmp"
+
+            mv "$tmp" "$jsonFile"
+        fi
+        ;;
 	privoxy)
 		echo "forward-socks5 / 127.0.0.1:9050 ." >> $PREFIX/etc/privoxy/config 
 		;; # --->  Nuevo comando 

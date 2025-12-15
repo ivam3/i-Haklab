@@ -50,8 +50,9 @@ function apt
                     continue # Continue to the next package in the for loop
 
 				
-				case bash-obfuscate localtunnel n8n twifo-cli
+				case bash-obfuscate localtunnel n8n pnpm open-lovable twifo-cli
                     set method "npm install -g"
+        # Veddrificar package.json
 					echo -en "\e[31mE:\e[0m $i is a nodejs module, you should try it with \e[33m'$method $i'\e[0m\n"
                     echo "(_>) you want me to run it for you? "
                     while true
