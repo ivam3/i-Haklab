@@ -1,5 +1,5 @@
 function pnpm
-	if test "$argv[1]" = "install" -o "$argv[1]" = "update"
+	if test (count $argv) -ge 1; and contains $argv[1] install update
         pushd $HOME
 		for i in $argv[2..-1]
             if test "$i" = "gemini-cli"
@@ -46,7 +46,7 @@ function pnpm
             end 
         end
 
-    else if test "$argv[1]" = "uninstall"
+    else if test (count $argv) -ge 1; and test "$argv[1]" = "uninstall"
         pushd $HOME
 		for i in $argv[2..-1]
             switch $i 
