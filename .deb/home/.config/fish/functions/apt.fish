@@ -15,7 +15,7 @@ function apt
 					echo -en "\e[31mE:\e[0m $i is a python module, you should try it with \e[33m'$method $i'\e[0m\n"
                     echo "(_>) you want me to run it for you? "
                     while true
-                        read -p "(y/n): " yesornot
+                        read -P "(y/n): " yesornot
                         switch $yesornot
                             case y Y yes YES
                                 eval $method $i
@@ -36,7 +36,7 @@ function apt
 					echo -en "\e[31mE:\e[0m $i is a ruby gem, you should try it with \e[33m'$method $i'\e[0m\n"
                     echo "(_>) you want me to run it for you? "
                     while true
-                        read -p "(y/n): " yesornot
+                        read -P "(y/n): " yesornot
                         switch $yesornot
                             case y Y yes YES
                                 eval $method $i
@@ -56,7 +56,7 @@ function apt
 					echo -en "\e[31mE:\e[0m $i is a nodejs module, you should try it with \e[33m'$method $i'\e[0m\n"
                     echo "(_>) you want me to run it for you? "
                     while true
-                        set yesornot (read -P "(y/n): ")
+                        read -P "(y/n): " yesornot
                         switch $yesornot
                             case y Y yes YES
                                 eval $method $i
