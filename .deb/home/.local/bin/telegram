@@ -1,0 +1,3 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab telegram
+am start -n org.telegram.messenger/org.telegram.ui.LaunchActivity >/dev/null

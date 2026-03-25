@@ -1,0 +1,82 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab APT Wrapper (Bash version)
+# Replaces apt.fish logic for agnostic shell support
+
+RED='\e[31m'
+GREEN='\e[32m'
+YELLOW='\e[33m'
+RESET='\e[0m'
+
+pkg2conf() {
+    local pkgName="$1"
+    if grep -q "^$pkgName$" "$HOME/.local/etc/i-Haklab/Tools/listofpkg2conf" 2>/dev/null; then
+        bash "$HOME/.local/libexec/pkg2conf" "$pkgName"
+    fi
+}
+
+install_wrapper() {
+    local method="$1"
+    local pkg="$2"
+    local type="$3"
+
+    echo -en "${RED}E:${RESET} $pkg is a $type, you should try it with ${YELLOW}'$method $pkg'${RESET}\n"
+    echo "(_>) you want me to run it for you? "
+    while true; do
+        read -p "(y/n): " yesornot
+        case "$yesornot" in
+            y|Y|yes|YES)
+                eval "$method $pkg"
+                [[ "$type" == "python module" ]] && pkg2conf "$pkg"
+                break
+                ;;
+            n|N|no|NO)
+                echo "Aborting ..."
+                break
+                ;;
+            *)
+                echo "Please answer y or n."
+                ;;
+        esac
+    done
+}
+
+# Main logic
+if [[ "$1" == "install" || "$1" == "reinstall" || "$1" == "search" ]]; then
+    for i in "${@:2}"; do
+        case "$i" in
+            bloodhound|frida|h8mail|hashid|holehe|mvt|objection|octosuite|orbitaldump|osrframework|phoneintel|scrapy|shodan|snscrape|speedtest-cli|sqlmap|wfuzz)
+                install_wrapper "python3 -m pip install" "$i" "python module"
+                continue 
+                ;;
+
+            bettercap|aquatone)
+                install_wrapper "gem install" "$i" "ruby gem"
+                continue
+                ;;
+
+            bash-obfuscate|localtunnel|n8n|pnpm|open-lovable|twifo-cli)
+                install_wrapper "npm install -g" "$i" "nodejs module"
+                continue
+                ;;
+
+            omf)
+                if command -v fish >/dev/null; then
+                    echo "Installing oh-my-fish over fish shell ..."
+                    curl -fsSL "https://raw.githubusercontent.com/ivam3/i-Haklab/master/.deb/home/.local/etc/i-Haklab/get.oh-my.fish" -o "$TMPDIR/omf.fish"
+                    fish "$TMPDIR/omf.fish"
+                    rm "$TMPDIR/omf.fish"
+                else
+                    echo -en "${RED}E:${RESET} Fish needed, you should try it with ${YELLOW}'apt install fish'${RESET}\n"
+                fi
+                continue
+                ;;
+
+            *)
+                "$PREFIX/bin/apt" "$1" "$i"
+                pkg2conf "$i"
+                ;;
+        esac
+    done
+else
+    "$PREFIX/bin/apt" "$@"
+fi

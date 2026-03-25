@@ -1,0 +1,35 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab Shell Setup Script (Switch version)
+
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+BASHRC="${PREFIX}/etc/bash.bashrc"
+
+banner
+echo -e "${Y}[?]${W} Which shell would you like to set as default?"
+select shell in fish zsh bash cancel; do
+    chk-pkg $shell $shell
+    case $shell in
+        fish|zsh)
+            # Update bash.bashrc to reflect the change
+            sed -i "s|chsh -s .*|chsh -s $shell|g" "$BASHRC"
+            
+            # Execute chsh for current session change
+            chsh -s $shell
+            echo -e "${G}(✔)${W} $shell is now your default shell. Please restart Termux."
+            break
+            ;;
+        bash)
+            echo -e "\e[32m(➤_)\e[0m Reverting to Bash as default..."
+            sed -i "/chsh -s/d" "$BASHRC"
+            chsh -s bash
+            curl -fsSL "$iHDB/.local/etc/bash/bashrc" -o ${HOME}/.bashrc
+            echo -e "${G}(✔)${W} $shell is now your default shell. Please restart Termux."
+            break
+            ;;
+        cancel)
+            exit 0
+            ;;
+    esac
+done

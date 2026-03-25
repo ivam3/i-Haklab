@@ -1,0 +1,12 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab serverapache control
+if [ $# -eq 0 ]; then
+    echo -en "\e[33mUsage:\e[0m serverapache <start|stop|restart>"
+else
+    apachectl "$@"
+    if pidof httpd >/dev/null; then
+        echo -en "\e[32mserver:\e[0m http://127.0.0.1:8080"
+        sleep 1
+        termux-open-url http://127.0.0.1:8080
+    fi
+fi

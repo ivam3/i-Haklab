@@ -131,7 +131,7 @@ helpper() {
             $Y[--] Setting Options [--]$W
 _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 ╰─about──────+──<name─of─tool>───➤ Show informations about tool/framework
-|   ╰────example─────────────────{─i-Haklab about crunch─}
+|                     ╰example───{─i-Haklab about crunch─}
 ╰─aptup──────➤───────────────────➤ Update termux manually, packages by packages
 ╰─help───────➤───────────────────➤ Show this help menu
 ╰─passwd─────+────set─|─new──────➤ Set and change the login termux
@@ -143,13 +143,14 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 |                           ╰─ex─{─i-Haklab pd list──➤ show all linux distribution available
 ╰─setapikey──➤───────────────────➤ Set API Keys to use in i-Haklab features
 ╰─setbanner──➤───────────────────➤ Enable, disable and custom the i-Haklab wall banner
+╰─setshell───➤───────────────────➤ Switch shell between bash, zsh and fish(default).
 ╰─setuser────➤───────────────────➤ Set i-Haklab user name
 ╰─show───────+─────alltools──────➤ List all tools/frameworks available on i-Haklab
 |   ╰────────+────instatools─────➤ Show all installed tools/framewotks
 |   ╰────────+──────books────────➤ Show all books available to download
 |   ╰────────+─────tutorials─────➤ Show tutorials available
 |   ╰────────+───────QG──────────➤ Show quick guides available
-╰speedtest───➤───────────────────➤ Run a speed test of your network
+╰─speedtest──➤───────────────────➤ Run a speed test of your network
 ╰─version────➤───────────────────➤ Show i-Haklab version installed
 ╰─weechat────➤───────────────────➤ Connect with irc Ivam3byCinderella chat
 ╰─Xwayland───➤───────────────────➤ Run xserver over TermuXwayland app with xfce4 as window manager
@@ -166,61 +167,61 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 |     ╰─────────────extract──────➤ ADB Data Extraction & System Snapshot Script
 |                      ╰─example─{─i-Haklab androforensic dumpsys 192.168.1.58:41771
 |                                |
-╰──backup────+──create|restore───➤ Create a backup of Termux or restore it
+╰backup──────+──create|restore───➤ Create a backup of Termux or restore it
 |                  |    ╰example─{─i-Haklab restore path/to/file.tar.gz
 |                  ╰─example─────{─i-Haklab create <in/ex> [in=internal ex=external sdcard]
-╰─binchecker─➤───────────────────➤ Get informacion about BINs (CC,DC)
+╰binchecker──➤───────────────────➤ Get informacion about BINs (CC,DC)
 |                                |
 ╰bruteforce─+─ftp|mail|ssh|telnet➤ Brute force attack at several servers.
 |    ╰───example─for─ftp─────────{─i-Haklab bruteforce ftp
 |    ╰───example─for─mail────────{─i-Haklab bruteforce mail ivam3@live.com, gmail or live.com
 |                                |
-╰──chatGPT──➤───<--help/-h>──────➤ Connect with OpenAi API to interact with ChatGPT-3 via CLi.
+╰chatGPT────➤───<--help/-h>──────➤ Connect with OpenAi API to interact with ChatGPT-3 via CLi.
 |    |               ╰──example──{─i-Haklab chatGPT -h [setting options]
 |    ╰───example─────────────────{─i-Haklab chatGPT
-╰──ESmsg────+──encode/decode─────➤ Encode|decode secret message into a ASCII file.
+╰ESmsg──────+──encode/decode─────➤ Encode|decode secret message into a ASCII file.
 |                    ╰──example──{─i-Haklab ESmsg <encode/decode-}
 |                                |
-╰──tunnel───+─<port─+─subdomain>─➤ Start a SSH client to request TCP port forwarding
+╰tunnel─────+─<port─+─subdomain>─➤ Start a SSH client to request TCP port forwarding
 |    ╰───example─────────────────{─i-Haklab tunnel -p 4444 -s my-subdomain-}
 |                                |
-╰─handler───+─<name─of─file.rc>──➤ Start handler on msfconsole with previous setting
+╰handler────+─<name─of─file.rc>──➤ Start handler on msfconsole with previous setting
 |                                |
-╰───msf─────+─dirscan─+─IPtarget─➤ Enumerate directories/subdirecotires from a server.
-|    |          ╰──example───────{─i-Haklab msf dirscan 10.10.10.242-}
-|    ╰──────+─embed──────────────➤ Embed a metasploit payload into legitim apk file.
-|               ╰─ex─for─outlan──{─i-Haklab msf embed 6.tcp.ngrok.io 4546 /path/to/file.apk
-|    ╰──────+─payapk─+─tun0:port─➤ Create a coded payload .apk
-|    |          ╰─ex─for─outlan──{─i-Haklab msf payapk 6.tcp.ngrok.io 23453─}
-|    ╰──────+─payexe─+─tun0:port─➤ Create a coded payload .exe
-|    |         ╰─ex─for─inlan───{─i-Haklab msf payexe 192.168.0.1 8080─}
-|    ╰──────+─paypdf─+─tun0:port─➤ Create a coded payload .pdf
-|    |          ╰─ex─default─set─{─i-Haklab msf paypdf─}
-|    ╰──────+──────shodan────────➤ Search vulnerable webcam servers using metasploit
+╰msf────────+─dirscan─+─IPtarget─➤ Enumerate directories/subdirecotires from a server.
+| |             ╰──example───────{─i-Haklab msf dirscan 10.10.10.242-}
+| ╰─────────+─embed──────────────➤ Embed a metasploit payload into legitim apk file.
+| |             ╰─ex─for─outlan──{─i-Haklab msf embed 6.tcp.ngrok.io 4546 /path/to/file.apk
+| ╰─────────+─payapk─+─tun0:port─➤ Create a coded payload .apk
+| |             ╰─ex─for─outlan──{─i-Haklab msf payapk 6.tcp.ngrok.io 23453─}
+| ╰─────────+─payexe─+─tun0:port─➤ Create a coded payload .exe
+| |             ╰─ex─for─inlan───{─i-Haklab msf payexe 192.168.0.1 8080─}
+| ╰─────────+─paypdf─+─tun0:port─➤ Create a coded payload .pdf
+| |             ╰─ex─default─set─{─i-Haklab msf paypdf─}
+| ╰─────────+──────shodan────────➤ Search vulnerable webcam servers using metasploit
 |                                |
-╰─ngroklink─➤────────────────────➤ Show the current ngrok link
+╰ngroklink──➤────────────────────➤ Show the current ngrok link
 |                                |
-╰─ngrokssh──➤─port+protocol+file─➤ Connect with ngrok servers via SSH protocol
+╰ngrokssh───➤─port+protocol+file─➤ Connect with ngrok servers via SSH protocol
 |                   ╰──example─1─{─i-Haklab ngrokssh -p 4546 -t http -f path/to/specific/id_rsa-file
 |                   ╰──example─2─{─i-Haklab ngrokssh -p 8080 -t tcp (default file:\$HOME/.ssh/id_rsa)
 |                                |
-╰─payvid────➤────────────────────➤ Hide a Reverse Shell with a Video File by Exploiting Linux OS.
+╰payvid─────➤────────────────────➤ Hide a Reverse Shell with a Video File by Exploiting Linux OS.
 |                                |
-╰─phonescan─+─<phonenumber>──────➤ A phone number information scaner
+╰phonescan──+─<phonenumber>──────➤ A phone number information scaner
 |                   ╰──example───{─i-Haklab phonescan 525584923476─}
 |                                |
-╰─qemufy────+─<file.zip/rm>──────➤ Convert ova files and run a QEMU virtual machine over Termux(no root).
+╰qemufy─────+─<file.zip/rm>──────➤ Convert ova files and run a QEMU virtual machine over Termux(no root).
 |    ╰──────────────|───|────────{─i-Haklab qemufy─}
 |                   |   ╰example─{─i-Haklab qemufy rm [remove image file]─}
 |                   ╰──example───{─i-Haklab qemufy VM_image.zip [create a new image file]─}
 |                                |
 ╰servers4test────────────────────➤ Init deliberately insecure web application for pentesting.
 |                                |
-╰──4share───➤───<server─name>────➤ Init web server for share files remotely and securely
+╰4share─────➤───<server─name>────➤ Init web server for share files remotely and securely
 |    ╰─────────────────|─────────{─Default credentials = Admin:password─}
 |                      ╰─────────{─servers names: localtunnel, localhost.run and cloudflared─}
 |                      ╰─example─{─i─Haklab 4share localtunnel─}
-╰─usbtest───➤─<path-to-device>───➤ Test usb device connected via OTG 
+╰usbtest────➤─<path-to-device>───➤ Test usb device connected via OTG 
 |                   ╰─example────{─i-Haklab usbtest /dev/bus/usb/001─}
 |───────────|────────────────────|
 |───────────|────────────────────|
@@ -239,7 +240,6 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰gitbrowsering───────────────────➤ Search repositories in github over CLi
 ╰LOCALHOST───────────────────────➤ Show the current internet protocol over LAN
 ╰lock────────────────────────────➤ Block Termux's screen
-╰osrframework────────────────────➤ OSINT setoolkit
 ╰mypip───────────────────────────➤ Show your public internet protocol
 ╰openvpn─────────────────────────➤ Open openvpn application
 ╰omf─────────────────────────────➤ Change Oh-my-fish theme
@@ -254,12 +254,19 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰sudo────────────────────────────➤ Execute commands or init an enviroment as fake root user
 ╰telegram────────────────────────➤ Open telegram application
 ╰traductor───────────────────────➤ Init a command line traductor
+╰yazi────────────────────────────➤ Terminal file manager
 ╰──────────────────────────────────────────────────────────────────────────────────────────|\n\n"
 }
 export -f helpper
 
 pass(){
-	user=$(grep "USER" ${HOME}/.local/etc/fish/config.fish|awk '{print $NF}')
+    shell=$(echo ${SHELL}|awk -F "/" '{print $NF}')
+    case $shell;
+        bash) filerc="${HOME}/.bashrc";;
+        fish) filerc="${HOME}/.local/etc/fish/config.fish";;
+        zsh) filerc="${HOME}/.zshrc";;
+    esac
+	user=$(grep "USER" $filerc | awk '{print $NF}')
 	[[ $1 = Set ]] && {
 		login=$(grep "pass" ${HOME}/.local/libexec/i-Haklab.login|tail -n 1)
 		select opt in Password Fingerprint Disable Exit

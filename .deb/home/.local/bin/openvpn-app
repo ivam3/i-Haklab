@@ -1,0 +1,3 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab openvpn
+am start -n net.openvpn.openvpn/net.openvpn.unified.MainActivity >/dev/null

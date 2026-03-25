@@ -1,0 +1,3 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab mypip -> public IP
+curl -fsSL ifconfig.so

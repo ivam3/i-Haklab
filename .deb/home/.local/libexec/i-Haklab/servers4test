@@ -35,18 +35,20 @@ createDB(){
 	rm -rf ${PREFIX}/var/run/*.pid;
 }
 
-until [ ! -z $pid ]; do
+while [ -z $pid ]; do
   killall mariadbd >/dev/null 2>/dev/null
   tput civis
   echo -en $G"\r(➤_)$W Running daemon ..."
   mariadbd-safe >/dev/null 2>/dev/null &
-  sleep 3
   export pid=$(echo $!)
+  sleep 3
   echo -en "\tDONE!!\n"
   tput cnorm 
 done
 
-while [ "$(ps a|awk '{print $1}'|grep $pid)" ]
+psbak=$(ps a|awk '{print $1}'|grep $pid)
+
+while [ $psbak ]
 do
     while read -sp "(>_) Enter data base password: " pass && printf "\n" && [[ -z $pass ]]; do
         continue
@@ -63,10 +65,12 @@ do
     done 
 
     [[ ! -d ${PREFIX}/var/lib/mysql  ]] && { 
-        mariadb-install-db >/dev/null 2>/dev/null;
+       mariadb-install-db --user=root \ 
+            --auth-root-authentication-method=normal >/dev/null 2>/dev/null;
     } || {
         echo -en $G"\r(>_)$W Upgrading data base ..."
-        mariadb-upgrade >/dev/null 2>/dev/null;
+        mariadb-upgrade >/dev/null 2>$LOGFILE;
+        mariadb -u $user --password="$pass" -D "mysql" -e "set password for '$user'@'localhost' = password('$pass');flush privileges;" >/dev/null 2>$LOGFILE;
         echo -en "DONE!!\n"
     }
 

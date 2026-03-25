@@ -1,0 +1,68 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab phantom-ps (Bash version)
+# Increase the limit of phantom processes on Android 12+
+
+# GETTING THE ACTUAL LIMIT OF PHANTOM PROCESS
+phantom_limit=$(/system/bin/dumpsys activity settings | grep max_phantom_processes | awk -F "=" '{print $NF}')
+
+if [ "$phantom_limit" = "32" ]; then
+    # GETTING THE IP OF THE DEVICE
+    IP=$(LOCALHOST)
+
+    echo "IP: $IP"
+
+    PAIR_PORT=""
+    while [ -z "$PAIR_PORT" ]; do
+        read -p "(>_) Pairing port: " PAIR_PORT
+    done
+
+    PAIR_CODE=""
+    while [ -z "$PAIR_CODE" ]; do
+        read -p "(>_) Pairing code: " PAIR_CODE
+    done
+
+    OUT=$(adb pair "$IP:$PAIR_PORT" "$PAIR_CODE" 2>&1)
+    if [[ "$OUT" == *"Successfully paired to"* ]]; then
+        echo "paired to $IP:$PAIR_PORT"
+    elif [[ "$OUT" == *"unable to"* ]]; then
+        echo "fail (${OUT})"
+        exit 1
+    else
+        echo "fail (unknown error)"
+        exit 1
+    fi
+
+    # GETTING THE LISTEN PORT OF THE DEVICE
+    echo "searching for debug port ..."
+    LPORTS=$(nmap -sT -p 10000-65535 --open -T4 -oG - "$IP" \
+        | grep "Ports:" \
+        | grep -oP '\d{5}(?=/open/tcp)' \
+        | sort -u)
+
+    for p in $LPORTS; do
+        OUT=$(adb connect "$IP:$p" 2>&1)
+
+        if [[ "$OUT" == *"connected to"* ]]; then
+            echo "connected to $IP:$p"
+            break
+        else
+            if [[ "$OUT" == *"unable to connect"* ]]; then
+                echo "fail (unable to connect)"
+            elif [[ "$OUT" == *"unable to"* ]]; then
+                echo "fail (${OUT})"
+            else
+                echo "fail (unknown error)"
+            fi
+        fi
+        sleep 1
+    done
+
+    # Granting permissions and setting the limit
+    adb -s "$IP:$p" shell pm grant com.termux android.permission.PACKAGE_USAGE_STATS >/dev/null 2>/dev/null
+    adb -s "$IP:$p" shell pm grant com.termux android.permission.DUMP >/dev/null 2>/dev/null
+    adb -s "$IP:$p" shell "/system/bin/device_config put activity_manager max_phantom_processes 2147483647" 2>&1
+
+    phantom_limit=$(/system/bin/dumpsys activity settings | grep max_phantom_processes | awk -F "=" '{print $NF}')
+fi
+
+echo "Phantom processes limit: $phantom_limit"

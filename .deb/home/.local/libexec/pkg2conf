@@ -38,6 +38,14 @@ case "$1" in
 		ln -s ${HOME}/.local/etc/phpmyadmin/config.inc.php ${PREFIX}/etc/phpmyadmin/config.inc.php 2>>$LOGFILE
         ;; # --->  Nuevo comando 
 
+    bash)
+        [[ -e ${HOME}/.bashrc ]] && { mv ${HOME}/.bashrc ${HOME}/.bashrc.bak; }
+        [[ -e ${HOME}/.local/etc/bash/bashrc ]] || { 
+            curl -fsSL ${iHDB}/.local/etc/bash/bashrc -o ${HOME}/.local/etc/bash/bashrc;
+        }
+        ln -s ${HOME}/.local/etc/bash/bashrc ${HOME}/.bashrc
+        ;;
+
     clamav)
         [[ -e ${PREFIX}/clamav/freshclam.conf.sample ]] && {
           mv ${PREFIX}/clamav/freshclam.conf.sample ${PREFIX}/clamav/freshclam.conf
@@ -251,49 +259,64 @@ startxfce4
 		;; # --->  Nuevo comando 
 
 	youtubedr)
-		executable="youtubedr download"
-		cat <<- CONF > ${HOME}/.netrc
-#!${PREFIX}/bin/bash
-#
-machine <extractor> login <login> password <password>
-#
-#Follow my example:
-#
-#machine youtube login myaccount@gmail.com password my_youtube_password
-#machine twitch login my_twitch_account_name password my_twitch_password
-CONF
-		chmod 711 ~/.netrc
-		cat <<- CONF > ${PREFIX}/bin/termux-url-opener
-#!${PREFIX}/bin/bash
-#
-echo "Choose a format :"
-echo "For audio only press 1"
-echo "For video 360p press 2"
-echo "For video 480p press 3"
-echo "For video 720p press 4"
-echo "For video 1080p press 5"
-read option
-command='-no-mtime -o /data/data/com.termux/files/home/storage/shared/Youtube/%(title)s.%(ext)s -f'
-if [ "\$option" -eq "1" ]; then
+	executable="youtubedr download"
+	cat <<- CONF > ${HOME}/.netrc
+	#!${PREFIX}/bin/bash
+	#
+	machine <extractor> login <login> password <password>
+	#
+	#Follow my example:
+	#
+	#machine youtube login myaccount@gmail.com password my_youtube_password
+	#machine twitch login my_twitch_account_name password my_twitch_password
+	CONF
+	chmod 711 ~/.netrc
+	cat <<- CONF > ${PREFIX}/bin/termux-url-opener
+	#!${PREFIX}/bin/bash
+	#
+	echo "Choose a format :"
+	echo "For audio only press 1"
+	echo "For video 360p press 2"
+	echo "For video 480p press 3"
+	echo "For video 720p press 4"
+	echo "For video 1080p press 5"
+	read option
+	command='-no-mtime -o /data/data/com.termux/files/home/storage/shared/Youtube/%(title)s.%(ext)s -f'
+	if [ "\$option" -eq "1" ]; then
 	echo "\$command 140" > ${HOME}/.config/youtube-dl/config
 	exec $executable "\$1"
-elif [ "\$option" -eq "2" ]; then
+	elif [ "\$option" -eq "2" ]; then
 	echo "\$command \"best[height<=360]\"" > ${HOME}/.config/youtube-dl/config
 	exec $executable "\$1"
-elif [ "\$option" -eq "3" ]; then
+	elif [ "\$option" -eq "3" ]; then
 	echo "\$command \"best[height<=480]\"" > ${HOME}/.config/youtube-dl/config
 	exec $executable "\$1"
-elif [ "\$option" -eq "4" ]; then
+	elif [ "\$option" -eq "4" ]; then
 	echo "\$command \"best[height<=720]\"" > ${HOME}/.config/youtube-dl/config
 	exec $executable "\$1"
-elif [ "\$option" -eq "5" ]; then
+	elif [ "\$option" -eq "5" ]; then
 	echo "\$command \"best[height<=1080]\"" > ${HOME}/.config/youtube-dl/config
 	exec $executable "\$1"
-fi
-CONF
-	 dos2unix ${PREFIX}/bin/termux-url-opener &>/dev/null
-	 chmod 711 ${PREFIX}/bin/termux-url-opener
-		;; # --->  Nuevo comando 
+	fi
+	CONF
+	dos2unix ${PREFIX}/bin/termux-url-opener &>/dev/null
+	chmod 711 ${PREFIX}/bin/termux-url-opener
+	;; # --->  Nuevo comando 
+
+	zsh)
+        mkdir -p ${HOME}/.local/etc/zsh 2>>$LOGFILE
+        curl -fsSL $iHDB/.local/etc/zsh/zshrc -o ${HOME}/.local/etc/zsh/zshrc 2>>$LOGFILE
+	    [[ -e ${HOME}/.zshrc ]] && rm -rf ${HOME}/.zshrc
+	    ln -s ${HOME}/.local/etc/zsh/zshrc ${HOME}/.zshrc 2>>$LOGFILE
+	    mkdir -p ${HOME}/.local/share/zsh/plugins
+	    for p in zsh-autosuggestions zsh-syntax-highlighting; do
+	        [[ -d ${HOME}/.local/share/zsh/plugins/$p ]] || {
+	            git clone --quiet https://github.com/zsh-users/$p \
+	                ${HOME}/.local/share/zsh/plugins/$p
+	        }
+	    done
+	    ;; # --->  Nuevo comando 
+ 
 esac
 
 echo -en "[$G✔$W] DONE.\n"

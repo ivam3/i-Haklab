@@ -1,0 +1,13 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab LOCALHOST (Bash version)
+# Supports optional interface argument
+
+interface="$1"
+
+if [ -n "$interface" ]; then
+    # If interface is provided (e.g., wlan, tun), filter by it
+    ifconfig 2>/dev/null | grep "$interface" -A 3 | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255 | head -n 1
+else
+    # Default behavior: get the main IP
+    ifconfig 2>/dev/null | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v 255 | grep -v 127 | tail -n 1
+fi

@@ -1,0 +1,85 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab NPM Wrapper (Bash version)
+
+pkg2conf() {
+    local pkgName="$1"
+    if grep -q "^$pkgName$" "$HOME/.local/etc/i-Haklab/Tools/listofpkg2conf" 2>/dev/null; then
+        bash "$HOME/.local/libexec/pkg2conf" "$pkgName"
+    fi
+}
+
+if [[ "$1" == "install" || "$1" == "update" ]]; then
+    pushd "$HOME" >/dev/null
+    for i in "${@:2}"; do
+        # Gemini check (case insensitive or exact match as in Fish?)
+        # Fish was exact match: if test "$i" = "gemini-cli"
+        if [[ "$i" == "gemini-cli" ]]; then
+            i="@google/gemini-cli"
+        fi
+
+        case "$i" in
+            n8n)
+                # INSTALL DEPENDENCIES 
+                for p in nodejs-lts libsqlite sqlite; do
+                    echo "(_>) Installing $p ..."
+                    yes|apt install "$p" >/dev/null 2>/dev/null
+                done
+                # INSTALL NPM GLOBAL PACKAGES 
+                for m in pm2 gyp node-gyp; do
+                    echo "(_>) Installing $m ..."
+                    npm install -g "$m"
+                done
+                # PREPARE ENVIRONMENT 
+                echo "(_>) Preparing n8n environment ..."
+                mkdir -p "$HOME"/{.n8n,.gyp}
+                echo "{'variables':{'android_ndk_path':''}}" > "$HOME/.gyp/include.gypi"
+                ;;
+            
+            pnpm)
+                corepack enable
+                ;;
+            
+            open-lovable)
+                if ls "$HOME/.local/share/open-lovable" &>/dev/null; then
+                    rm -rf "$HOME/.local/share/open-lovable"
+                fi
+                git clone --quiet https://github.com/firecrawl/open-lovable.git \
+                    "$HOME/.local/share/open-lovable"
+                cd "$HOME/.local/share/open-lovable"
+                corepack enable
+                "$PREFIX/bin/npm" "$1"
+                break
+                ;;
+            
+            -g|--global)
+                g="$i"
+                ;;
+        esac
+
+        "$PREFIX/bin/npm" "$1" "$g" "$i"
+        pkg2conf "$i"
+    done
+    popd >/dev/null 2>/dev/null
+
+elif [[ "$1" == "uninstall" ]]; then
+    pushd "$HOME" >/dev/null
+    for i in "${@:2}"; do
+        case "$i" in
+            n8n)
+                rm "/data/data/com.termux/files/home/.config/fish/functions/n8n.fish" 2>/dev/null
+                ;;
+            -g|--global)
+                g="$i"
+                ;;
+            open-lovable)
+                 if ls "$HOME/.local/share/open-lovable" &>/dev/null; then
+                     rm -rf "$HOME/.local/share/open-lovable"
+                 fi
+                 ;;
+        esac
+        "$PREFIX/bin/npm" "$1" "$g" "$i"
+    done
+    popd >/dev/null 2>/dev/null
+else
+    "$PREFIX/bin/npm" "$@"
+fi

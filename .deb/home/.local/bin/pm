@@ -1,0 +1,7 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab pm (package manager) wrapper
+if [ $# -gt 0 ]; then
+    printf '%s' "$(command pm "$@" 2>&1 < /dev/null)"
+else
+    printf '%s' "$(command pm "-h" 2>&1 < /dev/null)"
+fi

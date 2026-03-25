@@ -1,0 +1,7 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab cmd wrapper
+if [ $# -gt 0 ]; then
+    printf '%s' "$(command cmd "$@" 2>&1 < /dev/null)"
+else
+    printf '%s' "$(command cmd 2>&1 < /dev/null)"
+fi

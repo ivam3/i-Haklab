@@ -1,0 +1,4 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab lock
+cacafire
+bash "$HOME/.local/libexec/i-Haklab.login"

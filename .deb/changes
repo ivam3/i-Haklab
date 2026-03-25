@@ -1,0 +1,31 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#### FUNCIONES A BIN
+bin="""
+adminfiles
+apt
+cmd
+gitbrowsering
+i-Haklab
+LOCALHOST
+lock
+ls 
+mypip
+npm
+openvpn-app
+phantom-ps
+pm
+pnpm
+postgresql
+proxy 
+rmcache
+serverapache
+serverphp 
+sudo
+telegram
+traductor
+"""
+
+for i in ${bin[@]}; do
+    echo "\"home/.local/bin/$i\": \"/data/data/com.termux/files/home/.local/bin/$i\","
+done
+

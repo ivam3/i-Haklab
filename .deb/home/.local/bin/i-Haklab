@@ -1,0 +1,18 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab Main Command (Bash version)
+
+LIBEXEC="$HOME/.local/libexec/i-Haklab"
+
+if [[ $# -gt 0 ]]; then
+    subcommand="$1"
+    
+    if [[ -f "$LIBEXEC/$subcommand" ]]; then
+        # Shift arguments so $1 becomes the first argument to the subcommand
+        shift
+        bash "$LIBEXEC/$subcommand" "$@"
+    else
+        echo -en "\e[31m(➤_)\e[0m invalid argument, type i-Haklab help for helpper\n"
+    fi
+else
+    echo -en "\e[31m(➤_)\e[0m missing argument, type i-Haklab help for helpper\n"
+fi

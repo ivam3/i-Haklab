@@ -1,0 +1,4 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab traductor (Bash version)
+# Original by Ivam3 - Using gawk script for translation
+gawk -f <(curl -Ls git.io/translate) -- -shell

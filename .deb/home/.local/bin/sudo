@@ -1,0 +1,10 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab sudo (PRoot wrapper)
+command -v proot >/dev/null || yes | apt install proot >/dev/null 2>&1
+if [ $# -eq 0 ]; then
+    echo -en "\e[33mUSAGE : [\e[0msudo su\e[33m]-(\e[0mRun a shell as fake root user\e[33m)\n\t[\e[0msudo some-command\e[33m]-(\e[0mRun command as fake root user\e[33m)\e[0m"
+elif [ "$1" = "su" ]; then
+    proot -0 -w ~ termux-chroot "${SHELL:-bash}"
+else
+    proot -0 -w ~ termux-chroot "$@"
+fi

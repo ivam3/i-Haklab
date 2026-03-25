@@ -1,0 +1,11 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab rmcache (Clean system)
+for dir in "$TMPDIR" ~/.BurpSuite/burpbrowser ~/go/pkg/mod/cache ~/.maltego/v4.3.1/var/cache; do
+    if [ -d "$dir" ]; then
+        rm -rf "$dir" 2>/dev/null
+        mkdir -p "$dir" 2>/dev/null
+    fi
+done
+yes | apt autoremove >/dev/null 2>&1
+dpkg -l | grep '^rc' | awk '{print $2}' | xargs dpkg --purge 2>/dev/null
+echo "Termux cache was removed."

@@ -32,7 +32,7 @@ set fish_theme will
 set -g theme_nerd_fonts yes
 set DISPLAY :0
 set PULSE_SERVER 127.0.0.1
-set PATH /data/data/com.termux/files/usr/bin:/data/data/com.termux/files/home/go/bin:/data/data/com.termux/files/home/.local/bin
+set PATH /data/data/com.termux/files/home/.local/bin:/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/home/go/bin
 set HOME /data/data/com.termux/files/home
 set GOPATH /data/data/com.termux/files/home/go
 set GOROOT /data/data/com.termux/files/usr/lib/go
@@ -46,7 +46,8 @@ set CXX clang++
 set ANDROID_NDK_HOME /data/data/com.termux/files/usr
 set ANDROID_ALLOW_UNDEFINED_SYMBOLS On
 set TOOLS /data/data/com.termux/files/home/.local/share
+set VSCODE_EXTENSIONS_DIR /data/data/com.termux/files/home/.local/share/code-server/extensions
+alias ls="lsd"
+alias df="duf"
 alias du="du -hP"
 alias bat="bat -f --theme 'Visual Studio Dark+'"
-alias postgresql="pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql"
-

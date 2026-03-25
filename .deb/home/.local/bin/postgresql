@@ -1,0 +1,3 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab postgresql service control
+pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql "$@"
