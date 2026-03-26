@@ -12,34 +12,7 @@ if [[ -o login ]]; then
 fi
 
 # Environment Variables
-export USER=i-Haklab
-export GPG_TTY=$(tty)
-export DISPLAY=:0
-export PULSE_SERVER=127.0.0.1
-
-# IMPORTANT: .local/bin FIRST to intercept 'apt', 'npm' and 'pnpm' invisible wrappers
-export HOME=/data/data/com.termux/files/home
-export PATH="$HOME/.local/bin:/data/data/com.termux/files/usr/bin:$HOME/go/bin"
-export GOPATH=$HOME/go
-export GOROOT=/data/data/com.termux/files/usr/lib/go
-export JAVA_HOME=/data/data/com.termux/files/usr/opt/openjdk
-export LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib
-export LLVM_BUILD=/data/data/com.termux/files/usr/lib
-export LLVM_HOME=/data/data/com.termux/files/usr/lib/cmake/llvm
-export CFLAGS=" -Wno-incompatible-function-pointer-types"
-export CC=clang
-export CXX=clang++
-export ANDROID_NDK_HOME=/data/data/com.termux/files/usr
-export ANDROID_ALLOW_UNDEFINED_SYMBOLS=On
-export TOOLS=$HOME/.local/share
-export VSCODE_EXTENSIONS_DIR=$HOME/.local/share/code-server/extensions
-
-# Aliases
-alias la="ls -a"
-alias ll="ls -l"
-alias du="du -hP"
-alias bat="bat -f --theme 'Visual Studio Dark+'"
-alias postgresql="pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql"
+source /data/data/com.termux/files/home/.local/etc/i-Haklab/envvariables
 
 # Fish-like faculties (Predictive Text & Syntax Highlighting)
 # Using local i-Haklab plugins for speed and reliability

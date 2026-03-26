@@ -21,6 +21,7 @@ botgram
 burpsuite
 cewl
 clamav
+claude-code
 cloudbunny
 cloudflared
 code-server
@@ -47,6 +48,7 @@ finalrecon
 frida
 fuzzdb
 gdb
+gemini-cli 
 getadusers
 getnpusers
 getuserspns
@@ -89,6 +91,7 @@ n8n
 objection
 octosuite
 open-lovable
+opencode
 openjdk-21
 orbitaldump
 osintgram
@@ -103,6 +106,7 @@ postgresql
 putty
 pybelt
 quack
+qwen-code 
 radare2
 ransomux
 recon-ng

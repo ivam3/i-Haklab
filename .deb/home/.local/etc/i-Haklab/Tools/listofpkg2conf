@@ -1,7 +1,10 @@
 apache2
+bash
 clamav
+claude-code
 fish
 gdb
+gemini-cli
 localtunnel
 mariadb
 mvt
@@ -13,9 +16,11 @@ phpmyadmin
 privoxy
 proxychains-ng
 python
+qwen-code
 radare2
 tigervnc
 tmux
 tor
 vim
 youtubedr
+zsh

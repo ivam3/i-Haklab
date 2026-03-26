@@ -26,28 +26,4 @@ function on_exit --on-event fish_exit
   sleep 0.5
 end
 
-set USER i-Haklab
-set GPG_TTY $(tty)
-set fish_theme will
-set -g theme_nerd_fonts yes
-set DISPLAY :0
-set PULSE_SERVER 127.0.0.1
-set PATH /data/data/com.termux/files/home/.local/bin:/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/home/go/bin
-set HOME /data/data/com.termux/files/home
-set GOPATH /data/data/com.termux/files/home/go
-set GOROOT /data/data/com.termux/files/usr/lib/go
-set JAVA_HOME /data/data/com.termux/files/usr/opt/openjdk
-set LD_LIBRARY_PATH /data/data/com.termux/files/usr/lib
-set LLVM_BUILD /data/data/com.termux/files/usr/lib
-set LLVM_HOME /data/data/com.termux/files/usr/lib/cmake/llvm
-set CFLAGS \ -Wno-incompatible-function-pointer-types
-set CC clang
-set CXX clang++
-set ANDROID_NDK_HOME /data/data/com.termux/files/usr
-set ANDROID_ALLOW_UNDEFINED_SYMBOLS On
-set TOOLS /data/data/com.termux/files/home/.local/share
-set VSCODE_EXTENSIONS_DIR /data/data/com.termux/files/home/.local/share/code-server/extensions
-alias ls="lsd"
-alias df="duf"
-alias du="du -hP"
-alias bat="bat -f --theme 'Visual Studio Dark+'"
+source /data/data/com.termux/files/home/.local/etc/i-Haklab/envvariables

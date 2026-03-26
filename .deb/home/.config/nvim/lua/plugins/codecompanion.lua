@@ -1,17 +1,39 @@
 -- #################################################################
 -- ##                                                             ##
--- ##     CONFIGURACIÓN DE PROVEEDOR DE LLM PARA CODECOMPANION      ##
+-- ##     CONFIGURACIÓN DE PROVEEDOR DE LLM PARA CODECOMPANION    ##
 -- ##                                                             ##
 -- #################################################################
 
 -- -----------------------------------------------------------------
--- --      CONFIGURACIÓN ACTIVA: Gemini (Google)
+--   Define la clave de API directamente en el entorno de Neovim  -- 
 -- -----------------------------------------------------------------
--- Define la clave de API directamente en el entorno de Neovim.
--- ¡RECUERDA REEMPLAZAR 'YOUR_GEMINI_API_KEY_HERE' CON TU CLAVE REAL!
-vim.env.GEMINI_API_KEY = 'YOUR_GEMINI_API_KEY_HERE'
+-- ¡RECUERDA CONFIGURAR CON TU CLAVE REAL!
+-- 
+local file = os.getenv("HOME") .. "/.local/etc/i-Haklab/variables"  
+  
+local f = io.open(file, "r")  
+if not f then  
+  vim.notify("Unreachable APIKEY", vim.log.levels.ERROR)  
+  return  
+end  
+  
+for line in f:lines() do  
+  local key, value = line:match("^(APIKEY_%w+)%=(.+)$")  
+  if key and value then  
+    vim.env[key] = value  
+  end  
+end  
+  
+f:close()
 
--- Configuración para Code Companion con Gemini
+-- #################################################################
+-- ##                                                             ##
+-- ##       CONFIGURACION ACTIVA POR DEFECTO GEMINI (GOOGLE)      ##
+-- ##                                                             ##
+-- ## Para usar un proveedor diferente, comenta la configuración  ##
+-- ## activa de Gemini de arriba y descomenta la que desees usar  ##
+-- ##                                                             ##
+-- #################################################################
 require("codecompanion").setup({
   adapters = {
     http = { -- <--- Creado para solucionar el warning de obsoleto
@@ -19,7 +41,7 @@ require("codecompanion").setup({
         return require("codecompanion.adapters").extend("gemini", {
           env = {
             -- Aquí es donde se lee la clave de API que definimos arriba.
-            api_key = os.getenv("GEMINI_API_KEY"),
+            api_key = os.getenv("APIKEY_gemini"),
           },
           -- Opcional: puedes especificar un modelo, por ejemplo "gemini-1.5-flash".
           -- model = "gemini-pro",
@@ -60,7 +82,7 @@ require("codecompanion").setup({
       openai = function()
         return require("codecompanion.adapters").extend("openai", {
           env = {
-            api_key = os.getenv("OPENAI_API_KEY"),
+            api_key = os.getenv("APIKEY_chatGPT"),
           },
           -- Opcional: define un modelo por defecto
           -- schema = { model = { default = "gpt-4o" } }
@@ -91,7 +113,7 @@ require("codecompanion").setup({
       anthropic = function()
         return require("codecompanion.adapters").extend("anthropic", {
           env = {
-            api_key = os.getenv("ANTHROPIC_API_KEY"),
+            api_key = os.getenv("APIKEY_Claude"),
           },
           -- Opcional: define un modelo por defecto
           -- schema = { model = { default = "claude-3-opus-20240229" } }
@@ -122,7 +144,7 @@ require("codecompanion").setup({
       deepseek = function()
         return require("codecompanion.adapters").extend("deepseek", {
           env = {
-            api_key = os.getenv("DEEPSEEK_API_KEY"),
+            api_key = os.getenv("APIKEY_deepseek"),
           },
           -- Opcional: define un modelo por defecto
           schema = { model = { default = "deepseek-chat" } }

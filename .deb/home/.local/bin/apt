@@ -2,10 +2,7 @@
 # i-Haklab APT Wrapper (Bash version)
 # Replaces apt.fish logic for agnostic shell support
 
-RED='\e[31m'
-GREEN='\e[32m'
-YELLOW='\e[33m'
-RESET='\e[0m'
+source ${HOME}/.local/etc/i-Haklab/variables
 
 pkg2conf() {
     local pkgName="$1"
@@ -19,7 +16,7 @@ install_wrapper() {
     local pkg="$2"
     local type="$3"
 
-    echo -en "${RED}E:${RESET} $pkg is a $type, you should try it with ${YELLOW}'$method $pkg'${RESET}\n"
+    echo -en "${R}E:${W} $pkg is a $type, you should try it with ${Y}'$method $pkg'${W}\n"
     echo "(_>) you want me to run it for you? "
     while true; do
         read -p "(y/n): " yesornot
@@ -54,7 +51,10 @@ if [[ "$1" == "install" || "$1" == "reinstall" || "$1" == "search" ]]; then
                 continue
                 ;;
 
-            bash-obfuscate|localtunnel|n8n|pnpm|open-lovable|twifo-cli)
+            bash-obfuscate|claude-code|gemini-cli|localtunnel|n8n|pnpm|open-lovable|qwen-code|twifo-cli)
+                [[ "$i" == "qwen-code" ]] && { i="@qwen-code/qwen-code"; }
+                [[ "$i" == "gemini-cli" ]] && { i="@google/gemini-cli"; }
+                [[ "$i" == "claude-code" ]] && { i="@anthropic-ai/claude-code" }
                 install_wrapper "npm install -g" "$i" "nodejs module"
                 continue
                 ;;
@@ -66,14 +66,14 @@ if [[ "$1" == "install" || "$1" == "reinstall" || "$1" == "search" ]]; then
                     fish "$TMPDIR/omf.fish"
                     rm "$TMPDIR/omf.fish"
                 else
-                    echo -en "${RED}E:${RESET} Fish needed, you should try it with ${YELLOW}'apt install fish'${RESET}\n"
+                    echo -en "${R}E:${W} Fish needed, you should try it with ${Y}'apt install fish'${RESET}\n"
                 fi
                 continue
                 ;;
 
             *)
                 "$PREFIX/bin/apt" "$1" "$i"
-                pkg2conf "$i"
+                [[ "$1" == "search" ]] || { pkg2conf "$i";}
                 ;;
         esac
     done

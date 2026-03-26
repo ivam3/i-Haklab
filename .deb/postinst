@@ -152,17 +152,18 @@ echo -en "[deleted]
     ╰──➤ Commands:
     |\t\t• fakeID (down server)
     |\t\t• osrfremework (deprecated)
+    |\t\t• i-Haklab chatGPT
 [updates]
     ╰──➤ Commands recently added:
     |\t\t• yazi - terminal file manager
     |\t\t• qemufy
     |\t\t• phantom-ps
-    |\t\t• i-Haklab chatGPT
+    |\t\t• i-Haklab chatAI
     ╰──➤ New features:
 \t\t• shell: now i-Haklab works over shells fish, zsh & bash \n\t\t\t   run 'i-Haklab setshell' to set it
-\t\t• chatGPT: now you can mannage 2+ chats \n\t\t\t   create image | remember conversation
-\t\t• Into neovim: type 'alter', 'comma', 'ca' \n\t\t\t   (alt + , + n) to use AI
-\t\t• n8n: installation and configuration automated\n"
+\t\t• chatAI: LLM availables: chatGPT, Gemini & Claude | Mannage 2+ chats \n\t\t\t   create image | remember conversation
+\t\t• Into neovim: type 'alter', 'comma', 'ca' | (alt + , + n) to use AI \n\t\t\t   IAs: Github Copilot, OpenAI, Claude & DeepSeek.
+\t\t• n8n|gemini-cli|qwe-code|claude-code|opencode: installation and configuration automated \n\t\t\t   run 'npm install -g <provider_name>'"
 echo "[*] i-Haklab installation finished."
 echo "[*] run 'i-Haklab help' for a guide."
 echo "[-] Run 'fixer' to fix any posible issue."

@@ -72,6 +72,11 @@ case "$1" in
         let ln="$(grep -n "case 'android'" $indexFile | cut -d: -f1)+1"
         sed -i "${ln}s|===|!==|" $indexFile
         ;;
+    
+    @qwen-code/qwen-code|@anthropic-ai/claude-code)
+        python3 -m pip --no-color --quiet --no-cache-dir install mistral-vibe 2>>$LOGFILE
+        ;;
+
     localtunnel)
         mkdir -p ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl
         curl -fsSL ${iHDB}/.local/etc/localtunnel/openurl.js -o \
@@ -186,7 +191,7 @@ set softwrap
 		;; # --->  Nuevo comando 
 
   python)
-    python -m pip --no-color --quiet --no-cache-dir install bpython
+    python3 -m pip --no-color --quiet --no-cache-dir install bpython
     ;; # --->  Nuevo comando 
 
   radare2)
@@ -254,7 +259,7 @@ startxfce4
 		}
 		unzip -qq ${HOME}/setvim.zip -d ${HOME}
 		rm -rf ${HOME}/setvim.zip 
-        python -m pip --no-color --quiet --no-cache-dir install jedi 
+        python3 -m pip --no-color --quiet --no-cache-dir install jedi 
         vim +PluginInstall +PlugUpdate +CocInstall +coc-clangd +coc-sh +coc-jedi +x +x +x 2>>$LOGFILE
 		;; # --->  Nuevo comando 
 
