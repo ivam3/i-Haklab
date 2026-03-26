@@ -261,7 +261,7 @@ export -f helpper
 
 pass(){
     shell=$(echo ${SHELL}|awk -F "/" '{print $NF}')
-    case $shell;
+    case $shell in
         bash) filerc="${HOME}/.bashrc";;
         fish) filerc="${HOME}/.local/etc/fish/config.fish";;
         zsh) filerc="${HOME}/.zshrc";;

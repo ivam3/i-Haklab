@@ -97,7 +97,7 @@ case "$1" in
 
     mvt)
         v=$(python --version|grep -oE '([0-9]{1}\.)[0-9]{1,2}')
-        yes|apt install python-cryptography python-pycryptodomex >/dev/null 2>$LOGFILE
+        yes|"$PREFIX/bin/apt" install python-cryptography python-pycryptodomex >/dev/null 2>$LOGFILE
         # Define las rutas de los archivos a parchear
         BASE_PY_PATH="${PREFIX}/lib/python$v/site-packages/mvt/android/modules/adb/base.py"
         ADB_DEVICE_PY_PATH="${PREFIX}/lib/python$v/site-packages/adb_shell/adb_device.py"
@@ -147,7 +147,7 @@ set softwrap
         curl -fsSL $iHDB/.config/nvim.zip -o ${HOME}/.config/nvim/nvim.zip
         unzip -qo ${HOME}/.config/nvim/nvim.zip -d ${HOME}/.config/nvim
         rm -rf ${HOME}/.config/nvim/nvim.zip
-        npm install -g neovim bash-language-server pyright >/dev/null 2>/dev/null
+        "$PREFIX/bin/npm" install -g neovim bash-language-server pyright >/dev/null 2>/dev/null
         pip3 --no-color --quiet --no-cache-dir install neovim
 		yes|pkg i luarocks lua-language-server >/dev/null 2>/dev/null 
         nvim +x +x

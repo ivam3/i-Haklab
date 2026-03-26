@@ -3,7 +3,12 @@
 
 pkg2conf() {
     local pkgName="$1"
-    if grep -q "^$pkgName$" "$HOME/.local/etc/i-Haklab/Tools/listofpkg2conf" 2>/dev/null; then
+    local pkg2conf=("@google/gemini-cli" 
+        "@qwen-code/qwen-code" 
+        "@anthropic-ai/claude-code" 
+        "n8n" "localtunnel"
+        "open-lovable")
+    if [[ " ${pkg2conf[@]} " =~ " ${pkgName} " ]]; then
         bash "$HOME/.local/libexec/pkg2conf" "$pkgName"
     fi
 }
@@ -13,9 +18,9 @@ if [[ "$1" == "install" || "$1" == "update" ]]; then
     for i in "${@:2}"; do
         # Gemini check (case insensitive or exact match as in Fish?)
         # Fish was exact match: if test "$i" = "gemini-cli"
-        if [[ "$i" == "gemini-cli" ]]; then
-            i="@google/gemini-cli"
-        fi
+        [[ "$i" == "gemini-cli" ]] && { i="@google/gemini-cli"; }
+        [[ "$i" == "qwen-code" ]] && { i="@qwen-code/qwen-code"; }
+        [[ "$i" == "claude-code" ]] && { i="@anthropic-ai/claude-code"; }
 
         case "$i" in
             n8n)
@@ -27,7 +32,7 @@ if [[ "$1" == "install" || "$1" == "update" ]]; then
                 # INSTALL NPM GLOBAL PACKAGES 
                 for m in pm2 gyp node-gyp; do
                     echo "(_>) Installing $m ..."
-                    npm install -g "$m"
+                    "$PREFIX/bin/npm" install -g "$m"
                 done
                 # PREPARE ENVIRONMENT 
                 echo "(_>) Preparing n8n environment ..."

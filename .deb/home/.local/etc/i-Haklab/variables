@@ -1,5 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # This file contain all i-Haklab enviroment variables
+source '/data/data/com.termux/files/home/.local/etc/i-Haklab/envvariables'
 OP1=${2:-crunch}
 
 export version='v3.12'

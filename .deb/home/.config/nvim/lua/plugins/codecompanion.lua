@@ -4,6 +4,19 @@
 -- ##                                                             ##
 -- #################################################################
 
+-- Configuración de directorio temporal para Termux
+local termux_tmp = "/data/data/com.termux/files/usr/tmp"
+vim.env.TMPDIR = termux_tmp
+vim.env.TMP = termux_tmp
+vim.env.TEMP = termux_tmp
+vim.env.XDG_RUNTIME_DIR = termux_tmp
+
+-- Forzar a plenary a usar el directorio temporal de Termux
+local ok_plenary, job = pcall(require, "plenary.job")
+if ok_plenary then
+  job.tmpdir = termux_tmp
+end
+
 -- -----------------------------------------------------------------
 --   Define la clave de API directamente en el entorno de Neovim  -- 
 -- -----------------------------------------------------------------
@@ -17,11 +30,15 @@ if not f then
   return  
 end  
   
-for line in f:lines() do  
-  local key, value = line:match("^(APIKEY_%w+)%=(.+)$")  
-  if key and value then  
-    vim.env[key] = value  
-  end  
+for line in f:lines() do
+  -- 1. Quitamos 'export ' si existe para facilitar el match
+  local clean_line = line:gsub("^%s*export%s+", "")
+  -- 2. Capturamos solo si empieza por APIKEY_, ignorando comillas
+  local key, value = clean_line:match("^%s*(APIKEY_[%w_]+)%s*=%s*[\"']?(.-)[\"']?%s*$")
+  
+  if key and value then
+    vim.env[key] = value
+  end
 end  
   
 f:close()
@@ -113,7 +130,7 @@ require("codecompanion").setup({
       anthropic = function()
         return require("codecompanion.adapters").extend("anthropic", {
           env = {
-            api_key = os.getenv("APIKEY_Claude"),
+            api_key = os.getenv("APIKEY_claude"),
           },
           -- Opcional: define un modelo por defecto
           -- schema = { model = { default = "claude-3-opus-20240229" } }
