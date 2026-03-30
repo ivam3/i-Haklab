@@ -177,7 +177,26 @@ set softwrap
         fi
         ;;
 	privoxy)
-		echo "forward-socks5 / 127.0.0.1:9050 ." >> $PREFIX/etc/privoxy/config 
+        if [[ ! -e ${PREFIX}/etc/privoxy/config ]]; then
+            curl -fsSL $iHDB/.local/etc/privoxy/config -o ${PREFIX}/etc/privoxy/config
+        fi
+        grep "127.0.0.1:9050" $PREFIX/etc/privoxy/config || {
+		    echo "forward-socks5 / 127.0.0.1:9050 ." >> $PREFIX/etc/privoxy/config 
+        } 
+        [[ -e ${PREFIX}/etc/privoxy/user.filter ]] || {
+            if [[ -e ${PREFIX}/etc/privoxy/default.filter ]]; then
+                cp ${PREFIX}/etc/privoxy/default.filter ${PREFIX}/etc/privoxy/user.filter
+            else
+                curl -fsSL $iHDB/.local/etc/privoxy/user.filter -o ${PREFIX}/etc/privoxy/user.filter
+            fi
+        }
+        [[ -e ${PREFIX}/etc/privoxy/match-all.action ]] || {
+            if [[ -e ${PREFIX}/etc/privoxy/default.action ]]; then
+                cp ${PREFIX}/etc/privoxy/default.action ${PREFIX}/etc/privoxy/match-all.action
+            else 
+                curl -fsSL $iHDB/.local/etc/privoxy/match-all.action -o ${PREFIX}/etc/privoxy/match-all.action
+            fi 
+        }
 		;; # --->  Nuevo comando 
 
 	proxychains-ng)
