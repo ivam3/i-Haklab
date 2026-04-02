@@ -90,8 +90,6 @@ require("codecompanion").setup({
 -- -----------------------------------------------------------------
 --[[
 -- Descomenta las siguientes líneas para usar OpenAI.
--- DEBES definir tu clave de API de OpenAI.
-vim.env.OPENAI_API_KEY = "TU_CLAVE_DE_OPENAI_AQUI"
 
 require("codecompanion").setup({
   adapters = {
@@ -121,8 +119,6 @@ require("codecompanion").setup({
 -- -----------------------------------------------------------------
 --[[
 -- Descomenta las siguientes líneas para usar Anthropic.
--- DEBES definir tu clave de API de Anthropic.
-vim.env.ANTHROPIC_API_KEY = "TU_CLAVE_DE_ANTHROPIC_AQUI"
 
 require("codecompanion").setup({
   adapters = {
@@ -152,8 +148,6 @@ require("codecompanion").setup({
 -- -----------------------------------------------------------------
 --[[
 -- Descomenta las siguientes líneas para usar DeepSeek.
--- DEBES definir tu clave de API de DeepSeek.
-vim.env.DEEPSEEK_API_KEY = "TU_CLAVE_DE_DEEPSEEK_AQUI"
 
 require("codecompanion").setup({
   adapters = {
@@ -202,3 +196,30 @@ require("codecompanion").setup({
   },
 })
 --]]
+
+
+-- -----------------------------------------------------------------
+-- --      CONFIGURACIÓN ALTERNATIVA: Mistral AI
+-- -----------------------------------------------------------------
+-- Descomenta las siguientes líneas para usar OpenAI.
+--[[
+require("codecompanion").setup({
+  adapters = {
+    http = {
+      mistral = function()
+        return require("codecompanion.adapters").extend("mistral", {
+          env = {
+            api_key = os.getenv("APIKEY_mistralAI"),
+          },
+        })
+      end,
+    },
+  },
+  strategies = {
+    chat = { adapter = "mistral" },
+    inline = { adapter = "mistral" },
+    agent = { adapter = "mistral" },
+  },
+})
+--]]
+

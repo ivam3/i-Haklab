@@ -91,6 +91,7 @@ La `<leader>` key (tecla líder) está configurada por defecto como `alt+,`.
 | Atajo | Modo | Descripción |
 | :--- | :--- | :--- |
 | `<leader>ca`| Normal/Visual | **Abrir el menú de acciones de Code Companion.** |
+| `<leader>ci`| Normal/Visual | **Permite inyectar promt para vibe coding.** |
 | `<leader>n` | Normal | Activar la interacción con el plugin `neural`. |
 | `<leader>te`| Normal | Activar fondo transparente. |
 | `<leader>td`| Normal | Desactivar fondo transparente. |

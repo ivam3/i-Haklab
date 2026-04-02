@@ -6,7 +6,7 @@
   'script_url' => '',
   'session_name' => 'vfm_622809334',
   'align_logo' => 'center',
-  'appname' => 'i-Haklab v.3.9',
+  'appname' => 'i-Haklab v.3.12',
   'audio_notification' => true,
   'banner_width' => 'wide',
   'basedir' => '',

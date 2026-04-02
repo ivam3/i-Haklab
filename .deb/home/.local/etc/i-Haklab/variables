@@ -27,6 +27,7 @@ export APIKEY_chatGPT=""
 export APIKEY_gemini=""
 export APIKEY_claude=""
 export APIKEY_neural=""
+export APIKEY_mistralAI=""
 export R='\e[31m'
 export G='\e[32m'
 export Goke='\033[92m'
