@@ -1,0 +1,16 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+if [[ ! -e ${PREFIX}/bin/lolcat ]]; then 
+    if [[ ! -e ${PREFIX}/bin/ruby ]]; then 
+        apt install ruby -y
+    fi
+    gem install lolcat
+fi
+
+if [[ ! -e ${PREFIX}/bin/curl ]]; then 
+    apt install curl -y
+fi
+
+bash <(curl -fsSL "https://raw.githubusercontent.com/ivam3/i-Haklab/master/.deb/home/.local/libexec/IbyC-fixer") ${@:1}
+
+####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####
