@@ -71,12 +71,12 @@ bash setup
 ```
 
 - OPTION 3: INSTALLING A RELEASE VERSION:
-    1. Go to [releases section](https://github.com/ivam3/i-Haklab/releases)
-    2. Download the .deb file of your choice
-    3. Install it with:
-    ```
-    apt install ./path/at/i-haklab_example_all.deb
-    ```
+1. Go to [releases section](https://github.com/ivam3/i-Haklab/releases)
+2. Download the .deb file of your choice
+3. Install it with:
+```
+apt install ./path/at/i-haklab_example_all.deb
+```
 
 ### 🧠 i-Haklab will ...
 - Show information about any tool or framework:
