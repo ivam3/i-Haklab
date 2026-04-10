@@ -34,9 +34,9 @@ echo -en "$Y[!]$W Get an Gemini API key on:$B https://aistudio.google.com\n"
 echo -en "$Y[!]$W Get an DeepSeek API key on:$B https://api-docs.deepseek.com/\n"
 echo -en "$Y[!]$W Get an Claude API key on:$B https://platform.claude.com/docs/en/api/admin/api_keys/retrieve\n"
 echo "[?] Choose the api key to set:"
-select platform in chatGPT claude deepseek gemini neural phonescan cancel;do
+select platform in chatGPT claude deepseek gemini mistralAI neural phonescan cancel;do
   case $platform in
-    phonescan|deepseek|chatGPT|gemini|claude|neural)
+      chatGPT|claude|deepseek|gemini|mistralAI|neural|phonescan)
       [[ -z "$(eval "echo \$APIKEY_$platform")" ]] || { ask;}
       getApiKey
       setApiKey

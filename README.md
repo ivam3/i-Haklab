@@ -6,7 +6,7 @@
 
 ![linea](.img/linea.gif)
 <div align="center">
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Rubik+Wet+Paint&size=35&pause=1000&color=F77432&background=13520F00&center=verdadero&vCenter=FALSO&repeat=&random=&width=500&lines=I-Haklab+v.3+2025+by+%40Ivam3" alt="Typing SVG" /></a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Rubik+Wet+Paint&size=35&pause=1000&color=F77432&background=13520F00&center=verdadero&vCenter=FALSO&repeat=&random=&width=500&lines=I-Haklab+v.3.12+2025+by+%40Ivam3" alt="Typing SVG" /></a>
 </div>
 
 [![Ver video](./assets/iH_thumb.png)](./assets/iH.gif)
@@ -34,18 +34,6 @@
   <a href="https://t.me/Ivam3bCinderella" target="_blank">
     <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/telegram/default.svg" width="52" height="40" alt="telegram logo"  />
   </a>
-  <!--<a href="https://t.me/ivam3_Bot" target="_blank">-->
-  <!--  <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/telegram/default.svg" width="52" height="40" alt="telegram logo"  />-->
-  <!--</a>-->
-  <!--<a href="https://www.facebook.com/ivam3" target="_blank">-->
-  <!--  <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/telegram/default.svg" width="52" height="40" alt="telegram logo"  />-->
-  <!--<a href="https://www.instagram.com/_ivam3" target="_blank">-->
-  <!--  <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/telegram/default.svg" width="52" height="40" alt="telegram logo"  />-->
-  <!--<a href="https://x.com/_ivam3" target="_blank">-->
-  <!--  <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/telegram/default.svg" width="52" height="40" alt="telegram logo"  />-->
-  <!--</a>-->
-  </a>
-  </a>
 </div>
 
 
@@ -59,7 +47,7 @@ i-Haklab weechat
 
 
 ### 🤔 What is i-Haklab?
-> [i-Haklab]() is a hacking laboratory for [Termux](https://github.com/termux/termux-app) that contains [open source tools](https://github.com/ivam3/termux-packages) for osint, pentesting, scan/find vulnerabilities, exploitation and post-exploitation recommended for me [Ivam3](https://wlo.link/@Ivam3) with automation commands, a many guides, books and tutorials to learn how to use tools. [i-Haklab]() use oh my fish insteractive shell to provide core infrastructure to allow you to install packages which extend or modify the look of your termux. To get help about shell and its use going to [OMF official site](https://fishshell.com/docs/current/tutorial.html).
+> [i-Haklab]() is a hacking laboratory for [Termux](https://github.com/termux/termux-app) that contains [open source tools](https://github.com/ivam3/termux-packages) for osint, pentesting, scan/find vulnerabilities, exploitation and post-exploitation recommended for me [Ivam3](https://wlo.link/@Ivam3) with automation commands, a many guides, books and tutorials to learn how to use tools. [i-Haklab]() use oh my fish insteractive shell as default (users can change it for zsh or bash) to provide core infrastructure to allow you to install packages which extend or modify the look of your termux. To get help about shell and its use going to [OMF official site](https://fishshell.com/docs/current/tutorial.html).
 
 
 ### 📦 INSTALLATION.
@@ -74,7 +62,7 @@ curl -fsSL "https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/dis
 apt update && apt install i-haklab
 ```
 
-- OPTION 2: CLONING THIS REPOSITORY:
+- OPTION 2: CLONING THIS REPOSITORY: 
 ```bash
 git clone https://github.com/ivam3/i-Haklab \
 cd i-Haklab \
@@ -82,204 +70,168 @@ chmod +x setup \
 bash setup
 ```
 
+- OPTION 3: INSTALLING A RELEASE VERSION:
+    1. Go to [releases section](https://github.com/ivam3/i-Haklab/releases)
+    2. Download the .deb file of your choice
+    3. Install it with:
+    ```
+    apt install ./path/at/i-haklab_example_all.deb
+    ```
+
 ### 🧠 i-Haklab will ...
-- Provides a diferent types of prompt with command:
+- Show information about any tool or framework:
+```bash
+i-Haklab about <name_of_tool>
+```
+- Provide different types of prompt for shell fish with command:
 ```bash
 omf theme
 ```
-- Provides a login session by password(default=Ivam3byCinderella) or fingerprint(depends features device). It could set running:
+- Switch shell between bash, zsh and fish(default):
+```bash
+i-Haklab setshell
+```
+- Run linux distributions in proot environment (CLi or Graphical):
+```bash
+i-Haklab pd <distro> [X11]
+```
+- Provide a login session by password (default: Ivam3byCinderella) or fingerprint:
 ```bash
 i-Haklab passwd set
 ```
-Or change it running:
-```bash
-i-Haklab passwd new
-```
-- Let you change the banner running:
+- Let you change the banner and username:
 ```bash
 i-Haklab setbanner
-```
-- Let you change the username running:
-```bash
 i-Haklab setuser
 ```
-- Let you update Termux system package by package running:
+- Let you update Termux system package by package:
 ```bash
 i-Haklab aptup
 ```
-- Provide you test your bandwidth network running:
+- Provide network speed test and public IP:
 ```bash
 i-Haklab speedtest
+i-Haklab mypip
 ```
-- Bring you a main activity from apk file running:
+- Extract masive information from Android devices via ADB:
 ```bash
-i-Haklab apkactivity
+i-Haklab androforensic <option> <target>
 ```
-- Create a Termux backup and/or restore it running:
+- Create a Termux backup and/or restore it:
 ```bash
-i-Haklab backup
+i-Haklab backup create|restore
 ```
-- Automate brute force attacks running:
+- Automate brute force attacks (FTP, Mail, SSH, Telnet):
 ```bash
 i-Haklab bruteforce
 ```
-- Let you interact with all OpenAI modules running:
+- Let you interact with ChatGPT-3 via CLI:
 ```bash
 i-Haklab chatGPT
 ```
-- Add your API key running:
+- Add your API keys for various services:
 ```bash
 i-Haklab setapikey
 ```
-- Encode|decode secret message into a ASCII file running:
+- Encode/decode secret messages into ASCII files:
 ```bash
 i-Haklab ESmsg
 ```
-- Convert ova files and run a QEMU virtual machine over Termux(no root).
+- Convert ova files and run QEMU virtual machines (no root):
 ```bash
 i-Haklab qemufy
 ```
-- Provide you a port forwarding tunnel with a custom subdomain running:
+- Provide port forwarding tunnels (localtunnel, localhost.run, cloudflared):
 ```bash
 i-Haklab tunnel
 ```
-- Automate metasploit common process running:
+- Provides a server for storage and sharing of multimedia files:
+```
+i-Haklab 4share <server_name>
+```
+- Automate Metasploit processes (Payloads, Handlers, Shodan, Dirscan):
 ```bash
 i-Haklab msf
+i-Haklab handler <file.rc>
 ```
-- Provide you the ngrok link running:
+- Get information about BINs (CC, DC):
 ```bash
-i-Haklab ngroklink
+i-Haklab binchecker
 ```
-- Provide you a ngrok ssh connection running:
+- Provide telephone number information:
 ```bash
-i-Haklab ngrokssh
+i-Haklab phonescan <number>
 ```
-- Hide a Reverse Shell with a Video File by Exploiting Linux OS running:
+- Hide a Reverse Shell within a Video File:
 ```bash
 i-Haklab payvid
 ```
-- Let you get information about telephone number running:
-```bash
-i-Haklab phonescan
-```
-- Provide you with a web site server running over your device with [Termux](https://github.com/termux/termux-app), wich will you can share several files over all internet. Enable it running:
-```bash
-i-Haklab share
-```
-- Test usb device connected via OTG running:
+- Test USB devices via OTG:
 ```bash
 i-Haklab usbtest
 ```
-- Provide you with deliberately vulnerable web site servers as [bWAPP](http://www.itsecgames.com/), [DVWA](https://dvwa.co.uk/) and [MUTILLIDAE](https://github.com/webpwnized/mutillidae) to practice your hacking skills searching, finding and exploiting the most common vulnerabilities. Enable those running:
+- Provide vulnerable servers for testing (bWAPP, DVWA, MUTILLIDAE):
 ```bash
 i-Haklab servers4test
 ```
 
-- Bring you several automations to setup tools installed with apt, npm, pip, gem, etc. For example once execute 'apt install neovim', i-Haklab will setup it with predictable text editor settings, github copilot and AI assistant to vibecode experience over Termux.
+- Bring you several automations to setup tools installed with apt, npm, pip, gem, etc. For example once execute 'apt install neovim', i-Haklab will setup it with predictable text editor settings, github copilot and AI assistant (gemini, qwen-code, opencode, ollama, mistralAI and more) to vibecode experience over Termux.
 
 [![Ver video](./assets/vibe_coding.jpg)](./assets/ia_nvim.gif)
 
-- Provide you more than [100 tools/frameworks](https://github.com/ivam3/termux-packages) with an easy install/remove over command `apt`. You can get the list of all availables running :
+- Provide more than [100 tools/frameworks](https://github.com/ivam3/termux-packages) with an easy install/remove. List them with:
 ```bash
 i-Haklab show alltools
+i-Haklab show instatools
 ```
 ![i-Haklab show alltools](./.img/alltools.jpg)
-##### If you want to suggest some tool, do it in the section of suggestions of our [Telegram BOT](https://t.me/Ivam3_Bot).
+
+- Provides free support material for learning the [included tools](https://github.com/ivam3/termux-packages) and use of the shell in Termux.
+```
+i-Haklab show books
+i-Haklab show tutorials
+i-Haklab show QG
+```
+### 📕 BOOKS AVAILABLES
+![booksTermux](/.img/books_Termux.jpg)
 
 
 ### 🪄 COMMANDS
 > There are several commands in [i-Haklab]() that facilitate the use of [Termux](https://github.com/termux/termux-app):
 
-- [i-Haklab](): it is the main command that helps with automations of various processes such as visualization of user guides for the tools, download of hacking books, access to the community tutorials, payload creation automation, metaploit handler activation, brute force attacks among others. See all features running:
+- [i-Haklab](): main command for automations. See all features with:
 
  <details>
-<summary>**List** ↩️   </summary>
+<summary>**List of Direct Commands** ↩️   </summary>
 
-```bash
-i-Haklab help
-```
-- Mannage android main settings over Termux:
-```bash
-cmd
-```
-- Search repositories in github over CLi:
-```bash
-gitbrowswering
-```
-- Returns the private ip of your local network:
-```bash
-LOCALHOST
-```
-- Manage internal/external storage with graphical interface:
-```bash
-adminfiles
-```
-- Run OSINT setoolkit:
-```bash
-osrframework
-```
-- Enable proxy connection by proxychains4:
-```bash
-proxy
-```
-- Provides information about the mounted memory:
-```bash
-df
-```
-- Provides recursive information about the weight of directories and files:
-```bash
-du
-```
-- Use the easy and faster Fuzzy finder:
-```bash
-fzf
-```
-- Get your public internet protocol(IP):
-```bash
-mypip
-```
-- Privide you with a root enviroment as root user(on rooted device) or fake root user(on NOT rooted device):
-```bash
-sudo root
-````
-- Or just run any command(s) with:
-```bash
-sudo <some command>
-```
-- Enable the php server:
-```bash
-serverphp
-```
-- Enable the apache server:
-```bash
-serverapache start/stop/restart
-```
-- Enables postgresql database:
-```bash
-postgresql start/stop/restart
-```
-- Remove current session cache, temporal files & residual APT packages:
-```bash
-rmcache
-```
-- Init a shell to translate any text:
-```bash
-traductor
-```
-- We know that each Android is different and this can generate various errors in the installation processes of ruby gems, python modules, among others. Automates the solving processes running:
-```bash
-fixer
-```
-- Block the termux screen and it will only be unlocked with said password or your fingerprint. It is worth mentioning that these access codes are encrypted for your security.
-```bash
-lock
-```
+- **apt**: Install/remove and **configure** packages.
+- **npm**: Install/remove and **configure** nodejs packages.
+- **adminfiles**: Manage storage with graphical interface.
+- **bat**: Enhanced 'cat' with syntax highlighting.
+- **cmd**: Manage Android settings.
+- **df / du**: Disk and directory usage information.
+- **fixer**: Automate fixing Termux issues.
+- **fzf**: Fuzzy finder.
+- **gitbrowsering**: Search GitHub repositories.
+- **LOCALHOST / mypip**: LAN and Public IP information.
+- **lock**: Secure Termux screen.
+- **openvpn**: Open OpenVPN Android application.
+- **omf**: Change Oh-my-fish theme.
+- **phantom-ps**: Manage phantom process limits for fix 'E:signal 9'.
+- **pm**: Android package manager.
+- **postgresql**: Manage PostgreSQL database.
+- **proxy**: Connection via proxychains4/Tor.
+- **rmcache**: Clean temporary files and cache.
+- **serverapache / serverphp**: Web servers.
+- **sudo**: Fake root or real root environment.
+- **telegram**: Open Telegram Android application.
+- **traductor**: Command line translator.
+- **yazi**: Terminal file manager.
 </details>
 
 
 ### 🎴 DESKTOP ENVIROMENT
-> [i-Haklab]() automates the installation and configuration of a graphical environment with the xfce4 windows manager, which opens up the possibility of running tools such as wireshark and burpsuite. For this, the installation of the [Termux:Wayland](https://github.com/termux/termux-x11) application is required. Once installed it to run this enviroment just execute:
+> [i-Haklab]() automates the installation and configuration of a graphical environment with the xfce4 windows manager. Requires [Termux:Wayland](https://github.com/termux/termux-x11).
 ```bash
 apt install termux-desktop-xfce \
 i-Haklab Xwayland
@@ -288,18 +240,10 @@ i-Haklab Xwayland
 
 
 ### 📖 IRC CHAT Ivam3byCinderella
-> IRC (Internet Relay Chat) is an application layer protocol that facilitates communication in the form of text. The chat process works on a client/server networking model. Under the command <i-Haklab> we will find the <weechat> argument, with which you can join the official IRC Ivam3byCinderella where u can contact another i-Haklab.
-
-
-### 📕 BOOKS AVAILABLES
-![booksTermux](/.img/books_Termux.jpg)
-##### If you want to suggest some book do it in the section of suggestions of our [Telegram BOT](https://t.me/Ivam3_Bot).
-
-<div align="center">
-
-![alt text](/.img/png.png)  
-
-</div>
+> Join the official IRC chat to contact others i-Haklab users:
+```bash
+i-Haklab weechat
+```
 
 
 ### 🔥 UPDATE AT NEWEST VERSION 
@@ -309,4 +253,4 @@ apt update i-haklab
 ```
 
 
-##### Join to our community [Ivam3byCinderella](https://wlo.link/@Ivam3) and check all stuffs we have for you.
+##### Join to our community [Ivam3byCinderella](https://ivam3.github.io/#/redes) and check all stuffs we have for you.
