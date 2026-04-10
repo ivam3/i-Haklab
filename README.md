@@ -178,13 +178,14 @@ i-Haklab servers4test
 - Bring you several automations to setup tools installed with apt, npm, pip, gem, etc. For example once execute 'apt install neovim', i-Haklab will setup it with predictable text editor settings, github copilot and AI assistant (gemini, qwen-code, opencode, ollama, mistralAI and more) to vibecode experience over Termux.
 
 [![Ver video](./assets/vibe_coding.jpg)](./assets/ia_nvim.gif)
+- ver video 👆🏼
 
 - Provide more than [100 tools/frameworks](https://github.com/ivam3/termux-packages) with an easy install/remove. List them with:
 ```bash
 i-Haklab show alltools
 i-Haklab show instatools
 ```
-![i-Haklab show alltools](./.img/alltools.jpg)
+![i-Haklab show alltools](./.img/i-Haklab_alltools.png)
 
 - Provides free support material for learning the [included tools](https://github.com/ivam3/termux-packages) and use of the shell in Termux.
 ```
@@ -193,7 +194,11 @@ i-Haklab show tutorials
 i-Haklab show QG
 ```
 ### 📕 BOOKS AVAILABLES
-![booksTermux](/.img/books_Termux.jpg)
+![booksTermux](/.img/i-Haklab_books.png)
+
+
+### 📕 TUTORIALS AVAILABLES
+![utorialsTermux](/.img/i-Haklab_tutorials.png)
 
 
 ### 🪄 COMMANDS
