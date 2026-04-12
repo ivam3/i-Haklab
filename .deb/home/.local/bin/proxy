@@ -4,6 +4,7 @@ source $iHETC/functions
 
 chk-pkg tor tor
 chk-pkg curl curl
+chk-pkg privoxy privoxy
 chk-pkg proxychains4 proxychains-ng
 
 if [ $# -eq 0 ]; then
@@ -27,6 +28,7 @@ else
             [[ Tor -eq 0 ]] && {
                 echo "Proxy is activated"
             } || {
+                privoxy --no-daemon $PREFIX/etc/privoxy/config &>/dev/null 2>$LOGFILE &
                 tor >/dev/null 2>/dev/null &
                 sleep 6
                 echo -en "Proxy enable over:  \b";ip;
@@ -34,6 +36,7 @@ else
             ;;
         stop)
             [[ Tor -eq 0 ]] && {
+                pkill privoxy &>/dev/null
                 killall tor 2>/dev/null
                 echo "Proxy stoped.";
             } || {
