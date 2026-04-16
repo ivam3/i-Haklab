@@ -5,7 +5,6 @@
 export DISPLAY=:0
 export USER=i-Haklab
 export GPG_TTY=$(tty)
-export PULSE_SERVER=127.0.0.1
 export GYP_DEFINES="android_ndk_path=''"
 
 # IMPORTANT: .local/bin FIRST to intercept 'apt', 'npm' and 'pnpm' invisible wrappers
