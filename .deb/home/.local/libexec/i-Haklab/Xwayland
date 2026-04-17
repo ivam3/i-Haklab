@@ -25,6 +25,8 @@ export DISPLAY=:0
 export XDG_RUNTIME_DIR=${TMPDIR}
 export XKB_CONFIG_ROOT=${PREFIX}/share/xkeyboard-config-2/
 
+unset PULSE_SERVER
+
 pulseaudio --start --exit-idle-time=-1 2>/dev/null
 pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1
 am start -n com.termux.x11/com.termux.x11.MainActivity;sleep 3
