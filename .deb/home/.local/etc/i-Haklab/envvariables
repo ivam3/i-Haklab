@@ -31,5 +31,6 @@ export VSCODE_EXTENSIONS_DIR=$HOME/.local/share/code-server/extensions
 alias la="ls -a"
 alias ll="ls -l"
 alias du="du -hP"
+alias df="duf"
 alias bat="bat -f --theme 'Visual Studio Dark+'"
 alias postgresql="pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql"
