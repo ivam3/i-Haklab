@@ -6,7 +6,7 @@ pkg2conf() {
     local pkg2conf=("@google/gemini-cli" 
         "@qwen-code/qwen-code" 
         "@anthropic-ai/claude-code" 
-        "github/copilot"
+        "@github/copilot"
         "n8n" "localtunnel"
         "open-lovable")
     if [[ " ${pkg2conf[@]} " =~ " ${pkgName} " ]]; then
@@ -21,7 +21,7 @@ if [[ "$1" == "install" || "$1" == "update" ]]; then
         # Fish was exact match: if test "$i" = "gemini-cli"
         [[ "$i" == "gemini-cli" ]] && { i="@google/gemini-cli"; }
         [[ "$i" == "qwen-code" ]] && { i="@qwen-code/qwen-code"; }
-        [[ "$i" == "copilot" ]] || [[ "$i" == "github-copilot" ]]&& { i="@github/copilot"; }
+        [[ "$i" == "copilot-cli" ]] || [[ "$i" == "github-copilot" ]]&& { i="@github/copilot"; }
         [[ "$i" == "claude-code" ]] && { i="@anthropic-ai/claude-code"; }
 
         case "$i" in
