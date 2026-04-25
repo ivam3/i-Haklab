@@ -1,62 +1,39 @@
-# OpenClaw (openclaw-android)
+# OpenClaw
 
 ## ¿Qué es OpenClaw?
 
-**OpenClaw** es una avanzada plataforma de agentes de IA adaptada para ejecutarse de forma nativa en dispositivos Android a través de Termux. A diferencia de otras implementaciones que requieren entornos pesados como `proot-distro`, la versión `openclaw-android` utiliza una arquitectura optimizada que reduce drásticamente el consumo de recursos (de ~1GB a solo ~200MB), permitiendo que el hardware del móvil actúe como un nodo de IA potente y eficiente.
+**OpenClaw** es una reimplementación de código abierto y multiplataforma del motor del clásico juego de plataformas **Captain Claw (1997)**. Escrito principalmente en C++ y utilizando la librería SDL2, este proyecto busca permitir que el juego original se ejecute de manera fluida en sistemas modernos (incluyendo Android vía Termux), corrigiendo errores del motor original y añadiendo mejoras técnicas sin alterar la esencia del juego.
 
 ## ¿Para qué es útil la herramienta?
 
-OpenClaw transforma un dispositivo Android en un centro de operaciones inteligente, permitiendo:
+OpenClaw es ideal para los entusiastas de los juegos retro que desean revivir las aventuras de Nathaniel Joseph Claw en hardware actual, ofreciendo:
 
-*   **Control Remoto vía Mensajería:** Interactuar con el sistema operativo Android mediante bots de **Telegram** y **WhatsApp**.
-*   **Automatización con IA:** Ejecutar agentes (como Claude o Gemini) para realizar tareas complejas, responder consultas o gestionar archivos localmente.
-*   **Integración con el Hardware:** Consultar el estado de la batería, enviar SMS, tomar fotos o abrir aplicaciones de forma remota (requiere `termux-api`).
-*   **Servidor de Desarrollo Móvil:** Incluye herramientas como `code-server` y asistentes de código por IA para programar directamente desde el teléfono.
+*   **Compatibilidad Moderna:** Ejecución nativa en Linux y Android sin necesidad de emuladores pesados o capas de compatibilidad lentas.
+*   **Soporte de Resoluciones:** Permite jugar en pantallas modernas con mejores opciones de escalado y rendimiento estable.
+*   **Código Abierto:** Facilita la preservación del juego y permite a la comunidad aplicar correcciones y mejoras visuales.
+*   **Ligereza:** Al ser una ejecución nativa, consume muy pocos recursos, lo que lo hace perfecto para dispositivos móviles.
 
 ## ¿Cómo se usa? (Ejemplos básicos)
 
-Una vez instalado mediante el script de bootstrap del repositorio, puedes gestionar el agente con los siguientes comandos:
+Para que OpenClaw funcione, es imprescindible contar con los archivos de datos originales del juego.
 
-**Ejemplo 1: Configuración inicial y vinculación**
-
-```bash
-openclaw onboard
-```
-*(Sigue las instrucciones para configurar tus credenciales y preferencias).*
-
-**Ejemplo 2: Vincular un canal de Telegram**
+**Ejemplo 1: Iniciar el juego (si los datos están en la carpeta por defecto)**
 
 ```bash
-openclaw channels add --channel telegram
+openclaw
 ```
-*(Deberás proporcionar el API Token de tu bot creado en @BotFather).*
 
-**Ejemplo 3: Vincular WhatsApp (Escaneo de QR)**
+**Ejemplo 2: Ejecutar especificando la ruta de los archivos del juego**
 
 ```bash
-openclaw channels add --channel whatsapp
+openclaw --path /ruta/a/la/carpeta/de/CaptainClaw
 ```
-*(Escanea el código QR que aparecerá en la terminal desde la opción "Dispositivos vinculados" de WhatsApp).*
-
-**Ejemplo 4: Iniciar el servicio principal**
-
-```bash
-openclaw gateway
-```
-*(Este comando activa el "cerebro" del agente para que empiece a recibir comandos desde los bots).*
-
-**Ejemplo 5: Comandos desde el chat (Telegram/WhatsApp)**
-
-Una vez activo, puedes escribirle a tu bot:
-*   *"¿Cuál es el estado de mi batería?"*
-*   *"Haz un backup de la carpeta /home/scripts"*
-*   *"Envía un WhatsApp a Mamá que diga: Ya llegué"*
 
 ## Consideraciones Adicionales
 
-*   **Privacidad y Seguridad:** OpenClaw tiene acceso a tus mensajes y archivos. Nunca compartas tu `gateway token` y utiliza API Keys de proveedores confiables.
-*   **Termux:API:** Para funciones de control físico (cámara, SMS, batería), es obligatorio tener instalada la aplicación **Termux:API** desde F-Droid.
-*   **Rendimiento:** Esta versión nativa es ideal para dispositivos con recursos limitados o para quienes buscan convertir un teléfono antiguo en un servidor de IA de bajo consumo.
+*   **Archivos de Datos:** Por razones legales, OpenClaw **no incluye** los archivos del juego. El usuario debe proporcionar el archivo principal `CLAW.PWD` y otros recursos originales.
+*   **Dependencias:** En el entorno de i-Haklab, asegúrate de tener instaladas las librerías necesarias (`SDL2`, `SDL2_image`, `SDL2_mixer`, `SDL2_ttf`).
+*   **Estado del Proyecto:** Es una recreación del motor, por lo que algunas cinemáticas o comportamientos específicos de la IA pueden variar ligeramente respecto a la versión original de Monolith Productions.
 
 ---
-*Nota: OpenClaw representa el siguiente nivel en la integración de agentes autónomos dentro del ecosistema i-Haklab.*
+*Nota: Esta herramienta permite preservar y disfrutar del legado de los juegos de plataformas clásicos dentro del ecosistema i-Haklab.*

@@ -175,7 +175,7 @@ i-Haklab usbtest
 i-Haklab servers4test
 ```
 
-- Bring you several automations to setup tools installed with apt, npm, pip, gem, etc. For example once execute 'apt install neovim', i-Haklab will setup it with predictable text editor settings, github copilot and AI assistant (gemini, qwen-code, opencode, ollama, mistralAI and more) to vibecode experience over Termux.
+- Bring you several automations to setup tools installed with apt, npm, pip, gem, etc. For example once execute 'apt install neovim', i-Haklab will setup it with predictable text editor settings, github copilot and AI assistant (gemini, qwen-code, opencode, openclaw, claude-code, codex, ollama, mistralAI and more) to vibecode experience over Termux.
 
 [![Ver video](./assets/vibe_coding.jpg)](./assets/ia_nvim.gif)
 - ver video 👆🏼

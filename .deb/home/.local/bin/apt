@@ -51,7 +51,7 @@ if [[ "$1" == "install" || "$1" == "reinstall" || "$1" == "search" ]]; then
                 continue
                 ;;
 
-            bash-obfuscate|claude-code|gemini-cli|localtunnel|n8n|pnpm|open-lovable|qwen-code|twifo-cli)
+            bash-obfuscate|gemini-cli|localtunnel|n8n|pnpm|open-lovable|qwen-code|twifo-cli)
                 [[ "$i" == "qwen-code" ]] && { i="@qwen-code/qwen-code"; }
                 [[ "$i" == "gemini-cli" ]] && { i="@google/gemini-cli"; }
                 [[ "$i" == "claude-code" ]] && { i="@anthropic-ai/claude-code"; }
