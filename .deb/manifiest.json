@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.12.4",
+  "version": "3.12.5",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -88,6 +88,7 @@
         "home/.local/etc/i-Haklab/Tools/Readme/dnsenum.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/dnsenum.md",
         "home/.local/etc/i-Haklab/Tools/Readme/dos-a-tool.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/dos-a-tool.md",
         "home/.local/etc/i-Haklab/Tools/Readme/embed.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/embed.md",
+        "home/.local/etc/i-Haklab/Tools/Readme/engram.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/engram.md",
         "home/.local/etc/i-Haklab/Tools/Readme/enum4linux-ng.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/enum4linux-ng.md",
         "home/.local/etc/i-Haklab/Tools/Readme/enum4linux.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/enum4linux.md",
         "home/.local/etc/i-Haklab/Tools/Readme/evilginx2.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/evilginx2.md",
@@ -148,6 +149,7 @@
         "home/.local/etc/i-Haklab/Tools/Readme/objection.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/objection.md",
         "home/.local/etc/i-Haklab/Tools/Readme/octosuite.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/octosuite.md",
         "home/.local/etc/i-Haklab/Tools/Readme/open-lovable.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/open-lovable.md",
+        "home/.local/etc/i-Haklab/Tools/Readme/openclaw.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/openclaw.md.md",
         "home/.local/etc/i-Haklab/Tools/Readme/opencode.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/opencode.md",
         "home/.local/etc/i-Haklab/Tools/Readme/openjdk-21.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/openjdk-21.md",
         "home/.local/etc/i-Haklab/Tools/Readme/orbitaldump.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/orbitaldump.md",
