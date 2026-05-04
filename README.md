@@ -6,10 +6,11 @@
 
 ![linea](.img/linea.gif)
 <div align="center">
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Rubik+Wet+Paint&size=35&pause=1000&color=F77432&background=13520F00&center=verdadero&vCenter=FALSO&repeat=&random=&width=500&lines=I-Haklab+v.3.12+2025+by+%40Ivam3" alt="Typing SVG" /></a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Rubik+Wet+Paint&size=35&pause=1000&color=F77432&background=13520F00&center=verdadero&vCenter=FALSO&repeat=&random=&width=500&lines=I-Haklab+v.3.12+2026" alt="Typing SVG" /></a>
 </div>
 
 [![Ver video](./assets/iH_thumb.png)](./assets/iH.gif)
+Mira el video de presentación de i-Haklab 👆🏼
 
 
 > [!NOTE]
@@ -48,6 +49,9 @@ i-Haklab weechat
 
 ### 🤔 What is i-Haklab?
 > [i-Haklab]() is a hacking laboratory for [Termux](https://github.com/termux/termux-app) that contains [open source tools](https://github.com/ivam3/termux-packages) for osint, pentesting, scan/find vulnerabilities, exploitation and post-exploitation recommended for me [Ivam3](https://wlo.link/@Ivam3) with automation commands, a many guides, books and tutorials to learn how to use tools. [i-Haklab]() use oh my fish insteractive shell as default (users can change it for zsh or bash) to provide core infrastructure to allow you to install packages which extend or modify the look of your termux. To get help about shell and its use going to [OMF official site](https://fishshell.com/docs/current/tutorial.html).
+
+### IA ASSISTANT 
+Join to [deepwiki](https://deepwiki.com/i-haklab) and ask your questions about i-Haklab to our IA assistant trained with all the information about the project and its tools. 
 
 
 ### 📦 INSTALLATION.
@@ -257,5 +261,6 @@ i-Haklab weechat
 apt update i-haklab
 ```
 
+**Explore and search this repository with AI on [DeepWiki](https://deepwiki.com/ivam3/i-Haklab)**
 
 ##### Join to our community [Ivam3byCinderella](https://ivam3.github.io/#/redes) and check all stuffs we have for you.
