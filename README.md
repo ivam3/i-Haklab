@@ -50,9 +50,10 @@ i-Haklab weechat
 ### 🤔 What is i-Haklab?
 > [i-Haklab]() is a hacking laboratory for [Termux](https://github.com/termux/termux-app) that contains [open source tools](https://github.com/ivam3/termux-packages) for osint, pentesting, scan/find vulnerabilities, exploitation and post-exploitation recommended for me [Ivam3](https://wlo.link/@Ivam3) with automation commands, a many guides, books and tutorials to learn how to use tools. [i-Haklab]() use oh my fish insteractive shell as default (users can change it for zsh or bash) to provide core infrastructure to allow you to install packages which extend or modify the look of your termux. To get help about shell and its use going to [OMF official site](https://fishshell.com/docs/current/tutorial.html).
 
-### IA ASSISTANT 
-Join to [deepwiki](https://deepwiki.com/i-haklab) and ask your questions about i-Haklab to our IA assistant trained with all the information about the project and its tools. 
+### IA ASSISTANT
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/ivam3/i-Haklab)
 
+Join to [deepwiki](https://deepwiki.com/ivam3/i-Haklab) and learn more about this project asking to Devin, our IA assistant trained with all the information about this project and its tools.
 
 ### 📦 INSTALLATION.
 - OPTION 1 (RECOMMEND): ADDING AT APT SOURCES LIST
