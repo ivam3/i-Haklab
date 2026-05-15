@@ -100,8 +100,15 @@ INSERT INTO heroes (login, password, secret) VALUES ('neo', 'trinity', 'Oh why d
                         yes|unzip -qq $rootdir/$answ.zip -d $rootdir/ 2>$LOGFILE
                         rm $rootdir/* 2>/dev/null
                     } 
+                    FILE="$rootdir/$answ/soap/nusoap.php"
                     sed -i "20s/\"localhost\"/\"127.0.0.1\"/" $rootdir/$answ/admin/settings.php 2>$LOGFILE
-                    sed -i "22s/\"\"/\"root\"/" $rootdir/$answ/admin/settings.php 2>$LOGFILE
+                    sed -i "22s/\"\"/\"root\"/" $rootdir/$answ/admin/settings.php 2>$LOGFILE 
+                    sed -i 's/return (double) $value;/return (float) $value;/g' "$FILE" 2>$LOGFILE
+                    sed -i 's/return (boolean) $value;/return (bool) $value;/g' "$FILE" 2>$LOGFILE
+                    sed -i 's/function sendHTTPS($data, $timeout=0, $response_timeout=30, $cookies)/function sendHTTPS($data, $timeout=0, $response_timeout=30, $cookies = array())/g' "$FILE" 2>$LOGFILE
+                    if ! grep -q "var \$serviceName =" "$FILE"; then
+                        sed -i '/class wsdl extends nusoap_base {/a \	var $serviceName = '\'''\'';' "$FILE" 2>$LOGFILE
+                    fi
                     createDB $db
                     mariadb -u "$user" -p"$pass" "$db" -e "$SQL_COMMAND" 2>$LOGFILE
                 }
@@ -127,9 +134,19 @@ INSERT INTO heroes (login, password, secret) VALUES ('neo', 'trinity', 'Oh why d
                 chk-rootdir $answ || { 
                     git clone --quiet --depth 1 https://github.com/webpwnized/mutillidae \
                         $rootdir/$answ 2>$LOGFILE
-                    createDB $answ
-                    sed -i '53 {s|^|//|}' $rootdir/$answ/classes/MySQLHandler.php 2>$LOGFILE
-                    sed -i "53a static public $mMySQLDatabasePassword = \"root\";" $rootdir/$answ/classes/MySQLHandler.php 2>$LOGFILE
+                    createDB $answ 
+                    FILE="$rootdir/$answ/src/database-offline.php" 
+                    CONFIG="$rootdir/$answ/src/includes/database-config.inc" 
+                    YOUTUBE_HANDLER="$rootdir/$answ/src/classes/YouTubeVideoHandler.php"
+                    MySQLHandler="$rootdir/$answ/src/classes/MySQLHandler.php"
+                    sed -i '53 {s|^|//|}' $MySQLHandler 2>$LOGFILE
+                    sed -i '53a static public $mMySQLDatabasePassword = "root";' $MySQLHandler 2>$LOGFILE 
+                    sed -i "s/define('DB_PASSWORD', '.*');/define('DB_PASSWORD', 'root');/g" "$CONFIG" 2>$LOGFILE 
+                    sed -i '/if (session_status() == PHP_SESSION_NONE){/,/}/d' "$FILE" 2>$LOGFILE 
+                    sed -i '/\/\/end try/i \	if (session_status() == PHP_SESSION_NONE){\n\	    session_start();\n\	}' "$FILE" 2>$LOGFILE 
+                    sed -i 's/fsockopen($lLDAPHost/@fsockopen($lLDAPHost/g' "$FILE" 2>$LOGFILE 
+                    sed -i 's/fsockopen($lDatabaseHost/@fsockopen($lDatabaseHost/g' "$FILE" 2>$LOGFILE 
+                    sed -i 's/curl_close($lCurlInstance);/\/\/ curl_close($lCurlInstance);/g' "$YOUTUBE_HANDLER" 2>$LOGFILE
                     echo -en "\tDONE!!\n"
                 }
                 break
