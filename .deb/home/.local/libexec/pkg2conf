@@ -84,7 +84,7 @@ case "$1" in
         ;;
 
     mariadb)
-        root=user="root"
+        user="root";root=$user
         chk_dbuser_exist=$(mariadb -u $user -p$pass -e "use mysql;SELECT user FROM user;"|\
             grep $user|head -n1)
         if [[ $chk_dbuser_exist != $user ]]; then 

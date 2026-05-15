@@ -52,7 +52,7 @@ Banner(){
 }
 
 usage() {
-	printf "$B\n(USAGE)─➤$G IbyC-fixer <[apt|burpsuite|downgradeRepo|gemini-cli|localtunnel|metasploit|ngrok|nrauf|neovim|RuGiR|PyMiR]> <option>$W\n\napt\t\t\t\tSearch and fix some errores on APT/PKG with dpkg\nburpsuite\t\t\tDepends: openjdk-21 but it is not installable\ndowngradeRepo repo=version\tDowngrade apt|pkg reporitory tospecific version\ngemini-cli\t\t\tFix error with pty.node in gemini-cli installation issues\nlocaltunnel\t\t\tfix error 'Unsupported platform: android'\nmetasploit\t\t\tAlternative metasploit installation\nngrok\t\t\t\tInstall ngrok-server from Abhacker repositories\nnrauf         dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nneovim\t\t\t\tFix Neovim error: E5108\n\nRuGiR\t\t\t\tFix ruby gems issues\nPyMiR\t\t\t\tFix python module issues\nExamples:\n\tIbyC-fixer RuGiR\n\tIbyC-fixer downgradeRepo ruby=2.7.2\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n\n"
+	printf "$B\n(USAGE)─➤$G IbyC-fixer <[apt|burpsuite|downgradeRepo|gemini-cli|localtunnel|mariadb|metasploit|ngrok|nrauf|neovim|RuGiR|PyMiR]> <option>$W\n\napt\t\t\t\tSearch and fix some errores on APT/PKG with dpkg\nburpsuite\t\t\tDepends: openjdk-21 but it is not installable\ndowngradeRepo repo=version\tDowngrade apt|pkg reporitory tospecific version\ngemini-cli\t\t\tFix error with pty.node in gemini-cli installation issues\nlocaltunnel\t\t\tfix error 'Unsupported platform: android'\nmariadb\t\t\tfix error 'access denied for user root'\nmetasploit\t\t\tAlternative metasploit installation\nngrok\t\t\t\tInstall ngrok-server from Abhacker repositories\nnrauf         dir/to/app\tTo remapping unicode filenames to ascii when produced by apktool\nneovim\t\t\t\tFix Neovim error: E5108\n\nRuGiR\t\t\t\tFix ruby gems issues\nPyMiR\t\t\t\tFix python module issues\nExamples:\n\tIbyC-fixer RuGiR\n\tIbyC-fixer downgradeRepo ruby=2.7.2\n\tIbyC-fixer nrauf \$HOME/original\n\nFor more help join to$B https://t.me/Ivam3_Bot$W\n\n"
 	exit
 }
 
@@ -110,6 +110,58 @@ case ${arg[0]} in
 		ps=$(echo $!)
 		running ps $ps
 		;;
+
+    mariadb)
+        pkill mariadbd 2>/dev/null
+        sleep 2
+
+        echo "[*] Staring MariaDB on secure mode (--skip-grant-tables)..."
+        mariadbd-safe --skip-grant-tables > /dev/null 2>&1 &
+
+        # Esperar a que el socket esté disponible
+        intentos=0
+        while ! mariadb-admin ping >/dev/null 2>&1; do
+            echo -n "."
+            sleep 1
+            ((intentos++))
+            if [ $intentos -gt 15 ]; then
+                echo -e "\n[!] E: Cannot start MariaDB secure mode."
+                exit 1
+            fi
+        done
+        echo -e "\n[+] Server on secure mode detected."
+
+        # 3. Ejecutar comandos SQL para resetear root
+        echo "[*] Applting patchs for user 'root'..."
+
+        # Nota: Usamos UPDATE en mysql.global_priv para versiones modernas de MariaDB (10.4+)
+        # y ALTER/UPDATE en mysql.user para compatibilidad.
+        mariadb -u root <<EOF
+FLUSH PRIVILEGES;
+-- Para versiones < 10.4
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
+UPDATE mysql.user SET plugin='mysql_native_password' WHERE User='root';
+-- Para versiones >= 10.4 (MariaDB usa global_priv)
+UPDATE mysql.global_priv SET priv=json_set(priv, '$.plugin', 'mysql_native_password', '$.authentication_string', password('root')) WHERE User='root';
+FLUSH PRIVILEGES;
+EOF
+
+        if [ $? -eq 0 ]; then
+            echo "[+] Privileges 'root' updated."
+        else
+            echo "[!] Error executing SQL commands."
+            pkill mariadbd
+            exit 1
+        fi
+
+        # 4. Limpiar y reiniciar
+        echo "[*] Restaring MariaDB in normal mode..."
+        pkill mariadbd
+        sleep 2
+
+        mariadbd-safe > /dev/null 2>&1 &
+        sleep 3
+        ;;
 
 	metasploit)
 		[[ -d $PREFIX/var/lib/postgresql ]] && rm -rf $PREFIX/var/lib/postgresql
