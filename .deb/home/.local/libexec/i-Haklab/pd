@@ -5,6 +5,7 @@ source $HOME/.local/etc/i-Haklab/variables
 source $iHETC/functions
 distro=$1
 x11=$2
+export PD_FORCE_NO_COLORS=true
 
 [[ $distro = "alpine" ]] && { filerc="etc/profile.d/ashrc.sh"; } || { filerc="root/.bashrc"; }
 
@@ -44,10 +45,11 @@ instaDistro(){
 
 runXenv(){
   if [[ $distro = "alpine" ]]; then
-    if ! grep "testing" $PREFIX/var/lib/proot-distro/installed-rootfs/$distro/etc/apk/repositories >/dev/null;
+    if ! grep "testing" 
+        $PREFIX/var/lib/proot-distro/containers/$distro/rootfs/etc/apk/repositories >/dev/null;
       then 
         echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> \
-      $PREFIX/var/lib/proot-distro/installed-rootfs/$distro/etc/apk/repositories
+            $PREFIX/var/lib/proot-distro/containers/$distro/rootfs/etc/apk/repositories
     fi
     echo -en "#!/data/data/com.termux/files/usr/bin/bash\nproot-distro login alpine --shared-tmp -- /bin/ash -c 'export PULSE_SERVER=127.0.0.1 && export XDG_RUNTIME_DIR=\${TMPDIR} && su - $USER -c \"env DISPLAY=:0 startxfce4\"'" > ${TMPDIR}/xpd.sh
   
@@ -87,9 +89,9 @@ runXenv(){
 
 runEnv(){
   running time 2
-  if grep $USER $PREFIX/var/lib/proot-distro/installed-rootfs/$distro/etc/passwd >/dev/null;
+  if grep $USER $PREFIX/var/lib/proot-distro/containers/$distro/rootfs/etc/passwd >/dev/null;
   then
-    cat <<- CONF > $PREFIX/var/lib/proot-distro/installed-rootfs/$distro/$filerc
+    cat <<- CONF > $PREFIX/var/lib/proot-distro/containers/$distro/rootfs/$filerc
 #!/bin/bash
 #! command -v tmux >/dev/null && { apk add tmux; }
 #tmux new -s i-Haklab -n $distro 2>/dev/null
@@ -112,9 +114,9 @@ CONF
       export shell="bash"
       export step1="for file in \$(find /usr -type f -iname \"*login1*\");do rm -rf \$file; done"
       echo -en "Package: snapd\nPinP release a=*\nPin-Priority: -10" > \
-        $PREFIX/var/lib/proot-distro/installed-rootfs/$distro/etc/apt/preferences.d/nosnap.pref
+          $PREFIX/var/lib/proot-distro/containers/$distro/rootfs/etc/apt/preferences.d/nosnap.pref
     fi
-      cat <<- CONF > $PREFIX/var/lib/proot-distro/installed-rootfs/$distro/$filerc
+      cat <<- CONF > $PREFIX/var/lib/proot-distro/containers/$distro/rootfs/$filerc
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -242,7 +244,7 @@ chk-dist
 if [[ $? -gt 0 ]]
 then
   usage
-elif [[ -d $PREFIX/var/lib/proot-distro/installed-rootfs/$distro ]]; then
+elif [[ -d $PREFIX/var/lib/proot-distro/containers/$distro/rootfs ]]; then
   runEnv 
 else
   instaDistro
