@@ -5,6 +5,7 @@ aircrack-ng
 amass
 androbugs
 androidsdk-cli
+antigravity-cli
 apksigner
 apktool
 appshark
@@ -51,7 +52,6 @@ finalrecon
 frida
 fuzzdb
 gdb
-gemini-cli 
 getadusers
 getnpusers
 getuserspns
