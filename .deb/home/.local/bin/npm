@@ -23,6 +23,7 @@ if [[ "$1" == "install" || "$1" == "update" ]]; then
         [[ "$i" == "qwen-code" ]] && { i="@qwen-code/qwen-code"; }
         [[ "$i" == "copilot-cli" ]] || [[ "$i" == "github-copilot" ]]&& { i="@github/copilot"; }
         [[ "$i" == "claude-code" ]] && { i="@anthropic-ai/claude-code"; }
+        [[ "$i" == "codex" ]] && { i="@mmmbuto/codex-cli-termux@latest"; }
 
         case "$i" in
             n8n)

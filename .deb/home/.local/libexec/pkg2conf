@@ -84,11 +84,20 @@ case "$1" in
         ;;
 
     mariadb)
-        user="root";root=$user
-        chk_dbuser_exist=$(mariadb -u $user -p$pass -e "use mysql;SELECT user FROM user;"|\
-            grep $user|head -n1)
+        user="root"
+        root="$user"
+        pkill mariadbd 2>/dev/null
+        mariadbd-safe --skip-grant-tables &
+        sleep 5 
+        mariadb -u $user -e "FLUSH PRIVILEGES;"
+        mariadb -u $user -e "ALTER USER '$user'@'localhost' IDENTIFIED BY '$user';"
+        mariadb -u $user -e "UPDATE mysql.user SET plugin='mysql_native_password' WHERE User='$user';"
+        mariadb -u $user -e "FLUSH PRIVILEGES;"
+        pkill mariadbd 2>/dev/null
+        mariadbd-safe &
+        sleep 5
+        chk_dbuser_exist=$(mariadb -u $user -p$pass -e "use mysql;SELECT user FROM user;" | grep $user|head -n1)
         if [[ $chk_dbuser_exist != $user ]]; then 
-            mariadbd-safe &
             mariadb-secure-installation
             mariadb-install-db 
         fi
