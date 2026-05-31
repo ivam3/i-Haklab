@@ -1,9 +1,9 @@
-.TH I-HAKLAB 1 "2024" "" "General Commands Manual"
+.TH I-HAKLAB 1 "2026" "" "General Commands Manual"
 .nh
 .ad l
 .
 .SH NAME
-i-Haklab \- Hacking laboratory containing open-source tools
+i-Haklab \- Ivam3 Hacking laboratory containing open-source tools
 .
 .SH SYNOPSIS
 .B i-Haklab
@@ -11,7 +11,7 @@ i-Haklab \- Hacking laboratory containing open-source tools
 .RI [ ARG ]
 .
 .SH DESCRIPTION
-i-Haklab v.3.9 (c) 2024 by @Ivam3 is a hacking laboratory containing open-source tools recommended by Ivam3. If the law is violated with its use, the user handling it will be responsible for any consequences.
+i-Haklab v.3.12 (c) 2026 by @Ivam3 is a hacking laboratory containing open-source tools recommended by Ivam3. If the law is violated with its use, the user handling it will be responsible for any consequences.
 
 The syntax for i-Haklab is:
 .PP
@@ -31,10 +31,12 @@ Update Termux manually, packages by packages.
 Show the help menu.
 .TP
 .B passwd set|new
-Set or change the Termux login (e.g., i-Haklab passwd set password).
+Set or change the Termux login (e.g., i-Haklab passwd set password). Supports password or fingerprint.
 .TP
 .B pd <distro-X11-list>
-Run a Linux distribution in a proot environment (e.g., i-Haklab pd alpine for CLI or i-Haklab pd alpine X11 for graphical environment).
+Run a Linux distribution in a proot environment.
+Use `i-Haklab pd list` to show all available distributions.
+Example: `i-Haklab pd alpine` for CLI or `i-Haklab pd alpine X11` for graphical environment.
 .TP
 .B setapikey
 Set API keys to use in i-Haklab features.
@@ -42,11 +44,17 @@ Set API keys to use in i-Haklab features.
 .B setbanner
 Enable, disable, and customize the i-Haklab wall banner.
 .TP
+.B setshell
+Switch shell between bash, zsh and fish (default).
+.TP
 .B setuser
 Set the i-Haklab username.
 .TP
-.B show alltools
-List all tools/frameworks available on i-Haklab.
+.B show alltools|instatools|books|tutorials
+List available tools, installed tools, books or tutorials.
+.TP
+.B speedtest
+Run a speed test of your network.
 .TP
 .B version
 Show the current version of i-Haklab installed.
@@ -62,8 +70,11 @@ Run X server over Termux Wayland app with XFCE4 as the window manager.
 .B apkactivity <path-to-apk-file>
 Get the main activity from an APK file.
 .TP
+.B androforensic secretCodes|airscope|dumpsys|extract <target>
+Extract information from Android devices via ADB.
+.TP
 .B backup create|restore
-Create or restore a backup of Termux (e.g., i-Haklab restore /path/to/file.tar.gz).
+Create or restore a backup of Termux (e.g., i-Haklab backup create in/ex).
 .TP
 .B binchecker
 Get information about binary files (CC, DC).
@@ -71,8 +82,8 @@ Get information about binary files (CC, DC).
 .B bruteforce ftp|mail|ssh|telnet
 Perform a brute force attack on various servers (e.g., i-Haklab bruteforce ftp).
 .TP
-.B chatGPT <--help|-h>
-Connect with the OpenAI API to interact with ChatGPT-3 via CLI (e.g., i-Haklab chatGPT).
+.B chatAI <--help|-h>
+Connect with the OpenAI API to interact with ChatGPT-3 via CLI (e.g., i-Haklab chatAI).
 .TP
 .B ESmsg encode|decode
 Encode or decode secret messages into an ASCII file (e.g., i-Haklab ESmsg encode).
@@ -86,14 +97,8 @@ Start an SSH client to request TCP port forwarding (e.g., i-Haklab tunnel -p 444
 .B handler <name-of-file.rc>
 Start handler on msfconsole with previous settings.
 .TP
-.B msf dirscan <IP-target>
-Enumerate directories or subdirectories from a server (e.g., i-Haklab msf dirscan 10.10.10.242).
-.TP
-.B msf embed <host> <port> <path-to-file.apk>
-Embed a metasploit payload into a legitimate APK file.
-.TP
-.B msf payapk <host> <port>
-Create a coded APK payload (e.g., i-Haklab msf payapk 6.tcp.ngrok.io 23453).
+.B msf dirscan|embed|payapk|payexe|paypdf|shodan
+Metasploit automation tools for directory scanning, embedding payloads, creating APK/EXE/PDF payloads, and searching via Shodan.
 .TP
 .B ngroklink
 Show the current ngrok link.
@@ -106,6 +111,15 @@ Hide a reverse shell with a video file by exploiting the Linux OS.
 .TP
 .B phonescan <phonenumber>
 Scan information about a phone number (e.g., i-Haklab phonescan 525584923476).
+.TP
+.B qemufy <file.zip/rm>
+Convert OVA files and run a QEMU virtual machine over Termux (no root).
+.TP
+.B servers4test
+Initialize deliberately insecure web applications for pentesting.
+.TP
+.B 4share <server-name>
+Initialize a web server to share files remotely and securely (localtunnel, localhost.run, cloudflared).
 .TP
 .B usbtest <path-to-device>
 Test a USB device connected via OTG (e.g., i-Haklab usbtest /dev/bus/usb/001).
@@ -122,9 +136,6 @@ Copy any file from internal/external storage to the Termux directory.
 .TP
 .B bat
 Highlight text output instead of using the 'cat' command.
-.TP
-.B cinderella
-Virtual assistant exclusively for the use of Termux.
 .TP
 .B cmd
 Manage Android main settings over Termux.
@@ -150,14 +161,20 @@ Show the current internet protocol over LAN.
 .B lock
 Block Termux's screen.
 .TP
-.B osrframework
-OSINT toolkit.
-.TP
 .B mypip
 Show your public internet protocol.
 .TP
+.B openvpn
+Open OpenVPN application.
+.TP
 .B omf
 Change the Oh-My-Fish theme.
+.TP
+.B phantom-ps
+Change the limit of phantom processes.
+.TP
+.B pm
+Android package manager.
 .TP
 .B postgresql
 Start, stop, or restart PostgreSQL database.
@@ -177,9 +194,14 @@ Initialize a PHP server.
 .B sudo
 Execute commands or initialize an environment as a fake root user.
 .TP
+.B telegram
+Open Telegram application.
+.TP
 .B traductor
 Initialize a command-line translator.
+.TP
+.B yazi
+Terminal file manager.
 
 .SH SEE ALSO
-For more information and documentation, visit:
-
+For more information and documentation, visit: https://github.com/ivam3/i-Haklab
