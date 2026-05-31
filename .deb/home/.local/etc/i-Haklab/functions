@@ -149,7 +149,6 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 |   ╰────────+────instatools─────➤ Show all installed tools/framewotks
 |   ╰────────+──────books────────➤ Show all books available to download
 |   ╰────────+─────tutorials─────➤ Show tutorials available
-|   ╰────────+───────QG──────────➤ Show quick guides available
 ╰─speedtest──➤───────────────────➤ Run a speed test of your network
 ╰─version────➤───────────────────➤ Show i-Haklab version installed
 ╰─weechat────➤───────────────────➤ Connect with irc Ivam3byCinderella chat

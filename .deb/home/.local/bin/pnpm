@@ -11,9 +11,12 @@ pkg2conf() {
 if [[ "$1" == "install" || "$1" == "update" ]]; then
     pushd "$HOME" >/dev/null
     for i in "${@:2}"; do
-        if [[ "$i" == "gemini-cli" ]]; then
-            i="@google/gemini-cli"
-        fi
+        [[ "$i" == "gemini-cli" ]] && { i="@google/gemini-cli"; }
+        [[ "$i" == "qwen-code" ]] && { i="@qwen-code/qwen-code"; }
+        [[ "$i" == "copilot-cli" ]] || [[ "$i" == "github-copilot" ]] && { i="@github/copilot"; }
+        [[ "$i" == "claude-code" ]] && { i="@anthropic-ai/claude-code"; }
+        [[ "$i" == "codex" ]] && { i="@mmmbuto/codex-cli-termux@latest"; }
+        [[ "$i" == "minimax-cli" ]] && { i="mmx-cli"; }
 
         case "$i" in
             n8n)
@@ -32,10 +35,6 @@ if [[ "$1" == "install" || "$1" == "update" ]]; then
                 mkdir -p "$HOME"/{.n8n,.gyp}
                 echo "{'variables':{'android_ndk_path':''}}" > "$HOME/.gyp/include.gypi"
                 "$PREFIX/bin/pnpm" approve-builds -g
-                ;;
-            
-            pnpm)
-                corepack enable
                 ;;
             
             open-lovable)

@@ -77,23 +77,23 @@ then
 			STDERR
 		fi
 	done
-elif [[ $1 = QG ]]
-then
-	select QG in $(ls $iHLIBEXEC/../QG_*|awk -F "/" '{print $NF}') Exit;do
-		if [[ ! -z $QG ]] && [[ -e $iHLIBEXEC/../$QG ]]
-		then
-            [[ $QG = "QG_bWAPP.pdf" ]] && {
-                termux-open $iHLIBEXEC/../$QG
-            } || {
-                bash $iHLIBEXEC/../$QG
-            }
-		elif [[ $QG = Exit ]]
-		then
-			exit
-		else
-			STDERR
-		fi
-	done
+# elif [[ $1 = QG ]]
+# then
+# 	select QG in $(ls $iHLIBEXEC/../QG_*|awk -F "/" '{print $NF}') Exit;do
+# 		if [[ ! -z $QG ]] && [[ -e $iHLIBEXEC/../$QG ]]
+# 		then
+#             [[ $QG = "QG_bWAPP.pdf" ]] && {
+#                 termux-open $iHLIBEXEC/../$QG
+#             } || {
+#                 bash $iHLIBEXEC/../$QG
+#             }
+# 		elif [[ $QG = Exit ]]
+# 		then
+# 			exit
+# 		else
+# 			STDERR
+# 		fi
+# 	done
 elif [[ $1 = alltools ]]
 then
 	chk-pkg column util-linux

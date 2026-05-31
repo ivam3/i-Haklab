@@ -14,6 +14,16 @@ pkg2conf() {
     fi
 }
 
+set_filerc() {
+    shell=${SHELL##*/}
+    case "$shell" in
+        bash) FILERC="$HOME/.bashrc" ;;
+        zsh) FILERC="$HOME/.zshrc" ;;
+        fish) FILERC="$HOME/.config/fish/config.fish" ;;
+        *) echo "Unsupported shell: $shell." && exit 1 ;;
+    esac
+}
+
 if [[ "$1" == "install" || "$1" == "update" ]]; then
     pushd "$HOME" >/dev/null
     for i in "${@:2}"; do
@@ -21,9 +31,10 @@ if [[ "$1" == "install" || "$1" == "update" ]]; then
         # Fish was exact match: if test "$i" = "gemini-cli"
         [[ "$i" == "gemini-cli" ]] && { i="@google/gemini-cli"; }
         [[ "$i" == "qwen-code" ]] && { i="@qwen-code/qwen-code"; }
-        [[ "$i" == "copilot-cli" ]] || [[ "$i" == "github-copilot" ]]&& { i="@github/copilot"; }
+        [[ "$i" == "copilot-cli" ]] || [[ "$i" == "github-copilot" ]] && { i="@github/copilot"; }
         [[ "$i" == "claude-code" ]] && { i="@anthropic-ai/claude-code"; }
         [[ "$i" == "codex" ]] && { i="@mmmbuto/codex-cli-termux@latest"; }
+        [[ "$i" == "minimax-cli" ]] && { i="mmx-cli"; }
 
         case "$i" in
             n8n)
@@ -45,6 +56,14 @@ if [[ "$1" == "install" || "$1" == "update" ]]; then
             
             pnpm)
                 corepack enable
+                pnpm setup
+                search_in_path=$(echo "${PATH}"|tr ':' '\n'|grep -Fx "$HOME/.local/share/pnpm/bin")
+
+                [[ -n "$search_in_path" ]] && { 
+                    envPATH=$(echo "${PATH}"|tr ' ' ':')
+                    set_filerc 
+                    echo "export PATH=\"$HOME/.local/share/pnpm/bin:$envPATH\"" >> "$FILERC"
+                }
                 ;;
             
             open-lovable)

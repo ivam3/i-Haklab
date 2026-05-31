@@ -51,11 +51,15 @@ if [[ "$1" == "install" || "$1" == "reinstall" || "$1" == "search" ]]; then
                 continue
                 ;;
 
-            bash-obfuscate|codex|copilot-cli|gemini-cli|localtunnel|n8n|pnpm|open-lovable|qwen-code|twifo-cli)
-                [[ "$i" == "qwen-code" ]] && { i="@qwen-code/qwen-code"; }
+            bash-obfuscate|codex|copilot-cli|gemini-cli|localtunnel|minimax-cli|n8n|pnpm|open-lovable|qwen-code|twifo-cli)
+                [[ "$i" == "minimax-cli" ]] && { i="mmx-cli"; }
                 [[ "$i" == "gemini-cli" ]] && { i="@google/gemini-cli"; }
+                [[ "$i" == "qwen-code" ]] && { i="@qwen-code/qwen-code"; }
                 [[ "$i" == "claude-code" ]] && { i="@anthropic-ai/claude-code"; }
-                [[ "$i" == "codex" ]] && { i="@mmmbuto/codex-cli-termux@latest"; }
+                [[ "$i" == "codex" ]] && { i="@mmmbuto/codex-cli-termux@latest"; } 
+                [[ "$i" == "copilot-cli" ]] || [[ "$i" == "github-copilot" ]] && { 
+                    i="@github/copilot"; 
+                } 
                 install_wrapper "npm install -g" "$i" "nodejs module"
                 continue
                 ;;
