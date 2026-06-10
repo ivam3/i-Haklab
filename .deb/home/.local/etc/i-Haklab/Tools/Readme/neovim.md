@@ -152,3 +152,13 @@ La `<leader>` key está configurada como la coma (`,`).
 - **`lua/settings.lua`**: Opciones del sistema.
 - **`lua/keymaps.lua`**: Definición de atajos.
 - **`lua/plugins/`**: Configuraciones de plugins específicos.
+
+## 8. Terminal
+
+Esta configuración utiliza **Toggleterm** para gestionar terminales integradas.
+
+| Atajo | Modo | Descripción |
+| :--- | :--- | :--- |
+| `<C-t>` | Normal | **Abrir / Cerrar terminal flotante.** |
+| `<esc>` o `jk` | Terminal | Volver a modo Normal desde la terminal. |
+| `<C-h/j/k/l>` | Terminal | Navegar entre ventanas de Neovim sin salir del terminal. |
