@@ -51,18 +51,14 @@ f:close()
 -- ## activa de Gemini de arriba y descomenta la que desees usar  ##
 -- ##                                                             ##
 -- #################################################################
-
 require("codecompanion").setup({
   adapters = {
     http = { -- <--- Creado para solucionar el warning de obsoleto
       gemini = function()
         return require("codecompanion.adapters").extend("gemini", {
           env = {
-            -- Aquí es donde se lee la clave de API que definimos arriba.
             api_key = os.getenv("APIKEY_gemini"),
           },
-          -- Opcional: puedes especificar un modelo, por ejemplo "gemini-1.5-flash".
-          -- model = "gemini-pro",
         })
       end,
     },
@@ -71,6 +67,15 @@ require("codecompanion").setup({
     chat = { adapter = "gemini" },
     inline = { adapter = "gemini" },
     agent = { adapter = "gemini" },
+  },
+  display = {
+    action_palette = {
+      width = 95,
+      height = 10,
+    },
+  },
+  opts = {
+    language = "Spanish",
   },
 })
 
@@ -90,18 +95,14 @@ require("codecompanion").setup({
 -- --      CONFIGURACIÓN ALTERNATIVA: OpenAI (ChatGPT)
 -- -----------------------------------------------------------------
 --[[
--- Descomenta las siguientes líneas para usar OpenAI.
-
 require("codecompanion").setup({
   adapters = {
-    http = { -- <--- Creado para solucionar el warning de obsoleto
+    http = {
       openai = function()
         return require("codecompanion.adapters").extend("openai", {
           env = {
             api_key = os.getenv("APIKEY_chatGPT"),
           },
-          -- Opcional: define un modelo por defecto
-          -- schema = { model = { default = "gpt-4o" } }
         })
       end,
     },
@@ -119,18 +120,14 @@ require("codecompanion").setup({
 -- --      CONFIGURACIÓN ALTERNATIVA: Anthropic (Claude)
 -- -----------------------------------------------------------------
 --[[
--- Descomenta las siguientes líneas para usar Anthropic.
-
 require("codecompanion").setup({
   adapters = {
-    http = { -- <--- Creado para solucionar el warning de obsoleto
+    http = {
       anthropic = function()
         return require("codecompanion.adapters").extend("anthropic", {
           env = {
             api_key = os.getenv("APIKEY_claude"),
           },
-          -- Opcional: define un modelo por defecto
-          -- schema = { model = { default = "claude-3-opus-20240229" } }
         })
       end,
     },
@@ -148,18 +145,14 @@ require("codecompanion").setup({
 -- --      CONFIGURACIÓN ALTERNATIVA: DeepSeek
 -- -----------------------------------------------------------------
 --[[
--- Descomenta las siguientes líneas para usar DeepSeek.
-
 require("codecompanion").setup({
   adapters = {
-    http = { -- <--- Creado para solucionar el warning de obsoleto
+    http = {
       deepseek = function()
         return require("codecompanion.adapters").extend("deepseek", {
           env = {
             api_key = os.getenv("APIKEY_deepseek"),
           },
-          -- Opcional: define un modelo por defecto
-          schema = { model = { default = "deepseek-chat" } }
         })
       end,
     },
@@ -177,20 +170,13 @@ require("codecompanion").setup({
 -- --      CONFIGURACIÓN ALTERNATIVA: GitHub Copilot
 -- -----------------------------------------------------------------
 --[[
--- Descomenta la siguiente sección para usar GitHub Copilot.
--- NOTA: Esto asume que ya tienes un plugin de Copilot
---       (como copilot.vim o copilot.lua) instalado y autenticado.
---       Copilot NO va bajo 'http' porque usa un mecanismo diferente
---       de integración, no una API HTTP directa en este contexto.
 require("codecompanion").setup({
   adapters = {
-    -- Copilot NO va bajo 'http'
     copilot = function()
       return require("codecompanion.adapters").extend("copilot", {})
     end,
   },
   strategies = {
-    -- Copilot es excelente para sugerencias en línea
     chat = { adapter = "copilot" },
     inline = { adapter = "copilot" },
     agent = { adapter = "copilot" },
@@ -198,12 +184,10 @@ require("codecompanion").setup({
 })
 --]]
 
-
 -- -----------------------------------------------------------------
 -- --      CONFIGURACIÓN ALTERNATIVA: Mistral AI
 -- -----------------------------------------------------------------
--- Descomenta las siguientes líneas para usar OpenAI.
---[[ 
+--[[
 require("codecompanion").setup({
   adapters = {
     http = {

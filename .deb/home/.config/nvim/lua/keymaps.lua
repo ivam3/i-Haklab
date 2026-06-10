@@ -38,15 +38,16 @@ map("n", "<leader>cm", "<cmd>Telescope git_commits<CR>", { desc = "telescope git
 map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "telescope git status" })
 map("n", "<leader>pt", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidden term" })
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "telescope find files" })
-map(
-  "n",
-  "<leader>fa",
-  "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
-  { desc = "telescope find all files" }
-)
+map("n", "<leader>fa", "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>", { desc = "telescope find all files" })
+
+------------------------------------------------------
+--           NvimTree (Explorador de Archivos)
+------------------------------------------------------
+map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
 
 ------------------------------------------------------
 --            Mios  xD   
+   
 ------------------------------------------------------
 -- map leader+w to save current file in normal mode
 map("n", "<Leader>w", ":write<CR>", { noremap = true, silent = true })
@@ -105,10 +106,21 @@ map('n', '<leader>n', '<cmd>Neural<cr>')
 ------------------------------------------------------
 --        Code Companion
 ------------------------------------------------------
-map("n", "<leader>ca", "<cmd>CodeCompanionActions<cr>", { desc = "Code Companion Actions" })
-map("v", "<leader>ca", "<cmd>CodeCompanionActions<cr>", { desc = "Code Companion Actions" })
+map("n", "<A-,>ca", "<cmd>CodeCompanionActions<cr>", { desc = "Code Companion Actions" })
+map("v", "<A-,>ca", "<cmd>CodeCompanionActions<cr>", { desc = "Code Companion Actions" })
+map("n", "<A-,>cc", "<cmd>CodeCompanionChat Toggle<cr>", { desc = "Code Companion Chat" })
+map("v", "<A-,>cc", "<cmd>CodeCompanionChat Toggle<cr>", { desc = "Code Companion Chat" })
+map("n", "<A-,>ci", "<cmd>CodeCompanion<cr>", { desc = "Code Companion Inline" })
+map("v", "<A-,>ci", "<cmd>CodeCompanion<cr>", { desc = "Code Companion Inline" })
+map("n", "<A-,>ce", "<cmd>CodeCompanion /explain<cr>", { desc = "Code Companion Explain" })
 
 -- Activar / desactivar fondo transparente
 map('n', '<leader>te', '<cmd>TransparentEnable<cr>')
 map('n', '<leader>td', '<cmd>TransparentDisable<cr>')
 map('n', '<leader>tt', '<cmd>TransparentToggle<cr>')
+
+------------------------------------------------------
+--        nvim-ufo (Folds)
+------------------------------------------------------
+map('n', 'zR', function() require('ufo').openAllFolds() end, { desc = "Open all folds" })
+map('n', 'zM', function() require('ufo').closeAllFolds() end, { desc = "Close all folds" })

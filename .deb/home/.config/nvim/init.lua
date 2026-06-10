@@ -83,7 +83,23 @@ lazy.setup({
    {'dense-analysis/neural'},
    {'muniftanjim/nui.nvim'},
    {'elpiloto/significant.nvim'},
+   -- Plegado de código con nvim-ufo
+   {
+   "kevinhwang91/nvim-ufo",
+   dependencies = {
+     "kevinhwang91/promise-async",
+   },
+   event = "VeryLazy",
+   config = function()
+     require("ufo").setup({
+       provider_selector = function()
+         return { "treesitter", "indent" }
+       end,
+     })
+   end,
+   },
    -- {'williamboman/nvim-lsp-installer'},
+
    -- Gir ---> Pendiente a cambiar 
    {'dinhhuy258/git.nvim'},
    -- Efecto "smear" para el cursor

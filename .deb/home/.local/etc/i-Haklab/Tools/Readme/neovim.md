@@ -1,131 +1,154 @@
 # Documentación de la Configuración de Neovim
 
-Este documento proporciona una visión general completa de esta configuración de Neovim, diseñada para ser un entorno de desarrollo moderno, eficiente y altamente funcional, con un fuerte enfoque en la integración de la IA.
+Este documento proporciona una visión general completa de esta configuración de Neovim, diseñada para ser un entorno de desarrollo moderno, eficiente y altamente funcional, con un fuerte enfoque en la integración de la IA y herramientas de productividad avanzada.
 
 ## 1. ¿Qué es Neovim?
 
-**Neovim** es un editor de texto modal basado en Vim, pero modernizado y refactorizado. Hereda toda la potencia y eficiencia de Vim (operación mediante modos, edición sin ratón, alta personalización) y le añade características modernas como una mejor arquitectura de plugins, integración con scripts de Lua, soporte asíncrono nativo y una terminal integrada. Es conocido por su velocidad, bajo consumo de recursos y una comunidad de usuarios muy activa que crea constantemente nuevos plugins y herramientas.
+**Neovim** es un editor de texto modal basado en Vim. Hereda toda la potencia y eficiencia de Vim (operación mediante modos, edición sin ratón, alta personalización) y le añade características modernas como una mejor arquitectura de plugins, integración con scripts de Lua, soporte asíncrono nativo y una terminal integrada.
 
 ## 2. ¿Qué es Lua y por qué se usa en Neovim?
 
-**Lua** es un lenguaje de programación (scripting) ligero, rápido y potente. Neovim lo ha adoptado como su principal lenguaje de configuración y extensión, reemplazando en gran medida al tradicional VimScript.
-
-**Ventajas de usar Lua en Neovim:**
-- **Velocidad:** Lua es significativamente más rápido que VimScript, lo que hace que el editor se inicie y funcione con mayor fluidez.
-- **Sintaxis Moderna:** Su sintaxis es más sencilla y legible para quienes vienen de lenguajes como Python o JavaScript.
-- **Ecosistema:** Permite el acceso a un vasto ecosistema de librerías a través de LuaJIT y su FFI (Foreign Function Interface), lo que posibilita integraciones más complejas.
-- **Mejor API:** Neovim expone una API completa y bien documentada para Lua, permitiendo a los plugins interactuar con el editor de una manera más profunda y estable.
-
-En esta configuración, prácticamente todo (`init.lua`, plugins, atajos) está escrito en Lua.
+**Lua** es el lenguaje principal de configuración de Neovim. Es significativamente más rápido que el antiguo VimScript y permite una configuración más limpia, modular y potente.
 
 ---
 
 ## 3. Plugins Instalados
 
-Esta configuración utiliza `lazy.nvim` como gestor de plugins. A continuación se listan los plugins instalados y su función principal.
+Esta configuración utiliza `lazy.nvim` como gestor de plugins.
 
 | Plugin | Repositorio | Descripción |
 | :--- | :--- | :--- |
-| **Code Companion** | `olimorris/codecompanion.nvim` | **Asistente de IA principal.** Permite interactuar con modelos como Gemini, OpenAI, etc., directamente en el editor. |
-| **zk-nvim** | `mickael-menu/zk-nvim` | Un sistema de toma de notas basado en texto plano, ideal para crear una base de conocimiento personal (Zettelkasten). |
-| **Conform** | `stevearc/conform.nvim` | Formatea el código automáticamente al guardar, usando herramientas externas como `prettier`, `black`, `stylua`, etc. |
-| **Grammarous** | `rhysd/vim-grammarous` | Revisa la gramática del texto (principalmente en inglés). |
-| **Copilot.vim** | `github/copilot.vim` | Integración oficial con GitHub Copilot para sugerencias de código. |
-| **Tokyo Night** | `folke/tokyonight.nvim` | El tema de colores oscuro y popular que se usa en esta configuración. |
-| **Lualine** | `nvim-lualine/lualine.nvim` | Una barra de estado personalizable y atractiva en la parte inferior de la ventana. |
-| **Bufferline** | `akinsho/bufferline.nvim` | Una línea de pestañas en la parte superior para gestionar y navegar entre los archivos abiertos (buffers). |
-| **Telescope** | `nvim-telescope/telescope.nvim` | **Buscador interactivo.** Permite buscar archivos, texto, buffers, commits de git y mucho más con una interfaz flotante. |
-| **Nvim Tree** | `nvim-tree/nvim-tree.lua` | Un explorador de archivos en forma de árbol, similar al de VSCode. |
-| **Indent Blankline** | `lukas-reineke/indent-blankline.nvim` | Muestra líneas verticales para visualizar mejor los niveles de indentación del código. |
-| **Toggleterm** | `akinsho/toggleterm.nvim` | Permite abrir y gestionar terminales en ventanas flotantes o divididas. |
-| **Neural** | `dense-analysis/neural` | Otro cliente de IA que permite interactuar con modelos de lenguaje. |
-| **Git.nvim** | `dinhhuy258/git.nvim` | Proporciona integraciones y utilidades para trabajar con Git. |
-| **Smear-Cursor** | `sphamba/smear-cursor.nvim` | Un efecto visual divertido que deja una estela de "fuego" al mover el cursor. |
-| **LSP Zero** | `VonHeikemen/lsp-zero.nvim` | **El corazón del autocompletado e IDE.** Facilita la configuración del LSP (Language Server Protocol), autocompletado (con nvim-cmp) y snippets (con LuaSnip). |
-| **Transparent** | `xiyaowong/transparent.nvim` | Permite hacer el fondo de Neovim transparente. |
-| **Treesitter** | `nvim-treesitter/nvim-treesitter` | **Motor de coloreado de sintaxis.** Analiza el código de forma estructural para un resaltado más preciso y rápido. |
-| **Nui** | `muniftanjim/nui.nvim` | Una librería de componentes de UI para que otros plugins puedan crear interfaces complejas. |
+| **Code Companion** | `olimorris/codecompanion.nvim` | **Asistente de IA principal.** |
+| **nvim-ufo** | `kevinhwang91/nvim-ufo` | **Plegado de código avanzado.** |
+| **LSP Zero** | `VonHeikemen/lsp-zero.nvim` | **IDE (LSP, Autocompletado, Snippets).** |
+| **Telescope** | `nvim-telescope/telescope.nvim` | **Buscador interactivo universal.** |
+| **Nvim Tree** | `nvim-tree/nvim-tree.lua` | **Explorador de archivos lateral.** |
+| **zk-nvim** | `mickael-menu/zk-nvim` | Toma de notas Zettelkasten. |
+| **Conform** | `stevearc/conform.nvim` | Formateador automático al guardar. |
+| **Tokyo Night** | `folke/tokyonight.nvim` | Tema de colores principal. |
+| **Lualine** | `nvim-lualine/lualine.nvim` | Barra de estado inferior. |
+| **Bufferline** | `akinsho/bufferline.nvim` | Gestión de pestañas superior. |
+| **Toggleterm** | `akinsho/toggleterm.nvim` | Terminales integradas. |
+| **Significant** | `elpiloto/significant.nvim` | Animaciones de diagnóstico. |
+| **Auto Pairs** | `jiangmiao/auto-pairs` | Cierre automático de paréntesis. |
+| **Neural** | `dense-analysis/neural` | Cliente de IA secundario. |
+| **Treesitter** | `nvim-treesitter/nvim-treesitter` | Resaltado de sintaxis avanzado. |
 
 ---
 
-## 4. Atajos de Teclado (Keymaps)
+## 4. Gestión de Archivos (Nvim Tree)
 
-La `<leader>` key (tecla líder) está configurada por defecto como `alt+,`.
+El explorador de archivos se encuentra en el lateral izquierdo.
+
+### Atajos para el Árbol
+| Atajo | Acción |
+| :--- | :--- |
+| `<leader>e` | **Abrir / Cerrar el explorador.** |
+| `a` | **Crear un nuevo archivo** (dentro del árbol). |
+| `r` | **Renombrar un archivo** o carpeta. |
+| `d` | **Borrar un archivo** (pide confirmación). |
+| `x` | Cortar un archivo. |
+| `c` | Copiar un archivo. |
+| `p` | Pegar un archivo. |
+| `Enter` | Abrir el archivo o entrar en carpeta. |
+| `g?` | Mostrar ayuda de Nvim Tree con todos los comandos. |
+
+---
+
+## 5. Atajos de Teclado Personalizados
+
+La `<leader>` key está configurada como la coma (`,`).
 
 ### Navegación y Ventanas
-| Atajo | Modo | Descripción |
-| :--- | :--- | :--- |
-| `<C-h>` | Normal | Moverse a la ventana de la izquierda. |
-| `<C-l>` | Normal | Moverse a la ventana de la derecha. |
-| `<C-j>` | Normal | Moverse a la ventana de abajo. |
-| `<C-k>` | Normal | Moverse a la ventana de arriba. |
-
-### Edición y Archivos
-| Atajo | Modo | Descripción |
-| :--- | :--- | :--- |
-| `<Leader>w` | Normal | Guardar el archivo actual (`:write`). |
-| `<Leader>x` | Normal | Guardar y cerrar (`:x`). |
-| `<Leader>ei` | Normal | Abrir el archivo de configuración principal (`init.lua`). |
-| `<C-w>` | Normal | Guardar el archivo actual (`:w`). |
-| `<C-x>` | Normal | Guardar y cerrar (`:x`). |
-| `<C-c>` | Normal | Salir sin guardar (`:q!`). |
-| `<leader>fm` | Normal | Formatear el archivo actual con `conform.nvim`. |
+| Atajo | Descripción |
+| :--- | :--- |
+| `<C-h>` | Moverse a la ventana izquierda. |
+| `<C-j>` | Moverse a la ventana inferior. |
+| `<C-k>` | Moverse a la ventana superior. |
+| `<C-l>` | Moverse a la ventana derecha. |
+| `<leader>w` | Guardar archivo actual (`:write`). |
+| `<C-w>` | Guardar archivo actual (`:w`). |
+| `<leader>x` | Guardar y cerrar Neovim (`:x`). |
+| `<C-x>` | Guardar y cerrar Neovim. |
+| `<C-c>` | Salir de Neovim sin guardar (`:q!`). |
+| `<leader>ei` | Abrir configuración `init.lua`. |
 
 ### Buffers (Pestañas)
-| Atajo | Modo | Descripción |
-| :--- | :--- | :--- |
-| `<C-t>`  | Todos  | Ir a la terminal flotante. |
-| `<C-b>p` | Normal | Ir al buffer anterior. |
-| `<C-b>q` | Normal | Cerrar el buffer actual. |
+| Atajo | Descripción |
+| :--- | :--- |
+| `<C-b>n` | Ir al siguiente buffer. |
+| `<C-b>p` | Ir al buffer anterior. |
+| `<C-b>q` | Cerrar el buffer actual. |
 
-### Telescope (Búsqueda)
-| Atajo | Modo | Descripción |
-| :--- | :--- | :--- |
-| `<leader>ff` | Normal | Buscar archivos en el proyecto. |
-| `<leader>fa` | Normal | Buscar en TODOS los archivos (incluyendo ocultos e ignorados). |
-| `<leader>fw` | Normal | Buscar una cadena de texto en todo el proyecto (live grep). |
-| `<leader>fb` | Normal | Buscar en los buffers abiertos. |
-| `<leader>fh` | Normal | Buscar en las páginas de ayuda. |
+### Telescope (Búsqueda Interactiva)
+| Atajo | Descripción |
+| :--- | :--- |
+| `<leader>ff` | Buscar archivos por nombre. |
+| `<leader>fa` | Buscar en todos los archivos (ocultos, ignorados). |
+| `<leader>fo` | **Buscar archivos recientes (Oldfiles).** |
+| `<leader>fw` | Buscar texto en el proyecto (Live Grep). |
+| `<leader>fb` | Listar y buscar buffers abiertos. |
+| `<leader>fz` | Buscar texto dentro del buffer actual. |
+| `<leader>fh` | Buscar en las páginas de ayuda. |
+| `<leader>ma` | Buscar marcas (marks). |
+| `<leader>gt` | Ver estado de Git (status). |
+| `<leader>cm` | Ver historial de commits. |
+| `<leader>pt` | Seleccionar terminales ocultas. |
 
-### Plugins e IA
-| Atajo | Modo | Descripción |
-| :--- | :--- | :--- |
-| `<leader>ca`| Normal/Visual | **Abrir el menú de acciones de Code Companion.** |
-| `<leader>ci`| Normal/Visual | **Permite inyectar promt para vibe coding.** |
-| `<leader>n` | Normal | Activar la interacción con el plugin `neural`. |
-| `<leader>te`| Normal | Activar fondo transparente. |
-| `<leader>td`| Normal | Desactivar fondo transparente. |
-| `<leader>tt`| Normal | Alternar fondo transparente. |
-| `<leader>gt`| Normal | Ver el estado de Git con Telescope. |
+### IA y Herramientas
+| Atajo | Descripción |
+| :--- | :--- |
+| `<A-,>ca` | Abrir acciones de **Code Companion**. |
+| `<A-,>cc` | Abrir chat de **Code Companion**. |
+| `<A-,>ci` | Code Companion Inline (Vibe coding). |
+| `<A-,>ce` | Explicar código con **Code Companion**. |
+| `<leader>n` | Activar interfaz de **Neural**. |
+| `<leader>fm` | Formatear código con **Conform**. |
 
-### Terminal (dentro de una ventana de terminal)
-| Atajo | Modo | Descripción |
-| :--- | :--- | :--- |
-| `<C-b>q`| Terminal | Volver al modo Normal desde el modo de inserción del terminal. |
-| `<esc>` o `jk`| Terminal | Volver al modo Normal desde el modo de inserción del terminal. |
-| `<C-h/j/k/l>`| Terminal | Navegar entre ventanas de Neovim sin salir del terminal. |
+### Plegado de Código (nvim-ufo)
+| Atajo | Descripción |
+| :--- | :--- |
+| `zR` | Abrir todos los pliegues del buffer. |
+| `zM` | Cerrar todos los pliegues del buffer. |
 
----
-
-## 5. Estructura de la Configuración
-
-- **`init.lua`**: El punto de entrada principal. Carga `lazy.nvim` y la lista de todos los plugins. También carga los demás archivos de configuración.
-- **`lua/`**: Directorio principal para la configuración en Lua.
-  - **`lua/keymaps.lua`**: Define todos los atajos de teclado personalizados.
-  - **`lua/settings.lua`**: Contiene opciones generales de Neovim (números de línea, indentación, etc.).
-  - **`lua/plugins/`**: Cada archivo en este directorio contiene la configuración específica para un plugin, manteniendo el `init.lua` limpio.
-
----
-
-## 6. Gestión de Plugins con Lazy.nvim
-
-`lazy.nvim` facilita la gestión de plugins.
-- **`:Lazy`**: Abre la interfaz de `lazy.nvim` para ver el estado de los plugins.
-- **`:Lazy sync`**: Sincroniza la configuración, instalando los plugins que falten y eliminando los que ya no estén en la configuración.
-- **`:Lazy update`**: Actualiza todos los plugins a su última versión.
+### Transparencia y UI
+| Atajo | Descripción |
+| :--- | :--- |
+| `<leader>tt` | Alternar transparencia del fondo. |
+| `<leader>te` | Habilitar transparencia. |
+| `<leader>td` | Deshabilitar transparencia. |
 
 ---
 
-## 7. Gestión de API Keys
+## 6. Atajos Esenciales de Neovim (Nativos)
 
-Para los servicios de IA, las claves de API se gestionan en `lua/plugins/codecompanion.lua`. Dentro de este archivo, puedes activar la configuración para diferentes proveedores (Gemini, OpenAI, etc.) y debes colocar tu clave de API en la variable correspondiente. A su vez la clave de API para neural se configura en `lua/plugins/neural.lua`.
+### Modos
+- `i`: Entrar en **Modo Insertar**.
+- `Esc` o `jk`: Volver a **Modo Normal**.
+- `v`: **Modo Visual** (para seleccionar texto).
+- `V`: **Modo Visual de Línea**.
+
+### Edición Básica
+- `u`: Deshacer (Undo).
+- `<C-r>`: Rehacer (Redo).
+- `y`: Copiar (Yank).
+- `p`: Pegar (Paste).
+- `d`: Borrar/Cortar (Delete).
+- `x`: Borrar el carácter bajo el cursor.
+- `o`: Abrir nueva línea abajo.
+- `O`: Abrir nueva línea arriba.
+
+### Movimiento y Búsqueda
+- `gg`: Ir al principio del archivo.
+- `G`: Ir al final del archivo.
+- `/`: Buscar palabra (usar `n` para siguiente).
+- `:%s/viejo/nuevo/g`: Reemplazar texto globalmente.
+
+---
+
+## 7. Estructura de la Configuración
+
+- **`init.lua`**: Punto de entrada.
+- **`lua/settings.lua`**: Opciones del sistema.
+- **`lua/keymaps.lua`**: Definición de atajos.
+- **`lua/plugins/`**: Configuraciones de plugins específicos.
