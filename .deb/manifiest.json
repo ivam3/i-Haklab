@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.12.13",
+  "version": "3.12.14",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -140,6 +140,7 @@
         "home/.local/etc/i-Haklab/Tools/Readme/markdown-viewer.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/markdown-viewer.md",
         "home/.local/etc/i-Haklab/Tools/Readme/metasploit-framework.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/metasploit-framework.md",
         "home/.local/etc/i-Haklab/Tools/Readme/mimikatz.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/mimikatz.md",
+        "home/.local/etc/i-Haklab/Tools/Readme/mimocode.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/mimocode.md",
         "home/.local/etc/i-Haklab/Tools/Readme/minimax-cli.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/minimax-cli.md",
         "home/.local/etc/i-Haklab/Tools/Readme/mvt": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/mvt",
         "home/.local/etc/i-Haklab/Tools/Readme/mvt.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/mvt.md",
