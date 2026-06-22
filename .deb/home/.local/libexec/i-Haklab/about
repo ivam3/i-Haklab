@@ -5,13 +5,15 @@ source "${HOME}/.local/etc/i-Haklab/variables"
 source "$iHETC/functions"
 localdb="$iHETC/Tools/Readme"
 
+chk-pkg glow glow
+
 [[ ! -z "$1"  ]] && {
     if [[ ! -e $localdb/$1.md  ]]; then
         curl -sSLf "$iHDB/.local/etc/Tools/Readme/$1.md" -o $localdb/$1.md 2>>"$LOGFILE" || {
             STDERR; exit 1;
         }
     fi
-    bat $localdb/$1.md
+    glow $localdb/$1.md
 }
 #
 # [[ -z "$1" ]] && { echo "[ERROR] Se debe proporcionar un nombre de archivo como argumento." && exit 1;}
