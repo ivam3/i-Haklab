@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.12.15",
+  "version": "3.12.16",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -168,6 +168,7 @@
         "home/.local/etc/i-Haklab/Tools/Readme/phoneintel.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/phoneintel.md",
         "home/.local/etc/i-Haklab/Tools/Readme/phonesploit.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/phonesploit.md",
         "home/.local/etc/i-Haklab/Tools/Readme/phpmyadmin.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/phpmyadmin.md",
+        "home/.local/etc/i-Haklab/Tools/Readme/playwright-proot.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/playwright-proot.md",
         "home/.local/etc/i-Haklab/Tools/Readme/pnpm.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/pnpm.md",
         "home/.local/etc/i-Haklab/Tools/Readme/postgresql.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/postgresql.md",
         "home/.local/etc/i-Haklab/Tools/Readme/privoxy.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/privoxy.md",

@@ -65,7 +65,10 @@ case "$1" in
 		git clone --quiet https://github.com/longld/peda.git $TOOLS/peda
 		[[ -e ${HOME}/.gdginit ]] || touch ${HOME}/.gdbinit
 		echo "source $TOOLS/peda/peda.py" > ${HOME}/.gdbinit
-		;; # --->  Nuevo comando 
+		;; 
+    gh)
+        gh skill install cli/cli gh --scope user
+        ;;
 
     @google/gemini-cli)
         indexFile="${PREFIX}/lib/node_modules/@google/gemini-cli/node_modules/clipboardy/index.js"
@@ -228,9 +231,14 @@ set softwrap
     #} || {
       r2pm -qUU
     #}
-    ;; # --->  Nuevo comando 
+    ;; 
 
-	tigervnc)
+  railway-cli)
+    railway skills 
+    railway login
+    ;;
+
+tigervnc)
 		[[ -d ${HOME}/.vnc ]] || {
 			mkdir ${HOME}/.vnc;
 		}

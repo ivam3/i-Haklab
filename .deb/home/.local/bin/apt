@@ -16,6 +16,8 @@ install_wrapper() {
     local pkg="$2"
     local type="$3"
 
+    [[ "$pkg" == "ctx7" ]] && { pkg="ctx7 setup";}
+
     echo -en "${R}E:${W} $pkg is a $type, you should try it with ${Y}'$method $pkg'${W}\n"
     echo "(_>) you want me to run it for you? "
     while true; do
@@ -23,9 +25,10 @@ install_wrapper() {
         case "$yesornot" in
             y|Y|yes|YES)
                 eval "$method $pkg"
-                [[ "$type" == "python module" ]] && pkg2conf "$pkg"
+                pkg2conf "$pkg"
                 break
                 ;;
+
             n|N|no|NO)
                 echo "Aborting ..."
                 break
@@ -41,16 +44,19 @@ install_wrapper() {
 if [[ "$1" == "install" || "$1" == "reinstall" || "$1" == "search" ]]; then
     for i in "${@:2}"; do
         case "$i" in
+            # PYTHON MODULES
             bloodhound|frida|h8mail|hashid|holehe|mvt|objection|octosuite|orbitaldump|osrframework|phoneintel|scrapy|shodan|snscrape|speedtest-cli|sqlmap|wfuzz)
                 install_wrapper "python3 -m pip install" "$i" "python module"
                 continue 
                 ;;
 
+            # RUBY GEMS
             bettercap|aquatone)
                 install_wrapper "gem install" "$i" "ruby gem"
                 continue
                 ;;
 
+            # NPM MODULES 
             bash-obfuscate|codex|copilot-cli|gemini-cli|localtunnel|minimax-cli|n8n|pnpm|open-lovable|qwen-code|twifo-cli)
                 [[ "$i" == "minimax-cli" ]] && { i="mmx-cli"; }
                 [[ "$i" == "gemini-cli" ]] && { i="@google/gemini-cli"; }
@@ -63,7 +69,14 @@ if [[ "$1" == "install" || "$1" == "reinstall" || "$1" == "search" ]]; then
                 install_wrapper "npm install -g" "$i" "nodejs module"
                 continue
                 ;;
+            # NPX MODULES 
+            context7)
+                [[ "$i" == "context7" ]] && { i="ctx7";}
+                install_wrapper "npx" "$i" "npx module"
+                continue
+                ;;
 
+            # OH MY FISH PLUG-IN
             omf)
                 if command -v fish >/dev/null; then
                     echo "Installing oh-my-fish over fish shell ..."
