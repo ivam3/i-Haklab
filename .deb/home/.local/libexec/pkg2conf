@@ -58,7 +58,7 @@ case "$1" in
             rm -f ${PREFIX}/etc/fish/config.fish 2>>$LOGFILE
         }
         ln -s ${HOME}/.local/etc/fish/config.fish ${PREFIX}/etc/fish/config.fish 2>>$LOGFILE
-        ;; # --->  Nuevo comando 
+        ;;
 
 	gdb)
         [[ -d $TOOLS/peda ]] && { rm -rf $TOOLS/peda;}

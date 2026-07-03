@@ -13,12 +13,17 @@ if [[ "$1" == "install" || "$1" == "update" ]]; then
     for i in "${@:2}"; do
         [[ "$i" == "gemini-cli" ]] && { i="@google/gemini-cli"; }
         [[ "$i" == "qwen-code" ]] && { i="@qwen-code/qwen-code"; }
+        [[ "$i" == "openspec" ]] && { i="@fission-ai/openspec"; }
         [[ "$i" == "copilot-cli" ]] || [[ "$i" == "github-copilot" ]] && { i="@github/copilot"; }
         [[ "$i" == "claude-code" ]] && { i="@anthropic-ai/claude-code"; }
         [[ "$i" == "codex" ]] && { i="@mmmbuto/codex-cli-termux@latest"; }
         [[ "$i" == "minimax-cli" ]] && { i="mmx-cli"; }
 
-        case "$i" in
+        case "$i" in 
+            @fission-ai/openspec)
+                echo "> Setting allow-scripts for @fission-ai/openspec"
+                npm config set allow-scripts=@fission-ai/openspec --location=user
+                ;;
             n8n)
                 # INSTALL DEPENDENCIES 
                 for p in nodejs-lts libsqlite sqlite; do
