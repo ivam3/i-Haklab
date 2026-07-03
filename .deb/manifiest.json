@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.12.16",
+  "version": "3.12.17",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -79,6 +79,7 @@
         "home/.local/etc/i-Haklab/Tools/Readme/cloudflared.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/cloudflared.md",
         "home/.local/etc/i-Haklab/Tools/Readme/codex.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/codex.md",
         "home/.local/etc/i-Haklab/Tools/Readme/code-server.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/code-server.md",
+        "home/.local/etc/i-Haklab/Tools/Readme/codebuff.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/codebuff.md",
         "home/.local/etc/i-Haklab/Tools/Readme/converter.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/converter.md",
         "home/.local/etc/i-Haklab/Tools/Readme/copilot-cli.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/copilot-cli.md",
         "home/.local/etc/i-Haklab/Tools/Readme/credmap.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/credmap.md",
@@ -103,6 +104,7 @@
         "home/.local/etc/i-Haklab/Tools/Readme/ffmpeg.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/ffmpeg.md",
         "home/.local/etc/i-Haklab/Tools/Readme/finalrecon.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/finalrecon.md",
         "home/.local/etc/i-Haklab/Tools/Readme/fish.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/fish.md",
+        "home/.local/etc/i-Haklab/Tools/Readme/freebuff.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/freebuff.md",
         "home/.local/etc/i-Haklab/Tools/Readme/frida.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/frida.md",
         "home/.local/etc/i-Haklab/Tools/Readme/fuzzdb.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/fuzzdb.md",
         "home/.local/etc/i-Haklab/Tools/Readme/fzf.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/fzf.md",
