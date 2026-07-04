@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.12.18",
+  "version": "3.12.19",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -146,7 +146,6 @@
         "home/.local/etc/i-Haklab/Tools/Readme/mimikatz.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/mimikatz.md",
         "home/.local/etc/i-Haklab/Tools/Readme/mimocode.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/mimocode.md",
         "home/.local/etc/i-Haklab/Tools/Readme/minimax-cli.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/minimax-cli.md",
-        "home/.local/etc/i-Haklab/Tools/Readme/mvt": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/mvt",
         "home/.local/etc/i-Haklab/Tools/Readme/mvt.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/mvt.md",
         "home/.local/etc/i-Haklab/Tools/Readme/n8n.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/n8n.md",
         "home/.local/etc/i-Haklab/Tools/Readme/nano.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/nano.md",
@@ -213,6 +212,7 @@
         "home/.local/etc/i-Haklab/Tools/Readme/tangalanga.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/tangalanga.md",
         "home/.local/etc/i-Haklab/Tools/Readme/termux-desktop-xfce.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/termux-desktop-xfce.md",
         "home/.local/etc/i-Haklab/Tools/Readme/termux-docker-qemu.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/termux-docker-qemu.md",
+        "home/.local/etc/i-Haklab/Tools/Readme/termux-oracle-skill.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/termux-oracle-skill.md",
         "home/.local/etc/i-Haklab/Tools/Readme/tigervnc.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/tigervnc.md",
         "home/.local/etc/i-Haklab/Tools/Readme/tmux.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/tmux.md",
         "home/.local/etc/i-Haklab/Tools/Readme/tor.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/tor.md",
