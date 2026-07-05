@@ -88,14 +88,11 @@ case "$1" in
 
     mariadb)
         user="root"
-        root="$user"
+        pass="$user"
         pkill mariadbd 2>/dev/null
         mariadbd-safe --skip-grant-tables &
         sleep 5 
-        mariadb -u $user -e "FLUSH PRIVILEGES;"
-        mariadb -u $user -e "ALTER USER '$user'@'localhost' IDENTIFIED BY '$user';"
-        mariadb -u $user -e "UPDATE mysql.user SET plugin='mysql_native_password' WHERE User='$user';"
-        mariadb -u $user -e "FLUSH PRIVILEGES;"
+        mariadb -u $user -e "FLUSH PRIVILEGES;ALTER USER '$user'@'localhost' IDENTIFIED BY '$user';UPDATE mysql.user SET plugin='mysql_native_password' WHERE User='$user';FLUSH PRIVILEGES;"
         pkill mariadbd 2>/dev/null
         mariadbd-safe &
         sleep 5
