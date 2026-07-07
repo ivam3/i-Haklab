@@ -16,13 +16,13 @@ prevpaee=$(cat ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella|openssl enc -aes-2
 if [[ -e $HOME/.local/etc/i-Haklab/.Ivam3byCinderella ]]; then
   echo "Keeping previous password ..."
   [[ $prevpass != "Ivam3byCinderella" ]] && {
-    cp ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella ${HOME}/.local/etc/i-Haklab/.IbyC
+    cp ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella ${TMPDIR}/.IbyC
   }
 fi
 
 if [[ -e ${HOME}/.local/libexec/i-Haklab.login ]]; then
   echo "Keeping previous settings ..."
-  cp ${HOME}/.local/libexec/i-Haklab.login ${HOME}/.local/libexec/i-Haklab.login.backup
+  cp ${HOME}/.local/libexec/i-Haklab.login ${TMPDIR}/i-Haklab.login.backup
 fi
 
 # TOOLS STORAGE DIRECTORY (INTERNAL - EXTERNAL)
@@ -140,13 +140,13 @@ done
 # RESTORE PREVIOUS PASSWORD IF DEFAULT WAS CHANGED
 if [[ -e ${HOME}/.local/etc/i-Haklab/.IbyC ]]; then 
     echo "Restoring previous password."
-	cat ${HOME}/.local/etc/i-Haklab/.IbyC > ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella
-	rm -f ${HOME}/.local/etc/i-Haklab/.IbyC
+	cat ${TMPDIR}/.IbyC > ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella
+	rm -f ${TMPDIR}/.IbyC
 fi
 if [[ -e ${HOME}/.local/libexec/i-Haklab.login.backup ]]; then 
     echo "Restoring previous settings"
-	cat ${HOME}/.local/libexec/i-Haklab.login.backup > ${HOME}/.local/libexec/i-Haklab.login
-	rm ${HOME}/.local/libexec/i-Haklab.login.backup
+	cat ${TMPDIR}/i-Haklab.login.backup > ${HOME}/.local/libexec/i-Haklab.login
+	rm ${TMPDIR}/i-Haklab.login.backup
 fi
 echo -en "[deleted]
     ╰──➤ Commands:
