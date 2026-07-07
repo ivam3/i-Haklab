@@ -44,9 +44,30 @@ opt.wrap = true
 -- LSP                    
 vim.opt.signcolumn = 'yes'      --   Reserva un espacio en la cuneta    
 
+-- Performance
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 300
+
+-- Scroll context
+vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
+
+-- Popup menu height
+vim.opt.pumheight = 10
+
+-- Files
+vim.opt.undofile = true
+vim.opt.swapfile = false
+vim.opt.backup = false
+
+-- Confirm instead of error
+vim.opt.confirm = true
+
 -- Fold settings for nvim-ufo
 vim.o.foldcolumn = '1'
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 

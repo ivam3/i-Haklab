@@ -51,7 +51,6 @@ f:close()
 -- ## activa de Gemini de arriba y descomenta la que desees usar  ##
 -- ##                                                             ##
 -- #################################################################
---[[
 require("codecompanion").setup({
   adapters = {
     http = { -- <--- Creado para solucionar el warning de obsoleto
@@ -73,7 +72,6 @@ require("codecompanion").setup({
     agent = { adapter = "gemini" },
   },
 })
---]]
 
 -- #################################################################
 -- ##                                                             ##
@@ -203,6 +201,7 @@ require("codecompanion").setup({
 -- --      CONFIGURACIÓN ALTERNATIVA: Mistral AI
 -- -----------------------------------------------------------------
 -- Descomenta las siguientes líneas para usar OpenAI.
+--[[
 require("codecompanion").setup({
   adapters = {
     http = {
@@ -221,3 +220,4 @@ require("codecompanion").setup({
     agent = { adapter = "mistral" },
   },
 })
+--]]

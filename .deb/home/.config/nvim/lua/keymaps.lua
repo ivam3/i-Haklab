@@ -124,3 +124,4 @@ map('n', '<leader>tt', '<cmd>TransparentToggle<cr>')
 ------------------------------------------------------
 map('n', 'zR', function() require('ufo').openAllFolds() end, { desc = "Open all folds" })
 map('n', 'zM', function() require('ufo').closeAllFolds() end, { desc = "Close all folds" })
+map('n', 'zp', function() require('ufo').peekFoldedLinesUnderCursor() end, { desc = "Peek folded lines" })
