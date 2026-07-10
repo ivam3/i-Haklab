@@ -8,7 +8,8 @@ pkg2conf() {
         "@anthropic-ai/claude-code" 
         "@github/copilot"
         "n8n" "localtunnel"
-        "open-lovable")
+        "open-lovable"
+        "@smithery/cli")
     if [[ " ${pkg2conf[@]} " =~ " ${pkgName} " ]]; then
         bash "$HOME/.local/libexec/pkg2conf" "$pkgName"
     fi
@@ -36,6 +37,7 @@ if [[ "$1" == "install" || "$1" == "update" ]]; then
         [[ "$i" == "claude-code" ]] && { i="@anthropic-ai/claude-code"; }
         [[ "$i" == "codex" ]] && { i="@mmmbuto/codex-cli-termux@latest"; }
         [[ "$i" == "minimax-cli" ]] && { i="mmx-cli"; }
+        [[ "$i" == "smithery" ]] && { i="@smithery/cli"; }
 
         case "$i" in
             @fission-ai/openspec)

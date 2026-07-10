@@ -80,6 +80,19 @@ case "$1" in
         python3 -m pip --no-color --quiet --no-cache-dir install mistral-vibe 2>>$LOGFILE
         ;;
 
+    @smithery/cli)
+        indexFile="${PREFIX}/lib/node_modules/@smithery/cli/dist/index.js"
+        # Fix: force platform "linux" on Android to avoid destructure error
+        sed -i 's/Ohe=process.platform,{baseDir:/Ohe=process.platform==="android"?"linux":process.platform,{baseDir:/' "$indexFile"
+        # Fix shebang for Termux
+        termux-fix-shebang "$indexFile"
+        echo "[💡] Authenticate to your Smithery account (flet-mcp-server)"
+        echo " ╰─➤ smithery auth login"
+        echo "[💡] Set it at your AI-agent running"
+        echo " ╰─➤ smithery mcp add https://server.smithery.ai/nwokikeonyeka/flet-mcp-server --client agentAI'"
+        echo "[📢] substitute 'agentAI' with your agent name"
+        ;;
+
     localtunnel)
         mkdir -p ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl
         curl -fsSL ${iHDB}/.local/etc/localtunnel/openurl.js -o \
@@ -235,7 +248,7 @@ set softwrap
     railway login
     ;;
 
-tigervnc)
+  tigervnc)
 		[[ -d ${HOME}/.vnc ]] || {
 			mkdir ${HOME}/.vnc;
 		}
