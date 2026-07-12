@@ -98,8 +98,6 @@ lazy.setup({
      })
    end,
    },
-   -- {'williamboman/nvim-lsp-installer'},
-
    -- Gir ---> Pendiente a cambiar 
    {'dinhhuy258/git.nvim'},
    -- Efecto "smear" para el cursor
@@ -125,32 +123,22 @@ lazy.setup({
         'nvim-telescope/telescope.nvim',
     },
   },
-----------------------------------------------------
-{
-  'VonHeikemen/lsp-zero.nvim',
-  branch = 'v1.x',
-  dependencies = {
-    -- LSP Support
-    {'neovim/nvim-lspconfig'},             -- Required
-    -- Autocompletion
-    {'hrsh7th/nvim-cmp'},         --
-    {'hrsh7th/cmp-nvim-lsp'},   
-    {'hrsh7th/cmp-buffer'},       
-    {'hrsh7th/cmp-path'},         
-    {'saadparwaiz1/cmp_luasnip'}, 
-    {'hrsh7th/cmp-nvim-lua'},
-    {'jiangmiao/auto-pairs'},
-
-    -- Snippets
-    {'L3MON4D3/LuaSnip'},             
-    {'rafamadriz/friendly-snippets'},
-    -- transparent background
-    {'xiyaowong/transparent.nvim'},
-    {'nvim-treesitter/nvim-treesitter'},
-  }
-}
-----------------------------------------------------
+  {'neovim/nvim-lspconfig', tag = "v1.8.0"},
+  {'hrsh7th/nvim-cmp'},
+  {'hrsh7th/cmp-nvim-lsp'},
+  {'hrsh7th/cmp-buffer'},
+  {'hrsh7th/cmp-path'},
+  {'saadparwaiz1/cmp_luasnip'},
+  {'hrsh7th/cmp-nvim-lua'},
+  {'jiangmiao/auto-pairs'},
+  {'L3MON4D3/LuaSnip'},
+  {'rafamadriz/friendly-snippets'},
+  {'xiyaowong/transparent.nvim'},
+  {'nvim-treesitter/nvim-treesitter'},
+  {'williamboman/mason.nvim'},
+  {'williamboman/mason-lspconfig.nvim'},
 })
+
 ----------------------------------
 --        ==Arcivo de  configuracion===
 ------------------------------------
