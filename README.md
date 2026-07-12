@@ -58,7 +58,7 @@ Join to [deepwiki](https://deepwiki.com/ivam3/i-Haklab) and learn more about thi
 ### 📦 INSTALLATION.
 - OPTION 1 (RECOMMEND): ADDING AT APT SOURCES LIST
 ```bash
-curl -fsSL https://pastebin.com/raw/3YDapWsA | bash
+curl -fsSL "https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/install.sh" | bash
 ```
 
 - OPTION 2: CLONING THIS REPOSITORY: 

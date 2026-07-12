@@ -20,7 +20,9 @@ Esta configuración utiliza `lazy.nvim` como gestor de plugins.
 | :--- | :--- | :--- |
 | **Code Companion** | `olimorris/codecompanion.nvim` | **Asistente de IA principal.** |
 | **nvim-ufo** | `kevinhwang91/nvim-ufo` | **Plegado de código avanzado.** |
-| **LSP Zero** | `VonHeikemen/lsp-zero.nvim` | **IDE (LSP, Autocompletado, Snippets).** |
+| **nvim-cmp** | `hrsh7th/nvim-cmp` | **Autocompletado (LSP + snippets).** |
+| **Mason** | `williamboman/mason.nvim` | **Instalador de servidores LSP (solo referencia).** |
+| **Mason LSPConfig** | `williamboman/mason-lspconfig.nvim` | **Puente Mason (solo referencia).** |
 | **Telescope** | `nvim-telescope/telescope.nvim` | **Buscador interactivo universal.** |
 | **Nvim Tree** | `nvim-tree/nvim-tree.lua` | **Explorador de archivos lateral.** |
 | **zk-nvim** | `mickael-menu/zk-nvim` | Toma de notas Zettelkasten. |
@@ -140,7 +142,17 @@ de Vim (`:h fold`) funcionan normalmente.
 
 ### LSP (Lenguajes y Diagnósticos)
 
-Configurado en `lua/plugins/lsp-zero.lua`. Funcionan en buffers con servidor de lenguaje activo (Python, Lua, Bash, C/C++, etc.).
+Configurado en `lua/plugins/lsp-zero.lua` con **API nativa `vim.lsp.start`**.
+
+**Arquitectura actual:**
+- `nvim-lspconfig` (pineado a v1.8.0) — sólo como dependencia de Mason, **no se usa para configuración**
+- `mason.nvim` + `mason-lspconfig.nvim` — instalación de servidores (solo `lua_ls` via Mason)
+- **Configuración nativa**: `vim.lsp.start()` con autocomandos `FileType` (sin lsp-zero ni lspconfig)
+
+**Servidores pre-configurados:** `bashls` (Shell), `clangd` (C/C++), `lua_ls` (Lua), `pyright` (Python)
+**Instalación manual:** `npm install -g <lsp-server>` (Mason no recomendado en Termux)
+
+Funcionan en buffers con servidor de lenguaje activo (Python, Lua, Bash, C/C++, etc.).
 
 | Atajo | Modo | Acción |
 | :--- | :--- | :--- |
@@ -419,6 +431,78 @@ Los objetos funcionan con cualquier operador: `y` (copiar), `c` (cambiar), `d` (
 - **`lua/settings.lua`**: Opciones del sistema.
 - **`lua/keymaps.lua`**: Definición de atajos.
 - **`lua/plugins/`**: Configuraciones de plugins específicos.
+
+### Detalle de la configuración LSP
+
+**`init.lua`** (plugins LSP):
+```lua
+{'neovim/nvim-lspconfig', tag = "v1.8.0"},    -- solo compatibilidad con Mason
+{'hrsh7th/nvim-cmp'},
+{'hrsh7th/cmp-nvim-lsp'},
+{'hrsh7th/cmp-buffer'},
+{'hrsh7th/cmp-path'},
+{'saadparwaiz1/cmp_luasnip'},
+{'L3MON4D3/LuaSnip'},
+{'rafamadriz/friendly-snippets'},
+{'williamboman/mason.nvim'},
+{'williamboman/mason-lspconfig.nvim'},
+```
+
+**`lua/plugins/lsp-zero.lua`**:
+```lua
+local lsp_servers = {
+  bashls = {
+    cmd = { 'bash-language-server', 'start' },
+    filetypes = { 'bash', 'sh' },
+  },
+  clangd = {
+    cmd = { 'clangd' },
+    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
+  },
+  pyright = {
+    cmd = { 'pyright-langserver', '--stdio' },
+    filetypes = { 'python' },
+  },
+  lua_ls = {
+    cmd = { '/data/data/com.termux/files/usr/bin/lua-language-server' },
+    filetypes = { 'lua' },
+    settings = {
+      Lua = {
+        runtime = { version = 'LuaJIT' },
+        diagnostics = { globals = { 'vim' } },
+        workspace = { library = { vim.env.VIMRUNTIME } },
+      },
+    },
+  },
+}
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = vim.tbl_deep_extend('force', capabilities,
+  require('cmp_nvim_lsp').default_capabilities())
+
+for name, config in pairs(lsp_servers) do
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = config.filetypes,
+    callback = function(args)
+      local clients = vim.lsp.get_clients({ name = name, bufnr = args.buf })
+      if #clients == 0 then
+        vim.lsp.start({
+          name = name,
+          cmd = config.cmd,
+          capabilities = capabilities,
+          settings = config.settings,
+        })
+      end
+    end,
+  })
+end
+```
+
+**Nota sobre Termux/Android:**
+- `nvim-lspconfig` pineado a v1.8.0 sólo como dependencia de Mason. No se usa para configurar servidores.
+- Servidores npm requieren `termux-fix-shebang` para reparar shebangs rotos.
+- `lua-language-server` se instala con `pkg install` (el de Mason es glibc incompatible).
+- `clangd` se instala con `pkg install clangd` (binario nativo).
 
 ## 8. Terminal
 
