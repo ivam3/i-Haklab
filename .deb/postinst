@@ -5,7 +5,7 @@ source ${HOME}/.local/etc/i-Haklab/variables
 source $iHETC/functions
 fontsV="v2.3.3"
 z=$(sleep 0.5)
-prevpaee=$(cat ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella|openssl enc -aes-256-cbc -md sha512 -a -d -pbkdf2 -iter 100000 -salt -pass pass:Secret@123#) 
+prevpass=$(cat ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella 2>/dev/null | openssl enc -aes-256-cbc -md sha512 -a -d -pbkdf2 -iter 100000 -salt -pass pass:Secret@123# 2>/dev/null) 
 
 # PREINST
 [[ -e ${PREFIX}/etc/bashito ]] && { rm -rf ${PREFIX}/etc/bashito;}
@@ -25,15 +25,20 @@ if [[ -e ${HOME}/.local/libexec/i-Haklab.login ]]; then
   cp ${HOME}/.local/libexec/i-Haklab.login ${TMPDIR}/i-Haklab.login.backup
 fi
 
+# BACKUPING PREVIOUS API KEYS
+if [[ -e ${HOME}/.local/etc/i-Haklab/variables ]]; then
+  echo "Keeping previous API keys ..."
+  grep '^export APIKEY_' "${HOME}/.local/etc/i-Haklab/variables" > "${TMPDIR}/.ihabak-apikeys"
+fi
+
 # TOOLS STORAGE DIRECTORY (INTERNAL - EXTERNAL)
 echo "Getting access to external storage.";$z
 mkdir -p ${HOME}/go/bin
 s2=$(df|grep "fuse"|grep -iv emulated|awk -F " " '{print $6}')
 [[ -n $s2 ]] && [[ -w $s2 ]] && {
 	[[ -d $s2/Android/data/com.termux/files/tools ]] && [[ -s $s2/Android/data/com.termux/files/tools ]] && {
-		for tool in $(ls $s2/Android/data/com.termux/files/tools/)
-		do
-			mv $s2/Android/data/com.termux/files/tools/$tool ${HOME}/.local/share/;
+		for tool in "$s2/Android/data/com.termux/files/tools/"*; do
+			[[ -e "$tool" ]] && mv "$tool" ${HOME}/.local/share/
 		done
 	}
 }
@@ -52,8 +57,8 @@ npm install -g pnpm localtunnel 2>>$LOGFILE
 }
 
 echo "Setting website '4share'."
-curl -fsSL $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20functional%20tests.bat -o ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run functional tests.bat'
-curl -fsSL $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20unit%20tests.bat -o ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run unit tests.bat'
+curl --create-dirs -fsSL $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20functional%20tests.bat -o ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run functional tests.bat'
+curl --create-dirs -fsSL $iHDB/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/run%20unit%20tests.bat -o ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests/'run unit tests.bat'
 chmod 777 -R ${HOME}/.local/var/service/www/veno-file-manager/vfm/vfm-admin/assets/zipstream/phpzip/phpzip/tests
 
 # SET OMF SHELL
@@ -111,7 +116,7 @@ if chk-root;then
 		[[ -d ${HOME}/.suroot ]] || mkdir ${HOME}/.suroot
   fi
   cat <<- CONF > ${HOME}/.suroot/.bashrc
-PS1=\"\[\e[33m\][!] \[\e[31m\]Press\[\e[32m\] Ctrl d\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]\""
+PS1="\[\e[33m\][!] \[\e[31m\]Press\[\e[32m\] Ctrl d\[\e[31m\] to log out\[\e[32m\] ➤ \[\e[m\]"
 export TERM=xterm-256color
 export LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib
 export PATH=$HOME/go/bin:/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:/system/xbin:/system/bin
@@ -128,29 +133,55 @@ echo "Updating mlocate data base ..."
 updatedb
 
 # UPDATE NUN I-HAKLAB PACKAGES 
-for i in $(grep ")" ${HOME}/.local/libexec/pkg2conf|grep -iv "("|tr "|" "\n"|tr -d ")"|sed "s|\t||"|tr -d " "); do
-  [[ $i == "neovim" ]] && { i="nvim";}
-  [[ $i == "tigervnc" ]] && { i="Xvnc";}
-  [[ $i == "clamav" ]] && { i="clamdscan";}
-  [[ $i == "proxychains-ng" ]] && { i="proxychains4";}
-  [[ $i == "apache2" ]] && { i="apachectl";}
-  ! command -v $i >/dev/null || { bash ${HOME}/.local/libexec/pkg2conf $i;}
-done
+# for i in $(grep ")" ${HOME}/.local/libexec/pkg2conf|grep -iv "("|tr "|" "\n"|tr -d ")"|sed "s|\t||"|tr -d " "); do
+#   [[ $i == "neovim" ]] && { i="nvim";}
+#   [[ $i == "tigervnc" ]] && { i="Xvnc";}
+#   [[ $i == "clamav" ]] && { i="clamdscan";}
+#   [[ $i == "proxychains-ng" ]] && { i="proxychains4";}
+#   [[ $i == "apache2" ]] && { i="apachectl";}
+#   ! command -v $i >/dev/null || { bash ${HOME}/.local/libexec/pkg2conf $i;}
+# done
 
 # RESTORE PREVIOUS PASSWORD IF DEFAULT WAS CHANGED
-if [[ -e ${HOME}/.local/etc/i-Haklab/.IbyC ]]; then 
+if [[ -e ${TMPDIR}/.IbyC ]]; then 
     echo "Restoring previous password."
 	cat ${TMPDIR}/.IbyC > ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella
 	rm -f ${TMPDIR}/.IbyC
 fi
-if [[ -e ${HOME}/.local/libexec/i-Haklab.login.backup ]]; then 
+
+# RESTORE PREVIOUS LOGIN SETTING IF DEFAULT WAS CHANGED
+if [[ -e ${TMPDIR}/i-Haklab.login.backup ]]; then 
     echo "Restoring previous settings"
 	cat ${TMPDIR}/i-Haklab.login.backup > ${HOME}/.local/libexec/i-Haklab.login
 	rm ${TMPDIR}/i-Haklab.login.backup
 fi
+
+# RESTORE PREVIOUS API KEYS
+if [[ -s ${TMPDIR}/.ihabak-apikeys ]]; then
+  echo "Restoring previous API keys ..."
+  awk '
+    NR==FNR {
+      eq = index($0, "=")
+      varname = substr($0, 8, eq - 8)
+      keys[varname] = $0
+      next
+    }
+    /^export APIKEY_/ {
+      eq = index($0, "=")
+      varname = substr($0, 8, eq - 8)
+      if (varname in keys) {
+        print keys[varname]
+        next
+      }
+    }
+    { print }
+  ' "${TMPDIR}/.ihabak-apikeys" "$HOME/.local/etc/i-Haklab/variables" > "${TMPDIR}/.ihabak-vars-new" && \
+  mv "${TMPDIR}/.ihabak-vars-new" "$HOME/.local/etc/i-Haklab/variables"
+  rm -f "${TMPDIR}/.ihabak-apikeys"
+fi
+
 echo -en "[deleted]
     ╰──➤ Commands:
-    |\t\t• i-Haklab show QG (obsolete)
     |\t\t• i-Haklab chatGPT (changed at 'chatAI')
 [updates]
     ╰──➤ Commands recently added:
@@ -159,10 +190,38 @@ echo -en "[deleted]
     |\t\t• phantom-ps
     |\t\t• i-Haklab chatAI (before 'chatGPT')
     ╰──➤ New features:
-\t\t• shell: now i-Haklab works over shells fish, zsh & bash \n\t\t\t   run 'i-Haklab setshell' to set it
-\t\t• chatAI: LLM availables: chatGPT, Gemini & Claude | Mannage 2+ chats \n\t\t\t   create image | remember conversation
-\t\t• Into neovim: type 'alter', 'comma', 'ca' | (alt + , + n) to use AI \n\t\t\t   IAs: Github Copilot, OpenAI, Claude & DeepSeek.
-\t\t• n8n|minimax-cli|copilot-cli|qwe-code|codex|mistralAI|open-lovable: installation and configuration automated \n\t\t\t   run 'npm install -g <provider_name>'"
+    |\t\t• shell: now i-Haklab works over shells fish, zsh & bash \n\t\t\t   run 'i-Haklab setshell' to set it
+    |\t\t• chatAI: LLM availables: chatGPT, Gemini & Claude | Mannage 2+ chats \n\t\t\t   create image | remember conversation
+    |\t\t• Into neovim: type 'alter', 'comma', 'ca' | (alt + , + n) to use AI
+[Artificial Intellient]
+    ╰──➤ Agents:
+    |\t\t• N8N
+    |\t\t• Opencode
+    |\t\t• Mimocode
+    |\t\t• Openclaw
+    |\t\t• Codebuff
+    |\t\t• Freebuff
+    |\t\t• Codex-cli
+    |\t\t• Qwen-code
+    |\t\t• Claude-code
+    |\t\t• Minimax-cli 
+    |\t\t• Hermes-agent
+    |\t\t• Mistral-vibe
+    |\t\t• Open-lovable
+    |\t\t• Github Copilot
+    |\t\t• Antigravity-cli
+    ╰──➤ MCPs:
+    |\t\t• Testsprite
+    |\t\t• Context7
+    |\t\t• Engram
+    |\t\t• Smithery
+    ╰──➤ Skills:
+    |\t\t• Termux-oracle-skill
+    |\t\t• GH (github-cli)
+    |\t\t• Context7
+    |\t\t• Playwrigth-cli
+    |\t\t• Termux-api
+    |\t\t• Use-railway"
 echo "[*] i-Haklab installation finished."
 echo "[*] run 'i-Haklab help' for a guide."
 echo "[-] Run 'fixer' to fix any posible issue."
@@ -171,5 +230,4 @@ echo "[-] Run 'fixer' to fix any posible issue."
 # ==============================
 echo "[📢] Help: going to https://t.me/Ivam3_Bot."
 echo "[💡] @Ivam3: thank you for use my package."
-####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####
 ####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####

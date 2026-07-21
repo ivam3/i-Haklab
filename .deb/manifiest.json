@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.12.21",
+  "version": "3.12.22",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -80,6 +80,7 @@
         "home/.local/etc/i-Haklab/Tools/Readme/codex.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/codex.md",
         "home/.local/etc/i-Haklab/Tools/Readme/code-server.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/code-server.md",
         "home/.local/etc/i-Haklab/Tools/Readme/codebuff.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/codebuff.md",
+        "home/.local/etc/i-Haklab/Tools/Readme/context7.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/context7.md",
         "home/.local/etc/i-Haklab/Tools/Readme/converter.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/converter.md",
         "home/.local/etc/i-Haklab/Tools/Readme/copilot-cli.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/copilot-cli.md",
         "home/.local/etc/i-Haklab/Tools/Readme/credmap.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/credmap.md",
@@ -157,6 +158,7 @@
         "home/.local/etc/i-Haklab/Tools/Readme/nmap.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/nmap.md",
         "home/.local/etc/i-Haklab/Tools/Readme/objection.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/objection.md",
         "home/.local/etc/i-Haklab/Tools/Readme/octosuite.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/octosuite.md",
+        "home/.local/etc/i-Haklab/Tools/Readme/omniroute.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/omniroute.md",
         "home/.local/etc/i-Haklab/Tools/Readme/open-lovable.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/open-lovable.md",
         "home/.local/etc/i-Haklab/Tools/Readme/openclaw.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/openclaw.md.md",
         "home/.local/etc/i-Haklab/Tools/Readme/opencode.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/opencode.md",
