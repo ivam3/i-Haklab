@@ -50,7 +50,7 @@ done
 
 echo "Installing required nodejs modules (It could take a while) ...";$z
 corepack enable
-npm install -g pnpm localtunnel 2>>$LOGFILE
+npm install -g pnpm localtunnel bash-language-server 2>>$LOGFILE
 
 [[ -d ${HOME}/.local/share/wordlist ]] || { 
     mkdir -p ${HOME}/.local/share/wordlist
@@ -127,20 +127,10 @@ CONF
 fi
 
 echo "Getting permissions ..."
-chmod u+x -R ${HOME}/.local/* ${HOME}/.config/fish/functions/* ${PREFIX}/bin/* 
+chmod u+x -R ${HOME}/.local/* ${HOME}/.config/fish/functions/* ${PREFIX}/bin/* 2>>$LOGFILE
 
 echo "Updating mlocate data base ..."
 updatedb
-
-# UPDATE NUN I-HAKLAB PACKAGES 
-# for i in $(grep ")" ${HOME}/.local/libexec/pkg2conf|grep -iv "("|tr "|" "\n"|tr -d ")"|sed "s|\t||"|tr -d " "); do
-#   [[ $i == "neovim" ]] && { i="nvim";}
-#   [[ $i == "tigervnc" ]] && { i="Xvnc";}
-#   [[ $i == "clamav" ]] && { i="clamdscan";}
-#   [[ $i == "proxychains-ng" ]] && { i="proxychains4";}
-#   [[ $i == "apache2" ]] && { i="apachectl";}
-#   ! command -v $i >/dev/null || { bash ${HOME}/.local/libexec/pkg2conf $i;}
-# done
 
 # RESTORE PREVIOUS PASSWORD IF DEFAULT WAS CHANGED
 if [[ -e ${TMPDIR}/.IbyC ]]; then 
