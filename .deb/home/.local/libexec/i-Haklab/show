@@ -96,11 +96,73 @@ then
 # 	done
 elif [[ $1 = alltools ]]
 then
-	chk-pkg column util-linux
-    curl -sSL "$iHDB/.local/etc/i-Haklab/Tools/listoftools" -o $iHETC/Tools/listoftools
-	echo -en $Y$underline"TIP: You can install all of them with:$W apt install <tool>\n\n"
-	column $iHETC/Tools/listoftools
-	echo -en "$G\nTOTAL:$W $(wc $iHETC/Tools/listoftools|awk '{print $1}')"
+    chk-pkg column util-linux
+    curl -sSL --fail "$iHDB/.local/etc/i-Haklab/Tools/listoftools" \
+        -o $iHETC/Tools/listoftools 2>>"$LOGFILE" || \
+        [[ -f "$iHETC/Tools/listoftools" ]] || touch "$iHETC/Tools/listoftools"
+    curl -sSL --fail "$iHDB/.local/etc/i-Haklab/Tools/categories" \
+        -o $iHETC/Tools/categories 2>>"$LOGFILE" || \
+        [[ -f "$iHETC/Tools/categories" ]] || touch "$iHETC/Tools/categories"
+    echo -en $Y$underline"TIP: You can install all of them with:$W apt install <tool>\n\n"
+    cols=$(tput cols)
+    awk -F: -v OFS='\t' -v catfile="$iHETC/Tools/categories" -v cols="$cols" '
+    BEGIN {
+        while ((getline < catfile) > 0) {
+            map[$1] = $2
+        }
+        if (cols < 20) cols = 20
+    }
+    {
+        c = map[$1] ? map[$1] : "Uncategorized"
+        tools[c] = tools[c] ? tools[c] OFS $1 : $1
+        if (!seen[c]++) { order[++n] = c }
+    }
+    END {
+        for (i=1; i<=n; i++) {
+            c = order[i]
+            num = split(tools[c], tlist, "\t")
+
+            ml = 0
+            for (j=1; j<=num; j++) if (length(tlist[j]) > ml) ml = length(tlist[j])
+
+            inner = cols - 2
+            cw = ml + 2
+            nc = int(inner / cw)
+            if (nc < 1) nc = 1
+            if (nc > num) nc = num
+            if (cw > inner) cw = inner
+
+            rem = inner - nc * cw
+            base = int(rem / nc)
+            extra = rem % nc
+            for (j=1; j<=nc; j++) colw[j] = cw + base + (j <= extra ? 1 : 0)
+
+            printf "\033[34m╔═══ \033[31m%s\033[34m ", c
+            for (j=1; j<=cols-7-length(c); j++) printf "═"
+            printf "╗\033[0m\n"
+
+            nr = int((num + nc - 1) / nc)
+            if (nr < 1) nr = 1
+
+            for (r=1; r<=nr; r++) {
+                printf "\033[34m║\033[0m"
+                for (col=1; col<=nc; col++) {
+                    idx = (col-1)*nr + r
+                    if (idx <= num) {
+                        printf " %-*s", colw[col]-1, tlist[idx]
+                    } else {
+                        printf " %-*s", colw[col]-1, ""
+                    }
+                }
+                printf " \033[34m║\033[0m\n"
+            }
+
+            printf "\033[34m╚"
+            for (j=1; j<=cols-2; j++) printf "═"
+            printf "╝\033[0m\n"
+        }
+        printf "\n\033[32mTOTAL:\033[0m %d\n", NR
+    }' $iHETC/Tools/listoftools
 elif [[ $1 = instatools ]]
 then
 	chk-pkg column util-linux

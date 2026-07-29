@@ -1,0 +1,181 @@
+acccheck:Brute Force
+adbfastboot:Android
+adminpanel:Web Application
+aircrack-ng:Wireless
+amass:OSINT
+androbugs:Android
+androidsdk-cli:Android
+antigravity-cli:Agent AI
+apksigner:Android
+apktool:Android
+appshark:Android
+aquatone:Web Application
+axmlprinter2:Android
+bash-obfuscate:Utilities
+beef:Exploitation
+bettercap:Network Scanning
+bitb-framework:Exploitation
+binwalk:Forensics
+bloodhound:Windows/AD
+blackbox:Phishing
+botgram:Phishing
+burpsuite:Web Application
+cewl:Password
+clamav:Forensics
+claude-code:Agent AI
+cloudbunny:Cloud
+cloudflared:Tunneling
+code-server:Utilities
+codebuff:Agent AI
+codex:Agent AI
+converter:Utilities
+context7:Agent AI
+copilot-cli:Agent AI
+credmap:Brute Force
+crunch:Password
+cryptovenom:Exploitation
+d-tect:Web Application
+dex2jar:Android
+dirb:Web Application
+dns2tcp:Tunneling
+dnsenum:Network Scanning
+dos-a-tool:Exploitation
+embed:Exploitation
+engram:Agent AI
+enum4linux:Network Scanning
+enum4linux-ng:Network Scanning
+evilginx2:Phishing
+evilurl:Phishing
+exif:Forensics
+exploitdb:Exploitation
+fake-sms:Phishing
+fbi:Forensics
+finalrecon:OSINT
+freebuff:Agent AI
+frida:Android
+fuzzdb:Web Application
+gdb:Forensics
+getadusers:Windows/AD
+getnpusers:Windows/AD
+getuserspns:Windows/AD
+geo-recon:OSINT
+gh:Utilities
+ghidra:Forensics
+ghost:Phishing
+ghunt:OSINT
+git-filter-repo:Utilities
+glab-cli:Utilities
+gobuster:Web Application
+gophish:Phishing
+h8mail:OSINT
+hakku-framework:Web Application
+hashcat:Cracking
+hasher:Cracking
+hashid:Cracking
+hatcloud:Cloud
+hcdecryptor:Cracking
+hexer:Forensics
+hermes-agent:Agent AI
+holehe:OSINT
+hunner-framework:Web Application
+hydra-gtk:Brute Force
+infoga:OSINT
+ipgeolocation:OSINT
+johntheripper:Cracking
+jython-lts:Utilities
+kerbrute:Windows/AD
+kimi-code:Agent AI
+localtunnel:Tunneling
+lockphish:Phishing
+maltego:OSINT
+mariadb:Utilities
+markdown-viewer:Utilities
+metasploit-framework:Exploitation
+mimikatz:Windows/AD
+mimocode:Agent AI
+minimax-cli:Agent AI
+mistral-vibe:Agent AI
+mvt:Forensics
+nexphisher:Phishing
+ngrok:Tunneling
+nikto:Web Application
+nmap:Network Scanning
+n8n:Utilities
+objection:Android
+octosuite:OSINT
+omniroute:Utilities
+open-lovable:Utilities
+openclaw:Agent AI
+opencode:Agent AI
+openjdk-21:Utilities
+openspec:Utilities
+orbitaldump:OSINT
+osintgram:OSINT
+osrframework:OSINT
+ovh-ttyrec:Tunneling
+penelope:Exploitation
+phomber:OSINT
+phoneintel:OSINT
+phonesploit:Android
+playwright-proot:Utilities
+pnpm:Utilities
+postgresql:Utilities
+proroot:Utilities
+putty:Tunneling
+pybelt:Exploitation
+quack:Exploitation
+qwen-code:Agent AI
+radare2:Forensics
+railway-cli:Cloud
+ransomux:Exploitation
+recon-ng:OSINT
+recondog:OSINT
+rhash:Cracking
+redhawk:Web Application
+routersploit:Web Application
+saycheese:Phishing
+sayhello:Phishing
+scrapy:Utilities
+scrcpy:Android
+seclists:Password
+seeker:Phishing
+shc:Forensics
+shellsploit-framework:Exploitation
+sherlock:OSINT
+shodan:OSINT
+slowhttptest:Exploitation
+snscrape:OSINT
+steghide:Forensics
+stegsnow:Forensics
+storm-breaker:Phishing
+speedtest-go:Utilities
+sqlite:Utilities
+sqliv:Web Application
+sqlmap:Web Application
+sublist3r:OSINT
+tangalanga:Exploitation
+termux-desktop-xfce:Utilities
+termux-docker-qemu:Utilities
+termux-oracle-skill:Utilities
+tmux:Utilities
+translate-shell:Utilities
+trape:OSINT
+twifo-cli:OSINT
+udocker:Utilities
+unshc:Forensics
+virustotal-cli:OSINT
+vulnx:Web Application
+wbruter:Brute Force
+webscan:Web Application
+webhackshl:Web Application
+websploit:Web Application
+wfuzz:Web Application
+whatweb:Web Application
+wpscan:Web Application
+xapt-management:Utilities
+xerosploit:Exploitation
+xleak:OSINT
+xml2axml:Android
+ytfzf:Utilities
+youtubedr:Utilities
+zaproxy:Web Application
