@@ -3,7 +3,7 @@
 source '/data/data/com.termux/files/home/.local/etc/i-Haklab/envvariables'
 OP1=${2:-crunch}
 
-export version='v3.12'
+export version='v3.13'
 export iHETC='/data/data/com.termux/files/home/.local/etc/i-Haklab'
 export iHLIBEXEC='/data/data/com.termux/files/home/.local/libexec/i-Haklab'
 export iHDB='https://raw.githubusercontent.com/ivam3/i-Haklab/master/.deb/home'

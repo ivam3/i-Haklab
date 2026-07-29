@@ -2,15 +2,19 @@
 # This file contain all i-Haklab functions
 
 LOGFILE='/data/data/com.termux/files/usr/var/log/i-Haklab.log'
+iHDB='https://raw.githubusercontent.com/ivam3/i-Haklab/master/.deb/home'
 
 banner() {
-  banner="/data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab"
-	[[ ! -e $banner ]] && {
-		wget --tries=20 --quiet \
-			https://raw.githubusercontent.com/ivam3/i-Haklab/master/.deb/home/.local/etc/i-Haklab/banner/i-Haklab \
-				-O $banner;
+  banner="/data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab_legacy"
+  banner_dir="/data/data/com.termux/files/home/.local/etc/i-Haklab/banner"
+	[[ ! -e $banner/i-Haklab ]] && {
+		curl -fsSL "$iHDB/.local/etc/i-Haklab/banner/i-Haklab" -o $banner_dir/i-Haklab;
 	}
-  [[ $1 ]] && banner=/data/data/com.termux/files/home/.local/etc/i-Haklab/banner/custom
+	[[ ! -e $banner/i-Haklab_legacy ]] && {
+		curl -fsSL "$iHDB/.local/etc/i-Haklab/banner/i-Haklab_legacy" -o $banner_dir/i-Haklab_legacy;
+	}
+  [[ $1 = "latest" ]] && banner="/data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab"
+  [[ $1 = "custom" ]] && banner="/data/data/com.termux/files/home/.local/etc/i-Haklab/banner/custom"
 	bash $banner;
 	sleep 0.5;
 }
@@ -18,8 +22,7 @@ export -f banner
 
 k-boom() { 
 	[[ ! -e /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/k-boom ]] && {
-		wget --tries=20 --quiet \
-		https://raw.githubusercontent.com/ivam3/i-Haklab/master/.deb/home/.local/etc/i-Haklab/banner/k-boom \
+		curl -fsSL "$iHDB/.local/etc/i-Haklab/banner/k-boom" \
 		-O /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/k-boom &>/dev/null;
 	}
 	source /data/data/com.termux/files/home/.local/etc/i-Haklab/banner/k-boom;

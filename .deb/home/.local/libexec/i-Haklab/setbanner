@@ -13,12 +13,12 @@ echo -en $Y"!:$W Choose an option:\n"
 select opt in Enable Disable Custom Exit; do
   case $opt in
     Enable)
-      sed -i 's|custom||g' ${HOME}/.local/libexec/i-Haklab.login
+      sed -i 's|custom|latest|g' ${HOME}/.local/libexec/i-Haklab.login
       ;;
     Disable)
       echo -en "#!/usr/bin/bash\nsource \${HOME}/.local/etc/i-Haklab/envvariables\necho \"Welcome \$USER to i-Haklab $version.\"" > ${HOME}/.local/etc/i-Haklab/banner/custom
       [[ $(grep 'custom' $HOME/.local/libexec/i-Haklab.login) ]] || {
-        sed -i 's|banner|banner custom|g' ${HOME}/.local/libexec/i-Haklab.login
+        sed -i 's|latest|custom|g' ${HOME}/.local/libexec/i-Haklab.login
       }
       ;;
     Custom)
@@ -44,7 +44,7 @@ echo "Welcome \$(grep USER \$HOME/.local/etc/fish/config.fish|awk '{print \$NF}'
 rm "\${BANNER}"
 #               @IVAM3
 CONF
-        sed -i 's|banner|banner custom|g' ${HOME}/.local/libexec/i-Haklab.login
+        sed -i 's|latest|custom|g' ${HOME}/.local/libexec/i-Haklab.login
         fi
       };
       ;;
