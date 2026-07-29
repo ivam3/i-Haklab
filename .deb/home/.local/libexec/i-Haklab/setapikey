@@ -32,11 +32,15 @@ echo -en "$Y[!]$W Get an OpenAI API key on:$B https://platform.openai.com/accoun
 echo -en "$Y[!]$W Get an MistralAI API key on:$B https://console.mistral.ai\n"
 echo -en "$Y[!]$W Get an Gemini API key on:$B https://aistudio.google.com\n"
 echo -en "$Y[!]$W Get an DeepSeek API key on:$B https://api-docs.deepseek.com/\n"
-echo -en "$Y[!]$W Get an Claude API key on:$B https://platform.claude.com/docs/en/api/admin/api_keys/retrieve\n"
+echo -en "$Y[!]$W Get an Claude API key on:$B https://console.anthropic.com/\n"
+echo -en "$Y[!]$W Get an Groq API key on:$B https://console.groq.com/keys\n"
+echo -en "$Y[!]$W Get an OpenRouter API key on:$B https://openrouter.ai/settings/keys\n"
+echo -en "$Y[!]$W Get an Together AI API key on:$B https://api.together.ai/settings/api-keys\n"
+echo -en "$Y[!]$W Get an Kimi AI API key on:$B https://platform.moonshot.cn/console/api-keys\n"
 echo "[?] Choose the api key to set:"
-select platform in chatGPT claude deepseek gemini mistralAI neural phonescan cancel;do
+select platform in chatGPT claude deepseek gemini mistralAI groq openrouter togetherai kimi neural phonescan cancel;do
   case $platform in
-      chatGPT|claude|deepseek|gemini|mistralAI|neural|phonescan)
+      chatGPT|claude|deepseek|gemini|mistralAI|groq|openrouter|togetherai|kimi|neural|phonescan)
       [[ -z "$(eval "echo \$APIKEY_$platform")" ]] || { ask;}
       getApiKey
       setApiKey
