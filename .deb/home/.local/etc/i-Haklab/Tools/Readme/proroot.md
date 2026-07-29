@@ -57,6 +57,19 @@ proroot /bin/sh -c '
 proroot -r ~/rootfs-personalizado -0 --link2symlink -w /root /bin/sh
 ```
 
+## Bind-mounts automáticos
+
+El wrapper `proroot` monta automáticamente estas rutas del host dentro del guest:
+
+| Host | Guest | Propósito |
+|------|-------|-----------|
+| `/data/data/com.termux/files/home` | `/data/data/com.termux/files/home` | Home del usuario de Termux (sin exponer `usr/` bionic) |
+| `/sdcard` | `/sdcard` | Almacenamiento externo |
+| `/storage` | `/storage` | Almacenamiento compartido |
+| *(no bindeado)* | `/tmp` | Usa el `/tmp` del rootfs. Para compartir: `proroot -b \$TMPDIR:/tmp ...` |
+
+Si la ruta host no existe, el bind se omite silenciosamente.
+
 ## Consideraciones Adicionales
 
 -   **Solo arm64:** proroot funciona únicamente en dispositivos Android con arquitectura arm64-v8a.

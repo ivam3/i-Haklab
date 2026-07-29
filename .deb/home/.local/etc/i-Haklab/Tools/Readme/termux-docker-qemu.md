@@ -27,11 +27,21 @@ termux-docker-qemu <nombre_sistema_operativo> [x11]
   termux-docker-qemu alpine
   ```
   *(Inicia la VM en modo `-nographic` empleando la salida serial de la terminal, lo que reduce el consumo de memoria RAM y CPU).*
-* **Ejecución con entorno gráfico**:
+* **Ejecución gráfica SDL / VirGL 3D (Aceleración GPU)**:
   ```bash
-  termux-docker-qemu alpine x11
+  termux-docker-qemu alpine x11 sdl
   ```
-  *(Inicia la VM con salida de pantalla virtual VNC en la dirección `:0` para cuando se requiere visualizar software de escritorio dentro del sistema emulado).*
+  *(Utiliza `-device virtio-vga-gl` y `-display sdl,gl=on` enviando la aceleración 3D del host a la VM. Requiere instalar `mesa-dri-gallium mesa-egl mesa-gl` en Alpine).*
+* **Ejecución gráfica TCP Bridge (Ultra Ligero)**:
+  ```bash
+  termux-docker-qemu alpine x11 tcp
+  ```
+  *(Puentea el socket UNIX de Termux:X11 vía `socat` en el puerto TCP 6000. QEMU corre en modo `-nographic` reduciendo el uso de CPU. En Alpine ejecuta `source /termux2alpine/x11_env.sh` y abre apps como `xfce4-terminal &` o la sesión con `xfce4-session &`).*
+* **Ejecución gráfica VNC**:
+  ```bash
+  termux-docker-qemu alpine x11 vnc
+  ```
+  *(Inicia servidor VNC en el puerto `5900` para conectarte desde clientes VNC externos).*
 
 ---
 

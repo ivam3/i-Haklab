@@ -2,7 +2,7 @@
 
 ## ¿Qué es Playwright-proot?
 
-**Playwright-proot** es un wrapper empaquetado como `.deb` que integra **Playwright CLI** en Termux mediante `proot-distro Ubuntu`. Permite ejecutar **Chromium headless** en Android para automatización de navegador (snapshot, screenshots, click, fill, eval) sin necesidad de X11/Wayland.
+**Playwright-proot** es un wrapper empaquetado como `.deb` que integra **Playwright CLI** en Termux mediante `proroot` (Ubuntu 24.04, sin ptrace). Permite ejecutar **Chromium headless** en Android para automatización de navegador (snapshot, screenshots, click, fill, eval) sin necesidad de X11/Wayland.
 
 ## ¿Para qué es útil la herramienta?
 
@@ -21,7 +21,7 @@ Playwright-proot es esencial para testing visual y automatización de aplicacion
 apt install playwright-proot
 
 # El postinst configura automaticamente:
-# 1. proot-distro Ubuntu (si no existe)
+# 1. proroot rootfs (dependencia)
 # 2. Librerias glibc para Chromium
 # 3. Node.js + @playwright/cli
 # 4. Chromium headless (arm64)
