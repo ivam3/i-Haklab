@@ -67,7 +67,31 @@ case ${arg[0]} in
 		[[ $(grep -oE "E: Sub-process" $file) ]] && dpkg --configure -a
 		[[ $(grep -oE "E: Failed to fetch" $file) ]] || [[ $(grep -oE "E: Unmet" $file) ]] || [[ $(grep -oE "Broken pipe" $file) ]] && apt --fix-broken install
 		[[ $(grep -oE "E: Unable to fetch" $file) ]] && apt update --fix-missing
-		[[ $(grep -oE "is not signed" $file) ]] || [[ $(grep -oE "NO_PUBKEY" $file) ]] && echo "deb https://packages-cf.termux.org/apt/termux-main/ stable main" > $PREFIX/etc/apt/sources.list;rm -rf $PREFIX/etc/apt/sources.list.d/*;dpkg --configure -a
+		[[ $(grep -oE "is not signed" $file) ]] || [[ $(grep -oE "NO_PUBKEY" $file) ]] && {
+            echo "deb https://packages-cf.termux.org/apt/termux-main/ stable main" \
+            > $PREFIX/etc/apt/sources.list
+            rm -rf $PREFIX/etc/apt/sources.list.d/* 
+
+            echo "# The glibc termux repository, with cloudflare cache
+            deb https://packages-cf.termux.dev/apt/termux-glibc/ glibc stable
+            # The glibc termux repository, without cloudflare cache
+            # # deb https://packages.termux.dev/apt/termux-glibc/ glibc stable
+            " > $PREFIX/etc/apt/sources.list.d/glibc.list 
+
+            echo "deb https://tur.kcubeterm.com tur-packages tur tur-on-device tur-continuous
+            " > $PREFIX/etc/apt/sources.list.d/tur.list
+
+            echo "deb https://mirror.quantum5.ca/termux/termux-x11 x11 main
+            " > $PREFIX/etc/apt/sources.list.d/x11.list
+
+            yes|apt install gnupg 
+            mkdir -p $PREFIX/etc/apt/sources.list.d 
+            curl -s https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/ivam3-termux-packages.list -o $PREFIX/etc/apt/sources.list.d/ivam3-termux-packages.list 
+            curl -fsSL "https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/docs/dists/stable/public_key.gpg" | gpg --dearmor | tee "$PREFIX/etc/apt/trusted.gpg.d/ivam3.gpg" >/dev/null 
+            apt update
+
+            dpkg --configure -a
+        }
 		rm $file
 		;;
 
