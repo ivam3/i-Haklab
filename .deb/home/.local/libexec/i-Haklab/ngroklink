@@ -10,7 +10,7 @@ chkngrok=$(curl -sN http://localhost:4040/api/tunnels &>/dev/null;echo $?)
 
 [[ $chkngrok -eq 0 ]] && {
 	printf $G"Ngrok link:$W \
-  $(curl -sSL http://localhost:4040/api/tunnels|cut -d '"' -f18)";
+  $(curl -sSL http://localhost:4040/api/tunnels | python3 -c "import sys,json; print(json.load(sys.stdin)['tunnels'][0]['public_url'])" 2>/dev/null)";
 } || {
 	printf $R"E:$W Ngrok server is inactive or unreachable\n";
 }

@@ -3,7 +3,9 @@ IFS=$'\n\t'
 
 source ${HOME}/.local/etc/i-Haklab/variables
 source $iHETC/functions
-date=$(date|awk -F " " '{print $2,$NF}'|tr -d " ")
+
+
+BKDATE=$(date +%b%Y)
 
 chk-pkg tar tar
 chk-pkg file file
@@ -15,26 +17,31 @@ case "$1" in
   create)
     case "$2" in
       ex)
-        [[ ! -z $SDCARD ]] && {
+        SDCARD_EX=$(df 2>/dev/null | grep -E "fuse|sdcard|mmc" | grep -iv emulated | awk '{print $NF}' | head -1)
+        if [[ -n "$SDCARD_EX" ]] && [[ -d "$SDCARD_EX" ]]; then
+          SDCARD="$SDCARD_EX"
+          echo -en "$Y!: The backup will be saved on external SD card:$W $SDCARD\n"
+        else
+          echo -en "${R}E:$W External sdcard does not exist or is unreachable.$Y\n ╰──➤ Fallback to internal storage.$W\n"
           SDCARD="/storage/emulated/0"
-          echo -en "${R}E:$W External sdcard do not exists or it is unreachable.$Y\n ╰──➤ The backup will be saved in:$W $SDCARD\n"
-        }
+        fi
         ;;
       in)
-          echo -en "$Y!: The backup will be saved in:$W $SDCARD\n"
+        SDCARD="/storage/emulated/0"
+        echo -en "$Y!: The backup will be saved in:$W $SDCARD\n"
         ;;
       *) STDERR
         ;;
     esac
-    echo -en "\t\tPress$G ENTER$W to confirm.";read enter
-    [[ -e $SDCARD/termux-backup$date.tar.gz ]] && {
-      echo -en "$Y!:$W Backup file already exists.$Y\n ╰──➤$W $SDCARD/termux-backup$date.tar.gz"
+    echo -en "\n\t\tPress$G ENTER$W to confirm.";read enter
+    [[ -e $SDCARD/termux-backup$BKDATE.tar.gz ]] && {
+      echo -en "$Y!:$W Backup file already exists.$Y\n ╰──➤$W $SDCARD/termux-backup$BKDATE.tar.gz"
       exit 0
     }
     cd ${PREFIX}/..
-    tar -zcvf $SDCARD/termux-backup$date.tar.gz home usr
-    [[ -e $SDCARD/termux-backup$date.tar.gz ]] && {
-      echo -en "$G[+]$W DONE!!\n$G ╰──➤ Saved:$W $SDCARD/termux-backup$date.tar.gz"
+    tar -zcvf $SDCARD/termux-backup$BKDATE.tar.gz home usr
+    [[ -e $SDCARD/termux-backup$BKDATE.tar.gz ]] && {
+      echo -en "$G[+]$W DONE!!\n$G ╰──➤ Saved:$W $SDCARD/termux-backup$BKDATE.tar.gz"
     }
     ;;
   restore)

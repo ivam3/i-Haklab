@@ -196,4 +196,4 @@ while true; do
     python3 "$ENGINE" "$CHAT_FILE" "$PROVIDER" "$MODEL" "$API_KEY"
 done
 
-k-boom
+ctrl_c
