@@ -5,31 +5,11 @@ source ${HOME}/.local/etc/i-Haklab/variables
 source $iHETC/functions
 fontsV="v2.3.3"
 z=$(sleep 0.5)
-prevpass=$(cat ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella 2>/dev/null | openssl enc -aes-256-cbc -md sha512 -a -d -pbkdf2 -iter 100000 -salt -pass pass:Secret@123# 2>/dev/null) 
 
 # PREINST
 [[ -e ${PREFIX}/etc/bashito ]] && { rm -rf ${PREFIX}/etc/bashito;}
 [[ -e ${PREFIX}/etc/motd ]] && { rm -rf ${PREFIX}/etc/motd;}
 [[ -e ${PREFIX}/etc/motd.dpkg-old ]] && { rm -rf ${PREFIX}/etc/motd.dpkg-old;}
-
-# BACKUPING PREVIOUS SETTINGS
-if [[ -e $HOME/.local/etc/i-Haklab/.Ivam3byCinderella ]]; then
-  echo "Keeping previous password ..."
-  [[ $prevpass != "Ivam3byCinderella" ]] && {
-    cp ${HOME}/.local/etc/i-Haklab/.Ivam3byCinderella ${TMPDIR}/.IbyC
-  }
-fi
-
-if [[ -e ${HOME}/.local/libexec/i-Haklab.login ]]; then
-  echo "Keeping previous settings ..."
-  cp ${HOME}/.local/libexec/i-Haklab.login ${TMPDIR}/i-Haklab.login.backup
-fi
-
-# BACKUPING PREVIOUS API KEYS
-if [[ -e ${HOME}/.local/etc/i-Haklab/variables ]]; then
-  echo "Keeping previous API keys ..."
-  grep '^export APIKEY_' "${HOME}/.local/etc/i-Haklab/variables" > "${TMPDIR}/.ihabak-apikeys"
-fi
 
 # TOOLS STORAGE DIRECTORY (INTERNAL - EXTERNAL)
 echo "Getting access to external storage.";$z
@@ -86,6 +66,7 @@ omf install will
 CONF
 fish $file >/dev/null 2>>$LOGFILE
 rm $file
+set -U fish_greeting
 
 ## SETTING FONTS AS DejaVuSansMono
 [[ -d ${PREFIX}/share/fonts/ ]] && {
@@ -180,8 +161,13 @@ echo -en "[deleted]
     |\t\t• phantom-ps
     |\t\t• i-Haklab chatAI (before 'chatGPT')
     ╰──➤ New features:
-    |\t\t• shell: now i-Haklab works over shells fish, zsh & bash \n\t\t\t   run 'i-Haklab setshell' to set it
-    |\t\t• chatAI: LLM availables: chatGPT, Gemini & Claude | Mannage 2+ chats \n\t\t\t   create image | remember conversation
+    |\t\t• shell: now i-Haklab works over shells fish, zsh & bash\n    |\t\t\t   run 'i-Haklab setshell' to set it
+    |\t\t• chatAI: Mannage 2+ chats | create image | remember conversation\n    |\t\t\t  LLM availables: 
+    |\t\t\t\t╰──➤ OpenAI
+    |\t\t\t\t╰──➤ Gemini
+    |\t\t\t\t╰──➤ Deepseek
+    |\t\t\t\t╰──➤ MistralAI
+    |\t\t\t\t╰──➤ Ollama
     |\t\t• Into neovim: type 'alter', 'comma', 'ca' | (alt + , + n) to use AI
 [Artificial Intellient]
     ╰──➤ Agents:
@@ -193,6 +179,7 @@ echo -en "[deleted]
     |\t\t• Freebuff
     |\t\t• Codex-cli
     |\t\t• Qwen-code
+    |\t\t• Kimi-code
     |\t\t• Claude-code
     |\t\t• Minimax-cli 
     |\t\t• Hermes-agent
