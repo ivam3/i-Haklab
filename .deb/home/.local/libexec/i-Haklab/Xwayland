@@ -25,10 +25,28 @@ export DISPLAY=:0
 export XDG_RUNTIME_DIR=${TMPDIR}
 export XKB_CONFIG_ROOT=${PREFIX}/share/xkeyboard-config-2/
 
-unset PULSE_SERVER
+# Audio: un solo daemon con runtime fijo (evita daemons duplicados/autospawn con sink auto_null)
+killall pulseaudio 2>/dev/null; sleep 1
+rm -rf ${TMPDIR}/pulse ${TMPDIR}/pulse-* 2>/dev/null
+rm -f ${HOME}/.config/pulse/*-runtime 2>/dev/null
+
+mkdir -p ${TMPDIR}/pulse
+export PULSE_RUNTIME_PATH=${TMPDIR}/pulse
 
 pulseaudio --start --exit-idle-time=-1 2>/dev/null
-pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1
+for _ in $(seq 1 10); do
+    [[ -S ${PULSE_RUNTIME_PATH}/native ]] && break
+    sleep 1
+done
+sink=$(PULSE_SERVER=unix:${PULSE_RUNTIME_PATH}/native pactl info 2>/dev/null | sed -n 's/^Default Sink: //p')
+[[ "$sink" == "auto_null" ]] && {
+    killall pulseaudio 2>/dev/null; sleep 1
+    pulseaudio --start --exit-idle-time=-1 2>/dev/null
+    for _ in $(seq 1 10); do [[ -S ${PULSE_RUNTIME_PATH}/native ]] && break; sleep 1; done
+}
+PULSE_SERVER=unix:${PULSE_RUNTIME_PATH}/native pacmd load-module \
+    module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1 2>/dev/null
+export PULSE_SERVER=tcp:127.0.0.1:4713
 am start -n com.termux.x11/com.termux.x11.MainActivity;sleep 3
 
 [[ ! -z "$1" ]] && [[ "$1" == "Xwayland" ]] && { Xbin="$1";} || { Xbin="termux-x11";tip="Xwayland";}

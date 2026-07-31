@@ -64,7 +64,28 @@ runXenv(){
   kill -9 $(pgrep -f "termux.x11") 2>/dev/null
 
   # Enable PulseAudio over Network
-  pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1
+  # Audio: un solo daemon con runtime fijo (evita daemons duplicados/autospawn con sink auto_null)
+  killall pulseaudio 2>/dev/null; sleep 1
+  rm -rf ${TMPDIR}/pulse ${TMPDIR}/pulse-* 2>/dev/null
+  rm -f ${HOME}/.config/pulse/*-runtime 2>/dev/null
+
+  mkdir -p ${TMPDIR}/pulse
+  export PULSE_RUNTIME_PATH=${TMPDIR}/pulse
+
+  pulseaudio --start --exit-idle-time=-1 2>/dev/null
+  for _ in $(seq 1 10); do
+      [[ -S ${PULSE_RUNTIME_PATH}/native ]] && break
+      sleep 1
+  done
+  sink=$(PULSE_SERVER=unix:${PULSE_RUNTIME_PATH}/native pactl info 2>/dev/null | sed -n 's/^Default Sink: //p')
+  [[ "$sink" == "auto_null" ]] && {
+      killall pulseaudio 2>/dev/null; sleep 1
+      pulseaudio --start --exit-idle-time=-1 2>/dev/null
+      for _ in $(seq 1 10); do [[ -S ${PULSE_RUNTIME_PATH}/native ]] && break; sleep 1; done
+  }
+  PULSE_SERVER=unix:${PULSE_RUNTIME_PATH}/native pacmd load-module \
+      module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1 2>/dev/null
+  export PULSE_SERVER=tcp:127.0.0.1:4713
 
   # Prepare termux-x11 session
   export XDG_RUNTIME_DIR=${TMPDIR}
