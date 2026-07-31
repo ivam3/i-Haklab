@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.13.2",
+  "version": "3.13.3",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -210,6 +210,7 @@
         "home/.local/etc/i-Haklab/Tools/Readme/sherlock.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/sherlock.md",
         "home/.local/etc/i-Haklab/Tools/Readme/shodan.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/shodan.md",
         "home/.local/etc/i-Haklab/Tools/Readme/slowhttptest.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/slowhttptest.md",
+        "home/.local/etc/i-Haklab/Tools/Readme/sleepwalker.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/sleepwalker.md",
         "home/.local/etc/i-Haklab/Tools/Readme/smithery.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/smithery.md",
         "home/.local/etc/i-Haklab/Tools/Readme/snscrape.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/snscrape.md",
         "home/.local/etc/i-Haklab/Tools/Readme/speedtest-go.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/speedtest-go.md",

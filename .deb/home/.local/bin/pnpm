@@ -12,6 +12,7 @@ if [[ "$1" == "install" || "$1" == "update" ]]; then
     pushd "$HOME" >/dev/null
     for i in "${@:2}"; do
         [[ "$i" == "gemini-cli" ]] && { i="@google/gemini-cli"; }
+        [[ "$i" == "sleepwalker" ]] && { i="@sleepwalkerai/cli"; }
         [[ "$i" == "qwen-code" ]] && { i="@qwen-code/qwen-code"; }
         [[ "$i" == "openspec" ]] && { i="@fission-ai/openspec"; }
         [[ "$i" == "claude-code" ]] && { i="@anthropic-ai/claude-code"; }

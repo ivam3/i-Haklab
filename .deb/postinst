@@ -66,7 +66,7 @@ omf install will
 CONF
 fish $file >/dev/null 2>>$LOGFILE
 rm $file
-set -U fish_greeting
+$(command -v fish) -c "set -U fish_greeting"
 
 ## SETTING FONTS AS DejaVuSansMono
 [[ -d ${PREFIX}/share/fonts/ ]] && {
@@ -84,6 +84,11 @@ for i in ProFont Hack; do
     echo -en "${R}E:$W Fonts ${i}.zip file is missing or unreacheble."
   fi
 done
+
+# INSTALLING NLS COMMAND (SAME AS "ls" BUT WITH STEROIDS)
+echo "Installing nls ..."
+source ${HOME}/.local/etc/i-Haklab/envvariables
+go install github.com/nolight132/nls/cmd/nls@latest
 
 # SET ROOT USER IF DEVICE IS ROOTED
 if chk-root;then

@@ -31,6 +31,7 @@ if [[ "$1" == "install" || "$1" == "update" ]]; then
         # Gemini check (case insensitive or exact match as in Fish?)
         # Fish was exact match: if test "$i" = "gemini-cli"
         [[ "$i" == "gemini-cli" ]] && { i="@google/gemini-cli"; }
+        [[ "$i" == "sleepwalker" ]] && { i="@sleepwalkerai/cli"; }
         [[ "$i" == "qwen-code" ]] && { i="@qwen-code/qwen-code"; }
         [[ "$i" == "openspec" ]] && { i="@fission-ai/openspec"; }
         [[ "$i" == "kimi-code" ]] && { i="@moonshot-ai/kimi-code"; }

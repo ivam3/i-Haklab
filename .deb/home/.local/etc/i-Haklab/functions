@@ -244,6 +244,7 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰LOCALHOST───────────────────────➤ Show the current internet protocol over LAN
 ╰lock────────────────────────────➤ Block Termux's screen
 ╰mypip───────────────────────────➤ Show your public internet protocol
+╰nls─────────────────────────────➤ Use it instead of command 'ls' for text in boxes/grid
 ╰openvpn─────────────────────────➤ Open openvpn application
 ╰omf─────────────────────────────➤ Change Oh-my-fish theme
 ╰phantom─ps──────────────────────➤ Change the limit of phantom process at 2147483647 

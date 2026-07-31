@@ -57,8 +57,9 @@ if [[ "$1" == "install" || "$1" == "reinstall" || "$1" == "search" ]]; then
                 ;;
 
             # NPM MODULES 
-            bash-obfuscate|codex|copilot-cli|gemini-cli|kimi-code|localtunnel|minimax-cli|n8n|pnpm|open-lovable|openspec|qwen-code|twifo-cli)
+            bash-obfuscate|codex|copilot-cli|gemini-cli|kimi-code|localtunnel|minimax-cli|n8n|pnpm|open-lovable|openspec|sleepwalker|qwen-code|twifo-cli)
                 [[ "$i" == "minimax-cli" ]] && { i="mmx-cli"; }
+                [[ "$i" == "sleepwalker" ]] && { i="@sleepwalkerai/cli"; }
                 [[ "$i" == "gemini-cli" ]] && { i="@google/gemini-cli"; }
                 [[ "$i" == "openspec" ]] && { i="@fission-ai/openspec"; }
                 [[ "$i" == "qwen-code" ]] && { i="@qwen-code/qwen-code"; }
@@ -72,8 +73,9 @@ if [[ "$1" == "install" || "$1" == "reinstall" || "$1" == "search" ]]; then
                 continue
                 ;;
             # NPX MODULES 
-            context7)
+            context7|sleepwalkerai)
                 [[ "$i" == "context7" ]] && { i="ctx7";}
+                [[ "$i" == "sleepwalker" ]] && { i="@sleepwalkerai/cli"; }
                 install_wrapper "npx" "$i" "npx module"
                 continue
                 ;;
