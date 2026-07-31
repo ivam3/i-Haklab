@@ -1,0 +1,43 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab per-tool pre-install actions (setup before package install)
+# Usage: preconf <tool> [npm|pnpm] [action]
+IFS=$'\n\t'
+trap ctrl_c 2
+
+source $HOME/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+tool="$1"; shift
+
+case "$tool" in
+    n8n)
+        pm="${1:-npm}"
+        for p in nodejs-lts libsqlite sqlite; do
+            echo "(_>) Installing $p ..."
+            yes|apt install "$p" >/dev/null 2>/dev/null
+        done
+        for m in pm2 gyp node-gyp; do
+            echo "(_>) Installing $m ..."
+            "$PREFIX/bin/$pm" install -g "$m"
+        done
+        echo "(_>) Preparing n8n environment ..."
+        mkdir -p "$HOME"/{.n8n,.gyp}
+        echo "{'variables':{'android_ndk_path':''}}" > "$HOME/.gyp/include.gypi"
+        [[ "$pm" == "pnpm" ]] && "$PREFIX/bin/pnpm" approve-builds -g
+        ;;
+
+    open-lovable)
+        pm="${1:-npm}"; action="${2:-install}"
+        if ls "$HOME/.local/share/open-lovable" &>/dev/null; then
+            rm -rf "$HOME/.local/share/open-lovable"
+        fi
+        git clone --quiet https://github.com/firecrawl/open-lovable.git \
+            "$HOME/.local/share/open-lovable"
+        cd "$HOME/.local/share/open-lovable"
+        corepack enable
+        "$PREFIX/bin/$pm" "$action"
+        ;;
+
+    *) ;;
+esac
+exit 0

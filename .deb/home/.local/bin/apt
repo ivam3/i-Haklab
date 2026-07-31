@@ -3,13 +3,7 @@
 # Replaces apt.fish logic for agnostic shell support
 
 source ${HOME}/.local/etc/i-Haklab/variables
-
-pkg2conf() {
-    local pkgName="$1"
-    if grep -q "^$pkgName$" "$HOME/.local/etc/i-Haklab/Tools/listofpkg2conf" 2>/dev/null; then
-        bash "$HOME/.local/libexec/pkg2conf" "$pkgName"
-    fi
-}
+source ${HOME}/.local/etc/i-Haklab/functions
 
 install_wrapper() {
     local method="$1"
@@ -25,7 +19,7 @@ install_wrapper() {
         case "$yesornot" in
             y|Y|yes|YES)
                 eval "$method $pkg"
-                pkg2conf "$pkg"
+                ih_pkg2conf "$pkg"
                 break
                 ;;
 
@@ -58,24 +52,13 @@ if [[ "$1" == "install" || "$1" == "reinstall" || "$1" == "search" ]]; then
 
             # NPM MODULES 
             bash-obfuscate|codex|copilot-cli|gemini-cli|kimi-code|localtunnel|minimax-cli|n8n|pnpm|open-lovable|openspec|sleepwalker|qwen-code|twifo-cli)
-                [[ "$i" == "minimax-cli" ]] && { i="mmx-cli"; }
-                [[ "$i" == "sleepwalker" ]] && { i="@sleepwalkerai/cli"; }
-                [[ "$i" == "gemini-cli" ]] && { i="@google/gemini-cli"; }
-                [[ "$i" == "openspec" ]] && { i="@fission-ai/openspec"; }
-                [[ "$i" == "qwen-code" ]] && { i="@qwen-code/qwen-code"; }
-                [[ "$i" == "kimi-code" ]] && { i="@moonshot-ai/kimi-code"; }
-                [[ "$i" == "claude-code" ]] && { i="@anthropic-ai/claude-code"; }
-                [[ "$i" == "codex" ]] && { i="@mmmbuto/codex-cli-termux@latest"; } 
-                [[ "$i" == "copilot-cli" ]] || [[ "$i" == "github-copilot" ]] && { 
-                    i="@github/copilot"; 
-                } 
+                i=$(ih_normalize_pkg "$i")
                 install_wrapper "npm install -g" "$i" "nodejs module"
                 continue
                 ;;
             # NPX MODULES 
             context7|sleepwalkerai)
                 [[ "$i" == "context7" ]] && { i="ctx7";}
-                [[ "$i" == "sleepwalker" ]] && { i="@sleepwalkerai/cli"; }
                 install_wrapper "npx" "$i" "npx module"
                 continue
                 ;;
@@ -95,7 +78,7 @@ if [[ "$1" == "install" || "$1" == "reinstall" || "$1" == "search" ]]; then
 
             *)
                 "$PREFIX/bin/apt" "$1" "$i"
-                [[ "$1" == "search" ]] || { pkg2conf "$i";}
+                [[ "$1" == "search" ]] || { ih_pkg2conf "$i";}
                 ;;
         esac
     done

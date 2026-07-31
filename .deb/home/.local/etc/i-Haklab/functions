@@ -329,3 +329,48 @@ pass(){
 		}
 }
 export -f pass
+
+# ------------------------------------------------------------------
+# WRAPPER HELPERS
+# Compartidas por ~/.local/bin/{apt,npm,pnpm}
+# El setup pre-instalacion vive en ~/.local/libexec/preconf y el
+# cleanup post-desinstalacion en ~/.local/libexec/cleanup
+# ------------------------------------------------------------------
+
+ih_normalize_pkg() {
+    local i="$1"
+    case "$i" in
+        gemini-cli)        echo "@google/gemini-cli" ;;
+        sleepwalker)       echo "@sleepwalkerai/cli" ;;
+        qwen-code)         echo "@qwen-code/qwen-code" ;;
+        openspec)          echo "@fission-ai/openspec" ;;
+        kimi-code)         echo "@moonshot-ai/kimi-code" ;;
+        claude-code)       echo "@anthropic-ai/claude-code" ;;
+        codex)             echo "@mmmbuto/codex-cli-termux@latest" ;;
+        copilot-cli|github-copilot) echo "@github/copilot" ;;
+        minimax-cli)       echo "mmx-cli" ;;
+        smithery)          echo "@smithery/cli" ;;
+        *)                 echo "$i" ;;
+    esac
+}
+export -f ih_normalize_pkg
+
+ih_pkg2conf() {
+    local pkgName="$1"
+    [[ -z "$pkgName" ]] && return
+    if grep -q "^$pkgName$" "$HOME/.local/etc/i-Haklab/Tools/listofpkg2conf" 2>/dev/null; then
+        bash "$HOME/.local/libexec/pkg2conf" "$pkgName"
+    fi
+}
+export -f ih_pkg2conf
+
+set_filerc() {
+    shell=${SHELL##*/}
+    case "$shell" in
+        bash) FILERC="$HOME/.bashrc" ;;
+        zsh) FILERC="$HOME/.zshrc" ;;
+        fish) FILERC="$HOME/.config/fish/config.fish" ;;
+        *) echo "Unsupported shell: $shell." && exit 1 ;;
+    esac
+}
+export -f set_filerc

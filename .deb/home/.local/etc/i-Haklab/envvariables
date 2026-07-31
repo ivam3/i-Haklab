@@ -8,7 +8,7 @@ export GPG_TTY=$(tty)
 export GYP_DEFINES="android_ndk_path=''"
 
 # IMPORTANT: .local/bin FIRST to intercept 'apt', 'npm' and 'pnpm' invisible wrappers
-export HOME=/data/data/com.termux/files/home
+export HOME="${HOME:-/data/data/com.termux/files/home}"
 export PATH="$HOME/.local/bin:/data/data/com.termux/files/usr/bin:$HOME/go/bin"
 export GOPATH=$HOME/go
 export GOROOT=/data/data/com.termux/files/usr/lib/go

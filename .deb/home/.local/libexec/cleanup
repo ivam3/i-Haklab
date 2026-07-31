@@ -1,0 +1,23 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab per-tool post-uninstall cleanup
+# Usage: cleanup <tool>
+IFS=$'\n\t'
+trap ctrl_c 2
+
+source $HOME/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+case "$1" in
+    n8n)
+        rm "$HOME/.config/fish/functions/n8n.fish" 2>/dev/null
+        ;;
+
+    open-lovable)
+        if ls "$HOME/.local/share/open-lovable" &>/dev/null; then
+            rm -rf "$HOME/.local/share/open-lovable"
+        fi
+        ;;
+
+    *) ;;
+esac
+exit 0

@@ -24,3 +24,12 @@ tor
 vim
 youtubedr
 zsh
+@google/gemini-cli
+@qwen-code/qwen-code
+@anthropic-ai/claude-code
+@github/copilot
+@smithery/cli
+@sleepwalkerai/cli
+@fission-ai/openspec
+@moonshot-ai/kimi-code
+@mmmbuto/codex-cli-termux@latest
