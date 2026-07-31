@@ -231,6 +231,9 @@ $Y          [--] DIRECT COMMANDS [--]
 $W  Those commands do not need the i-Haklab command
              Just type the command.
 _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
+╰ai─────────────────────────────➤ Asistente IA: lenguaje natural → comando de terminal (ollama/groq)
+|  ╰example─────────────────────{─ai "lista los archivos de ~/"}
+|  ╰options─────────────────────{─ai -v (por voz) | ai disable | ai "..." --no-run}
 ╰apt─────────────────────────────➤ Install/remove and configure packages/tools/frameworks
 ╰adminfiles──────────────────────➤ Copy any file from internal/external storage at termux directory
 ╰bat─────────────────────────────➤ Use it instead of command 'cat' for text highlighting

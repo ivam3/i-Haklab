@@ -38,6 +38,13 @@ case "$tool" in
         "$PREFIX/bin/$pm" "$action"
         ;;
 
+    ai)
+        [[ -d "$HOME/.local/share/hybrid-cli-ai" ]] || \
+            git clone --quiet https://github.com/HereIsMuhammad/hybrid-cli-ai.git \
+                "$HOME/.local/share/hybrid-cli-ai"
+        cd "$HOME/.local/share/hybrid-cli-ai" && pip install -e .
+        ;;
+
     *) ;;
 esac
 exit 0

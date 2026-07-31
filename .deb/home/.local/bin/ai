@@ -1,0 +1,78 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab AI Wrapper (Bash version) - hybrid-cli-ai
+# Asistente IA: lenguaje natural -> comando de terminal (ollama local / groq cloud)
+
+source ${HOME}/.local/etc/i-Haklab/functions
+
+# GROQ_API_KEY: usa la clave configurada con `i-Haklab setapikey` (groq -> APIKEY_groq)
+if [[ -z "$GROQ_API_KEY" ]]; then
+    export GROQ_API_KEY="$(grep '^export APIKEY_groq=' "$HOME/.local/etc/i-Haklab/variables" 2>/dev/null | head -1 | cut -d'"' -f2)"
+fi
+
+REPO="$HOME/.local/share/hybrid-cli-ai"
+BIN="$PREFIX/lib/bin/ai"
+MODEL="qwen2.5-coder:1.5b"
+
+if [[ "$1" == "disable" ]]; then
+    bash "$HOME/.local/libexec/cleanup" ai
+    exit 0
+fi
+
+if [[ "$1" == "-v" || "$1" == "--voice" ]]; then
+    shift
+fi
+
+prompt=("$@")
+
+if [[ ${#prompt[@]} -eq 0 ]]; then
+    chk-pkg termux-dialog termux-api
+    echo "(_>) Habla ahora ..."
+    text=$(termux-dialog speech 2>/dev/null | jq -r '.text' 2>/dev/null)
+    if [[ -z "$text" || "$text" == "null" ]]; then
+        echo "(_>) Se requiere la app 'Termux:API' (termux-api.apk) instalada y el permiso de microfono habilitado."
+        exit 1
+    fi
+    prompt=("$text")
+fi
+
+if [[ ! -x "$BIN" ]]; then
+    bash "$HOME/.local/libexec/preconf" ai
+    [[ -x "$BIN" ]] || { echo "(_>) Fallo la instalacion de hybrid-cli-ai"; exit 1; }
+fi
+
+if ! curl -s --max-time 2 http://127.0.0.1:11434/api/tags >/dev/null 2>&1; then
+    command -v ollama >/dev/null || { echo "(_>) ollama no esta instalado"; exit 1; }
+    echo "(_>) Starting ollama server ..."
+    nohup ollama serve >/dev/null 2>&1 &
+    for _ in $(seq 1 15); do
+        curl -s --max-time 1 http://127.0.0.1:11434/api/tags >/dev/null 2>&1 && break
+        sleep 1
+    done
+fi
+
+if ! ollama list 2>/dev/null | grep -q "$MODEL"; then
+    echo "(_>) Pulling $MODEL ..."
+    ollama pull "$MODEL"
+fi
+
+case "${prompt[0]}" in
+    --help|-h|--history|-H|--clear-history)
+        exec "$BIN" "${prompt[@]}"
+        ;;
+esac
+
+args=()
+no_run=false
+for a in "${prompt[@]}"; do
+    [[ "$a" == "--no-run" ]] && { no_run=true; continue; }
+    args+=("$a")
+done
+
+has_model=false
+for a in "${args[@]}"; do
+    [[ "$a" == "-m" || "$a" == "--model" ]] && has_model=true
+done
+[[ "$has_model" == false ]] && args+=(--model "$MODEL")
+[[ "$no_run" == false ]] && args+=(--run)
+
+exec "$BIN" "${args[@]}"

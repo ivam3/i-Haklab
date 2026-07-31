@@ -5,7 +5,7 @@
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
   "depends": [
-    "x11-repo, termux-api, termux-elf-cleaner, termux-tools, termux-gui-package, tur-repo, util-linux, lsd, apr, which, apr-util, autoconf, axel, bat, bc, binutils, fontconfig-utils, bison, clang, coreutils, curl, debianutils, dnsutils, dos2unix, duf, fd, file, findutils, fish, fzf, gawk, git, glibc-repo, glow, gpgme, irssi, jq, libassuan, libcaca, libffi, libgcrypt, libgmp, libgpg-error, libgrpc, libiconv, libmpc, libmpc-static, libmpfr, libmpfr-static, libpcap, libsodium, libsodium-static, libsqlite, libtool, libxml2, libxml2-utils, gnupg, make, mandoc, megatools, mlocate, ncurses, ncurses-utils, neofetch, ninja, openssh, openssl, openssl-tool, php, php-apache, pkg-config, procps, pv, python, python-pip, readline, ripgrep, sqlite, strace, tar, tor, torsocks, translate-shell, unzip, weechat, wget, yazi, zip, zlib"
+    "x11-repo, termux-api, termux-elf-cleaner, termux-tools, termux-gui-package, tur-repo, util-linux, lsd, apr, which, apr-util, autoconf, axel, bat, bc, binutils, fontconfig-utils, bison, clang, coreutils, curl, debianutils, dnsutils, dos2unix, duf, fd, file, findutils, fish, fzf, gawk, git, glibc-repo, glow, gpgme, irssi, jq, libassuan, libcaca, libffi, libgcrypt, libgmp, libgpg-error, libgrpc, libiconv, libmpc, libmpc-static, libmpfr, libmpfr-static, libpcap, libsodium, libsodium-static, libsqlite, libtool, libxml2, libxml2-utils, gnupg, make, mandoc, megatools, mlocate, ncurses, ncurses-utils, neofetch, ninja, ollama, openssh, openssl, openssl-tool, php, php-apache, pkg-config, procps, pv, python, python-pip, readline, ripgrep, sqlite, strace, tar, tor, torsocks, translate-shell, unzip, weechat, wget, yazi, zip, zlib"
   ],
   "suggests": [
     "openjdk-17, perl, ruby"
@@ -23,6 +23,7 @@
     "home/.config/fish/config.fish": "/data/data/com.termux/files/home/.config/fish/config.fish",
     "usr/bin/fixer": "/data/data/com.termux/files/usr/bin/fixer",
     "home/.local/bin/adminfiles": "/data/data/com.termux/files/home/.local/bin/adminfiles",
+    "home/.local/bin/ai": "/data/data/com.termux/files/home/.local/bin/ai",
     "home/.local/bin/apt": "/data/data/com.termux/files/home/.local/bin/apt",
     "home/.local/bin/cmd": "/data/data/com.termux/files/home/.local/bin/cmd",
     "home/.local/bin/gitbrowsering": "/data/data/com.termux/files/home/.local/bin/gitbrowsering",
@@ -56,6 +57,7 @@
     "home/.local/etc/i-Haklab/Tools/listofpkg2conf": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/listofpkg2conf",
     "home/.local/etc/i-Haklab/Tools/Readme/acccheck.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/acccheck.md",
     "home/.local/etc/i-Haklab/Tools/Readme/adbfastboot.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/adbfastboot.md",
+    "home/.local/etc/i-Haklab/Tools/Readme/ai.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/ai.md",
     "home/.local/etc/i-Haklab/Tools/Readme/adminpanel.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/adminpanel.md",
     "home/.local/etc/i-Haklab/Tools/Readme/aircrack-ng.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/aircrack-ng.md",
     "home/.local/etc/i-Haklab/Tools/Readme/amass.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/amass.md",

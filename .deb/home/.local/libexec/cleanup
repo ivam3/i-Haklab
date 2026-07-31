@@ -18,6 +18,11 @@ case "$1" in
         fi
         ;;
 
+    ai)
+        "$PREFIX/bin/pip" uninstall -y hybrid-cli-ai >/dev/null 2>/dev/null
+        rm -rf "$HOME/.local/share/hybrid-cli-ai" 2>/dev/null
+        ;;
+
     *) ;;
 esac
 exit 0
