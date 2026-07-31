@@ -43,8 +43,10 @@ ai "lista los archivos de ~/" --local
 **Ejemplo 4: Comando por voz (requiere Termux:API y permiso de micrófono)**
 
 ```bash
-ai
-ai -v
+ai              # voz + ejecutar el comando
+ai -v           # idem (flag explícito)
+ai --no-run     # voz + sugerir SIN ejecutar
+ai -v --no-run  # idem
 ```
 
 **Ejemplo 5: Historial**
@@ -68,6 +70,8 @@ ai "lista los archivos de ~/"   # lo vuelve a instalar automáticamente
 *   **Groq Cloud:** Requiere una clave de Groq. Se configura con `i-Haklab setapikey` → `groq` (guarda `APIKEY_groq`, que el wrapper mapea a `GROQ_API_KEY`) o directamente con `export GROQ_API_KEY=...` (clave gratis en https://console.groq.com).
 *   **Voz:** Requiere el paquete `termux-api` y la app Android **Termux:API (termux-api.apk)** con el permiso de micrófono habilitado.
 *   **Ubicación del ejecutable:** El script pip queda en `$PREFIX/lib/bin/ai`; el wrapper `ai` de `~/.local/bin` lo invoca con ruta absoluta.
+*   **Entorno Termux:** El wrapper auto-aplica un parche idempotente sobre `hybrid-cli-ai` para que el system prompt detecte Termux (`get_os_info` → `termux`) y genere comandos con `pkg`/`$PREFIX`/`$HOME` en lugar de Linux estándar (`sudo`, `/usr/bin`). Se re-aplica tras cada reinstalación.
+*   **Conocimiento de i-Haklab:** El system prompt incluye una línea de awareness de la suite y, cuando la consulta menciona i-Haklab (`i-haklab`, `setapikey`, `helpper`, `alltools`, `wrapper`, `documentacion`, `apikey`, `clave de`, `groq`…), el wrapper antepone un cheat-sheet con subcomandos (`help`, `about <tool>`, `show alltools`, `setapikey`…), wrappers (`apt`/`npm`/`pnpm`, `bat`, `nls`, `glow`…) y la regla `apt install <tool>`.
 
 ---
 *Nota: Esta herramienta integra la potencia de los agentes de IA de última generación en el ecosistema i-Haklab.*
