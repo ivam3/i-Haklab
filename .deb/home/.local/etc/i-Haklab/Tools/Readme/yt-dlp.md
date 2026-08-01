@@ -1,8 +1,8 @@
-# YouTubeDR
+# yt-dlp
 
-## ¿Qué es YouTubeDR?
+## ¿Qué es yt-dlp?
 
-**YouTubeDR** es una herramienta de línea de comandos para **descargar contenido de YouTube**, incluyendo videos, audio o listas de reproducción, generalmente basada en motores como `yt-dlp`.
+**yt-dlp** es un descargador de video de línea de comandos (fork activo de youtube-dl) que soporta YouTube y miles de otros sitios, incluyendo videos, audio y listas de reproducción.
 
 ## ¿Para qué es útil?
 
@@ -16,13 +16,13 @@
 **Descargar un video:**
 
 ```bash
-youtubedr https://youtube.com/watch?v=XXXX
+yt-dlp https://youtube.com/watch?v=XXXX
 ```
 
 **Descargar solo audio:**
 
 ```bash
-youtubedr --audio https://youtube.com/watch?v=XXXX
+yt-dlp -x https://youtube.com/watch?v=XXXX
 ```
 
 ## Consideraciones legales

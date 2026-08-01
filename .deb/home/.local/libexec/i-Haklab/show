@@ -48,12 +48,12 @@ then
 					done
 					;;
 				Download)
-					chk-pkg youtubedr youtubedr
+					chk-pkg yt-dlp python-yt-dlp
 					TUTO=$(cat $iHETC/listoftutorials|grep $ANSW|awk '{print $2}'|head -n 1)
 					if [[ $TUTO = 'false' ]] || [[ -z $TUTO ]];then
 						printf "$R\n(_➤)$W Tutorial is not available to be download\n";exit
 					else
-						youtubedr download $TUTO
+						yt-dlp $TUTO
 					fi
 					;;
 				Exit|*)

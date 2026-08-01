@@ -144,7 +144,6 @@ shellsploit-framework:Exploitation
 sherlock:OSINT
 shodan:OSINT
 slowhttptest:Exploitation
-sleepwalker:Agent AI
 smithery:Agent AI
 snscrape:OSINT
 steghide:Forensics
@@ -179,5 +178,5 @@ xerosploit:Exploitation
 xleak:OSINT
 xml2axml:Android
 ytfzf:Utilities
-youtubedr:Utilities
+yt-dlp:Utilities
 zaproxy:Web Application
