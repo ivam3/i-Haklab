@@ -240,7 +240,12 @@ set softwrap
       r2pm -qU && r2pm -ci r2ghidra-sleigh
     #} || {
       r2pm -qUU
-    #}
+    #} 
+    # Download scripts to avoid which spawns a shell and causes a bad system call in some environments
+    curl -fsSL $iHDB/.local/etc/radare2/r2chweb -o ${HOME}/.local/bin/r2chweb
+    curl -fsSL $iHDB/.local/etc/radare2/radare2rc -o ${HOME}/.radare2rc
+    chmod +x ${HOME}/.local/bin/r2chweb ${HOME}/.radare2rc
+    echo -en "[💡] Run 'r2chweb' to start the radare2 web interface\n"
     ;; 
 
   railway-cli)

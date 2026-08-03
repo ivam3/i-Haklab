@@ -1,0 +1,10 @@
+e asm.syntax=intel
+e scr.utf8=true
+e scr.utf8.curvy
+e bin.cache=true
+
+# r2chweb (~/.local/bin/r2chweb): servidor web seguro (evita "=H" que spawnea sh -> SIGSYS)
+e http.bind=127.0.0.1
+e http.port=9090
+e http.sandbox=true
+

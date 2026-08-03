@@ -10,6 +10,9 @@ source $iHETC/functions
 case "$1" in
     n8n)
         rm "$HOME/.config/fish/functions/n8n.fish" 2>/dev/null
+        rm -rf "$HOME/.n8n" 2>/dev/null
+        rm -f "$HOME/.gyp/include.gypi" 2>/dev/null
+        rmdir "$HOME/.gyp" 2>/dev/null
         ;;
 
     open-lovable)
@@ -21,6 +24,10 @@ case "$1" in
     ai)
         "$PREFIX/bin/pip" uninstall -y hybrid-cli-ai >/dev/null 2>/dev/null
         rm -rf "$HOME/.local/share/hybrid-cli-ai" 2>/dev/null
+        ;;
+
+    radare2)
+        rm -f "$HOME/.radare2rc" "$HOME/.local/bin/r2chweb" 2>/dev/null
         ;;
 
     *) ;;

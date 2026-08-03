@@ -1,6 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # i-Haklab APT Wrapper (Bash version)
-# Replaces apt.fish logic for agnostic shell support
 
 source ${HOME}/.local/etc/i-Haklab/variables
 source ${HOME}/.local/etc/i-Haklab/functions
@@ -82,6 +81,11 @@ if [[ "$1" == "install" || "$1" == "reinstall" || "$1" == "search" ]]; then
                 ;;
         esac
     done
+elif [[ "$1" == "remove" || "$1" == "purge" || "$1" == "uninstall" ]]; then
+    for i in "${@:2}"; do
+        [[ "$i" == -* ]] || bash "$HOME/.local/libexec/cleanup" "$i"
+    done
+    "$PREFIX/bin/apt" "$@"
 else
     "$PREFIX/bin/apt" "$@"
 fi

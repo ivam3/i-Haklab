@@ -1,0 +1,16 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# r2chweb: analiza con webui radare2 evitando "=H" (spawnea sh -> bad system call)
+# Analizer script for radare2 to run the webui without using "=H" (which spawns a shell and causes a bad system call in some environments).
+#
+if [[ $# -lt 1 ]]; then
+    echo "Uso: $(basename "$0") <binario> [puerto]"
+    exit 1
+fi
+
+f="$1"
+p="${2:-9090}"
+p="${2:-9090}"
+r2 -e http.bind=127.0.0.1 -e http.port="$p" -e http.sandbox=true -c '=h!' "$f"
+echo "Web:      http://127.0.0.1:$p/"
+echo "Consola:  http://127.0.0.1:$p/console.html"
+
