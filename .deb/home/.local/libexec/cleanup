@@ -30,6 +30,10 @@ case "$1" in
         rm -f "$HOME/.radare2rc" "$HOME/.local/bin/r2chweb" 2>/dev/null
         ;;
 
+    ttyd)
+        rm -f "$HOME/.local/bin/ttyd" 2>/dev/null
+        ;;
+
     *) ;;
 esac
 exit 0
