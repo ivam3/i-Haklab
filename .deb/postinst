@@ -164,6 +164,7 @@ echo -en "[deleted]
     |\t\t• yazi - terminal file manager
     |\t\t• qemufy
     |\t\t• phantom-ps
+    |\t\t• ttyd (run termux in browser)
     |\t\t• i-Haklab chatAI (before 'chatGPT')
     ╰──➤ New features:
     |\t\t• shell: now i-Haklab works over shells fish, zsh & bash\n    |\t\t\t   run 'i-Haklab setshell' to set it
