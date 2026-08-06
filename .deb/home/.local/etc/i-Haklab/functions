@@ -261,6 +261,7 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰sudo────────────────────────────➤ Execute commands or init an enviroment as fake root user
 ╰telegram────────────────────────➤ Open telegram application
 ╰traductor───────────────────────➤ Init a command line traductor
+╰ttyd────────────────────────────➤ Run ttyd server to access Termux remotely via web browser
 ╰yazi────────────────────────────➤ Terminal file manager
 ╰──────────────────────────────────────────────────────────────────────────────────────────|\n\n"
 }

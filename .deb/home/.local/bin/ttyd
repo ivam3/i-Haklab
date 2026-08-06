@@ -1,0 +1,45 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# ttyd: terminal web local o con túnel cloudflared (wrapper i-Haklab)
+# Binario real: $PREFIX/bin/ttyd
+
+source "$HOME/.local/etc/i-Haklab/variables"
+source "$iHETC/functions"
+
+TTYD_PID=""
+CF_PID=""
+ctrl_c() {
+    [[ -n "$TTYD_PID" ]] && kill "$TTYD_PID" 2>/dev/null
+    [[ -n "$CF_PID" ]] && kill "$CF_PID" 2>/dev/null
+    exit 0
+}
+trap ctrl_c INT TERM
+
+case "$1" in
+    --local|-l)
+        shift
+        getPORT
+        "$PREFIX/bin/spin" --cmd "$PREFIX/bin/ttyd -W -w $HOME -p $LPORT $SHELL" \
+            -t "Terminal web local" \
+            --success "Terminal web: http://$LOOPBACK:$LPORT"
+        ;;
+    --remote|-r)
+        shift
+        chk-pkg cloudflared cloudflared
+        getPORT
+        "$PREFIX/bin/ttyd" -W -w "$HOME" -p "$LPORT" "$SHELL" &
+        TTYD_PID=$!
+        TMPLOG=$(mktemp)
+        "$PREFIX/bin/cloudflared" tunnel --url "http://$LOOPBACK:$LPORT" >"$TMPLOG" 2>&1 &
+        CF_PID=$!
+        "$PREFIX/bin/spin" -t "Estableciendo túnel cloudflared" --cmd \
+            "while ! grep -qE 'https://[a-z0-9-]+\.trycloudflare\.com' \"$TMPLOG\"; do sleep 1; done" \
+            --success "Túnel activo"
+        URL=$(grep -oE 'https://[a-z0-9-]+\.trycloudflare\.com' "$TMPLOG" | head -n1)
+        printf "$G(_➤)$W Terminal web pública:$G\n ╰─➤ $URL$W\n"
+        rm -f "$TMPLOG"
+        wait "$CF_PID"
+        ;;
+    *)
+        exec "$PREFIX/bin/ttyd" "$@"
+        ;;
+esac
