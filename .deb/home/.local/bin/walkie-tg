@@ -1,0 +1,45 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# i-Haklab walkie-tg : puente walkie <-> Telegram (direct command)
+BRIDGE="${HOME}/.local/libexec/walkie-tg/bridge.js"
+PIDFILE="${HOME}/.config/walkie-tg/walkie-tg.pid"
+LOGFILE="${HOME}/.config/walkie-tg/walkie-tg.log"
+
+[ -x "$(command -v node)" ] || { echo "walkie-tg: node no instalado"; exit 1; }
+
+case "$1" in
+  start)
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      echo "walkie-tg ya esta corriendo (pid $(cat "$PIDFILE"))"
+      exit 0
+    fi
+    mkdir -p "${HOME}/.config/walkie-tg"
+    command -v termux-wake-lock >/dev/null && termux-wake-lock
+    nohup node "$BRIDGE" >>"$LOGFILE" 2>&1 &
+    echo $! > "$PIDFILE"
+    echo "walkie-tg iniciado (pid $(cat "$PIDFILE"))  log: $LOGFILE"
+    ;;
+  stop)
+    if [ -f "$PIDFILE" ]; then
+      kill "$(cat "$PIDFILE")" 2>/dev/null && rm -f "$PIDFILE" && echo "walkie-tg detenido"
+    else
+      echo "walkie-tg no esta corriendo"
+    fi
+    ;;
+  status)
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+      echo "walkie-tg: corriendo (pid $(cat "$PIDFILE"))"
+    else
+      echo "walkie-tg: detenido"
+    fi
+    ;;
+  logs)
+    [ -f "$LOGFILE" ] && tail -n 30 "$LOGFILE" || echo "sin logs aun"
+    ;;
+  *)
+    echo "uso: walkie-tg {start|stop|status|logs}"
+    echo "config:"
+    echo "  token  -> ~/.config/walkie-tg/token   (chmod 600)  o WALKIE_TG_TOKEN"
+    echo "  canal  -> WALKIE_TG_CHANNEL / WALKIE_TG_SECRET  o ~/.config/walkie-tg/config.json"
+    echo "  chat   -> WALKIE_TG_CHAT (opcional, auto-detecta el primer chat)"
+    ;;
+esac
