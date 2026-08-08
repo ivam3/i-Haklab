@@ -95,6 +95,7 @@ mimikatz:Windows/AD
 mimocode:Agent AI
 minimax-cli:Agent AI
 mistral-vibe:Agent AI
+muse-code:Agent AI
 mvt:Forensics
 nexphisher:Phishing
 ngrok:Tunneling
@@ -166,6 +167,7 @@ udocker:Utilities
 unshc:Forensics
 virustotal-cli:OSINT
 vulnx:Web Application
+walkie:Agent AI
 wbruter:Brute Force
 webscan:Web Application
 webhackshl:Web Application
