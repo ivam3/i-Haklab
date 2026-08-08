@@ -52,7 +52,10 @@ lazy.setup({
   -- Tema 
   {'folke/tokyonight.nvim'},
   -- Linea inferiol
-  {'nvim-lualine/lualine.nvim'},
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' }
+  },
   -- Linea superiol 
   {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
   -- Buscar de forma interavtiva 
