@@ -262,6 +262,7 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰telegram────────────────────────➤ Open telegram application
 ╰traductor───────────────────────➤ Init a command line traductor
 ╰ttyd────────────────────────────➤ Run ttyd server to access Termux remotely via web browser
+╰walkie─tg───────────────────────➤ Connection's bridge between walkie server and telegram's bot
 ╰yazi────────────────────────────➤ Terminal file manager
 ╰──────────────────────────────────────────────────────────────────────────────────────────|\n\n"
 }
