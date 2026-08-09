@@ -44,6 +44,55 @@ walkie-tg start             # puente activo
 # publica en el canal -> llega al bot de Telegram
 ```
 
+**Ejemplo 4: Enviar una foto desde walkie al bot**
+
+Walkie solo transporta texto; el puente interpreta el marcador `photo:<ruta>` como adjunto (debe ser un archivo local accesible desde el bridge).
+
+```bash
+termux-camera-photo -c 0 ~/.walkie-media/captura.jpg
+walkie send equipo "photo:~/.walkie-media/captura.jpg | Foto del entorno"
+# el bridge descarga/envía la imagen vía sendPhoto; el caption va tras ' | '
+```
+
+**Ejemplo 5: Recibir una foto del bot en walkie**
+
+Cuando envías una foto al bot, el bridge la descarga a `~/.walkie-media/tg_<ts>.jpg` y publica en el canal `photo:<ruta> | <caption>` para que el agente la procese.
+
+## Media (multimedia)
+
+*   **Marcadores**: `photo:<ruta>` envía como imagen (`sendPhoto`); `file:<ruta>` como documento genérico (`sendDocument`). El caption opcional va tras ` | `. Soporta `.jpg/.png/.gif/.webp/.pdf/.mp4/.mp3/.txt/.json/.zip` y más.
+*   **Directorio**: todo el media se guarda en `~/.walkie-media/` (creado por el bridge, permiso 700). El agente debe escribir ahí sus fotos/archivos para que el bridge los lea.
+*   **Telegram → walkie**: fotos, documentos, videos y notas de voz enviados al bot se descargan (`getFile`) a `~/.walkie-media/tg_<ts>.<ext>` y se publican en el canal con el marcador correspondiente.
+*   **Límites Bot API**: ~50 MB por envío y 20 MB de descarga.
+*   **Misma máquina**: el puente lee archivos locales, por lo que agente y bridge deben correr en el mismo dispositivo.
+
+## Prompt sugerido para el agente
+
+Si quieres que un agente de IA (p. ej. codex) atienda el canal y sepa usar los marcadores `photo:`/`file:` del puente — y a la vez evite los bucles de saludos — lánzalo con el siguiente prompt:
+
+```bash
+PROMPT="Eres termux-oracle-agent, un agente IA en el canal walkie conectado a un bot de Telegram.
+
+CONTEXTO DEL PUENTE:
+- Todo lo que respondas en el canal llega a Telegram.
+- Para enviar una IMAGEN a Telegram: primero guarda el archivo en ~/.walkie-media/ (ej. termux-camera-photo -c 0 ~/.walkie-media/captura.jpg), luego responde SOLO con el marcador:
+  photo:<ruta> | <caption opcional>
+- Para enviar un ARCHIVO: file:<ruta> | <caption opcional>
+- Si recibes un mensaje con photo:<ruta> o file:<ruta>, la imagen/archivo ya está guardado en esa ruta local: léelo y procésalo.
+- NO respondas \"he enviado la foto\" en texto plano: usa el marcador photo: para que el puente la envíe.
+
+REGLAS ANTI-BUCLE:
+- Responde SOLO a mensajes que no sean tuyos y no sean de sistema.
+- No saludes ni te presentes repetidamente.
+- Si un mensaje es de otro agente, respóndele solo si te pide algo.
+
+Eres conciso, servicial y directo."
+
+walkie agent primera-conexion --cli codex --name termux-oracle-agent --prompt "$PROMPT"
+```
+
+Ajusta `--name` y el nombre del canal a tu caso. Guarda el prompt en un archivo (p. ej. `~/.config/walkie-tg/agent-prompt.txt`) y pasa `--prompt "$(cat ~/.config/walkie-tg/agent-prompt.txt)"` para no repetirlo en cada comando.
+
 ## Consideraciones Adicionales
 
 *   **Auto-detección de chat**: la primera vez que le escribes al bot, el puente detecta tu `chat_id` y lo guarda en `~/.config/walkie-tg/chat.json` (chmod 600). También puedes fijarlo con `WALKIE_TG_CHAT`.

@@ -1,8 +1,12 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # i-Haklab walkie-tg : puente walkie <-> Telegram (direct command)
+#
+source ${HOME}/.local/etc/i-Haklab/functions
 BRIDGE="${HOME}/.local/libexec/walkie-tg/bridge.js"
 PIDFILE="${HOME}/.config/walkie-tg/walkie-tg.pid"
 LOGFILE="${HOME}/.config/walkie-tg/walkie-tg.log"
+
+chck-pkg walkie walkie
 
 [ -x "$(command -v node)" ] || { echo "walkie-tg: node no instalado"; exit 1; }
 

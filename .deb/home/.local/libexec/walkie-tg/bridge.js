@@ -12,6 +12,7 @@ const WALKIE_CLIENT = process.env.WALKIE_SH_CLIENT ||
   path.join(os.homedir(), '.local', 'share', 'walkie', 'node_modules', 'walkie-sh', 'src', 'client.js')
 
 const WALKIE_ID = process.env.WALKIE_TG_ID || 'tg-bot'
+const MEDIA_DIR = process.env.WALKIE_TG_MEDIA || path.join(os.homedir(), '.walkie-media')
 
 function log(...args) {
   process.stdout.write(`[${new Date().toISOString()}] ${args.join(' ')}\n`)
@@ -55,20 +56,26 @@ const API = `https://api.telegram.org/bot${TOKEN}`
 
 function api(method, params = {}) {
   return new Promise((resolve, reject) => {
-    const url = `${API}/${method}${Object.keys(params).length ? '?' + new URLSearchParams(params).toString() : ''}`
-    const req = https.get(url, (res) => {
-      let body = ''
-      res.on('data', (c) => { body += c })
+    const url = `${API}/${method}`
+    const body = JSON.stringify(params)
+    const req = https.request(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    }, (res) => {
+      let buf = ''
+      res.on('data', (c) => { buf += c })
       res.on('end', () => {
         try {
-          const json = JSON.parse(body)
+          const json = JSON.parse(buf)
           if (!json.ok) return reject(new Error(`${method}: ${json.description || 'telegram error'}`))
           resolve(json.result)
         } catch (e) { reject(e) }
       })
     })
     req.on('error', reject)
-    req.setTimeout(30000, () => req.destroy(new Error('telegram timeout')))
+    req.setTimeout(70000, () => req.destroy(new Error('telegram timeout')))
+    req.write(body)
+    req.end()
   })
 }
 
@@ -85,14 +92,116 @@ function sendTelegram(chatId, text) {
   return api('sendMessage', { chat_id: chatId, text }).catch((e) => log('sendMessage fallo:', e.message))
 }
 
+function mimeFor(file) {
+  const ext = path.extname(file).toLowerCase()
+  const map = {
+    '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.gif': 'image/gif',
+    '.webp': 'image/webp', '.bmp': 'image/bmp', '.pdf': 'application/pdf',
+    '.mp4': 'video/mp4', '.mp3': 'audio/mpeg', '.txt': 'text/plain',
+    '.json': 'application/json', '.zip': 'application/zip', '.tar': 'application/x-tar'
+  }
+  return map[ext] || 'application/octet-stream'
+}
+
+function sendMultipart(method, fields, filePath) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, (err, data) => {
+      if (err) return reject(err)
+      const boundary = '----walkie' + Date.now().toString(16)
+      const chunks = []
+      const part = (name, value) => {
+        chunks.push(Buffer.from(
+          `--${boundary}\r\nContent-Disposition: form-data; name="${name}"\r\n\r\n${value}\r\n`
+        ))
+      }
+      for (const [k, v] of Object.entries(fields)) part(k, String(v))
+      const fname = path.basename(filePath)
+      chunks.push(Buffer.from(
+        `--${boundary}\r\nContent-Disposition: form-data; name="${method === 'sendPhoto' ? 'photo' : 'document'}"; filename="${fname}"\r\nContent-Type: ${mimeFor(fname)}\r\n\r\n`
+      ))
+      chunks.push(data)
+      chunks.push(Buffer.from(`\r\n--${boundary}--\r\n`))
+      const body = Buffer.concat(chunks)
+
+      const req = https.request(`${API}/${method}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': `multipart/form-data; boundary=${boundary}`,
+          'Content-Length': body.length
+        }
+      }, (res) => {
+        let buf = ''
+        res.on('data', (c) => { buf += c })
+        res.on('end', () => {
+          try {
+            const json = JSON.parse(buf)
+            if (!json.ok) return reject(new Error(`${method}: ${json.description || 'telegram error'}`))
+            resolve(json.result)
+          } catch (e) { reject(e) }
+        })
+      })
+      req.on('error', reject)
+      req.setTimeout(70000, () => req.destroy(new Error('telegram timeout')))
+      req.end(body)
+    })
+  })
+}
+
+function downloadFile(url, dest) {
+  return new Promise((resolve, reject) => {
+    const req = https.get(url, (res) => {
+      if (res.statusCode !== 200) {
+        res.resume()
+        return reject(new Error(`download ${res.statusCode}`))
+      }
+      const ws = fs.createWriteStream(dest)
+      res.pipe(ws)
+      ws.on('finish', () => ws.close(() => resolve(dest)))
+      ws.on('error', reject)
+    })
+    req.on('error', reject)
+  })
+}
+
+function sendMediaFromPath(chatId, filePath, caption) {
+  const method = /\.(jpe?g|png|gif|webp|bmp)$/i.test(filePath) ? 'sendPhoto' : 'sendDocument'
+  const fields = { chat_id: chatId }
+  if (caption) fields.caption = caption
+  return sendMultipart(method, fields, filePath).catch((e) => log(method + ' fallo:', e.message))
+}
+
+function parseMediaMarker(text) {
+  if (!text) return null
+  const m = String(text).match(/^(photo|file):(\S+)(?:\s*\|\s*(.*))?$/)
+  if (!m) return null
+  let filePath = m[2]
+  if (filePath === '~' || filePath.startsWith('~/')) {
+    filePath = path.join(os.homedir(), filePath.slice(2))
+  }
+  return { kind: m[1], filePath, caption: (m[3] || '').trim() }
+}
+
 const walkie = require(WALKIE_CLIENT)
 
 function startWalkieToTelegram() {
   const abort = { aborted: false, socket: null }
   const onMessage = async (msg) => {
-    if (!msg || msg.message == null) return
+    if (!msg || msg.data == null) return
     if (msg.from === WALKIE_ID) return
-    await sendTelegram(CHAT_ID, `[${msg.from || 'walkie'}]: ${msg.message}`)
+    if (msg.from === 'system') return
+    const text = String(msg.data)
+    const marker = parseMediaMarker(text)
+    if (marker) {
+      log('walkie -> Telegram media:', marker.kind, marker.filePath)
+      if (fs.existsSync(marker.filePath) && fs.statSync(marker.filePath).isFile()) {
+        const caption = marker.caption ? `[${msg.from}]: ${marker.caption}` : `[${msg.from}]`
+        await sendMediaFromPath(CHAT_ID, marker.filePath, caption)
+        return
+      }
+      log('media no encontrado, reenviando como texto:', marker.filePath)
+    }
+    log('walkie -> Telegram:', `[${msg.from}]`, text.slice(0, 80))
+    await sendTelegram(CHAT_ID, `[${msg.from || 'walkie'}]: ${text}`)
   }
 
   walkie.request({ action: 'join', channel: CHANNEL, secret: SECRET, clientId: WALKIE_ID, persist: true })
@@ -115,16 +224,52 @@ function startTelegramToWalkie() {
 
   const poll = async () => {
     try {
-      const updates = await api('getUpdates', { offset, timeout: 30 })
+      const updates = await api('getUpdates', { offset, timeout: 25 })
       for (const u of updates || []) {
         offset = u.update_id + 1
         const m = u.message
-        if (!m || !m.text) continue
+        if (!m) continue
         if (!CHAT_ID) {
           if (m.chat && (m.chat.id || m.chat.id === 0)) saveChat(m.chat.id)
         }
         if (CHAT_ID && m.chat && m.chat.id !== Number(CHAT_ID)) continue
-        if (m.text.startsWith('/')) continue
+        const caption = m.caption || ''
+        let fileId = null
+        let kind = null
+        let ext = '.bin'
+        if (m.photo && m.photo.length > 0) {
+          fileId = m.photo[m.photo.length - 1].file_id
+          kind = 'photo'
+          ext = '.jpg'
+        } else if (m.document) {
+          fileId = m.document.file_id
+          kind = 'file'
+          ext = path.extname(m.document.file_name || '.bin') || '.bin'
+        } else if (m.video) {
+          fileId = m.video.file_id
+          kind = 'file'
+          ext = '.mp4'
+        } else if (m.voice) {
+          fileId = m.voice.file_id
+          kind = 'file'
+          ext = '.ogg'
+        }
+
+        if (fileId) {
+          try {
+            const f = await api('getFile', { file_id: fileId })
+            const dest = path.join(MEDIA_DIR, `tg_${Date.now()}${ext}`)
+            await downloadFile(`https://api.telegram.org/file/bot${TOKEN}/${f.file_path}`, dest)
+            const marker = `${kind}:${dest}${caption ? ' | ' + caption : ''}`
+            await send(marker)
+            log('Telegram -> walkie media:', marker)
+          } catch (e) {
+            log('media fallo:', e.message)
+          }
+          continue
+        }
+
+        if (!m.text || m.text.startsWith('/')) continue
         await send(m.text)
         log('Telegram -> walkie:', m.text)
       }
@@ -138,5 +283,6 @@ function startTelegramToWalkie() {
   poll()
 }
 
+fs.mkdirSync(MEDIA_DIR, { recursive: true, mode: 0o700 })
 startWalkieToTelegram()
 startTelegramToWalkie()
