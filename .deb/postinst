@@ -161,11 +161,11 @@ echo -en "[deleted]
     |\t\t• i-Haklab chatGPT (changed at 'chatAI')
 [updates]
     ╰──➤ Commands recently added:
-    |\t\t• yazi - terminal file manager
     |\t\t• qemufy
     |\t\t• phantom-ps
     |\t\t• ttyd (run termux in browser)
     |\t\t• i-Haklab chatAI (before 'chatGPT')
+    |\t\t• walkie-tg - connect walkie server at telegram bot
     ╰──➤ New features:
     |\t\t• shell: now i-Haklab works over shells fish, zsh & bash\n    |\t\t\t   run 'i-Haklab setshell' to set it
     |\t\t• chatAI: Mannage 2+ chats | create image | remember conversation\n    |\t\t\t  LLM availables: 
