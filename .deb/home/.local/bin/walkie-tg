@@ -6,7 +6,7 @@ BRIDGE="${HOME}/.local/libexec/walkie-tg/bridge.js"
 PIDFILE="${HOME}/.config/walkie-tg/walkie-tg.pid"
 LOGFILE="${HOME}/.config/walkie-tg/walkie-tg.log"
 
-chck-pkg walkie walkie
+chk-pkg walkie walkie
 
 [ -x "$(command -v node)" ] || { echo "walkie-tg: node no instalado"; exit 1; }
 

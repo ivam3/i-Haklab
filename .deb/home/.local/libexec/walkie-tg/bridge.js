@@ -185,10 +185,14 @@ const walkie = require(WALKIE_CLIENT)
 
 function startWalkieToTelegram() {
   const abort = { aborted: false, socket: null }
+  const START_TS = Date.now()
+  const STALE_MS = 60 * 1000
   const onMessage = async (msg) => {
     if (!msg || msg.data == null) return
     if (msg.from === WALKIE_ID) return
     if (msg.from === 'system') return
+    if (msg.ts && msg.ts < START_TS - STALE_MS) return
+    if (msg.ts && msg.ts > Date.now() + STALE_MS) return
     const text = String(msg.data)
     const marker = parseMediaMarker(text)
     if (marker) {

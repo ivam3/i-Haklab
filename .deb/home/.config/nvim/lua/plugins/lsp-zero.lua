@@ -71,9 +71,9 @@ vim.diagnostic.config({
 
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
-  callback = function()
+  callback = function(args)
     local bufmap = function(mode, lhs, rhs)
-      local opts = { buffer = true }
+      local opts = { buffer = args.buf }
       vim.keymap.set(mode, lhs, rhs, opts)
     end
     bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
@@ -85,14 +85,21 @@ vim.api.nvim_create_autocmd('LspAttach', {
     bufmap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
     bufmap('n', '<F3>', '<cmd>lua vim.lsp.buf.rename()<cr>')
     bufmap('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
-    bufmap('x', '<F4>', '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
+    -- bufmap('x', '<F4>', '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
+    bufmap('x', '<F4>', function() vim.lsp.buf.code_action() end)
     bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
-    bufmap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
-    bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+    bufmap('n', '[d', '<cmd>lua vim.diagnostic.jump({ count = -1 })<cr>')
+    bufmap('n', ']d', '<cmd>lua vim.diagnostic.jump({ count = 1 })<cr>')
   end
 })
 
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+
+workspace = {
+  checkThirdParty = false,
+  library = vim.api.nvim_get_runtime_file("", true),
+},
+
 
 require('luasnip.loaders.from_vscode').lazy_load()
 
@@ -102,16 +109,17 @@ local luasnip = require('luasnip')
 cmp.setup({
   sources = {
     { name = 'nvim_lsp' },
+    { name = 'path' },
+    { name = 'buffer' },
+    { name = 'luasnip' },
   },
-    
-mapping = cmp.mapping.preset.insert({
-  ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = 'select' }),
-  ['<C-n>'] = cmp.mapping.select_next_item({ behavior = 'select' }),
-  ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-  ['<C-d>'] = cmp.mapping.scroll_docs(4),
-  ['<CR>'] = cmp.mapping.confirm({ select = true }),
-}),
-    
+  mapping = cmp.mapping.preset.insert({
+    ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = 'select' }),
+    ['<C-n>'] = cmp.mapping.select_next_item({ behavior = 'select' }),
+    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(4),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+  }),
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -127,7 +135,7 @@ mapping = cmp.mapping.preset.insert({
         nvim_lsp = 'λ',
         luasnip = '⋗',
         buffer = 'Ω',
-        path = '🖫',
+        path = '',
         nvim_lua = "Π",
       }
       item.menu = menu_icon[entry.source.name]

@@ -21,10 +21,14 @@ map("n", "<C-k>", "<C-w>k", { desc = "switch window up" })
 ------------------------------------------------------
 --        Formateador 
 ------------------------------------------------------
+-- Help   
+--  :ConformInfo  
 map("n", "<leader>fm", function()
-  require("conform").format { lsp_fallback = true }
-end, { desc = "general format file" })
-
+  require("conform").format({
+    async = true,
+    lsp_format = "fallback",
+  })
+end, { desc = "Format current file" })
 ------------------------------------------------------
 ---           Telescope
 ------------------------------------------------------

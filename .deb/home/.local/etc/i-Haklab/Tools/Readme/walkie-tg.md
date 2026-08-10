@@ -98,6 +98,7 @@ Ajusta `--name` y el nombre del canal a tu caso. Guarda el prompt en un archivo 
 *   **Auto-detección de chat**: la primera vez que le escribes al bot, el puente detecta tu `chat_id` y lo guarda en `~/.config/walkie-tg/chat.json` (chmod 600). También puedes fijarlo con `WALKIE_TG_CHAT`.
 *   **Config alternativa**: en lugar de variables de entorno puedes crear `~/.config/walkie-tg/config.json` con `{"channel": "...", "secret": "...", "chatId": 123456789}`.
 *   **Persistencia**: `walkie-tg start` lanza el puente en segundo plano con `nohup` y mantiene la CPU activa con `termux-wake-lock` (si está instalado).
+*   **Filtro de antigüedad**: al arrancar, el bridge solo reenvía a Telegram los mensajes del canal que son **frescos** (llegados en ese momento). El historial guardado por walkie (`~/.walkie/messages/<canal>.jsonl`) no se reenvía: evita que al reconectar el daemon lleguen ráfagas de mensajes pasados. El historial sí se sigue guardando en disco.
 *   **Identidad en walkie**: el puente usa `clientId = tg-bot` (`WALKIE_TG_ID` para cambiarlo), así los mensajes del bot se distinguen de los demás.
 *   **Seguridad**: el token y el chat_id se guardan con permisos `600`. No compartas el token.
 *   **Dependencia interna**: el puente hace `require()` directo de `~/.local/share/walkie/node_modules/walkie-sh/src/client.js` (API IPC local). Si el paquete walkie se reinstala, el puente sigue funcionando sin cambios.
