@@ -51,27 +51,27 @@ f:close()
 -- ## activa de Gemini de arriba y descomenta la que desees usar  ##
 -- ##                                                             ##
 -- #################################################################
-require("codecompanion").setup({
-  adapters = {
-    http = { -- <--- Creado para solucionar el warning de obsoleto
-      gemini = function()
-        return require("codecompanion.adapters").extend("gemini", {
-          env = {
-            -- Aquí es donde se lee la clave de API que definimos arriba.
-            api_key = os.getenv("APIKEY_gemini"),
-          },
-          -- Opcional: puedes especificar un modelo, por ejemplo "gemini-1.5-flash".
-          -- model = "gemini-pro",
-        })
-      end,
-    },
-  },
-  strategies = {
-    chat = { adapter = "gemini" },
-    inline = { adapter = "gemini" },
-    agent = { adapter = "gemini" },
-  },
-})
+-- require("codecompanion").setup({
+--   adapters = {
+--     http = { -- <--- Creado para solucionar el warning de obsoleto
+--       gemini = function()
+--         return require("codecompanion.adapters").extend("gemini", {
+--           env = {
+--             -- Aquí es donde se lee la clave de API que definimos arriba.
+--             api_key = os.getenv("APIKEY_gemini"),
+--           },
+--           -- Opcional: puedes especificar un modelo, por ejemplo "gemini-1.5-flash".
+--           -- model = "gemini-pro",
+--         })
+--       end,
+--     },
+--   },
+--   strategies = {
+--     chat = { adapter = "gemini" },
+--     inline = { adapter = "gemini" },
+--     agent = { adapter = "gemini" },
+--   },
+-- })
 
 -- #################################################################
 -- ##                                                             ##
@@ -201,7 +201,6 @@ require("codecompanion").setup({
 -- --      CONFIGURACIÓN ALTERNATIVA: Mistral AI
 -- -----------------------------------------------------------------
 -- Descomenta las siguientes líneas para usar OpenAI.
---[[
 require("codecompanion").setup({
   adapters = {
     http = {
@@ -220,4 +219,3 @@ require("codecompanion").setup({
     agent = { adapter = "mistral" },
   },
 })
---]]

@@ -13,7 +13,7 @@ g.mapleader = ','
 
 opt.shell = "/bin/sh"               -- Para  evitar   conflicto con   fish    
 opt.completeopt = {'menu', 'menuone', 'noselect'} -- Auto completado  
-opt.clipboard=unnamedplus           -- Usar la clipboard del sistema   
+opt.clipboard = 'unnamedplus'       -- Usar la clipboard del sistema   
 opt.mouse = 'a'                     -- Usar  el  maus  
 
 

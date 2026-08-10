@@ -70,10 +70,8 @@ map('n', '<C-b>p', '<cmd>:bprevious<cr>')
 map('n', '<C-b>q', '<cmd>:bdelete<cr>')
 -- Cerrar neovim sin guardar
 map('n', '<C-c>', '<cmd>:q!<cr>')
--- Guardar cambios
-map('n', '<C-w>', '<cmd>:w<cr>')
--- Guardar cambios y Cerrar neovim 
-map('n', '<C-x>', '<cmd>:x<cr>')
+-- Salir de modo insertar con jk
+map('i', 'jk', '<Esc>', { desc = 'Exit insert mode' })
 ---==========================
 --
  

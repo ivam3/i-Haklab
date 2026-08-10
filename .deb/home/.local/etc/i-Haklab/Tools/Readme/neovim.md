@@ -35,6 +35,15 @@ Esta configuración utiliza `lazy.nvim` como gestor de plugins.
 | **Auto Pairs** | `jiangmiao/auto-pairs` | Cierre automático de paréntesis. |
 | **Neural** | `dense-analysis/neural` | Cliente de IA secundario. |
 | **Treesitter** | `nvim-treesitter/nvim-treesitter` | Resaltado de sintaxis avanzado. |
+| **Vim Grammarous** | `rhysd/vim-grammarous` | Revisión gramatical y ortográfica. |
+| **GitHub Copilot** | `github/copilot.vim` | Sugerencias de código de Copilot. |
+| **Indent Blankline** | `lukas-reineke/indent-blankline.nvim` | Guías de sangría en todas las líneas. |
+| **Nui** | `muniftanjim/nui.nvim` | Biblioteca de componentes UI (dependencia). |
+| **Git.nvim** | `dinhhuy258/git.nvim` | Comandos de Git dentro del editor. |
+| **Gitsigns** | `lewis6991/gitsigns.nvim` | Indicadores de cambios Git en el margen. |
+| **Smear Cursor** | `sphamba/smear-cursor.nvim` | Efecto "smear" para el cursor. |
+| **Transparent** | `xiyaowong/transparent.nvim` | Fondo transparente del editor. |
+| **cmp-nvim-lua** | `hrsh7th/cmp-nvim-lua` | Autocompletado para la API de Neovim Lua. |
 
 ---
 
@@ -69,9 +78,7 @@ La `<leader>` key está configurada como la coma (`,`).
 | `<C-k>` | Moverse a la ventana superior. |
 | `<C-l>` | Moverse a la ventana derecha. |
 | `<leader>w` | Guardar archivo actual (`:write`). |
-| `<C-w>` | Guardar archivo actual (`:w`). |
 | `<leader>x` | Guardar y cerrar Neovim (`:x`). |
-| `<C-x>` | Guardar y cerrar Neovim. |
 | `<C-c>` | Salir de Neovim sin guardar (`:q!`). |
 | `<leader>ei` | Abrir configuración `init.lua`. |
 
@@ -360,6 +367,47 @@ Los objetos funcionan con cualquier operador: `y` (copiar), `c` (cambiar), `d` (
 | `q` | Dejar de grabar la macro. |
 | `@{reg}` | **Reproducir** la macro guardada en el registro `{reg}`. |
 | `@@` | Repetir la **última macro ejecutada**. |
+| `:let @a = '...'` | Editar o **importar** una macro manualmente (pegar texto compartido). |
+
+### 6.8.1 Uso práctico de macros
+
+**¿Cómo funciona?** Al grabar (`qa`), Vim guarda las **teclas exactas** pulsadas (no
+"video" ni acciones). Al reproducir (`@a`), esas teclas se re-ejecutan como comandos,
+**relativos al cursor actual**. Por eso una macro grabada en una línea suele poder
+aplicarse línea a línea, como un macro de Excel pero basado en teclas.
+
+- **Indicador de grabación**: mientras grabas, la barra de estado (lualine) muestra
+  `[a]` en **rojo y negrita** (la letra del registro). Desaparece al pulsar `q`.
+- **Repetir N veces**: `5@a` ejecuta la macro 5 veces; `@@` repite la última macro.
+- **Aplicar a muchas líneas** (recorrido tipo Excel):
+  - Graba la edición de UNA línea, termina con `j`, y luego pulsa `@a` varias veces.
+  - O con un patrón: `:g/patrón/normal @a` (aplica la macro a todas las líneas que
+    coincidan).
+- **Macro recursiva**: `qaq` (limpia) → `qa ... @a q` (se ejecuta a sí misma al final).
+- **Se detiene ante errores**: si un comando falla (ej. `n` sin coincidencias, `dd` en
+  línea vacía), la reproducción se corta en ese punto.
+- **Ver / editar contenido**: `:reg a` muestra el texto grabado. Puedes corregirlo con
+  `:let @a = '...'` o compartir la macro con otro usuario exactamente así.
+
+### 6.8.2 Compartir una macro para reparar errores
+
+Si quieres ayudar a otro usuario de Termux/i-Haklab a corregir un error en un archivo,
+puedes grabar una macro, exportar su texto con `:reg a` (o `:let @a = '...'`) y
+enviársela para que la pegue en su registro y la ejecute con `@a` sobre el archivo
+afectado.
+
+> **Advertencia:** una macro es una secuencia de teclas **relativa al cursor y al
+> estado del archivo**. Solo funcionará de forma fiable si:
+>
+> - El archivo del otro usuario es **idéntico** al tuyo (mismo contenido y versión).
+> - El cursor se coloca en el punto exacto donde la grabaste.
+> - Su configuración de Neovim no remapea las teclas que usa la macro.
+>
+> Si el archivo difiere aunque sea en una línea, la macro puede hacer ediciones
+> **equivocadas o corromper el archivo** sin avisar. Para distribuir una corrección a
+> muchos usuarios es preferible usar un **patch** (`git diff > fix.patch` → `git apply
+> fix.patch`), un `sed -i 's/viejo/nuevo/'`, o reemplazar directamente el archivo
+> corregido.
 
 ### 6.9 Marcas (Marks)
 | Comando | Descripción |
