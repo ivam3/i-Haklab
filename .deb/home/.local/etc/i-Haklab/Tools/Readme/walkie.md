@@ -81,12 +81,130 @@ walkie agent equipo --cli codex --skip-git-repo-check
 *   **Agentes registrados (registry):** `agy` (`-p`), `vibe` (`-p --output text`), `opencode` (`run`), `gemini`/`qwen`/`qwen-code`/`mimo`/`mimocode`/`kilo`/`kilocode`/`minimax`/`mmx` (`-p`), `copilot`/`copilot-cli`/`codebuff`/`freebuff`/`hermes`/`openclaw` (prompt posicional vía `--agent-args`), `ollama` (REST API, sin CLI) y cualquier otro con fallback `<cli> <prompt>`.
 *   **Ollama (IA local):** requiere un servidor Ollama corriendo en `http://127.0.0.1:11434` (configurable con `OLLAMA_HOST`). Usa la REST API `/api/chat` con `stream:false` (JSON limpio, no el CLI `ollama run` que escupe ANSI en no-TTY) mediante `fetch` nativo (Node ≥ 24). Resolución de modelo: `--model` → `OLLAMA_MODEL` → primer modelo local (`/api/tags`, ignora `:cloud`) → `qwen2.5-coder:1.5b`. Mantiene **historial rodante** (últimos 40 mensajes) para dar contexto entre mensajes. Validado end-to-end: el agente responde vía P2P y recuerda datos de mensajes previos.
 *   **`--skip-git-repo-check`:** flag nativo de `walkie agent`; cuando está presente solo se añade `--skip-git-repo-check` a los argumentos de `codex exec` (que corre fuera de un repo git). Agentes que no lo soportan (p. ej. `agy`) lo ignoran: walkie no se lo reenvía. Sin el flag, codex en un directorio no-git falla con "Not inside a trusted directory and --skip-git-repo-check was not specified".
+*   **`--mention-only`:** flag de `walkie agent` (parche local) que hace responder al agente SOLO cuando lo taggean por nombre (`@nombre`). Sin él, walkie responde también a mensajes sin menciones, lo que dejaría que un agente interfiriera en un chat humano-humano.
+*   **`--respond-to <id>`:** flag de `walkie agent` (parche local) que hace responder al agente SOLO a mensajes de ese emisor (p. ej. un ejecutor que solo obedece al brain).
 *   **`WALKIE_ID`:** define una identidad distinta para cada proceso. Sin ella, todos usan el id por defecto `'default'` y el daemon descarta mensajes propios; para probar P2P en la misma máquina usa `WALKIE_ID=peer1` y `WALKIE_ID=peer2`.
 *   **Legado npm 1.4.0:** para forzar la instalación desde el registro npm (sin chat/agent/pair), exportar `WALKIE_USE_140=1` antes de instalar el paquete.
 *   **Persistencia:** `--persist` en `connect` sincroniza mensajes perdidos al reconectar; los agentes recuerdan contexto entre mensajes.
 *   **Debug:** el daemon corre detached (`stdio:'ignore'`); para ver errores ejecutar directo `node node_modules/walkie-sh/src/daemon.js`, el log queda en `~/.walkie/daemon.log`.
 *   **Arquitectura:** `canal + secreto` → SHA-256 → Topic; los daemons se descubren en la DHT global de Hyperswarm y negocian conexión P2P cifrada directa (UDP udx-native con hole punching vía relays). Daemon persistente por socket Unix en `~/.walkie/daemon.sock`.
-*   **Actualización:** reinstalar el paquete (el `postinst` re-aplica el parche).
+*   **Actualización:** reinstalar el paquete (el `postinst` re-aplica el parche). Tras reinstalar, re-aplicar también el parche de solo-tag (ver abajo).
+
+## Modo solo-tag estricto (parche local)
+
+El `walkie agent` stock solo filtra menciones ajenas: si un humano escribe sin `@`, el agente responde igual. Para que los agentes **escuchen sin intervenir** en una conversación humano-humano y solo actúen cuando se les taggea, se aplicó un parche idempotente al bin local:
+
+- **Archivo del parche:** `$PREFIX/share/walkie/patch-mention-only.js`
+- **Target:** `~/.local/share/walkie/node_modules/walkie-sh/bin/walkie.js` (el que usa el launcher `$PREFIX/bin/walkie`)
+- **Backup:** `walkie.js.bak-mention` (junto al target)
+- **Marcador de idempotencia:** `/* walkie-patch-mention */` (2ª corrida = "already applied")
+
+**Lo que añade:**
+1. **`--mention-only`** → responde solo si `@<nombre>` aparece en el mensaje.
+2. **`--respond-to <id>`** → responde solo si `msg.from === <id>`.
+3. **Anti-replay (`START_TS`)** → descarta mensajes con `ts` anterior al arranque del agente; si el daemon se reinicia y reenvía historial, el agente no re-procesa ni re-ejecuta tareas viejas.
+
+**Re-aplicación tras reinstalar/actualizar walkie:**
+
+```bash
+node $PREFIX/share/walkie/patch-mention-only.js \
+  ~/.local/share/walkie/node_modules/walkie-sh/bin/walkie.js
+```
+
+**Validado end-to-end** (canal de prueba con CLI dummy): mensaje humano sin tag → ignorado; `@nombre` → respondido; `--respond-to brain` → ignora a humanos y obedece solo al brain; agente nuevo con historial previo → no reprocesa mensajes viejos.
+
+## Prompts sugeridos por rol de agente
+
+Para una asistencia 1-a-1 (admin + usuario dialogando, brain delegando y ejecutor aplicando en el dispositivo del usuario), lanza cada agente con su prompt. Ambos requieren el parche de solo-tag de la sección anterior.
+
+### Brain (orquestador/cerebro)
+
+Canal `soporte-<usuario>:<secreto>` — se lanza en el dispositivo del admin:
+
+```bash
+walkie agent soporte-u1 --secret SEcreto \
+  --name termux-oracle-brain \
+  --cli codex \
+  --mention-only \
+  --prompt "$(cat ~/.config/walkie/prompt-brain.txt)"
+```
+
+```bash
+PROMPT_BRAIN="# ROL: BRAIN / cerebro
+# ID: termux-oracle-brain
+# CANAL: soporte-<usuario1>
+# MODALIDAD: maestro + estratega
+
+Eres el cerebro de una asistencia 1-a-1. Ivam3 (admin, humano) y usuario1
+(usuario, humano) dialogan en este canal. NO interrumpas su conversación:
+solo respondes cuando te taggean @termux-oracle-brain.
+
+REGLAS DE ESCUCHA:
+1. Lee siempre, responde solo si te mencionan por nombre.
+2. Si el humano no te taggea, no respondas. Punto.
+3. Ante un error reportado: pide contexto mínimo (comando, output, error exacto)
+   si falta, y define un PLAN.
+
+CUANDO TE TAGGEAN:
+- Analiza el error, propón causa y pasos concretos.
+- Delega la ejecución al ejecutor: mensaje con formato
+  TASKID|ACCION|PARAMS (TASKID corto único, ACCION un verbo claro).
+- Dirígete al ejecutor con @usuario1-executor en el mismo mensaje.
+- NO ejecutes tú los comandos: el ejecutor es quien toca el dispositivo de usuario1.
+
+SÍNTESIS:
+- Consume reportes \"TASKID|ESTADO|RESULTADO\" del ejecutor y resúmelos
+  al humano de forma legible (qué se hizo, qué quedó pendiente, si hubo error).
+- Si TODOS los intentos del ejecutor fallan, escala a ivam3 con lo que falta.
+- Reporta en español, conciso."
+```
+
+### Ejecutor (esclavo)
+
+Se lanza en el dispositivo del usuario — solo obedece al brain:
+
+```bash
+walkie agent soporte-u1 --secret SEcreto \
+  --name usuario1-executor \
+  --cli codex \
+  --mention-only \
+  --respond-to termux-oracle-brain \
+  --agent-args "--dangerously-skip-permissions" \
+  --prompt "$(cat ~/.config/walkie/prompt-executor.txt)"
+```
+
+```bash
+PROMPT_EXECUTOR="# ROL: EXECUTOR
+# ID: usuario1-executor
+# CANAL: soporte-<usuario1>
+# MODALIDAD: esclavo
+
+Eres el ejecutor en el dispositivo de usuario1. Solo recibes órdenes del
+brain (termux-oracle-brain). No decides tareas ni respondes a humanos.
+
+REGLAS DE ESCUCHA:
+1. Solo procesas mensajes cuyo emisor es termux-oracle-brain.
+2. Ignoras a ivam3 y a usuario1 por completo, aunque te escriban directo.
+3. No hablas en el canal a nadie más que al brain.
+
+PROTOCOLO DE EJECUCIÓN:
+- Cada orden llega como: TASKID|ACCION|PARAMS|DEADLINE
+- Respondes SIEMPRE con: TASKID|ESTADO (recibida/en-progreso/ok/fail)|RESULTADO
+- Antes de ejecutar cualquier comando con efectos, reporta EXACTAMENTE qué
+  vas a tocar (comando, rutas, riesgos) y espera el OK del brain si la acción
+  es destructiva (rm, sed -i, reinstalar, reiniciar, tocar config).
+- Si no entiendes o falta un parámetro, pide aclaración ANTES de ejecutar.
+- Ejecuta UNA tarea a la vez. No encadenes pasos sin reportar cada uno.
+- Idempotencia: si recibes un TASKID ya ejecutado, responde \"dup\" y no repitas.
+
+ENTORNO:
+- Estas en Termux en Android. Reinstalar paquetes y reiniciar servicios puede
+  cortar tu propia conexión al canal: avisa al brain antes de hacerlo.
+- Si un comando no existe, usa el fixer de i-Haklab o pkg, y reporta qué instalamos.
+- Reporta en español, resultados crudos (sin interpretar): el brain sintetiza."
+```
+
+Guarda cada prompt en un archivo (p. ej. `~/.config/walkie/prompt-brain.txt` y `~/.config/walkie/prompt-executor.txt`) y pásalo con `--prompt "$(cat ...)"` para no repetirlo en cada comando. `--mention-only` en el ejecutor es redundante con `--respond-to` pero añade defensa en profundidad. Para un agente que atienda un canal enrutado a Telegram, usa en su lugar el prompt anti-bucle de `walkie-tg.md`.
 
 ---
 *Nota: Esta herramienta integra mensajería P2P para humanos y agentes de IA en el ecosistema i-Haklab, sin servidores ni cuentas.*
