@@ -144,6 +144,7 @@ shc:Forensics
 shellsploit-framework:Exploitation
 sherlock:OSINT
 shodan:OSINT
+sleepwalker:Agent AI
 slowhttptest:Exploitation
 smithery:Agent AI
 snscrape:OSINT
@@ -162,6 +163,7 @@ termux-oracle-skill:Utilities
 tmux:Utilities
 translate-shell:Utilities
 trape:OSINT
+ttyd:Utilities
 twifo-cli:OSINT
 udocker:Utilities
 unshc:Forensics
