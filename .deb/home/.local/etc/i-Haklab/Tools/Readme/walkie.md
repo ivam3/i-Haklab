@@ -106,6 +106,10 @@ El `walkie agent` stock solo filtra menciones ajenas: si un humano escribe sin `
 
 **Re-aplicación tras reinstalar/actualizar walkie:**
 
+Desde el paquete `1.5.0-2` el `postinst` aplica este patch automáticamente
+(STEP 2.5b, después del parche de runner genérico). Solo hace falta re-aplicarlo
+a mano si instalaste walkie por otra vía (npm directo, git):
+
 ```bash
 node $PREFIX/share/walkie/patch-mention-only.js \
   ~/.local/share/walkie/node_modules/walkie-sh/bin/walkie.js
@@ -113,9 +117,46 @@ node $PREFIX/share/walkie/patch-mention-only.js \
 
 **Validado end-to-end** (canal de prueba con CLI dummy): mensaje humano sin tag → ignorado; `@nombre` → respondido; `--respond-to brain` → ignora a humanos y obedece solo al brain; agente nuevo con historial previo → no reprocesa mensajes viejos.
 
+## Seguimiento de miembros del canal (`--track-members`)
+
+Un agente brain no "ve" quién entra al canal: descarta los anuncios `"X joined"`
+junto con todos los mensajes de sistema, así que con varios ejecutores presentes
+no sabe a cuál delegar. Un tercer parche idempotente
+(`$PREFIX/share/walkie/patch-members.js`, debe correr después de
+`patch-agents.js` y `patch-mention-only.js`) añade el flag opt-in:
+
+```bash
+walkie agent ops:secret --cli codex --track-members --mention-only \
+  --prompt "$(cat ~/.config/walkie/prompt-brain.txt)"
+```
+
+**Lo que añade:**
+1. Registra **miembros locales** desde los anuncios `joined`/`left` del daemon
+   más una consulta `members` al arrancar, y **peers remotos** (otros
+   dispositivos) desde el `from` del primer mensaje que envía cada uno.
+2. Inyecta el roster en el prompt del agente **solo cuando cambia la membresía**
+   (Δ, sin ruido): `[ROSTER #channel] brain, exec1, humano, ...`
+3. Persiste en `~/.walkie/roster-<canal>.json`, así un brain reiniciado ya
+   nace sabiendo quién está presente.
+
+**Re-aplicación tras reinstalar/actualizar walkie:**
+
+Desde el paquete `1.5.0-2` el `postinst` aplica el de solo-tag automáticamente;
+el de member tracking se agrega en `1.5.0-3` (STEP 2.5c, después de
+patch-agents y patch-mention-only). A mano (instalación por npm/git directo):
+
+```bash
+node $PREFIX/share/walkie/patch-members.js \
+  ~/.local/share/walkie/node_modules/walkie-sh/bin/walkie.js
+```
+
+**Validado end-to-end** (canal de prueba con CLI dummy): un join se registra y
+persiste; sin cambio de membresía no aparece `[ROSTER]`; un miembro nuevo
+aparece en el siguiente prompt; el roster sobrevive a un reinicio del agente.
+
 ## Prompts sugeridos por rol de agente
 
-Para una asistencia 1-a-1 (admin + usuario dialogando, brain delegando y ejecutor aplicando en el dispositivo del usuario), lanza cada agente con su prompt. Ambos requieren el parche de solo-tag de la sección anterior.
+Para una asistencia 1-a-1 (admin + usuario dialogando, brain delegando y ejecutor aplicando en el dispositivo del usuario), lanza cada agente con su prompt. Ambos requieren el parche de solo-tag de la sección anterior; el brain, además, el de seguimiento de miembros si quiere conocer el roster del canal (`--track-members`).
 
 ### Brain (orquestador/cerebro)
 
@@ -124,10 +165,19 @@ Canal `soporte-<usuario>:<secreto>` — se lanza en el dispositivo del admin:
 ```bash
 walkie agent soporte-u1 --secret SEcreto \
   --name termux-oracle-brain \
-  --cli codex \
+  --cli claude \
   --mention-only \
+  --track-members \
   --prompt "$(cat ~/.config/walkie/prompt-brain.txt)"
 ```
+
+> **Por qué `--cli claude` y no `--cli codex`:** el brain debe **orquestar y
+> delegar**, nunca ejecutar en su propio dispositivo. `codex` es un agente
+> tool-use con shell: aunque el prompt le prohíba ejecutar, tiene la capacidad
+> física de hacerlo y a veces lo hace. `claude` se invoca en modo texto puro
+> (`claude -p`, sin tools), así que al brain le es **imposible por construcción**
+> ejecutar comandos. El único que ejecuta es el ejecutor (en el dispositivo del
+> usuario, con codex + permisos).
 
 ```bash
 PROMPT_BRAIN="# ROL: BRAIN / cerebro
@@ -146,6 +196,8 @@ REGLAS DE ESCUCHA:
    si falta, y define un PLAN.
 
 CUANDO TE TAGGEAN:
+- Si en tu prompt aparece una línea [ROSTER #<canal>] con los presentes,
+  úsala para saber a quién delegar; por defecto delega a @usuario1-executor.
 - Analiza el error, propón causa y pasos concretos.
 - Delega la ejecución al ejecutor: mensaje con formato
   TASKID|ACCION|PARAMS (TASKID corto único, ACCION un verbo claro).
