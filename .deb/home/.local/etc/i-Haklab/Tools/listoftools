@@ -20,6 +20,7 @@ bloodhound
 blackbox
 botgram
 burpsuite
+cactus
 cewl
 clamav
 claude-code
@@ -77,6 +78,7 @@ hcdecryptor
 hexer
 hermes-agent
 holehe
+huggingface
 hunner-framework
 hydra-gtk
 infoga

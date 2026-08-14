@@ -20,6 +20,7 @@ bloodhound:Windows/AD
 blackbox:Phishing
 botgram:Phishing
 burpsuite:Web Application
+cactus:Agent AI
 cewl:Password
 clamav:Forensics
 claude-code:Agent AI
@@ -77,6 +78,7 @@ hcdecryptor:Cracking
 hexer:Forensics
 hermes-agent:Agent AI
 holehe:OSINT
+huggingface:Agent IA
 hunner-framework:Web Application
 hydra-gtk:Brute Force
 infoga:OSINT
