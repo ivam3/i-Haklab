@@ -101,7 +101,15 @@ apt install ./path/at/i-haklab_example_all.deb
 | **codebuff** | ✅ `apt install codebuff` | ❌ | ❌ | ❌ | Buffcode AI agent, glibc-native binary |
 | **freebuff** | ✅ `apt install freebuff` | ❌ | ❌ | ❌ | Community free version of codebuff |
 | **mimocode** | ✅ `apt install mimocode` | ❌ | ❌ | ❌ | Mini AI coding agent, glibc-native binary |
+| **cactus** | ✅ `apt install cactus` | ❌ | ❌ | ❌ | Hybrid edge-cloud AI engine: on-device LLM/VLM/speech inference (Cactus Engine) + `cactus convert` |
+| **hermes-agent** | ✅ `apt install hermes-agent` | ❌ | ❌ | ❌ | Personal AI agent by Nous Research (CLI, TUI, desktop & messaging gateway) |
+| **muse-code** | ✅ `apt install muse-code` | ❌ | ❌ | ❌ | Meta AI coding agent for the terminal (runs under proot for Android) |
+| **omniroute** | ✅ `apt install omniroute` | ❌ | ❌ | ❌ | Multi-proxy routing manager (TOR/SOCKS5/HTTP/chain proxies) for AI agents |
+| **walkie** | ✅ `apt install walkie` | ❌ | ❌ | ❌ | P2P communication CLI for AI agents (no server, no setup) |
 | **codex-cli** | ❌ | ✅ `npm install -g codex` | ✅ | ❌ | Codex CLI (wrapper: `@mmmbuto/codex-cli-termux`) |
+| **kimi-code** | ❌ | ✅ `npm install -g kimi-code` | ✅ | ❌ | Moonshot AI coding agent (wrapper: `@moonshot-ai/kimi-code`) |
+| **sleepwalker** | ❌ | ✅ `npm install -g sleepwalker` | ❌ | ❌ | AI Visibility & Content Intelligence CLI (wrapper: `@sleepwalkerai/cli`) |
+| **smithery** | ❌ | ✅ `npm install -g smithery` | ✅ | ❌ | MCP servers marketplace & unified proxy (wrapper: `@smithery/cli`) |
 | **minimax-cli** | ❌ | ✅ `npm install -g minimax-cli` | ✅ | ❌ | MiniMax AI agent (wrapper: `mmx-cli`) |
 | **open-lovable** | ❌ | ✅ `npm install -g open-lovable` | ✅ | ❌ | Lovable dev agent (wrapper clones `firecrawl/open-lovable`) |
 | **codecompanion** | ❌ | Via Neovim (`olimorris/codecompanion.nvim`) | ❌ | ❌ | AI plugin for Neovim with Gemini/OpenAI/Anthropic/Copilot/Mistral adapters. Activated on first `nvim` launch via lazy.nvim |
@@ -118,6 +126,7 @@ apt install ./path/at/i-haklab_example_all.deb
 | **context7 (ctx7)** | ❌ | ✅ `npm install -g ctx7` | ❌ | ✅ `npx ctx7@latest` | Documentation & code example retrieval for AI agents (MCP-compatible) |
 | **openspec** | ❌ | ✅ `npm install -g openspec` | ✅ `pnpm install -g openspec` | ❌ | Open-source LLM spec generator (wrapper: `@fission-ai/openspec`) |
 | **termux-oracle-skill** | ✅ `apt install termux-oracle-skill` | ❌ | ❌ | ❌ | Termux expert skill for AI agents — context about Termux, i-Haklab & 190+ tools |
+| **huggingface** | ✅ `apt install huggingface` | ❌ | ❌ | ❌ | Client library for the Hugging Face Hub (`huggingface_hub`) — download/publish AI models & datasets via `huggingface-cli`/`hf` |
 | **n8n** | ❌ | ✅ `npm install -g n8n` | ✅ `pnpm install -g n8n` | ❌ | Workflow automation with SQLite backend (wrapper auto-installs pm2/gyp pre-reqs) |
 
 </details>
@@ -178,7 +187,18 @@ i-Haklab bruteforce
 ```
 - Let you interact with ChatGPT-3 via CLI:
 ```bash
-i-Haklab chatGPT
+i-Haklab chatAI
+```
+
+- Get the main activity from an .apk file:
+```bash
+i-Haklab apkactivity <path/to/file.apk>
+```
+
+- Show the current ngrok link / connect via SSH with ngrok:
+```bash
+i-Haklab ngroklink
+i-Haklab ngrokssh -p <port> -t <protocol> -f <id_rsa-file>
 ```
 - Add your API keys for various services:
 ```bash
@@ -238,6 +258,28 @@ i-Haklab show instatools
 ```
 ![i-Haklab show alltools](./.img/i-Haklab_alltools.png)
 
+**Full breakdown of the 188 available tools by category (`i-Haklab show alltools`):**
+
+| Category | Tools |
+|---|---|
+| **Brute Force** | acccheck, credmap, hydra-gtk, wbruter |
+| **Android** | adbfastboot, androbugs, androidsdk-cli, apksigner, apktool, appshark, axmlprinter2, dex2jar, frida, objection, phonesploit, scrcpy, xml2axml |
+| **Web Application** | adminpanel, aquatone, burpsuite, d-tect, dirb, fuzzdb, gobuster, hakku-framework, hunner-framework, nikto, redhawk, routersploit, sqliv, sqlmap, vulnx, webhackshl, webscan, websploit, wfuzz, whatweb, wpscan, zaproxy |
+| **Wireless** | aircrack-ng |
+| **OSINT** | amass, finalrecon, geo-recon, ghunt, h8mail, holehe, infoga, ipgeolocation, maltego, octosuite, orbitaldump, osintgram, osrframework, phomber, phoneintel, recon-ng, recondog, sherlock, shodan, snscrape, sublist3r, trape, twifo-cli, virustotal-cli, xleak |
+| **Agent AI** | antigravity-cli, cactus, claude-code, codebuff, codex, context7, copilot-cli, engram, freebuff, hermes-agent, kimi-code, mimocode, minimax-cli, mistral-vibe, muse-code, omniroute, open-lovable, openclaw, opencode, playwright-proot, qwen-code, sleepwalker, smithery, walkie |
+| **Utilities** | bash-obfuscate, code-server, converter, gh, git-filter-repo, glab-cli, jython-lts, mariadb, markdown-viewer, n8n, openjdk-21, openspec, pnpm, postgresql, proroot, scrapy, speedtest-go, sqlite, termux-desktop-xfce, termux-docker-qemu, termux-oracle-skill, tmux, translate-shell, ttyd, udocker, xapt-management, yt-dlp, ytfzf |
+| **Exploitation** | beef, bitb-framework, cryptovenom, dos-a-tool, embed, exploitdb, metasploit-framework, penelope, pybelt, quack, ransomux, shellsploit-framework, slowhttptest, tangalanga, xerosploit |
+| **Network Scanning** | bettercap, dnsenum, enum4linux, enum4linux-ng, nmap |
+| **Forensics** | binwalk, clamav, exif, fbi, gdb, ghidra, hexer, mvt, radare2, shc, steghide, stegsnow, unshc |
+| **Windows/AD** | bloodhound, getadusers, getnpusers, getuserspns, kerbrute, mimikatz |
+| **Phishing** | blackbox, botgram, evilginx2, evilurl, fake-sms, ghost, gophish, lockphish, nexphisher, saycheese, sayhello, seeker, storm-breaker |
+| **Password** | cewl, crunch, seclists |
+| **Cloud** | cloudbunny, hatcloud, railway-cli |
+| **Tunneling** | cloudflared, dns2tcp, localtunnel, ngrok, ovh-ttyrec, putty |
+| **Cracking** | hashcat, hasher, hashid, hcdecryptor, johntheripper, rhash |
+| **Agent IA** | huggingface |
+
 - Provides free support material for learning the [included tools](https://github.com/ivam3/termux-packages) and use of the shell in Termux.
 ```
 i-Haklab show books
@@ -263,14 +305,17 @@ i-Haklab show QG
 - **apt**: Install/remove and **configure** packages.
 - **npm**: Install/remove and **configure** nodejs packages.
 - **adminfiles**: Manage storage with graphical interface.
+- **ai**: Asistente IA: natural language → terminal command (ollama/groq, local/cloud, voice).
 - **bat**: Enhanced 'cat' with syntax highlighting.
 - **cmd**: Manage Android settings.
 - **df / du**: Disk and directory usage information.
 - **fixer**: Automate fixing Termux issues.
 - **fzf**: Fuzzy finder.
 - **gitbrowsering**: Search GitHub repositories.
+- **glow**: Read markdown files with syntax highlighting.
 - **LOCALHOST / mypip**: LAN and Public IP information.
 - **lock**: Secure Termux screen.
+- **nls**: Enhanced 'ls' rendering entries in boxes/grid.
 - **openvpn**: Open OpenVPN Android application.
 - **omf**: Change Oh-my-fish theme.
 - **phantom-ps**: Manage phantom process limits for fix 'E:signal 9'.
@@ -282,6 +327,8 @@ i-Haklab show QG
 - **sudo**: Fake root or real root environment.
 - **telegram**: Open Telegram Android application.
 - **traductor**: Command line translator.
+- **ttyd**: Run ttyd server to access Termux remotely via web browser.
+- **walkie-tg**: Connection's bridge between walkie server and telegram's bot.
 - **yazi**: Terminal file manager.
 </details>
 
