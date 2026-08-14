@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.13.7",
+  "version": "3.13.8",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -81,6 +81,7 @@
     "home/.local/etc/i-Haklab/Tools/Readme/bloodhound.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/bloodhound.md",
     "home/.local/etc/i-Haklab/Tools/Readme/botgram.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/botgram.md",
     "home/.local/etc/i-Haklab/Tools/Readme/burpsuite.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/burpsuite.md",
+    "home/.local/etc/i-Haklab/Tools/Readme/cactus.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/cactus.md",
     "home/.local/etc/i-Haklab/Tools/Readme/cewl.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/cewl.md",
     "home/.local/etc/i-Haklab/Tools/Readme/chatgpt.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/chatgpt.md",
     "home/.local/etc/i-Haklab/Tools/Readme/clamav.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/clamav.md",
@@ -144,6 +145,7 @@
     "home/.local/etc/i-Haklab/Tools/Readme/hermes-agent.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/hermes-agent.md",
     "home/.local/etc/i-Haklab/Tools/Readme/hexer.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/hexer.md",
     "home/.local/etc/i-Haklab/Tools/Readme/holehe.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/holehe.md",
+    "home/.local/etc/i-Haklab/Tools/Readme/huggingface.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/huggingface.md",
     "home/.local/etc/i-Haklab/Tools/Readme/hunner-framework.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/hunner-framework.md",
     "home/.local/etc/i-Haklab/Tools/Readme/hydra-gtk.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/hydra-gtk.md",
     "home/.local/etc/i-Haklab/Tools/Readme/infoga.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/infoga.md",

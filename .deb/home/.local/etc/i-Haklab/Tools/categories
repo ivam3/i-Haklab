@@ -106,8 +106,8 @@ nmap:Network Scanning
 n8n:Utilities
 objection:Android
 octosuite:OSINT
-omniroute:Utilities
-open-lovable:Utilities
+omniroute:Agent AI
+open-lovable:Agent AI
 openclaw:Agent AI
 opencode:Agent AI
 openjdk-21:Utilities
@@ -120,7 +120,7 @@ penelope:Exploitation
 phomber:OSINT
 phoneintel:OSINT
 phonesploit:Android
-playwright-proot:Utilities
+playwright-proot:Agent AI
 pnpm:Utilities
 postgresql:Utilities
 proroot:Utilities
