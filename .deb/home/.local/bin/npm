@@ -3,6 +3,11 @@
 
 source ${HOME}/.local/etc/i-Haklab/functions
 
+if ! dpkg-query -W -f='${Status}' $(basename $0) 2>/dev/null | grep -q "install ok installed"; then
+    echo "> $(basename $0) itself is not installed. Installing it now..."
+    apt install -y $(basename $0)
+fi
+
 if [[ "$1" == "install" || "$1" == "update" ]]; then
     pushd "$HOME" >/dev/null
     for i in "${@:2}"; do
