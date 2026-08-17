@@ -25,13 +25,6 @@ if [[ "$1" == "install" || "$1" == "update" ]]; then
             pnpm)
                 corepack enable
                 pnpm setup
-                search_in_path=$(echo "${PATH}"|tr ':' '\n'|grep -Fx "$HOME/.local/share/pnpm/bin")
-
-                [[ -n "$search_in_path" ]] && { 
-                    envPATH=$(echo "${PATH}"|tr ' ' ':')
-                    set_filerc 
-                    echo "export PATH=\"$HOME/.local/share/pnpm/bin:$envPATH\"" >> "$FILERC"
-                }
                 ;;
             
             open-lovable)
