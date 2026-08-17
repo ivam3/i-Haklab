@@ -3,7 +3,7 @@
 
 source ${HOME}/.local/etc/i-Haklab/functions
 
-if ! -e $PREFIX/lib/node_modules/corepack/dist/$(basename $0).js; then 
+if [[ ! -e "$PREFIX/lib/node_modules/corepack/dist/$(basename $0).js" ]]; then 
     echo "> $(basename $0) itself is not installed. Installing it now..."
     npm install -g $(basename $0)
 fi
