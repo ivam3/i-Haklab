@@ -159,6 +159,7 @@ fi
 echo -en "[deleted]
     ╰──➤ Commands:
     |\t\t• i-Haklab chatGPT (changed at 'chatAI')
+    |\t\t• i-Haklab weechat (deprecated)
 [updates]
     ╰──➤ Commands recently added:
     |\t\t• qemufy
@@ -191,8 +192,12 @@ echo -en "[deleted]
     |\t\t• Hermes-agent
     |\t\t• Mistral-vibe
     |\t\t• Open-lovable
+    |\t\t• Omniroute
     |\t\t• Github Copilot
     |\t\t• Antigravity-cli
+    ╰──➤ LOCALS AI:
+    |\t\t• Ollama
+    |\t\t• Cactus
     ╰──➤ MCPs:
     |\t\t• Testsprite
     |\t\t• Context7

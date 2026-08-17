@@ -154,7 +154,6 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 |   ╰────────+─────tutorials─────➤ Show tutorials available
 ╰─speedtest──➤───────────────────➤ Run a speed test of your network
 ╰─version────➤───────────────────➤ Show i-Haklab version installed
-╰─weechat────➤───────────────────➤ Connect with irc Ivam3byCinderella chat
 ╰─Xwayland───➤───────────────────➤ Run xserver over TermuXwayland app with xfce4 as window manager
 |            |                   |
 |            |                   |
