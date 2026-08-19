@@ -33,6 +33,7 @@ export APIKEY_groq=""
 export APIKEY_openrouter=""
 export APIKEY_togetherai=""
 export APIKEY_kimi=""
+export APIKEY_testsprite=""
 export R='\e[31m'
 export G='\e[32m'
 export Goke='\033[92m'

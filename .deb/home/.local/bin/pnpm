@@ -22,6 +22,10 @@ if [[ "$1" == "install" || "$1" == "update" ]]; then
                 bash "$HOME/.local/libexec/preconf" n8n pnpm
                 ;;
             
+            @testsprite/testsprite-mcp)
+                bash "$HOME/.local/libexec/preconf" testsprite pnpm
+                ;;
+            
             open-lovable)
                 bash "$HOME/.local/libexec/preconf" open-lovable pnpm "$1"
                 break

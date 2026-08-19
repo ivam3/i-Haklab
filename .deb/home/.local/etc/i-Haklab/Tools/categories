@@ -11,6 +11,7 @@ apktool:Android
 appshark:Android
 aquatone:Web Application
 axmlprinter2:Android
+azure-cli:Cloud
 bash-obfuscate:Utilities
 beef:Exploitation
 bettercap:Network Scanning
@@ -162,6 +163,7 @@ tangalanga:Exploitation
 termux-desktop-xfce:Utilities
 termux-docker-qemu:Utilities
 termux-oracle-skill:Utilities
+testsprite:Agent AI
 tmux:Utilities
 translate-shell:Utilities
 trape:OSINT

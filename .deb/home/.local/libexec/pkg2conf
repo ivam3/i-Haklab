@@ -93,6 +93,17 @@ case "$1" in
         echo "[📢] substitute 'agentAI' with your agent name"
         ;;
 
+    @testsprite/testsprite-mcp)
+        indexFile="${PREFIX}/lib/node_modules/@testsprite/testsprite-mcp/dist/index.js"
+        termux-fix-shebang "$indexFile"
+        echo "[💡] TestSprite MCP server installed correctly"
+        echo " ╰─➤ Get an API key at https://www.testsprite.com/dashboard/settings/apikey"
+        echo "[💡] Configure your API key (it will be stored as APIKEY_testsprite)"
+        echo " ╰─➤ i-Haklab setapikey"
+        echo "[💡] Then register the MCP server in your AI-agent with the API_KEY env var"
+        echo " ╰─➤ API_KEY=\$APIKEY_testsprite node $indexFile"
+        ;;
+
     localtunnel)
         mkdir -p ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl
         curl -fsSL ${iHDB}/.local/etc/localtunnel/openurl.js -o \

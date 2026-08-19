@@ -275,7 +275,7 @@ i-Haklab show instatools
 | **Windows/AD** | bloodhound, getadusers, getnpusers, getuserspns, kerbrute, mimikatz |
 | **Phishing** | blackbox, botgram, evilginx2, evilurl, fake-sms, ghost, gophish, lockphish, nexphisher, saycheese, sayhello, seeker, storm-breaker |
 | **Password** | cewl, crunch, seclists |
-| **Cloud** | cloudbunny, hatcloud, railway-cli |
+| **Cloud** | azure-cli, cloudbunny, hatcloud, railway-cli |
 | **Tunneling** | cloudflared, dns2tcp, localtunnel, ngrok, ovh-ttyrec, putty |
 | **Cracking** | hashcat, hasher, hashid, hcdecryptor, johntheripper, rhash |
 | **Agent IA** | huggingface |

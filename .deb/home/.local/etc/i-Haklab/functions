@@ -7,11 +7,11 @@ iHDB='https://raw.githubusercontent.com/ivam3/i-Haklab/master/.deb/home'
 banner() {
   banner="/data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab_legacy"
   banner_dir="/data/data/com.termux/files/home/.local/etc/i-Haklab/banner"
-	[[ ! -e $banner/i-Haklab ]] && {
-		curl -fsSL "$iHDB/.local/etc/i-Haklab/banner/i-Haklab" -o $banner_dir/i-Haklab;
+	[[ -e $banner/i-Haklab ]] || {
+		curl -fsSL "$iHDB/.local/etc/i-Haklab/banner/i-Haklab" -o $banner_dir/i-Haklab 2>/dev/null;
 	}
-	[[ ! -e $banner/i-Haklab_legacy ]] && {
-		curl -fsSL "$iHDB/.local/etc/i-Haklab/banner/i-Haklab_legacy" -o $banner_dir/i-Haklab_legacy;
+	[[ -e $banner/i-Haklab_legacy ]] || {
+		curl -fsSL "$iHDB/.local/etc/i-Haklab/banner/i-Haklab_legacy" -o $banner_dir/i-Haklab_legacy 2>/dev/null;
 	}
   [[ $1 = "latest" ]] && banner="/data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab"
   [[ $1 = "custom" ]] && banner="/data/data/com.termux/files/home/.local/etc/i-Haklab/banner/custom"
@@ -154,6 +154,7 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 |   ╰────────+─────tutorials─────➤ Show tutorials available
 ╰─speedtest──➤───────────────────➤ Run a speed test of your network
 ╰─version────➤───────────────────➤ Show i-Haklab version installed
+╰─weechat────➤───────────────────➤ Connect with irc Ivam3byCinderella chat
 ╰─Xwayland───➤───────────────────➤ Run xserver over TermuXwayland app with xfce4 as window manager
 |            |                   |
 |            |                   |
@@ -354,6 +355,7 @@ ih_normalize_pkg() {
         copilot-cli|github-copilot) echo "@github/copilot" ;;
         minimax-cli)       echo "mmx-cli" ;;
         smithery)          echo "@smithery/cli" ;;
+        testsprite)        echo "@testsprite/testsprite-mcp" ;;
         *)                 echo "$i" ;;
     esac
 }

@@ -33,3 +33,4 @@ zsh
 @fission-ai/openspec
 @moonshot-ai/kimi-code
 @mmmbuto/codex-cli-termux@latest
+@testsprite/testsprite-mcp
