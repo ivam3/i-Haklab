@@ -71,6 +71,13 @@ walkie agent equipo --cli ollama   # auto-detecta el primer modelo local
 walkie agent equipo --cli codex --skip-git-repo-check
 ```
 
+**Ejemplo 9: Agente con IA on-device (cactus)**
+
+```bash
+walkie agent equipo --cli cactus                          # modelo por defecto (gemma-4-E2B-it)
+walkie agent equipo --cli cactus --model google/gemma-4-E2B-it
+```
+
 **Comandos disponibles (v1.5.0):** `chat`, `agent`, `pair`, `connect`, `watch`, `send`, `read`, `leave`, `status`, `web`, `stop`.
 
 ## Consideraciones Adicionales
@@ -78,8 +85,9 @@ walkie agent equipo --cli codex --skip-git-repo-check
 *   **Instalación en i-Haklab:** disponible como paquete `.deb` → `apt install walkie` (o `pkg install walkie`). El `postinst` instala `walkie-sh` desde el repo git de upstream (v1.5.0), con fallback a la versión npm 1.4.0 si no hay internet.
 *   **Parche netlink/SELinux (obligatorio en Android):** al arrancar, el daemon crea un socket `AF_NETLINK` para observar cambios de red; en Android SELinux bloquea ese `bind()` para apps no-root (`permission denied`). El `postinst` aplica automáticamente un parche en `node_modules/udx-native/lib/network-interfaces.js` que envuelve el init nativo en `try/catch` y degrada a `interfaces = []`. Con esto el daemon arranca y responde todos los comandos; la IP local cae a `127.0.0.1` (solo desactiva el atajo LAN; el descubrimiento WAN sigue funcionando vía HiperDHT).
 *   **Parche genérico de agentes (runner universal):** el `postinst` aplica además un parche sobre `bin/walkie.js` (`~/.local/share/walkie/node_modules/walkie-sh/`) que añade un runner genérico (`runGeneric`), un runner para **IA local vía Ollama** (`runOllama`), un flag nativo `--skip-git-repo-check` (solo se reenvía a `codex`, que lo soporta) y relaja la validación de `--cli`. Esto permite `--cli <cualquier-agente>` y `--cli ollama` sin que el CLI nativo los conozca.
-*   **Agentes registrados (registry):** `agy` (`-p`), `vibe` (`-p --output text`), `opencode` (`run`), `gemini`/`qwen`/`qwen-code`/`mimo`/`mimocode`/`kilo`/`kilocode`/`minimax`/`mmx` (`-p`), `copilot`/`copilot-cli`/`codebuff`/`freebuff`/`hermes`/`openclaw` (prompt posicional vía `--agent-args`), `ollama` (REST API, sin CLI) y cualquier otro con fallback `<cli> <prompt>`.
+*   **Agentes registrados (registry):** `agy` (`-p`), `vibe` (`-p --output text`), `opencode` (`run`), `gemini`/`qwen`/`qwen-code`/`mimo`/`mimocode`/`kilo`/`kilocode`/`minimax`/`mmx` (`-p`), `copilot`/`copilot-cli`/`codebuff`/`freebuff`/`hermes`/`openclaw` (prompt posicional vía `--agent-args`), `cactus` (`run --prompt`, modelo on-device; respuesta limpia vía `--result-json`), `ollama` (REST API, sin CLI) y cualquier otro con fallback `<cli> <prompt>`.
 *   **Ollama (IA local):** requiere un servidor Ollama corriendo en `http://127.0.0.1:11434` (configurable con `OLLAMA_HOST`). Usa la REST API `/api/chat` con `stream:false` (JSON limpio, no el CLI `ollama run` que escupe ANSI en no-TTY) mediante `fetch` nativo (Node ≥ 24). Resolución de modelo: `--model` → `OLLAMA_MODEL` → primer modelo local (`/api/tags`, ignora `:cloud`) → `qwen2.5-coder:1.5b`. Mantiene **historial rodante** (últimos 40 mensajes) para dar contexto entre mensajes. Validado end-to-end: el agente responde vía P2P y recuerda datos de mensajes previos.
+*   **Cactus (IA on-device):** el runner invoca `cactus run --prompt "<mensaje>"` sobre el modelo local (por defecto `google/gemma-4-E2B-it`; cualquier modelo de `cactus list` se pasa con `--model`, que cactus recibe como posición, no como `--model`). La respuesta se lee del `--result-json` que escribe el engine, así el canal solo ve la respuesta del asistente (sin el banner/`You:`/stats interactivos). Primer uso puede requerir descarga del modelo. Validado end-to-end vía P2P.
 *   **`--skip-git-repo-check`:** flag nativo de `walkie agent`; cuando está presente solo se añade `--skip-git-repo-check` a los argumentos de `codex exec` (que corre fuera de un repo git). Agentes que no lo soportan (p. ej. `agy`) lo ignoran: walkie no se lo reenvía. Sin el flag, codex en un directorio no-git falla con "Not inside a trusted directory and --skip-git-repo-check was not specified".
 *   **`--mention-only`:** flag de `walkie agent` (parche local) que hace responder al agente SOLO cuando lo taggean por nombre (`@nombre`). Sin él, walkie responde también a mensajes sin menciones, lo que dejaría que un agente interfiriera en un chat humano-humano.
 *   **`--respond-to <id>`:** flag de `walkie agent` (parche local) que hace responder al agente SOLO a mensajes de ese emisor (p. ej. un ejecutor que solo obedece al brain).

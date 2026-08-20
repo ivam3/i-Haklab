@@ -1,11 +1,11 @@
 acccheck:Brute Force
 adbfastboot:Android
 adminpanel:Web Application
-aircrack-ng:Wireless
+aircrack-ng:Network Scanning
 amass:OSINT
 androbugs:Android
 androidsdk-cli:Android
-antigravity-cli:Agent AI
+antigravity-cli:AI Agents
 apksigner:Android
 apktool:Android
 appshark:Android
@@ -21,18 +21,18 @@ bloodhound:Windows/AD
 blackbox:Phishing
 botgram:Phishing
 burpsuite:Web Application
-cactus:Agent AI
+cactus:AI & Automation
 cewl:Password
 clamav:Forensics
-claude-code:Agent AI
+claude-code:AI Agents
 cloudbunny:Cloud
 cloudflared:Tunneling
 code-server:Utilities
-codebuff:Agent AI
-codex:Agent AI
+codebuff:AI Agents
+codex:AI Agents
 converter:Utilities
-context7:Agent AI
-copilot-cli:Agent AI
+context7:MCP & Skills
+copilot-cli:AI Agents
 credmap:Brute Force
 crunch:Password
 cryptovenom:Exploitation
@@ -43,7 +43,7 @@ dns2tcp:Tunneling
 dnsenum:Network Scanning
 dos-a-tool:Exploitation
 embed:Exploitation
-engram:Agent AI
+engram:AI & Automation
 enum4linux:Network Scanning
 enum4linux-ng:Network Scanning
 evilginx2:Phishing
@@ -51,9 +51,9 @@ evilurl:Phishing
 exif:Forensics
 exploitdb:Exploitation
 fake-sms:Phishing
-fbi:Forensics
+fbi:Utilities
 finalrecon:OSINT
-freebuff:Agent AI
+freebuff:AI Agents
 frida:Android
 fuzzdb:Web Application
 gdb:Forensics
@@ -77,17 +77,17 @@ hashid:Cracking
 hatcloud:Cloud
 hcdecryptor:Cracking
 hexer:Forensics
-hermes-agent:Agent AI
+hermes-agent:AI Agents
 holehe:OSINT
-huggingface:Agent AI
+huggingface:AI & Automation
 hunner-framework:Web Application
 hydra-gtk:Brute Force
 infoga:OSINT
 ipgeolocation:OSINT
 johntheripper:Cracking
 jython-lts:Utilities
-kerbrute:Windows/AD
-kimi-code:Agent AI
+kerbrute:Brute Force
+kimi-code:AI Agents
 localtunnel:Tunneling
 lockphish:Phishing
 maltego:OSINT
@@ -95,22 +95,22 @@ mariadb:Utilities
 markdown-viewer:Utilities
 metasploit-framework:Exploitation
 mimikatz:Windows/AD
-mimocode:Agent AI
-minimax-cli:Agent AI
-mistral-vibe:Agent AI
-muse-code:Agent AI
+mimocode:AI Agents
+minimax-cli:AI Agents
+mistral-vibe:AI Agents
+muse-code:AI Agents
 mvt:Forensics
 nexphisher:Phishing
 ngrok:Tunneling
 nikto:Web Application
 nmap:Network Scanning
-n8n:Utilities
+n8n:AI & Automation
 objection:Android
 octosuite:OSINT
-omniroute:Agent AI
-open-lovable:Agent AI
-openclaw:Agent AI
-opencode:Agent AI
+omniroute:AI & Automation
+open-lovable:AI Agents
+openclaw:AI Agents
+opencode:AI Agents
 openjdk-21:Utilities
 openspec:Utilities
 orbitaldump:OSINT
@@ -121,14 +121,14 @@ penelope:Exploitation
 phomber:OSINT
 phoneintel:OSINT
 phonesploit:Android
-playwright-proot:Agent AI
+playwright-proot:MCP & Skills
 pnpm:Utilities
 postgresql:Utilities
 proroot:Utilities
 putty:Tunneling
 pybelt:Exploitation
 quack:Exploitation
-qwen-code:Agent AI
+qwen-code:AI Agents
 radare2:Forensics
 railway-cli:Cloud
 ransomux:Exploitation
@@ -139,7 +139,7 @@ redhawk:Web Application
 routersploit:Web Application
 saycheese:Phishing
 sayhello:Phishing
-scrapy:Utilities
+scrapy:OSINT
 scrcpy:Android
 seclists:Password
 seeker:Phishing
@@ -147,9 +147,9 @@ shc:Forensics
 shellsploit-framework:Exploitation
 sherlock:OSINT
 shodan:OSINT
-sleepwalker:Agent AI
+sleepwalker:AI & Automation
 slowhttptest:Exploitation
-smithery:Agent AI
+smithery:MCP & Skills
 snscrape:OSINT
 steghide:Forensics
 stegsnow:Forensics
@@ -162,18 +162,18 @@ sublist3r:OSINT
 tangalanga:Exploitation
 termux-desktop-xfce:Utilities
 termux-docker-qemu:Utilities
-termux-oracle-skill:Utilities
-testsprite:Agent AI
+termux-oracle-skill:MCP & Skills
+testsprite:MCP & Skills
 tmux:Utilities
 translate-shell:Utilities
 trape:OSINT
-ttyd:Utilities
 twifo-cli:OSINT
+ttyd:Utilities
 udocker:Utilities
 unshc:Forensics
 virustotal-cli:OSINT
 vulnx:Web Application
-walkie:Agent AI
+walkie:AI Agents
 wbruter:Brute Force
 webscan:Web Application
 webhackshl:Web Application
