@@ -29,6 +29,26 @@ local lsp_servers = {
   },
 }
 
+-------------------- 
+local lspconfig = require('lspconfig')
+local configs = require('lspconfig.configs')
+
+if not configs.smali_lsp then
+  configs.smali_lsp = {
+    default_config = {
+      cmd = { 'smali-lsp', 'lsp' },
+      filetypes = { 'smali' },
+      root_dir = function(fname)
+        return lspconfig.util.root_pattern('AndroidManifest.xml', 'apktool.yml', '.git')(fname)
+      end,
+    },
+  }
+end
+
+lspconfig.smali_lsp.setup {}
+--------------------
+
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = vim.tbl_deep_extend('force', capabilities,
   require('cmp_nvim_lsp').default_capabilities())
@@ -76,17 +96,24 @@ vim.api.nvim_create_autocmd('LspAttach', {
       local opts = { buffer = args.buf }
       vim.keymap.set(mode, lhs, rhs, opts)
     end
-    bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+    -- Navegacion  
     bufmap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
     bufmap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
     bufmap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
     bufmap('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
     bufmap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
+    -- Informacion
     bufmap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
-    bufmap('n', '<F3>', '<cmd>lua vim.lsp.buf.rename()<cr>')
-    bufmap('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
-    -- bufmap('x', '<F4>', '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
-    bufmap('x', '<F4>', function() vim.lsp.buf.code_action() end)
+    bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+    --- Acciones  
+    bufmap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>')
+    bufmap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+    -- Busqueda 
+    bufmap('n', '<leader>ds','<cmd>lua vim.lsp.buf.document_symbols()<cr>')
+     -- Call hierarchy (requiere Neovim 0.9+)
+    bufmap('n', '<leader>ci','<cmd>lua vim.lsp.buf.incoming_calls()<cr>')
+    bufmap('n', '<leader>co','<cmd>lua vim.lsp.buf.outgoing_calls()<cr>')
+    --
     bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
     bufmap('n', '[d', '<cmd>lua vim.diagnostic.jump({ count = 1 })<cr>') 
     -- bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
