@@ -36,6 +36,8 @@ Si tienes el entorno de desarrollo de Go configurado, también puedes instalarlo
 go install github.com/OJ/gobuster/v3@latest
 ```
 
+**En Termux (i-HakLab):** se compila desde el código fuente con `go install github.com/OJ/gobuster/v3@v3.8.2` y se invoca con `gobuster`.
+
 ### 2. Modos y Ejemplos de Uso
 
 Todos los comandos se ejecutan desde la terminal.

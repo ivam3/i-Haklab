@@ -58,6 +58,7 @@ wpscan --url http://example-wordpress.com --enumerate u --passwords /ruta/a/mi/d
 ## Consideraciones Adicionales
 
 *   **API Key:** Para acceder a la base de datos de vulnerabilidades más actualizada, WPScan requiere una clave de API gratuita de su sitio web (wpscan.com). La herramienta te guiará para obtenerla y configurarla.
+*   **Instalación en Termux (i-HakLab):** WPScan se instala desde la gem oficial (`gem install wpscan`, v4.1.0) junto con `nokogiri` compilada con las librerías del sistema (`libxml2`/`libxslt`). Se invoca con `wpscan`.
 *   **Herramienta Defensiva y Ofensiva:** Aunque es una herramienta de ataque, su uso principal y recomendado es **defensivo**: los administradores de sitios deben escanear sus propias webs regularmente para encontrar y corregir fallos antes de que un atacante lo haga.
 *   **Legalidad:** El escaneo de un sitio web con WPScan sin el permiso del propietario es ilegal, ya que puede ser considerado un acceso no autorizado.
 

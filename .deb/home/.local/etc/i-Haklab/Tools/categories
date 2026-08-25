@@ -1,9 +1,7 @@
 acccheck:Brute Force
 adbfastboot:Android
-adminpanel:Web Application
 aircrack-ng:Network Scanning
 amass:OSINT
-androbugs:Android
 androidsdk-cli:Android
 antigravity-cli:AI Agents
 apksigner:Android
@@ -18,7 +16,6 @@ bettercap:Network Scanning
 bitb-framework:Exploitation
 binwalk:Forensics
 bloodhound:Windows/AD
-blackbox:Phishing
 botgram:Phishing
 burpsuite:Web Application
 cactus:AI & Automation
@@ -33,10 +30,8 @@ codex:AI Agents
 converter:Utilities
 context7:MCP & Skills
 copilot-cli:AI Agents
-credmap:Brute Force
 crunch:Password
 cryptovenom:Exploitation
-d-tect:Web Application
 dex2jar:Android
 dirb:Web Application
 dns2tcp:Tunneling
@@ -47,11 +42,8 @@ engram:AI & Automation
 enum4linux:Network Scanning
 enum4linux-ng:Network Scanning
 evilginx2:Phishing
-evilurl:Phishing
 exif:Forensics
 exploitdb:Exploitation
-fake-sms:Phishing
-fbi:Utilities
 finalrecon:OSINT
 freebuff:AI Agents
 frida:Android
@@ -70,17 +62,16 @@ glab-cli:Utilities
 gobuster:Web Application
 gophish:Phishing
 h8mail:OSINT
-hakku-framework:Web Application
 hashcat:Cracking
 hasher:Cracking
 hashid:Cracking
 hatcloud:Cloud
 hcdecryptor:Cracking
+herdr:AI & Automation
 hexer:Forensics
 hermes-agent:AI Agents
 holehe:OSINT
 huggingface:AI & Automation
-hunner-framework:Web Application
 hydra-gtk:Brute Force
 infoga:OSINT
 ipgeolocation:OSINT
@@ -89,7 +80,6 @@ jython-lts:Utilities
 kerbrute:Brute Force
 kimi-code:AI Agents
 localtunnel:Tunneling
-lockphish:Phishing
 maltego:OSINT
 mariadb:Utilities
 markdown-viewer:Utilities
@@ -100,7 +90,6 @@ minimax-cli:AI Agents
 mistral-vibe:AI Agents
 muse-code:AI Agents
 mvt:Forensics
-nexphisher:Phishing
 ngrok:Tunneling
 nikto:Web Application
 nmap:Network Scanning
@@ -118,15 +107,14 @@ osintgram:OSINT
 osrframework:OSINT
 ovh-ttyrec:Tunneling
 penelope:Exploitation
-phomber:OSINT
 phoneintel:OSINT
 phonesploit:Android
 playwright-proot:MCP & Skills
 pnpm:Utilities
+polenum:Windows/AD
 postgresql:Utilities
 proroot:Utilities
 putty:Tunneling
-pybelt:Exploitation
 quack:Exploitation
 qwen-code:AI Agents
 radare2:Forensics
@@ -135,16 +123,11 @@ ransomux:Exploitation
 recon-ng:OSINT
 recondog:OSINT
 rhash:Cracking
-redhawk:Web Application
 routersploit:Web Application
-saycheese:Phishing
-sayhello:Phishing
 scrapy:OSINT
 scrcpy:Android
 seclists:Password
-seeker:Phishing
 shc:Forensics
-shellsploit-framework:Exploitation
 sherlock:OSINT
 shodan:OSINT
 sleepwalker:AI & Automation
@@ -153,20 +136,16 @@ smithery:MCP & Skills
 snscrape:OSINT
 steghide:Forensics
 stegsnow:Forensics
-storm-breaker:Phishing
 speedtest-go:Utilities
 sqlite:Utilities
-sqliv:Web Application
 sqlmap:Web Application
 sublist3r:OSINT
-tangalanga:Exploitation
 termux-desktop-xfce:Utilities
 termux-docker-qemu:Utilities
 termux-oracle-skill:MCP & Skills
 testsprite:MCP & Skills
 tmux:Utilities
 translate-shell:Utilities
-trape:OSINT
 twifo-cli:OSINT
 ttyd:Utilities
 udocker:Utilities
@@ -174,15 +153,12 @@ unshc:Forensics
 virustotal-cli:OSINT
 vulnx:Web Application
 walkie:AI Agents
-wbruter:Brute Force
-webscan:Web Application
 webhackshl:Web Application
 websploit:Web Application
 wfuzz:Web Application
 whatweb:Web Application
 wpscan:Web Application
 xapt-management:Utilities
-xerosploit:Exploitation
 xleak:OSINT
 xml2axml:Android
 ytfzf:Utilities

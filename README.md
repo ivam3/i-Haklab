@@ -258,22 +258,22 @@ i-Haklab show instatools
 ```
 ![i-Haklab show alltools](./.img/i-Haklab_alltools.png)
 
-**Full breakdown of the 188 available tools by category (`i-Haklab show alltools`):**
+**Full breakdown of the 165 available tools by category (`i-Haklab show alltools`):**
 
 | Category | Tools |
 |---|---|
-| **Brute Force** | acccheck, credmap, hydra-gtk, wbruter |
-| **Android** | adbfastboot, androbugs, androidsdk-cli, apksigner, apktool, appshark, axmlprinter2, dex2jar, frida, objection, phonesploit, scrcpy, xml2axml |
-| **Web Application** | adminpanel, aquatone, burpsuite, d-tect, dirb, fuzzdb, gobuster, hakku-framework, hunner-framework, nikto, redhawk, routersploit, sqliv, sqlmap, vulnx, webhackshl, webscan, websploit, wfuzz, whatweb, wpscan, zaproxy |
+| **Brute Force** | acccheck, hydra-gtk |
+| **Android** | adbfastboot, androidsdk-cli, apksigner, apktool, appshark, axmlprinter2, dex2jar, frida, objection, phonesploit, scrcpy, xml2axml |
+| **Web Application** | aquatone, burpsuite, dirb, fuzzdb, gobuster, nikto, routersploit, sqlmap, vulnx, webhackshl, websploit, wfuzz, whatweb, wpscan, zaproxy |
 | **Wireless** | aircrack-ng |
-| **OSINT** | amass, finalrecon, geo-recon, ghunt, h8mail, holehe, infoga, ipgeolocation, maltego, octosuite, orbitaldump, osintgram, osrframework, phomber, phoneintel, recon-ng, recondog, sherlock, shodan, snscrape, sublist3r, trape, twifo-cli, virustotal-cli, xleak |
+| **OSINT** | amass, finalrecon, geo-recon, ghunt, h8mail, holehe, infoga, ipgeolocation, maltego, octosuite, orbitaldump, osintgram, osrframework, phoneintel, recon-ng, recondog, sherlock, shodan, snscrape, sublist3r, twifo-cli, virustotal-cli, xleak |
 | **Agent AI** | antigravity-cli, cactus, claude-code, codebuff, codex, context7, copilot-cli, engram, freebuff, hermes-agent, kimi-code, mimocode, minimax-cli, mistral-vibe, muse-code, omniroute, open-lovable, openclaw, opencode, playwright-proot, qwen-code, sleepwalker, smithery, walkie |
 | **Utilities** | bash-obfuscate, code-server, converter, gh, git-filter-repo, glab-cli, jython-lts, mariadb, markdown-viewer, n8n, openjdk-21, openspec, pnpm, postgresql, proroot, scrapy, speedtest-go, sqlite, termux-desktop-xfce, termux-docker-qemu, termux-oracle-skill, tmux, translate-shell, ttyd, udocker, xapt-management, yt-dlp, ytfzf |
-| **Exploitation** | beef, bitb-framework, cryptovenom, dos-a-tool, embed, exploitdb, metasploit-framework, penelope, pybelt, quack, ransomux, shellsploit-framework, slowhttptest, tangalanga, xerosploit |
+| **Exploitation** | beef, bitb-framework, cryptovenom, dos-a-tool, embed, exploitdb, metasploit-framework, penelope, quack, ransomux, slowhttptest |
 | **Network Scanning** | bettercap, dnsenum, enum4linux, enum4linux-ng, nmap |
-| **Forensics** | binwalk, clamav, exif, fbi, gdb, ghidra, hexer, mvt, radare2, shc, steghide, stegsnow, unshc |
+| **Forensics** | binwalk, clamav, exif, gdb, ghidra, hexer, mvt, radare2, shc, steghide, stegsnow, unshc |
 | **Windows/AD** | bloodhound, getadusers, getnpusers, getuserspns, kerbrute, mimikatz |
-| **Phishing** | blackbox, botgram, evilginx2, evilurl, fake-sms, ghost, gophish, lockphish, nexphisher, saycheese, sayhello, seeker, storm-breaker |
+| **Phishing** | botgram, evilginx2, ghost, gophish |
 | **Password** | cewl, crunch, seclists |
 | **Cloud** | azure-cli, cloudbunny, hatcloud, railway-cli |
 | **Tunneling** | cloudflared, dns2tcp, localtunnel, ngrok, ovh-ttyrec, putty |

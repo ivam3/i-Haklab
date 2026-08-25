@@ -64,6 +64,7 @@ Evilginx2 funciona como un shell interactivo.
 ## Consideraciones Adicionales
 
 *   **Escrito en Go:** Evilginx2 es un binario único escrito en Go, lo que lo hace muy rápido y fácil de desplegar sin dependencias.
+*   **Instalación en Termux (v3.3.0):** Se compila desde el código fuente (no hay binarios precompilados para `aarch64`) y se instala en `~/.local/share/evilginx2`. Los phishlets de la comunidad se descargan automáticamente a `~/.local/share/evilginx2/phishlets` y se cargan al lanzar la herramienta: `evilginx2`.
 *   **Certificados SSL:** La herramienta gestiona automáticamente la obtención de certificados SSL/TLS para los dominios de phishing utilizando Let's Encrypt, haciendo que los sitios falsos parezcan aún más legítimos con el candado de HTTPS.
 *   **Mitigación:** La única forma efectiva de protección contra este tipo de ataques es usar **estándares de 2FA resistentes al phishing**, como las llaves de seguridad de hardware **FIDO2/WebAuthn** (por ejemplo, YubiKey). Estos protocolos vinculan criptográficamente la autenticación al dominio real, por lo que el intento de inicio de sesión en el dominio de phishing fallaría.
 
