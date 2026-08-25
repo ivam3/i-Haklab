@@ -37,7 +37,7 @@ export APIKEY_testsprite=""
 export R='\e[31m'
 export G='\e[32m'
 export Goke='\033[92m'
-export Glig=='\e[1;32m'
+export Glig='\e[1;32m'
 export Y='\e[33m'
 export B='\e[34m'
 export M='\e[35m'
