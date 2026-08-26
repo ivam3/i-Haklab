@@ -9,7 +9,7 @@ export GYP_DEFINES="android_ndk_path=''"
 
 # IMPORTANT: .local/bin FIRST to intercept 'apt', 'npm' and 'pnpm' invisible wrappers
 test -n "$HOME" || export HOME=/data/data/com.termux/files/home
-export PATH="$HOME/.local/bin:$HOME/go/bin:$HOME/.local/share/pnpm:$PREFIX/lib/bin:$PREFIX/bin"
+export PATH="$HOME/.local/bin:$HOME/go/bin:$HOME/.local/share/pnpm/bin:$PREFIX/lib/bin:$PREFIX/bin"
 export GOPATH=$HOME/go
 export GOROOT=/data/data/com.termux/files/usr/lib/go
 export GOCACHE="$HOME/.cache/go"
