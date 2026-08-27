@@ -154,7 +154,6 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 |   ╰────────+─────tutorials─────➤ Show tutorials available
 ╰─speedtest──➤───────────────────➤ Run a speed test of your network
 ╰─version────➤───────────────────➤ Show i-Haklab version installed
-╰─weechat────➤───────────────────➤ Connect with irc Ivam3byCinderella chat
 ╰─Xwayland───➤───────────────────➤ Run xserver over TermuXwayland app with xfce4 as window manager
 |            |                   |
 |            |                   |
@@ -206,8 +205,6 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 ╰ngrokssh───➤─port+protocol+file─➤ Connect with ngrok servers via SSH protocol
 |                   ╰──example─1─{─i-Haklab ngrokssh -p 4546 -t http -f path/to/specific/id_rsa-file
 |                   ╰──example─2─{─i-Haklab ngrokssh -p 8080 -t tcp (default file:\$HOME/.ssh/id_rsa)
-|                                |
-╰payvid─────➤────────────────────➤ Hide a Reverse Shell with a Video File by Exploiting Linux OS.
 |                                |
 ╰phonescan──+─<phonenumber>──────➤ A phone number information scaner
 |                   ╰──example───{─i-Haklab phonescan 525584923476─}
