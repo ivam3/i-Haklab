@@ -1,204 +1,686 @@
-.TH I-HAKLAB 1 "2026" "" "General Commands Manual"
+.TH I-HAKLAB 1 "August 2026" "i-Haklab 3.13" "General Commands Manual"
 .nh
 .ad l
 .
-.SH NAME
-i-Haklab \- Ivam3 Hacking laboratory containing open-source tools
+.SH NAME / NOMBRE
+i-Haklab \- Ivam3 hacking laboratory containing open-source tools / laboratorio de hacking de Ivam3 con herramientas open-source
 .
-.SH SYNOPSIS
+.SH SYNOPSIS / SINOPSIS
 .B i-Haklab
 .RI [ OPTION ]...
 .RI [ ARG ]
+.br
+.RI [ DIRECT-COMMAND ]
+.RI [ ARGS ]...
 .
-.SH DESCRIPTION
-i-Haklab v.3.12 (c) 2026 by @Ivam3 is a hacking laboratory containing open-source tools recommended by Ivam3. If the law is violated with its use, the user handling it will be responsible for any consequences.
-
-The syntax for i-Haklab is:
+.SH DESCRIPTION / DESCRIPCI\['O]N
+i-Haklab v3.13 (c) 2026 by @Ivam3 is a hacking laboratory containing open-source tools recommended by Ivam3.
+Transporta aplicaciones, herramientas y frameworks de un entorno Linux al alcance de la mano gracias a Android + Termux.
+.br
+If the law is violated with its use, this would be the responsibility of the user who handled it. / Si se viola la ley con su uso, ser\['a] responsabilidad del usuario.
+.br
+Uses Oh-My-Fish (fish) as default interactive shell; user can switch to zsh or bash with
+.B i-Haklab setshell.
+See
+.BR fish (1),
+.BR zsh (1),
+.BR bash (1).
+.PP
+Syntax / Sintaxis:
 .PP
 .B i-Haklab [-option-] [-args-]
+.br
+.B <direct-command> [args]  " (sin prefijo i-Haklab)"
+.PP
+Project / Proyecto: https://github.com/ivam3/i-Haklab
+.br
+Docs \& support / Soporte: https://t.me/Ivam3by_Cinderella  |  https://t.me/Ivam3_Bot
 .
-.SH OPTIONS
+.SH OPTIONS / OPCIONES
 .
-.SS [--] Setting Options [--]
+.SS Setting Options / Opciones de Configuraci\['o]n
 .TP
 .B about <name-of-tool>
-Show information about a specific tool or framework (e.g., i-Haklab about crunch).
+Show information about a specific tool or framework.
+Muestra informaci\['o]n detallada de una herramienta/framework.
+.br
+Uses
+.B glow
+to render markdown from
+.I ~/.local/etc/i-Haklab/Tools/Readme/<tool>.md
+(fetched on demand from iHDB).
+Example / Ejemplo:
+.B i-Haklab about crunch
+.RS
+.B i-Haklab about nmap
+.RE
 .TP
 .B aptup
-Update Termux manually, packages by packages.
+Update Termux manually, package by package.
+Actualiza Termux paquete por paquete (alternativa a apt upgrade).
 .TP
 .B help
-Show the help menu.
+Show this help menu.
+Muestra el men\['u] de ayuda (functions helpper).
 .TP
 .B passwd set|new
-Set or change the Termux login (e.g., i-Haklab passwd set password). Supports password or fingerprint.
+Set or change the Termux login.
+Configura/cambia el login de Termux.
+.B set
+chooses Password/Fingerprint/Disable; 
+.B new
+asks for new password (AES-256-CBC, 100k iterations).
+Example / Ejemplo:
+.B i-Haklab passwd set
+.RS
+Password default: Ivam3byCinderella. Stored in
+.I ~/.local/etc/i-Haklab/.Ivam3byCinderella
+.RE
 .TP
-.B pd <distro-X11-list>
-Run a Linux distribution in a proot environment.
-Use `i-Haklab pd list` to show all available distributions.
-Example: `i-Haklab pd alpine` for CLI or `i-Haklab pd alpine X11` for graphical environment.
+.B pd <distro> [X11] | pd list
+Run a Linux distribution in proot environment.
+Ejecuta una distribuci\['o]n Linux en proot.
+.B list
+shows all available distros.
+.B X11
+starts graphical environment (requires Termux:Wayland).
+Examples / Ejemplos:
+.B i-Haklab pd alpine
+.RS
+.B i-Haklab pd alpine X11
+.br
+.B i-Haklab pd list
+.RE
 .TP
 .B setapikey
 Set API keys to use in i-Haklab features.
+Configura API keys (phonescan, deepseek, chatGPT, gemini, claude, mistralAI, groq, openrouter, kimi, testsprite, etc.) stored in
+.I ~/.local/etc/i-Haklab/variables
+as
+.B APIKEY_*
 .TP
 .B setbanner
-Enable, disable, and customize the i-Haklab wall banner.
+Enable, disable and customize the i-Haklab wall banner.
+Activa/desactiva/personaliza el banner de inicio.
 .TP
 .B setshell
 Switch shell between bash, zsh and fish (default).
+Cambia de shell entre bash, zsh y fish (por defecto).
+.br
+Uses
+.I ~/.local/libexec/i-Haklab/setshell
+and
+.I ~/.local/etc/fish/config.fish .
 .TP
 .B setuser
 Set the i-Haklab username.
+Configura el nombre de usuario mostrado en el banner.
 .TP
 .B show alltools|instatools|books|tutorials
 List available tools, installed tools, books or tutorials.
+Lista herramientas disponibles/instaladas, libros y tutoriales.
+.RS
+.B alltools
+\- grid categorized from
+.I ~/.local/etc/i-Haklab/Tools/listoftools
+and
+.I categories
+(165 tools, fetches iHDB on each call).
+.B instatools
+\- lists installed packages via pkg.
+.B books
+\- downloads from
+.I listofbooks
+(mega.nz).
+.B tutorials
+\- lists from
+.I listoftutorials
+(YouTube/Telegram).
+.RE
 .TP
 .B speedtest
-Run a speed test of your network.
+Run a network speed test.
+Ejecuta test de velocidad de red.
 .TP
 .B version
 Show the current version of i-Haklab installed.
+Muestra la versi\['o]n instalada (v3.13).
 .TP
 .B Xwayland
-Run X server over Termux Wayland app with XFCE4 as the window manager.
-
-.SS Automatization Options [--]
+Run X server over Termux:Wayland app with XFCE4 as window manager.
+Inicia servidor X con XFCE4 (requiere Termux:Wayland).
+.br
+Install first / Instalar primero:
+.B apt install termux-desktop-xfce
+.
+.SS Automatization Options / Opciones de Automatizaci\['o]n
 .TP
-.B apkactivity <path-to-apk-file>
+.B apkactivity <path/to/file.apk>
 Get the main activity from an APK file.
+Obtiene la actividad principal de un .apk (aapt/axmlprinter2).
 .TP
 .B androforensic secretCodes|airscope|dumpsys|extract <target>
 Extract information from Android devices via ADB.
+Extrae informaci\['o]n de dispositivos Android v\['i]a ADB.
+.RS
+.B secretCodes
+\- scan installed packages for secret dialer codes.
+.B airscope
+\- Wi-Fi radar via ADB.
+.B dumpsys
+\- dump system information.
+.B extract
+\- data extraction & system snapshot.
+Example / Ejemplo:
+.B i-Haklab androforensic dumpsys 192.168.1.58:41771
+.RE
 .TP
 .B backup create|restore
-Create or restore a backup of Termux (e.g., i-Haklab backup create in/ex).
+Create or restore a backup of Termux.
+Crea o restaura backup de Termux.
+.B create in|ex
+(internal/external sdcard).
+.B restore <path/to/file.tar.gz>
 .TP
 .B binchecker
-Get information about binary files (CC, DC).
+Get information about BINs (CC, DC).
+Consulta informaci\['o]n de BINs (tarjetas).
 .TP
 .B bruteforce ftp|mail|ssh|telnet
-Perform a brute force attack on various servers (e.g., i-Haklab bruteforce ftp).
+Brute force attack helpers.
+Automatiza ataques de fuerza bruta a servidores.
+Examples / Ejemplos:
+.B i-Haklab bruteforce ftp
+.RS
+.B i-Haklab bruteforce mail ivam3@live.com
+.RE
 .TP
-.B chatAI <--help|-h>
-Connect with the OpenAI API to interact with ChatGPT-3 via CLI (e.g., i-Haklab chatAI).
+.B chatAI [-h|--help]
+Connect with LLM APIs to interact via CLI.
+Conecta con APIs de LLMs (OpenAI, Gemini, Deepseek, MistralAI, Ollama, etc.) v\['i]a CLI, gestiona m\['u]ltiples chats, crea im\['a]genes y recuerda conversaci\['o]n.
+.br
+Config keys: APIKEY_chatGPT, APIKEY_gemini, APIKEY_deepseek, APIKEY_mistralAI.
 .TP
 .B ESmsg encode|decode
-Encode or decode secret messages into an ASCII file (e.g., i-Haklab ESmsg encode).
+Encode/decode secret message into an ASCII file.
+Codifica/decodifica mensajes secretos en archivos ASCII (esteganograf\['i]a).
 .TP
 .B fakeID <options+args>
-Create a fake identity card with a real email and phone number (e.g., i-Haklab fakeID -g male -n America -c "United States").
-.TP
-.B tunnel <port+subdomain>
-Start an SSH client to request TCP port forwarding (e.g., i-Haklab tunnel -p 4444 -s my-subdomain).
+Create a fake identity card with a real email and phone number.
+Crea identidad falsa con email/tel\['e]fono reales.
+Example / Ejemplo:
+.B i-Haklab fakeID -g male -n America -c "United States"
 .TP
 .B handler <name-of-file.rc>
 Start handler on msfconsole with previous settings.
+Inicia handler en msfconsole con configuraci\['o]n previa.
 .TP
 .B msf dirscan|embed|payapk|payexe|paypdf|shodan
-Metasploit automation tools for directory scanning, embedding payloads, creating APK/EXE/PDF payloads, and searching via Shodan.
+Metasploit automation.
+Automatizaci\['o]n de Metasploit.
+.RS
+.B dirscan <IP>
+\- enumerate directories.
+.B embed <lhost> <lport> <apk>
+\- embed payload into legitimate APK (inLAN/outLAN).
+.B payapk <lhost:port>
+\- create coded APK payload.
+.B payexe <lhost:port>
+\- create coded EXE payload.
+.B paypdf <lhost:port>
+\- create coded PDF payload.
+.B shodan
+\- search vulnerable webcam servers via Shodan API.
+.RE
 .TP
 .B ngroklink
 Show the current ngrok link.
+Muestra el link actual de ngrok.
 .TP
-.B ngrokssh <port+protocol+file>
-Connect to ngrok servers via SSH protocol (e.g., i-Haklab ngrokssh -p 4546 -t http -f /path/to/id_rsa).
+.B ngrokssh -p <port> -t <protocol> -f <id_rsa-file>
+Connect with ngrok servers via SSH.
+Conecta v\['i]a SSH a servidores ngrok.
+Examples / Ejemplos:
+.B i-Haklab ngrokssh -p 4546 -t http -f path/to/id_rsa
+.RS
+.B i-Haklab ngrokssh -p 8080 -t tcp
+(default
+.I ~/.ssh/id_rsa
+)
+.RE
 .TP
 .B payvid
-Hide a reverse shell with a video file by exploiting the Linux OS.
+Hide a reverse shell within a video file.
+Oculta una reverse shell dentro de un archivo de video (explota Linux).
 .TP
 .B phonescan <phonenumber>
-Scan information about a phone number (e.g., i-Haklab phonescan 525584923476).
+Phone number information scanner.
+Esc\['a]ner de informaci\['o]n de n\['u]meros telef\['o]nicos.
+Example / Ejemplo:
+.B i-Haklab phonescan 525584923476
 .TP
-.B qemufy <file.zip/rm>
+.B qemufy [<file.zip>|rm]
 Convert OVA files and run a QEMU virtual machine over Termux (no root).
+Convierte OVA y ejecuta VM QEMU sin root.
+.B qemufy VM.zip
+creates image;
+.B qemufy rm
+removes image.
 .TP
 .B servers4test
-Initialize deliberately insecure web applications for pentesting.
+Initialize deliberately insecure web applications for pentesting (bWAPP, DVWA, Mutillidae).
+Inicia servidores vulnerables para pentesting.
 .TP
 .B 4share <server-name>
-Initialize a web server to share files remotely and securely (localtunnel, localhost.run, cloudflared).
+Initialize a web server to share files remotely and securely.
+Inicia servidor web para compartir archivos.
+Servers / Servidores: localtunnel, localhost.run, cloudflared.
+Default credentials: Admin:password (veno-file-manager).
+Example / Ejemplo:
+.B i-Haklab 4share localtunnel
+.TP
+.B tunnel -p <port> -s <subdomain>
+Start an SSH client to request TCP port forwarding.
+Inicia t\['u]nel SSH para port forwarding.
+Example / Ejemplo:
+.B i-Haklab tunnel -p 4444 -s my-subdomain
 .TP
 .B usbtest <path-to-device>
-Test a USB device connected via OTG (e.g., i-Haklab usbtest /dev/bus/usb/001).
-
-.SS Direct Commands [--]
-.PP
-These commands do not require the `i-Haklab` prefix, simply type the command.
+Test USB device connected via OTG.
+Prueba dispositivos USB v\['i]a OTG.
+Example / Ejemplo:
+.B i-Haklab usbtest /dev/bus/usb/001
+.
+.SS Direct Commands / Comandos Directos
+These commands do not require the
+.B i-Haklab
+prefix, simply type the command. / Estos comandos no requieren el prefijo i-Haklab, solo escriba el comando.
 .TP
-.B apt
-Install/remove and configure packages/tools/frameworks.
+.B ai ["prompt"] [-v|--no-run|disable]
+AI assistant: natural language -> terminal command (hybrid-cli-ai, ollama/groq, local/cloud, voice).
+Asistente IA: lenguaje natural -> comando (ollama/groq, local/nube, voz).
+Examples / Ejemplos:
+.B ai "lista los archivos de ~/"
+.RS
+.B ai -v
+(voice)
+.B ai --no-run
+(suggest without execute)
+.RE
+.TP
+.B apt [install|remove|search|...] <pkg>
+i-Haklab APT wrapper with auto-configuration.
+Wrapper APT con auto-configuraci\['o]n (pkg2conf).
+See PACKAGE MANAGEMENT below. / Ver GESTI\['O]N DE PAQUETES abajo.
 .TP
 .B adminfiles
-Copy any file from internal/external storage to the Termux directory.
+Copy any file from internal/external storage to Termux directory (graphical).
+Copia archivos desde almacenamiento interno/externo a Termux.
 .TP
 .B bat
-Highlight text output instead of using the 'cat' command.
+Enhanced cat with syntax highlighting. / cat mejorado con resaltado.
 .TP
 .B cmd
 Manage Android main settings over Termux.
+Gestiona ajustes principales de Android.
 .TP
 .B df
-Provide information about mounted memory.
+Provides information about mounted memory. / Info de memoria montada.
 .TP
 .B du
-Provide recursive information about the weight of directories and files.
+Recursive weight of directories/files. / Peso recursivo de directorios.
 .TP
 .B fixer
-Automate the process to fix Termux issues.
+Automate fixing Termux issues. / Corrige problemas comunes de Termux.
 .TP
 .B fzf
-Fuzzy finder for easier and faster file selection.
+Fuzzy finder for faster file selection. / Buscador difuso r\['a]pido.
 .TP
 .B gitbrowsering
-Search GitHub repositories over CLI.
+Search GitHub repositories over CLI. / Busca repos en GitHub.
+.TP
+.B glow
+Read markdown files with syntax highlighting. / Lee markdown con resaltado.
 .TP
 .B LOCALHOST
-Show the current internet protocol over LAN.
+Show LAN IP. / Muestra IP de LAN.
 .TP
 .B lock
-Block Termux's screen.
+Block Termux screen (password/fingerprint). / Bloquea pantalla.
 .TP
 .B mypip
-Show your public internet protocol.
+Show public IP. / Muestra IP p\['u]blica.
 .TP
-.B openvpn
-Open OpenVPN application.
+.B nls
+Enhanced ls rendering entries in boxes/grid (github.com/nolight132/nls). / ls mejorado en cajas/grilla.
+.TP
+.B npm [install|uninstall] <pkg>
+i-Haklab NPM wrapper (normalizes names, preconf, pkg2conf). / Wrapper NPM (normaliza nombres).
+See PACKAGE MANAGEMENT. / Ver GESTI\['O]N DE PAQUETES.
+.TP
+.B pnpm [install|uninstall] <pkg>
+i-Haklab PNPM wrapper (same as npm via corepack). / Wrapper PNPM (v\['i]a corepack).
+.TP
+.B openvpn / openvpn-app
+Open OpenVPN Android application. / Abre app OpenVPN.
 .TP
 .B omf
-Change the Oh-My-Fish theme.
+Change Oh-My-Fish theme. / Cambia tema de Oh-My-Fish.
+.B omf theme
 .TP
 .B phantom-ps
-Change the limit of phantom processes.
+Change phantom process limit to 2147483647. / Cambia l\['i]mite de procesos phantom (requiere divisi\['o]n de pantalla con opciones de desarrollador).
 .TP
 .B pm
-Android package manager.
+Android package manager helper. / Gestor de paquetes Android.
 .TP
-.B postgresql
-Start, stop, or restart PostgreSQL database.
+.B postgresql [start|stop|restart]
+Manage PostgreSQL database. / Gestiona PostgreSQL.
 .TP
-.B proxy
-Execute CLI commands over Tor with proxychains.
+.B proxy <command>
+Execute CLI commands over Tor proxychains. / Ejecuta comandos v\['i]a Tor/proxychains.
 .TP
 .B rmcache
-Remove current session cache, temporary files, and residual APT packages.
+Remove session cache, temp files & residual APT packages. / Limpia cach\['e], temporales y paquetes residuales.
 .TP
 .B serverapache
-Initialize an Apache server.
+Initialize Apache server. / Inicia servidor Apache.
 .TP
 .B serverphp
-Initialize a PHP server.
+Initialize PHP server. / Inicia servidor PHP.
 .TP
 .B sudo
-Execute commands or initialize an environment as a fake root user.
+Fake root or real root environment (if rooted, links to /system/xbin/su). / Root falso o real si el dispositivo est\['a] rooteado.
 .TP
 .B telegram
-Open Telegram application.
+Open Telegram Android application. / Abre Telegram.
 .TP
 .B traductor
-Initialize a command-line translator.
+Command-line translator. / Traductor en l\['i]nea de comandos.
+.TP
+.B ttyd
+Run ttyd server to access Termux remotely via web browser. / Ejecuta servidor ttyd para acceso remoto v\['i]a navegador.
+.TP
+.B walkie-tg
+Bridge between walkie P2P server and Telegram bot. / Puente entre servidor walkie P2P y bot de Telegram.
 .TP
 .B yazi
-Terminal file manager.
-
-.SH SEE ALSO
-For more information and documentation, visit: https://github.com/ivam3/i-Haklab
+Terminal file manager. / Gestor de archivos en terminal.
+.
+.SH PACKAGE MANAGEMENT / GESTI\['O]N DE PAQUETES
+i-Haklab integrates native and JS/Python ecosystems. All wrappers auto-configure via
+.B pkg2conf
+and normalize names via
+.B ih_normalize_pkg
+(functions).
+.br
+i-Haklab integra ecosistemas nativo y JS/Python. Todos los wrappers auto-configuran v\['i]a pkg2conf y normalizan nombres v\['i]a ih_normalize_pkg.
+.SS apt wrapper / wrapper apt
+.B ~/.local/bin/apt
+intercepts install/reinstall/search/remove.
+If package is a known pip/gem/npm/npx module, it suggests the correct manager and offers to run it. On install success calls
+.B pkg2conf
+if listed in
+.I ~/.local/etc/i-Haklab/Tools/listofpkg2conf .
+.PP
+Mappings / Mapeos (apt:41-63):
+.RS
+.B pip:
+bloodhound, frida, h8mail, hashid, holehe, mvt, objection, octosuite, orbitaldump, osrframework, phoneintel, scrapy, shodan, snscrape, speedtest-cli, sqlmap, wfuzz -> python3 -m pip install
+.br
+.B gem:
+bettercap, aquatone -> gem install
+.br
+.B npm:
+bash-obfuscate, codex, copilot-cli, gemini-cli, kimi-code, localtunnel, minimax-cli, n8n, pnpm, open-lovable, openspec, sleepwalker, qwen-code, testsprite, twifo-cli -> npm install -g (normalized)
+.br
+.B npx:
+context7 (ctx7) -> npx
+.RE
+.PP
+Examples / Ejemplos:
+.B apt install nmap
+.RS
+.B apt install h8mail
+-> suggests python3 -m pip install h8mail
+.br
+.B apt search sqlmap
+.RE
+.SS npm / pnpm wrappers
+.B ~/.local/bin/npm
+and
+.B ~/.local/bin/pnpm
+normalize via
+.BR ih_normalize_pkg :
+.RS
+gemini-cli -> @google/gemini-cli, sleepwalker -> @sleepwalkerai/cli, qwen-code -> @qwen-code/qwen-code, openspec -> @fission-ai/openspec, kimi-code -> @moonshot-ai/kimi-code, claude-code -> @anthropic-ai/claude-code, codex -> @mmmbuto/codex-cli-termux@latest, copilot-cli|github-copilot -> @github/copilot, minimax-cli -> mmx-cli, smithery -> @smithery/cli, testsprite -> @testsprite/testsprite-mcp
+.RE
+.PP
+Pre-install hooks via
+.B ~/.local/libexec/preconf
+: n8n (installs pm2/gyp, prepares ~/.n8n), open-lovable (clones firecrawl/open-lovable), testsprite (checks Node >=22), ai (hybrid-cli-ai). Post-uninstall via
+.B ~/.local/libexec/cleanup
+and post-install
+.B pkg2conf
+patch config (apache2, fish, gdb/peda, gh, mvt, radare2, tmux, tor, yt-dlp, etc.).
+.PP
+Usage / Uso:
+.B npm install -g @google/gemini-cli
+.RS
+.B pnpm install -g @qwen-code/qwen-code
+.br
+.B npx ctx7@latest
+(ephemeral, no install)
+.br
+.B pip install h8mail
+(also via apt wrapper)
+.RE
+.
+.SH TOOLS / HERRAMIENTAS
+165 tools available via
+.B i-Haklab show alltools
+(install with
+.B apt install <tool>
+or via wrappers above). Categorized as in
+.I ~/.local/etc/i-Haklab/Tools/categories .
+.br
+165 herramientas disponibles v\['i]a i-Haklab show alltools (instalar con apt install <tool> o wrappers). Categorizadas seg\['u]n categories.
+.PP
+Tip / Consejo: after installing any agent, pkg2conf auto-configures it. Run
+.B i-Haklab about <tool>
+for details. / Tras instalar, pkg2conf auto-configura. Ejecute i-Haklab about <tool> para detalles.
+.
+.SS Brute Force / Fuerza Bruta (3)
+acccheck, hydra-gtk, kerbrute
+.
+.SS Android (12)
+adbfastboot, androidsdk-cli, apksigner, apktool, appshark, axmlprinter2, dex2jar, frida, objection, phonesploit, scrcpy, xml2axml
+.
+.SS Web Application / Aplicaci\['o]n Web (15)
+aquatone, burpsuite, dirb, fuzzdb, gobuster, nikto, routersploit, sqlmap, vulnx, webhackshl, websploit, wfuzz, whatweb, wpscan, zaproxy
+.
+.SS Network Scanning / Escaneo de Red (5)
+aircrack-ng, bettercap, dnsenum, enum4linux, enum4linux-ng, nmap
+.
+.SS OSINT (23)
+amass, finalrecon, geo-recon, ghunt, h8mail, holehe, infoga, ipgeolocation, maltego, octosuite, orbitaldump, osintgram, osrframework, phoneintel, recon-ng, recondog, sherlock, shodan, snscrape, sublist3r, twifo-cli, virustotal-cli, xleak
+.
+.SS AI Agents / Agentes IA (24)
+antigravity-cli, cactus, claude-code, codebuff, codex, context7, copilot-cli, engram, freebuff, hermes-agent, kimi-code, mimocode, minimax-cli, mistral-vibe, muse-code, omniroute, open-lovable, openclaw, opencode, playwright-proot, qwen-code, sleepwalker, smithery, walkie
+.
+.SS AI & Automation / IA y Automatizaci\['o]n (7)
+cactus, engram, herdr, huggingface, n8n, omniroute, sleepwalker
+.
+.SS MCP & Skills (4)
+context7, playwright-proot, smithery, termux-oracle-skill, testsprite
+.
+.SS Utilities / Utilidades (27)
+bash-obfuscate, code-server, converter, gh, git-filter-repo, glab-cli, jython-lts, mariadb, markdown-viewer, n8n, openjdk-21, openspec, pnpm, postgresql, proroot, scrapy, speedtest-go, sqlite, termux-desktop-xfce, termux-docker-qemu, tmux, translate-shell, ttyd, udocker, xapt-management, yt-dlp, ytfzf
+.
+.SS Exploitation / Explotaci\['o]n (10)
+beef, bitb-framework, cryptovenom, dos-a-tool, embed, exploitdb, metasploit-framework, penelope, quack, slowhttptest
+.
+.SS Forensics / Forense (12)
+binwalk, clamav, exif, gdb, ghidra, hexer, mvt, radare2, shc, steghide, stegsnow, unshc
+.
+.SS Windows/AD (6)
+bloodhound, getadusers, getnpusers, getuserspns, kerbrute, mimikatz
+.
+.SS Phishing (4)
+botgram, evilginx2, ghost, gophish
+.
+.SS Password / Contrasenas (3)
+cewl, crunch, seclists
+.
+.SS Cloud / Nube (4)
+azure-cli, cloudbunny, hatcloud, railway-cli
+.
+.SS Tunneling / T\['u]neles (6)
+cloudflared, dns2tcp, localtunnel, ngrok, ovh-ttyrec, putty
+.
+.SS Cracking (6)
+hashcat, hasher, hashid, hcdecryptor, johntheripper, rhash
+.
+.SS TOTAL
+165 tools / herramientas. List with / Listar con: i-Haklab show alltools ; installed: i-Haklab show instatools
+.
+.SH FILES / ARCHIVOS
+.TP
+.I ~/.local/bin/i-Haklab
+Main command dispatcher. / Despachador principal.
+.TP
+.I ~/.local/libexec/i-Haklab/*
+Per-option executables (about, backup, msf, pd, etc.). / Ejecutables por opci\['o]n.
+.TP
+.I ~/.local/etc/i-Haklab/variables
+Environment variables, version v3.13, APIKEY_*, colors. / Variables de entorno, versi\['o]n, API keys, colores.
+.TP
+.I ~/.local/etc/i-Haklab/functions
+All functions (helpper, banner, ih_normalize_pkg, ih_pkg2conf, chk-root, etc.). / Todas las funciones.
+.TP
+.I ~/.local/etc/i-Haklab/Tools/listoftools
+List of 165 tools (one per line). / Lista de 165 herramientas.
+.TP
+.I ~/.local/etc/i-Haklab/Tools/categories
+Tool:Category mapping. / Mapeo herramienta:categor\['i]a.
+.TP
+.I ~/.local/etc/i-Haklab/Tools/listofpkg2conf
+Tools needing pkg2conf. / Herramientas que requieren pkg2conf.
+.TP
+.I ~/.local/etc/i-Haklab/Tools/Readme/*.md
+Per-tool docs (fetched from iHDB). / Docs por herramienta (desde iHDB).
+.TP
+.I ~/.local/etc/i-Haklab/listofbooks
+Books list (mega.nz links). / Lista de libros.
+.TP
+.I ~/.local/etc/i-Haklab/listoftutorials
+Tutorials list (YouTube/Telegram). / Lista de tutoriales.
+.TP
+.I /data/data/com.termux/files/usr/share/man/man1/i-Haklab.1
+This manual. / Este manual.
+.TP
+.I /data/data/com.termux/files/usr/var/log/i-Haklab.log
+Log file. / Archivo de log.
+.
+.SH ENVIRONMENT / ENTORNO
+.TP
+.B iHDB
+https://raw.githubusercontent.com/ivam3/i-Haklab/master/.deb/home (base for curl fetches).
+.TP
+.B PKGDB
+https://raw.githubusercontent.com/ivam3/termux-packages/gh-pages/packages
+.TP
+.B PREFIX
+/data/data/com.termux/files/usr
+.TP
+.B HOME
+/data/data/com.termux/files/home
+.TP
+.B APIKEY_*
+API keys set via i-Haklab setapikey (phonescan, chatGPT, gemini, deepseek, mistralAI, groq, etc.).
+.
+.SH EXAMPLES / EJEMPLOS
+1. Show help / Mostrar ayuda:
+.br
+.B i-Haklab help
+.br
+.B man i-haklab
+.PP
+2. Install tools / Instalar herramientas:
+.br
+.B apt install nmap
+.br
+.B apt install h8mail
+# wrapper suggests pip
+.br
+.B npm install -g @google/gemini-cli
+.br
+.B pnpm install -g @qwen-code/qwen-code
+.br
+.B npx ctx7@latest
+.PP
+3. Learn a tool / Aprender herramienta:
+.br
+.B i-Haklab about sherlock
+.br
+.B i-Haklab about n8n
+.PP
+4. Proot distros / Distros proot:
+.br
+.B i-Haklab pd list
+.br
+.B i-Haklab pd alpine X11
+.PP
+5. Forensics & OSINT / Forense y OSINT:
+.br
+.B i-Haklab phonescan 525584923476
+.br
+.B i-Haklab androforensic dumpsys 192.168.1.58:41771
+.br
+.B i-Haklab apkactivity ~/Download/app.apk
+.PP
+6. Tunnels & sharing / T\['u]neles y compartir:
+.br
+.B i-Haklab tunnel -p 4444 -s my-subdomain
+.br
+.B i-Haklab 4share localtunnel
+.br
+.B i-Haklab ngroklink
+.PP
+7. AI vibecoding / Vibecoding IA:
+.br
+.B ai "crea un script que escanee puertos"
+.br
+.B i-Haklab chatAI
+.
+.SH SEE ALSO / V\['E]ASE TAMBI\['E]N
+.BR apt (8),
+.BR npm (1),
+.BR pnpm (1),
+.BR pip (1),
+.BR gem (1),
+.BR fish (1),
+.BR glow (1),
+.BR nmap (1),
+.BR sqlmap (1),
+.BR metasploit-framework (1)
+.br
+Full docs / Docs completas: https://github.com/ivam3/i-Haklab
+.br
+DeepWiki AI assistant: https://deepwiki.com/ivam3/i-Haklab
+.
+.SH AUTHOR / AUTOR
+Ivam3 <https://t.me/Ivam3_Bot> (c) 2026. Maintainer of i-Haklab and termux-packages.
+.
+.SH REPORTING BUGS / REPORTE DE ERRORES
+Report issues at / Reportar en: https://github.com/ivam3/i-Haklab/issues or Telegram https://t.me/Ivam3_Bot
+.br
+Log file: /data/data/com.termux/files/usr/var/log/i-Haklab.log
+.br
+Fix common issues / Corregir problemas comunes:
+.B fixer
+.
+.SH HISTORY / HISTORIAL
+v3.13 - 2026 - Updated manual bilingual, 165 tools, wrappers for pip/gem/npm/pnpm/npx. Removed weechat/403bypass/ransomux (CXC).
+.br
+v3.12 - previous manual.
