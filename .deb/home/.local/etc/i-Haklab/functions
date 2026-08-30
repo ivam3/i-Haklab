@@ -272,8 +272,11 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰nls─────────────────────────────➤ Use it instead of command 'ls' for text in boxes/grid
 ╰openvpn─────────────────────────➤ Open openvpn application
 ╰omf─────────────────────────────➤ Change Oh-my-fish theme
-╰phantom─ps──────────────────────➤ Change the limit of phantom process at 2147483647 
-|  ╰─────────────────────────────{ Screen division with android developer options is required}
+╰phantom─ps──────────────────────➤ Manage phantom processes limit — validate, set, persist or restore
+|  ╰─────────────────────────────{ Screen division with developer options required}
+|  ╰──────────────────example─1──{─phantom-ps (validate, if !=32 → 2147483647)─}
+|  ╰──────────────────example─2──{─phantom-ps --set <32 at 2147483647> --always (persistent)─}
+|  ╰──────────────────example─3──{─phantom-ps --restore (per API, remove persistent)─}
 ╰pm──────────────────────────────➤ For android packages mannager 
 ╰postgresql──────────────────────➤ Start, stop or restart postgres data base
 ╰proxy───────────────────────────➤ Execute cli commands over tor proxychains
