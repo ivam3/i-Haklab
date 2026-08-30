@@ -316,9 +316,10 @@ i-Haklab show QG
 - **LOCALHOST / mypip**: LAN and Public IP information.
 - **lock**: Secure Termux screen.
 - **nls**: Enhanced 'ls' rendering entries in boxes/grid.
+- **net-traffic-scan**: Network traffic monitor via ADB (grid, history & fallback) — bypasses `untrusted_app` `Permission denied` on `/proc/net` via `adb shell` `readproc` (no root). Example: `net-traffic-scan --once --grid` / `--no-grid` / `--dry-run` (logs to `~/.local/share/traffic/`).
 - **openvpn**: Open OpenVPN Android application.
 - **omf**: Change Oh-my-fish theme.
-- **phantom-ps**: Manage phantom process limits for fix 'E:signal 9'.
+- **phantom-ps**: Manage phantom processes limit (Android 12+, 32b) — validate (`!=32` → `2147483647`), `--set <0-2147483647>`, `--always` (persistent + whitelist), `--restore` (per API).
 - **pm**: Android package manager.
 - **postgresql**: Manage PostgreSQL database.
 - **proxy**: Connection via proxychains4/Tor.
