@@ -406,6 +406,18 @@ Bridge between walkie P2P server and Telegram bot. / Puente entre servidor walki
 .TP
 .B yazi
 Terminal file manager. / Gestor de archivos en terminal.
+.TP
+.B net-traffic-scan [\-\-dry\-run|\-\-once|\-\-grid|\-\-no\-grid]
+Network traffic monitor via ADB (grid, history & fallback) \- scans \fI/proc/net/{tcp,tcp6,udp,udp6,dev}\fR via \fBshell(3009:readproc)\fR bypass for \fIuntrusted_app\fR, resolves \fIuid→package\fR, logs to \fI~/.local/share/traffic/network_activity.txt\fR and \fIips_24h_*.txt\fR (fallback \fI/data/local/tmp/traffic\fR).
+.br
+Monitor de tráfico vía ADB (malla, historial y respaldo).
+.RS
+.I "net-traffic-scan --once --grid"
+.br
+.I "net-traffic-scan --no-grid"
+.br
+.I "net-traffic-scan --dry-run"
+.RE
 .
 .SH PACKAGE MANAGEMENT / GESTI\['O]N DE PAQUETES
 i-Haklab integrates native and JS/Python ecosystems. All wrappers auto-configure via

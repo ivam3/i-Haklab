@@ -5,16 +5,19 @@ LOGFILE='/data/data/com.termux/files/usr/var/log/i-Haklab.log'
 iHDB='https://raw.githubusercontent.com/ivam3/i-Haklab/master/.deb/home'
 
 banner() {
-  banner="/data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab_legacy"
-  banner_dir="/data/data/com.termux/files/home/.local/etc/i-Haklab/banner"
+    opt="${1:-}"
+    banner="/data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab_legacy"
+    banner_dir="/data/data/com.termux/files/home/.local/etc/i-Haklab/banner"
 	[[ -e $banner/i-Haklab ]] || {
 		curl -fsSL "$iHDB/.local/etc/i-Haklab/banner/i-Haklab" -o $banner_dir/i-Haklab 2>/dev/null;
 	}
 	[[ -e $banner/i-Haklab_legacy ]] || {
 		curl -fsSL "$iHDB/.local/etc/i-Haklab/banner/i-Haklab_legacy" -o $banner_dir/i-Haklab_legacy 2>/dev/null;
 	}
-  [[ $1 = "latest" ]] && banner="/data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab"
-  [[ $1 = "custom" ]] && banner="/data/data/com.termux/files/home/.local/etc/i-Haklab/banner/custom"
+    if [[ ! -z $opt ]]; then 
+        [[ $opt = "latest" ]] && banner="/data/data/com.termux/files/home/.local/etc/i-Haklab/banner/i-Haklab"
+        [[ $opt = "custom" ]] && banner="/data/data/com.termux/files/home/.local/etc/i-Haklab/banner/custom"
+    fi
 	bash $banner;
 	sleep 0.5;
 }
@@ -31,6 +34,24 @@ export -f k-boom
 
 ctrl_c(){ k-boom;exit 0;}
 export -f ctrl_c
+
+info() { printf "%b[📢]%b %b%s%b\n" "$CYAN" "$RESET" "$DIM" "$*" "$RESET"; }
+export -f info 
+
+msg()   { printf "[➡] %s\n" "$*"; }
+export -f msg 
+
+ok()   { printf "%b[✔]%b %s\n" "$GREEN" "$RESET" "$*"; }
+export -f ok 
+
+warn() { printf "%b[!]%b %s\n" "" "$RESET" "$*"; }
+export -f warn 
+
+tip() { printf "%b[💡]%b %s\n" "$YELLOW" "$RESET" "$*"; }
+export -f tip 
+
+err()  { printf "%b[❌]%b %s\n" "$RED" "$RESET" "$*" >&2; }
+export -f err
 
 running(){
 	[[ $1 = "time" ]] && {
@@ -244,6 +265,10 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰LOCALHOST───────────────────────➤ Show the current internet protocol over LAN
 ╰lock────────────────────────────➤ Block Termux's screen
 ╰mypip───────────────────────────➤ Show your public internet protocol
+╰net-traffic-scan────────────────➤ Network traffic monitor via ADB (grid, history & fallback)
+|  ╰──────────────────example─1──{─net-traffic-scan --once --grid (run 1 cycle)─}
+|  ╰──────────────────example─2──{─net-traffic-scan --no-grid (show result without grid[raw])─}
+|  ╰──────────────────example─3──{─net-traffic-scan --dry-run (test adb conection)─}
 ╰nls─────────────────────────────➤ Use it instead of command 'ls' for text in boxes/grid
 ╰openvpn─────────────────────────➤ Open openvpn application
 ╰omf─────────────────────────────➤ Change Oh-my-fish theme
@@ -261,7 +286,7 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰ttyd────────────────────────────➤ Run ttyd server to access Termux remotely via web browser
 ╰walkie─tg───────────────────────➤ Connection's bridge between walkie server and telegram's bot
 ╰yazi────────────────────────────➤ Terminal file manager
-╰──────────────────────────────────────────────────────────────────────────────────────────|\n\n"
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────|\n\n"
 }
 export -f helpper
 

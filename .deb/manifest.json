@@ -32,6 +32,7 @@
     "home/.local/bin/lock": "/data/data/com.termux/files/home/.local/bin/lock",
     "home/.local/bin/ls": "/data/data/com.termux/files/home/.local/bin/ls",
     "home/.local/bin/mypip": "/data/data/com.termux/files/home/.local/bin/mypip",
+    "home/.local/bin/net-traffic-scan": "/data/data/com.termux/files/home/.local/bin/net-traffic-scan",
     "home/.local/bin/npm": "/data/data/com.termux/files/home/.local/bin/npm",
     "home/.local/bin/openvpn-app": "/data/data/com.termux/files/home/.local/bin/openvpn-app",
     "home/.local/bin/phantom-ps": "/data/data/com.termux/files/home/.local/bin/phantom-ps",

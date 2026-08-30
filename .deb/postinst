@@ -167,6 +167,7 @@ echo -en "[deleted]
     |\t\t• ttyd (run termux in browser)
     |\t\t• i-Haklab chatAI (before 'chatGPT')
     |\t\t• walkie-tg - connect walkie server at telegram bot
+    |\t\t• net-traffic-scan (bypass netstat blocked by untrusted_app)
     ╰──➤ New features:
     |\t\t• shell: now i-Haklab works over shells fish, zsh & bash\n    |\t\t\t   run 'i-Haklab setshell' to set it
     |\t\t• chatAI: Mannage 2+ chats | create image | remember conversation\n    |\t\t\t  LLM availables: 

@@ -1,0 +1,380 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# net-traffic-scan - wrapper unificado (Termux) + payload (device sh)
+# Uso: net-traffic-scan [--dry-run] [--once]
+set -euo pipefail
+# i-Haklab colors/banner - nounset-safe (functions usa $1 sin default)
+set +u
+source "${HOME}/.local/etc/i-Haklab/variables"
+# shellcheck disable=SC1090,SC2154
+source "${iHETC:-$HOME/.local/etc/i-Haklab}/functions"
+# Convertir \e a escape real para uso directo ${C} en mensajes
+for _c in R G Y B M C W bold dim gray darkgray; do
+  # shellcheck disable=SC2154
+  eval "_v=\${$_c:-}"; [[ -n "$_v" ]] && printf -v "$_c" '%b' "$_v" 2>/dev/null || true
+done
+# alias para funciones
+export GREEN="$G" RED="$R" YELLOW="$Y" CYAN="$C" BLUE="$B" MAGENTA="$M" WHITE="$W" RESET="$W" DIM="$dim" GREY="$gray" 2>/dev/null || true
+export GREY="${gray:-}" CYAN_LIGHT="$C" 2>/dev/null || true
+set -u
+
+REMOTE="/data/local/tmp/net-traffic-scan.sh"
+# Ruta migrada de /sdcard/Download/traffic -> ~/.local/share/traffic
+OUTPUT_DIR="$HOME/.local/share/traffic"
+DEVICE_OUTPUT_DIR="/data/data/com.termux/files/home/.local/share/traffic"
+FALLBACK="/data/local/tmp/traffic"
+LOCAL_TMP=""
+ADB_BIN="adb"
+ADB="adb"
+SERIAL=""
+
+DRY_RUN=0
+ONCE=0
+GRID=1
+for arg in "$@"; do
+  case "$arg" in
+    --dry-run) DRY_RUN=1 ;;
+    --once) ONCE=1 ;;
+    --grid) GRID=1 ;;
+    --no-grid|--plain) GRID=0 ;;
+    -h|--help)
+      echo "Uso: $(basename "$0") [--dry-run] [--once] [--grid|--no-grid]"
+      echo "  --dry-run  valida adb sin ejecutar payload"
+      echo "  --once     ejecuta una sola iteración en device (debug)"
+      echo "  --grid     salida con grid Unicode (default)"
+      echo "  --no-grid  salida plana sin bordes"
+      exit 0
+      ;;
+  esac
+done
+
+cleanup() {
+  [[ -n "${LOCAL_TMP:-}" && -f "$LOCAL_TMP" ]] && rm -f "$LOCAL_TMP" 2>/dev/null || true
+}
+trap cleanup EXIT
+
+# --- validación adb ---
+chk-pkg adb android-tools
+
+set +u; banner ""; set -u
+# obtener devices en estado device (ignora offline/unauthorized)
+mapfile -t DEVS < <(adb devices 2>&1 | awk 'NR>1 && $2=="device" {print $1}' || true)
+COUNT=${#DEVS[@]}
+
+if (( COUNT == 0 )); then
+  err "No se detectaron devices adb en estado 'device'." >&2
+  echo "" >&2
+  warn "Activa la conexión ADB (depuración inalámbrica):" >&2
+  printf "  ${Y}1)${W} Ajustes > Opciones de desarrollador > ${G}Depuración inalámbrica > ACTIVAR${W}\n" >&2
+  printf "  ${Y}2)${W} Vincular:  ${C}adb pair <IP>:<PORT>${W}  (código de 6 dígitos)\n" >&2
+  printf "  ${Y}3)${W} Conectar:  ${C}adb connect <IP>:<PORT>${W}  (ej: 192.168.1.88:41023)\n" >&2
+  printf "  ${Y}4)${W} Verifica:  ${C}adb devices${W}\n" >&2
+  echo "" >&2
+  adb devices 2>&1 || true
+  exit 1
+fi
+
+# >1 -> listar y preguntar
+if (( COUNT > 1 )); then
+  info "Detectados ${Y}$COUNT${W} devices adb:"
+  for i in "${!DEVS[@]}"; do
+    idx=$((i+1))
+    dev="${DEVS[i]}"
+    detail="$(adb devices -l 2>&1 | grep -F "$dev" || echo "$dev")"
+    printf "  ${C}[%d]${W} %s\n" "$idx" "$detail"
+  done
+  echo ""
+  # usar select si TTY, sino read
+  if [[ -t 0 ]]; then
+    PS3="$(printf "${Y}Elige device [1-%d] (default 1): ${W}" "$COUNT")"
+    select SERIAL in "${DEVS[@]}"; do
+      if [[ -n "${SERIAL:-}" ]]; then
+        break
+      else
+        warn "Selección inválida, elige 1-$COUNT" >&2
+      fi
+    done
+  else
+    read -rp "$(printf "${Y}Elige device [1-%d] (default 1): ${W}" "$COUNT")" CHOICE
+    CHOICE=${CHOICE:-1}
+    if ! [[ "$CHOICE" =~ ^[0-9]+$ ]] || (( CHOICE < 1 || CHOICE > COUNT )); then
+      warn "Selección inválida: $CHOICE, usando 1" >&2
+      CHOICE=1
+    fi
+    SERIAL="${DEVS[$((CHOICE-1))]}"
+  fi
+  ADB="adb -s $SERIAL"
+  ok "Usando device: ${C}$SERIAL${W}"
+else
+  SERIAL="${DEVS[0]}"
+  # con 1 device, usar -s explícito para consistencia (opcional)
+  ADB="adb -s $SERIAL"
+  ok "Device único detectado: ${C}$SERIAL${W}"
+fi
+
+if (( DRY_RUN == 1 )); then
+  ok "--dry-run: validación ${G}OK${W}, no se ejecuta payload"
+  $ADB shell "echo device_ok; id; cat /proc/net/tcp 2>&1 | head -n 2" || warn "dry-run probe falló"
+  exit 0
+fi
+
+# --- instalar payload remoto vía EOF + push (grid vs plain) ---
+install_remote() {
+  LOCAL_TMP="$(mktemp /data/data/com.termux/files/usr/tmp/.net-scan.XXXXXX 2>/dev/null || mktemp "${TMPDIR:-/data/data/com.termux/files/usr/tmp}/.net-scan.XXXXXX")"
+  if (( GRID == 1 )); then
+  cat > "$LOCAL_TMP" <<'__NET_TRAFFIC_SCAN_PAYLOAD__'
+#!/system/bin/sh
+# net-traffic-scan payload GRID - salida con bordes Unicode - ruta ~/.local/share/traffic
+
+LOG="/data/data/com.termux/files/home/.local/share/traffic/network_activity.txt"
+TMP_IPS="/data/local/tmp/current_ips.tmp"
+CACHE_DIR="/data/local/tmp/.net_cache"
+OUTPUT_DIR="/data/data/com.termux/files/home/.local/share/traffic"
+INTERVAL=3
+
+mkdir -p "$OUTPUT_DIR" 2>/dev/null || run-as com.termux mkdir -p "$OUTPUT_DIR" 2>/dev/null || { OUTPUT_DIR="/data/local/tmp/traffic"; mkdir -p "$OUTPUT_DIR"; }
+mkdir -p "$CACHE_DIR" 2>/dev/null
+LOG="$OUTPUT_DIR/network_activity.txt"
+
+if [ ! -w "$OUTPUT_DIR" ]; then
+  # fallback si no hay permiso (shell sin acceso a Termux home)
+  OUTPUT_DIR="/data/local/tmp/traffic"
+  mkdir -p "$OUTPUT_DIR" 2>/dev/null || true
+  LOG="$OUTPUT_DIR/network_activity.txt"
+fi
+# asegurar que LOG dir exista via run-as si es Termux home
+if [ ! -w "$(dirname "$LOG")" ]; then run-as com.termux mkdir -p "$(dirname "$LOG")" 2>/dev/null || true; fi
+
+resolve_uid() {
+  uid=$1
+  cfile="$CACHE_DIR/u_$uid"
+  if [ -f "$cfile" ]; then cat "$cfile"
+  else pkg=$(pm list packages --uid "$uid" 2>/dev/null | cut -d':' -f2 | head -n1); [ -z "$pkg" ] && pkg="uid:$uid"
+    case "$uid" in 0) pkg="root";; 1000) pkg="system";; 1001) pkg="radio";; 1073) pkg="network_stack";; 1020) pkg="mdns";; 2000) pkg="shell/adb";; esac
+    echo "$pkg" > "$cfile"; echo "$pkg"
+  fi
+}
+
+while true; do
+  TIMESTAMP=$(date "+%H:%M:%S")
+  TODAY=$(date "+%Y-%m-%d")
+  IP_HISTORY="$OUTPUT_DIR/ips_24h_${TODAY}.txt"
+  if [ ! -f "$IP_HISTORY" ]; then
+    echo "┌──────────────────────┬────────────────────┬──────────┬────────────────────────────────┐" > "$IP_HISTORY"
+    printf "│ %-20s │ %-18s │ %-8s │ %-30s │\n" "FIRST SEEN" "IP ADDRESS" "UID" "PACKAGE" >> "$IP_HISTORY"
+    echo "├──────────────────────┼────────────────────┼──────────┼────────────────────────────────┤" >> "$IP_HISTORY"
+  fi
+  # migrar historial plain -> grid y limpiar entradas corruptas (58, NumberFormat, etc)
+  if [ -f "$IP_HISTORY" ]; then
+    # si header no es grid, migrar todo; si ya es grid pero tiene corruptas, limpiar
+    need_mig=0
+    head -1 "$IP_HISTORY" 2>/dev/null | grep -q "^┌" || need_mig=1
+    grep -q "NumberFormatException" "$IP_HISTORY" 2>/dev/null && need_mig=1
+    grep -q "^│.*│ 58 .*│" "$IP_HISTORY" 2>/dev/null && need_mig=1
+    if [ "$need_mig" = 1 ]; then
+      tmp_mig="/data/local/tmp/.ips_mig.$$"
+      cp "$IP_HISTORY" "$IP_HISTORY.bak.$(date +%s)" 2>/dev/null || true
+      {
+        echo "┌──────────────────────┬────────────────────┬──────────┬────────────────────────────────┐"
+        printf "│ %-20s │ %-18s │ %-8s │ %-30s │\n" "FIRST SEEN" "IP ADDRESS" "UID" "PACKAGE"
+        echo "├──────────────────────┼────────────────────┼──────────┼────────────────────────────────┤"
+        # procesar todas las líneas (plain y grid) y filtrar corruptas
+        cat "$IP_HISTORY" 2>/dev/null | while IFS= read -r line; do
+          [ -z "$line" ] && continue
+          # saltar headers
+          case "$line" in "FIRST SEEN"*|*"FIRST SEEN"*|*"IP ADDRESS"*|"┌"*|"├"*) continue;; esac
+          # filtrar NumberFormat
+          case "$line" in *NumberFormatException*|*java.lang*) continue;; esac
+          # extraer ip/uid/pkg según sea grid o plain
+          if echo "$line" | grep -q "^│"; then
+            ip=$(echo "$line" | awk -F '│' '{print $3}' | sed 's/^ *//;s/ *$//')
+            uid=$(echo "$line" | awk -F '│' '{print $4}' | sed 's/^ *//;s/ *$//')
+            ts=$(echo "$line" | awk -F '│' '{print $2}' | sed 's/^ *//;s/ *$//')
+            pkg=$(echo "$line" | awk -F '│' '{print $5}' | sed 's/^ *//;s/ *$//')
+          else
+            ts=$(echo "$line" | awk '{print $1}'); ip=$(echo "$line" | awk '{print $2}'); uid=$(echo "$line" | awk '{print $3}'); pkg=$(echo "$line" | awk '{$1=$2=$3=""; sub(/^  */, ""); print}')
+          fi
+          [ -z "$ip" ] && continue
+          # validar ip contiene . o : y no es solo número corto
+          case "$ip" in *.*|*:*) ;; *) continue;; esac
+          # uid debe ser numérico
+          case "$uid" in ""|*[!0-9]*) continue;; esac
+          # filtrar ip que no parece host (ej: 58, 0119)
+          # ya validado por *.*|*:*, así que 58 no pasa
+          printf "│ %-20s │ %-18s │ %-8s │ %-30s │\n" "$ts" "$ip" "$uid" "$pkg" 2>/dev/null || true
+        done
+      } > "$tmp_mig" 2>/dev/null || true
+      mv "$tmp_mig" "$IP_HISTORY" 2>/dev/null || cat "$tmp_mig" > "$IP_HISTORY" 2>/dev/null || true
+      rm -f "$tmp_mig" 2>/dev/null || true
+    fi
+  fi
+  rm -f "$TMP_IPS"
+  {
+    echo "┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐"
+    printf "│ ACTIVE INTERFACES %-105s │\n" "($(date '+%H:%M:%S'))"
+    echo "├──────────────┬──────────────┬──────────────┤"
+    printf "│ %-12s │ %-12s │ %-12s │\n" "IFACE" "RX-BYTES" "TX-BYTES"
+    echo "├──────────────┼──────────────┼──────────────┤"
+    awk 'NR>2{
+        iface=$1; sub(":","",iface); rx=$2; tx=$10;
+        if(rx>0||tx>0) printf "│ %-12s │ %-12s │ %-12s │\n",iface,rx,tx
+      }' /proc/net/dev 2>/dev/null || printf "│ %-42s │\n" "(no /proc/net/dev)"
+    echo "└──────────────┴──────────────┴──────────────┘"
+    echo ""
+    echo "┌───────────────────────────────────────────────┬───────────────────────────────────────────────┬────────────┬──────────┬────────────┐"
+    printf "│ %-45s │ %-45s │ %-10s │ %-8s │ %-10s │\n" "LOCAL" "REMOTE" "STATE" "UID" "INODE"
+    echo "├───────────────────────────────────────────────┼───────────────────────────────────────────────┼────────────┼──────────┼────────────┤"
+    awk -v tmp_file="$TMP_IPS" '
+    function hex2dec(h,i,v,c){h=tolower(h);v=0;for(i=1;i<=length(h);i++){c=index("0123456789abcdef",substr(h,i,1))-1;v=v*16+c}return v}
+    function rev8(h){return substr(h,7,2) substr(h,5,2) substr(h,3,2) substr(h,1,2)}
+    function decode_ip(hex,ip,g1,g2,g3,g4,full,v4hex){
+      if(length(hex)==8) return sprintf("%d.%d.%d.%d",hex2dec(substr(hex,7,2)),hex2dec(substr(hex,5,2)),hex2dec(substr(hex,3,2)),hex2dec(substr(hex,1,2)));
+      if(length(hex)==32){g1=rev8(substr(hex,1,8));g2=rev8(substr(hex,9,8));g3=rev8(substr(hex,17,8));g4=rev8(substr(hex,25,8));full=tolower(g1 g2 g3 g4);if(substr(full,1,24)=="00000000000000000000ffff"){v4hex=substr(full,25,8);return sprintf("%d.%d.%d.%d",hex2dec(substr(v4hex,1,2)),hex2dec(substr(v4hex,3,2)),hex2dec(substr(v4hex,5,2)),hex2dec(substr(v4hex,7,2)))}return substr(full,1,4)":"substr(full,5,4)":"substr(full,9,4)":"substr(full,13,4)":"substr(full,17,4)":"substr(full,21,4)":"substr(full,25,4)":"substr(full,29,4)}
+      return hex}
+    FNR>1 && ($4=="01" || $4=="0A") {
+      state=($4=="01")?"ESTAB":"LISTEN"; split($2,loc,":"); l_hex=loc[1]; lport=hex2dec(loc[2]); lip=decode_ip(l_hex); split($3,rem,":"); r_hex=rem[1]; rport=hex2dec(rem[2]); rip=decode_ip(r_hex);
+      if(state=="ESTAB" && (lip=="127.0.0.1" || rip=="127.0.0.1" || rip=="0.0.0.0" || rip=="0000:0000:0000:0000:0000:0000:0000:0000")) next;
+      if(lport==5555||lport==5037||rport==5555||rport==5037) next;
+      if(rip=="0000:0000:0000:0000:0000:0000:0000:0001") next;
+      printf "│ %-45s │ %-45s │ %-10s │ %-8s │ %-10s │\n", lip":"lport, rip":"rport, state, $8, $10;
+      if(state=="ESTAB" && rip!="0.0.0.0" && rip!="0000:0000:0000:0000:0000:0000:0000:0000" && rport!=0) print rip" "$8 >> tmp_file;
+    }' /proc/net/tcp /proc/net/tcp6 2>/dev/null
+    echo "└───────────────────────────────────────────────┴───────────────────────────────────────────────┴────────────┴──────────┴────────────┘"
+    echo ""
+    echo "┌───────────────────────────────────────────────┬───────────────────────────────────────────────┬────────────┬──────────┬────────────┐"
+    printf "│ %-45s │ %-45s │ %-10s │ %-8s │ %-10s │\n" "LOCAL" "REMOTE" "STATE" "UID" "INODE"
+    echo "├───────────────────────────────────────────────┼───────────────────────────────────────────────┼────────────┼──────────┼────────────┤"
+    awk -v tmp_file="$TMP_IPS" '
+    function hex2dec(h,i,v,c){h=tolower(h);v=0;for(i=1;i<=length(h);i++){c=index("0123456789abcdef",substr(h,i,1))-1;v=v*16+c}return v}
+    function rev8(h){return substr(h,7,2) substr(h,5,2) substr(h,3,2) substr(h,1,2)}
+    function decode_ip(hex,g1,g2,g3,g4,full,v4hex){
+      if(length(hex)==8) return sprintf("%d.%d.%d.%d",hex2dec(substr(hex,7,2)),hex2dec(substr(hex,5,2)),hex2dec(substr(hex,3,2)),hex2dec(substr(hex,1,2)));
+      if(length(hex)==32){g1=rev8(substr(hex,1,8));g2=rev8(substr(hex,9,8));g3=rev8(substr(hex,17,8));g4=rev8(substr(hex,25,8));full=tolower(g1 g2 g3 g4);if(substr(full,1,24)=="00000000000000000000ffff"){v4hex=substr(full,25,8);return sprintf("%d.%d.%d.%d",hex2dec(substr(v4hex,1,2)),hex2dec(substr(v4hex,3,2)),hex2dec(substr(v4hex,5,2)),hex2dec(substr(v4hex,7,2)))}return substr(full,1,4)":"substr(full,5,4)":"substr(full,9,4)":"substr(full,13,4)":"substr(full,17,4)":"substr(full,21,4)":"substr(full,25,4)":"substr(full,29,4)}
+      return hex}
+    FNR>1{
+      split($2,loc,":"); l_hex=loc[1]; lport=hex2dec(loc[2]); lip=decode_ip(l_hex); split($3,rem,":"); r_hex=rem[1]; rport=hex2dec(rem[2]); rip=decode_ip(r_hex); uid=$8; inode=$10;
+      if(lip=="127.0.0.1" || rip=="127.0.0.1") next; if(lport==5555||lport==5037||rport==5555||rport==5037) next; if(rip=="0000:0000:0000:0000:0000:0000:0000:0001") next;
+      if(rip=="0.0.0.0" || rip=="0000:0000:0000:0000:0000:0000:0000:0000") {printf "│ %-45s │ %-45s │ %-10s │ %-8s │ %-10s │\n", lip":"lport, "*:*", "UDP", uid, inode; next;}
+      printf "│ %-45s │ %-45s │ %-10s │ %-8s │ %-10s │\n", lip":"lport, rip":"rport, "UDP", uid, inode; if(rport!=0) print rip" "uid >> tmp_file;
+    }' /proc/net/udp /proc/net/udp6 2>/dev/null
+    echo "└───────────────────────────────────────────────┴───────────────────────────────────────────────┴────────────┴──────────┴────────────┘"
+  } > "$LOG" 2>&1
+  if [ -f "$TMP_IPS" ]; then
+    sort -u "$TMP_IPS" -o "$TMP_IPS"
+    while read -r rip uid; do
+      [ -z "$rip" ] && continue
+      # validar rip es IP/host y uid numérico, filtrar corruptos
+      case "$rip" in *.*|*:*) ;; *) continue;; esac
+      case "$uid" in ""|*[!0-9]*) continue;; esac
+      case "$rip" in *NumberFormat*|*java.lang*) continue;; esac
+      if ! grep -qF " $rip " "$IP_HISTORY" 2>/dev/null; then
+        pkg=$(resolve_uid "$uid")
+        # si resolve_uid devolvió NumberFormat, saltar
+        case "$pkg" in *NumberFormat*|*java.lang*) continue;; esac
+        printf "│ %-20s │ %-18s │ %-8s │ %-30s │\n" "$TIMESTAMP" "$rip" "$uid" "$pkg" >> "$IP_HISTORY"
+      fi
+    done < "$TMP_IPS"
+    rm -f "$TMP_IPS"
+  fi
+  sleep $INTERVAL
+done
+__NET_TRAFFIC_SCAN_PAYLOAD__
+  else
+  cat > "$LOCAL_TMP" <<'__NET_TRAFFIC_SCAN_PAYLOAD_PLAIN__'
+#!/system/bin/sh
+# payload plain - ruta ~/.local/share/traffic
+LOG="/data/data/com.termux/files/home/.local/share/traffic/network_activity.txt"
+TMP_IPS="/data/local/tmp/current_ips.tmp"
+CACHE_DIR="/data/local/tmp/.net_cache"
+OUTPUT_DIR="/data/data/com.termux/files/home/.local/share/traffic"
+INTERVAL=3
+mkdir -p "$OUTPUT_DIR" 2>/dev/null || run-as com.termux mkdir -p "$OUTPUT_DIR" 2>/dev/null || { OUTPUT_DIR="/data/local/tmp/traffic"; mkdir -p "$OUTPUT_DIR"; }
+mkdir -p "$CACHE_DIR" 2>/dev/null
+LOG="$OUTPUT_DIR/network_activity.txt"
+if [ ! -w "$OUTPUT_DIR" ]; then OUTPUT_DIR="/data/local/tmp/traffic"; mkdir -p "$OUTPUT_DIR" 2>/dev/null || true; LOG="$OUTPUT_DIR/network_activity.txt"; fi
+if [ ! -w "$(dirname "$LOG")" ]; then run-as com.termux mkdir -p "$(dirname "$LOG")" 2>/dev/null || true; fi
+resolve_uid() { uid=$1; cfile="$CACHE_DIR/u_$uid"; if [ -f "$cfile" ]; then cat "$cfile"; else pkg=$(pm list packages --uid "$uid" 2>/dev/null | cut -d':' -f2 | head -n1); [ -z "$pkg" ] && pkg="uid:$uid"; case "$uid" in 0) pkg="root";; 1000) pkg="system";; 1001) pkg="radio";; 1073) pkg="network_stack";; 1020) pkg="mdns";; 2000) pkg="shell/adb";; esac; echo "$pkg" > "$cfile"; echo "$pkg"; fi; }
+while true; do TIMESTAMP=$(date "+%H:%M:%S"); TODAY=$(date "+%Y-%m-%d"); IP_HISTORY="$OUTPUT_DIR/ips_24h_${TODAY}.txt"; if [ ! -f "$IP_HISTORY" ]; then printf "%-20s %-18s %-8s %-30s\n" "FIRST SEEN" "IP ADDRESS" "UID" "PACKAGE" > "$IP_HISTORY"; fi; rm -f "$TMP_IPS"
+  { echo "=== ACTIVE INTERFACES (/proc/net/dev) [$(date)] ==="; printf "%-12s %-12s %-12s\n" "IFACE" "RX-BYTES" "TX-BYTES"; awk 'NR>2{iface=$1; sub(":","",iface); rx=$2; tx=$10; if(rx>0||tx>0) printf "%-12s %-12s %-12s\n",iface,rx,tx}' /proc/net/dev 2>/dev/null || echo "(no /proc/net/dev)"; echo ""; echo "=== DETAILED TCP CONNECTIONS (/proc/net/tcp & tcp6) ==="; printf "%-45s %-45s %-10s %-8s %-8s\n" "LOCAL" "REMOTE" "STATE" "UID" "INODE"; awk -v tmp_file="$TMP_IPS" 'function hex2dec(h,i,v,c){h=tolower(h);v=0;for(i=1;i<=length(h);i++){c=index("0123456789abcdef",substr(h,i,1))-1;v=v*16+c}return v} function rev8(h){return substr(h,7,2) substr(h,5,2) substr(h,3,2) substr(h,1,2)} function decode_ip(hex,ip,g1,g2,g3,g4,full,v4hex){if(length(hex)==8) return sprintf("%d.%d.%d.%d",hex2dec(substr(hex,7,2)),hex2dec(substr(hex,5,2)),hex2dec(substr(hex,3,2)),hex2dec(substr(hex,1,2))); if(length(hex)==32){g1=rev8(substr(hex,1,8));g2=rev8(substr(hex,9,8));g3=rev8(substr(hex,17,8));g4=rev8(substr(hex,25,8));full=tolower(g1 g2 g3 g4);if(substr(full,1,24)=="00000000000000000000ffff"){v4hex=substr(full,25,8);return sprintf("%d.%d.%d.%d",hex2dec(substr(v4hex,1,2)),hex2dec(substr(v4hex,3,2)),hex2dec(substr(v4hex,5,2)),hex2dec(substr(v4hex,7,2)))}return substr(full,1,4)":"substr(full,5,4)":"substr(full,9,4)":"substr(full,13,4)":"substr(full,17,4)":"substr(full,21,4)":"substr(full,25,4)":"substr(full,29,4)}return hex} FNR>1 && ($4=="01" || $4=="0A") {state=($4=="01")?"ESTAB":"LISTEN";split($2,loc,":");l_hex=loc[1];lport=hex2dec(loc[2]);lip=decode_ip(l_hex);split($3,rem,":");r_hex=rem[1];rport=hex2dec(rem[2]);rip=decode_ip(r_hex);if(state=="ESTAB" && (lip=="127.0.0.1" || rip=="127.0.0.1" || rip=="0.0.0.0" || rip=="0000:0000:0000:0000:0000:0000:0000:0000")) next; if(lport==5555||lport==5037||rport==5555||rport==5037) next; if(rip=="0000:0000:0000:0000:0000:0000:0000:0001") next; printf "%-45s %-45s %-10s %-8s %-8s\n", lip":"lport, rip":"rport, state, $8, $10; if(state=="ESTAB" && rip!="0.0.0.0" && rip!="0000:0000:0000:0000:0000:0000:0000:0000" && rport!=0) print rip" "$8 >> tmp_file;}' /proc/net/tcp /proc/net/tcp6 2>/dev/null; echo ""; echo "=== DETAILED UDP SOCKETS (/proc/net/udp & udp6) ==="; printf "%-45s %-45s %-10s %-8s %-8s\n" "LOCAL" "REMOTE" "STATE" "UID" "INODE"; awk -v tmp_file="$TMP_IPS" 'function hex2dec(h,i,v,c){h=tolower(h);v=0;for(i=1;i<=length(h);i++){c=index("0123456789abcdef",substr(h,i,1))-1;v=v*16+c}return v} function rev8(h){return substr(h,7,2) substr(h,5,2) substr(h,3,2) substr(h,1,2)} function decode_ip(hex,g1,g2,g3,g4,full,v4hex){if(length(hex)==8) return sprintf("%d.%d.%d.%d",hex2dec(substr(hex,7,2)),hex2dec(substr(hex,5,2)),hex2dec(substr(hex,3,2)),hex2dec(substr(hex,1,2))); if(length(hex)==32){g1=rev8(substr(hex,1,8));g2=rev8(substr(hex,9,8));g3=rev8(substr(hex,17,8));g4=rev8(substr(hex,25,8));full=tolower(g1 g2 g3 g4);if(substr(full,1,24)=="00000000000000000000ffff"){v4hex=substr(full,25,8);return sprintf("%d.%d.%d.%d",hex2dec(substr(v4hex,1,2)),hex2dec(substr(v4hex,3,2)),hex2dec(substr(v4hex,5,2)),hex2dec(substr(v4hex,7,2)))}return substr(full,1,4)":"substr(full,5,4)":"substr(full,9,4)":"substr(full,13,4)":"substr(full,17,4)":"substr(full,21,4)":"substr(full,25,4)":"substr(full,29,4)}return hex} FNR>1{split($2,loc,":");l_hex=loc[1];lport=hex2dec(loc[2]);lip=decode_ip(l_hex);split($3,rem,":");r_hex=rem[1];rport=hex2dec(rem[2]);rip=decode_ip(r_hex);uid=$8;inode=$10;if(lip=="127.0.0.1" || rip=="127.0.0.1") next; if(lport==5555||lport==5037||rport==5555||rport==5037) next; if(rip=="0000:0000:0000:0000:0000:0000:0000:0001") next; if(rip=="0.0.0.0" || rip=="0000:0000:0000:0000:0000:0000:0000:0000") {printf "%-45s %-45s %-10s %-8s %-8s\n", lip":"lport, "*:*", "UDP", uid, inode; next;} printf "%-45s %-45s %-10s %-8s %-8s\n", lip":"lport, rip":"rport, "UDP", uid, inode; if(rport!=0) print rip" "uid >> tmp_file;}' /proc/net/udp /proc/net/udp6 2>/dev/null; } > "$LOG" 2>&1; if [ -f "$TMP_IPS" ]; then sort -u "$TMP_IPS" -o "$TMP_IPS"; while read -r rip uid; do [ -z "$rip" ] && continue; if ! grep -qF " $rip " "$IP_HISTORY" 2>/dev/null; then pkg=$(resolve_uid "$uid"); printf "%-20s %-18s %-8s %-30s\n" "$TIMESTAMP" "$rip" "$uid" "$pkg" >> "$IP_HISTORY"; fi; done < "$TMP_IPS"; rm -f "$TMP_IPS"; fi; sleep $INTERVAL; done
+__NET_TRAFFIC_SCAN_PAYLOAD_PLAIN__
+  fi
+  msg "Instalando payload en ${C}$REMOTE${W} (grid=${Y}$GRID${W})..."
+  # shellcheck disable=SC2086
+  $ADB push "$LOCAL_TMP" "$REMOTE" >/dev/null && ok "payload subido" || { err "push falló"; return 1; }
+  $ADB shell chmod +x "$REMOTE" && ok "payload chmod +x" || warn "chmod falló"
+}
+
+# --- ejecución ---
+# asegurar dir local ~/.local/share/traffic
+mkdir -p "$OUTPUT_DIR" 2>/dev/null || true
+install_remote
+
+info "Limpiando logs previos (manteniendo historial ips_24h)..."
+# solo borra network_activity y tmp, NO ips_24h - intenta via run-as para Termux home
+# shellcheck disable=SC2086
+$ADB shell "rm -f $DEVICE_OUTPUT_DIR/network_activity.txt $FALLBACK/network_activity.txt $FALLBACK/current_ips.tmp /data/local/tmp/current_ips.tmp 2>/dev/null; run-as com.termux rm -f $DEVICE_OUTPUT_DIR/network_activity.txt 2>/dev/null; mkdir -p $DEVICE_OUTPUT_DIR 2>/dev/null || run-as com.termux mkdir -p $DEVICE_OUTPUT_DIR 2>/dev/null || mkdir -p $FALLBACK 2>/dev/null; mkdir -p $FALLBACK 2>/dev/null; echo ok" 2>&1 | while read -r l; do msg "$l"; done | head -n 5
+
+msg "Lanzando scanner en background..."
+# shellcheck disable=SC2086
+if (( ONCE == 1 )); then
+  $ADB shell "timeout 5 sh $REMOTE 2>&1 & sleep 4; cat $FALLBACK/network_activity.txt 2>/dev/null || cat $DEVICE_OUTPUT_DIR/network_activity.txt 2>/dev/null || run-as com.termux cat $DEVICE_OUTPUT_DIR/network_activity.txt 2>/dev/null | head -n 100" || true
+else
+  $ADB shell "nohup sh $REMOTE >/dev/null 2>&1 & echo \$!" || warn "nohup falló"
+  sleep 4
+  ok "scanner PID $($ADB shell "pidof -s net-traffic-scan.sh 2>/dev/null || pgrep -f net-traffic-scan 2>/dev/null | head -n1" 2>&1 || echo "?")"
+fi
+
+echo "" || true
+info "=== LOG (device) ${C}$DEVICE_OUTPUT_DIR/network_activity.txt${W} / ${C}$FALLBACK/network_activity.txt${W} ==="
+# shellcheck disable=SC2086
+$ADB shell "cat $FALLBACK/network_activity.txt 2>/dev/null || cat $DEVICE_OUTPUT_DIR/network_activity.txt 2>/dev/null || run-as com.termux cat $DEVICE_OUTPUT_DIR/network_activity.txt 2>/dev/null" 2>&1 | head -n 80 || true
+
+echo "" || true
+info "=== IP HISTORY (device, historial mantenido) ${C}$DEVICE_OUTPUT_DIR/ips_24h_*.txt${W} ==="
+# shellcheck disable=SC2086
+$ADB shell "cat $FALLBACK/ips_24h_*.txt 2>/dev/null || cat $DEVICE_OUTPUT_DIR/ips_24h_*.txt 2>/dev/null || run-as com.termux cat $DEVICE_OUTPUT_DIR/ips_24h_*.txt 2>/dev/null" 2>&1 | head -n 60 || true
+
+# --- concatenación ambos ---
+STAMP="$(date +%Y%m%d_%H%M%S)"
+mkdir -p "$OUTPUT_DIR" 2>/dev/null || true
+LOCAL_CONCAT="$OUTPUT_DIR/combined_${STAMP}.txt"
+info "Concatenando ambos archivos -> ${Y}$LOCAL_CONCAT${W} y en device ${C}$DEVICE_OUTPUT_DIR/combined_${STAMP}.txt${W} (fallback $FALLBACK)"
+# local concat: fallback primero (payload escribe allí) - tolerar fallos
+set +eu
+printf "${C}===== traffic_combined %s device:%s =====${W}\n" "$STAMP" "$SERIAL" > "$LOCAL_CONCAT" 2>&1 || true
+echo "" >> "$LOCAL_CONCAT" 2>&1 || true
+printf "${Y}===== network_activity.txt =====${W}\n" >> "$LOCAL_CONCAT" 2>&1 || true
+# shellcheck disable=SC2086
+$ADB shell "cat $FALLBACK/network_activity.txt 2>/dev/null || cat $DEVICE_OUTPUT_DIR/network_activity.txt 2>/dev/null || run-as com.termux cat $DEVICE_OUTPUT_DIR/network_activity.txt 2>/dev/null" >> "$LOCAL_CONCAT" 2>&1 || true
+echo "" >> "$LOCAL_CONCAT" 2>&1 || true
+printf "${Y}===== ips_24h (historial) =====${W}\n" >> "$LOCAL_CONCAT" 2>&1 || true
+$ADB shell "cat $FALLBACK/ips_24h_*.txt 2>/dev/null || cat $DEVICE_OUTPUT_DIR/ips_24h_*.txt 2>/dev/null || run-as com.termux cat $DEVICE_OUTPUT_DIR/ips_24h_*.txt 2>/dev/null" >> "$LOCAL_CONCAT" 2>&1 || true
+set -eu
+
+# también deja combinado en device (solo en FALLBACK para no sobreescribir local con headers)
+# shellcheck disable=SC2086
+if $ADB shell "cat $FALLBACK/network_activity.txt $FALLBACK/ips_24h_*.txt > $FALLBACK/combined_${STAMP}.txt 2>/dev/null && ls -lh $FALLBACK/combined_${STAMP}.txt 2>&1"; then
+  ok "combined en device: $FALLBACK/combined_${STAMP}.txt"
+else
+  warn "combined en device no creado en $FALLBACK"
+fi
+
+ok "Local concatenado: ${Y}$LOCAL_CONCAT${W} ($(wc -l < "$LOCAL_CONCAT" 2>/dev/null || echo ?) líneas)"
+# listar local y device (fallback) - sin mostrar error esperado, tip si vacío
+if ! ls -lh "$OUTPUT_DIR"/*.txt 2>/dev/null | head -n 20; then tip "sin archivos aún en ${C}$OUTPUT_DIR${W}"; fi
+# shellcheck disable=SC2086
+if ! $ADB shell "ls $FALLBACK/*.txt 2>/dev/null | grep -q txt" 2>/dev/null; then
+  tip "sin archivos aún en ${C}$FALLBACK${W}"
+else
+  $ADB shell "ls -lh $FALLBACK/*.txt 2>/dev/null | head -n 20" 2>/dev/null | head -n 20 || true
+fi
+if ! $ADB shell "ls $DEVICE_OUTPUT_DIR/*.txt 2>/dev/null | grep -q txt" 2>/dev/null && ! $ADB shell "run-as com.termux ls $DEVICE_OUTPUT_DIR/*.txt 2>/dev/null | grep -q txt" 2>/dev/null; then
+  tip "sin archivos aún en ${C}$DEVICE_OUTPUT_DIR${W} (usando fallback)"
+else
+  $ADB shell "ls -lh $DEVICE_OUTPUT_DIR/*.txt 2>/dev/null | head -n 20" 2>/dev/null | head -n 20 || $ADB shell "run-as com.termux ls -lh $DEVICE_OUTPUT_DIR/*.txt 2>/dev/null | head -n 20" 2>/dev/null | head -n 20 || true
+fi
+
+echo ""
+tip "Para ver en vivo:  ${C}$ADB shell tail -f $FALLBACK/network_activity.txt${W}  ${W}(device: $DEVICE_OUTPUT_DIR)${W}"
+tip "Para detener:      ${R}$ADB shell pkill -f net-traffic-scan${W}"
+tip "Para ver combinado: ${Y}cat $LOCAL_CONCAT${W}  ${W}|  ${Y}adb shell cat $FALLBACK/combined_*.txt${W}"
+tip "Dir local: ${G}$OUTPUT_DIR${W}  |  Device: ${C}$DEVICE_OUTPUT_DIR${W} (fallback ${Y}$FALLBACK${W})"
