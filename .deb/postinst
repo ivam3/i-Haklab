@@ -115,6 +115,15 @@ fi
 echo "Getting permissions ..."
 chmod u+x -R ${HOME}/.local/* ${HOME}/.config/fish/functions/* ${PREFIX}/bin/* 2>>$LOGFILE
 
+# SETTING UP @DEMON (victor028) PACKAGES
+echo "Setting up @demon (victor028) packages ..."
+# DOW LOADING REPO LIST
+curl -fsSL "https://raw.githubusercontent.com/VictorH028/victorh028.github.io/refs/heads/gh-pages/key/demon-termux-packages.list" | tee "$PREFIX/etc/apt/sources.list.d/demon-termux-packages.list" >/dev/null 2>>$LOGFILE
+
+# SIGNING KEY
+curl -fsSL "https://raw.githubusercontent.com/VictorH028/victorh028.github.io/refs/heads/main/demon-packages/demon-packages-key.asc"  | gpg --dearmor | tee "$PREFIX/etc/apt/trusted.gpg.d/demon.gpg" >/dev/null 2>>$LOGFILE
+
+# SETTING UP ML0CATE DATABASE
 echo "Updating mlocate data base ..."
 updatedb
 

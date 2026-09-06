@@ -5,6 +5,7 @@ amass:OSINT
 androidsdk-cli:Android
 antigravity-cli:AI Agents
 apksigner:Android
+apkeditor:Android
 apktool:Android
 appshark:Android
 aquatone:Web Application
@@ -24,7 +25,7 @@ clamav:Forensics
 claude-code:AI Agents
 cloudbunny:Cloud
 cloudflared:Tunneling
-code-server:Utilities
+code-oss:Utilities
 codebuff:AI Agents
 codex:AI Agents
 converter:Utilities
@@ -92,6 +93,7 @@ muse-code:AI Agents
 mvt:Forensics
 ngrok:Tunneling
 nikto:Web Application
+nljson:Utilities
 nmap:Network Scanning
 n8n:AI & Automation
 objection:Android
@@ -132,14 +134,17 @@ sherlock:OSINT
 shodan:OSINT
 sleepwalker:AI & Automation
 slowhttptest:Exploitation
+smali-lsp:MCP & Skills
 smithery:MCP & Skills
 snscrape:OSINT
 steghide:Forensics
 stegsnow:Forensics
 speedtest-go:Utilities
+spin:Utilities
 sqlite:Utilities
 sqlmap:Web Application
 sublist3r:OSINT
+termux-apk-make:Android
 termux-desktop-xfce:Utilities
 termux-docker-qemu:Utilities
 termux-oracle-skill:MCP & Skills

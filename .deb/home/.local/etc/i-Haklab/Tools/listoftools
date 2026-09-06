@@ -5,6 +5,7 @@ amass
 androidsdk-cli
 antigravity-cli
 apksigner
+apkeditor
 apktool
 appshark
 aquatone
@@ -92,6 +93,7 @@ muse-code
 mvt
 ngrok
 nikto
+nljson
 nmap
 n8n
 objection
@@ -132,14 +134,17 @@ sherlock
 shodan
 sleepwalker
 slowhttptest
+smali-lsp
 smithery
 snscrape
 steghide
 stegsnow
 speedtest-go
+spin
 sqlite
 sqlmap
 sublist3r
+termux-apk-make
 termux-desktop-xfce
 termux-docker-qemu
 termux-oracle-skill
