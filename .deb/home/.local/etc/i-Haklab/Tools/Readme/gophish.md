@@ -67,3 +67,6 @@ Una vez lanzada, GoPhish te proporcionará un panel de control con estadísticas
 -   **Ética y Legalidad:** Es fundamental recordar que GoPhish es una herramienta de seguridad que debe utilizarse **siempre con el consentimiento expreso y por escrito** de la organización y los individuos involucrados. El uso no autorizado de GoPhish para fines maliciosos es ilegal y puede tener graves consecuencias.
 -   **Certificados SSL:** Para que las campañas parezcan más legítimas, es recomendable configurar GoPhish con un certificado SSL válido para su servidor web.
 -   **Evasión de Defensas:** Las plantillas de correo y las páginas de aterrizaje deben diseñarse cuidadosamente para evitar ser detectadas por los filtros de spam y las defensas de seguridad del correo electrónico.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

@@ -52,3 +52,6 @@ Privoxy tiene una interfaz web interna para ver su estado y configuración. Nave
 
 ---
 *Nota: Es una herramienta poderosa para usuarios avanzados que desean control total sobre lo que entra y sale de su navegador.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

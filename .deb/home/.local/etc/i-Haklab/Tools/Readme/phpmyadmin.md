@@ -52,3 +52,6 @@ $cfg['Servers'][$i]['auth_type'] = 'cookie';
 
 ---
 *Nota: Es la herramienta estándar de facto en la mayoría de los paneles de control de hosting (como cPanel) para gestionar bases de datos.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

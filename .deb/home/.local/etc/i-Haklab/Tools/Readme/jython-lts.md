@@ -103,3 +103,6 @@ El uso de Jython implica tener un entorno Java configurado y luego ejecutar scri
 -   **Compatibilidad Python 2.7:** Es importante recordar que Jython-LTS (la serie 2.7.x) es compatible con Python 2.7. Esto significa que no soporta la sintaxis ni las características de Python 3.
 -   **Extensiones C:** Jython no puede ejecutar módulos de Python escritos en C (como NumPy o algunas partes de SciPy). Está limitado a código Python puro y a la interoperabilidad con Java.
 -   **Rendimiento:** Aunque Jython compila código Python a bytecode de Java, el rendimiento puede variar y no siempre es igual al de CPython (el intérprete estándar de Python) o al de Java nativo.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

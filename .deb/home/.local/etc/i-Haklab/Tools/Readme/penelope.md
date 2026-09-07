@@ -83,3 +83,6 @@ Esto es útil para que el objetivo pueda descargar herramientas adicionales.
 -   **Ética y Legalidad:** Penelope es una herramienta de seguridad ofensiva. Su uso debe ser **estrictamente ético y legal**, y solo en sistemas para los que se tenga autorización explícita para realizar pruebas de penetración. El uso no autorizado es ilegal y puede tener graves consecuencias.
 -   **Evadiendo Detección:** Al igual que con cualquier herramienta de post-explotación, se debe tener en cuenta que los sistemas de detección de intrusiones (IDS/IPS) y el software antivirus pueden detectar el tráfico del shell inverso o la actividad de Penelope.
 -   **Redes y Firewalls:** Asegúrate de que los firewalls en la máquina del atacante (y en la del objetivo, si es posible) permitan la conexión del shell inverso al puerto configurado en Penelope.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

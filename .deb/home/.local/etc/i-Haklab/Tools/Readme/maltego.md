@@ -57,3 +57,6 @@ Las "Transforms" son las funciones que recopilan información.
 -   **Community Edition (CE):** La versión gratuita CE es una excelente manera de empezar, pero tiene limitaciones como el número de resultados por Transform y la velocidad. Las versiones de pago ofrecen más funcionalidades y acceso a una gama más amplia de fuentes de datos.
 -   **Fuentes de Datos (Hub):** Maltego integra "Hubs" que son colecciones de Transforms que acceden a diferentes fuentes de datos, algunas gratuitas y otras de pago.
 -   **Ética y Legalidad:** Maltego es una herramienta de OSINT. Solo debe utilizarse para recopilar información que es pública y accesible. Su uso debe ser ético y legal, respetando siempre la privacidad de las personas y las leyes aplicables. No debe utilizarse para la vigilancia no autorizada o actividades ilegales.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

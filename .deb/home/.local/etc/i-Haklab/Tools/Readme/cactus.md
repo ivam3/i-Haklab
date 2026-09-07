@@ -16,7 +16,7 @@ Cactus es útil para:
 
 ## ¿Cómo se usa? (Ejemplos básicos)
 
-El paquete se instala con `pkg install cactus`; el `postinst` clona el upstream en `~/.local/share/cactus`, instala las dependencias Python y compila el motor nativo (tarda unos 5-15 minutos; el log queda en `~/.local/share/cactus/build.log`).
+El paquete se instala con `pkg install cactus`. La primera instalación compila el motor en tu teléfono y tarda unos 5-15 minutos (puedes seguir el avance en `~/.local/share/cactus/build.log`).
 
 **Ejemplo 1: Autenticación**
 
@@ -58,11 +58,9 @@ cactus convert HuggingFace/modello
 
 ## Consideraciones Adicionales
 
-*   **Dependencias:** El paquete depende de `huggingface` (huggingface_hub), Python, CMake, Rust, `build-essential`, `libcurl`, `python-torch`, `python-torchvision`, `python-scipy`, `python-numpy`, `python-pillow` y `python-tokenizers`.
-*   **`cactus convert` necesita el *convert stack*:** Se instala automáticamente en el paso 4 del `postinst` (`sentencepiece`, `protobuf`, `transformers==5.5.4` con `safetensors`, `regex`, `pyyaml`). Si falla o expira el timeout solo afecta a `convert`; el resto de comandos siguen funcionando.
-*   **Compatible con Python 3.14:** El `postinst` parchea `requires-python` del `pyproject.toml` y relaja el chequeo de `tokenizers` (transformers exige `<=0.23.0` pero en Termux se usa `python-tokenizers` 0.23.1).
-*   **Descargas de HuggingFace:** Por el paquete `huggingface`, las descargas usan HTTP clásico (`HF_HUB_DISABLE_XET=1`) porque `hf-xet` no tiene wheel para Termux/aarch64.
-*   **Ejecutables:** El binario `cactus` se instala en `$PREFIX/bin` (sin venv, instalación global e idempotente: se re-parcha tras cada reinstalación).
+*   **Requisitos:** Se instala todo solo con el paquete (Python, herramientas de compilación y librerías de IA incluidas).
+*   **`cactus convert`:** Si la conversión falla o tarda demasiado, solo afecta a `convert`; el resto de comandos siguen funcionando.
+*   **Descargas de HuggingFace:** Usan descarga clásica, optimizada para funcionar en el teléfono.
 *   **Ayuda:** https://t.me/Ivam3_Bot · Issues: https://github.com/cactus-compute/cactus
 
 ---

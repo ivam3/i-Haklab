@@ -82,3 +82,6 @@ A continuación, se presentan algunos ejemplos de cómo se podría usar Quack To
 -   **Daños Potenciales:** Los ataques DoS pueden causar interrupciones graves en el servicio, pérdida de datos y daños económicos significativos.
 
 **Bajo ninguna circunstancia debes utilizar esta herramienta con fines maliciosos o sin la debida autorización.**
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

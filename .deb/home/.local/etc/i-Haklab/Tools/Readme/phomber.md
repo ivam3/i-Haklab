@@ -107,3 +107,6 @@ Fonemas con separadores personalizados: ['ɪɡ-ˈzæm-pəl t-ɛk-st']
 -   **Soporte de Idiomas y Backends:** La calidad y el soporte para idiomas pueden variar significativamente entre los diferentes backends. Es importante elegir el backend y el idioma correctos para tus necesidades.
 -   **IPA (International Phonetic Alphabet):** Muchos backends de Phonemizer (especialmente `espeak-ng`) producen salida en formato IPA, que es un sistema estandarizado para representar sonidos del habla.
 -   **Dependencias Externas:** Recuerda que Phonemizer es una biblioteca "wrapper"; necesitarás instalar los motores de fonemización externos (como `espeak-ng`) por separado.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

@@ -83,3 +83,6 @@ Una vez conectado, puedes usar comandos como `get`, `put`, `ls`, `cd`, etc.
 -   **Seguridad:** SSH proporciona una conexión cifrada, lo que hace que PuTTY sea una opción segura para la administración remota. Siempre usa SSH en lugar de Telnet cuando sea posible.
 -   **PuTTYgen:** Una herramienta auxiliar para generar pares de claves SSH para la autenticación sin contraseña.
 -   **Pageant:** Un agente de autenticación que almacena tus claves privadas de forma segura en memoria para evitar tener que introducirlas repetidamente.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

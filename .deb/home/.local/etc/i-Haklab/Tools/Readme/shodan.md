@@ -79,3 +79,6 @@ La verdadera potencia de Shodan reside en sus filtros. Los filtros se usan con e
 
 ---
 *Nota: Shodan es una herramienta de inteligencia y reconocimiento. Trata la información que encuentres con responsabilidad y ética.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

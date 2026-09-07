@@ -64,3 +64,6 @@ Lockphish es una herramienta de línea de comandos que se ejecuta en entornos Li
 -   **Dependencia de `ngrok`:** La herramienta suele depender de `ngrok` o servicios similares para exponer el servidor de phishing.
 
 **No utilices esta herramienta con fines maliciosos.**
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

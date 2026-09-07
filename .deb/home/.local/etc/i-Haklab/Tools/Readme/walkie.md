@@ -82,89 +82,50 @@ walkie agent equipo --cli cactus --model google/gemma-4-E2B-it
 
 ## Consideraciones Adicionales
 
-*   **Instalación en i-Haklab:** disponible como paquete `.deb` → `apt install walkie` (o `pkg install walkie`). El `postinst` instala `walkie-sh` desde el repo git de upstream (v1.5.0), con fallback a la versión npm 1.4.0 si no hay internet.
-*   **Parche netlink/SELinux (obligatorio en Android):** al arrancar, el daemon crea un socket `AF_NETLINK` para observar cambios de red; en Android SELinux bloquea ese `bind()` para apps no-root (`permission denied`). El `postinst` aplica automáticamente un parche en `node_modules/udx-native/lib/network-interfaces.js` que envuelve el init nativo en `try/catch` y degrada a `interfaces = []`. Con esto el daemon arranca y responde todos los comandos; la IP local cae a `127.0.0.1` (solo desactiva el atajo LAN; el descubrimiento WAN sigue funcionando vía HiperDHT).
-*   **Parche genérico de agentes (runner universal):** el `postinst` aplica además un parche sobre `bin/walkie.js` (`~/.local/share/walkie/node_modules/walkie-sh/`) que añade un runner genérico (`runGeneric`), un runner para **IA local vía Ollama** (`runOllama`), un flag nativo `--skip-git-repo-check` (solo se reenvía a `codex`, que lo soporta) y relaja la validación de `--cli`. Esto permite `--cli <cualquier-agente>` y `--cli ollama` sin que el CLI nativo los conozca.
+*   **Instalación:** `apt install walkie` (o `pkg install walkie`). Queda lista para usar, sin pasos extra.
+*   **Red en Android:** la IP local se muestra como `127.0.0.1`; la conexión con otros dispositivos funciona igual.
+*   **Cualquier agente:** `--cli` acepta casi cualquier CLI de IA (`claude`, `codex`, `gemini`, `ollama`, ...) además de los integrados. `--skip-git-repo-check` solo aplica a `codex`.
 *   **Agentes registrados (registry):** `agy` (`-p`), `vibe` (`-p --output text`), `opencode` (`run`), `gemini`/`qwen`/`qwen-code`/`mimo`/`mimocode`/`kilo`/`kilocode`/`minimax`/`mmx` (`-p`), `copilot`/`copilot-cli`/`codebuff`/`freebuff`/`hermes`/`openclaw` (prompt posicional vía `--agent-args`), `cactus` (`run --prompt`, modelo on-device; respuesta limpia vía `--result-json`), `ollama` (REST API, sin CLI) y cualquier otro con fallback `<cli> <prompt>`.
-*   **Ollama (IA local):** requiere un servidor Ollama corriendo en `http://127.0.0.1:11434` (configurable con `OLLAMA_HOST`). Usa la REST API `/api/chat` con `stream:false` (JSON limpio, no el CLI `ollama run` que escupe ANSI en no-TTY) mediante `fetch` nativo (Node ≥ 24). Resolución de modelo: `--model` → `OLLAMA_MODEL` → primer modelo local (`/api/tags`, ignora `:cloud`) → `qwen2.5-coder:1.5b`. Mantiene **historial rodante** (últimos 40 mensajes) para dar contexto entre mensajes. Validado end-to-end: el agente responde vía P2P y recuerda datos de mensajes previos.
-*   **Cactus (IA on-device):** el runner invoca `cactus run --prompt "<mensaje>"` sobre el modelo local (por defecto `google/gemma-4-E2B-it`; cualquier modelo de `cactus list` se pasa con `--model`, que cactus recibe como posición, no como `--model`). La respuesta se lee del `--result-json` que escribe el engine, así el canal solo ve la respuesta del asistente (sin el banner/`You:`/stats interactivos). Primer uso puede requerir descarga del modelo. Validado end-to-end vía P2P.
+*   **Ollama (IA local):** necesita un servidor Ollama en `http://127.0.0.1:11434` (o define `OLLAMA_HOST`). Si no pasas `--model`, usa el primer modelo local. El agente recuerda el contexto de mensajes previos.
+*   **Cactus (IA en el teléfono):** usa tu modelo local (por defecto `google/gemma-4-E2B-it`; otro con `--model`, ver `cactus list`). El primer uso puede descargar el modelo.
 *   **`--skip-git-repo-check`:** flag nativo de `walkie agent`; cuando está presente solo se añade `--skip-git-repo-check` a los argumentos de `codex exec` (que corre fuera de un repo git). Agentes que no lo soportan (p. ej. `agy`) lo ignoran: walkie no se lo reenvía. Sin el flag, codex en un directorio no-git falla con "Not inside a trusted directory and --skip-git-repo-check was not specified".
-*   **`--mention-only`:** flag de `walkie agent` (parche local) que hace responder al agente SOLO cuando lo taggean por nombre (`@nombre`). Sin él, walkie responde también a mensajes sin menciones, lo que dejaría que un agente interfiriera en un chat humano-humano.
-*   **`--respond-to <id>`:** flag de `walkie agent` (parche local) que hace responder al agente SOLO a mensajes de ese emisor (p. ej. un ejecutor que solo obedece al brain).
+*   **`--mention-only`:** hace que el agente responda SOLO cuando lo taggean por nombre (`@nombre`). Sin él, walkie responde también a mensajes sin menciones, lo que dejaría que un agente interfiriera en un chat humano-humano.
+*   **`--respond-to <id>`:** hace que el agente responda SOLO a mensajes de ese emisor (p. ej. un ejecutor que solo obedece al brain).
 *   **`WALKIE_ID`:** define una identidad distinta para cada proceso. Sin ella, todos usan el id por defecto `'default'` y el daemon descarta mensajes propios; para probar P2P en la misma máquina usa `WALKIE_ID=peer1` y `WALKIE_ID=peer2`.
 *   **Legado npm 1.4.0:** para forzar la instalación desde el registro npm (sin chat/agent/pair), exportar `WALKIE_USE_140=1` antes de instalar el paquete.
 *   **Persistencia:** `--persist` en `connect` sincroniza mensajes perdidos al reconectar; los agentes recuerdan contexto entre mensajes.
-*   **Debug:** el daemon corre detached (`stdio:'ignore'`); para ver errores ejecutar directo `node node_modules/walkie-sh/src/daemon.js`, el log queda en `~/.walkie/daemon.log`.
-*   **Arquitectura:** `canal + secreto` → SHA-256 → Topic; los daemons se descubren en la DHT global de Hyperswarm y negocian conexión P2P cifrada directa (UDP udx-native con hole punching vía relays). Daemon persistente por socket Unix en `~/.walkie/daemon.sock`.
-*   **Actualización:** reinstalar el paquete (el `postinst` re-aplica el parche). Tras reinstalar, re-aplicar también el parche de solo-tag (ver abajo).
+*   **Si algo falla:** revisa el registro en `~/.walkie/daemon.log`.
+*   **Actualización:** reinstala el paquete con `apt install walkie`.
 
-## Modo solo-tag estricto (parche local)
+## Agentes que solo responden al ser mencionados
 
-El `walkie agent` stock solo filtra menciones ajenas: si un humano escribe sin `@`, el agente responde igual. Para que los agentes **escuchen sin intervenir** en una conversación humano-humano y solo actúen cuando se les taggea, se aplicó un parche idempotente al bin local:
+Por defecto el agente responde a todo lo que se escribe en el canal. Para que
+**escuche sin intervenir** en una conversación entre humanos y solo actúe
+cuando lo mencionen, usa:
 
-- **Archivo del parche:** `$PREFIX/share/walkie/patch-mention-only.js`
-- **Target:** `~/.local/share/walkie/node_modules/walkie-sh/bin/walkie.js` (el que usa el launcher `$PREFIX/bin/walkie`)
-- **Backup:** `walkie.js.bak-mention` (junto al target)
-- **Marcador de idempotencia:** `/* walkie-patch-mention */` (2ª corrida = "already applied")
-
-**Lo que añade:**
 1. **`--mention-only`** → responde solo si `@<nombre>` aparece en el mensaje.
-2. **`--respond-to <id>`** → responde solo si `msg.from === <id>`.
-3. **Anti-replay (`START_TS`)** → descarta mensajes con `ts` anterior al arranque del agente; si el daemon se reinicia y reenvía historial, el agente no re-procesa ni re-ejecuta tareas viejas.
+2. **`--respond-to <id>`** → responde solo a mensajes de ese emisor (p. ej. un ejecutor que solo obedece al brain).
+3. Además ignora mensajes anteriores a su arranque (no re-ejecuta tareas viejas si el daemon se reinicia).
 
-**Re-aplicación tras reinstalar/actualizar walkie:**
-
-Desde el paquete `1.5.0-2` el `postinst` aplica este patch automáticamente
-(STEP 2.5b, después del parche de runner genérico). Solo hace falta re-aplicarlo
-a mano si instalaste walkie por otra vía (npm directo, git):
-
-```bash
-node $PREFIX/share/walkie/patch-mention-only.js \
-  ~/.local/share/walkie/node_modules/walkie-sh/bin/walkie.js
-```
-
-**Validado end-to-end** (canal de prueba con CLI dummy): mensaje humano sin tag → ignorado; `@nombre` → respondido; `--respond-to brain` → ignora a humanos y obedece solo al brain; agente nuevo con historial previo → no reprocesa mensajes viejos.
+> Si instalaste walkie por npm directo en vez del paquete i-Haklab, estas opciones pueden no existir.
 
 ## Seguimiento de miembros del canal (`--track-members`)
 
-Un agente brain no "ve" quién entra al canal: descarta los anuncios `"X joined"`
-junto con todos los mensajes de sistema, así que con varios ejecutores presentes
-no sabe a cuál delegar. Un tercer parche idempotente
-(`$PREFIX/share/walkie/patch-members.js`, debe correr después de
-`patch-agents.js` y `patch-mention-only.js`) añade el flag opt-in:
+Un agente coordinador (brain) no "ve" quién entra o sale del canal, así que
+con varios ejecutores no sabe a cuál delegar. Con `--track-members`:
 
 ```bash
 walkie agent ops:secret --cli codex --track-members --mention-only \
   --prompt "$(cat ~/.config/walkie/prompt-brain.txt)"
 ```
 
-**Lo que añade:**
-1. Registra **miembros locales** desde los anuncios `joined`/`left` del daemon
-   más una consulta `members` al arrancar, y **peers remotos** (otros
-   dispositivos) desde el `from` del primer mensaje que envía cada uno.
-2. Inyecta el roster en el prompt del agente **solo cuando cambia la membresía**
-   (Δ, sin ruido): `[ROSTER #channel] brain, exec1, humano, ...`
-3. Persiste en `~/.walkie/roster-<canal>.json`, así un brain reiniciado ya
-   nace sabiendo quién está presente.
-
-**Re-aplicación tras reinstalar/actualizar walkie:**
-
-Desde el paquete `1.5.0-2` el `postinst` aplica el de solo-tag automáticamente;
-el de member tracking se agrega en `1.5.0-3` (STEP 2.5c, después de
-patch-agents y patch-mention-only). A mano (instalación por npm/git directo):
-
-```bash
-node $PREFIX/share/walkie/patch-members.js \
-  ~/.local/share/walkie/node_modules/walkie-sh/bin/walkie.js
-```
-
-**Validado end-to-end** (canal de prueba con CLI dummy): un join se registra y
-persiste; sin cambio de membresía no aparece `[ROSTER]`; un miembro nuevo
-aparece en el siguiente prompt; el roster sobrevive a un reinicio del agente.
+El agente recibe la lista de presentes (`[ROSTER #canal] brain, exec1,
+humano, ...`) solo cuando alguien entra o sale, y la lista se guarda en
+`~/.walkie/roster-<canal>.json` para que sobreviva a reinicios.
 
 ## Prompts sugeridos por rol de agente
 
-Para una asistencia 1-a-1 (admin + usuario dialogando, brain delegando y ejecutor aplicando en el dispositivo del usuario), lanza cada agente con su prompt. Ambos requieren el parche de solo-tag de la sección anterior; el brain, además, el de seguimiento de miembros si quiere conocer el roster del canal (`--track-members`).
+Para una asistencia 1-a-1 (admin + usuario dialogando, brain delegando y ejecutor aplicando en el dispositivo del usuario), lanza cada agente con su prompt. Ambos usan las opciones de la sección anterior (`--mention-only`); el brain, además, `--track-members` si quiere conocer quién está en el canal.
 
 ### Brain (orquestador/cerebro)
 

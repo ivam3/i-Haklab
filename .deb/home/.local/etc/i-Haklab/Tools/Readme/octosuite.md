@@ -94,3 +94,6 @@ Octosuite suele exportar los resultados de sus búsquedas en formato CSV, lo que
 -   **API de GitHub:** Octosuite se basa en la API de GitHub. Es posible que para un uso intensivo, necesites configurar un token de API de GitHub personal para evitar las limitaciones de tasa de las peticiones no autenticadas.
 -   **Ética y Legalidad:** Octosuite es una herramienta de OSINT que solo busca información públicamente accesible. Sin embargo, su uso debe ser **ético y legal**. No utilices esta herramienta para acosar, espiar o acceder a información privada. Utilízala únicamente para fines de seguridad autorizados, investigación legítima o en tus propios proyectos.
 -   **Actualizaciones:** GitHub y su API evolucionan. Es importante mantener Octosuite actualizado (`pip install --upgrade octosuite` o `git pull`) para asegurar su funcionalidad y compatibilidad.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

@@ -88,3 +88,6 @@ Una vez conectado, PhoneSploit te presentará un menú con varias opciones. Algu
 -   **Ética y Legalidad:** PhoneSploit es una herramienta ofensiva muy potente. **Su uso para atacar dispositivos que no te pertenecen o para los cuales no tienes autorización explícita y por escrito es ILEGAL y puede tener graves consecuencias legales.** Utilízala únicamente para fines educativos, de investigación y de pruebas de penetración éticas en entornos controlados.
 -   **Dependencia de ADB:** La funcionalidad de PhoneSploit depende completamente de la conexión ADB. Si ADB no está habilitado o configurado correctamente en el objetivo, la herramienta no podrá operar.
 -   **Detección:** El tráfico ADB y las acciones realizadas por PhoneSploit pueden ser detectados por soluciones de seguridad en el dispositivo Android.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

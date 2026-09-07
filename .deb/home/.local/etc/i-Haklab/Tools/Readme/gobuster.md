@@ -80,3 +80,6 @@ Todos los comandos se ejecutan desde la terminal.
 -   **Listas de Palabras:** La efectividad de Gobuster depende críticamente de la calidad y exhaustividad de la lista de palabras utilizada. Colecciones como Seclists son una excelente fuente.
 -   **Uso Ético:** Gobuster realiza fuerza bruta. Utiliza esta herramienta solo en sistemas para los que tengas autorización explícita para probar su seguridad.
 -   **Monitoreo:** Debido a la gran cantidad de peticiones que puede generar, es posible que los sistemas de detección de intrusiones (IDS/IPS) o WAF detecten la actividad de Gobuster.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

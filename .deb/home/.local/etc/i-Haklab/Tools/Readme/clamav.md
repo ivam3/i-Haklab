@@ -90,3 +90,6 @@ Infected files: 1
 
 ---
 *Nota: ClamAV es una herramienta poderosa para una estrategia de defensa en profundidad. Asegúrate de entender las implicaciones de rendimiento y de las acciones que tomas sobre los archivos detectados (como moverlos o eliminarlos).*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

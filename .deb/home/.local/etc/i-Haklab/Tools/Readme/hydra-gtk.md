@@ -85,3 +85,6 @@ hydra -l usuario_conocido -P /ruta/a/diccionario.txt -t 10 ssh://192.168.1.10
 -   **Ética y Legalidad:** THC Hydra y `hydra-gtk` son herramientas potentes para pruebas de seguridad. **Su uso debe ser estrictamente ético y legal, siempre con el permiso explícito y por escrito del propietario del sistema objetivo.** El uso no autorizado es ilegal y puede tener graves consecuencias.
 -   **Recursos del Sistema:** Los ataques de fuerza bruta pueden consumir muchos recursos de CPU, memoria y red, tanto en la máquina atacante como en el objetivo.
 -   **Bloqueos:** Los sistemas de detección de intrusiones (IDS/IPS) y los sistemas de prevención de ataques pueden detectar y bloquear los intentos de fuerza bruta, bloqueando la IP del atacante.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

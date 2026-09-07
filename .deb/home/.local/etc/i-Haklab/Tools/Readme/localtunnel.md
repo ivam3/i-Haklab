@@ -63,3 +63,6 @@ Una vez instalado, sigue estos pasos:
 -   **Seguridad:** Ten en cuenta que al exponer tu servidor local a Internet, estás abriendo un posible punto de entrada. Es crucial ser consciente de la seguridad de tu aplicación local y los datos que maneja. No uses LocalTunnel para exponer aplicaciones en entornos de producción con datos sensibles.
 -   **HTTPS por Defecto:** LocalTunnel asegura todos los túneles con HTTPS, lo que proporciona una capa básica de seguridad para la comunicación.
 -   **No es para Producción:** LocalTunnel está diseñado explícitamente para entornos de desarrollo y pruebas, no para el despliegue de aplicaciones en producción.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

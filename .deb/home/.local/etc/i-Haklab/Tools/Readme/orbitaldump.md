@@ -83,3 +83,6 @@ Necesitarás archivos de texto para los nombres de usuario y las contraseñas, c
 -   **Bloqueo de Cuentas:** Los ataques de fuerza bruta pueden llevar al bloqueo de cuentas si el servidor SSH tiene configuradas políticas de bloqueo de intentos fallidos. Utiliza la herramienta con precaución.
 -   **Calidad de las Listas de Palabras:** La efectividad del ataque depende en gran medida de la calidad y el tamaño de las listas de nombres de usuario y contraseñas.
 -   **Proxies:** La fiabilidad de los proxies públicos puede variar. Algunos pueden ser lentos o inactivos.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

@@ -77,3 +77,6 @@ Esto devolverá solo el nombre del país asociado a la IP `8.8.8.8`.
 -   **Privacidad:** Las direcciones IP no identifican directamente a una persona, pero combinadas con otros datos pueden contribuir a la identificación. Utiliza estas herramientas de manera ética y legal.
 -   **Límites de Uso:** Las APIs gratuitas a menudo tienen límites de solicitudes por minuto/hora/día. Si necesitas un uso intensivo, deberás contratar un plan de pago o buscar una solución local (bases de datos sin conexión).
 -   **Herramientas Específicas:** Existen scripts y pequeñas herramientas CLI desarrolladas por la comunidad que envuelven estas APIs para facilitar su uso, pero no hay un estándar único.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

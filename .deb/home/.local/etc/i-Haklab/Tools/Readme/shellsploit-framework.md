@@ -56,3 +56,6 @@ Shellsploit funciona con una interfaz interactiva en la línea de comandos, muy 
 
 ---
 *Nota: Esta es una herramienta avanzada para profesionales de la seguridad. El uso indebido de los payloads generados puede tener graves consecuencias legales y éticas.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

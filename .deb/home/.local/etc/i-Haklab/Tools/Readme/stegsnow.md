@@ -56,3 +56,6 @@ Stegsnow imprimirá el mensaje oculto directamente en la salida estándar (la te
 
 ---
 *Nota: Stegsnow es una herramienta clásica y efectiva para la esteganografía en texto, pero como toda herramienta de este tipo, su seguridad no es absoluta.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

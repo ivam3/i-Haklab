@@ -60,3 +60,6 @@ Xerosploit es conocido por su interfaz amigable y fácil de usar.
 
 ---
 *Nota: Xerosploit es una herramienta extremadamente poderosa y peligrosa. Su simplicidad la hace tentadora, pero su uso indebido puede tener consecuencias legales y técnicas muy serias.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

@@ -17,13 +17,13 @@ Playwright-proot es esencial para testing visual y automatización de aplicacion
 ## Instalación
 
 ```bash
-# Mediante el wrapper de i-HakLab:
+# Con i-HakLab:
 apt install playwright-proot
 
-# El postinst configura automaticamente:
-# 1. proroot rootfs (dependencia)
-# 2. Librerias glibc para Chromium
-# 3. Node.js + @playwright/cli
+# La instalación deja todo listo automáticamente:
+# 1. Entorno Ubuntu interno
+# 2. Librerías para Chromium
+# 3. Node.js + Playwright CLI
 # 4. Chromium headless (arm64)
 ```
 
@@ -65,7 +65,7 @@ playwright-proot close
 -   **CanvasKit / Flutter:** Las apps renderizadas con CanvasKit (Flet, Flutter Web) no exponen sus elementos en el DOM. Usar `screenshot` en lugar de `click` para verificar contenido visual.
 -   **Espacio en disco:** La instalación completa (Ubuntu + Chromium) requiere aproximadamente 1.2 GB de espacio libre.
 -   **Rendimiento:** En dispositivos con 4 GB de RAM o menos, la carga inicial de Chromium puede tomar entre 10 y 20 segundos.
--   **Primera ejecución:** El `postinst` descarga e instala las dependencias automáticamente. Requiere conexión a internet.
+-   **Primera ejecución:** Descarga e instala lo necesario automáticamente. Requiere conexión a internet.
 
 ---
 *Nota: Esta herramienta integra automatización de navegador headless en el ecosistema i-Haklab.*

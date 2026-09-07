@@ -83,3 +83,6 @@ Aunque el menú puede variar, algunas de las funcionalidades típicas incluyen:
 -   **Ética y Legalidad:** Es crucial utilizar Hunner-framework de manera ética y legal. **Solo debe emplearse en sistemas y redes para los que se tenga autorización explícita para realizar pruebas de seguridad.** El uso no autorizado es ilegal y puede tener graves consecuencias.
 -   **Ambiente:** El framework está optimizado para entornos Linux, incluyendo distribuciones como Kali Linux o Termux en Android.
 -   **Dependencias:** Asegúrate de que todas las dependencias de Python (si las hay, a menudo listadas en un `requirements.txt`) estén instaladas.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

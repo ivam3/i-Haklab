@@ -6,7 +6,7 @@
 
 Además del binario CLI, puede usarse como módulo de Python y como librería de C++. Incluye manual integrado (`man spin`) y estilos y colores predefinidos.
 
-En i-Haklab se distribuye como paquete `spin` desde el repositorio de la comunidad `demon_hunter (victor028)`, ya configurado en el `postinst`.
+En i-Haklab se distribuye como paquete `spin` desde el repositorio de la comunidad `demon_hunter (victor028)`, listo para usar tras instalar.
 
 ## ¿Para qué es útil la herramienta?
 

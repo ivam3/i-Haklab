@@ -4,7 +4,7 @@
 
 `nljson` es el empaquetado para Termux de la librería **JSON for Modern C++** de `nlohmann` (`https://github.com/nlohmann/json`). Toda la librería consiste en un único header `json.hpp`, sin dependencias externas, escrito en C++11.
 
-En i-Haklab se distribuye como paquete `nljson` desde el repositorio de la comunidad `demon_hunter (victor028)`, ya configurado en el `postinst`. Instala el header en la ruta de includes del sistema para usarlo directamente con `clang`/`g++`.
+En i-Haklab se distribuye como paquete `nljson` desde el repositorio de la comunidad `demon_hunter (victor028)`, listo para usar tras instalar. Deja el header disponible para usarlo directamente con `clang`/`g++`.
 
 ## ¿Para qué es útil la herramienta?
 

@@ -69,3 +69,6 @@ Upload: 23.45 Mbit/s
 
 ---
 *Nota: Esta es una herramienta de diagnóstico de red. Es útil y segura de usar en cualquier entorno.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

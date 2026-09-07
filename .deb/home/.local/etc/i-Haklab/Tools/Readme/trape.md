@@ -50,3 +50,6 @@ Trape se ejecuta desde la línea de comandos y proporciona una interfaz web para
 
 ---
 *Nota: Trape demuestra de forma aterradora la cantidad de información que un simple clic puede revelar. Es una lección sobre los peligros del phishing y la importancia de la privacidad en línea.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

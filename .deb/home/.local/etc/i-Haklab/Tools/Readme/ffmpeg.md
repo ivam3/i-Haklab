@@ -124,3 +124,5 @@ In the command line above, the minimum width/height to perform scaling is set
 to 320 and 240 pixels respectively. This is a very simple way to guard against
 poor quality scaling.
 
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

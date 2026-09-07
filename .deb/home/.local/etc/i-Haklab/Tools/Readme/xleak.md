@@ -76,3 +76,6 @@ xleak calculos.xlsx -i --formulas
 
 ---
 *Nota: `xleak` es una herramienta excelente para mantener en tu kit de utilidades de terminal, especialmente si trabajas frecuentemente con datos estructurados en entornos de línea de comandos.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

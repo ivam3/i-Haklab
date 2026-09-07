@@ -49,3 +49,6 @@ Seeker generalmente se ejecuta desde la línea de comandos en un entorno que pue
 
 ---
 *Nota: Esta herramienta debe ser utilizada con extrema precaución y responsabilidad. Su propósito es educativo y para la evaluación de la seguridad, no para el espionaje o el acoso.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

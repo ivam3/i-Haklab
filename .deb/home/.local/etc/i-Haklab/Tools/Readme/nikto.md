@@ -83,3 +83,6 @@ sudo apt install nikto
 -   **Falsos Positivos:** Aunque es potente, Nikto puede generar falsos positivos. Los resultados deben ser verificados manualmente por un analista.
 -   **Legalidad y Ética:** Nikto es una herramienta ofensiva. **Su uso debe ser estrictamente ético y legal, siempre con el permiso explícito y por escrito del propietario del sistema objetivo.** El uso no autorizado es ilegal y puede tener graves consecuencias.
 -   **No es un Exploit:** Nikto es un escáner de vulnerabilidades; no explota las vulnerabilidades que encuentra. Solo las reporta.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

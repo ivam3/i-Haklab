@@ -64,3 +64,6 @@ Ambos scripts producirían exactamente la misma salida en la terminal, pero el s
 
 ---
 *Nota: La ofuscación de código es una técnica de doble filo. Utilízala de forma ética y legal, principalmente para fines de investigación y pruebas de seguridad.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

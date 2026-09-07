@@ -70,3 +70,6 @@ Evilginx2 funciona como un shell interactivo.
 
 ---
 *Nota: Esta información se proporciona con fines estrictamente educativos para comprender los ataques de phishing modernos. No intentes replicar estos ataques fuera de un entorno de pruebas de penetración legal y autorizado.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

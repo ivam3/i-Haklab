@@ -104,3 +104,6 @@ JtR a menudo viene con herramientas auxiliares para extraer hashes de diferentes
 -   **Ética y Legalidad:** John the Ripper es una herramienta potente y debe usarse **siempre de manera ética y legal**. Solo úsala en sistemas para los que tengas autorización explícita para realizar pruebas de seguridad. El uso no autorizado es ilegal y puede tener graves consecuencias.
 -   **Recursos:** El crackeo de contraseñas es una tarea que consume muchos recursos de CPU. Prepárate para que tu sistema funcione lentamente mientras JtR está en marcha.
 -   **Diccionarios:** La efectividad del ataque de diccionario depende en gran medida de la calidad y el tamaño de la wordlist.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

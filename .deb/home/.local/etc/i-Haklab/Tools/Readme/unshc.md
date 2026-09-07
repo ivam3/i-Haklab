@@ -43,3 +43,6 @@ unshc /ruta/al/script.sh.x
 
 ---
 *Nota: `unshc` es el recordatorio perfecto de que la "seguridad por oscuridad" (ocultar algo para protegerlo) rara vez es una estrategia de seguridad efectiva por sí sola.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

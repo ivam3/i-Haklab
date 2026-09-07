@@ -75,3 +75,6 @@ This project is licensed under the GNU License. See the [LICENSE](LICENSE) file 
 ---
 
 **Developed by Ivam3byCinderella**
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

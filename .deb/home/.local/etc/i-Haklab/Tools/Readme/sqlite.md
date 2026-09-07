@@ -80,3 +80,6 @@ SQLite tiene meta-comandos que empiezan con un punto (`.`). Son muy útiles para
 
 ---
 *Nota: Saber manejar `sqlite3` es una habilidad esencial para cualquier persona involucrada en el desarrollo de software, la administración de sistemas o la ciberseguridad.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

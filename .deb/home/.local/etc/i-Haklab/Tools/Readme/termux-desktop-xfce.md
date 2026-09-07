@@ -61,3 +61,6 @@ Cuando ejecutas el comando `desktop`, el sistema realiza los siguientes pasos en
 
 7. **Apagado Limpio al Finalizar**:
    Una vez que sales de la sesión de escritorio XFCE4, el script detiene automáticamente PulseAudio y cierra de forma limpia todos los procesos de visualización que queden en segundo plano para conservar batería y memoria RAM.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

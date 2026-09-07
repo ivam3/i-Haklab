@@ -307,3 +307,5 @@ Sin control de usuarios nativo
 https://sqlite.org/docs.html
 https://www.sqlite.org/lang.html
 
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

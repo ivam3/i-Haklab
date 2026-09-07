@@ -65,3 +65,6 @@ python sublist3r.py -d example.com -e google,yahoo
 
 ---
 *Nota: Sublist3r es una de las primeras herramientas que se suelen ejecutar al iniciar una auditoría de seguridad de una aplicación web.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

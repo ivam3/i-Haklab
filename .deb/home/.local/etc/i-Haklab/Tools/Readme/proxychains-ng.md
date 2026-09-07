@@ -51,3 +51,6 @@ Cualquier comando ejecutado dentro de esta nueva shell pasará por los proxies c
 
 ---
 *Nota: Es vital verificar la configuración antes de operaciones sensibles para asegurar que el tráfico realmente está siendo enrutado.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

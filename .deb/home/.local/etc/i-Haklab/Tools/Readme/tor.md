@@ -42,3 +42,6 @@ tor --hash-password mi_contraseña
 
 ---
 *Nota: Para navegación web general, se recomienda encarecidamente usar "Tor Browser" en lugar de configurar manualmente otro navegador, ya que incluye protecciones adicionales contra huellas digitales (fingerprinting).*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

@@ -53,3 +53,6 @@ github-copilot explain "grep -r 'ERROR' /var/log/ | sort | uniq -c | sort -nr"
 ---
 
 *Nota: Herramienta integrada en el ecosistema i-HakLab a través del wrapper npm/pnpm.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

@@ -64,3 +64,6 @@ Puedes distribuir `mi_script.sh.x` sin necesidad de enviar el `mi_script.sh` ori
 
 ---
 *Nota: Utiliza `shc` como una capa de ofuscación, no como una garantía de seguridad. Para proteger secretos, es mejor utilizar soluciones de gestión de secretos como variables de entorno o bóvedas de secretos.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

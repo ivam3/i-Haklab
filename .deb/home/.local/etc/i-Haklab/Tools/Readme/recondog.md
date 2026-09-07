@@ -65,3 +65,6 @@ ReconDog se opera desde la línea de comandos, ofreciendo una interfaz de menú 
 -   **Ética y Legalidad:** ReconDog es una herramienta de OSINT. Solo accede a información públicamente disponible. Su uso debe ser **ético y legal**. Utilízala únicamente para fines de seguridad autorizados, investigación legítima o en tus propios proyectos.
 -   **APIs:** La efectividad de ReconDog se basa en la integración con diversas APIs.
 -   **Recursos:** Es una herramienta potente que puede requerir una cantidad considerable de tiempo y recursos para un análisis exhaustivo.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

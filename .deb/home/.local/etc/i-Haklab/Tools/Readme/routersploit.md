@@ -98,3 +98,6 @@ rsf (Cisco Telnet Bruteforce) > run
 -   **Ética y Legalidad:** Routersploit es una herramienta ofensiva. Su uso para atacar a individuos o sistemas sin consentimiento mutuo y por escrito es **ILEGAL y puede tener graves consecuencias legales**. Utilízala únicamente para fines educativos, de penetración ética en tus propios sistemas o con autorización explícita.
 -   **Base de Datos de Dispositivos:** La efectividad de Routersploit se basa en su base de datos de vulnerabilidades conocidas. Es crucial mantener la herramienta actualizada.
 -   **Firmware:** Los dispositivos embebidos pueden tener numerosas versiones de firmware, y una vulnerabilidad puede no aplicarse a todas ellas.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

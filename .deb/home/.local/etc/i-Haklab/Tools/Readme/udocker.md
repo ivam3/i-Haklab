@@ -63,3 +63,5 @@ udocker run --rm ghcr.io/anomalyco/opencode /bin/bash -i
     udocker rm mi_kali
     ```
 
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

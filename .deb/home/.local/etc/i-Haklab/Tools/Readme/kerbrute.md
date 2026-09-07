@@ -75,3 +75,6 @@ Todos los comandos se ejecutan desde la terminal.
 -   **Ética y Legalidad:** Kerbrute es una herramienta ofensiva. Su uso debe ser **estrictamente ético y legal**, y solo en sistemas para los que se tenga autorización explícita para realizar pruebas de seguridad. El uso no autorizado es ilegal.
 -   **Detección:** Aunque la enumeración de usuarios puede ser sigilosa, los ataques de pulverización de contraseñas pueden generar suficientes eventos de seguridad como para activar alertas en sistemas de monitoreo o SIEM, incluso si no bloquean cuentas directamente.
 -   **Rendimiento:** Kerbrute es muy rápido gracias a que está escrito en Go y a su diseño eficiente para el protocolo Kerberos.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

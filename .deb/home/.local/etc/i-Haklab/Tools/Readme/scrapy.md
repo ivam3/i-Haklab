@@ -126,3 +126,6 @@ Dentro de la shell, puedes usar `response.css(...)` o `response.xpath(...)` para
 -   **Middleware:** Scrapy es altamente extensible. Puedes añadir middlewares para gestionar proxies, user-agents, cookies, o para procesar solicitudes y respuestas.
 -   **Item Pipelines:** Para un procesamiento más avanzado de los datos (validación, limpieza, almacenamiento en una base de datos), se utilizan los Item Pipelines.
 -   **`settings.py`:** El archivo `settings.py` de tu proyecto permite configurar el comportamiento de Scrapy, como el retraso entre solicitudes (`DOWNLOAD_DELAY`), el `User-Agent`, o si se debe seguir `robots.txt`.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

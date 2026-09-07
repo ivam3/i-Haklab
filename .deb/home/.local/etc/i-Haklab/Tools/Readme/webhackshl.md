@@ -48,3 +48,6 @@ Al ser un toolkit, generalmente se ejecuta un script principal que presenta al u
 
 ---
 *Nota: Los toolkits como WebHackSHL pueden ser útiles para aprender sobre diferentes tipos de ataques web y para automatizar tareas repetitivas, pero en una auditoría profesional, a menudo se prefieren herramientas más especializadas y mantenidas como Nmap, Burp Suite, o ZAP.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

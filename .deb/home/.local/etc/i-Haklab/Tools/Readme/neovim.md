@@ -548,7 +548,7 @@ end
 
 **Nota sobre Termux/Android:**
 - `nvim-lspconfig` pineado a v1.8.0 sólo como dependencia de Mason. No se usa para configurar servidores.
-- Servidores npm requieren `termux-fix-shebang` para reparar shebangs rotos.
+- Si un servidor instalado por npm no arranca, repáralo con: `termux-fix-shebang <ruta-del-servidor>`.
 - `lua-language-server` se instala con `pkg install` (el de Mason es glibc incompatible).
 - `clangd` se instala con `pkg install clangd` (binario nativo).
 
@@ -625,3 +625,6 @@ Configurado en `lua/settings.lua`. Opciones generales que definen el comportamie
 | `foldlevel` | `99` | Nivel de plegado inicial (todos abiertos). |
 | `foldlevelstart` | `99` | Mismo valor al abrir archivos nuevos. |
 | `foldcolumn` | `1` | Muestra una columna con indicadores de plegado. |
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

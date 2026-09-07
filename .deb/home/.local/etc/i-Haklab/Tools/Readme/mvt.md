@@ -38,3 +38,6 @@ mvt-android check-adb --iocs iocs/
 No funciona correctamente con USB en Termux
 Se recomienda usar ADB vía TCP/IP
 No reemplaza un análisis forense profesional
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

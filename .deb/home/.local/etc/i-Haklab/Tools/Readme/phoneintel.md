@@ -83,3 +83,6 @@ El formato general del comando es `phoneintel <opción> <número_de_teléfono>`.
 -   **Precisión y Limitaciones:** La cantidad y precisión de la información obtenida dependen de la disponibilidad de los datos en las fuentes públicas y las APIs consultadas. La geolocalización de números móviles puede ser limitada.
 -   **API Keys:** Para acceder a funcionalidades avanzadas o para un uso intensivo, es posible que necesites registrarte en servicios de terceros (como NeutrinoAPI o Tellows) y configurar sus respectivas claves API.
 -   **Actualizaciones:** Las fuentes de datos y APIs pueden cambiar con el tiempo. Es importante mantener PhoneIntel actualizado (`pip install --upgrade phoneintel`) para asegurar su funcionalidad.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

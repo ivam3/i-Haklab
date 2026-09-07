@@ -86,3 +86,6 @@ api_key=TU_API_KEY_LEAKIX
 -   **Privacidad:** Al usar `h8mail` con APIs en línea, las direcciones de correo electrónico que consultas pueden ser enviadas a esos servicios. Ten en cuenta las implicaciones de privacidad.
 -   **Legalidad y Ética:** Utiliza `h8mail` de manera ética y legal. No utilices esta herramienta para acosar o investigar a individuos sin el consentimiento adecuado o sin una base legal sólida.
 -   **Actualización de Bases de Datos:** Si utilizas bases de datos locales, asegúrate de mantenerlas actualizadas para obtener los resultados más recientes.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

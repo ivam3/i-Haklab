@@ -88,3 +88,6 @@ Osintgram necesita iniciar sesión en Instagram para recopilar datos. **Es altam
 -   **Privacidad y Ética:** Osintgram solo puede acceder a información pública. **No puede acceder a perfiles privados**. Su uso debe ser ético y legal, respetando siempre la privacidad de las personas y las leyes aplicables. No debe utilizarse para acosar, espiar o acceder a información privada.
 -   **Riesgo de Bloqueo de Cuenta:** El uso intensivo o la actividad sospechosa por parte de la cuenta utilizada por Osintgram puede llevar a la detección y bloqueo temporal o permanente por parte de Instagram. Por eso, usa siempre una cuenta dedicada y no tu cuenta principal.
 -   **Cambios en Instagram:** Instagram actualiza constantemente su plataforma y APIs. Es posible que Osintgram necesite actualizaciones frecuentes para seguir funcionando correctamente.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

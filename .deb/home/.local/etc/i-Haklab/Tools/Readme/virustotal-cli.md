@@ -71,3 +71,6 @@ vt intel "type:peexe size:100KB+ positives:5+"
 
 ---
 *Nota: `vt-cli` es una herramienta fundamental para cualquier persona que trabaje en el campo de la ciberseguridad, desde la respuesta a incidentes hasta la inteligencia de amenazas.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

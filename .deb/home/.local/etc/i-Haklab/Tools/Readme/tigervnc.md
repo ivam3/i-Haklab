@@ -51,3 +51,6 @@ Desde un cliente VNC (en tu PC o móvil), te conectarías a:
 
 ---
 *Nota: TigerVNC es un fork de TightVNC y es la opción por defecto en muchas distribuciones modernas como Fedora.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

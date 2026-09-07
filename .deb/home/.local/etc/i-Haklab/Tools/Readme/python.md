@@ -61,3 +61,6 @@ python -m http.server 8000
 
 ---
 *Nota: Python es a menudo descrito como "baterías incluidas" debido a su completa biblioteca estándar.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

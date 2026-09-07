@@ -68,3 +68,6 @@ zap.sh -cmd -port 8080 -host 127.0.0.1 -config api.disablekey=true -newsession $
 
 ---
 *Nota: OWASP ZAP es un pilar fundamental en la seguridad de aplicaciones web y una herramienta indispensable para cualquiera que se dedique a probar o defender sitios web.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

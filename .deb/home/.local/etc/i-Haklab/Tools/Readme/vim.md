@@ -54,3 +54,6 @@ Desde el modo Normal:
 
 ---
 *Nota: Salir de Vim es el chiste más viejo de la informática, pero `:q!` te salvará la vida.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

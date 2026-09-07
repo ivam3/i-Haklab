@@ -59,3 +59,6 @@ python sqliv.py -t http://testphp.vulnweb.com/ -r
 
 ---
 *Nota: SQLiv es una herramienta potente para encontrar vulnerabilidades a gran escala. Su uso debe ser ético y responsable.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

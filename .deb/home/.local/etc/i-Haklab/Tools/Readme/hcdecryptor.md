@@ -75,3 +75,6 @@ Existen servicios web (como HCDrill) y bots de Telegram que ofrecen la funcional
 
 -   **Claves de Descifrado:** Las aplicaciones VPN a veces cambian las claves o algoritmos de cifrado. Esto significa que una versión antigua de HCDecryptor podría no ser capaz de descifrar los archivos `.hc` generados por versiones más recientes de las aplicaciones, o viceversa. Es posible que necesites la versión correcta de la herramienta o un conjunto de claves actualizado.
 -   **Contenido Sensible:** Ten en cuenta que los archivos `.hc` descifrados pueden contener información sensible. Maneja esta información con cuidado.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

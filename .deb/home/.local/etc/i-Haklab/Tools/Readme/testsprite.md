@@ -18,7 +18,7 @@
 npm install -g @testsprite/testsprite-mcp@latest
 ```
 
-Al instalarlo via los wrappers de i-Haklab se ejecuta automáticamente el preconf (verifica Node >= 22) y el pkg2conf (corrige el shebang y muestra la configuración del API key).
+Al instalarlo con i-Haklab queda configurado automáticamente (incluye la revisión de Node >= 22 y las instrucciones del API key).
 
 ## ¿Cómo se usa? (Ejemplos básicos)
 
@@ -59,7 +59,7 @@ Help me test this project with TestSprite
 ## Consideraciones Adicionales
 
 *   **API Key:** La obtienes en [app.testsprite.com/dashboard/settings/apikey](https://www.testsprite.com/dashboard/settings/apikey).
-*   **Node >= 22:** Requerido por el paquete; el preconf de i-Haklab instala `nodejs-lts` si tu versión es menor.
+*   **Node >= 22:** Requerido por el paquete; i-Haklab instala lo necesario si tu versión es menor.
 *   **No subir claves:** Usar `i-Haklab setapikey testsprite` o variables de entorno; nunca comprometer claves reales.
 
 ---

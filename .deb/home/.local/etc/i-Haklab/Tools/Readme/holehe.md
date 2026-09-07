@@ -75,3 +75,6 @@ La herramienta escaneará la dirección contra su lista de servicios y mostrará
 -   **Ética y Responsabilidad:** Holehe es una herramienta potente para la recopilación de información. Es crucial usarla de manera responsable y ética, respetando la privacidad de las personas. **No la uses para acosar o investigar a individuos sin su consentimiento o una base legal válida.**
 -   **Anonimato:** Holehe no requiere claves API ni credenciales, y está diseñado para ser discreto. Sin embargo, siempre existe la posibilidad de que los servicios detecten el comportamiento de escaneo.
 -   **Actualizaciones:** Los servicios en línea pueden cambiar sus procesos de registro/inicio de sesión/recuperación, lo que puede afectar la eficacia de Holehe. Es recomendable mantener la herramienta actualizada para asegurar su correcto funcionamiento.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

@@ -6,7 +6,7 @@
 
 Soporta los 41 tipos de instrucciones Dalvik (`invoke-*`, `iget/iput`, `sget/sput`, `new-instance`, `check-cast`, etc.) e indexa proyectos completos de `apktool` con miles de archivos en segundos.
 
-En i-Haklab se distribuye como paquete `smali-lsp` desde el repositorio de la comunidad `demon_hunter (victor028)`, ya configurado en el `postinst`.
+En i-Haklab se distribuye como paquete `smali-lsp` desde el repositorio de la comunidad `demon_hunter (victor028)`, listo para usar tras instalar.
 
 ## ¿Para qué es útil la herramienta?
 

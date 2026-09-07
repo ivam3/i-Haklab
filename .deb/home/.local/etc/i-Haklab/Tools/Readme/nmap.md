@@ -106,3 +106,6 @@ nmap --script http-enum example.com # Ejecuta un script específico
 -   **Ética y Legalidad:** Nmap es una herramienta muy potente. **Siempre debes tener autorización expresa y por escrito** antes de escanear cualquier red o sistema. El escaneo no autorizado puede ser ilegal y poco ético, y puede generar alertas en los sistemas de seguridad del objetivo.
 -   **Ruido:** Dependiendo del tipo de escaneo, Nmap puede generar un considerable tráfico de red, lo que podría ser detectado por firewalls, IDS/IPS.
 -   **Firewalls:** Los firewalls pueden afectar los resultados del escaneo, bloqueando puertos o haciendo que parezcan filtrados.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

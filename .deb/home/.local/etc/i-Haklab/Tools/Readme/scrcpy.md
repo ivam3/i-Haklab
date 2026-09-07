@@ -84,3 +84,6 @@ Scrcpy tiene muchas opciones para personalizar la experiencia.
 -   **Seguridad:** La comunicación entre Scrcpy y el dispositivo Android se realiza a través de ADB, que es un protocolo seguro.
 -   **No Requiere Root:** Una de las grandes ventajas es que no necesita acceso root en el dispositivo para funcionar.
 -   **No Instala Apps:** Scrcpy no instala ningún software en el dispositivo Android; simplemente utiliza las funcionalidades nativas de Android.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

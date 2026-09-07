@@ -31,6 +31,10 @@ if [[ "$1" == "install" || "$1" == "update" ]]; then
                 bash "$HOME/.local/libexec/preconf" testsprite npm
                 ;;
             
+            zcode-app-cli)
+                bash "$HOME/.local/libexec/preconf" zcode-cli npm
+                ;;
+            
             open-lovable)
                 bash "$HOME/.local/libexec/preconf" open-lovable npm "$1"
                 break

@@ -108,3 +108,6 @@ Una vez iniciado `recon-ng`, verás un prompt interactivo.
 -   **Ética y Legalidad:** Recon-ng es una herramienta de OSINT. Solo accede a información públicamente disponible. Sin embargo, el uso de la información obtenida debe ser **ético y legal**. Utilízala únicamente para fines de seguridad autorizados, investigación legítima o en tus propios proyectos.
 -   **Velocidad:** La velocidad del reconocimiento puede depender de las limitaciones de tasa de las APIs de terceros y de la cantidad de módulos ejecutados.
 -   **Recursos:** Es una herramienta potente que puede requerir una cantidad considerable de tiempo y recursos para un análisis exhaustivo.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

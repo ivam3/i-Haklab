@@ -37,3 +37,6 @@ Algunas versiones de la herramienta pueden incluir características adicionales 
 
 ---
 *Nota: El uso no autorizado de esta herramienta para acceder a reuniones privadas es un delito. Su valor hoy en día es principalmente educativo para demostrar un vector de ataque que ya ha sido en gran medida mitigado.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

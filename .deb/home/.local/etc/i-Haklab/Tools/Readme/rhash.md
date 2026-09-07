@@ -94,3 +94,6 @@ sudo dnf install rhash # En sistemas basados en RHEL/Fedora
 -   **Algoritmos Seguros:** Para la verificación de integridad crítica, se recomienda utilizar algoritmos de la familia SHA-2 (SHA256, SHA512) o SHA3, ya que MD5 y SHA1 se consideran criptográficamente débiles.
 -   **Velocidad:** RHash está optimizado para la velocidad y puede procesar grandes volúmenes de datos de manera eficiente.
 -   **Integración:** Es una herramienta de línea de comandos que se puede integrar fácilmente en scripts de shell para automatizar tareas.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

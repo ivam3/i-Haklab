@@ -16,7 +16,7 @@ HuggingFace es útil para:
 
 ## ¿Cómo se usa? (Ejemplos básicos)
 
-El paquete se instala con `pkg install huggingface`; el `postinst` instala `huggingface_hub` vía pip (global, sin venv) junto a sus dependencias puras.
+El paquete se instala con `pkg install huggingface` y queda listo para usar.
 
 **Ejemplo 1: Autenticarse con HuggingFace**
 
@@ -51,9 +51,7 @@ snapshot_download("org/model")
 
 ## Consideraciones Adicionales
 
-*   **Descargas clásicas (sin Xet):** `huggingface_hub` 1.27.0 declara `hf-xet` como dependencia dura en aarch64, pero no tiene wheel para Termux y no compila en Python 3.14 (`_Py_FalseStruct`). Por eso el `postinst` lo instala con `--no-deps` y crea `${PREFIX}/etc/profile.d/huggingface.sh` que exporta `HF_HUB_DISABLE_XET=1`, forzando descargas HTTP clásicas. Si en el futuro sale un wheel de `hf-xet` funcional, puedes borrar ese archivo o hacer `unset HF_HUB_DISABLE_XET`.
-*   **Limpieza al desinstalar:** El `postrm` elimina automáticamente `huggingface.sh` del `profile.d`.
-*   **Ejecutables:** `huggingface-cli` y `hf` se instalan en `$PREFIX/bin` (instalación global, idempotente).
+*   **Descargas:** Usan el modo clásico, optimizado para funcionar en el teléfono sin pasos extra.
 *   **Documentación oficial:** https://huggingface.co/docs/huggingface_hub
 *   **Ayuda:** https://t.me/Ivam3_Bot
 

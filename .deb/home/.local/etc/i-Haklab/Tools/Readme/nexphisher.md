@@ -81,3 +81,6 @@ Nexphisher se ejecuta desde la línea de comandos en entornos Linux o Termux (pa
 -   **Detección:** Las páginas de phishing generadas por estas herramientas pueden ser detectadas por navegadores web, filtros de spam y software de seguridad.
 -   **Actualización:** Es importante mantener la herramienta actualizada (`git pull`) ya que los sitios web y sus diseños cambian constantemente, lo que puede afectar la efectividad de las plantillas de phishing.
 -   **Dependencias:** Nexphisher depende de otras herramientas y servicios para funcionar, como `ngrok` o `serveo` para el reenvío de puertos.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

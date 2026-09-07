@@ -46,3 +46,6 @@ muse-code exec "Crea un script bash que haga backup de una carpeta"
 ---
 
 *Nota: Herramienta integrada en el ecosistema i-HakLab como paquete de Termux.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

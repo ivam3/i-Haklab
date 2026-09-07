@@ -6,7 +6,7 @@
 
 Expone seis comandos principales: `d` (decode), `b` (build), `m` (merge), `x` (refactor), `p` (protect) e `info`. El binario se ejecuta sobre Java con la sintaxis `APKEditor.jar <comando> -i <entrada> -o <salida>`.
 
-En i-Haklab se distribuye como paquete `apkeditor` desde el repositorio de la comunidad `demon_hunter (victor028)`, ya configurado en el `postinst`.
+En i-Haklab se distribuye como paquete `apkeditor` desde el repositorio de la comunidad `demon_hunter (victor028)`, listo para usar tras instalar.
 
 ## ¿Para qué es útil la herramienta?
 

@@ -30,3 +30,6 @@ yt-dlp -x https://youtube.com/watch?v=XXXX
 Respeta los términos de servicio de YouTube
 Úsalo solo para contenido permitido
 Evita redistribución no autorizada
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

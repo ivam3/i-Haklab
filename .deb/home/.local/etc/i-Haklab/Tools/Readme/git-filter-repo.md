@@ -83,3 +83,6 @@ git remote add origin <URL_del_remoto>
 git push origin --force --all
 git push origin --force --tags
 ```
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

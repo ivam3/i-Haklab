@@ -197,14 +197,16 @@ echo -en "[deleted]
     |\t\t• Codex-cli
     |\t\t• Qwen-code
     |\t\t• Kimi-code
+    |\t\t• Omniroute
     |\t\t• Claude-code
     |\t\t• Minimax-cli 
     |\t\t• Hermes-agent
     |\t\t• Mistral-vibe
     |\t\t• Open-lovable
-    |\t\t• Omniroute
     |\t\t• Github Copilot
     |\t\t• Antigravity-cli
+    |\t\t• Zcode (GUI)
+    |\t\t• Zcode-cli (TUI)
     ╰──➤ LOCALS AI:
     |\t\t• Ollama
     |\t\t• Cactus
@@ -213,6 +215,7 @@ echo -en "[deleted]
     |\t\t• Context7
     |\t\t• Engram
     |\t\t• Smithery
+    |\t\t• Smile-lsp
     ╰──➤ Skills:
     |\t\t• Termux-oracle-skill
     |\t\t• GH (github-cli)

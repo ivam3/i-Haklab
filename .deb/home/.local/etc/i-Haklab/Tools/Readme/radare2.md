@@ -105,3 +105,6 @@ nmap --script http-enum example.com # Ejecuta un script específico
 -   **Curva de Aprendizaje:** Radare2 es una herramienta extremadamente potente y flexible, pero tiene una curva de aprendizaje considerable debido a su amplia funcionalidad y su interfaz basada en comandos.
 -   **Integración:** Se puede integrar con otras herramientas y es extensible mediante plugins y scripts.
 -   **Modo Gráfico:** También existe una interfaz gráfica llamada Iaito, aunque la potencia de `r2` reside en su CLI.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

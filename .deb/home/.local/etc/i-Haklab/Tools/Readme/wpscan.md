@@ -64,3 +64,6 @@ wpscan --url http://example-wordpress.com --enumerate u --passwords /ruta/a/mi/d
 
 ---
 *Nota: Si gestionas un sitio de WordPress, el uso regular de WPScan no es opcional, es una parte fundamental de una buena postura de seguridad.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

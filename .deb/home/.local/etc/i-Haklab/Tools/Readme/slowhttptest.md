@@ -63,3 +63,6 @@ Durante la ejecución, SlowHTTPTest te mostrará el estado de las conexiones (ab
 
 ---
 *Nota: La denegación de servicio es una actividad disruptiva e ilegal si no se realiza en un entorno controlado y autorizado.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

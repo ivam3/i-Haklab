@@ -67,3 +67,6 @@ En entornos Linux y Unix, la mayoría de las herramientas hasher son comandos de
     -   **MD5 y SHA-1:** Aunque todavía se usan, se consideran criptográficamente débiles y no se recomiendan para fines de seguridad crítica debido a la posibilidad de colisiones (dos archivos diferentes que producen el mismo hash).
     -   **SHA-256 y SHA-512 (familia SHA-2):** Son los algoritmos más recomendados actualmente para la verificación de integridad y seguridad.
 -   **Disponibilidad:** Estas herramientas son estándar en la mayoría de los sistemas operativos basados en Linux/Unix y también están disponibles para Windows (a menudo a través de Git Bash, WSL o herramientas de terceros).
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

@@ -52,3 +52,6 @@ snscrape --max-results 1000 reddit-subreddit netsec
 
 ---
 *Nota: `snscrape` es una herramienta muy potente para la recopilación masiva de datos. Su uso debe ser cuidadoso para no infringir la privacidad ni los términos de servicio de las plataformas sociales.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

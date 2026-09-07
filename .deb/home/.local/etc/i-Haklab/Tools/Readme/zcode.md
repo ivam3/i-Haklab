@@ -2,7 +2,11 @@
 
 ## ¿Qué es ZCode?
 
-**ZCode** es un harness de vibe coding con IA (GLM-5.3) distribuido como aplicación Electron arm64. En Termux corre como binario glibc nativo aarch64 sobre `termux-x11`, sin proot.
+**ZCode** es un entorno de programación con IA (modelos GLM) con ventana
+gráfica. En Termux funciona sobre `termux-x11`, sin necesidad de root.
+
+> ¿Prefieres la terminal en vez de la ventana? Usa `zcode-cli`
+> (`i-Haklab about zcode-cli`).
 
 ## ¿Para qué es útil la herramienta?
 
@@ -38,9 +42,8 @@ zcode --version
 
 ## Consideraciones Adicionales
 
-*   **X11 requerido para la GUI:** `zcode` sin argumentos muestra un aviso; la ventana necesita `termux-x11` con `DISPLAY=:0` y `--no-sandbox` (inyectado automáticamente).
-*   **Sin root:** usa `--disable-dev-shm-usage` y render por software (`swiftshader`) porque `/dev/shm` no es escribible sin root.
-*   **Fuentes y tema:** requiere `fontconfig-glibc`, `freetype-glibc` y `gnome-themes-extra` (tema `Adwaita:dark` por defecto) para que el texto sea visible.
+*   **X11 requerido para la ventana:** `zcode` sin argumentos muestra un aviso; para la interfaz gráfica necesitas `termux-x11` corriendo (ver ejemplo 2). Todo lo técnico (permisos, render por software, tema oscuro) se ajusta solo durante la instalación.
+*   **Fuentes y tema:** Si alguna vez ves la ventana en blanco o el texto invisible, reinstala el paquete (restaura el tema y las fuentes).
 *   **Seguridad:** incluye protecciones para evitar la modificación accidental de archivos sensibles y respeta las configuraciones de `.gitignore`.
 
 ---

@@ -69,3 +69,6 @@ Ghost Framework se opera a través de una consola interactiva. Primero, se debe 
 
 -   **Legalidad y Ética:** Esta es una herramienta potente. Su uso debe limitarse a entornos de prueba autorizados y hacking ético.
 -   **Dependencia de ADB:** El framework es completamente dependiente de ADB. Si la conexión ADB se pierde o es revocada en el dispositivo, el control se pierde.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

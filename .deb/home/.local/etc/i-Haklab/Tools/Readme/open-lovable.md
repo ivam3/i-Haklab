@@ -23,3 +23,6 @@ Turbopack no es compatible con Android
 Es necesario deshabilitar Turbopack usando:
 NEXT_DISABLE_TURBOPACK=1
 Requiere Node.js reciente
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

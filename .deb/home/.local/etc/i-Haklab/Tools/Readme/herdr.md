@@ -16,7 +16,7 @@ Herdr resuelve el caos de múltiples agentes en paralelo, siendo ideal para:
 
 ## ¿Cómo se usa? (Ejemplos básicos)
 
-Una vez instalado vía `apt install herdr` (deb `aarch64` estricto, postinst descarga siempre `latest` estable desde `https://herdr.dev/latest.json` con verificación SHA-256), úsalo así:
+Una vez instalado con `apt install herdr` (siempre se descarga la última versión estable y verificada), úsalo así:
 
 **Ejemplo 1: Iniciar o adjuntar sesión persistente**
 
@@ -66,20 +66,10 @@ herdr --remote usuario@host --session prod
 
 ## Consideraciones Adicionales
 
-*   **Instalación en Termux:** Paquete `.deb` `aarch64` estricto en `ivam3/termux-packages`. `preinst` verifica que no seas root y limpia clon legacy `~/.local/share/herdr` (plantilla python); `postinst` detecta `linux-aarch64` (`uname -s`/`uname -m`), descarga `herdr-linux-aarch64` desde `herdr.dev/latest.json` (parsing con `awk` sin `jq`), verifica `SHA-256` (`sha256sum`/`shasum`/`openssl`), instala en `$PREFIX/bin/herdr` (`chmod +x`) y deja `fixer` en `$PREFIX/bin/fixer`. No requiere `glibc` (binario estáticamente enlazado, válido para Android Bionic).
-*   **Dependencias del paquete:** `curl`, `coreutils`, `gawk` (para `curl`/`awk`/`sha256sum`). Sin `git`/`python`.
-*   **Siempre latest:** Cada `apt install`/`postinst` consulta `https://herdr.dev/latest.json` (hoy `0.8.2`) y usa `assets.linux-aarch64` + `sha256.linux-aarch64`; `herdr update` usa el mismo manifest.
-*   **Desinstalación:** `prerm` pregunta `[Y/n]` antes de borrar datos de usuario (`~/.config/herdr`, `~/.local/share/herdr`, `~/.cache/herdr`); `postrm` borra `$PREFIX/bin/herdr` (instalado por `postinst`, no trackeado por dpkg). `fixer` se conserva (compartido con otros paquetes ivam3).
-*   **Fallback cargo (solo si herdr.dev/GitHub bloqueados o build custom):** Upstream `git clone https://github.com/herdrdev/herdr && cargo build --release` falla en Termux por `build.rs:zig_target()` que solo mapea `aarch64-unknown-linux-gnu` (no `aarch64-linux-android`). Usa:
-    ```bash
-    pkg install rust zig
-    git clone https://github.com/herdrdev/herdr && cd herdr
-    rustup target add aarch64-unknown-linux-gnu
-    cargo build --target aarch64-unknown-linux-gnu --release
-    cp target/aarch64-unknown-linux-gnu/release/herdr $PREFIX/bin/herdr
-    ```
-    Requiere `zig 0.16+` para compilar `vendor/libghostty-vt` y genera binario dinámico vs el estático del release.
-*   **Config y skill:** `herdr --default-config`, `herdr --skill` (skill para agentes), `~/.config/herdr/config.toml`.
+*   **Instalación:** `apt install herdr`. No necesitas compilar nada ni instalar dependencias extra; funciona directo en Android.
+*   **Siempre actualizado:** Cada instalación trae la última versión estable y verificada. Para actualizar después usa `herdr update`.
+*   **Desinstalación:** Al desinstalar se te pregunta antes de borrar tus datos (`~/.config/herdr`, `~/.local/share/herdr`, `~/.cache/herdr`).
+*   **Configuración:** `herdr --default-config` genera la config base en `~/.config/herdr/config.toml`; `herdr --skill` muestra la ayuda para agentes.
 
 ---
 *Nota: Esta herramienta integra el runtime de agentes para multiplexar terminales y orquestar IA en el ecosistema i-Haklab/Termux.*

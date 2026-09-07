@@ -47,3 +47,6 @@ Ghidra es una aplicación de escritorio con una interfaz gráfica. El flujo de t
 -   **Requisitos del sistema:** Ghidra puede consumir una cantidad significativa de RAM, especialmente con binarios grandes. Se recomienda tener al menos 4 GB de RAM, pero 8 GB o más es ideal.
 -   **Scripting:** Ghidra soporta scripting en Java y Python (a través de Jython) para automatizar tareas repetitivas de análisis.
 -   **Depurador:** A partir de versiones recientes, Ghidra incluye un depurador que permite el análisis dinámico del código, es decir, ejecutar el programa paso a paso y observar su comportamiento en tiempo real.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

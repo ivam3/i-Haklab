@@ -61,3 +61,6 @@ La salida del comando suele estar bien estructurada, mostrando los datos de form
 -   **Dependencias:** La herramienta puede requerir la instalación de ciertas librerías de Python. Generalmente se instalan con `pip install -r requirements.txt`.
 -   **APIs:** El funcionamiento de Geo-Recon depende de servicios de terceros (APIs de geolocalización). Es posible que algunas de estas APIs requieran una clave (API Key) para su uso, la cual debería configurarse según las instrucciones de la herramienta.
 -   **Limitaciones:** La precisión de la geolocalización de una IP puede variar. No siempre apunta a la ubicación física exacta del dispositivo, sino a la del proveedor de servicios de Internet.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

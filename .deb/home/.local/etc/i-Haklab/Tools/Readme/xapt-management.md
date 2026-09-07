@@ -53,3 +53,6 @@ Básicamente, actúa como un intermediario amigable entre el usuario y el sistem
 
 ---
 *Nota: `xapt-management` es una excelente herramienta para quienes se inician en Termux o para aquellos que prefieren una interfaz gráfica para la gestión de paquetes en lugar de la línea de comandos.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

@@ -72,3 +72,6 @@ sudo fbi -d /dev/fb0 -T 2 mi_logo.png
 
 ---
 *Nota: La información proporcionada aquí se refiere al visor de imágenes para Linux. Cualquier otra herramienta con el mismo nombre tendría un propósito completamente diferente.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

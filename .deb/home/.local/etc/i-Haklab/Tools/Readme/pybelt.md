@@ -81,3 +81,6 @@ Los ejemplos varían ligeramente dependiendo de la versión o fork de `pybelt`, 
 -   **Ética y Legalidad:** `pybelt` es una herramienta ofensiva. Su uso debe ser **estrictamente ético y legal**, siempre con el permiso explícito y por escrito del propietario del sistema objetivo. El uso no autorizado es ilegal y puede tener graves consecuencias.
 -   **Actualizaciones:** Al ser un proyecto de código abierto, la continuidad del desarrollo y el soporte pueden variar.
 -   **Dependencias:** Asegúrate de tener todas las dependencias (`requests`, `beautifulsoup4`, etc.) instaladas antes de usarla.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

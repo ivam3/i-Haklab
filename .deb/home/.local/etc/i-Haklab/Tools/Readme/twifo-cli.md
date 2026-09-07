@@ -59,3 +59,6 @@ Descripción:
 
 ---
 *Nota: Esta es una herramienta de OSINT simple y efectiva para la recopilación de información básica de perfiles de Twitter.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

@@ -104,6 +104,108 @@ case "$1" in
         echo " ╰─➤ API_KEY=\$APIKEY_testsprite node $indexFile"
         ;;
 
+    zcode-app-cli)
+        entryFile="${PREFIX}/lib/node_modules/zcode-app-cli/bin/zcode.js"
+        # Fix shebang for Termux (upstream ships #!/usr/bin/env node)
+        [[ -f "$entryFile" ]] && termux-fix-shebang "$entryFile"
+        # Avoid collision with the zcode desktop wrapper ($PREFIX/bin/zcode):
+        # the npm CLI always lives as zcode-cli, desktop keeps zcode.
+        if [[ -e "${PREFIX}/bin/zcode" ]] && [[ "$(readlink "${PREFIX}/bin/zcode" 2>/dev/null)" == *zcode-app-cli* ]]; then
+            mv -f "${PREFIX}/bin/zcode" "${PREFIX}/bin/zcode-cli"
+            echo "[✔] npm bin renamed to zcode-cli (zcode desktop untouched)"
+        elif [[ ! -e "${PREFIX}/bin/zcode-cli" && -f "$entryFile" ]]; then
+            ln -sf "../lib/node_modules/zcode-app-cli/bin/zcode.js" "${PREFIX}/bin/zcode-cli"
+            echo "[✔] zcode-cli link created"
+        fi
+        # Pre-seed config: Android blocks hardlinks (EACCES) and the launcher
+        # creates config.json via tmp+link(), so first run would crash.
+        if [[ ! -f "${HOME}/.zcode/cli/config.json" ]]; then
+            mkdir -p "${HOME}/.zcode/cli"
+            cp "${PREFIX}/lib/node_modules/zcode-app-cli/config.example.json" \
+                "${HOME}/.zcode/cli/config.json" 2>/dev/null && \
+                chmod 600 "${HOME}/.zcode/cli/config.json" && \
+                echo "[✔] Seeded ~/.zcode/cli/config.json from defaults"
+        fi
+        # Hoist options.apiKey -> top-level apiKey: the launcher preflight reads
+        # provider.<id>.options.apiKey but the runtime signer only reads the
+        # top-level apiKey (schema Nje). Key in options alone passes `login`
+        # checks yet fails at signing ("must contain one separator").
+        if [[ -f "${HOME}/.zcode/cli/config.json" ]]; then
+            python3 - "${HOME}/.zcode/cli/config.json" <<'PY' 2>/dev/null && echo "[✔] apiKey placement verified (top-level)"
+import json, sys
+p = sys.argv[1]
+d = json.load(open(p))
+fixed = []
+for pid, prov in (d.get('provider') or {}).items():
+    if not isinstance(prov, dict):
+        continue
+    key = prov.get('options', {}).get('apiKey') if isinstance(prov.get('options'), dict) else None
+    if key and not prov.get('apiKey'):
+        prov['apiKey'] = key
+        fixed.append(pid)
+if fixed:
+    json.dump(d, open(p, 'w'), indent=2)
+    print('[✔] Hoisted options.apiKey to top-level for: %s' % ','.join(fixed))
+PY
+            chmod 600 "${HOME}/.zcode/cli/config.json" 2>/dev/null
+        fi
+        # Inject APIKEY_zcode (from `i-Haklab setapikey` -> zcode) into the CLI
+        # config when no key is configured yet. Never overwrites an existing key.
+        zcode_key="$(grep '^export APIKEY_zcode=' "${HOME}/.local/etc/i-Haklab/variables" 2>/dev/null | head -1 | cut -d'"' -f2)"
+        if [[ -n "$zcode_key" && -f "${HOME}/.zcode/cli/config.json" ]]; then
+            python3 - "${HOME}/.zcode/cli/config.json" "$zcode_key" <<'PY' 2>/dev/null
+import json, sys
+p, key = sys.argv[1], sys.argv[2]
+d = json.load(open(p))
+z = d.setdefault('provider', {}).setdefault('zai', {})
+if not z.get('apiKey'):
+    z['apiKey'] = key
+    if isinstance(z.get('options'), dict):
+        z['options']['apiKey'] = key
+    json.dump(d, open(p, 'w'), indent=2)
+    print('[✔] Injected APIKEY_zcode into ~/.zcode/cli/config.json')
+else:
+    print('[✔] CLI config already has an API key (kept)')
+PY
+            chmod 600 "${HOME}/.zcode/cli/config.json" 2>/dev/null
+            unset zcode_key
+        fi
+        # Quota probe: a micro headless prompt classifies the account state.
+        # Costs one tiny turn ONLY when quota exists; on [1113]/401 it is free.
+        if command -v zcode-cli >/dev/null 2>&1 && command -v timeout >/dev/null 2>&1; then
+            echo "[→] Probing Z.AI quota (micro-prompt, timeout 120s)..."
+            probe_out="$(timeout 120 zcode-cli --prompt "responde solo: OK" --no-browser 2>&1 | head -n 12)"
+            if echo "$probe_out" | grep -q "1113\|Insufficient balance"; then
+                echo "[⚠] Key válida pero SIN SALDO (Coding Plan es de pago, sin tier free)."
+                echo " ╰─➤ Recarga/saldo: https://z.ai/manage-apikey/billing"
+                echo " ╰─➤ O prueba el trial gratis de BigModel:"
+                echo "     1) key en https://open.bigmodel.cn/usercenter/apikeys"
+                echo "     2) i-Haklab setapikey → bigmodel"
+                echo "     3) zcode-cli → /login → BigModel Coding Plan API Key"
+            elif echo "$probe_out" | grep -qi "401\|unauthorized\|invalid.*key\|key.*invalid\|authentication"; then
+                echo "[⚠] La key fue RECHAZADA. Regenérala aquí:"
+                echo " ╰─➤ https://z.ai/manage-apikey  →  i-Haklab setapikey → zcode"
+            elif echo "$probe_out" | grep -q "Model access is not configured"; then
+                echo "[💡] Sin API key configurada. Consigue una y guárdala:"
+                echo " ╰─➤ Z.AI: https://z.ai/manage-apikey  |  BigModel trial: https://open.bigmodel.cn/usercenter/apikeys"
+                echo " ╰─➤ i-Haklab setapikey → zcode  (o bigmodel)"
+            elif echo "$probe_out" | grep -q "separator\|signing"; then
+                echo "[⚠] Fallo de firma local. Reinstala el paquete para re-aplicar el fix."
+            else
+                echo "[✔] Z.AI responde con tu key. Todo listo:"
+                echo " ╰─➤ zcode-cli  (TUI)  |  zcode-cli --prompt \"...\" --no-browser"
+            fi
+            unset probe_out
+        fi
+        echo "[💡] ZCode CLI installed as zcode-cli (desktop keeps zcode)"
+        echo " ╰─➤ zcode-cli --version"
+        echo "[💡] Browser OAuth login is macOS-only; on Termux use the API key path"
+        echo " ╰─➤ run 'zcode-cli', then /login → Z.AI Coding Plan API Key"
+        echo "[💡] Headless without browser automation"
+        echo " ╰─➤ zcode-cli --prompt \"...\" --no-browser"
+        echo "[💡] Optional native plugins (cua/sharp) are linux-x64 only, core TUI unaffected"
+        ;;
+
     localtunnel)
         mkdir -p ${PREFIX}/lib/node_modules/localtunnel/node_modules/openurl
         curl -fsSL ${iHDB}/.local/etc/localtunnel/openurl.js -o \

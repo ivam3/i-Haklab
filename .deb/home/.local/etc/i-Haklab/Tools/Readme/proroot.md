@@ -17,13 +17,13 @@ proroot es ideal para ejecutar software Linux pesado en Termux sin root:
 ## Instalación
 
 ```bash
-# Mediante el wrapper de i-HakLab:
+# Con i-HakLab:
 apt install proroot
 
-# El postinst configura automáticamente:
-# 1. Descarga Ubuntu 24.04 (Noble) rootfs
-# 2. Descarga las 5 librerías .so de proroot
-# 3. Instala el wrapper `proroot` en $PREFIX/bin
+# La instalación deja todo listo automáticamente:
+# 1. Sistema Ubuntu 24.04 interno
+# 2. Librerías necesarias
+# 3. Comando `proroot` disponible
 ```
 
 ## ¿Cómo se usa? (Ejemplos básicos)

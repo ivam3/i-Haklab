@@ -57,3 +57,6 @@ hashcat -m 18200 hashes_asrep.txt /usr/share/wordlists/rockyou.txt
 
 - **Se necesita una lista de usuarios:** A diferencia de otras herramientas, `GetNPUsers.py` generalmente requiere una lista de nombres de usuario para ser efectivo. Esta lista se puede obtener con otras herramientas de enumeración como `GetADUsers.py`.
 - **Conectividad:** Se requiere conectividad de red con el controlador de dominio en el puerto 88 (Kerberos).
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

@@ -79,3 +79,5 @@ This software and related documentation are provided under license agreement con
 This tool was written by Ivam3, <https://t.me/Ivam3byCinderella>
 Some maintenance releases have been done by <https://t.me/Ivam3_Bot>
 
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

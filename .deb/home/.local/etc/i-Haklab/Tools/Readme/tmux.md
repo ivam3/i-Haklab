@@ -46,3 +46,6 @@ Su característica más poderosa es la capacidad de **desvincularse (detach) y v
 
 ---
 *Nota: Aprender a usar `tmux` es una de las inversiones de tiempo más rentables que puede hacer un usuario de la línea de comandos. Mejora drásticamente la productividad.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

@@ -56,3 +56,6 @@ apachectl -t
 
 ---
 *Nota: Apache sigue siendo un estándar de la industria, aunque servidores como Nginx han ganado popularidad por su rendimiento en ciertos escenarios.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

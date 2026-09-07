@@ -38,10 +38,12 @@ echo -en "$Y[!]$W Get an OpenRouter API key on:$B https://openrouter.ai/settings
 echo -en "$Y[!]$W Get an Together AI API key on:$B https://api.together.ai/settings/api-keys\n"
 echo -en "$Y[!]$W Get an Kimi AI API key on:$B https://platform.moonshot.cn/console/api-keys\n"
 echo -en "$Y[!]$W Get a TestSprite API key on:$B https://www.testsprite.com/dashboard/settings/apikey\n"
+echo -en "$Y[!]$W Get a Z.AI Coding Plan API key on:$B https://z.ai/manage-apikey (billing: https://z.ai/manage-apikey/billing)\n"
+echo -en "$Y[!]$W Get a BigModel API key on:$B https://open.bigmodel.cn/usercenter/apikeys (free trial for new accounts)\n"
 echo "[?] Choose the api key to set:"
-select platform in chatGPT claude deepseek gemini mistralAI groq openrouter togetherai kimi neural phonescan testsprite cancel;do
+select platform in chatGPT claude deepseek gemini mistralAI groq openrouter togetherai kimi neural phonescan testsprite zcode bigmodel cancel;do
   case $platform in
-      chatGPT|claude|deepseek|gemini|mistralAI|groq|openrouter|togetherai|kimi|neural|phonescan|testsprite)
+      chatGPT|claude|deepseek|gemini|mistralAI|groq|openrouter|togetherai|kimi|neural|phonescan|testsprite|zcode|bigmodel)
       [[ -z "$(eval "echo \$APIKEY_$platform")" ]] || { ask;}
       getApiKey
       setApiKey

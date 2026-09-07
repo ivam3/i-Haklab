@@ -62,3 +62,6 @@ WebSploit funciona a través de una consola interactiva similar a la de Metasplo
 
 ---
 *Nota: WebSploit es una herramienta poderosa para practicar y ejecutar ataques de red en un entorno de laboratorio controlado. Su uso en redes productivas sin autorización es un delito.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

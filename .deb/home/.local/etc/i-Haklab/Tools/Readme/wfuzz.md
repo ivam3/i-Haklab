@@ -58,3 +58,6 @@ wfuzz -c -w /usr/share/seclists/Discovery/Web-Content/common.txt --hc 404 http:/
 
 ---
 *Nota: Wfuzz es una herramienta esencial y avanzada para el pentesting de aplicaciones web. Su dominio requiere práctica, especialmente en el arte de filtrar los resultados para encontrar las verdaderas vulnerabilidades.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

@@ -71,3 +71,6 @@ Una vez en el shell interactivo de Objection (`com.example.app (PID: 12345) #`),
 -   **Entorno Controlado:** Objection es una herramienta de seguridad ofensiva. Su uso debe realizarse en **entornos controlados y con la autorización explícita** del propietario de la aplicación y el dispositivo móvil.
 -   **Frida como Base:** Familiarizarse con Frida (`frida-tools`) mejorará tu capacidad para usar Objection y entender sus funcionalidades.
 -   **Actualizaciones Constantes:** Las aplicaciones móviles y los sistemas operativos cambian constantemente. Es importante mantener Objection y Frida actualizados para asegurar su compatibilidad y efectividad.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

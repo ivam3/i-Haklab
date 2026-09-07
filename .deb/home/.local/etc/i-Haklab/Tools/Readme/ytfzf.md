@@ -60,3 +60,6 @@ ytfzf -d "gemini 2.5 flash"
 
 ---
 *Nota: `ytfzf` es una excelente demostración de cómo la combinación de herramientas de línea de comandos puede crear soluciones poderosas y eficientes.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

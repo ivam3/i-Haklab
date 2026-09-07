@@ -12,7 +12,7 @@
 
 ## Cómo se usa en i-Haklab
 
-El wrapper `ttyd` de i-Haklab intercepta los modos `--local` y `--remote`; cualquier otro argumento pasa directo al binario real `$PREFIX/bin/ttyd`.
+i-Haklab añade dos modos cómodos, `--local` y `--remote`; cualquier otro uso funciona igual que el `ttyd` original.
 
 ### Ejemplo 1: Terminal web local
 
@@ -20,7 +20,7 @@ El wrapper `ttyd` de i-Haklab intercepta los modos `--local` y `--remote`; cualq
 ttyd --local
 ```
 
-Obtiene un puerto libre con la función `getPORT` y levanta la terminal en:
+Busca un puerto libre y levanta la terminal en:
 
 ```
 http://127.0.0.1:<puerto>
@@ -32,10 +32,10 @@ http://127.0.0.1:<puerto>
 ttyd --remote
 ```
 
-1. Valida que `cloudflared` esté instalado (`chk-pkg cloudflared cloudflared`).
-2. Levanta `ttyd` en background sobre el puerto libre.
-3. Lanza `cloudflared tunnel --url http://127.0.0.1:<puerto>` en background.
-4. Filtra de sus logs la URL pública `https://...trycloudflare.com` y la muestra en la salida estándar.
+1. Revisa que `cloudflared` esté instalado (y te avisa si falta).
+2. Levanta la terminal en un puerto libre.
+3. Crea el túnel público hacia ese puerto.
+4. Te muestra la URL pública `https://...trycloudflare.com` lista para abrir.
 
 ```
 (_➤) Terminal web pública:
@@ -48,16 +48,19 @@ ttyd --remote
 ttyd -p 8080 bash
 ```
 
-Cualquier invocación que no sea `--local`/`-l` o `--remote`/`-r` se reenvía tal cual a `$PREFIX/bin/ttyd`.
+Todo lo que no sea `--local`/`-l` o `--remote`/`-r` funciona igual que el `ttyd` original.
 
 ## Notas
 
-*   **Shell:** el wrapper usa `$SHELL` del usuario (bash, zsh o fish según su configuración).
-*   **Writable:** el wrapper lanza `ttyd` con `-W` (modo writable), necesario para poder escribir en la terminal desde el navegador. Sin `-W`, ttyd arranca en readonly y no se puede teclear.
-*   **Directorio de trabajo:** se fija a `$HOME` con `-w` para que la shell abra siempre en el home, sin importar desde dónde se invoque el wrapper.
-*   **Puerto:** se obtiene con la función `getPORT` de i-Haklab (requiere `nmap`).
+*   **Shell:** se usa tu shell habitual (bash, zsh o fish).
+*   **Escritura:** la terminal web permite escribir (modo writable); sin eso solo podrías mirar.
+*   **Carpeta inicial:** siempre abre en tu home, la ejecutes desde donde la ejecutes.
+*   **Puerto:** se busca uno libre automáticamente (requiere `nmap`).
 *   **Túnel sin cuenta:** los túneles *quick* de Cloudflare no tienen garantía de uptime; para producción se recomienda un *named tunnel*.
 *   **Detener:** `Ctrl+C` mata tanto `ttyd` como `cloudflared`.
 
 ---
 *Nota: `ttyd` es una herramienta oficial open source para compartir terminales web. `cloudflared` es el demonio oficial de Cloudflare Tunnels.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

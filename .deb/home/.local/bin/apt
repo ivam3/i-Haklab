@@ -50,7 +50,7 @@ if [[ "$1" == "install" || "$1" == "reinstall" || "$1" == "search" ]]; then
                 ;;
 
             # NPM MODULES 
-            bash-obfuscate|codex|copilot-cli|gemini-cli|kimi-code|localtunnel|minimax-cli|n8n|pnpm|open-lovable|openspec|sleepwalker|qwen-code|testsprite|twifo-cli)
+            bash-obfuscate|codex|copilot-cli|gemini-cli|kimi-code|localtunnel|minimax-cli|n8n|pnpm|open-lovable|openspec|sleepwalker|qwen-code|testsprite|twifo-cli|zcode-cli)
                 i=$(ih_normalize_pkg "$i")
                 install_wrapper "npm install -g" "$i" "nodejs module"
                 continue

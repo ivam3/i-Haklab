@@ -63,3 +63,6 @@ El hash obtenido (que suele empezar con `$krb5tgs$23$*...`) se puede crackear of
 
 - **Se requieren credenciales:** A diferencia de AS-REP Roasting (`GetNPUsers.py`), el Kerberoasting requiere credenciales de dominio válidas para poder solicitar los TGS.
 - **Mitigación:** La principal forma de mitigar este ataque es asegurarse de que las cuentas de servicio utilicen contraseñas largas, complejas y que se roten periódicamente, haciendo que el cracking offline sea inviable.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

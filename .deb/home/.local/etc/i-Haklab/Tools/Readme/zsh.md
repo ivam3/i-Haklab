@@ -19,7 +19,7 @@ Zsh mejora significativamente el flujo de trabajo diario gracias a:
 
 ## ¿Cómo se usa? (Ejemplos básicos)
 
-Una vez configurada mediante `pkg2conf`, puedes entrar a Zsh simplemente escribiendo su nombre:
+Una vez instalada (i-Haklab la deja configurada sola), puedes entrar a Zsh simplemente escribiendo su nombre:
 
 **Ejemplo 1: Iniciar Zsh**
 
@@ -47,3 +47,6 @@ En Zsh, muchas veces ni siquiera necesitas escribir `cd` para entrar en una carp
 
 ---
 *Nota: Zsh es la shell recomendada para usuarios avanzados de i-Haklab que buscan el máximo rendimiento en su terminal.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

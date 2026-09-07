@@ -124,3 +124,6 @@ Además del cliente de línea de comandos, existen herramientas gráficas y web 
 -   **Compatibilidad:** MariaDB mantiene una alta compatibilidad con MySQL, lo que facilita la migración de un sistema a otro.
 -   **Motores de Almacenamiento:** MariaDB soporta múltiples motores de almacenamiento, como InnoDB (transaccional, por defecto), Aria (reemplazo de MyISAM), ColumnStore (analítico) y Spider (federado), lo que permite optimizar la base de datos para diferentes cargas de trabajo.
 -   **Seguridad:** Es crucial configurar adecuadamente la seguridad de MariaDB, incluyendo contraseñas robustas para el usuario `root`, la creación de usuarios con privilegios mínimos y el aseguramiento del acceso a la base de datos.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

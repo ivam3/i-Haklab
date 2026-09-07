@@ -381,6 +381,7 @@ ih_normalize_pkg() {
         minimax-cli)       echo "mmx-cli" ;;
         smithery)          echo "@smithery/cli" ;;
         testsprite)        echo "@testsprite/testsprite-mcp" ;;
+        zcode-cli)         echo "zcode-app-cli" ;;
         *)                 echo "$i" ;;
     esac
 }

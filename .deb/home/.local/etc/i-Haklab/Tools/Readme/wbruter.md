@@ -44,3 +44,6 @@ Para otros ataques (Gmail, FTP, etc.), se seleccionaría la opción correspondie
 
 ---
 *Nota: WBruter es principalmente una herramienta educativa para demostrar el concepto de los ataques de fuerza bruta. En la práctica, su efectividad contra sistemas modernos y seguros es muy limitada debido a las contramedidas de seguridad existentes.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

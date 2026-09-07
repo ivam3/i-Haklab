@@ -82,3 +82,6 @@ Una vez autenticado, puedes usar los diferentes módulos de GHunt.
 
 -   **Legalidad y Ética:** GHunt solo accede a información públicamente visible. No "hackea" nada. Sin embargo, su uso debe ser ético y legal. Utilízalo solo en cuentas para las que tengas autorización de investigar.
 -   **Evolución Constante:** Google cambia sus APIs y la forma en que muestra la información con frecuencia. Esto significa que GHunt requiere actualizaciones constantes por parte de su desarrollador para seguir funcionando correctamente.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

@@ -106,21 +106,17 @@ Para transferir archivos sin necesidad de servidores de red externos, `termux-do
 
 ---
 
-## ⚙️ 5. Instalación y Entorno Interno (`postinst` y Scripts)
+## ⚙️ 5. Instalación: qué te pregunta y qué queda listo
 
-El instalador `postinst` permite seleccionar la arquitectura (`x86_64`, `x86`, `aarch64`, `armv7`) y la versión de Alpine Linux (desde **v3.16** hasta **v3.24**).
+Al instalar puedes elegir la arquitectura (`x86_64`, `x86`, `aarch64`,
+`armv7`) y la versión de Alpine Linux (desde **v3.16** hasta **v3.24**).
 
-### Componentes Internos Automáticos:
-1. **`ashrc.sh`**:
-   * Configura automáticamente los servidores DNS (`8.8.8.8`).
-   * Automonta el volumen compartido VirtFS 9p en `/termux2alpine`.
-   * Habilita repositorios APK (incluyendo `@testing`).
-   * Configura `pip` para instalaciones en entorno de sistema (`break-system-packages = true`).
-   * Instala, habilita e inicia el servicio **Docker** (`service docker start` y `rc-update add docker`).
-   * Opcionalmente instala y configura un entorno de terminal con `tmux`.
-2. **`alpineX11.sh`**:
-   * Script para aprovisionar el entorno gráfico completo (XFCE4, XFCE4 Terminal, DBus, LightDM, Firefox).
-   * Instala los controladores de aceleración GPU 3D Mesa (`mesa-dri-gallium`, `mesa-egl`, `mesa-gl`).
+La máquina virtual queda preconfigurada con:
+
+1. **Red y DNS listos** para salir a internet sin tocar nada.
+2. **Carpeta compartida** con Termux en `/termux2alpine` (montada sola al arrancar).
+3. **Docker instalado y arrancado** como servicio (listo para `docker run`).
+4. Opcionalmente, **entorno gráfico completo** (XFCE4, terminal, Firefox) con aceleración 3D, y terminal `tmux`.
 
 ---
 
@@ -146,3 +142,5 @@ Cuando la VM se ejecuta en modo consola / headless (`-nographic`):
 | **Ecosistema** | Parte de [i-HakLab](https://github.com/Ivam3/i-HakLab) / termux-packages |
 | **Dependencias** | `openssh`, `wget`, `samba`, `procps`, `net-tools`, `xorg-xrandr`, `xfwm4`, `xdotool`, `termux-x11-nightly`, `qemu-utils`, `qemu-common`, `qemu-system-x86-64` |
 
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

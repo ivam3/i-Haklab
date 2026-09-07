@@ -78,3 +78,6 @@ Una vez abierto el archivo, estarás en el modo comando.
 -   **Cuidado:** La edición de archivos binarios es una operación de bajo nivel que puede corromper un archivo si no se hace correctamente. Siempre trabaja en copias de seguridad de archivos importantes.
 -   **Limitaciones:** `hexer` carga el archivo completo en la memoria, por lo que no es adecuado para editar archivos extremadamente grandes que superen la RAM disponible.
 -   **Dependencias:** `hexer` es una utilidad nativa de Unix, por lo que generalmente no tiene dependencias externas complejas más allá de las librerías estándar del sistema.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

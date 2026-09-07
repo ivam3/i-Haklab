@@ -54,7 +54,7 @@ opencode mcp add smithery --url "https://mcp.smithery.run/tu-namespace" --header
 ## Consideraciones Adicionales
 
 *   **Autenticación:** Requiere `smithery auth login` (vía navegador) o configurar `SMITHERY_API_KEY`.
-*   **Android/Termux:** El bundle ofuscado de Smithery no contempla `process.platform="android"`. En i-HakLab se parchea automáticamente vía pkg2conf para que retorne `"linux"`.
+*   **Android/Termux:** Funciona sin pasos extra; i-Haklab la deja lista durante la instalación.
 *   **Endpoint Unificado:** La URL `https://mcp.smithery.run/<namespace>` reemplaza la necesidad de configurar cada MCP individualmente en el agente.
 *   **OAuth:** Los MCP servers alojados en Smithery utilizan OAuth2 para autenticación. El endpoint unificado maneja esto automáticamente.
 

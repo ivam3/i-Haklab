@@ -65,3 +65,6 @@ Esto abrirá VS Code directamente en esa carpeta.
 
 ---
 *Nota: `code-server` es una herramienta increíblemente útil para modernizar y flexibilizar los flujos de trabajo de desarrollo.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

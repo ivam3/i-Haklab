@@ -63,3 +63,6 @@ python3 ran.py --target-message "Tus archivos han sido cifrados! Paga 1 BTC en 2
 -   **NO CIFRA ARCHIVOS REALES:** Insistimos, RansoMux está diseñado para **NO cifrar archivos reales** ni causar daños permanentes a tu dispositivo. Es una herramienta de simulación.
 -   **Ética y Legalidad:** **Nunca debes usar RansoMux o cualquier herramienta de simulación de ransomware con fines maliciosos o sin el consentimiento explícito y por escrito de las personas afectadas.** Utilizar herramientas de ransomware (incluso simuladas) sin autorización es ILEGAL y puede tener graves consecuencias legales.
 -   **Prueba en un Entorno Controlado:** Si utilizas esta herramienta para demostraciones, asegúrate de hacerlo en un dispositivo de prueba aislado y nunca en un entorno de producción o en el dispositivo de otra persona sin su pleno consentimiento.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

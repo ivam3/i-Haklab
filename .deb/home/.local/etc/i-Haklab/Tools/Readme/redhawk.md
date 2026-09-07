@@ -61,3 +61,6 @@ Una vez iniciada, RED HAWK suele presentar una interfaz interactiva basada en me
 -   **Ética y Legalidad:** RED HAWK es una herramienta ofensiva. **Su uso para atacar a individuos o sistemas sin consentimiento mutuo y por escrito es ILEGAL y puede tener graves consecuencias legales.** Utilízala únicamente para fines educativos, de investigación y de pruebas de penetración éticas en sistemas propios o con autorización.
 -   **Plugins:** La herramienta puede incluir plugins para ampliar su funcionalidad y tipos de escaneo.
 -   **Lenguaje de Programación:** Dependiendo del desarrollo, puede estar escrito en Python o PHP, lo que define sus dependencias.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

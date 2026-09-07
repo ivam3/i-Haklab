@@ -69,3 +69,6 @@ sherlock usuario1 usuario2 usuario3
 
 ---
 *Nota: Sherlock es una herramienta de recopilación de información pasiva. No interactúa con las cuentas encontradas, simplemente verifica su existencia.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

@@ -6,13 +6,10 @@
 
 Utiliza enlaces simbólicos para evitar duplicación de dependencias.
 
-En **i-HakLab**, `pnpm` cuenta con un wrapper instalado en:
-
-```bash
-~/.local/bin/pnpm
-```
-
-Este wrapper conserva la compatibilidad con el binario real de Termux (`$PREFIX/bin/pnpm`), pero añade automatizaciones para herramientas Node.js usadas dentro de la suite.
+En **i-HakLab**, el comando `pnpm` viene mejorado: funciona igual que el
+original, pero además prepara solo el entorno de herramientas conocidas
+(`n8n`, `open-lovable`) y acepta nombres cortos (alias) para los agentes
+de IA más usados.
 
 ## ¿Para qué es útil?
 
@@ -67,21 +64,10 @@ Menor consumo de disco
 Instalaciones más rápidas
 Lockfile estricto
 
-## Automatizaciones del wrapper i-HakLab
+## Ayudas automáticas de i-HakLab
 
-El wrapper interviene en:
-
-```bash
-pnpm install ...
-pnpm update ...
-pnpm uninstall ...
-```
-
-Para el resto de comandos delega directamente al pnpm real:
-
-```bash
-$PREFIX/bin/pnpm "$@"
-```
+i-HakLab interviene solo al instalar, actualizar o desinstalar; el resto de
+comandos funcionan igual que el pnpm original.
 
 ## Alias normalizados
 
@@ -110,33 +96,12 @@ pnpm install -g @qwen-code/qwen-code
 
 ## Instalación especial de n8n
 
-Cuando el paquete solicitado es `n8n`, el wrapper prepara el entorno de Termux:
+Al instalar `n8n`, i-HakLab prepara sola todo lo necesario:
 
-1. Instala dependencias del sistema:
-
-```bash
-apt install nodejs-lts libsqlite sqlite
-```
-
-2. Instala paquetes globales auxiliares con pnpm:
-
-```bash
-pnpm install -g pm2 gyp node-gyp
-```
-
-3. Crea directorios de configuración:
-
-```bash
-mkdir -p ~/.n8n ~/.gyp
-```
-
-4. Genera:
-
-```bash
-~/.gyp/include.gypi
-```
-
-5. Ejecuta aprobación de builds globales:
+1. Dependencias del sistema (Node.js, SQLite).
+2. Herramientas auxiliares (gestor de procesos y compilación).
+3. Carpetas y archivos de configuración (`~/.n8n`, entorno de compilación).
+4. Aprobación de compilaciones del paquete.
 
 ```bash
 pnpm approve-builds -g
@@ -144,29 +109,21 @@ pnpm approve-builds -g
 
 ## Instalación especial de open-lovable
 
-Para `open-lovable`, el wrapper:
+Al instalar o actualizar `open-lovable`, i-Haklab descarga sola la última
+versión oficial en `~/.local/share/open-lovable` (borrando la anterior si
+existe) y deja sus dependencias listas.
 
-1. Elimina una instalación previa en `~/.local/share/open-lovable` si existe.
-2. Clona el repositorio oficial en esa ruta.
-3. Habilita `corepack`.
-4. Ejecuta el comando `pnpm install` o `pnpm update` desde el directorio clonado.
+## Configuración automática
 
-## Configuración posterior con pkg2conf
-
-Después de instalar o actualizar paquetes, el wrapper revisa:
-
-```bash
-~/.local/etc/i-Haklab/Tools/listofpkg2conf
-```
-
-Si la herramienta requiere configuración adicional, ejecuta:
-
-```bash
-bash ~/.local/libexec/pkg2conf nombre-del-paquete
-```
+Después de instalar o actualizar paquetes, i-Haklab aplica sola la
+configuración que cada herramienta necesite. Si algo quedó a medias,
+reinstala el paquete y listo.
 
 ## Notas importantes
 
 * `pnpm add -g paquete` es la forma recomendada por pnpm para añadir herramientas globales.
-* El wrapper de i-HakLab acepta flujos con `install`/`update` para mantener compatibilidad con scripts existentes.
+* i-HakLab acepta `install`/`update` además de `add`/`remove`, por compatibilidad con guías y scripts de internet.
 * Si un paquete global requiere scripts de compilación, revisa la salida de `pnpm approve-builds`.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

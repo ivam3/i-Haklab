@@ -67,3 +67,6 @@ Infoga es una herramienta de línea de comandos.
 -   **API Keys:** Para maximizar la cantidad y calidad de la información, es a menudo necesario obtener y configurar API Keys para servicios de terceros.
 -   **Uso Ético y Legal:** Infoga debe usarse de manera ética y legal. Solo debe emplearse para investigar direcciones de correo electrónico para las que se tenga autorización explícita o que sean de dominio público para fines legítimos (ej. investigación de seguridad).
 -   **Actualizaciones:** Debido a que los sitios web y APIs cambian con frecuencia, es importante mantener la herramienta actualizada para asegurar su correcto funcionamiento y la obtención de datos relevantes.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

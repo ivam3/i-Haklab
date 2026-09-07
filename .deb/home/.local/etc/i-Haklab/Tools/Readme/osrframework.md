@@ -98,3 +98,6 @@ La herramienta principal es `osrf`, que actúa como un "runner" para las diferen
 -   **Ética y Legalidad:** OSRFramework es una herramienta de OSINT que solo accede a información públicamente disponible. **Su uso debe ser estrictamente ético y legal.** No debe utilizarse para acosar, espiar o acceder a información privada. Utilízala únicamente para fines de seguridad autorizados, investigación legítima o en tus propios proyectos.
 -   **Dependencia de APIs:** La efectividad de OSRFramework depende de la disponibilidad y el funcionamiento de las APIs de las diferentes plataformas que consulta. Los cambios en estas APIs pueden afectar la funcionalidad.
 -   **Actualizaciones:** Es importante mantener OSRFramework actualizado (`pip install --upgrade osrframework`) para asegurar que funciona correctamente con los cambios en las plataformas en línea y para obtener las últimas características.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

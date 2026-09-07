@@ -47,3 +47,6 @@ gemini "Quiero instalar Metasploit en Termux con la suite i-Haklab"
 
 ---
 *Nota: Este skill integra el conocimiento experto del ecosistema Termux y la suite i-Haklab en los agentes de IA modernos.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

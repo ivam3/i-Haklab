@@ -60,3 +60,6 @@ xml2axml -e AndroidManifest_modified.xml -o AndroidManifest_recompiled.axml
 
 ---
 *Nota: Dominar `xml2axml` es una habilidad crucial para cualquiera que trabaje en profundidad con aplicaciones de Android fuera del entorno IDE estándar.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

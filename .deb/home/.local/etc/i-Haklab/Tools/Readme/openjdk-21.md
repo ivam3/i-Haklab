@@ -112,3 +112,6 @@ sudo update-alternatives --config javac
 -   **Soporte a Largo Plazo (LTS):** OpenJDK 21 es una versión LTS, lo que significa que es adecuada para proyectos de producción que requieren estabilidad y actualizaciones de seguridad durante varios años.
 -   **Licencia:** OpenJDK es de código abierto bajo la licencia GPLv2 con Classpath Exception, lo que permite su uso libre y su distribución en software propietario.
 -   **Ecosistema:** Java es uno de los ecosistemas de desarrollo más grandes y maduros, con una vasta cantidad de frameworks, bibliotecas y herramientas.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

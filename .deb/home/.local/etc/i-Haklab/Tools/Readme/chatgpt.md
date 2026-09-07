@@ -47,3 +47,5 @@ The script uses the `completions` endpoint and the `text-davinci-003` model for 
       
     To learn more about these parameters you can view the [API documentation](https://platform.openai.com/docs/api-reference/completions/create)
 
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

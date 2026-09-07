@@ -6,7 +6,7 @@
 
 Tu proyecto solo necesita la estructura estándar (`AndroidManifest.xml`, `src/` con `.java` y `res/` con recursos) y el comando `compil-apk-termux` genera el APK final en `tu_proyecto/build/final.apk`.
 
-En i-Haklab se distribuye como paquete `termux-apk-make` desde el repositorio de la comunidad `demon_hunter (victor028)`, ya configurado en el `postinst`.
+En i-Haklab se distribuye como paquete `termux-apk-make` desde el repositorio de la comunidad `demon_hunter (victor028)`, listo para usar tras instalar.
 
 ## ¿Para qué es útil la herramienta?
 

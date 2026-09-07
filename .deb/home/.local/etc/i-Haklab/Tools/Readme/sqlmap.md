@@ -71,3 +71,6 @@ sqlmap -u "http://testphp.vulnweb.com/listproducts.php?cat=1" --os-shell
 
 ---
 *Nota: sqlmap es posiblemente una de las herramientas de hacking más potentes y conocidas. Trátala con el máximo respeto y responsabilidad.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

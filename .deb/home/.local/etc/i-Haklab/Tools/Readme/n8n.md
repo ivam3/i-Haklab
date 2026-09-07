@@ -81,3 +81,6 @@ Una vez que n8n está en ejecución y has accedido a su interfaz web (normalment
 -   **Código Abierto vs. Cloud:** La versión autoalojada ofrece total control y privacidad de datos, ideal para empresas que manejan información sensible. n8n Cloud proporciona una solución gestionada sin preocupaciones de infraestructura.
 -   **Flexibilidad "Low-Code":** La capacidad de añadir nodos "Function" con JavaScript hace que n8n sea extremadamente flexible para casos de uso complejos que requieren lógica personalizada.
 -   **Comunidad y Recursos:** n8n cuenta con una comunidad activa y una excelente documentación, lo que facilita el aprendizaje y la resolución de problemas.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

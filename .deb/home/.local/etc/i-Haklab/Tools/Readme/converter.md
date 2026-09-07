@@ -32,3 +32,6 @@ converter imagen.png imagen.jpg
 Puede depender de herramientas externas como ffmpeg
 El rendimiento depende del tamaño del archivo
 Ideal para entornos CLI como Termux o servidores
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

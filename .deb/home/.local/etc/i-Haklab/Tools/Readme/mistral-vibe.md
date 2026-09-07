@@ -34,3 +34,6 @@ mistral-vibe "describe el propósito de este repositorio"
 ---
 
 *Nota: Herramienta integrada en el ecosistema i-HakLab para desarrollo asistido por IA.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

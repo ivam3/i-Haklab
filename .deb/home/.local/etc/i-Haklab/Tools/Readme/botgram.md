@@ -48,4 +48,5 @@ To get help about how to use it and/or to report some issues join to :
 
  • https://t.me/Ivam3_Bot
 
-
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

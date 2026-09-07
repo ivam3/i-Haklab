@@ -106,3 +106,6 @@ Program exited normally.
 
 ---
 *Nota: GDB es una herramienta poderosa y compleja que requiere práctica para dominarla. Esencial para cualquier trabajo serio con código compilado.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

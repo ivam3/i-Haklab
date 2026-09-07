@@ -80,3 +80,6 @@ Esto mostrará los detalles del certificado del firmante (como el `SHA-256 diges
 
 ---
 *Nota: La seguridad de tu clave de firma es de máxima importancia para la distribución de aplicaciones de Android. Trata tu keystore de lanzamiento como un activo extremadamente sensible.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

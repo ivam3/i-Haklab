@@ -17,16 +17,11 @@ OmniRoute es un compañero versátil para desarrolladores y administradores de s
 ## Instalación
 
 ```bash
-# Mediante el wrapper de i-Haklab:
+# Con i-Haklab:
 apt install omniroute
 
-# El postinst configura automáticamente:
-# 1. Node.js + npm (si no existen)
-# 2. Crea el directorio de instalacion en ~/.local/share/omniroute
-# 3. Descarga e instala omniroute via npm
-# 4. Reconstruye modulos nativos (better-sqlite3)
-# 5. Parchea playwright-core para compatibilidad Android
-# 6. Instala el binario 'omniroute' en PATH
+# La instalación deja todo listo automáticamente
+# (Node.js, dependencias y comando `omniroute` disponible).
 ```
 
 ## ¿Cómo se usa? (Ejemplos básicos)

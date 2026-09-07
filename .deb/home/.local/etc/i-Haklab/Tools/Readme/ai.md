@@ -66,12 +66,11 @@ ai "lista los archivos de ~/"   # lo vuelve a instalar automáticamente
 ## Consideraciones Adicionales
 
 *   **Modo por defecto:** `ai "texto"` equivale a `ai "texto" --model qwen2.5-coder:1.5b --run`. Puedes manipular libremente con tus propias opciones; `--no-run` evita la ejecución automática.
-*   **Ollama:** Es dependencia del paquete i-haklab (`depends`). El wrapper arranca el servidor de Ollama si está caído (`ollama serve`), valida el modelo `qwen2.5-coder:1.5b` y lo instala si falta.
+*   **Ollama:** Viene incluida con i-Haklab. Si el servidor está apagado, `ai` lo enciende solo y descarga el modelo `qwen2.5-coder:1.5b` si falta.
 *   **Groq Cloud:** Requiere una clave de Groq. Se configura con `i-Haklab setapikey` → `groq` (guarda `APIKEY_groq`, que el wrapper mapea a `GROQ_API_KEY`) o directamente con `export GROQ_API_KEY=...` (clave gratis en https://console.groq.com).
 *   **Voz:** Requiere el paquete `termux-api` y la app Android **Termux:API (termux-api.apk)** con el permiso de micrófono habilitado.
-*   **Ubicación del ejecutable:** El script pip queda en `$PREFIX/lib/bin/ai`; el wrapper `ai` de `~/.local/bin` lo invoca con ruta absoluta.
-*   **Entorno Termux:** El wrapper auto-aplica un parche idempotente sobre `hybrid-cli-ai` para que el system prompt detecte Termux (`get_os_info` → `termux`) y genere comandos con `pkg`/`$PREFIX`/`$HOME` en lugar de Linux estándar (`sudo`, `/usr/bin`). Se re-aplica tras cada reinstalación.
-*   **Conocimiento de i-Haklab:** El system prompt incluye una línea de awareness de la suite y, cuando la consulta menciona i-Haklab (`i-haklab`, `setapikey`, `helpper`, `alltools`, `wrapper`, `documentacion`, `apikey`, `clave de`, `groq`…), el wrapper antepone un cheat-sheet con subcomandos (`help`, `about <tool>`, `show alltools`, `setapikey`…), wrappers (`apt`/`npm`/`pnpm`, `bat`, `nls`, `glow`…) y la regla `apt install <tool>`.
+*   **Hecha para Termux:** La IA sabe que está en un teléfono con Termux y te propone comandos con `pkg` y rutas del móvil, no de Linux de PC (`sudo`, `/usr/bin`).
+*   **Conoce i-Haklab:** Si tu pregunta menciona i-Haklab (p. ej. `setapikey`, `alltools`, claves), la IA responde con ayuda de la suite: subcomandos, herramientas y cómo instalarlas.
 
 ---
 *Nota: Esta herramienta integra la potencia de los agentes de IA de última generación en el ecosistema i-Haklab.*

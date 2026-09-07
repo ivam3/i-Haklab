@@ -48,3 +48,6 @@ Este comando buscará en Google sitios que coincidan con el dork y luego los ata
 
 ---
 *Nota: Vulnx es una herramienta poderosa pero peligrosa en manos equivocadas. Su uso debe estar estrictamente limitado a entornos de pentesting legales y autorizados. La automatización de la explotación requiere un alto grado de responsabilidad.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

@@ -73,3 +73,6 @@ Todos los reportes e imágenes generadas durante la ejecución de las herramient
 
 ## 👥 Créditos
 * **Douglas Habian**: Autor original de los scripts de recolección de dumpsys, extracción de datos y búsqueda de códigos secretos integrados en este módulo de i-HakLab.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

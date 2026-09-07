@@ -137,3 +137,6 @@ Dentro del prompt de `psql`, puedes ejecutar comandos SQL. Cada sentencia SQL de
 -   **Seguridad:** Es crucial configurar usuarios y privilegios de forma segura. Evita usar el usuario `postgres` para tus aplicaciones.
 -   **Extensibilidad:** PostgreSQL permite crear funciones personalizadas, tipos de datos, operadores e incluso lenguajes de programación.
 -   **Comunidad:** Cuenta con una comunidad muy activa y una excelente documentación, lo que facilita encontrar ayuda y recursos.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

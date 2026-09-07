@@ -69,3 +69,6 @@ Esto te dirá si hay datos incrustados, su tamaño y el algoritmo de cifrado uti
 
 ---
 *Nota: La esteganografía es una técnica poderosa. Asegúrate de utilizarla de manera ética y legal.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

@@ -89,3 +89,6 @@ Se abrirá un prompt donde podrás escribir texto para ser traducido al instante
 
 ---
 *Nota: Translate Shell es una herramienta increíblemente útil para cualquiera que trabaje en un entorno multilingüe desde la línea de comandos.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

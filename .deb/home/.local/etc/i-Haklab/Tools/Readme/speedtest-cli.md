@@ -54,3 +54,6 @@ speedtest-cli --share
 ---
 
 *Nota: Existe también `speedtest-go` como alternativa en Go. Consulta su documentación aparte para más detalles.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

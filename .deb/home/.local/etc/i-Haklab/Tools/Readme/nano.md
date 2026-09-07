@@ -49,3 +49,6 @@ Presiona `Ctrl + X`. Si tienes cambios sin guardar, te preguntará si quieres gu
 
 ---
 *Nota: Aunque menos potente que Vim o Emacs para desarrollo complejo, Nano es el editor de facto para ediciones rápidas y sencillas en el servidor.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

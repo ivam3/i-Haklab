@@ -87,3 +87,6 @@ Este es el método recomendado para producción. Es más robusto y se configura 
 
 ---
 *Nota: `cloudflared` es una herramienta oficial de Cloudflare diseñada para mejorar la seguridad. Su configuración y uso adecuados son clave para proteger tu infraestructura.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

@@ -62,3 +62,6 @@ whatweb -i urls.txt
 
 ---
 *Nota: WhatWeb es una herramienta esencial y estándar en la industria para la fase de "fingerprinting" o reconocimiento en una auditoría de seguridad web.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

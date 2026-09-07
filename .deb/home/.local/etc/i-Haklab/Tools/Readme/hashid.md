@@ -87,3 +87,6 @@ pip install hashid
 
 -   **Precisión:** `hashID` es muy preciso, pero en raras ocasiones puede haber ambigüedades si un hash es muy corto o si un algoritmo menos común coincide con las características de otro. La opción `--extended` puede ayudar en estos casos.
 -   **No es un Cracker:** Es importante recordar que `hashID` solo identifica el tipo de hash; no lo "crackea" ni recupera la contraseña original. Para eso, necesitarías herramientas como Hashcat o John the Ripper.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

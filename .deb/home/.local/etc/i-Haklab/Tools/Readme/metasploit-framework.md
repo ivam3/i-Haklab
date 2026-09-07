@@ -103,3 +103,6 @@ msfconsole
 -   **Ética y Legalidad:** Metasploit Framework es una herramienta ofensiva extremadamente potente. Su uso debe ser **estrictamente ético y legal**, siempre con el permiso explícito y por escrito del propietario del sistema objetivo. El uso no autorizado es ilegal y puede tener graves consecuencias.
 -   **Actualizaciones:** Debido a la constante aparición de nuevas vulnerabilidades, es crucial mantener Metasploit Framework actualizado para asegurar su efectividad.
 -   **Recursos del Sistema:** Metasploit puede consumir una cantidad considerable de recursos del sistema, especialmente durante ataques complejos.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

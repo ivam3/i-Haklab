@@ -88,3 +88,6 @@ Esto grabaría los comandos `ls -l` y `df -h` y saldría, guardando la sesión e
 -   **Seguridad:** Las grabaciones de terminal pueden contener información sensible (contraseñas, claves). Asegúrate de manejar estos archivos de forma segura.
 -   **Tamaño del Archivo:** Las grabaciones pueden volverse grandes si las sesiones son muy largas o contienen mucha salida. La compresión puede ayudar a mitigar esto.
 -   **Compatibilidad:** El formato de archivo `.ttyrecord` es ampliamente compatible entre diferentes versiones de `ttyrec` y `ttyplay`.
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

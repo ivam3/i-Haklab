@@ -42,3 +42,6 @@ codex "Crea un script bash que haga backup de una carpeta"
 ---
 
 *Nota: Herramienta integrada en el ecosistema i-HakLab a través del wrapper npm/pnpm.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*

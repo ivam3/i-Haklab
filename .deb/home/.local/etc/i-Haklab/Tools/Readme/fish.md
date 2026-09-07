@@ -56,3 +56,6 @@ fish_config
 
 ---
 *Nota: Fish es ideal para uso interactivo diario, aunque para scripting de sistema se suele preferir bash por su portabilidad.*
+
+---
+*Nota: Herramienta integrada en el ecosistema i-Haklab.*
