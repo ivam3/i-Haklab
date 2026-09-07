@@ -1,0 +1,18 @@
+#!/bin/sh
+
+QUERY="${1:-google}"
+
+case "$QUERY" in
+    http://*|https://*)
+        URL="$QUERY"
+        ;;
+    *)
+        URL="https://www.google.com/search?q=$QUERY"
+        ;;
+esac
+
+am start \
+  -a android.intent.action.VIEW \
+  -n com.android.chrome/com.google.android.apps.chrome.Main \
+  -d "$URL"
+
