@@ -1,5 +1,6 @@
 acccheck
 adbfastboot
+afrog
 aircrack-ng
 amass
 androidsdk-cli
@@ -25,6 +26,7 @@ clamav
 claude-code
 cloudbunny
 cloudflared
+code-oss
 code-server
 codebuff
 codex
@@ -46,6 +48,7 @@ evilginx2
 exif
 exploitdb
 finalrecon
+findomain
 freebuff
 frida
 fuzzdb
@@ -126,6 +129,7 @@ recon-ng
 recondog
 rhash
 routersploit
+rustscan
 scrapy
 scrcpy
 seclists

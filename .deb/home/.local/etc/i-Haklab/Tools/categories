@@ -1,5 +1,6 @@
 acccheck:Brute Force
 adbfastboot:Android
+afrog:Exploitation
 aircrack-ng:Network Scanning
 amass:OSINT
 androidsdk-cli:Android
@@ -26,6 +27,7 @@ claude-code:AI Agents
 cloudbunny:Cloud
 cloudflared:Tunneling
 code-oss:Utilities
+code-server:Utilities
 codebuff:AI Agents
 codex:AI Agents
 converter:Utilities
@@ -46,6 +48,7 @@ evilginx2:Phishing
 exif:Forensics
 exploitdb:Exploitation
 finalrecon:OSINT
+findomain:Web Application
 freebuff:AI Agents
 frida:Android
 fuzzdb:Web Application
@@ -126,6 +129,7 @@ recon-ng:OSINT
 recondog:OSINT
 rhash:Cracking
 routersploit:Web Application
+rustscan:Network Scanning
 scrapy:OSINT
 scrcpy:Android
 seclists:Password

@@ -293,6 +293,46 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 }
 export -f helpper
 
+ih_read_secret() {
+	# Lectura de password con eco fijo de asteriscos (*).
+	# $1 = prompt, $2 = nombre de variable destino.
+	local prompt="$1" __var="$2"
+	local _input="" _char="" _i=""
+	printf '%s' "$prompt" >&2
+	# Fallback no interactivo (pipes/tests): lee línea completa.
+	if [[ ! -t 0 ]]; then
+		IFS= read -r _input || true
+		printf '\n' >&2
+		printf -v "$__var" '%s' "$_input"
+		return 0
+	fi
+	while IFS= read -r -s -n1 _char; do
+		if [[ -z $_char ]]; then
+			break
+		elif [[ $_char == $'\x7f' || $_char == $'\b' ]]; then
+			if [[ -n $_input ]]; then
+				_input="${_input%?}"
+				printf '\b \b' >&2
+			fi
+		elif [[ $_char == $'\x15' ]]; then
+			for (( _i=0; _i<${#_input}; _i++ )); do
+				printf '\b \b' >&2
+			done
+			_input=""
+		elif [[ $_char == $'\x1b' ]]; then
+			# Secuencia de escape (flechas, etc.): consume resto y la ignora.
+			IFS= read -r -s -n2 -t 0.05 _char || true
+			continue
+		else
+			_input+="$_char"
+			printf '*' >&2
+		fi
+	done
+	printf '\n' >&2
+	printf -v "$__var" '%s' "$_input"
+}
+export -f ih_read_secret
+
 pass(){
     shell=$(echo ${SHELL}|awk -F "/" '{print $NF}')
     case $shell in
@@ -313,14 +353,10 @@ pass(){
 	}
 
 	[[ $1 = New ]] && {
-		while read -sp "New password: " pass && printf "\n" && [[ -z $pass ]]
-		do
-			continue
-		done
-		while read -sp "Retype new password: " pass2 && printf "\n" && [[ -z $pass2 ]]
-		do
-			continue
-		done
+		pass=""
+		while [[ -z $pass ]]; do ih_read_secret "New password: " pass; done
+		pass2=""
+		while [[ -z $pass2 ]]; do ih_read_secret "Retype new password: " pass2; done
 		[[ $pass = $pass2 ]] && {
 			echo $pass|openssl enc -aes-256-cbc -md sha512 -a -pbkdf2 -iter 100000 \
 			-salt -pass pass:Secret@123# > $HOME/.local/etc/i-Haklab/.Ivam3byCinderella;
@@ -330,10 +366,8 @@ pass(){
 		}
 
 		[[ $1 = Get ]] && {
-			while read -sp "Password: " pass && [[ -z $pass ]]
-			do
-				continue
-			done;
+			pass=""
+			while [[ -z $pass ]]; do ih_read_secret "Password: " pass; done
 			until [[ $pass = $(cat $HOME/.local/etc/i-Haklab/.Ivam3byCinderella|openssl enc -aes-256-cbc -md sha512	-a -d -pbkdf2 -iter 100000	-salt -pass pass:Secret@123#) ]]
 			do
 				echo -en "\e[31mERROR:\e[0m wrong password\n"
