@@ -27,6 +27,10 @@ local lsp_servers = {
       },
     },
   },
+  smali_lsp = {
+    cmd = { 'smali-lsp', 'lsp' },
+    filetypes = { 'smali' },
+  },
 }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -90,6 +94,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
     bufmap('n', '[d', '<cmd>lua vim.diagnostic.jump({ count = -1 })<cr>')
     bufmap('n', ']d', '<cmd>lua vim.diagnostic.jump({ count = 1 })<cr>')
+    -- Aportes demon (leaders libres, no pisan los actuales)
+    bufmap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>')
+    bufmap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+    bufmap('n', '<leader>ds', '<cmd>lua vim.lsp.buf.document_symbol()<cr>')
+    bufmap('n', '<leader>ci', '<cmd>lua vim.lsp.buf.incoming_calls()<cr>')
+    bufmap('n', '<leader>co', '<cmd>lua vim.lsp.buf.outgoing_calls()<cr>')
   end
 })
 

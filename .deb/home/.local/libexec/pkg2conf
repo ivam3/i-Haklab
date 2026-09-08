@@ -288,6 +288,7 @@ set softwrap
             $(command -v npm) install -g neovim bash-language-server pyright 
             pip3 --no-color --quiet --no-cache-dir install neovim 
             yes|pkg i luarocks lua-language-server >/dev/null 2>/dev/null 
+            yes|pkg i smali-lsp ollama >/dev/null 2>/dev/null 
         )
         nvim +x +x
         ;; # --->  Nuevo comando 

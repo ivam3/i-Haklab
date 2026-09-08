@@ -128,6 +128,74 @@ lazy.setup({
         'nvim-telescope/telescope.nvim',
     },
   },
+  -- IA local con Ollama (colaboración demon; no altera lo existente)
+  {
+    "nomnivore/ollama.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      require("ollama").setup({
+        model = "deepseek-coder:1.3b",
+        prompts = {
+          Translate_To_Spanish = {
+            prompt = "Traduce este código a español (comentarios y explicaciones):\n\n$sel",
+            action = "display",
+            options = { temperature = 0.3 },
+          },
+          Find_Bugs = {
+            prompt = "Encuentra posibles bugs o problemas en este código:\n\n$sel",
+            action = "display",
+            options = { temperature = 0.1 },
+          },
+          Document_Code = {
+            prompt = "Genera documentación (comentarios) para este código:\n\n$sel",
+            action = "replace",
+            extract = "```[%w+]+\n(.-)```",
+            options = { temperature = 0.2 },
+          },
+          Optimize_Code = {
+            prompt = "Optimiza este código para mejor rendimiento:\n\n$sel",
+            action = "display",
+            options = { temperature = 0.4 },
+          },
+        },
+        url = "http://127.0.0.1:11434",
+        serve = {
+          on_start = false,
+          command = "ollama",
+          args = { "serve" },
+          stop_command = "pkill",
+          stop_args = { "-SIGTERM", "ollama" },
+        },
+      })
+    end,
+    cmd = { "Ollama", "OllamaModel", "OllamaServe", "OllamaServeStop" },
+    keys = {
+      {
+        -- OJO: coma literal y no <leader>: mapleader (',') se define en
+        -- lua/settings.lua DESPUÉS de lazy.setup, así que <leader> aquí
+        -- se expandiría al valor por defecto '\'. La coma equivale a <leader>.
+        ",lm",
+        function()
+          -- Guard contra E5108: ollama.nvim lee las marcas '< '> sin
+          -- validarlas; en modo normal sin selección previa son {0,0,0,0}
+          -- o rancias y nvim_buf_get_text revienta. En visual siempre válidas.
+          local s = vim.fn.getpos("'<")
+          local e = vim.fn.getpos("'>")
+          local bad = s[2] == 0 or e[2] == 0
+            or (s[2] > e[2])
+            or (s[2] == e[2] and s[3] > e[3])
+          if bad then
+            vim.notify("Ollama: selecciona código en modo visual primero y pulsa ,lm", vim.log.levels.WARN, { title = "Ollama" })
+            return
+          end
+          require("ollama").prompt()
+        end,        desc = "ollama prompt",
+        mode = { "n", "v" },
+      },
+    },
+  },
   {'neovim/nvim-lspconfig', tag = "v1.8.0"},
   {'hrsh7th/nvim-cmp'},
   {'hrsh7th/cmp-nvim-lsp'},
