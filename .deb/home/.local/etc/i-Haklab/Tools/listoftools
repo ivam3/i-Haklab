@@ -149,6 +149,7 @@ sqlite
 sqlmap
 sublist3r
 termux-apk-make
+termux-desktop-bspwm
 termux-desktop-xfce
 termux-docker-qemu
 termux-oracle-skill
