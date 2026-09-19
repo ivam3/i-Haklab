@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.13.19",
+  "version": "3.13.20",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -45,6 +45,7 @@
     "home/.local/bin/serverphp": "/data/data/com.termux/files/home/.local/bin/serverphp",
     "home/.local/bin/sudo": "/data/data/com.termux/files/home/.local/bin/sudo",
     "home/.local/bin/telegram": "/data/data/com.termux/files/home/.local/bin/telegram",
+    "home/.local/bin/telegram-desktop-x11": "/data/data/com.termux/files/home/.local/bin/telegram-desktop-x11",
     "home/.local/bin/traductor": "/data/data/com.termux/files/home/.local/bin/traductor",
     "home/.local/bin/walkie-tg": "/data/data/com.termux/files/home/.local/bin/walkie-tg",
     "home/.local/etc/bash/bashrc": "/data/data/com.termux/files/home/.local/etc/bash/bashrc",
@@ -245,6 +246,7 @@
     "home/.local/etc/i-Haklab/Tools/Readme/storm-breaker.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/storm-breaker.md",
     "home/.local/etc/i-Haklab/Tools/Readme/sublist3r.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/sublist3r.md",
     "home/.local/etc/i-Haklab/Tools/Readme/tangalanga.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/tangalanga.md",
+    "home/.local/etc/i-Haklab/Tools/Readme/telegram-desktop.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/telegram-desktop.md",
     "home/.local/etc/i-Haklab/Tools/Readme/termux-apk-make.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/termux-apk-make.md",
     "home/.local/etc/i-Haklab/Tools/Readme/termux-desktop-bspwm.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/termux-desktop-bspwm.md",
     "home/.local/etc/i-Haklab/Tools/Readme/termux-desktop-xfce.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/termux-desktop-xfce.md",

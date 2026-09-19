@@ -148,6 +148,7 @@ spin
 sqlite
 sqlmap
 sublist3r
+telegram-desktop
 termux-apk-make
 termux-desktop-bspwm
 termux-desktop-xfce

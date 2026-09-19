@@ -148,6 +148,7 @@ spin:Utilities
 sqlite:Utilities
 sqlmap:Web Application
 sublist3r:OSINT
+telegram-desktop:Web Application
 termux-apk-make:Android
 termux-desktop-bspwm:Utilities
 termux-desktop-xfce:Utilities

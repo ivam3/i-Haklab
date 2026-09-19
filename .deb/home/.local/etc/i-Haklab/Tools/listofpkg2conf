@@ -24,6 +24,7 @@ tmux
 tor
 vim
 yt-dlp
+zcode-app-cli
 zsh
 @google/gemini-cli
 @qwen-code/qwen-code
@@ -35,4 +36,3 @@ zsh
 @moonshot-ai/kimi-code
 @mmmbuto/codex-cli-termux@latest
 @testsprite/testsprite-mcp
-zcode-app-cli
