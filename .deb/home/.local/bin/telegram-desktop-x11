@@ -1,0 +1,9 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# Telegram Desktop en Termux-X11 con WebKitGTK (fix mini-apps / WebView)
+# 1. Termux empaqueta WebKit sin SONAME versionado -> symlinks .so.0/.so.4 (pkg2conf)
+# 2. No hay bubblewrap/xdg-dbus-proxy en repos Termux -> desactivar sandbox WebKit (Android bloquea namespaces)
+export WEBKIT_DISABLE_SANDBOX_THIS_IS_DANGEROUS=1
+export WEBKIT_DISABLE_DMABUF_RENDERER=1
+export GDK_BACKEND=x11
+export QT_QPA_PLATFORM=xcb
+exec /data/data/com.termux/files/usr/bin/Telegram -- "$@"

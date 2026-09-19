@@ -485,8 +485,37 @@ startxfce4
 	                ${HOME}/.local/share/zsh/plugins/$p
 	        }
 	    done
-	    ;; # --->  Nuevo comando 
- 
+    ;; # --->  Nuevo comando 
+
+    telegram-desktop)
+        # Bot mini-apps / WebApps necesitan WebKitGTK: el paquete Termux no
+        # lo declara como dependencia y sirve las .so sin SONAME versionado,
+        # asi el dlopen de Telegram falla ("WebView Error: No library" y el
+        # dialogo volcado en ~/tmp/out.txt).
+        dpkg -s webkit2gtk-4.1 >/dev/null 2>&1 || {
+            echo "(_>) Installing webkit2gtk-4.1 (backend WebView de mini-apps) ..."
+            yes | pkg install webkit2gtk-4.1 >>"$LOGFILE" 2>&1
+        }
+        ln -sf libwebkit2gtk-4.1.so "${PREFIX}/lib/libwebkit2gtk-4.1.so.0" 2>>"$LOGFILE"
+        ln -sf libjavascriptcoregtk-4.1.so "${PREFIX}/lib/libjavascriptcoregtk-4.1.so.0" 2>>"$LOGFILE"
+        ln -sf libwebkitgtk-6.0.so "${PREFIX}/lib/libwebkitgtk-6.0.so.4" 2>>"$LOGFILE"
+        ln -sf libjavascriptcoregtk-6.0.so "${PREFIX}/lib/libjavascriptcoregtk-6.0.so.6" 2>>"$LOGFILE"
+        [[ -e ${HOME}/.local/bin/telegram-desktop-x11 ]] || {
+            curl -fsSL ${iHDB}/.local/bin/telegram-desktop-x11 \
+                -o ${HOME}/.local/bin/telegram-desktop-x11
+        }
+        chmod +x ${HOME}/.local/bin/telegram-desktop-x11 2>>"$LOGFILE"
+        [[ -e ${HOME}/.local/share/applications/org.telegram.desktop.desktop ]] || {
+            mkdir -p ${HOME}/.local/share/applications
+            curl -fsSL ${iHDB}/.local/share/applications/org.telegram.desktop.desktop \
+                -o ${HOME}/.local/share/applications/org.telegram.desktop.desktop
+        }
+        update-desktop-database ${HOME}/.local/share/applications 2>>"$LOGFILE"
+        rm -f ${HOME}/tmp/out.txt
+        echo "[✔] Telegram Desktop listo para mini-apps (WebKitGTK + lanzador)"
+        echo " ╰─➤ Cierra Telegram por completo y reabrelo desde el menu Whisker"
+        ;; # --->  Nuevo comando 
+
 esac
 
 echo -en "[$G✔$W] DONE.\n"
