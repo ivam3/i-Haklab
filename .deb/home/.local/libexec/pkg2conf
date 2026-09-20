@@ -493,7 +493,6 @@ startxfce4
         # asi el dlopen de Telegram falla ("WebView Error: No library" y el
         # dialogo volcado en ~/tmp/out.txt).
         dpkg -s webkit2gtk-4.1 >/dev/null 2>&1 || {
-            echo "(_>) Installing webkit2gtk-4.1 (backend WebView de mini-apps) ..."
             yes | pkg install webkit2gtk-4.1 >>"$LOGFILE" 2>&1
         }
         ln -sf libwebkit2gtk-4.1.so "${PREFIX}/lib/libwebkit2gtk-4.1.so.0" 2>>"$LOGFILE"
@@ -512,8 +511,6 @@ startxfce4
         }
         update-desktop-database ${HOME}/.local/share/applications 2>>"$LOGFILE"
         rm -f ${HOME}/tmp/out.txt
-        echo "[✔] Telegram Desktop listo para mini-apps (WebKitGTK + lanzador)"
-        echo " ╰─➤ Cierra Telegram por completo y reabrelo desde el menu Whisker"
         ;; # --->  Nuevo comando 
 
 esac
