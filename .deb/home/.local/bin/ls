@@ -1,3 +1,0 @@
-#!/data/data/com.termux/files/usr/bin/bash
-# i-Haklab ls -> uses lsd
-lsd "$@"
