@@ -1025,6 +1025,7 @@
     "home/.local/libexec/tips": "/data/data/com.termux/files/home/.local/libexec/tips",
     "home/.local/libexec/walkie-tg/bridge.js": "/data/data/com.termux/files/home/.local/libexec/walkie-tg/bridge.js",
     "home/.local/libexec/iH-AI.py": "/data/data/com.termux/files/home/.local/libexec/iH-AI.py",
+    "home/.local/libexec/iH-ai-shell.py": "/data/data/com.termux/files/home/.local/libexec/iH-ai-shell.py",
     "home/.local/libexec/i-Haklab.login": "/data/data/com.termux/files/home/.local/libexec/i-Haklab.login",
     "home/.local/libexec/i-Haklab/4share": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/4share",
     "home/.local/libexec/i-Haklab/about": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/about",

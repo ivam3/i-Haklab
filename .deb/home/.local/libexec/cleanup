@@ -22,8 +22,9 @@ case "$1" in
         ;;
 
     ai)
-        "$PREFIX/bin/pip" uninstall -y hybrid-cli-ai >/dev/null 2>/dev/null
+        "$PREFIX/bin/pip" uninstall -y hybrid-cli-ai >/dev/null 2>&1
         rm -rf "$HOME/.local/share/hybrid-cli-ai" 2>/dev/null
+        rm -f "$HOME/.local/share/iH-ai/history.json" 2>/dev/null
         ;;
 
     radare2)

@@ -39,11 +39,13 @@ case "$tool" in
         ;;
 
     ai)
-        [[ -d "$HOME/.local/share/hybrid-cli-ai" ]] || \
-            git clone --quiet https://github.com/HereIsMuhammad/hybrid-cli-ai.git \
-                "$HOME/.local/share/hybrid-cli-ai"
-            pip install maturin
-            cd "$HOME/.local/share/hybrid-cli-ai" && pip install -e .
+        # Vendored backend (iH-ai-shell.py, stdlib only): no external clones.
+        # Migration: remove the old hybrid-cli-ai (repo deleted from GitHub).
+        "$PREFIX/bin/pip" uninstall -y hybrid-cli-ai >/dev/null 2>&1
+        rm -rf "$HOME/.local/share/hybrid-cli-ai" 2>/dev/null
+        mkdir -p "$HOME/.local/share/iH-ai"
+        [[ -f "$HOME/.local/libexec/iH-ai-shell.py" ]] || \
+            { echo "(_>) Missing iH-ai-shell.py (reinstall i-Haklab)"; exit 1; }
         ;;
 
     testsprite)
