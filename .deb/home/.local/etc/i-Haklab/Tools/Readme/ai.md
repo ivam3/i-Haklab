@@ -1,4 +1,4 @@
-# AI (hybrid-cli-ai)
+# AI
 
 ## ¿Qué es AI?
 
@@ -18,7 +18,7 @@ AI es útil para:
 
 ## ¿Cómo se usa? (Ejemplos básicos)
 
-El wrapper se auto-instala en el primer uso (clona e instala `hybrid-cli-ai` y garantiza el modelo `qwen2.5-coder:1.5b`).
+El wrapper viene incluido con i-Haklab (sin descargas externas) y garantiza el modelo `qwen2.5-coder:1.5b`.
 
 **Ejemplo 1: Uso básico (por defecto agrega `--model qwen2.5-coder:1.5b --run`)**
 
@@ -56,11 +56,10 @@ ai --history
 ai --clear-history
 ```
 
-**Ejemplo 6: Deshabilitar / rehabilitar**
+**Ejemplo 6: Deshabilitar (limpia el historial)**
 
 ```bash
 ai disable
-ai "lista los archivos de ~/"   # lo vuelve a instalar automáticamente
 ```
 
 ## Consideraciones Adicionales

@@ -1,19 +1,18 @@
 #!/data/data/com.termux/files/usr/bin/bash
-# i-Haklab AI Wrapper (Bash version) - hybrid-cli-ai
-# Asistente IA: lenguaje natural -> comando de terminal (ollama local / groq cloud)
+# i-Haklab AI Wrapper (Bash version)
+# AI assistant: natural language -> terminal command (local ollama / groq cloud)
 
 source ${HOME}/.local/etc/i-Haklab/functions
 
-# GROQ_API_KEY: usa la clave configurada con `i-Haklab setapikey` (groq -> APIKEY_groq)
+# GROQ_API_KEY: uses the key stored via `i-Haklab setapikey` (groq -> APIKEY_groq)
 if [[ -z "$GROQ_API_KEY" ]]; then
     export GROQ_API_KEY="$(grep '^export APIKEY_groq=' "$HOME/.local/etc/i-Haklab/variables" 2>/dev/null | head -1 | cut -d'"' -f2)"
 fi
 
-REPO="$HOME/.local/share/hybrid-cli-ai"
-BIN="$PREFIX/lib/bin/ai"
+VENDOR="$HOME/.local/libexec/iH-ai-shell.py"
 MODEL="qwen2.5-coder:1.5b"
 
-IHK_CTX="Contexto i-Haklab (suite sobre Termux): comando principal 'i-Haklab <sub>' con subcomandos help, about <tool>, show alltools, setapikey, setbanner, setshell, setuser, chatAI, backup, aptup, ngroklink, ngrokssh, tunnel, servers4test, Xwayland. Wrappers en ~/.local/bin que reemplazan comandos estandar: apt/npm/pnpm (instalan herramientas), bat (cat), nls (ls), glow (md), df, du, proxy (tor), pm, cmd, fixer, rmcache. Para instalar una herramienta: apt install <tool>. Documentacion: i-Haklab about <tool>. Menu: i-Haklab help."
+IHK_CTX="i-Haklab context (Termux-based suite): main command 'i-Haklab <sub>' with subcommands help, about <tool>, show alltools, setapikey, setbanner, setshell, setuser, chatAI, backup, aptup, ngroklink, ngrokssh, tunnel, servers4test, Xwayland. Wrappers in ~/.local/bin replacing standard commands: apt/npm/pnpm (install tools), bat (cat), nls (ls), glow (md), df, du, proxy (tor), pm, cmd, fixer, rmcache. To install a tool: apt install <tool>. Docs: i-Haklab about <tool>. Menu: i-Haklab help."
 
 if [[ "$1" == "disable" ]]; then
     bash "$HOME/.local/libexec/cleanup" ai
@@ -35,52 +34,31 @@ prompt=("${filtered[@]}")
 
 if [[ ${#prompt[@]} -eq 0 ]]; then
     chk-pkg termux-dialog termux-api
-    echo "(_>) Habla ahora ..."
+    echo "(_>) Speak now ..."
     text=$(termux-dialog speech 2>/dev/null | jq -r '.text' 2>/dev/null)
     if [[ -z "$text" || "$text" == "null" ]]; then
-        echo "(_>) Se requiere la app 'Termux:API' (termux-api.apk) instalada y el permiso de microfono habilitado."
+        echo "(_>) The 'Termux:API' app (termux-api.apk) with microphone permission is required."
         exit 1
     fi
     prompt=("$text")
 fi
 
-if [[ ! -x "$BIN" ]]; then
+if [[ ! -f "$VENDOR" ]]; then
     bash "$HOME/.local/libexec/preconf" ai
-    [[ -x "$BIN" ]] || { echo "(_>) Fallo la instalacion de hybrid-cli-ai"; exit 1; }
+    [[ -f "$VENDOR" ]] || { echo "(_>) Missing vendored backend iH-ai-shell.py"; exit 1; }
 fi
 
-# Auto-parche Termux (idempotente): el tool detecta Termux y ajusta su system prompt
-python - "$REPO" <<'PYEOF'
-import sys
-from pathlib import Path
+PYBIN="$VENDOR"
 
-repo = Path(sys.argv[1])
-
-u = repo / "utils.py"
-s = u.read_text()
-marker = 'os.environ.get("PREFIX") or os.path.exists("/data/data/com.termux")'
-if marker not in s:
-    s = s.replace(
-        '    else:\n        return "linux"',
-        '    else:\n'
-        '        if os.environ.get("PREFIX") or os.path.exists("/data/data/com.termux"):\n'
-        '            return "termux"\n'
-        '        return "linux"',
-        1,
-    )
-    u.write_text(s)
-
-e = repo / "ai_engine.py"
-s = e.read_text()
-if '"termux":' not in s:
-    anchor = '    "linux": "Environment: Linux terminal (bash/zsh). Use standard GNU/Linux commands: ls, grep, find, curl, etc.",\n}'
-    termux = anchor[:-1] + '    "termux": "Environment: Termux on Android (no root). $PREFIX=/data/data/com.termux/files/usr, $HOME=/data/data/com.termux/files/home. No sudo, no /usr/bin/env; /etc/passwd is empty and files outside $PREFIX/$HOME do not exist. Package manager: apt (via pkg). Example: \'install nmap\' -> \'pkg install nmap\'. i-Haklab suite: \'i-Haklab <sub>\' (help, about <tool>, show alltools, setapikey); wrappers apt/npm/pnpm install tools; install a tool -> \'apt install <tool>\'. Use real paths under $PREFIX and $HOME.",\n}'
-    s = s.replace(anchor, termux, 1)
-    e.write_text(s)
-PYEOF
+# Non-AI commands (help/history) need neither ollama nor a model.
+case "${prompt[0]}" in
+    --help|-h|--history|-H|--clear-history)
+        exec python3 "$PYBIN" "${prompt[@]}"
+        ;;
+esac
 
 if ! curl -s --max-time 2 http://127.0.0.1:11434/api/tags >/dev/null 2>&1; then
-    command -v ollama >/dev/null || { echo "(_>) ollama no esta instalado"; exit 1; }
+    command -v ollama >/dev/null || { echo "(_>) ollama is not installed"; exit 1; }
     echo "(_>) Starting ollama server ..."
     nohup ollama serve >/dev/null 2>&1 &
     for _ in $(seq 1 15); do
@@ -93,12 +71,6 @@ if ! ollama list 2>/dev/null | grep -q "$MODEL"; then
     echo "(_>) Pulling $MODEL ..."
     ollama pull "$MODEL"
 fi
-
-case "${prompt[0]}" in
-    --help|-h|--history|-H|--clear-history)
-        exec "$BIN" "${prompt[@]}"
-        ;;
-esac
 
 joined=$(printf '%s' "${prompt[*]}")
 if printf '%s' "$joined" | grep -Eiq 'i-haklab|ihaklab|setapikey|helpper|alltools|wrapper|documentacion|apikey|clave de|groq'; then
@@ -117,4 +89,4 @@ done
 [[ "$has_model" == false ]] && args+=(--model "$MODEL")
 [[ "$no_run" == false ]] && args+=(--run)
 
-exec "$BIN" "${args[@]}"
+exec python3 "$PYBIN" "${args[@]}"
