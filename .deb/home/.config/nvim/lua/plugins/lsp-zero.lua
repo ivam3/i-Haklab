@@ -4,6 +4,11 @@ require('mason-lspconfig').setup({
 })
 
 local lsp_servers = {
+  jdtls = {
+        cmd = { 'jdtls' }, -- :MasonInstall jdtls
+        filetypes = { 'java' },
+        root_dir = require('lspconfig.util').root_pattern('pom.xml', 'build.gradle', '.git'),
+    },
   bashls = {
     cmd = { 'bash-language-server', 'start' },
     filetypes = { 'bash', 'sh' },
