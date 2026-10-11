@@ -1,36 +1,164 @@
 #!/data/data/com.termux/files/usr/bin/bash
-# This file contain all i-Haklab enviroment variables
+# ============================================================================
+# i-Haklab — Variables de entorno
+# Ubicación: ~/.local/etc/i-Haklab/envvariables
+# User:
+# ============================================================================
 
-# Environment Variables
-export DISPLAY=:0
+# ----------------------------------------------------------------------------
+# 1. Identidad / Sesión
+# ----------------------------------------------------------------------------
 export USER=i-Haklab
+export DISPLAY=:0
 export GPG_TTY=$(tty)
-export GYP_DEFINES="android_ndk_path=''"
+# Evita que algunos programas intenten abrir un navegador gráfico ausente
+export BROWSER=${BROWSER:-termux-open-url}
 
-# IMPORTANT: .local/bin FIRST to intercept 'apt', 'npm' and 'pnpm' invisible wrappers
+# ----------------------------------------------------------------------------
+# 2. HOME y PATH
+# ----------------------------------------------------------------------------
 test -n "$HOME" || export HOME=/data/data/com.termux/files/home
+# IMPORTANTE: .local/bin PRIMERO para interceptar wrappers de 'apt', 'npm', 'pnpm'
 export PATH="$HOME/.local/bin:$HOME/go/bin:$HOME/.local/share/pnpm/bin:$PREFIX/lib/bin:$PREFIX/bin"
+export TOOLS=$HOME/.local/share
+
+# ----------------------------------------------------------------------------
+# 3. Go
+# ----------------------------------------------------------------------------
 export GOPATH=$HOME/go
 export GOROOT=/data/data/com.termux/files/usr/lib/go
 export GOCACHE="$HOME/.cache/go"
 export GOMODCACHE="$GOPATH/pkg/mod"
+
+# ----------------------------------------------------------------------------
+# 4. Java
+# ----------------------------------------------------------------------------
 export JAVA_HOME=/data/data/com.termux/files/usr/lib/jvm/java-21-openjdk
-export LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib
-export LLVM_BUILD=/data/data/com.termux/files/usr/lib
-export LLVM_HOME=/data/data/com.termux/files/usr/lib/cmake/llvm
-export CFLAGS=" -Wno-incompatible-function-pointer-types"
+
+export PATH="$JAVA_HOME/bin:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH"
+
+export ANDROID_SDK_ROOT="$ANDROID_HOME"
+# ----------------------------------------------------------------------------
+# 5. Compiladores C/C++ (clang por defecto en Termux)
+# ----------------------------------------------------------------------------
 export CC=clang
 export CXX=clang++
+export CFLAGS=" -Wno-incompatible-function-pointer-types"
+export LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib
+
+# ----------------------------------------------------------------------------
+# 6. LLVM
+# ----------------------------------------------------------------------------
+export LLVM_BUILD=/data/data/com.termux/files/usr/lib
+export LLVM_HOME=/data/data/com.termux/files/usr/lib/cmake/llvm
+
+# ----------------------------------------------------------------------------
+# 7. Android / NDK
+# ----------------------------------------------------------------------------
 export ANDROID_NDK_HOME=/data/data/com.termux/files/usr
+export ANDROID_HOME="$HOME/Android/sdk"
 export ANDROID_ALLOW_UNDEFINED_SYMBOLS=On
-export TOOLS=$HOME/.local/share
 export ANDROID_API_LEVEL=24
+
+# ----------------------------------------------------------------------------
+# 8. Node / pnpm / npm
+# ----------------------------------------------------------------------------
+export NPM_CONFIG_PREFIX=$HOME/.local
+export PNPM_HOME=$HOME/.local/share/pnpm
+export NODE_PATH=$HOME/.local/lib/node_modules
+# Fuerza a Node a no salirse del prefijo cuando se instala globalmente
+export NPM_CONFIG_USERCONFIG=$HOME/.npmrc
+
+# ----------------------------------------------------------------------------
+# 9. Python / pip
+# ----------------------------------------------------------------------------
+export PYTHONUSERBASE=$HOME/.local
+export PIP_USER=1
+# Evita que pip intente usar ruedas precompiladas incompatibles con Android
+export PIP_NO_BINARY=:all:  # coméntalo si alguna instalación falla y quieres probar wheels
+export PATH="$HOME/.local/bin:$PATH"  # refuerzo por si PIP_USER instala scripts aquí
+
+# ----------------------------------------------------------------------------
+# 10. Rust / Cargo
+# ----------------------------------------------------------------------------
+export CARGO_HOME=$HOME/.cargo
+export RUSTUP_HOME=$HOME/.rustup
+export PATH="$CARGO_HOME/bin:$PATH"
+
+# ----------------------------------------------------------------------------
+# 11. Git / GPG
+# ----------------------------------------------------------------------------
+export GIT_EDITOR=${GIT_EDITOR:-nvim}
+export GIT_PAGER=${GIT_PAGER:-less}
+# Ayuda en repos con nombres unicode en Termux
+export LANG=${LANG:-en_US.UTF-8}
+export LC_ALL=${LC_ALL:-en_US.UTF-8}
+
+# ----------------------------------------------------------------------------
+# 12. Neovim / XDG (mantiene limpio ~/.config y ~/.local/share)
+# ----------------------------------------------------------------------------
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
+export XDG_STATE_HOME=${XDG_STATE_HOME:-$HOME/.local/state}
+export NVIM_APPNAME=${NVIM_APPNAME:-nvim}
+
+export XDG_RUNTIME_DIR="$PREFIX/tmp"
+# ----------------------------------------------------------------------------
+# 13. Ollama (IA local)
+# ----------------------------------------------------------------------------
+export OLLAMA_HOST=${OLLAMA_HOST:-127.0.0.1:11434}
+# Descomenta si quieres que Ollama use una carpeta específica para modelos:
+# export OLLAMA_MODELS=$HOME/.ollama/models
+
+# ----------------------------------------------------------------------------
+# 14. VS Code Server (si lo usas)
+# ----------------------------------------------------------------------------
 export VSCODE_EXTENSIONS_DIR=$HOME/.local/share/code-server/extensions
 
+# ----------------------------------------------------------------------------
+# 15. Miscelánea / Compilación genérica
+# ----------------------------------------------------------------------------
+export GYP_DEFINES="android_ndk_path=''"
+# Reduce ruido de compiladores
+export CXXFLAGS="$CFLAGS"
+# tmp por si algún programa se empeña en usar /tmp (no existe en Termux)
+export TMPDIR=${TMPDIR:-$PREFIX/tmp}
+export TEMP=$TMPDIR
+export TMP=$TMPDIR
+
+# ============================================================================
 # Aliases
+# ============================================================================
+# --- Listados ---
 alias la="ls -a"
 alias ll="ls -l"
+alias lt="ls -lt"                 # ordenado por fecha
+alias l="ls -lah"                 # formato largo + humano
+
+# --- Disco ---
 alias du="du -hP"
 alias df="duf"
+
+# --- Visores ---
 alias bat="bat -f --theme 'Visual Studio Dark+'"
+alias less="less -R"
+
+# --- PostgreSQL ---
 alias postgresql="pg_ctl -D /data/data/com.termux/files/usr/var/lib/postgresql"
+
+# --- Git ---
+alias gs="git status -sb"
+alias ga="git add"
+alias gc="git commit -m"
+alias gp="git push"
+alias gl="git log --oneline --graph --decorate -20"
+
+# --- Neovim ---
+alias v="nvim"
+alias vim="nvim"
+
+# --- Utilidades ---
+alias grep="grep --color=auto"
+alias reload="source ~/.zshrc"
+alias envvars="source ~/.local/etc/i-Haklab/envvariables"
