@@ -95,20 +95,20 @@ case "$1" in
 
     @github/copilot)
         loaderFile="${PREFIX}/lib/node_modules/@github/copilot/npm-loader.js"
-        # Fix 1: npm omite optionalDeps os=linux en android (EBADPLATFORM) -> forzar glibc arm64 misma version que el wrapper
+        # Fix 1: npm skips os=linux optionalDeps on android (EBADPLATFORM) -> force glibc arm64 matching the wrapper version
         if [[ -f "${PREFIX}/lib/node_modules/@github/copilot/package.json" ]]; then
             copilotVer="$(grep '"version"' "${PREFIX}/lib/node_modules/@github/copilot/package.json" | head -1 | cut -d'"' -f4)"
             if [[ -n "$copilotVer" ]] && [[ ! -d "${PREFIX}/lib/node_modules/@github/copilot-linux-arm64" ]]; then
                 "$PREFIX/bin/npm" install -g --force "@github/copilot-linux-arm64@${copilotVer}" >>"$LOGFILE" 2>&1
             fi
-            # resto musl (177MB, pide /lib/ld-musl inexistente) -> fuera
+            # leftover musl build (177MB, requires missing /lib/ld-musl) -> remove
             [[ -d "${PREFIX}/lib/node_modules/@github/copilot-linuxmusl-arm64" ]] && \
                 "$PREFIX/bin/npm" uninstall -g @github/copilot-linuxmusl-arm64 >>"$LOGFILE" 2>&1
         fi
-        # Fix 2: android->linux + spawn via glibc loader sin LD_PRELOAD (idempotente, con migracion)
-        # libtermux-exec declara NEEDED [libc.so] (estilo Bionic); si el loader glibc lo preloads,
-        # resuelve libc.so al script de texto de GNU ld -> "invalid ELF header". Se elimina solo
-        # para el proceso glibc; los hijos Termux de node conservan su env intacto.
+        # Fix 2: android->linux + spawn via glibc loader without LD_PRELOAD (idempotent, with migration)
+        # libtermux-exec declares NEEDED [libc.so] (Bionic style); if the glibc loader preloads it,
+        # it resolves libc.so to the GNU ld text script -> "invalid ELF header". Stripped only
+        # for the glibc process; Termux children of node keep their env untouched.
         if [[ -f "$loaderFile" ]] && { ! grep -q 'process.platform==="android")return\["linux"\]' "$loaderFile" || ! grep -q 'delete e\.LD_PRELOAD' "$loaderFile"; }; then
             cp -f "$loaderFile" "${loaderFile}.bak"
             python3 - "$loaderFile" <<'PY'
@@ -130,7 +130,7 @@ PY
         fi
         # Fix shebang for Termux (upstream ships #!/usr/bin/env node)
         [[ -f "$loaderFile" ]] && termux-fix-shebang "$loaderFile"
-        echo "[✔] copilot fix android->linux aplicado (glibc loader)"
+        echo "[✔] copilot android->linux fix applied (glibc loader)"
         echo " ╰─➤ copilot --version"
         ;;
 
