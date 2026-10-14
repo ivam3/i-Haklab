@@ -131,7 +131,6 @@ PY
         # Fix shebang for Termux (upstream ships #!/usr/bin/env node)
         [[ -f "$loaderFile" ]] && termux-fix-shebang "$loaderFile"
         echo "[✔] copilot android->linux fix applied (glibc loader)"
-        echo " ╰─➤ copilot --version"
         ;;
 
     @testsprite/testsprite-mcp)
