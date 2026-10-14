@@ -93,6 +93,47 @@ case "$1" in
         echo "[📢] substitute 'agentAI' with your agent name"
         ;;
 
+    @github/copilot)
+        loaderFile="${PREFIX}/lib/node_modules/@github/copilot/npm-loader.js"
+        # Fix 1: npm omite optionalDeps os=linux en android (EBADPLATFORM) -> forzar glibc arm64 misma version que el wrapper
+        if [[ -f "${PREFIX}/lib/node_modules/@github/copilot/package.json" ]]; then
+            copilotVer="$(grep '"version"' "${PREFIX}/lib/node_modules/@github/copilot/package.json" | head -1 | cut -d'"' -f4)"
+            if [[ -n "$copilotVer" ]] && [[ ! -d "${PREFIX}/lib/node_modules/@github/copilot-linux-arm64" ]]; then
+                "$PREFIX/bin/npm" install -g --force "@github/copilot-linux-arm64@${copilotVer}" >>"$LOGFILE" 2>&1
+            fi
+            # resto musl (177MB, pide /lib/ld-musl inexistente) -> fuera
+            [[ -d "${PREFIX}/lib/node_modules/@github/copilot-linuxmusl-arm64" ]] && \
+                "$PREFIX/bin/npm" uninstall -g @github/copilot-linuxmusl-arm64 >>"$LOGFILE" 2>&1
+        fi
+        # Fix 2: android->linux + spawn via glibc loader sin LD_PRELOAD (idempotente, con migracion)
+        # libtermux-exec declara NEEDED [libc.so] (estilo Bionic); si el loader glibc lo preloads,
+        # resuelve libc.so al script de texto de GNU ld -> "invalid ELF header". Se elimina solo
+        # para el proceso glibc; los hijos Termux de node conservan su env intacto.
+        if [[ -f "$loaderFile" ]] && { ! grep -q 'process.platform==="android")return\["linux"\]' "$loaderFile" || ! grep -q 'delete e\.LD_PRELOAD' "$loaderFile"; }; then
+            cp -f "$loaderFile" "${loaderFile}.bak"
+            python3 - "$loaderFile" <<'PY'
+import sys
+p = sys.argv[1]
+s = open(p).read()
+NEW_U = 'function u(r,t){if(process.platform==="android"){const e={...process.env};delete e.LD_PRELOAD;return o("/data/data/com.termux/files/usr/glibc/lib/ld-linux-aarch64.so.1",["--library-path","/data/data/com.termux/files/usr/glibc/lib",r,...t],{stdio:"inherit",env:e})}return o(r,t,{stdio:"inherit"})}'
+OLD_U = 'function u(r,t){if(process.platform==="android"){return o("/data/data/com.termux/files/usr/glibc/lib/ld-linux-aarch64.so.1",["--library-path","/data/data/com.termux/files/usr/glibc/lib",r,...t],{stdio:"inherit"})}return o(r,t,{stdio:"inherit"})}'
+if ',n=u(r,process.argv.slice(2))' not in s:
+    s = s.replace(',n=o(r,process.argv.slice(2),{stdio:"inherit"})', ',n=u(r,process.argv.slice(2))')
+if OLD_U in s:
+    s = s.replace(OLD_U, NEW_U)
+elif 'function u(r,t)' not in s:
+    s = s.replace('function s(t,r){', NEW_U + 'function s(t,r){')
+if 'process.platform==="android")return["linux"]' not in s:
+    s = s.replace('function c(){return process.platform==="linux"', 'function c(){if(process.platform==="android")return["linux"];return process.platform==="linux"')
+open(p, 'w').write(s)
+PY
+        fi
+        # Fix shebang for Termux (upstream ships #!/usr/bin/env node)
+        [[ -f "$loaderFile" ]] && termux-fix-shebang "$loaderFile"
+        echo "[✔] copilot fix android->linux aplicado (glibc loader)"
+        echo " ╰─➤ copilot --version"
+        ;;
+
     @testsprite/testsprite-mcp)
         indexFile="${PREFIX}/lib/node_modules/@testsprite/testsprite-mcp/dist/index.js"
         termux-fix-shebang "$indexFile"
