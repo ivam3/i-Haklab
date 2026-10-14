@@ -18,7 +18,8 @@ install_wrapper() {
         case "$yesornot" in
             y|Y|yes|YES)
                 eval "$method $pkg"
-                ih_pkg2conf "$pkg"
+                # npm wrapper already runs ih_pkg2conf; skip to avoid double run
+                [[ "$method" == npm* ]] || ih_pkg2conf "$pkg"
                 break
                 ;;
 
