@@ -155,12 +155,12 @@ helpper() {
             $Y[--] Setting Options [--]$W
 _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 ╰─about──────+──<name─of─tool>───➤ Show informations about tool/framework
-|                     ╰example───{─i-Haklab about crunch─}
+|                     ╰───────ex─{─i-Haklab about crunch─}
 ╰─aptup──────➤───────────────────➤ Update termux manually, packages by packages
 ╰─help───────➤───────────────────➤ Show this help menu
 ╰─passwd─────+────set─|─new──────➤ Set and change the login termux
-|                 ╰─────|────ex──{─i-Haklab passwd set──➤ password|fingerprint
-|                       ╰────ex──{─i-Haklab passwd new─➤ get a new password
+|                 ╰─────|─────ex─{─i-Haklab passwd set──➤ password|fingerprint
+|                       ╰─────ex─{─i-Haklab passwd new─➤ get a new password
 ╰─pd─────────➤─<distro─X11─list>─➤ Run linux distribution in proot enviroment.
 |                  ╰─────|──|─ex─{─i-Haklab pd alpine──➤ for only CLi
 |                        ╰──|─ex─{─i-Haklab pd alpine X11──➤ for graphical enviroment
@@ -180,6 +180,10 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 |            |                   |
 $Y       [--] Automatitation Options [--]$W
 _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
+╰4share─────➤───<server─name>────➤ Init web server for share files remotely and securely
+|    ╰─────────────────|─────────{─Default credentials = Admin:password─}
+|                      ╰─────────{─servers names: localtunnel, localhost.run and cloudflared─}
+|                      ╰──────ex─{─i─Haklab 4share localtunnel─}
 ╰apkactivity─+─<path─to─apk─file>➤ Get the main activity from .apk file
 |                                |
 ╰androforensic─<option>─<target>─➤ Extract several information from android devices via ADB.
@@ -187,30 +191,27 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 |     ╰────────────airscope──────➤ Wi-Fi radar for Android devices via ADB
 |     ╰─────────────dumpsys──────➤ Dump several system information from target android device via ADB
 |     ╰─────────────extract──────➤ ADB Data Extraction & System Snapshot Script
-|                      ╰─example─{─i-Haklab androforensic dumpsys 192.168.1.58:41771
+|                      ╰──────ex─{─i-Haklab androforensic dumpsys 192.168.1.58:41771
 |                                |
 ╰backup──────+──create|restore───➤ Create a backup of Termux or restore it
-|                  |    ╰example─{─i-Haklab restore path/to/file.tar.gz
-|                  ╰─example─────{─i-Haklab create <in/ex> [in=internal ex=external sdcard]
+|                  |    ╰─────ex─{─i-Haklab restore path/to/file.tar.gz
+|                  ╰──────────ex─{─i-Haklab create <in/ex> [in=internal ex=external sdcard]
 ╰binchecker──➤───────────────────➤ Get informacion about BINs (CC,DC)
 |                                |
 ╰bruteforce─+─ftp|mail|ssh|telnet➤ Brute force attack at several servers.
-|    ╰───example─for─ftp─────────{─i-Haklab bruteforce ftp
-|    ╰───example─for─mail────────{─i-Haklab bruteforce mail ivam3@live.com, gmail or live.com
+|              ╰────|─────────ex─{─i-Haklab bruteforce ftp
+|                   ╰─────────ex─{─i-Haklab bruteforce mail ivam3@live.com, gmail or live.com
 |                                |
-╰chatAI────➤───<--help/-h>──────➤ Connect with OpenAi API to interact with ChatGPT-3 via CLi.
-|    |               ╰──example──{─i-Haklab chatAI -h [setting options]
-|    ╰───example─────────────────{─i-Haklab chatAI
+╰chatAI────➤────<--help/-h>──────➤ Connect with OpenAi API to interact with ChatGPT-3 via CLi.
+|    |               ╰────────ex─{─i-Haklab chatAI -h [setting options]
+|    ╰────────────────────────ex─{─i-Haklab chatAI
 ╰ESmsg──────+──encode/decode─────➤ Encode|decode secret message into a ASCII file.
-|                    ╰──example──{─i-Haklab ESmsg <encode/decode-}
-|                                |
-╰tunnel─────+─<port─+─subdomain>─➤ Start a SSH client to request TCP port forwarding
-|    ╰───example─────────────────{─i-Haklab tunnel -p 4444 -s my-subdomain-}
+|                    ╰────────ex─{─i-Haklab ESmsg <encode/decode-}
 |                                |
 ╰handler────+─<name─of─file.rc>──➤ Start handler on msfconsole with previous setting
 |                                |
 ╰msf────────+─dirscan─+─IPtarget─➤ Enumerate directories/subdirecotires from a server.
-| |             ╰──example───────{─i-Haklab msf dirscan 10.10.10.242-}
+| |             ╰─────────────ex─{─i-Haklab msf dirscan 10.10.10.242-}
 | ╰─────────+─embed──────────────➤ Embed a metasploit payload into legitim apk file.
 | |             ╰─ex─for─outlan──{─i-Haklab msf embed 6.tcp.ngrok.io 4546 /path/to/file.apk
 | ╰─────────+─payapk─+─tun0:port─➤ Create a coded payload .apk
@@ -224,25 +225,29 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 ╰ngroklink──➤────────────────────➤ Show the current ngrok link
 |                                |
 ╰ngrokssh───➤─port+protocol+file─➤ Connect with ngrok servers via SSH protocol
-|                   ╰──example─1─{─i-Haklab ngrokssh -p 4546 -t http -f path/to/specific/id_rsa-file
-|                   ╰──example─2─{─i-Haklab ngrokssh -p 8080 -t tcp (default file:\$HOME/.ssh/id_rsa)
+|   ╰────────────────────────ex1─{─i-Haklab ngrokssh -p 4546 -t http -f path/to/specific/id_rsa-file
+|   ╰────────────────────────ex2─{─i-Haklab ngrokssh -p 8080 -t tcp (default file:\$HOME/.ssh/id_rsa)
 |                                |
 ╰phonescan──+─<phonenumber>──────➤ A phone number information scaner
-|                   ╰──example───{─i-Haklab phonescan 525584923476─}
+|                   ╰─────────ex─{─i-Haklab phonescan 525584923476─}
 |                                |
 ╰qemufy─────+─<file.zip/rm>──────➤ Convert ova files and run a QEMU virtual machine over Termux(no root).
 |    ╰──────────────|───|────────{─i-Haklab qemufy─}
-|                   |   ╰example─{─i-Haklab qemufy rm [remove image file]─}
-|                   ╰──example───{─i-Haklab qemufy VM_image.zip [create a new image file]─}
+|                   |   ╰─────ex─{─i-Haklab qemufy rm [remove image file]─}
+|                   ╰─────────ex─{─i-Haklab qemufy VM_image.zip [create a new image file]─}
 |                                |
 ╰servers4test────────────────────➤ Init deliberately insecure web application for pentesting.
 |                                |
-╰4share─────➤───<server─name>────➤ Init web server for share files remotely and securely
-|    ╰─────────────────|─────────{─Default credentials = Admin:password─}
-|                      ╰─────────{─servers names: localtunnel, localhost.run and cloudflared─}
-|                      ╰─example─{─i─Haklab 4share localtunnel─}
+╰tunnel─────+─<port─+─subdomain>─➤ Start a SSH client to request TCP port forwarding
+|    ╰────────────────────────ex─{─i-Haklab tunnel -p 4444 -s my-subdomain-}
+|                                |
+╰txt2media──+─<-t text/-f file>──➤ Text to speech (Edge-TTS neural voices) + merge audio into video for shorts
+|   |        ╰───────────────ex1─{─i-Haklab txt2media -t \"hola mundo\" -o short01─}
+|   |               ╰────────ex2─{─i-Haklab txt2media -f nota.txt -o short02 -v es-MX-JorgeNeural─}
+|   ╰────────────────────────ex3─{─i-Haklab txt2media --video base.mp4 --audio short01.mp3 -o final.mp4─}
+|                                |
 ╰usbtest────➤─<path-to-device>───➤ Test usb device connected via OTG 
-|                   ╰─example────{─i-Haklab usbtest /dev/bus/usb/001─}
+|                   ╰─────────ex─{─i-Haklab usbtest /dev/bus/usb/001─}
 |───────────|────────────────────|
 |───────────|────────────────────|
 $Y          [--] DIRECT COMMANDS [--]
@@ -250,8 +255,8 @@ $W  Those commands do not need the i-Haklab command
              Just type the command.
 _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰ai──────────────────────────────➤ Asistente IA: lenguaje natural → comando de terminal (ollama/groq)
-| ╰example─text──────────────────{─ai \"lista los archivos de ~/\"}
-| ╰example─voice─────────────────{─ai -v (voice) | ai --no-run (voice+suggest) | ai "..." --no-run | ai disable─}
+| ╰──────────────────────────ex1─{─ai \"lista los archivos de ~/\"}
+| ╰──────────────────────────ex2─{─ai -v (voice) | ai --no-run (voice+suggest) | ai "..." --no-run | ai disable─}
 ╰apt─────────────────────────────➤ Install/remove and configure packages/tools/frameworks
 ╰adminfiles──────────────────────➤ Copy any file from internal/external storage at termux directory
 ╰bat─────────────────────────────➤ Use it instead of command 'cat' for text highlighting
@@ -266,17 +271,17 @@ _$Y        COMMAND$W                 |$Y    DESCRIPTION$W
 ╰lock────────────────────────────➤ Block Termux's screen
 ╰mypip───────────────────────────➤ Show your public internet protocol
 ╰net-traffic-scan────────────────➤ Network traffic monitor via ADB (grid, history & fallback)
-|  ╰──────────────────example─1──{─net-traffic-scan --once --grid (run 1 cycle)─}
-|  ╰──────────────────example─2──{─net-traffic-scan --no-grid (show result without grid[raw])─}
-|  ╰──────────────────example─3──{─net-traffic-scan --dry-run (test adb conection)─}
+|  ╰─────────────────────────ex1─{─net-traffic-scan --once --grid (run 1 cycle)─}
+|  ╰─────────────────────────ex2─{─net-traffic-scan --no-grid (show result without grid[raw])─}
+|  ╰─────────────────────────ex3─{─net-traffic-scan --dry-run (test adb conection)─}
 ╰nls─────────────────────────────➤ Use it instead of command 'ls' for text in boxes/grid
 ╰openvpn─────────────────────────➤ Open openvpn application
 ╰omf─────────────────────────────➤ Change Oh-my-fish theme
 ╰phantom─ps──────────────────────➤ Manage phantom processes limit — validate, set, persist or restore
 |  ╰─────────────────────────────{ Screen division with developer options required}
-|  ╰──────────────────example─1──{─phantom-ps (validate, if !=32 → 2147483647)─}
-|  ╰──────────────────example─2──{─phantom-ps --set <32 at 2147483647> --always (persistent)─}
-|  ╰──────────────────example─3──{─phantom-ps --restore (per API, remove persistent)─}
+|  ╰─────────────────────────ex1─{─phantom-ps (validate, if !=32 → 2147483647)─}
+|  ╰─────────────────────────ex2─{─phantom-ps --set <32 at 2147483647> --always (persistent)─}
+|  ╰─────────────────────────ex3─{─phantom-ps --restore (per API, remove persistent)─}
 ╰pm──────────────────────────────➤ For android packages mannager 
 ╰postgresql──────────────────────➤ Start, stop or restart postgres data base
 ╰proxy───────────────────────────➤ Execute cli commands over tor proxychains

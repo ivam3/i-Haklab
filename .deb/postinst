@@ -165,28 +165,20 @@ if [[ -s ${TMPDIR}/.ihabak-apikeys ]]; then
   rm -f "${TMPDIR}/.ihabak-apikeys"
 fi
 
-echo -en "[deleted]
+echo -en "[updates]
+    ╰──➤ New features:
+    |\t\t• i-Haklab txt2media (convert text to multimedia{mp3/mp4})
+    ╰──➤ New direct commands:
+    |\t\t• ttyd (run termux in browser)
+    |\t\t• walkie-tg - connect walkie server at telegram bot
+    |\t\t• net-traffic-scan (bypass netstat blocked by untrusted_app)
+[deleted]
     ╰──➤ Commands:
     |\t\t• i-Haklab chatGPT (changed at 'chatAI')
     |\t\t• i-Haklab weechat (deprecated)
-[updates]
-    ╰──➤ Commands recently added:
-    |\t\t• qemufy
-    |\t\t• phantom-ps
-    |\t\t• ttyd (run termux in browser)
-    |\t\t• i-Haklab chatAI (before 'chatGPT')
-    |\t\t• walkie-tg - connect walkie server at telegram bot
-    |\t\t• net-traffic-scan (bypass netstat blocked by untrusted_app)
-    ╰──➤ New features:
-    |\t\t• shell: now i-Haklab works over shells fish, zsh & bash\n    |\t\t\t   run 'i-Haklab setshell' to set it
-    |\t\t• chatAI: Mannage 2+ chats | create image | remember conversation\n    |\t\t\t  LLM availables: 
-    |\t\t\t\t╰──➤ OpenAI
-    |\t\t\t\t╰──➤ Gemini
-    |\t\t\t\t╰──➤ Deepseek
-    |\t\t\t\t╰──➤ MistralAI
-    |\t\t\t\t╰──➤ Ollama
-    |\t\t• Into neovim: type 'alter', 'comma', 'ca' | (alt + , + n) to use AI
 [Artificial Intellient]
+    ╰──➤ Vibe coding:
+    |\t\t• Into neovim: type 'alter', 'comma', 'ca' | (alt + , + n) to use AI
     ╰──➤ Agents:
     |\t\t• N8N
     |\t\t• Opencode

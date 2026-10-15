@@ -1,0 +1,181 @@
+#!/data/data/com.termux/files/usr/bin/bash
+#This file is part of i-Haklab command
+# txt2media - Text to speech (Edge-TTS) + merge audio into video for shorts
+# Merges voz-short.sh + unir-video.sh from the voz-shorts project
+# Usage:
+#   i-Haklab txt2media -t "Hello world" -o greeting [-v voice] [-r rate]
+#   i-Haklab txt2media -f text.txt -o short01 [-v es-MX-JorgeNeural]
+#   i-Haklab txt2media --video base.mp4 --audio short01.mp3 -o final.mp4
+#   i-Haklab txt2media -l | -h
+# Exports to: $HOME/.local/share/txt2media/{texts,audios,videos/} + ~/storage/music + Movies
+IFS=$'\n\t'
+trap ctrl_c 2
+source ${HOME}/.local/etc/i-Haklab/variables
+source $iHETC/functions
+
+BASE="$TOOLS/txt2media"
+TEXTDIR="$BASE/texts"
+AUDDIR="$BASE/audios"
+VIDDIR="$BASE/videos"
+MUSIC="$HOME/storage/music"
+MOVIES="$HOME/storage/shared/Movies"
+[[ -d "$MOVIES" ]] || MOVIES="$HOME/storage/movies"
+
+mkdir -p "$TEXTDIR" "$AUDDIR" "$VIDDIR" "$MUSIC" "$MOVIES" 2>/dev/null
+
+VOICE_DEFAULT="es-MX-DaliaNeural"
+RATE_DEFAULT="+10%"
+
+usage(){
+  banner 2>/dev/null
+  printf '%b USAGE:%b i-Haklab txt2media [options]\n\n' "$Y" "$W"
+  printf '%bTTS (text -> mp3):%b\n' "$Y" "$W"
+  printf '    i-Haklab txt2media -t "text" -o output [-v voice] [-r rate]\n'
+  printf '    i-Haklab txt2media -f file.txt -o output [-v voice] [-r rate]\n\n'
+  printf '%bVIDEO (merge audio into video):%b\n' "$Y" "$W"
+  printf '    i-Haklab txt2media --video base.mp4 --audio output.mp3 [-o final.mp4]\n\n'
+  printf '%bOTHER:%b\n' "$Y" "$W"
+  printf '    -v voice    Edge-TTS voice (default: %s)\n' "$VOICE_DEFAULT"
+  printf '    -r rate     Speed e.g. +10%%, +0%%, -10%% (default: %s)\n' "$RATE_DEFAULT"
+  printf '    -l          List all available voices (Spanish, English and more)\n'
+  printf '    -h          This help\n\n'
+  printf '%bVoice examples:%b es-MX-DaliaNeural (ES), en-US-JennyNeural (EN) -- see -l for all\n' "$Y" "$W"
+  printf '%bExports:%b %s/{texts,audios,videos/} + Music + Movies (with media-scan)\n' "$Y" "$W" "$BASE"
+}
+
+chk-deps-tts(){
+  chk-pkg python3 python
+  chk-pkg ffmpeg ffmpeg
+  python3 -m edge_tts --help >/dev/null 2>&1 || {
+    printf '%b(_>)%b Installing edge-tts (pip) ...\n' "$Y" "$W"
+    pip install -q edge-tts || { printf '%b(_>)%b Could not install edge-tts\n' "$R" "$W"; exit 1; }
+  }
+}
+
+chk-deps-video(){
+  chk-pkg ffmpeg ffmpeg
+}
+
+# Latency-tolerant network check: 3 attempts, warn without aborting.
+# (The stock chk-network exits on the first failed ping with -W 1.)
+net_ok(){
+  local i
+  for i in 1 2 3; do
+    ping -q -c1 -W 5 8.8.8.8 >/dev/null 2>&1 && return 0
+    printf '%b(_>)%b Retrying network (%s/3, high latency?) ...\n' "$Y" "$W" "$i"
+    sleep 2
+  done
+  printf '%b(_>)%b No network after 3 attempts. If it fails, retry later.\n' "$R" "$W"
+  return 1
+}
+
+# Generate with retries on latency/dropouts (default 3).
+edge_tts_retry(){
+  local dest="$1"; shift
+  local i
+  for i in 1 2 3; do
+    if python3 -m edge_tts "$@" --write-media "$dest"; then
+      [[ -s "$dest" ]] && return 0
+    fi
+    printf '%b(_>)%b Attempt %s/3 failed (latency?), retrying ...\n' "$Y" "$W" "$i"
+    sleep 3
+    rm -f "$dest" 2>/dev/null
+  done
+  printf '%b(_>)%b Edge-TTS did not respond after 3 attempts. Try with a better connection.\n' "$R" "$W"
+  return 1
+}
+
+resolve_file(){
+  # $1 = name or path ; echo path or empty
+  local q="$1"
+  [[ -z "$q" ]] && return 1
+  [[ -f "$q" ]] && { echo "$q"; return 0; }
+  # current dirs first, then legacy Spanish dir names for backward compatibility
+  for d in "$AUDDIR" "$VIDDIR" "$TEXTDIR" "$MUSIC" "$MOVIES" "$HOME/storage/shared" "$BASE/textos" "$BASE/videos" .; do
+    [[ -f "$d/$q" ]] && { echo "$d/$q"; return 0; }
+  done
+  return 1
+}
+
+do_tts(){
+  local text_arg="$1" file_txt="$2" output="$3" voice="$4" rate="$5"
+  [[ -z "$output" ]] && output="short_$(date +%Y%m%d_%H%M%S)"
+  output="${output%.mp3}"
+  local dest_base="$AUDDIR/${output}.mp3"
+  local dest_music="$MUSIC/${output}.mp3"
+
+  net_ok || true
+  chk-deps-tts
+  if [[ -n "$text_arg" ]]; then
+    printf '%b(_>)%b Generating voice: "%s" | %s %s\n' "$Y" "$W" "$text_arg" "$voice" "$rate"
+    edge_tts_retry "$dest_base" --voice "$voice" --rate "$rate" --text "$text_arg" || exit 1
+  elif [[ -n "$file_txt" ]]; then
+    local f
+    f=$(resolve_file "$file_txt") || { printf '%b(_>)%b File not found: %s\n' "$R" "$W" "$file_txt"; exit 1; }
+    # keep a copy of the source text used
+    cp "$f" "$TEXTDIR/" 2>/dev/null
+    printf '%b(_>)%b Generating from: %s | %s %s\n' "$Y" "$W" "$f" "$voice" "$rate"
+    edge_tts_retry "$dest_base" --voice "$voice" --rate "$rate" --file "$f" || exit 1
+  else
+    STDERR
+  fi
+  cp "$dest_base" "$dest_music"
+  timeout 10 termux-media-scan "$dest_music" >/dev/null 2>&1 || true
+  printf '%b(_>)_OK%b\n' "$G" "$W"
+  printf ' +-- base: %s\n +-- media: %s\n' "$dest_base" "$dest_music"
+  ls -lh "$dest_base" | awk '{print " +-- " $5 " " $9}'
+}
+
+do_video(){
+  local video_q="$1" audio_q="$2" output="$3"
+  [[ -z "$output" ]] && output="final_short_$(date +%Y%m%d_%H%M%S).mp4"
+  [[ "$output" != *.mp4 ]] && output="${output}.mp4"
+  chk-deps-video
+  local video audio
+  video=$(resolve_file "$video_q") || { printf '%b(_>)%b Video not found: %s\n' "$R" "$W" "$video_q"; exit 1; }
+  audio=$(resolve_file "$audio_q") || { printf '%b(_>)%b Audio not found: %s\n' "$R" "$W" "$audio_q"; exit 1; }
+  local dest_vid="$VIDDIR/$output"
+  printf '%b(_>)%b Merging:\n +-- video: %s\n +-- audio: %s\n' "$Y" "$W" "$video" "$audio"
+  ffmpeg -y -i "$video" -i "$audio" -c:v copy -map 0:v:0 -map 1:a:0 -shortest "$dest_vid" 2>&1 | tail -n 3
+  local dest_movies="$MOVIES/$output"
+  cp "$dest_vid" "$dest_movies" 2>/dev/null || true
+  timeout 10 termux-media-scan "$dest_vid" >/dev/null 2>&1 || true
+  timeout 10 termux-media-scan "$dest_movies" >/dev/null 2>&1 || true
+  printf '%b(_>)_OK%b\n' "$G" "$W"
+  printf ' +-- base: %s\n +-- media: %s\n' "$dest_vid" "$dest_movies"
+}
+
+[[ $# -eq 0 ]] && { usage; exit 0; }
+
+VOICE="$VOICE_DEFAULT"
+RATE="$RATE_DEFAULT"
+TEXT_ARG=""; FILE_TXT=""; OUTPUT=""; VIDEO_Q=""; AUDIO_Q=""
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -t|--text) TEXT_ARG="$2"; shift 2;;
+    -f|--file) FILE_TXT="$2"; shift 2;;
+    -o|--output) OUTPUT="$2"; shift 2;;
+    -v|--voice) VOICE="$2"; shift 2;;
+    -r|--rate) RATE="$2"; shift 2;;
+    --video) VIDEO_Q="$2"; shift 2;;
+    --audio) AUDIO_Q="$2"; shift 2;;
+    -l|--list) chk-deps-tts; python3 -m edge_tts --list-voices; exit 0;;
+    -h|--help) usage; exit 0;;
+    *) # compat: bare file.txt or bare output name
+      if [[ -f "$1" || "$1" == *.txt ]]; then FILE_TXT="$1";
+      elif [[ -z "$OUTPUT" ]]; then OUTPUT="$1";
+      else printf '%b(_>)%b Invalid arg: %s\n' "$R" "$W" "$1"; usage; exit 1; fi
+      shift;;
+  esac
+done
+
+# video mode when --video is given (merges unir-video.sh)
+if [[ -n "$VIDEO_Q" ]]; then
+  [[ -z "$AUDIO_Q" ]] && { printf '%b(_>)%b Missing --audio for video mode\n' "$R" "$W"; usage; exit 1; }
+  do_video "$VIDEO_Q" "$AUDIO_Q" "$OUTPUT"
+  exit 0
+fi
+
+# tts mode (merges voz-short.sh)
+do_tts "$TEXT_ARG" "$FILE_TXT" "$OUTPUT" "$VOICE" "$RATE"
