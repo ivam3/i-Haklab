@@ -1,33 +1,64 @@
 #!/data/data/com.termux/files/usr/bin/bash
-# This file contain all i-Haklab enviroment variables
+# This file contains all i-Haklab environment variables
 
-# Environment Variables
+# ----------------------------------------------------------------------------
+# 1. Identity / Session
+# ----------------------------------------------------------------------------
 export DISPLAY=:0
-export USER=ivam3
+export USER=i-Haklab
 export GPG_TTY=$(tty)
 export GYP_DEFINES="android_ndk_path=''"
 
+# ----------------------------------------------------------------------------
+# 2. HOME and PATH
+# ----------------------------------------------------------------------------
 # IMPORTANT: .local/bin FIRST to intercept 'apt', 'npm' and 'pnpm' invisible wrappers
 test -n "$HOME" || export HOME=/data/data/com.termux/files/home
 export PATH="$HOME/.local/bin:$HOME/go/bin:$HOME/.local/share/pnpm/bin:$PREFIX/lib/bin:$PREFIX/bin"
+export TOOLS=$HOME/.local/share
+
+# ----------------------------------------------------------------------------
+# 3. Go
+# ----------------------------------------------------------------------------
 export GOPATH=$HOME/go
 export GOROOT=/data/data/com.termux/files/usr/lib/go
 export GOCACHE="$HOME/.cache/go"
 export GOMODCACHE="$GOPATH/pkg/mod"
+
+# ----------------------------------------------------------------------------
+# 4. Java
+# ----------------------------------------------------------------------------
 export JAVA_HOME=/data/data/com.termux/files/usr/lib/jvm/java-21-openjdk
+
+# ----------------------------------------------------------------------------
+# 5. C/C++ Compilers (clang is default on Termux)
+# ----------------------------------------------------------------------------
 export LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib
-export LLVM_BUILD=/data/data/com.termux/files/usr/lib
-export LLVM_HOME=/data/data/com.termux/files/usr/lib/cmake/llvm
 export CFLAGS=" -Wno-incompatible-function-pointer-types"
 export CC=clang
 export CXX=clang++
+
+# ----------------------------------------------------------------------------
+# 6. LLVM
+# ----------------------------------------------------------------------------
+export LLVM_BUILD=/data/data/com.termux/files/usr/lib
+export LLVM_HOME=/data/data/com.termux/files/usr/lib/cmake/llvm
+
+# ----------------------------------------------------------------------------
+# 7. Android / NDK
+# ----------------------------------------------------------------------------
 export ANDROID_NDK_HOME=/data/data/com.termux/files/usr
 export ANDROID_ALLOW_UNDEFINED_SYMBOLS=On
-export TOOLS=$HOME/.local/share
 export ANDROID_API_LEVEL=24
+
+# ----------------------------------------------------------------------------
+# 8. VS Code Server
+# ----------------------------------------------------------------------------
 export VSCODE_EXTENSIONS_DIR=$HOME/.local/share/code-server/extensions
 
+# ----------------------------------------------------------------------------
 # Aliases
+# ----------------------------------------------------------------------------
 alias la="ls -a"
 alias ll="ls -l"
 alias du="du -hP"
