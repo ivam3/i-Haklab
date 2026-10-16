@@ -98,29 +98,37 @@ case "$1" in
         # Fix 1: npm skips os=linux optionalDeps on android (EBADPLATFORM) -> force glibc arm64 matching the wrapper version
         if [[ -f "${PREFIX}/lib/node_modules/@github/copilot/package.json" ]]; then
             copilotVer="$(grep '"version"' "${PREFIX}/lib/node_modules/@github/copilot/package.json" | head -1 | cut -d'"' -f4)"
-            if [[ -n "$copilotVer" ]] && [[ ! -d "${PREFIX}/lib/node_modules/@github/copilot-linux-arm64" ]]; then
+            platVer="$(grep '"version"' "${PREFIX}/lib/node_modules/@github/copilot-linux-arm64/package.json" 2>/dev/null | head -1 | cut -d'"' -f4)"
+            if [[ -n "$copilotVer" ]] && { [[ "$platVer" != "$copilotVer" ]] || [[ ! -d "${PREFIX}/lib/node_modules/@github/copilot-linux-arm64" ]]; }; then
                 "$PREFIX/bin/npm" install -g --force "@github/copilot-linux-arm64@${copilotVer}" >>"$LOGFILE" 2>&1
             fi
             # leftover musl build (177MB, requires missing /lib/ld-musl) -> remove
             [[ -d "${PREFIX}/lib/node_modules/@github/copilot-linuxmusl-arm64" ]] && \
                 "$PREFIX/bin/npm" uninstall -g @github/copilot-linuxmusl-arm64 >>"$LOGFILE" 2>&1
         fi
-        # Fix 2: android->linux + spawn via glibc loader without LD_PRELOAD (idempotent, with migration)
+        # Fix 2: android->linux + spawn via glibc loader without LD_PRELOAD + copilot.real (idempotent, with migration)
         # libtermux-exec declares NEEDED [libc.so] (Bionic style); if the glibc loader preloads it,
         # it resolves libc.so to the GNU ld text script -> "invalid ELF header". Stripped only
         # for the glibc process; Termux children of node keep their env untouched.
-        if [[ -f "$loaderFile" ]] && { ! grep -q 'process.platform==="android")return\["linux"\]' "$loaderFile" || ! grep -q 'delete e\.LD_PRELOAD' "$loaderFile"; }; then
+        # Note: .../copilot-linux-arm64/copilot is a bash wrapper (not ELF); ld.so must load copilot.real.
+        if [[ -f "$loaderFile" ]] && { ! grep -q 'process.platform==="android")return\["linux"\]' "$loaderFile" || ! grep -q 'delete e\.LD_PRELOAD' "$loaderFile" || ! grep -q '\.real' "$loaderFile"; }; then
             cp -f "$loaderFile" "${loaderFile}.bak"
             python3 - "$loaderFile" <<'PY'
 import sys
 p = sys.argv[1]
 s = open(p).read()
-NEW_U = 'function u(r,t){if(process.platform==="android"){const e={...process.env};delete e.LD_PRELOAD;return o("/data/data/com.termux/files/usr/glibc/lib/ld-linux-aarch64.so.1",["--library-path","/data/data/com.termux/files/usr/glibc/lib",r,...t],{stdio:"inherit",env:e})}return o(r,t,{stdio:"inherit"})}'
-OLD_U = 'function u(r,t){if(process.platform==="android"){return o("/data/data/com.termux/files/usr/glibc/lib/ld-linux-aarch64.so.1",["--library-path","/data/data/com.termux/files/usr/glibc/lib",r,...t],{stdio:"inherit"})}return o(r,t,{stdio:"inherit"})}'
+# ensure node:fs import for .real check
+if 'existsSync as f' not in s:
+    s = s.replace('from"detect-libc";', 'from"detect-libc";import{existsSync as f}from"node:fs";')
+NEW_U = 'function u(r,t){if(process.platform==="android"){const e={...process.env};delete e.LD_PRELOAD;try{if(f(r+".real"))r=r+".real"}catch{}return o("/data/data/com.termux/files/usr/glibc/lib/ld-linux-aarch64.so.1",["--library-path","/data/data/com.termux/files/usr/glibc/lib",r,...t],{stdio:"inherit",env:e})}return o(r,t,{stdio:"inherit"})}'
+OLD_U_NOPRELOAD = 'function u(r,t){if(process.platform==="android"){return o("/data/data/com.termux/files/usr/glibc/lib/ld-linux-aarch64.so.1",["--library-path","/data/data/com.termux/files/usr/glibc/lib",r,...t],{stdio:"inherit"})}return o(r,t,{stdio:"inherit"})}'
+OLD_U_PRELOAD = 'function u(r,t){if(process.platform==="android"){const e={...process.env};delete e.LD_PRELOAD;return o("/data/data/com.termux/files/usr/glibc/lib/ld-linux-aarch64.so.1",["--library-path","/data/data/com.termux/files/usr/glibc/lib",r,...t],{stdio:"inherit",env:e})}return o(r,t,{stdio:"inherit"})}'
 if ',n=u(r,process.argv.slice(2))' not in s:
     s = s.replace(',n=o(r,process.argv.slice(2),{stdio:"inherit"})', ',n=u(r,process.argv.slice(2))')
-if OLD_U in s:
-    s = s.replace(OLD_U, NEW_U)
+if OLD_U_NOPRELOAD in s:
+    s = s.replace(OLD_U_NOPRELOAD, NEW_U)
+elif OLD_U_PRELOAD in s:
+    s = s.replace(OLD_U_PRELOAD, NEW_U)
 elif 'function u(r,t)' not in s:
     s = s.replace('function s(t,r){', NEW_U + 'function s(t,r){')
 if 'process.platform==="android")return["linux"]' not in s:
@@ -130,7 +138,30 @@ PY
         fi
         # Fix shebang for Termux (upstream ships #!/usr/bin/env node)
         [[ -f "$loaderFile" ]] && termux-fix-shebang "$loaderFile"
-        [[ -f ${HOME}/.local/bin/copilot ]] && rm ${HOME}/.local/bin/copilot
+        # Fix 3: self-healing bash-wrapper vs ELF replica + smoke test
+        # Symptom: `copilot` -> ".../copilot-linux-arm64/copilot: invalid ELF header".
+        # Cause: npm-loader.js ran `ld-linux ... <r>` where <r> is the
+        # bash `.../copilot` wrapper (not ELF); ld.so only loads `copilot.real` (ELF aarch64).
+        # Recovery steps (for manual replica when needed):
+        #   1) `copilot 2>&1` to get the error.
+        #   2) `file .../copilot-linux-arm64/copilot*` -> wrapper=bash script, .real=ELF.
+        #   3) `grep -n "android\|LD_PRELOAD\|\.real" npm-loader.js` -> must show all 3.
+        #   4) `ld-linux ... copilot.real --version` must return OK; `copilot --version` must return OK.
+        platDir="${PREFIX}/lib/node_modules/@github/copilot-linux-arm64"
+        if [[ -f "$platDir/copilot.real" && -f "$platDir/copilot" ]]; then
+            # wrapper must exist, be executable and delegate to copilot.real via glibc loader
+            if ! grep -q 'copilot.real' "$platDir/copilot" 2>/dev/null; then
+                printf '#!/data/data/com.termux/files/usr/bin/bash\nexec /data/data/com.termux/files/usr/glibc/lib/ld-linux-aarch64.so.1 "$(dirname "$0")/copilot.real" "$@"\n' > "$platDir/copilot"
+            fi
+            chmod +x "$platDir/copilot" "$platDir/copilot.real" 2>>"$LOGFILE"
+        fi
+        if copilot --version >>"$LOGFILE" 2>&1; then
+            echo "[✔] copilot smoke test OK ($(copilot --version 2>/dev/null | head -1))"
+        else
+            echo "[✘] copilot smoke test FAIL (invalid ELF header?). Check $LOGFILE"
+            echo " ╰─➤ Steps: file $platDir/copilot* ; grep -n 'LD_PRELOAD\|\\.real' $loaderFile"
+        fi
+        echo "[✔] copilot android->linux fix applied (glibc loader + copilot.real)"
         ;;
 
     @testsprite/testsprite-mcp)
@@ -214,25 +245,25 @@ PY
         # Costs one tiny turn ONLY when quota exists; on [1113]/401 it is free.
         if command -v zcode-cli >/dev/null 2>&1 && command -v timeout >/dev/null 2>&1; then
             echo "[→] Probing Z.AI quota (micro-prompt, timeout 120s)..."
-            probe_out="$(timeout 120 zcode-cli --prompt "responde solo: OK" --no-browser 2>&1 | head -n 12)"
+            probe_out="$(timeout 120 zcode-cli --prompt "reply only: OK" --no-browser 2>&1 | head -n 12)"
             if echo "$probe_out" | grep -q "1113\|Insufficient balance"; then
-                echo "[⚠] Key válida pero SIN SALDO (Coding Plan es de pago, sin tier free)."
-                echo " ╰─➤ Recarga/saldo: https://z.ai/manage-apikey/billing"
-                echo " ╰─➤ O prueba el trial gratis de BigModel:"
-                echo "     1) key en https://open.bigmodel.cn/usercenter/apikeys"
+                echo "[⚠] Valid key but OUT OF CREDIT (Coding Plan is paid, no free tier)."
+                echo " ╰─➤ Top-up/billing: https://z.ai/manage-apikey/billing"
+                echo " ╰─➤ Or try the free BigModel trial:"
+                echo "     1) key at https://open.bigmodel.cn/usercenter/apikeys"
                 echo "     2) i-Haklab setapikey → bigmodel"
                 echo "     3) zcode-cli → /login → BigModel Coding Plan API Key"
             elif echo "$probe_out" | grep -qi "401\|unauthorized\|invalid.*key\|key.*invalid\|authentication"; then
-                echo "[⚠] La key fue RECHAZADA. Regenérala aquí:"
+                echo "[⚠] The key was REJECTED. Regenerate it here:"
                 echo " ╰─➤ https://z.ai/manage-apikey  →  i-Haklab setapikey → zcode"
             elif echo "$probe_out" | grep -q "Model access is not configured"; then
-                echo "[💡] Sin API key configurada. Consigue una y guárdala:"
+                echo "[💡] No API key configured. Get one and save it:"
                 echo " ╰─➤ Z.AI: https://z.ai/manage-apikey  |  BigModel trial: https://open.bigmodel.cn/usercenter/apikeys"
-                echo " ╰─➤ i-Haklab setapikey → zcode  (o bigmodel)"
+                echo " ╰─➤ i-Haklab setapikey → zcode (or bigmodel)"
             elif echo "$probe_out" | grep -q "separator\|signing"; then
-                echo "[⚠] Fallo de firma local. Reinstala el paquete para re-aplicar el fix."
+                echo "[⚠] Local signing failure. Reinstall the package to re-apply the fix."
             else
-                echo "[✔] Z.AI responde con tu key. Todo listo:"
+                echo "[✔] Z.AI answers with your key. All set:"
                 echo " ╰─➤ zcode-cli  (TUI)  |  zcode-cli --prompt \"...\" --no-browser"
             fi
             unset probe_out
@@ -273,12 +304,12 @@ PY
     mvt)
         v=$(python --version|grep -oE '([0-9]{1}\.)[0-9]{1,2}')
         yes|"$PREFIX/bin/apt" install python-cryptography python-pycryptodomex >/dev/null 2>$LOGFILE
-        # Define las rutas de los archivos a parchear
+        # Define the paths of the files to patch
         BASE_PY_PATH="${PREFIX}/lib/python$v/site-packages/mvt/android/modules/adb/base.py"
         ADB_DEVICE_PY_PATH="${PREFIX}/lib/python$v/site-packages/adb_shell/adb_device.py"
-        # --- Parche 1: Corregir IndentationError en base.py ---
+        # --- Patch 1: Fix IndentationError in base.py ---
         curl -fsSL "$iHDB/.local/etc/mvt/base.py" -o $BASE_PY_PATH
-        # --- Parche 2: Corregir el manejo de excepciones de importación de USB en adb_device.py ---
+        # --- Patch 2: Fix USB import exception handling in adb_device.py ---
         sed -i "s/except (ImportError, OSError):/except (ImportError, OSError, Exception):/" "$ADB_DEVICE_PY_PATH"
         ;;
 
