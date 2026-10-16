@@ -74,7 +74,7 @@ vim.diagnostic.config({
   signs = true,
   update_in_insert = false,
   underline = true,
-  severity_sort = false,
+  severity_sort = true,
   float = true,
 })
 

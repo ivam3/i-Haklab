@@ -51,7 +51,7 @@ f:close()
 -- ##  SETUP ÚNICO: todos los adapters (default: gemini)           ##
 -- ##  Para cambiar de proveedor, edita `strategies` abajo o usa  ##
 -- ##  :CodeCompanionChat adapter=<nombre>                         ##
--- ##  Nombres: gemini, openai, neural, anthropic, claude,         ##
+-- ##  Nombres: gemini, openai, anthropic, claude,               ##
 -- ##  deepseek, mistral, groq, kimi, togetherai, bigmodel,        ##
 -- ##  zcode, openrouter, copilot                                  ##
 -- #################################################################

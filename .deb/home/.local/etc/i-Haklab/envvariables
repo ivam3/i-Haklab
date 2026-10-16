@@ -16,6 +16,7 @@ export GYP_DEFINES="android_ndk_path=''"
 test -n "$HOME" || export HOME=/data/data/com.termux/files/home
 export PATH="$HOME/.local/bin:$HOME/go/bin:$HOME/.local/share/pnpm/bin:$PREFIX/lib/bin:$PREFIX/bin"
 export TOOLS=$HOME/.local/share
+XDG_RUNTIME_DIR="$PREFIX/tmp"
 
 # ----------------------------------------------------------------------------
 # 3. Go

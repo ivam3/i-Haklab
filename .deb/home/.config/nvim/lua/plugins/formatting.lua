@@ -8,6 +8,9 @@ require("conform").setup({
     cpp = { "clang-format" },
     java = { "google-java-format" },
     javascript = { "prettierd", "prettier", stop_after_first = true },
-    C = {"clang-format"},
+    typescript = { "prettierd" },
+    json = { "prettierd" },
+    markdown = { "prettierd" },
+    c = {"clang-format"},
   },
 })

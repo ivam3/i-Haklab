@@ -10,6 +10,7 @@ local opt  = vim.opt
 
 -- General
 g.mapleader = ','
+g.maplocalleader = ',' -- Local leader for buffer/filetype specific mappings
 
 opt.shell = "/bin/sh"               -- Para  evitar   conflicto con   fish    
 opt.completeopt = {'menu', 'menuone', 'noselect'} -- Auto completado  

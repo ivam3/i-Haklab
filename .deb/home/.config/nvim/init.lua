@@ -80,13 +80,9 @@ lazy.setup({
 {
     "lukas-reineke/indent-blankline.nvim", 
 },    
-    -- Tarminal 
+     -- Tarminal 
      {'akinsho/toggleterm.nvim', version = "*", config = true},
-   -- IA 
-   {'dense-analysis/neural'},
-   {'muniftanjim/nui.nvim'},
-   {'elpiloto/significant.nvim'},
-   -- Plegado de código con nvim-ufo
+    -- Plegado de código con nvim-ufo
    {
    "kevinhwang91/nvim-ufo",
    dependencies = {
@@ -190,6 +186,20 @@ lazy.setup({
             vim.notify("Ollama: selecciona código en modo visual primero y pulsa ,lm", vim.log.levels.WARN, { title = "Ollama" })
             return
           end
+          -- Availability check: warn instead of failing with a raw curl error.
+          if vim.fn.executable("ollama") == 0 then
+            vim.notify("Ollama binary not found. Install it with: pkg install ollama", vim.log.levels.WARN, { title = "Ollama" })
+            return
+          end
+          -- Fast probe of the local server (short timeout, no hang on failure).
+          local probe_ok = pcall(function()
+            local out = vim.fn.system({ "curl", "--silent", "--max-time", "2", "http://127.0.0.1:11434/api/tags" })
+            if vim.v.shell_error ~= 0 or out == "" then error("unreachable") end
+          end)
+          if not probe_ok then
+            vim.notify("Ollama server is not running. Start it with: ollama serve (then pull a model, e.g. ollama pull deepseek-coder:1.3b)", vim.log.levels.WARN, { title = "Ollama" })
+            return
+          end
           require("ollama").prompt()
         end,        desc = "ollama prompt",
         mode = { "n", "v" },
@@ -225,7 +235,25 @@ require('plugins.lsp-zero')           -- Soporte para LSP
 require('plugins.blankline')          -- guías de sangría a todas las líneas  
 require("plugins.telescope")          -- filtrar de forma interactiva
 require("plugins.toggleterm")         -- Terminal 
-require("plugins.neural")             -- IA  
 require("plugins.git")                -- Cosas de git 
-require("zk")                         -- Para texto sin formato 
+require("plugins.zk")                   -- Plain text notes
+require("plugins.react")                -- Web LSP servers (on demand, manual install via :Mason)
 require("plugins.codecompanion")      -- Code Companion 
+
+-- ----------------------------------------------------------------------------
+-- Ollama server exit prompt (shared service: keep running by default)
+-- ----------------------------------------------------------------------------
+-- Only prompt on interactive exits while an "ollama serve" process is alive.
+-- Headless/scripted exits quit silently and never kill the server.
+vim.api.nvim_create_autocmd("VimLeavePre", {
+  callback = function()
+    if #vim.api.nvim_list_uis() == 0 then return end
+    if vim.fn.executable("pgrep") == 0 then return end
+    vim.fn.system({ "pgrep", "-f", "ollama serve" })
+    if vim.v.shell_error ~= 0 then return end -- no server running, exit quietly
+    local choice = vim.fn.confirm("Ollama server is still running. Stop it?", "&Keep running\n&Stop server", 1)
+    if choice == 2 then
+      vim.fn.system({ "pkill", "-SIGTERM", "-f", "ollama serve" })
+    end
+  end,
+})
