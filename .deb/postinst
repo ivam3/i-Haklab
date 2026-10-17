@@ -178,7 +178,8 @@ echo -en "[updates]
     |\t\t• i-Haklab weechat (deprecated)
 [Artificial Intellient]
     ╰──➤ Vibe coding:
-    |\t\t• Into neovim: type 'alter', 'comma', 'ca' | (alt + , + n) to use AI
+    |\t\t• Into neovim: type 'alter', 'comma', 'ca' | (alt + , + c + a) to use cloud AI
+    |\t\t• Into neovim: type 'alter', 'comma', 'lm' | (alt + , + l + m) to use local AI
     ╰──➤ Agents:
     |\t\t• N8N
     |\t\t• Opencode
