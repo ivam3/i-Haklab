@@ -489,6 +489,8 @@ afectado.
 - **`lua/settings.lua`**: Opciones del sistema.
 - **`lua/keymaps.lua`**: Definición de atajos.
 - **`lua/plugins/`**: Configuraciones de plugins específicos.
+- **`ftdetect/`, `ftplugin/`, `syntax/`, `indent/`**: Soporte de lenguajes (Águila, `.ag`).
+- **`snippets/` + `package.json`**: Fragmentos de código cargados por LuaSnip.
 
 ### Detalle de la configuración LSP
 
@@ -574,6 +576,43 @@ end
 - Si un servidor instalado por npm no arranca, repáralo con: `termux-fix-shebang <ruta-del-servidor>`.
 - `lua-language-server` se instala con `pkg install` (el de Mason es glibc incompatible).
 - `clangd` se instala con `pkg install clangd` (binario nativo).
+
+## 7.1 Soporte del lenguaje Águila (`.ag`)
+
+Esta configuración reconoce e ilumina archivos Águila (`.ag`), el lenguaje del paquete
+`aguila-lang` (instálalo con `pkg install aguila-lang`).
+
+- **Detección de tipo de archivo**: `ftdetect/aguila.lua` asocia la extensión `.ag`
+  con el filetype `aguila`.
+- **Resaltado de sintaxis**: `syntax/aguila.vim` (palabras clave `si`, `sino`,
+  `mientras`, `para`, `en`, `hasta`, `funcion`, `clase`, `imprimir`, `importar`,
+  `retornar`, `intentar`, `capturar`, `nuevo`, `asincrono`, `esperar`, `segun`,
+  `caso`, `defecto`, `romper`, `continuar`; lógicos `y`/`o`/`no`; booleanos
+  `verdadero`/`falso`/`nulo`; tipos `Numero`, `Texto`, `Logico`, `Lista`,
+  `Diccionario`, `Conjunto`; comentarios con `#`; cadenas `"..."`/`'...'` e
+  interpoladas `a"..."`).
+- **Comentarios**: `commentstring` = `# %s` (`ftplugin/aguila.lua`).
+- **Indentación**: `indent/aguila.vim` (basada en llaves, corchetes y paréntesis).
+- **Fragmentos (snippets)**: `snippets/aguila.json` en formato VS Code, cargados por
+  LuaSnip mediante la entrada `contributes` de `package.json` (`fun`, `si`, `sisi`,
+  `para`, `pararango`, `mientras`, `clase`, `try`, `segun`, `interp`, `impmod`, …).
+
+### Atajos en buffers Águila
+
+| Atajo | Acción |
+| :--- | :--- |
+| `<localleader>r` | Guardar y **ejecutar** (`aguila ejecutar %`). |
+| `<localleader>c` | Guardar y **chequear** (`aguila chequear %`). |
+| `<localleader>b` | Guardar y **compilar** a JavaScript (`aguila compilar %`). |
+
+`<localleader>` es la coma (`,r`, `,c`, `,b`).
+
+### Limitaciones
+
+Todavía no hay servidor LSP, parser de Treesitter ni formateador para Águila: el
+resaltado usa las reglas de `syntax/aguila.vim`, y no hay diagnósticos ni
+autocompletado específico del lenguaje. El prefijo de interpolación es `a"..."`; el
+`README` del lenguaje menciona `f"..."`, pero el lexer de v2.4.3 solo reconoce `a"`.
 
 ## 8. Terminal
 
