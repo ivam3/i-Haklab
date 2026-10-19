@@ -5,6 +5,7 @@ claude-code
 fish
 gdb
 gemini-cli
+gh
 localtunnel
 mariadb
 mvt
@@ -18,6 +19,7 @@ proxychains-ng
 python
 qwen-code
 radare2
+railway-cli
 telegram-desktop
 tigervnc
 tmux
