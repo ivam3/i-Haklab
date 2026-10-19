@@ -1,0 +1,150 @@
+{
+    "Función": {
+        "prefix": "fun",
+        "body": [
+            "funcion ${1:nombre}(${2:parametros}) {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Crear una función"
+    },
+    "Si": {
+        "prefix": "si",
+        "body": [
+            "si ${1:condicion} {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Condicional si"
+    },
+    "Si-Sino": {
+        "prefix": "sisi",
+        "body": [
+            "si ${1:condicion} {",
+            "\t$2",
+            "} sino {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Condicional si-sino"
+    },
+    "Para": {
+        "prefix": "para",
+        "body": [
+            "para ${1:item} en ${2:lista} {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Bucle para-en"
+    },
+    "Para Rango": {
+        "prefix": "pararango",
+        "body": [
+            "para ${1:i} = ${2:0} hasta ${3:10} {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Bucle numérico"
+    },
+    "Mientras": {
+        "prefix": "mientras",
+        "body": [
+            "mientras ${1:condicion} {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Bucle mientras"
+    },
+    "Romper": {
+        "prefix": "romper",
+        "body": "romper",
+        "description": "Romper bucle"
+    },
+    "Clase": {
+        "prefix": "clase",
+        "body": [
+            "clase ${1:Nombre} {",
+            "\tconstructor(${2:parametros}) {",
+            "\t\t$0",
+            "\t}",
+            "}"
+        ],
+        "description": "Crear una clase"
+    },
+    "Método": {
+        "prefix": "metodo",
+        "body": [
+            "${1:nombre}(${2:parametros}) {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Método de clase"
+    },
+    "Intentar-Capturar": {
+        "prefix": "try",
+        "body": [
+            "intentar {",
+            "\t$1",
+            "} capturar error {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Manejo de errores"
+    },
+    "Según": {
+        "prefix": "segun",
+        "body": [
+            "segun ${1:valor} {",
+            "\tcaso ${2:opcion1} {",
+            "\t\t$3",
+            "\t}",
+            "\tcaso ${4:opcion2} {",
+            "\t\t$5",
+            "\t}",
+            "\tdefecto {",
+            "\t\t$0",
+            "\t}",
+            "}"
+        ],
+        "description": "Switch/match"
+    },
+    "Interpolación": {
+        "prefix": "interp",
+        "body": "a\"${1:Texto} {${2:variable}}\"",
+        "description": "Texto interpolado"
+    },
+    "Importar": {
+        "prefix": "impmod",
+        "body": "importar \"${1:./modulo.ag}\" como ${2:alias}",
+        "description": "Importar módulo"
+    },
+    "Imprimir": {
+        "prefix": "imp",
+        "body": "imprimir $0",
+        "description": "Imprimir en consola"
+    },
+    "Afirmar": {
+        "prefix": "afirmar",
+        "body": "afirmar ${1:condicion}, \"${2:mensaje}\"",
+        "description": "Aserción para testing"
+    },
+    "Lista": {
+        "prefix": "lista",
+        "body": "[${1:elementos}]",
+        "description": "Crear lista"
+    },
+    "Diccionario": {
+        "prefix": "dict",
+        "body": [
+            "{",
+            "\t\"${1:clave}\": ${2:valor}$0",
+            "}"
+        ],
+        "description": "Crear diccionario"
+    },
+    "Conjunto": {
+        "prefix": "conjunto",
+        "body": "conjunto([${1:elementos}])",
+        "description": "Crear conjunto"
+    }
+}
