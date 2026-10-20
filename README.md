@@ -92,6 +92,7 @@ apt install ./path/at/i-haklab_example_all.deb
 | Agent | apt | npm | pnpm | npx | Description |
 |-------|:---:|:---:|:----:|:---:|-------------|
 | **opencode** | ✅ `apt install opencode` | ❌ | ❌ | ❌ | Universal AI coding agent (AGI), glibc-native binary for Termux |
+| **opencode-v2** | ✅ `apt install opencode-v2` | ❌ | ❌ | ❌ | OpenCode v2 (2.0.32), glibc-native binary; installs as `opencode-v2` and coexists with v1 |
 | **claude-code** | ✅ `apt install claude-code` | ✅ `npm install -g claude-code` | ✅ | ❌ | Anthropic's AI coding agent, pre-built for Termux |
 | **openclaw** | ✅ `apt install openclaw` | ❌ | ❌ | ❌ | Autonomous AI agent with full platform/scripts/patches suite |
 | **qwen-code** | ❌ | ✅ `npm install -g qwen-code` | ✅ | ❌ | Alibaba's Qwen coding agent (wrapper: `@qwen-code/qwen-code`) |
@@ -133,6 +134,7 @@ apt install ./path/at/i-haklab_example_all.deb
 
 **💡 Pro tips:**
 - `apt install <agent>` works for all agents with a 📦 badge — the i-Haklab apt wrapper intelligently redirects npm/pip packages automatically
+- `opencode` (v1) and `opencode-v2` can coexist: install both and use the `opencode` and `opencode-v2` commands
 - Need a quick test? Use `npx ctx7@latest` without installing anything
 - After installing any agent, i-Haklab's `pkg2conf` auto-configures it for the environment
 - All Neovim AI adapters (codecompanion) are pre-configured — just press a key and start vibecoding
@@ -143,6 +145,11 @@ apt install ./path/at/i-haklab_example_all.deb
 ```bash
 i-Haklab about <name_of_tool>
 ```
+- Show the full command reference or the installed version:
+```bash
+i-Haklab help
+i-Haklab version
+```
 - Provide different types of prompt for shell fish with command:
 ```bash
 omf theme
@@ -151,13 +158,15 @@ omf theme
 ```bash
 i-Haklab setshell
 ```
-- Run linux distributions in proot environment (CLi or Graphical):
+- Run linux distributions in proot environment (CLi or Graphical), or list them:
 ```bash
 i-Haklab pd <distro> [X11]
+i-Haklab pd list
 ```
 - Provide a login session by password (default: Ivam3byCinderella) or fingerprint:
 ```bash
 i-Haklab passwd set
+i-Haklab passwd new
 ```
 - Let you change the banner and username:
 ```bash
@@ -173,9 +182,9 @@ i-Haklab aptup
 i-Haklab speedtest
 i-Haklab mypip
 ```
-- Extract masive information from Android devices via ADB:
+- Extract massive information from Android devices via ADB:
 ```bash
-i-Haklab androforensic <option> <target>
+i-Haklab androforensic secretCodes|airscope|dumpsys|extract <target>
 ```
 - Create a Termux backup and/or restore it:
 ```bash
@@ -183,7 +192,7 @@ i-Haklab backup create|restore
 ```
 - Automate brute force attacks (FTP, Mail, SSH, Telnet):
 ```bash
-i-Haklab bruteforce
+i-Haklab bruteforce ftp|mail|ssh|telnet
 ```
 - Let you interact with ChatGPT-3 via CLI:
 ```bash
@@ -210,7 +219,8 @@ i-Haklab ESmsg
 ```
 - Convert ova files and run QEMU virtual machines (no root):
 ```bash
-i-Haklab qemufy
+i-Haklab qemufy <VM_image.zip>
+i-Haklab qemufy rm
 ```
 - Provide port forwarding tunnels (localtunnel, localhost.run, cloudflared):
 ```bash
@@ -220,9 +230,13 @@ i-Haklab tunnel
 ```
 i-Haklab 4share <server_name>
 ```
+> Server names: `localtunnel`, `localhost.run` and `cloudflared`. Default credentials: `Admin:password`.
 - Automate Metasploit processes (Payloads, Handlers, Shodan, Dirscan):
 ```bash
-i-Haklab msf
+i-Haklab msf dirscan <target>
+i-Haklab msf embed <host> <port> <file.apk>
+i-Haklab msf payapk|payexe|paypdf <host> <port>
+i-Haklab msf shodan
 i-Haklab handler <file.rc>
 ```
 - Get information about BINs (CC, DC):
@@ -240,6 +254,12 @@ i-Haklab payvid
 - Test USB devices via OTG:
 ```bash
 i-Haklab usbtest
+```
+- Text to speech (Edge-TTS neural voices) + merge audio into video for shorts:
+```bash
+i-Haklab txt2media -t "hola mundo" -o short01
+i-Haklab txt2media -f nota.txt -o short02 -v es-MX-JorgeNeural
+i-Haklab txt2media --video base.mp4 --audio short01.mp3 -o final.mp4
 ```
 - Provide vulnerable servers for testing (bWAPP, DVWA, MUTILLIDAE):
 ```bash
@@ -267,7 +287,7 @@ i-Haklab show instatools
 | **Web Application** | aquatone, burpsuite, dirb, fuzzdb, gobuster, nikto, routersploit, sqlmap, vulnx, webhackshl, websploit, wfuzz, whatweb, wpscan, zaproxy |
 | **Wireless** | aircrack-ng |
 | **OSINT** | amass, finalrecon, geo-recon, ghunt, h8mail, holehe, infoga, ipgeolocation, maltego, octosuite, orbitaldump, osintgram, osrframework, phoneintel, recon-ng, recondog, sherlock, shodan, snscrape, sublist3r, twifo-cli, virustotal-cli, xleak |
-| **AI Agents** | antigravity-cli, cactus, claude-code, codebuff, codex, context7, copilot-cli, engram, freebuff, hermes-agent, kimi-code, mimocode, minimax-cli, mistral-vibe, muse-code, omniroute, open-lovable, openclaw, opencode, playwright-proot, qwen-code, sleepwalker, smithery, walkie, zcode |
+| **AI Agents** | antigravity-cli, cactus, claude-code, codebuff, codex, context7, copilot-cli, engram, freebuff, hermes-agent, kimi-code, mimocode, minimax-cli, mistral-vibe, muse-code, omniroute, open-lovable, openclaw, opencode, opencode-v2, playwright-proot, qwen-code, sleepwalker, smithery, walkie, zcode |
 | **Utilities** | bash-obfuscate, code-server, converter, gh, git-filter-repo, glab-cli, jython-lts, mariadb, markdown-viewer, n8n, openjdk-21, openspec, pnpm, postgresql, proroot, scrapy, speedtest-go, sqlite, termux-desktop-xfce, termux-docker-qemu, termux-oracle-skill, tmux, translate-shell, ttyd, udocker, xapt-management, yt-dlp, ytfzf |
 | **Exploitation** | beef, bitb-framework, cryptovenom, dos-a-tool, embed, exploitdb, metasploit-framework, penelope, quack, ransomux, slowhttptest |
 | **Network Scanning** | bettercap, dnsenum, enum4linux, enum4linux-ng, nmap |

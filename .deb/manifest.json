@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.13.22",
+  "version": "3.13.23",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -189,6 +189,7 @@
     "home/.local/etc/i-Haklab/Tools/Readme/open-lovable.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/open-lovable.md",
     "home/.local/etc/i-Haklab/Tools/Readme/openclaw.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/openclaw.md",
     "home/.local/etc/i-Haklab/Tools/Readme/opencode.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/opencode.md",
+    "home/.local/etc/i-Haklab/Tools/Readme/opencode-v2.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/opencode-v2.md",
     "home/.local/etc/i-Haklab/Tools/Readme/openjdk-21.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/openjdk-21.md",
     "home/.local/etc/i-Haklab/Tools/Readme/openspec.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/openspec.md",
     "home/.local/etc/i-Haklab/Tools/Readme/orbitaldump.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/orbitaldump.md",
