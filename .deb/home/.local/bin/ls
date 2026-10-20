@@ -1,3 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
-# i-Haklab ls -> uses lsd
-lsd "$@"
+# i-Haklab ls -> uses lsd (only on interactive terminals; scripts need coreutils)
+if [ -t 1 ]; then
+  exec lsd "$@"
+else
+  exec /data/data/com.termux/files/usr/bin/ls "$@"
+fi
