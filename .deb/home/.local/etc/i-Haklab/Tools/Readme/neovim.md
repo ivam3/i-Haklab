@@ -154,6 +154,82 @@ de Vim (`:h fold`) funcionan normalmente.
 | `<leader>te` | Habilitar transparencia. |
 | `<leader>td` | Deshabilitar transparencia. |
 
+### Tema de Colores (Colorscheme)
+
+El tema se aplica con **una sola línea** en `lua/plugins/tokyonight.lua`, cargado desde
+`init.lua`. Actual: **Tokyo Night variante `moon`**.
+
+```lua
+vim.cmd[[colorscheme tokyonight-moon]]
+```
+
+#### Cambiar el tema en la sesión actual (temporal)
+
+| Comando | Acción |
+| :--- | :--- |
+| `:colorscheme` | Muestra el tema activo. |
+| `:Telescope colorscheme` | Picker con vista previa en vivo. |
+| `:colorscheme tokyonight-storm` | Cambia en caliente (se pierde al cerrar). |
+| `:set background=light` / `dark` | Variante clara/oscura del tema activo. |
+
+Variantes incluidas de Tokyo Night: `tokyonight-night`, `tokyonight-storm`,
+`tokyonight-moon` (actual), `tokyonight-day` (clara) y `tokyonight`.
+
+#### Cambiar el tema de forma permanente
+
+Editar la primera línea de `lua/plugins/tokyonight.lua`:
+
+```lua
+vim.cmd[[colorscheme tokyonight-storm]]
+```
+
+Para un tema que no sea Tokyo Night conviene renombrar el archivo a
+`lua/plugins/colorscheme.lua` y actualizar el `require` en `init.lua`, para que el
+nombre no confunda.
+
+#### Elegir el tema sin editar archivos (variable de entorno)
+
+Requiere crear `lua/plugins/colorscheme.lua` y reemplazar el `require` del tema en
+`init.lua`:
+
+```lua
+-- lua/plugins/colorscheme.lua
+vim.g.theme = vim.env.NVIM_THEME or "tokyonight-moon"
+if not pcall(vim.cmd.colorscheme, vim.g.theme) then
+  vim.notify("Tema no encontrado: " .. vim.g.theme, vim.log.levels.WARN)
+  vim.cmd.colorscheme("tokyonight-moon")
+end
+```
+
+Uso: `NVIM_THEME=catppuccin nvim`.
+
+#### Temas ya disponibles (sin instalar nada)
+
+Neovim 0.12 incluye: `catppuccin`, `unokai`, `habamax`, `retrobox`, `wildcharm`,
+`sorbet`, `zaibatsu`, `lunaperche`, `quiet`, `zellner`, `slate`, `torte`, `desert`,
+`morning`, `evening`, `pablo`, `ron`, `shine`, `delek`, `industry`, `elflord`,
+`murphy`, `peachpuff`, `blue`, `darkblue`, `default`, `vim`.
+
+#### Instalar un tema de terceros
+
+```lua
+-- init.lua (lista de plugins de lazy.nvim)
+{ 'catppuccin/nvim', name = 'catppuccin', priority = 1000, opts = { flavour = 'mocha' } },
+```
+
+Luego `:Lazy sync` y `colorscheme catppuccin` (o `kanagawa`, `rose-pine`, `gruvbox`,
+`everforest`, `nightfox`, `onedark`...).
+
+#### Advertencias
+
+- **Lualine no sigue al tema:** tiene colores fijos en `lua/plugins/lualine.lua`.
+  Para que se adapte, usar `theme = 'auto'`.
+- **Transparencia:** `transparent.nvim` es independiente; usar `<leader>tt` tras
+  cambiar de tema.
+- **Smear cursor:** colores fijos en `init.lua`; pueden desentonar con temas claros.
+- **Tema claro:** definir `vim.o.background = 'light'` **antes** del `colorscheme`.
+- Si el tema se configura como spec lazy (con `config`), agregar `priority = 1000`.
+
 ### LSP (Lenguajes y Diagnósticos)
 
 Configurado en `lua/plugins/lsp-zero.lua` con **API nativa `vim.lsp.start`**.
