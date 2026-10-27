@@ -288,12 +288,12 @@ i-Haklab show instatools
 | **Web Application** | aquatone, burpsuite, dirb, fuzzdb, gobuster, nikto, routersploit, sqlmap, vulnx, webhackshl, websploit, wfuzz, whatweb, wpscan, zaproxy |
 | **Wireless** | aircrack-ng |
 | **OSINT** | amass, finalrecon, geo-recon, ghunt, h8mail, holehe, infoga, ipgeolocation, maltego, octosuite, orbitaldump, osintgram, osrframework, phoneintel, recon-ng, recondog, sherlock, shodan, snscrape, sublist3r, twifo-cli, virustotal-cli, xleak |
-| **AI Agents** | antigravity-cli, cactus, claude-code, codebuff, codex, context7, copilot-cli, deepseek-harness, engram, freebuff, hermes-agent, kimi-code, mimocode, minimax-cli, mistral-vibe, muse-code, omniroute, open-lovable, openclaw, opencode, opencode-v2, playwright-proot, qwen-code, sleepwalker, smithery, walkie, zcode |
+| **AI Agents** | antigravity-cli, cactus, claude-code, codebuff, codex, context7, copilot-cli, deepseek-harness, engram, freebuff, hermes-agent, kimi-code, mimocode, minimax-cli, mistral-vibe, muse-code, ollama, omniroute, open-lovable, openclaw, opencode, opencode-v2, playwright-proot, qwen-code, sleepwalker, smithery, walkie, zcode |
 | **Utilities** | bash-obfuscate, code-server, converter, gh, git-filter-repo, glab-cli, jython-lts, mariadb, markdown-viewer, n8n, openjdk-21, openspec, pnpm, postgresql, proroot, scrapy, speedtest-go, sqlite, termux-desktop-xfce, termux-docker-qemu, termux-oracle-skill, tmux, translate-shell, ttyd, udocker, xapt-management, yt-dlp, ytfzf |
 | **Exploitation** | beef, bitb-framework, cryptovenom, dos-a-tool, embed, exploitdb, metasploit-framework, penelope, quack, ransomux, slowhttptest |
 | **Network Scanning** | bettercap, dnsenum, enum4linux, enum4linux-ng, nmap |
-| **Forensics** | binwalk, clamav, exif, gdb, ghidra, hexer, mvt, radare2, shc, steghide, stegsnow, unshc |
-| **Windows/AD** | bloodhound, getadusers, getnpusers, getuserspns, kerbrute, mimikatz |
+| **Forensics** | binwalk, clamav, exif, gdb, ghidra, hexer, mvt, radare2, rea, shc, steghide, stegsnow, unshc |
+| **Windows/AD** | bloodhound, getadusers, getnpusers, getuserspns, kerbrute, mimikatz, ntlmrelayx |
 | **Phishing** | botgram, evilginx2, ghost, gophish |
 | **Password** | cewl, crunch, seclists |
 | **Cloud** | azure-cli, cloudbunny, hatcloud, railway-cli |

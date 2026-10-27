@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.13.24",
+  "version": "3.13.25",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -186,6 +186,7 @@
     "home/.local/etc/i-Haklab/Tools/Readme/ntlmrelayx.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/ntlmrelayx.md",
     "home/.local/etc/i-Haklab/Tools/Readme/objection.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/objection.md",
     "home/.local/etc/i-Haklab/Tools/Readme/octosuite.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/octosuite.md",
+    "home/.local/etc/i-Haklab/Tools/Readme/ollama.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/ollama.md",
     "home/.local/etc/i-Haklab/Tools/Readme/omniroute.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/omniroute.md",
     "home/.local/etc/i-Haklab/Tools/Readme/open-lovable.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/open-lovable.md",
     "home/.local/etc/i-Haklab/Tools/Readme/openclaw.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/openclaw.md",
@@ -217,6 +218,7 @@
     "home/.local/etc/i-Haklab/Tools/Readme/radare2.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/radare2.md",
     "home/.local/etc/i-Haklab/Tools/Readme/railway-cli.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/railway-cli.md",
     "home/.local/etc/i-Haklab/Tools/Readme/ransomux.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/ransomux.md",
+    "home/.local/etc/i-Haklab/Tools/Readme/rea.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/rea.md",
     "home/.local/etc/i-Haklab/Tools/Readme/recon-ng.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/recon-ng.md",
     "home/.local/etc/i-Haklab/Tools/Readme/recondog.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/recondog.md",
     "home/.local/etc/i-Haklab/Tools/Readme/redhawk.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/redhawk.md",

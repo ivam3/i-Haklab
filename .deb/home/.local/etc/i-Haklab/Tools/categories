@@ -101,6 +101,7 @@ nikto:Web Application
 nljson:Utilities
 nmap:Network Scanning
 n8n:AI & Automation
+ntlmrelayx:Windows/AD
 objection:Android
 octosuite:OSINT
 ollama:AI Agents
@@ -129,6 +130,7 @@ qwen-code:AI Agents
 radare2:Forensics
 railway-cli:Cloud
 ransomux:Exploitation
+rea:Forensics
 recon-ng:OSINT
 recondog:OSINT
 rhash:Cracking

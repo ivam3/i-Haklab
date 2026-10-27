@@ -101,8 +101,10 @@ nikto
 nljson
 nmap
 n8n
+ntlmrelayx
 objection
 octosuite
+ollama
 omniroute
 open-lovable
 openclaw
@@ -128,6 +130,7 @@ qwen-code
 radare2
 railway-cli
 ransomux
+rea
 recon-ng
 recondog
 rhash
