@@ -416,6 +416,8 @@ ih_normalize_pkg() {
         kimi-code)         echo "@moonshot-ai/kimi-code" ;;
         claude-code)       echo "@anthropic-ai/claude-code" ;;
         codex)             echo "@mmmbuto/codex-cli-termux@latest" ;;
+        comandle)          echo "github.com/legiosai/comandle@latest" ;;
+        context7)          echo "ctx7" ;;
         copilot-cli|github-copilot) echo "@github/copilot" ;;
         minimax-cli)       echo "mmx-cli" ;;
         smithery)          echo "@smithery/cli" ;;

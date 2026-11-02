@@ -125,7 +125,7 @@ Lista herramientas disponibles/instaladas, libros y tutoriales.
 .I ~/.local/etc/i-Haklab/Tools/listoftools
 and
 .I categories
-(165 tools, fetches iHDB on each call).
+(187 tools, fetches iHDB on each call).
 .B instatools
 \- lists installed packages via pkg.
 .B books
@@ -489,14 +489,14 @@ Usage / Uso:
 .RE
 .
 .SH TOOLS / HERRAMIENTAS
-165 tools available via
+187 tools available via
 .B i-Haklab show alltools
 (install with
 .B apt install <tool>
 or via wrappers above). Categorized as in
 .I ~/.local/etc/i-Haklab/Tools/categories .
 .br
-165 herramientas disponibles v\['i]a i-Haklab show alltools (instalar con apt install <tool> o wrappers). Categorizadas seg\['u]n categories.
+187 herramientas disponibles v\['i]a i-Haklab show alltools (instalar con apt install <tool> o wrappers). Categorizadas seg\['u]n categories.
 .PP
 Tip / Consejo: after installing any agent, pkg2conf auto-configures it. Run
 .B i-Haklab about <tool>
@@ -505,38 +505,41 @@ for details. / Tras instalar, pkg2conf auto-configura. Ejecute i-Haklab about <t
 .SS Brute Force / Fuerza Bruta (3)
 acccheck, hydra-gtk, kerbrute
 .
-.SS Android (12)
-adbfastboot, androidsdk-cli, apksigner, apktool, appshark, axmlprinter2, dex2jar, frida, objection, phonesploit, scrcpy, xml2axml
+.SS Android (14)
+adbfastboot, androidsdk-cli, apkeditor, apksigner, apktool, appshark, axmlprinter2, dex2jar, frida, objection, phonesploit, scrcpy, termux-apk-make, xml2axml
 .
-.SS Web Application / Aplicaci\['o]n Web (15)
-aquatone, burpsuite, dirb, fuzzdb, gobuster, nikto, routersploit, sqlmap, vulnx, webhackshl, websploit, wfuzz, whatweb, wpscan, zaproxy
+.SS Web Application / Aplicaci\['o]n Web (17)
+aquatone, burpsuite, dirb, findomain, fuzzdb, gobuster, nikto, routersploit, sqlmap, telegram-desktop, vulnx, webhackshl, websploit, wfuzz, whatweb, wpscan, zaproxy
 .
-.SS Network Scanning / Escaneo de Red (5)
-aircrack-ng, bettercap, dnsenum, enum4linux, enum4linux-ng, nmap
+.SS Network Scanning / Escaneo de Red (7)
+aircrack-ng, bettercap, dnsenum, enum4linux, enum4linux-ng, nmap, rustscan
 .
-.SS OSINT (23)
-amass, finalrecon, geo-recon, ghunt, h8mail, holehe, infoga, ipgeolocation, maltego, octosuite, orbitaldump, osintgram, osrframework, phoneintel, recon-ng, recondog, sherlock, shodan, snscrape, sublist3r, twifo-cli, virustotal-cli, xleak
+.SS OSINT (24)
+amass, finalrecon, geo-recon, ghunt, h8mail, holehe, infoga, ipgeolocation, maltego, octosuite, orbitaldump, osintgram, osrframework, phoneintel, recon-ng, recondog, scrapy, sherlock, shodan, snscrape, sublist3r, twifo-cli, virustotal-cli, xleak
 .
-.SS AI Agents / Agentes IA (25)
-antigravity-cli, cactus, claude-code, codebuff, codex, context7, copilot-cli, engram, freebuff, hermes-agent, kimi-code, mimocode, minimax-cli, mistral-vibe, muse-code, ollama, omniroute, open-lovable, openclaw, opencode, playwright-proot, qwen-code, sleepwalker, smithery, walkie
+.SS AI Agents / Agentes IA (21)
+antigravity-cli, claude-code, codebuff, codex, copilot-cli, deepseek-harness, freebuff, hermes-agent, kimi-code, mimocode, minimax-cli, mistral-vibe, muse-code, ollama, open-lovable, openclaw, opencode, opencode-v2, qwen-code, zcode, zcode-cli
 .
-.SS AI & Automation / IA y Automatizaci\['o]n (7)
-cactus, engram, herdr, huggingface, n8n, omniroute, sleepwalker
+.SS AI & Automation / IA y Automatizaci\['o]n (8)
+cactus, engram, herdr, huggingface, n8n, omniroute, sleepwalker, walkie
 .
-.SS MCP & Skills (4)
-context7, playwright-proot, smithery, termux-oracle-skill, testsprite
+.SS MCP & Skills (6)
+context7, playwright-proot, smali-lsp, smithery, termux-oracle-skill, testsprite
 .
-.SS Utilities / Utilidades (27)
-bash-obfuscate, code-server, converter, gh, git-filter-repo, glab-cli, jython-lts, mariadb, markdown-viewer, n8n, openjdk-21, openspec, pnpm, postgresql, proroot, scrapy, speedtest-go, sqlite, termux-desktop-xfce, termux-docker-qemu, tmux, translate-shell, ttyd, udocker, xapt-management, yt-dlp, ytfzf
+.SS Utilities / Utilidades (30)
+aguila-lang, bash-obfuscate, code-oss, code-server, converter, gh, git-filter-repo, glab-cli, jython-lts, mariadb, markdown-viewer, nljson, openjdk-21, openspec, pnpm, postgresql, proroot, speedtest-go, spin, sqlite, termux-desktop-bspwm, termux-desktop-xfce, termux-docker-qemu, tmux, translate-shell, ttyd, udocker, xapt-management, yt-dlp, ytfzf
 .
-.SS Exploitation / Explotaci\['o]n (10)
-beef, bitb-framework, cryptovenom, dos-a-tool, embed, exploitdb, metasploit-framework, penelope, quack, slowhttptest
+.SS Games / Juegos (2)
+clmystery, comandle
+.
+.SS Exploitation / Explotaci\['o]n (12)
+afrog, beef, bitb-framework, cryptovenom, dos-a-tool, embed, exploitdb, metasploit-framework, penelope, quack, ransomux, slowhttptest
 .
 .SS Forensics / Forense (13)
 binwalk, clamav, exif, gdb, ghidra, hexer, mvt, radare2, rea, shc, steghide, stegsnow, unshc
 .
 .SS Windows/AD (7)
-bloodhound, getadusers, getnpusers, getuserspns, kerbrute, mimikatz, ntlmrelayx
+bloodhound, getadusers, getnpusers, getuserspns, mimikatz, ntlmrelayx, polenum
 .
 .SS Phishing (4)
 botgram, evilginx2, ghost, gophish
@@ -554,7 +557,7 @@ cloudflared, dns2tcp, localtunnel, ngrok, ovh-ttyrec, putty
 hashcat, hasher, hashid, hcdecryptor, johntheripper, rhash
 .
 .SS TOTAL
-165 tools / herramientas. List with / Listar con: i-Haklab show alltools ; installed: i-Haklab show instatools
+187 tools / herramientas. List with / Listar con: i-Haklab show alltools ; installed: i-Haklab show instatools
 .
 .SH FILES / ARCHIVOS
 .TP
@@ -571,7 +574,7 @@ Environment variables, version v3.13, APIKEY_*, colors. / Variables de entorno, 
 All functions (helpper, banner, ih_normalize_pkg, ih_pkg2conf, chk-root, etc.). / Todas las funciones.
 .TP
 .I ~/.local/etc/i-Haklab/Tools/listoftools
-List of 165 tools (one per line). / Lista de 165 herramientas.
+List of 187 tools (one per line). / Lista de 187 herramientas.
 .TP
 .I ~/.local/etc/i-Haklab/Tools/categories
 Tool:Category mapping. / Mapeo herramienta:categor\['i]a.

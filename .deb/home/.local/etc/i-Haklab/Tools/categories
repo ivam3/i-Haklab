@@ -25,12 +25,14 @@ cactus:AI & Automation
 cewl:Password
 clamav:Forensics
 claude-code:AI Agents
+clmystery:Games
 cloudbunny:Cloud
 cloudflared:Tunneling
 code-oss:Utilities
 code-server:Utilities
 codebuff:AI Agents
 codex:AI Agents
+comandle:Games
 converter:Utilities
 context7:MCP & Skills
 copilot-cli:AI Agents
@@ -155,6 +157,7 @@ sqlite:Utilities
 sqlmap:Web Application
 sublist3r:OSINT
 telegram-desktop:Web Application
+terminus-game:Games
 termux-apk-make:Android
 termux-desktop-bspwm:Utilities
 termux-desktop-xfce:Utilities

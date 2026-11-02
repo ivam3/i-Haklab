@@ -4,22 +4,29 @@
 source ${HOME}/.local/etc/i-Haklab/variables
 source ${HOME}/.local/etc/i-Haklab/functions
 
+search_wrapper() {
+        echo -en "(_>) $1 is a tool added by i-Haklab\n[💡] Run 'i-Haklab about $1' for the tool manual\n"
+}
+
 install_wrapper() {
     local method="$1"
     local pkg="$2"
     local type="$3"
+    toolName="$4"
 
     [[ "$pkg" == "ctx7" ]] && { pkg="ctx7 setup";}
 
-    echo -en "${R}E:${W} $pkg is a $type, you should try it with ${Y}'$method $pkg'${W}\n"
+    echo -en "${R}E:${W} $toolName is a $type, you should try it with ${Y}'$method $pkg'${W}\n"
     echo "(_>) you want me to run it for you? "
     while true; do
         read -p "(y/n): " yesornot
         case "$yesornot" in
             y|Y|yes|YES)
-                eval "$method $pkg"
+                local -a _cmd
+                read -ra _cmd <<< "$method $pkg"
+                "${_cmd[@]}"
                 # npm wrapper already runs ih_pkg2conf; skip to avoid double run
-                [[ "$method" == npm* ]] || ih_pkg2conf "$pkg"
+                [[ "$method" == npm* ]] || ih_pkg2conf "${toolName:-$pkg}"
                 break
                 ;;
 
@@ -40,26 +47,67 @@ if [[ "$1" == "install" || "$1" == "reinstall" || "$1" == "search" ]]; then
         case "$i" in
             # PYTHON MODULES
             bloodhound|frida|h8mail|hashid|holehe|mvt|objection|octosuite|orbitaldump|osrframework|phoneintel|scrapy|shodan|snscrape|speedtest-cli|sqlmap|wfuzz)
+                [[ "$1" == "search" ]] && { search_wrapper  "$i"; continue;}
                 install_wrapper "python3 -m pip install" "$i" "python module"
-                continue 
+                continue
                 ;;
 
             # RUBY GEMS
             bettercap|aquatone)
+                [[ "$1" == "search" ]] && { search_wrapper  "$i"; continue;}
                 install_wrapper "gem install" "$i" "ruby gem"
                 continue
                 ;;
 
-            # NPM MODULES 
+            # NPM MODULES
             bash-obfuscate|codex|copilot-cli|gemini-cli|kimi-code|localtunnel|minimax-cli|n8n|pnpm|open-lovable|openspec|sleepwalker|qwen-code|testsprite|twifo-cli|zcode-cli)
+                [[ "$1" == "search" ]] && { search_wrapper  "$i"; continue;}
+                toolName="$i"
                 i=$(ih_normalize_pkg "$i")
-                install_wrapper "npm install -g" "$i" "nodejs module"
+                install_wrapper "npm install -g" "$i" "nodejs module" "$toolName"
                 continue
                 ;;
-            # NPX MODULES 
+            # NPX MODULES
             context7|sleepwalkerai)
-                [[ "$i" == "context7" ]] && { i="ctx7";}
-                install_wrapper "npx" "$i" "npx module"
+                [[ "$1" == "search" ]] && { search_wrapper  "$i"; continue;}
+                toolName="$i"
+                i=$(ih_normalize_pkg "$i")
+                install_wrapper "npx" "$i" "npx module" "$toolName"
+                continue
+                ;;
+
+            comandle)
+                [[ "$1" == "search" ]] && { search_wrapper  "$i"; continue;}
+                toolName="$i"
+                i=$(ih_normalize_pkg "$i")
+                install_wrapper "go install" "$i" "go binary" "$toolName"
+                continue
+                ;;
+
+            clmystery)
+                [[ "$1" == "search" ]] && { search_wrapper  "$i"; continue;}
+                if [[ ! -d "$HOME/.local/share/$i" ]]; then
+                    echo "Installing $i ..."
+                    if git clone --quiet "https://github.com/veltman/clmystery" "$HOME/.local/share/$i"; then
+                        echo "$i: english version installed in: ~/.local/share/$i"
+                    else
+                        echo -en "${Y}W:${W} Download english version failed\n"
+                    fi
+                else
+                    echo "$i is already installed (english version)"
+                fi
+                if [[ ! -d "$HOME/.local/share/${i}_esp" ]]; then
+                    rm -f "$TMPDIR/CTF_CLImurder.zip" 2>/dev/null
+                    megadl "https://mega.nz/file/aDJ0DJzS#j_7MUsVpjRmbsVjtKObTFeHjxKmV_2knXhfcvHG_4sA" --path "$TMPDIR/" 2>>"$LOGFILE"
+                    if unzip "$TMPDIR/CTF_CLImurder.zip" -d "$HOME/.local/share/" ; then
+                        echo "$i: version en español instalada en: ~/.local/share/${i}_esp"
+                        rm -f "$TMPDIR/CTF_CLImurder.zip" 2>>"$LOGFILE"
+                    else
+                        echo -en "${Y}W:${W} Download spanish version failed\n"
+                    fi
+                else
+                    echo "$i is already installed (spanish version)"
+                fi
                 continue
                 ;;
 

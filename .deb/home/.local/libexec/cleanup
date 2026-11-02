@@ -7,7 +7,24 @@ trap ctrl_c 2
 source $HOME/.local/etc/i-Haklab/variables
 source $iHETC/functions
 
+echo -en "\rCleaning up $1 following i-Haklab instructions ...  \b"
 case "$1" in
+    ai)
+        "$PREFIX/bin/pip" uninstall -y hybrid-cli-ai >/dev/null 2>&1
+        rm -rf "$HOME/.local/share/hybrid-cli-ai" 2>/dev/null
+        rm -f "$HOME/.local/share/iH-ai/history.json" 2>/dev/null
+        ;;
+
+    clmystery)
+        rm -rf "$HOME/.local/share/clmystery" \
+               "$HOME/.local/share/clmystery_esp" 2>/dev/null
+        ;;
+
+    comandle)
+        gopath="$(go env GOPATH 2>/dev/null)"
+        rm -f "${gopath:-$HOME/go}/bin/comandle" 2>/dev/null
+        ;;
+
     n8n)
         rm "$HOME/.config/fish/functions/n8n.fish" 2>/dev/null
         rm -rf "$HOME/.n8n" 2>/dev/null
@@ -21,12 +38,6 @@ case "$1" in
         fi
         ;;
 
-    ai)
-        "$PREFIX/bin/pip" uninstall -y hybrid-cli-ai >/dev/null 2>&1
-        rm -rf "$HOME/.local/share/hybrid-cli-ai" 2>/dev/null
-        rm -f "$HOME/.local/share/iH-ai/history.json" 2>/dev/null
-        ;;
-
     radare2)
         rm -f "$HOME/.radare2rc" "$HOME/.local/bin/r2chweb" 2>/dev/null
         ;;
@@ -37,4 +48,5 @@ case "$1" in
 
     *) ;;
 esac
+echo -en "[$G✔$W] DONE.\n"
 exit 0
