@@ -4,7 +4,7 @@
 
 `terminus-game` es un juego de aventura de texto para aprender a usar la línea de comandos de Linux. La historia te lleva por un mundo de fantasía (bosques, academias de magia, cuevas y ciudades) donde los hechizos son en realidad comandos reales de Unix/Linux: `ls`, `cd`, `less`, `pwd`, `cp`, `mv`, `rm`, `grep`, `touch` y `sudo`.
 
-Es un port nativo para Termux del juego original **Terminus** de Michele Pratusevich. Reproduce la lógica y el texto original en inglés mediante Node.js y sustituye el terminal del navegador por una interfaz de línea de comandos, con soporte opcional de imágenes en la terminal.
+Es un port nativo para Termux del juego original **Terminus** de Michele Pratusevich. Reproduce la lógica y el texto original mediante Node.js (en inglés por defecto, con opción de jugar en español) y sustituye el terminal del navegador por una interfaz de línea de comandos, con soporte opcional de imágenes en la terminal.
 
 ## ¿Para qué es útil?
 
@@ -49,8 +49,25 @@ terminus-game --images=chafa   # mostrar imágenes en la terminal
 terminus-game --images=open    # abrir imágenes con termux-open
 terminus-game --images=off     # desactivar imágenes
 terminus-game --script archivo # ejecutar comandos desde un archivo
+terminus-game --esp            # jugar en español
+terminus-game --lang es        # igual que --esp
 terminus-game --help
 ```
+
+**Jugar en español:**
+
+```bash
+terminus-game --esp
+```
+
+También puedes dejarlo configurado para la sesión actual:
+
+```bash
+export TERMINUS_LANG=es
+terminus-game
+```
+
+Los nombres de salas y objetos, los comandos y los libros del acertijo de `grep` se mantienen en inglés; las descripciones, los diálogos y los mensajes se muestran en español. La partida guardada es compatible entre ambos idiomas.
 
 **Imágenes (opcional):**
 
@@ -77,7 +94,7 @@ El archivo de guardado se conserva; bórralo manualmente (o usa `--reset`) para 
 
 ## Consideraciones Adicionales
 
-*   **Contenido en inglés:** el texto del juego es el original de Terminus; esta documentación está en español.
+*   **Idiomas:** inglés por defecto; usa `--esp` o `--lang es` para jugar en español. Esta documentación está en español.
 *   **Dependencia:** requiere `nodejs-lts` (proporciona `node`).
 *   **Imágenes opcionales:** `chafa` para dibujos en la terminal o `termux-api` (`termux-open`) para abrirlos en una app externa.
 *   **Guardado:** `~/.local/share/terminus-game/save.json`. Puedes cambiarlo con `--save` o la variable `TERMINUS_SAVE`. Sobrevive a actualizaciones, reinstalaciones y a la desinstalación del paquete.
