@@ -1,0 +1,110 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# cam-usb - capture a UVC camera directly over USB (no USB Camera app)
+# and expose it as a local MJPEG stream for OBS and mpv.
+#
+# Usage:
+#   cam-usb --list          list visible USB devices
+#   cam-usb --probe         request permission and detect the UVC camera (save VID:PID)
+#   cam-usb                 start the stream at http://127.0.0.1:9000/video
+#   cam-usb --stop          stop the stream
+#
+# Requires a working Termux:API app and no other app holding the camera.
+
+set -u
+
+DIR="$HOME/.local/src/uvc-cam"
+STREAM="$DIR/uvc-stream"
+PROBE="$DIR/usbdesc"
+VIDPID_FILE="$HOME/.config/cam-usb.vidpid"
+PORT="${CAM_PORT:-9000}"
+
+ensure_api() {
+    if ! ps -A -o args 2>/dev/null | grep -q '[c]om.termux.api'; then
+        am start -n com.termux.api/.activities.TermuxAPILauncherActivity >/dev/null 2>&1 || true
+        sleep 1
+    fi
+    termux-api-start >/dev/null 2>&1 || true
+}
+
+list_devices() {
+    timeout -k 2 20 termux-usb -l 2>&1
+}
+
+stop_stream() {
+    pkill -f "$STREAM" 2>/dev/null || true
+    sleep 1
+    pkill -9 -f "$STREAM" 2>/dev/null || true
+    echo "stream stopped"
+}
+
+probe() {
+    ensure_api
+    local out
+    out="$(list_devices)"
+    if ! grep -q '/dev/bus/usb/' <<<"$out"; then
+        echo "No USB devices are visible."
+        echo "Connect the UVC camera and try again."
+        echo "If the USB Camera app is installed, close or disable it so it does not claim the camera."
+        return 1
+    fi
+
+    local dev
+    while IFS= read -r dev; do
+        [[ -n "$dev" ]] || continue
+        echo "=== Probing $dev ==="
+        local tmp
+        tmp="$(mktemp)"
+        timeout -k 2 90 termux-usb -r -E -e "$PROBE" "$dev" 2>&1 | tee "$tmp"
+        if grep -q 'class=0e' "$tmp"; then
+            local vidpid
+            vidpid="$(awk '/^VID:PID/{print $3; exit}' "$tmp")"
+            if [[ -n "${vidpid:-}" ]]; then
+                local vid="${vidpid%%:*}"
+                local pid="${vidpid##*:}"
+                printf '%s %s\n' "$vid" "$pid" >"$VIDPID_FILE"
+                echo "UVC camera detected: $vidpid"
+                echo "Saved to $VIDPID_FILE"
+                echo "Now run: cam-usb"
+            fi
+        fi
+        rm -f "$tmp"
+    done < <(grep -o '"/dev/bus/usb/[^"]*"' <<<"$out" | tr -d '"')
+}
+
+stream() {
+    ensure_api
+    if [[ ! -x "$STREAM" ]]; then
+        echo "Missing $STREAM (build it first)."
+        return 1
+    fi
+    if pgrep -f "[u]vc-stream" >/dev/null 2>&1; then
+        echo "The stream is already running at http://127.0.0.1:$PORT/video"
+        return 0
+    fi
+    if [[ ! -s "$VIDPID_FILE" ]]; then
+        echo "No camera configured; detecting automatically..."
+        probe || return 1
+        if [[ ! -s "$VIDPID_FILE" ]]; then
+            echo "No UVC camera was detected."
+            return 1
+        fi
+    fi
+    local vid pid
+    read -r vid pid <"$VIDPID_FILE"
+    echo "Starting camera $vid:$pid at http://127.0.0.1:$PORT/video"
+    export CAM_PORT="$PORT"
+    exec termux-usb -r -E -e "$STREAM" "$vid" "$pid"
+}
+
+# Required so termux-usb exports the fd that uvc-stream reads.
+export TERMUX_EXPORT_FD=true
+
+case "${1:-}" in
+    --list)  ensure_api; list_devices ;;
+    --probe) probe ;;
+    --stop)  stop_stream ;;
+    -h|--help)
+        sed -n '2,14p' "$0" | sed 's/^# \{0,1\}//'
+        ;;
+    *) stream ;;
+esac

@@ -1067,7 +1067,7 @@
     "home/.local/libexec/i-Haklab/speedtest": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/speedtest",
     "home/.local/libexec/i-Haklab/tunnel": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/tunnel",
     "home/.local/libexec/i-Haklab/txt2media": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/txt2media",
-    "home/.local/libexec/i-Haklab/Xwayland": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/Xwayland",
+    "home/.local/libexec/i-Haklab/desktop": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/desktop",
     "home/.netrc": "/data/data/com.termux/files/home/.netrc",
     "home/.termux/colors.properties": "/data/data/com.termux/files/home/.termux/colors.properties",
     "home/.termux/font.ttf": "/data/data/com.termux/files/home/.termux/font.ttf",

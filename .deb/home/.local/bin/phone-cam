@@ -1,0 +1,115 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# phone-cam - expose a phone camera (front/back) as a local MJPEG stream,
+# without a camera app and without a visible preview window.
+#
+# Usage:
+#   phone-cam --list          list available cameras
+#   phone-cam back            main back camera (id 0), port 9001
+#   phone-cam front           front camera (id 1), port 9001
+#   phone-cam <id> [port]     camera by id
+#   phone-cam --stop          stop the stream
+#
+# URL for OBS / mpv:
+#   http://127.0.0.1:9001/video   (mpjpeg)
+#
+# Requires a connected ADB device (wireless debugging works) and scrcpy 5.x.
+# Note: most phone camera HALs cannot open the front and back cameras at the
+# same time; switch with "phone-cam front" / "phone-cam back".
+
+set -u
+
+DIR="$HOME/.local/src/uvc-cam"
+MJPEG_SERVER="$DIR/mjpeg-pipe-server"
+RUNDIR="$HOME/.cache/phone-cam"
+FIFO="$RUNDIR/fifo"
+LOG="$RUNDIR/phone-cam.log"
+PIDFILE="$RUNDIR/pids"
+PORT="${PHONE_CAM_PORT:-9001}"
+
+mkdir -p "$RUNDIR"
+
+die() { echo "$*" >&2; exit 1; }
+
+stop_cam() {
+    if [[ -f "$PIDFILE" ]]; then
+        local scpid pipeid
+        read -r scpid pipeid <"$PIDFILE" || true
+        [[ -n "${scpid:-}" ]] && kill -TERM -- "-$scpid" 2>/dev/null || true
+        [[ -n "${pipeid:-}" ]] && kill -TERM -- "-$pipeid" 2>/dev/null || true
+        rm -f "$PIDFILE"
+    fi
+    pkill -f "$FIFO" 2>/dev/null || true
+    pkill -f "$MJPEG_SERVER $PORT" 2>/dev/null || true
+    rm -f "$FIFO"
+}
+
+check_adb() {
+    command -v adb >/dev/null || die "adb is not installed"
+    command -v scrcpy >/dev/null || die "scrcpy is not installed"
+    local serial
+    # Prefer a wireless device (IP:port) when several devices are connected.
+    serial=$(adb devices | awk 'NR>1 && $2=="device"{print $1}' | grep ':' | head -n1)
+    if [[ -z "${serial:-}" ]]; then
+        serial=$(adb devices | awk 'NR>1 && $2=="device"{print $1; exit}')
+    fi
+    [[ -n "${serial:-}" ]] || die "No ADB device. Enable wireless debugging and connect adb first."
+    printf '%s\n' "$serial"
+}
+
+list_cameras() {
+    command -v scrcpy >/dev/null || die "scrcpy is not installed"
+    local serial
+    serial="$(check_adb)" || exit 1
+    scrcpy --serial "$serial" --list-cameras
+}
+
+start_cam() {
+    local id="$1" port="${2:-$PORT}"
+    [[ "$id" =~ ^[0-9]+$ ]] || die "invalid camera id: $id"
+    local serial
+    serial="$(check_adb)" || exit 1
+    [[ -x "$MJPEG_SERVER" ]] || die "Missing $MJPEG_SERVER"
+    stop_cam
+    : >"$LOG"
+    mkfifo "$FIFO" || die "Could not create $FIFO"
+
+    echo "Starting camera $id at http://127.0.0.1:$port/video (ADB: $serial)"
+    setsid scrcpy --serial "$serial" \
+        --video-source=camera \
+        --camera-id="$id" \
+        --camera-size=1280x720 \
+        --camera-fps=30 \
+        --no-audio --no-control --no-window \
+        --record="$FIFO" --record-format=mkv \
+        >>"$LOG" 2>&1 &
+    local scpid=$!
+
+    setsid bash -c \
+        "ffmpeg -hide_banner -loglevel warning \
+         -f matroska -i '$FIFO' \
+         -c:v mjpeg -q:v 7 -pix_fmt yuvj420p \
+         -flush_packets 1 -f mjpeg - | '$MJPEG_SERVER' '$port'" \
+        >>"$LOG" 2>&1 &
+    local pipeid=$!
+
+    echo "$scpid $pipeid" >"$PIDFILE"
+    sleep 3
+    if ! kill -0 "$scpid" 2>/dev/null; then
+        echo "scrcpy exited. Last log lines:"
+        tail -20 "$LOG"
+        stop_cam
+        exit 1
+    fi
+    echo "Stream active. For OBS/mpv: http://127.0.0.1:$port/video (mpjpeg)"
+    echo "Log: $LOG"
+}
+
+case "${1:-}" in
+    --list) list_cameras ;;
+    --stop) stop_cam; echo "phone-cam stopped" ;;
+    -h|--help) sed -n '2,20p' "$0" | sed 's/^# \{0,1\}//' ;;
+    back) start_cam 0 "${2:-$PORT}" ;;
+    front) start_cam 1 "${2:-$PORT}" ;;
+    "") die "Specify a camera: phone-cam back | front | <id> | --list | --stop" ;;
+    *) start_cam "$1" "${2:-$PORT}" ;;
+esac

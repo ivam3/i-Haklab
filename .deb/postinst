@@ -174,6 +174,7 @@ echo -en "[updates]
     |\t\t• net-traffic-scan (bypass netstat blocked by untrusted_app)
 [deleted]
     ╰──➤ Commands:
+    |\t\t• i-Haklab Xwayland (changed at 'i-Haklab desktop')
     |\t\t• i-Haklab chatGPT (changed at 'chatAI')
     |\t\t• i-Haklab weechat (deprecated)
 [Artificial Intellient]
