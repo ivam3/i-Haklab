@@ -157,6 +157,7 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 ╰─about──────+──<name─of─tool>───➤ Show informations about tool/framework
 |                     ╰───────ex─{─i-Haklab about crunch─}
 ╰─aptup──────➤───────────────────➤ Update termux manually, packages by packages
+╰─desktop───➤────────────────────➤ Run xserver over Termux x11 app with xfce4 as window manager
 ╰─help───────➤───────────────────➤ Show this help menu
 ╰─passwd─────+────set─|─new──────➤ Set and change the login termux
 |                 ╰─────|─────ex─{─i-Haklab passwd set──➤ password|fingerprint
@@ -175,7 +176,6 @@ _$Y   OPTIONS$W  |$Y     ARGUMENTS$W     |$Y    DESCRIPTION$W
 |   ╰────────+─────tutorials─────➤ Show tutorials available
 ╰─speedtest──➤───────────────────➤ Run a speed test of your network
 ╰─version────➤───────────────────➤ Show i-Haklab version installed
-╰─Xwayland───➤───────────────────➤ Run xserver over TermuXwayland app with xfce4 as window manager
 |            |                   |
 |            |                   |
 $Y       [--] Automatitation Options [--]$W

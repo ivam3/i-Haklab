@@ -49,9 +49,9 @@ PULSE_SERVER=unix:${PULSE_RUNTIME_PATH}/native pacmd load-module \
 export PULSE_SERVER=tcp:127.0.0.1:4713
 am start -n com.termux.x11/com.termux.x11.MainActivity;sleep 3
 
-[[ ! -z "$1" ]] && [[ "$1" == "Xwayland" ]] && { Xbin="$1";} || { Xbin="termux-x11";tip="Xwayland";}
+[[ ! -z "$1" ]] && [[ "$1" == "desktop" ]] && { Xbin="Xwayland";} || { Xbin="termux-x11";tip="Xwayland";}
 $(command -v $Xbin) :0 >/dev/null &
-sleep 5;xfce4-session --display=:0 || echo -en "${R}E: Display unreachable $W|$Y Try it with: ${G}i-Haklab Xwayland $tip$W"
+sleep 5;xfce4-session --display=:0 || echo -en "${R}E: Display unreachable $W|$Y Try it with: ${G}i-Haklab desktop $tip$W"
 
 killall main pulseaudio 2>/dev/null
 ####::: REPORT ISSUES AT https://t.me/Ivam3_Bot :::####

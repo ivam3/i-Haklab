@@ -23,7 +23,7 @@ tips=(
   "i-Haklab speedtest            —  test your network speed"
   "i-Haklab version              —  show i-Haklab version"
   "i-Haklab weechat              —  connect to IRC @Ivam3byCinderella"
-  "i-Haklab Xwayland             —  run Xserver via TermuXwayland + xfce4"
+  "i-Haklab desktop              —  run Xserver via Termux-x11 + xfce4"
   # -- AUTOMATITATION OPTIONS --
   "i-Haklab apkactivity <apk>    —  get main activity from .apk"
   "i-Haklab androforensic secretCodes  —  scan dialer codes via ADB"

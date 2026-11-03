@@ -2,7 +2,7 @@
 
 El proyecto **`termux-desktop-xfce`** es una integración avanzada de la suite que permite ejecutar el entorno de escritorio ligero **XFCE4** directamente sobre tu dispositivo Android de forma nativa. 
 
-A diferencia de las soluciones tradicionales de virtualización basadas en VNC que introducen una alta latencia y pérdida de calidad, esta integración aprovecha los servidores de ventanas **`termux-x11`** y **`Xwayland`** para interactuar directamente con la interfaz del sistema operativo, logrando la máxima fluidez, sincronización de portapapeles y salida de audio integrada.
+A diferencia de las soluciones tradicionales de virtualización basadas en VNC que introducen una alta latencia y pérdida de calidad, esta integración aprovecha los servidores de ventanas **`termux-x11`** y **`desktop`** para interactuar directamente con la interfaz del sistema operativo, logrando la máxima fluidez, sincronización de portapapeles y salida de audio integrada.
 
 ---
 

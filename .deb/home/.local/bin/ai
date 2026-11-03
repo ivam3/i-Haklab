@@ -12,7 +12,7 @@ fi
 VENDOR="$HOME/.local/libexec/iH-ai-shell.py"
 MODEL="qwen2.5-coder:1.5b"
 
-IHK_CTX="i-Haklab context (Termux-based suite): main command 'i-Haklab <sub>' with subcommands help, about <tool>, show alltools, setapikey, setbanner, setshell, setuser, chatAI, backup, aptup, ngroklink, ngrokssh, tunnel, servers4test, Xwayland. Wrappers in ~/.local/bin replacing standard commands: apt/npm/pnpm (install tools), bat (cat), nls (ls), glow (md), df, du, proxy (tor), pm, cmd, fixer, rmcache. To install a tool: apt install <tool>. Docs: i-Haklab about <tool>. Menu: i-Haklab help."
+IHK_CTX="i-Haklab context (Termux-based suite): main command 'i-Haklab <sub>' with subcommands help, about <tool>, show alltools, setapikey, setbanner, setshell, setuser, chatAI, backup, aptup, ngroklink, ngrokssh, tunnel, servers4test, desktop. Wrappers in ~/.local/bin replacing standard commands: apt/npm/pnpm (install tools), bat (cat), nls (ls), glow (md), df, du, proxy (tor), pm, cmd, fixer, rmcache. To install a tool: apt install <tool>. Docs: i-Haklab about <tool>. Menu: i-Haklab help."
 
 if [[ "$1" == "disable" ]]; then
     bash "$HOME/.local/libexec/cleanup" ai
