@@ -206,6 +206,19 @@ PY
         rm -f "$HOME/.local/bin/ttyd" 2>/dev/null
         ;;
 
+    zcode-cli|zcode-app-cli)
+        # npm removes the package itself. Remove the renamed CLI link, but
+        # never touch the desktop 'zcode' binary owned by another package.
+        for bin in "$PREFIX/bin/zcode" "$PREFIX/bin/zcode-cli"; do
+            if [[ -L "$bin" && "$(readlink "$bin" 2>/dev/null)" == *zcode-app-cli* ]]; then
+                rm -f "$bin"
+            fi
+        done
+        # CLI configuration, sessions and history live in ~/.zcode/cli.
+        rm -rf "$HOME/.zcode/cli" 2>/dev/null
+        rmdir "$HOME/.zcode" 2>/dev/null || true
+        ;;
+
     *) ;;
 esac
 echo -en "[$G✔$W] DONE.\n"
