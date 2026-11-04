@@ -1,0 +1,68 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# phone-float - show the phone camera (phone-cam) in a borderless,
+# always-on-top floating window on XFCE/X11.
+#
+# Usage:
+#   phone-float                 # open (or close when already running)
+#   phone-float 480x360+20+20   # open with an explicit size/position
+#   phone-float --stop          # close the window
+#
+# Optional variable:
+#   PHONE_CAM_URL=http://127.0.0.1:9001/video
+
+set -u
+
+URL="${PHONE_CAM_URL:-http://127.0.0.1:9001/video}"
+PIDFILE="${TMPDIR:-/tmp}/phone-float.pid"
+TITLE="Phone Camera"
+
+stop() {
+    if [[ -f "$PIDFILE" ]]; then
+        local pid
+        pid=$(cat "$PIDFILE" 2>/dev/null || true)
+        if [[ -n "${pid:-}" ]] && kill -0 "$pid" 2>/dev/null; then
+            kill "$pid" 2>/dev/null || true
+            sleep 1
+            kill -9 "$pid" 2>/dev/null || true
+        fi
+        rm -f "$PIDFILE"
+    fi
+    pkill -f "mpv .*--title=$TITLE" 2>/dev/null || true
+}
+
+if [[ "${1:-}" == "--stop" ]]; then
+    stop
+    exit 0
+fi
+
+if [[ -f "$PIDFILE" ]] && kill -0 "$(cat "$PIDFILE" 2>/dev/null)" 2>/dev/null; then
+    stop
+    exit 0
+fi
+
+geom="${1:-}"
+if [[ -z "$geom" ]]; then
+    res=$(xrandr --current 2>/dev/null | awk '/\*/{print $1; exit}')
+    W=${res%x*}
+    H=${res#*x}
+    if [[ -z "${W:-}" || -z "${H:-}" ]]; then
+        W=1920
+        H=1080
+    fi
+    w=352
+    h=264
+    m=24
+    geom="${w}x${h}+$((W - w - m))+${m}"
+fi
+
+setsid mpv --no-config \
+    --title="$TITLE" \
+    --no-border --ontop --focus-on=never \
+    --geometry="$geom" \
+    --no-osc --no-osd-bar \
+    --no-input-default-bindings --no-input-vo-keyboard \
+    --profile=low-latency --cache=no \
+    --really-quiet \
+    -- "$URL" >/dev/null 2>&1 &
+
+echo $! >"$PIDFILE"

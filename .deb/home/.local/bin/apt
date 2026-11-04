@@ -125,6 +125,10 @@ if [[ "$1" == "install" || "$1" == "reinstall" || "$1" == "search" ]]; then
                 ;;
 
             *)
+                # Native packages can still need pre-install actions; run them
+                # before the package is unpacked. Skip read-only searches.
+                [[ "$1" == "search" ]] || \
+                    bash "$HOME/.local/libexec/preconf" "$i" 2>/dev/null || true
                 "$PREFIX/bin/apt" "$1" "$i"
                 [[ "$1" == "search" ]] || { ih_pkg2conf "$i";}
                 ;;

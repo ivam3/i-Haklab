@@ -32,6 +32,166 @@ case "$1" in
         rmdir "$HOME/.gyp" 2>/dev/null
         ;;
 
+    obs-studio)
+        # Undo the camera scenes/sources added by pkg2conf and the build
+        # artifacts created by preconf. User scenes and other sources remain.
+        if pgrep -x obs >/dev/null 2>&1; then
+            echo "[!] Close OBS before cleaning the camera scenes."
+        elif ! command -v python3 >/dev/null 2>&1; then
+            echo "[!] python3 is required to clean the OBS scenes."
+        else
+            python3 - "$HOME" <<'PY' || echo "[!] Could not clean the OBS scenes."
+import json
+import os
+import shutil
+import sys
+import time
+import uuid
+from pathlib import Path
+
+home = Path(sys.argv[1])
+cfg = home / ".config" / "obs-studio"
+scenes_dir = cfg / "basic" / "scenes"
+user_ini = cfg / "user.ini"
+
+
+def ini_get(path, section, key, default=None):
+    current = None
+    try:
+        lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    except OSError:
+        return default
+    for raw in lines:
+        line = raw.strip()
+        if line.startswith("[") and line.endswith("]"):
+            current = line[1:-1]
+        elif current == section and "=" in line:
+            name, value = line.split("=", 1)
+            if name.strip() == key:
+                return value.strip()
+    return default
+
+
+collection = ini_get(user_ini, "Basic", "SceneCollectionFile", "Untitled.json")
+collection = collection or "Untitled.json"
+scene_path = Path(collection)
+if not scene_path.is_absolute():
+    scene_path = scenes_dir / scene_path
+if not scene_path.exists():
+    print("[i-HakLab] No OBS collection found; nothing to clean.")
+    raise SystemExit(0)
+
+try:
+    data = json.loads(scene_path.read_text(encoding="utf-8"))
+except (OSError, ValueError) as exc:
+    print(f"[!] Cannot read {scene_path}: {exc}", file=sys.stderr)
+    raise SystemExit(1)
+
+ns = uuid.UUID("6c69626f-6273-4c00-9d88-c5136d61696e")
+scene_names = {"Cámara USB", "Cámara Trasera", "Cámara Frontal", "USB + Teléfono"}
+source_names = {"Cámara USB (MJPEG)", "Cámara Teléfono (MJPEG)"}
+camera_urls = {"http://127.0.0.1:9000/video", "http://127.0.0.1:9001/video"}
+expected_scene_uuids = {
+    str(uuid.uuid5(ns, "i-haklab/obs/scene/" + name)) for name in scene_names
+}
+expected_source_uuids = {
+    str(uuid.uuid5(ns, "i-haklab/obs/usb-source")),
+    str(uuid.uuid5(ns, "i-haklab/obs/phone-source")),
+}
+
+
+def is_camera_scene(source):
+    return (
+        source.get("id") == "scene"
+        and source.get("name") in scene_names
+        and source.get("uuid") in expected_scene_uuids
+    )
+
+
+def is_camera_source(source):
+    if source.get("id") != "ffmpeg_source":
+        return False
+    if source.get("uuid") in expected_source_uuids:
+        return True
+    settings = source.get("settings", {})
+    return (
+        source.get("name") in source_names
+        and settings.get("input") in camera_urls
+    )
+
+
+sources = data.get("sources", [])
+removed_scene_names = set()
+remaining = []
+for source in sources:
+    if is_camera_scene(source):
+        removed_scene_names.add(source.get("name"))
+        continue
+    remaining.append(source)
+
+referenced = set()
+for source in remaining:
+    for item in source.get("settings", {}).get("items", []):
+        if item.get("source_uuid"):
+            referenced.add(item["source_uuid"])
+
+removed_sources = []
+cleaned = []
+for source in remaining:
+    if is_camera_source(source) and source.get("uuid") not in referenced:
+        removed_sources.append(source.get("name"))
+        continue
+    cleaned.append(source)
+
+if not removed_scene_names and not removed_sources:
+    print("[i-HakLab] No i-HakLab camera scenes or sources found.")
+    raise SystemExit(0)
+
+backup = scene_path.with_name(
+    scene_path.name + ".bak.cleanup-" + time.strftime("%Y%m%d%H%M%S")
+)
+shutil.copy2(scene_path, backup)
+print(f"[i-HakLab] Backup: {backup}")
+
+data["sources"] = cleaned
+order = data.get("scene_order") or []
+data["scene_order"] = [
+    entry for entry in order
+    if (entry.get("name") if isinstance(entry, dict) else entry)
+    not in removed_scene_names
+]
+
+remaining_scene_names = {
+    source.get("name") for source in cleaned
+    if source.get("id") == "scene"
+}
+for key in ("current_scene", "current_program_scene"):
+    if data.get(key) not in remaining_scene_names:
+        data[key] = next(iter(remaining_scene_names), "")
+
+tmp = scene_path.with_suffix(scene_path.suffix + ".tmp")
+tmp.write_text(json.dumps(data, ensure_ascii=False, indent=4) + "\n",
+               encoding="utf-8")
+os.replace(tmp, scene_path)
+
+for name in sorted(removed_scene_names):
+    print(f"[i-HakLab] Scene removed: {name}")
+for name in sorted(set(removed_sources)):
+    print(f"[i-HakLab] Source removed: {name}")
+print(f"[i-HakLab] OBS collection updated: {scene_path}")
+PY
+        fi
+
+        # preconf builds these outside the package manifest. Remove only the
+        # generated artifacts; the packaged sources and scripts stay.
+        if [[ -d "$HOME/.local/src/uvc-cam/libuvc/.git" ]]; then
+            rm -rf "$HOME/.local/src/uvc-cam/libuvc"
+        fi
+        rm -f "$HOME/.local/src/uvc-cam/uvc-stream" \
+              "$HOME/.local/src/uvc-cam/usbdesc" \
+              "$HOME/.local/src/uvc-cam/mjpeg-pipe-server"
+        ;;
+
     open-lovable)
         if ls "$HOME/.local/share/open-lovable" &>/dev/null; then
             rm -rf "$HOME/.local/share/open-lovable"

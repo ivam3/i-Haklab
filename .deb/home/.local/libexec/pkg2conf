@@ -330,6 +330,394 @@ end""" > ${HOME}/.config/fish/functions/n8n.fish
         chmod +x ${HOME}/.config/fish/functions/n8n.fish
         ;;
 
+    obs-studio)
+        # Apply the i-HakLab OBS camera scenes to the active collection.
+        # OBS keeps the collection in memory while running, so never write it
+        # under a live instance.
+        if pgrep -x obs >/dev/null 2>&1; then
+            echo "[!] Close OBS before applying the camera scenes."
+            echo "[i] Then run: pkg2conf obs-studio"
+        elif ! command -v python3 >/dev/null 2>&1; then
+            echo "[!] python3 is required to merge the OBS scenes."
+        else
+            python3 - "$HOME" <<'PY' || echo "[!] Could not merge the OBS scenes."
+import json
+import os
+import shutil
+import sys
+import time
+import uuid
+from pathlib import Path
+
+home = Path(sys.argv[1])
+cfg = home / ".config" / "obs-studio"
+scenes_dir = cfg / "basic" / "scenes"
+user_ini = cfg / "user.ini"
+
+
+def ini_get(path, section, key, default=None):
+    current = None
+    try:
+        lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    except OSError:
+        return default
+    for raw in lines:
+        line = raw.strip()
+        if line.startswith("[") and line.endswith("]"):
+            current = line[1:-1]
+        elif current == section and "=" in line:
+            name, value = line.split("=", 1)
+            if name.strip() == key:
+                return value.strip()
+    return default
+
+
+profile_dir = ini_get(user_ini, "Basic", "ProfileDir", "Termux") or "Termux"
+profile_ini = cfg / "basic" / "profiles" / profile_dir / "basic.ini"
+try:
+    base_cx = int(ini_get(profile_ini, "Video", "BaseCX", "1920") or 1920)
+    base_cy = int(ini_get(profile_ini, "Video", "BaseCY", "1080") or 1080)
+except ValueError:
+    base_cx, base_cy = 1920, 1080
+
+collection = ini_get(user_ini, "Basic", "SceneCollectionFile", "Untitled.json")
+collection = collection or "Untitled.json"
+scene_path = Path(collection)
+if not scene_path.is_absolute():
+    scene_path = scenes_dir / scene_path
+
+usb_source = "Cámara USB (MJPEG)"
+phone_source = "Cámara Teléfono (MJPEG)"
+usb_scene = "Cámara USB"
+back_scene = "Cámara Trasera"
+front_scene = "Cámara Frontal"
+combined_scene = "USB + Teléfono"
+camera_scenes = [usb_scene, back_scene, front_scene, combined_scene]
+
+ns = uuid.UUID("6c69626f-6273-4c00-9d88-c5136d61696e")
+source_uuid = {
+    usb_source: str(uuid.uuid5(ns, "i-haklab/obs/usb-source")),
+    phone_source: str(uuid.uuid5(ns, "i-haklab/obs/phone-source")),
+}
+
+
+def source_template(name, url):
+    return {
+        "prev_ver": 553648129,
+        "name": name,
+        "uuid": source_uuid[name],
+        "id": "ffmpeg_source",
+        "versioned_id": "ffmpeg_source",
+        "settings": {
+            "input": url,
+            "input_format": "mpjpeg",
+            "close_when_inactive": True,
+            "hw_decode": False,
+            "is_local_file": False,
+            "looping": False,
+            "clear_on_media_end": False,
+            "restart_on_activate": False,
+            "buffering_mb": 0,
+            "speed_percent": 100,
+        },
+        "mixers": 0,
+        "sync": 0,
+        "flags": 0,
+        "volume": 1.0,
+        "balance": 0.5,
+        "enabled": True,
+        "muted": True,
+        "push-to-mute": False,
+        "push-to-mute-delay": 0,
+        "push-to-talk": False,
+        "push-to-talk-delay": 0,
+        "hotkeys": {
+            "libobs.mute": [],
+            "libobs.unmute": [],
+            "libobs.monitor-on": [],
+            "libobs.monitor-off": [],
+            "libobs.push-to-mute": [],
+            "libobs.push-to-talk": [],
+            "MediaSource.Restart": [],
+            "MediaSource.Play": [],
+            "MediaSource.Pause": [],
+            "MediaSource.Stop": [],
+        },
+        "deinterlace_mode": 0,
+        "deinterlace_field_order": 0,
+        "monitoring_type": 0,
+        "monitoring_enabled": False,
+        "private_settings": {},
+    }
+
+
+def fullscreen_item(source_name, item_id):
+    sx = base_cx / 1280.0
+    sy = base_cy / 720.0
+    return {
+        "name": source_name,
+        "source_uuid": source_uuid[source_name],
+        "visible": True,
+        "locked": False,
+        "rot": 0.0,
+        "scale_ref": {"x": float(base_cx), "y": float(base_cy)},
+        "align": 0,
+        "bounds_type": 0,
+        "bounds_align": 0,
+        "bounds_crop": False,
+        "crop_left": 0,
+        "crop_top": 0,
+        "crop_right": 0,
+        "crop_bottom": 0,
+        "id": item_id,
+        "group_item_backup": False,
+        "pos": {"x": base_cx / 2.0, "y": base_cy / 2.0},
+        "pos_rel": {"x": 0.0, "y": 0.0},
+        "scale": {"x": sx, "y": sy},
+        "scale_rel": {"x": sx, "y": sy},
+        "bounds": {"x": 0.0, "y": 0.0},
+        "bounds_rel": {"x": 0.0, "y": 0.0},
+        "scale_filter": "disable",
+        "blend_method": "default",
+        "blend_type": "normal",
+        "show_transition": {"duration": 300},
+        "hide_transition": {"duration": 300},
+        "private_settings": {},
+    }
+
+
+def pip_item(source_name, item_id):
+    pip_w = base_cx * 0.25
+    pip_h = pip_w * 720.0 / 1280.0
+    margin = 40.0
+    center_x = base_cx - margin - pip_w / 2.0
+    center_y = base_cy - margin - pip_h / 2.0
+    scale = pip_w / 1280.0
+    pos_rel_x = (center_x - base_cx / 2.0) / (base_cy / 2.0)
+    pos_rel_y = (center_y - base_cy / 2.0) / (base_cy / 2.0)
+    return {
+        "name": source_name,
+        "source_uuid": source_uuid[source_name],
+        "visible": True,
+        "locked": False,
+        "rot": 0.0,
+        "scale_ref": {"x": float(base_cx), "y": float(base_cy)},
+        "align": 0,
+        "bounds_type": 0,
+        "bounds_align": 0,
+        "bounds_crop": False,
+        "crop_left": 0,
+        "crop_top": 0,
+        "crop_right": 0,
+        "crop_bottom": 0,
+        "id": item_id,
+        "group_item_backup": False,
+        "pos": {"x": center_x, "y": center_y},
+        "pos_rel": {"x": pos_rel_x, "y": pos_rel_y},
+        "scale": {"x": scale, "y": scale},
+        "scale_rel": {"x": scale, "y": scale},
+        "bounds": {"x": 0.0, "y": 0.0},
+        "bounds_rel": {"x": 0.0, "y": 0.0},
+        "scale_filter": "disable",
+        "blend_method": "default",
+        "blend_type": "normal",
+        "show_transition": {"duration": 300},
+        "hide_transition": {"duration": 300},
+        "private_settings": {},
+    }
+
+
+def scene_template(name, items):
+    max_id = max((item["id"] for item in items), default=0)
+    hotkeys = {"OBSBasic.SelectScene": []}
+    for item in items:
+        hotkeys[f"libobs.show_scene_item.{item['id']}"] = []
+        hotkeys[f"libobs.hide_scene_item.{item['id']}"] = []
+    return {
+        "prev_ver": 553648129,
+        "name": name,
+        "uuid": str(uuid.uuid5(ns, "i-haklab/obs/scene/" + name)),
+        "id": "scene",
+        "versioned_id": "scene",
+        "settings": {
+            "id_counter": max_id + 1,
+            "custom_size": False,
+            "items": items,
+        },
+        "mixers": 0,
+        "sync": 0,
+        "flags": 0,
+        "volume": 1.0,
+        "balance": 0.5,
+        "enabled": True,
+        "muted": False,
+        "push-to-mute": False,
+        "push-to-mute-delay": 0,
+        "push-to-talk": False,
+        "push-to-talk-delay": 0,
+        "hotkeys": hotkeys,
+        "deinterlace_mode": 0,
+        "deinterlace_field_order": 0,
+        "monitoring_type": 0,
+        "monitoring_enabled": False,
+        "canvas_uuid": "6c69626f-6273-4c00-9d88-c5136d61696e",
+        "private_settings": {},
+    }
+
+
+new_collection = {
+    "name": scene_path.stem,
+    "sources": [],
+    "groups": [],
+    "scene_order": [],
+    "current_scene": usb_scene,
+    "current_program_scene": usb_scene,
+    "canvases": [],
+    "current_transition": "Fade",
+    "transition_duration": 300,
+    "transitions": [],
+    "quick_transitions": [],
+    "saved_projectors": [],
+    "preview_locked": False,
+    "scaling_enabled": False,
+    "scaling_level": -15,
+    "scaling_off_x": 0.0,
+    "scaling_off_y": 0.0,
+    "modules": {},
+    "version": 2,
+}
+
+if scene_path.exists():
+    try:
+        data = json.loads(scene_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        print(f"[!] Cannot read {scene_path}: {exc}", file=sys.stderr)
+        raise SystemExit(1)
+    backup = scene_path.with_name(
+        scene_path.name + ".bak.ih-" + time.strftime("%Y%m%d%H%M%S")
+    )
+    shutil.copy2(scene_path, backup)
+    print(f"[i-HakLab] Backup: {backup}")
+else:
+    data = new_collection
+    scene_path.parent.mkdir(parents=True, exist_ok=True)
+    if not user_ini.exists():
+        cfg.mkdir(parents=True, exist_ok=True)
+        user_ini.write_text(
+            "[Basic]\n"
+            "Profile=Termux\n"
+            "ProfileDir=Termux\n"
+            "SceneCollection=Untitled\n"
+            "SceneCollectionFile=Untitled.json\n",
+            encoding="utf-8",
+        )
+
+sources = data.setdefault("sources", [])
+by_name = {item.get("name"): item for item in sources if isinstance(item, dict)}
+
+for name, url in ((usb_source, "http://127.0.0.1:9000/video"),
+                  (phone_source, "http://127.0.0.1:9001/video")):
+    existing = by_name.get(name)
+    if existing is None:
+        obj = source_template(name, url)
+        sources.append(obj)
+        by_name[name] = obj
+        print(f"[i-HakLab] Source '{name}': added")
+    elif existing.get("id") != "ffmpeg_source":
+        print(f"[!] Source '{name}' already exists with type "
+              f"'{existing.get('id')}'; left untouched.")
+        old_uuid = existing.get("uuid")
+        if old_uuid:
+            source_uuid[name] = old_uuid
+        else:
+            existing["uuid"] = source_uuid[name]
+    else:
+        settings = existing.setdefault("settings", {})
+        settings["input"] = url
+        settings["input_format"] = "mpjpeg"
+        settings["close_when_inactive"] = True
+        existing["muted"] = True
+        old_uuid = existing.get("uuid")
+        if old_uuid:
+            source_uuid[name] = old_uuid
+        else:
+            existing["uuid"] = source_uuid[name]
+        print(f"[i-HakLab] Source '{name}': updated")
+
+existing_scenes = {
+    item.get("name") for item in sources
+    if isinstance(item, dict) and item.get("id") == "scene"
+}
+scene_items = {
+    usb_scene: [fullscreen_item(usb_source, 1)],
+    back_scene: [fullscreen_item(phone_source, 1)],
+    front_scene: [fullscreen_item(phone_source, 1)],
+    combined_scene: [fullscreen_item(usb_source, 1), pip_item(phone_source, 2)],
+}
+
+added_scenes = []
+for name in camera_scenes:
+    if name in existing_scenes:
+        print(f"[i-HakLab] Scene '{name}': already exists, left untouched")
+        continue
+    sources.append(scene_template(name, scene_items[name]))
+    added_scenes.append(name)
+    print(f"[i-HakLab] Scene '{name}': added")
+
+order = data.get("scene_order") or []
+order_names = {
+    (entry.get("name") if isinstance(entry, dict) else entry)
+    for entry in order
+}
+for name in added_scenes:
+    if name not in order_names:
+        order.append({"name": name})
+data["scene_order"] = [
+    entry if isinstance(entry, dict) else {"name": entry}
+    for entry in order
+]
+
+all_scene_names = {
+    item.get("name") for item in sources
+    if isinstance(item, dict) and item.get("id") == "scene"
+}
+if data.get("current_scene") not in all_scene_names:
+    data["current_scene"] = usb_scene if usb_scene in all_scene_names else next(iter(all_scene_names), "")
+if data.get("current_program_scene") not in all_scene_names:
+    data["current_program_scene"] = data.get("current_scene", "")
+
+data.setdefault("name", scene_path.stem)
+data.setdefault("groups", [])
+data.setdefault("canvases", [])
+data.setdefault("transitions", [])
+data.setdefault("quick_transitions", [])
+data.setdefault("saved_projectors", [])
+data.setdefault("preview_locked", False)
+data.setdefault("scaling_enabled", False)
+data.setdefault("scaling_level", -15)
+data.setdefault("scaling_off_x", 0.0)
+data.setdefault("scaling_off_y", 0.0)
+data.setdefault("modules", {})
+data.setdefault("version", 2)
+data.setdefault("current_transition", "Fade")
+data.setdefault("transition_duration", 300)
+
+tmp = scene_path.with_suffix(scene_path.suffix + ".tmp")
+tmp.write_text(json.dumps(data, ensure_ascii=False, indent=4) + "\n",
+               encoding="utf-8")
+os.replace(tmp, scene_path)
+print(f"[i-HakLab] OBS collection updated: {scene_path}")
+PY
+        fi
+
+        # preconf normally builds these before apt installs obs-studio. Keep a
+        # fallback for installs made with the native apt binary.
+        if [[ ! -x "$HOME/.local/src/uvc-cam/uvc-stream" ]]; then
+            bash "$HOME/.local/libexec/i-Haklab/build-uvc-cam" >>"$LOGFILE" 2>&1 || \
+                echo "[!] Camera helper build failed; run: ~/.local/libexec/i-Haklab/build-uvc-cam"
+        fi
+        ;;
+
     nano)
 		cat <<- CONF > $HOME/.nanorc
 set linenumbers

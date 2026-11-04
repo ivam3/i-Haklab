@@ -1072,6 +1072,16 @@
     "home/.termux/colors.properties": "/data/data/com.termux/files/home/.termux/colors.properties",
     "home/.termux/font.ttf": "/data/data/com.termux/files/home/.termux/font.ttf",
     "home/.termux/termux.properties": "/data/data/com.termux/files/home/.termux/termux.properties",
-    "home/.bashrc": "/data/data/com.termux/files/home/.bashrc"
+    "home/.bashrc": "/data/data/com.termux/files/home/.bashrc",
+    "home/.local/bin/cam-usb": "/data/data/com.termux/files/home/.local/bin/cam-usb",
+    "home/.local/bin/cam-float": "/data/data/com.termux/files/home/.local/bin/cam-float",
+    "home/.local/bin/phone-cam": "/data/data/com.termux/files/home/.local/bin/phone-cam",
+    "home/.local/bin/phone-float": "/data/data/com.termux/files/home/.local/bin/phone-float",
+    "home/.local/libexec/i-Haklab/build-uvc-cam": "/data/data/com.termux/files/home/.local/libexec/i-Haklab/build-uvc-cam",
+    "home/.local/src/uvc-cam/Makefile": "/data/data/com.termux/files/home/.local/src/uvc-cam/Makefile",
+    "home/.local/src/uvc-cam/mjpeg-pipe-server.c": "/data/data/com.termux/files/home/.local/src/uvc-cam/mjpeg-pipe-server.c",
+    "home/.local/src/uvc-cam/usbdesc.c": "/data/data/com.termux/files/home/.local/src/uvc-cam/usbdesc.c",
+    "home/.local/src/uvc-cam/uvc-stream.c": "/data/data/com.termux/files/home/.local/src/uvc-cam/uvc-stream.c",
+    "home/.local/etc/i-Haklab/Tools/Readme/obs-studio.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/obs-studio.md"
   }
 }

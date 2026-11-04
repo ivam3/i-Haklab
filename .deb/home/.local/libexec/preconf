@@ -26,6 +26,25 @@ case "$tool" in
         [[ "$pm" == "pnpm" ]] && "$PREFIX/bin/pnpm" approve-builds -g
         ;;
 
+    obs-studio)
+        # OBS camera sources need ffmpeg, adb/scrcpy, and a local libuvc build.
+        # Install dependencies before obs-studio itself is unpacked.
+        for p in clang cmake make pkg-config git libusb libjpeg-turbo \
+                 ffmpeg scrcpy android-tools termux-api mpv python procps \
+                 coreutils; do
+            if ! dpkg -s "$p" >/dev/null 2>&1 && ! command -v "$p" >/dev/null 2>&1; then
+                echo "(_>) Installing $p ..."
+                yes | "$PREFIX/bin/apt" install "$p" >/dev/null 2>&1 || true
+            fi
+        done
+        if [[ -x "$HOME/.local/libexec/i-Haklab/build-uvc-cam" ]]; then
+            bash "$HOME/.local/libexec/i-Haklab/build-uvc-cam" || \
+                echo "(_>) Camera helpers failed to build; run: ~/.local/libexec/i-Haklab/build-uvc-cam"
+        else
+            echo "(_>) Missing build-uvc-cam (reinstall i-Haklab)"
+        fi
+        ;;
+
     open-lovable)
         pm="${1:-npm}"; action="${2:-install}"
         if ls "$HOME/.local/share/open-lovable" &>/dev/null; then

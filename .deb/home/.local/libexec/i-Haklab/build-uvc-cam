@@ -1,0 +1,53 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# build-uvc-cam - build the local MJPEG/UVC helpers used by the OBS scenes.
+#
+# The helpers are compiled on the device because i-Haklab ships "Architecture:
+# all" packages. libuvc is cloned from upstream and pinned to v0.0.9.
+
+set -euo pipefail
+
+DIR="$HOME/.local/src/uvc-cam"
+LIBUVC="$DIR/libuvc"
+UVC_TAG="v0.0.9"
+
+need() {
+    command -v "$1" >/dev/null 2>&1 || {
+        echo "[i-HakLab] Missing build tool: $1" >&2
+        return 1
+    }
+}
+
+for tool in cc make cmake git; do
+    need "$tool" || exit 1
+done
+
+[[ -f "$DIR/Makefile" ]] || {
+    echo "[i-HakLab] Missing $DIR/Makefile (reinstall i-Haklab)" >&2
+    exit 1
+}
+
+mkdir -p "$DIR"
+
+if [[ ! -d "$LIBUVC" ]]; then
+    echo "[i-HakLab] Cloning libuvc $UVC_TAG ..."
+    git clone --quiet --depth 1 --branch "$UVC_TAG" \
+        https://github.com/libuvc/libuvc.git "$LIBUVC"
+fi
+
+[[ -f "$LIBUVC/CMakeLists.txt" ]] || {
+    echo "[i-HakLab] $LIBUVC is incomplete; remove it and retry" >&2
+    exit 1
+}
+
+echo "[i-HakLab] Building libuvc ..."
+cmake -S "$LIBUVC" -B "$LIBUVC/build" \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_EXAMPLES=OFF \
+    -DBUILD_TESTING=OFF >/dev/null
+cmake --build "$LIBUVC/build" -j"$(nproc)" >/dev/null
+
+echo "[i-HakLab] Building camera helpers ..."
+make -C "$DIR" -j"$(nproc)" >/dev/null
+chmod +x "$DIR/mjpeg-pipe-server" "$DIR/usbdesc" "$DIR/uvc-stream"
+
+echo "[i-HakLab] Camera helpers ready in $DIR"
