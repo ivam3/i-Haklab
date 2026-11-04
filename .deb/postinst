@@ -3,7 +3,7 @@ IFS=$'\n\t'
 # INVOKE VARIABLES AND FUNCTIONS
 source ${HOME}/.local/etc/i-Haklab/variables
 source $iHETC/functions
-fontsV="v2.3.3"
+fontsV="v3.5.1"
 z=$(sleep 0.5)
 
 # PREINST
@@ -121,6 +121,7 @@ echo "Setting up @demon (victor028) packages ..."
 curl -fsSL "https://raw.githubusercontent.com/VictorH028/victorh028.github.io/refs/heads/gh-pages/key/demon-termux-packages.list" | tee "$PREFIX/etc/apt/sources.list.d/demon-termux-packages.list" >/dev/null 2>>$LOGFILE
 
 # SIGNING KEY
+echo "Signing @demon (victor028) packages ..."
 curl -fsSL "https://raw.githubusercontent.com/VictorH028/victorh028.github.io/refs/heads/main/demon-packages/demon-packages-key.asc"  | gpg --dearmor | tee "$PREFIX/etc/apt/trusted.gpg.d/demon.gpg" >/dev/null 2>>$LOGFILE
 
 # SETTING UP ML0CATE DATABASE
