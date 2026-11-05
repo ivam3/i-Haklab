@@ -142,6 +142,13 @@ if [[ -e ${TMPDIR}/i-Haklab.login.backup ]]; then
 	rm ${TMPDIR}/i-Haklab.login.backup
 fi
 
+# RESTORE PREVIOUS USERNAME IF DEFAULT WAS CHANGED
+if [[ -e ${TMPDIR}/.prevUSER ]]; then 
+    echo "Restoring previous username"
+    prevUSER=$(cat ${TMPDIR}/.prevUSER) 
+    sed -i "s|export USER=i-Haklab|$prevUSER|g" $HOME/.local/etc/i-Haklab/envvariables
+fi
+
 # RESTORE PREVIOUS API KEYS
 if [[ -s ${TMPDIR}/.ihabak-apikeys ]]; then
   echo "Restoring previous API keys ..."

@@ -53,7 +53,15 @@ export ANDROID_ALLOW_UNDEFINED_SYMBOLS=On
 export ANDROID_API_LEVEL=24
 
 # ----------------------------------------------------------------------------
-# 8. VS Code Server
+# 8. Node.js / pnpm
+# ----------------------------------------------------------------------------
+# Android SELinux denies pnpm's hardlink-based store import (EACCES in the
+# pacquet staging directory). Use copies for every pnpm invocation, including
+# the native binary that pnpm setup puts before the i-Haklab wrapper in PATH.
+export PNPM_CONFIG_PACKAGE_IMPORT_METHOD=copy
+
+# ----------------------------------------------------------------------------
+# 9. VS Code Server
 # ----------------------------------------------------------------------------
 export VSCODE_EXTENSIONS_DIR=$HOME/.local/share/code-server/extensions
 

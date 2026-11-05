@@ -3,6 +3,10 @@
 
 source ${HOME}/.local/etc/i-Haklab/functions
 
+# Android SELinux blocks pnpm's hardlink-based package import. Copying is
+# slower but works on the shared Termux app data directory.
+export PNPM_CONFIG_PACKAGE_IMPORT_METHOD="${PNPM_CONFIG_PACKAGE_IMPORT_METHOD:-copy}"
+
 if [[ ! -e "$PREFIX/lib/node_modules/corepack/dist/$(basename $0).js" ]]; then 
     echo "> $(basename $0) itself is not installed. Installing it now..."
     npm install -g $(basename $0)

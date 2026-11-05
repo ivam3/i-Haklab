@@ -24,7 +24,15 @@ if [[ "$1" == "install" || "$1" == "update" ]]; then
             
             pnpm)
                 corepack enable
-                pnpm setup
+                # Android SELinux rejects pnpm's hardlink-based store import
+                # (EACCES on the pacquet staging path). Copy the package
+                # instead, and stop here: npm must not overwrite the corepack
+                # shim at $PREFIX/bin/pnpm (EEXIST).
+                PNPM_CONFIG_PACKAGE_IMPORT_METHOD=copy pnpm setup --force --no-modify-path
+                # Persist the setting for the native pnpm binary too; users
+                # often have PNPM_HOME/bin ahead of this wrapper in PATH.
+                pnpm config set package-import-method copy --global >/dev/null 2>&1 || true
+                break
                 ;;
             
             @testsprite/testsprite-mcp)
