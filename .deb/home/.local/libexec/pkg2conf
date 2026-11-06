@@ -179,6 +179,12 @@ PY
         entryFile="${PREFIX}/lib/node_modules/zcode-app-cli/bin/zcode.js"
         # Fix shebang for Termux (upstream ships #!/usr/bin/env node)
         [[ -f "$entryFile" ]] && termux-fix-shebang "$entryFile"
+        # zcode-cli 0.17.x creates setting.json with tmp+link(). Android/F2FS
+        # rejects hardlinks with EACCES, so use rename() for the atomic install.
+        if [[ -f "$entryFile" ]] && grep -q 'await link(temporaryPath, configPath);' "$entryFile"; then
+            sed -i 's/await link(temporaryPath, configPath);/await rename(temporaryPath, configPath);/' "$entryFile"
+            echo "[✔] zcode-cli config creation patched for Android (link -> rename)"
+        fi
         # Avoid collision with the zcode desktop wrapper ($PREFIX/bin/zcode):
         # the npm CLI always lives as zcode-cli, desktop keeps zcode.
         if [[ -e "${PREFIX}/bin/zcode" ]] && [[ "$(readlink "${PREFIX}/bin/zcode" 2>/dev/null)" == *zcode-app-cli* ]]; then
