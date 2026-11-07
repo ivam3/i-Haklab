@@ -1,6 +1,6 @@
 e asm.syntax=intel
 e scr.utf8=true
-e scr.utf8.curvy
+e scr.utf8.curvy=true
 e bin.cache=true
 
 # r2chweb (~/.local/bin/r2chweb): servidor web seguro (evita "=H" que spawnea sh -> SIGSYS)
