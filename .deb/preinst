@@ -14,7 +14,7 @@ if [[ -e $HOME/.local/etc/i-Haklab/variables ]]; then
       cp $HOME/.local/etc/i-Haklab/.Ivam3byCinderella ${TMPDIR}/.IbyC
     fi
 
-    if [[ -en $HOME/.local/etc/i-Haklab/envvariables ]]; then 
+    if [[ -e $HOME/.local/etc/i-Haklab/envvariables ]]; then 
         echo "Keeping previous username ..."
         prevUSER=$(grep "USER" ~/.local/etc/i-Haklab/envvariables)
         echo $prevUSER > ${TMPDIR}/.prevUSER
