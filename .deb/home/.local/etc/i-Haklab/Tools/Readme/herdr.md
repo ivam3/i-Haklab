@@ -73,3 +73,123 @@ herdr --remote usuario@host --session prod
 
 ---
 *Nota: Esta herramienta integra el runtime de agentes para multiplexar terminales y orquestar IA en el ecosistema i-Haklab/Termux.*
+
+---
+
+## Atajos de Teclado
+
+> **Tecla prefijo por defecto:** `Ctrl+B`
+>
+> Los atajos con `prefix+` requieren pulsar primero la tecla prefijo y luego la tecla indicada.
+> Los atajos directos (`Ctrl+...`) se ejecutan sin prefijo previo.
+
+### 🌐 Sesión / Global
+
+| Atajo | Acción |
+|---|---|
+| `prefix+?` | Mostrar ayuda de atajos |
+| `prefix+s` | Abrir ajustes (settings) |
+| `prefix+q` | Desconectar cliente (detach) |
+| `prefix+Shift+R` | Recargar configuración en caliente |
+| `prefix+o` | Abrir destino de notificación activa |
+
+### 🗂️ Workspaces
+
+| Atajo | Acción |
+|---|---|
+| `prefix+w` | Selector de workspaces (picker) |
+| `prefix+g` | Ir a sesión/workspace (goto) |
+| `prefix+Shift+N` | Crear nuevo workspace |
+| `prefix+Shift+G` | Crear nuevo worktree |
+| `prefix+Shift+W` | Renombrar workspace actual |
+| `prefix+Shift+D` | Cerrar workspace actual |
+
+### 📑 Tabs
+
+| Atajo | Acción |
+|---|---|
+| `prefix+c` | Nueva tab |
+| `prefix+n` | Ir a la tab siguiente |
+| `prefix+p` | Ir a la tab anterior |
+| `prefix+1`…`prefix+9` | Saltar directamente a la tab N |
+| `prefix+Shift+T` | Renombrar tab actual |
+| `prefix+Shift+X` | Cerrar tab actual |
+
+### 🪟 Panes (paneles)
+
+| Atajo | Acción |
+|---|---|
+| `prefix+v` | Dividir pane verticalmente |
+| `prefix+-` | Dividir pane horizontalmente |
+| `prefix+x` | Cerrar pane actual |
+| `prefix+z` | Zoom / pantalla completa al pane actual |
+| `prefix+h` | Enfocar pane izquierdo |
+| `prefix+j` | Enfocar pane inferior |
+| `prefix+k` | Enfocar pane superior |
+| `prefix+l` | Enfocar pane derecho |
+| `prefix+Tab` | Ciclar al siguiente pane |
+| `prefix+Shift+Tab` | Ciclar al pane anterior |
+| `prefix+Shift+P` | Renombrar pane actual |
+| `prefix+e` | Editar scrollback en editor externo |
+| `prefix+r` | Entrar en modo redimensionar (resize mode) |
+| `prefix+b` | Colapsar / expandir sidebar de agentes |
+
+### 🤖 Agentes
+
+| Atajo | Acción |
+|---|---|
+| `prefix+Alt+1`…`9` | Enfocar agente N en el panel *(requiere configurar `focus_agent` en config)* |
+
+> **Tip:** En modo navigate (navegador de panes), usa `h/j/k/l` o las flechas para moverte entre panes y workspaces sin necesitar el prefijo.
+
+### 🖱️ Modo navegar (Navigate Mode)
+
+Activo al abrir el goto (`prefix+g`) o el workspace picker:
+
+| Tecla | Acción |
+|---|---|
+| `↑` / `↓` | Moverse entre workspaces |
+| `h` / `←` | Enfocar pane a la izquierda |
+| `j` | Enfocar pane inferior |
+| `k` | Enfocar pane superior |
+| `l` / `→` | Enfocar pane a la derecha |
+| `Enter` | Confirmar selección |
+| `Esc` | Cancelar / salir del modo |
+
+### 📋 Copy Mode (Scrollback)
+
+Activa copy mode con `prefix+e` o scroll con el ratón:
+
+| Tecla | Acción |
+|---|---|
+| `↑` / `k` | Scroll hacia arriba |
+| `↓` / `j` | Scroll hacia abajo |
+| `Page Up` | Página anterior |
+| `Page Down` | Página siguiente |
+| `q` / `Esc` | Salir de copy mode |
+
+### ⚙️ Personalización de atajos
+
+Todos los atajos son configurables en `~/.config/herdr/config.toml` bajo la sección `[keys]`. Para generar la config base con todos los valores comentados:
+
+```bash
+herdr --default-config > ~/.config/herdr/config.toml
+```
+
+Para resetear keybindings a los valores por defecto:
+
+```bash
+herdr config reset-keys
+```
+
+Para atajos indexados directos (sin prefijo), configura en `config.toml`:
+
+```toml
+[keys.indexed]
+tabs = "ctrl"           # ctrl+1..9 cambia tabs directamente
+workspaces = "ctrl+shift" # ctrl+shift+1..9 cambia workspaces
+agents = "alt"          # alt+1..9 enfoca agentes
+```
+
+---
+*Nota: Esta herramienta integra el runtime de agentes para multiplexar terminales y orquestar IA en el ecosistema i-Haklab/Termux.*
