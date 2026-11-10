@@ -8,70 +8,90 @@ if ! dpkg-query -W -f='${Status}' $(basename $0) 2>/dev/null | grep -q "install 
     apt install -y $(basename $0)
 fi
 
-if [[ "$1" == "install" || "$1" == "update" ]]; then
-    pushd "$HOME" >/dev/null
-    for i in "${@:2}"; do
-        i=$(ih_normalize_pkg "$i")
+ih_pm_parse_args "$@"
 
-        case "$i" in
-            @fission-ai/openspec)
-                echo "> Setting allow-scripts for @fission-ai/openspec"
-                npm config set allow-scripts=@fission-ai/openspec --location=user
-                ;;
-            n8n)
-                bash "$HOME/.local/libexec/preconf" n8n npm
-                ;;
-            
-            pnpm)
-                corepack enable
-                # Android SELinux rejects pnpm's hardlink-based store import
-                # (EACCES on the pacquet staging path). Copy the package
-                # instead, and stop here: npm must not overwrite the corepack
-                # shim at $PREFIX/bin/pnpm (EEXIST).
-                PNPM_CONFIG_PACKAGE_IMPORT_METHOD=copy pnpm setup --force --no-modify-path
-                # Persist the setting for the native pnpm binary too; users
-                # often have PNPM_HOME/bin ahead of this wrapper in PATH.
-                pnpm config set package-import-method copy --global >/dev/null 2>&1 || true
-                break
-                ;;
-            
-            @testsprite/testsprite-mcp)
-                bash "$HOME/.local/libexec/preconf" testsprite npm
-                ;;
-            
-            zcode-app-cli)
-                bash "$HOME/.local/libexec/preconf" zcode-cli npm
-                ;;
-            
-            open-lovable)
-                bash "$HOME/.local/libexec/preconf" open-lovable npm "$1"
-                break
-                ;;
-            
-            -g|--global)
-                g="$i"
-                ;;
-        esac
+case "$IH_PM_ACTION" in
+    install|update)
+        # No packages: keep native behavior (project install, npm update -g).
+        if ((${#IH_PM_PKGS[@]} == 0)); then
+            if ((IH_PM_GLOBAL)) && [[ "$IH_PM_ACTION" == "install" ]]; then
+                echo "> $(basename $0): missing package (usage: $(basename $0) install -g <package>)" >&2
+                exit 1
+            fi
+            exec "$PREFIX/bin/npm" "$@"
+        fi
 
-        "$PREFIX/bin/npm" "$1" "$g" "$i"
-        ih_pkg2conf "$i"
-    done
-    popd >/dev/null 2>/dev/null
+        # Packages that replace or wrap the generic global install.
+        remaining=()
+        for p in "${IH_PM_PKGS[@]}"; do
+            case "$p" in
+                pnpm)
+                    corepack enable
+                    # Android SELinux rejects pnpm's hardlink-based store import
+                    # (EACCES on the pacquet staging path). Copy the package
+                    # instead, and stop here: npm must not overwrite the corepack
+                    # shim at $PREFIX/bin/pnpm (EEXIST).
+                    PNPM_CONFIG_PACKAGE_IMPORT_METHOD=copy pnpm setup --force --no-modify-path
+                    # Persist the setting for the native pnpm binary too; users
+                    # often have PNPM_HOME/bin ahead of this wrapper in PATH.
+                    pnpm config set package-import-method copy --global >/dev/null 2>&1 || true
+                    ;;
+                open-lovable)
+                    # preconf clones and installs the project on its own.
+                    bash "$HOME/.local/libexec/preconf" open-lovable npm "$IH_PM_ACTION"
+                    ;;
+                *)
+                    remaining+=("$p")
+                    ;;
+            esac
+        done
+        ((${#remaining[@]} == 0)) && exit 0
 
-elif [[ "$1" == "uninstall" ]]; then
-    pushd "$HOME" >/dev/null
-    for i in "${@:2}"; do
-        case "$i" in
-            -g|--global)
-                g="$i"
-                ;;
-            *)
-                bash "$HOME/.local/libexec/cleanup" "$i"
-                ;;
-        esac
-        "$PREFIX/bin/npm" "$1" "$g" "$i"
-    done
-    popd >/dev/null 2>/dev/null
-else
-    "$PREFIX/bin/npm" "$@"
-fi
+        # Per-package setup must run before the install itself.
+        for p in "${remaining[@]}"; do
+            case "$p" in
+                @fission-ai/openspec)
+                    echo "> Setting allow-scripts for @fission-ai/openspec"
+                    "$PREFIX/bin/npm" config set allow-scripts=@fission-ai/openspec --location=user
+                    ;;
+                n8n)
+                    bash "$HOME/.local/libexec/preconf" n8n npm
+                    ;;
+                @testsprite/testsprite-mcp)
+                    bash "$HOME/.local/libexec/preconf" testsprite npm
+                    ;;
+                zcode-app-cli)
+                    bash "$HOME/.local/libexec/preconf" zcode-cli npm
+                    ;;
+            esac
+        done
+
+        # Single invocation: flags first (keeps -g and options intact), then packages.
+        "$PREFIX/bin/npm" "$IH_PM_VERB" "${IH_PM_FLAGS[@]}" "${remaining[@]}"
+        rc=$?
+        for p in "${remaining[@]}"; do
+            ih_pkg2conf "$p"
+        done
+        exit $rc
+        ;;
+
+    uninstall)
+        if ((${#IH_PM_PKGS[@]} == 0)); then
+            if ((IH_PM_GLOBAL)); then
+                echo "> $(basename $0): missing package (usage: $(basename $0) uninstall -g <package>)" >&2
+                exit 1
+            fi
+            exec "$PREFIX/bin/npm" "$@"
+        fi
+
+        for p in "${IH_PM_PKGS[@]}"; do
+            bash "$HOME/.local/libexec/cleanup" "$p"
+        done
+        "$PREFIX/bin/npm" "$IH_PM_VERB" "${IH_PM_FLAGS[@]}" "${IH_PM_PKGS[@]}"
+        exit $?
+        ;;
+
+    *)
+        exec "$PREFIX/bin/npm" "$@"
+        ;;
+esac

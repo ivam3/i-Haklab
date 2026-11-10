@@ -12,53 +12,79 @@ if [[ ! -e "$PREFIX/lib/node_modules/corepack/dist/$(basename $0).js" ]]; then
     npm install -g $(basename $0)
 fi
 
-if [[ "$1" == "install" || "$1" == "update" ]]; then
-    pushd "$HOME" >/dev/null
-    for i in "${@:2}"; do
-        i=$(ih_normalize_pkg "$i")
+ih_pm_parse_args "$@"
 
-        case "$i" in 
-            @fission-ai/openspec)
-                echo "> Setting allow-scripts for @fission-ai/openspec"
-                npm config set allow-scripts=@fission-ai/openspec --location=user
-                ;;
-            n8n)
-                bash "$HOME/.local/libexec/preconf" n8n pnpm
-                ;;
-            
-            @testsprite/testsprite-mcp)
-                bash "$HOME/.local/libexec/preconf" testsprite pnpm
-                ;;
-            
-            open-lovable)
-                bash "$HOME/.local/libexec/preconf" open-lovable pnpm "$1"
-                break
-                ;;
-            
-            -g|--global)
-                g="$i"
-                ;;
-        esac
+case "$IH_PM_ACTION" in
+    install|update)
+        # No packages: keep native behavior (project install, pnpm update -g).
+        if ((${#IH_PM_PKGS[@]} == 0)); then
+            if ((IH_PM_GLOBAL)) && [[ "$IH_PM_ACTION" == "install" ]]; then
+                echo "> $(basename $0): missing package (usage: $(basename $0) install -g <package>)" >&2
+                exit 1
+            fi
+            exec "$PREFIX/bin/pnpm" "$@"
+        fi
 
-        "$PREFIX/bin/pnpm" "$1" "$g" "$i"
-        ih_pkg2conf "$i"
-    done
-    popd >/dev/null 2>/dev/null
+        # Packages that wrap the generic global install.
+        remaining=()
+        for p in "${IH_PM_PKGS[@]}"; do
+            case "$p" in
+                open-lovable)
+                    # preconf clones and installs the project on its own.
+                    bash "$HOME/.local/libexec/preconf" open-lovable pnpm "$IH_PM_ACTION"
+                    ;;
+                *)
+                    remaining+=("$p")
+                    ;;
+            esac
+        done
+        ((${#remaining[@]} == 0)) && exit 0
 
-elif [[ "$1" == "uninstall" ]]; then
-    pushd "$HOME" >/dev/null
-    for i in "${@:2}"; do
-        case "$i" in
-            -g|--global)
-                g="$i"
-                ;;
-            *)
-                bash "$HOME/.local/libexec/cleanup" "$i"
-                ;;
-        esac
-        "$PREFIX/bin/pnpm" "$1" "$g" "$i"
-    done
-    popd >/dev/null 2>/dev/null
-else
-    "$PREFIX/bin/pnpm" "$@"
-fi
+        # Per-package setup must run before the install itself.
+        for p in "${remaining[@]}"; do
+            case "$p" in
+                @fission-ai/openspec)
+                    echo "> Setting allow-scripts for @fission-ai/openspec"
+                    "$PREFIX/bin/npm" config set allow-scripts=@fission-ai/openspec --location=user
+                    ;;
+                n8n)
+                    bash "$HOME/.local/libexec/preconf" n8n pnpm
+                    ;;
+                @testsprite/testsprite-mcp)
+                    bash "$HOME/.local/libexec/preconf" testsprite pnpm
+                    ;;
+                zcode-app-cli)
+                    bash "$HOME/.local/libexec/preconf" zcode-cli pnpm
+                    ;;
+            esac
+        done
+
+        # Single invocation: flags first (keeps -g and options intact), then packages.
+        "$PREFIX/bin/pnpm" "$IH_PM_VERB" "${IH_PM_FLAGS[@]}" "${remaining[@]}"
+        rc=$?
+        for p in "${remaining[@]}"; do
+            ih_pkg2conf "$p"
+        done
+        exit $rc
+        ;;
+
+    uninstall)
+        if ((${#IH_PM_PKGS[@]} == 0)); then
+            if ((IH_PM_GLOBAL)); then
+                echo "> $(basename $0): missing package (usage: $(basename $0) uninstall -g <package>)" >&2
+                exit 1
+            fi
+            exec "$PREFIX/bin/pnpm" "$@"
+        fi
+
+        for p in "${IH_PM_PKGS[@]}"; do
+            bash "$HOME/.local/libexec/cleanup" "$p"
+        done
+        "$PREFIX/bin/pnpm" "$IH_PM_VERB" "${IH_PM_FLAGS[@]}" "${IH_PM_PKGS[@]}"
+        exit $?
+        ;;
+
+    *)
+        exec "$PREFIX/bin/pnpm" "$@"
+        ;;
+esac

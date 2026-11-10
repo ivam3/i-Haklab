@@ -437,6 +437,73 @@ ih_pkg2conf() {
 }
 export -f ih_pkg2conf
 
+# Split npm/pnpm wrapper arguments into flags and packages.
+# Sets these globals:
+#   IH_PM_VERB    verb as typed (install, i, add, update, uninstall, ...)
+#   IH_PM_ACTION  canonical action: install|update|uninstall (empty if unhandled)
+#   IH_PM_FLAGS   array with every option, keeping options that take a value
+#   IH_PM_PKGS    array with normalized package names
+#   IH_PM_GLOBAL  1 when -g/--global/--location=global was given
+ih_pm_parse_args() {
+    IH_PM_VERB="${1:-}"
+    IH_PM_ACTION=""
+    IH_PM_FLAGS=()
+    IH_PM_PKGS=()
+    IH_PM_GLOBAL=0
+
+    case "$IH_PM_VERB" in
+        install|i|add)          IH_PM_ACTION=install ;;
+        update|up|upgrade)      IH_PM_ACTION=update ;;
+        uninstall|remove|rm|un) IH_PM_ACTION=uninstall ;;
+        *) return 0 ;;
+    esac
+
+    local a end_opts=0 want_value=0
+    for a in "${@:2}"; do
+        # Previous token was an option that takes a separate value.
+        if ((want_value)); then
+            IH_PM_FLAGS+=("$a")
+            want_value=0
+            continue
+        fi
+        if ((end_opts)); then
+            IH_PM_PKGS+=("$(ih_normalize_pkg "$a")")
+            continue
+        fi
+        case "$a" in
+            --)
+                IH_PM_FLAGS+=("$a")
+                end_opts=1
+                ;;
+            -g|--global|--location=global)
+                IH_PM_FLAGS+=("$a")
+                IH_PM_GLOBAL=1
+                ;;
+            # Options that take a value in the next argument. Options written
+            # as --flag=value are self-contained and fall into the -*) case.
+            --registry|--prefix|--cache|--userconfig|--globalconfig|--tag|\
+            --omit|--include|--install-strategy|--scope|--workspace|--filter|\
+            --save-prefix|--before|--otp|--script-shell|--cpu|--os|--libc|\
+            --proxy|--https-proxy|--noproxy|--access|--auth-type|--location|\
+            --loglevel|--reporter|--depth|--dir|--store-dir|--virtual-store-dir|\
+            --lockfile-dir|--modules-dir|--global-dir|--global-bin-dir|\
+            --state-dir|--cache-dir|--use-node-version|--resolution-mode|\
+            --node-linker|--package-import-method|--network-concurrency|\
+            --child-concurrency|--fetch-retries|--fetch-timeout)
+                IH_PM_FLAGS+=("$a")
+                want_value=1
+                ;;
+            -*)
+                IH_PM_FLAGS+=("$a")
+                ;;
+            *)
+                IH_PM_PKGS+=("$(ih_normalize_pkg "$a")")
+                ;;
+        esac
+    done
+}
+export -f ih_pm_parse_args
+
 set_filerc() {
     shell=${SHELL##*/}
     case "$shell" in

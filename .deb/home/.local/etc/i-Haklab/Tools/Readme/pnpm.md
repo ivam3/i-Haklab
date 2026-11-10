@@ -69,9 +69,24 @@ Lockfile estricto
 i-HakLab interviene solo al instalar, actualizar o desinstalar; el resto de
 comandos funcionan igual que el pnpm original.
 
+## Cómo se procesan los argumentos
+
+Antes de llamar a pnpm, el wrapper separa las **opciones** de los **paquetes**:
+
+* Cualquier opción (`-g`, `--global`, `--save-dev`, `--filter=...`, etc.) se
+  pasa intacta a pnpm.
+* El orden ya no importa: `pnpm add paquete -g` equivale a
+  `pnpm add -g paquete`.
+* Varios paquetes se instalan en una sola llamada.
+* Las opciones que llevan un valor separado (`--filter app`, `--registry URL`)
+  se conservan completas.
+* `pnpm install` sin paquetes dentro de un proyecto instala sus dependencias.
+* `pnpm install -g` sin paquete muestra un error de uso, en lugar de intentar
+  instalar el directorio actual.
+
 ## Alias normalizados
 
-Al instalar o actualizar paquetes, el wrapper traduce estos alias al paquete real:
+Al instalar, actualizar o desinstalar paquetes, el wrapper traduce estos alias al paquete real:
 
 | Alias usado | Paquete real |
 |---|---|
@@ -81,6 +96,12 @@ Al instalar o actualizar paquetes, el wrapper traduce estos alias al paquete rea
 | `codex` | `@mmmbuto/codex-cli-termux@latest` |
 | `copilot-cli` / `github-copilot` | `@github/copilot` |
 | `minimax-cli` | `mmx-cli` |
+| `testsprite` | `@testsprite/testsprite-mcp` |
+| `zcode-cli` | `zcode-app-cli` |
+| `openspec` | `@fission-ai/openspec` |
+| `sleepwalker` | `@sleepwalkerai/cli` |
+| `kimi-code` | `@moonshot-ai/kimi-code` |
+| `context7` | `ctx7` |
 
 Ejemplo:
 
@@ -122,7 +143,9 @@ reinstala el paquete y listo.
 ## Notas importantes
 
 * `pnpm add -g paquete` es la forma recomendada por pnpm para añadir herramientas globales.
-* i-HakLab acepta `install`/`update` además de `add`/`remove`, por compatibilidad con guías y scripts de internet.
+* i-HakLab acepta `install`/`i`/`add`, `update`/`up`/`upgrade` y
+  `uninstall`/`remove`/`rm`/`un`, por compatibilidad con guías y scripts de internet.
+* Las opciones desconocidas se pasan a pnpm sin interpretarlas como paquetes.
 * Si un paquete global requiere scripts de compilación, revisa la salida de `pnpm approve-builds`.
 
 ---

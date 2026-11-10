@@ -1,6 +1,6 @@
 {
   "name": "i-haklab",
-  "version": "3.13.31",
+  "version": "3.13.33",
   "arch": "all",
   "homepage": "https://github.com/ivam3/i-Haklab",
   "maintainer": "Ivam3 <https://t.me/Ivam3_Bot>",
@@ -186,6 +186,7 @@
     "home/.local/etc/i-Haklab/Tools/Readme/nljson.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/nljson.md",
     "home/.local/etc/i-Haklab/Tools/Readme/nmap.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/nmap.md",
     "home/.local/etc/i-Haklab/Tools/Readme/ntlmrelayx.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/ntlmrelayx.md",
+    "home/.local/etc/i-Haklab/Tools/Readme/npm.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/npm.md",
     "home/.local/etc/i-Haklab/Tools/Readme/objection.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/objection.md",
     "home/.local/etc/i-Haklab/Tools/Readme/octosuite.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/octosuite.md",
     "home/.local/etc/i-Haklab/Tools/Readme/ollama.md": "/data/data/com.termux/files/home/.local/etc/i-Haklab/Tools/Readme/ollama.md",
