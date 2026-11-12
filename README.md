@@ -37,17 +37,23 @@
 </div>
 
 <div align="center">
-  <a href="https://www.youtube.com/c/Ivam3byCinderella" target="_blank">
-    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/youtube/default.svg" width="52" height="40" alt="youtube logo"  />
+  <a href="https://www.youtube.com/ivam3bycinderella" target="_blank">
+    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/youtube/default.svg" width="52" height="40" alt="YouTube logo" />
   </a>
-  <a href="http://github.com/ivam3" target="_blank">
-    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/tryhackme/default.svg" width="52" height="40" alt="tryhackme logo"  />
+  <a href="https://t.me/ivam3bycinderella" target="_blank">
+    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/telegram/default.svg" width="52" height="40" alt="Telegram logo" />
   </a>
   <a href="https://whatsapp.com/channel/0029VaM2Qbd9MF8wiloJx510" target="_blank">
-    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/whatsapp/default.svg" width="52" height="40" alt="whatsapp logo"  />
+    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/whatsapp/default.svg" width="52" height="40" alt="WhatsApp logo" />
   </a>
-  <a href="https://t.me/Ivam3bCinderella" target="_blank">
-    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/telegram/default.svg" width="52" height="40" alt="telegram logo"  />
+  <a href="https://instagram.com/_ivam3" target="_blank">
+    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/instagram/default.svg" width="52" height="40" alt="Instagram logo" />
+  </a>
+  <a href="https://www.tiktok.com/@ivam3bycinderella?_r=1&amp;_t=ZS-94wBN5R80Kj" target="_blank">
+    <img src="https://cdn.simpleicons.org/tiktok/25F4EE" width="40" height="40" alt="TikTok logo" />
+  </a>
+  <a href="https://open.spotify.com/show/2VFhDOc39I4UaHdTMUd9az" target="_blank">
+    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/spotify/default.svg" width="52" height="40" alt="Spotify logo" />
   </a>
 </div>
 
