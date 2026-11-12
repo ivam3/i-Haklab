@@ -4,11 +4,18 @@
 #
 # Usage:
 #   cam-usb --list          list visible USB devices
-#   cam-usb --probe         request permission and detect the UVC camera (save VID:PID)
+#   cam-usb --probe         request permission and detect the UVC camera (save VID:PID + device path)
 #   cam-usb                 start the stream at http://127.0.0.1:9000/video
 #   cam-usb --stop          stop the stream
 #
+# Resolution options (default: 1280x720 @ 30 fps):
+#   cam-usb --width 640 --height 480 --fps 30
+#   cam-usb --resolution 640x480
+#   CAM_WIDTH=640 CAM_HEIGHT=480 CAM_FPS=30 cam-usb
+#
 # Requires a working Termux:API app and no other app holding the camera.
+# Android 14+ also requires the Camera runtime permission for Termux:API,
+# because UsbManager rejects UVC devices without it.
 
 set -u
 
@@ -16,6 +23,7 @@ DIR="$HOME/.local/src/uvc-cam"
 STREAM="$DIR/uvc-stream"
 PROBE="$DIR/usbdesc"
 VIDPID_FILE="$HOME/.config/cam-usb.vidpid"
+DEVPATH_FILE="$HOME/.config/cam-usb.devpath"
 PORT="${CAM_PORT:-9000}"
 
 ensure_api() {
@@ -30,9 +38,19 @@ list_devices() {
     timeout -k 2 20 termux-usb -l 2>&1
 }
 
+camera_permission_hint() {
+    echo "Android denegó el permiso USB para la cámara UVC."
+    echo "En Android 14+ concede el permiso Cámara a Termux:API:"
+    echo "  Ajustes > Apps > Termux:API > Permisos > Cámara > Permitir"
+    echo "También puedes hacerlo por ADB:"
+    echo "  adb shell pm grant com.termux.api android.permission.CAMERA"
+}
+
 stop_stream() {
+    pkill -x uvc-stream 2>/dev/null || true
     pkill -f "$STREAM" 2>/dev/null || true
     sleep 1
+    pkill -9 -x uvc-stream 2>/dev/null || true
     pkill -9 -f "$STREAM" 2>/dev/null || true
     echo "stream stopped"
 }
@@ -44,17 +62,19 @@ probe() {
     if ! grep -q '/dev/bus/usb/' <<<"$out"; then
         echo "No USB devices are visible."
         echo "Connect the UVC camera and try again."
-        echo "If the USB Camera app is installed, close or disable it so it does not claim the camera."
         return 1
     fi
 
-    local dev
+    local dev found=0 denied=0
     while IFS= read -r dev; do
         [[ -n "$dev" ]] || continue
         echo "=== Probing $dev ==="
         local tmp
         tmp="$(mktemp)"
         timeout -k 2 90 termux-usb -r -E -e "$PROBE" "$dev" 2>&1 | tee "$tmp"
+        if grep -q 'Permission denied' "$tmp"; then
+            denied=1
+        fi
         if grep -q 'class=0e' "$tmp"; then
             local vidpid
             vidpid="$(awk '/^VID:PID/{print $3; exit}' "$tmp")"
@@ -62,13 +82,21 @@ probe() {
                 local vid="${vidpid%%:*}"
                 local pid="${vidpid##*:}"
                 printf '%s %s\n' "$vid" "$pid" >"$VIDPID_FILE"
-                echo "UVC camera detected: $vidpid"
-                echo "Saved to $VIDPID_FILE"
+                printf '%s\n' "$dev" >"$DEVPATH_FILE"
+                echo "UVC camera detected: $vidpid ($dev)"
+                echo "Saved to $VIDPID_FILE and $DEVPATH_FILE"
                 echo "Now run: cam-usb"
+                found=1
             fi
         fi
         rm -f "$tmp"
     done < <(grep -o '"/dev/bus/usb/[^"]*"' <<<"$out" | tr -d '"')
+
+    if (( found == 0 )); then
+        echo "No UVC camera was detected."
+        (( denied == 1 )) && camera_permission_hint
+        return 1
+    fi
 }
 
 stream() {
@@ -77,34 +105,115 @@ stream() {
         echo "Missing $STREAM (build it first)."
         return 1
     fi
-    if pgrep -f "[u]vc-stream" >/dev/null 2>&1; then
-        echo "The stream is already running at http://127.0.0.1:$PORT/video"
-        return 0
-    fi
-    if [[ ! -s "$VIDPID_FILE" ]]; then
-        echo "No camera configured; detecting automatically..."
-        probe || return 1
-        if [[ ! -s "$VIDPID_FILE" ]]; then
-            echo "No UVC camera was detected."
-            return 1
+    if pgrep -f "$STREAM" >/dev/null 2>&1; then
+        if [[ -n "${CAM_WIDTH:-}${CAM_HEIGHT:-}${CAM_FPS:-}" ]]; then
+            echo "Restarting stream with requested resolution..."
+            stop_stream
+        else
+            echo "The stream is already running at http://127.0.0.1:$PORT/video"
+            return 0
         fi
     fi
-    local vid pid
-    read -r vid pid <"$VIDPID_FILE"
-    echo "Starting camera $vid:$pid at http://127.0.0.1:$PORT/video"
+
+    local devpath=""
+    [[ -s "$DEVPATH_FILE" ]] && devpath="$(head -n1 "$DEVPATH_FILE")"
+    if [[ -z "$devpath" ]]; then
+        echo "No camera configured; detecting automatically..."
+        probe || return 1
+        devpath="$(head -n1 "$DEVPATH_FILE" 2>/dev/null || true)"
+    fi
+    if [[ -z "$devpath" ]]; then
+        echo "No UVC camera device path was saved."
+        return 1
+    fi
+
+    ensure_api
+    local visible
+    visible="$(list_devices)"
+    if ! grep -qF "\"$devpath\"" <<<"$visible"; then
+        echo "Saved device path is no longer visible; re-detecting..."
+        probe || return 1
+        devpath="$(head -n1 "$DEVPATH_FILE" 2>/dev/null || true)"
+    fi
+    if [[ -z "$devpath" ]]; then
+        echo "No UVC camera device path was saved."
+        return 1
+    fi
+
+    local vidpid=""
+    [[ -s "$VIDPID_FILE" ]] && vidpid="$(head -n1 "$VIDPID_FILE")"
+    echo "Starting camera${vidpid:+ $vidpid} at http://127.0.0.1:$PORT/video ($devpath)"
     export CAM_PORT="$PORT"
-    exec termux-usb -r -E -e "$STREAM" "$vid" "$pid"
+    exec termux-usb -r -E -e "$STREAM" "$devpath"
 }
 
 # Required so termux-usb exports the fd that uvc-stream reads.
 export TERMUX_EXPORT_FD=true
 
-case "${1:-}" in
+WIDTH="${CAM_WIDTH:-}"
+HEIGHT="${CAM_HEIGHT:-}"
+FPS="${CAM_FPS:-}"
+ACTION=""
+
+while (( $# > 0 )); do
+    case "$1" in
+        --width|-w)
+            [[ $# -ge 2 ]] || { echo "--width requires a value" >&2; exit 1; }
+            WIDTH="$2"
+            shift 2
+            ;;
+        --height)
+            [[ $# -ge 2 ]] || { echo "--height requires a value" >&2; exit 1; }
+            HEIGHT="$2"
+            shift 2
+            ;;
+        --fps)
+            [[ $# -ge 2 ]] || { echo "--fps requires a value" >&2; exit 1; }
+            FPS="$2"
+            shift 2
+            ;;
+        --resolution|-r)
+            [[ $# -ge 2 ]] || { echo "--resolution requires WxH (e.g. 640x480)" >&2; exit 1; }
+            if [[ "$2" =~ ^([0-9]+)[xX]([0-9]+)$ ]]; then
+                WIDTH="${BASH_REMATCH[1]}"
+                HEIGHT="${BASH_REMATCH[2]}"
+            else
+                echo "Invalid resolution: $2 (use WxH, e.g. 640x480)" >&2
+                exit 1
+            fi
+            shift 2
+            ;;
+        --list|--probe|--stop)
+            ACTION="$1"
+            shift
+            ;;
+        -h|--help)
+            ACTION="help"
+            shift
+            ;;
+        *)
+            echo "Unknown argument: $1" >&2
+            echo "Use: cam-usb --help" >&2
+            exit 1
+            ;;
+    esac
+done
+
+for value in "${WIDTH:-}" "${HEIGHT:-}" "${FPS:-}"; do
+    if [[ -n "$value" && ! "$value" =~ ^[0-9]+$ ]]; then
+        echo "Invalid numeric value: $value" >&2
+        exit 1
+    fi
+done
+
+[[ -n "${WIDTH:-}" ]] && export CAM_WIDTH="$WIDTH"
+[[ -n "${HEIGHT:-}" ]] && export CAM_HEIGHT="$HEIGHT"
+[[ -n "${FPS:-}" ]] && export CAM_FPS="$FPS"
+
+case "${ACTION:-stream}" in
     --list)  ensure_api; list_devices ;;
     --probe) probe ;;
     --stop)  stop_stream ;;
-    -h|--help)
-        sed -n '2,14p' "$0" | sed 's/^# \{0,1\}//'
-        ;;
-    *) stream ;;
+    help)    sed -n '2,18p' "$0" | sed 's/^# \{0,1\}//' ;;
+    stream)  stream ;;
 esac

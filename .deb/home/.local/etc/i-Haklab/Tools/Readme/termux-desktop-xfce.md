@@ -1,66 +1,83 @@
-# Entorno de Escritorio Gráfico XFCE en Termux (`desktop`) 🖥️🎭
+# XFCE Graphical Desktop Environment on Termux (`desktop`) 🖥️🎭
 
-El proyecto **`termux-desktop-xfce`** es una integración avanzada de la suite que permite ejecutar el entorno de escritorio ligero **XFCE4** directamente sobre tu dispositivo Android de forma nativa. 
+The **`termux-desktop-xfce`** project is an advanced integration that runs the
+lightweight **XFCE4** desktop environment natively on Android.
 
-A diferencia de las soluciones tradicionales de virtualización basadas en VNC que introducen una alta latencia y pérdida de calidad, esta integración aprovecha los servidores de ventanas **`termux-x11`** y **`desktop`** para interactuar directamente con la interfaz del sistema operativo, logrando la máxima fluidez, sincronización de portapapeles y salida de audio integrada.
-
----
-
-## 🚀 1. Ejecución del Entorno: El Comando `desktop`
-
-El proceso de arranque, configuración de variables e inicio de los subprocesos gráficos se encuentra automatizado a través del comando **`desktop`**.
-
-### Sintaxis de uso:
-* **Arrancar con Termux-X11 (Servidor nativo - Recomendado)**:
-  ```bash
-  desktop
-  ```
-* **Arrancar empleando Xwayland (Alternativa de compatibilidad)**:
-  ```bash
-  desktop Xwayland
-  ```
+Unlike traditional VNC-based virtualization, which adds latency and reduces
+image quality, this integration uses the **`termux-x11`** display server to
+interact directly with the Android interface. This provides smooth rendering,
+clipboard synchronization and integrated audio output.
 
 ---
 
-## ⚙️ 2. Flujo Interno de Ejecución del Script
+## 🚀 1. Starting the Environment: The `desktop` Command
 
-Cuando ejecutas el comando `desktop`, el sistema realiza los siguientes pasos en segundo plano:
+The startup sequence, environment variables and graphical subprocesses are
+automated by the **`desktop`** command.
 
-1. **Configuración del Entorno de Ventanas**:
-   Define las variables de entorno de Linux necesarias para el renderizado gráfico y el soporte de teclado:
+### Usage:
+
+* **Start the desktop (native Termux-X11 - recommended):**
+
+  ```bash
+  i-Haklab desktop
+  ```
+
+> The old `i-Haklab Xwayland` option was replaced by
+> `i-Haklab desktop`.
+
+---
+
+## ⚙️ 2. Internal Script Execution Flow
+
+When you run `desktop`, the system performs the following steps in the
+background:
+
+1. **Window environment configuration**:
+   Defines the Linux environment variables required for graphical rendering and
+   keyboard support:
+
    ```bash
    export DISPLAY=:0
    export XDG_RUNTIME_DIR=${TMPDIR}
    export XKB_CONFIG_ROOT=${PREFIX}/share/xkeyboard-config-2/
    ```
 
-2. **Verificación Automática de Dependencias**:
-   El script comprueba que las herramientas requeridas estén instaladas. Si faltan submódulos, se clona el repositorio de soporte de Termux-X11 y se inicializan de forma transparente para el usuario.
+2. **Automatic dependency check**:
+   The script verifies that the required tools are installed. If support
+   submodules are missing, it clones the Termux-X11 support repository and
+   initializes it transparently.
 
-3. **Inicio del Servidor de Audio (PulseAudio)**:
-   Se levanta el servicio de audio configurando el módulo de red nativo sobre TCP local para redireccionar el sonido de las aplicaciones del escritorio hacia el hardware del móvil Android:
+3. **Start the audio server (PulseAudio)**:
+   Starts the audio service and configures the native TCP module so desktop
+   applications can send sound to the Android device:
+
    ```bash
    pulseaudio --start --exit-idle-time=-1
    pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1
    ```
 
-4. **Lanzamiento de la Interfaz del Visor Android**:
-   Mediante comandos de actividad de Android (`am`), se levanta automáticamente la aplicación visor instalada en el dispositivo:
+4. **Launch the Android viewer**:
+   Uses Android activity commands (`am`) to open the installed viewer
+   application automatically:
+
    ```bash
    am start -n com.termux.x11/com.termux.x11.MainActivity
    ```
 
-5. **Lanzamiento del Servidor de Ventanas**:
-   Se inicia en segundo plano el servidor gráfico correspondiente (`termux-x11 :0` o `Xwayland :0`).
+5. **Launch the window server**:
+   Starts the selected X server in the background (`termux-x11 :0` by default).
 
-6. **Arranque de la Sesión de Escritorio**:
-   Finalmente, se ejecuta la sesión de XFCE4 redirigiendo la salida hacia el display configurado:
+6. **Start the desktop session**:
+   Runs the XFCE4 session with output directed to the configured display:
+
    ```bash
    xfce4-session --display=:0
    ```
 
-7. **Apagado Limpio al Finalizar**:
-   Una vez que sales de la sesión de escritorio XFCE4, el script detiene automáticamente PulseAudio y cierra de forma limpia todos los procesos de visualización que queden en segundo plano para conservar batería y memoria RAM.
+7. **Clean shutdown on exit**:
+   When you leave the XFCE4 desktop session, the script stops PulseAudio and
+   closes the remaining display processes to save battery and RAM.
 
 ---
-*Nota: Herramienta integrada en el ecosistema i-Haklab.*
+*Note: Tool integrated into the i-HakLab ecosystem.*

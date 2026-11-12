@@ -38,15 +38,28 @@ Escenas creadas:
 
 ## Cámara USB
 
-La app *USB Camera* (`com.shenyaocn.android.usbcamera`) debe estar cerrada o
-deshabilitada para que no reclame el dispositivo UVC.
+No hace falta la app *USB Camera* (`com.shenyaocn.android.usbcamera`). La
+captura usa directamente `termux-usb` y los helpers de i-Haklab; solo debes
+cerrar cualquier otra app que esté usando la cámara.
 
 ```bash
 cam-usb --list       # lista dispositivos USB visibles
-cam-usb --probe      # pide permiso y guarda VID:PID
-cam-usb              # inicia el stream en el puerto 9000
+cam-usb --probe      # pide permiso y guarda VID:PID + ruta del dispositivo
+cam-usb              # inicia el stream en el puerto 9000 (1280x720 @ 30)
 cam-usb --stop       # detiene el stream
 ```
+
+Por defecto se usa **1280x720 @ 30 fps**. Si OBS conecta pero no muestra
+imagen, usa una resolución menor:
+
+```bash
+cam-usb --resolution 640x480
+cam-usb --width 640 --height 480 --fps 30
+CAM_WIDTH=640 CAM_HEIGHT=480 CAM_FPS=30 cam-usb
+```
+
+Si el stream ya está activo, `cam-usb` lo reinicia automáticamente al
+indicar una resolución nueva.
 
 Verificación:
 
@@ -54,9 +67,20 @@ Verificación:
 curl -fsS http://127.0.0.1:9000/snapshot -o /tmp/usb.jpg
 ```
 
-La primera vez Android muestra un diálogo de permiso USB. Acepta el acceso y
-repite `cam-usb --probe` si es necesario. El VID:PID se guarda en
-`~/.config/cam-usb.vidpid`.
+La primera vez Android muestra un diálogo de permiso USB. Acepta el acceso.
+En Android 14+ los dispositivos UVC también requieren el permiso **Cámara**
+para Termux:API; si `termux-usb` responde `Permission denied`, concédelo en
+Ajustes > Apps > Termux:API > Permisos > Cámara, o con:
+
+```bash
+adb shell pm grant com.termux.api android.permission.CAMERA
+adb shell pm set-permission-flags com.termux.api android.permission.CAMERA user-set
+```
+
+El segundo comando evita que Android vuelva a tratar el permiso como una
+concesión temporal. La ruta del dispositivo se guarda en `~/.config/cam-usb.devpath` y el VID:PID
+en `~/.config/cam-usb.vidpid`. Si la ruta cambia al reconectar la cámara,
+ejecuta de nuevo `cam-usb --probe`.
 
 ## Cámara del teléfono
 
