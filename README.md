@@ -9,9 +9,6 @@
 <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Rubik+Wet+Paint&size=35&pause=1000&color=F77432&background=13520F00&center=true&vCenter=false&repeat=&random=&width=500&lines=I-Haklab+v.3.13+2026" alt="Typing SVG" /></a>
 </div>
 
-[![Watch the i-HakLab introduction](./assets/iH_thumb.png)](./assets/iH.gif)
-Watch the i-HakLab introduction animation 👆🏼
-
 ## Video tutorial
 
 [![i-HakLab video tutorial](https://img.youtube.com/vi/1mpBI0hltA4/0.jpg)](https://youtu.be/1mpBI0hltA4)
