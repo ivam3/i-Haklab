@@ -30,7 +30,7 @@ export GOMODCACHE="$GOPATH/pkg/mod"
 # 4. Java
 # ----------------------------------------------------------------------------
 export JAVA_HOME=/data/data/com.termux/files/usr/lib/jvm/java-21-openjdk
-
+export FONTCONFIG_FILE=/data/data/com.termux/files/usr/etc/fonts/fonts.conf
 # ----------------------------------------------------------------------------
 # 5. C/C++ Compilers (clang is default on Termux)
 # ----------------------------------------------------------------------------
