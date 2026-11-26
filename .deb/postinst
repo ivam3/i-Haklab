@@ -224,7 +224,7 @@ echo -en "[updates]
     |\t\t• Context7
     |\t\t• Playwrigth-cli
     |\t\t• Termux-api
-    |\t\t• Use-railway"
+    |\t\t• Use-railway\n"
 echo "[*] i-Haklab installation finished."
 echo "[*] run 'i-Haklab help' for a guide."
 echo "[-] Run 'fixer' to fix any posible issue."
