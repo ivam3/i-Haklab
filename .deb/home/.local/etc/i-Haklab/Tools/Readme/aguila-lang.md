@@ -76,9 +76,9 @@ aguila compilar programa.ag
 ## Consideraciones Adicionales
 
 *   **Versión:** el paquete instala `2.4.3`, la versión cuyo código fuente público está disponible en la rama `dev` del repositorio.
-*   **Arquitectura:** en `aarch64` descarga un binario nativo ya compilado; en otras arquitecturas, o si la descarga falla, compila el código fuente con Rust (puede tardar unos minutos y requiere `rust`, que se instala solo en ese caso).
+*   **Arquitectura:** en `aarch64` descarga un binario nativo ya compilado (verificado con SHA-256 antes de instalarse); en otras arquitecturas, o si la descarga o el checksum fallan, compila el código fuente con Rust (puede tardar unos minutos).
 *   **Interpolación de cadenas:** la sintaxis `f"..."` que aparece en el README upstream no está disponible en `2.4.3`; usa concatenación con `+`.
-*   **Dependencias:** `curl` para la descarga del binario. `rust` solo se instala si hace falta compilar.
+*   **Dependencias:** `tar`, `curl` y `rust`. `rust` figura como dependencia declarada del paquete (se instala siempre) porque es el fallback cuando el binario precompilado no está disponible o no pasa la verificación.
 *   **Ayuda:** https://t.me/Ivam3_Bot · Issues: https://github.com/emersonxinay/aguila/issues
 
 ---

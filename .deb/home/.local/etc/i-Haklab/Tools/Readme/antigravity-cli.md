@@ -15,30 +15,48 @@ Antigravity lleva la asistencia de IA a un nivel superior, permitiendo:
 
 ## ¿Cómo se usa? (Ejemplos básicos)
 
-Antigravity se utiliza principalmente a través de su CLI o su entorno integrado. Aquí algunos ejemplos de su potencia:
+En Termux el comando instalado es **`agy`** (no `antigravity`). Sin argumentos abre la sesión interactiva; para una consulta puntual se usa `-p` / `--print`:
 
-**Ejemplo 1: Una tarea de refactorización**
+**Ejemplo 1: Sesión interactiva**
 
 ```bash
-antigravity "Refactoriza el módulo de autenticación para usar JWT en lugar de sesiones"
+agy
 ```
 
-**Ejemplo 2: Análisis de vulnerabilidades**
+**Ejemplo 2: Una tarea de refactorización (sin interacción)**
 
 ```bash
-antigravity "Busca inyecciones SQL en la carpeta /src y propón soluciones"
+agy -p "Refactoriza el módulo de autenticación para usar JWT en lugar de sesiones"
 ```
 
-**Ejemplo 3: Creación de documentación**
+**Ejemplo 3: Análisis de vulnerabilidades**
 
 ```bash
-antigravity "Genera un archivo README.md detallado basado en el código de este repositorio"
+agy -p "Busca inyecciones SQL en la carpeta /src y propón soluciones"
+```
+
+**Ejemplo 4: Continuar la última conversación**
+
+```bash
+agy -c
+```
+
+**Subcomandos útiles:**
+
+```bash
+agy models      # modelos disponibles
+agy mcp         # gestionar servidores MCP
+agy plugins     # gestionar plugins
+agy changelog   # notas de versión
+agy update      # actualizar el CLI
+agy --help      # ayuda completa (--model, --mode, --effort, --print, ...)
 ```
 
 ## Consideraciones Adicionales
 
 *   **Confianza y Permisos:** Al ser un agente autónomo con acceso al sistema de archivos, debe ejecutarse en entornos controlados y supervisados.
-*   **API Key:** Requiere configuración previa con las credenciales de Google Cloud o AI Studio.
+*   **Autenticación:** el primer arranque abre el flujo OAuth de Google en el navegador; también reconoce `GEMINI_API_KEY` en el entorno.
+*   **Paquete:** `antigravity-cli` (solo `aarch64`) instala el bootstrapper `agy`, descarga el CLI oficial desde el updater de Google y le aplica los parches de memoria VA39 para que funcione en Termux.
 *   **Seguridad:** Ten en cuenta los riesgos de inyección de prompts indirectos al permitir que el agente procese código de fuentes no confiables.
 *   **Optimización para Termux:** En el ecosistema i-Haklab, Antigravity está especialmente configurado para funcionar de manera eficiente en dispositivos Android.
 
